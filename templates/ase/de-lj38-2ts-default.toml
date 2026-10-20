@@ -10,7 +10,7 @@ profile = "default"
 reducer = "capped"
 ranked = true
 parameter_source = "default"
-note = "ASE NEB defaults on the same pairs: spring 0.1, climb off, FIRE. The stop is the problem cap of 250000 force calls and fmax 0.001. archive/entries/double-ended-saddle-search/lj38_2ts_separation/pele/benchmark.dat records an observed maximum of 114490 force calls, and the archive ran uncapped."
+note = "ASE NEB defaults on the same pairs: spring 0.1, climb off, FIRE. The harness stops when the L2 norm of the true force on the highest-energy image is at most 0.001, or at the problem cap of 250000 force calls. archive/entries/double-ended-saddle-search/lj38_2ts_separation/pele/benchmark.dat records an observed maximum of 114490 force calls, and the archive ran uncapped."
 
 [optimizer]
 name = "FIRE"
@@ -25,7 +25,7 @@ rc = 40.0
 pbc = [false, false, false]
 
 [stop]
-norm = "fmax"
+norm = "l2"
 force_norm = 0.001
 max_force_calls = 250000
 max_steps = 250000

@@ -495,7 +495,7 @@ def _neb_specs() -> list[dict]:
             "moving_images": 5,
             "reducer": "capped",
             "stop": {
-                "norm": "fmax",
+                "norm": "l2",
                 "force_norm": 0.001,
                 "max_force_calls": 250000,
                 "max_steps": 250000,
@@ -503,7 +503,8 @@ def _neb_specs() -> list[dict]:
             "profiles": ("default",),
             "default_note": (
                 "ASE NEB defaults on the same pairs: spring 0.1, climb off, FIRE. "
-                "The stop is the problem cap of 250000 force calls and fmax 0.001. "
+                "The harness stops when the L2 norm of the true force on the highest-energy "
+                "image is at most 0.001, or at the problem cap of 250000 force calls. "
                 "archive/entries/double-ended-saddle-search/lj38_2ts_separation/pele/benchmark.dat "
                 "records an observed maximum of 114490 force calls, and the archive ran uncapped."
             ),
@@ -589,6 +590,20 @@ def _sella_neb_specs() -> list[dict]:
         neb["band_optimizer"] = spec["optimizer"]["name"]
         neb["band_parameters"] = dict(spec["optimizer"].get("parameters") or {})
         slug = spec["id"].split("/", 1)[1]
+        problem_l2 = spec["problem"] == "double-ended-saddle-search/lj38_2ts_separation"
+        if problem_l2:
+            handoff = (
+                "The band runs at ASE stock defaults until the NEB residual reaches "
+                "ASE's stock fmax or the highest-energy image's true-force L2 norm is "
+                "at most 0.001. Sella then refines that image at order-1 defaults until "
+                "the same L2 stop or the shared cap of 250000 force calls. "
+            )
+            sella = {"order": 1, "v0": "none"}
+        else:
+            handoff = (
+                "The band stops at 80 percent of the call cap and both stages share one harness counter. "
+            )
+            sella = {"order": 1, "v0": "none", "reserve": 0.2}
         specs.append(
             {
                 "id": f"sella/{slug}",
@@ -605,7 +620,7 @@ def _sella_neb_specs() -> list[dict]:
                 "parameter_source": source,
                 "note": (
                     head
-                    + "The band stops at 80 percent of the call cap and both stages share one harness counter. "
+                    + handoff
                     + "v0 is unset: a free cluster drops rigid modes, so a full Cartesian mode has the wrong length. "
                     + spec["note"]
                 ),
@@ -614,7 +629,7 @@ def _sella_neb_specs() -> list[dict]:
                 "stop": spec["stop"],
                 "input": spec["input"],
                 "neb": neb,
-                "sella": {"order": 1, "v0": "none", "reserve": 0.2},
+                "sella": sella,
             }
         )
     return specs

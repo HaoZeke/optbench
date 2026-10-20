@@ -970,19 +970,69 @@ def _highest_moving(images):
     return best
 
 
-def _run_neb(payload: dict, bucket: CallCounter, band_limit: int | None = None) -> dict:
+def _ase_stock_fmax() -> float:
+    """Default ``fmax`` of ``Optimizer.irun`` in the installed ASE."""
+    import inspect
+
+    from ase.optimize.optimize import Optimizer
+
+    return float(inspect.signature(Optimizer.irun).parameters["fmax"].default)
+
+
+def _saddle_force_l2(band, images) -> float | None:
+    """Euclidean norm of the true force on the highest-energy image.
+
+    That image is the climbing image when climbing is on. The value is the
+    calculator force, read from the cache the band step just filled.
+    """
+    imax = getattr(band, "imax", None)
+    if imax is None:
+        return None
+    index = int(imax)
+    if index <= 0 or index >= len(images) - 1:
+        return None
+    image = images[index]
+    return _cached_l2(getattr(image, "calc", None), image)
+
+
+def _run_neb(
+    payload: dict,
+    bucket: CallCounter,
+    band_limit: int | None = None,
+    stock_fmax: float | None = None,
+) -> dict:
+    """Relax one band.
+
+    ``norm=l2`` stops on the true-force L2 norm of the highest-energy image.
+    ``stock_fmax`` also ends the band when ASE reports its own fmax stop, so
+    a later saddle step can take the image the rest of the way. Other norms
+    keep the NEB residual fmax stop.
+    """
     neb_spec = payload["neb"]
     band, images = _make_band(payload, bucket)
     opt = _build_optimizer(payload["optimizer"], band)
     climb_after = neb_spec.get("climb_after")
     limit = bucket[1] if band_limit is None else int(band_limit)
+    observe_l2 = str(payload.get("norm") or "") == "l2"
+    fmax = float(payload["tol"]) if stock_fmax is None else float(stock_fmax)
+    if observe_l2 and stock_fmax is None:
+        # A zero threshold never trips ASE's residual stop, so the loop ends
+        # on the true-force norm or the cap.
+        fmax = 0.0
     converged = False
+    met = False
+    norm = None
     try:
-        for converged in opt.irun(fmax=payload["tol"], steps=payload["max_steps"]):
+        for converged in opt.irun(fmax=fmax, steps=payload["max_steps"]):
             if bucket[0] >= limit:
                 converged = False
                 raise ForceCap()
-            if climb_after is not None and not band.climb:
+            if observe_l2:
+                norm = _saddle_force_l2(band, images)
+                if norm is not None and norm <= float(payload["tol"]):
+                    met = True
+                    break
+            elif climb_after is not None and not band.climb:
                 residuals = [float(value) for value in getattr(band, "residuals", []) or []]
                 if residuals and max(residuals) <= float(climb_after):
                     band.climb = True
@@ -990,11 +1040,25 @@ def _run_neb(payload: dict, bucket: CallCounter, band_limit: int | None = None) 
         if not _cap_error(exc):
             raise
         converged = False
-    residuals = [float(value) for value in getattr(band, "residuals", []) or []]
-    failed = (not converged) or bucket[0] >= bucket[1]
-    row = {"failed": failed, "force_norm": max(residuals) if residuals else None, "images": images}
+        met = False
+    if observe_l2:
+        if norm is None:
+            norm = _saddle_force_l2(band, images)
+        failed = (
+            not met
+            or norm is None
+            or float(norm) > float(payload["tol"])
+            or bucket[0] >= bucket[1]
+        )
+        row = {"failed": failed, "force_norm": norm, "images": images}
+    else:
+        residuals = [float(value) for value in getattr(band, "residuals", []) or []]
+        failed = (not converged) or bucket[0] >= bucket[1]
+        row = {"failed": failed, "force_norm": max(residuals) if residuals else None, "images": images}
     if payload.get("snapshot"):
         row["parameters"] = _neb_parameters(opt, payload, neb_spec)
+        if stock_fmax is not None:
+            row["parameters"]["band_fmax"] = float(stock_fmax)
     return row
 
 
@@ -1023,22 +1087,38 @@ def _displace_free(atoms, seed: int, std: float) -> None:
 def _run_sella_neb(payload: dict, bucket: CallCounter) -> dict:
     """Relax the band, then refine the highest image with Sella.
 
-    The band stops at ``reserve`` of the cap so the saddle step has calls
-    left. ``v0`` stays unset: on a free cluster Sella drops the rigid modes
-    and a full Cartesian mode has the wrong length.
+    A problem L2 stop runs the band until ASE's stock fmax or that L2 norm,
+    on the full call cap, and Sella then stops on the same L2 norm. Other
+    rows keep the fractional reserve so the saddle step has calls left.
+    ``v0`` stays unset: on a free cluster Sella drops the rigid modes and a
+    full Cartesian mode has the wrong length.
     """
     from sella import Sella
 
     neb_spec = payload["neb"]
-    reserve = float((payload.get("sella") or {}).get("reserve", 0.2))
-    band_limit = max(1, int(bucket[1] * (1.0 - reserve)))
+    observe_l2 = str(payload.get("norm") or "") == "l2"
+    reserve = (payload.get("sella") or {}).get("reserve")
+    if observe_l2:
+        band_limit = None
+        stock_fmax = _ase_stock_fmax()
+    else:
+        if reserve is None:
+            reserve = 0.2
+        reserve = float(reserve)
+        band_limit = max(1, int(bucket[1] * (1.0 - reserve)))
+        stock_fmax = None
     band_payload = dict(payload)
     band_payload["optimizer"] = {
         "name": str(neb_spec.get("band_optimizer", "FIRE")),
         "parameters": dict(neb_spec.get("band_parameters") or {}),
     }
     try:
-        band_row = _run_neb(band_payload, bucket, band_limit=band_limit)
+        band_row = _run_neb(
+            band_payload,
+            bucket,
+            band_limit=band_limit,
+            stock_fmax=stock_fmax,
+        )
     except Exception as exc:
         if _cap_error(exc):
             return _cap_row({"failed": True, "force_norm": None}, None)
@@ -1047,43 +1127,102 @@ def _run_sella_neb(payload: dict, bucket: CallCounter) -> dict:
     if bucket[0] >= bucket[1] or not images:
         band_row["failed"] = True
         return band_row
-    chosen = _highest_moving(images)
     requested = dict(payload["optimizer"].get("parameters") or {})
     order = int(requested.pop("order", 1))
     kwargs = {key: value for key, value in requested.items() if value is not None}
+    if observe_l2:
+        held = band_row.get("force_norm")
+        if held is not None and float(held) <= float(payload["tol"]):
+            band_row["failed"] = False
+            band_row["energy"] = _safe_energy(_highest_moving(images))
+            if payload.get("snapshot"):
+                band_row["parameters"] = _sella_band_parameters(
+                    band_row.get("parameters") or {},
+                    None,
+                    order,
+                    requested,
+                    stock_fmax,
+                    reserve=None,
+                    band_optimizer=band_payload["optimizer"]["name"],
+                )
+            return band_row
+    chosen = _highest_moving(images)
     try:
         opt = Sella(chosen, logfile=None, order=order, v0=None, **kwargs)
-        failed, _norm = _drive_l2(
-            opt,
-            chosen.calc,
-            bucket,
-            payload["tol"],
-            payload["max_steps"],
-            chosen,
-            norm_of=lambda: _fmax(chosen),
-        )
+        if observe_l2:
+            failed, force_norm = _drive_l2(
+                opt,
+                chosen.calc,
+                bucket,
+                payload["tol"],
+                payload["max_steps"],
+                chosen,
+            )
+        else:
+            failed, _norm = _drive_l2(
+                opt,
+                chosen.calc,
+                bucket,
+                payload["tol"],
+                payload["max_steps"],
+                chosen,
+                norm_of=lambda: _fmax(chosen),
+            )
+            force_norm = _fmax(chosen)
     except Exception as exc:
         if _cap_error(exc):
             band_row["failed"] = True
             band_row["error"] = "force-call cap"
-            band_row["force_norm"] = _fmax(chosen)
+            band_row["force_norm"] = (
+                _cached_l2(getattr(chosen, "calc", None), chosen) if observe_l2 else _fmax(chosen)
+            )
             return band_row
         band_row["failed"] = True
         band_row["error"] = f"{type(exc).__name__}: {exc}"[:500]
         return band_row
-    force_norm = _fmax(chosen)
     failed = failed or force_norm is None or force_norm > payload["tol"] or bucket[0] >= bucket[1]
     band_row["failed"] = failed
     band_row["force_norm"] = force_norm
     band_row["energy"] = _safe_energy(chosen)
     if payload.get("snapshot"):
-        params = dict(band_row.get("parameters") or {})
-        params.update(_snapshot_sella(opt, order, requested))
-        params["v0"] = "none"
-        params["reserve"] = reserve
-        params["band_optimizer"] = band_payload["optimizer"]["name"]
-        band_row["parameters"] = params
+        band_row["parameters"] = _sella_band_parameters(
+            band_row.get("parameters") or {},
+            opt,
+            order,
+            requested,
+            stock_fmax,
+            reserve=None if observe_l2 else reserve,
+            band_optimizer=band_payload["optimizer"]["name"],
+        )
     return band_row
+
+
+def _sella_band_parameters(
+    band_params: dict,
+    opt,
+    order: int,
+    requested: dict,
+    stock_fmax: float | None,
+    *,
+    reserve,
+    band_optimizer: str,
+) -> dict:
+    params = dict(band_params)
+    if opt is None:
+        params.update(SELLA_SADDLE if order else SELLA_MINIMUM)
+        params.update({key: value for key, value in requested.items() if value is not None})
+        params["order"] = order
+    else:
+        params.update(_snapshot_sella(opt, order, requested))
+    params["v0"] = "none"
+    params["band_optimizer"] = band_optimizer
+    if stock_fmax is not None:
+        params["band_fmax"] = float(stock_fmax)
+    if reserve is None:
+        params.pop("reserve", None)
+    else:
+        params["reserve"] = float(reserve)
+    return params
 
 
 def _run_sella_search(payload: dict, bucket: CallCounter) -> dict:
@@ -1339,8 +1478,12 @@ def _baseline_parameters(template: dict) -> dict:
             params.update(requested)
             params["band_optimizer"] = str(neb.get("band_optimizer", "FIRE"))
             params["band_parameters"] = dict(neb.get("band_parameters") or {})
-            params["reserve"] = float((template.get("sella") or {}).get("reserve", 0.2))
+            reserve = (template.get("sella") or {}).get("reserve")
+            if reserve is not None:
+                params["reserve"] = float(reserve)
             params["v0"] = "none"
+            if str((template.get("stop") or {}).get("norm") or "") == "l2":
+                params["band_fmax"] = _ase_stock_fmax()
         params["spring"] = float(neb["spring"])
         params["climb"] = bool(neb["climb"])
         params["moving_images"] = int(neb["moving_images"])
@@ -1386,9 +1529,16 @@ def _write_dat(
             + " Energy and Kabsch RMSD are not applied: these starts have no reference geometry."
         ).strip()
     elif template["task"] in {"neb", "sella-neb"}:
+        if str((template.get("stop") or {}).get("norm") or "") == "l2":
+            stop_note = (
+                " v2 success is the harness cap and the L2 norm of the true force"
+                " on the highest-energy image."
+            )
+        else:
+            stop_note = " v2 success is the harness cap and the template fmax stop."
         note = (
             note
-            + " v2 success is the harness cap and the template fmax stop."
+            + stop_note
             + " The band has no reference saddle, so the Hessian and Kabsch RMSD are not applied."
         ).strip()
     fields = [

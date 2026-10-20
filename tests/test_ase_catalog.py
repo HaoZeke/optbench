@@ -34,6 +34,16 @@ def test_catalog_covers_every_problem_and_both_profiles():
             assert profiles == {"default", "tuned"}
     assert "ase/de-lj38-2ts-tuned" not in ids
     assert "sella/de-lj38-2ts-tuned" not in ids
+    pair = "double-ended-saddle-search/lj38_2ts_separation"
+    ase_pair = next(spec for spec in specs if spec["id"] == "ase/de-lj38-2ts-default")
+    sella_pair = next(spec for spec in specs if spec["id"] == "sella/de-lj38-2ts-default")
+    assert ase_pair["problem"] == pair and ase_pair["stop"]["norm"] == "l2"
+    assert sella_pair["stop"]["norm"] == "l2"
+    assert "reserve" not in sella_pair["sella"]
+    assert "80 percent" not in sella_pair["note"]
+    other = next(spec for spec in specs if spec["id"] == "sella/de-lj38-default")
+    assert other["sella"]["reserve"] == 0.2
+    assert "80 percent" in other["note"]
     lj = [spec for spec in specs if spec["problem"] == "minimization/lj38"]
     assert {spec["algorithm"] for spec in lj} == set(OPTIMIZERS) | {"Sella"}
     dimer = [spec for spec in specs if spec["problem"] == "saddle-search/pt-island"]
