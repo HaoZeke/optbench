@@ -96,6 +96,12 @@ SAMPLE_N = {
     "double-ended-saddle-search/pt-island": 59,
     "lowest-eigenvector/lj38": 200,
     "globalopt/lj38": 100,
+    "globalopt/lj75": 200,
+    "globalopt/lj98": 100,
+    "globalopt/lj150": 100,
+    "globalopt/tip4p10": 10000,
+    "globalopt/tip4p15": 500,
+    "globalopt/tip4p20": 100,
     "neb/Pt-heptamer": 13,
 }
 
@@ -110,7 +116,7 @@ SHA = {
     "entries/eon-svn-htst": "715bc521c827f1f18102c1c027d99d0d8624b0fb",
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
-    "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+    "cells/fill-not-rerun": "f0b0d4e0748170b3e7415a481a5283382cd0c4d2",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -197,6 +203,22 @@ MATCHES: list[dict] = [
     # globalopt and htst and aladatom rates
     {"key": "globalopt/lj38/eon-basinhopping", "template": "eon-client/bh-lj38", "branch": "entries/eon-svn-lane-a", "path": "results/campaign/eon-client-bh-lj38.dat"},
     {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "cells/pele/go", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
+    {"key": "globalopt/lj38/gmin-csm", "template": "gmin/lj38-csm", "branch": "cells/fill-not-rerun", "path": "results/campaign/gmin-wales27058-lj38-csm.dat"},
+    {"key": "globalopt/lj38/gmin-symmetrise", "template": "gmin/lj38-symmetrise", "branch": "cells/fill-not-rerun", "path": "results/campaign/gmin-wales27058-lj38-sym.dat"},
+    {"key": "globalopt/lj38/gmin-nosym", "template": "gmin/lj38-nosym", "branch": "cells/fill-not-rerun", "path": "results/campaign/gmin-wales27058-lj38-nosym.dat", "cause": "gmin_numeric_drift"},
+    {"key": "globalopt/lj75/gmin", "template": "gmin/lj75", "branch": "cells/fill-not-rerun", "path": "results/campaign/gmin-wales27058-lj75.dat"},
+    {"key": "globalopt/lj98/gmin-symmetrise", "template": "gmin/lj98-symmetrise", "branch": "cells/fill-not-rerun", "path": "results/campaign/gmin-wales27058-lj98-sym.dat", "metrics": ["energy_calls_mean", "energy_calls_stddev", "basin_hopping_steps_mean", "basin_hopping_steps_stddev"], "cause": "gmin_numeric_drift"},
+    {"key": "globalopt/lj98/gmin-nosym", "template": "gmin/lj98-nosym", "branch": "cells/fill-not-rerun", "path": "results/campaign/gmin-wales27058-lj98-nosym.dat", "metrics": ["energy_calls_mean", "energy_calls_stddev", "basin_hopping_steps_mean", "basin_hopping_steps_stddev"], "cause": "gmin_numeric_drift"},
+    {"key": "globalopt/lj100-binary/gmin", "template": "gmin/lj100-binary", "branch": "cells/fill-not-rerun", "path": "results/campaign/gmin-wales27058-lj100.dat"},
+    {"key": "globalopt/lj100-binary/eon-basinhopping", "template": "eon-svn/bh-lj100", "branch": "cells/fill-not-rerun", "path": "results/campaign/eon-r2549-lj100-bh.dat"},
+    {"key": "globalopt/lj150/gmin-symmetrise", "template": "gmin/lj150-symmetrise", "branch": "cells/fill-not-rerun", "path": "results/campaign/gmin-wales27058-lj150-sym.dat", "metrics": ["energy_calls_mean", "energy_calls_stddev", "basin_hopping_steps_mean", "basin_hopping_steps_stddev"], "cause": "gmin_numeric_drift"},
+    {"key": "globalopt/lj150/gmin-nosym", "template": "gmin/lj150-nosym", "branch": "cells/fill-not-rerun", "path": "results/campaign/gmin-wales27058-lj150-nosym.dat", "metrics": ["energy_calls_mean", "energy_calls_stddev", "basin_hopping_steps_mean", "basin_hopping_steps_stddev"], "cause": "gmin_numeric_drift"},
+    {"key": "globalopt/tip4p10/gmin", "template": "gmin/tip4p10", "branch": "cells/fill-not-rerun", "path": "results/campaign/gmin-wales27058-tip4p10.dat"},
+    {"key": "globalopt/tip4p10/gmin-tbp", "template": "gmin/tip4p10-tbp", "branch": "cells/fill-not-rerun", "path": "results/campaign/gmin-wales27058-tip4p10-tbp.dat"},
+    {"key": "globalopt/tip4p15/gmin", "template": "gmin/tip4p15", "branch": "cells/fill-not-rerun", "path": "results/campaign/gmin-wales27058-tip4p15.dat"},
+    {"key": "globalopt/tip4p15/gmin-tbp", "template": "gmin/tip4p15-tbp", "branch": "cells/fill-not-rerun", "path": "results/campaign/gmin-wales27058-tip4p15-tbp.dat"},
+    {"key": "globalopt/tip4p20/gmin", "template": "gmin/tip4p20", "branch": "cells/fill-not-rerun", "path": "results/campaign/gmin-wales27058-tip4p20.dat", "cause": "gmin_numeric_drift"},
+    {"key": "globalopt/tip4p20/gmin-tbp", "template": "gmin/tip4p20-tbp", "branch": "cells/fill-not-rerun", "path": "results/campaign/gmin-wales27058-tip4p20-tbp.dat"},
     {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn/htst-al-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
     {"key": "hTST/Pt/eon-dimer-cg", "template": "eon-svn/htst-pt-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-pt-dimer.dat", "kind": "htst"},
 ]
@@ -270,6 +292,13 @@ CAUSE_TEXT = {
         "The archived driver is the dangling path bin/js850/globalopt.py. "
         "The harness uses pele LJCluster defaults (temperature 1, step 0.6, LBFGS memory 4) on unshifted cutoff 40. "
         "The mean is 688720 against 521595."
+    ),
+    "gmin_numeric_drift": (
+        "wales-27058 serial GMIN, gfortran 13, bundled BLAS/LAPACK, Release -O3, and -fallow-argument-mismatch. "
+        "The same binary reproduces the short LJ38 symmetrised and CSM rows, LJ75, both TIP4P10 rows, both TIP4P15 rows, TIP4P20 basin-paving, and the LJ100 energies. "
+        "The long basin-hopping trajectories land outside 10 percent on the archived energy-call and quench counters. "
+        "On the 2022 LJ98 nosym data file the binary records about 138 function calls per quench; the archived energy-call mean implies about 1367. "
+        "cpu_time is this machine's clock and is not the comparison."
     ),
     "htst_al": "The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) misses barrier_force_calls and rate_force_calls by about 30 percent. Pt dimer CG with max 10 reproduces all four hTST counts.",
     "precon_hessian_index": (

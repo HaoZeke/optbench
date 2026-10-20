@@ -1025,7 +1025,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">No committed harness run.</p>
+   <p class="bench-gaps">Files with no per-start harness record stay off the ranked table.</p>
    <p><a href="generated/suites/globalopt.html#lj100-binary">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="lj100-binary-legacy">
    <h3>Legacy 2014 archive</h3>
@@ -1074,7 +1074,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
+   <p class="bench-gaps">Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
    <p><a href="generated/suites/globalopt.html#lj38">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="lj38-legacy">
    <h3>Legacy 2014 archive</h3>
@@ -1118,7 +1118,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="globalopt-lj38-gmin-nosym">
    <td class="num">3</td>
-   <td class="text">gmin-nosym</td>
+   <td class="text">gmin-nosym · not reproduced</td>
    <td class="text">GMIN</td>
    <td class="num">2.65951e+05</td>
    <td class="num">6.4570e+03</td>
@@ -1159,13 +1159,13 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">No committed harness run.</p>
+   <p class="bench-gaps">Files with no per-start harness record stay off the ranked table.</p>
    <p><a href="generated/suites/globalopt.html#lj150">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="lj150-legacy">
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. The columns are the archived keys.</caption>
    <thead><tr>
@@ -1184,7 +1184,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr></thead><tbody>
    <tr id="globalopt-lj150-gmin-symmetrise" class="best">
    <td class="num">1</td>
-   <td class="text">gmin-symmetrise</td>
+   <td class="text">gmin-symmetrise · not reproduced</td>
    <td class="text">GMIN</td>
    <td class="num">6.6738e+02</td>
    <td class="num">5.4347e+02</td>
@@ -1198,7 +1198,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="globalopt-lj150-gmin-nosym">
    <td class="num">2</td>
-   <td class="text">gmin-nosym</td>
+   <td class="text">gmin-nosym · not reproduced</td>
    <td class="text">GMIN</td>
    <td class="num">3.28089e+03</td>
    <td class="num">2.72295e+03</td>
@@ -1220,7 +1220,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">No committed harness run.</p>
+   <p class="bench-gaps">Files with no per-start harness record stay off the ranked table.</p>
    <p><a href="generated/suites/globalopt.html#lj75">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="lj75-legacy">
    <h3>Legacy 2014 archive</h3>
@@ -1263,13 +1263,13 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">No committed harness run.</p>
+   <p class="bench-gaps">Files with no per-start harness record stay off the ranked table.</p>
    <p><a href="generated/suites/globalopt.html#lj98">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="lj98-legacy">
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. The columns are the archived keys.</caption>
    <thead><tr>
@@ -1288,7 +1288,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr></thead><tbody>
    <tr id="globalopt-lj98-gmin-symmetrise" class="best">
    <td class="num">1</td>
-   <td class="text">gmin-symmetrise</td>
+   <td class="text">gmin-symmetrise · not reproduced</td>
    <td class="text">GMIN</td>
    <td class="num">1.28192e+03</td>
    <td class="num">1.06356e+03</td>
@@ -1302,7 +1302,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="globalopt-lj98-gmin-nosym">
    <td class="num">2</td>
-   <td class="text">gmin-nosym</td>
+   <td class="text">gmin-nosym · not reproduced</td>
    <td class="text">GMIN</td>
    <td class="num">4.381976e+04</td>
    <td class="num">4.566034e+04</td>
@@ -1324,7 +1324,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">No committed harness run.</p>
+   <p class="bench-gaps">Files with no per-start harness record stay off the ranked table.</p>
    <p><a href="generated/suites/globalopt.html#tip4p10">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="tip4p10-legacy">
    <h3>Legacy 2014 archive</h3>
@@ -1379,7 +1379,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">No committed harness run.</p>
+   <p class="bench-gaps">Files with no per-start harness record stay off the ranked table.</p>
    <p><a href="generated/suites/globalopt.html#tip4p15">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="tip4p15-legacy">
    <h3>Legacy 2014 archive</h3>
@@ -1434,13 +1434,13 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">No committed harness run.</p>
+   <p class="bench-gaps">Files with no per-start harness record stay off the ranked table.</p>
    <p><a href="generated/suites/globalopt.html#tip4p20">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="tip4p20-legacy">
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
@@ -1469,7 +1469,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr>
    <tr id="globalopt-tip4p20-gmin">
    <td class="num">2</td>
-   <td class="text">gmin</td>
+   <td class="text">gmin · not reproduced</td>
    <td class="text">GMIN</td>
    <td class="num">2.85967e+07</td>
    <td class="num">1.4191e+08</td>

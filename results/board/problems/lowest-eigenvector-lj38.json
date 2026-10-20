@@ -328,7 +328,7 @@
   },
   "ranked": [
     {
-      "asv_commit": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+      "asv_commit": "426ad367fe1a8bd3a3cd511ca4883d4fdda13f84",
       "call_unit": "total",
       "cap": 10000,
       "code": "Sella",
@@ -361,7 +361,7 @@
       "par2_mean": 17.8,
       "partial": false,
       "partial_reason": "",
-      "path": "results/campaign/sella-0.1.1-lj38-loweig.dat; results/asv/dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+      "path": "results/campaign/sella-0.1.1-lj38-loweig.dat; results/asv/426ad367fe1a8bd3a3cd511ca4883d4fdda13f84",
       "problem": "lowest-eigenvector/lj38",
       "registry_match": true,
       "scored": true,

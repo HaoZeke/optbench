@@ -1446,7 +1446,7 @@
   "not_comparable": [],
   "partial": [
     {
-      "asv_commit": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+      "asv_commit": "426ad367fe1a8bd3a3cd511ca4883d4fdda13f84",
       "call_unit": "total",
       "cap": 10000,
       "code": "ASE",
@@ -1479,7 +1479,7 @@
       "par2_mean": 547.556,
       "partial": true,
       "partial_reason": "does not reproduce the 2014 archive",
-      "path": "results/campaign/ase-3.29.0-lj38-lbfgslinesearch-tuned.dat; results/asv/dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+      "path": "results/campaign/ase-3.29.0-lj38-lbfgslinesearch-tuned.dat; results/asv/426ad367fe1a8bd3a3cd511ca4883d4fdda13f84",
       "problem": "minimization/lj38",
       "registry_match": true,
       "scored": true,
@@ -1491,7 +1491,7 @@
       "wilson_low": 0.9856216845342334
     },
     {
-      "asv_commit": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+      "asv_commit": "426ad367fe1a8bd3a3cd511ca4883d4fdda13f84",
       "call_unit": "total",
       "cap": 10000,
       "code": "ASE",
@@ -1524,7 +1524,7 @@
       "par2_mean": 2778.506,
       "partial": true,
       "partial_reason": "does not reproduce the 2014 archive",
-      "path": "results/campaign/ase-3.29.0-lj38-preconlbfgs-tuned.dat; results/asv/dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+      "path": "results/campaign/ase-3.29.0-lj38-preconlbfgs-tuned.dat; results/asv/426ad367fe1a8bd3a3cd511ca4883d4fdda13f84",
       "problem": "minimization/lj38",
       "registry_match": true,
       "scored": true,

@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+56 reproduced, 35 not reproduced, 60 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -51,24 +51,24 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
-| lj100-binary/eon-basinhopping | — | — | not rerun |
-| lj100-binary/gmin | — | — | not rerun |
-| lj150/gmin-nosym | — | — | not rerun |
-| lj150/gmin-symmetrise | — | — | not rerun |
+| lj100-binary/eon-basinhopping | avg_energy -584.579, min_energy -596.13, max_energy -574.14 | -584.762, -600.31, -574.63 | reproduced |
+| lj100-binary/gmin | avg_energy -589.507, min_energy -599.034, max_energy -578.557 | -589.324, -601.086, -577.862 | reproduced |
+| lj150/gmin-nosym | energy_calls_mean 695965, energy_calls_stddev 584541, basin_hopping_steps_mean 3280.89, basin_hopping_steps_stddev 2722.95 | 858288, 666181, 4033.29, 3089.68 | not reproduced; gmin_numeric_drift |
+| lj150/gmin-symmetrise | energy_calls_mean 127559, energy_calls_stddev 106387, basin_hopping_steps_mean 667.38, basin_hopping_steps_stddev 543.47 | 185203, 196471, 955, 996.77 | not reproduced; gmin_numeric_drift |
 | lj38/eon-basinhopping | force_calls 508011 | 503146 | reproduced |
-| lj38/gmin-csm | — | — | not rerun |
-| lj38/gmin-nosym | — | — | not rerun |
-| lj38/gmin-symmetrise | — | — | not rerun |
+| lj38/gmin-csm | force_calls 6421 | 6888 | reproduced |
+| lj38/gmin-nosym | force_calls 265951 | 303498 | not reproduced; gmin_numeric_drift |
+| lj38/gmin-symmetrise | force_calls 22711 | 22123 | reproduced |
 | lj38/pele-basinhopping | force_calls 521595 | 688720 | not reproduced; pele_bh_defaults |
-| lj75/gmin | — | — | not rerun |
-| lj98/gmin-nosym | — | — | not rerun |
-| lj98/gmin-symmetrise | — | — | not rerun |
-| tip4p10/gmin | — | — | not rerun |
-| tip4p10/gmin-tbp | — | — | not rerun |
-| tip4p15/gmin | — | — | not rerun |
-| tip4p15/gmin-tbp | — | — | not rerun |
-| tip4p20/gmin | — | — | not rerun |
-| tip4p20/gmin-tbp | — | — | not rerun |
+| lj75/gmin | force_calls 60692 | 61316 | reproduced |
+| lj98/gmin-nosym | energy_calls_mean 5.98857e+07, energy_calls_stddev 6.21562e+07, basin_hopping_steps_mean 43819.8, basin_hopping_steps_stddev 45660.3 | 7.72021e+06, 7.69283e+06, 56505.6, 56283.1 | not reproduced; gmin_numeric_drift |
+| lj98/gmin-symmetrise | energy_calls_mean 249538, energy_calls_stddev 205789, basin_hopping_steps_mean 1281.92, basin_hopping_steps_stddev 1063.56 | 298510, 287435, 1531.67, 1452.06 | not reproduced; gmin_numeric_drift |
+| tip4p10/gmin | force_calls 16236 | 16493 | reproduced |
+| tip4p10/gmin-tbp | force_calls 16099 | 16352 | reproduced |
+| tip4p15/gmin | force_calls 670645 | 668815 | reproduced |
+| tip4p15/gmin-tbp | force_calls 625362 | 642263 | reproduced |
+| tip4p20/gmin | force_calls 2.85967e+07 | 3.65911e+07 | not reproduced; gmin_numeric_drift |
+| tip4p20/gmin-tbp | force_calls 2.55667e+07 | 2.73817e+07 | reproduced |
 
 ## hTST
 
@@ -262,6 +262,17 @@ archive run.sh divides coordinates by r0 = 2.897 and scales rho and rcut into th
 
 - double-ended-saddle-search/pt-island/optim
 - tsopt/pt-island/optim_ffd
+
+### gmin_numeric_drift
+
+wales-27058 serial GMIN, gfortran 13, bundled BLAS/LAPACK, Release -O3, and -fallow-argument-mismatch. The same binary reproduces the short LJ38 symmetrised and CSM rows, LJ75, both TIP4P10 rows, both TIP4P15 rows, TIP4P20 basin-paving, and the LJ100 energies. The long basin-hopping trajectories land outside 10 percent on the archived energy-call and quench counters. On the 2022 LJ98 nosym data file the binary records about 138 function calls per quench; the archived energy-call mean implies about 1367. cpu_time is this machine's clock and is not the comparison.
+
+- globalopt/lj150/gmin-nosym
+- globalopt/lj150/gmin-symmetrise
+- globalopt/lj38/gmin-nosym
+- globalopt/lj98/gmin-nosym
+- globalopt/lj98/gmin-symmetrise
+- globalopt/tip4p20/gmin
 
 ### pele_bh_defaults
 
