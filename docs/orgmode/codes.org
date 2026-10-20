@@ -9,4 +9,20 @@ The Sella 0.1.1 rows stay on the 2014 tables and are labelled legacy.
 A new score is entered by Rohit Goswami.
 The number is written only after the run finishes under the problem rule.
 
+FLAME minhocao uses one Lennard-Jones setting block on every LJ problem.
+The values are the published inputs in FLAME =tests/minhopp_LJ= and =tests/minhocao_blj_mhm=.
+=tests/minhopp_LJ= sets ediff 1.1, ekin 0.09, and dt 0.01, with nsoften 20, mdmin 3, etoler 1.E-3, and fmaxtol 1.E-3.
+That task keeps atomic mass 1 unless amass.dat is present.
+ediff and etoler are divided by =Ha_eV= 27.21138386, so minhocao receives 4.0424257938e-2 Ha and 3.6749325398e-5 Ha.
+ekin 0.09 is the kinetic energy per remaining degree of freedom.
+The temperature that puts the same energy in =1.5*N*k_B*T= is =T = 0.18*(N-1)/N/k_B=, where =k_B = 3.1668154197285284e-6*27.21138386= eV/K, and the temperature cap stays 1e5 K.
+symbol2znucl gives carbon a mass of 12.011 u.
+minhocao multiplies by =amu_emass= 1822.888484264545, which is 21894.71 electron masses.
+The unit-mass step 0.01 is then =0.01*sqrt(21894.71*27.21138386)/0.52917720859 = 14.586= atomic units.
+That step crosses the repulsive wall at 1e5 K, so the timestep is MDDTINIT 2, the value in =tests/minhocao_blj_mhm=.
+GEOFIREDTINIT is 1.d-9 and GEOFIREDTMIN is 1.d-12.
+lj38, lj75, lj98, and lj150 use this block.
+The initial temperatures are 2033.84 K for N=38, 2060.96 K for N=75, 2067.50 K for N=98, and 2074.89 K for N=150.
+The lj38 campaign counts are the =params_new= default search and are scored at cap 2000000.
+
 #+INCLUDE: "../include/codes.org"
