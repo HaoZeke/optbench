@@ -1,26 +1,26 @@
 # counter harness
 # force_calls count raw potential evaluations and are not divided by the image count
 # the mean is round-half-even over successes; a failure is outside that mean
-n 51
-successes 21
-nfailed 30
-force_calls 5717
-force_calls_min 994
-force_calls_max 14567
-force_calls_median 1933
-force_calls_per_image 1143
+n 43
+successes 1
+nfailed 42
+force_calls 950
+force_calls_min 950
+force_calls_max 950
+force_calls_median 950
+force_calls_per_image 190
 call_unit total
-par2_mean 296471.7254901961
+par2_mean 488394.1860465116
 par2_median 500000.0000000000
-wilson_low 0.2875439520
-wilson_high 0.5483466279
+wilson_low 0.0041170873
+wilson_high 0.1205899344
 n_crash 0
-n_divergence 20
-n_cap 0
-n_not_converged 10
+n_divergence 5
+n_cap 37
+n_not_converged 0
 n_wrong_stationary 0
 code pygsm
-code_version 1.0.0+692.g1b4d5a5.dirty
+code_version 1.0.0+692.g1b4d5a5
 commit 1b4d5a5557a61adc6a3df7405d6b7255b1fa4865
 algorithm DE-GSM
 template pygsm/de-gsm
@@ -28,4 +28,4 @@ tuning default
 counter harness
 problem double-ended-saddle-search/lj38_2ts_separation
 images 5
-note pyGSM DE-GSM, stock climb step. The 0.05 limit in base_optimizer applies only when the tangent projection is positive. 11 nodes. Contact-distance TRIC. The level of theory stores ε as an eV. Endpoints fixed. DMAX 0.1. A separated cluster is divergence by the harness connected-cluster rule at 1.5 sigma. Call cap 250000.
+note pyGSM DE-GSM, stock climb step. The 0.05 limit in base_optimizer applies only when the tangent projection is positive. 11 nodes. Hybrid Cartesian primitives from bin/gsm -coordinate_type TRIC -hybrid_coord_idx_file, every atom index. The level of theory stores ε divided by the Hartree. Endpoints fixed. DMAX 0.1. A separated cluster is divergence by the harness connected-cluster rule at 1.5 sigma. Call cap 250000. GSM iteration and optimizer step arguments are 1000000000.
