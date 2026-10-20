@@ -1,0 +1,12 @@
+force_calls 335
+nfailed 0
+n 59
+code OPTIM
+code_version wales-27058
+commit wales-27058
+algorithm climbing string
+template archive-optim/de-pt-clstring
+problem double-ended-saddle-search/pt-island
+reducer archive
+counter optim
+call_unit energy+gradient

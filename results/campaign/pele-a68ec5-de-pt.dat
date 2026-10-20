@@ -1,0 +1,12 @@
+force_calls 247
+nfailed 2
+n 58
+code pele
+code_version a68ec5
+commit a68ec5e7706a64b93a85ac34ffe22cd08eb1c1c9
+algorithm hybrid eigenvector following
+template archive-pele/de-pt
+problem double-ended-saddle-search/pt-island
+reducer archive
+counter pele
+call_unit potential

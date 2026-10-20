@@ -1,0 +1,12 @@
+force_calls 127
+nfailed 3
+n 59
+code Eon
+code_version r2549
+commit r2549
+algorithm CI-NEB
+template eon-svn/de-pt-ci-neb-single
+problem double-ended-saddle-search/pt-island
+reducer archive
+counter eon
+call_unit total_force_calls

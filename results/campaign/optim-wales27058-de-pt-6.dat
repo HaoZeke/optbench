@@ -1,0 +1,12 @@
+force_calls 118
+nfailed 0
+n 59
+code OPTIM
+code_version wales-27058
+commit wales-27058
+algorithm DNEB + hybrid eigenvector following
+template archive-optim/de-pt-6
+problem double-ended-saddle-search/pt-island
+reducer archive
+counter optim
+call_unit energy+gradient

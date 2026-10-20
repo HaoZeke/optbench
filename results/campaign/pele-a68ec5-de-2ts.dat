@@ -1,0 +1,13 @@
+force_calls 27844
+nfailed 3
+n 50
+transition_states 8
+code pele
+code_version a68ec5
+commit a68ec5e7706a64b93a85ac34ffe22cd08eb1c1c9
+algorithm DNEB + hybrid eigenvector following
+template archive-pele/de-2ts
+problem double-ended-saddle-search/lj38_2ts_separation
+reducer archive
+counter pele
+call_unit potential
