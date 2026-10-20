@@ -1,23 +1,23 @@
-barrier_jobs 1348
-barrier_force_calls 6.396e+05
+barrier_jobs 1916
+barrier_force_calls 1.695e+06
 barrier_windows 10
 rate_jobs 57
-rate_force_calls  2.710e+04
-rate_windows 236
-searches 13504
+rate_force_calls  5.044e+04
+rate_windows 336
+searches 19168
 missed_barriers 0
 unexpected_barriers 0
 reference_processes 15
-code Eon svn
+code EON (SVN r2549)
 code_version r2549
 commit r2549
 counter htst-reducer
 reducer harness-htst
 contributor Rohit Goswami
 random_seed 42
-communicator_jobs 8
-passes 423
-seconds 1973.17
+communicator_jobs 4
+passes 600
+seconds 8009.16
 algorithm Lanczos-CG rotation: max=10, tol=0.05
 template eon-svn/htst-pt-lanczos-cg
 problem hTST/Pt

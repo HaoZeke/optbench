@@ -173,6 +173,26 @@ commit = "0.1.1"
 committed = "2019-12-10"
 note = "Sella 0.1.1 PESWrapper.diag for the lowest-eigenvector row. eta 1e-6, gamma 1e-16, vreftol 0.99, gradient v0, rigid-mode projection. This pin is not Sella 2.6.0."
 
+[[code]]
+id = "eon-r2549"
+name = "EON (SVN r2549)"
+role = "kinetic Monte Carlo"
+repository = "https://theory.cm.utexas.edu/svn/eon"
+ref = "r2549"
+commit = "r2549"
+committed = "2026-01-23"
+note = "Latest EON SVN revision, r2549, last changed 2026-01-23. eonclient -v prints r2549. Built with Fortran and no physics patches. This is the old SVN code, not the git eOn at TheochemUI/eon. The Eon svn pin stays for the other r2549 templates."
+
+[[code]]
+id = "eon-develop-a7aa574"
+name = "eOn (develop a7aa574)"
+role = "kinetic Monte Carlo"
+repository = "https://github.com/TheochemUI/eon"
+ref = "develop"
+commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+committed = "2026-10-18"
+note = "Current develop of https://github.com/TheochemUI/eon (https://eondocs.org), commit a7aa574. Built with Fortran enabled and no physics patches. This is not the SVN code. The eon-develop pin at 7095b23 stays for the scores that were run on it."
+
 [[template]]
 id = "sella-0.1.1/lj38-loweig"
 code = "sella-0.1.1"

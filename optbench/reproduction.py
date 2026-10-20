@@ -200,7 +200,7 @@ MATCHES: list[dict] = [
     {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "cells/pele/go", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
     {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn/htst-al-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
     {"key": "hTST/Pt/eon-dimer-cg", "template": "eon-svn/htst-pt-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-pt-dimer.dat", "kind": "htst"},
-    {"key": "hTST/Pt/eon-lanczos-cg", "template": "eon-svn/htst-pt-lanczos-cg", "branch": "repro/htst-pt-eon-lanczos-cg", "path": "results/campaign/eon-svn-htst-pt-lanczos-cg.dat", "kind": "htst"},
+    {"key": "hTST/Pt/eon-lanczos-cg", "template": "eon-svn/htst-pt-lanczos-cg", "branch": "repro/htst-pt-eon-lanczos-cg", "path": "results/campaign/eon-svn-htst-pt-lanczos-cg.dat", "kind": "htst", "cause": "htst_pt_lanczos_stock", "extra": {"code": "EON (SVN r2549)"}},
 ]
 
 
@@ -274,6 +274,15 @@ CAUSE_TEXT = {
         "The mean is 688720 against 521595."
     ),
     "htst_al": "The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) misses barrier_force_calls and rate_force_calls by about 30 percent. Pt dimer CG with max 10 reproduces all four hTST counts.",
+    "htst_pt_lanczos_stock": (
+        "Stock EON SVN r2549, Fortran client, no physics patches. "
+        "The ini is the archived AKMC setup and the stop is max_atom at 0.001. "
+        "finite_difference, quit_early, and thermally_accessible_window stay at the r2549 defaults. "
+        "barrier_jobs 1916 vs 1419, barrier_force_calls 1695000 vs 673700, and rate_force_calls 50440 vs 25860 are outside 10 percent. "
+        "rate_jobs 57 vs 54 is inside. "
+        "eOn develop a7aa574 is a different code and is ranked on the same problem: "
+        "barrier_jobs 1720, barrier_force_calls 1468000, rate_jobs 54, rate_force_calls 46850."
+    ),
     "precon_hessian_index": (
         "ASE 3.29 PreconLBFGS with the archived opt.py setup (Exp A 3, maxstep 0.1, ASE fmax 0.01) "
         "scores 2605 against 2686, inside 10 percent. "
