@@ -1,15 +1,15 @@
-# Stock Lanczos from TSASE current main. Constructor defaults are not the 2014 script.
+# TSASE 1.0 Lanczos. rotationMax is the problem cap. The stop is overlap 0.99.
 id = "tsase/lj38-lanczos"
 engine = "tsase-stock"
 problem = "lowest-eigenvector/lj38"
-code = "tsase"
-code_version = "1.0"
+code = "TSASE"
+code_version = "1.0 (98aac60)"
 commit = "98aac60b5d9905e81ee4e6b8c385f169258d0218"
 algorithm = "Lanczos"
 tuning = "stock"
 ranked = true
 parameter_source = "stock"
-note = "TSASE main 98aac60, lanczos_atoms defaults (phi_tol 5 degrees, rotationMax 4, dR 0.001, ss false, random mode). The harness scores overlap 0.99 on the archive starts. Defaults are not adjusted toward the 2014 mean."
+note = "TSASE 1.0 commit 98aac60. lanczos_atoms keeps phi_tol 5 degrees, dR 0.001, ss false, maxStep 0.2, and a vrand initial mode. rotationMax is the problem cap 10000. The harness ends the Lanczos loop at absolute overlap 0.99 with the reference mode."
 
 [stop]
 norm = "overlap"
