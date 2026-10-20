@@ -14,11 +14,11 @@
       "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
       "entry": "tsase-98aac60b-lj75-minimahopping",
       "legacy": {
-        "force_calls": null,
+        "force_calls": 328970,
         "force_calls_max": 1000000,
-        "force_calls_median": 2.0,
-        "force_calls_min": 2,
-        "nfailed": 200
+        "force_calls_median": 1000000.0,
+        "force_calls_min": 192541,
+        "nfailed": 193
       },
       "metrics": {
         "bootstrap_resamples": 2000,
@@ -28,27 +28,27 @@
         "iqr": 0.0,
         "iqr_high": 0.0,
         "iqr_low": 0.0,
-        "mean": 2000000.0,
+        "mean": 1941513.965,
         "median": 2000000.0,
         "median_high": 2000000.0,
         "median_low": 2000000.0,
         "n": 200,
-        "n_cap": 11,
+        "n_cap": 193,
         "n_crash": 0,
-        "n_divergence": 189,
+        "n_divergence": 0,
         "n_wrong_stationary": 0,
-        "nfailed": 200,
-        "par2_mean": 2000000.0,
+        "nfailed": 193,
+        "par2_mean": 1941513.965,
         "par_applied": true,
         "par_factor": 2,
         "q25": 2000000.0,
         "q75": 2000000.0,
         "scoring": "par2-wilson-bootstrap",
-        "success_only_mean": null,
-        "success_rate": 0.0,
-        "successes": 0,
-        "wilson_high": 0.018845326377266575,
-        "wilson_low": 0.0
+        "success_only_mean": 328970.4285714286,
+        "success_rate": 0.035,
+        "successes": 7,
+        "wilson_high": 0.07047061152229073,
+        "wilson_low": 0.017055542008567192
       },
       "parameters": {
         "Ediff0": 0.5,
@@ -106,12 +106,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 420458610.06280816,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 420458610.06280816,
+          "energy": -396.2822423562499,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822423562499,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.2",
@@ -123,12 +123,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 7022139675.525924,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 7022139675.525924,
+          "energy": -396.2822430423348,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822430423348,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.3",
@@ -140,12 +140,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 3103533062.31548,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 3103533062.31548,
+          "energy": -396.2822393627839,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822393627839,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.4",
@@ -157,12 +157,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 14612036971.790339,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 14612036971.790339,
+          "energy": -396.2385055034106,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2385055034106,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.5",
@@ -174,12 +174,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 208242460.1134019,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 208242460.1134019,
+          "energy": -396.06158412478214,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.06158412478214,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.6",
@@ -191,12 +191,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 12145453.668481544,
-          "failure": "divergence",
-          "force_calls": 3,
-          "lowest_energy": 12145453.668481544,
+          "energy": -396.28224110218866,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28224110218866,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.7",
@@ -208,12 +208,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 501762994.4806117,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 501762994.4806117,
+          "energy": -396.1916371175179,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.1916371175179,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.8",
@@ -225,12 +225,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 3029031057.265773,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 3029031057.265773,
+          "energy": -396.2822404674783,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822404674783,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.9",
@@ -242,12 +242,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 76567660.28671716,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 76567660.28671716,
+          "energy": -396.0610499638631,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.0610499638631,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.10",
@@ -259,12 +259,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 398324768137.0382,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 398324768137.0382,
+          "energy": -396.28223959553975,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28223959553975,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.11",
@@ -276,12 +276,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 181847239010.96405,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 181847239010.96405,
+          "energy": -396.28224230031134,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28224230031134,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.12",
@@ -293,12 +293,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 1081026766.8914022,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 1081026766.8914022,
+          "energy": -396.2822416710732,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822416710732,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.13",
@@ -310,12 +310,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 270551059098.34387,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 270551059098.34387,
+          "energy": -395.0090543743275,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -395.0090543743275,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.14",
@@ -327,12 +327,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 139535356.1825444,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 139535356.1825444,
+          "energy": -396.2822423532788,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822423532788,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.15",
@@ -344,12 +344,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 543983117.4978446,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 543983117.4978446,
+          "energy": -396.282241879451,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.282241879451,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.16",
@@ -361,12 +361,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 1218473966.5350592,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 1218473966.5350592,
+          "energy": -395.3935623565423,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -395.3935623565423,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.17",
@@ -378,12 +378,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 283811805.56617165,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 283811805.56617165,
+          "energy": -396.28224021140494,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28224021140494,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.18",
@@ -393,18 +393,16 @@
         },
         {
           "comparable": true,
-          "converged": false,
+          "converged": true,
           "counter": "harness",
-          "energy": 156883357.93306738,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 156883357.93306738,
-          "reasons": [
-            "divergence"
-          ],
+          "energy": -397.49151024188006,
+          "failure": null,
+          "force_calls": 297208,
+          "lowest_energy": -397.49151024188006,
+          "reasons": [],
           "schema": "optbench.start/v2",
           "start": "coords.19",
-          "success": false,
+          "success": true,
           "threshold": -397.491331,
           "verify_calls": 0
         },
@@ -412,12 +410,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 29795842.012001827,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 29795842.012001827,
+          "energy": -396.2385066433321,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2385066433321,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.20",
@@ -429,12 +427,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 138634320.40959966,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 138634320.40959966,
+          "energy": -396.2822438638114,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822438638114,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.21",
@@ -446,12 +444,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 24938044547.288128,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 24938044547.288128,
+          "energy": -396.2822384025631,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822384025631,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.22",
@@ -463,12 +461,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 126347423396.22862,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 126347423396.22862,
+          "energy": -396.1262588582267,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.1262588582267,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.23",
@@ -480,12 +478,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 286263407.1108787,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 286263407.1108787,
+          "energy": -396.2822420403529,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822420403529,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.24",
@@ -497,12 +495,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 597543427.141617,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 597543427.141617,
+          "energy": -396.2822428367808,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822428367808,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.25",
@@ -531,12 +529,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 78591538370.66003,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 78591538370.66003,
+          "energy": -396.23850167216904,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.23850167216904,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.27",
@@ -565,12 +563,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 475794439.58389604,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 475794439.58389604,
+          "energy": -396.2822385731758,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822385731758,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.29",
@@ -582,12 +580,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 23741213.818054073,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 23741213.818054073,
+          "energy": -396.2822434982135,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822434982135,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.30",
@@ -599,12 +597,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 1162164700024.5415,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 1162164700024.5415,
+          "energy": -396.282239107132,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.282239107132,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.31",
@@ -616,12 +614,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 76781603.75139329,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 76781603.75139329,
+          "energy": -396.1930300124461,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.1930300124461,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.32",
@@ -633,12 +631,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 31899842.850750428,
-          "failure": "divergence",
-          "force_calls": 3,
-          "lowest_energy": 31899842.850750428,
+          "energy": -396.1929874919406,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.1929874919406,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.33",
@@ -650,12 +648,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 174201919238.33044,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 174201919238.33044,
+          "energy": -396.28224227612907,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28224227612907,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.34",
@@ -667,12 +665,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 4457711.383899283,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 4457711.383899283,
+          "energy": -396.2822424222318,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822424222318,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.35",
@@ -684,12 +682,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 17736373.66207778,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 17736373.66207778,
+          "energy": -396.28223802410685,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28223802410685,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.36",
@@ -718,12 +716,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 179519778.56883296,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 179519778.56883296,
+          "energy": -393.8054963325511,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -393.8054963325511,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.38",
@@ -735,12 +733,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 254986758.58431002,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 254986758.58431002,
+          "energy": -396.2822410041781,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822410041781,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.39",
@@ -752,12 +750,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 79666967.1184966,
-          "failure": "divergence",
-          "force_calls": 3,
-          "lowest_energy": 79666967.1184966,
+          "energy": -396.1929628462209,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.1929628462209,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.40",
@@ -769,12 +767,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 3779651940.746231,
-          "failure": "divergence",
-          "force_calls": 3,
-          "lowest_energy": 3779651940.746231,
+          "energy": -395.9692394545895,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -395.9692394545895,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.41",
@@ -786,12 +784,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 3673355306.601849,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 3673355306.601849,
+          "energy": -396.1929862382377,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.1929862382377,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.42",
@@ -803,12 +801,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 16910843198.424995,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 16910843198.424995,
+          "energy": -396.2822407243159,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822407243159,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.43",
@@ -820,12 +818,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 3724593.5772447516,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 3724593.5772447516,
+          "energy": -395.18043581831364,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -395.18043581831364,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.44",
@@ -837,12 +835,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 11855871.700345928,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 11855871.700345928,
+          "energy": -396.2822415074419,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822415074419,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.45",
@@ -854,12 +852,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 216251007.8561717,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 216251007.8561717,
+          "energy": -396.19302678471206,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.19302678471206,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.46",
@@ -871,12 +869,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 12819080631.309273,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 12819080631.309273,
+          "energy": -396.1930119612887,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.1930119612887,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.47",
@@ -888,12 +886,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 2298576515.142542,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 2298576515.142542,
+          "energy": -396.2822389732021,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822389732021,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.48",
@@ -905,12 +903,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 304030979.1895853,
-          "failure": "divergence",
-          "force_calls": 3,
-          "lowest_energy": 304030979.1895853,
+          "energy": -396.28224028978184,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28224028978184,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.49",
@@ -922,10 +920,10 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 1152339155578.8987,
+          "energy": -396.28224224333906,
           "failure": "cap",
           "force_calls": 1000000,
-          "lowest_energy": 1152339155578.8987,
+          "lowest_energy": -396.28224224333906,
           "reasons": [
             "cap"
           ],
@@ -939,12 +937,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 186804641.4395857,
-          "failure": "divergence",
-          "force_calls": 3,
-          "lowest_energy": 186804641.4395857,
+          "energy": -396.2385060802976,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2385060802976,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.51",
@@ -956,12 +954,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 95628407.81537288,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 95628407.81537288,
+          "energy": -396.1929961718007,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.1929961718007,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.52",
@@ -973,12 +971,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 1883012484.5921495,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 1883012484.5921495,
+          "energy": -396.2822360345051,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822360345051,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.53",
@@ -990,12 +988,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 540992932.821187,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 540992932.821187,
+          "energy": -396.2822443396833,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822443396833,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.54",
@@ -1007,12 +1005,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 2351952457.9036193,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 2351952457.9036193,
+          "energy": -396.28224238279887,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28224238279887,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.55",
@@ -1024,12 +1022,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 1183492535.9332952,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 1183492535.9332952,
+          "energy": -396.2822376859959,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822376859959,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.56",
@@ -1041,12 +1039,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 314059512.5209796,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 314059512.5209796,
+          "energy": -396.238508640405,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.238508640405,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.57",
@@ -1056,18 +1054,16 @@
         },
         {
           "comparable": true,
-          "converged": false,
+          "converged": true,
           "counter": "harness",
-          "energy": 333977706147.6114,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 333977706147.6114,
-          "reasons": [
-            "divergence"
-          ],
+          "energy": -397.4915439097014,
+          "failure": null,
+          "force_calls": 318127,
+          "lowest_energy": -397.4915439097014,
+          "reasons": [],
           "schema": "optbench.start/v2",
           "start": "coords.58",
-          "success": false,
+          "success": true,
           "threshold": -397.491331,
           "verify_calls": 0
         },
@@ -1075,12 +1071,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 61910356.57990445,
-          "failure": "divergence",
-          "force_calls": 3,
-          "lowest_energy": 61910356.57990445,
+          "energy": -396.28223767173534,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28223767173534,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.59",
@@ -1092,12 +1088,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 20404939.463895157,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 20404939.463895157,
+          "energy": -396.2385056535783,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2385056535783,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.60",
@@ -1109,12 +1105,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 589531152.4691467,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 589531152.4691467,
+          "energy": -394.63726447730187,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -394.63726447730187,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.61",
@@ -1126,12 +1122,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 199802002.92667988,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 199802002.92667988,
+          "energy": -393.343158826543,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -393.343158826543,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.62",
@@ -1143,12 +1139,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 30948916540.632828,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 30948916540.632828,
+          "energy": -396.28224338502,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28224338502,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.63",
@@ -1160,12 +1156,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 239586323.84536284,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 239586323.84536284,
+          "energy": -393.43505968742863,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -393.43505968742863,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.64",
@@ -1177,12 +1173,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 4902727768.548035,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 4902727768.548035,
+          "energy": -396.2822421713389,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822421713389,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.65",
@@ -1194,12 +1190,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 5532750176.303007,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 5532750176.303007,
+          "energy": -396.2822409646312,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822409646312,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.66",
@@ -1211,12 +1207,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 2217776898.450812,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 2217776898.450812,
+          "energy": -396.1930254394067,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.1930254394067,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.67",
@@ -1228,12 +1224,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 842503222.9442368,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 842503222.9442368,
+          "energy": -396.28223767804246,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28223767804246,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.68",
@@ -1245,12 +1241,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 527250450.56964374,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 527250450.56964374,
+          "energy": -396.2822412106673,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822412106673,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.69",
@@ -1262,12 +1258,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 203768754.85114795,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 203768754.85114795,
+          "energy": -396.28223639673445,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28223639673445,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.70",
@@ -1279,12 +1275,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 1287643673.6736453,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 1287643673.6736453,
+          "energy": -393.62954765838475,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -393.62954765838475,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.71",
@@ -1296,12 +1292,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 1242458863.0323205,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 1242458863.0323205,
+          "energy": -396.2822432744624,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822432744624,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.72",
@@ -1313,12 +1309,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 1419904879294.0007,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 1419904879294.0007,
+          "energy": -396.28223998875956,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28223998875956,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.73",
@@ -1330,12 +1326,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 12821370125.21787,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 12821370125.21787,
+          "energy": -396.28224333774824,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28224333774824,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.74",
@@ -1347,12 +1343,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 125662903.45067257,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 125662903.45067257,
+          "energy": -396.2822407534115,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822407534115,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.75",
@@ -1364,12 +1360,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 306787813.0977634,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 306787813.0977634,
+          "energy": -396.23850605761993,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.23850605761993,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.76",
@@ -1381,12 +1377,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 134702336.31696722,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 134702336.31696722,
+          "energy": -396.2822420591283,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822420591283,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.77",
@@ -1398,12 +1394,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 716934900.0949467,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 716934900.0949467,
+          "energy": -396.2822379795275,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822379795275,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.78",
@@ -1415,12 +1411,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 1300120051.1140678,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 1300120051.1140678,
+          "energy": -396.2822417221679,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822417221679,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.79",
@@ -1432,12 +1428,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 431049025.8334484,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 431049025.8334484,
+          "energy": -396.28224338512564,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28224338512564,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.80",
@@ -1449,12 +1445,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 3826812842.6484165,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 3826812842.6484165,
+          "energy": -396.2822416398725,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822416398725,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.81",
@@ -1466,12 +1462,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 756810583.4697493,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 756810583.4697493,
+          "energy": -396.282242042075,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.282242042075,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.82",
@@ -1483,12 +1479,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 6215844.938795291,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 6215844.938795291,
+          "energy": -396.28224331975343,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28224331975343,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.83",
@@ -1500,12 +1496,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 304888297.14889663,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 304888297.14889663,
+          "energy": -396.28223941716954,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28223941716954,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.84",
@@ -1517,12 +1513,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 3383711222.828562,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 3383711222.828562,
+          "energy": -396.2822420929583,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822420929583,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.85",
@@ -1534,12 +1530,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 1492955212361.6218,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 1492955212361.6218,
+          "energy": -396.2822426369262,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822426369262,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.86",
@@ -1551,12 +1547,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 448642357.2625286,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 448642357.2625286,
+          "energy": -396.28223870824854,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28223870824854,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.87",
@@ -1568,12 +1564,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 1877586164.0747447,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 1877586164.0747447,
+          "energy": -394.5601441590247,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -394.5601441590247,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.88",
@@ -1583,18 +1579,16 @@
         },
         {
           "comparable": true,
-          "converged": false,
+          "converged": true,
           "counter": "harness",
-          "energy": 136303471.5465775,
-          "failure": "divergence",
-          "force_calls": 3,
-          "lowest_energy": 136303471.5465775,
-          "reasons": [
-            "divergence"
-          ],
+          "energy": -397.4914681711023,
+          "failure": null,
+          "force_calls": 623019,
+          "lowest_energy": -397.4914681711023,
+          "reasons": [],
           "schema": "optbench.start/v2",
           "start": "coords.89",
-          "success": false,
+          "success": true,
           "threshold": -397.491331,
           "verify_calls": 0
         },
@@ -1602,12 +1596,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 3790061994202.813,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 3790061994202.813,
+          "energy": -396.28224244341106,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28224244341106,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.90",
@@ -1619,12 +1613,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 2122179264.878069,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 2122179264.878069,
+          "energy": -394.2890409213387,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -394.2890409213387,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.91",
@@ -1636,12 +1630,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 50170881.2097343,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 50170881.2097343,
+          "energy": -396.28224019368815,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28224019368815,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.92",
@@ -1653,12 +1647,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 12646407910.144663,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 12646407910.144663,
+          "energy": -396.1916324618558,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.1916324618558,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.93",
@@ -1670,12 +1664,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 38961932.15014824,
-          "failure": "divergence",
-          "force_calls": 3,
-          "lowest_energy": 38961932.15014824,
+          "energy": -396.2822382792433,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822382792433,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.94",
@@ -1687,12 +1681,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 1266648788.852146,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 1266648788.852146,
+          "energy": -396.2822427124655,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822427124655,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.95",
@@ -1704,12 +1698,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 47755865133.61861,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 47755865133.61861,
+          "energy": -395.74121756145036,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -395.74121756145036,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.96",
@@ -1721,12 +1715,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 283413792.88112783,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 283413792.88112783,
+          "energy": -394.628643521082,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -394.628643521082,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.97",
@@ -1738,12 +1732,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 31165992.2862418,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 31165992.2862418,
+          "energy": -396.2822436087379,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822436087379,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.98",
@@ -1755,10 +1749,10 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 1173643126.4988518,
+          "energy": -396.19302795134706,
           "failure": "cap",
           "force_calls": 1000000,
-          "lowest_energy": 1173643126.4988518,
+          "lowest_energy": -396.19302795134706,
           "reasons": [
             "cap"
           ],
@@ -1772,12 +1766,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 824085843730.5367,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 824085843730.5367,
+          "energy": -396.191639907031,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.191639907031,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.100",
@@ -1789,12 +1783,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 2708390460.16497,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 2708390460.16497,
+          "energy": -396.28223935557935,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28223935557935,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.101",
@@ -1806,12 +1800,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 50499036.82869139,
-          "failure": "divergence",
-          "force_calls": 3,
-          "lowest_energy": 50499036.82869139,
+          "energy": -396.19294519909533,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.19294519909533,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.102",
@@ -1823,12 +1817,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 145615369.0717832,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 145615369.0717832,
+          "energy": -396.28223843573136,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28223843573136,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.103",
@@ -1840,10 +1834,10 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 10455617638.733788,
+          "energy": -396.28223011411353,
           "failure": "cap",
           "force_calls": 1000000,
-          "lowest_energy": 10455617638.733788,
+          "lowest_energy": -396.28223011411353,
           "reasons": [
             "cap"
           ],
@@ -1857,12 +1851,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 5315946547219.564,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 5315946547219.564,
+          "energy": -396.28224023879784,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28224023879784,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.105",
@@ -1874,12 +1868,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 6795322.556379075,
-          "failure": "divergence",
-          "force_calls": 3,
-          "lowest_energy": 6795322.556379075,
+          "energy": -396.2822421886817,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822421886817,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.106",
@@ -1891,12 +1885,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 102315675.79278961,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 102315675.79278961,
+          "energy": -396.192922863837,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.192922863837,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.107",
@@ -1908,12 +1902,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 3561865441.512267,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 3561865441.512267,
+          "energy": -396.2822423103927,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822423103927,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.108",
@@ -1925,12 +1919,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 6971091.123149074,
-          "failure": "divergence",
-          "force_calls": 3,
-          "lowest_energy": 6971091.123149074,
+          "energy": -394.62864636279915,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -394.62864636279915,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.109",
@@ -1942,12 +1936,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 4567571994.241953,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 4567571994.241953,
+          "energy": -396.2822410398579,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822410398579,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.110",
@@ -1959,12 +1953,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 8494465083.665752,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 8494465083.665752,
+          "energy": -394.56014787413216,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -394.56014787413216,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.111",
@@ -1974,35 +1968,31 @@
         },
         {
           "comparable": true,
-          "converged": false,
+          "converged": true,
           "counter": "harness",
-          "energy": 4563336589051.794,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 4563336589051.794,
-          "reasons": [
-            "divergence"
-          ],
+          "energy": -397.49156140121335,
+          "failure": null,
+          "force_calls": 313463,
+          "lowest_energy": -397.49156140121335,
+          "reasons": [],
           "schema": "optbench.start/v2",
           "start": "coords.112",
-          "success": false,
+          "success": true,
           "threshold": -397.491331,
           "verify_calls": 0
         },
         {
           "comparable": true,
-          "converged": false,
+          "converged": true,
           "counter": "harness",
-          "energy": 168942864.44487596,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 168942864.44487596,
-          "reasons": [
-            "divergence"
-          ],
+          "energy": -397.4915599455279,
+          "failure": null,
+          "force_calls": 192541,
+          "lowest_energy": -397.4915599455279,
+          "reasons": [],
           "schema": "optbench.start/v2",
           "start": "coords.113",
-          "success": false,
+          "success": true,
           "threshold": -397.491331,
           "verify_calls": 0
         },
@@ -2010,12 +2000,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 92362283.7882213,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 92362283.7882213,
+          "energy": -396.2822358105472,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822358105472,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.114",
@@ -2027,12 +2017,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 134527651.17397186,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 134527651.17397186,
+          "energy": -396.28224206421214,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28224206421214,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.115",
@@ -2044,12 +2034,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 13984922.562931104,
-          "failure": "divergence",
-          "force_calls": 3,
-          "lowest_energy": 13984922.562931104,
+          "energy": -396.2385038268682,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2385038268682,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.116",
@@ -2061,12 +2051,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 61449994.69505775,
-          "failure": "divergence",
-          "force_calls": 3,
-          "lowest_energy": 61449994.69505775,
+          "energy": -396.2822324930745,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822324930745,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.117",
@@ -2078,12 +2068,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 465389890.6153333,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 465389890.6153333,
+          "energy": -396.2822421521996,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822421521996,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.118",
@@ -2095,12 +2085,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 249394412.6084067,
-          "failure": "divergence",
-          "force_calls": 3,
-          "lowest_energy": 249394412.6084067,
+          "energy": -396.1930282523151,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.1930282523151,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.119",
@@ -2112,12 +2102,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 1992614309.8965583,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 1992614309.8965583,
+          "energy": -396.28223493521807,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28223493521807,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.120",
@@ -2129,12 +2119,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 1173303295.889664,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 1173303295.889664,
+          "energy": -396.2822416521874,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822416521874,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.121",
@@ -2146,12 +2136,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 138322422.140563,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 138322422.140563,
+          "energy": -396.23850486686797,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.23850486686797,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.122",
@@ -2163,12 +2153,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 13354674760.540154,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 13354674760.540154,
+          "energy": -396.28224199004876,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28224199004876,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.123",
@@ -2180,12 +2170,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 395306103.3710888,
-          "failure": "divergence",
-          "force_calls": 3,
-          "lowest_energy": 395306103.3710888,
+          "energy": -395.2470302898952,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -395.2470302898952,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.124",
@@ -2197,12 +2187,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 54503463231.2427,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 54503463231.2427,
+          "energy": -396.2822424440641,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822424440641,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.125",
@@ -2212,18 +2202,16 @@
         },
         {
           "comparable": true,
-          "converged": false,
+          "converged": true,
           "counter": "harness",
-          "energy": 526265262.0043305,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 526265262.0043305,
-          "reasons": [
-            "divergence"
-          ],
+          "energy": -397.49143923293707,
+          "failure": null,
+          "force_calls": 355072,
+          "lowest_energy": -397.49143923293707,
+          "reasons": [],
           "schema": "optbench.start/v2",
           "start": "coords.126",
-          "success": false,
+          "success": true,
           "threshold": -397.491331,
           "verify_calls": 0
         },
@@ -2231,12 +2219,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 142722074.31649217,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 142722074.31649217,
+          "energy": -396.2822442573623,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822442573623,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.127",
@@ -2248,12 +2236,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 20853428025.914993,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 20853428025.914993,
+          "energy": -396.2822321708874,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822321708874,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.128",
@@ -2265,12 +2253,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 836035713.7363887,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 836035713.7363887,
+          "energy": -394.628645322631,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -394.628645322631,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.129",
@@ -2282,12 +2270,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 36258578.75998442,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 36258578.75998442,
+          "energy": -396.28224331286424,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28224331286424,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.130",
@@ -2299,12 +2287,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 628918118.6160369,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 628918118.6160369,
+          "energy": -396.19300266453473,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.19300266453473,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.131",
@@ -2316,12 +2304,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 1489240133.0860322,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 1489240133.0860322,
+          "energy": -396.2822432312266,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822432312266,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.132",
@@ -2333,12 +2321,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 97579835.43046045,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 97579835.43046045,
+          "energy": -393.5613808952196,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -393.5613808952196,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.133",
@@ -2350,12 +2338,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 55250572.65846396,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 55250572.65846396,
+          "energy": -396.2385021059168,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2385021059168,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.134",
@@ -2367,12 +2355,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 9431963376.936302,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 9431963376.936302,
+          "energy": -396.19299189913545,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.19299189913545,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.135",
@@ -2384,12 +2372,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 23662288534.59999,
-          "failure": "divergence",
-          "force_calls": 3,
-          "lowest_energy": 23662288534.59999,
+          "energy": -396.28223895303165,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28223895303165,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.136",
@@ -2401,12 +2389,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 467258632238.353,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 467258632238.353,
+          "energy": -396.282240663058,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.282240663058,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.137",
@@ -2418,12 +2406,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 333733528.69589937,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 333733528.69589937,
+          "energy": -396.1929881691255,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.1929881691255,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.138",
@@ -2435,12 +2423,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 11424121271.161877,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 11424121271.161877,
+          "energy": -396.28224049459436,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28224049459436,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.139",
@@ -2452,12 +2440,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 3905940923.333785,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 3905940923.333785,
+          "energy": -396.2822406810219,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822406810219,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.140",
@@ -2469,12 +2457,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 121404753.10668716,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 121404753.10668716,
+          "energy": -396.1929645013977,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.1929645013977,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.141",
@@ -2486,12 +2474,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 1835255832.0730562,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 1835255832.0730562,
+          "energy": -396.2822402273826,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822402273826,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.142",
@@ -2503,12 +2491,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 741663964.0421722,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 741663964.0421722,
+          "energy": -396.2822410895309,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822410895309,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.143",
@@ -2520,12 +2508,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 257511085.93380472,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 257511085.93380472,
+          "energy": -396.2822460829284,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822460829284,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.144",
@@ -2537,12 +2525,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 853613690.5680326,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 853613690.5680326,
+          "energy": -396.28223810177775,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28223810177775,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.145",
@@ -2554,12 +2542,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 1820683425.1745965,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 1820683425.1745965,
+          "energy": -394.5601498874104,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -394.5601498874104,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.146",
@@ -2571,12 +2559,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 6546936978.071461,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 6546936978.071461,
+          "energy": -396.28224180073164,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28224180073164,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.147",
@@ -2588,12 +2576,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 21834368.451629236,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 21834368.451629236,
+          "energy": -396.2822429880492,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822429880492,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.148",
@@ -2605,12 +2593,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 1780761321.2604582,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 1780761321.2604582,
+          "energy": -396.2822436773224,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822436773224,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.149",
@@ -2622,12 +2610,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 58870008199.52753,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 58870008199.52753,
+          "energy": -396.28224047732067,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28224047732067,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.150",
@@ -2639,12 +2627,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 3631767563.359892,
-          "failure": "divergence",
-          "force_calls": 3,
-          "lowest_energy": 3631767563.359892,
+          "energy": -396.2822411155456,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822411155456,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.151",
@@ -2654,18 +2642,16 @@
         },
         {
           "comparable": true,
-          "converged": false,
+          "converged": true,
           "counter": "harness",
-          "energy": 167316722.28104037,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 167316722.28104037,
-          "reasons": [
-            "divergence"
-          ],
+          "energy": -397.4913501605941,
+          "failure": null,
+          "force_calls": 203363,
+          "lowest_energy": -397.4913501605941,
+          "reasons": [],
           "schema": "optbench.start/v2",
           "start": "coords.152",
-          "success": false,
+          "success": true,
           "threshold": -397.491331,
           "verify_calls": 0
         },
@@ -2673,12 +2659,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 11247682.158807114,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 11247682.158807114,
+          "energy": -396.193028639645,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.193028639645,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.153",
@@ -2690,12 +2676,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 5391487629.350844,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 5391487629.350844,
+          "energy": -396.2822389835135,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822389835135,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.154",
@@ -2707,12 +2693,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 138271905662.6454,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 138271905662.6454,
+          "energy": -396.28224315426127,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28224315426127,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.155",
@@ -2724,12 +2710,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 36225588.14555725,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 36225588.14555725,
+          "energy": -396.18685079805635,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.18685079805635,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.156",
@@ -2741,12 +2727,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 10394066043.983099,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 10394066043.983099,
+          "energy": -396.1916395479017,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.1916395479017,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.157",
@@ -2758,10 +2744,10 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 50399917.29589806,
+          "energy": -396.1930092732531,
           "failure": "cap",
           "force_calls": 1000000,
-          "lowest_energy": 50399917.29589806,
+          "lowest_energy": -396.1930092732531,
           "reasons": [
             "cap"
           ],
@@ -2775,12 +2761,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 1870634229.0815814,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 1870634229.0815814,
+          "energy": -396.28224077665675,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28224077665675,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.159",
@@ -2792,12 +2778,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 225898281.04099023,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 225898281.04099023,
+          "energy": -396.2822338253087,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822338253087,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.160",
@@ -2809,12 +2795,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 49219692562260.83,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 49219692562260.83,
+          "energy": -396.19296898261416,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.19296898261416,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.161",
@@ -2826,12 +2812,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 43143535689.15125,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 43143535689.15125,
+          "energy": -396.2822408545908,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822408545908,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.162",
@@ -2860,12 +2846,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 1369330564143.2769,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 1369330564143.2769,
+          "energy": -396.28224343270386,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28224343270386,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.164",
@@ -2877,12 +2863,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 50093411.68966408,
-          "failure": "divergence",
-          "force_calls": 3,
-          "lowest_energy": 50093411.68966408,
+          "energy": -396.2822429652171,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822429652171,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.165",
@@ -2894,12 +2880,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 690995926.69455,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 690995926.69455,
+          "energy": -396.2385073971108,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2385073971108,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.166",
@@ -2911,12 +2897,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 107560458.73490222,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 107560458.73490222,
+          "energy": -396.2822447667523,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822447667523,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.167",
@@ -2928,12 +2914,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 331254237.2075463,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 331254237.2075463,
+          "energy": -396.2822397902666,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822397902666,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.168",
@@ -2945,12 +2931,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 41919196288.00112,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 41919196288.00112,
+          "energy": -396.2822350919063,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822350919063,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.169",
@@ -2962,12 +2948,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 44686497.85546609,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 44686497.85546609,
+          "energy": -396.19297923438864,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.19297923438864,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.170",
@@ -2979,12 +2965,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 587671475.8021688,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 587671475.8021688,
+          "energy": -396.2822388851093,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822388851093,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.171",
@@ -2996,12 +2982,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 86029780.47449555,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 86029780.47449555,
+          "energy": -396.2822432298832,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822432298832,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.172",
@@ -3013,12 +2999,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 5321672511.486437,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 5321672511.486437,
+          "energy": -396.2822423130798,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822423130798,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.173",
@@ -3030,12 +3016,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 2837033872.146003,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 2837033872.146003,
+          "energy": -396.28223684988234,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28223684988234,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.174",
@@ -3047,12 +3033,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 46891693818113.22,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 46891693818113.22,
+          "energy": -396.2822409501383,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822409501383,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.175",
@@ -3064,12 +3050,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 82184492.52870633,
-          "failure": "divergence",
-          "force_calls": 3,
-          "lowest_energy": 82184492.52870633,
+          "energy": -396.2822429092939,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822429092939,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.176",
@@ -3081,12 +3067,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 4806370256.041,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 4806370256.041,
+          "energy": -393.5061145249324,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -393.5061145249324,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.177",
@@ -3098,12 +3084,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 1695875218.424149,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 1695875218.424149,
+          "energy": -396.1929899845185,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.1929899845185,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.178",
@@ -3115,12 +3101,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 2536008041.5872507,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 2536008041.5872507,
+          "energy": -395.3607587993854,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -395.3607587993854,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.179",
@@ -3132,12 +3118,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 29155452.553995907,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 29155452.553995907,
+          "energy": -396.2385069444605,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2385069444605,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.180",
@@ -3149,12 +3135,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 12095622859.891985,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 12095622859.891985,
+          "energy": -396.2822436402462,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822436402462,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.181",
@@ -3166,12 +3152,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 1060267826.7176626,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 1060267826.7176626,
+          "energy": -394.62864501662085,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -394.62864501662085,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.182",
@@ -3183,12 +3169,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 16338214.311476817,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 16338214.311476817,
+          "energy": -396.2822410315459,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822410315459,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.183",
@@ -3200,12 +3186,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 4115608285.9259243,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 4115608285.9259243,
+          "energy": -396.28223541494344,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28223541494344,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.184",
@@ -3217,12 +3203,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 1229236993.347268,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 1229236993.347268,
+          "energy": -396.28224145389737,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28224145389737,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.185",
@@ -3234,12 +3220,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 46149489783.1175,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 46149489783.1175,
+          "energy": -396.2385004592314,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2385004592314,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.186",
@@ -3251,12 +3237,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 39257505.81492849,
-          "failure": "divergence",
-          "force_calls": 3,
-          "lowest_energy": 39257505.81492849,
+          "energy": -395.37490126993487,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -395.37490126993487,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.187",
@@ -3268,12 +3254,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 7371160437.094206,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 7371160437.094206,
+          "energy": -396.28224342420356,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28224342420356,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.188",
@@ -3285,12 +3271,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 1464899011.0327125,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 1464899011.0327125,
+          "energy": -396.28224338045027,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28224338045027,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.189",
@@ -3302,12 +3288,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 5417475037.014417,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 5417475037.014417,
+          "energy": -395.1207025523188,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -395.1207025523188,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.190",
@@ -3319,12 +3305,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 5259681.755463814,
-          "failure": "divergence",
-          "force_calls": 3,
-          "lowest_energy": 5259681.755463814,
+          "energy": -396.2822414869865,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822414869865,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.191",
@@ -3336,12 +3322,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 1970792628.6000128,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 1970792628.6000128,
+          "energy": -396.2822416975122,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822416975122,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.192",
@@ -3353,12 +3339,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 925563436.8816617,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 925563436.8816617,
+          "energy": -396.28224106758046,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.28224106758046,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.193",
@@ -3370,12 +3356,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 508718716002.6349,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 508718716002.6349,
+          "energy": -396.1929765081957,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.1929765081957,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.194",
@@ -3387,10 +3373,10 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 1571079900.3377059,
+          "energy": -396.1929889187975,
           "failure": "cap",
           "force_calls": 1000000,
-          "lowest_energy": 1571079900.3377059,
+          "lowest_energy": -396.1929889187975,
           "reasons": [
             "cap"
           ],
@@ -3404,12 +3390,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 359888976888.35284,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 359888976888.35284,
+          "energy": -396.1930022839913,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.1930022839913,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.196",
@@ -3421,12 +3407,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 14559771582.57036,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 14559771582.57036,
+          "energy": -396.2822413911161,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822413911161,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.197",
@@ -3438,12 +3424,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 49986764.84878266,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 49986764.84878266,
+          "energy": -396.2822373280361,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822373280361,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.198",
@@ -3472,12 +3458,12 @@
           "comparable": true,
           "converged": false,
           "counter": "harness",
-          "energy": 594415807.8052843,
-          "failure": "divergence",
-          "force_calls": 2,
-          "lowest_energy": 594415807.8052843,
+          "energy": -396.2822419543709,
+          "failure": "cap",
+          "force_calls": 1000000,
+          "lowest_energy": -396.2822419543709,
           "reasons": [
-            "divergence"
+            "cap"
           ],
           "schema": "optbench.start/v2",
           "start": "coords.200",
