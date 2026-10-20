@@ -8,10 +8,13 @@ import pytest
 
 from optbench.campaign import _check_stop, list_templates, resolve_problem
 from optbench.connection import ProcessCatalog
+from optbench.endpoints import EndpointArchive, archive_error
 from optbench.softsaddle_run import (
     _apply_novelty,
+    _attach_endpoint,
     _depth_snapshot,
     _radius_update,
+    _records_carry_endpoints,
     _search_seed,
     _starts_by_repetition,
     hypersphere,
@@ -379,3 +382,30 @@ def test_novelty_uses_find_repeat():
     assert high["failure"] == "divergence"
     assert catalog.unique == 3
     assert catalog.qualifying == 2
+
+
+def test_attach_endpoint_stamps_stored_and_not_minimized(tmp_path: Path):
+    archive = EndpointArchive(tmp_path / "softsaddle-2019.04-saddle-demo.endpoints.npz", 2)
+    archive.reset(np.array([19.2088, 19.0118, 30.0]), np.array([0, 4]))
+    reactant = np.zeros((2, 3))
+    judged = {
+        "endpoint_plus": reactant + np.array([2.71, 0.0, 0.0]),
+        "endpoint_minus": reactant + np.array([0.05, 0.0, 0.0]),
+    }
+    stored = {"start": "rep1-search1"}
+    assert _attach_endpoint(archive, reactant, judged, stored) == "stored"
+    assert "endpoint_plus" not in judged
+    skipped = {"start": "rep1-search2"}
+    assert _attach_endpoint(archive, reactant, {}, skipped) == "not_minimized"
+    non_finite = {
+        "endpoint_plus": reactant,
+        "endpoint_minus": np.array([[np.nan, 0.0, 0.0], [0.0, 0.0, 0.0]]),
+    }
+    missing = {"start": "rep1-search3"}
+    assert _attach_endpoint(archive, reactant, non_finite, missing) == "not_minimized"
+    archive.save()
+    rows = [stored, skipped, missing]
+    assert archive_error(archive.path, rows, archive.path.name) is None
+    assert _records_carry_endpoints(rows) is True
+    assert _records_carry_endpoints([{**stored, "endpoint_status": "guessed"}]) is False
+    assert [row["endpoint_index"] for row in rows] == [0, 1, 2]

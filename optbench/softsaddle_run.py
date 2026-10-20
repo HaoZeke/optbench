@@ -15,9 +15,11 @@ cap. A saddle is connected when exactly one minimized endpoint matches
 the reactant by the eOn r2205 per-atom test. Novelty is
 ``AKMCState.find_repeat``: a barrier difference above 0.01 eV is a
 different process, and otherwise the same per-atom test is applied to
-the saddle. Davidson charges one finite-difference Hessian-vector
-product per iteration. The dense anchor built inside libdavidson is
-not a harness call.
+the saddle. Each search records its minimized endpoints in
+``<stem>.endpoints.npz``; a search that stops first is
+``not_minimized``. Davidson charges one finite-difference
+Hessian-vector product per iteration. The dense anchor built inside
+libdavidson is not a harness call.
 """
 
 from __future__ import annotations
@@ -39,6 +41,15 @@ from .connection import (
     link_tolerance,
     per_atom_max,
     same_process,
+)
+from .endpoints import (
+    STATUS_NOT_MINIMIZED,
+    STATUS_STORED,
+    EndpointArchive,
+    align_resume,
+    archive_error,
+    stamp_endpoint,
+    stored_cell,
 )
 from .failures import classify_failure
 from .rgsaddle_minmode import (
@@ -768,6 +779,8 @@ def _judge_saddle(payload: dict, climbed: dict, potential: HarnessSurface, calls
             record["rmsd_minus"] = minus_rmsd
             record["saddle_distance"] = _norm(point - minimum)
             record["saddle_x"] = point.copy()
+            record["endpoint_plus"] = plus.reshape(-1, 3).copy()
+            record["endpoint_minus"] = minus.reshape(-1, 3).copy()
             record["novel_candidate"] = True
             if climbed["x_lambda"] is not None:
                 distance = _norm(np.asarray(climbed["x_lambda"], dtype=np.float64) - minimum)
@@ -826,6 +839,9 @@ def _saddle_worker(payload: dict) -> dict:
     judged["index"] = int(payload["index"])
     if judged.get("saddle_x") is not None:
         judged["saddle_x"] = np.asarray(judged["saddle_x"], dtype=np.float64).tolist()
+    for key in ("endpoint_plus", "endpoint_minus"):
+        if judged.get(key) is not None:
+            judged[key] = np.asarray(judged[key], dtype=np.float64).reshape(-1, 3).tolist()
     return judged
 
 
@@ -1437,6 +1453,57 @@ def _displace(minimum: np.ndarray, direction: np.ndarray, radius: float, atoms: 
     return x0
 
 
+def _records_carry_endpoints(records: list[dict]) -> bool:
+    """True when every start points at a row of the endpoint archive."""
+    if not records:
+        return False
+    allowed = {STATUS_STORED, STATUS_NOT_MINIMIZED}
+    for row in records:
+        if "endpoint_index" not in row or not row.get("endpoints"):
+            return False
+        if str(row.get("endpoint_status") or "") not in allowed:
+            return False
+    return True
+
+
+def _attach_endpoint(archive: EndpointArchive, reactant, judged: dict, record: dict) -> str:
+    """Append this search and stamp ``record``.
+
+    The coordinate arrays are removed from ``judged``. The starts file
+    keeps the archive name and the row index. A missing or non-finite
+    pair is ``not_minimized``.
+    """
+    plus = judged.pop("endpoint_plus", None)
+    minus = judged.pop("endpoint_minus", None)
+    plus_row = minus_row = None
+    if plus is not None and minus is not None:
+        plus_row = np.asarray(plus, dtype=np.float64).reshape(archive.n_free, 3)
+        minus_row = np.asarray(minus, dtype=np.float64).reshape(archive.n_free, 3)
+        if not (np.isfinite(plus_row).all() and np.isfinite(minus_row).all()):
+            plus_row = minus_row = None
+    reactant_row = np.asarray(reactant, dtype=np.float64).reshape(archive.n_free, 3)
+    status = archive.add(reactant_row, plus_row, minus_row)
+    stamp_endpoint(record, archive.name, archive.count - 1, status)
+    return status
+
+
+def _seal_endpoints(archive: EndpointArchive, records: list[dict]) -> None:
+    """Pack the crash log, or accept an npz that already matches ``records``."""
+    if archive.bin_path.is_file():
+        align_resume(archive, len(records))
+        for index, row in enumerate(records):
+            start = row.get("start", index)
+            if row.get("endpoints") != archive.name or int(row.get("endpoint_index", -1)) != index:
+                raise RuntimeError(f"{start} is not endpoint row {index} of {archive.name}")
+            if str(row.get("endpoint_status") or "") not in {STATUS_STORED, STATUS_NOT_MINIMIZED}:
+                raise RuntimeError(f"{start} has no endpoint status")
+        archive.save()
+        return
+    error = archive_error(archive.path, records, archive.path.name)
+    if error:
+        raise RuntimeError(error)
+
+
 def _load_partial(path: Path) -> list[dict]:
     if not path.is_file():
         return []
@@ -1487,6 +1554,7 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
     total_reps = int(settings["repetitions"])
     selected = _wanted_repetitions(total_reps)
     free = np.flatnonzero(~fixed)
+    archive = EndpointArchive(output.with_name(output.stem + ".endpoints.npz"), int(free.size))
     raw = potential_from_problem(problem)
     work.mkdir(parents=True, exist_ok=True)
     minimum, min_energy, minimize_calls, min_ok = _campaign_minimum(
@@ -1515,6 +1583,10 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
             return
         records = _published_records(output, repetition)
         if not records or any("good" not in row for row in records):
+            return
+        if not _records_carry_endpoints(records):
+            return
+        if not (output.parent / str(records[0]["endpoints"])).is_file():
             return
         if len(records) != int(published["total_searches"]):
             print(
@@ -1546,10 +1618,29 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
         run_cap = min(run_limit, template_budget, int(order.size))
         radius, _lam, _sad = _replay_radius(saved, settings)
         catalog, found = _replay_state(saved, cell, tolerance, barrier_max)
+        prior = 0
+        for earlier in range(1, repetition):
+            earlier_done = _done_summary(earlier)
+            if earlier_done is None:
+                raise RuntimeError(
+                    f"{template['id']} rep {repetition} needs rep {earlier} "
+                    "finished before the endpoint log can resume"
+                )
+            prior += int(earlier_done["total_searches"])
+        expected = prior + len(saved)
+        if expected == 0 and not archive.bin_path.is_file():
+            archive.reset(stored_cell(cell), free)
+        else:
+            align_resume(archive, expected)
+        for offset, row in enumerate(saved):
+            if int(row.get("endpoint_index", -1)) != prior + offset or row.get("endpoints") != archive.name:
+                raise RuntimeError(
+                    f"{row.get('start')} is not endpoint row {prior + offset} of {archive.name}"
+                )
         print(
             f"{template['id']} rep {repetition} resume searches {catalog.searches} "
             f"connected {catalog.qualifying} linked {catalog.unique} "
-            f"radius {radius:.4f} hypersphere {sha}",
+            f"radius {radius:.4f} hypersphere {sha} endpoints {archive.count}",
             flush=True,
         )
         batch = int(settings["batch"])
@@ -1621,6 +1712,7 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
                     linked=bool(applied.get("linked")),
                     error=applied.get("error"),
                 )
+                _attach_endpoint(archive, minimum, applied, public)
                 partial = dict(public)
                 partial["novel_candidate"] = bool(applied.get("novel_candidate"))
                 if applied.get("saddle_x") is not None:
@@ -1720,6 +1812,7 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
         goal=goal,
         summaries=finished_rows,
         work=work,
+        archive=archive,
     )
 
 
@@ -1757,6 +1850,7 @@ def _publish_saddle(
     goal: int,
     summaries: list[dict],
     work: Path,
+    archive: EndpointArchive,
 ) -> dict:
     records = []
     comments = []
@@ -1831,6 +1925,7 @@ def _publish_saddle(
         f"v2_nfailed {metrics['nfailed']}\n"
     )
     output.parent.mkdir(parents=True, exist_ok=True)
+    _seal_endpoints(archive, records)
     starts_body = "".join(json.dumps(_jsonable(row), sort_keys=True) + "\n" for row in records)
     _atomic_write(output, text)
     _atomic_write(output.with_suffix(".starts.jsonl"), starts_body)
@@ -1861,7 +1956,8 @@ def _publish_saddle(
             "is the climb budget, 64 calls of overshoot, and the two endpoint "
             "minimizations. The initial minimization is not in that count. "
             "Pt-island is eOn Morse::force. Novelty is AKMCState.find_repeat "
-            "on the saddle, and the link is the eOn r2205 per-atom test."
+            "on the saddle, and the link is the eOn r2205 per-atom test. "
+            "Endpoint minima are in the sibling endpoints archive."
         ),
         "runs": [
             {
@@ -1883,6 +1979,7 @@ def _publish_saddle(
         output.with_suffix(".v2.json"),
         json.dumps(document, indent=2, sort_keys=True) + "\n",
     )
+    archive.drop_log()
     table = write_archive_comparison(root, output.parent)
     print(f"wrote {table}", flush=True)
     return {
