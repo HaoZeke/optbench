@@ -1,0 +1,18 @@
+# rep 1 force_calls 3233357 unique_saddles 106 fraction_connected 0.7553296752721058 total_searches 11117
+# One stock repetition of eOn develop a7aa57472fb7. HarnessCounter through ext_pot, kernel morse/smooth/linear. Seed 1, start pt-island, stop at 27 good saddles below 1.5 eV. client_calls 1643380. This is not the 2014 archive row.
+force_calls 3233357
+force_calls_mean_error 0
+unique_saddles 106
+fraction_connected 0.7553296752721058
+total_searches 11117
+nfailed 0
+code eOn (develop a7aa57472fb7)
+code_version a7aa57472fb7
+commit a7aa57472fb7d823953fd36b78cd755fa4842d30
+algorithm Dimer
+template eon/develop-saddle-pt-lbfgs-5
+problem saddle-search/pt-island
+reducer harness
+counter harness
+count_keys HarnessCounter
+tuning default

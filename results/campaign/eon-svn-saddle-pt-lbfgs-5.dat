@@ -1,0 +1,18 @@
+# rep 1 force_calls 2237859 unique_saddles 121 fraction_connected 0.7482888432580425 total_searches 5844
+# One stock repetition of EON SVN r2549. HarnessCounter through ext_pot, kernel morse/smooth/linear. Seed 1, start pt-island, stop at 27 good saddles below 1.5 eV. client_calls 2221431. This is not the 2014 archive row.
+force_calls 2237859
+force_calls_mean_error 0
+unique_saddles 121
+fraction_connected 0.7482888432580425
+total_searches 5844
+nfailed 0
+code EON (SVN r2549)
+code_version r2549
+commit r2549
+algorithm Dimer
+template eon-svn/saddle-pt-lbfgs-5
+problem saddle-search/pt-island
+reducer harness
+counter harness
+count_keys HarnessCounter
+tuning default

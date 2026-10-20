@@ -14,6 +14,8 @@ Table 10 prints EON Lanczos 165. The archive file is 325. CI-NEB(3) prints 3 fai
 
 Endpoint minima are free-atom float32 deltas against the reactant, compressed. A file over 1 MB is a git-LFS pointer, not a loose blob.
 
+EON, the old SVN code, and eOn (https://eondocs.org, https://github.com/TheochemUI/eon) are different codes. The Pt-island dimer L-BFGS row with 5 rotations stays the 2014 archive number and is not rerun. One stock repetition of each later code was scored with the harness on the same problem, the same pt-island start, and the same stop: dimer, L-BFGS, rotations_max 5, converged force 0.001, 27 good saddles below 1.5 eV. EON (SVN r2549) recorded force_calls 2237859, unique_saddles 121, fraction_connected 0.7482888432580425, and total_searches 5844. eOn (develop a7aa57472fb7) recorded force_calls 3233357, unique_saddles 106, fraction_connected 0.7553296752721058, and total_searches 11117. The archive is force_calls 1684436.77778 (standard error 547855.076197), unique_saddles 113.111111111, fraction_connected 0.747722, and total_searches 4664.88888889. Force calls and searches sit outside 10% and outside that standard error. Unique saddles and the connected fraction sit inside 10%. The gaps are findings. Neither campaign reproduces the archive.
+
 ## accelerated-md
 
 | Row | Archive | Rerun | Status |
