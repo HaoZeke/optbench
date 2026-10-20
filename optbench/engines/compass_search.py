@@ -167,6 +167,7 @@ def _execute(job: dict) -> dict:
                     targetdistanceother=separation,
                     minimize_nsteps=cap,
                     nsteps=cap,
+                    nloops=cap,
                     restart_level=0,
                     parallel=False,
                     basename="clog_",
@@ -238,6 +239,7 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
         "# counter harness. COMPASS calls the ASE calculator, and that calculator calls pes.evaluate.\n"
         "# forcetol, minimize_fmax, and both target distances are the problem force stop.\n"
         "# The cell is fixed. COMPASS would otherwise treat any periodic boundary as a variable cell.\n"
+        "# nsteps, minimize_nsteps, and nloops are the problem force-call cap.\n"
         "# A success is under the cap, at the force stop, and Hessian index 1."
     )
     return write_campaign(
@@ -254,6 +256,9 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
             "fixed_cell": True,
             "counter": "harness",
             "potential": settings["potential"],
+            "nsteps": settings["cap"],
+            "minimize_nsteps": settings["cap"],
+            "nloops": settings["cap"],
         },
         images=None,
         comment=comment,
