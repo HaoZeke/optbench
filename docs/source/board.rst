@@ -107,8 +107,8 @@ It does not run a campaign.
    <td data-code="Eon svn" data-template="eon-svn/de-2ts-lanczos-improved" data-par2="502.784"><span class="bench-score">502.784</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">eon-svn/de-2ts-lanczos-improved</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="168024"><span class="bench-score">168024</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
-   <td data-code="ASE" data-template="ase/de-lj38-2ts-default" data-par2="245870"><span class="bench-score">245870</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">ase/de-lj38-2ts-default</a></td>
-   <td data-code="Sella" data-template="sella/de-lj38-2ts-default" data-par2="143927"><span class="bench-score">143927</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">sella/de-lj38-2ts-default</a></td>
+   <td data-code="ASE" data-template="ase/de-lj38-2ts-default" data-par2="273911"><span class="bench-score">273911</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">ase/de-lj38-2ts-default</a></td>
+   <td data-code="Sella" data-template="sella/de-lj38-2ts-default" data-par2="2868.75"><span class="bench-score">2868.75</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">sella/de-lj38-2ts-default</a></td>
    <td data-code="pysisyphus">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass" data-template="compass/sqnm" data-par2="100831"><span class="bench-score">100831</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">compass/sqnm</a></td>
