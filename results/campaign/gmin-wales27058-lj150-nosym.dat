@@ -1,0 +1,15 @@
+energy_calls_mean 858287.61
+energy_calls_stddev 666180.724
+basin_hopping_steps_mean 4033.29
+basin_hopping_steps_stddev 3089.679046
+nfailed 0
+code GMIN
+code_version wales-27058
+commit wales-27058
+algorithm no symmetrisation
+template gmin/lj150-nosym
+problem globalopt/lj150
+reducer archive
+counter gmin
+call_unit npcall
+n 100

@@ -1,0 +1,12 @@
+force_calls 27381673
+nfailed 0
+code GMIN
+code_version wales-27058
+commit wales-27058
+algorithm linear temperature basin-paving
+template gmin/tip4p20-tbp
+problem globalopt/tip4p20
+reducer archive
+counter gmin
+call_unit npcall
+n 100

@@ -1,0 +1,12 @@
+force_calls 36591097
+nfailed 0
+code GMIN
+code_version wales-27058
+commit wales-27058
+algorithm basin-hopping
+template gmin/tip4p20
+problem globalopt/tip4p20
+reducer archive
+counter gmin
+call_unit npcall
+n 100

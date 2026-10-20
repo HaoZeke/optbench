@@ -1,0 +1,13 @@
+avg_energy -589.3242394
+min_energy -601.0859614
+max_energy -577.8622742
+code GMIN
+code_version wales-27058
+commit wales-27058
+algorithm basin-hopping
+template gmin/lj100-binary
+problem globalopt/lj100-binary
+reducer archive
+counter gmin
+call_unit npcall
+n 100

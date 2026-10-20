@@ -1,0 +1,12 @@
+force_calls 61316
+nfailed 0
+code GMIN
+code_version wales-27058
+commit wales-27058
+algorithm basin-hopping with symmetrise csm moves
+template gmin/lj75
+problem globalopt/lj75
+reducer archive
+counter gmin
+call_unit npcall
+n 200
