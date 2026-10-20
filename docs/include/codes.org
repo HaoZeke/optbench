@@ -1,8 +1,8 @@
 #+begin_export rst
 .. raw:: html
 
-   <section class="bench" id="current-codes">
-   <h2>Current codes</h2>
+   <section class="bench" id="codes">
+   <h2>Codes</h2>
    <p>The benchmark contributor is Rohit Goswami. A ranked row is a full harness run. The commit on that row is the commit that produced the score.</p>
    <h3>eOn</h3>
    <table>
@@ -54,14 +54,14 @@
    </tr>
    </tbody></table>
    <p>No full ranked run</p><ul>
-   <li>LJ38 double-ended saddle: not yet on the harness counter, partial.</li>
-   <li>lj38_2ts_separation: partial.</li>
-   <li>pt-island: not yet on the harness counter, partial.</li>
-   <li>lj38: partial.</li>
+   <li>LJ38 double-ended saddle: not yet on the harness counter, short of the full start set.</li>
+   <li>lj38_2ts_separation: short of the full start set.</li>
+   <li>pt-island: not yet on the harness counter, short of the full start set.</li>
+   <li>lj38: short of the full start set.</li>
    <li>Pt-heptamer: not yet on the harness counter.</li>
-   <li>Pt heptamer island: not yet on the harness counter, partial.</li>
-   <li>LJ38: not yet on the harness counter, partial.</li>
-   <li>pt-island: not yet on the harness counter, partial.</li>
+   <li>Pt heptamer island: not yet on the harness counter, short of the full start set.</li>
+   <li>LJ38: not yet on the harness counter, short of the full start set.</li>
+   <li>pt-island: not yet on the harness counter, short of the full start set.</li>
    <li>eon-ci-neb: no per-start record.</li>
    <li>eon-ci-swdneb: no per-start record.</li>
    <li>eon-cg: no per-start record.</li>
@@ -291,14 +291,13 @@
    </tr>
    </tbody></table>
    <p>No full ranked run</p><ul>
-   <li>LJ38 double-ended saddle: partial.</li>
-   <li>lj38_2ts_separation: partial.</li>
-   <li>pt-island: partial.</li>
-   <li>Lennard-Jones 38 global minimum: partial.</li>
-   <li>Lennard-Jones 38 clusters: partial.</li>
-   <li>Morse bulk: partial.</li>
-   <li>Pt-heptamer: partial.</li>
-   <li>Pt heptamer island: partial.</li>
+   <li>LJ38 double-ended saddle: short of the full start set.</li>
+   <li>lj38_2ts_separation: short of the full start set.</li>
+   <li>pt-island: short of the full start set.</li>
+   <li>Lennard-Jones 38 clusters: short of the full start set.</li>
+   <li>Morse bulk: short of the full start set.</li>
+   <li>Pt-heptamer: short of the full start set.</li>
+   <li>Pt heptamer island: short of the full start set.</li>
    </ul>
    <h3>Sella</h3>
    <table>
@@ -360,14 +359,14 @@
    </tr>
    </tbody></table>
    <p>No full ranked run</p><ul>
-   <li>LJ38 double-ended saddle: partial.</li>
-   <li>lj38_2ts_separation: partial.</li>
-   <li>pt-island: partial.</li>
-   <li>Lennard-Jones 38 clusters: partial.</li>
-   <li>Morse bulk: partial.</li>
-   <li>Pt heptamer island: partial.</li>
-   <li>LJ38: partial.</li>
-   <li>pt-island: partial.</li>
+   <li>LJ38 double-ended saddle: short of the full start set.</li>
+   <li>lj38_2ts_separation: short of the full start set.</li>
+   <li>pt-island: short of the full start set.</li>
+   <li>Lennard-Jones 38 clusters: short of the full start set.</li>
+   <li>Morse bulk: short of the full start set.</li>
+   <li>Pt heptamer island: short of the full start set.</li>
+   <li>LJ38: short of the full start set.</li>
+   <li>pt-island: short of the full start set.</li>
    <li>sella-lj38: no per-start record.</li>
    </ul>
    <h3>pARTn</h3>
@@ -396,17 +395,6 @@
    <table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="globalopt/lj38" data-template="pele/bh-lj38-tuned">
-   <td>Lennard-Jones 38 global minimum</td>
-   <td data-field="template">pele/bh-lj38-tuned</td>
-   <td data-field="version">pele 0.1.2</td>
-   <td data-field="commit">b7081b932a06</td>
-   <td data-field="par2_mean">1.09971e+06</td>
-   <td data-field="mean_calls">669710</td>
-   <td data-field="median_calls">809086</td>
-   <td data-field="failures">crash 0, divergence 0, cap 43, wrong_stationary 0</td>
-   <td data-field="n">100</td>
-   </tr>
    <tr data-problem="lowest-eigenvector/lj38" data-template="pele/eig-lj38">
    <td>lj38</td>
    <td data-field="template">pele/eig-lj38</td>
@@ -464,7 +452,6 @@
    </tr>
    </tbody></table>
    <p>No full ranked run</p><ul>
-   <li>Lennard-Jones 38 global minimum: partial.</li>
    <li>pele-lbfgs-M1-maxstep0.1: no per-start record.</li>
    <li>pele-lbfgs-M10-maxstep0.1: no per-start record.</li>
    <li>pele-lbfgs-M100-maxstep0.2: no per-start record.</li>
@@ -532,9 +519,6 @@
    <td data-field="n">100</td>
    </tr>
    </tbody></table>
-   <p>No full ranked run</p><ul>
-   <li>Lennard-Jones 38 global minimum: partial.</li>
-   </ul>
    <h3>sqnm</h3>
    <table>
    <caption>Registry pins.</caption>
@@ -584,7 +568,7 @@
    </tr>
    </tbody></table>
    <p>No full ranked run</p><ul>
-   <li>Lennard-Jones 38 clusters: partial.</li>
+   <li>Lennard-Jones 38 clusters: short of the full start set.</li>
    </ul>
    <h3>geomeTRIC</h3>
    <table>
@@ -635,9 +619,6 @@
    </tr>
    </tbody></table>
    <p>No full ranked run.</p>
-   <p>No full ranked run</p><ul>
-   <li>Lennard-Jones 38 global minimum: partial.</li>
-   </ul>
    <h3>GMIN</h3>
    <table>
    <caption>Registry pins.</caption>
@@ -677,7 +658,7 @@
    </tr>
    </tbody></table>
    <p>No full ranked run</p><ul>
-   <li>Lennard-Jones 38 clusters: partial.</li>
+   <li>Lennard-Jones 38 clusters: short of the full start set.</li>
    </ul>
    <h3>PyAMFF</h3>
    <table>
@@ -787,21 +768,7 @@
    <td><a href="https://github.com/marktoakley/PyBCGA">https://github.com/marktoakley/PyBCGA</a></td>
    </tr>
    </tbody></table>
-   <table data-board-table="code-best">
-   <caption>Best full harness run on each problem.</caption>
-   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="globalopt/lj38" data-template="pybcga/lj38">
-   <td>Lennard-Jones 38 global minimum</td>
-   <td data-field="template">pybcga/lj38</td>
-   <td data-field="version">pybcga fb646c19</td>
-   <td data-field="commit">fb646c19b182</td>
-   <td data-field="par2_mean">2e+06</td>
-   <td data-field="mean_calls">25018.8</td>
-   <td data-field="median_calls">25020.5</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 100</td>
-   <td data-field="n">100</td>
-   </tr>
-   </tbody></table>
+   <p>No full ranked run.</p>
    <h3>ase-gpatom</h3>
    <table>
    <caption>Registry pins.</caption>
@@ -915,7 +882,7 @@
    </tr>
    </tbody></table>
    <p>No full ranked run</p><ul>
-   <li>Lennard-Jones 38 clusters: partial.</li>
+   <li>Lennard-Jones 38 clusters: short of the full start set.</li>
    </ul>
    <h3>SCGO</h3>
    <table>
@@ -929,9 +896,6 @@
    </tr>
    </tbody></table>
    <p>No full ranked run.</p>
-   <p>No full ranked run</p><ul>
-   <li>Lennard-Jones 38 global minimum: partial.</li>
-   </ul>
    <h3>TorchSim</h3>
    <table>
    <caption>Registry pins.</caption>
@@ -980,21 +944,7 @@
    <td><a href="https://gitlab.com/agox/agox">https://gitlab.com/agox/agox</a></td>
    </tr>
    </tbody></table>
-   <table data-board-table="code-best">
-   <caption>Best full harness run on each problem.</caption>
-   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="globalopt/lj38" data-template="agox/bh-lj38">
-   <td>Lennard-Jones 38 global minimum</td>
-   <td data-field="template">agox/bh-lj38</td>
-   <td data-field="version">agox 0.0.1.dev1+g22d94a6fa</td>
-   <td data-field="commit">22d94a6fae8c</td>
-   <td data-field="par2_mean">2e+06</td>
-   <td data-field="mean_calls">1e+06</td>
-   <td data-field="median_calls">1e+06</td>
-   <td data-field="failures">crash 0, divergence 0, cap 100, wrong_stationary 0</td>
-   <td data-field="n">100</td>
-   </tr>
-   </tbody></table>
+   <p>No full ranked run.</p>
    <h3>EZGA</h3>
    <table>
    <caption>Registry pins.</caption>
@@ -1007,9 +957,6 @@
    </tr>
    </tbody></table>
    <p>No full ranked run.</p>
-   <p>No full ranked run</p><ul>
-   <li>Lennard-Jones 38 global minimum: partial.</li>
-   </ul>
    <h3>Optax</h3>
    <table>
    <caption>Registry pins.</caption>

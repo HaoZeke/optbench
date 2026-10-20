@@ -314,6 +314,7 @@ def run(
             workers=workers,
             work=work,
             limit=limit,
+            resume=resume,
         )
     if template["engine"] in {"ase", "sella"}:
         from .ase_sella import run_template

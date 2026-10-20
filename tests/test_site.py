@@ -77,16 +77,20 @@ def test_rendered_pages_use_the_board_rank():
     assert f'data-board-table="ranked" data-problem="minimization/lj38"' in minimization
     assert f'data-field="par2_mean">{cells["par2_mean"]}<' in minimization
     assert "minimization-lj38-profile.svg" in minimization
-    assert "Legacy 2014 archive" in minimization
+    assert "2014 archive" in minimization
+    assert "Legacy 2014" not in minimization
+    assert "Wilson low" not in minimization
     assert "eon-cg" in minimization
     assert "par2-wilson-bootstrap" in minimization
     assert "Present runs. Fewer force calls first." not in minimization
     neb_page = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "neb.org").read_text(encoding="utf-8")
     assert neb["template"] in neb_page
     assert "not yet on the harness counter" in neb_page
-    assert "Legacy 2014 scores. Fewer calls is to the left." in neb_page
+    assert "2014 scores. Fewer calls is to the left." in neb_page
+    assert "Legacy 2014" not in neb_page
     tsopt = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "tsopt.org").read_text(encoding="utf-8")
-    assert "Sella 0.1.1 legacy" in tsopt
+    assert "Sella 0.1.1" in tsopt
+    assert "Sella 0.1.1 legacy" not in tsopt
     assert "2.6.0 legacy" not in tsopt
     assert "tsopt-LJ38-profile.svg" in tsopt
     saddle = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "saddle-search.org").read_text(encoding="utf-8")

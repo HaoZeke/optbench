@@ -75,19 +75,30 @@ class Budget:
         *,
         converged: bool,
     ) -> None:
-        """Record a finished local minimization. A hit raises :class:`Hit`."""
+        """Record a finished local minimization. A hit raises :class:`Hit`.
+
+        The stored structure is the lowest converged quench. A later
+        quench replaces it only when that quench is lower, or when it
+        lands inside the global-minimum window.
+        """
         if not converged:
             return
+        point_arr = np.asarray(point, dtype=np.float64).reshape(-1).copy()
+        grad_arr = np.asarray(gradient, dtype=np.float64).reshape(-1).copy()
+        energy_f = float(energy)
         self.quenched = True
-        self.quench_energy = float(energy)
-        self.quench_point = np.asarray(point, dtype=np.float64).reshape(-1).copy()
-        self.point = self.quench_point.copy()
-        self.energy = float(energy)
-        self.gradient = np.asarray(gradient, dtype=np.float64).reshape(-1).copy()
-        if (
+        in_window = (
             self.target is not None
-            and self.quench_energy <= self.target + self.window
+            and energy_f <= self.target + self.window
             and self.calls < self.cap
-        ):
+        )
+        better = self.quench_energy is None or energy_f < self.quench_energy
+        if better or in_window:
+            self.quench_energy = energy_f
+            self.quench_point = point_arr
+            self.point = point_arr.copy()
+            self.energy = energy_f
+            self.gradient = grad_arr
+        if in_window:
             self.hit = True
             raise Hit()

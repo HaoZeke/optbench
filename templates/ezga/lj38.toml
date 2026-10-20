@@ -10,7 +10,7 @@ profile = "default"
 tuning = "default"
 reducer = "capped"
 ranked = true
-note = "EZGA 1.2.31. The relaxer is ase_calculator's default FIRE at fmax 0.05 for 100 steps, with no MD. The population is 16 copies of the archived start and the run is 10 rattle generations. A hit is a quench inside fmax and inside the energy window."
+note = "EZGA 1.2.31. The relaxer is FIRE at fmax 0.05 with no MD. steps_max and the generation count are the force-call cap. The population is 16 copies of the archived start. A hit is a quench inside fmax and inside the energy window."
 
 [search]
 family = "globalopt"

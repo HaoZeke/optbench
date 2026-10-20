@@ -2,7 +2,7 @@
 #+OPTIONS: toc:nil num:nil author:nil
 
 The ranked table is the v2 PAR-2 mean on the problem's full start set.
-A row with fewer starts is partial and stays off that table.
+A row with fewer starts stays off that table.
 =uv run optbench board= writes this page from the committed results.
 It does not run a campaign.
 

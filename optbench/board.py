@@ -699,7 +699,7 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
         if str(fields.get("ranked") or "").lower() == "false":
             row["_declared_partial"] = "result file sets ranked false"
         elif str(fields.get("partial") or "").lower() == "true":
-            row["_declared_partial"] = "result file sets partial true"
+            row["_declared_partial"] = "result file is short of the full start set"
         if not records:
             row["note"] = "no per-start record"
             unparsed.append(row)
@@ -1154,11 +1154,8 @@ def _headers(problem: dict) -> list[str]:
         "Version",
         "Commit",
         "Source",
-        "Current",
         "PAR-2",
         "Success",
-        "Wilson low",
-        "Wilson high",
         "Median calls",
         "Mean calls",
     ]
@@ -1178,11 +1175,8 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
         ("version", f"{row.get('code') or ''} {row.get('code_version') or ''}"),
         ("commit", str(row.get("commit") or "")[:12]),
         ("source", str(row.get("source") or "")),
-        ("current", "yes" if row.get("current") else "no"),
         ("par2_mean", _format_number(row.get("par2_mean"))),
         ("success_rate", _format_number(row.get("success_rate"))),
-        ("wilson_low", _format_number(row.get("wilson_low"))),
-        ("wilson_high", _format_number(row.get("wilson_high"))),
         ("median_calls", _format_number(row.get("median_calls"))),
         ("mean_calls", _format_number(row.get("mean_calls"))),
     ]
@@ -1233,7 +1227,7 @@ def gap_paragraph(problem: dict, unparsed: list[dict] | None = None) -> str:
     if other:
         bits.append(f"{_joined_names(other)} {kind} are off the ranked table")
     if problem.get("partial"):
-        bits.append("Partial rows stay off the ranked table")
+        bits.append("Rows short of the full start set stay off the ranked table")
     if unparsed:
         bits.append("Files with no per-start harness record stay off the ranked table")
     if not bits and not problem.get("ranked"):
@@ -1245,7 +1239,7 @@ def gap_paragraph(problem: dict, unparsed: list[dict] | None = None) -> str:
 
 def _reason_text(row: dict) -> str:
     if row.get("partial"):
-        return str(row.get("partial_reason") or "partial")
+        return str(row.get("partial_reason") or "short of the full start set")
     if _off_harness(row):
         return "not yet on the harness counter"
     return f"counter {row.get('counter') or 'unset'}"
@@ -1313,10 +1307,7 @@ def _table(
 ) -> str:
     per_image = _show_per_image(problem)
     headers = _headers(problem)
-    caption = (
-        "Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. "
-        "Wilson bounds are the 95% interval on the success rate."
-    )
+    caption = "Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals."
     if per_image:
         caption += " Per-image mean divides that total by the problem's moving images, the same way for every code."
     ident = section_id or _slug(problem["id"])
@@ -1330,7 +1321,7 @@ def _table(
         [
             "<p>Ranked by the v2 PAR-2 mean of the harness total. "
             "Only the newest full version of a template is in this table. "
-            "A partial row, including a one-start asv smoke run, is not.</p>",
+            "A one-start smoke run is not.</p>",
             f'<table data-board-table="ranked" data-problem="{_cell(problem["id"])}">',
             f"<caption>{caption}</caption>",
             "<thead><tr>" + "".join(f"<th>{_cell(header)}</th>" for header in headers) + "</tr></thead><tbody>",
@@ -1356,7 +1347,7 @@ def _table(
             )
         lines.append("</ul>")
     if problem.get("partial"):
-        lines.append("<h3>Partial</h3><ul>")
+        lines.append("<h3>Short of the full start set</h3><ul>")
         for row in problem["partial"]:
             lines.append(
                 "<li>"

@@ -16,9 +16,9 @@ uv run optbench check
 uv run optbench templates
 ```
 
-`uv run` reads `pyproject.toml`, installs the command-line library, and runs that command. `pytest` is the test runner. `check` exits 0 when every partial contract covers its archived rows and `oracle/archive_gaps.txt` matches the departures. `templates` prints every template id.
+`uv run` reads `pyproject.toml`, installs the command-line library, and runs that command. `pytest` is the test runner. `check` exits 0 when every partly stated contract covers its archived rows and `oracle/archive_gaps.txt` matches the departures. `templates` prints every template id.
 
-`uv run optbench board` reads `results/campaign` and `results/asv` and writes `results/board` plus the v2 table on the Board page. It does not start a search. A band method is ranked on the harness force-call total across every image, and the per-image mean is a second column from that same total. Only the newest version of a code and template is ranked. A run that is both a campaign file and an asv track is one row, with the source kept as a column. A row that used fewer starts than the problem's full set is partial. An asv result that covers one start is a smoke run and stays out of the ranked mean.
+`uv run optbench board` reads `results/campaign` and `results/asv` and writes `results/board` plus the v2 table on the Board page. It does not start a search. A band method is ranked on the harness force-call total across every image, and the per-image mean is a second column from that same total. Only the newest version of a code and template is ranked. A run that is both a campaign file and an asv track is one row, with the source kept as a column. A row that used fewer starts than the problem's full set stays off the ranked table. An asv result that covers one start is a smoke run and stays out of the ranked mean.
 
 The harness does not contain eOn, pele, or Sella. Those are installed separately, and the commands below say which release produced the files in `results/campaign/`.
 
@@ -68,7 +68,7 @@ pixi exec --spec eon --spec uv -- uv run optbench run \
 
 The recorded 181 is commit `4d8b34baf`. Read the version line the client prints before treating another build as that score.
 
-`templates/eon/` is current main, commit `1d71c944501832bfafb955ffe13b9aae50c8efd4`, the merge of pull request 776. The version string is 3.6.0. `eon/lj38-lbfgs` is L-BFGS at the struct defaults, including memory 20 and `lbfgs_accept = energy`. `eon/lj38-lbfgs-m100` changes only the memory to 100. Both set the problem stop. The same pair for Morse bulk is `eon/morse-lbfgs` and `eon/morse-lbfgs-m100`. L-BFGS keys sit in `[LBFGS]`. A run writes `benchmark.dat` and `benchmark.starts`, one JSON object per geometry, failures included. The same commit has a default and a memory-100 template for the Pt-heptamer NEB, the LJ38 and Pt-island double-ended bands, and the LJ38 and Pt-island dimer saddle searches. `uv run optbench eon-job neb-pt-lbfgs` runs one of those. The NEB and saddle means follow the archived report: a counter under the cap stays in the mean, and `nfailed` counts a termination reason other than 0. The heptamer mean divides `force_calls_neb` by 8. The 3.5.0 and SVN templates are unchanged. `--workers` is the number of client processes. The default is 1. The problem file names `website/minimization/lj38/lj38-clusters.tgz`, and the manifest stores that archive at `inputs/sha256/86bf774955b906c486d37282c48e42628e8fe4af3579222f6e07fcf5913157b1/lj38-clusters.tgz`. The command unpacks it. `--work` chooses the scratch directory. The default is next to `--output`.
+`templates/eon/` is the main branch, commit `1d71c944501832bfafb955ffe13b9aae50c8efd4`, the merge of pull request 776. The version string is 3.6.0. `eon/lj38-lbfgs` is L-BFGS at the struct defaults, including memory 20 and `lbfgs_accept = energy`. `eon/lj38-lbfgs-m100` changes only the memory to 100. Both set the problem stop. The same pair for Morse bulk is `eon/morse-lbfgs` and `eon/morse-lbfgs-m100`. L-BFGS keys sit in `[LBFGS]`. A run writes `benchmark.dat` and `benchmark.starts`, one JSON object per geometry, failures included. The same commit has a default and a memory-100 template for the Pt-heptamer NEB, the LJ38 and Pt-island double-ended bands, and the LJ38 and Pt-island dimer saddle searches. `uv run optbench eon-job neb-pt-lbfgs` runs one of those. The NEB and saddle means follow the archived report: a counter under the cap stays in the mean, and `nfailed` counts a termination reason other than 0. The heptamer mean divides `force_calls_neb` by 8. The 3.5.0 and SVN templates are unchanged. `--workers` is the number of client processes. The default is 1. The problem file names `website/minimization/lj38/lj38-clusters.tgz`, and the manifest stores that archive at `inputs/sha256/86bf774955b906c486d37282c48e42628e8fe4af3579222f6e07fcf5913157b1/lj38-clusters.tgz`. The command unpacks it. `--work` chooses the scratch directory. The default is next to `--output`.
 
 `benchmark.dat` is the result. `force_calls` is the mean over starts that finished under the cap. Compare it to the file quoted above.
 
@@ -112,7 +112,7 @@ uv run optbench/sella_lj38.py \
   --version 2.6.0
 ```
 
-The recorded file is `results/campaign/sella-2.6.0-ts-lj38.dat`: mean 93, two starts at the step cap. Sella 0.1.1 was mean 69.55 with none failed. Those 0.1.1 rows stay on the 2014 tables and are labelled legacy.
+The recorded file is `results/campaign/sella-2.6.0-ts-lj38.dat`: mean 93, two starts at the step cap. Sella 0.1.1 was mean 69.55 with none failed. Those 0.1.1 rows stay on the 2014 tables.
 
 ASE 3.29.0 and Sella 2.6.0 templates live under `templates/ase/` and `templates/sella/`. A default row is the library constructor. A tuned row is the archived script when one exists. Force calls are calculator evaluations counted by the harness, for both codes. The ranked set is:
 
@@ -192,9 +192,9 @@ The front page is a result whose status is `sota` and whose commit is the presen
 
 The 2014 mean leaves out failures. The comparable score does not. It is specified in `docs/design/decision.md` and `docs/v2.md`, and the in-process wrapper is `docs/harness.md`.
 
-A force call is one entry to `HarnessCounter`. ASE, pele, and Sella are charged through that counter. A compiled client reaches the same counter: eonclient through the `ext_pot` bridge in `optbench.extpot`, and an rgpot client through `RgpotCounter.calculate`. `uv run optbench run` still writes the legacy `benchmark.dat` from the client's own counter, and the per-start file next to it is marked `counter` `client`. That file is not a v2 score. `uv run optbench validate-counter` is the subset check that the server count matches eonclient. A subset is not a published mean.
+A force call is one entry to `HarnessCounter`. ASE, pele, and Sella are charged through that counter. A compiled client reaches the same counter: eonclient through the `ext_pot` bridge in `optbench.extpot`, and an rgpot client through `RgpotCounter.calculate`. `uv run optbench run` still writes `benchmark.dat` from the client's own counter, and the per-start file next to it is marked `counter` `client`. That file is not a v2 score. `uv run optbench validate-counter` is the subset check that the server count matches eonclient. A subset is not a published mean.
 
-A v2 success is under the cap, at the force stop, and, when a reference is supplied, at Hessian index 0 for a minimum or index 1 for a saddle, with the energy and Kabsch RMSD inside the tolerances. A failure costs `2` times the cap. The table shows that PAR-2 mean, the Wilson 95% interval on the success rate, and the median and interquartile range with a bootstrap of 2000 resamples seeded by `20261015`.
+A v2 success is under the cap, at the force stop, and, when a reference is supplied, at Hessian index 0 for a minimum or index 1 for a saddle, with the energy and Kabsch RMSD inside the tolerances. A failure costs `2` times the cap. The table shows that PAR-2 mean, and the median and interquartile range with a bootstrap of 2000 resamples seeded by `20261015`.
 
 Pt-island cost is force calls in a repetition divided by the searches in that repetition. `eon-client/lbfgs-m20` is `tuning` `default`. `eon-client/lbfgs-m100` is `tuning` `tuned`.
 

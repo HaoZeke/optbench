@@ -145,7 +145,7 @@ def _caption(primary: str | None) -> str:
         "true_rate": "Lowest rate first.",
     }
     detail = captions.get(primary or "", "The columns are the archived keys.")
-    return f"Legacy 2014 archive. {detail}"
+    return f"2014 archive. {detail}"
 
 
 def _plot(points: list[dict], primary: str | None, caption: str | None = None) -> str:
@@ -189,13 +189,10 @@ def _plot(points: list[dict], primary: str | None, caption: str | None = None) -
 
 
 def _code_label(fields: dict[str, str]) -> str:
-    """Code column. Sella 0.1.1 stays on the 2014 table and is marked legacy."""
+    """Code column. Sella 0.1.1 stays on the 2014 table."""
     code = fields.get("code", "")
     version = fields.get("code_version", "")
-    label = f"{code} {version}".strip() if version else code
-    if code == "Sella" and version == "0.1.1":
-        label = f"{label} legacy"
-    return label
+    return f"{code} {version}".strip() if version else code
 
 
 def campaign_problem(stem: str) -> str | None:
@@ -252,7 +249,7 @@ def problem_html(
 
     ident = section_id or str(problem["problem"])
     title = heading_text or str(problem.get("title") or problem["problem"])
-    lines = [f'<section class="bench bench-legacy-section" id="{html.escape(ident)}">']
+    lines = [f'<section class="bench bench-archive" id="{html.escape(ident)}">']
     lines.append(f"<{heading}>{html.escape(title)}</{heading}>")
     if include_rule:
         bits = _bits(problem)
@@ -285,10 +282,10 @@ def problem_html(
             }
         )
     lines.append(
-        '<p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. '
+        '<p class="bench-archive">2014 archive. These rows stay in the published order. '
         "They are not a v2 score.</p>"
     )
-    lines.append('<div class="bench-table"><table class="bench-legacy">')
+    lines.append('<div class="bench-table"><table>')
     lines.append(f"<caption>{html.escape(_caption(primary))}</caption>")
     headers = ["", "Entry", "Code", *metrics, "Contributor", "Date"]
     lines.append("<thead><tr>")
@@ -302,8 +299,6 @@ def problem_html(
             classes.append("best")
         if point["held"]:
             classes.append("held")
-        if point.get("current"):
-            classes.append("current")
         class_attr = f' class="{" ".join(classes)}"' if classes else ""
         cells = [str(point["rank"]), point["label"], point["code"]]
         for metric in metrics:
@@ -316,7 +311,7 @@ def problem_html(
             lines.append(f'<td class="{kind}">{html.escape(cell)}</td>')
         lines.append("</tr>")
     lines.append("</tbody></table></div>")
-    lines.append(_plot(prepared, primary, "Legacy 2014 scores"))
+    lines.append(_plot(prepared, primary, "2014 scores"))
     lines.append("</section>")
     return "\n".join(lines)
 
@@ -370,9 +365,9 @@ def _legacy_section(problem: dict, oracle: list[dict]) -> str:
     return problem_html(
         problem,
         oracle,
-        section_id=f"{problem['problem']}-legacy",
+        section_id=f"{problem['problem']}-archive",
         heading="h3",
-        heading_text="Legacy 2014 archive",
+        heading_text="2014 archive",
         include_rule=False,
     )
 
@@ -393,7 +388,7 @@ def _headlines_html(
         '<section class="bench" id="headlines">',
         "<p>The first row of each problem is the best full harness run, ranked by PAR-2. "
         "The ranked table and the performance profile are on the problem page. "
-        "The 2014 archive is labelled legacy on that page.</p>",
+        "The 2014 archive is on that page.</p>",
     ]
     for suite in order:
         group = by_suite.get(suite)
@@ -427,7 +422,7 @@ def _collection_html(
 
     lines = [
         '<section class="bench" id="collection">',
-        "<p>Each problem leads with the current v2 rank. "
+        "<p>Each problem leads with the v2 rank. "
         "The 2014 rows follow, in the published order.</p>",
     ]
     for suite in order:
@@ -478,8 +473,8 @@ def _codes_html(root: Path, document: dict) -> str:
             order.append(name)
         grouped[name].append(pin)
     lines = [
-        '<section class="bench" id="current-codes">',
-        "<h2>Current codes</h2>",
+        '<section class="bench" id="codes">',
+        "<h2>Codes</h2>",
         f"<p>The benchmark contributor is {html.escape(contributor)}. "
         "A ranked row is a full harness run. "
         "The commit on that row is the commit that produced the score.</p>",
@@ -554,7 +549,7 @@ def _codes_html(root: Path, document: dict) -> str:
             if off:
                 reasons.append("not yet on the harness counter")
             if partial:
-                reasons.append("partial")
+                reasons.append("short of the full start set")
             title = str(problem.get("title") or problem["id"])
             missing.append(f"<li>{html.escape(title)}: {html.escape(', '.join(reasons))}.</li>")
         for row in document.get("unparsed") or []:

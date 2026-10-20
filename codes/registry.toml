@@ -222,7 +222,7 @@ repository = "https://github.com/marktoakley/PyBCGA"
 ref = "master"
 commit = "fb646c19b1829656bf16cc72ca318bef2d37bfeb"
 committed = "2016-02-26"
-note = "GPL-3.0. setup.py imports distutils, which Python 3.12 does not provide, so the install uses a setuptools build of the same tree. PeleMinimiser accepts a pele potential. The row uses population 10, 10 generations, and 8 offspring. The archived start is one member and the other nine are the library random clusters. Quenches are pele mylbfgs. Binary LJ is not in this row."
+note = "GPL-3.0. setup.py imports distutils, which Python 3.12 does not provide, so the install uses a setuptools build of the same tree. PeleMinimiser accepts a pele potential. The row uses population 10, 8 offspring, and mutant rate 0.1. Generations run until the force-call cap. The archived start is one member and the other nine are the library random clusters. Quenches are pele mylbfgs. Binary LJ is not in this row."
 
 [[code]]
 id = "ase-gpatom"
@@ -302,7 +302,7 @@ repository = "https://github.com/rlaplaza-lab/scgo"
 ref = "main"
 commit = "2338742a434a920ed82e52a72dc1338cf06647c1"
 committed = "2026-10-01"
-note = "0.9.1, MIT. The package import requires torch. bh_go relaxes an ASE calculator, so the harness potential is that calculator. Defaults are niter 100, LBFGS, fmax 0.05, 250 local steps, dr 0.5, and temperature 1. The covalent-connectivity gate calls a reduced Lennard-Jones cluster fragmented, so allow_cluster_fragmentation is on and a hit is the quench rather than the filtered minima list. Declared numpy is >=2.2 and <2.5. This install is --no-deps on NumPy 2.5.4."
+note = "0.9.1, MIT. The package import requires torch. bh_go relaxes an ASE calculator, so the harness potential is that calculator. LBFGS, fmax 0.05, dr 0.5, and temperature 1 stay at the library defaults. niter and niter_local_relaxation are the force-call cap. The covalent-connectivity gate calls a reduced Lennard-Jones cluster fragmented, so allow_cluster_fragmentation is on and a hit is the quench rather than the filtered minima list. Declared numpy is >=2.2 and <2.5. This install is --no-deps on NumPy 2.5.4."
 
 [[code]]
 id = "torch-sim"
@@ -322,7 +322,7 @@ repository = "https://gitlab.com/agox/agox"
 ref = "dev"
 commit = "22d94a6fae8cf2d08d51ecc8b9291a47667aa95c"
 committed = "2026-05-05"
-note = "GPL-3.0-only. This commit has no version tag. setuptools_scm reports 0.0.1.dev1+g22d94a6fa. Basin hopping uses BasinHoppingConfig: Metropolis temperature 0.25 eV, a rattle of a quarter of the atoms with amplitude 3, and BFGS at fmax 0.05 for 100 steps. The harness potential is the ASE calculator. The archived start is quenched and seeded into the sampler. Without that seed the rattle falls back to a random cluster. The rattle gate uses carbon covalent radii."
+note = "GPL-3.0-only. This commit has no version tag. setuptools_scm reports 0.0.1.dev1+g22d94a6fa. Basin hopping uses BasinHoppingConfig: Metropolis temperature 0.25 eV, a rattle of a quarter of the atoms with amplitude 3, and BFGS at fmax 0.05. Local steps run until that force or the force-call cap, because 100 steps leaves a rattled LJ38 cluster above fmax. The harness potential is the ASE calculator. The archived start is quenched and seeded into the sampler. Without that seed the rattle falls back to a random cluster. The rattle gate uses carbon covalent radii."
 
 [[code]]
 id = "ezga"
@@ -332,7 +332,7 @@ repository = "https://gitlab.mpcdf.mpg.de/fhi-theory/EZGA"
 ref = "main"
 commit = "1395e8de01f003e40a3352987377d5f863a2e388"
 committed = "2026-08-27"
-note = "1.2.31, MIT. ase_calculator accepts an ASE calculator. The bundled LJMixer example uses argon sigma 3.405 and epsilon 0.0103, so the row does not use that potential. The relaxer defaults are FIRE, fmax 0.05, and 100 steps. The population is 16 copies of the archived start and the run is 10 rattle generations."
+note = "1.2.31, MIT. ase_calculator accepts an ASE calculator. The bundled LJMixer example uses argon sigma 3.405 and epsilon 0.0103, so the row does not use that potential. The relaxer is FIRE at fmax 0.05. steps_max and the generation count are the force-call cap. The population is 16 copies of the archived start."
 
 [[code]]
 id = "optax"

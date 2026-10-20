@@ -10,7 +10,7 @@ profile = "default"
 tuning = "default"
 reducer = "capped"
 ranked = true
-note = "SCGO 0.9.1 bh_go defaults: niter 100, LBFGS, fmax 0.05, niter_local_relaxation 250, dr 0.5, temperature 1. The harness potential is the ASE calculator. allow_cluster_fragmentation is on because the covalent-connectivity gate rejects a reduced Lennard-Jones cluster. A hit is a quench inside fmax and inside the energy window."
+note = "SCGO 0.9.1 bh_go: LBFGS, fmax 0.05, dr 0.5, temperature 1. niter and niter_local_relaxation are the force-call cap. The harness potential is the ASE calculator. allow_cluster_fragmentation is on because the covalent-connectivity gate rejects a reduced Lennard-Jones cluster. A hit is a quench inside fmax and inside the energy window."
 
 [search]
 family = "globalopt"

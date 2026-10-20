@@ -10,7 +10,7 @@ profile = "default"
 tuning = "default"
 reducer = "capped"
 ranked = true
-note = "PyBCGA defaults: population 10, 10 generations, 8 offspring, mutant rate 0.1. The archived start is one member. The other nine are the library random clusters. Each member is quenched with pele mylbfgs. A hit is a successful quench inside the energy window."
+note = "PyBCGA defaults: population 10, 8 offspring, mutant rate 0.1. Generations run until the force-call cap. The archived start is one member. The other nine are the library random clusters. Each member is quenched with pele mylbfgs. A hit is a successful quench inside the energy window."
 
 [search]
 family = "globalopt"

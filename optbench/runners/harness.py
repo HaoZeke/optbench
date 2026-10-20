@@ -149,6 +149,43 @@ def _import_version(code: str, method: str) -> str:
     raise RuntimeError(f"no preflight for {code} method {method}")
 
 
+def _checkpoint_path(output: Path) -> Path:
+    """Per-start rows kept beside the campaign directory.
+
+    The board reads only files directly in ``results/campaign``. A checkpoint
+    next to that directory is not a row.
+    """
+    if output.parent.name == "campaign":
+        return output.parent.parent / "checkpoints" / f"{output.stem}.starts.jsonl"
+    return output.with_suffix(".checkpoint.jsonl")
+
+
+def _load_checkpoint(path: Path) -> dict[str, dict]:
+    found: dict[str, dict] = {}
+    if not path.is_file():
+        return found
+    for line in path.read_text(encoding="utf-8").splitlines():
+        text = line.strip()
+        if not text:
+            continue
+        try:
+            row = json.loads(text)
+        except json.JSONDecodeError:
+            continue
+        start = row.get("start")
+        if start:
+            found[str(start)] = row
+    return found
+
+
+def _dump_checkpoint(path: Path, records: list[dict]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    body = "".join(json.dumps(row, sort_keys=True) + "\n" for row in records)
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    temporary.write_text(body, encoding="utf-8")
+    temporary.replace(path)
+
+
 def run_template(
     root: Path,
     problem: dict,
@@ -159,6 +196,7 @@ def run_template(
     workers: int,
     work: Path | None,
     limit: int = 0,
+    resume: bool = False,
 ) -> dict:
     if geometries is not None:
         raise ValueError("the harness runner reads the problem archive")
@@ -188,7 +226,6 @@ def run_template(
             raise ValueError("template force_norm is not the problem force norm")
     loaded = load_starts(root, problem, work=work, output=output, limit=limit)
     expected = (problem.get("sample") or {}).get("starts")
-    partial = bool(limit > 0 or (expected is not None and len(loaded) < int(expected)))
     target = convergence.get("energy_minimum", potential.get("energy_minimum"))
     window = float(convergence.get("energy_above_minimum") or 0.001)
     if search["family"] == "globalopt" and target is None:
@@ -235,25 +272,61 @@ def run_template(
                 "overlap": (problem.get("sample") or {}).get("overlap", 0.99),
             }
         )
-    if workers <= 1:
-        records = [run_job(job) for job in jobs]
-    else:
+    checkpoint = _checkpoint_path(output)
+    finished = _load_checkpoint(checkpoint) if resume else {}
+    if not resume and checkpoint.exists():
+        checkpoint.unlink()
+    pending = [job for job in jobs if str(job["start"]) not in finished]
+    fresh: list[dict] = []
+
+    def _store(record: dict) -> None:
+        fresh.append(record)
+        by_start = dict(finished)
+        for row in fresh:
+            by_start[str(row["start"])] = row
+        ordered_now = [by_start[str(job["start"])] for job in jobs if str(job["start"]) in by_start]
+        _dump_checkpoint(checkpoint, ordered_now)
+        print(
+            f"{template['id']} {record['start']} {len(ordered_now)}/{len(jobs)} "
+            f"calls={record['force_calls']} success={record['success']}",
+            flush=True,
+        )
+
+    if pending and workers <= 1:
+        for job in pending:
+            _store(run_job(job))
+    elif pending:
         import multiprocessing as mp
 
         context = mp.get_context("spawn")
         with ProcessPoolExecutor(max_workers=workers, mp_context=context) as pool:
-            futures = [pool.submit(run_job, job) for job in jobs]
-            records = []
-            total = len(futures)
-            for done, future in enumerate(as_completed(futures), 1):
-                records.append(future.result())
-                if done == total or done % 25 == 0:
-                    print(f"{template['id']} {done}/{total}", flush=True)
-    records.sort(key=lambda row: row["index"])
-    for record in records:
+            futures = [pool.submit(run_job, job) for job in pending]
+            for future in as_completed(futures):
+                _store(future.result())
+    by_start = dict(finished)
+    for row in fresh:
+        by_start[str(row["start"])] = row
+    ordered = [by_start[str(job["start"])] for job in jobs if str(job["start"]) in by_start]
+    expected_n = len(jobs) if expected is None else int(expected)
+    complete = limit <= 0 and len(ordered) == len(jobs) and len(ordered) >= expected_n
+    if not complete:
+        failed = sum(1 for row in ordered if not row.get("success"))
+        return {
+            "force_calls": None,
+            "nfailed": failed,
+            "starts": len(ordered),
+            "template": template["id"],
+            "problem": problem["id"],
+            "complete": False,
+        }
+    for record in ordered:
         record.pop("index", None)
         record.pop("_point", None)
-    return _write(problem, template, records, cap, version, commit, partial, output)
+    summary = _write(problem, template, ordered, cap, version, commit, False, output)
+    if checkpoint.exists():
+        checkpoint.unlink()
+    summary["complete"] = True
+    return summary
 
 
 def _kind(problem: dict) -> str:
@@ -386,7 +459,7 @@ def _dat(summary, template, metrics, commit, version, problem, partial, cap) -> 
     ]
     family = str((template.get("search") or {}).get("family") or "")
     if family == "minimize":
-        lines.append("# Legacy success is the force stop. v2 success also requires Hessian index 0.")
+        lines.append("# The force stop is the Euclidean force. v2 success also requires Hessian index 0.")
         if problem["id"] == "minimization/lj38-noise":
             lines.append(
                 "# sigma 0 uses the clean force and Hessian rule. Positive sigma compares the clean "

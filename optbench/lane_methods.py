@@ -804,10 +804,14 @@ def _pybcga(budget: Budget, x0: np.ndarray, job: dict) -> None:
         os.chdir(tmp)
         try:
             population.sort_energy()
-            for _generation in range(10):
-                if budget.calls >= budget.cap or budget.hit:
-                    break
+            # Stock population, offspring, and mutant rate. The generation
+            # count runs until the force-call cap. Ten generations stop on a
+            # local minimum and the harness then reports that minimum.
+            while budget.calls < budget.cap and not budget.hit:
+                before = budget.calls
                 for _offspring in range(8):
+                    if budget.calls >= budget.cap or budget.hit:
+                        break
                     indices = selector.select(population)
                     child = crossover.get_offspring(population[indices[0]], population[indices[1]])
                     population.append(child)
@@ -816,6 +820,8 @@ def _pybcga(budget: Budget, x0: np.ndarray, job: dict) -> None:
                         population.append(mutator.get_mutant(member))
                 population.truncate()
                 population.sort_energy()
+                if budget.calls == before:
+                    break
         finally:
             os.chdir(cwd)
 
@@ -1171,15 +1177,20 @@ def _agox_bh(budget: Budget, x0: np.ndarray, job: dict) -> None:
     """AGOX basin hopping. The ASE calculator is the harness potential.
 
     BasinHoppingConfig defaults are Metropolis temperature 0.25 eV, a rattle
-    of a quarter of the atoms by at most 3 angstrom, and BFGS at fmax 0.05
-    for 100 steps. The archived start is quenched and seeded into the sampler.
-    Without that seed the rattle falls back to a random cluster.
+    of a quarter of the atoms by at most 3 angstrom, and BFGS at fmax 0.05.
+    The local step limit is the force-call cap. The archived start is quenched
+    and seeded into the sampler. Without that seed the rattle falls back to a
+    random cluster.
     """
     from ase import Atoms
     from ase.calculators.calculator import Calculator
 
     fmax = 0.05
-    steps = 100
+    # BasinHoppingConfig uses 100 steps. A rattled LJ38 cluster is still
+    # above fmax 0.05 at step 100 and reaches it near step 200, so the
+    # step limit is the force-call cap. Temperature and the rattle stay
+    # at the config defaults.
+    steps = int(job["cap"])
 
     class _Halt(BaseException):
         """Leave AGOX. Its evaluator catches Exception, including Hit."""
@@ -1288,10 +1299,11 @@ def _agox_search(job, pos, nat, lo, span, template, calc, fmax, steps, tmp) -> N
 def _ezga(budget: Budget, x0: np.ndarray, job: dict) -> None:
     """EZGA from the archived start.
 
-    The relaxer defaults are ase_calculator's: FIRE, fmax 0.05, 100 steps,
-    no MD. The population is 16 copies of the start, and the run is 10
-    generations of rattle. A quench is a point whose maximum atomic force
-    is inside fmax.
+    The relaxer is FIRE at fmax 0.05 with no MD. steps_max and the
+    generation count are the force-call cap unless the job sets
+    ezga_generations. The population is 16 copies of the start unless
+    the job sets ezga_population. A quench is a point whose maximum
+    atomic force is inside fmax.
     """
     from ase import Atoms
     from ase.calculators.calculator import Calculator
@@ -1303,7 +1315,10 @@ def _ezga(budget: Budget, x0: np.ndarray, job: dict) -> None:
 
     fmax = 0.05
     population = int(job.get("ezga_population") or 16)
-    generations = int(job.get("ezga_generations") or 10)
+    if job.get("ezga_generations") is None:
+        generations = int(job["cap"])
+    else:
+        generations = int(job["ezga_generations"])
 
     class _Calc(Calculator):
         implemented_properties = ["energy", "forces"]
@@ -1327,7 +1342,7 @@ def _ezga(budget: Budget, x0: np.ndarray, job: dict) -> None:
         calculator=_Calc(),
         nvt_steps=0,
         fmax=fmax,
-        steps_max=100,
+        steps_max=int(job["cap"]),
         device="cpu",
         log_interval=0,
         write_interval=0,
@@ -1423,8 +1438,10 @@ def _torchsim_fire(budget: Budget, x0: np.ndarray, job: dict) -> None:
 def _scgo_bh(budget: Budget, x0: np.ndarray, job: dict) -> None:
     """SCGO basin hopping. The attached ASE calculator is the harness potential.
 
-    The library's covalent-connectivity gate treats a reduced Lennard-Jones
-    cluster as fragmented, so fragmentation is allowed. Hits are the quenches.
+    niter and niter_local_relaxation are the force-call cap. LBFGS, fmax,
+    dr, and temperature stay at the library defaults. The covalent-connectivity
+    gate treats a reduced Lennard-Jones cluster as fragmented, so
+    fragmentation is allowed. Hits are the quenches.
     """
     import scgo.algorithms.basinhopping_go as bhmod
     from scgo.algorithms.basinhopping_go import bh_go
@@ -1450,6 +1467,8 @@ def _scgo_bh(budget: Budget, x0: np.ndarray, job: dict) -> None:
                 atoms,
                 output_dir=tmp,
                 verbosity=0,
+                niter=int(job["cap"]),
+                niter_local_relaxation=int(job["cap"]),
                 rng=np.random.default_rng(int(job["seed"])),
                 allow_cluster_fragmentation=True,
             )
@@ -1496,6 +1515,14 @@ def _jaxmd_fire(budget: Budget, x0: np.ndarray, job: dict) -> None:
 
 
 def _record(job: dict, budget: Budget | None, error: str, reference: dict | None, overlap: float | None) -> dict:
+    if (
+        budget is not None
+        and str(job.get("family")) == "globalopt"
+        and budget.quench_point is not None
+    ):
+        budget.point = budget.quench_point.copy()
+        if budget.quench_energy is not None:
+            budget.energy = float(budget.quench_energy)
     calls = 0 if budget is None else budget.calls
     verify = 0
     energy = None if budget is None else budget.energy
