@@ -53,7 +53,7 @@ def asv_benchmark_pattern(class_name: str) -> str:
 
     asv matches this regular expression against
     ``bench_rgmin.Class.method(param, ...)``. The escaped dots and the
-    trailing dot keep ``RgminMorseCg`` from selecting ``RgminMorseCgTuned``.
+    trailing dot keep ``RgminMorseCg`` from selecting a longer class name.
     """
     return rf"^bench_rgmin\.{class_name}\."
 

@@ -255,26 +255,10 @@ task = "minimize"
 ranked = true
 
 [[template]]
-id = "ase/lj38-bfgs-tuned"
-code = "ase"
-problem = "minimization/lj38"
-profile = "tuned"
-task = "minimize"
-ranked = true
-
-[[template]]
 id = "ase/lj38-lbfgs-default"
 code = "ase"
 problem = "minimization/lj38"
 profile = "default"
-task = "minimize"
-ranked = true
-
-[[template]]
-id = "ase/lj38-lbfgs-tuned"
-code = "ase"
-problem = "minimization/lj38"
-profile = "tuned"
 task = "minimize"
 ranked = true
 
@@ -287,26 +271,10 @@ task = "minimize"
 ranked = true
 
 [[template]]
-id = "ase/lj38-fire-tuned"
-code = "ase"
-problem = "minimization/lj38"
-profile = "tuned"
-task = "minimize"
-ranked = true
-
-[[template]]
 id = "ase/lj38-bfgslinesearch-default"
 code = "ase"
 problem = "minimization/lj38"
 profile = "default"
-task = "minimize"
-ranked = true
-
-[[template]]
-id = "ase/lj38-bfgslinesearch-tuned"
-code = "ase"
-problem = "minimization/lj38"
-profile = "tuned"
 task = "minimize"
 ranked = true
 
@@ -319,26 +287,10 @@ task = "minimize"
 ranked = true
 
 [[template]]
-id = "ase/lj38-gpmin-tuned"
-code = "ase"
-problem = "minimization/lj38"
-profile = "tuned"
-task = "minimize"
-ranked = true
-
-[[template]]
 id = "ase/lj38-preconlbfgs-default"
 code = "ase"
 problem = "minimization/lj38"
 profile = "default"
-task = "minimize"
-ranked = true
-
-[[template]]
-id = "ase/lj38-preconlbfgs-tuned"
-code = "ase"
-problem = "minimization/lj38"
-profile = "tuned"
 task = "minimize"
 ranked = true
 
@@ -351,26 +303,10 @@ task = "minimize"
 ranked = true
 
 [[template]]
-id = "ase/lj38-preconfire-tuned"
-code = "ase"
-problem = "minimization/lj38"
-profile = "tuned"
-task = "minimize"
-ranked = true
-
-[[template]]
 id = "ase/lj38-preconode12r-default"
 code = "ase"
 problem = "minimization/lj38"
 profile = "default"
-task = "minimize"
-ranked = true
-
-[[template]]
-id = "ase/lj38-preconode12r-tuned"
-code = "ase"
-problem = "minimization/lj38"
-profile = "tuned"
 task = "minimize"
 ranked = true
 
@@ -383,26 +319,10 @@ task = "sella"
 ranked = true
 
 [[template]]
-id = "sella/lj38-min-tuned"
-code = "sella"
-problem = "minimization/lj38"
-profile = "tuned"
-task = "sella"
-ranked = true
-
-[[template]]
 id = "ase/morse-bfgs-default"
 code = "ase"
 problem = "minimization/morse-bulk"
 profile = "default"
-task = "minimize"
-ranked = true
-
-[[template]]
-id = "ase/morse-bfgs-tuned"
-code = "ase"
-problem = "minimization/morse-bulk"
-profile = "tuned"
 task = "minimize"
 ranked = true
 
@@ -415,26 +335,10 @@ task = "minimize"
 ranked = true
 
 [[template]]
-id = "ase/morse-lbfgs-tuned"
-code = "ase"
-problem = "minimization/morse-bulk"
-profile = "tuned"
-task = "minimize"
-ranked = true
-
-[[template]]
 id = "ase/morse-fire-default"
 code = "ase"
 problem = "minimization/morse-bulk"
 profile = "default"
-task = "minimize"
-ranked = true
-
-[[template]]
-id = "ase/morse-fire-tuned"
-code = "ase"
-problem = "minimization/morse-bulk"
-profile = "tuned"
 task = "minimize"
 ranked = true
 
@@ -447,26 +351,10 @@ task = "minimize"
 ranked = true
 
 [[template]]
-id = "ase/morse-bfgslinesearch-tuned"
-code = "ase"
-problem = "minimization/morse-bulk"
-profile = "tuned"
-task = "minimize"
-ranked = true
-
-[[template]]
 id = "ase/morse-gpmin-default"
 code = "ase"
 problem = "minimization/morse-bulk"
 profile = "default"
-task = "minimize"
-ranked = true
-
-[[template]]
-id = "ase/morse-gpmin-tuned"
-code = "ase"
-problem = "minimization/morse-bulk"
-profile = "tuned"
 task = "minimize"
 ranked = true
 
@@ -479,26 +367,10 @@ task = "minimize"
 ranked = true
 
 [[template]]
-id = "ase/morse-preconlbfgs-tuned"
-code = "ase"
-problem = "minimization/morse-bulk"
-profile = "tuned"
-task = "minimize"
-ranked = true
-
-[[template]]
 id = "ase/morse-preconfire-default"
 code = "ase"
 problem = "minimization/morse-bulk"
 profile = "default"
-task = "minimize"
-ranked = true
-
-[[template]]
-id = "ase/morse-preconfire-tuned"
-code = "ase"
-problem = "minimization/morse-bulk"
-profile = "tuned"
 task = "minimize"
 ranked = true
 
@@ -511,26 +383,10 @@ task = "minimize"
 ranked = true
 
 [[template]]
-id = "ase/morse-preconode12r-tuned"
-code = "ase"
-problem = "minimization/morse-bulk"
-profile = "tuned"
-task = "minimize"
-ranked = true
-
-[[template]]
 id = "sella/morse-min-default"
 code = "sella"
 problem = "minimization/morse-bulk"
 profile = "default"
-task = "sella"
-ranked = true
-
-[[template]]
-id = "sella/morse-min-tuned"
-code = "sella"
-problem = "minimization/morse-bulk"
-profile = "tuned"
 task = "sella"
 ranked = true
 
@@ -543,26 +399,10 @@ task = "sella"
 ranked = true
 
 [[template]]
-id = "sella/lj38-ts-tuned"
-code = "sella"
-problem = "tsopt/LJ38"
-profile = "tuned"
-task = "sella"
-ranked = true
-
-[[template]]
 id = "sella/pt-island-ts-default"
 code = "sella"
 problem = "tsopt/pt-island"
 profile = "default"
-task = "sella"
-ranked = true
-
-[[template]]
-id = "sella/pt-island-ts-tuned"
-code = "sella"
-problem = "tsopt/pt-island"
-profile = "tuned"
 task = "sella"
 ranked = true
 
@@ -575,26 +415,10 @@ task = "neb"
 ranked = true
 
 [[template]]
-id = "ase/neb-pt-heptamer-tuned"
-code = "ase"
-problem = "neb/Pt-heptamer"
-profile = "tuned"
-task = "neb"
-ranked = true
-
-[[template]]
 id = "ase/de-lj38-default"
 code = "ase"
 problem = "double-ended-saddle-search/lj38"
 profile = "default"
-task = "neb"
-ranked = true
-
-[[template]]
-id = "ase/de-lj38-tuned"
-code = "ase"
-problem = "double-ended-saddle-search/lj38"
-profile = "tuned"
 task = "neb"
 ranked = true
 
@@ -607,26 +431,10 @@ task = "neb"
 ranked = true
 
 [[template]]
-id = "ase/de-pt-island-tuned"
-code = "ase"
-problem = "double-ended-saddle-search/pt-island"
-profile = "tuned"
-task = "neb"
-ranked = true
-
-[[template]]
 id = "ase/de-lj38-2ts-default"
 code = "ase"
 problem = "double-ended-saddle-search/lj38_2ts_separation"
 profile = "default"
-task = "neb"
-ranked = true
-
-[[template]]
-id = "ase/de-lj38-2ts-tuned"
-code = "ase"
-problem = "double-ended-saddle-search/lj38_2ts_separation"
-profile = "tuned"
 task = "neb"
 ranked = true
 
@@ -639,26 +447,10 @@ task = "sella-neb"
 ranked = true
 
 [[template]]
-id = "sella/de-lj38-tuned"
-code = "sella"
-problem = "double-ended-saddle-search/lj38"
-profile = "tuned"
-task = "sella-neb"
-ranked = true
-
-[[template]]
 id = "sella/de-pt-island-default"
 code = "sella"
 problem = "double-ended-saddle-search/pt-island"
 profile = "default"
-task = "sella-neb"
-ranked = true
-
-[[template]]
-id = "sella/de-pt-island-tuned"
-code = "sella"
-problem = "double-ended-saddle-search/pt-island"
-profile = "tuned"
 task = "sella-neb"
 ranked = true
 
@@ -671,14 +463,6 @@ task = "sella-neb"
 ranked = true
 
 [[template]]
-id = "sella/de-lj38-2ts-tuned"
-code = "sella"
-problem = "double-ended-saddle-search/lj38_2ts_separation"
-profile = "tuned"
-task = "sella-neb"
-ranked = true
-
-[[template]]
 id = "ase/dimer-pt-island-default"
 code = "ase"
 problem = "saddle-search/pt-island"
@@ -687,25 +471,9 @@ task = "dimer"
 ranked = false
 
 [[template]]
-id = "ase/dimer-pt-island-tuned"
-code = "ase"
-problem = "saddle-search/pt-island"
-profile = "tuned"
-task = "dimer"
-ranked = false
-
-[[template]]
 id = "sella/pt-island-search-default"
 code = "sella"
 problem = "saddle-search/pt-island"
 profile = "default"
-task = "sella-search"
-ranked = false
-
-[[template]]
-id = "sella/pt-island-search-tuned"
-code = "sella"
-problem = "saddle-search/pt-island"
-profile = "tuned"
 task = "sella-search"
 ranked = false

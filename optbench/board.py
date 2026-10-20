@@ -686,6 +686,11 @@ def _dedup(rows: list[dict]) -> list[dict]:
     return merged
 
 
+def _template_is_tuned(template_id: str) -> bool:
+    """A template id ending in ``-tuned`` is not a board row."""
+    return str(template_id).endswith("-tuned")
+
+
 def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict]) -> tuple[list[dict], list[dict]]:
     rows: list[dict] = []
     unparsed: list[dict] = []
@@ -708,6 +713,8 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
                 continue
         probe = _first_raw(group)
         template_id = fields.get("template") or str(probe.get("template") or "")
+        if _template_is_tuned(template_id):
+            continue
         template = templates.get(template_id)
         problem_id = (
             fields.get("problem")
@@ -861,6 +868,8 @@ def _asv_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict])
             module_name = parts[-2] if len(parts) >= 2 else ""
             described = index.get(f"{module_name}.{class_name}") or index.get(class_name) or {}
             template_id = described.get("template") or ""
+            if _template_is_tuned(template_id) or class_name.endswith("Tuned"):
+                continue
             template = templates.get(template_id)
             pinned = _template_at_commit(root, str(result.commit_hash), template_id) if template_id else None
             source_template = pinned or template

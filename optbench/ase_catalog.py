@@ -720,7 +720,8 @@ def _dimer_specs() -> list[dict]:
 
 
 def all_specs() -> list[dict]:
-    return (
+    """Catalog rows. An id ending in ``-tuned`` is not written."""
+    specs = (
         _minimization_specs()
         + _ts_specs()
         + _neb_specs()
@@ -728,6 +729,7 @@ def all_specs() -> list[dict]:
         + _dimer_specs()
         + _sella_search_specs()
     )
+    return [spec for spec in specs if not str(spec["id"]).endswith("-tuned")]
 
 
 def _toml_scalar(value: object) -> str:

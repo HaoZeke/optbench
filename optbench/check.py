@@ -47,6 +47,32 @@ def archive_gaps(problems: dict[str, dict], rows: list[dict]) -> list[str]:
     return gaps
 
 
+def tuned_templates(root: Path) -> list[str]:
+    """Template paths and ids that end with ``-tuned``.
+
+    ``optbench check`` used to read the oracle and the rendered site only.
+    A template id was never part of that pass, so a file whose id ends
+    with ``-tuned`` stayed on the board.
+    """
+    directory = root / "templates"
+    if not directory.is_dir():
+        return []
+    found: list[str] = []
+    for path in sorted(directory.rglob("*.toml")):
+        relative = str(path.relative_to(root))
+        if path.stem.endswith("-tuned"):
+            found.append(relative)
+            continue
+        ident = ""
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if line.startswith("id ") or line.startswith("id="):
+                ident = line.split("=", 1)[1].strip().strip('"').strip("'")
+                break
+        if ident.endswith("-tuned"):
+            found.append(ident)
+    return found
+
+
 def check(problems_dir: Path, oracle_path: Path) -> int:
     """Return 0 when archive gaps match oracle/archive_gaps.txt."""
     problems = load_all(problems_dir)
@@ -89,9 +115,15 @@ def check(problems_dir: Path, oracle_path: Path) -> int:
             if line not in gaps:
                 print(f"- {line}")
         return 1
+    root = oracle_path.resolve().parent.parent
+    tuned = tuned_templates(root)
+    if tuned:
+        print(f"tuned {len(tuned)}")
+        for line in tuned:
+            print(line)
+        return 1
     from .site_check import check_site
 
-    root = oracle_path.resolve().parent.parent
     site_errors = check_site(root)
     if site_errors:
         print(f"site {len(site_errors)}")

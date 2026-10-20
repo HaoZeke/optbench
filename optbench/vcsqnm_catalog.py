@@ -17,7 +17,7 @@ SQNM replaces the coefficient after the first step.
 The wrapper constructor uses ``eps_subsp`` 1e-3. On LJ38 that value
 lets a later step leave the cutoff, and the flat region counts as a
 minimum. Both rows use ``eps_subsp`` 1e-5, which keeps every archived
-LJ38 start bound. The default history is 10. The tuned history is 20.
+LJ38 start bound. The history length is 10.
 
 Lennard-Jones 38 has no cell coordinate in the spec potential, so the
 variable-cell methods are Morse bulk only.
@@ -45,13 +45,6 @@ SOURCE_SHA256 = {
 DEFAULT = {
     "initial_step_size": -1e-7,
     "nhist_max": 10,
-    "alpha_min": 1e-3,
-    "eps_subsp": 1e-5,
-    "lattice_weight": 2.0,
-}
-TUNED = {
-    "initial_step_size": -1e-7,
-    "nhist_max": 20,
     "alpha_min": 1e-3,
     "eps_subsp": 1e-5,
     "lattice_weight": 2.0,
@@ -86,7 +79,7 @@ _VC = (
 )
 
 
-def _note(method: str, tuned: bool, variable_cell: bool) -> str:
+def _note(method: str, variable_cell: bool) -> str:
     if variable_cell:
         body = _VC
         if method == "ase-vc":
@@ -103,10 +96,7 @@ def _note(method: str, tuned: bool, variable_cell: bool) -> str:
             body += " The call goes through aseOptimizer with vc_relax false. Force calls are harness calculator evaluations."
         else:
             body += " The call goes through free_sqnm."
-    if tuned:
-        body += " Tuned row: history length 20. eps_subsp stays 1e-5."
-    else:
-        body += " Default row: history length 10 and eps_subsp 1e-5."
+    body += " History length 10 and eps_subsp 1e-5."
     return body
 
 
@@ -124,28 +114,23 @@ def specs() -> list[dict]:
         for method, algorithm, variable_cell in _METHODS:
             if variable_cell and problem != "minimization/morse-bulk":
                 continue
-            for tuned, profile, parameters in (
-                (False, "default", DEFAULT),
-                (True, "tuned", TUNED),
-            ):
-                suffix = "-tuned" if tuned else ""
-                found.append(
-                    {
-                        "id": f"vcsqnm/{slug}-{method}{suffix}",
-                        "engine": "vcsqnm",
-                        "problem": problem,
-                        "code": CODE,
-                        "code_version": CODE_VERSION,
-                        "commit": COMMIT,
-                        "algorithm": algorithm,
-                        "tuning": profile,
-                        "note": _note(method, tuned, variable_cell),
-                        "sqnm": {"method": method, **parameters},
-                        "force_norm": float(force),
-                        "cap": 10000,
-                        "variable_cell": variable_cell,
-                    }
-                )
+            found.append(
+                {
+                    "id": f"vcsqnm/{slug}-{method}",
+                    "engine": "vcsqnm",
+                    "problem": problem,
+                    "code": CODE,
+                    "code_version": CODE_VERSION,
+                    "commit": COMMIT,
+                    "algorithm": algorithm,
+                    "tuning": "default",
+                    "note": _note(method, variable_cell),
+                    "sqnm": {"method": method, **DEFAULT},
+                    "force_norm": float(force),
+                    "cap": 10000,
+                    "variable_cell": variable_cell,
+                }
+            )
     return found
 
 
