@@ -1,7 +1,7 @@
 """Render the public site from the v2 board.
 
 Prose stays in ``docs/orgmode``. This module writes the ranked tables,
-the code page, and the labelled 2014 archive those pages include.
+the code page, and the 2014 archive those pages include.
 """
 
 from __future__ import annotations
@@ -145,7 +145,7 @@ def _caption(primary: str | None) -> str:
         "true_rate": "Lowest rate first.",
     }
     detail = captions.get(primary or "", "The columns are the archived keys.")
-    return f"Legacy 2014 archive. {detail}"
+    return f"2014 archive. {detail}"
 
 
 def _plot(points: list[dict], primary: str | None, caption: str | None = None) -> str:
@@ -189,13 +189,10 @@ def _plot(points: list[dict], primary: str | None, caption: str | None = None) -
 
 
 def _code_label(fields: dict[str, str]) -> str:
-    """Code column. Sella 0.1.1 stays on the 2014 table and is marked legacy."""
+    """Code column on the 2014 table."""
     code = fields.get("code", "")
     version = fields.get("code_version", "")
-    label = f"{code} {version}".strip() if version else code
-    if code == "Sella" and version == "0.1.1":
-        label = f"{label} legacy"
-    return label
+    return f"{code} {version}".strip() if version else code
 
 
 def campaign_problem(stem: str) -> str | None:
@@ -223,16 +220,10 @@ def campaign_problem(stem: str) -> str | None:
     return None
 
 
-def _not_reproduced() -> set[str]:
-    """Archive rows whose exact-setup rerun missed the tolerance."""
-    from .reproduction import load_ledger
+def _measurements() -> dict[str, list[dict]]:
+    from .ledger import latest_for
 
-    path = Path(__file__).resolve().parents[1] / "oracle" / "reproduction.jsonl"
-    found: set[str] = set()
-    for row in load_ledger(path):
-        if row.get("status") == "not_reproduced":
-            found.add(f"{row['suite']}/{row['problem']}/{row['entry']}")
-    return found
+    return latest_for(Path(__file__).resolve().parents[1])
 
 
 def problem_html(
@@ -246,7 +237,7 @@ def problem_html(
     heading_text: str | None = None,
     include_rule: bool = True,
 ) -> str:
-    """Legacy 2014 table for one problem. The v2 rank is a separate section."""
+    """2014 table for one problem, with each latest campaign beside its archive row."""
     canonical_rows = []
     for row in _rows_for(problem, oracle):
         fields, _renamed = normalize(row["fields"])
@@ -264,7 +255,7 @@ def problem_html(
 
     ident = section_id or str(problem["problem"])
     title = heading_text or str(problem.get("title") or problem["problem"])
-    lines = [f'<section class="bench bench-legacy-section" id="{html.escape(ident)}">']
+    lines = [f'<section class="bench bench-archive-section" id="{html.escape(ident)}">']
     lines.append(f"<{heading}>{html.escape(title)}</{heading}>")
     if include_rule:
         bits = _bits(problem)
@@ -276,27 +267,21 @@ def problem_html(
     if smoke_note:
         lines.append(f'<p class="bench-smoke">{html.escape(smoke_note)}</p>')
     lines.append('<details class="bench-details">')
-    lines.append("<summary>Legacy 2014 archive</summary>")
+    lines.append("<summary>2014 archive</summary>")
 
-    misses = _not_reproduced()
+    measurements = _measurements()
     prepared = []
-    any_miss = False
-    for rank, (row, fields) in enumerate(canonical_rows, 1):
+    for row, fields in canonical_rows:
         value = _float(fields.get(primary, "")) if primary else None
         held = _held(fields)
         code = _code_label(fields)
         row_id = _slug(f"{problem['id']}-{row['entry']}")
-        missed = f"{problem['id']}/{row['entry']}" in misses
-        any_miss = any_miss or missed
         label = row["entry"]
         if held:
             label = f"{label} (held out of the original table)"
-        if missed:
-            label = f"{label} · not reproduced"
         prepared.append(
             {
                 "id": row_id,
-                "rank": rank,
                 "entry": row["entry"],
                 "label": label,
                 "code": code,
@@ -304,17 +289,36 @@ def problem_html(
                 "value": value,
                 "best": best is not None and value == best,
                 "held": held,
-                "current": bool(row.get("current")),
             }
         )
-    legacy = (
-        "Legacy 2014 archive. These rows stay in the published order. "
-        "They are not a v2 score."
-    )
-    if any_miss:
-        legacy += " A row marked not reproduced has a harness rerun outside the archive tolerance."
-    lines.append(f'<p class="bench-legacy">{legacy}</p>')
-    lines.append('<div class="bench-table"><table class="bench-legacy">')
+        for item in measurements.get(f"{problem['id']}/{row['entry']}", []):
+            by_name = {metric["metric"]: metric for metric in item.get("metrics") or []}
+            latest_fields = {
+                metric: (by_name.get(metric) or {}).get("latest_text", "")
+                for metric in metrics
+            }
+            latest_value = _float(latest_fields.get(primary, "")) if primary else None
+            prepared.append(
+                {
+                    "id": _slug(f"{problem['id']}-{row['entry']}-{item.get('label', '')}"),
+                    "entry": item.get("label") or row["entry"],
+                    "label": item.get("label") or row["entry"],
+                    "code": item.get("label") or code,
+                    "fields": latest_fields,
+                    "value": latest_value,
+                    "best": best is not None and latest_value == best,
+                    "held": False,
+                }
+            )
+    numbers = [point["value"] for point in prepared if point["value"] is not None]
+    best = min(numbers) if numbers else None
+    for point in prepared:
+        point["best"] = best is not None and point["value"] == best
+    for rank, point in enumerate(prepared, 1):
+        point["rank"] = rank
+    note = "2014 archive. These rows stay in the published order, and each latest campaign sits beside its archive row. They are not a v2 score."
+    lines.append(f'<p class="bench-archive">{note}</p>')
+    lines.append('<div class="bench-table"><table class="bench-archive">')
     lines.append(f"<caption>{html.escape(_caption(primary))}</caption>")
     headers = ["", "Entry", "Code", *metrics, "Contributor", "Date"]
     lines.append("<thead><tr>")
@@ -328,8 +332,6 @@ def problem_html(
             classes.append("best")
         if point["held"]:
             classes.append("held")
-        if point.get("current"):
-            classes.append("current")
         class_attr = f' class="{" ".join(classes)}"' if classes else ""
         cells = [str(point["rank"]), point["label"], point["code"]]
         for metric in metrics:
@@ -342,7 +344,7 @@ def problem_html(
             lines.append(f'<td class="{kind}">{html.escape(cell)}</td>')
         lines.append("</tr>")
     lines.append("</tbody></table></div>")
-    lines.append(_plot(prepared, primary, "Legacy 2014 scores"))
+    lines.append(_plot(prepared, primary, "2014 archive"))
     lines.append("</details>")
     lines.append("</section>")
     return "\n".join(lines)
@@ -393,13 +395,13 @@ def _rule_html(problem: dict, smoke_note: str = "") -> str:
     return "\n".join(lines)
 
 
-def _legacy_section(problem: dict, oracle: list[dict]) -> str:
+def _archive_section(problem: dict, oracle: list[dict]) -> str:
     return problem_html(
         problem,
         oracle,
-        section_id=f"{problem['problem']}-legacy",
+        section_id=f"{problem['problem']}-archive",
         heading="h3",
-        heading_text="Legacy 2014 archive",
+        heading_text="2014 archive",
         include_rule=False,
     )
 
@@ -420,7 +422,7 @@ def _headlines_html(
         '<section class="bench" id="headlines">',
         "<p>The first row of each problem is the best full harness run, ranked by PAR-2. "
         "The ranked table and the performance profile are on the problem page. "
-        "The 2014 archive is labelled legacy on that page.</p>",
+        "The 2014 archive is on that page, with each latest campaign beside its archive row.</p>",
     ]
     for suite in order:
         group = by_suite.get(suite)
@@ -454,8 +456,8 @@ def _collection_html(
 
     lines = [
         '<section class="bench" id="collection">',
-        "<p>Each problem leads with the current v2 rank. "
-        "The 2014 rows follow, in the published order.</p>",
+        "<p>Each problem leads with the v2 rank. "
+        "The 2014 rows follow, in the published order, with each latest campaign beside its archive row.</p>",
     ]
     for suite in order:
         group = by_suite.get(suite)
@@ -472,7 +474,7 @@ def _collection_html(
             if lead:
                 lines.append(lead)
             lines.append(f'<p><a href="{html.escape(href)}">Full ranked table and performance profile</a>.</p>')
-            lines.append(_legacy_section(problem, oracle))
+            lines.append(_archive_section(problem, oracle))
     lines.append("</section>")
     return "\n".join(lines)
 
@@ -505,8 +507,8 @@ def _codes_html(root: Path, document: dict) -> str:
             order.append(name)
         grouped[name].append(pin)
     lines = [
-        '<section class="bench" id="current-codes">',
-        "<h2>Current codes</h2>",
+        '<section class="bench" id="codes">',
+        "<h2>Codes</h2>",
         f"<p>The benchmark contributor is {html.escape(contributor)}. "
         "A ranked row is a full harness run. "
         "The commit on that row is the commit that produced the score.</p>",
@@ -608,7 +610,7 @@ def _smoke_note(root: Path) -> str:
     if not archived or not smoke_run:
         return ""
     return (
-        f"A {smoke_run.get('searches')}-search SoftSaddle smoke is outside this rank. "
+        f"A {smoke_run.get('searches')}-search SoftSaddle smoke is not part of this rank. "
         f"The {archived.get('date')} {archived.get('entry')} entry records "
         f"{archived.get('force_calls')} force calls."
     )
@@ -677,7 +679,7 @@ def render(root: Path) -> None:
                     unparsed=pending.get(problem["id"]),
                 )
             )
-            sections.append(_legacy_section(problem, oracle))
+            sections.append(_archive_section(problem, oracle))
         body = [
             f"#+TITLE: {suite_title(suite)}",
             "#+OPTIONS: toc:nil num:nil author:nil",

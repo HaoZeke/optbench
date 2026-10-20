@@ -356,7 +356,7 @@ directory, outside the HTML tables.
 | eon-svn/saddle-pt-md | absent; same string | fraction 0 | fraction 0 | 40000000 | 40000000 |
 | eon/develop-saddle-pt-dimer, asv n=1 | absent | 0/1 | 0/1 | 200000000 | 200000000 |
 | eon/develop-saddle-pt-lanczos, asv n=1 | absent | 0/1 | 0/1 | 200000000 | 200000000 |
-| eon-3.5.0-saddle-pt-classic | absent; repetition means | fraction 0.6919518057 | fraction 0.6919518057 | not applied | not applied |
+| eon-svn-r2549-saddle-pt-dimer | absent; repetition means | fraction 0.7018048496 | fraction 0.7018048496 | not applied | not applied |
 | eon-3.5.0-saddle-pt-dimer | absent; repetition means | fraction 0.7517199457 | fraction 0.7517199457 | not applied | not applied |
 | archive eon-dimer r2205 | absent | fraction 0.746017 | fraction 0.746017 | not applied | not applied |
 | archive eon-md r2205 | absent | fraction 0.886966 | fraction 0.886966 | not applied | not applied |
@@ -373,7 +373,7 @@ directory, outside the HTML tables.
 
 Sella and ASE successes are order-1 convergence, not this endpoint link.
 The eOn client, eOn SVN, eOn 3.5.0, and archive fractions are those codes'
-own `Not Connected` labels. PAR-2 is not applied to a legacy campaign
+own `Not Connected` labels. PAR-2 is not applied to a campaign
 ratio or to the 2014 archive. The rgsaddle comment lines still record
 the RMSD-novel `unique_saddles`. Those starts have no endpoint
 coordinates, so that count was not recomputed. A later run of those
@@ -421,7 +421,7 @@ at `02405b0d` return the same coordinates for `search_seed(1, 1)`,
 `(1, 2)`, `(1, 50)`, `(2, 1)`, and `(3, 17)`. The maximum absolute
 difference is 0. Each draw moves 7 atoms, from epicentres 5, 2, 2,
 1, and 0. A generator that continues after
-`search_seed(1, 1)` does not reproduce `search_seed(1, 2)`.
+`search_seed(1, 1)` is not the same stream as `search_seed(1, 2)`.
 `partn/saddle-pt` itself still pushes 1 to 7 island atoms in plane,
 which is the authors' script. Sella's pt-island searches displace every
 free atom from seeds 0 through 15. ASE dimer leaves the reactant and
@@ -557,7 +557,8 @@ on `cells/softsaddle/ts-reps`.
 | eon-svn/saddle-pt-dimer-bounded | absent | 10 | 10 | 5/32 | 5/32 | 0.75 | 0.75 | 40000000 | 40000000 |  |  |
 | eon-svn/saddle-pt-lanczos-bounded | absent | 5 | 5 | 4/32 | 4/32 | 1.0 | 1.0 | 40000000 | 40000000 |  |  |
 | eon-svn/saddle-pt-md | absent | 0 | 0 | 0/1 | 0/1 | 0.0 | 0.0 | 40000000 | 40000000 |  |  |
-| eon-3.5.0-saddle-pt-classic | absent; 10-repetition means | 91.7 | 91.7 |  |  | 0.6919518057 | 0.6919518057 | not applied | not applied |  |  |
+| eon-svn-r2549-saddle-pt-dimer | absent; 10-repetition means | 112.6 | 112.6 |  |  | 0.7018048496 | 0.7018048496 | not applied | not applied |  |  |
+| eon-develop-500350d9-saddle-pt-dimer | absent; 10-repetition means | 109.8888889 | 109.8888889 |  |  | 0.6944540625 | 0.6944540625 | not applied | not applied |  |  |
 | eon-3.5.0-saddle-pt-dimer | absent; 10-repetition means | 77.1 | 77.1 |  |  | 0.7517199457 | 0.7517199457 | not applied | not applied |  |  |
 | archive eon-dimer r2205 | absent | 109.222 | 109.222 |  |  | 0.746017 | 0.746017 | not applied | not applied | 109.222 | 0.746017 |
 | archive eon-md r2205 | absent | 51.6667 | 51.6667 |  |  | 0.886966 | 0.886966 | not applied | not applied | 51.6667 | 0.886966 |

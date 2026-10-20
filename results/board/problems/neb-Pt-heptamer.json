@@ -263,7 +263,7 @@
       "note": "starts",
       "par2_mean": 3515.6923076923076,
       "partial": true,
-      "partial_reason": "does not reproduce the 2014 archive",
+      "partial_reason": "a different counter is the ranked row",
       "path": "results/campaign/eon-main-neb-pt-lbfgs.dat",
       "problem": "neb/Pt-heptamer",
       "registry_match": true,

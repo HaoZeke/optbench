@@ -317,6 +317,8 @@ def _write_saddle(template: dict, rows: list[dict], output: Path, workers: int) 
     lines.append(f"template {template['id']}")
     lines.append(f"problem {template.get('problem', '')}")
     lines.append(f"reducer {template.get('reducer', 'akmc-until-27')}")
+    searches = sum(int(row["total_searches"]) for row in rows if row.get("total_searches") is not None)
+    lines.append(f"n {searches}")
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text("\n".join(lines) + "\n", encoding="utf-8")
     start_rows = []

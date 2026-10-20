@@ -1881,7 +1881,7 @@ def _publish_saddle(
         "schema": "optbench.result/v2",
         "status": "measured",
         "problem": problem["id"],
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-bootstrap",
         "par_factor": 2,
         "bootstrap_resamples": 2000,
         "bootstrap_seed": 20261015,

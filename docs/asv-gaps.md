@@ -78,9 +78,9 @@ The `AttributeError` is the call `Uv.matches("3.12")`. `_run_pip` is the install
 
 `asv_runner.statistics.compute_stats` summarizes repeated timings of one parameter. The keys are a 99% interval around the median time, the quartiles, the repeat count, and `number`. asv calls it when a benchmark returns `samples` and `number`. Track benchmarks that return a float skip it, which is why force calls survive.
 
-It does not compute a Wilson interval, a PAR-2 mean with a cap penalty, a bootstrap median across parameters, or a Dolan-Moré profile. asv-perch compares commits with asv-spyglass (Mann-Whitney on timing samples, by that action's own description). It has no input for a censored-cost reducer.
+It does not compute a 95% success interval, a PAR-2 mean with a cap penalty, a bootstrap median across parameters, or a Dolan-Moré profile. asv-perch compares commits with asv-spyglass (Mann-Whitney on timing samples, by that action's own description). It has no input for a censored-cost reducer.
 
-Upstream: `asv-runner` (`compute_stats` or a new reducer entry point that receives the per-parameter track vector, not the timing repeats) and `asv-perch` / asv-spyglass (print that summary). The smallest useful addition is a hook that accepts the vector of track values for one benchmark and returns a summary object the result file can store. Wilson, PAR-2 given a cap, and a bootstrap median belong there. The Dolan-Moré profile needs several benchmarks on the same problems, so it is a cross-benchmark reducer, not a per-benchmark `compute_stats` extension.
+Upstream: `asv-runner` (`compute_stats` or a new reducer entry point that receives the per-parameter track vector, not the timing repeats) and `asv-perch` / asv-spyglass (print that summary). The smallest useful addition is a hook that accepts the vector of track values for one benchmark and returns a summary object the result file can store. A 95% success interval, PAR-2 given a cap, and a bootstrap median belong there. The Dolan-Moré profile needs several benchmarks on the same problems, so it is a cross-benchmark reducer, not a per-benchmark `compute_stats` extension.
 
 optbench calls `score_v2` and `performance_profile` on the saved floats. That is the product score, not a copy of `compute_stats`.
 

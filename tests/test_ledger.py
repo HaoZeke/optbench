@@ -1,91 +1,108 @@
-"""The 2014 ledger is the paper baseline, and a miss fails the check."""
+"""Campaigns sit beside the 2014 archive with the numbers they measured."""
 
 import json
 from pathlib import Path
 
 from optbench.check import load_oracle
-from optbench.problems import load_problem
-from optbench.reproduction import (
-    baseline_errors,
+from optbench.ledger import (
+    LEDGER_PATH,
+    build_rows,
     holdback,
-    judge_checks,
+    ledger_errors,
     load_ledger,
-    reproduction_errors,
     row_id,
 )
+from optbench.problems import load_problem
 from optbench.site import problem_html
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def _metric(item: dict, name: str) -> float:
+    found = next(row for row in item["metrics"] if row["metric"] == name)
+    return float(found["latest"])
+
+
 def test_the_ledger_covers_the_oracle_in_order():
     oracle = load_oracle(ROOT / "oracle" / "entries.jsonl")
-    ledger = load_ledger(ROOT / "oracle" / "reproduction.jsonl")
+    ledger = load_ledger(ROOT / LEDGER_PATH)
     assert len(ledger) == len(oracle) == 151
     assert [row_id(row) for row in ledger] == [row_id(row) for row in oracle]
-    counts = {"reproduced": 0, "not_reproduced": 0, "not_rerun": 0}
+    assert ledger == build_rows(ROOT)
     for row in ledger:
-        failure = row.get("failure_check") if row.get("rerun") else None
-        status = judge_checks(row.get("checks") or [], failure)
-        if row.get("rerun") is None:
-            status = "not_rerun"
-        assert row["status"] == status
-        counts[status] += 1
-        if status == "not_reproduced":
-            assert row["cause"]
-        if (row.get("rerun") or {}).get("paper_baseline"):
-            assert status == "reproduced"
-    assert counts == {"reproduced": 48, "not_reproduced": 24, "not_rerun": 79}
-    assert reproduction_errors(ROOT) == []
+        assert "status" not in row
+        assert "cause" not in row
+        assert "paper_baseline" not in row
+        blob = json.dumps(row)
+        assert "reproduced" not in blob
+        assert "paper_baseline" not in blob
+    assert ledger_errors(ROOT) == []
 
 
-def test_pele_paper_baseline_is_the_2014_stop():
-    ledger = {row_id(row): row for row in load_ledger(ROOT / "oracle" / "reproduction.jsonl")}
-    forward = ledger["tsopt/LJ38/pele_ffd"]
-    central = ledger["tsopt/LJ38/pele_cd"]
-    island = ledger["tsopt/pt-island/pele"]
-    assert forward["status"] == "reproduced"
-    assert central["status"] == "reproduced"
-    assert island["status"] == "reproduced"
-    assert forward["rerun"]["baseline_metric"] == "stop2014_calls"
-    assert forward["rerun"]["stop2014_calls"] == 207.51
-    assert forward["rerun"]["harness_stop_mean"] == 254.48
-    assert central["rerun"]["stop2014_calls"] == 263.52
-    assert central["rerun"]["harness_stop_mean"] == 335.06
-    assert island["rerun"]["stop2014_calls"] == 88.551
-    assert island["rerun"]["paper_baseline"] is True
-    assert "starting set" in forward["note"]
+def test_measured_campaigns_stay_beside_the_archive():
+    ledger = {row_id(row): row for row in load_ledger(ROOT / LEDGER_PATH)}
+    dimer = ledger["saddle-search/pt-island/eon-dimer"]["latest"]
+    assert [item["label"] for item in dimer] == [
+        "EON SVN r2549",
+        "eOn (develop 500350d9)",
+    ]
+    eon = dimer[0]
+    assert eon["path"] == "results/campaign/eon-svn-r2549-saddle-pt-dimer.dat"
+    assert _metric(eon, "force_calls") == 5719004.8
+    assert _metric(eon, "unique_saddles") == 112.6
+    assert abs(_metric(eon, "fraction_connected") - 0.7018048496) < 1e-9
+    develop = dimer[1]
+    assert develop["path"] == "results/campaign/eon-develop-500350d9-saddle-pt-dimer.dat"
+    assert develop["template"] == "eon/develop-saddle-pt-dimer"
+    assert _metric(develop, "force_calls") > 0
+
+    soft = {
+        "adaptive_HSphere-lbfgs-davidson-sm50": (406030.3, 115.5),
+        "adaptive_HSphere-lbfgs-lanczos-sm50": (927873.6, 169.1),
+        "adaptive_HSphere-lbfgs-lanczos-sm0": (1506841.4, 177.8),
+    }
+    for entry, (force, unique) in soft.items():
+        item = ledger[f"saddle-search/pt-island/{entry}"]["latest"][0]
+        assert _metric(item, "force_calls") == force
+        assert _metric(item, "unique_saddles") == unique
+
+    assert _metric(ledger["tsopt/LJ38/sella"]["latest"][0], "force_calls") == 69
+    assert _metric(ledger["tsopt/pt-island/sella"]["latest"][0], "force_calls") == 59
+
+    forward = ledger["tsopt/LJ38/pele_ffd"]["latest"][0]
+    central = ledger["tsopt/LJ38/pele_cd"]["latest"][0]
+    island = ledger["tsopt/pt-island/pele"]["latest"][0]
+    assert _metric(forward, "force_calls") == 207.51
+    assert _metric(central, "force_calls") == 263.52
+    assert abs(_metric(island, "force_calls") - 88.551) < 1e-6
+
+
+def test_a_different_counter_is_held_and_a_distant_mean_is_not():
     held = holdback(ROOT)
+    assert ("double-ended-saddle-search/lj38", "eon-client/de-lj38-ci-swdneb") in held.templates
     assert ("tsopt/LJ38", "sella/lj38-ts-tuned") not in held.templates
     assert ("tsopt/LJ38", "sella/lj38-ts-default") not in held.templates
-    assert ("double-ended-saddle-search/lj38", "eon-client/de-lj38-ci-swdneb") in held.templates
-    assert "results/campaign/eon-3.5.0-saddle-pt-classic.dat" in held.paths
+    assert "results/campaign/eon-svn-r2549-saddle-pt-dimer.dat" not in held.paths
+    assert "results/campaign/eon-3.5.0-saddle-pt-classic.dat" not in held.paths
+    assert ledger_errors(ROOT) == []
 
 
-def test_a_paper_baseline_outside_the_archive_fails(tmp_path: Path):
-    source = next(
-        row
-        for row in load_ledger(ROOT / "oracle" / "reproduction.jsonl")
-        if row_id(row) == "minimization/lj38/eon-lbfgs"
-    )
-    row = json.loads(json.dumps(source))
-    row["rerun"]["path"] = "results/campaign/bad.dat"
-    campaign = tmp_path / "results" / "campaign"
-    campaign.mkdir(parents=True)
-    (campaign / "bad.dat").write_text("force_calls 1000\nnfailed 0\n", encoding="utf-8")
-    oracle = tmp_path / "oracle"
-    oracle.mkdir()
-    (oracle / "reproduction.jsonl").write_text(json.dumps(row) + "\n", encoding="utf-8")
-    errors = baseline_errors(tmp_path)
-    assert errors
-    assert any("force_calls" in line and "1000" in line for line in errors)
-
-
-def test_legacy_rows_that_miss_are_marked_in_place():
+def test_archive_tables_have_no_pass_mark():
     problem = load_problem(ROOT / "problems" / "minimization" / "lj38.toml")
     oracle = load_oracle(ROOT / "oracle" / "entries.jsonl")
     html = problem_html(problem, oracle)
     assert ">eon-cg<" in html
-    assert "pele-fire · not reproduced" in html
-    assert "outside the archive tolerance" in html
-    assert "eon-cg · not reproduced" not in html
+    assert "pele-fire" in html
+    assert "not reproduced" not in html
+    assert "Wilson" not in html
+    assert "legacy" not in html.lower()
+    assert "paper baseline" not in html.lower()
+    saddle = load_problem(ROOT / "problems" / "saddle-search" / "pt-island.toml")
+    saddle_html = problem_html(saddle, oracle)
+    assert "EON SVN r2549" in saddle_html
+    assert "eOn (develop 500350d9)" in saddle_html
+    assert "5719004.8" in saddle_html
+    assert "112.6" in saddle_html
+    assert "406030.3" in saddle_html
+    assert ">115.5<" in saddle_html
+    assert "not reproduced" not in saddle_html

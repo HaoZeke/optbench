@@ -22,7 +22,7 @@ repository = "https://github.com/TheochemUI/eon"
 ref = "main"
 commit = "1d71c944501832bfafb955ffe13b9aae50c8efd4"
 committed = "2026-10-15"
-note = "Current main, including merged pull request 776. The version string is 3.6.0. Templates under templates/eon/ use this commit. The 3.5.0 pin above stays for the scores that were run on it."
+note = "The main branch, including merged pull request 776. The version string is 3.6.0. Templates under templates/eon/ use this commit. The 3.5.0 pin above stays for the scores that were run on it."
 
 [[code]]
 id = "eon-develop"
@@ -82,7 +82,7 @@ repository = "https://github.com/zadorlab/sella"
 ref = "2.6.0"
 commit = "6cfb60cdb100a146c3c6f0587d5308b247aa8010"
 committed = "2026-10-15"
-note = "Sella 2.6.0. Order 1 is a saddle and order 0 is a minimum. The Sella 0.1.1 rows on the 2014 tables are legacy and are not this pin. Force calls are harness calculator evaluations."
+note = "Sella 2.6.0. Order 1 is a saddle and order 0 is a minimum. The Sella 0.1.1 rows on the 2014 tables are an earlier pin. Force calls are harness calculator evaluations."
 
 [[code]]
 id = "artn"

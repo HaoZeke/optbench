@@ -1,7 +1,7 @@
 """Pair potentials and endpoint readers for the band campaigns.
 
 Morse platinum matches the eOn ``morse_pt`` parameters that the LAMMPS
-twin reproduces: ``pair_style morse 9.5``, ``pair_coeff * * 0.7102
+twin matches: ``pair_style morse 9.5``, ``pair_coeff * * 0.7102
 1.6047 2.897``, ``pair_modify shift yes``. Lennard-Jones is the
 archive ``lj/cut`` with ``epsilon = sigma = 1`` and cutoff 40, with no
 shift. A force call is one energy-and-gradient evaluation of every

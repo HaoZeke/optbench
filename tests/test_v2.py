@@ -24,8 +24,8 @@ def test_wilson_locks_the_published_counts():
     assert all_high == 1.0
 
 
-def test_rounded_legacy_means_are_not_a_v2_score():
-    # Illustration only: every success is charged the rounded legacy mean.
+def test_rounded_published_means_are_not_a_v2_score():
+    # Illustration only: every success is charged the rounded published mean.
     assert (975 * 3514 + 25 * 2 * 10000) / 1000 == 3926.15
     assert (904 * 4901 + 96 * 2 * 10000) / 1000 == 6350.504
     assert (999 * 1849 + 1 * 2 * 10000) / 1000 == 1867.151
@@ -60,10 +60,11 @@ def test_pt_island_repetitions_are_per_search():
     assert f"{summary['median']:.6f}" == "263.284133"
     assert f"{summary['mean']:.6f}" == "263.590450"
     classic = parse_repetitions(
-        (ROOT / "results" / "campaign" / "eon-3.5.0-saddle-pt-classic.dat").read_text(encoding="utf-8")
+        (ROOT / "results" / "campaign" / "eon-svn-r2549-saddle-pt-dimer.dat").read_text(encoding="utf-8")
     )
     classic_summary = distribution_summary([row["per_search"] for row in classic], resamples=20, seed=1)
-    assert f"{classic_summary['median']:.6f}" == "469.759056"
+    assert f"{classic_summary['median']:.6f}" == "474.526816"
+    assert f"{classic_summary['mean']:.6f}" == "474.282606"
     no_cap = score_v2(
         [{"force_calls": row["per_search"], "success": True} for row in rows],
         cap=None,

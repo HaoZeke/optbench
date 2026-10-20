@@ -15,7 +15,7 @@ An asv result that covers one start is a smoke run and is partial.
 The full set is the problem file's sample, or the Morse archive when
 that file gives no sample count. It is not the largest campaign file.
 A result that sets ``ranked false`` stays off the ranked table.
-A template that does not reproduce the 2014 archive stays off it too.
+An alternate counter named by the ledger stays off the ranked table.
 Partial rows stay in the output. A campaign file and an asv track for
 the same run are one row. Only the newest full version of a template
 is ranked. Older full versions stay in the history list.
@@ -606,7 +606,7 @@ def _version_key(text: str) -> tuple[int, ...]:
 
 
 def _mark_versions(rows: list[dict]) -> None:
-    """The newest full version of a template is current. Older full versions are history."""
+    """The newest full version of a template stays ranked. Older full versions are history."""
     groups: dict[tuple, list[dict]] = defaultdict(list)
     for row in rows:
         template = row.get("template") or ""
@@ -961,6 +961,43 @@ def _public(row: dict) -> dict:
     return {key: value for key, value in row.items() if not key.startswith("_")}
 
 
+def _one_method_row(rows: list[dict]) -> None:
+    """Sella and SoftSaddle keep one ranked row per method.
+
+    When a stock profile and another profile of the same method both
+    score, the stock profile stays ranked.
+    """
+    groups: dict[tuple, list[dict]] = defaultdict(list)
+    for row in rows:
+        code = str(row.get("code") or "").lower()
+        if code not in {"sella", "softsaddle"}:
+            continue
+        template = str(row.get("template") or "")
+        if not template:
+            continue
+        stem = template
+        for suffix in ("-default", "-tuned"):
+            if template.endswith(suffix):
+                stem = template[: -len(suffix)]
+                break
+        groups[(row.get("problem"), code, stem)].append(row)
+    for group in groups.values():
+        eligible = [row for row in group if not row.get("partial") and row.get("comparable")]
+        if len(eligible) < 2:
+            continue
+
+        def _prefer(row: dict) -> tuple:
+            template = str(row.get("template") or "")
+            tuning = str(row.get("tuning") or "")
+            stock = 0 if template.endswith("-default") or tuning == "default" else 1
+            return (stock, template)
+
+        eligible.sort(key=_prefer)
+        for row in eligible[1:]:
+            row["partial"] = True
+            row["partial_reason"] = "same method as the ranked row"
+
+
 def _rank_key(row: dict) -> tuple:
     score = row["par2_mean"] if row["par2_mean"] is not None else row["median"]
     return (
@@ -980,14 +1017,14 @@ def _matches_hold(row: dict, held) -> bool:
     return any(path in held.paths for path in paths)
 
 
-def _apply_reproduction_hold(row: dict, held) -> None:
-    """Keep an exact archive rerun that missed the tolerance off the ranked table."""
+def _apply_counter_hold(row: dict, held) -> None:
+    """Keep an alternate counter off the ranked table."""
     if not _matches_hold(row, held) or row.get("_declared_partial"):
         return
     n = int(row.get("n") or 0)
     if _source_parts(row) == {"asv"} and n <= 1:
         return
-    reason = "does not reproduce the 2014 archive"
+    reason = "a different counter is the ranked row"
     if not row.get("scored"):
         note = str(row.get("note") or "")
         if reason not in note:
@@ -1006,13 +1043,13 @@ def build_board(root: Path) -> dict:
     asv_rows, asv_unparsed, unmapped = _asv_rows(root, problems, templates)
     unparsed.extend(asv_unparsed)
     rows = _dedup(campaign + asv_rows)
-    from .reproduction import holdback
+    from .ledger import holdback
 
     held = holdback(root)
     for row in rows:
-        _apply_reproduction_hold(row, held)
+        _apply_counter_hold(row, held)
     for row in unparsed:
-        _apply_reproduction_hold(row, held)
+        _apply_counter_hold(row, held)
     full_n: dict[str, int | None] = {}
     for problem_id, problem in problems.items():
         full_n[problem_id] = stated_full_n(root, problem)
@@ -1036,6 +1073,7 @@ def build_board(root: Path) -> dict:
             continue
         for row in group:
             _mark_partial(row, stated)
+    _one_method_row(rows)
     for row in rows:
         row["registry_match"] = _registry_match(row, registry)
     _mark_versions(rows)
@@ -1309,11 +1347,8 @@ def _headers(problem: dict) -> list[str]:
         "Version",
         "Commit",
         "Source",
-        "Current",
         "PAR-2",
         "Success",
-        "Wilson low",
-        "Wilson high",
         "Median calls",
         "Mean calls",
     ]
@@ -1333,11 +1368,8 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
         ("version", f"{row.get('code') or ''} {row.get('code_version') or ''}"),
         ("commit", str(row.get("commit") or "")[:12]),
         ("source", str(row.get("source") or "")),
-        ("current", "yes" if row.get("current") else "no"),
         ("par2_mean", _format_number(row.get("par2_mean"))),
         ("success_rate", _format_number(row.get("success_rate"))),
-        ("wilson_low", _format_number(row.get("wilson_low"))),
-        ("wilson_high", _format_number(row.get("wilson_high"))),
         ("median_calls", _format_number(row.get("median_calls"))),
         ("mean_calls", _format_number(row.get("mean_calls"))),
     ]
@@ -1583,7 +1615,7 @@ def _table(
     headers = _headers(problem)
     caption = (
         "Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. "
-        "Wilson bounds are the 95% interval on the success rate."
+        "Success is the fraction of starts that met the stop."
     )
     if per_image:
         caption += " Per-image mean divides that total by the problem's moving images, the same way for every code."

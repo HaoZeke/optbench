@@ -112,7 +112,7 @@ uv run optbench/sella_lj38.py \
   --version 2.6.0
 ```
 
-The recorded file is `results/campaign/sella-2.6.0-ts-lj38.dat`: mean 93, two starts at the step cap. Sella 0.1.1 was mean 69.55 with none failed. Those 0.1.1 rows stay on the 2014 tables and are labelled legacy.
+The recorded file is `results/campaign/sella-2.6.0-ts-lj38.dat`: mean 93, two starts at the step cap. Sella 0.1.1 was mean 69.55 with none failed. Those 0.1.1 rows stay on the 2014 tables.
 
 ASE 3.29.0 and Sella 2.6.0 templates live under `templates/ase/` and `templates/sella/`. A default row is the library constructor. A tuned row is the archived script when one exists. Force calls are calculator evaluations counted by the harness, for both codes. The ranked set is:
 
@@ -194,9 +194,9 @@ The front page is a result whose status is `sota` and whose commit is the presen
 
 The 2014 mean leaves out failures. The comparable score does not. It is specified in `docs/design/decision.md` and `docs/v2.md`, and the in-process wrapper is `docs/harness.md`.
 
-A force call is one entry to `HarnessCounter`. ASE, pele, and Sella are charged through that counter. A compiled client reaches the same counter: eonclient through the `ext_pot` bridge in `optbench.extpot`, and an rgpot client through `RgpotCounter.calculate`. `uv run optbench run` still writes the legacy `benchmark.dat` from the client's own counter, and the per-start file next to it is marked `counter` `client`. That file is not a v2 score. `uv run optbench validate-counter` is the subset check that the server count matches eonclient. A subset is not a published mean.
+A force call is one entry to `HarnessCounter`. ASE, pele, and Sella are charged through that counter. A compiled client reaches the same counter: eonclient through the `ext_pot` bridge in `optbench.extpot`, and an rgpot client through `RgpotCounter.calculate`. `uv run optbench run` still writes `benchmark.dat` from the client's own counter, and the per-start file next to it is marked `counter` `client`. That file is not a v2 score. `uv run optbench validate-counter` is the subset check that the server count matches eonclient. A subset is not a published mean.
 
-A v2 success is under the cap, at the force stop, and, when a reference is supplied, at Hessian index 0 for a minimum or index 1 for a saddle, with the energy and Kabsch RMSD inside the tolerances. A failure costs `2` times the cap. The table shows that PAR-2 mean, the Wilson 95% interval on the success rate, and the median and interquartile range with a bootstrap of 2000 resamples seeded by `20261015`.
+A v2 success is under the cap, at the force stop, and, when a reference is supplied, at Hessian index 0 for a minimum or index 1 for a saddle, with the energy and Kabsch RMSD inside the tolerances. A failure costs `2` times the cap. The table shows that PAR-2 mean, the 95% interval on the success rate, and the median and interquartile range with a bootstrap of 2000 resamples seeded by `20261015`.
 
 Pt-island cost is force calls in a repetition divided by the searches in that repetition. `eon-client/lbfgs-m20` is `tuning` `default`. `eon-client/lbfgs-m100` is `tuning` `tuned`.
 

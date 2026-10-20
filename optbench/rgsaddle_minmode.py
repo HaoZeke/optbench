@@ -1449,7 +1449,7 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
             "schema": "optbench.result/v2",
             "status": "archive",
             "problem": problem["id"],
-            "scoring": "par2-wilson-bootstrap",
+            "scoring": "par2-bootstrap",
             "par_factor": 2,
             "bootstrap_resamples": 2000,
             "bootstrap_seed": 20261015,
