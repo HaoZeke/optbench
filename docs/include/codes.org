@@ -1054,5 +1054,24 @@
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
+   <h3>GMIN</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>basin hopping</td>
+   <td>svn.tar.bz2</td>
+   <td>df8da5992675</td>
+   <td><a href="https://www-wales.ch.cam.ac.uk/svn.tar.bz2">https://www-wales.ch.cam.ac.uk/svn.tar.bz2</a></td>
+   </tr>
+   </tbody></table></div>
+   <p>No full ranked run.</p>
+   <p>No full ranked run</p><ul>
+   <li>Binary Lennard-Jones 100: partial.</li>
+   <li>Lennard-Jones 38 global minimum: partial.</li>
+   <li>lj75: partial.</li>
+   <li>tip4p10: partial.</li>
+   <li>tip4p20: partial.</li>
+   </ul>
    </section>
 #+end_export
