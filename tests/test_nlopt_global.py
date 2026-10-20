@@ -13,7 +13,6 @@ import pytest
 from optbench.campaign import list_templates, load_template
 from optbench.potentials import lennard_jones, read_con
 from optbench.runners.nlopt_global import (
-    capped_lennard_jones,
     judge_global,
     objective_report,
     reference_minimum,
@@ -55,8 +54,12 @@ def test_templates_pin_the_registry_commit():
             assert int(template["stop"]["max_force_calls"]) == HOP_CAPS[name]
             assert float(template["nlopt"]["displacement"]) == 0.5
             assert float(template["nlopt"]["temperature"]) == 0.8
-            assert float(template["nlopt"]["maxstep"]) == 0.2
-            assert float(template["nlopt"]["core_radius"]) == 0.9
+            assert float(template["nlopt"]["tolg"]) == 1e-5
+            assert int(template["nlopt"]["local_maxeval"]) == 4000
+            assert "maxstep" not in template["nlopt"]
+            assert "core_radius" not in template["nlopt"]
+            assert "stock NLopt LD_LBFGS" in template["note"]
+            assert "1e-12" in template["note"]
         else:
             assert template["problem"] == "globalopt/lj38"
             assert int(template["stop"]["max_force_calls"]) == 1_000_000
@@ -189,17 +192,15 @@ def test_the_budget_is_a_cap_and_a_high_energy_is_the_wrong_point():
     assert failure == "crash"
 
 
-def test_a_coincident_pair_stays_a_candidate_with_a_large_finite_energy():
-    from optbench.potentials import COINCIDENT_PAIR_ENERGY
-
+def test_a_coincident_pair_is_the_true_singularity():
     stacked = np.zeros(6)
     raw, grad = lennard_jones(stacked)
-    assert raw == pytest.approx(COINCIDENT_PAIR_ENERGY)
-    assert np.all(np.isfinite(grad))
+    assert math.isinf(raw) and raw > 0.0
+    assert np.all(grad == 0.0)
     reported, reported_grad, usable = objective_report(float(raw), grad, stacked)
-    assert usable is True
-    assert reported == pytest.approx(COINCIDENT_PAIR_ENERGY)
-    assert reported_grad.shape == stacked.shape
+    assert usable is False
+    assert math.isinf(reported) and reported > 0.0
+    assert np.all(reported_grad == 0.0)
     energy, _force, coords = reference_minimum()
     kept, kept_grad, keep = objective_report(energy, np.zeros(coords.size), coords)
     assert keep is True
@@ -264,33 +265,23 @@ def test_asv_classes_follow_the_templates():
         assert cls.params == [["0"], ["0"]]
 
 
-def test_the_core_cap_matches_the_harness_beyond_the_join():
-    energy, _force, coords = reference_minimum()
-    capped, grad, minimum = capped_lennard_jones(coords, 0.9)
-    assert minimum > 0.9
-    assert capped == pytest.approx(energy, abs=1e-12)
-    raw, raw_grad = lennard_jones(coords)
-    assert np.max(np.abs(grad - raw_grad)) < 1e-8
+def test_a_close_pair_is_the_true_repulsion():
     pair = np.zeros(6)
-    pair[3] = 1.2
-    capped, grad, _minimum = capped_lennard_jones(pair, 0.9)
-    raw, raw_grad = lennard_jones(pair)
-    assert capped == pytest.approx(raw)
-    assert np.allclose(grad, raw_grad)
     pair[3] = 0.4
-    capped, grad, _minimum = capped_lennard_jones(pair, 0.9)
-    assert math.isfinite(capped)
-    assert capped < 1000.0
-    eps = 1e-6
+    energy, grad = lennard_jones(pair)
+    assert math.isfinite(energy)
+    assert energy > 1000.0
+    eps = 1e-7
     finite = np.zeros_like(grad)
     for index in range(pair.size):
         pair[index] += eps
-        above, _grad, _minimum = capped_lennard_jones(pair, 0.9)
+        above, _grad = lennard_jones(pair)
         pair[index] -= 2.0 * eps
-        below, _grad, _minimum = capped_lennard_jones(pair, 0.9)
+        below, _grad = lennard_jones(pair)
         pair[index] += eps
         finite[index] = (above - below) / (2.0 * eps)
-    assert np.max(np.abs(finite - grad)) < 1e-6
+    scale = max(1.0, float(np.max(np.abs(grad))))
+    assert np.max(np.abs(finite - grad)) / scale < 1e-4
 
 
 def test_a_polished_basin_is_a_cambridge_success():
@@ -320,45 +311,49 @@ def test_a_polished_basin_is_a_cambridge_success():
     assert record["counter"] == "harness"
 
 
-def test_the_native_core_matches_the_numpy_core():
-    from optbench.fastpot import lj_capped_gradient
+def test_the_native_kernel_matches_the_harness_potential():
+    from optbench.fastpot import lj_gradient
 
-    native = lj_capped_gradient
     energy, _force, coords = reference_minimum()
-    got = native(coords, 0.9)
+    got = lj_gradient(coords)
     if got is None:
-        pytest.skip("native capped kernel is unavailable")
-    capped, grad, minimum = got
-    raw, raw_grad, raw_min = capped_lennard_jones(coords, 0.9)
-    assert minimum == pytest.approx(raw_min, abs=1e-12)
-    assert capped == pytest.approx(raw, abs=1e-9)
-    assert capped == pytest.approx(energy, abs=1e-9)
+        pytest.skip("native Lennard-Jones kernel is unavailable")
+    value, grad, minimum = got
+    raw, raw_grad = lennard_jones(coords)
+    assert minimum > 1.0
+    assert value == pytest.approx(raw, abs=1e-9)
+    assert value == pytest.approx(energy, abs=1e-9)
     assert np.max(np.abs(grad - raw_grad)) < 1e-8
     pair = np.zeros(6)
     pair[3] = 0.4
-    got = native(pair, 0.9)
-    raw, raw_grad, raw_min = capped_lennard_jones(pair, 0.9)
-    assert got[2] == pytest.approx(raw_min, abs=1e-12)
-    assert got[0] == pytest.approx(raw, abs=1e-9)
-    assert np.max(np.abs(got[1] - raw_grad)) < 1e-8
+    got = lj_gradient(pair)
+    raw, raw_grad = lennard_jones(pair)
+    assert math.isfinite(got[0]) and got[0] > 1000.0
+    assert got[0] == pytest.approx(raw, rel=1e-9, abs=1e-6)
+    scale = max(1.0, float(np.max(np.abs(raw_grad))))
+    assert np.max(np.abs(got[1] - raw_grad)) / scale < 1e-8
     coincident = np.zeros(6)
-    got = native(coincident, 0.9)
-    raw, raw_grad, raw_min = capped_lennard_jones(coincident, 0.9)
+    got = lj_gradient(coincident)
+    raw, raw_grad = lennard_jones(coincident)
     assert got[2] == pytest.approx(0.0, abs=1e-15)
-    assert raw_min == pytest.approx(0.0, abs=1e-15)
-    assert got[0] == pytest.approx(raw, abs=1e-9)
-    assert np.max(np.abs(got[1] - raw_grad)) < 1e-8
+    assert math.isinf(got[0]) and got[0] > 0.0
+    assert math.isinf(raw) and raw > 0.0
+    assert np.all(got[1] == 0.0)
+    assert np.all(raw_grad == 0.0)
 
 
-def test_cambridge_minima_sit_outside_the_quadratic_core():
+def test_cambridge_minima_match_the_harness_potential():
     from optbench.ccd import LJ_SIZES, lennard_jones_minimum
 
     for size in LJ_SIZES:
         record = lennard_jones_minimum(size)
         harness, _gradient = lennard_jones(record["positions"])
-        capped, _capped_gradient, minimum = capped_lennard_jones(record["positions"], 0.9)
-        assert minimum > 0.9
-        assert capped == pytest.approx(harness, abs=1e-9)
+        positions = np.asarray(record["positions"], dtype=np.float64).reshape(-1, 3)
+        diff = positions[:, None, :] - positions[None, :, :]
+        distances = np.sqrt(np.sum(diff * diff, axis=2))
+        np.fill_diagonal(distances, np.inf)
+        assert float(distances.min()) > 0.9
+        assert math.isfinite(harness)
         assert harness == pytest.approx(float(record["energy"]), abs=1e-6)
 
 
@@ -378,10 +373,7 @@ def test_the_c_quench_matches_the_python_quench(monkeypatch):
     kwargs = {
         "cap": 20000,
         "local_max": 4000,
-        "maxstep": 0.2,
         "tolg": 1e-5,
-        "core_radius": 0.9,
-        "window": 100,
     }
     monkeypatch.setenv("OPTBENCH_PYTHON_QUENCH", "1")
     python_counter = HarnessCounter(cache=True, cap=20000)
@@ -419,7 +411,8 @@ def test_a_checkpoint_resumes_the_same_trajectory(tmp_path: Path):
     partial = run_job(partial_job)
     assert partial["force_calls"] < full["force_calls"]
     saved = json.loads((tmp_path / "progress.json").read_text(encoding="utf-8"))
-    assert saved["schema"] == "optbench.bh-progress/v1"
+    assert saved["schema"] == "optbench.bh-progress/v2"
+    assert saved["potential"] == "lj-cut"
     assert int(saved["calls"]) == partial["force_calls"]
     resumed = run_job(dict(partial_job, max_hops=None))
     assert resumed["force_calls"] == full["force_calls"]

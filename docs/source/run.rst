@@ -122,6 +122,18 @@ reads the steepest-descent step from ``[Optimizer]`` and calls the
 Lennard-Jones potential ``lj_cluster``. The 3.5.0 name is ``ljcluster``.
 The repository README is the longer form of these rules.
 
+The NLopt basin-hopping quench evaluates cutoff Lennard-Jones with an
+AVX-512 kernel when the CPU supports it. The vector reduction differs
+from the scalar sum by about 1e-12 in the energy on the LJ98 minimum.
+``OPTBENCH_SCALAR_LJ=1`` selects the scalar kernel. The potential is the
+same either way: unshifted 12-6, cutoff 40, no quadratic core. A
+coincident pair is the true singularity. There is no NLopt entry under
+``archive/entries/globalopt``. The archived eOn basin hop
+(``archive/entries/globalopt/lj38/eon-basinhopping/config.ini``,
+displacement 0.5, temperature 8000; ``in.lammps`` ``lj/cut/opt 40.0``) does
+not set a core or an L-BFGS step bound, so the quench is stock NLopt
+LD_LBFGS. A dissociated or non-finite result is a failure.
+
 The v2 counter, the seed sample, and the noise rule are ``docs/v2.md``.
 ``optbench statistics`` reads asv tracks from ``results/asv`` (``docs/asv.md``).
 These two commands write under ``results/validation/``. Neither file is

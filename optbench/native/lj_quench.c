@@ -1,8 +1,9 @@
-/* Step-capped NLopt LD_LBFGS for one basin-hopping quench.
+/* Stock NLopt LD_LBFGS for one basin-hopping quench.
 
-   The objective is optbench_lj_capped. A repeated coordinate does not
-   count, matching HarnessCounter. The call budget is the remaining
-   force-call cap. A refused call sets capped and is not counted.
+   The objective is the cutoff 12-6. There are no coordinate bounds.
+   A repeated coordinate does not count, matching HarnessCounter.
+   The call budget is the remaining force-call cap. A refused call
+   sets capped and is not counted.
 */
 
 #include <math.h>
@@ -10,8 +11,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-int optbench_lj_capped(const double *positions, int atoms, double core_radius, double cutoff,
-                        double *energy_out, double *gradient, double *min_distance);
+int optbench_lj_gradient(const double *positions, int atoms, double cutoff, double *energy_out,
+                         double *gradient, double *min_distance);
 
 struct optbench_quench_out {
     double energy;
@@ -23,9 +24,6 @@ struct optbench_quench_out {
 
 struct quench_buffers {
     int dimension;
-    double *best;
-    double *lower;
-    double *upper;
     double *gradient;
     double *cache_x;
     double *cache_gradient;
@@ -35,26 +33,20 @@ struct quench_buffers {
 static __thread struct quench_buffers reused;
 
 static int ensure_buffers(struct quench_buffers *buffers, int dimension) {
-    if (buffers->dimension == dimension && buffers->best != NULL) {
+    if (buffers->dimension == dimension && buffers->gradient != NULL) {
         return 0;
     }
-    free(buffers->best);
-    free(buffers->lower);
-    free(buffers->upper);
     free(buffers->gradient);
     free(buffers->cache_x);
     free(buffers->cache_gradient);
     free(buffers->working);
     memset(buffers, 0, sizeof(*buffers));
-    buffers->best = calloc((size_t)dimension, sizeof(double));
-    buffers->lower = calloc((size_t)dimension, sizeof(double));
-    buffers->upper = calloc((size_t)dimension, sizeof(double));
     buffers->gradient = calloc((size_t)dimension, sizeof(double));
     buffers->cache_x = calloc((size_t)dimension, sizeof(double));
     buffers->cache_gradient = calloc((size_t)dimension, sizeof(double));
     buffers->working = calloc((size_t)dimension, sizeof(double));
-    if (buffers->best == NULL || buffers->lower == NULL || buffers->upper == NULL || buffers->gradient == NULL ||
-        buffers->cache_x == NULL || buffers->cache_gradient == NULL || buffers->working == NULL) {
+    if (buffers->gradient == NULL || buffers->cache_x == NULL || buffers->cache_gradient == NULL ||
+        buffers->working == NULL) {
         return 1;
     }
     buffers->dimension = dimension;
@@ -71,7 +63,6 @@ struct eval_state {
     int cap;
     int capped;
     int cache_valid;
-    double core_radius;
     double cutoff;
     double cache_energy;
     double cache_min;
@@ -95,8 +86,7 @@ static double objective(unsigned dimension, const double *x, double *gradient, v
     double energy;
     double minimum;
     (void)dimension;
-    if (state->cache_valid &&
-        memcmp(state->cache_x, x, (size_t)state->dimension * sizeof(double)) == 0) {
+    if (state->cache_valid && memcmp(state->cache_x, x, (size_t)state->dimension * sizeof(double)) == 0) {
         if (gradient) {
             memcpy(gradient, state->cache_gradient, (size_t)state->dimension * sizeof(double));
         }
@@ -112,8 +102,7 @@ static double objective(unsigned dimension, const double *x, double *gradient, v
         }
         return 1.0e300;
     }
-    optbench_lj_capped(x, state->atoms, state->core_radius, state->cutoff, &energy, state->gradient,
-                        &minimum);
+    optbench_lj_gradient(x, state->atoms, state->cutoff, &energy, state->gradient, &minimum);
     (*state->calls)++;
     memcpy(state->cache_x, x, (size_t)state->dimension * sizeof(double));
     memcpy(state->cache_gradient, state->gradient, (size_t)state->dimension * sizeof(double));
@@ -135,35 +124,28 @@ static void finish(struct optbench_quench_out *out, double energy, double minimu
     out->capped = capped;
 }
 
-int optbench_lj_quench(double *x, int dimension, int cap, int local_max, int window, double maxstep,
-                        double tolg, double core_radius, double cutoff, struct optbench_quench_out *out) {
+int optbench_lj_quench(double *x, int dimension, int cap, int local_max, double tolg, double cutoff,
+                       struct optbench_quench_out *out) {
     int atoms;
     int calls = 0;
     int code = 0;
-    int stall = 0;
-    double *best;
-    double *lower;
-    double *upper;
+    int remain;
     double *gradient;
     double *cache_x;
     double *cache_gradient;
     double *working;
-    double best_energy;
-    double best_min;
-    double previous;
+    double step_min;
+    nlopt_result result;
     struct eval_state state;
 
     if (out == NULL || x == NULL || dimension < 3 || dimension % 3 != 0 || cap < 0 || local_max < 1 ||
-        window < 1 || maxstep <= 0.0 || tolg <= 0.0 || core_radius <= 0.0 || cutoff <= 0.0) {
+        tolg <= 0.0 || cutoff <= 0.0) {
         return 1;
     }
     atoms = dimension / 3;
     if (ensure_buffers(&reused, dimension) != 0) {
         return 1;
     }
-    best = reused.best;
-    lower = reused.lower;
-    upper = reused.upper;
     gradient = reused.gradient;
     cache_x = reused.cache_x;
     cache_gradient = reused.cache_gradient;
@@ -177,101 +159,44 @@ int optbench_lj_quench(double *x, int dimension, int cap, int local_max, int win
     state.atoms = atoms;
     state.calls = &calls;
     state.cap = cap;
-    state.core_radius = core_radius;
     state.cutoff = cutoff;
     objective((unsigned)dimension, working, gradient, &state);
     if (state.capped) {
         finish(out, 0.0, 0.0, calls, code, 1);
-        goto cleanup;
+        return 0;
     }
-    best_energy = state.cache_energy;
-    best_min = state.cache_min;
-    previous = best_energy;
-    memcpy(best, working, (size_t)dimension * sizeof(double));
     if (gmax_of(gradient, dimension) <= tolg) {
-        code = 1;
-        finish(out, best_energy, best_min, calls, code, 0);
-        memcpy(x, best, (size_t)dimension * sizeof(double));
-        goto cleanup;
+        finish(out, state.cache_energy, state.cache_min, calls, 1, 0);
+        memcpy(x, working, (size_t)dimension * sizeof(double));
+        return 0;
     }
-    while (calls < local_max && calls < cap && !state.capped) {
-        int i;
-        int remain;
-        int before;
-        int on_bound = 0;
-        double step_min;
-        nlopt_result result;
-        for (i = 0; i < dimension; i++) {
-            lower[i] = working[i] - maxstep;
-            upper[i] = working[i] + maxstep;
-        }
-        state.opt = nlopt_create(NLOPT_LD_LBFGS, (unsigned)dimension);
-        if (state.opt == NULL) {
-            return 1;
-        }
-        nlopt_set_min_objective(state.opt, objective, &state);
-        nlopt_set_lower_bounds(state.opt, lower);
-        nlopt_set_upper_bounds(state.opt, upper);
-        nlopt_set_xtol_rel(state.opt, 1e-14);
-        nlopt_set_ftol_abs(state.opt, 1e-14);
-        remain = local_max - calls;
-        if (cap - calls < remain) {
-            remain = cap - calls;
-        }
-        if (remain > window) {
-            remain = window;
-        }
-        if (remain < 1) {
-            remain = 1;
-        }
-        nlopt_set_maxeval(state.opt, remain);
-        nlopt_set_param(state.opt, "tolg", tolg);
-        before = calls;
-        result = nlopt_optimize(state.opt, working, &step_min);
-        code = (int)result;
-        nlopt_destroy(state.opt);
-        state.opt = NULL;
-        (void)step_min;
-        if (state.capped) {
-            break;
-        }
-        if (result < 0) {
-            break;
-        }
+    remain = local_max - calls;
+    if (cap - calls < remain) {
+        remain = cap - calls;
+    }
+    if (remain < 1) {
+        finish(out, state.cache_energy, state.cache_min, calls, 0, 0);
+        memcpy(x, working, (size_t)dimension * sizeof(double));
+        return 0;
+    }
+    state.opt = nlopt_create(NLOPT_LD_LBFGS, (unsigned)dimension);
+    if (state.opt == NULL) {
+        return 1;
+    }
+    nlopt_set_min_objective(state.opt, objective, &state);
+    nlopt_set_xtol_rel(state.opt, 1e-14);
+    nlopt_set_ftol_abs(state.opt, 1e-14);
+    nlopt_set_maxeval(state.opt, remain);
+    nlopt_set_param(state.opt, "tolg", tolg);
+    result = nlopt_optimize(state.opt, working, &step_min);
+    code = (int)result;
+    nlopt_destroy(state.opt);
+    state.opt = NULL;
+    (void)step_min;
+    if (!state.capped) {
         objective((unsigned)dimension, working, gradient, &state);
-        if (state.capped) {
-            break;
-        }
-        if (state.cache_energy < best_energy) {
-            best_energy = state.cache_energy;
-            best_min = state.cache_min;
-            memcpy(best, working, (size_t)dimension * sizeof(double));
-        }
-        for (i = 0; i < dimension; i++) {
-            if (working[i] <= lower[i] + 1e-8 || working[i] >= upper[i] - 1e-8) {
-                on_bound = 1;
-                break;
-            }
-        }
-        if (calls == before) {
-            break;
-        }
-        if (gmax_of(gradient, dimension) <= tolg && !on_bound) {
-            break;
-        }
-        if (fabs(state.cache_energy - previous) < 1e-10 && !on_bound) {
-            stall++;
-            if (stall >= 3) {
-                break;
-            }
-        } else {
-            stall = 0;
-        }
-        previous = state.cache_energy;
     }
-    memcpy(x, best, (size_t)dimension * sizeof(double));
-    finish(out, best_energy, best_min, calls, code, state.capped);
-    return 0;
-cleanup:
+    memcpy(x, working, (size_t)dimension * sizeof(double));
+    finish(out, state.cache_energy, state.cache_min, calls, code, state.capped);
     return 0;
 }

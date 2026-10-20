@@ -167,16 +167,15 @@ def kernels() -> ctypes.CDLL | None:
         pointer,
     ]
     lib.optbench_lj_cut.restype = ctypes.c_int
-    lib.optbench_lj_capped.argtypes = [
+    lib.optbench_lj_gradient.argtypes = [
         pointer,
         ctypes.c_int,
-        ctypes.c_double,
         ctypes.c_double,
         pointer,
         pointer,
         pointer,
     ]
-    lib.optbench_lj_capped.restype = ctypes.c_int
+    lib.optbench_lj_gradient.restype = ctypes.c_int
     _KERNELS = lib
     return lib
 
@@ -286,11 +285,13 @@ def lj_cut_forces(positions, epsilon: float, sigma: float, cutoff: float):
     return float(energy.value), tuple(out)
 
 
-def lj_capped_gradient(coords, core_radius: float, cutoff: float = 40.0):
-    """Energy, gradient, and minimum pair distance for the capped 12-6.
+def lj_gradient(coords, cutoff: float = 40.0):
+    """Energy, gradient, and minimum pair distance for cutoff 12-6.
 
     Returns ``None`` when the native kernel is unavailable. The gradient
-    is ``dE/dx``. Pairs inside ``core_radius`` use the quadratic core.
+    is ``dE/dx``. A coincident pair has energy +infinity and a zero
+    gradient. An AVX-512 build uses the same potential; its energy can
+    differ from the scalar sum by about 1e-13.
     """
     import numpy as np
 
@@ -305,10 +306,9 @@ def lj_capped_gradient(coords, core_radius: float, cutoff: float = 40.0):
     energy = ctypes.c_double()
     minimum = ctypes.c_double()
     pointer = ctypes.POINTER(ctypes.c_double)
-    code = lib.optbench_lj_capped(
+    code = lib.optbench_lj_gradient(
         pos.ctypes.data_as(pointer) if atoms else None,
         atoms,
-        float(core_radius),
         float(cutoff),
         ctypes.byref(energy),
         grad.ctypes.data_as(pointer) if atoms else None,
@@ -349,7 +349,7 @@ def _nlopt_dirs() -> tuple[Path, Path] | None:
 
 
 def quench_library() -> ctypes.CDLL | None:
-    """NLopt LD_LBFGS quench linked against the capped kernel, or ``None``."""
+    """NLopt LD_LBFGS quench linked against the cutoff kernel, or ``None``."""
     global _QUENCH
     if not enabled():
         return None
@@ -376,9 +376,6 @@ def quench_library() -> ctypes.CDLL | None:
         ctypes.c_int,
         ctypes.c_int,
         ctypes.c_int,
-        ctypes.c_int,
-        ctypes.c_double,
-        ctypes.c_double,
         ctypes.c_double,
         ctypes.c_double,
         ctypes.POINTER(_QuenchOut),
@@ -393,13 +390,10 @@ def lj_lbfgs_quench(
     *,
     cap: int,
     local_max: int,
-    window: int,
-    maxstep: float,
     tolg: float,
-    core_radius: float,
     cutoff: float = 40.0,
 ):
-    """One step-capped LD_LBFGS quench.
+    """One stock LD_LBFGS quench, with no coordinate bounds.
 
     Returns ``(point, energy, min_distance, calls, code, capped)``, or
     ``None`` when the native quench is unavailable. ``calls`` counts fresh
@@ -420,10 +414,7 @@ def lj_lbfgs_quench(
         int(point.size),
         int(cap),
         int(local_max),
-        int(window),
-        float(maxstep),
         float(tolg),
-        float(core_radius),
         float(cutoff),
         ctypes.byref(out),
     )

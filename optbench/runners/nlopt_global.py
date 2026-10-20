@@ -11,19 +11,19 @@ energy still succeeds. The template evaluation budget is the force-call
 cap. A cube search gives NLopt that budget as ``maxeval`` and that
 threshold as ``stopval``.
 
-A coincident pair in the harness potential is a large finite energy.
+A coincident pair in the harness potential is the true singularity.
 The recorded geometry is the point the search returned, and the recorded
-energy is the harness value of that point.
+energy is the harness value of that point. A non-finite energy is a
+divergence, scored as a failure.
 
-Basin hopping uses NLopt LD_LBFGS as the quench. Luksan's L-BFGS has no
-step cap, and one long step dissociates the cluster, so each trial step
-is a cube of half-width ``maxstep`` recentered on the current point.
-Pairs inside ``core_radius`` use a quadratic stand-in matched to the
-12-6 value and slope. Outside that radius the search value is the
-harness potential. The quench calls the NLopt C API directly. A fresh
-geometry is still one harness force call, and a repeated coordinate is
-not counted again. A progress file written after a finished hop resumes
-that hop, so a restarted start repeats no completed quench.
+Basin hopping uses one stock NLopt LD_LBFGS quench per trial. There is
+no coordinate step bound and no quadratic core. The archive has no NLopt
+global row; the eOn basin hop uses plain cutoff Lennard-Jones. A quench
+that dissociates the cluster is a finding and scores as a failure. The
+quench calls the NLopt C API directly. A fresh geometry is still one
+harness force call, and a repeated coordinate is not counted again. A
+progress file written after a finished hop resumes that hop, so a
+restarted start repeats no completed quench.
 """
 
 from __future__ import annotations
@@ -45,15 +45,15 @@ from optbench.v2 import collect_provenance, write_starts
 
 MAXEVAL = 5
 MAXTIME = 6
-PENALTY = 1.0e6
 _REFERENCE_NAME = "lj38_global_minimum.con"
+_PROGRESS_SCHEMA = "optbench.bh-progress/v2"
 
 
 def duplicate_sites(coords: np.ndarray) -> bool:
     """True when two atoms share one coordinate triple.
 
-    Equality is bitwise. The harness potential gives that pair a large
-    finite energy.
+    Equality is bitwise. The harness potential gives that pair infinite
+    energy.
     """
     pos = np.asarray(coords, dtype=np.float64).reshape(-1, 3)
     count = pos.shape[0]
@@ -68,16 +68,15 @@ def objective_report(
     gradient: np.ndarray,
     coords: np.ndarray,
 ) -> tuple[float, np.ndarray, bool]:
-    """Value and gradient NLopt sees, and that the point stays a candidate.
+    """Value and gradient NLopt sees, and whether the point is a finite candidate.
 
-    A non-finite value becomes a large finite penalty. A coincident pair
-    already has a large finite harness energy, and that value is kept.
+    A coincident pair keeps the true non-finite energy. It is not a
+    finite candidate, and it is not replaced by a penalty.
     """
     del coords
     grad = np.asarray(gradient, dtype=np.float64).reshape(-1)
-    if not math.isfinite(energy) or not bool(np.all(np.isfinite(grad))):
-        return PENALTY, np.zeros(grad.size, dtype=np.float64), True
-    return float(energy), grad, True
+    finite = math.isfinite(energy) and bool(np.all(np.isfinite(grad)))
+    return float(energy), grad, finite
 
 
 def reference_minimum() -> tuple[float, float, np.ndarray]:
@@ -86,51 +85,6 @@ def reference_minimum() -> tuple[float, float, np.ndarray]:
     pos, _box = read_con(path.read_text(encoding="utf-8"))
     energy, gradient = lennard_jones(pos)
     return float(energy), float(np.linalg.norm(gradient)), np.asarray(pos, dtype=np.float64).reshape(-1)
-
-
-def capped_lennard_jones(
-    coords: np.ndarray,
-    core_radius: float,
-) -> tuple[float, np.ndarray, float]:
-    """Harness 12-6, with a quadratic core inside ``core_radius``.
-
-    The core matches the 12-6 value and ``dV/dr`` at the join, so the
-    search gradient stays finite when two atoms overlap. The returned
-    minimum pair distance is infinite when the cluster has one atom.
-    """
-    if core_radius <= 0.0:
-        raise ValueError("core_radius must be positive")
-    pos = np.asarray(coords, dtype=np.float64).reshape(-1, 3)
-    iu, ju = np.triu_indices(pos.shape[0], k=1)
-    diff = pos[iu] - pos[ju]
-    r2 = np.einsum("ij,ij->i", diff, diff)
-    energy = 0.0
-    slope = np.zeros(r2.shape, dtype=np.float64)
-    core2 = core_radius * core_radius
-    core = r2 < core2
-    physical = (~core) & (r2 > 0.0) & (r2 < 40.0 * 40.0)
-    if np.any(physical):
-        rr = r2[physical]
-        inv = 1.0 / rr
-        sr6 = inv * inv * inv
-        sr12 = sr6 * sr6
-        energy += float(4.0 * np.sum(sr12 - sr6))
-        slope[physical] = 24.0 * (sr6 - 2.0 * sr12) * inv
-    if np.any(core):
-        inv = 1.0 / core2
-        sr6 = inv * inv * inv
-        sr12 = sr6 * sr6
-        value = 4.0 * (sr12 - sr6)
-        derivative = 24.0 * (sr6 - 2.0 * sr12) * inv * core_radius
-        curvature = derivative / (2.0 * core_radius)
-        energy += float(np.sum(value + curvature * (r2[core] - core2)))
-        slope[core] = derivative / core_radius
-    grad = np.zeros_like(pos)
-    piece = slope[:, None] * diff
-    np.add.at(grad, iu, piece)
-    np.add.at(grad, ju, -piece)
-    minimum = float(np.sqrt(r2.min())) if r2.size else math.inf
-    return float(energy), grad.reshape(-1), minimum
 
 
 def search_bounds(coords: np.ndarray, half_width: float) -> tuple[np.ndarray, np.ndarray]:
@@ -198,13 +152,16 @@ def _settings(problem: dict, template: dict) -> dict:
     domain = template.get("domain") or {}
     section = _nlopt_section(template)
     if "displacement" in section:
-        for name in ("displacement", "temperature", "maxstep", "tolg", "core_radius"):
+        for name in ("maxstep", "core_radius"):
+            if name in section:
+                raise ValueError(
+                    f"{template['id']} nlopt.{name} is not in the archive and is not stock LD_LBFGS"
+                )
+        for name in ("displacement", "temperature", "tolg"):
             if name not in section:
                 raise ValueError(f"{template['id']} needs nlopt.{name}")
             if float(section[name]) <= 0.0:
                 raise ValueError(f"{template['id']} nlopt.{name} must be positive")
-        if float(section["core_radius"]) >= 1.0:
-            raise ValueError(f"{template['id']} core would move the Lennard-Jones well")
         if "local_maxeval" not in section or int(section["local_maxeval"]) <= 0:
             raise ValueError(f"{template['id']} needs a positive nlopt.local_maxeval")
         half_width = float(domain["half_width"]) if "half_width" in domain else None
@@ -240,21 +197,37 @@ def run_job(job: dict) -> dict:
     return _run_cube(job)
 
 
+def _pair_minimum(flat: np.ndarray) -> float:
+    pos = np.asarray(flat, dtype=np.float64).reshape(-1, 3)
+    count = pos.shape[0]
+    if count < 2:
+        return math.inf
+    minimum = math.inf
+    for i in range(count):
+        diff = pos[i + 1 :] - pos[i]
+        if diff.size == 0:
+            continue
+        distance = float(np.sqrt(np.einsum("ij,ij->i", diff, diff).min()))
+        if distance < minimum:
+            minimum = distance
+    return minimum
+
+
 def _search_value(
     counter: HarnessCounter,
     coords: np.ndarray,
-    core_radius: float,
 ) -> tuple[float, np.ndarray, float]:
     flat = np.ascontiguousarray(coords, dtype=np.float64).reshape(-1)
     key = flat.tobytes()
     _fresh, cached = counter.charge(key)
     if cached is None:
-        from optbench.fastpot import lj_capped_gradient
+        from optbench.fastpot import lj_gradient
 
-        native = lj_capped_gradient(flat, core_radius)
+        native = lj_gradient(flat)
         if native is None:
-            value, gradient, minimum = capped_lennard_jones(flat, core_radius)
+            value, gradient = lennard_jones(flat)
             gradient = np.asarray(gradient, dtype=np.float64).copy()
+            minimum = _pair_minimum(flat)
         else:
             value, gradient, minimum = native
             gradient = np.asarray(gradient, dtype=np.float64)
@@ -264,31 +237,13 @@ def _search_value(
     return float(value), np.asarray(gradient, dtype=np.float64), float(minimum)
 
 
-def _harness_value(counter: HarnessCounter, coords: np.ndarray) -> tuple[float, np.ndarray]:
-    """One harness evaluation that does not reuse a search-cache entry."""
-    flat = np.asarray(coords, dtype=np.float64).reshape(-1)
-    key = tuple(float(value) for value in flat)
-    counter.remember((), (0.0, np.zeros(1, dtype=np.float64), 0.0))
-    _fresh, cached = counter.charge(key)
-    if cached is None:
-        value, gradient = lennard_jones(flat)
-        gradient = np.asarray(gradient, dtype=np.float64)
-        counter.remember(key, (float(value), gradient, math.inf))
-    else:
-        value, gradient, _minimum = cached
-    return float(value), np.asarray(gradient, dtype=np.float64)
-
-
 def _native_quench(
     counter: HarnessCounter,
     origin: np.ndarray,
     *,
     cap: int,
     local_max: int,
-    maxstep: float,
     tolg: float,
-    core_radius: float,
-    window: int,
 ) -> tuple[np.ndarray, float, int | None] | None:
     """The C quench, or ``None`` when that library cannot be built."""
     from optbench.fastpot import lj_lbfgs_quench
@@ -300,19 +255,14 @@ def _native_quench(
         origin,
         cap=remaining,
         local_max=int(local_max),
-        window=int(window),
-        maxstep=float(maxstep),
         tolg=float(tolg),
-        core_radius=float(core_radius),
     )
     if got is None:
         return None
-    point, energy, minimum, calls, code, capped = got
+    point, energy, _minimum, calls, code, capped = got
     counter.calls += int(calls)
     if capped:
         raise ForceCallCap(f"force-call cap {cap}")
-    if minimum < float(core_radius):
-        energy, _gradient = _harness_value(counter, point)
     return np.asarray(point, dtype=np.float64), float(energy), None if int(code) == 0 else int(code)
 
 
@@ -322,12 +272,9 @@ def _quench(
     *,
     cap: int,
     local_max: int,
-    maxstep: float,
     tolg: float,
-    core_radius: float,
-    window: int = 100,
 ) -> tuple[np.ndarray, float, int | None]:
-    """Step-limited LD_LBFGS. The returned energy is the harness value."""
+    """Stock LD_LBFGS. The returned energy is the harness potential."""
     native = None
     if os.environ.get("OPTBENCH_PYTHON_QUENCH") != "1":
         native = _native_quench(
@@ -335,10 +282,7 @@ def _quench(
             origin,
             cap=cap,
             local_max=local_max,
-            maxstep=maxstep,
             tolg=tolg,
-            core_radius=core_radius,
-            window=window,
         )
     if native is not None:
         return native
@@ -346,74 +290,65 @@ def _quench(
 
     x = np.asarray(origin, dtype=np.float64).reshape(-1).copy()
     opened = counter.calls
-    value, gradient, minimum = _search_value(counter, x, core_radius)
-    best_e = value
-    best_x = x.copy()
-    best_r = minimum
-    local_code: int | None = 1 if float(np.max(np.abs(gradient))) <= tolg else None
-    stall = 0
-    previous = value
-    if local_code == 1:
-        if best_r < core_radius:
-            best_e, _gradient = _harness_value(counter, best_x)
-        return best_x, float(best_e), local_code
-    while counter.calls - opened < local_max and counter.calls < cap:
-        box = x.copy()
-        lower = box - maxstep
-        upper = box + maxstep
+    value, gradient, _minimum = _search_value(counter, x)
+    if float(np.max(np.abs(gradient))) <= tolg:
+        return x, float(value), 1
+    remain = min(int(local_max) - (counter.calls - opened), int(cap) - counter.calls)
+    if remain < 1:
+        return x, float(value), None
 
-        def objective(point, grad):
-            reported, reported_grad, _minimum = _search_value(counter, point, core_radius)
-            if grad.size:
-                grad[:] = reported_grad
-            return reported
+    def objective(point, grad):
+        reported, reported_grad, _pair = _search_value(counter, point)
+        if grad.size:
+            grad[:] = reported_grad
+        return reported
 
-        opt = nlopt.opt(nlopt.LD_LBFGS, x.size)
-        opt.set_min_objective(objective)
-        opt.set_lower_bounds(lower.tolist())
-        opt.set_upper_bounds(upper.tolist())
-        opt.set_xtol_rel(1e-14)
-        opt.set_ftol_abs(1e-14)
-        remain = min(local_max - (counter.calls - opened), cap - counter.calls)
-        opt.set_maxeval(max(1, min(int(window), remain)))
-        opt.set_param("tolg", tolg)
-        before = counter.calls
+    opt = nlopt.opt(nlopt.LD_LBFGS, x.size)
+    opt.set_min_objective(objective)
+    opt.set_xtol_rel(1e-14)
+    opt.set_ftol_abs(1e-14)
+    opt.set_maxeval(int(remain))
+    opt.set_param("tolg", tolg)
+    local_code: int | None = None
+    try:
+        returned = np.asarray(opt.optimize(x.copy()), dtype=np.float64)
+        local_code = int(opt.last_optimize_result())
+    except ForceCallCap:
+        raise
+    except Exception as exc:
+        if "ForceCallCap" in type(exc).__name__ or "force-call cap" in str(exc):
+            raise ForceCallCap(str(exc)) from exc
         try:
-            returned = np.asarray(opt.optimize(box.copy()), dtype=np.float64)
             local_code = int(opt.last_optimize_result())
-        except ForceCallCap:
-            raise
-        except Exception as exc:
-            if "ForceCallCap" in type(exc).__name__ or "force-call cap" in str(exc):
-                raise ForceCallCap(str(exc)) from exc
+        except Exception:
             local_code = None
-            break
-        if returned.size != x.size or not bool(np.all(np.isfinite(returned))):
-            break
-        reported, reported_grad, minimum = _search_value(counter, returned, core_radius)
-        if reported < best_e:
-            best_e = reported
-            best_x = returned.copy()
-            best_r = minimum
-        x = returned.copy()
-        gmax = float(np.max(np.abs(reported_grad)))
-        on_bound = bool(np.any((returned <= lower + 1e-8) | (returned >= upper - 1e-8)))
-        if counter.calls == before:
-            break
-        if gmax <= tolg and not on_bound:
-            break
-        if abs(reported - previous) < 1e-10 and not on_bound:
-            stall += 1
-            if stall >= 3:
-                break
-        else:
-            stall = 0
-        previous = reported
-    if not math.isfinite(best_e):
-        return best_x, best_e, local_code
-    if best_r < core_radius:
-        best_e, _gradient = _harness_value(counter, best_x)
-    return best_x, float(best_e), local_code
+        returned = x
+    if returned.size != x.size or not bool(np.all(np.isfinite(returned))):
+        return x, float(value), local_code
+    reported, _reported_grad, _pair = _search_value(counter, returned)
+    return returned, float(reported), local_code
+
+
+def _json_energy(value: float) -> float | str:
+    """JSON number, or a token ``json.loads`` accepts for a non-finite energy."""
+    number = float(value)
+    if math.isnan(number):
+        return "nan"
+    if number == math.inf:
+        return "inf"
+    if number == -math.inf:
+        return "-inf"
+    return number
+
+
+def _parse_energy(value: object) -> float:
+    if value == "inf":
+        return math.inf
+    if value == "-inf":
+        return -math.inf
+    if value == "nan":
+        return math.nan
+    return float(value)
 
 
 def _json_ready(value):
@@ -440,7 +375,7 @@ def _atomic_json(path: Path, payload: dict) -> None:
 
 def _restore_basin(saved: dict | None, job: dict, size: int) -> dict | None:
     """Hop state for this start, or ``None`` when the file is not usable."""
-    if not saved or saved.get("schema") != "optbench.bh-progress/v1":
+    if not saved or saved.get("schema") != _PROGRESS_SCHEMA or saved.get("potential") != "lj-cut":
         return None
     if int(saved.get("seed", -1)) != int(job["seed"]) or saved.get("start") != job["start"]:
         return None
@@ -458,9 +393,9 @@ def _restore_basin(saved: dict | None, job: dict, size: int) -> dict | None:
         "seconds": float(saved.get("seconds") or 0.0),
         "code": None if code is None else int(code),
         "current": current,
-        "current_energy": float(saved["current_energy"]),
+        "current_energy": _parse_energy(saved["current_energy"]),
         "best": best,
-        "best_energy": float(saved["best_energy"]),
+        "best_energy": _parse_energy(saved["best_energy"]),
         "rng": rng,
     }
 
@@ -486,10 +421,7 @@ def _run_basin_hop(job: dict) -> dict:
         quench = {
             "cap": cap,
             "local_max": int(job["local_maxeval"]),
-            "maxstep": float(job["maxstep"]),
             "tolg": float(job["tolg"]),
-            "core_radius": float(job["core_radius"]),
-            "window": int(job.get("lbfgs_window") or 100),
         }
         checkpoint = Path(job["checkpoint"]) if job.get("checkpoint") else None
         checkpoint_calls = int(job.get("checkpoint_calls") or 0)
@@ -511,7 +443,8 @@ def _run_basin_hop(job: dict) -> dict:
             _atomic_json(
                 checkpoint,
                 {
-                    "schema": "optbench.bh-progress/v1",
+                    "schema": _PROGRESS_SCHEMA,
+                    "potential": "lj-cut",
                     "index": int(job["index"]),
                     "start": job["start"],
                     "seed": int(job["seed"]),
@@ -519,9 +452,9 @@ def _run_basin_hop(job: dict) -> dict:
                     "seconds": time.perf_counter() - started,
                     "code": None if code is None else int(code),
                     "current": current,
-                    "current_energy": float(current_e),
+                    "current_energy": _json_energy(current_e),
                     "best": point,
-                    "best_energy": float(best_e),
+                    "best_energy": _json_energy(best_e),
                     "rng": rng.bit_generator.state,
                 },
             )
@@ -979,7 +912,7 @@ def _job(index: int, name: str, coords: np.ndarray, settings: dict, reference: f
         "reference": reference,
         "tolerance": tolerance,
     }
-    for name in ("displacement", "temperature", "maxstep", "tolg", "core_radius"):
+    for name in ("displacement", "temperature", "tolg"):
         if section.get(name) is not None:
             job[name] = float(section[name])
     if section.get("local_maxeval") is not None:
@@ -1031,9 +964,9 @@ def run_template(
     pending = [job for job in jobs if job["index"] not in done]
     records = [done[job["index"]] for job in jobs if job["index"] in done]
     if pending and settings["nlopt"].get("displacement") is not None:
-        from optbench.fastpot import lj_capped_gradient, quench_library
+        from optbench.fastpot import lj_gradient, quench_library
 
-        lj_capped_gradient(np.zeros(6, dtype=np.float64), float(settings["nlopt"]["core_radius"]))
+        lj_gradient(np.zeros(6, dtype=np.float64))
         quench_library()
     if pending:
         if workers <= 1:
@@ -1159,7 +1092,7 @@ def _write_campaign(
         "reference_energy": reference,
         "seed": "start index",
     }
-    for name in ("displacement", "temperature", "maxstep", "tolg", "local_maxeval", "core_radius"):
+    for name in ("displacement", "temperature", "tolg", "local_maxeval"):
         if section.get(name) is not None:
             passed[name] = int(section[name]) if name == "local_maxeval" else float(section[name])
     passed = {key: value for key, value in passed.items() if value is not None}
@@ -1315,9 +1248,9 @@ def run_basin_shard(
         pending.append(job)
     if not pending:
         return finished
-    from optbench.fastpot import lj_capped_gradient, quench_library
+    from optbench.fastpot import lj_gradient, quench_library
 
-    lj_capped_gradient(np.zeros(6, dtype=np.float64), float(settings["nlopt"]["core_radius"]))
+    lj_gradient(np.zeros(6, dtype=np.float64))
     quench_library()
 
     def _store(record: dict) -> None:

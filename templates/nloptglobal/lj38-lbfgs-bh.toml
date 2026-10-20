@@ -10,16 +10,14 @@ profile = "default"
 tuning = "default"
 reducer = "capped"
 ranked = true
-note = "Basin hopping. Each quench is NLopt LD_LBFGS. A trial coordinate step is limited to 0.2 because Luksan L-BFGS has no step cap, and a long step dissociates the cluster. Displacement is 0.5 and kT is 0.8, the archived basin-hopping schedule. Pairs closer than 0.9 use a quadratic core matched to the 12-6 value and slope. The recorded energy is the harness potential. The seed is the start index. GN_MLSL, CRS2, ISRES, and StoGO on the half-width 6 cube do not reach this minimum inside the cap."
+note = "Basin hopping. Each quench is stock NLopt LD_LBFGS with no step bounds. Displacement is 0.5 and kT is 0.8, the archived eOn basin-hopping schedule (archive/entries/globalopt/lj38/eon-basinhopping/config.ini displacement 0.5, temperature 8000; in.lammps lj/cut 40). There is no NLopt entry under archive/entries/globalopt. The potential is the cutoff 12-6. A coincident pair is the true singularity, not a finite penalty and not a quadratic core. A dissociated or non-finite result is a failure. The recorded energy is the harness potential. The seed is the start index. The AVX-512 kernel matches that potential; its energy differs from the scalar sum by about 1e-12 on the LJ98 minimum. GN_MLSL, CRS2, ISRES, and StoGO on the half-width 6 cube do not reach this minimum inside the cap."
 
 [nlopt]
 name = "LD_LBFGS"
 displacement = 0.5
 temperature = 0.8
-maxstep = 0.2
 tolg = 1e-5
 local_maxeval = 4000
-core_radius = 0.9
 
 [potential]
 kind = "lennard-jones"

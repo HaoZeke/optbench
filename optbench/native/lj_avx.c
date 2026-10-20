@@ -1,15 +1,16 @@
-/* AVX-512 Lennard-Jones gradient. Same core and cutoff rules as the
-   scalar kernel. Pair terms are accumulated in a vector reduction, so
-   the sum differs from the scalar order by a few units in the last
-   place. The harness tests allow that gap. */
+/* AVX-512 cutoff Lennard-Jones gradient. Same potential as the scalar
+   kernel: unshifted 12-6, no quadratic core. Pair terms are accumulated
+   in a vector reduction, so the sum differs from the scalar order by
+   about 1e-13 on an LJ98 geometry. OPTBENCH_SCALAR_LJ=1 selects the
+   scalar kernel. A pair at distance zero makes the energy +infinity. */
 
 #include <immintrin.h>
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
 
-int optbench_lj_capped_avx(const double *positions, int atoms, double core_radius, double cutoff,
-                           double *energy_out, double *gradient, double *min_distance) {
+int optbench_lj_gradient_avx(const double *positions, int atoms, double cutoff, double *energy_out,
+                             double *gradient, double *min_distance) {
     static __thread double *scratch;
     static __thread int scratch_atoms;
     double *xs;
@@ -18,30 +19,19 @@ int optbench_lj_capped_avx(const double *positions, int atoms, double core_radiu
     double *gx;
     double *gy;
     double *gz;
-    double core2;
     double cutoff2;
-    double inv_core;
-    double sr6_core;
-    double sr12_core;
-    double core_value;
-    double core_derivative;
-    double core_slope;
-    double core_curvature;
     double energy;
     double min2;
+    int singular;
     int i;
     int j;
-    __m512d vcore2;
     __m512d vcut2;
-    __m512d vcore_value;
-    __m512d vcurv;
-    __m512d vslope_core;
     __m512d vfour;
     __m512d v24;
     __m512d vtwo;
     __m512d vone;
     if (atoms < 2 || positions == NULL || gradient == NULL || energy_out == NULL || min_distance == NULL ||
-        core_radius <= 0.0 || cutoff <= 0.0) {
+        cutoff <= 0.0) {
         return 1;
     }
     if (scratch_atoms < atoms) {
@@ -62,22 +52,11 @@ int optbench_lj_capped_avx(const double *positions, int atoms, double core_radiu
     gx = zs + atoms;
     gy = gx + atoms;
     gz = gy + atoms;
-    core2 = core_radius * core_radius;
     cutoff2 = cutoff * cutoff;
-    inv_core = 1.0 / core2;
-    sr6_core = inv_core * inv_core * inv_core;
-    sr12_core = sr6_core * sr6_core;
-    core_value = 4.0 * (sr12_core - sr6_core);
-    core_derivative = 24.0 * (sr6_core - 2.0 * sr12_core) * inv_core * core_radius;
-    core_slope = core_derivative / core_radius;
-    core_curvature = core_derivative / (2.0 * core_radius);
     energy = 0.0;
     min2 = INFINITY;
-    vcore2 = _mm512_set1_pd(core2);
+    singular = 0;
     vcut2 = _mm512_set1_pd(cutoff2);
-    vcore_value = _mm512_set1_pd(core_value);
-    vcurv = _mm512_set1_pd(core_curvature);
-    vslope_core = _mm512_set1_pd(core_slope);
     vfour = _mm512_set1_pd(4.0);
     v24 = _mm512_set1_pd(24.0);
     vtwo = _mm512_set1_pd(2.0);
@@ -112,22 +91,23 @@ int optbench_lj_capped_avx(const double *positions, int atoms, double core_radiu
             __m512d r2 = _mm512_fmadd_pd(dx, dx, _mm512_fmadd_pd(dy, dy, _mm512_mul_pd(dz, dz)));
             __mmask8 nonzero = _mm512_cmp_pd_mask(r2, _mm512_setzero_pd(), _CMP_GT_OQ);
             __mmask8 inside = _mm512_cmp_pd_mask(r2, vcut2, _CMP_LT_OQ);
-            __mmask8 core = _mm512_cmp_pd_mask(r2, vcore2, _CMP_LT_OQ);
-            __m512d inv = _mm512_mask_div_pd(_mm512_setzero_pd(), nonzero, vone, r2);
+            __mmask8 zero = _mm512_cmp_pd_mask(r2, _mm512_setzero_pd(), _CMP_EQ_OQ);
+            __mmask8 physical = nonzero & inside;
+            __m512d inv = _mm512_mask_div_pd(_mm512_setzero_pd(), physical, vone, r2);
             __m512d sr6 = _mm512_mul_pd(_mm512_mul_pd(inv, inv), inv);
             __m512d sr12 = _mm512_mul_pd(sr6, sr6);
             __m512d lj_energy = _mm512_mul_pd(vfour, _mm512_sub_pd(sr12, sr6));
-            __m512d lj_slope = _mm512_mul_pd(v24, _mm512_mul_pd(_mm512_sub_pd(sr6, _mm512_mul_pd(vtwo, sr12)), inv));
-            __m512d core_energy = _mm512_fmadd_pd(vcurv, _mm512_sub_pd(r2, vcore2), vcore_value);
-            __m512d pair_energy = _mm512_mask_blend_pd(core, lj_energy, core_energy);
-            __m512d slope = _mm512_mask_blend_pd(core, lj_slope, vslope_core);
+            __m512d slope = _mm512_mul_pd(v24, _mm512_mul_pd(_mm512_sub_pd(sr6, _mm512_mul_pd(vtwo, sr12)), inv));
             __m512d sgx;
             __m512d sgy;
             __m512d sgz;
             double block_min;
-            pair_energy = _mm512_maskz_mov_pd(inside, pair_energy);
-            slope = _mm512_maskz_mov_pd(inside, slope);
-            ve = _mm512_add_pd(ve, pair_energy);
+            if (zero) {
+                singular = 1;
+            }
+            lj_energy = _mm512_maskz_mov_pd(physical, lj_energy);
+            slope = _mm512_maskz_mov_pd(physical, slope);
+            ve = _mm512_add_pd(ve, lj_energy);
             sgx = _mm512_mul_pd(slope, dx);
             sgy = _mm512_mul_pd(slope, dy);
             sgz = _mm512_mul_pd(slope, dz);
@@ -151,22 +131,25 @@ int optbench_lj_capped_avx(const double *positions, int atoms, double core_radiu
             double dy = yi - ys[j];
             double dz = zi - zs[j];
             double r2 = dx * dx + dy * dy + dz * dz;
+            double inv;
+            double sr6;
+            double sr12;
             double slope;
             if (r2 < min2) {
                 min2 = r2;
             }
-            if (r2 < core2) {
-                energy += core_value + core_curvature * (r2 - core2);
-                slope = core_slope;
-            } else if (r2 > 0.0 && r2 < cutoff2) {
-                double inv = 1.0 / r2;
-                double sr6 = inv * inv * inv;
-                double sr12 = sr6 * sr6;
-                energy += 4.0 * (sr12 - sr6);
-                slope = 24.0 * (sr6 - 2.0 * sr12) * inv;
-            } else {
+            if (r2 == 0.0) {
+                singular = 1;
                 continue;
             }
+            if (r2 >= cutoff2) {
+                continue;
+            }
+            inv = 1.0 / r2;
+            sr6 = inv * inv * inv;
+            sr12 = sr6 * sr6;
+            energy += 4.0 * (sr12 - sr6);
+            slope = 24.0 * (sr6 - 2.0 * sr12) * inv;
             gxi += slope * dx;
             gyi += slope * dy;
             gzi += slope * dz;
@@ -177,6 +160,14 @@ int optbench_lj_capped_avx(const double *positions, int atoms, double core_radiu
         gx[i] += gxi;
         gy[i] += gyi;
         gz[i] += gzi;
+    }
+    if (singular) {
+        energy = INFINITY;
+        for (i = 0; i < atoms; i++) {
+            gx[i] = 0.0;
+            gy[i] = 0.0;
+            gz[i] = 0.0;
+        }
     }
     for (i = 0; i < atoms; i++) {
         gradient[3 * i] = gx[i];

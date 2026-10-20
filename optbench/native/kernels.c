@@ -10,10 +10,10 @@
 #include <stddef.h>
 #include <stdlib.h>
 
-int optbench_lj_capped_avx(const double *positions, int atoms, double core_radius, double cutoff,
-                           double *energy_out, double *gradient, double *min_distance);
-int optbench_lj_capped_scalar(const double *positions, int atoms, double core_radius, double cutoff,
-                              double *energy_out, double *gradient, double *min_distance);
+int optbench_lj_gradient_avx(const double *positions, int atoms, double cutoff, double *energy_out,
+                             double *gradient, double *min_distance);
+int optbench_lj_gradient_scalar(const double *positions, int atoms, double cutoff, double *energy_out,
+                                double *gradient, double *min_distance);
 
 static double morse_fold(double delta, double length) {
     double scaled = delta / length;
@@ -204,28 +204,20 @@ int optbench_lj_cut(const double *positions, int atoms, double epsilon, double s
     return 0;
 }
 
-/* Quadratic core inside core_radius, matched in value and dV/dr to the
-   unshifted 12-6 at the join. The gradient is dE/dx, not the force.
-   Pairs at or beyond cutoff are omitted from the energy. The minimum
-   pair distance still includes them. */
-int optbench_lj_capped_scalar(const double *positions, int atoms, double core_radius,
-                               double cutoff, double *energy_out, double *gradient,
-                               double *min_distance) {
+/* Unshifted cutoff 12-6. The gradient is dE/dx, not the force. A pair at
+   distance zero makes the energy +infinity and clears the gradient: the
+   direction is undefined. Pairs at or beyond cutoff are omitted from the
+   energy. The minimum pair distance still includes them. */
+int optbench_lj_gradient_scalar(const double *positions, int atoms, double cutoff, double *energy_out,
+                                double *gradient, double *min_distance) {
     int count = atoms * 3;
     int i;
-    double core2;
+    int singular = 0;
     double cutoff2;
-    double inv_core;
-    double sr6_core;
-    double sr12_core;
-    double core_value;
-    double core_derivative;
-    double core_curvature;
-    double core_slope;
     double energy = 0.0;
     double min2 = INFINITY;
-    if (atoms < 0 || energy_out == NULL || min_distance == NULL || core_radius <= 0.0
-        || cutoff <= 0.0 || (atoms > 0 && (positions == NULL || gradient == NULL))) {
+    if (atoms < 0 || energy_out == NULL || min_distance == NULL || cutoff <= 0.0
+        || (atoms > 0 && (positions == NULL || gradient == NULL))) {
         return 1;
     }
     for (i = 0; i < count; i++) {
@@ -236,15 +228,7 @@ int optbench_lj_capped_scalar(const double *positions, int atoms, double core_ra
         *min_distance = INFINITY;
         return 0;
     }
-    core2 = core_radius * core_radius;
     cutoff2 = cutoff * cutoff;
-    inv_core = 1.0 / core2;
-    sr6_core = inv_core * inv_core * inv_core;
-    sr12_core = sr6_core * sr6_core;
-    core_value = 4.0 * (sr12_core - sr6_core);
-    core_derivative = 24.0 * (sr6_core - 2.0 * sr12_core) * inv_core * core_radius;
-    core_curvature = core_derivative / (2.0 * core_radius);
-    core_slope = core_derivative / core_radius;
     for (i = 0; i < atoms; i++) {
         int ix = 3 * i;
         int j;
@@ -254,6 +238,9 @@ int optbench_lj_capped_scalar(const double *positions, int atoms, double core_ra
             double dy = positions[ix + 1] - positions[jx + 1];
             double dz = positions[ix + 2] - positions[jx + 2];
             double r2 = dx * dx + dy * dy + dz * dz;
+            double inv;
+            double sr6;
+            double sr12;
             double slope;
             double gx;
             double gy;
@@ -261,18 +248,18 @@ int optbench_lj_capped_scalar(const double *positions, int atoms, double core_ra
             if (r2 < min2) {
                 min2 = r2;
             }
-            if (r2 < core2) {
-                energy += core_value + core_curvature * (r2 - core2);
-                slope = core_slope;
-            } else if (r2 > 0.0 && r2 < cutoff2) {
-                double inv = 1.0 / r2;
-                double sr6 = inv * inv * inv;
-                double sr12 = sr6 * sr6;
-                energy += 4.0 * (sr12 - sr6);
-                slope = 24.0 * (sr6 - 2.0 * sr12) * inv;
-            } else {
+            if (r2 == 0.0) {
+                singular = 1;
                 continue;
             }
+            if (r2 >= cutoff2) {
+                continue;
+            }
+            inv = 1.0 / r2;
+            sr6 = inv * inv * inv;
+            sr12 = sr6 * sr6;
+            energy += 4.0 * (sr12 - sr6);
+            slope = 24.0 * (sr6 - 2.0 * sr12) * inv;
             gx = slope * dx;
             gy = slope * dy;
             gz = slope * dz;
@@ -284,22 +271,27 @@ int optbench_lj_capped_scalar(const double *positions, int atoms, double core_ra
             gradient[jx + 2] -= gz;
         }
     }
+    if (singular) {
+        for (i = 0; i < count; i++) {
+            gradient[i] = 0.0;
+        }
+        energy = INFINITY;
+    }
     *energy_out = energy;
     *min_distance = sqrt(min2);
     return 0;
 }
 
-int optbench_lj_capped(const double *positions, int atoms, double core_radius, double cutoff,
-                        double *energy_out, double *gradient, double *min_distance) {
+int optbench_lj_gradient(const double *positions, int atoms, double cutoff, double *energy_out,
+                         double *gradient, double *min_distance) {
     static int avx = -1;
     if (avx < 0) {
         const char *scalar = getenv("OPTBENCH_SCALAR_LJ");
         int forced = scalar != NULL && scalar[0] == '1' && scalar[1] == '\0';
         avx = !forced && __builtin_cpu_supports("avx512f");
     }
-    if (avx &&
-        optbench_lj_capped_avx(positions, atoms, core_radius, cutoff, energy_out, gradient, min_distance) == 0) {
+    if (avx && optbench_lj_gradient_avx(positions, atoms, cutoff, energy_out, gradient, min_distance) == 0) {
         return 0;
     }
-    return optbench_lj_capped_scalar(positions, atoms, core_radius, cutoff, energy_out, gradient, min_distance);
+    return optbench_lj_gradient_scalar(positions, atoms, cutoff, energy_out, gradient, min_distance);
 }

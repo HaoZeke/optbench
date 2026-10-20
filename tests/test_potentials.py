@@ -1,9 +1,10 @@
+import math
+
 import pytest
 
 np = pytest.importorskip("numpy")
 
 from optbench.potentials import (
-    COINCIDENT_PAIR_ENERGY,
     lennard_jones,
     lennard_jones_hessian,
     morse_bulk,
@@ -46,10 +47,10 @@ def test_lj_dimer_sits_at_the_well():
     assert index == 0
 
 
-def test_a_coincident_lennard_jones_pair_is_a_large_finite_energy():
+def test_a_coincident_lennard_jones_pair_is_the_true_singularity():
     energy, grad = lennard_jones(np.zeros(6))
-    assert energy == pytest.approx(COINCIDENT_PAIR_ENERGY)
-    assert np.all(np.isfinite(grad))
+    assert math.isinf(energy) and energy > 0.0
+    assert np.all(grad == 0.0)
     assert float(np.linalg.norm(grad)) == pytest.approx(0.0)
 
 
