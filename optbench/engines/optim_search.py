@@ -370,13 +370,13 @@ def _native_job(pair, template: dict, preamble: str, cap: int) -> dict:
 
 _CURRENT_TARBALL = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
 _CURRENT_SHA256 = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
-_CURRENT_VERSION = "26635"
-_CURRENT_CODE = "optim-26635"
+_CURRENT_VERSION = "df8da599"
+_CURRENT_CODE = "optim-df8da599"
 _CURRENT_SOURCE = "df8da599267534fbe43a250e578f7396a7946311"
 _CURRENT_BINARY = Path("/tmp/wales-latest/wales/OPTIM/builds/gfortran/OPTIM")
 _STOCK_KEYWORDS = (
     "NEWCONNECT\n"
-    "NEWNEB 3 3000 0.001\n"
+    "NEWNEB 6 3000\n"
     "BFGSTS 3000 3000 3000\n"
     "BFGSMIN 0.001\n"
     "BFGSSTEPS 3000\n"
@@ -507,17 +507,22 @@ def _run_stock_dneb(root: Path, problem: dict, template: dict, *, output: Path, 
     published = dict(template)
     published["code"] = "optim"
     comment = (
-        f"# OPTIM image revision {_CURRENT_VERSION}, {_CURRENT_TARBALL}. "
-        f"sha256 {_CURRENT_SHA256}. OPTIM source {_CURRENT_SOURCE}.\n"
-        "# NEWCONNECT with NEWNEB 3 3000 0.001, BFGSTS 3000 3000 3000, "
+        f"# OPTIM source {_CURRENT_SOURCE}, {_CURRENT_TARBALL}. "
+        f"sha256 {_CURRENT_SHA256}. INCLUDE revision 26635.\n"
+        "# NEWCONNECT with NEWNEB 6 3000, BFGSTS 3000 3000 3000, "
         "BFGSMIN 0.001, BFGSSTEPS 3000, STEPS 3000.\n"
-        "# Image count, iteration cap, and RMS gradient are the problem values. "
-        "BULK repeats the PARAMS cell so the connection is not run in a zero box.\n"
-        "# Spring constant, push-off, eigenvalue tolerance, and image density stay at OPTIM defaults.\n"
+        "# Six images is the optim-6 entry: comments.txt says six images are used in DNEB. "
+        "NEWNEB's first field is that interior count. "
+        "The problem file band.interior_images is 3, the divisor the other rows use.\n"
+        "# NEWNEB iterations, BFGSTS steps, BFGSSTEPS, and STEPS are the problem cap 3000. "
+        "The band RMS stays at the OPTIM default 0.01. BFGSMIN is the problem RMS gradient 0.001.\n"
+        "# BULK repeats the PARAMS cell so the connection is not run in a zero box. "
+        "Spring constant, push-off, eigenvalue tolerance, and image density stay at OPTIM defaults.\n"
         "# NOHESS is set because morse bulk has no analytic second derivatives. "
         "NONEBMIND keeps the supplied endpoints.\n"
-        "# The count is OPTIM's energy+gradient calls, written on the harness counter. "
-        "A start is kept when the log contains Converged to TS."
+        "# The count is the last energy+gradient line. That is the band total the archive script stored, "
+        "and the unit the other rows rank. The cap 3000 is that total. "
+        "A start is kept when the log contains Converged to TS and the tally is under the cap."
     )
     return write_campaign(
         output,

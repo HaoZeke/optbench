@@ -160,26 +160,33 @@ are wrong stationary. The success median is 72. Start `pos_0000` took 55
 harness calls and stopped at force `0.000842553062284986`, energy
 `-1421.4513232624358`, vibrational index 6. `optim/unhooked` writes nothing.
 Noise is not scored: the relay has no noisy-force window. The ranked
-Pt-island row is the current `svn.tar.bz2` image, INCLUDE revision
-26635, sha256
+Pt-island row is the current `svn.tar.bz2` image, labelled OPTIM
+`df8da599`, sha256
 `738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31`,
-OPTIM source `df8da599267534fbe43a250e578f7396a7946311`. The source is
-unmodified. `BFGSSTEPS` and `STEPS` default to 1, and `NEWNEB` has no
-default iteration count in the manual, so a deck that omits those fields
-stops after one step. The deck follows the manual's doubly-nudged
-connection: `NEWCONNECT`, `NEWNEB 3 3000 0.001`, `BFGSTS 3000 3000 3000`,
-`BFGSMIN 0.001`, `BFGSSTEPS 3000`, and `STEPS 3000`. The 3 images, the
-3000 step and iteration limits, and the RMS gradient 0.001 are the
-problem. Spring constant, push-off, eigenvalue tolerance, and image
-density stay at OPTIM defaults. `BULK` repeats the periodic cell already
-written on `PARAMS`, in the same reduced units. `NOHESS` is set because
-this OPTIM has no analytic second derivatives for morse bulk.
-`NONEBMIND` keeps the supplied endpoints. The score is the last
-energy+gradient count, stored as harness force calls. A start is kept
-when the log contains `Converged to TS` and the count is under the cap.
-All 59 logs contain that line. 57 counts are over 3000. The two starts
-under the cap give success mean 1620, median 1619.5, min 934, max 2305.
-The harness PAR-2 is 5851.51. Other saddle search, NEB, tsopt, and hTST
+OPTIM source `df8da599267534fbe43a250e578f7396a7946311`, INCLUDE
+revision 26635. The source is unmodified. `BFGSSTEPS` and `STEPS`
+default to 1, and `NEWNEB` has no default iteration count in the
+manual, so a deck that omits those fields stops after one step. The
+deck is `NEWCONNECT`, `NEWNEB 6 3000`, `BFGSTS 3000 3000 3000`,
+`BFGSMIN 0.001`, `BFGSSTEPS 3000`, and `STEPS 3000`. The six images
+are the optim-6 entry: `comments.txt` says six images are used in
+DNEB, and `NEWNEB`'s first field is that interior count. The problem
+file `band.interior_images` is 3, which is the per-image divisor the
+other rows on this problem use. The iteration and step fields are the
+problem cap 3000. The band RMS stays at the OPTIM default 0.01.
+`BFGSMIN` is the problem RMS gradient 0.001. Spring constant,
+push-off, eigenvalue tolerance, and image density stay at OPTIM
+defaults. `BULK` repeats the periodic cell already written on
+`PARAMS`, in the same reduced units. `NOHESS` is set because this
+OPTIM has no analytic second derivatives for morse bulk. `NONEBMIND`
+keeps the supplied endpoints. The score is the last energy+gradient
+count. That line is the band total the 2014 `run_optim.sh` stored, and
+it is the unit the other rows rank. The cap 3000 is that total. A
+start is kept when the log contains `Converged to TS` and the count is
+under the cap. All 59 logs contain that line. 23 tallies are under
+3000. Their success mean is 467, median 499, min 273, max 654. The
+other 36 are cap failures. The harness PAR-2 is 3842.9. The archive
+success mean stays 117 with nfailed 0. Other saddle search, NEB, tsopt, and hTST
 keywords are not connected to the ASE
 socket. PATHSAMPLE is in the same snapshot. The PATHSAMPLE target linked
 (gfortran, `WITH_OPENMP` off). It does not call `pes.evaluate`. It writes
