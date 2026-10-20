@@ -1,0 +1,20 @@
+force_calls 1774316
+force_calls_min 1774316
+force_calls_max 1774316
+call_unit total
+nfailed 1
+code EON (SVN r2549)
+code_version r2549
+commit r2549
+algorithm Dimer
+template eon-svn/pt-island-stock
+problem saddle-search/pt-island
+reducer harness
+counter harness
+count_keys HarnessCounter
+tuning default
+unique_saddles 10
+fraction_connected 0.7960750853242321
+total_searches 1172
+qualifying 10
+client_calls 728296
