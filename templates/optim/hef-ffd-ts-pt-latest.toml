@@ -1,4 +1,4 @@
-# Latest Wales OPTIM, stock hybrid eigenvector following, forward differences.
+# OPTIM df8da599 hybrid eigenvector-following on the Pt(111) heptamer island.
 id = "optim/hef-ffd-ts-pt-latest"
 engine = "optim"
 problem = "tsopt/pt-island"
@@ -7,9 +7,9 @@ code_version = "df8da599"
 commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
 algorithm = "hybrid eigenvector following"
 tuning = "default"
-label = "current-OPTIM"
+label = "OPTIM df8da599"
 beside = "optim_ffd"
-note = "Wales svn snapshot SVNREV df8da599. Stock BFGSTS. USEDIAG 3 is forward difference. BFGSCONV is the problem L2 stop as an RMS in reduced units. The cap is 10000. The score is OPTIM's energy-plus-gradient count."
+note = "Wales OPTIM SVNREV df8da599. Hybrid eigenvector-following. USEDIAG 3 is the forward finite-difference second derivative. STEPS, BFGSSTEPS, NEVS, NBFGSMAX1, NBFGSMAX2, and NEVL are the problem cap. The score is OPTIM's energy-plus-gradient count."
 
 [optim]
-method = "hef-stock"
+method = "hef-ffd"

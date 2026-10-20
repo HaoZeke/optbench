@@ -1035,12 +1035,6 @@
    <td>02aaf45245af</td>
    <td><a href="http://www-wales.ch.cam.ac.uk/svn.tar.bz2">http://www-wales.ch.cam.ac.uk/svn.tar.bz2</a></td>
    </tr>
-   <tr>
-   <td>saddle search</td>
-   <td>27058</td>
-   <td>144a703eef67</td>
-   <td><a href="https://optbench.org/codes/wales-27058.tar.bz2">https://optbench.org/codes/wales-27058.tar.bz2</a></td>
-   </tr>
    </tbody></table></div>
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
@@ -1072,15 +1066,12 @@
    <td data-field="template">optim/hef-ffd-ts-pt-latest</td>
    <td data-field="version">optim df8da599</td>
    <td data-field="commit">02aaf45245af</td>
-   <td data-field="par2_mean">588.122</td>
-   <td data-field="mean_calls">588.122</td>
-   <td data-field="median_calls">497</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="par2_mean">18788.9</td>
+   <td data-field="mean_calls">17709.2</td>
+   <td data-field="median_calls">10264</td>
+   <td data-field="failures">crash 0, divergence 0, cap 46, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>
    </tbody></table></div>
-   <p>No full ranked run</p><ul>
-   <li>pt-island: not yet on the harness counter.</li>
-   </ul>
    </section>
 #+end_export

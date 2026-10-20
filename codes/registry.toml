@@ -161,17 +161,7 @@ role = "saddle search"
 repository = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
 ref = "svn-snapshot"
 commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
-note = "No public git commit. The pin is the sha256 of the Wales svn.tar.bz2 snapshot, 122743078 bytes. Minimization L-BFGS calls the ASE socket and pes.evaluate. OPTIM's own call counter is not a harness score. The stock Pt-island hybrid eigenvector following row files that count on the harness counter. The archived-preamble snapshot stays off the ranked table. NEB, noise, and PATHSAMPLE are not scored."
-
-[[code]]
-id = "optim-27058"
-name = "OPTIM"
-role = "saddle search"
-repository = "https://optbench.org/codes/wales-27058.tar.bz2"
-ref = "27058"
-commit = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
-committed = "2014-08-06"
-note = "The tarball linked from the 2014 Pt-island optim_ffd row, 20942854 bytes. OPTIM/source/SVNREV inside it is 27059. Hybrid eigenvector following uses the native Morse bulk potential in reduced units. The score is OPTIM's energy-plus-gradient count. This pin is not the current svn.tar.bz2 snapshot."
+note = "No public git commit. The pin is the sha256 of the Wales svn.tar.bz2 snapshot, 122743078 bytes. Minimization L-BFGS calls the ASE socket and pes.evaluate. OPTIM's own call counter is not a harness score. The Pt-island hybrid eigenvector-following row records that count on the harness counter. NEB, noise, and PATHSAMPLE are not scored."
 
 [[code]]
 id = "sella-0.1.1"

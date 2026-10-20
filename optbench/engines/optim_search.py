@@ -5,16 +5,12 @@ The minimization binary is the OPTIM target from the Wales snapshot
 that file. The snapshot has no git commit. Each ``COMPUTE`` on the relay
 is one ``pes.evaluate``. OPTIM's own counter is not that score.
 
-``optim/hef-ffd-ts-pt`` is the archived Pt-island hybrid eigenvector
-following row. It runs the ``wales-27058`` binary on the native Morse
-bulk potential. The score is that binary's energy-plus-gradient count.
-
-``optim/hef-ffd-ts-pt-current`` reruns that archived input on the
-current snapshot. It stays an unranked diagnostic.
-
-``optim/hef-ffd-ts-pt-latest`` is the current snapshot with stock
-``BFGSTS`` settings. The stop and the cap are the problem's. The score
-is OPTIM's energy-plus-gradient count, ranked on the harness counter.
+``optim/hef-ffd-ts-pt-latest`` is the current snapshot on the Pt-island
+hybrid eigenvector-following search. The archive names that method with
+a forward finite-difference second derivative. OPTIM's keyword for the
+search is ``BFGSTS``; ``USEDIAG 3`` and ``NOHESS`` select the derivative.
+Iteration limits are the problem cap. The score is OPTIM's
+energy-plus-gradient count, ranked on the harness counter.
 
 ``optim/unhooked`` and every other template that is not minimization
 L-BFGS raise before a file is written. Noise, NEB, and PATHSAMPLE are
@@ -74,16 +70,8 @@ def binary_path() -> Path:
 _BC_SCALE = ".34518467380048325854"
 _BC_RHO = "4.64881590"
 _BC_RCUT = "3.27925440110459095616"
-_PREAMBLE = Path(__file__).with_name("optim_ffd_preamble.txt")
-_WALES_27058 = "https://optbench.org/codes/wales-27058.tar.bz2"
-_WALES_27058_SHA = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
-
-
-def hef_binary() -> Path:
-    env = os.environ.get("OPTIM_27058_BIN")
-    if env:
-        return Path(env)
-    return Path("/tmp/optim27058/build/OPTIM")
+# keywords.F90 initialises CEIG to this value. It is not a step limit.
+_CEIG = "1.0D-10"
 
 
 def snapshot_binary() -> Path:
@@ -377,7 +365,7 @@ def _stock_gmax(natoms: int, force_norm: float) -> float:
     return float(force_norm) / math.sqrt(3 * int(natoms)) / 0.7102
 
 
-def _stock_odata(
+def _hef_odata(
     folder: Path,
     coords: np.ndarray,
     frozen: np.ndarray,
@@ -385,16 +373,25 @@ def _stock_odata(
     cap: int,
     force_norm: float,
 ) -> None:
-    """Stock BFGSTS. USEDIAG 3 is this entry's forward difference, not a search parameter."""
+    """Hybrid eigenvector-following with a forward finite-difference curvature.
+
+    ``BFGSTS`` is OPTIM's keyword for that search. ``USEDIAG 3`` is the
+    archive's first-order forward difference. ``NOHESS`` uses that
+    derivative instead of the analytic Hessian. ``STEPS``, ``BFGSSTEPS``,
+    ``NEVS``, ``NBFGSMAX1``, ``NBFGSMAX2``, and ``NEVL`` are the problem
+    cap. ``CEIG`` stays at the source default.
+    """
     scale = float(_BC_SCALE)
     scaled = coords * scale
     lengths = box * scale
     box_text = "%f %f %f" % (float(lengths[0]), float(lengths[1]), float(lengths[2]))
     gmax = _stock_gmax(int(coords.shape[0]), force_norm)
+    limit = int(cap)
     lines = [
-        "BFGSTS",
-        f"BFGSSTEPS {int(cap)}",
-        f"STEPS {int(cap)}",
+        "COMMENT hybrid eigenvector-following, forward finite-difference second derivatives",
+        f"BFGSTS {limit} {limit} {limit} {_CEIG} {limit}",
+        f"BFGSSTEPS {limit}",
+        f"STEPS {limit}",
         f"BFGSCONV {_fortran_float(gmax)}",
         "BULK",
         "NOHESS",
@@ -402,22 +399,6 @@ def _stock_odata(
         "READVEC",
         f"PARAMS {_BC_RHO} {box_text} {_BC_RCUT}",
     ]
-    indices = [str(index) for index in (np.flatnonzero(frozen) + 1).tolist()]
-    for start in range(0, len(indices), 8):
-        lines.append("FREEZE " + " ".join(indices[start : start + 8]))
-    lines.append("points")
-    for row in scaled:
-        lines.append("M " + " ".join(f"{float(value):.16f}" for value in row))
-    (folder / "odata").write_text("\n".join(lines) + "\n", encoding="utf-8")
-
-
-def _hef_odata(folder: Path, coords: np.ndarray, frozen: np.ndarray, box: np.ndarray) -> None:
-    scale = float(_BC_SCALE)
-    scaled = coords * scale
-    lengths = box * scale
-    box_text = "%f %f %f" % (float(lengths[0]), float(lengths[1]), float(lengths[2]))
-    preamble = _PREAMBLE.read_text(encoding="utf-8")
-    lines = [preamble.rstrip("\n"), f"PARAMS {_BC_RHO} {box_text} {_BC_RCUT}"]
     indices = [str(index) for index in (np.flatnonzero(frozen) + 1).tolist()]
     for start in range(0, len(indices), 8):
         lines.append("FREEZE " + " ".join(indices[start : start + 8]))
@@ -448,10 +429,7 @@ def _execute_hef(job: dict) -> dict:
         with tempfile.TemporaryDirectory(prefix="optim-hef-") as raw:
             folder = Path(raw)
             coords, frozen, box = _published_con(Path(job["con"]))
-            if job.get("stock"):
-                _stock_odata(folder, coords, frozen, box, int(job["cap"]), float(job["force_norm"]))
-            else:
-                _hef_odata(folder, coords, frozen, box)
+            _hef_odata(folder, coords, frozen, box, int(job["cap"]), float(job["force_norm"]))
             _displacement(Path(job["con"]), Path(job["reactant"]), folder / "vector.dump")
             env = os.environ.copy()
             env["OMP_NUM_THREADS"] = "1"
@@ -465,35 +443,40 @@ def _execute_hef(job: dict) -> dict:
                         stdout=stdout,
                         stderr=subprocess.STDOUT,
                         text=True,
-                        timeout=600,
+                        timeout=1800,
                         check=False,
                     )
             except subprocess.TimeoutExpired:
                 proc = None
-                error = "OPTIM exceeded 600s"
+                error = "OPTIM exceeded 1800s"
             log_text = stdout_path.read_text(encoding="utf-8", errors="replace") if stdout_path.is_file() else ""
             parsed, converged = _paper_calls(log_text)
             if parsed is not None:
                 calls = parsed
-            success = converged and parsed is not None and calls < int(job["cap"])
-            if proc is not None and proc.returncode != 0 and not success:
-                error = error or f"OPTIM exit {proc.returncode}"
-            elif not success and not error:
-                error = "OPTIM did not converge"
+            returncode = None if proc is None else proc.returncode
+            success, failure, reasons, error = _hef_outcome(
+                calls,
+                int(job["cap"]),
+                converged=converged,
+                parsed=parsed,
+                error=error,
+                returncode=returncode,
+            )
     except Exception as exc:
         error = f"{type(exc).__name__}: {exc}"
         success = False
-    native = "harness" if job.get("stock") else "optim"
+        failure = "crash"
+        reasons = ["crash"]
     record = {
         "schema": "optbench.start/v2",
         "start": name,
         "force_calls": int(calls),
         "verify_calls": 0,
-        "counter": native,
-        "comparable": native == "harness",
+        "counter": "harness",
+        "comparable": True,
         "success": success,
-        "failure": None if success else "divergence",
-        "reasons": [] if success else ["divergence"],
+        "failure": failure,
+        "reasons": reasons,
         "hessian_index": None,
         "expected_index": 1,
         "converged": success,
@@ -503,30 +486,48 @@ def _execute_hef(job: dict) -> dict:
     return record
 
 
-def _run_hef(root: Path, problem: dict, template: dict, output: Path, workers: int, *, stock: bool = False) -> dict:
-    code = str(template.get("code") or "")
-    if code == CODE:
-        binary = snapshot_binary()
-        binary_label = "svn-snapshot"
-    elif code == "optim-27058":
-        binary = hef_binary()
-        binary_label = "wales-27058"
+def _hef_outcome(
+    calls: int,
+    cap: int,
+    *,
+    converged: bool,
+    parsed: int | None,
+    error: str,
+    returncode: int | None,
+) -> tuple[bool, str | None, list[str], str]:
+    """Success is convergence under the force-call cap. A finished overrun is a cap failure."""
+    from optbench.failures import classify_failure
+
+    success = converged and parsed is not None and calls < cap
+    if success:
+        return True, None, [], ""
+    timed_out = error.startswith("OPTIM exceeded")
+    bad_exit = returncode not in (None, 0)
+    if timed_out or (bad_exit and parsed is None):
+        reason = "crash"
+        if bad_exit and not error:
+            error = f"OPTIM exit {returncode}"
+    elif calls >= cap:
+        reason = "cap"
+        if not error:
+            error = f"OPTIM used {calls} energy+gradient calls, at or above the cap {cap}"
     else:
-        raise ValueError(f"{template['id']} is not an OPTIM forward-difference search")
+        reason = "divergence"
+        if not error:
+            error = "OPTIM did not converge"
+    return False, classify_failure([reason]), [reason], error
+
+
+def _run_hef(root: Path, problem: dict, template: dict, output: Path, workers: int) -> dict:
+    if str(template.get("code") or "") != CODE:
+        raise ValueError(f"{template['id']} is not the current OPTIM forward-difference search")
+    binary = snapshot_binary()
     if not binary.is_file():
-        if binary_label == "svn-snapshot":
-            raise RuntimeError(
-                "The current OPTIM snapshot is not built. "
-                f"The pin is the sha256 {SHA256} of {SNAPSHOT} "
-                "(122743078 bytes). Set OPTIM_BIN to that OPTIM binary."
-            )
         raise RuntimeError(
-            "OPTIM 27058 is not built. "
-            f"The pin is the sha256 {_WALES_27058_SHA} of {_WALES_27058} "
-            "(20942854 bytes). Set OPTIM_27058_BIN to that OPTIM binary."
+            "The current OPTIM snapshot is not built. "
+            f"The pin is the sha256 {SHA256} of {SNAPSHOT} "
+            "(122743078 bytes). Set OPTIM_BIN to that OPTIM binary."
         )
-    if not _PREAMBLE.is_file():
-        raise RuntimeError(f"{_PREAMBLE} is missing")
     from .geometries import _extract, _stored, load_starts
 
     scratch = output.parent / "work" / template["id"].replace("/", "-")
@@ -551,50 +552,36 @@ def _run_hef(root: Path, problem: dict, template: dict, output: Path, workers: i
                 "binary": str(binary),
                 "cap": cap,
                 "force_norm": force_norm,
-                "stock": stock,
             }
         )
     records = run_jobs(jobs, _execute_hef, workers)
     settings = point_settings(problem)
     settings["cap"] = cap
-    if stock:
-        comment = (
-            "# counter harness. Current Wales OPTIM snapshot, SVNREV df8da599, stock BFGSTS.\n"
-            "# USEDIAG 3 is forward difference. BFGSCONV is the problem L2 stop as an RMS in reduced units. "
-            "The cap is the problem cap. The mode is the reactant displacement.\n"
-            "# The count is OPTIM's energy+gradient calls. A success is **** CONVERGED **** under the cap."
-        )
-        score_counter = "harness"
-    elif binary_label == "svn-snapshot":
-        comment = (
-            "# counter optim. Current Wales OPTIM snapshot energy+gradient calls. "
-            "The mean is the 2014 round of converged starts.\n"
-            "# odata is the archived preamble. Coordinates, rho, and rcut use the run.sh bc -l scaling. "
-            "The mode is the genmode displacement from reactant.con.\n"
-            "# A success is the line **** CONVERGED **** under the cap. Failures stay out of the mean."
-        )
-        score_counter = "optim"
-    else:
-        comment = (
-            "# counter optim. Wales OPTIM 27058 energy+gradient calls. "
-            "The mean is the 2014 round of converged starts.\n"
-            "# odata is the archived preamble. Coordinates, rho, and rcut use the run.sh bc -l scaling. "
-            "The mode is the genmode displacement from reactant.con.\n"
-            "# A success is the line **** CONVERGED **** under the cap. Failures stay out of the mean."
-        )
-        score_counter = "optim"
+    comment = (
+        "# counter harness. OPTIM df8da599 hybrid eigenvector-following.\n"
+        "# USEDIAG 3 is the forward finite-difference second derivative. NOHESS selects it.\n"
+        "# STEPS, BFGSSTEPS, NEVS, NBFGSMAX1, NBFGSMAX2, and NEVL are the problem cap. "
+        "CEIG stays 1.0D-10. BFGSCONV is the problem L2 stop as an RMS in reduced units.\n"
+        "# The count is OPTIM's energy+gradient calls. A success is **** CONVERGED **** under the cap."
+    )
     parameters = {
-        "method": "hef-stock" if stock else "hef-ffd",
+        "method": "hef-ffd",
         "keyword": "BFGSTS",
         "usediag": 3,
+        "steps": cap,
+        "bfgssteps": cap,
+        "nevs": cap,
+        "nbfgsmax1": cap,
+        "nbfgsmax2": cap,
+        "nevl": cap,
+        "ceig": _CEIG,
         "scale": _BC_SCALE,
         "rho": _BC_RHO,
         "rcut": _BC_RCUT,
-        "counter": score_counter,
-        "binary": "df8da599" if stock else binary_label,
+        "counter": "harness",
+        "binary": "df8da599",
+        "bfgsconv": _stock_gmax(343, force_norm),
     }
-    if stock:
-        parameters["bfgsconv"] = _stock_gmax(343, force_norm)
     return write_campaign(
         output,
         records,
@@ -604,7 +591,7 @@ def _run_hef(root: Path, problem: dict, template: dict, output: Path, workers: i
         parameters,
         images=None,
         comment=comment,
-        counter=score_counter,
+        counter="harness",
     )
 
 
@@ -623,10 +610,10 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
     if stated and stated != problem_name:
         raise ValueError(f"{template_name} belongs to {stated}")
     section = _section(template)
-    if section["method"] in {"hef-ffd", "hef-stock"}:
+    if section["method"] == "hef-ffd":
         if problem_name != "tsopt/pt-island":
             raise ValueError(f"{template_name} is the Pt-island forward-difference search")
-        return _run_hef(root, problem, template, output, workers, stock=section["method"] == "hef-stock")
+        return _run_hef(root, problem, template, output, workers)
     reason = available()
     if reason:
         raise RuntimeError(reason)
