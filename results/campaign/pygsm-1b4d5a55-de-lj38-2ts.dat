@@ -1,22 +1,22 @@
 # counter harness
 # force_calls count raw potential evaluations and are not divided by the image count
 # the mean is round-half-even over successes; a failure is outside that mean
-n 50
+n 51
 successes 1
-nfailed 49
+nfailed 50
 force_calls 950
 force_calls_min 950
 force_calls_max 950
 force_calls_median 950
 force_calls_per_image 190
 call_unit total
-par2_mean 490019.0000000000
+par2_mean 490214.7058823530
 par2_median 500000.0000000000
-wilson_low 0.0035392593
-wilson_high 0.1049544359
+wilson_low 0.0034696926
+wilson_high 0.1030456873
 n_crash 0
 n_divergence 5
-n_cap 44
+n_cap 45
 n_not_converged 0
 n_wrong_stationary 0
 code pygsm
