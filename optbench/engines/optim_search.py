@@ -5,12 +5,11 @@ The binary is the OPTIM target from the Wales snapshot
 that file. The snapshot has no git commit. Each ``COMPUTE`` on the relay
 is one ``pes.evaluate``. OPTIM's own counter is not the score.
 
-``optim/unhooked`` and every template that is not minimization L-BFGS,
-the archived six-image DNEB row, or the current-image DNEB row raise
-before a file is written. The six-image row runs wales-27058 and keeps
-OPTIM's own counter. The current-image row runs the latest
-``svn.tar.bz2`` with stock keywords and writes that energy+gradient
-count as a harness score. Noise and PATHSAMPLE are not this runner.
+``optim/unhooked`` and every template that is not minimization L-BFGS
+or the current-image DNEB row raise before a file is written. The
+current-image row runs the latest ``svn.tar.bz2`` and writes OPTIM's
+energy+gradient count as a harness score. Noise and PATHSAMPLE are not
+this runner.
 """
 
 from __future__ import annotations
@@ -86,7 +85,6 @@ def _unhooked(template_name: str) -> RuntimeError:
     return RuntimeError(
         f"{template_name} writes nothing. The pin is the sha256 {SHA256}. "
         "Minimization L-BFGS calls the ASE socket. "
-        "The six-image Pt-island DNEB row is optim/de-pt-6. "
         "The current-image Pt-island DNEB row is optim/de-pt-stock. "
         "Noise and PATHSAMPLE are not scored."
     )
@@ -289,8 +287,6 @@ def _job(start: dict, settings: dict, template: dict) -> dict:
 _SCALE = ".34518467380048325854"
 _RHO_SCALED = "4.64881590"
 _RCUT_SCALED = "3.27925440110459095616"
-_WALES_CODE = "optim-27058"
-
 
 def _optim_tally(text: str) -> tuple[int | None, bool]:
     """Last energy+gradient count and whether the log converged to a TS.
@@ -350,85 +346,6 @@ def _native_inputs(folder: Path, job: dict) -> None:
     (folder / "odata").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
-def _native_search(job: dict) -> dict:
-    """One wales-27058 DNEB search. The score is OPTIM's own counter."""
-    import tempfile
-    import time
-
-    os.environ.setdefault("OMP_NUM_THREADS", "1")
-    calls = None
-    success = False
-    error = ""
-    started = time.perf_counter()
-    try:
-        with tempfile.TemporaryDirectory(prefix="optim-de6-") as raw:
-            folder = Path(raw)
-            _native_inputs(folder, job)
-            env = os.environ.copy()
-            env["OMP_NUM_THREADS"] = "1"
-            stdout_path = folder / "OPTIM.log"
-            stderr_path = folder / "OPTIM.err"
-            try:
-                with stdout_path.open("w", encoding="utf-8") as stdout, stderr_path.open(
-                    "w", encoding="utf-8"
-                ) as stderr:
-                    proc = subprocess.run(
-                        [str(binary_path())],
-                        cwd=folder,
-                        env=env,
-                        stdout=stdout,
-                        stderr=stderr,
-                        text=True,
-                        timeout=int(job.get("timeout", 120)),
-                        check=False,
-                    )
-            except subprocess.TimeoutExpired:
-                error = "OPTIM exceeded the wall limit"
-                proc = None
-            log = stdout_path.read_text(encoding="utf-8", errors="replace") if stdout_path.is_file() else ""
-            calls, success = _optim_tally(log)
-            if proc is not None and proc.returncode not in (0, None) and error == "":
-                detail = _tail(stderr_path) or _tail(stdout_path) or f"exit {proc.returncode}"
-                error = f"OPTIM exit {proc.returncode}: {detail}"
-                success = False
-            elif calls is None and error == "":
-                detail = _tail(stdout_path) or _tail(stderr_path) or "no energy+gradient line"
-                error = f"OPTIM produced no energy+gradient count: {detail}"
-                success = False
-    except Exception as exc:
-        error = f"{type(exc).__name__}: {exc}"
-        success = False
-    wall = time.perf_counter() - started
-    if not success:
-        recorded = int(job["cap"]) if calls is None else int(calls)
-        failure = "crash" if error else "divergence"
-    else:
-        recorded = int(calls)
-        failure = None
-    return {
-        "schema": "optbench.start/v2",
-        "start": job["name"],
-        "force_calls": recorded,
-        "verify_calls": 0,
-        "counter": "optim",
-        "comparable": False,
-        "success": bool(success and not error),
-        "failure": failure,
-        "reasons": [],
-        "error": error,
-        "converged": bool(success and not error),
-        "optim_method": "dneb-native",
-        "wall_s": float(wall),
-        "problem": job.get("problem", ""),
-        "template": job.get("template", ""),
-        "code": job.get("code", ""),
-        "code_version": job.get("code_version", ""),
-        "commit": job.get("commit", ""),
-        "algorithm": job.get("algorithm", ""),
-        "tuning": job.get("tuning", ""),
-    }
-
-
 def _native_job(pair, template: dict, preamble: str, cap: int) -> dict:
     section = template.get("optim") or {}
     return {
@@ -451,105 +368,23 @@ def _native_job(pair, template: dict, preamble: str, cap: int) -> dict:
     }
 
 
-def _write_native_campaign(output: Path, records: list[dict], template: dict, problem: dict, cap: int) -> dict:
-    import json
-    import statistics
-
-    from optbench.score import score_v2
-    from optbench.v2 import collect_provenance, write_starts
-
-    output.parent.mkdir(parents=True, exist_ok=True)
-    successes = [int(row["force_calls"]) for row in records if row["success"]]
-    lines = [
-        "# counter optim. The score is the last 'energy+gradient calls' field.",
-        "# A start is a failure when the log has no 'Converged to TS' line.",
-        "# Coordinates, PARAMS, and FREEZE follow archive run.sh. The potential is morse_bulk.",
-        f"# binary wales-27058 sha256 {template['commit']}",
-    ]
-    if successes:
-        mean = statistics.fmean(successes)
-        lines.append(f"# unrounded_mean {mean:.10g}")
-        lines.append(f"force_calls {int(round(mean))}")
-        lines.append(f"force_calls_min {min(successes)}")
-        lines.append(f"force_calls_max {max(successes)}")
-        median = statistics.median(successes)
-        lines.append(
-            f"force_calls_median {int(median) if float(median).is_integer() else median}"
-        )
-    lines.extend(
-        [
-            f"successes {len(successes)}",
-            f"nfailed {len(records) - len(successes)}",
-            f"n {len(records)}",
-            f"code {template['code']}",
-            f"code_version {template['code_version']}",
-            f"commit {template['commit']}",
-            f"algorithm {template['algorithm']}",
-            f"template {template['id']}",
-            f"problem {problem['id']}",
-            f"tuning {template['tuning']}",
-            "counter optim",
-            "images 6",
-        ]
-    )
-    output.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    write_starts(output.with_suffix(".starts.jsonl"), records)
-    scored = [
-        {"force_calls": row["force_calls"], "success": row["success"], "failure": row["failure"]}
-        for row in records
-    ]
-    summary = score_v2(scored, cap)
-    document = {
-        "schema": "optbench.score/v2",
-        "problem": problem["id"],
-        "template": template["id"],
-        "counter": "optim",
-        "provenance": collect_provenance(
-            code=template["code"],
-            code_version=template["code_version"],
-            commit=template["commit"],
-            parameters={
-                "method": "dneb-native",
-                "preamble": str((template.get("optim") or {}).get("preamble", "")),
-                "images": 6,
-                "potential": "morse_bulk",
-                "scale": "angstrom/r0",
-                "counter": "energy+gradient",
-            },
-        ),
-        "score": summary,
-        "legacy": {
-            "force_calls": int(round(statistics.fmean(successes))) if successes else None,
-            "force_calls_min": min(successes) if successes else None,
-            "force_calls_max": max(successes) if successes else None,
-            "force_calls_median": statistics.median(successes) if successes else None,
-            "nfailed": len(records) - len(successes),
-            "n": len(records),
-            "successes": len(successes),
-        },
-    }
-    output.with_suffix(".v2.json").write_text(
-        json.dumps(document, indent=2, sort_keys=True) + "\n",
-        encoding="utf-8",
-    )
-    return {
-        "problem": problem["id"],
-        "template": template["id"],
-        "force_calls": document["legacy"]["force_calls"],
-        "nfailed": document["legacy"]["nfailed"],
-        "starts": len(records),
-        "successes": len(successes),
-        "output": str(output),
-    }
-
-
 _CURRENT_TARBALL = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
 _CURRENT_SHA256 = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
 _CURRENT_VERSION = "26635"
 _CURRENT_CODE = "optim-26635"
 _CURRENT_SOURCE = "df8da599267534fbe43a250e578f7396a7946311"
 _CURRENT_BINARY = Path("/tmp/wales-latest/wales/OPTIM/builds/gfortran/OPTIM")
-_STOCK_KEYWORDS = "NEWNEB\nBFGSTS\nOPTIMIZETS\nBULK\nNOHESS\nNONEBMIND\n"
+_STOCK_KEYWORDS = (
+    "NEWCONNECT\n"
+    "NEWNEB 3 3000 0.001\n"
+    "BFGSTS 3000 3000 3000\n"
+    "BFGSMIN 0.001\n"
+    "BFGSSTEPS 3000\n"
+    "STEPS 3000\n"
+    "NOHESS\n"
+    "BULK 6.630583 6.562582 10.355540\n"
+    "NONEBMIND\n"
+)
 
 
 def current_binary_path() -> Path:
@@ -563,7 +398,8 @@ def _stock_search(job: dict) -> dict:
     """One current OPTIM DNEB search.
 
     The stored count is the last energy+gradient line. A start is a
-    success only when the log contains ``Converged to TS``.
+    success when the log contains ``Converged to TS`` and the count is
+    under the problem cap.
     """
     import tempfile
     import time
@@ -609,16 +445,25 @@ def _stock_search(job: dict) -> dict:
     except Exception as exc:
         error = f"{type(exc).__name__}: {exc}"
     cap = int(job["cap"])
-    success = bool(converged) and calls is not None and int(calls) < cap and not error
+    counted = None if calls is None else int(calls)
+    success = bool(converged) and counted is not None and counted < cap and not error
+    if success:
+        failure = None
+    elif counted is None or error:
+        failure = "crash"
+    elif counted >= cap:
+        failure = "cap"
+    else:
+        failure = "divergence"
     record = {
         "schema": "optbench.start/v2",
         "start": job["name"],
-        "force_calls": cap if calls is None else int(calls),
+        "force_calls": cap if counted is None else counted,
         "verify_calls": 0,
         "counter": "harness",
         "comparable": True,
         "success": success,
-        "failure": None if success else ("crash" if calls is None or error else "divergence"),
+        "failure": failure,
         "reasons": [],
         "error": error,
         "converged": bool(converged),
@@ -664,9 +509,11 @@ def _run_stock_dneb(root: Path, problem: dict, template: dict, *, output: Path, 
     comment = (
         f"# OPTIM image revision {_CURRENT_VERSION}, {_CURRENT_TARBALL}. "
         f"sha256 {_CURRENT_SHA256}. OPTIM source {_CURRENT_SOURCE}.\n"
-        "# Keywords are NEWNEB, BFGSTS, OPTIMIZETS, BULK, NOHESS, and NONEBMIND, with no numeric arguments.\n"
-        "# NEWNEB defaults to 3 images and 1 iteration. BFGSTS defaults to 1 step. "
-        "The RMS stop is the stock 0.001.\n"
+        "# NEWCONNECT with NEWNEB 3 3000 0.001, BFGSTS 3000 3000 3000, "
+        "BFGSMIN 0.001, BFGSSTEPS 3000, STEPS 3000.\n"
+        "# Image count, iteration cap, and RMS gradient are the problem values. "
+        "BULK repeats the PARAMS cell so the connection is not run in a zero box.\n"
+        "# Spring constant, push-off, eigenvalue tolerance, and image density stay at OPTIM defaults.\n"
         "# NOHESS is set because morse bulk has no analytic second derivatives. "
         "NONEBMIND keeps the supplied endpoints.\n"
         "# The count is OPTIM's energy+gradient calls, written on the harness counter. "
@@ -680,7 +527,7 @@ def _run_stock_dneb(root: Path, problem: dict, template: dict, *, output: Path, 
         settings,
         {
             "method": "dneb-stock",
-            "keyword": "NEWNEB BFGSTS",
+            "keyword": "NEWCONNECT NEWNEB BFGSTS",
             "counter": "optim energy+gradient calls",
             "potential": "morse_bulk",
             "version": _CURRENT_VERSION,
@@ -689,26 +536,6 @@ def _run_stock_dneb(root: Path, problem: dict, template: dict, *, output: Path, 
         images=None,
         comment=comment,
     )
-
-
-def _run_native_dneb(root: Path, problem: dict, template: dict, *, output: Path, workers: int) -> dict:
-    from .common import band_settings, cached_pairs
-
-    section = template.get("optim") or {}
-    settings = band_settings(problem)
-    if settings["potential"] != "morse_pt":
-        raise ValueError(f"{template['id']} native DNEB is the Pt Morse row")
-    preamble_path = root / str(section.get("preamble", ""))
-    if not preamble_path.is_file():
-        raise RuntimeError(f"{template['id']} preamble is not at {preamble_path}")
-    preamble = preamble_path.read_text(encoding="utf-8")
-    if "NEWNEB 6 10 0.06" not in preamble:
-        raise RuntimeError(f"{template['id']} preamble is not the six-image archive file")
-    pairs = list(cached_pairs(root, problem, settings).values())
-    pairs.sort(key=lambda pair: int(pair.name.rsplit("_", 1)[-1]))
-    jobs = [_native_job(pair, template, preamble, int(settings["cap"])) for pair in pairs]
-    records = run_jobs(jobs, _native_search, workers)
-    return _write_native_campaign(output, records, template, problem, int(settings["cap"]))
 
 
 def run(root: Path, problem_name: str, template_name: str, *, output: Path, workers: int = 1) -> dict:
@@ -731,13 +558,6 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
     reason = available()
     if reason:
         raise RuntimeError(reason)
-    if section["method"] == "dneb-native":
-        pin = registry_pin(root, _WALES_CODE)
-        if template.get("code") != CODE:
-            raise ValueError(f"{template_name} code is not {CODE}")
-        if template.get("commit") != pin["commit"]:
-            raise ValueError(f"{template_name} commit does not match the {_WALES_CODE} registry")
-        return _run_native_dneb(root, problem, template, output=output, workers=workers)
     require_pin(template, registry_pin(root, CODE))
     if problem.get("suite") != "minimization" or section["method"] != "lbfgs":
         raise _unhooked(template_name)

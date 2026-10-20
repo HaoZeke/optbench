@@ -161,16 +161,7 @@ role = "saddle search"
 repository = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
 ref = "svn-snapshot"
 commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
-note = "No public git commit. The pin is the sha256 of the Wales svn.tar.bz2 snapshot, 122743078 bytes. Minimization L-BFGS calls the ASE socket and pes.evaluate. The Pt-island six-image DNEB row is the separate wales-27058 pin."
-
-[[code]]
-id = "optim-27058"
-name = "OPTIM"
-role = "double-ended saddle search"
-repository = "https://optbench.org/codes/wales-27058.tar.bz2"
-ref = "27058"
-commit = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
-note = "optbench.org codes/wales-27058.tar.bz2, 20942854 bytes. The pin is the sha256 of that file. The Pt-island optim-6 diagnostic runs this binary with the archived odata preamble. The score is OPTIM's energy+gradient count. That diagnostic stays off the harness counter."
+note = "No public git commit. The pin is the sha256 of the Wales svn.tar.bz2 snapshot, 122743078 bytes. Minimization L-BFGS calls the ASE socket and pes.evaluate. The Pt-island DNEB row is the separate optim-26635 pin."
 
 [[code]]
 id = "optim-26635"
@@ -180,7 +171,7 @@ repository = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
 ref = "26635"
 commit = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
 committed = "2026-10-19"
-note = "Current Wales svn.tar.bz2 fetched 2026-10-19, 122737951 bytes, Last-Modified Mon, 19 Oct 2026 02:01:38 GMT. The pin is the sha256 of that file. INCLUDE/SVNREV is 26635. OPTIM/source/SVNREV is df8da599267534fbe43a250e578f7396a7946311. The Pt-island stock DNEB row runs this image unmodified. The score is OPTIM's energy+gradient count on the harness counter."
+note = "Current Wales svn.tar.bz2 fetched 2026-10-19, 122737951 bytes, Last-Modified Mon, 19 Oct 2026 02:01:38 GMT. The pin is the sha256 of that file. INCLUDE/SVNREV is 26635. OPTIM/source/SVNREV is df8da599267534fbe43a250e578f7396a7946311. The Pt-island DNEB row runs this image. NEWNEB iterations, BFGSTS steps, BFGSSTEPS, and STEPS are the problem cap. The RMS stop is 0.001. The score is OPTIM's energy+gradient count on the harness counter."
 
 [[code]]
 id = "sella-0.1.1"

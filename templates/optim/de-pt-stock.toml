@@ -1,4 +1,4 @@
-# Current OPTIM double-ended Pt island. Stock keywords, no numeric arguments.
+# Current OPTIM double-ended Pt island. Documented DNEB connection.
 id = "optim/de-pt-stock"
 engine = "optim"
 problem = "double-ended-saddle-search/pt-island"
@@ -7,10 +7,10 @@ code_version = "26635"
 commit = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
 algorithm = "DNEB + hybrid eigenvector following"
 tuning = "stock"
-note = "Current Wales svn.tar.bz2, INCLUDE revision 26635, OPTIM source df8da599. NEWNEB, BFGSTS, OPTIMIZETS, BULK, NOHESS, NONEBMIND, with no numeric arguments. NEWNEB defaults to 3 images and 1 iteration. BFGSTS defaults to 1 step. The RMS stop is the stock 0.001. NOHESS is set because morse bulk has no analytic second derivatives. NONEBMIND keeps the supplied endpoints. The score is the last energy+gradient count on the harness counter. A start fails when the log has no Converged to TS line."
+note = "Current Wales svn.tar.bz2, INCLUDE revision 26635, OPTIM source df8da599. The deck is the documented NEWCONNECT plus NEWNEB connection with hybrid eigenvector following. NEWNEB uses the problem's 3 images, 3000 iterations, and RMS 0.001. BFGSTS step fields, BFGSSTEPS, and STEPS are the problem force-call cap 3000. BFGSMIN is the problem RMS 0.001. BULK carries the periodic cell in the same reduced units as PARAMS, so the connection distance is not taken in a zero box. Spring constant, push-off, eigenvalue tolerance, and image density stay at OPTIM defaults. NOHESS is set because morse bulk has no analytic second derivatives. NONEBMIND keeps the supplied endpoints. The score is the last energy+gradient count on the harness counter. A start fails when the log has no Converged to TS line."
 
 [optim]
 method = "dneb-stock"
 preamble = "templates/optim/preambles/de-pt-stock.txt"
 symbol = "M"
-timeout = 120
+timeout = 3600
