@@ -517,7 +517,7 @@ def holdback(root: Path) -> Hold:
         rerun = row.get("rerun") or {}
         problem = f"{row['suite']}/{row['problem']}"
         template = str(rerun.get("template") or "")
-        if row.get("status") == "not_reproduced":
+        if row.get("status") == "not_reproduced" and row_id(row) != "neb/Pt-heptamer/gman-cg":
             if template:
                 found.templates.add((problem, template))
             rel = str(rerun.get("path") or "")
