@@ -145,12 +145,12 @@ def _benchmark(spec: dict):
 
     class _Benchmark(_GaspSearch):
         param_names = ["seed", "start"]
-        params = [[SEED], [str(index) for index in range(spec["n"])]]
+        params = [[SEED], [str(index) for index in range(bound["n"])]]
         timeout = 7200
-        cap = spec["cap"]
+        cap = bound["cap"]
         spec = bound
-        template_id = spec["template_id"]
-        problem_id = spec["problem_id"]
+        template_id = bound["template_id"]
+        problem_id = bound["problem_id"]
 
     _Benchmark.__name__ = spec["class_name"]
     _Benchmark.__qualname__ = spec["class_name"]
