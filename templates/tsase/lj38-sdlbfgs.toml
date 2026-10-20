@@ -1,13 +1,13 @@
-# TSASE 1.0 at current main. Stock SDLBFGS. Problem Euclidean stop.
+# TSASE at current main. Stock SDLBFGS. Problem Euclidean stop.
 id = "tsase/lj38-sdlbfgs"
 engine = "tsase"
 problem = "minimization/lj38"
 code = "tsase"
-code_version = "1.0"
+code_version = "98aac60"
 commit = "98aac60b5d9905e81ee4e6b8c385f169258d0218"
 algorithm = "SDLBFGS"
 tuning = "default"
-note = "TSASE 1.0 at current main 98aac60. SDLBFGS keeps constructor defaults maxstep 0.2, memory 100, and damping 1. optimizer L2 stops when the Euclidean force norm is under the problem value 0.01. The iteration limit is the 10000 force-call cap. The score is the harness counter, that force norm, and Hessian index 0."
+note = "TSASE 98aac60 at current main. setup.py reports 1.0. SDLBFGS keeps constructor defaults maxstep 0.2, memory 100, and damping 1. optimizer L2 stops when the Euclidean force norm is under the problem value 0.01. The iteration limit is the 10000 force-call cap. The score is the harness counter, that force norm, and Hessian index 0."
 
 [tsase]
 method = "sdlbfgs-stock"

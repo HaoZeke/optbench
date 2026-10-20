@@ -1318,6 +1318,19 @@ def _headers(problem: dict) -> list[str]:
     return headers
 
 
+def _version_text(row: dict) -> str:
+    """Version cell.
+
+    The LJ38 SDLBFGS row uses the registry name plus the short commit,
+    the same shape as the archived TSASE labels.
+    """
+    code = str(row.get("code") or "")
+    version = str(row.get("code_version") or "")
+    if row.get("template") == "tsase/lj38-sdlbfgs" and code.lower() == "tsase":
+        code = "TSASE"
+    return f"{code} {version}".strip()
+
+
 def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
     """Visible ranked-table cells, in column order.
 
@@ -1325,7 +1338,7 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
     """
     cells = [
         ("template", str(row.get("template") or row.get("entry") or "")),
-        ("version", f"{row.get('code') or ''} {row.get('code_version') or ''}"),
+        ("version", _version_text(row)),
         ("commit", str(row.get("commit") or "")[:12]),
         ("source", str(row.get("source") or "")),
         ("current", "yes" if row.get("current") else "no"),
