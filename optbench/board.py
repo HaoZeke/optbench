@@ -1323,9 +1323,11 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
 
     The site check compares these strings with the rendered table.
     """
+    code = str(row.get("code") or "")
+    version = str(row.get("code_version") or "")
     cells = [
         ("template", str(row.get("template") or row.get("entry") or "")),
-        ("version", f"{row.get('code') or ''} {row.get('code_version') or ''}"),
+        ("version", f"{code} {version}".strip() if version else code),
         ("commit", str(row.get("commit") or "")[:12]),
         ("source", str(row.get("source") or "")),
         ("current", "yes" if row.get("current") else "no"),

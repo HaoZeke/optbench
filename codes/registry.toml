@@ -173,6 +173,26 @@ commit = "0.1.1"
 committed = "2019-12-10"
 note = "Sella 0.1.1 PESWrapper.diag for the lowest-eigenvector row. eta 1e-6, gamma 1e-16, vreftol 0.99, gradient v0, rigid-mode projection. This pin is not Sella 2.6.0."
 
+[[code]]
+id = "eon-svn-r2549"
+name = "EON (SVN r2549)"
+role = "saddle search"
+repository = "https://theory.cm.utexas.edu/svn/eon"
+ref = "r2549"
+commit = "r2549"
+committed = "2026-01-23"
+note = "EON is the SVN client, not a version of eOn. This pin is unpatched r2549 built with Fortran. eonclient -v prints r2549. The git eOn pins stay separate. QSC sources are in the tree. The saddle row uses the stock dimer, LBFGS, and bowl-breakout defaults plus the archive keys rotations_max 20, converged_angle 5, confine_positive, bowl_breakout, and confine_positive_min_active 20."
+
+[[code]]
+id = "eon-develop-a7aa574"
+name = "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)"
+role = "saddle search"
+repository = "https://github.com/TheochemUI/eon"
+ref = "develop"
+commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+committed = "2026-10-19"
+note = "eOn is the git client at eondocs.org, not a version of SVN EON. This pin is develop a7aa57472fb7d823953fd36b78cd755fa4842d30, built with Fortran. It is not the 7095b23 develop pin and not the conda-forge binary. The saddle row is stock: the archive dimer, LBFGS, and bowl keys, and this tree's own defaults for every key the archive left unset."
+
 [[template]]
 id = "sella-0.1.1/lj38-loweig"
 code = "sella-0.1.1"

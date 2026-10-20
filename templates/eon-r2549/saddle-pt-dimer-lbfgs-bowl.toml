@@ -1,0 +1,40 @@
+id = "eon-r2549/saddle-pt-dimer-lbfgs-bowl"
+engine = "eon-client"
+problem = "saddle-search/pt-island"
+code = "EON (SVN r2549)"
+code_version = ""
+commit = "r2549"
+algorithm = "Dimer L-BFGS bowl breakout"
+reducer = "harness"
+tuning = "default"
+failure_cap = 5064
+kernel = "morse"
+note = """EON, the SVN client, at r2549. Built with Fortran and not patched. Stock dimer and LBFGS: improved, rotation optimizer, and bowl_active_atoms stay at the client defaults. The archive keys that this binary reads are set: opt_method lbfgs, converged_force 1e-3, max_move 0.2, max_iterations 1000, min_mode_method dimer, max_energy 5, confine_positive, bowl_breakout, confine_positive_min_active 20, rotations_max 20, converged_angle 5. The ranked unit is one displacement search, the same 16 starts for EON and eOn: atoms 0-6, magnitude 0.1, seed 20261016, from the minimized pt-island.con. client_displace_type load reads that displacement. The potential during the climb is ext_pot on the problem Morse. The harness adds the two endpoint minimizations and applies the connection test. Gaps against the 2014 archive are left as scored."""
+
+[ini.Main]
+job = "saddle_search"
+random_seed = 1
+
+[ini.Potential]
+potential = "ext_pot"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+converged_force = 0.001
+max_iterations = 1000
+max_move = 0.2
+
+[ini."Saddle Search"]
+min_mode_method = "dimer"
+client_displace_type = "load"
+converged_force = 0.001
+max_iterations = 1000
+max_energy = 5.0
+displace_magnitude = 0.1
+confine_positive = true
+bowl_breakout = true
+confine_positive_min_active = 20
+
+[ini.Dimer]
+rotations_max = 20
+converged_angle = 5.0
