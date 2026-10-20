@@ -150,6 +150,58 @@ The number is written only after the run finishes under the problem rule.
    <li>eon-client/sd-twopoint: no per-start record.</li>
    <li>eon-client/sd: no per-start record.</li>
    </ul>
+   <h3>EON (SVN r2549)</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization and saddle search</td>
+   <td>r2549</td>
+   <td>r2549</td>
+   <td><a href="https://theory.cm.utexas.edu/svn/eon">https://theory.cm.utexas.edu/svn/eon</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="hTST/Pt" data-template="EON/htst-pt-dimer-cg2">
+   <td>Pt</td>
+   <td data-field="template">EON/htst-pt-dimer-cg2</td>
+   <td data-field="version">EON (SVN r2549) r2549</td>
+   <td data-field="commit">r2549</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="mean_calls">610601</td>
+   <td data-field="median_calls">606939</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">9</td>
+   </tr>
+   </tbody></table></div>
+   <h3>eOn (develop a7aa57472fb7)</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization and saddle search</td>
+   <td>develop</td>
+   <td>a7aa57472fb7</td>
+   <td><a href="https://github.com/TheochemUI/eon">https://github.com/TheochemUI/eon</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="hTST/Pt" data-template="eOn/develop-htst-pt-dimer-cg2">
+   <td>Pt</td>
+   <td data-field="template">eOn/develop-htst-pt-dimer-cg2</td>
+   <td data-field="version">eOn (develop a7aa57472fb7) a7aa57472fb7</td>
+   <td data-field="commit">a7aa57472fb7</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="mean_calls">855210</td>
+   <td data-field="median_calls">763424</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">9</td>
+   </tr>
+   </tbody></table></div>
    <h3>Eon svn</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
