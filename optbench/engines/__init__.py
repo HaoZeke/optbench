@@ -15,6 +15,7 @@ from __future__ import annotations
 from . import (
     compass_search,
     dlfind_search,
+    gmin_native,
     lammps_min,
     optim_search,
     partn,
@@ -32,6 +33,7 @@ _MODULES = (
     dlfind_search,
     compass_search,
     pysis_search,
+    gmin_native,
 )
 ENGINES = {module.ENGINE: module for module in _MODULES}
 

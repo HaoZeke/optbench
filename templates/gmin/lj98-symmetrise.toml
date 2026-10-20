@@ -1,0 +1,14 @@
+# GMIN core-orbits symmetrisation on LJ98. Latest Wales snapshot, stock data file.
+id = "gmin/lj98-symmetrise"
+engine = "gmin"
+problem = "globalopt/lj98"
+code = "gmin"
+code_version = "df8da599267534fbe43a250e578f7396a7946311"
+commit = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
+algorithm = "core orbits symmetrisation scheme"
+tuning = "archive"
+failure_cap = 100000000
+note = "SVNREV df8da599267534fbe43a250e578f7396a7946311. The pin is the sha256 of svn.tar.bz2, 122737951 bytes. Native Lennard-Jones and the published symmetrise data file. The score is GMIN's function calls on the target-hit line. failure_cap is STEPS times MAXIT and does not stop GMIN."
+
+[gmin]
+method = "symmetrise"

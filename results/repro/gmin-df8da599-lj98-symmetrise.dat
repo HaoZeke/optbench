@@ -1,0 +1,13 @@
+# GMIN SVNREV df8da599267534fbe43a250e578f7396a7946311. Native LJ, published symmetrise data, 100 lj98 coords.
+# Population standard deviation over the starts that hit the target.
+# Ranked harness campaign: results/campaign/gmin-df8da599-lj98-symmetrise.dat
+basin_hopping_steps_mean 1721.24
+basin_hopping_steps_stddev 1550.723786623524
+cpu_time_mean 17.811
+cpu_time_stddev 16.33198845823741
+energy_calls_mean 339935.7
+energy_calls_stddev 308403.6766615632
+nfailed 0
+code_version df8da599267534fbe43a250e578f7396a7946311
+commit 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31
+n 100

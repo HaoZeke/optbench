@@ -35,8 +35,53 @@ def test_the_ledger_covers_the_oracle_in_order():
             assert row["cause"]
         if (row.get("rerun") or {}).get("paper_baseline"):
             assert status == "reproduced"
-    assert counts == {"reproduced": 46, "not_reproduced": 29, "not_rerun": 76}
+    assert counts == {"reproduced": 46, "not_reproduced": 30, "not_rerun": 75}
     assert reproduction_errors(ROOT) == []
+
+
+def test_lj98_gmin_symmetrise_ranks_the_latest_release():
+    from optbench.board import build_board
+    from optbench.engines.gmin_native import TARBALL_SHA256, VERSION
+
+    ledger = {row_id(row): row for row in load_ledger(ROOT / "oracle" / "reproduction.jsonl")}
+    row = ledger["globalopt/lj98/gmin-symmetrise"]
+    assert row["status"] == "not_reproduced"
+    assert row["in_paper"] is False
+    assert row["cause"] == "gmin_latest"
+    assert row["rerun"]["paper_baseline"] is False
+    assert row["rerun"]["code_version"] == VERSION
+    assert row["rerun"]["tarball_sha256"] == TARBALL_SHA256
+    assert row["rerun"]["ranked_template"] == "gmin/lj98-symmetrise"
+    assert row["rerun"]["template"] == "gmin/lj98-symmetrise-archive"
+    by_metric = {item["metric"]: item for item in row["checks"]}
+    assert by_metric["nfailed"]["ok"] is True
+    assert by_metric["energy_calls_mean"]["ok"] is False
+    assert by_metric["basin_hopping_steps_mean"]["ok"] is False
+    assert by_metric["cpu_time_mean"]["ok"] is False
+    held = holdback(ROOT)
+    assert ("globalopt/lj98", "gmin/lj98-symmetrise") not in held.templates
+    assert "results/campaign/gmin-df8da599-lj98-symmetrise.dat" not in held.paths
+    text = (ROOT / "results/campaign/gmin-df8da599-lj98-symmetrise.dat").read_text(encoding="utf-8")
+    assert "counter harness\n" in text
+    assert "ranked false" not in text
+    assert "partial true" not in text
+    assert f"code_version {VERSION}\n" in text
+    document = build_board(ROOT)
+    ranked = document["problems"]["globalopt/lj98"]["ranked"]
+    match = [item for item in ranked if item["template"] == "gmin/lj98-symmetrise"]
+    assert len(match) == 1
+    assert match[0]["partial"] is False
+    assert match[0]["n"] == 100
+    assert match[0]["nfailed"] == 0
+    assert match[0]["current"] is True
+    assert abs(match[0]["par2_mean"] - 339935.7) < 1e-6
+    partial = [
+        item
+        for item in document["partial"]
+        if item.get("template") == "gmin/lj98-symmetrise"
+        or item.get("path") == "results/campaign/gmin-df8da599-lj98-symmetrise.dat"
+    ]
+    assert partial == []
 
 
 def test_pele_paper_baseline_is_the_2014_stop():

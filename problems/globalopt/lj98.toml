@@ -5,6 +5,15 @@ problem = "lj98"
 contract = "partial"
 entry_count = 2
 
+[sample]
+starts = 100
+
+[convergence]
+energy_above_minimum = 0.003
+
+[input]
+archive_path = "website/globalopt/lj98/lj98_clusters.tgz"
+
 [metrics]
 required = ["basin_hopping_steps_mean", "basin_hopping_steps_stddev", "cpu_time_mean", "cpu_time_stddev", "energy_calls_mean", "energy_calls_stddev", "nfailed"]
 

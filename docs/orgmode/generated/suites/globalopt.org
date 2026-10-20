@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>GMIN</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="globalopt/lj100-binary">
    <th scope="row"><a href="#lj100-binary">Binary Lennard-Jones 100</a></th>
    <td data-code="eOn">—</td>
@@ -17,6 +17,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="GMIN">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -33,6 +34,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="GMIN">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -49,6 +51,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="GMIN">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -65,6 +68,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="GMIN">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -81,6 +85,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="GMIN" data-template="gmin/lj98-symmetrise" data-par2="339936"><span class="bench-score">339936</span><a href="#lj98-templates">gmin/lj98-symmetrise</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -97,6 +102,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="GMIN">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -113,6 +119,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="GMIN">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -129,6 +136,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="GMIN">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -414,25 +422,28 @@
    </section><section class="bench" id="lj98" data-problem="globalopt/lj98">
    <h2>lj98</h2>
    <dl class="bench-rule">
+   <dt>Stop</dt><dd>within 0.003 of the known minimum</dd>
+   <dt>Starts</dt><dd>100</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">No committed harness run.</p>
+   <figure class="bench-plot"><a href="../../_static/board/globalopt-lj98-profile.svg"><picture><source srcset="../../_static/board/globalopt-lj98-profile.webp" type="image/webp"><img src="../../_static/board/globalopt-lj98-profile.png" alt="Dolan-More profile for globalopt/lj98" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="../../_static/board/globalopt-lj98-cost.svg"><picture><source srcset="../../_static/board/globalopt-lj98-cost.webp" type="image/webp"><img src="../../_static/board/globalopt-lj98-cost.png" alt="Cost versus success for globalopt/lj98" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="lj98-templates">
-   <summary>All templates (0 ranked)</summary>
+   <summary>All templates (1 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="globalopt/lj98">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="13">No full harness row.</td></tr>
+   <tr><td data-field="template">gmin/lj98-symmetrise</td><td data-field="version">GMIN df8da599267534fbe43a250e578f7396a7946311</td><td data-field="commit">738fafe3df5a</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">339936</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">230826</td><td data-field="mean_calls">339936</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    </details>
    </section><section class="bench bench-legacy-section" id="lj98-legacy">
    <h3>Legacy 2014 archive</h3>
    <details class="bench-details">
    <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score. A row marked not reproduced has a harness rerun outside the archive tolerance.</p>
    <div class="bench-table"><table class="bench-legacy">
    <caption>Legacy 2014 archive. The columns are the archived keys.</caption>
    <thead><tr>
@@ -451,7 +462,7 @@
    </tr></thead><tbody>
    <tr id="globalopt-lj98-gmin-symmetrise" class="best">
    <td class="num">1</td>
-   <td class="text">gmin-symmetrise</td>
+   <td class="text">gmin-symmetrise · not reproduced</td>
    <td class="text">GMIN</td>
    <td class="num">1.28192e+03</td>
    <td class="num">1.06356e+03</td>

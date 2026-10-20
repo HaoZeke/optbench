@@ -111,6 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+    "repro/globalopt-lj98-gmin-symmetrise": "0000000000000000000000000000000000000000",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -199,6 +200,31 @@ MATCHES: list[dict] = [
     {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "cells/pele/go", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
     {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn/htst-al-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
     {"key": "hTST/Pt/eon-dimer-cg", "template": "eon-svn/htst-pt-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-pt-dimer.dat", "kind": "htst"},
+    # The ranked campaign is gmin/lj98-symmetrise. This path is the archive
+    # comparison. A not_reproduced template is held off the ranked table, so
+    # the comparison template is not the ranked one.
+    {
+        "key": "globalopt/lj98/gmin-symmetrise",
+        "template": "gmin/lj98-symmetrise-archive",
+        "branch": "repro/globalopt-lj98-gmin-symmetrise",
+        "path": "results/repro/gmin-df8da599-lj98-symmetrise.dat",
+        "metrics": [
+            "basin_hopping_steps_mean",
+            "basin_hopping_steps_stddev",
+            "cpu_time_mean",
+            "cpu_time_stddev",
+            "energy_calls_mean",
+            "energy_calls_stddev",
+            "nfailed",
+        ],
+        "cause": "gmin_latest",
+        "extra": {
+            "code_version": "df8da599267534fbe43a250e578f7396a7946311",
+            "tarball_sha256": "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31",
+            "ranked_template": "gmin/lj98-symmetrise",
+            "ranked_path": "results/campaign/gmin-df8da599-lj98-symmetrise.dat",
+        },
+    },
 ]
 
 
@@ -287,6 +313,18 @@ CAUSE_TEXT = {
         "The harness records 7 failures: 5 RuntimeError LineSearch failed (ASE 3.8.2 already raises that; ASE 3.6.0 is not on PyPI) "
         "and 2 Hessian index 1 after the Euclidean force norm is under 0.01. "
         "The Wilson interval on 0 failures out of 1000 is about 0 to 3.83."
+    ),
+    "gmin_latest": (
+        "GMIN SVNREV df8da599267534fbe43a250e578f7396a7946311 from the 19 Oct 2026 "
+        "Wales svn.tar.bz2 (sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31, "
+        "122737951 bytes), unmodified. gfortran 13.3.0 -O3, MPI off, reference netlib BLAS 3.12.0. "
+        "The published symmetrise data file and the 100 numbered lj98 coordinates. "
+        "EDIFF 0.003, TARGET -543.665361, SLOPPYCONV 0.007, TIGHTCONV 1e-5. "
+        "The harness score is GMIN's function-call count on the target-hit line, "
+        "template gmin/lj98-symmetrise. "
+        "Quench and energy-call means sit about 34% and 36% above the archive, and the CPU mean is about 59% lower. "
+        "All 100 starts hit energy -543.6653608 and nfailed is 0. "
+        "The gap is the finding. The keywords were not changed to close it."
     ),
     "akmc_vs_langevin": (
         "The archive rows are Langevin parallel replica. The harness rows are AKMC. "

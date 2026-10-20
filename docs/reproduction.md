@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+46 reproduced, 30 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -62,7 +62,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38/pele-basinhopping | force_calls 521595 | 688720 | not reproduced; pele_bh_defaults |
 | lj75/gmin | — | — | not rerun |
 | lj98/gmin-nosym | — | — | not rerun |
-| lj98/gmin-symmetrise | — | — | not rerun |
+| lj98/gmin-symmetrise | basin_hopping_steps_mean 1281.92, basin_hopping_steps_stddev 1063.56, cpu_time_mean 43.69, cpu_time_stddev 36.01, energy_calls_mean 249538, energy_calls_stddev 205789, nfailed 0 | 1721.24, 1550.72, 17.811, 16.332, 339936, 308404, 0 | not reproduced; gmin_latest |
 | tip4p10/gmin | — | — | not rerun |
 | tip4p10/gmin-tbp | — | — | not rerun |
 | tip4p15/gmin | — | — | not rerun |
@@ -268,6 +268,12 @@ archive run.sh divides coordinates by r0 = 2.897 and scales rho and rcut into th
 The archived driver is the dangling path bin/js850/globalopt.py. The harness uses pele LJCluster defaults (temperature 1, step 0.6, LBFGS memory 4) on unshifted cutoff 40. The mean is 688720 against 521595.
 
 - globalopt/lj38/pele-basinhopping
+
+### gmin_latest
+
+GMIN SVNREV df8da599267534fbe43a250e578f7396a7946311 from the 19 Oct 2026 Wales svn.tar.bz2 (sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31, 122737951 bytes), unmodified. gfortran 13.3.0 -O3, MPI off, reference netlib BLAS 3.12.0. The published symmetrise data file and the 100 numbered lj98 coordinates. EDIFF 0.003, TARGET -543.665361, SLOPPYCONV 0.007, TIGHTCONV 1e-5. The harness score is GMIN's function-call count on the target-hit line, template gmin/lj98-symmetrise. Quench and energy-call means sit about 34% and 36% above the archive, and the CPU mean is about 59% lower. All 100 starts hit energy -543.6653608 and nfailed is 0. The gap is the finding. The keywords were not changed to close it.
+
+- globalopt/lj98/gmin-symmetrise
 
 ### htst_al
 
