@@ -88,6 +88,8 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | Pt/quench_dimer-qm | — | — | not rerun |
 | Pt/tsase-dimer-qm | — | — | not rerun |
 
+Pt/alpha_dimer-qm stays the archived paper row. Two stock harness runs are ranked beside it, untuned: EON (SVN r2549) and eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30). A gap against the archived window is a finding.
+
 ## lowest-eigenvector
 
 | Row | Archive | Rerun | Status |

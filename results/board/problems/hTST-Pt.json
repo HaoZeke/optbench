@@ -185,6 +185,130 @@
       "wilson_low": 0.20654931437723745
     }
   ],
-  "ranked": [],
+  "profile": {
+    "area_log10": {
+      "eon-develop-rank/htst-pt-stock 3.6.0 stock campaign a7aa574": 1.2041199826559248,
+      "eon-svn/htst-pt-stock r2549 stock campaign r2549": 1.0536049848239342
+    },
+    "rho": {
+      "eon-develop-rank/htst-pt-stock 3.6.0 stock campaign a7aa574": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "eon-svn/htst-pt-stock r2549 stock campaign r2549": [
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "solved": {
+      "eon-develop-rank/htst-pt-stock 3.6.0 stock campaign a7aa574": 1.0,
+      "eon-svn/htst-pt-stock r2549 stock campaign r2549": 1.0
+    },
+    "taus": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ]
+  },
+  "ranked": [
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 2000000,
+      "code": "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)",
+      "code_version": "3.6.0",
+      "commit": "a7aa57472fb7d823953fd36b78cd755fa4842d30",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "eon-develop-rank-htst-pt-stock",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": null,
+      "history": false,
+      "max_calls": 5648.0,
+      "mean_calls": 5648.0,
+      "mean_per_image": null,
+      "median": 5648.0,
+      "median_calls": 5648.0,
+      "median_high": 5648.0,
+      "median_low": 5648.0,
+      "median_per_image": null,
+      "min_calls": 5648.0,
+      "n": 1,
+      "nfailed": 0,
+      "note": "starts",
+      "par2_mean": 5648.0,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/eon-develop-rank-htst-pt-stock.dat",
+      "problem": "hTST/Pt",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "eon-develop-rank/htst-pt-stock",
+      "tuning": "stock",
+      "wilson_high": 1.0,
+      "wilson_low": 0.20654931437723745
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 2000000,
+      "code": "EON (SVN r2549)",
+      "code_version": "r2549",
+      "commit": "r2549",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "eon-svn-htst-pt-stock",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": null,
+      "history": false,
+      "max_calls": 10516.0,
+      "mean_calls": 10516.0,
+      "mean_per_image": null,
+      "median": 10516.0,
+      "median_calls": 10516.0,
+      "median_high": 10516.0,
+      "median_low": 10516.0,
+      "median_per_image": null,
+      "min_calls": 10516.0,
+      "n": 1,
+      "nfailed": 0,
+      "note": "starts",
+      "par2_mean": 10516.0,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/eon-svn-htst-pt-stock.dat",
+      "problem": "hTST/Pt",
+      "registry_match": false,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "eon-svn/htst-pt-stock",
+      "tuning": "stock",
+      "wilson_high": 1.0,
+      "wilson_low": 0.20654931437723745
+    }
+  ],
   "title": "Pt"
 }

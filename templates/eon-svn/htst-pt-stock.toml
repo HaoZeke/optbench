@@ -1,0 +1,63 @@
+id = "eon-svn/htst-pt-stock"
+engine = "eon"
+problem = "hTST/Pt"
+code = "EON (SVN r2549)"
+code_version = "r2549"
+commit = "r2549"
+algorithm = "Dimer"
+reducer = "harness"
+failure_cap = 2000000
+kind = "htst"
+kernel = "morse_shift"
+asv_class = "EonSvnHtstPtStock"
+tuning = "stock"
+note = '''
+Stock, untuned EON SVN r2549 on the archived hTST/Pt reactant. The ini is the alpha_dimer-qm config: temperature 700, seed 42, morse_pt, confidence 1.9, optimizer converged_force 0.001, max_iterations 5000, least-coordinated displacement weight 1, radius 3.3, magnitude 0.3, dimer rotations_max 50, converged_angle 5. Unspecified keys stay at the r2549 defaults, including optimizer cg and saddle-search converged_force 0.01. The harness scores Morse::force through ext_pot. The start ends at the first good saddle below 1.5 eV. Nothing was tuned toward the archived window means.
+'''
+seeds = [42]
+starts = ["pt"]
+geometry = "website/hTST/Pt/alpha_dimer-qm/pos.con"
+pass_limit = 40
+workers = 8
+asv_full = false
+asv_timeout = 1200
+budget_seconds = 1200
+
+[ini.Main]
+job = "akmc"
+temperature = 700
+random_seed = 42
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Prefactor]
+default_value = "1e12"
+
+[ini.Optimizer]
+converged_force = 0.001
+max_iterations = 5000
+
+[ini.AKMC]
+confidence = 1.9
+
+[ini."Process Search"]
+minimize_first = true
+
+[ini.Communicator]
+type = "local"
+num_jobs = 8
+number_of_CPUs = 8
+jobs_per_bundle = 1
+client_path = "eonclient"
+
+[ini."Saddle Search"]
+displace_least_coordinated_weight = 1.0
+displace_radius = 3.3
+displace_magnitude = 0.3
+min_mode_method = "dimer"
+max_energy = 1000.0
+
+[ini.Dimer]
+rotations_max = 50
+converged_angle = 5.0
