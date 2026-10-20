@@ -184,6 +184,22 @@ committed = "2026-10-12"
 note = "pele 0.1.2, tag v0.1.2, the latest release. Pt-island double-ended connect uses the library defaults on the problem images, L2 stop, and call cap. The harness counts the potential."
 
 [[template]]
+id = "pele/de-pt-island"
+code = "pele"
+problem = "double-ended-saddle-search/pt-island"
+profile = "archive"
+task = "dneb-hef"
+ranked = false
+
+[[template]]
+id = "pele/de-pt-island-stock"
+code = "pele"
+problem = "double-ended-saddle-search/pt-island"
+profile = "default"
+task = "dneb-hef"
+ranked = true
+
+[[template]]
 id = "sella-0.1.1/lj38-loweig"
 code = "sella-0.1.1"
 problem = "lowest-eigenvector/lj38"
@@ -688,19 +704,3 @@ problem = "saddle-search/pt-island"
 profile = "tuned"
 task = "sella-search"
 ranked = false
-
-[[template]]
-id = "pele/de-pt-island"
-code = "pele"
-problem = "double-ended-saddle-search/pt-island"
-profile = "archive"
-task = "dneb-hef"
-ranked = false
-
-[[template]]
-id = "pele/de-pt-island-stock"
-code = "pele"
-problem = "double-ended-saddle-search/pt-island"
-profile = "default"
-task = "dneb-hef"
-ranked = true
