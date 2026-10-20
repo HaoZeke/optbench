@@ -142,7 +142,7 @@ It does not run a campaign.
    <td data-code="lammps">—</td>
    <td data-code="optim">—</td>
    <td data-code="optking">—</td>
-   <td data-code="pygsm" data-template="pygsm/de-gsm" data-par2="5000">5000<a href="generated/suites/double-ended-saddle-search.html#lj38-templates">pygsm/de-gsm</a></td>
+   <td data-code="pygsm" data-template="pygsm/de-gsm" data-par2="3995.04">3995.04<a href="generated/suites/double-ended-saddle-search.html#lj38-templates">pygsm/de-gsm</a></td>
    <td data-code="softsaddle">—</td>
    <td data-code="tsase" data-template="tsase/ci-neb" data-par2="3119.56">3119.56<a href="generated/suites/double-ended-saddle-search.html#lj38-templates">tsase/ci-neb</a></td>
    </tr>
@@ -168,7 +168,7 @@ It does not run a campaign.
    <td data-code="lammps">—</td>
    <td data-code="optim">—</td>
    <td data-code="optking">—</td>
-   <td data-code="pygsm" data-template="pygsm/de-gsm" data-par2="20000">20000<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">pygsm/de-gsm</a></td>
+   <td data-code="pygsm" data-template="pygsm/de-gsm-climbclamp" data-par2="13796.2">13796.2<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">pygsm/de-gsm-climbclamp</a></td>
    <td data-code="softsaddle">—</td>
    <td data-code="tsase" data-template="tsase/ci-neb" data-par2="18812.1">18812.1<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">tsase/ci-neb</a></td>
    </tr>
