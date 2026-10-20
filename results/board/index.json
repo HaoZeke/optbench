@@ -17494,6 +17494,62 @@
       "ranked": [],
       "title": "lj75"
     },
+    "globalopt/tip4p20": {
+      "full_n": null,
+      "history": [],
+      "id": "globalopt/tip4p20",
+      "not_comparable": [],
+      "partial": [],
+      "profile_gap": "No performance profile. One start has no finite cost.",
+      "ranked": [
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": 143405001,
+          "code": "GMIN",
+          "code_version": "df8da599",
+          "commit": "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31",
+          "comparable": true,
+          "counter": "harness",
+          "current": true,
+          "entry": "gmin-df8da599-tip4p20-bh",
+          "failures": {
+            "cap": 1,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": null,
+          "history": false,
+          "max_calls": 149938602.0,
+          "mean_calls": 32950596.14,
+          "mean_per_image": null,
+          "median": 26774949.0,
+          "median_calls": 26774949.0,
+          "median_high": 33919998.0,
+          "median_low": 24086643.5,
+          "median_per_image": null,
+          "min_calls": 53057.0,
+          "n": 100,
+          "nfailed": 1,
+          "note": "starts.jsonl",
+          "par2_mean": 34319310.14,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/gmin-df8da599-tip4p20-bh.dat",
+          "problem": "globalopt/tip4p20",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 0.99,
+          "template": "gmin/tip4p20-bh",
+          "tuning": "stock",
+          "wilson_high": 0.9982325679358593,
+          "wilson_low": 0.9455138038212946
+        }
+      ],
+      "title": "tip4p20"
+    },
     "hTST/Al": {
       "full_n": null,
       "history": [],
@@ -47972,7 +48028,7 @@
       "title": "pt-island"
     }
   },
-  "ranked_count": 559,
+  "ranked_count": 560,
   "schema": "optbench.board/v1",
   "unmapped": [
     {

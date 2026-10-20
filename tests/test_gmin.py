@@ -25,8 +25,10 @@ def test_registry_pins_the_tarball_revision():
 
 def test_templates_use_the_keyword_defaults():
     found = [row for row in list_templates(ROOT) if row.get("engine") == "gmin"]
-    assert {row["id"] for row in found} == {"gmin/lj38-lbfgs", "gmin/morse-lbfgs"}
-    for template in found:
+    quench = [row for row in found if row["id"] in {"gmin/lj38-lbfgs", "gmin/morse-lbfgs"}]
+    assert {row["id"] for row in quench} == {"gmin/lj38-lbfgs", "gmin/morse-lbfgs"}
+    assert any(row["id"] == "gmin/tip4p20-bh" for row in found)
+    for template in quench:
         assert template["code"] == "GMIN"
         assert template["code_version"] == VERSION
         assert template["commit"] == REVISION

@@ -84,6 +84,8 @@ def _specs() -> list[dict]:
         if template.get("engine") != "gmin":
             continue
         problem_id = str(template["problem"])
+        if problem_id not in {"minimization/lj38", "minimization/morse-bulk"}:
+            continue
         if problem_id not in counts:
             counts[problem_id] = _archive_count(problem_id) if os.environ.get("OPTBENCH_ASV_FULL") == "1" else 1
         problem = resolve_problem(ROOT, problem_id)

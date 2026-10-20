@@ -105,6 +105,16 @@ committed = "2026-10-18"
 note = "Wales group GMIN. Tarball sha256 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f. SVNREV df8da599267534fbe43a250e578f7396a7946311, fetched 2026-10-18. The quench is source/mymylbfgs.F90. Keyword defaults are MUPDATE 4, DGUESS 0.1, MAXBFGS 0.4, and MAXERISE 1e-10. The RMS tolerance is the Euclidean force norm divided by sqrt(3N). The potential is the harness Lennard-Jones or Morse through POTENTIAL. Force calls are HarnessCounter entries."
 
 [[code]]
+id = "gmin-df8da599"
+name = "GMIN"
+role = "basin-hopping"
+repository = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
+ref = "df8da599267534fbe43a250e578f7396a7946311"
+commit = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
+committed = "2026-10-19"
+note = "Wales svn.tar.bz2, 122737951 bytes, sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. GMIN/source/SVNREV is df8da599267534fbe43a250e578f7396a7946311. Unmodified serial GMIN. The score is GMIN NPCALL, stored on the harness counter. The TIP4P20 basin-hopping data file is the archived keyword set. READI rejects 1.D4 and 4.D7, so MAXIT is 10000 10000 and STEPS is 40000000."
+
+[[code]]
 id = "pele"
 name = "pele"
 role = "minimization"

@@ -776,10 +776,27 @@ The number is written only after the run finishes under the problem rule.
    <td>df8da5992675</td>
    <td><a href="https://www-wales.ch.cam.ac.uk/svn.tar.bz2">https://www-wales.ch.cam.ac.uk/svn.tar.bz2</a></td>
    </tr>
+   <tr>
+   <td>basin-hopping</td>
+   <td>df8da599267534fbe43a250e578f7396a7946311</td>
+   <td>738fafe3df5a</td>
+   <td><a href="http://www-wales.ch.cam.ac.uk/svn.tar.bz2">http://www-wales.ch.cam.ac.uk/svn.tar.bz2</a></td>
+   </tr>
    </tbody></table></div>
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="globalopt/tip4p20" data-template="gmin/tip4p20-bh">
+   <td>tip4p20</td>
+   <td data-field="template">gmin/tip4p20-bh</td>
+   <td data-field="version">GMIN df8da599</td>
+   <td data-field="commit">738fafe3df5a</td>
+   <td data-field="par2_mean">3.43193e+07</td>
+   <td data-field="mean_calls">3.29506e+07</td>
+   <td data-field="median_calls">2.67749e+07</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
    <tr data-problem="minimization/lj38" data-template="gmin/lj38-lbfgs">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="template">gmin/lj38-lbfgs</td>
