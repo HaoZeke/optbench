@@ -8,6 +8,8 @@ The pele transition-state paper score is the 2014 stop: break at the first RMS b
 
 OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.
 
+GMIN TIP4P20 linear temperature basin-paving: the archived mean 2.55667e+07 stays the paper row. The ranked harness row is GMIN df8da5992675, stock settings, NPCALL mean 2.57721e+07.
+
 EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.
 
 Table 10 prints EON Lanczos 165. The archive file is 325. CI-NEB(3) prints 3 failures; the archive file has 0.
