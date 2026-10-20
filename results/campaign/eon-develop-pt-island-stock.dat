@@ -1,11 +1,11 @@
-force_calls 1419380
-force_calls_min 1419380
-force_calls_max 1419380
+force_calls 9551074
+force_calls_min 9551074
+force_calls_max 9551074
 call_unit total
 nfailed 1
-code eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)
+code eOn (develop 500350d9)
 code_version 3.6.0
-commit a7aa57472fb7d823953fd36b78cd755fa4842d30
+commit 500350d9fae881f06c7ef194e5868da079c4be5a
 algorithm Dimer
 template eon-develop/pt-island-stock
 problem saddle-search/pt-island
@@ -13,8 +13,8 @@ reducer harness
 counter harness
 count_keys HarnessCounter
 tuning default
-unique_saddles 6
-fraction_connected 0.6544471153846154
-total_searches 1664
-qualifying 4
-client_calls 675274
+unique_saddles 13
+fraction_connected 0.7605248769819574
+total_searches 14632
+qualifying 10
+client_calls 7244927

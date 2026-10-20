@@ -8,8 +8,8 @@ algorithm = "Dimer"
 reducer = "harness"
 tuning = "default"
 failure_cap = 100000000
-pass_limit = 293
-note = "Stock r2549 AKMC on the Pt island. The harness kernel is the problem Morse: smooth-linear, D 0.7102, alpha 1.6047, r0 2.897, cutoff 9.5, periodic in x and y. Optimizer and dimer stay at the r2549 defaults (CG, improved dimer, rotations_max 10, no bowl, random displacement, temperature 300, finite difference 0.01, prefactor computed). converged_force is the problem norm 0.001. confidence 1.1 with the stock scheme old keeps the search on the initial state. Seed 1000, 4 workers, 293 passes, 1172 searches. Ten good saddles below 1.5 eV were registered, then none for the next several hundred searches, so the archive stop of 27 was not reached. The harness total includes prefactor calls. Nothing was tuned toward the 2014 force-call mean."
+pass_limit = 100000000
+note = "Dimer AKMC on the Pt island. Optimizer opt_method is cg, Dimer rotations_max is 20, and Saddle Search bowl_breakout is true with bowl_active_atoms 20. confine_positive is true because this client reads bowl_breakout only when that switch is on. Everything else is an r2549 default, except converged_force 0.001, which is the problem norm, and confidence 1.1, which holds the search on the initial state so the run can reach 27 good saddles below 1.5 eV. Optimizer max_iterations, Saddle Search max_iterations, and pass_limit are 100000000, the campaign force-call cap, so a search count, an iteration count, or a step count does not end the run before that cap. There is no wall-clock limit. The harness kernel is the problem Morse. Seed 1000, 4 workers."
 
 [ini.Main]
 job = "akmc"
@@ -18,10 +18,19 @@ job = "akmc"
 potential = "morse_pt"
 
 [ini.Optimizer]
+opt_method = "cg"
 converged_force = 0.001
+max_iterations = 100000000
+
+[ini.Dimer]
+rotations_max = 20
 
 [ini.AKMC]
 confidence = 1.1
 
 [ini."Saddle Search"]
 converged_force = 0.001
+max_iterations = 100000000
+confine_positive = true
+bowl_breakout = true
+bowl_active_atoms = 20

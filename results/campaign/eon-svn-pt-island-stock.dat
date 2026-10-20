@@ -1,6 +1,6 @@
-force_calls 1774316
-force_calls_min 1774316
-force_calls_max 1774316
+force_calls 11235280
+force_calls_min 11235280
+force_calls_max 11235280
 call_unit total
 nfailed 1
 code EON (SVN r2549)
@@ -14,7 +14,7 @@ counter harness
 count_keys HarnessCounter
 tuning default
 unique_saddles 10
-fraction_connected 0.7960750853242321
-total_searches 1172
-qualifying 10
-client_calls 728296
+fraction_connected 0.9131806108897742
+total_searches 12048
+qualifying 9
+client_calls 4797570
