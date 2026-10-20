@@ -967,14 +967,7 @@ def _write_cache(family: str, template_name: str, seed: int, start: str, passes:
     temporary.replace(path)
 
 
-def _logged_basin_minimum(run: Path) -> float | None:
-    """Best global minimum printed in ``client.log``.
-
-    The client writes ``minimum_energy`` when the step loop returns. A
-    force cap stops the client inside a quench, so that line is absent
-    and the log line is the measured minimum.
-    """
-    path = run / "client.log"
+def _basin_log_minimum(path: Path) -> float | None:
     if not path.is_file():
         return None
     best = None
@@ -990,6 +983,44 @@ def _logged_basin_minimum(run: Path) -> float | None:
             continue
         best = value if best is None else min(best, value)
     return best
+
+
+def _con_header_energy(path: Path) -> float | None:
+    """Energy stored in a ``.con`` header, when the client wrote one."""
+    if not path.is_file():
+        return None
+    lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+    if len(lines) < 2 or not lines[1].lstrip().startswith("{"):
+        return None
+    try:
+        payload = json.loads(lines[1])
+    except json.JSONDecodeError:
+        return None
+    value = payload.get("energy") if isinstance(payload, dict) else None
+    try:
+        energy = float(value)
+    except (TypeError, ValueError):
+        return None
+    if not math.isfinite(energy):
+        return None
+    return energy
+
+
+def _logged_basin_minimum(run: Path) -> float | None:
+    """Best minimum the client recorded for this run.
+
+    The client writes ``minimum_energy`` when the step loop returns. A
+    force cap stops the client inside a quench, so that line is absent.
+    EON writes the running minimum to ``client.log``. eOn develop writes
+    the same column to ``client_quill.log`` and the saved minimum's
+    energy into the ``min.con`` header. A cap kills the process before a
+    block-buffered log is flushed, and the header is already on disk.
+    """
+    for name in ("client.log", "client_quill.log"):
+        found = _basin_log_minimum(run / name)
+        if found is not None:
+            return found
+    return _con_header_energy(run / "min.con")
 
 
 def _earr_min(path: Path) -> float | None:
