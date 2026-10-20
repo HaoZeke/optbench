@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-47 reproduced, 28 not reproduced, 76 not rerun. 151 archive rows.
+46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -113,7 +113,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38/ase-fire | force_calls 656 | 720 | reproduced |
 | lj38/ase-lbfgs | force_calls 355 | 356 | reproduced |
 | lj38/ase-lbfgslinesearch | force_calls 417 | 410 | not reproduced; linesearch_exceptions |
-| lj38/ase-preconlbfgs | force_calls 2686 | 2602 | reproduced |
+| lj38/ase-preconlbfgs | force_calls 2686 | 673 | not reproduced; ase_precon_stock |
 | lj38/eon-cg | force_calls 453 | 454 | reproduced |
 | lj38/eon-fire | force_calls 731 | 731 | reproduced |
 | lj38/eon-lbfgs | force_calls 181 | 181 | reproduced |
@@ -286,6 +286,12 @@ The Rayleigh-Ritz template uses updates 4. The archived first-order mean is 25 a
 ASE 3.29 LBFGSLineSearch with the archived opt.py arguments (maxstep 0.2, alpha 1/0.001, memory 100) scores 410 against 417, inside 10 percent. report.sh counts a start as failed only when a written total_force_calls is at least 10000, and the benchmark.dat label says M=5 while opt.py sets memory 100. The harness records 7 failures: 5 RuntimeError LineSearch failed (ASE 3.8.2 already raises that; ASE 3.6.0 is not on PyPI) and 2 Hessian index 1 after the Euclidean force norm is under 0.01. The Wilson interval on 0 failures out of 1000 is about 0 to 3.83.
 
 - minimization/lj38/ase-lbfgslinesearch
+
+### ase_precon_stock
+
+ASE 3.29.0 is the latest release. Stock PreconLBFGS keeps the constructor (IdentityPrecon, maxstep 0.04) and stops on the archived fmax 0.01. The harness scores 673 against 2686. Three starts have Hessian index 1, and nfailed 3 is inside the Wilson interval for 0 failures out of 1000. The gap is the stock preconditioner and step. It is not a tuning target.
+
+- minimization/lj38/ase-preconlbfgs
 
 ### pele_fire
 

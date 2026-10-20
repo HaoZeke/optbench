@@ -599,6 +599,20 @@ def _version_key(text: str) -> tuple[int, ...]:
     return tuple(parts)
 
 
+# Exact paper-era reruns already on this branch. They stay in History.
+_PAPER_DIAGNOSTIC = {("minimization/lj38", "ase/lj38-preconlbfgs-tuned")}
+
+
+def _mark_paper_diagnostics(rows: list[dict]) -> None:
+    """Keep a finished paper-era rerun off the ranked table and out of Partial."""
+    for row in rows:
+        key = (row.get("problem"), row.get("template"))
+        if key not in _PAPER_DIAGNOSTIC or row.get("partial"):
+            continue
+        row["history"] = True
+        row["current"] = False
+
+
 def _mark_versions(rows: list[dict]) -> None:
     """The newest full version of a template is current. Older full versions are history."""
     groups: dict[tuple, list[dict]] = defaultdict(list)
@@ -1034,6 +1048,7 @@ def build_board(root: Path) -> dict:
     for row in rows:
         row["registry_match"] = _registry_match(row, registry)
     _mark_versions(rows)
+    _mark_paper_diagnostics(rows)
 
     problems_out: dict[str, dict] = {}
     partial: list[dict] = []

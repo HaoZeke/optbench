@@ -328,6 +328,14 @@ task = "minimize"
 ranked = true
 
 [[template]]
+id = "ase/lj38-preconlbfgs"
+code = "ase"
+problem = "minimization/lj38"
+profile = "default"
+task = "minimize"
+ranked = true
+
+[[template]]
 id = "sella/lj38-min-default"
 code = "sella"
 problem = "minimization/lj38"

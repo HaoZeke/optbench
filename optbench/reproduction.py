@@ -128,7 +128,7 @@ MATCHES: list[dict] = [
     {"key": "minimization/lj38/ase-BFGS", "template": "ase/lj38-bfgs-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-lj38-bfgs-tuned.dat"},
     {"key": "minimization/lj38/ase-bfgslinesearch", "template": "ase/lj38-bfgslinesearch-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-lj38-bfgslinesearch-tuned.dat"},
     {"key": "minimization/lj38/ase-lbfgslinesearch", "template": "ase/lj38-lbfgslinesearch-tuned", "branch": "cells/fill-not-rerun", "path": "results/campaign/ase-3.29.0-lj38-lbfgslinesearch-tuned.dat", "cause": "linesearch_exceptions"},
-    {"key": "minimization/lj38/ase-preconlbfgs", "template": "ase/lj38-preconlbfgs-tuned", "branch": "repro/minimization-lj38-ase-preconlbfgs", "path": "results/campaign/ase-3.29.0-lj38-preconlbfgs-tuned.dat"},
+    {"key": "minimization/lj38/ase-preconlbfgs", "template": "ase/lj38-preconlbfgs", "branch": "repro/minimization-lj38-ase-preconlbfgs", "path": "results/campaign/ase-3.29.0-lj38-preconlbfgs.dat", "cause": "ase_precon_stock", "extra": {"code_version": "3.29.0", "rank": True}},
     {"key": "minimization/lj38/ase-fire", "template": "ase/lj38-fire-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-lj38-fire-tuned.dat"},
     {"key": "minimization/lj38/optim", "template": "optim/lj38-lbfgs-tuned", "branch": "cells/optim/min", "path": "results/campaign/optim-02aaf45245af-lj38-lbfgs-tuned.dat", "extra": {"unrounded_mean": 175.537}},
     {"key": "minimization/lj38/pele-lbfgs-M1-maxstep0.1", "template": "pele-lbfgs-M1-maxstep0.1", "branch": "main", "path": "results/campaign/pele-0.1.2-lbfgs-M1-maxstep0.1.dat"},
@@ -273,6 +273,13 @@ CAUSE_TEXT = {
         "The mean is 688720 against 521595."
     ),
     "htst_al": "The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) misses barrier_force_calls and rate_force_calls by about 30 percent. Pt dimer CG with max 10 reproduces all four hTST counts.",
+    "ase_precon_stock": (
+        "ASE 3.29.0 is the latest release. Stock PreconLBFGS keeps the constructor "
+        "(IdentityPrecon, maxstep 0.04) and stops on the archived fmax 0.01. "
+        "The harness scores 673 against 2686. Three starts have Hessian index 1, and nfailed 3 "
+        "is inside the Wilson interval for 0 failures out of 1000. "
+        "The gap is the stock preconditioner and step. It is not a tuning target."
+    ),
     "linesearch_exceptions": (
         "ASE 3.29 LBFGSLineSearch with the archived opt.py arguments (maxstep 0.2, alpha 1/0.001, memory 100) "
         "scores 410 against 417, inside 10 percent. "
@@ -508,7 +515,7 @@ def holdback(root: Path) -> Hold:
         rerun = row.get("rerun") or {}
         problem = f"{row['suite']}/{row['problem']}"
         template = str(rerun.get("template") or "")
-        if row.get("status") == "not_reproduced":
+        if row.get("status") == "not_reproduced" and rerun.get("rank") is not True:
             if template:
                 found.templates.add((problem, template))
             rel = str(rerun.get("path") or "")

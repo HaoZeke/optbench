@@ -225,6 +225,33 @@ def _tuned_minimizer(problem: str, name: str) -> tuple[dict, str, str]:
     return table[name]
 
 
+def _lj38_precon_stock_spec(archive: str, potential: dict, select: str) -> dict:
+    """Latest ASE release, constructor defaults, archive fmax stop."""
+    return {
+        "id": "ase/lj38-preconlbfgs",
+        "engine": "ase",
+        "code": "ASE",
+        "code_version": ASE_VERSION,
+        "commit": ASE_COMMIT,
+        "algorithm": "PreconLBFGS",
+        "problem": "minimization/lj38",
+        "task": "minimize",
+        "profile": "default",
+        "reducer": "capped",
+        "ranked": True,
+        "parameter_source": "default",
+        "note": (
+            f"ASE {ASE_VERSION} is the latest release. PreconLBFGS uses the"
+            " unmodified constructor. The stop is the archived ASE fmax 0.01"
+            " and the harness cap 10000, on the same LJ38 starts."
+        ),
+        "optimizer": {"name": "PreconLBFGS", "parameters": {}},
+        "potential": potential,
+        "stop": {**_LJ_STOP, "norm": "fmax"},
+        "input": {"archive_path": archive, "select": select},
+    }
+
+
 def _minimization_specs() -> list[dict]:
     problems = (
         (
@@ -298,6 +325,8 @@ def _minimization_specs() -> list[dict]:
                 if archive_failure:
                     spec["archive_failure"] = archive_failure
                 specs.append(spec)
+        if problem == "minimization/lj38":
+            specs.append(_lj38_precon_stock_spec(archive, potential, select))
         # Sella can minimize with order 0.
         for profile in ("default", "tuned"):
             if profile == "default":

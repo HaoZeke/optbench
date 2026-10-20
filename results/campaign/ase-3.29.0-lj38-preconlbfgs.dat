@@ -1,0 +1,34 @@
+force_calls 673
+force_calls_min 341
+force_calls_median 635
+force_calls_max 1780
+nfailed 3
+starts 1000
+code ASE
+code_version 3.29.0
+commit f27c0005ae6a67ea419f996e728668865bfc1f86
+algorithm PreconLBFGS
+profile default
+template ase/lj38-preconlbfgs
+problem minimization/lj38
+counter harness
+reducer capped
+parameter_source default
+method {"counter":"harness attach_ase_counter","parameter_source":"default","parameters":{"alpha":70.0,"c1":0.23,"c2":0.46,"damping":1.0,"maxstep":0.04,"memory":100,"precon":"IdentityPrecon","use_armijo":true,"variable_cell":false},"potential":{"epsilon":1.0,"kind":"lennard-jones","pbc":[false,false,false],"rc":40.0,"sigma":1.0},"profile":"default","reducer":"capped","stop":{"force_norm":0.01,"max_force_calls":10000,"max_steps":10000,"norm":"fmax"}}
+note ASE 3.29.0 is the latest release. PreconLBFGS uses the unmodified constructor. The stop is the archived ASE fmax 0.01 and the harness cap 10000, on the same LJ38 starts. v2 success is the harness cap, the stop norm, and the Hessian index (0 minimum, 1 saddle) after rigid modes are projected out when no atom is fixed. Energy and Kabsch RMSD are not applied: these starts have no reference geometry.
+host cursor
+date 2026-10-19
+contributor Rohit Goswami
+scoring par2-wilson-bootstrap
+par2_mean 730.602
+par2_median 636
+par2_median_low 621
+par2_median_high 648.025
+par2_iqr 227
+success_rate 0.997
+wilson_low 0.9912169859
+wilson_high 0.9989792161
+par_applied true
+par_factor 2
+bootstrap_resamples 2000
+bootstrap_seed 20261015
