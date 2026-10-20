@@ -2,9 +2,9 @@
 # A repeated coordinate is cached, so the gradient of that geometry is the same call.
 # The cap refuses the next search call and does not count it.
 # Success is a finite harness energy at or below -397.491331 with calls under the cap.
-# scored 157 of 200 starts
+# scored 182 of 200 starts
 # SciPy 1.18.1 differential_evolution at the constructor defaults, with maxiter set to the force-call cap. strategy is best1bin, popsize is 15, tol is 0.01, mutation is (0.5, 1), recombination is 0.7, polish is true, init is latinhypercube, atol is 0, updating is immediate, and workers is 1. Each centered coordinate lies in [-6, 6]. The seed is 314159 plus the start index. The force-call cap is 1000000, the cap stated on globalopt/lj75.
-nfailed 157
+nfailed 182
 code SciPy
 code_version 1.18.1
 commit e4e854eaa8f18d807cd3496028e257e36caa93cc
@@ -16,14 +16,14 @@ counter harness
 cap 1000000
 par2_mean 2000000
 wilson_low 0
-wilson_high 0.0238835114333
+wilson_high 0.0206706234716
 par2_median 2000000
 par2_median_low 2000000
 par2_median_high 2000000
-v2_nfailed 157
+v2_nfailed 182
 v2_successes 0
-n 157
-energy_min -33.1296335512
+n 182
+energy_min -38.1523129872
 energy_max -26.1800210512
 partial true
-partial_reason scored 157 of 200 starts
+partial_reason scored 182 of 200 starts
