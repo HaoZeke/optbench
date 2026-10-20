@@ -35,8 +35,47 @@ def test_the_ledger_covers_the_oracle_in_order():
             assert row["cause"]
         if (row.get("rerun") or {}).get("paper_baseline"):
             assert status == "reproduced"
-    assert counts == {"reproduced": 46, "not_reproduced": 29, "not_rerun": 76}
+    assert counts == {"reproduced": 46, "not_reproduced": 30, "not_rerun": 75}
     assert reproduction_errors(ROOT) == []
+
+
+def test_gman_lbfgs_hess_keeps_the_archive_gap_and_ranks():
+    from optbench.board import build_board
+
+    ledger = {row_id(row): row for row in load_ledger(ROOT / "oracle" / "reproduction.jsonl")}
+    row = ledger["neb/Pt-heptamer/gman-lbfgs-hess"]
+    assert row["status"] == "not_reproduced"
+    assert row["cause"] == "gman_latest"
+    assert row["in_paper"] is False
+    assert row["rerun"]["paper_baseline"] is False
+    assert row["rerun"]["template"] == "gman/stock-lbfgs-hess"
+    assert row["rerun"]["code_version"] == "r235"
+    assert row["rerun"]["ranked_template"] == "gman/lbfgs-hess"
+    assert row["rerun"]["unrounded_per_image_mean"] == 257.84615384615387
+    by_metric = {item["metric"]: item for item in row["checks"]}
+    assert by_metric["force_calls"] == {"metric": "force_calls", "archive": 217.0, "rerun": 258.0, "se": None, "ok": False}
+    assert by_metric["force_calls_max"]["archive"] == 704
+    assert by_metric["force_calls_max"]["rerun"] == 946
+    assert by_metric["force_calls_max"]["ok"] is False
+    assert by_metric["force_calls_min"]["archive"] == 108
+    assert by_metric["force_calls_min"]["rerun"] == 106
+    assert by_metric["force_calls_min"]["ok"] is True
+    held = holdback(ROOT)
+    campaign = "results/campaign/gman-r235-lbfgs-hess.dat"
+    assert ("neb/Pt-heptamer", "gman/lbfgs-hess") not in held.templates
+    assert campaign not in held.paths
+    document = build_board(ROOT)
+    ranked = document["problems"]["neb/Pt-heptamer"]["ranked"]
+    match = [item for item in ranked if item["template"] == "gman/lbfgs-hess"]
+    assert len(match) == 1
+    scored = match[0]
+    assert scored["partial"] is False
+    assert scored["n"] == 13
+    assert scored["code"] == "Gman"
+    assert scored["code_version"] == "r235"
+    assert scored["counter"] == "harness"
+    assert abs(scored["par2_mean"] - (26816 / 13)) < 1e-9
+    assert abs(scored["mean_per_image"] - (3352 / 13)) < 1e-9
 
 
 def test_pele_paper_baseline_is_the_2014_stop():

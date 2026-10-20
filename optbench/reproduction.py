@@ -111,6 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+    "repro/neb-pt-heptamer-gman-lbfgs-hess": "0000000000000000000000000000000000000000",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -189,6 +190,24 @@ MATCHES: list[dict] = [
     {"key": "neb/Pt-heptamer/eon-cg", "template": "eon-cg", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-cg.dat", "cause": "heptamer_cg", "hold": ["eon-client/neb-pt-cg"]},
     {"key": "neb/Pt-heptamer/eon-fire", "template": "eon-fire", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-fire.dat", "hold": ["eon-client/neb-pt-fire"]},
     {"key": "neb/Pt-heptamer/eon-qm", "template": "eon-qm", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-qm.dat", "hold": ["eon-client/neb-pt-qm"]},
+    {
+        "key": "neb/Pt-heptamer/gman-lbfgs-hess",
+        "template": "gman/stock-lbfgs-hess",
+        "branch": "repro/neb-pt-heptamer-gman-lbfgs-hess",
+        "path": "results/findings/gman-r235-lbfgs-hess.dat",
+        "metrics": ["force_calls", "force_calls_max", "force_calls_min"],
+        "value_from": {
+            "force_calls": "force_calls_per_image",
+            "force_calls_max": "force_calls_per_image_max",
+            "force_calls_min": "force_calls_per_image_min",
+        },
+        "cause": "gman_latest",
+        "extra": {
+            "code_version": "r235",
+            "unrounded_per_image_mean": 257.84615384615387,
+            "ranked_template": "gman/lbfgs-hess",
+        },
+    },
     # saddle search
     {"key": "saddle-search/pt-island/eon-dimer", "template": "eon-svn/saddle-pt-dimer", "branch": "main", "path": "results/campaign/eon-3.5.0-saddle-pt-classic.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "cause": "eon_saddle_count"},
     {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-davidson-sm50", "template": "softsaddle/saddle-davidson-sm50", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-davidson-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
@@ -292,6 +311,15 @@ CAUSE_TEXT = {
         "The archive rows are Langevin parallel replica. The harness rows are AKMC. "
         "On infra/aladatom-repro, eon/aladatom-akmc true_rate 3.597591452e9 is 14.1 times 2.542941e8, "
         "and eon/standard-aladatom-akmc true_rate 3.80613e7 is 45.5 times 8.359e5."
+    ),
+    "gman_latest": (
+        "Gman r235 is the latest public release, Gman-r235.tgz from 2013-04-03. "
+        "The run is that release with the archive driver: LBFGS-Hess, maxmove 0.2, alpha 0.05, memory 25, "
+        "spring 5, eight images, climbing image, Fmag 0.01. "
+        "The paper counter is pot.count()/8. The harness ranks pot.count(), the band total. "
+        "Per-image mean 258 (unrounded 257.84615384615387), max 946, min 106 against the archive 217, 704, 108. "
+        "The min is inside 10 percent. The mean and the max are not. The gap is left as found. "
+        "The ranked board row is gman/lbfgs-hess."
     ),
 }
 
@@ -809,6 +837,8 @@ def render_markdown(rows: list[dict]) -> str:
         "The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.",
         "",
         "OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.",
+        "",
+        "Gman Pt-heptamer LBFGS-Hess: the archived per-image integers are 217, 704, and 108. Gman r235 stock scores 258, 946, and 106 on that counter. The harness ranks the band total.",
         "",
         "EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.",
         "",

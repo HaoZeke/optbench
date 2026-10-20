@@ -1,0 +1,25 @@
+# Same Gman r235 stock score as results/campaign/gman-r235-lbfgs-hess.dat.
+# The ledger reads the per-image counter here. The harness ranks the campaign file.
+# Gman r235 LBFGS-Hess. Archive driver: maxmove 0.2, alpha 0.05, memory 25, min hess, spring 5, tangent new, method ci, converge Fmag, fmax 0.01.
+# force_calls is pot.count(), the band total. The 2014 benchmark.dat divided that total by 8.
+force_calls 2063
+force_calls_min 848
+force_calls_max 7568
+force_calls_median 1208
+force_calls_per_image 258
+call_unit total
+successes 13
+nfailed 0
+n 13
+transition_states 0
+code Gman
+code_version r235
+commit 299795f6dc4410b49d3db3006ffea0bbb8613c2ab44126be2937ae7b34842849
+algorithm lbfgs
+template gman/lbfgs-hess
+problem neb/Pt-heptamer
+tuning stock
+counter harness
+images 8
+force_calls_per_image_min 106
+force_calls_per_image_max 946

@@ -26,6 +26,7 @@ def test_named_engines_are_in_the_table():
         "dlfind",
         "compass",
         "pysisyphus",
+        "gman",
     ]
     assert find("eon") is None
     assert find("rgsaddle-band") is None
@@ -48,6 +49,7 @@ def test_named_engines_are_in_the_table():
     assert found["dlfind"] is None or "libdlfind" in found["dlfind"]
     assert found["compass"] is None or "compass.py" in found["compass"]
     assert found["pysisyphus"] is None or "a4ce10dd" in found["pysisyphus"]
+    assert found["gman"] is None or "Gman-r235" in found["gman"]
 
 
 def test_new_templates_match_a_problem_stop():
@@ -122,6 +124,7 @@ def test_new_templates_match_a_problem_stop():
         "pysisyphus/cg-lj38",
         "pysisyphus/sd-lj38",
         "pysisyphus/lanczos-lj38",
+        "gman/lbfgs-hess",
     }
     found = []
     for template in list_templates(ROOT):

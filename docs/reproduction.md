@@ -2,11 +2,13 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+46 reproduced, 30 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
 OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.
+
+Gman Pt-heptamer LBFGS-Hess: the archived per-image integers are 217, 704, and 108. Gman r235 stock scores 258, 946, and 106 on that counter. The harness ranks the band total.
 
 EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.
 
@@ -173,7 +175,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | Pt-heptamer/gman-fire | — | — | not rerun |
 | Pt-heptamer/gman-glbfgs-hess | — | — | not rerun |
 | Pt-heptamer/gman-glbfgs-line | — | — | not rerun |
-| Pt-heptamer/gman-lbfgs-hess | — | — | not rerun |
+| Pt-heptamer/gman-lbfgs-hess | force_calls 217, force_calls_max 704, force_calls_min 108 | 258, 946, 106 | not reproduced; gman_latest |
 | Pt-heptamer/gman-lbfgs-line | — | — | not rerun |
 | Pt-heptamer/gman-qm | — | — | not rerun |
 | Pt-heptamer/gman-sd | — | — | not rerun |
@@ -330,6 +332,12 @@ pele Morse L-BFGS scores 92. The archive is 51. eOn Morse L-BFGS on the same bul
 The 3.5.0 file already stores the per-image mean, 142 against the archive 120. L-BFGS, FIRE, and QM on the same 8-image spring-5 climb reproduce, so the image count is not the split.
 
 - neb/Pt-heptamer/eon-cg
+
+### gman_latest
+
+Gman r235 is the latest public release, Gman-r235.tgz from 2013-04-03. The run is that release with the archive driver: LBFGS-Hess, maxmove 0.2, alpha 0.05, memory 25, spring 5, eight images, climbing image, Fmag 0.01. The paper counter is pot.count()/8. The harness ranks pot.count(), the band total. Per-image mean 258 (unrounded 257.84615384615387), max 946, min 106 against the archive 217, 704, 108. The min is inside 10 percent. The mean and the max are not. The gap is left as found. The ranked board row is gman/lbfgs-hess.
+
+- neb/Pt-heptamer/gman-lbfgs-hess
 
 ### saddle_novelty
 

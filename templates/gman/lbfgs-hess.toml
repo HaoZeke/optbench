@@ -1,0 +1,13 @@
+# Gman r235 climbing-image LBFGS with a Hessian initial step.
+id = "gman/lbfgs-hess"
+engine = "gman"
+problem = "neb/Pt-heptamer"
+code = "gman"
+code_version = "r235"
+commit = "299795f6dc4410b49d3db3006ffea0bbb8613c2ab44126be2937ae7b34842849"
+algorithm = "lbfgs"
+tuning = "stock"
+note = "Gman-r235.tgz. Stock LBFGS-Hess from the 2014 opt.py: maxmove 0.2, alpha 0.05, memory 25, min hess, spring 5, eight images, climbing image, Fmag 0.01. The score is pot.count(). The harness ranks that band total. The archive divided it by 8."
+
+[gman]
+method = "lbfgs-hess"
