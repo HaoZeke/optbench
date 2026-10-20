@@ -735,6 +735,8 @@ def build_rows(root: Path) -> list[dict]:
             if ident == "globalopt/tip4p20/gmin":
                 path = "results/campaign/gmin-df8da599-tip4p20-bh.dat"
                 fields = parse_dat((root / path).read_text(encoding="utf-8"))
+                scored = json.loads((root / path).with_suffix(".v2.json").read_text(encoding="utf-8"))
+                summary = scored["score"]
                 record["latest"] = {
                     "code": "GMIN",
                     "code_version": fields["code_version"],
@@ -743,11 +745,13 @@ def build_rows(root: Path) -> list[dict]:
                     "path": path,
                     "counter": "GMIN NPCALL",
                     "n": int(float(fields["n"])),
+                    "hits": int(summary["successes"]),
                     "nfailed": int(float(fields["nfailed"])),
                     "force_calls": int(float(fields["force_calls"])),
                     "force_calls_min": int(float(fields["force_calls_min"])),
                     "force_calls_median": float(fields["force_calls_median"]),
                     "force_calls_max": int(float(fields["force_calls_max"])),
+                    "par2_mean": summary["par2_mean"],
                 }
             built.append(record)
             continue
@@ -818,23 +822,22 @@ def _tip4p20_gmin_paragraph(rows: list[dict]) -> str:
         if row.get("problem") == "tip4p20" and row.get("entry") == "gmin":
             latest = row.get("latest") or {}
             break
-    archive = 2.85967e7
     calls = float(latest.get("force_calls") or 0)
-    gap = (calls - archive) / archive
     median = latest.get("force_calls_median")
     median_text = str(int(median)) if isinstance(median, float) and median == int(median) else str(median)
     return (
-        "GMIN tip4p20 basin-hopping is ranked as GMIN df8da599. "
+        "GMIN tip4p20 basin-hopping is GMIN df8da599. "
         "SVNREV df8da599267534fbe43a250e578f7396a7946311, svn.tar.bz2 sha256 "
         "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. "
         "The data file is the archived basin-hopping keyword set. READI rejects 1.D4 and 4.D7, "
         "so MAXIT is 10000 10000 and STEPS is 40000000. Temperature is 2.20 and the rigid-body "
-        "step is 0 0 1.41, with FIXBOTH. "
-        f"Native NPCALL on 100 starts has half-even mean {int(calls)}, "
+        "step is 0 0 1.41, with FIXBOTH. The force-call cap is 143405001. "
+        f"Hits {latest.get('hits')} of {latest.get('n')}. "
+        f"Counts under the cap have half-even mean {int(calls)}, "
         f"median {median_text}, min {latest.get('force_calls_min')}, "
-        f"max {latest.get('force_calls_max')}, and nfailed {latest.get('nfailed')}. "
-        f"The archived paper row is 2.85967e7 with nfailed 0. The mean is {gap:.1%} above that row. "
-        "PAR-2 equals the mean because every start hit the target under the problem cap 149938603."
+        f"max {latest.get('force_calls_max')}. "
+        "The start that recorded 149938602 calls is charged 286810002. "
+        f"PAR-2 is {latest.get('par2_mean')}."
     )
 
 

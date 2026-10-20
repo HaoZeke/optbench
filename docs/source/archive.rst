@@ -1432,7 +1432,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/tip4p20">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">gmin/tip4p20-bh</td><td data-field="version">GMIN df8da599</td><td data-field="commit">738fafe3df5a</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">3.29506e+07</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.963007</td><td data-field="wilson_high">1</td><td data-field="median_calls">2.67749e+07</td><td data-field="mean_calls">3.29506e+07</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">gmin/tip4p20-bh</td><td data-field="version">GMIN df8da599</td><td data-field="commit">738fafe3df5a</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">3.43193e+07</td><td data-field="success_rate">0.99</td><td data-field="wilson_low">0.945514</td><td data-field="wilson_high">0.998233</td><td data-field="median_calls">2.67749e+07</td><td data-field="mean_calls">3.29506e+07</td><td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    <p><a href="generated/suites/globalopt.html#tip4p20">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="tip4p20-legacy">

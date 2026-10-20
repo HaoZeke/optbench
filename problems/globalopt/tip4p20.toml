@@ -7,18 +7,15 @@ entry_count = 2
 
 # The archive data file at 0f26b796 sets STEPS 4.D7, which is 40000000
 # basin-hopping steps, and records no force-call cap. benchmark.dat
-# force_calls_max is 1.4191e+08 with nfailed 0, and the paper's maximum
+# force_calls_max is 1.4191e+08 with nfailed 0, and the published maximum
 # is 141910 thousand. The same problem's basin-paving archive maximum
 # is 1.4340e+08. format(143405000, '.4e') is 1.4340e+08 and
-# format(143405001, '.4e') is 1.4341e+08, so 143405001 sits strictly
-# above both archived maxima. The GMIN df8da599 basin-hopping rerun
-# hit the target once at 149938602 calls. A success is a count strictly
-# below the cap, so the cap is 149938603. 1000000 sits below the
-# archived mean 2.85967e7. 40000000 is the basin-hopping step limit.
+# format(143405001, '.4e') is 1.4341e+08. A count strictly below the cap
+# is inside it, so the cap is 143405001.
 [convergence]
 energy_above_minimum = 0.001
 target = -872.9887
-max_force_calls = 149938603
+max_force_calls = 143405001
 
 [metrics]
 required = ["force_calls", "force_calls_max", "force_calls_median", "force_calls_min", "nfailed"]

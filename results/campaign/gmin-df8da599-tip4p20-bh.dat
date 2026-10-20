@@ -3,13 +3,13 @@
 # Archived basin-hopping keywords. READI takes plain integers, so MAXIT is 10000 10000 and STEPS is 40000000.
 # TEMPERATURE 2.20, STEP 0 0 1.41, FIXBOTH, CENTRE, RADIUS 10, MAXBFGS 0.2, MAXERISE 1e-4.
 # Convergence is EDIFF, SLOPPYCONV and TIGHTCONV 1e-3, TARGET -872.9887.
-# The problem force-call cap is 149938603. A count at or above that cap is a failure.
-force_calls 32950596
+# The force-call cap is 143405001. A count at or above that cap is left out of force_calls and charged twice the cap.
+force_calls 31768899
 force_calls_min 53057
-force_calls_max 149938602
-force_calls_median 26774949
-successes 100
-nfailed 0
+force_calls_max 108357257
+force_calls_median 26673629
+successes 99
+nfailed 1
 n 100
 transition_states 0
 code GMIN
