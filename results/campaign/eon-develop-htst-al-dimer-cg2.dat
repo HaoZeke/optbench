@@ -1,7 +1,15 @@
-force_calls 353
-force_calls_min 353
-force_calls_max 353
-force_calls_median 353.0
+barrier_jobs 27
+barrier_force_calls 17072
+barrier 0.23285
+rate_jobs 2139
+rate_force_calls 2335796
+rate 591495578.125
+client_barrier_force_calls 7744
+client_rate_force_calls 786744
+force_calls 17072
+force_calls_min 17072
+force_calls_max 17072
+force_calls_median 17072
 call_unit total
 nfailed 0
 code eOn (develop a7aa57472fb7)
@@ -13,3 +21,4 @@ problem hTST/Al
 reducer harness
 counter harness
 count_keys HarnessCounter
+seed 42

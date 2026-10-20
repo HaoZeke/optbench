@@ -235,9 +235,9 @@ It does not run a campaign.
    <tr data-problem="hTST/Al">
    <th scope="row"><a href="generated/suites/hTST.html#Al">Al</a></th>
    <td data-code="eOn">—</td>
-   <td data-code="eOn (develop a7aa57472fb7)" data-template="eon/develop-htst-al-dimer-cg2" data-par2="353"><span class="bench-score">353</span><a href="generated/suites/hTST.html#Al-templates">eon/develop-htst-al-dimer-cg2</a></td>
+   <td data-code="eOn (develop a7aa57472fb7)" data-template="eon/develop-htst-al-dimer-cg2" data-par2="17072"><span class="bench-score">17072</span><a href="generated/suites/hTST.html#Al-templates">eon/develop-htst-al-dimer-cg2</a></td>
    <td data-code="Eon svn">—</td>
-   <td data-code="EON (SVN r2549)" data-template="eon-svn/htst-al-dimer-cg2-r2549" data-par2="443"><span class="bench-score">443</span><a href="generated/suites/hTST.html#Al-templates">eon-svn/htst-al-dimer-cg2-r2549</a></td>
+   <td data-code="EON (SVN r2549)" data-template="eon-svn/htst-al-dimer-cg2-r2549" data-par2="11146"><span class="bench-score">11146</span><a href="generated/suites/hTST.html#Al-templates">eon-svn/htst-al-dimer-cg2-r2549</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>

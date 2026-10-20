@@ -1,7 +1,15 @@
-force_calls 443
-force_calls_min 443
-force_calls_max 443
-force_calls_median 443.0
+barrier_jobs 17
+barrier_force_calls 11146
+barrier 0.23285
+rate_jobs 3282
+rate_force_calls 2692466
+rate 591458408.066
+client_barrier_force_calls 11146
+client_rate_force_calls 2692466
+force_calls 11146
+force_calls_min 11146
+force_calls_max 11146
+force_calls_median 11146
 call_unit total
 nfailed 0
 code EON (SVN r2549)
@@ -13,3 +21,4 @@ problem hTST/Al
 reducer harness
 counter harness
 count_keys HarnessCounter
+seed 42

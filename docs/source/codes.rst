@@ -170,9 +170,9 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">eon/develop-htst-al-dimer-cg2</td>
    <td data-field="version">eOn (develop a7aa57472fb7) a7aa57472fb7</td>
    <td data-field="commit">a7aa57472fb7</td>
-   <td data-field="par2_mean">353</td>
-   <td data-field="mean_calls">353</td>
-   <td data-field="median_calls">353</td>
+   <td data-field="par2_mean">17072</td>
+   <td data-field="mean_calls">17072</td>
+   <td data-field="median_calls">17072</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">1</td>
    </tr>
@@ -323,9 +323,9 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">eon-svn/htst-al-dimer-cg2-r2549</td>
    <td data-field="version">EON (SVN r2549) r2549</td>
    <td data-field="commit">r2549</td>
-   <td data-field="par2_mean">443</td>
-   <td data-field="mean_calls">443</td>
-   <td data-field="median_calls">443</td>
+   <td data-field="par2_mean">11146</td>
+   <td data-field="mean_calls">11146</td>
+   <td data-field="median_calls">11146</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">1</td>
    </tr>
