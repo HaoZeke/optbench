@@ -1,0 +1,19 @@
+mean_epoch 24960.0
+median_epoch 27648.0
+mean_energy_rmse 0.012260744200000001
+median_energy_rmse 0.01031276
+mean_force_rmse 0.14057059
+median_force_rmse 0.091288205
+nfailed 20
+code Pyamff
+code_version 240f51d0
+commit 240f51d01ca22969369f9bc21760c61cbb3b6665
+algorithm LBFGS
+template pyamff/c2h4-lbfgs10-7-fcoeff0-1
+problem mlopt/C2H4
+starts 50
+counter harness
+cap 30000
+parameter_source archive
+profile archive
+note Pyamff 240f51d0 (2026-07-04), unmodified. Same C2H4 problem, 50 random_uniform starts, and convergence as the archive: hidden layers 10 7, tanh, NoScaler, one batch, torch LBFGS learning rate 0.01, force coefficient 0.1, epochs_max 30000, maximum absolute loss gradient on each parameter set below 0.10. One batch makes that per-parameter test the full loss gradient, the same stop as the ADAM row on this commit. The release removed the SE loss, so the run uses SSE. init_model_parameters is true so a fresh model is created. A start fails when the log reports Max Epoch. One harness force call is one logged epoch.

@@ -293,6 +293,18 @@ CAUSE_TEXT = {
         "On infra/aladatom-repro, eon/aladatom-akmc true_rate 3.597591452e9 is 14.1 times 2.542941e8, "
         "and eon/standard-aladatom-akmc true_rate 3.80613e7 is 45.5 times 8.359e5."
     ),
+    "pyamff_force_rmse": (
+        "Pyamff 240f51d0 torch LBFGS compares the 0.10 tolerance to the maximum absolute component of each parameter tensor "
+        "of the last batch loss gradient, inside the closure and before the update. "
+        "The stock default of 100 batches makes that last-batch gradient smaller than 0.10 at initialization, so the logged epoch is 0. "
+        "The gradient the optimizer steps on is the sum across batches. "
+        "LBFGSScipy does not read 0.10; it uses scipy ftol and gtol of 1e-30. "
+        "The C2H4 ADAM row on the same commit uses one batch, so the same per-tensor test is the full loss gradient. "
+        "This row uses that wiring: hidden layers 10 7, tanh, random_uniform on [-1, 1), NoScaler, SSE, force coefficient 0.1, "
+        "learning rate 0.01, tolerance 0.10, and 30000 epochs. "
+        "Mean force RMSE is 0.140571 against 0.119702. "
+        "The epoch means, the energy RMSEs, the median force RMSE, and 20 failures are inside the archive tolerance."
+    ),
 }
 
 

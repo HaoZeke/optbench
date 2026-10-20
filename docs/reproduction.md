@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+46 reproduced, 30 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -151,7 +151,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | C2H4/pyamff-adam10-7-fcoeff0 | — | — | not rerun |
 | C2H4/pyamff-adam10-7-fcoeff0_1 | — | — | not rerun |
 | C2H4/pyamff-lbfgs10-7-fcoeff0 | — | — | not rerun |
-| C2H4/pyamff-lbfgs10-7-fcoeff0_1 | — | — | not rerun; residual |
+| C2H4/pyamff-lbfgs10-7-fcoeff0_1 | mean_epoch 23314.5, median_epoch 25349, mean_energy_rmse 0.0115361, median_energy_rmse 0.00985883, mean_force_rmse 0.119702, median_force_rmse 0.0914002 | 24960, 27648, 0.0122607, 0.0103128, 0.140571, 0.0912882 | not reproduced; pyamff_force_rmse |
 | C2H4/pyamff-rprop10-7-fcoeff0 | — | — | not rerun |
 | C2H4/pyamff-rprop10-7-fcoeff0_1 | — | — | not rerun |
 | emt-pt38/pyamff-adam10-7-fcoeff0 | — | — | not rerun |
@@ -217,7 +217,6 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 ## Residuals inside the band
 
-- mlopt/C2H4/pyamff-lbfgs10-7-fcoeff0_1: Pyamff 0.1.0-beta master 240f51d0 is the ranked harness row pyamff/c2h4-stock. Stock settings on the archived C2H4 trajectory, fifty fresh starts, and loss-gradient tolerance 0.10 stop at the first evaluation (1 harness call, 0 failures). The archived mean epoch is 23314.46. The 8037eb98 campaign stays an unranked diagnostic.
 - tsopt/LJ38/pele_cd: Inside the 10% band (263.52 vs 254). The same xyz-versus-con starting set as ts-ffd. findTS_local.py for the CD row does not pass orthogZeroEigs; the harness template sets orthog translations-rotations. The paper baseline is this 2014-stop mean, not the harness-stop mean 335.06.
 - tsopt/LJ38/pele_ffd: Inside the 10% band (207.51 vs 192). Archive run.sh unpacks coords-xyz.tar.gz (200 xyz, max pair about 4.4). The harness problem points at coords-con.tar.gz (max pair about 37). Kabsch RMS is about 6.33, so the sets are not the same geometry. Neither set has a pair past cutoff 40, and both drivers use RMS tolerance 1e-3/sqrt(114). The 8% residual is the starting set. The paper baseline is this 2014-stop mean, not the harness-stop mean 254.48.
 
@@ -358,5 +357,11 @@ Sella 2.6.0 with the archived trust-region numbers (eta, gamma, delta0, rho, sig
 
 - tsopt/LJ38/sella
 - tsopt/pt-island/sella
+
+### pyamff_force_rmse
+
+Pyamff 240f51d0 torch LBFGS compares the 0.10 tolerance to the maximum absolute component of each parameter tensor of the last batch loss gradient, inside the closure and before the update. The stock default of 100 batches makes that last-batch gradient smaller than 0.10 at initialization, so the logged epoch is 0. The gradient the optimizer steps on is the sum across batches. LBFGSScipy does not read 0.10; it uses scipy ftol and gtol of 1e-30. The C2H4 ADAM row on the same commit uses one batch, so the same per-tensor test is the full loss gradient. This row uses that wiring: hidden layers 10 7, tanh, random_uniform on [-1, 1), NoScaler, SSE, force coefficient 0.1, learning rate 0.01, tolerance 0.10, and 30000 epochs. Mean force RMSE is 0.140571 against 0.119702. The epoch means, the energy RMSEs, the median force RMSE, and 20 failures are inside the archive tolerance.
+
+- mlopt/C2H4/pyamff-lbfgs10-7-fcoeff0_1
 
 Rows with no exact-setup campaign stay not rerun and are not given a cause. AKMC on aladatom is a different method from Langevin parallel replica; the ratios above are that comparison, and the archive rows stay not rerun.
