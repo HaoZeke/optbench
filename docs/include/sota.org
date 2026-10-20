@@ -57,7 +57,7 @@
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="double-ended-saddle-search/pt-island">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Per-image mean</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">eon-svn/de-pt-lanczos-improved</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">180.644</td><td data-field="success_rate">1</td><td data-field="wilson">0.938871–1</td><td data-field="median_calls">161</td><td data-field="mean_calls">180.644</td><td data-field="mean_per_image">60.2147</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">59</td></tr>
+   <tr><td data-field="template">eon-svn/de-pt-dimer</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">192.051</td><td data-field="success_rate">1</td><td data-field="wilson">0.938871–1</td><td data-field="median_calls">188</td><td data-field="mean_calls">192.051</td><td data-field="mean_per_image">64.0169</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">59</td></tr>
    </tbody></table></div>
    <p class="bench-gaps">eOn band rows are not yet on the harness counter. Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/double-ended-saddle-search.html#pt-island">Ranked table, performance profile, and the 2014 archive</a>.</p>
@@ -105,9 +105,8 @@
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/tip4p10">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="11">No full harness row.</td></tr>
+   <tr><td data-field="template">gmin/tip4p10-tbp</td><td data-field="version">GMIN df8da599</td><td data-field="commit">df8da5992675</td><td data-field="source">campaign</td><td data-field="par2_mean">16547.9</td><td data-field="success_rate">1</td><td data-field="wilson">0.999616–1</td><td data-field="median_calls">11980.5</td><td data-field="mean_calls">16547.9</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">10000</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">No committed harness run.</p>
    <p><a href="generated/suites/globalopt.html#tip4p10">Ranked table, performance profile, and the 2014 archive</a>.</p>
    <h3>tip4p15</h3>
    <div class="bench-scroll">
@@ -130,7 +129,7 @@
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="lowest-eigenvector/lj38">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">rgsaddle/mode-lanczos</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">26.12</td><td data-field="success_rate">1</td><td data-field="wilson">0.981155–1</td><td data-field="median_calls">26</td><td data-field="mean_calls">26.12</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
+   <tr><td data-field="template">sella-0.1.1/lj38-loweig</td><td data-field="version">Sella 0.1.1</td><td data-field="commit">0.1.1</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">17.8</td><td data-field="success_rate">1</td><td data-field="wilson">0.981155–1</td><td data-field="median_calls">17</td><td data-field="mean_calls">17.8</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
    </tbody></table></div>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/lowest-eigenvector.html#lj38">Ranked table, performance profile, and the 2014 archive</a>.</p>

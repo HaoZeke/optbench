@@ -1,0 +1,20 @@
+# GMIN df8da599267534fbe43a250e578f7396a7946311. NPCALL stored as force_calls.
+# Keywords from archive/entries/globalopt/tip4p10/gmin-tbp/data.
+# MAXIT 10000 10000 and STEPS 2000000 are MAXIT 1.D4 1.D4 and STEPS 2.D6.
+force_calls 16548
+force_calls_min 127
+force_calls_max 154327
+force_calls_median 11980
+successes 10000
+nfailed 0
+n 10000
+code GMIN
+code_version df8da599
+commit df8da599267534fbe43a250e578f7396a7946311
+algorithm linear temperature basin-paving
+template gmin/tip4p10-tbp
+problem globalopt/tip4p10
+tuning archive
+counter harness
+cap 1000000
+unrounded_mean 16547.9037

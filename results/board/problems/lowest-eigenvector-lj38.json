@@ -187,122 +187,130 @@
   ],
   "profile": {
     "area_log10": {
-      "eon-client/low-lj38-dimer-cg 3.5.0 campaign 4d8b34b": 1.0039350355393775,
-      "eon-client/low-lj38-dimer-lbfgs 3.5.0 campaign 4d8b34b": 1.0272648602033359,
-      "eon-client/low-lj38-lanczos 3.5.0 campaign 4d8b34b": 1.0423163599865348,
-      "eon-svn/low-lj38-dimer-cg r2549 campaign r2549": 1.0039350355393775,
-      "eon-svn/low-lj38-dimer-lbfgs r2549 campaign r2549": 1.0272648602033359,
-      "eon-svn/low-lj38-lanczos-ljcut r2549 campaign r2549": 1.0423163599865348,
-      "eon/develop-low-lj38-dimer 3.6.0 asv 7095b23": 1.0039350355393775,
-      "eon/develop-low-lj38-lanczos 3.6.0 asv 7095b23": 1.0423163599865348,
-      "partn/mode-lj38 1.1.0 default campaign 9b75351": 0.942223886428261,
-      "pysisyphus/lanczos-lj38 0.1.dev1 default campaign a4ce10d": 0.8842756122629448,
-      "rgsaddle/mode-dimer 0.2.2 default campaign, asv c0db2b8": 0.9986670106152576,
-      "rgsaddle/mode-dimer-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.863956087555626,
-      "rgsaddle/mode-lanczos 0.2.2 default campaign, asv c0db2b8": 1.0769348094878928,
-      "rgsaddle/mode-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.9542650862548203,
+      "eon-client/low-lj38-dimer-cg 3.5.0 campaign 4d8b34b": 0.9632959861247398,
+      "eon-client/low-lj38-dimer-lbfgs 3.5.0 campaign 4d8b34b": 0.9828629358428986,
+      "eon-client/low-lj38-lanczos 3.5.0 campaign 4d8b34b": 1.0039350355393772,
+      "eon-svn/low-lj38-dimer-cg r2549 campaign r2549": 0.9632959861247398,
+      "eon-svn/low-lj38-dimer-lbfgs r2549 campaign r2549": 0.9828629358428986,
+      "eon-svn/low-lj38-lanczos-ljcut r2549 campaign r2549": 1.0039350355393772,
+      "eon/develop-low-lj38-dimer 3.6.0 asv 7095b23": 0.9632959861247398,
+      "eon/develop-low-lj38-lanczos 3.6.0 asv 7095b23": 1.0039350355393772,
+      "partn/mode-lj38 1.1.0 default campaign 9b75351": 0.8940590871220242,
+      "pysisyphus/lanczos-lj38 0.1.dev1 default campaign a4ce10d": 0.833100513000068,
+      "rgsaddle/mode-dimer 0.2.2 default campaign, asv c0db2b8": 0.9422238864282612,
+      "rgsaddle/mode-dimer-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.7962243385312302,
+      "rgsaddle/mode-lanczos 0.2.2 default campaign, asv c0db2b8": 1.038553485040735,
+      "rgsaddle/mode-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 0.8820178872954649,
+      "sella-0.1.1/lj38-loweig 0.1.1 archive campaign, asv 0.1.1": 1.1740169830895266,
       "softsaddle/mode-davidson 2019.04 default campaign, asv 5a00aee": 0.0,
-      "softsaddle/mode-davidson-tuned 2019.04 tuned campaign, asv 5a00aee": 0.0030102999566398126,
-      "softsaddle/mode-lanczos 2019.04 default campaign, asv 5a00aee": 0.07826779887263512,
-      "softsaddle/mode-lanczos-tuned 2019.04 tuned campaign, asv 5a00aee": 0.9700691610271794,
-      "tsase/mode-lj38 1.0 default campaign 98aac60": 0.2054529720406672
+      "softsaddle/mode-davidson-tuned 2019.04 tuned campaign, asv 5a00aee": 0.0015051499783199063,
+      "softsaddle/mode-lanczos 2019.04 default campaign, asv 5a00aee": 0.06848432401355573,
+      "softsaddle/mode-lanczos-tuned 2019.04 tuned campaign, asv 5a00aee": 0.9045951369702635,
+      "tsase/mode-lj38 1.0 default campaign 98aac60": 0.15804074772359014
     },
     "rho": {
       "eon-client/low-lj38-dimer-cg 3.5.0 campaign 4d8b34b": [
-        0.01,
-        0.835,
-        0.995,
+        0.0,
+        0.715,
+        0.985,
         1.0,
         1.0
       ],
       "eon-client/low-lj38-dimer-lbfgs 3.5.0 campaign 4d8b34b": [
-        0.055,
-        0.885,
-        1.0,
+        0.01,
+        0.78,
+        0.98,
         1.0,
         1.0
       ],
       "eon-client/low-lj38-lanczos 3.5.0 campaign 4d8b34b": [
-        0.115,
-        0.91,
-        0.995,
+        0.04,
+        0.825,
+        0.99,
         1.0,
         1.0
       ],
       "eon-svn/low-lj38-dimer-cg r2549 campaign r2549": [
-        0.01,
-        0.835,
-        0.995,
+        0.0,
+        0.715,
+        0.985,
         1.0,
         1.0
       ],
       "eon-svn/low-lj38-dimer-lbfgs r2549 campaign r2549": [
-        0.055,
-        0.885,
-        1.0,
+        0.01,
+        0.78,
+        0.98,
         1.0,
         1.0
       ],
       "eon-svn/low-lj38-lanczos-ljcut r2549 campaign r2549": [
-        0.115,
-        0.91,
-        0.995,
+        0.04,
+        0.825,
+        0.99,
         1.0,
         1.0
       ],
       "eon/develop-low-lj38-dimer 3.6.0 asv 7095b23": [
-        0.01,
-        0.835,
-        0.995,
+        0.0,
+        0.715,
+        0.985,
         1.0,
         1.0
       ],
       "eon/develop-low-lj38-lanczos 3.6.0 asv 7095b23": [
-        0.115,
-        0.91,
-        0.995,
+        0.04,
+        0.825,
+        0.99,
         1.0,
         1.0
       ],
       "partn/mode-lj38 1.1.0 default campaign 9b75351": [
-        0.27,
-        0.82,
-        0.87,
+        0.11,
+        0.745,
+        0.865,
         0.87,
         0.87
       ],
       "pysisyphus/lanczos-lj38 0.1.dev1 default campaign a4ce10d": [
-        0.295,
-        0.79,
-        0.8,
+        0.115,
+        0.715,
+        0.795,
         0.8,
         0.8
       ],
       "rgsaddle/mode-dimer 0.2.2 default campaign, asv c0db2b8": [
-        0.095,
-        0.77,
-        1.0,
+        0.0,
+        0.635,
+        0.995,
         1.0,
         1.0
       ],
       "rgsaddle/mode-dimer-tuned 0.2.2 tuned campaign, asv c0db2b8": [
         0.0,
-        0.45,
-        0.925,
-        0.995,
+        0.27,
+        0.885,
+        0.99,
         1.0
       ],
       "rgsaddle/mode-lanczos 0.2.2 default campaign, asv c0db2b8": [
-        0.225,
-        0.965,
+        0.0,
+        0.95,
         1.0,
         1.0,
         1.0
       ],
       "rgsaddle/mode-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": [
-        0.01,
-        0.675,
-        0.99,
+        0.0,
+        0.47,
+        0.96,
+        1.0,
+        1.0
+      ],
+      "sella-0.1.1/lj38-loweig 0.1.1 archive campaign, asv 0.1.1": [
+        0.8,
+        1.0,
+        1.0,
         1.0,
         1.0
       ],
@@ -318,28 +326,28 @@
         0.0,
         0.0,
         0.0,
-        0.02
+        0.01
       ],
       "softsaddle/mode-lanczos 2019.04 default campaign, asv 5a00aee": [
-        0.065,
+        0.0,
         0.065,
         0.065,
         0.065,
         0.065
       ],
       "softsaddle/mode-lanczos-tuned 2019.04 tuned campaign, asv 5a00aee": [
-        0.015,
-        0.715,
-        1.0,
+        0.0,
+        0.525,
+        0.98,
         1.0,
         1.0
       ],
       "tsase/mode-lj38 1.0 default campaign 98aac60": [
         0.0,
-        0.01,
-        0.065,
-        0.28,
-        0.655
+        0.005,
+        0.04,
+        0.19,
+        0.58
       ]
     },
     "solved": {
@@ -357,6 +365,7 @@
       "rgsaddle/mode-dimer-tuned 0.2.2 tuned campaign, asv c0db2b8": 1.0,
       "rgsaddle/mode-lanczos 0.2.2 default campaign, asv c0db2b8": 1.0,
       "rgsaddle/mode-lanczos-tuned 0.2.2 tuned campaign, asv c0db2b8": 1.0,
+      "sella-0.1.1/lj38-loweig 0.1.1 archive campaign, asv 0.1.1": 1.0,
       "softsaddle/mode-davidson 2019.04 default campaign, asv 5a00aee": 0.055,
       "softsaddle/mode-davidson-tuned 2019.04 tuned campaign, asv 5a00aee": 0.855,
       "softsaddle/mode-lanczos 2019.04 default campaign, asv 5a00aee": 0.065,
@@ -372,6 +381,51 @@
     ]
   },
   "ranked": [
+    {
+      "asv_commit": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "Sella",
+      "code_version": "0.1.1",
+      "commit": "0.1.1",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "sella-0.1.1-lj38-loweig",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 200,
+      "history": false,
+      "max_calls": 37.0,
+      "mean_calls": 17.8,
+      "mean_per_image": null,
+      "median": 17.0,
+      "median_calls": 17.0,
+      "median_high": 18.0,
+      "median_low": 16.0,
+      "median_per_image": null,
+      "min_calls": 4.0,
+      "n": 200,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 17.8,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/sella-0.1.1-lj38-loweig.dat; results/asv/dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+      "problem": "lowest-eigenvector/lj38",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign, asv",
+      "success_rate": 1.0,
+      "template": "sella-0.1.1/lj38-loweig",
+      "tuning": "archive",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9811546736227335
+    },
     {
       "asv_commit": "a914203cbb891442232aea2c92f960df9a48dc1d",
       "call_unit": "total",

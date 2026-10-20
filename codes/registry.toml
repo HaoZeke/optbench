@@ -243,6 +243,24 @@ commit = "8de817dd79bfe4525d5d39246a212d833e6dee07"
 committed = "2026-09-30"
 note = "LAMMPS 30 Sep 2026, tag stable_30Sep2026. Band rows use fix neb with a climbing stage and min_style quickmin or fire. The pair style is the spec potential: lj/cut 40 with no shift, and morse 9.5 with pair_modify shift yes. Kspring is 1.0 with the default parallel neigh spring. The timestep is the unit default. Force calls are pair computes summed across replicas. The FIRE row leaves one fifth of the cap unused so a velocity-reset evaluation stays inside the cap."
 
+[[code]]
+id = "sella-0.1.1"
+name = "Sella"
+role = "lowest eigenvector"
+repository = "https://github.com/zadorlab/sella"
+ref = "0.1.1"
+commit = "0.1.1"
+committed = "2019-12-10"
+note = "Sella 0.1.1 PESWrapper.diag for the lowest-eigenvector row. eta 1e-6, gamma 1e-16, vreftol 0.99, gradient v0, rigid-mode projection. This pin is not Sella 2.6.0."
+
+[[template]]
+id = "sella-0.1.1/lj38-loweig"
+code = "sella-0.1.1"
+problem = "lowest-eigenvector/lj38"
+profile = "archive"
+task = "lowest-eigenvector"
+ranked = true
+
 # generated ASE and Sella templates
 
 [[template]]
@@ -303,6 +321,22 @@ ranked = true
 
 [[template]]
 id = "ase/lj38-bfgslinesearch-tuned"
+code = "ase"
+problem = "minimization/lj38"
+profile = "tuned"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/lj38-lbfgslinesearch-default"
+code = "ase"
+problem = "minimization/lj38"
+profile = "default"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/lj38-lbfgslinesearch-tuned"
 code = "ase"
 problem = "minimization/lj38"
 profile = "tuned"
@@ -447,6 +481,22 @@ ranked = true
 
 [[template]]
 id = "ase/morse-bfgslinesearch-tuned"
+code = "ase"
+problem = "minimization/morse-bulk"
+profile = "tuned"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/morse-lbfgslinesearch-default"
+code = "ase"
+problem = "minimization/morse-bulk"
+profile = "default"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/morse-lbfgslinesearch-tuned"
 code = "ase"
 problem = "minimization/morse-bulk"
 profile = "tuned"
