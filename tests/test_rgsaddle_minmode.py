@@ -18,11 +18,13 @@ from optbench.surfaces import lennard_jones, morse_smooth_linear, read_con
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_island_saddle_success_is_a_cartesian_connection():
+def test_island_saddle_success_is_the_eon_per_atom_link():
     problem = resolve_problem(ROOT, "saddle-search/pt-island")
     success = problem["scoring"]["v2"]["success"]
-    assert "Cartesian RMSD" in success
-    assert "Kabsch" not in success
+    assert "distance_difference 0.1" in success
+    assert "energy_difference 0.01" in success
+    assert "RMSD" not in success
+    assert problem["connection"] == {"distance_difference": 0.1, "energy_difference": 0.01}
     assert "max_force_calls" not in (problem.get("convergence") or {})
 
 
