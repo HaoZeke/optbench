@@ -171,7 +171,7 @@ repository = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
 ref = "df8da599"
 commit = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
 committed = "2026-10-19"
-note = "Current Wales svn.tar.bz2 fetched 2026-10-19, 122737951 bytes, Last-Modified Mon, 19 Oct 2026 02:01:38 GMT. The pin is the sha256 of that file. OPTIM/source/SVNREV is df8da599267534fbe43a250e578f7396a7946311. INCLUDE/SVNREV is 26635. The Pt-island DNEB row publishes code optim and version df8da599. NEWNEB uses 6 images. NEWNEB iterations, BFGSTS steps, BFGSSTEPS, and STEPS are the problem cap. The band RMS stays at the OPTIM default. The TS RMS stop is 0.001. The score is OPTIM's energy+gradient count, a band total, on the harness counter."
+note = "Current Wales svn.tar.bz2 fetched 2026-10-19, 122737951 bytes, Last-Modified Mon, 19 Oct 2026 02:01:38 GMT. The pin is the sha256 of that file. OPTIM/source/SVNREV is df8da599267534fbe43a250e578f7396a7946311. INCLUDE/SVNREV is 26635. The Pt-island DNEB row publishes code optim and version df8da599. NEWNEB uses 6 images. STEPS is the outer transition-state step count and equals the problem cap. BFGSSTEPS and the NEWNEB iteration field are that same cap. BFGSTS is the archive line 11 7 30 0.08 100. USEDIAG 3 and OPTIMIZETS are the archive eigenvector-search lines. CONVERGE and MAXERISE are absent from that deck and stay at OPTIM defaults. The band RMS stays at the OPTIM default. The TS RMS stop is 0.001. The score is OPTIM's energy+gradient count, a band total, on the harness counter."
 
 [[code]]
 id = "sella-0.1.1"

@@ -1,16 +1,16 @@
 # OPTIM source df8da599267534fbe43a250e578f7396a7946311, http://www-wales.ch.cam.ac.uk/svn.tar.bz2. sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. INCLUDE revision 26635.
-# NEWCONNECT with NEWNEB 6 3000, BFGSTS 3000 3000 3000, BFGSMIN 0.001, BFGSSTEPS 3000, STEPS 3000.
+# NEWCONNECT with NEWNEB 6 3000, BFGSTS 11 7 30 0.08 100, BFGSMIN 0.001, BFGSSTEPS 3000, STEPS 3000, USEDIAG 3, OPTIMIZETS.
 # Six images is the optim-6 entry: comments.txt says six images are used in DNEB. NEWNEB's first field is that interior count. The problem file band.interior_images is 3, the divisor the other rows use.
-# NEWNEB iterations, BFGSTS steps, BFGSSTEPS, and STEPS are the problem cap 3000. The band RMS stays at the OPTIM default 0.01. BFGSMIN is the problem RMS gradient 0.001.
-# BULK repeats the PARAMS cell so the connection is not run in a zero box. Spring constant, push-off, eigenvalue tolerance, and image density stay at OPTIM defaults.
+# STEPS is the outer transition-state step count and equals the problem cap 3000. BFGSSTEPS and the NEWNEB iteration field are that same cap. The BFGSTS fields are the archive eigenvector search: 11 smallest-eigenvector steps, 7 and 30 tangent-space steps, eigenvalue RMS 0.08, and 100 largest-eigenvector steps. The archive deck has no CONVERGE line and no MAXERISE line, so those stay at OPTIM defaults. BFGSMIN sets the RMS gradient to the problem value 0.001. USEDIAG 3 is the archive first-order Rayleigh-Ritz difference. OPTIMIZETS is the archive eigenvector-following keyword; NEWCONNECT sets the same flag. The band RMS stays at the OPTIM default 0.01.
+# BULK repeats the PARAMS cell so the connection is not run in a zero box. Spring constant, push-off, and image density stay at OPTIM defaults.
 # NOHESS is set because morse bulk has no analytic second derivatives. NONEBMIND keeps the supplied endpoints.
 # The count is the last energy+gradient line. That is the band total the archive script stored, and the unit the other rows rank. The cap 3000 is that total. A start is kept when the log contains Converged to TS and the tally is under the cap.
-force_calls 467
-force_calls_min 273
-force_calls_max 654
-force_calls_median 499
-successes 23
-nfailed 36
+force_calls 222
+force_calls_min 76
+force_calls_max 383
+force_calls_median 236
+successes 59
+nfailed 0
 n 59
 transition_states 0
 code optim
