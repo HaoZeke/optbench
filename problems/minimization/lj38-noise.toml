@@ -40,7 +40,7 @@ sigma = [0.0, 1e-4, 1e-3, 1e-2]
 kappa = 3.0
 window = 5
 seed = 20261016
-rule = "Stop when the noisy force norm is at most max(clean tolerance, kappa * sigma * sqrt(components)) and, when sigma is positive, the clean energy over the last window evaluations spans at most max(energy_tol, kappa * sigma). The Hessian is the clean force. One force sample inside the floor does not stop the search. Newton and dogleg need that exact Hessian, so they run only at sigma 0. Each analytic Hessian-vector product counts as one force call, and a full analytic Hessian costs one product per coordinate."
+rule = "Stop when the noisy force norm is at most max(clean tolerance, kappa * sigma * sqrt(components)) and, when sigma is positive, the clean energy over the last window evaluations spans at most max(energy_tol, kappa * sigma). The Hessian is the clean force. One force sample inside the floor does not stop the search. Newton and dogleg need that exact Hessian, so they run only at sigma 0."
 
 [metrics]
 required = ["force_calls", "force_calls_max", "force_calls_min", "nfailed"]

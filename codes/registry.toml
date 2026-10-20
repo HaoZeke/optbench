@@ -52,7 +52,7 @@ repository = "https://github.com/OmniPotentRPC/rgmin"
 ref = "fix/default-cap-per-method"
 commit = "f15726f1c7983b3656c5dbc2f812e2394e144500"
 committed = "2026-10-17"
-note = "Minimizers, version 0.4.1, branch fix/default-cap-per-method. A Lennard-Jones 38 entry uses the harness force counter. L-BFGS memory defaults to 10. BFGS, dogleg, and FIRE 2.0 start without the 0.2 per-atom cap. The other Cartesian methods start at 0.2. An explicit cap still applies. SR1 and SR2 step in a trust region sized to that cap. DIIS searches the GDIIS image. Adam scales its direction to unit per-atom length. Newton, dogleg, and rfo take an analytic Hessian. Each matrix costs one force call per coordinate."
+note = "Minimizers, version 0.4.1, branch fix/default-cap-per-method. A Lennard-Jones 38 entry uses the harness force counter. L-BFGS memory defaults to 10. BFGS, dogleg, and FIRE 2.0 start without the 0.2 per-atom cap. The other Cartesian methods start at 0.2. An explicit cap still applies. SR1 and SR2 step in a trust region sized to that cap. DIIS searches the GDIIS image. Adam scales its direction to unit per-atom length."
 
 [[code]]
 id = "rgsaddle"
@@ -152,16 +152,6 @@ ref = "0.1.6"
 commit = "5b145886c19042f2ef13e21627f28d86027f719c"
 committed = "2026-08-12"
 note = "GeometryOptimization 0.1.6, tag v0.1.6, commit 5b145886. Optim.jl 1.13.3, registry tree 48968edaf014f67e58fe4c8a4ce72d392aed3294. The minimizers are OptimLBFGS, OptimCG, and OptimSD. OptimSD is GradientDescent. The linesearch is BackTracking of order 2 with maxstep 0.8 bohr. LBFGS uses the Hager-Zhang initial step. Force calls are harness evaluations of the spec potential."
-
-[[code]]
-id = "scipy"
-name = "SciPy"
-role = "minimization"
-repository = "https://github.com/scipy/scipy"
-ref = "v1.18.1"
-commit = "e4e854eaa8f18d807cd3496028e257e36caa93cc"
-committed = "2026-08-21"
-note = "SciPy 1.18.1 built from tag v1.18.1. L-BFGS-B, BFGS, and CG take the harness energy and Jacobian. trust-krylov, trust-ncg, and Newton-CG also take analytic Hessian-vector products. Each product counts as one force call. L-BFGS-B, trust-krylov, and trust-ncg refuse a trial that would move an atom by more than 0.2. BFGS, CG, and Newton-CG map that trial back inside the ball. The map is the identity through 0.18."
 
 [[code]]
 id = "artn"
@@ -430,26 +420,10 @@ task = "minimize"
 ranked = true
 
 [[template]]
-id = "ase/lj38-bfgs-tuned"
-code = "ase"
-problem = "minimization/lj38"
-profile = "tuned"
-task = "minimize"
-ranked = true
-
-[[template]]
 id = "ase/lj38-lbfgs-default"
 code = "ase"
 problem = "minimization/lj38"
 profile = "default"
-task = "minimize"
-ranked = true
-
-[[template]]
-id = "ase/lj38-lbfgs-tuned"
-code = "ase"
-problem = "minimization/lj38"
-profile = "tuned"
 task = "minimize"
 ranked = true
 
@@ -462,26 +436,10 @@ task = "minimize"
 ranked = true
 
 [[template]]
-id = "ase/lj38-fire-tuned"
-code = "ase"
-problem = "minimization/lj38"
-profile = "tuned"
-task = "minimize"
-ranked = true
-
-[[template]]
 id = "ase/lj38-bfgslinesearch-default"
 code = "ase"
 problem = "minimization/lj38"
 profile = "default"
-task = "minimize"
-ranked = true
-
-[[template]]
-id = "ase/lj38-bfgslinesearch-tuned"
-code = "ase"
-problem = "minimization/lj38"
-profile = "tuned"
 task = "minimize"
 ranked = true
 
@@ -494,26 +452,10 @@ task = "minimize"
 ranked = true
 
 [[template]]
-id = "ase/lj38-gpmin-tuned"
-code = "ase"
-problem = "minimization/lj38"
-profile = "tuned"
-task = "minimize"
-ranked = true
-
-[[template]]
 id = "ase/lj38-preconlbfgs-default"
 code = "ase"
 problem = "minimization/lj38"
 profile = "default"
-task = "minimize"
-ranked = true
-
-[[template]]
-id = "ase/lj38-preconlbfgs-tuned"
-code = "ase"
-problem = "minimization/lj38"
-profile = "tuned"
 task = "minimize"
 ranked = true
 
@@ -526,26 +468,10 @@ task = "minimize"
 ranked = true
 
 [[template]]
-id = "ase/lj38-preconfire-tuned"
-code = "ase"
-problem = "minimization/lj38"
-profile = "tuned"
-task = "minimize"
-ranked = true
-
-[[template]]
 id = "ase/lj38-preconode12r-default"
 code = "ase"
 problem = "minimization/lj38"
 profile = "default"
-task = "minimize"
-ranked = true
-
-[[template]]
-id = "ase/lj38-preconode12r-tuned"
-code = "ase"
-problem = "minimization/lj38"
-profile = "tuned"
 task = "minimize"
 ranked = true
 
@@ -558,26 +484,10 @@ task = "sella"
 ranked = true
 
 [[template]]
-id = "sella/lj38-min-tuned"
-code = "sella"
-problem = "minimization/lj38"
-profile = "tuned"
-task = "sella"
-ranked = true
-
-[[template]]
 id = "ase/morse-bfgs-default"
 code = "ase"
 problem = "minimization/morse-bulk"
 profile = "default"
-task = "minimize"
-ranked = true
-
-[[template]]
-id = "ase/morse-bfgs-tuned"
-code = "ase"
-problem = "minimization/morse-bulk"
-profile = "tuned"
 task = "minimize"
 ranked = true
 
@@ -590,26 +500,10 @@ task = "minimize"
 ranked = true
 
 [[template]]
-id = "ase/morse-lbfgs-tuned"
-code = "ase"
-problem = "minimization/morse-bulk"
-profile = "tuned"
-task = "minimize"
-ranked = true
-
-[[template]]
 id = "ase/morse-fire-default"
 code = "ase"
 problem = "minimization/morse-bulk"
 profile = "default"
-task = "minimize"
-ranked = true
-
-[[template]]
-id = "ase/morse-fire-tuned"
-code = "ase"
-problem = "minimization/morse-bulk"
-profile = "tuned"
 task = "minimize"
 ranked = true
 
@@ -622,26 +516,10 @@ task = "minimize"
 ranked = true
 
 [[template]]
-id = "ase/morse-bfgslinesearch-tuned"
-code = "ase"
-problem = "minimization/morse-bulk"
-profile = "tuned"
-task = "minimize"
-ranked = true
-
-[[template]]
 id = "ase/morse-gpmin-default"
 code = "ase"
 problem = "minimization/morse-bulk"
 profile = "default"
-task = "minimize"
-ranked = true
-
-[[template]]
-id = "ase/morse-gpmin-tuned"
-code = "ase"
-problem = "minimization/morse-bulk"
-profile = "tuned"
 task = "minimize"
 ranked = true
 
@@ -654,26 +532,10 @@ task = "minimize"
 ranked = true
 
 [[template]]
-id = "ase/morse-preconlbfgs-tuned"
-code = "ase"
-problem = "minimization/morse-bulk"
-profile = "tuned"
-task = "minimize"
-ranked = true
-
-[[template]]
 id = "ase/morse-preconfire-default"
 code = "ase"
 problem = "minimization/morse-bulk"
 profile = "default"
-task = "minimize"
-ranked = true
-
-[[template]]
-id = "ase/morse-preconfire-tuned"
-code = "ase"
-problem = "minimization/morse-bulk"
-profile = "tuned"
 task = "minimize"
 ranked = true
 
@@ -686,26 +548,10 @@ task = "minimize"
 ranked = true
 
 [[template]]
-id = "ase/morse-preconode12r-tuned"
-code = "ase"
-problem = "minimization/morse-bulk"
-profile = "tuned"
-task = "minimize"
-ranked = true
-
-[[template]]
 id = "sella/morse-min-default"
 code = "sella"
 problem = "minimization/morse-bulk"
 profile = "default"
-task = "sella"
-ranked = true
-
-[[template]]
-id = "sella/morse-min-tuned"
-code = "sella"
-problem = "minimization/morse-bulk"
-profile = "tuned"
 task = "sella"
 ranked = true
 
@@ -718,26 +564,10 @@ task = "sella"
 ranked = true
 
 [[template]]
-id = "sella/lj38-ts-tuned"
-code = "sella"
-problem = "tsopt/LJ38"
-profile = "tuned"
-task = "sella"
-ranked = true
-
-[[template]]
 id = "sella/pt-island-ts-default"
 code = "sella"
 problem = "tsopt/pt-island"
 profile = "default"
-task = "sella"
-ranked = true
-
-[[template]]
-id = "sella/pt-island-ts-tuned"
-code = "sella"
-problem = "tsopt/pt-island"
-profile = "tuned"
 task = "sella"
 ranked = true
 
@@ -750,26 +580,10 @@ task = "neb"
 ranked = true
 
 [[template]]
-id = "ase/neb-pt-heptamer-tuned"
-code = "ase"
-problem = "neb/Pt-heptamer"
-profile = "tuned"
-task = "neb"
-ranked = true
-
-[[template]]
 id = "ase/de-lj38-default"
 code = "ase"
 problem = "double-ended-saddle-search/lj38"
 profile = "default"
-task = "neb"
-ranked = true
-
-[[template]]
-id = "ase/de-lj38-tuned"
-code = "ase"
-problem = "double-ended-saddle-search/lj38"
-profile = "tuned"
 task = "neb"
 ranked = true
 
@@ -782,26 +596,10 @@ task = "neb"
 ranked = true
 
 [[template]]
-id = "ase/de-pt-island-tuned"
-code = "ase"
-problem = "double-ended-saddle-search/pt-island"
-profile = "tuned"
-task = "neb"
-ranked = true
-
-[[template]]
 id = "ase/de-lj38-2ts-default"
 code = "ase"
 problem = "double-ended-saddle-search/lj38_2ts_separation"
 profile = "default"
-task = "neb"
-ranked = true
-
-[[template]]
-id = "ase/de-lj38-2ts-tuned"
-code = "ase"
-problem = "double-ended-saddle-search/lj38_2ts_separation"
-profile = "tuned"
 task = "neb"
 ranked = true
 
@@ -814,26 +612,10 @@ task = "sella-neb"
 ranked = true
 
 [[template]]
-id = "sella/de-lj38-tuned"
-code = "sella"
-problem = "double-ended-saddle-search/lj38"
-profile = "tuned"
-task = "sella-neb"
-ranked = true
-
-[[template]]
 id = "sella/de-pt-island-default"
 code = "sella"
 problem = "double-ended-saddle-search/pt-island"
 profile = "default"
-task = "sella-neb"
-ranked = true
-
-[[template]]
-id = "sella/de-pt-island-tuned"
-code = "sella"
-problem = "double-ended-saddle-search/pt-island"
-profile = "tuned"
 task = "sella-neb"
 ranked = true
 
@@ -846,14 +628,6 @@ task = "sella-neb"
 ranked = true
 
 [[template]]
-id = "sella/de-lj38-2ts-tuned"
-code = "sella"
-problem = "double-ended-saddle-search/lj38_2ts_separation"
-profile = "tuned"
-task = "sella-neb"
-ranked = true
-
-[[template]]
 id = "ase/dimer-pt-island-default"
 code = "ase"
 problem = "saddle-search/pt-island"
@@ -862,25 +636,9 @@ task = "dimer"
 ranked = false
 
 [[template]]
-id = "ase/dimer-pt-island-tuned"
-code = "ase"
-problem = "saddle-search/pt-island"
-profile = "tuned"
-task = "dimer"
-ranked = false
-
-[[template]]
 id = "sella/pt-island-search-default"
 code = "sella"
 problem = "saddle-search/pt-island"
 profile = "default"
-task = "sella-search"
-ranked = false
-
-[[template]]
-id = "sella/pt-island-search-tuned"
-code = "sella"
-problem = "saddle-search/pt-island"
-profile = "tuned"
 task = "sella-search"
 ranked = false

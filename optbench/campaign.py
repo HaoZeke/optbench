@@ -505,24 +505,6 @@ def run(
             limit=limit,
             resume=resume,
         )
-    if template["engine"] == "scipy":
-        from .runners.scipy_min import run_template
-
-        problem = resolve_problem(root, problem_name)
-        stated = template.get("problem")
-        if stated and stated != problem["id"]:
-            raise ValueError(f"{template_name} belongs to {stated}")
-        return run_template(
-            root,
-            problem,
-            template,
-            geometries=geometries,
-            output=output,
-            workers=workers,
-            work=work,
-            limit=limit,
-            resume=resume,
-        )
     if template["engine"] == "saddlesearchjl":
         from .saddlesearchjl import run_template
 

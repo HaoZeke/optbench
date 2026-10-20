@@ -28,7 +28,7 @@ def test_catalog_covers_every_problem_and_both_profiles():
         by_problem.setdefault(spec["problem"], set()).add(spec["profile"])
     assert set(by_problem) == PROBLEMS
     for profiles in by_problem.values():
-        assert profiles == {"default", "tuned"}
+        assert profiles == {"default"}
     lj = [spec for spec in specs if spec["problem"] == "minimization/lj38"]
     assert {spec["algorithm"] for spec in lj} == set(OPTIMIZERS) | {"Sella"}
     dimer = [spec for spec in specs if spec["problem"] == "saddle-search/pt-island"]
@@ -47,15 +47,12 @@ def test_templates_match_the_catalog_and_registry():
         assert loaded["problem"] == spec["problem"]
         assert loaded["optimizer"]["name"]
         assert loaded["stop"]["max_force_calls"] > 0
-    tuned = load_template(ROOT, "ase/lj38-lbfgs-tuned")
-    assert tuned["optimizer"]["parameters"]["memory"] == 100
-    assert abs(float(tuned["optimizer"]["parameters"]["alpha"]) - 1000.0) < 1e-9
+    default = load_template(ROOT, "ase/lj38-lbfgs-default")
+    assert "memory" not in default["optimizer"]["parameters"]
     sella = load_template(ROOT, "sella/lj38-ts-default")
     assert sella["optimizer"]["parameters"]["order"] == 1
     assert "delta0" not in sella["optimizer"]["parameters"]
     assert sella["reducer"] == "all"
-    tuned_sella = load_template(ROOT, "sella/lj38-ts-tuned")
-    assert tuned_sella["optimizer"]["parameters"]["delta0"] == 1.3e-3
     registry = tomllib.loads((ROOT / "codes" / "registry.toml").read_text(encoding="utf-8"))
     names = {row["id"] for row in registry["code"]}
     assert {"eon", "ase", "sella"} <= names

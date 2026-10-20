@@ -61,13 +61,9 @@ def test_search_seed_is_the_optim_formula():
     "name",
     [
         "rgsaddle/saddle-dimer-lbfgs",
-        "rgsaddle/saddle-dimer-lbfgs-tuned",
         "rgsaddle/saddle-dimer-fire",
-        "rgsaddle/saddle-dimer-fire-tuned",
         "rgsaddle/saddle-dimer-rotskip",
-        "rgsaddle/saddle-dimer-rotskip-tuned",
         "rgsaddle/saddle-lanczos",
-        "rgsaddle/saddle-lanczos-tuned",
     ],
 )
 def test_archived_rgsaddle_templates_name_the_shared_radius(name):

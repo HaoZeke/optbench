@@ -59,7 +59,7 @@ def test_registry_commit_matches_both_templates():
         assert loaded["commit"] == row["commit"]
         assert loaded["code"] == "LAMMPS"
         assert loaded["code_version"] == "30 Sep 2026"
-        assert loaded["tuning"] in {"default", "tuned"}
+        assert loaded["tuning"] == "default"
         assert loaded["band"]["climbing"] is True
         assert loaded["band"]["spring_k"] == 1.0
         assert loaded["band"]["parallel"] == "neigh"
@@ -67,14 +67,8 @@ def test_registry_commit_matches_both_templates():
         assert "timestep_scale" not in loaded["band"]
     assert load_template(ROOT, "lammpsneb/ci-fire")["band"]["call_reserve"] == 0.2
     assert load_template(ROOT, "lammpsneb/ci-quickmin")["band"]["call_reserve"] == 0.0
-    assert load_template(ROOT, "lammpsneb/ci-fire-tuned")["band"]["step_budget"] == "climb"
-    assert load_template(ROOT, "lammpsneb/ci-fire-tuned")["band"]["call_reserve"] == 0.2
-    assert load_template(ROOT, "lammpsneb/ci-quickmin-tuned")["band"]["step_budget"] == "climb"
-    assert load_template(ROOT, "lammpsneb/ci-quickmin-tuned")["band"]["call_reserve"] == 0.0
     assert found == [
-        "lammpsneb/ci-fire-tuned",
         "lammpsneb/ci-fire",
-        "lammpsneb/ci-quickmin-tuned",
         "lammpsneb/ci-quickmin",
     ]
 
@@ -312,12 +306,7 @@ def test_board_index_names_the_lammps_classes():
     quick = index["bench_lammpsneb.HeptamerLammpsnebCiQuickmin"]
     fire = index["bench_lammpsneb.Lj38DeLammpsnebCiFire"]
     assert quick == {"template": "lammpsneb/ci-quickmin", "problem": "neb/Pt-heptamer", "cap": 10000}
-    tuned = index["bench_lammpsneb.Lj38DeLammpsnebCiFireTuned"]
-    assert tuned == {
-        "template": "lammpsneb/ci-fire-tuned",
-        "problem": "double-ended-saddle-search/lj38",
-        "cap": 2500,
-    }
+    assert "bench_lammpsneb.Lj38DeLammpsnebCiFireTuned" not in index
     assert fire["template"] == "lammpsneb/ci-fire"
     assert fire["problem"] == "double-ended-saddle-search/lj38"
     assert fire["cap"] == 2500

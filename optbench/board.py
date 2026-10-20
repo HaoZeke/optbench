@@ -855,7 +855,6 @@ def _benchmark_index() -> dict[str, dict]:
         "benchmarks.bench_optax",
         "benchmarks.bench_geomoptjl",
         "benchmarks.bench_panna",
-        "benchmarks.bench_scipy",
         "benchmarks.bench_kliff",
         "benchmarks.quadratic",
     )

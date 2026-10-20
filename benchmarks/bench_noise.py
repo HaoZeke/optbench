@@ -47,8 +47,6 @@ def _ready(family: str) -> bool:
             import sqnm.sqnm  # noqa: F401
         elif family == "pele":
             import pele  # noqa: F401
-        elif family == "scipy":
-            import scipy  # noqa: F401
         else:
             return False
     except ImportError:

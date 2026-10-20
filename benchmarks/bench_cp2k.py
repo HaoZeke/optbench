@@ -41,11 +41,8 @@ PROBLEMS = (
 
 TEMPLATES = (
     ("CiNeb", "cp2k/ci-neb"),
-    ("CiNebTuned", "cp2k/ci-neb-tuned"),
     ("ItNeb", "cp2k/it-neb"),
-    ("ItNebTuned", "cp2k/it-neb-tuned"),
     ("String", "cp2k/string"),
-    ("StringTuned", "cp2k/string-tuned"),
 )
 
 TRACKS = (
@@ -390,9 +387,7 @@ def _bind_dimer(class_name: str, template_id: str, problem_id: str, starts: list
 
 _ROWS = [
     ("Cp2kLj38DimerCg", "cp2k/lj38-dimer-cg", "tsopt/LJ38", _selected(lj38_start_names()), 3600),
-    ("Cp2kLj38DimerCgTuned", "cp2k/lj38-dimer-cg-tuned", "tsopt/LJ38", _selected(lj38_start_names()), 3600),
     ("Cp2kPtDimerCg", "cp2k/pt-island-dimer-cg", "tsopt/pt-island", _selected(pt_start_names()), 7200),
-    ("Cp2kPtDimerCgTuned", "cp2k/pt-island-dimer-cg-tuned", "tsopt/pt-island", _selected(pt_start_names()), 7200),
 ]
 
 for _class_name, _template_id, _problem_id, _starts, _timeout in _ROWS:

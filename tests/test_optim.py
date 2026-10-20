@@ -199,9 +199,7 @@ def test_asv_discovers_only_the_userpot_templates():
     ]
     assert {row.spec["template_id"] for row in classes} == {
         "optim/lj38-lbfgs",
-        "optim/lj38-lbfgs-tuned",
         "optim/morse-lbfgs",
-        "optim/morse-lbfgs-tuned",
         "optim/noise-lbfgs-s0",
         "optim/noise-lbfgs-s1em4",
         "optim/noise-lbfgs-s1em3",
@@ -218,9 +216,7 @@ def test_optim_templates_match_the_tarball_pin():
     assert pinned["committed"] == "2026-10-18"
     wanted = {
         "optim/lj38-lbfgs",
-        "optim/lj38-lbfgs-tuned",
         "optim/morse-lbfgs",
-        "optim/morse-lbfgs-tuned",
         "optim/noise-lbfgs-s0",
         "optim/noise-lbfgs-s1em4",
         "optim/noise-lbfgs-s1em3",
@@ -242,9 +238,7 @@ def test_optim_templates_match_the_tarball_pin():
         seen.add(template["id"])
     assert seen == {
         "optim/lj38-lbfgs",
-        "optim/lj38-lbfgs-tuned",
         "optim/morse-lbfgs",
-        "optim/morse-lbfgs-tuned",
         "optim/noise-lbfgs-s0",
         "optim/noise-lbfgs-s1em4",
         "optim/noise-lbfgs-s1em3",
@@ -252,8 +246,6 @@ def test_optim_templates_match_the_tarball_pin():
     }
     by_id = {row["id"]: row for row in found}
     assert by_id["optim/lj38-lbfgs"]["optim"] == {"updates": 4, "maxbfgs": 0.2}
-    assert by_id["optim/lj38-lbfgs-tuned"]["optim"]["updates"] == 1000
-    assert by_id["optim/morse-lbfgs-tuned"]["optim"] == {"updates": 100, "maxbfgs": 2.0}
+    assert by_id["optim/morse-lbfgs"]["optim"] == {"updates": 4, "maxbfgs": 0.2}
     assert by_id["optim/noise-lbfgs-s1em2"]["noise"]["sigma"] == 0.01
     assert by_id["optim/lj38-lbfgs"]["tuning"] == "default"
-    assert by_id["optim/lj38-lbfgs-tuned"]["tuning"] == "tuned"

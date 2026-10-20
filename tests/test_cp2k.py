@@ -278,7 +278,7 @@ def test_render_input_is_ipi_dimer_not_fist():
 
 def test_shipped_cp2k_templates_match_the_pin():
     found = [template for template in list_templates(ROOT) if template.get("engine") == "cp2k"]
-    assert len(found) == 6
+    assert len(found) == 3
     saddle = []
     tsopt = []
     for template in found:
@@ -298,14 +298,11 @@ def test_shipped_cp2k_templates_match_the_pin():
             assert float(template["stop"]["force_norm"]) == pytest.approx(0.001)
             tsopt.append(template["id"])
         block = template["cp2k"]
-        if template["tuning"] == "tuned":
-            assert block["force_match"] == "l2"
-            assert block["model_hessian"] is False
-        else:
-            assert block["force_match"] == "library"
-            assert block["max_iter"] == 200
-    assert len(tsopt) == 4
-    assert len(saddle) == 2
+        assert template["tuning"] == "default"
+        assert block["force_match"] == "library"
+        assert block["max_iter"] == 200
+    assert len(tsopt) == 2
+    assert len(saddle) == 1
     assert SEARCH_CAP == 1000 + 64 + 4000
 
 
@@ -322,7 +319,7 @@ def test_asv_classes_import_and_follow_the_full_flag(monkeypatch):
     monkeypatch.setenv("OPTBENCH_ASV_FULL", "1")
     bench = importlib.reload(bench)
     assert len(bench.Cp2kLj38DimerCg.params[1]) == 200
-    assert len(bench.Cp2kPtDimerCgTuned.params[1]) == 49
+    assert len(bench.Cp2kPtDimerCg.params[1]) == 49
     monkeypatch.delenv("OPTBENCH_ASV_FULL", raising=False)
     importlib.reload(bench)
 

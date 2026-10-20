@@ -43,8 +43,6 @@ PROBLEMS = (
 TEMPLATES = (
     ("CiQuickmin", "lammpsneb/ci-quickmin"),
     ("CiFire", "lammpsneb/ci-fire"),
-    ("CiQuickminTuned", "lammpsneb/ci-quickmin-tuned"),
-    ("CiFireTuned", "lammpsneb/ci-fire-tuned"),
 )
 
 TRACKS = (

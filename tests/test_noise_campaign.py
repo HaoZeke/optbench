@@ -9,7 +9,7 @@ import pytest
 
 from optbench.campaign import list_templates
 from optbench.noise import SIGMA_LEVELS, window_energy_tolerance
-from optbench.noise_catalog import HESSIAN_METHODS, allows_method, allows_scipy, sigma_slug, specs
+from optbench.noise_catalog import HESSIAN_METHODS, allows_method, sigma_slug, specs
 from optbench.problems import load_problem
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -31,7 +31,7 @@ def test_lj38_noise_does_not_invent_a_reference():
 
 def test_noise_catalog_covers_the_campaign_and_skips_exact_hessians():
     catalog = specs()
-    assert len(catalog) == 77
+    assert len(catalog) == 62
     on_disk = [row for row in list_templates(ROOT) if row.get("engine") == "noise"]
     assert {row["id"] for row in on_disk} == {row["id"] for row in catalog}
     by_id = {row["id"]: row for row in on_disk}
@@ -75,17 +75,6 @@ def test_noise_catalog_covers_the_campaign_and_skips_exact_hessians():
     for name in ("lbfgs", "mylbfgs", "fire", "sd"):
         for sigma in SIGMA_LEVELS:
             assert f"noise/pele-{name}-{sigma_slug(sigma)}" in by_id
-    for name in ("lbfgsb", "bfgs", "cg"):
-        for sigma in SIGMA_LEVELS:
-            assert f"noise/scipy-{name}-{sigma_slug(sigma)}" in by_id
-    for name in ("trust-krylov", "trust-ncg", "newton-cg"):
-        assert f"noise/scipy-{name}-s0" in by_id
-        for sigma in SIGMA_LEVELS:
-            if sigma == 0.0:
-                continue
-            assert f"noise/scipy-{name}-{sigma_slug(sigma)}" not in by_id
-    assert allows_scipy("Newton-CG", 1e-3) is False
-    assert allows_scipy("BFGS", 1e-3) is True
 
 
 def test_exact_hessian_job_is_refused():
@@ -107,8 +96,3 @@ def test_exact_hessian_job_is_refused():
     }
     with pytest.raises(ValueError, match="exact Hessian"):
         _minimize_job(job)
-    scipy_job = dict(job)
-    scipy_job["family"] = "scipy"
-    scipy_job["method"] = "Newton-CG"
-    with pytest.raises(ValueError, match="analytic Hessian"):
-        _minimize_job(scipy_job)

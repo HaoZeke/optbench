@@ -23,7 +23,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="minimization/lj38">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">optim/lj38-lbfgs-tuned</td><td data-field="version">optim 02aaf45245af</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">175.537</td><td data-field="success_rate">1</td><td data-field="wilson">0.996173–1</td><td data-field="median_calls">164</td><td data-field="mean_calls">175.537</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">1000</td></tr>
+   <tr><td data-field="template">rgmin/lj38-dogleg</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">81.881</td><td data-field="success_rate">1</td><td data-field="wilson">0.996173–1</td><td data-field="median_calls">79</td><td data-field="mean_calls">81.881</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">1000</td></tr>
    </tbody></table></div>
    <p class="bench-gaps">Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
    <p><a href="generated/suites/minimization.html#lj38">Full ranked table and performance profile</a>.</p>
@@ -317,7 +317,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="minimization/lj38-noise">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">noise/rgmin-dogleg-s0</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">asv</td><td data-field="par2_mean">81.881</td><td data-field="success_rate">1</td><td data-field="wilson">0.996173–1</td><td data-field="median_calls">79</td><td data-field="mean_calls">81.881</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">1000</td></tr>
+   <tr><td data-field="template">noise/rgmin-dogleg-s0</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">81.881</td><td data-field="success_rate">1</td><td data-field="wilson">0.996173–1</td><td data-field="median_calls">79</td><td data-field="mean_calls">81.881</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">1000</td></tr>
    </tbody></table></div>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/minimization-lj38-noise.html">Full ranked table and performance profile</a>.</p>
@@ -347,7 +347,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="minimization/morse-bulk">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">scipy/morse-lbfgsb</td><td data-field="version">SciPy 1.18.1</td><td data-field="commit">e4e854eaa8f1</td><td data-field="source">campaign</td><td data-field="par2_mean">26.31</td><td data-field="success_rate">1</td><td data-field="wilson">0.963007–1</td><td data-field="median_calls">26</td><td data-field="mean_calls">26.31</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">rgmin/morse-newton</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">8.35</td><td data-field="success_rate">1</td><td data-field="wilson">0.963007–1</td><td data-field="median_calls">9</td><td data-field="mean_calls">8.35</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    <p class="bench-gaps">Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
    <p><a href="generated/suites/minimization.html#morse-bulk">Full ranked table and performance profile</a>.</p>

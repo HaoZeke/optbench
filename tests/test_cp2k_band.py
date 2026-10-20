@@ -509,29 +509,15 @@ def test_templates_name_the_registry_commit():
     assert pinned["commit"] == COMMIT
     found = [row for row in list_templates(ROOT) if row.get("engine") == "cp2k-band"]
     assert [row["id"] for row in found] == [
-        "cp2k/ci-neb-tuned",
         "cp2k/ci-neb",
-        "cp2k/it-neb-tuned",
         "cp2k/it-neb",
-        "cp2k/string-tuned",
         "cp2k/string",
     ]
     for row in found:
         assert row["commit"] == pinned["commit"]
         assert row["code"] == "CP2K"
+        assert row["tuning"] == "default"
         assert row["band"]["band_type"] in {"CI-NEB", "IT-NEB", "SM"}
-    tuned = [row for row in found if row["tuning"] == "tuned"]
-    assert [row["id"] for row in tuned] == [
-        "cp2k/ci-neb-tuned",
-        "cp2k/it-neb-tuned",
-        "cp2k/string-tuned",
-    ]
-    for row in tuned:
-        assert row["band"]["opt_type"] == "MD"
-        assert row["band"]["k_spring"] == pytest.approx(0.05)
-        assert row["band"]["timestep"] == pytest.approx(0.5)
-        assert row["band"]["temperature"] == pytest.approx(100.0)
-        assert row["band"]["annealing"] == pytest.approx(0.95)
 
 
 @pytest.mark.skipif(binary_path() is None, reason="CP2K binary is not built on this machine")

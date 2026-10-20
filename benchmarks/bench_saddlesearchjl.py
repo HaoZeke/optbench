@@ -162,17 +162,14 @@ _ROWS = [
     ("SsjlLj38Static", "saddlesearchjl/lj38-static", "tsopt/LJ38", selected_lj38(), 600),
     ("SsjlLj38Bb", "saddlesearchjl/lj38-bb", "tsopt/LJ38", selected_lj38(), 600),
     ("SsjlLj38Superlinear", "saddlesearchjl/lj38-superlinear", "tsopt/LJ38", selected_lj38(), 600),
-    ("SsjlLj38SuperlinearTuned", "saddlesearchjl/lj38-superlinear-tuned", "tsopt/LJ38", selected_lj38(), 600),
     ("SsjlLj38Ode", "saddlesearchjl/lj38-ode", "tsopt/LJ38", selected_lj38(), 600),
     ("SsjlPtStatic", "saddlesearchjl/pt-static", "tsopt/pt-island", selected_pt(), 900),
     ("SsjlPtBb", "saddlesearchjl/pt-bb", "tsopt/pt-island", selected_pt(), 900),
     ("SsjlPtSuperlinear", "saddlesearchjl/pt-superlinear", "tsopt/pt-island", selected_pt(), 900),
-    ("SsjlPtSuperlinearTuned", "saddlesearchjl/pt-superlinear-tuned", "tsopt/pt-island", selected_pt(), 900),
     ("SsjlPtOde", "saddlesearchjl/pt-ode", "tsopt/pt-island", selected_pt(), 900),
     ("SsjlModeStatic", "saddlesearchjl/mode-static", "lowest-eigenvector/lj38", selected_lj38(), 600),
     ("SsjlModeBb", "saddlesearchjl/mode-bb", "lowest-eigenvector/lj38", selected_lj38(), 600),
     ("SsjlModeSuperlinear", "saddlesearchjl/mode-superlinear", "lowest-eigenvector/lj38", selected_lj38(), 600),
-    ("SsjlModeSuperlinearTuned", "saddlesearchjl/mode-superlinear-tuned", "lowest-eigenvector/lj38", selected_lj38(), 600),
 ]
 
 for _class_name, _template_id, _problem_id, _starts, _timeout in _ROWS:

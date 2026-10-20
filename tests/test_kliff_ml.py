@@ -21,14 +21,14 @@ def test_kliff_templates_cover_both_problems():
     assert pinned["commit"] == COMMIT
     assert pinned["name"] == "KLIFF"
     found = _templates()
-    assert len(found) == 20
+    assert len(found) == 12
     seen = set()
     for template in found:
         assert template["engine"] == "kliff"
         assert template["code"] == "KLIFF"
         assert template["commit"] == COMMIT
         assert template["code_version"] == "1.0.1"
-        assert template["tuning"] in ("default", "tuned")
+        assert template["tuning"] == "default"
         assert template["kliff"]["method"] in ("Adam", "LBFGS", "Rprop")
         assert template["kliff"]["seed_base"] == 20261015
         assert template["model"]["hidden"] == [10, 7]
@@ -39,10 +39,7 @@ def test_kliff_templates_cover_both_problems():
         if template["kliff"]["method"] == "Rprop":
             assert template["tuning"] == "default"
             assert "learning_rate" not in template["kliff"]
-        if template["tuning"] == "tuned":
-            assert float(template["kliff"]["learning_rate"]) == 0.01
-        if template["tuning"] == "default":
-            assert "learning_rate" not in template["kliff"]
+        assert "learning_rate" not in template["kliff"]
         if template["problem"] == "mlopt/emt-pt38":
             assert int(template["stop"]["max_force_calls"]) == 10000
         elif force == 0.0:
@@ -56,7 +53,6 @@ def test_kliff_templates_cover_both_problems():
         for method in ("Adam", "LBFGS"):
             for force in (0.0, 0.1):
                 assert (problem, method, "default", force) in seen
-                assert (problem, method, "tuned", force) in seen
         for force in (0.0, 0.1):
             assert (problem, "Rprop", "default", force) in seen
             assert (problem, "Rprop", "tuned", force) not in seen

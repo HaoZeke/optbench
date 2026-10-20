@@ -62,12 +62,12 @@ def test_templates_pin_the_source_and_the_problem_cap():
         else:
             assert cap == 10000
     assert "saddlesearchjl/lj38-static" in found
-    assert "saddlesearchjl/lj38-superlinear-tuned" in found
+    assert "saddlesearchjl/lj38-superlinear" in found
     assert "saddlesearchjl/pt-ode" in found
     assert "saddlesearchjl/mode-bb" in found
     assert "saddlesearchjl/saddle-dimer" not in found
     assert "saddlesearchjl/saddle-ode" in found
-    assert len(found) == 19
+    assert len(found) == 15
 
 
 @pytest.mark.skipif(not _available(), reason="Julia or SaddleSearch.jl is not on this host")

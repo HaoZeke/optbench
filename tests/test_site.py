@@ -144,12 +144,14 @@ def test_rendered_pages_use_the_board_rank():
     ts_ranked = [row["template"] for row in document["problems"]["tsopt/LJ38"]["ranked"]]
     assert "sella/lj38-ts-default" in ts_ranked
     assert "sella/lj38-ts-tuned" not in ts_ranked
-    assert "rgsaddle/dimer-rotskip-tuned" in ts_ranked
+    assert "rgsaddle/dimer-rotskip" in ts_ranked
+    assert "rgsaddle/dimer-rotskip-tuned" not in ts_ranked
     assert "tsopt-LJ38-profile.svg" in tsopt
     saddle = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "saddle-search.org").read_text(encoding="utf-8")
     assert 'data-board-table="ranked" data-problem="saddle-search/pt-island"' in saddle
-    assert "rgsaddle/saddle-dimer-rotskip-tuned" in saddle
-    assert 'data-field="par2_mean">10127.1<' in saddle
+    assert "rgsaddle/saddle-dimer-rotskip" in saddle
+    assert "rgsaddle/saddle-dimer-rotskip-tuned" not in saddle
+    assert 'data-field="par2_mean">10128<' in saddle
     assert "No full harness row." not in saddle
     assert "eon-3.5.0-saddle-pt-dimer" in saddle
     assert "not yet on the harness counter" in saddle

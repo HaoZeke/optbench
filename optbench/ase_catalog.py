@@ -1,8 +1,8 @@
 """ASE 3.29.0 and Sella 2.6.0 template catalog.
 
 The files under ``templates/ase`` and ``templates/sella`` are rendered
-from this module. A default row is the library constructor. A tuned row
-is the archived OptBench script when one exists.
+from this module. A row is the library constructor. Tuned copies of the
+archived OptBench scripts are not part of the catalog.
 """
 
 from __future__ import annotations
@@ -732,7 +732,7 @@ def _dimer_specs() -> list[dict]:
 
 
 def all_specs() -> list[dict]:
-    return (
+    specs = (
         _minimization_specs()
         + _ts_specs()
         + _neb_specs()
@@ -740,6 +740,7 @@ def all_specs() -> list[dict]:
         + _dimer_specs()
         + _sella_search_specs()
     )
+    return [spec for spec in specs if spec.get("profile") != "tuned"]
 
 
 def _toml_scalar(value: object) -> str:

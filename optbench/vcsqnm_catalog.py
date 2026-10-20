@@ -124,10 +124,7 @@ def specs() -> list[dict]:
         for method, algorithm, variable_cell in _METHODS:
             if variable_cell and problem != "minimization/morse-bulk":
                 continue
-            for tuned, profile, parameters in (
-                (False, "default", DEFAULT),
-                (True, "tuned", TUNED),
-            ):
+            for tuned, profile, parameters in ((False, "default", DEFAULT),):
                 suffix = "-tuned" if tuned else ""
                 found.append(
                     {
