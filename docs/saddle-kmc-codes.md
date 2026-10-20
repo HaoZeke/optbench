@@ -505,7 +505,7 @@ invented for them:
 - `eon-client/saddle-pt-dimer`, `eon-client/saddle-pt-lanczos`, `eon-client/saddle-pt-md`, `eon-svn/saddle-pt-dimer-bounded`, `eon-svn/saddle-pt-lanczos-bounded`, `eon-svn/saddle-pt-md`. The kernel was `morse`, which is smooth-linear.
 - `eon/develop-saddle-pt-dimer` and `eon/develop-saddle-pt-lanczos`. The ext_pot kernel was `morse_cluster`, which has no cutoff.
 - `sella/pt-island-search-default`, `sella/pt-island-search-tuned`, `ase/dimer-pt-island-default`, `ase/dimer-pt-island-tuned`. The cutoff was 7 Å.
-- OPTIM saddle-pt. The socket calls `potential_from_problem` on the job potential. A job that copies this problem file now gets `Morse::force`. The runner lives on `cells/optim/saddle-pt`, not on this branch. The stored `optim/saddle-hef-ffd-pt` campaign has no endpoint coordinates.
+- `optim/saddle-hef-ffd-pt`. The stored campaign has no endpoint coordinates. `optim/saddle-pt` is the campaign in the recount below. `optbench/optim_saddle.py` runs it on this branch. The socket calls `potential_from_problem`, and this problem selects `Morse::force`.
 
 Rows that stay. pARTn's stored geometries were evaluated with
 `pes.morse_pt`, which matches `Morse::force` to the roundoff above, so
@@ -536,6 +536,7 @@ on `cells/softsaddle/ts-reps`.
 | partn/saddle-pt | 187 finite free-atom pairs, 13 not minimized | 3 | 48 | 0/200 | 18/200 | 0.0 | 0.755 | 12000.0 | 10980.175 |  |  |
 | pykmc/saddle-pt | 499 finite 343-atom pairs, 62 not finite | 163 | 99 | 12/561 | 13/561 | 0.0213903743315508 | 0.7522281639928698 | 39172.08021390374 | 39103.130124777184 |  |  |
 | optim/saddle-hef-ffd-pt | absent; `saddle_free` on 1 of 124 | 1 | 1 | 0/124 | 0/124 | 0.0 | 0.0 | 10128.0 | 10128.0 |  |  |
+| optim/saddle-pt | 19671 stored free-atom pairs, 329 not minimized | 11 | 11 | 10/20000 | 10/20000 | 0.99915 | 0.99915 | 10123.1558 | 10123.1558 |  |  |
 | cp2k/saddle-dimer-cg-tuned | absent; RMSD on 750 of 20000 | 1 | 1 | 0/20000 | 0/20000 | 0.0 | 0.0 | 10128.0 | 10128.0 |  |  |
 | cp2k/saddle-dimer-cg | absent | 0 | 0 | 0/20000 | 0/20000 | 0.0 | 0.0 | 10128.0 | 10128.0 |  |  |
 | cp2k/saddle-dimer-bfgs-tuned | absent | 0 | 0 | 0/1 | 0/1 | 0.0 | 0.0 | 10128.0 | 10128.0 |  |  |
@@ -561,6 +562,23 @@ on `cells/softsaddle/ts-reps`.
 | eon-3.5.0-saddle-pt-dimer | absent; 10-repetition means | 77.1 | 77.1 |  |  | 0.7517199457 | 0.7517199457 | not applied | not applied |  |  |
 | archive eon-dimer r2205 | absent | 109.222 | 109.222 |  |  | 0.746017 | 0.746017 | not applied | not applied | 109.222 | 0.746017 |
 | archive eon-md r2205 | absent | 51.6667 | 51.6667 |  |  | 0.886966 | 0.886966 | not applied | not applied | 51.6667 | 0.886966 |
+
+`optim/saddle-pt` is
+`results/campaign/optim-svn-snapshot-saddle-search-pt-island--optim-saddle-pt.dat`.
+The starts file has 19671 rows with `endpoint_status` `stored` and 329
+with `not_minimized`. The dat fields are `unique_saddles` 11,
+`connected` 10, `n` 20000, `fraction_connected` 0.99915, `par2_mean`
+10123.1558, `successes` 10, `n_divergence` 19980, `n_cap` 10,
+`n_crash` 0, and `n_wrong_stationary` 0. `code_version` is
+`svn-snapshot` and `commit` is
+`02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f`.
+Both recount columns quote that file. The dat comment records the
+built tarball sha256
+`738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31`
+(122737951 bytes). The registry pin is
+`02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f`
+(122743078 bytes). The `optim/saddle-hef-ffd-pt` row is the 124-search
+file and is a different template.
 
 pyKMC `eon_connected` is 360. Rejudging the 499 finite pairs agrees with
 that flag on every row. `not_connected` is 139, so the `done.py` fraction
