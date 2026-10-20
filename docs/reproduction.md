@@ -156,7 +156,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | C2H4/pyamff-rprop10-7-fcoeff0_1 | — | — | not rerun |
 | emt-pt38/pyamff-adam10-7-fcoeff0 | — | — | not rerun |
 | emt-pt38/pyamff-adam10-7-fcoeff0_1 | — | — | not rerun |
-| emt-pt38/pyamff-lbfgs10-7-fcoeff0 | — | — | not rerun |
+| emt-pt38/pyamff-lbfgs10-7-fcoeff0 | mean_epoch 1791.8, median_epoch 1275.5 | mean_epoch 1748.4, median_epoch 1065 | not rerun; PyAMFF 240f51d; median epoch is outside 10% |
 | emt-pt38/pyamff-lbfgs10-7-fcoeff0_1 | — | — | not rerun |
 | emt-pt38/pyamff-rprop10-7-fcoeff0 | — | — | not rerun |
 | emt-pt38/pyamff-rprop10-7-fcoeff0_1 | — | — | not rerun |
