@@ -166,8 +166,14 @@ def _odata(folder: Path, python: str, hook: Path, gmax: float, updates: int, ste
     (folder / "odata").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
-def _odata_rr(folder: Path, python: str, hook: Path, section: dict) -> None:
-    """Stock odata. ``1.0D-10`` is the source ``CEIG``. The second value sets ``OVERCONV``."""
+def _odata_rr(folder: Path, python: str, hook: Path, section: dict, cap: int) -> None:
+    """Stock odata. ``1.0D-10`` is the source ``CEIG``. The second value sets ``OVERCONV``.
+
+    ``NEVS`` defaults to 500 and ``beig`` passes it to ``xmylbfgs`` as the
+    Rayleigh-Ritz iteration limit. ``BFGSTS`` would set ``NEVS`` and leave
+    this branch. ``CHECKINDEX`` is the documented way to set that same
+    integer when ``BFGSTS`` is absent, so it carries the problem cap.
+    """
     lines = [
         "NOTE optbench",
         f"ASE geom.xyz {python} {hook} dummy dummy cpu FIXCELL NOPBC EV ANG",
@@ -175,6 +181,7 @@ def _odata_rr(folder: Path, python: str, hook: Path, section: dict) -> None:
         f"USEDIAG {int(section['usediag'])}",
         "READVEC",
         "DUMPVECTOR",
+        f"CHECKINDEX {int(cap)}",
     ]
     (folder / "odata").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
@@ -412,7 +419,7 @@ def _execute_rr(job: dict) -> dict:
             _write_xyz(folder / "geom.xyz", positions, None)
             _write_vector_dump(folder / "vector.dump", str(job["initial_mode"]))
             (folder / "target.vector").write_text(str(job["target"]), encoding="utf-8")
-            _odata_rr(folder, sys.executable, hook, job["section"])
+            _odata_rr(folder, sys.executable, hook, job["section"], int(job["cap"]))
             env = _relay_env(folder, job)
             stdout_path = folder / "stdout.txt"
             stderr_path = folder / "stderr.txt"
@@ -576,6 +583,7 @@ def _run_rr(root, problem, template, settings, scratch, output, workers: int) ->
         "# counter harness. Each ASE COMPUTE is one pes.evaluate. "
         "OPTIM energy+gradient calls are recorded and are not the score.\n"
         "# Rayleigh-Ritz EIGENONLY 1.0D-10 0.99, USEDIAG 3 (forward differences). "
+        f"CHECKINDEX {int(settings['cap'])} is NEVS, the problem cap. "
         "Memory, step, and BFGSTSPC stay at the source defaults.\n"
         "# vector.dump is 100 plus the shared initial_mode. "
         "target.vector is the per-start mode file.\n"
@@ -587,6 +595,7 @@ def _run_rr(root, problem, template, settings, scratch, output, workers: int) ->
         "usediag": section["usediag"],
         "ceig": 1.0e-10,
         "cover": section["cover"],
+        "nevs": int(settings["cap"]),
         "version": CODE_VERSION,
         "svnrev": SVNREV,
         "counter": "harness",
