@@ -438,29 +438,27 @@ def run(
     if workers is None:
         workers = os.cpu_count() or 1
     campaign_root = root if dest is None else dest
-    jsonl = campaign_root / "results" / "campaign" / f"{stem_for(slug)}.starts.jsonl"
+    progress = _progress_path(campaign_root, slug)
     if prior is None:
-        jsonl.unlink(missing_ok=True)
-        jsonl.with_name(f"{stem_for(slug)}.dat").unlink(missing_ok=True)
-    # A full PAR-2 bootstrap on every start dominates the short searches.
-    # The jsonl is appended immediately; the summary is rewritten in batches.
-    summary_every = 50
+        progress.unlink(missing_ok=True)
+        _campaign_paths(campaign_root, slug)[0].unlink(missing_ok=True)
+        _campaign_paths(campaign_root, slug)[1].unlink(missing_ok=True)
 
     def _store(record: dict) -> None:
         records.append(record)
         _report(record)
-        _append_jsonl(jsonl, record)
-        if len(records) % summary_every == 0 or len(records) >= expected:
-            _rewrite(records)
+        _append_jsonl(progress, record)
+        _publish()
 
-    def _rewrite(rows: list[dict]) -> None:
-        ordered = sorted(rows, key=lambda item: int(str(item["start"]).split(".")[1]))
-        try:
-            write_campaign(campaign_root, slug, ordered, partial=len(ordered) < expected, spec=spec)
-        except ValueError as exc:
-            print(f"summary deferred for {slug}: {exc}", flush=True)
+    def _publish() -> None:
+        if len(records) != expected:
+            return
+        ordered = sorted(records, key=lambda item: int(str(item["start"]).split(".")[1]))
+        write_campaign(campaign_root, slug, ordered, spec=spec)
+        progress.unlink(missing_ok=True)
 
     if not payload:
+        _publish()
         return sorted(records, key=lambda record: int(str(record["start"]).split(".")[1]))
     if workers <= 1 or len(payload) == 1:
         for item in payload:
@@ -471,7 +469,7 @@ def run(
             for future in as_completed(futures):
                 _store(future.result())
     records.sort(key=lambda record: int(str(record["start"]).split(".")[1]))
-    _rewrite(records)
+    _publish()
     return records
 
 
@@ -488,13 +486,13 @@ def run_template(
     slug = str(problem["id"]).split("/", 1)[1]
     if template.get("id") != template_id(slug):
         raise ValueError(f"{template.get('id')} is not {template_id(slug)}")
-    prior = None
-    if resume:
-        prior = load_campaign_records(root / "results" / "campaign" / f"{stem_for(slug)}.starts.jsonl")
+    prior = _resume_prior(root, slug) if resume else None
     records = run(root, slug, limit=limit or None, workers=workers, prior=prior)
     spec = _spec(root, slug)
     expected = int(problem["sample"]["starts"])
-    dat, _jsonl = write_campaign(root, slug, records, partial=len(records) < expected, spec=spec)
+    if len(records) != expected:
+        raise RuntimeError(f"{slug} has {len(records)} starts and the problem states {expected}")
+    dat, _jsonl = write_campaign(root, slug, records, spec=spec)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(dat.read_text(encoding="utf-8"), encoding="utf-8")
     summary = score_v2(records, spec["cap"])
@@ -529,17 +527,36 @@ def _atomic_write(path: Path, text: str) -> None:
     temporary.replace(path)
 
 
+def _campaign_paths(root: Path, slug: str) -> tuple[Path, Path]:
+    directory = root / "results" / "campaign"
+    stem = stem_for(slug)
+    return directory / f"{stem}.dat", directory / f"{stem}.starts.jsonl"
+
+
+def _progress_path(root: Path, slug: str) -> Path:
+    return root / "results" / "campaign" / f"{stem_for(slug)}.progress.jsonl"
+
+
+def _resume_prior(root: Path, slug: str) -> list[dict] | None:
+    progress = _progress_path(root, slug)
+    source = progress if progress.is_file() else _campaign_paths(root, slug)[1]
+    records = load_campaign_records(source)
+    return records or None
+
+
 def write_campaign(
     root: Path,
     slug: str,
     records: list[dict],
     *,
-    partial: bool,
     spec: dict,
 ) -> tuple[Path, Path]:
+    expected = int(spec["problem"]["sample"]["starts"])
+    if len(records) != expected:
+        raise ValueError(f"{slug} has {len(records)} starts and the problem states {expected}")
     directory = root / "results" / "campaign"
     directory.mkdir(parents=True, exist_ok=True)
-    jsonl = directory / f"{stem_for(slug)}.starts.jsonl"
+    dat, jsonl = _campaign_paths(root, slug)
     _atomic_write(jsonl, "".join(json.dumps(record) + "\n" for record in records))
     summary = score_v2(records, spec["cap"])
     energies = [float(record["energy"]) for record in records if record.get("energy") is not None]
@@ -589,9 +606,6 @@ def write_campaign(
     if energies:
         lines.append(f"energy_min {_format(min(energies))}")
         lines.append(f"energy_max {_format(max(energies))}")
-    if partial:
-        lines.append("partial true")
-    dat = directory / f"{stem_for(slug)}.dat"
     _atomic_write(dat, "\n".join(lines) + "\n")
     return dat, jsonl
 
@@ -609,17 +623,22 @@ def main(argv: list[str] | None = None) -> None:
     limit = args.limit or None
     workers = args.workers or None
     for slug in slugs:
-        jsonl = root / "results" / "campaign" / f"{stem_for(slug)}.starts.jsonl"
-        prior = load_campaign_records(jsonl) if args.resume else None
+        prior = _resume_prior(root, slug) if args.resume else None
         if prior:
-            print(f"resume {slug} {len(prior)} starts from {jsonl}", flush=True)
+            print(f"resume {slug} {len(prior)} starts", flush=True)
         records = run(root, slug, limit=limit, workers=workers, prior=prior)
         spec = _spec(root, slug)
         expected = int(spec["problem"]["sample"]["starts"])
+        if len(records) != expected:
+            print(
+                f"{stem_for(slug)} n={len(records)} of {expected}",
+                flush=True,
+            )
+            continue
         summary = score_v2(records, spec["cap"])
         print(
             f"wrote {stem_for(slug)} n={summary['n']} successes={summary['successes']} "
-            f"par2_mean={summary['par2_mean']} partial={len(records) < expected}",
+            f"par2_mean={summary['par2_mean']}",
             flush=True,
         )
 

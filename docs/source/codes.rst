@@ -1078,11 +1078,4 @@ The number is written only after the run finishes under the problem rule.
    </tr>
    </tbody></table></div>
    <p>No full ranked run.</p>
-   <p>No full ranked run</p><ul>
-   <li>Binary Lennard-Jones 100: partial.</li>
-   <li>Lennard-Jones 38 global minimum: partial.</li>
-   <li>lj75: partial.</li>
-   <li>tip4p10: partial.</li>
-   <li>tip4p20: partial.</li>
-   </ul>
    </section>
