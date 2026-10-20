@@ -164,6 +164,16 @@ commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
 note = "No public git commit. The pin is the sha256 of the Wales svn.tar.bz2 snapshot, 122743078 bytes. Minimization L-BFGS calls the ASE socket and pes.evaluate. OPTIM's own call counter is not a score. Saddle search, NEB, noise, and PATHSAMPLE are not scored."
 
 [[code]]
+id = "gmin"
+name = "GMIN"
+role = "global optimisation"
+repository = "http://www-wales.ch.cam.ac.uk/svn.tar.bz2"
+ref = "svn-snapshot"
+commit = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
+committed = "2026-10-19"
+note = "Wales svn.tar.bz2 fetched 2026-10-19, 122737951 bytes, sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. Serial GMIN, WITH_MPI off, unmodified. LJ98 no symmetrisation uses the archived data file. The ranked score is NPCALL on the target-hit line."
+
+[[code]]
 id = "sella-0.1.1"
 name = "Sella"
 role = "lowest eigenvector"

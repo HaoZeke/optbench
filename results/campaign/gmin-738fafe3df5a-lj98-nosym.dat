@@ -1,0 +1,19 @@
+# GMIN 738fafe3df5a, Wales svn.tar.bz2 sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31.
+# Serial native Lennard-Jones, unmodified, archived data file, coords.1 through coords.100.
+# force_calls is GMIN NPCALL on the target-hit line.
+force_calls 6791676
+force_calls_min 60315
+force_calls_max 30875446
+force_calls_median 4538730
+successes 100
+nfailed 0
+n 100
+transition_states 0
+code GMIN
+code_version 738fafe3df5a
+commit 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31
+algorithm no symmetrisation
+template gmin/lj98-nosym
+problem globalopt/lj98
+tuning archive
+counter harness

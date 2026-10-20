@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+46 reproduced, 30 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -61,7 +61,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38/gmin-symmetrise | — | — | not rerun |
 | lj38/pele-basinhopping | force_calls 521595 | 688720 | not reproduced; pele_bh_defaults |
 | lj75/gmin | — | — | not rerun |
-| lj98/gmin-nosym | — | — | not rerun |
+| lj98/gmin-nosym | cpu_time_mean 1194.84, basin_hopping_steps_mean 43819.8, energy_calls_mean 5.98857e+07 | 345.273, 49657.9, 6.79168e+06 | not reproduced; gmin_lj98_nosym |
 | lj98/gmin-symmetrise | — | — | not rerun |
 | tip4p10/gmin | — | — | not rerun |
 | tip4p10/gmin-tbp | — | — | not rerun |
@@ -268,6 +268,12 @@ archive run.sh divides coordinates by r0 = 2.897 and scales rho and rcut into th
 The archived driver is the dangling path bin/js850/globalopt.py. The harness uses pele LJCluster defaults (temperature 1, step 0.6, LBFGS memory 4) on unshifted cutoff 40. The mean is 688720 against 521595.
 
 - globalopt/lj38/pele-basinhopping
+
+### gmin_lj98_nosym
+
+GMIN 738fafe3df5a is the 2026-10-19 Wales svn.tar.bz2 (sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31), serial, native Lennard-Jones, unmodified, on the archived data file and coords.1 through coords.100. The ranked harness score is NPCALL on the target-hit line. All 100 starts hit. Basin-hopping steps are 49657.9 against 43819.8 (13.3 percent; 1.28 archived standard errors). NPCALL is 6.79168e6 against archived energy calls 5.98857e7 (136.8 potential calls per quench; the archive has 1366.6). PCCP 2013 Table 1 for LJ98 with no symmetrisation is 145 calls per minimisation (7.017e6 calls and 48301 minimisations over 100 starts). finalio CPU time is 345.273 s against 1194.84 s. The archive CPU per quench matches that paper's Xeon E5405 time, not ten times the potential work. nfailed is 0. The gap is left as found.
+
+- globalopt/lj98/gmin-nosym
 
 ### htst_al
 

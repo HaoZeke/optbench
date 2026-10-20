@@ -293,6 +293,21 @@ CAUSE_TEXT = {
         "On infra/aladatom-repro, eon/aladatom-akmc true_rate 3.597591452e9 is 14.1 times 2.542941e8, "
         "and eon/standard-aladatom-akmc true_rate 3.80613e7 is 45.5 times 8.359e5."
     ),
+    "gmin_lj98_nosym": (
+        "GMIN 738fafe3df5a is the 2026-10-19 Wales svn.tar.bz2 "
+        "(sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31), "
+        "serial, native Lennard-Jones, unmodified, on the archived data file and coords.1 through coords.100. "
+        "The ranked harness score is NPCALL on the target-hit line. "
+        "All 100 starts hit. Basin-hopping steps are 49657.9 against 43819.8 "
+        "(13.3 percent; 1.28 archived standard errors). "
+        "NPCALL is 6.79168e6 against archived energy calls 5.98857e7 "
+        "(136.8 potential calls per quench; the archive has 1366.6). "
+        "PCCP 2013 Table 1 for LJ98 with no symmetrisation is 145 calls per minimisation "
+        "(7.017e6 calls and 48301 minimisations over 100 starts). "
+        "finalio CPU time is 345.273 s against 1194.84 s. "
+        "The archive CPU per quench matches that paper's Xeon E5405 time, not ten times the potential work. "
+        "nfailed is 0. The gap is left as found."
+    ),
 }
 
 

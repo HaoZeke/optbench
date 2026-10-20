@@ -1,0 +1,63 @@
+{
+  "counter": "harness",
+  "legacy": {
+    "force_calls": 6791676,
+    "force_calls_max": 30875446,
+    "force_calls_median": 4538730.0,
+    "force_calls_min": 60315,
+    "n": 100,
+    "nfailed": 0,
+    "successes": 100,
+    "transition_states": 0
+  },
+  "problem": "globalopt/lj98",
+  "provenance": {
+    "code": "GMIN",
+    "code_version": "738fafe3df5a",
+    "commit": "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31",
+    "machine": {
+      "machine": "x86_64",
+      "node": "cursor",
+      "python": "3.12.3",
+      "system": "Linux"
+    },
+    "parameters": {
+      "counter": "GMIN NPCALL",
+      "potential": "lennard-jones",
+      "symmetrisation": false,
+      "version": "738fafe3df5a"
+    }
+  },
+  "schema": "optbench.score/v2",
+  "score": {
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 20261015,
+    "cap": null,
+    "includes_failures": true,
+    "iqr": 6151816.5,
+    "iqr_high": 8695926.624999998,
+    "iqr_low": 4201259.68125,
+    "mean": 6791675.6,
+    "median": 4538730.0,
+    "median_high": 5992465.0,
+    "median_low": 3700150.675,
+    "n": 100,
+    "n_cap": 0,
+    "n_crash": 0,
+    "n_divergence": 0,
+    "n_wrong_stationary": 0,
+    "nfailed": 0,
+    "par2_mean": null,
+    "par_applied": false,
+    "par_factor": 2,
+    "q25": 2643218.25,
+    "q75": 8795034.75,
+    "scoring": "par2-wilson-bootstrap",
+    "success_only_mean": 6791675.6,
+    "success_rate": 1.0,
+    "successes": 100,
+    "wilson_high": 1.0,
+    "wilson_low": 0.9630065017930143
+  },
+  "template": "gmin/lj98-nosym"
+}
