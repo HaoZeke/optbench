@@ -1,12 +1,33 @@
-call_unit total
-nfailed 1
-code Eon svn
+# rep 1 seed 1000 force_calls 1028614 unique_saddles 49 fraction_connected 0.9074410163 total_searches 551 reached 1 harness_calls 1044883
+# rep 2 seed 1001 force_calls 1081284 unique_saddles 44 fraction_connected 0.8802698145 total_searches 593 reached 1 harness_calls 1110172
+# rep 3 seed 1002 force_calls 1818807 unique_saddles 59 fraction_connected 0.8883248731 total_searches 985 reached 1 harness_calls 1853138
+# rep 4 seed 1003 force_calls 1620854 unique_saddles 49 fraction_connected 0.9026047565 total_searches 883 reached 1 harness_calls 1647089
+# rep 5 seed 1004 force_calls 1029674 unique_saddles 45 fraction_connected 0.8725663717 total_searches 565 reached 1 harness_calls 1053644
+# rep 6 seed 1005 force_calls 1512476 unique_saddles 51 fraction_connected 0.8908659549 total_searches 843 reached 1 harness_calls 1536750
+# rep 7 seed 1006 force_calls 1370977 unique_saddles 54 fraction_connected 0.8959459459 total_searches 740 reached 1 harness_calls 1391005
+# rep 8 seed 1007 force_calls 2494049 unique_saddles 57 fraction_connected 0.8939283102 total_searches 1367 reached 1 harness_calls 2509844
+# rep 9 seed 1008 force_calls 1804073 unique_saddles 57 fraction_connected 0.881147541 total_searches 976 reached 1 harness_calls 1821825
+# note eOn a7aa574 is not a board row. Same seed 1000 and the same 27-saddle stop: it was stopped at 5160 searches with 25 of 27 good saddles below 1.5 eV. EON SVN r2549 reached 27 at 551 searches on that seed.
+code EON (SVN r2549)
 code_version r2549
 commit r2549
+counter client-search-results
+count_keys sad-fcs+mins-fcs
+contributor Rohit Goswami
+repetitions 9
+report_runs 9
+saddle_method dynamics
+communicator_jobs 8
+force_calls 1528978.667
+force_calls_mean_error 150095.2993
+force_calls_min 1028614
+force_calls_max 2494049
+unique_saddles 51.66666667
+fraction_connected 0.8903438427
+total_searches 833.6666667
+nfailed 0
 algorithm Dynamics
 template eon-svn/saddle-pt-md
 problem saddle-search/pt-island
 reducer harness
-counter harness
-count_keys HarnessCounter
-partial true
+tuning default
