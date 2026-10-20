@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-47 reproduced, 29 not reproduced, 75 not rerun. 151 archive rows.
+46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -100,7 +100,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj38/pele-first-order | force_calls 25 | 25 | reproduced |
 | lj38/pele-second-order | force_calls 47 | 47 | reproduced |
 | lj38/sella | force_calls 17.8 | 17.8 | reproduced |
-| lj38/tsase-dimer-bfgs | force_calls 27 | 27 | reproduced |
+| lj38/tsase-dimer-bfgs | — | — | not rerun; residual |
 | lj38/tsase-dimer-cg | — | — | not rerun |
 | lj38/tsase-lanczos | — | — | not rerun |
 
@@ -217,6 +217,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 ## Residuals inside the band
 
+- lowest-eigenvector/lj38/tsase-dimer-bfgs: TSASE 1.0 commit 98aac60b5d9905e81ee4e6b8c385f169258d0218 is the ranked stock SSDimer (constructor defaults, harness force calls). On the 200 LJ38 modes the harness records 248 (min 25, max 2014, nfailed 22). The archive row remains 27, 13, 65, and 0. The gap is outside the band and is left as a finding.
 - tsopt/LJ38/pele_cd: Inside the 10% band (263.52 vs 254). The same xyz-versus-con starting set as ts-ffd. findTS_local.py for the CD row does not pass orthogZeroEigs; the harness template sets orthog translations-rotations. The paper baseline is this 2014-stop mean, not the harness-stop mean 335.06.
 - tsopt/LJ38/pele_ffd: Inside the 10% band (207.51 vs 192). Archive run.sh unpacks coords-xyz.tar.gz (200 xyz, max pair about 4.4). The harness problem points at coords-con.tar.gz (max pair about 37). Kabsch RMS is about 6.33, so the sets are not the same geometry. Neither set has a pair past cutoff 40, and both drivers use RMS tolerance 1e-3/sqrt(114). The 8% residual is the starting set. The paper baseline is this 2014-stop mean, not the harness-stop mean 254.48.
 

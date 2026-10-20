@@ -772,15 +772,15 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 20, cap 1, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
-   <tr data-problem="lowest-eigenvector/lj38" data-template="tsase-408/lj38-dimer-bfgs">
+   <tr data-problem="lowest-eigenvector/lj38" data-template="tsase/mode-lj38">
    <td>lj38</td>
-   <td data-field="template">tsase-408/lj38-dimer-bfgs</td>
-   <td data-field="version">TSASE 408</td>
-   <td data-field="commit">55844612b607</td>
-   <td data-field="par2_mean">27.125</td>
-   <td data-field="mean_calls">27.125</td>
-   <td data-field="median_calls">25.5</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="template">tsase/mode-lj38</td>
+   <td data-field="version">tsase 1.0</td>
+   <td data-field="commit">98aac60b5d99</td>
+   <td data-field="par2_mean">2420.61</td>
+   <td data-field="mean_calls">267.945</td>
+   <td data-field="median_calls">233</td>
+   <td data-field="failures">crash 0, divergence 22, cap 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="minimization/lj38" data-template="tsase/lbfgs-lj38">
