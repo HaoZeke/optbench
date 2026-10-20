@@ -2,12 +2,12 @@
 # A repeated geometry is one call. The call that would pass the cap is not counted.
 # The potential is epsilon 1, sigma 1, cutoff 40, no shift.
 # One reduced sigma is the Ar sigma 6.434516991 bohr. The socket divides by it.
-# partial. scored 75 of 200 starts; lowest energy -396.28224883; mean calls 983782.6; median calls 1000000.0
+# partial. scored 83 of 200 starts; lowest energy -396.28224883; mean calls 985345.7; median calls 1000000.0
 # Same genetic algorithm as ogolem/lj38. The archive is website/globalopt/lj75/lj75_clusters.tgz, 200 coords files. Success is the Cambridge N=75 minimum -397.492331 plus energy_above_minimum 0.001. The force cap is the problem max_force_calls, 1000000. The generation budget stays 19900. A start that exhausts the force cap is cap. A start that ends under the cap above the window is wrong_stationary.
 force_calls 391847
 force_calls_min 381964
 force_calls_max 401730
-nfailed 73
+nfailed 81
 median 391847
 code ogolem
 code_version 2016.CURRENT
@@ -20,14 +20,14 @@ counter harness
 cap 1000000
 par2_mean 2000000
 wilson_low 0
-wilson_high 0.0487238424828
+wilson_high 0.044235309642
 par2_median 2000000
 par2_median_low 2000000
 par2_median_high 2000000
-v2_nfailed 75
+v2_nfailed 83
 v2_successes 0
-n 75
+n 83
 energy_min -396.282248826
 energy_max -392.6594686
 partial true
-partial_reason scored 75 of 200 starts; lowest energy -396.28224883; mean calls 983782.6; median calls 1000000.0
+partial_reason scored 83 of 200 starts; lowest energy -396.28224883; mean calls 985345.7; median calls 1000000.0
