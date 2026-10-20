@@ -33,7 +33,7 @@ def test_benchmark_classes_publish_the_problem_cap():
     assert PygsmLj38De.params[1] == ["pair_00"]
     assert PygsmLj38TwoTs.problem_name == "double-ended-saddle-search/lj38_2ts_separation"
     assert PygsmLj38TwoTs.template_id == "pygsm/de-gsm"
-    assert PygsmLj38TwoTs.cap == 10000
+    assert PygsmLj38TwoTs.cap == 250000
     assert PygsmLj38TwoTs.timeout == 7200
     assert PygsmLj38TwoTs.params[1] == ["pair_00"]
 

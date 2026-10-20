@@ -240,7 +240,7 @@ PygsmLj38De = _bind("PygsmLj38De", "double-ended-saddle-search/lj38", 2500, 1800
 PygsmLj38TwoTs = _bind(
     "PygsmLj38TwoTs",
     "double-ended-saddle-search/lj38_2ts_separation",
-    10000,
+    250000,
     7200,
     "pygsm/de-gsm",
 )

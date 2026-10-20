@@ -5,12 +5,14 @@ problem = "lj38_2ts_separation"
 contract = "partial"
 entry_count = 2
 
-# The archive does not state an image count or a force cap. Five interior
-# images is the LJ38 double-ended band. The cap is the run limit used here.
+# The archive does not state an image count. Five interior images is the
+# LJ38 double-ended band. The archive ran uncapped.
+# archive/entries/double-ended-saddle-search/lj38_2ts_separation/pele/benchmark.dat
+# records force_calls_max 1.1449e+05 (114490). This cap covers that budget.
 [convergence]
 norm = "l2"
 force_norm = 0.001
-max_force_calls = 10000
+max_force_calls = 250000
 
 [band]
 interior_images = 5
