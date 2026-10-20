@@ -1064,13 +1064,55 @@ def _profile_reason(exc: ValueError) -> str:
     return text[0].upper() + text[1:]
 
 
+def _plain_tick(value: float, _position: object) -> str:
+    """Tick text without mathtext, so the SVG does not outline every glyph."""
+    if value == 0:
+        return "0"
+    return f"{value:.4g}"
+
+
+def _raster_thumbnails(figure, stem: Path) -> list[str]:
+    """Write a PNG fallback and a compressed WebP at the figure's pixel size."""
+    import io
+
+    from PIL import Image
+
+    buffer = io.BytesIO()
+    figure.savefig(buffer, format="png", dpi=100)
+    buffer.seek(0)
+    image = Image.open(buffer)
+    image.load()
+    if image.mode == "RGBA":
+        flat = Image.new("RGB", image.size, (255, 255, 255))
+        flat.paste(image, mask=image.getchannel("A"))
+        image = flat
+    elif image.mode != "RGB":
+        image = image.convert("RGB")
+    png_path = stem.with_suffix(".png")
+    webp_path = stem.with_suffix(".webp")
+    image.save(png_path, format="PNG", optimize=True)
+    image.save(webp_path, format="WEBP", quality=72, method=6)
+    return [str(png_path), str(webp_path)]
+
+
+def _save_figure(figure, directory: Path, stem: str) -> list[str]:
+    svg_path = directory / f"{stem}.svg"
+    figure.savefig(svg_path, format="svg")
+    written = [str(svg_path)]
+    written.extend(_raster_thumbnails(figure, directory / stem))
+    return written
+
+
 def _write_plots(problem_id: str, ranked: list[dict], profile: dict | None, directory: Path) -> list[str]:
     import os
 
     import matplotlib
+    from matplotlib.ticker import FuncFormatter, ScalarFormatter
 
     matplotlib.use("Agg", force=False)
     matplotlib.rcParams["svg.hashsalt"] = "optbench"
+    # Glyphs stay as <text>. Path-cloned markers were hundreds of <use> nodes per plot.
+    matplotlib.rcParams["svg.fonttype"] = "none"
     # Same bytes on the next render. The date is metadata, not a score.
     os.environ.setdefault("SOURCE_DATE_EPOCH", "0")
     import matplotlib.pyplot as plt
@@ -1078,11 +1120,14 @@ def _write_plots(problem_id: str, ranked: list[dict], profile: dict | None, dire
     directory.mkdir(parents=True, exist_ok=True)
     slug = _slug(problem_id)
     written = []
+    plain = FuncFormatter(_plain_tick)
     if profile is not None:
         figure, axis = plt.subplots(figsize=(7.2, 4.2))
         for label, values in profile["rho"].items():
             axis.step(profile["taus"], values, where="post", label=label)
         axis.set_xscale("log", base=2)
+        axis.xaxis.set_major_formatter(plain)
+        axis.yaxis.set_major_formatter(ScalarFormatter(useOffset=False))
         axis.set_xlabel("tau")
         axis.set_ylabel("fraction of starts")
         axis.set_ylim(0.0, 1.05)
@@ -1090,10 +1135,7 @@ def _write_plots(problem_id: str, ranked: list[dict], profile: dict | None, dire
         if len(profile["rho"]) <= 12:
             axis.legend(fontsize=7, loc="lower right")
         figure.tight_layout()
-        for suffix in ("svg", "png"):
-            path = directory / f"{slug}-profile.{suffix}"
-            figure.savefig(path)
-            written.append(str(path))
+        written.extend(_save_figure(figure, directory, f"{slug}-profile"))
         plt.close(figure)
     if ranked:
         figure, axis = plt.subplots(figsize=(7.2, 4.2))
@@ -1102,17 +1144,16 @@ def _write_plots(problem_id: str, ranked: list[dict], profile: dict | None, dire
             float(row["par2_mean"] if row["par2_mean"] is not None else row["median"])
             for row in ranked
         ]
-        axis.scatter(rates, costs)
+        axis.scatter(rates, costs, s=16, marker="o", linewidths=0)
         for index, (rate, cost) in enumerate(zip(rates, costs), start=1):
             axis.annotate(str(index), (rate, cost), fontsize=7, textcoords="offset points", xytext=(3, 3))
+        axis.xaxis.set_major_formatter(plain)
+        axis.yaxis.set_major_formatter(ScalarFormatter(useOffset=False))
         axis.set_xlabel("success rate")
         axis.set_ylabel("PAR-2 mean" if any(row["par2_mean"] is not None for row in ranked) else "median calls")
         axis.set_title(f"Cost and success: {problem_id}")
         figure.tight_layout()
-        for suffix in ("svg", "png"):
-            path = directory / f"{slug}-cost.{suffix}"
-            figure.savefig(path)
-            written.append(str(path))
+        written.extend(_save_figure(figure, directory, f"{slug}-cost"))
         plt.close(figure)
     return written
 
@@ -1243,6 +1284,26 @@ def _reason_text(row: dict) -> str:
     if _off_harness(row):
         return "not yet on the harness counter"
     return f"counter {row.get('counter') or 'unset'}"
+
+
+def _plot_html(prefix: str, name: str, label: str, problem_id: str) -> str:
+    """Lazy WebP thumbnail, PNG fallback, click-through to the full SVG."""
+    stem = name[:-4] if name.endswith(".svg") else name
+    svg_name = name if name.endswith(".svg") else f"{stem}.svg"
+    alt = f"{label} for {problem_id}"
+    caption = f"{label}. Select the plot for the full SVG."
+    return (
+        '<figure class="bench-plot">'
+        f'<a href="{_cell(f"{prefix}/{svg_name}")}">'
+        "<picture>"
+        f'<source srcset="{_cell(f"{prefix}/{stem}.webp")}" type="image/webp">'
+        f'<img src="{_cell(f"{prefix}/{stem}.png")}" alt="{_cell(alt)}" '
+        'loading="lazy" decoding="async">'
+        "</picture>"
+        "</a>"
+        f"<figcaption>{_cell(caption)}</figcaption>"
+        "</figure>"
+    )
 
 
 def plot_names_for(problem: dict) -> set[str]:
@@ -1379,7 +1440,7 @@ def _table(
     for kind, label in (("profile", "Dolan-More profile"), ("cost", "Cost versus success")):
         name = f"{slug}-{kind}.svg"
         if name in plots:
-            lines.append(f'<img src="{prefix}/{name}" alt="{_cell(label)} for {_cell(problem["id"])}">')
+            lines.append(_plot_html(prefix, name, label, str(problem["id"])))
     if problem.get("profile_gap") and f"{slug}-profile.svg" not in plots:
         lines.append(f'<p class="bench-gaps">{_cell(problem["profile_gap"])}</p>')
     lines.append("</section>")

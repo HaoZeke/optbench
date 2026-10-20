@@ -29,8 +29,8 @@
    <li>eon/develop-low-lj38-dimer eOn asv n=1, smoke run; scored 1 of 200 starts.</li>
    <li>eon/develop-low-lj38-lanczos eOn asv n=1, smoke run; scored 1 of 200 starts.</li>
    </ul>
-   <img src="../../_static/board/lowest-eigenvector-lj38-profile.svg" alt="Dolan-More profile for lowest-eigenvector/lj38">
-   <img src="../../_static/board/lowest-eigenvector-lj38-cost.svg" alt="Cost versus success for lowest-eigenvector/lj38">
+   <figure class="bench-plot"><a href="../../_static/board/lowest-eigenvector-lj38-profile.svg"><picture><source srcset="../../_static/board/lowest-eigenvector-lj38-profile.webp" type="image/webp"><img src="../../_static/board/lowest-eigenvector-lj38-profile.png" alt="Dolan-More profile for lowest-eigenvector/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="../../_static/board/lowest-eigenvector-lj38-cost.svg"><picture><source srcset="../../_static/board/lowest-eigenvector-lj38-cost.webp" type="image/webp"><img src="../../_static/board/lowest-eigenvector-lj38-cost.png" alt="Cost versus success for lowest-eigenvector/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    </section><section class="bench bench-archive" id="lj38-archive">
    <h3>2014 archive</h3>
    <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>

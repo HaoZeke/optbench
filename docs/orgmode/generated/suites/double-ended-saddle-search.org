@@ -52,7 +52,7 @@
    <li>eon-ci-neb: no per-start record</li>
    <li>eon-ci-swdneb: no per-start record</li>
    </ul>
-   <img src="../../_static/board/double-ended-saddle-search-lj38-cost.svg" alt="Cost versus success for double-ended-saddle-search/lj38">
+   <figure class="bench-plot"><a href="../../_static/board/double-ended-saddle-search-lj38-cost.svg"><picture><source srcset="../../_static/board/double-ended-saddle-search-lj38-cost.webp" type="image/webp"><img src="../../_static/board/double-ended-saddle-search-lj38-cost.png" alt="Cost versus success for double-ended-saddle-search/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <p class="bench-gaps">No performance profile. One start has no finite cost.</p>
    </section><section class="bench bench-archive" id="lj38-archive">
    <h3>2014 archive</h3>
@@ -206,7 +206,7 @@
    <li>ase/de-lj38-2ts-default ASE asv n=1, smoke run; scored 1 of 51 starts.</li>
    <li>ase/de-lj38-2ts-tuned ASE asv n=1, smoke run; scored 1 of 51 starts.</li>
    </ul>
-   <img src="../../_static/board/double-ended-saddle-search-lj38_2ts_separation-cost.svg" alt="Cost versus success for double-ended-saddle-search/lj38_2ts_separation">
+   <figure class="bench-plot"><a href="../../_static/board/double-ended-saddle-search-lj38_2ts_separation-cost.svg"><picture><source srcset="../../_static/board/double-ended-saddle-search-lj38_2ts_separation-cost.webp" type="image/webp"><img src="../../_static/board/double-ended-saddle-search-lj38_2ts_separation-cost.png" alt="Cost versus success for double-ended-saddle-search/lj38_2ts_separation" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <p class="bench-gaps">No performance profile. One start has no finite cost.</p>
    </section><section class="bench bench-archive" id="lj38_2ts_separation-archive">
    <h3>2014 archive</h3>
@@ -296,8 +296,8 @@
    <li>eon/de-pt-lbfgs-m100 eOn n=59, not yet on the harness counter.</li>
    <li>eon/de-pt-lbfgs eOn n=59, not yet on the harness counter.</li>
    </ul>
-   <img src="../../_static/board/double-ended-saddle-search-pt-island-profile.svg" alt="Dolan-More profile for double-ended-saddle-search/pt-island">
-   <img src="../../_static/board/double-ended-saddle-search-pt-island-cost.svg" alt="Cost versus success for double-ended-saddle-search/pt-island">
+   <figure class="bench-plot"><a href="../../_static/board/double-ended-saddle-search-pt-island-profile.svg"><picture><source srcset="../../_static/board/double-ended-saddle-search-pt-island-profile.webp" type="image/webp"><img src="../../_static/board/double-ended-saddle-search-pt-island-profile.png" alt="Dolan-More profile for double-ended-saddle-search/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="../../_static/board/double-ended-saddle-search-pt-island-cost.svg"><picture><source srcset="../../_static/board/double-ended-saddle-search-pt-island-cost.webp" type="image/webp"><img src="../../_static/board/double-ended-saddle-search-pt-island-cost.png" alt="Cost versus success for double-ended-saddle-search/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    </section><section class="bench bench-archive" id="pt-island-archive">
    <h3>2014 archive</h3>
    <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>

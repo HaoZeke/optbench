@@ -43,7 +43,7 @@
    <li>eon-ci-neb: no per-start record</li>
    <li>eon-ci-swdneb: no per-start record</li>
    </ul>
-   <img src="_static/board/double-ended-saddle-search-lj38-cost.svg" alt="Cost versus success for double-ended-saddle-search/lj38">
+   <figure class="bench-plot"><a href="_static/board/double-ended-saddle-search-lj38-cost.svg"><picture><source srcset="_static/board/double-ended-saddle-search-lj38-cost.webp" type="image/webp"><img src="_static/board/double-ended-saddle-search-lj38-cost.png" alt="Cost versus success for double-ended-saddle-search/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <p class="bench-gaps">No performance profile. One start has no finite cost.</p>
    </section>
    <section class="bench" id="double-ended-saddle-search-lj38_2ts_separation" data-problem="double-ended-saddle-search/lj38_2ts_separation">
@@ -77,7 +77,7 @@
    <li>ase/de-lj38-2ts-default ASE asv n=1, smoke run; scored 1 of 51 starts.</li>
    <li>ase/de-lj38-2ts-tuned ASE asv n=1, smoke run; scored 1 of 51 starts.</li>
    </ul>
-   <img src="_static/board/double-ended-saddle-search-lj38_2ts_separation-cost.svg" alt="Cost versus success for double-ended-saddle-search/lj38_2ts_separation">
+   <figure class="bench-plot"><a href="_static/board/double-ended-saddle-search-lj38_2ts_separation-cost.svg"><picture><source srcset="_static/board/double-ended-saddle-search-lj38_2ts_separation-cost.webp" type="image/webp"><img src="_static/board/double-ended-saddle-search-lj38_2ts_separation-cost.png" alt="Cost versus success for double-ended-saddle-search/lj38_2ts_separation" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <p class="bench-gaps">No performance profile. One start has no finite cost.</p>
    </section>
    <section class="bench" id="double-ended-saddle-search-pt-island" data-problem="double-ended-saddle-search/pt-island">
@@ -116,8 +116,8 @@
    <li>eon/de-pt-lbfgs-m100 eOn n=59, not yet on the harness counter.</li>
    <li>eon/de-pt-lbfgs eOn n=59, not yet on the harness counter.</li>
    </ul>
-   <img src="_static/board/double-ended-saddle-search-pt-island-profile.svg" alt="Dolan-More profile for double-ended-saddle-search/pt-island">
-   <img src="_static/board/double-ended-saddle-search-pt-island-cost.svg" alt="Cost versus success for double-ended-saddle-search/pt-island">
+   <figure class="bench-plot"><a href="_static/board/double-ended-saddle-search-pt-island-profile.svg"><picture><source srcset="_static/board/double-ended-saddle-search-pt-island-profile.webp" type="image/webp"><img src="_static/board/double-ended-saddle-search-pt-island-profile.png" alt="Dolan-More profile for double-ended-saddle-search/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="_static/board/double-ended-saddle-search-pt-island-cost.svg"><picture><source srcset="_static/board/double-ended-saddle-search-pt-island-cost.webp" type="image/webp"><img src="_static/board/double-ended-saddle-search-pt-island-cost.png" alt="Cost versus success for double-ended-saddle-search/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    </section>
    <section class="bench" id="globalopt-lj38" data-problem="globalopt/lj38">
    <h2>Lennard-Jones 38 global minimum</h2>
@@ -127,7 +127,7 @@
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td data-field="template">ase-mh/lj38</td><td data-field="version">ase-mh 1.1.2</td><td data-field="commit">6baabf94c48f</td><td data-field="source">campaign</td><td data-field="par2_mean">368164</td><td data-field="success_rate">0.93</td><td data-field="median_calls">189133</td><td data-field="mean_calls">298164</td><td data-field="failures">crash 0, divergence 0, cap 7, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table>
-   <img src="_static/board/globalopt-lj38-cost.svg" alt="Cost versus success for globalopt/lj38">
+   <figure class="bench-plot"><a href="_static/board/globalopt-lj38-cost.svg"><picture><source srcset="_static/board/globalopt-lj38-cost.webp" type="image/webp"><img src="_static/board/globalopt-lj38-cost.png" alt="Cost versus success for globalopt/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <p class="bench-gaps">No performance profile. One start has no finite cost.</p>
    </section>
    <section class="bench" id="lowest-eigenvector-lj38" data-problem="lowest-eigenvector/lj38">
@@ -149,8 +149,8 @@
    <li>eon/develop-low-lj38-dimer eOn asv n=1, smoke run; scored 1 of 200 starts.</li>
    <li>eon/develop-low-lj38-lanczos eOn asv n=1, smoke run; scored 1 of 200 starts.</li>
    </ul>
-   <img src="_static/board/lowest-eigenvector-lj38-profile.svg" alt="Dolan-More profile for lowest-eigenvector/lj38">
-   <img src="_static/board/lowest-eigenvector-lj38-cost.svg" alt="Cost versus success for lowest-eigenvector/lj38">
+   <figure class="bench-plot"><a href="_static/board/lowest-eigenvector-lj38-profile.svg"><picture><source srcset="_static/board/lowest-eigenvector-lj38-profile.webp" type="image/webp"><img src="_static/board/lowest-eigenvector-lj38-profile.png" alt="Dolan-More profile for lowest-eigenvector/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="_static/board/lowest-eigenvector-lj38-cost.svg"><picture><source srcset="_static/board/lowest-eigenvector-lj38-cost.webp" type="image/webp"><img src="_static/board/lowest-eigenvector-lj38-cost.png" alt="Cost versus success for lowest-eigenvector/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    </section>
    <section class="bench" id="minimization-lj38" data-problem="minimization/lj38">
    <h2>Lennard-Jones 38 clusters</h2>
@@ -334,8 +334,8 @@
    <li>pele-lbfgs-M4-maxstep0.1: no per-start record</li>
    <li>pele-lbfgs-M4-maxstep0.2: no per-start record</li>
    </ul>
-   <img src="_static/board/minimization-lj38-profile.svg" alt="Dolan-More profile for minimization/lj38">
-   <img src="_static/board/minimization-lj38-cost.svg" alt="Cost versus success for minimization/lj38">
+   <figure class="bench-plot"><a href="_static/board/minimization-lj38-profile.svg"><picture><source srcset="_static/board/minimization-lj38-profile.webp" type="image/webp"><img src="_static/board/minimization-lj38-profile.png" alt="Dolan-More profile for minimization/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="_static/board/minimization-lj38-cost.svg"><picture><source srcset="_static/board/minimization-lj38-cost.webp" type="image/webp"><img src="_static/board/minimization-lj38-cost.png" alt="Cost versus success for minimization/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    </section>
    <section class="bench" id="minimization-lj38-noise" data-problem="minimization/lj38-noise">
    <h2>Lennard-Jones 38 clusters with Gaussian force noise</h2>
@@ -362,8 +362,8 @@
    <tr><td data-field="template">sqnm/noise-lj38-tuned-s1em02</td><td data-field="version">sqnm 1.3</td><td data-field="commit">4241692173cc</td><td data-field="source">campaign</td><td data-field="par2_mean">16183</td><td data-field="success_rate">0.194</td><td data-field="median_calls">331</td><td data-field="mean_calls">340.211</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 806</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">optking/noise-lj38-s1em04</td><td data-field="version">optking 767e2c0c</td><td data-field="commit">767e2c0c13ff</td><td data-field="source">campaign</td><td data-field="par2_mean">19610.5</td><td data-field="success_rate">0.02</td><td data-field="median_calls">560</td><td data-field="mean_calls">733.84</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 980</td><td data-field="n">1000</td></tr>
    </tbody></table>
-   <img src="_static/board/minimization-lj38-noise-profile.svg" alt="Dolan-More profile for minimization/lj38-noise">
-   <img src="_static/board/minimization-lj38-noise-cost.svg" alt="Cost versus success for minimization/lj38-noise">
+   <figure class="bench-plot"><a href="_static/board/minimization-lj38-noise-profile.svg"><picture><source srcset="_static/board/minimization-lj38-noise-profile.webp" type="image/webp"><img src="_static/board/minimization-lj38-noise-profile.png" alt="Dolan-More profile for minimization/lj38-noise" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="_static/board/minimization-lj38-noise-cost.svg"><picture><source srcset="_static/board/minimization-lj38-noise-cost.webp" type="image/webp"><img src="_static/board/minimization-lj38-noise-cost.png" alt="Cost versus success for minimization/lj38-noise" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    </section>
    <section class="bench" id="minimization-morse-bulk" data-problem="minimization/morse-bulk">
    <h2>Morse bulk</h2>
@@ -534,8 +534,8 @@
    <li>eon-svn/morse-lbfgs: no per-start record</li>
    <li>eon-svn/morse-sd: no per-start record</li>
    </ul>
-   <img src="_static/board/minimization-morse-bulk-profile.svg" alt="Dolan-More profile for minimization/morse-bulk">
-   <img src="_static/board/minimization-morse-bulk-cost.svg" alt="Cost versus success for minimization/morse-bulk">
+   <figure class="bench-plot"><a href="_static/board/minimization-morse-bulk-profile.svg"><picture><source srcset="_static/board/minimization-morse-bulk-profile.webp" type="image/webp"><img src="_static/board/minimization-morse-bulk-profile.png" alt="Dolan-More profile for minimization/morse-bulk" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="_static/board/minimization-morse-bulk-cost.svg"><picture><source srcset="_static/board/minimization-morse-bulk-cost.webp" type="image/webp"><img src="_static/board/minimization-morse-bulk-cost.png" alt="Cost versus success for minimization/morse-bulk" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    </section>
    <section class="bench" id="neb-Pt-heptamer" data-problem="neb/Pt-heptamer">
    <h2>Pt-heptamer</h2>
@@ -573,8 +573,8 @@
    <li>eon-lbfgs: no per-start record</li>
    <li>eon-qm: no per-start record</li>
    </ul>
-   <img src="_static/board/neb-Pt-heptamer-profile.svg" alt="Dolan-More profile for neb/Pt-heptamer">
-   <img src="_static/board/neb-Pt-heptamer-cost.svg" alt="Cost versus success for neb/Pt-heptamer">
+   <figure class="bench-plot"><a href="_static/board/neb-Pt-heptamer-profile.svg"><picture><source srcset="_static/board/neb-Pt-heptamer-profile.webp" type="image/webp"><img src="_static/board/neb-Pt-heptamer-profile.png" alt="Dolan-More profile for neb/Pt-heptamer" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="_static/board/neb-Pt-heptamer-cost.svg"><picture><source srcset="_static/board/neb-Pt-heptamer-cost.webp" type="image/webp"><img src="_static/board/neb-Pt-heptamer-cost.png" alt="Cost versus success for neb/Pt-heptamer" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    </section>
    <section class="bench" id="saddle-search-pt-island" data-problem="saddle-search/pt-island">
    <h2>Pt heptamer island</h2>
@@ -634,8 +634,8 @@
    <h3>Not scored</h3><ul>
    <li>sella-lj38: no per-start record</li>
    </ul>
-   <img src="_static/board/tsopt-LJ38-profile.svg" alt="Dolan-More profile for tsopt/LJ38">
-   <img src="_static/board/tsopt-LJ38-cost.svg" alt="Cost versus success for tsopt/LJ38">
+   <figure class="bench-plot"><a href="_static/board/tsopt-LJ38-profile.svg"><picture><source srcset="_static/board/tsopt-LJ38-profile.webp" type="image/webp"><img src="_static/board/tsopt-LJ38-profile.png" alt="Dolan-More profile for tsopt/LJ38" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="_static/board/tsopt-LJ38-cost.svg"><picture><source srcset="_static/board/tsopt-LJ38-cost.webp" type="image/webp"><img src="_static/board/tsopt-LJ38-cost.png" alt="Cost versus success for tsopt/LJ38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    </section>
    <section class="bench" id="tsopt-pt-island" data-problem="tsopt/pt-island">
    <h2>pt-island</h2>
@@ -665,8 +665,8 @@
    <li>eon/ts-pt-dimer-m100 eOn n=49, not yet on the harness counter.</li>
    <li>eon/ts-pt-dimer eOn n=49, not yet on the harness counter.</li>
    </ul>
-   <img src="_static/board/tsopt-pt-island-profile.svg" alt="Dolan-More profile for tsopt/pt-island">
-   <img src="_static/board/tsopt-pt-island-cost.svg" alt="Cost versus success for tsopt/pt-island">
+   <figure class="bench-plot"><a href="_static/board/tsopt-pt-island-profile.svg"><picture><source srcset="_static/board/tsopt-pt-island-profile.webp" type="image/webp"><img src="_static/board/tsopt-pt-island-profile.png" alt="Dolan-More profile for tsopt/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="_static/board/tsopt-pt-island-cost.svg"><picture><source srcset="_static/board/tsopt-pt-island-cost.webp" type="image/webp"><img src="_static/board/tsopt-pt-island-cost.png" alt="Cost versus success for tsopt/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    </section>
    <section id="unparsed"><h2>Not scored</h2><ul><li>results/campaign/eon-3.5.0-de-lj38-ci-neb.dat: no per-start record</li><li>results/campaign/eon-3.5.0-de-lj38-ci-swdneb.dat: no per-start record</li><li>results/campaign/eon-3.5.0-neb-pt-cg.dat: no per-start record</li><li>results/campaign/eon-3.5.0-neb-pt-fire.dat: no per-start record</li><li>results/campaign/eon-3.5.0-neb-pt-lbfgs.dat: no per-start record</li><li>results/campaign/eon-3.5.0-neb-pt-qm.dat: no per-start record</li><li>results/campaign/eon-client-cg.dat: no per-start record</li><li>results/campaign/eon-client-fire.dat: no per-start record</li><li>results/campaign/eon-client-lbfgs-m100.dat: no per-start record</li><li>results/campaign/eon-client-lbfgs-m20.dat: no per-start record</li><li>results/campaign/eon-client-morse-cg.dat: no per-start record</li><li>results/campaign/eon-client-morse-fire.dat: no per-start record</li><li>results/campaign/eon-client-morse-lbfgs.dat: no per-start record</li><li>results/campaign/eon-client-morse-sd.dat: no per-start record</li><li>results/campaign/eon-client-qm.dat: no per-start record</li><li>results/campaign/eon-client-sd-twopoint.dat: no per-start record</li><li>results/campaign/eon-client-sd.dat: no per-start record</li><li>results/campaign/eon-svn-cg.dat: no per-start record</li><li>results/campaign/eon-svn-fire.dat: no per-start record</li><li>results/campaign/eon-svn-lbfgs-m100.dat: no per-start record</li><li>results/campaign/eon-svn-lbfgs-m20.dat: no per-start record</li><li>results/campaign/eon-svn-morse-cg.dat: no per-start record</li><li>results/campaign/eon-svn-morse-fire.dat: no per-start record</li><li>results/campaign/eon-svn-morse-lbfgs.dat: no per-start record</li><li>results/campaign/eon-svn-morse-sd.dat: no per-start record</li><li>results/campaign/eon-svn-qm.dat: no per-start record</li><li>results/campaign/eon-svn-sd-twopoint.dat: no per-start record</li><li>results/campaign/eon-svn-sd.dat: no per-start record</li><li>results/campaign/pele-0.1.2-lbfgs-M1-maxstep0.1.dat: no per-start record</li><li>results/campaign/pele-0.1.2-lbfgs-M10-maxstep0.1.dat: no per-start record</li><li>results/campaign/pele-0.1.2-lbfgs-M100-maxstep0.2.dat: no per-start record</li><li>results/campaign/pele-0.1.2-lbfgs-M20-maxstep0.1.dat: no per-start record</li><li>results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.05.dat: no per-start record</li><li>results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.1.dat: no per-start record</li><li>results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.2.dat: no per-start record</li><li>results/campaign/sella-2.6.0-ts-lj38.dat: no per-start record</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Lj38EonCg (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;lj38-clusters/cluster_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Lj38EonFire (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;lj38-clusters/cluster_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Lj38EonLbfgsM100 (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;lj38-clusters/cluster_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Lj38EonLbfgsM20 (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;lj38-clusters/cluster_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Lj38EonQm (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;lj38-clusters/cluster_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Lj38EonSd (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;lj38-clusters/cluster_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Lj38EonSdTwopoint (&quot;&#x27;0&#x27;&quot;, &quot;&#x27;lj38-clusters/cluster_0000.con&#x27;&quot;) track_force_calls was skipped or failed</li><li>results/asv/d4513f42b39edd0b69ade46ce63fd106e0f406c3: Pending.track_success matched nothing in commit d4513f42b39edd0b69ade46ce63fd106e0f406c3</li></ul></section>
    <section id="unmapped"><h2>Not a problem template</h2><ul><li>quadratic.QuadraticDimer: benchmark quadratic.QuadraticDimer is not a problem template</li><li>quadratic.QuadraticDisplacement: benchmark quadratic.QuadraticDisplacement is not a problem template</li><li>quadratic.QuadraticFailureCap: benchmark quadratic.QuadraticFailureCap is not a problem template</li><li>quadratic.QuadraticFailureCrash: benchmark quadratic.QuadraticFailureCrash is not a problem template</li><li>quadratic.QuadraticFailureDivergence: benchmark quadratic.QuadraticFailureDivergence is not a problem template</li><li>quadratic.QuadraticFailureWrongStationary: benchmark quadratic.QuadraticFailureWrongStationary is not a problem template</li><li>quadratic.QuadraticKept: benchmark quadratic.QuadraticKept is not a problem template</li><li>quadratic.QuadraticNoise0: benchmark quadratic.QuadraticNoise0 is not a problem template</li><li>quadratic.QuadraticNoise1em02: benchmark quadratic.QuadraticNoise1em02 is not a problem template</li><li>quadratic.QuadraticNoise1em03: benchmark quadratic.QuadraticNoise1em03 is not a problem template</li><li>quadratic.QuadraticNoise1em04: benchmark quadratic.QuadraticNoise1em04 is not a problem template</li><li>quadratic.QuadraticProfileCap30: benchmark quadratic.QuadraticProfileCap30 is not a problem template</li><li>quadratic.QuadraticProfileStep001: benchmark quadratic.QuadraticProfileStep001 is not a problem template</li><li>quadratic.QuadraticProfileStep005: benchmark quadratic.QuadraticProfileStep005 is not a problem template</li></ul></section>

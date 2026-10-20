@@ -45,8 +45,8 @@
    <h3>Not scored</h3><ul>
    <li>sella-lj38: no per-start record</li>
    </ul>
-   <img src="../../_static/board/tsopt-LJ38-profile.svg" alt="Dolan-More profile for tsopt/LJ38">
-   <img src="../../_static/board/tsopt-LJ38-cost.svg" alt="Cost versus success for tsopt/LJ38">
+   <figure class="bench-plot"><a href="../../_static/board/tsopt-LJ38-profile.svg"><picture><source srcset="../../_static/board/tsopt-LJ38-profile.webp" type="image/webp"><img src="../../_static/board/tsopt-LJ38-profile.png" alt="Dolan-More profile for tsopt/LJ38" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="../../_static/board/tsopt-LJ38-cost.svg"><picture><source srcset="../../_static/board/tsopt-LJ38-cost.webp" type="image/webp"><img src="../../_static/board/tsopt-LJ38-cost.png" alt="Cost versus success for tsopt/LJ38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    </section><section class="bench bench-archive" id="LJ38-archive">
    <h3>2014 archive</h3>
    <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
@@ -197,8 +197,8 @@
    <li>eon/ts-pt-dimer-m100 eOn n=49, not yet on the harness counter.</li>
    <li>eon/ts-pt-dimer eOn n=49, not yet on the harness counter.</li>
    </ul>
-   <img src="../../_static/board/tsopt-pt-island-profile.svg" alt="Dolan-More profile for tsopt/pt-island">
-   <img src="../../_static/board/tsopt-pt-island-cost.svg" alt="Cost versus success for tsopt/pt-island">
+   <figure class="bench-plot"><a href="../../_static/board/tsopt-pt-island-profile.svg"><picture><source srcset="../../_static/board/tsopt-pt-island-profile.webp" type="image/webp"><img src="../../_static/board/tsopt-pt-island-profile.png" alt="Dolan-More profile for tsopt/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="../../_static/board/tsopt-pt-island-cost.svg"><picture><source srcset="../../_static/board/tsopt-pt-island-cost.webp" type="image/webp"><img src="../../_static/board/tsopt-pt-island-cost.png" alt="Cost versus success for tsopt/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    </section><section class="bench bench-archive" id="pt-island-archive">
    <h3>2014 archive</h3>
    <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>

@@ -46,8 +46,8 @@
    <li>eon-lbfgs: no per-start record</li>
    <li>eon-qm: no per-start record</li>
    </ul>
-   <img src="../../_static/board/neb-Pt-heptamer-profile.svg" alt="Dolan-More profile for neb/Pt-heptamer">
-   <img src="../../_static/board/neb-Pt-heptamer-cost.svg" alt="Cost versus success for neb/Pt-heptamer">
+   <figure class="bench-plot"><a href="../../_static/board/neb-Pt-heptamer-profile.svg"><picture><source srcset="../../_static/board/neb-Pt-heptamer-profile.webp" type="image/webp"><img src="../../_static/board/neb-Pt-heptamer-profile.png" alt="Dolan-More profile for neb/Pt-heptamer" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="../../_static/board/neb-Pt-heptamer-cost.svg"><picture><source srcset="../../_static/board/neb-Pt-heptamer-cost.webp" type="image/webp"><img src="../../_static/board/neb-Pt-heptamer-cost.png" alt="Cost versus success for neb/Pt-heptamer" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    </section><section class="bench bench-archive" id="Pt-heptamer-archive">
    <h3>2014 archive</h3>
    <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>

@@ -146,10 +146,25 @@
   max-width: 68ch;
 }
 
+.bench-plot > a,
+.bench-plot picture {
+  display: block;
+  max-width: 42rem;
+}
+
+.bench-plot img,
+.yue img,
+.yue svg,
+.yue picture {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
 .bench-plot svg {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
 }
 
 .bench-plot .label,

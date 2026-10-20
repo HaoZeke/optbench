@@ -193,8 +193,8 @@
    <li>pele-lbfgs-M4-maxstep0.1: no per-start record</li>
    <li>pele-lbfgs-M4-maxstep0.2: no per-start record</li>
    </ul>
-   <img src="../../_static/board/minimization-lj38-profile.svg" alt="Dolan-More profile for minimization/lj38">
-   <img src="../../_static/board/minimization-lj38-cost.svg" alt="Cost versus success for minimization/lj38">
+   <figure class="bench-plot"><a href="../../_static/board/minimization-lj38-profile.svg"><picture><source srcset="../../_static/board/minimization-lj38-profile.webp" type="image/webp"><img src="../../_static/board/minimization-lj38-profile.png" alt="Dolan-More profile for minimization/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="../../_static/board/minimization-lj38-cost.svg"><picture><source srcset="../../_static/board/minimization-lj38-cost.webp" type="image/webp"><img src="../../_static/board/minimization-lj38-cost.png" alt="Cost versus success for minimization/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    </section><section class="bench bench-archive" id="lj38-archive">
    <h3>2014 archive</h3>
    <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
@@ -509,8 +509,8 @@
    <tr><td data-field="template">sqnm/noise-lj38-tuned-s1em02</td><td data-field="version">sqnm 1.3</td><td data-field="commit">4241692173cc</td><td data-field="source">campaign</td><td data-field="par2_mean">16183</td><td data-field="success_rate">0.194</td><td data-field="median_calls">331</td><td data-field="mean_calls">340.211</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 806</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">optking/noise-lj38-s1em04</td><td data-field="version">optking 767e2c0c</td><td data-field="commit">767e2c0c13ff</td><td data-field="source">campaign</td><td data-field="par2_mean">19610.5</td><td data-field="success_rate">0.02</td><td data-field="median_calls">560</td><td data-field="mean_calls">733.84</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 980</td><td data-field="n">1000</td></tr>
    </tbody></table>
-   <img src="../../_static/board/minimization-lj38-noise-profile.svg" alt="Dolan-More profile for minimization/lj38-noise">
-   <img src="../../_static/board/minimization-lj38-noise-cost.svg" alt="Cost versus success for minimization/lj38-noise">
+   <figure class="bench-plot"><a href="../../_static/board/minimization-lj38-noise-profile.svg"><picture><source srcset="../../_static/board/minimization-lj38-noise-profile.webp" type="image/webp"><img src="../../_static/board/minimization-lj38-noise-profile.png" alt="Dolan-More profile for minimization/lj38-noise" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="../../_static/board/minimization-lj38-noise-cost.svg"><picture><source srcset="../../_static/board/minimization-lj38-noise-cost.webp" type="image/webp"><img src="../../_static/board/minimization-lj38-noise-cost.png" alt="Cost versus success for minimization/lj38-noise" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    </section><section class="bench bench-archive" id="lj38-noise-archive">
    <h3>2014 archive</h3>
    <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
@@ -703,8 +703,8 @@
    <li>eon-svn/morse-lbfgs: no per-start record</li>
    <li>eon-svn/morse-sd: no per-start record</li>
    </ul>
-   <img src="../../_static/board/minimization-morse-bulk-profile.svg" alt="Dolan-More profile for minimization/morse-bulk">
-   <img src="../../_static/board/minimization-morse-bulk-cost.svg" alt="Cost versus success for minimization/morse-bulk">
+   <figure class="bench-plot"><a href="../../_static/board/minimization-morse-bulk-profile.svg"><picture><source srcset="../../_static/board/minimization-morse-bulk-profile.webp" type="image/webp"><img src="../../_static/board/minimization-morse-bulk-profile.png" alt="Dolan-More profile for minimization/morse-bulk" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="../../_static/board/minimization-morse-bulk-cost.svg"><picture><source srcset="../../_static/board/minimization-morse-bulk-cost.webp" type="image/webp"><img src="../../_static/board/minimization-morse-bulk-cost.png" alt="Cost versus success for minimization/morse-bulk" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    </section><section class="bench bench-archive" id="morse-bulk-archive">
    <h3>2014 archive</h3>
    <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>

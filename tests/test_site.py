@@ -77,6 +77,8 @@ def test_rendered_pages_use_the_board_rank():
     assert f'data-board-table="ranked" data-problem="minimization/lj38"' in minimization
     assert f'data-field="par2_mean">{cells["par2_mean"]}<' in minimization
     assert "minimization-lj38-profile.svg" in minimization
+    assert "minimization-lj38-profile.webp" in minimization
+    assert 'loading="lazy"' in minimization
     assert "2014 archive" in minimization
     assert "Legacy 2014" not in minimization
     assert "Wilson low" not in minimization
