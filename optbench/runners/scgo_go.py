@@ -11,11 +11,11 @@ Basin hopping is ``scgo.algorithms.basinhopping_go.bh_go``. For a
 archived start. Each file in the problem archive is one start.
 
 The library budget for 38 atoms is 131 hops and 233 FIRE steps. A
-start ends early when a quenched energy lies within
-``energy_above_minimum`` of the harness minimum. The force-call cap is
+start ends early when the harness energy lies within
+``energy_above_minimum`` of ``reference.energy``. The force-call cap is
 the most evaluations that budget can spend. A search that uses the cap
-is a cap failure. A quenched energy outside the window is
-``wrong_stationary``.
+is a cap failure. An energy outside the window, with calls still under
+the cap, is ``wrong_stationary``.
 
 The tuned template keeps that FIRE length, step size, and Metropolis
 scale. Its hop count is the AIRSS Lennard-Jones 38 call ceiling, so a
@@ -301,7 +301,7 @@ def _dat(summary: dict, template: dict, metrics: dict, *, partial: bool, energy_
     lines = [
         "# counter harness. One force call is one ASE calculate on optbench.potentials.lennard_jones.",
         (
-            "# A start succeeds when a quenched energy is within energy_above_minimum of the known minimum."
+            "# A start succeeds when the harness energy is within energy_above_minimum of reference.energy."
             if energy_rule
             else "# The problem states no energy_above_minimum. success means a finite quench under the FIRE force tolerance. energy is that quenched energy, or the lowest energy seen when the force never met fmax."
         ),
@@ -608,7 +608,7 @@ def _write_campaign(output: Path, template: dict, problem: dict, records: list[d
         "note": (
             "Harness counter on optbench.potentials.lennard_jones. "
             + (
-                "A start succeeds when a quenched energy is within energy_above_minimum of the known minimum. "
+                "A start succeeds when the harness energy is within energy_above_minimum of reference.energy. "
                 if energy_rule
                 else "The problem states no energy_above_minimum. success means a finite quench under the FIRE force tolerance. energy is that quenched energy, or the lowest energy seen when the force never met fmax. "
             )
