@@ -1,15 +1,15 @@
-# partial snapshot: 55 starts scored, the campaign is still running
+# partial snapshot: 59 starts scored, the campaign is still running
 # counter harness. One force call is one RgpotCounter.calculate entry.
 # geomeTRIC finite-difference Hessians are not used.
 # v2 success is under the cap, at the force stop, and Hessian index 0.
 # energy and Kabsch RMSD were not applied: the problem file has no energy_tol, rmsd_tol, or per-start reference.
-# final coordinate system: DelocalizedInternalCoordinates 55
+# final coordinate system: DelocalizedInternalCoordinates 59
 # TRIC coordinates on the Morse bulk cell. Bonds are the two nearest Cartesian neighbors. Distance coordinates are the library's Cartesian differences, so a minimum-image neighbor is not used: that pair can be a long Cartesian vector and does not describe the periodic contact. The covalent first shell is not used: its Wilson G matrix is about a tebibyte. A coordinate rebuild keeps that neighbor list. Atoms are Pt. The stop and trust settings match the Cartesian Morse row. A failed coordinate rebuild can continue in Cartesian coordinates.
-force_calls 785
+force_calls 796
 force_calls_min 605
 force_calls_max 1776
 nfailed 0
-median 721
+median 722
 code geomeTRIC
 code_version 1.1.1
 commit f657e69bae9c81bf7a23e7375db98502ca5c8c30
@@ -18,15 +18,15 @@ template geometric/morse-tric
 tuning default
 counter harness
 problem minimization/morse-bulk
-par2_mean 785.436363636
-wilson_low 0.934715098883
+par2_mean 796.016949153
+wilson_low 0.938870629473
 wilson_high 1
-par2_median 721
-par2_median_low 680
-par2_median_high 774
+par2_median 722
+par2_median_low 685
+par2_median_high 811
 v2_nfailed 0
-v2_successes 55
-n 55
+v2_successes 59
+n 59
 partial true
 energy_min -1396.17323766
 energy_max -1396.17323764
