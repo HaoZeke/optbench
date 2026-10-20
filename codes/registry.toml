@@ -185,13 +185,13 @@ note = "EON, the SVN client, is a different code from eOn. This pin is unpatched
 
 [[code]]
 id = "eon-develop-a7aa574"
-name = "eOn (develop a7aa57472fb7)"
+name = "eOn (develop 500350d9)"
 role = "accelerated molecular dynamics"
 repository = "https://github.com/TheochemUI/eon"
-ref = "develop"
-commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
-committed = "2026-10-18"
-note = "eOn at current develop a7aa57472fb7d823953fd36b78cd755fa4842d30 (https://eondocs.org). The version string is 3.6.0. This is not EON and not SVN r2549. The older eon-develop pin stays for the scores that were run on 7095b23a."
+ref = "fix/develop-regressions-vs-350"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
+committed = "2026-10-20"
+note = "eOn at 500350d9fae881f06c7ef194e5868da079c4be5a on fix/develop-regressions-vs-350 (https://eondocs.org). This is not EON and not SVN r2549. The older eon-develop pin stays for the scores that were run on 7095b23a."
 
 [[template]]
 id = "sella-0.1.1/lj38-loweig"

@@ -2471,18 +2471,26 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <h3>aladatom</h3>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="accelerated-md/aladatom">
-   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">eon-develop/aladatom-pr-langevin</td><td data-field="version">eOn (develop a7aa57472fb7) 3.6.0</td><td data-field="commit">a7aa57472fb7</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">2e+06</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.793451</td><td data-field="median_calls">2141</td><td data-field="mean_calls">2141</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 1</td><td data-field="n">1</td></tr>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Latest</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td data-field="template">eon-develop/aladatom-pr-langevin</td><td data-field="version">eOn (develop 500350d9) 3.6.0</td><td data-field="commit">500350d9fae8</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">5547</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.206549</td><td data-field="wilson_high">1</td><td data-field="median_calls">5547</td><td data-field="mean_calls">5547</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">1</td></tr>
    </tbody></table></div>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/accelerated-md.html#aladatom">Full ranked table and performance profile</a>.</p>
-   <section class="bench bench-legacy-section" id="aladatom-legacy">
-   <h3>Legacy 2014 archive</h3>
+   <table class="bench-rates">
+   <caption>Archive true rate beside the latest-version parallel-replica rows.</caption>
+   <thead><tr><th>Row</th><th>Code</th><th>Value</th><th>Unit</th><th>Stop</th></tr></thead>
+   <tbody>
+   <tr><td>archive</td><td>Eon</td><td>2.542941e+08</td><td>1/s</td><td>archived true rate</td></tr>
+   <tr><td>eon-r2549-aladatom-pr-langevin</td><td>EON (SVN r2549)</td><td>3.448276e+11</td><td>1/s</td><td>transition confirmed: the product was minimized and it differs from the reactant; the client kept stepping until the force-call cap</td></tr>
+   <tr><td>eon-develop-aladatom-pr-langevin</td><td>eOn (develop 500350d9)</td><td>3.448276e+11</td><td>1/s</td><td>transition confirmed: the product was minimized, written, and it differs from the reactant</td></tr>
+   </tbody></table>
+   <section class="bench bench-legacy-section" id="aladatom-archive">
+   <h3>Archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
+   <summary>Archive</summary>
+   <p class="bench-legacy">Archive. The archive row sits beside the latest-version rows. The quantity is the true rate.</p>
    <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Lowest rate first.</caption>
+   <caption>Archive. Lowest rate first.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>

@@ -32,6 +32,7 @@ import ctypes
 import hashlib
 import json
 import os
+import re
 import shutil
 import signal
 import subprocess
@@ -88,7 +89,7 @@ FAMILIES = {
         "default": Path("/tmp/eon-hg/client/eonclient"),
         "flag": "-v",
         "token": "r2549",
-        "cache": "r2549-unpatched",
+        "cache": "r2549-rate-cap",
     },
     "develop": {
         "prefix": "eon-develop/",
@@ -96,7 +97,7 @@ FAMILIES = {
         "default": Path("/tmp/eon-develop-prefix/bin/eonclient"),
         "flag": "-v",
         "token": "3.6.0",
-        "cache": "develop-a7aa574",
+        "cache": "develop-500350d9",
     },
 }
 
@@ -586,7 +587,16 @@ def default_starts(kind: str) -> list[str]:
     raise ValueError(f"unknown harness kind {kind}")
 
 
-def _run_client(client: str, ini: str, dest: Path, copies, texts, timeout: int | None) -> dict:
+def _run_client(
+    client: str,
+    ini: str,
+    dest: Path,
+    copies,
+    texts,
+    timeout: int | None,
+    *,
+    line_buffer: bool = False,
+) -> dict:
     if dest.exists():
         shutil.rmtree(dest)
     dest.mkdir(parents=True)
@@ -597,18 +607,95 @@ def _run_client(client: str, ini: str, dest: Path, copies, texts, timeout: int |
         shutil.copy(src, target)
     for name, text in texts:
         (dest / name).write_text(text, encoding="utf-8")
+    command = [client]
+    if line_buffer and shutil.which("stdbuf"):
+        command = ["stdbuf", "-oL", "-eL", client]
     proc = subprocess.run(
-        [client],
+        command,
         cwd=dest,
         env=_client_env(client),
-        stdout=subprocess.DEVNULL,
+        stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         check=False,
         text=True,
         timeout=timeout,
     )
     fields = _read_dat(dest / "results.dat")
-    return {"returncode": proc.returncode, "fields": fields, "stderr": proc.stderr or ""}
+    disk_log = ""
+    log_path = dest / "client.log"
+    if log_path.is_file():
+        disk_log = log_path.read_text(encoding="utf-8", errors="replace")
+    return {
+        "returncode": proc.returncode,
+        "fields": fields,
+        "stderr": proc.stderr or "",
+        "log": (proc.stdout or "") + "\n" + disk_log,
+        "product": (dest / "product.con").is_file(),
+    }
+
+
+_TRANSITION_TIME = re.compile(r"Transition time:\s*([0-9.eE+-]+)")
+
+
+def _prd_record(found: dict, calls: int, cap: int) -> dict:
+    """A parallel-replica rate. Success is a minimized product distinct from the reactant."""
+    fields = found["fields"]
+    log = found.get("log") or ""
+    stderr = found.get("stderr") or ""
+    transition_time = None
+    raw_time = fields.get("transition_time_s")
+    if raw_time is not None:
+        transition_time = float(raw_time)
+    else:
+        match = _TRANSITION_TIME.search(log)
+        if match:
+            transition_time = float(match.group(1))
+    simulation_time = None
+    raw_simulation = fields.get("simulation_time_s")
+    if raw_simulation is not None:
+        simulation_time = float(raw_simulation)
+    confirmed = fields.get("transition_found") == "1" or "Transition occurred" in log
+    killed = found["returncode"] is not None and found["returncode"] < 0
+    cap_hit = calls >= cap or killed or "force-call cap" in stderr or "ForceCallCap" in stderr
+    if confirmed and transition_time is not None and transition_time > 0.0:
+        reason = "transition confirmed: the product was minimized and it differs from the reactant"
+        if found.get("product"):
+            reason = (
+                "transition confirmed: the product was minimized, written, and it differs from the reactant"
+            )
+        if cap_hit:
+            reason += "; the client kept stepping until the force-call cap"
+        record = {
+            "force_calls": float(calls),
+            "success": True,
+            "failure": None,
+            "transition_found": 1,
+            "transition_time_s": transition_time,
+            "true_rate": 1.0 / transition_time,
+            "stop_reason": reason,
+        }
+        return record
+    ended = "Simulation ended without seeing a transition" in log
+    if cap_hit or ended:
+        record = {
+            "force_calls": float(calls),
+            "success": False,
+            "failure": "cap",
+            "transition_found": 0,
+            "stop_reason": "force-call cap reached before a confirmed transition",
+        }
+        if ended and not cap_hit:
+            record["stop_reason"] = "dynamics window ended without a confirmed transition"
+        if simulation_time is not None:
+            record["simulation_time_s"] = simulation_time
+        return record
+    crashed = found["returncode"] != 0 or ("total_force_calls" not in fields and calls == 0)
+    record = classify_flag(calls=calls, cap=cap, ok=False, crashed=crashed)
+    record["transition_found"] = 0
+    record["stop_reason"] = "client exited without a confirmed transition"
+    if simulation_time is not None:
+        record["simulation_time_s"] = simulation_time
+    return record
 
 
 def _guard(record: dict, client_calls) -> dict:
@@ -818,6 +905,7 @@ def run_case(
                     copies,
                     texts,
                     None,
+                    line_buffer=kind in {"prd", "hyper"},
                 )
                 calls, _verify = remote_count(server.host, server.port)
                 fields = found["fields"]
@@ -841,10 +929,7 @@ def run_case(
                     )
                     record["minimum_energy"] = energy
                 elif kind in {"prd", "hyper"}:
-                    transition = fields.get("transition_found") == "1"
-                    crashed = found["returncode"] != 0 or "total_force_calls" not in fields and calls == 0
-                    record = classify_flag(calls=calls, cap=cap, ok=transition, crashed=crashed)
-                    record["transition_found"] = 1 if transition else 0
+                    record = _prd_record(found, calls, cap)
                 else:
                     reason = fields.get("termination_reason")
                     record = classify_client(
@@ -951,6 +1036,10 @@ def _start_row(seed: int, start: str, record: dict) -> dict:
         "fraction_connected",
         "passes",
         "transition_found",
+        "transition_time_s",
+        "simulation_time_s",
+        "true_rate",
+        "stop_reason",
         "error",
         "force_norm",
         "hessian_index",
@@ -985,12 +1074,21 @@ def write_campaign(template: dict, rows: list[tuple[int, str, dict]], output: Pa
         summary["force_calls_min"] = int(min(calls))
         summary["force_calls_max"] = int(max(calls))
         summary["force_calls_median"] = float(np.median(calls))
+    rates = [float(row["true_rate"]) for _seed, _start, row in kept if row.get("true_rate")]
+    if rates:
+        summary["true_rate"] = sum(rates) / len(rates)
+    reasons = [str(row["stop_reason"]) for _seed, _start, row in kept if row.get("stop_reason")]
     text = benchmark_text(summary, template)
     extra = ["counter harness", "count_keys HarnessCounter"]
+    if summary.get("true_rate") is not None:
+        extra.append(f"true_rate {summary['true_rate']:.6e}")
     if partial:
         extra.append("partial true")
+    comment = ""
+    if reasons:
+        comment = "# " + reasons[0] + "\n"
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(text.rstrip("\n") + "\n" + "\n".join(extra) + "\n", encoding="utf-8")
+    output.write_text(comment + text.rstrip("\n") + "\n" + "\n".join(extra) + "\n", encoding="utf-8")
     write_starts(output.with_suffix(".starts"), [_start_row(seed, start, row) for seed, start, row in kept])
     summary["starts"] = len(kept)
     summary["partial"] = partial

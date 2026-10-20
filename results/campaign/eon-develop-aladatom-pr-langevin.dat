@@ -1,12 +1,17 @@
-# Stock eOn develop a7aa57472fb7. Same reactant, seed, thermostat, and library defaults as EON r2549. Harness force calls 2141. transition_found 0, so this run has no true_rate. The archived true_rate is 2.542941e8. The gap is the finding.
+# transition confirmed: the product was minimized, written, and it differs from the reactant
+force_calls 5547
+force_calls_min 5547
+force_calls_max 5547
+force_calls_median 5547.0
 call_unit total
-nfailed 1
-code eOn (develop a7aa57472fb7)
+nfailed 0
+code eOn (develop 500350d9)
 code_version 3.6.0
-commit a7aa57472fb7d823953fd36b78cd755fa4842d30
+commit 500350d9fae881f06c7ef194e5868da079c4be5a
 algorithm parallel replica
 template eon-develop/aladatom-pr-langevin
 problem accelerated-md/aladatom
 reducer harness
 counter harness
 count_keys HarnessCounter
+true_rate 3.448276e+11

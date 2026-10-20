@@ -18,7 +18,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
-| aladatom/true_standard/eon-pr-langevin | — | — | not rerun; akmc_vs_langevin |
+| aladatom/true_standard/eon-pr-langevin | true_rate 2.542941e8 1/s | EON (SVN r2549) true_rate 3.448276e11 1/s, 1000000 force calls; eOn (develop 500350d9) true_rate 3.448276e11 1/s, 5547 force calls | archive row |
 | standard_aladatom/eon-md-langevin | — | — | not rerun; akmc_vs_langevin |
 
 ## double-ended-saddle-search
@@ -224,9 +224,8 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 ### akmc_vs_langevin
 
-The archive rows are Langevin parallel replica. The harness rows are AKMC. On infra/aladatom-repro, eon/aladatom-akmc true_rate 3.597591452e9 is 14.1 times 2.542941e8, and eon/standard-aladatom-akmc true_rate 3.80613e7 is 45.5 times 8.359e5.
+The standard_aladatom archive row is Langevin parallel replica. The harness row cited for it is AKMC. On infra/aladatom-repro, eon/standard-aladatom-akmc true_rate 3.80613e7 is 45.5 times 8.359e5.
 
-- accelerated-md/aladatom/true_standard/eon-pr-langevin
 - accelerated-md/standard_aladatom/eon-md-langevin
 
 ### de_exclusion
@@ -358,6 +357,10 @@ Sella 2.6.0 with the archived trust-region numbers (eta, gamma, delta0, rho, sig
 - tsopt/LJ38/sella
 - tsopt/pt-island/sella
 
-Rows with no exact-setup campaign stay not rerun and are not given a cause. AKMC on aladatom is a different method from Langevin parallel replica; the ratios above are that comparison, and the archive rows stay not rerun.
+Rows with no exact-setup campaign stay not rerun and are not given a cause. The standard_aladatom comparison above is AKMC against Langevin parallel replica.
 
-EON and eOn are different codes. The archived aladatom true_rate 2.542941e8 stays the paper row. Stock untuned parallel replica, Langevin friction 0.001, the archived reactant, seed 1, and each code's library defaults (300 K, 1 fs, dynamics time 1000 fs, dephase 1000 fs, state check 1000 fs, conjugate-gradient force stop 0.01) scores as follows. EON (SVN r2549) used 3191 harness force calls and found no transition. eOn (develop a7aa57472fb7) used 2141 harness force calls and found no transition. Neither run emits a true_rate. The harness ranks both beside the archive and records the miss as wrong_stationary. The gap is the finding.
+EON and eOn are different codes. The aladatom archive row is the true rate 2.542941e8 1/s, Langevin friction 0.001, parallel replica, on the archived reactant. It sits beside two stock latest-version rows, seed 1. Temperature is 300 K. The dephase time, the state-check interval, and the post-transition time are 1000 fs. Those are the shared library defaults; the archive file records the thermostat and the rate. A detected escape is minimized and compared with the reactant. The dynamics window is 10000000 fs and the force-call cap is 1000000. Nothing else is moved off the library defaults.
+
+eOn (develop 500350d9) confirmed a transition at 2.900e-12 s. The true rate is 3.448276e11 1/s from 5547 harness force calls. Stop: the product was minimized, written, and it differs from the reactant.
+
+EON (SVN r2549), built with Fortran and unpatched, confirmed the same transition time, 2.900e-12 s, so the true rate is 3.448276e11 1/s. That client does not act on stop_after_transition, so after the confirmation it kept stepping until the harness reached the 1000000 force-call cap. Stop: the product was minimized and it differs from the reactant; the client kept stepping until the force-call cap.

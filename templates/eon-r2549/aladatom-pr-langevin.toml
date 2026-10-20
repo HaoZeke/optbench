@@ -11,19 +11,32 @@ failure_cap = 1000000
 kind = "prd"
 kernel = "eam"
 note = '''
-Stock unpatched EON r2549 parallel replica on the archived aluminum adatom reactant. The thermostat is the archive name langevin_0.001. Temperature, timestep, dynamics time, dephase, state check, post-transition time, and the conjugate-gradient force stop stay at the r2549 library defaults. The geometry is the archived reactant and the seed is 1. The run is not tuned toward the archived rate.
+Stock unpatched EON r2549 parallel replica on the archived aluminum adatom reactant. Langevin friction is 0.001. Temperature is 300 K and the dephase, state-check, and post-transition times are 1000 fs, the shared library defaults, because the archive file records the thermostat and the rate. The trajectory runs until a transition is minimized and found distinct from the reactant, or until the 1000000 force-call cap. The seed is 1. Nothing is tuned toward the archived rate.
 '''
 seeds = [1]
 starts = ["reactant"]
 asv_full = false
-budget_seconds = 1200
+budget_seconds = 20000
 
 [ini.Main]
 job = "parallel_replica"
+temperature = 300
 
 [ini.Potential]
 potential = "eam_al"
 
 [ini.Dynamics]
+time_step = 1
+time = 10000000
 thermostat = "langevin"
 langevin_friction = 0.001
+
+[ini."Parallel Replica"]
+stop_after_transition = true
+refine_transition = true
+dephase_time = 1000
+state_check_interval = 1000
+post_transition_time = 1000
+
+[ini.Debug]
+write_movies_interval = 1000

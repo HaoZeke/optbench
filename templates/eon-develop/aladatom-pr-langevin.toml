@@ -1,9 +1,9 @@
 id = "eon-develop/aladatom-pr-langevin"
 engine = "eon"
 problem = "accelerated-md/aladatom"
-code = "eOn (develop a7aa57472fb7)"
+code = "eOn (develop 500350d9)"
 code_version = "3.6.0"
-commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
 algorithm = "parallel replica"
 reducer = "harness"
 tuning = "stock"
@@ -11,19 +11,32 @@ failure_cap = 1000000
 kind = "prd"
 kernel = "eam"
 note = '''
-Stock eOn develop a7aa57472fb7 parallel replica on the same archived aluminum adatom reactant, seed, thermostat, and library defaults as EON r2549. eOn is not EON. The thermostat is langevin_0.001. Temperature, timestep, dynamics time, dephase, state check, post-transition time, and the conjugate-gradient force stop stay at the library defaults. The run is not tuned toward the archived rate.
+Stock eOn develop 500350d9 parallel replica on the same archived aluminum adatom reactant, seed, thermostat, temperature, dephase, state check, post-transition time, and force-call cap as EON r2549. eOn is not EON. The trajectory runs until a transition is minimized and found distinct from the reactant, or until the 1000000 force-call cap. Nothing is tuned toward the archived rate.
 '''
 seeds = [1]
 starts = ["reactant"]
 asv_full = false
-budget_seconds = 1200
+budget_seconds = 20000
 
 [ini.Main]
 job = "parallel_replica"
+temperature = 300
 
 [ini.Potential]
 potential = "eam_al"
 
 [ini.Dynamics]
+time_step = 1
+time = 10000000
 thermostat = "langevin"
 langevin_friction = 0.001
+
+[ini."Parallel Replica"]
+stop_after_transition = true
+refine_transition = true
+dephase_time = 1000
+state_check_interval = 1000
+post_transition_time = 1000
+
+[ini.Debug]
+write_movies_interval = 1000

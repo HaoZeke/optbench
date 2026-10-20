@@ -393,15 +393,91 @@ def _rule_html(problem: dict, smoke_note: str = "") -> str:
     return "\n".join(lines)
 
 
+def _archive_wording(text: str) -> str:
+    """The aladatom archive row sits beside the latest-version rows."""
+    text = text.replace("<summary>Legacy 2014 archive</summary>", "<summary>Archive</summary>")
+    text = text.replace("Legacy 2014 archive. ", "Archive. ")
+    text = text.replace("Legacy 2014 scores", "Archive scores")
+    text = text.replace(
+        "These rows stay in the published order. They are not a v2 score.",
+        "The archive row sits beside the latest-version rows. The quantity is the true rate.",
+    )
+    return text.replace(">Current<", ">Latest<")
+
+
 def _legacy_section(problem: dict, oracle: list[dict]) -> str:
-    return problem_html(
+    archive = problem.get("id") == "accelerated-md/aladatom"
+    text = problem_html(
         problem,
         oracle,
-        section_id=f"{problem['problem']}-legacy",
+        section_id=f"{problem['problem']}-archive" if archive else f"{problem['problem']}-legacy",
         heading="h3",
-        heading_text="Legacy 2014 archive",
+        heading_text="Archive" if archive else "Legacy 2014 archive",
         include_rule=False,
     )
+    if archive:
+        text = _archive_wording(text)
+    return text
+
+
+def _aladatom_rates(root: Path) -> str:
+    """Archive true rate beside the two stock parallel-replica runs."""
+    import json
+    rows = [
+        (
+            "archive",
+            "Eon",
+            "2.542941e+08",
+            "1/s",
+            "archived true rate",
+        )
+    ]
+    for stem, label in (
+        ("eon-r2549-aladatom-pr-langevin", "EON (SVN r2549)"),
+        ("eon-develop-aladatom-pr-langevin", "eOn (develop 500350d9)"),
+    ):
+        dat = root / "results" / "campaign" / f"{stem}.dat"
+        starts = root / "results" / "campaign" / f"{stem}.starts"
+        rate = ""
+        reason = ""
+        calls = ""
+        if dat.is_file():
+            for line in dat.read_text(encoding="utf-8").splitlines():
+                if line.startswith("true_rate "):
+                    rate = line.split(None, 1)[1]
+                if line.startswith("# "):
+                    reason = line[2:].strip()
+        if starts.is_file():
+            for line in starts.read_text(encoding="utf-8").splitlines():
+                if not line.strip():
+                    continue
+                row = json.loads(line)
+                calls = str(row.get("force_calls", ""))
+                reason = str(row.get("stop_reason") or reason)
+                if row.get("true_rate"):
+                    rate = f"{float(row['true_rate']):.6e}"
+                break
+        quantity = rate if rate else calls
+        unit = "1/s" if rate else "force calls"
+        rows.append((stem, label, quantity or "—", unit, reason or "—"))
+    lines = [
+        '<table class="bench-rates">',
+        "<caption>Archive true rate beside the latest-version parallel-replica rows.</caption>",
+        "<thead><tr><th>Row</th><th>Code</th><th>Value</th><th>Unit</th><th>Stop</th></tr></thead>",
+        "<tbody>",
+    ]
+    for row_id, code, value, unit, stop in rows:
+        lines.append(
+            "<tr>"
+            f"<td>{html.escape(row_id)}</td>"
+            f"<td>{html.escape(code)}</td>"
+            f"<td>{html.escape(value)}</td>"
+            f"<td>{html.escape(unit)}</td>"
+            f"<td>{html.escape(stop)}</td>"
+            "</tr>"
+        )
+    lines.append("</tbody></table>")
+    return "\n".join(lines)
 
 
 def _sorted_problems(group: list[dict]) -> list[dict]:
@@ -432,7 +508,10 @@ def _headlines_html(
             title = str(problem.get("title") or problem["problem"])
             href = f"generated/suites/{suite}.html#{problem['problem']}"
             lines.append(f"<h3>{html.escape(title)}</h3>")
-            lines.append(headline_table(view))
+            table = headline_table(view)
+            if problem["id"] == "accelerated-md/aladatom":
+                table = _archive_wording(table)
+            lines.append(table)
             lead = gap_paragraph(view, pending.get(problem["id"]))
             if lead:
                 lines.append(lead)
@@ -449,6 +528,7 @@ def _collection_html(
     document: dict,
     pending: dict[str, list[dict]],
     oracle: list[dict],
+    root: Path,
 ) -> str:
     from .board import gap_paragraph, headline_table
 
@@ -467,11 +547,16 @@ def _collection_html(
             title = str(problem.get("title") or problem["problem"])
             href = f"generated/suites/{suite}.html#{problem['problem']}"
             lines.append(f"<h3>{html.escape(title)}</h3>")
-            lines.append(headline_table(view))
+            table = headline_table(view)
+            if problem["id"] == "accelerated-md/aladatom":
+                table = _archive_wording(table)
+            lines.append(table)
             lead = gap_paragraph(view, pending.get(problem["id"]))
             if lead:
                 lines.append(lead)
             lines.append(f'<p><a href="{html.escape(href)}">Full ranked table and performance profile</a>.</p>')
+            if problem["id"] == "accelerated-md/aladatom":
+                lines.append(_aladatom_rates(root))
             lines.append(_legacy_section(problem, oracle))
     lines.append("</section>")
     return "\n".join(lines)
@@ -644,7 +729,7 @@ def render(root: Path) -> None:
         encoding="utf-8",
     )
     (include / "collection.org").write_text(
-        _raw(_collection_html(order, by_suite, document, pending, oracle)),
+        _raw(_collection_html(order, by_suite, document, pending, oracle, root)),
         encoding="utf-8",
     )
     for stale in ("featured.org", "terra-pass.org"):
@@ -667,16 +752,20 @@ def render(root: Path) -> None:
         for problem in sorted(group, key=lambda item: item["problem"].lower()):
             view = _board_view(problem, document)
             note = smoke if problem["id"] == "saddle-search/pt-island" else ""
-            sections.append(
-                render_problem_section(
-                    view,
-                    plot_names_for(view),
-                    asset_prefix="../../_static/board",
-                    preamble=_rule_html(problem, note),
-                    section_id=str(problem["problem"]),
-                    unparsed=pending.get(problem["id"]),
-                )
+            section = render_problem_section(
+                view,
+                plot_names_for(view),
+                asset_prefix="../../_static/board",
+                preamble=_rule_html(problem, note),
+                section_id=str(problem["problem"]),
+                unparsed=pending.get(problem["id"]),
             )
+            if problem["id"] == "accelerated-md/aladatom":
+                section = _archive_wording(section)
+                sections.append(section)
+                sections.append(_aladatom_rates(root))
+            else:
+                sections.append(section)
             sections.append(_legacy_section(problem, oracle))
         body = [
             f"#+TITLE: {suite_title(suite)}",
