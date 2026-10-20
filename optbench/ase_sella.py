@@ -835,41 +835,12 @@ def _cap_row(row: dict, atoms, message: str = "force-call cap") -> dict:
     return row
 
 
-def _paper_lbfgs36(template_or_optimizer: dict) -> bool:
-    optimizer = template_or_optimizer.get("optimizer") or template_or_optimizer
-    return str(optimizer.get("implementation") or "") == "3.6.0"
-
-
-def _run_lbfgs36(payload: dict) -> dict:
-    """ASE 3.6.0 LBFGS. The paper count is ``force_calls`` on the optimizer."""
-    from .ase_lbfgs36 import minimize_poscar
-
-    result = minimize_poscar(
-        Path(payload["paths"][0]),
-        payload["potential"],
-        dict(payload["optimizer"].get("parameters") or {}),
-        float(payload["tol"]),
-        int(payload["max_steps"]),
-    )
-    row = {
-        "failed": bool(result["failed"]),
-        "force_norm": float(result["force_norm"]),
-        "optimizer_force_calls": int(result["force_calls"]),
-        "energy": float(result["energy"]),
-    }
-    if payload.get("snapshot"):
-        row["parameters"] = result["parameters"]
-    return row
-
-
 def _stop_verify_hessian(stop: dict | None) -> bool:
     """Hessian index is part of v2 success unless the template turns it off."""
     return (stop or {}).get("verify_hessian", True) is not False
 
 
 def _run_minimize(payload: dict, bucket: CallCounter) -> dict:
-    if _paper_lbfgs36(payload["optimizer"]):
-        return _run_lbfgs36(payload)
     atoms = _attach(_read_atoms(Path(payload["paths"][0])), payload["potential"], bucket)
     opt = _build_optimizer(payload["optimizer"], atoms)
     verify = payload.get("verify_hessian", True) is not False
@@ -1349,10 +1320,6 @@ def _summarize(rows: list[dict], template: dict) -> dict:
         summary = summarize_capped(counts, cap)
         ok = [count for count in counts if count < cap]
         summary["force_calls_median"] = float(statistics.median(ok)) if ok else None
-        # The 2013 script writes np.mean of LBFGS.force_calls. half_even would
-        # move 53.72 to 54. Keep the unrounded mean for that counter.
-        if _paper_lbfgs36(template) and rows:
-            summary["force_calls"] = statistics.fmean(int(row["force_calls"]) for row in rows)
         return summary
     if reducer == "all":
         return summarize_all(
@@ -1429,19 +1396,18 @@ def _write_dat(
     partial: bool,
     scored: dict | None = None,
 ) -> None:
-    paper_steps = _paper_lbfgs36(template)
     force_only = not _stop_verify_hessian(template.get("stop"))
     method = {
         "profile": template["profile"],
         "parameter_source": template.get("parameter_source", ""),
-        "counter": "ASE 3.6.0 LBFGS.force_calls" if paper_steps else "harness attach_ase_counter",
+        "counter": "harness attach_ase_counter",
         "reducer": template["reducer"],
         "parameters": parameters,
         "potential": template.get("potential") or {},
         "stop": template.get("stop") or {},
     }
     note = template.get("note", "")
-    if paper_steps or force_only:
+    if force_only:
         note = note.strip()
     elif template["task"] in {"minimize", "sella", "sella-search", "dimer"}:
         note = (

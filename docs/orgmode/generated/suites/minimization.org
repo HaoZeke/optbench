@@ -782,7 +782,6 @@
    <li>rgmin/morse-dogleg-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=31.26 mean=31.26</li>
    <li>rgmin/morse-bb-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=33.22 mean=33.22</li>
    <li>rgmin/morse-cg-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=50.49 mean=50.49</li>
-   <li>ase-3.29.0/morse-lbfgs-current ASE 3.6.0 campaign n=100 PAR-2=53.65 mean=53.65</li>
    <li>rgmin/morse-bfgs rgmin 0.4.0 campaign, asv n=100 PAR-2=54.04 mean=54.04</li>
    <li>rgmin/morse-cg rgmin 0.4.0 campaign, asv n=100 PAR-2=54.72 mean=54.72</li>
    <li>rgmin/morse-quickmin-tuned rgmin 0.4.0 campaign, asv n=100 PAR-2=61.75 mean=61.75</li>
@@ -807,7 +806,6 @@
    </ul>
    <h3>Partial</h3><ul>
    <li>ase/morse-fire-tuned ASE campaign, asv n=100, does not reproduce the 2014 archive.</li>
-   <li>ase/morse-lbfgs-tuned ASE campaign, asv n=100, does not reproduce the 2014 archive.</li>
    <li>ase/morse-preconlbfgs-tuned ASE campaign, asv n=100, does not reproduce the 2014 archive.</li>
    <li>ase/morse-preconode12r-tuned ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
    <li>ase/morse-bfgs-default ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
@@ -823,7 +821,6 @@
    <li>ase/morse-preconode12r-default ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
    <li>ase/morse-preconfire-tuned ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
    <li>sella/morse-min-default Sella asv n=1, smoke run; scored 1 of 100 starts.</li>
-   <li>ase/morse-lbfgs-tuned ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
    <li>ase/morse-preconlbfgs-tuned ASE asv n=1, smoke run; scored 1 of 100 starts.</li>
    </ul>
    <h3>Not scored</h3><ul>

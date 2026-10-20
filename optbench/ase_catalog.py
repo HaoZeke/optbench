@@ -248,6 +248,8 @@ def _minimization_specs() -> list[dict]:
     for slug, problem, archive, potential, stop, select in problems:
         for name in OPTIMIZERS:
             for profile in ("default", "tuned"):
+                if problem == "minimization/morse-bulk" and name == "LBFGS" and profile == "tuned":
+                    continue
                 if profile == "default":
                     params = {}
                     source = "default"

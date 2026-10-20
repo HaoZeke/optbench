@@ -111,7 +111,6 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
-    "repro/minimization-morse-bulk-ase-lbfgs": "91119cf10f2da6d1a2cb39a9215ba4ddc5e8989a",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -146,7 +145,6 @@ MATCHES: list[dict] = [
     {"key": "minimization/morse-bulk/eon-sd", "template": "eon-client/morse-sd", "branch": "main", "path": "results/campaign/eon-client-morse-sd.dat", "cause": "morse_sd"},
     {"key": "minimization/morse-bulk/optim", "template": "optim/morse-lbfgs-tuned", "branch": "cells/optim/min", "path": "results/campaign/optim-02aaf45245af-morse-lbfgs-tuned.dat", "cause": "optim_morse_memory"},
     {"key": "minimization/morse-bulk/pele-lbfgs", "template": "pele/morse-lbfgs", "branch": "cells/pele/min", "path": "results/campaign/pele-b7081b93-morse-lbfgs.dat", "cause": "pele_morse"},
-    {"key": "minimization/morse-bulk/ase-lbfgs", "template": "ase-3.29.0/morse-lbfgs-current", "branch": "repro/minimization-morse-bulk-ase-lbfgs", "path": "results/campaign/ase-3.6.0-morse-lbfgs.dat", "cause": "ase_lbfgs36", "hold": ["ase/morse-lbfgs-tuned"], "extra": {"code_version": "3.29.0", "current_par2": 89.45}},
     {"key": "minimization/morse-bulk/ase-fire", "template": "ase/morse-fire-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-morse-fire-tuned.dat", "cause": "ase_morse_script"},
     {"key": "minimization/morse-bulk/ase-preconLBFGS", "template": "ase/morse-preconlbfgs-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-morse-preconlbfgs-tuned.dat", "cause": "ase_morse_script"},
     # lowest eigenvector
@@ -224,13 +222,6 @@ CAUSE_TEXT = {
     "pt_lanczos": (
         "The svn template uses the archived Lanczos keys (10 iterations, tolerance 0.05) and shifted Morse::force. "
         "Dimer and climbing-image on that kernel reproduce. Lanczos does not, and the failure count is 0 against 5 or 8."
-    ),
-    "ase_lbfgs36": (
-        "The archive mean 53.8 is the paper row. "
-        "Current ASE 3.29.0 LBFGS uses stock constructor defaults (memory 100, alpha 70, maxstep 0.2, damping 1, no line search) "
-        "on the archived POSCAR starts and the paper force norm 0.001. "
-        "The harness PAR-2 is 89.45, min 63, max 143. That gap is a finding and is not tuned. "
-        "The ASE 3.6.0 script diagnostic scores 53.65 and stays off the ranked table."
     ),
     "ase_morse_script": (
         "ASE 3.29 FIRE with the archived maxstep 0.2 scores 113 against 147.47. "
