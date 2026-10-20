@@ -11,13 +11,13 @@ kind = "htst"
 kernel = "morse_shift"
 tuning = "stock"
 note = '''
-Stock eOn develop a7aa57472fb7d823953fd36b78cd755fa4842d30 dimer on the quench_dimer-qm reactant. EON and eOn are different codes. The archived number is the paper row. This run does not retune the dimer to close that gap. Temperature 700, seed 42, confidence 1.1, prefactor 1.2e12, optimizer qm, converged_force 0.001, max_iterations 5000, time_step 0.3, minimize_first false, displace_least_coordinated_weight 1, radius 3.3, magnitude 0.3, max_energy 10, dimer rotations_max 100, converged_angle 5. The archive cluster buffer is 1000 jobs on 2 CPUs. This machine runs one local batch of 8, which is the slot count, and the displacement sequence for those jobs is the seed-42 sequence. The harness potential is morse_shift, the same surface as the EON row. Success for the harness row is one qualifying saddle in that batch.
+Stock eOn develop a7aa57472fb7d823953fd36b78cd755fa4842d30 dimer on the quench_dimer-qm reactant. Temperature 700, seed 42, confidence 1.1, prefactor 1.2e12, optimizer qm, converged_force 0.001, max_iterations 5000, time_step 0.3, minimize_first false, displace_least_coordinated_weight 1, radius 3.3, magnitude 0.3, max_energy 10, dimer rotations_max 100, converged_angle 5. The archive communicator buffer is 1000 jobs on 2 CPUs. This score used local batches of 4 and the seed-42 displacement sequence. The harness potential is morse_shift. The ranked cost is the PotServer total at the stop. Sad-fcs in per-batch wuid order are stored beside that total.
 '''
 seeds = [42]
 starts = ["pt"]
 geometry = "website/hTST/Pt/quench_dimer-qm/states/0/reactant.con"
 pass_limit = 1
-workers = 8
+workers = 4
 asv_full = false
 budget_seconds = 7200
 
@@ -47,8 +47,8 @@ minimize_first = false
 [ini.Communicator]
 type = "local"
 client_path = "eonclient"
-number_of_CPUs = 8
-num_jobs = 8
+number_of_CPUs = 4
+num_jobs = 4
 
 [ini."Saddle Search"]
 displace_least_coordinated_weight = 1.0

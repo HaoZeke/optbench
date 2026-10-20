@@ -1,1 +1,1 @@
-{"call_unit": "total", "client_calls": 19461, "count_key": "harness", "counter": "harness", "force_calls": 32999, "fraction_connected": 0.5, "geometry": "pt", "passes": 1, "qualifying": 2, "raw": 32999, "seconds": 79.31753878100062, "seed": 42, "success": true, "total_searches": 8, "unique_saddles": 3}
+{"barrier_force_calls": 2733400, "barrier_jobs": 2794, "call_unit": "total", "cap": 2000000, "counter": "harness", "failure": "cap", "force_calls": 9813603, "geometry": "pt", "rate_force_calls": 63765.11904761905, "rate_jobs": 65, "raw": 9813603, "seed": 42, "success": false}

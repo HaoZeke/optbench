@@ -636,6 +636,8 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path, work
     if stated and stated != problem["id"]:
         raise ValueError(f"{template_name} belongs to {stated}")
     method = str((template.get("tsase") or {}).get("method", "ci"))
+    if method not in {"ci", "normal", "dimer", "lbfgs", "mdmin"}:
+        raise ValueError(f"{template_name} method {method} is not a search this module runs")
     if method == "dimer":
         settings = point_settings(problem)
         if settings["cap"] is None:

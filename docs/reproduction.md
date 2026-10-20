@@ -85,7 +85,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | Pt/eon-lanczos-cg2 | — | — | not rerun |
 | Pt/eon-lanczos-lbfgs | — | — | not rerun |
 | Pt/eon-lanczos-lbfgs2 | — | — | not rerun |
-| Pt/quench_dimer-qm | — | — | not rerun; the archive is the paper row, ranked beside it as EON (SVN r2549) and eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) |
+| Pt/quench_dimer-qm | — | — | not rerun |
 | Pt/tsase-dimer-qm | — | — | not rerun |
 
 ## lowest-eigenvector
