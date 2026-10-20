@@ -441,9 +441,9 @@ def main() -> None:
     root = Path(__file__).resolve().parents[2]
     from optbench.campaign import load_template, resolve_problem
 
-    template = load_template(root, "gman/neb-pt-sd")
+    template = load_template(root, "gman/neb-pt-qm")
     problem = resolve_problem(root, template["problem"])
-    output = root / "results" / "campaign" / "gman-r235-neb-pt-sd.dat"
+    output = root / "results" / "campaign" / "gman-r235-neb-pt-qm.dat"
     summary = run_template(root, problem, template, output=output)
     print(json.dumps({key: summary[key] for key in ("force_calls", "force_calls_min", "force_calls_max", "nfailed", "starts")}))
     print(" ".join(str(value) for value in summary["counts"]))
