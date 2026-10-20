@@ -16070,7 +16070,54 @@
         }
       ],
       "partial": [],
-      "ranked": [],
+      "profile_gap": "No performance profile. One start has no finite cost.",
+      "ranked": [
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": 9052660,
+          "code": "GMIN",
+          "code_version": "df8da599",
+          "commit": "df8da599267534fbe43a250e578f7396a7946311",
+          "comparable": true,
+          "counter": "harness",
+          "current": true,
+          "entry": "gmin-df8da599-tip4p10-stock",
+          "failures": {
+            "cap": 4351,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": null,
+          "history": false,
+          "max_calls": 9052660.0,
+          "mean_calls": 1296760.7778,
+          "mean_per_image": null,
+          "median": 743215.5,
+          "median_calls": 743215.5,
+          "median_high": 813213.25,
+          "median_low": 677568.8875000001,
+          "median_per_image": null,
+          "min_calls": 168.0,
+          "n": 10000,
+          "nfailed": 4351,
+          "note": "starts.jsonl",
+          "par2_mean": 8055913.0219,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/gmin-df8da599-tip4p10-stock.dat",
+          "problem": "globalopt/tip4p10",
+          "registry_match": false,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 0.5649,
+          "template": "gmin/tip4p10-stock",
+          "tuning": "stock",
+          "wilson_high": 0.5745901600171227,
+          "wilson_low": 0.5551599969943634
+        }
+      ],
       "title": "tip4p10"
     },
     "hTST/Al": {
@@ -42222,7 +42269,7 @@
       "title": "pt-island"
     }
   },
-  "ranked_count": 439,
+  "ranked_count": 440,
   "schema": "optbench.board/v1",
   "unmapped": [
     {
