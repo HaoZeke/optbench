@@ -15,6 +15,7 @@ import os
 import shutil
 import sys
 import time
+import traceback
 from pathlib import Path
 
 from .campaign import format_ini, geometry_archive, load_template, write_starts
@@ -40,6 +41,52 @@ def _fmt(value: float) -> str:
     return f"{value:.10g}"
 
 
+def _installed_python_dirs(root: Path) -> list[Path]:
+    """Site directories for a prefix, plus paths named by editable ``.pth`` files.
+
+    A pixi prefix stores the server package in ``lib/python3.12/site-packages``.
+    The Debian layout is ``lib/python3/dist-packages``. An editable schema
+    checkout is a path written into a ``.pth`` file and is only imported
+    when that path is on ``sys.path``.
+    """
+    lib = root / "lib"
+    sites: list[Path] = []
+    seen: set[Path] = set()
+    if lib.is_dir():
+        for child in sorted(lib.glob("python*")):
+            for name in ("site-packages", "dist-packages"):
+                path = child / name
+                if not path.is_dir():
+                    continue
+                resolved = path.resolve()
+                if resolved in seen:
+                    continue
+                seen.add(resolved)
+                sites.append(path)
+    extras: list[Path] = []
+    for site in sites:
+        for pth in sorted(site.glob("*.pth")):
+            try:
+                lines = pth.read_text(encoding="utf-8").splitlines()
+            except OSError:
+                continue
+            for line in lines:
+                entry = line.strip()
+                if not entry or entry.startswith("#") or entry.startswith("import "):
+                    continue
+                path = Path(entry)
+                if path.is_dir() and path not in extras:
+                    extras.append(path)
+    ordered: list[Path] = []
+    for path in extras + sites:
+        if path not in ordered:
+            ordered.append(path)
+    py_deps = root / "py"
+    if py_deps.is_dir() and py_deps not in ordered:
+        ordered.append(py_deps)
+    return ordered
+
+
 def prepare_client_env(client: Path) -> None:
     """Put the installed eOn libraries on the path this process already uses.
 
@@ -48,9 +95,7 @@ def prepare_client_env(client: Path) -> None:
     """
     root = client.resolve().parent.parent
     lib = root / "lib"
-    py_pkg = lib / "python3" / "dist-packages"
-    py_deps = root / "py"
-    entries = [str(py_pkg), str(py_deps)]
+    entries = [str(path) for path in _installed_python_dirs(root)]
     for entry in reversed(entries):
         if entry not in sys.path:
             sys.path.insert(0, entry)
@@ -85,17 +130,21 @@ def _one_repetition(
     workers: int,
     *,
     passes: int,
+    geometry: Path | None = None,
 ) -> dict:
     if work.exists():
         shutil.rmtree(work)
     work.mkdir(parents=True)
-    pos = geometry_archive(
-        root,
-        {
-            "id": "saddle",
-            "input": {"archive_path": "website/saddle-search/pt-island/pt-island.con"},
-        },
-    )
+    if geometry is None:
+        pos = geometry_archive(
+            root,
+            {
+                "id": "saddle",
+                "input": {"archive_path": "website/saddle-search/pt-island/pt-island.con"},
+            },
+        )
+    else:
+        pos = Path(geometry)
     shutil.copy(pos, work / "pos.con")
     _write_config(template, work / "config.ini", client, seed, workers)
     prepare_client_env(client)
@@ -105,15 +154,48 @@ def _one_repetition(
     progress = saddle_progress("")
     last_error = ""
     started = time.monotonic()
+    for relative in (
+        "jobs/scratch",
+        "jobs/in",
+        "jobs/out",
+        "jobs/incomplete",
+        "states",
+        "potfiles",
+    ):
+        (work / relative).mkdir(parents=True, exist_ok=True)
     try:
         os.chdir(work)
-        from eon.akmc import akmc
-        from eon.config import ConfigClass
+        import inspect
 
         try:
-            config = ConfigClass()
-            # Construction only loads the schema. init() reads config.ini.
+            from eon import akmc as akmc_mod
+            from eon.config import ConfigClass
+            from eon.config import config as shared_config
+        except Exception as exc:
+            last_error = f"{type(exc).__name__}: {exc}"
+            progress["error"] = last_error
+            progress["seed"] = seed
+            progress["passes"] = 0
+            progress["seconds"] = time.monotonic() - started
+            return progress
+
+        try:
+            # r2549 helpers read the module-level config object. 3.5.0
+            # passes the instance into those helpers, so a fresh object
+            # still sees the ini.
+            parameters = inspect.signature(akmc_mod.get_akmc_metadata).parameters
+            if "config" in parameters:
+                config = ConfigClass()
+            else:
+                config = shared_config
+                config.init_done = False
             config.init()
+            # get_communicator caches the first Local object. A second
+            # seed in this process would keep the old scratch path.
+            from eon import communicator
+
+            if hasattr(communicator.get_communicator, "comm"):
+                del communicator.get_communicator.comm
         except SystemExit as exc:
             last_error = f"config exit {exc.code}"
             progress["error"] = last_error
@@ -123,12 +205,12 @@ def _one_repetition(
             return progress
         for index in range(passes):
             try:
-                akmc(config)
+                akmc_mod.akmc(config)
             except SystemExit as exc:
                 last_error = f"akmc exit {exc.code}"
                 break
             except Exception as exc:
-                last_error = f"{type(exc).__name__}: {exc}"
+                last_error = f"{type(exc).__name__}: {exc}\n{traceback.format_exc()}"
                 break
             results = work / "states" / "0" / "search_results.txt"
             if not results.is_file():
@@ -151,7 +233,7 @@ def _one_repetition(
         if not progress.get("reached"):
             config.comm_job_buffer_size = 0
             try:
-                akmc(config)
+                akmc_mod.akmc(config)
             except SystemExit as exc:
                 last_error = last_error or f"akmc exit {exc.code}"
             except Exception as exc:

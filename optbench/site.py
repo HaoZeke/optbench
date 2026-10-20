@@ -117,6 +117,22 @@ def _bits(problem: dict) -> list[tuple[str, str]]:
     sample = problem.get("sample") or {}
     if sample.get("starts"):
         bits.append(("Starts", str(sample["starts"])))
+    potential = problem.get("potential") or {}
+    if potential.get("kind"):
+        label = str(potential["kind"])
+        if potential.get("name"):
+            label = f"{label} ({potential['name']})"
+        bits.append(("Potential", label))
+    thermal = problem.get("thermal") or {}
+    if thermal.get("temperature_K") is not None:
+        bits.append(("Temperature", f"{thermal['temperature_K']} K"))
+    reference = problem.get("reference") or {}
+    if reference.get("true_rate") is not None:
+        bits.append(("Reference rate", f"{float(reference['true_rate']):.6g} per second"))
+    if sample.get("products"):
+        bits.append(("Products", str(sample["products"])))
+    if sample.get("repetitions"):
+        bits.append(("Repetitions", str(sample["repetitions"])))
     scoring = problem.get("scoring") or {}
     archive = scoring.get("archive") or {}
     if archive.get("failure"):

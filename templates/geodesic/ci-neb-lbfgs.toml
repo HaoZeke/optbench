@@ -1,0 +1,29 @@
+# Initialiser ablation of rgsaddle/ci-neb-lbfgs. Only the initial path changes.
+id = "geodesic/ci-neb-lbfgs"
+engine = "geodesic"
+backend = "rgsaddle"
+code = "geodesic"
+code_version = "1.0.0"
+commit = "476aa041f562d37d5fb4121b86817a52d75e4c5d"
+algorithm = "CI-NEB-LBFGS geodesic"
+tuning = "ablation"
+note = "Initialiser ablation of rgsaddle/ci-neb-lbfgs. The path is geodesic-interpolate 1.0.0 at 476aa041. Climbing image, uniform springs, spring_k 5, and LBFGS memory 100 match that template. The smoother is geometric and is not a force call."
+
+[ini]
+
+[band]
+climbing = true
+spring = "uniform"
+path = "geodesic"
+refine = ""
+method = "lbfgs"
+memory = 100
+spring_k = 5.0
+k_min = 0.97
+k_max = 9.7
+ci_trigger_factor = 0.5
+ci_trigger_force = 0.0
+idpp_spring_k = 1.0
+idpp_force_tol = 0.01
+idpp_max_steps = 80
+sidpp_stage_steps = 50
