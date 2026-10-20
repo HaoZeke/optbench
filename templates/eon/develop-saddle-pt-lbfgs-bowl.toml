@@ -1,0 +1,61 @@
+id = "eon/develop-saddle-pt-lbfgs-bowl"
+engine = "eon"
+problem = "saddle-search/pt-island"
+code = "eOn"
+code_version = "(develop 500350d9)"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
+algorithm = "Dimer"
+reducer = "harness"
+failure_cap = 100000000
+tuning = "default"
+note = """Stock eOn develop 500350d9fae881f06c7ef194e5868da079c4be5a. Label eOn (develop 500350d9). This is not EON, the SVN code. Pt-island displacement and stop, with every unset key left at the develop default. Dimer rotations_max 5, converged_angle 20, translation L-BFGS, max_energy 5 eV, confine_positive and bowl_breakout on, confine_positive_min_active 20. bowl_active_atoms stays the default 20. improved stays the default true. The dimer rotation optimizer stays the develop default. Displacement is atoms 0-6, radius 3.3, magnitude 0.1. Stop at 27 good saddles below 1.5 eV. The harness counts ext_pot calls. The kernel is the cutoff-9.5 shifted Morse both codes ship as morse_pt. No parameter was moved."""
+
+pass_limit = 20000
+
+[ini.Main]
+job = "akmc"
+temperature = 700
+random_seed = 1
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+convergence_metric = "norm"
+converged_force = 0.001
+max_move = 0.2
+max_iterations = 1000
+
+[ini.AKMC]
+confidence = 1.1
+thermally_accessible_window = 99999
+
+[ini."Process Search"]
+minimize_first = true
+
+[ini.Communicator]
+type = "local"
+num_jobs = 10
+number_of_CPUs = 2
+client_path = "eonclient"
+
+[ini."Saddle Search"]
+min_mode_method = "dimer"
+displace_listed_atom_weight = 1
+displace_atom_list = "0,1,2,3,4,5,6"
+displace_radius = 3.3
+displace_magnitude = 0.1
+max_energy = 5.0
+max_iterations = 1000
+converged_force = 0.001
+confine_positive = true
+bowl_breakout = true
+confine_positive_min_active = 20
+
+[ini.Dimer]
+rotations_max = 5
+converged_angle = 20.0
+
+[ini.Prefactor]
+default_value = 5e12
