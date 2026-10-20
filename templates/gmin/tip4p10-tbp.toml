@@ -5,7 +5,7 @@ code = "GMIN"
 code_version = "r27059"
 commit = "144a703eef674a826191308b9f8dfda548d88fc7a50323687e7cc1f6e64bf348"
 algorithm = "linear temperature basin-paving"
-paper_baseline = true
+paper_baseline = false
 note = """
 Linear temperature basin-paving for TIP4P water, n=10. The keyword file is archive/entries/globalopt/tip4p10/gmin-tbp/data from the 2014 gmin-tbp inputs: NTIP 4, CENTRE, EDIFF 1.D-3, SLOPPYCONV 1.D-3, TIGHTCONV 1.D-3, MAXIT 1.D4 1.D4, FIXBOTH, RANSEED 100, RADIUS 1.D1, MAXBFGS 1.D0, MAXERISE 1.D-4, TARGET -391.0233D0, STEPS 2.D6, STEP 0.D0 0.D0 1.56D0, TEMPERATURE 6.65D0, TBP -391.2 0.5 200 0.003 0.001 20. The 10000 starts are the archived angle-axis coordinates. A start succeeds when saveit writes "Target hit after". The recorded force call is NPCALL on that line, which is awk field 7. A missing line is a failure and is left out of the mean. The source is wales-27058.tar.bz2, SVNREV 27059. The binary was built with gfortran 13, serial, against libblas and liblapack. The score is that GMIN NPCALL, not a harness counter.
 """

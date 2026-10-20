@@ -1,0 +1,20 @@
+# GMIN df8da599267534fbe43a250e578f7396a7946311. Native NPCALL ranked as the harness column.
+# Stock basin-hopping. NTIP 4, CENTRE, EDIFF 1.D-3, TARGET -391.0233D0, STEPS 20000.
+# force_calls is the half-even mean of successful NPCALL. Failures stay out of that mean.
+force_calls 315610
+force_calls_min 168
+force_calls_max 2136342
+force_calls_median 157398
+successes 5649
+nfailed 4351
+n 10000
+code GMIN
+code_version df8da599
+commit df8da599267534fbe43a250e578f7396a7946311
+algorithm basin-hopping
+template gmin/tip4p10-stock-score
+problem globalopt/tip4p10
+tuning stock
+counter harness
+cap 9052660
+unrounded_mean 315610.3556
