@@ -19,6 +19,7 @@ import json
 import math
 import os
 import statistics
+from datetime import date
 from contextlib import contextmanager
 from pathlib import Path
 
@@ -1633,7 +1634,12 @@ def _publish_saddle(
         f"n_divergence {metrics['n_divergence']}\n"
         f"n_crash {metrics['n_crash']}\n"
         f"v2_nfailed {metrics['nfailed']}\n"
+        f"contributor Rohit Goswami\n"
+        f"date {date.today().isoformat()}\n"
+        f"host {os.uname().nodename}\n"
     )
+    if template.get("note"):
+        text += f"note {template['note']}\n"
     output.parent.mkdir(parents=True, exist_ok=True)
     starts_body = "".join(json.dumps(_jsonable(row), sort_keys=True) + "\n" for row in records)
     _atomic_write(output, text)
