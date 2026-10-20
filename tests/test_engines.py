@@ -148,6 +148,16 @@ def test_optim_rr_loweig_is_first_order():
     assert "maxxbfgs" not in template["optim"]
     assert "bfgstspc" not in template["optim"]
     assert template["commit"] == SHA256
+    preamble = (ROOT / "archive/entries/lowest-eigenvector/lj38/optim-first-order/odata.preamble").read_text(
+        encoding="utf-8"
+    )
+    folded = preamble.upper()
+    assert "USEDIAG 3" in folded
+    assert "EIGENONLY 1D-13 0.99" in folded
+    assert "UPDATES 4 30" in folded
+    assert "MAXBFGS 0.2 0.3" in folded
+    assert "BFGSTS" not in folded
+    assert "CHECKINDEX" not in folded
 
 
 def test_pykmc_and_optim_write_nothing(tmp_path: Path):

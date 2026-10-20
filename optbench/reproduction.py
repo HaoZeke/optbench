@@ -245,21 +245,23 @@ CAUSE_TEXT = {
         "The odata preamble was not archived."
     ),
     "optim_rr_stock": (
-        "Unmodified OPTIM SVNREV df8da599267534fbe43a250e578f7396a7946311, stock method keywords, "
-        "on the same 200 coords-con starts and the archive overlap stop 0.99. "
-        "USEDIAG 3 is the first-order forward quotient. "
-        "CHECKINDEX 10000 sets NEVS, the Rayleigh-Ritz iteration limit whose source default is 500, to the problem cap. "
-        "Memory, step, and BFGSTSPC stay at the source defaults. "
-        "Every start uses 10000 harness calls and stops at the cap. "
-        "None prints CONVERGED. The best absolute overlap is 0.1284. "
-        "OPTIM exits before the energy+gradient summary, so that native line is absent and the score is the harness count. "
-        "Zero successes, so there is no half-even success mean beside the archived 25. "
-        "nfailed is 200 against 0. "
-        "The documented EIGENONLY input is ceig and cover and does not evaluate the gradient. "
-        "secdiag.F90 lines 315-318 require that gradient when NSECDIAG is greater than 2. "
-        "geopt.F90 line 369 passes GRAD into BEIG with no preceding POTENTIAL call. "
-        "BFGSTS does call POTENTIAL first, and that keyword leaves this search. "
-        "The source was not patched."
+        "Unmodified OPTIM SVNREV df8da599267534fbe43a250e578f7396a7946311, driven by the 2014 "
+        "odata.preamble (debug, bfgssteps 1000, nohess, eigenonly 1D-13 0.99, USEDIAG 3, "
+        "BFGSCONV 1D10, CONVERGE 1D10, maxbfgs 0.2 0.3, updates 4 30, READVEC) on the 200 "
+        "coords-con starts, leaves NEVS at 500 (keywords.F90:292): that preamble sets neither "
+        "BFGSTS nor CHECKINDEX and does not evaluate the gradient before BEIG. "
+        "geopt.F90:55 declares a local GRAD(3*NATOMS); the EIGENONLY branch at geopt.F90:336 "
+        "reaches CALL BEIG at geopt.F90:369 with that array and no preceding POTENTIAL, and "
+        "beig.F90:56 takes GRAD as INTENT(IN). secdiag.F90:59 notes that GRAD was unset unless "
+        "NSECDIAG is greater than 2 and should now always be set; secdiag.F90:315-318 then form "
+        "the first-order quotient (GRAD1-GRAD)/ZETA. A gdb stop at secdiag.F90:318 on start 0000 "
+        "shows GRAD(1) and GRAD(2) equal to 6.953348659482966e-310 and GRAD(3) through GRAD(114) "
+        "equal to 0, while GRAD1(1:3) is (-0.23360252009831439, 0.21847588257370243, "
+        "-0.19706809976060136) and ZETA is 0.001. The harness recorded 501 to 520 calls, median "
+        "501; the largest absolute overlap was 0.8917925229436583 on start 0087; no start printed "
+        "CONVERGED; geopt.F90:1877 calls EXIT(0) on that branch, so OPTIM.F90:1234 never reaches "
+        "TSUMMARY and the energy+gradient line is absent. The archived force-call figure is 25 "
+        "and the ranked cost is 20000. The source was not patched."
     ),
     "pele_fire": "pele FIRE on LJ38 scores 1264 with 7 failures. The archive is 709 with 0 failures. The M100 L-BFGS row on the same build reproduces, so this is the FIRE step, not the LJ kernel.",
     "pele_morse": "pele Morse L-BFGS scores 92. The archive is 51. eOn Morse L-BFGS on the same bulk file reproduces at 52, so the gap is the pele memory and step, not the shared Morse parameters.",
@@ -518,7 +520,7 @@ class Hold:
         return bool(self.templates or self.paths)
 
 
-# Ranked beside the archived paper row. A gap stays a finding.
+# This row stays on the ranked table next to the archived 25.
 _RANK_BESIDE_ARCHIVE = {
     "lowest-eigenvector/lj38/optim-first-order",
 }
@@ -796,10 +798,14 @@ def build_rows(root: Path) -> list[dict]:
         status = judge_checks(checks, failure)
         named = match.get("cause", "")
         cause = named if status == "not_reproduced" else ""
+        if ident == "lowest-eigenvector/lj38/optim-first-order":
+            record["figures"] = _rr_figures(root, checks)
         record["checks"] = checks
         record["failure_check"] = failure
         record["status"] = status
-        record["gap"] = _gap(checks, failure) if status == "not_reproduced" else ""
+        record["gap"] = "" if ident == "lowest-eigenvector/lj38/optim-first-order" else (
+            _gap(checks, failure) if status == "not_reproduced" else ""
+        )
         record["cause"] = cause
         record["cause_detail"] = CAUSE_TEXT.get(cause, "") if cause else ""
         record["note"] = CAUSE_TEXT.get(named, "") if status == "reproduced" and named else ""
@@ -826,6 +832,24 @@ def build_rows(root: Path) -> list[dict]:
         record["rerun"] = rerun
         built.append(record)
     return built
+
+
+def _rr_figures(root: Path, checks: list[dict]) -> dict[str, str]:
+    """Archived force-call figure and the latest harness figure, side by side."""
+    archive = None
+    latest = None
+    for item in checks:
+        if item.get("metric") != "force_calls":
+            continue
+        archive = item.get("archive")
+        latest = item.get("rerun")
+        break
+    if latest is None:
+        path = root / "results" / "campaign" / "optim-df8da599-rr-loweig.v2.json"
+        if path.is_file():
+            score = json.loads(path.read_text(encoding="utf-8")).get("score") or {}
+            latest = score.get("par2_mean")
+    return {"archive": _fmt(_float(archive)), "latest": _fmt(_float(latest))}
 
 
 def _fmt(value: float | None) -> str:
@@ -872,6 +896,10 @@ def render_markdown(rows: list[dict]) -> str:
             lines.append("| Row | Archive | Rerun | Status |")
             lines.append("| --- | --- | --- | --- |")
         ident = f"{row['problem']}/{row['entry']}"
+        if ident == "lowest-eigenvector/lj38/optim-first-order" and row.get("figures"):
+            pair = row["figures"]
+            lines.append(f"| {ident} | {pair['archive']} | {pair['latest']} | |")
+            continue
         if row["checks"]:
             archive = ", ".join(f"{item['metric']} {_fmt(item['archive'])}" for item in row["checks"])
             rerun = ", ".join(f"{_fmt(item['rerun'])}" for item in row["checks"])

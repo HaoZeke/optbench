@@ -11,10 +11,9 @@ Minimization L-BFGS and the LJ38 Rayleigh-Ritz lowest eigenvector are
 scored. ``optim/unhooked`` and every other template raise before a file
 is written. Noise, saddle search, NEB, and PATHSAMPLE are not this runner.
 
-The Rayleigh-Ritz row is unmodified stock OPTIM. ``USEDIAG 3`` is the
-first-order forward quotient. ``EIGENONLY``'s second value is the archive
-overlap stop. Memory, step, and the percent-change gate stay at the
-source defaults.
+The Rayleigh-Ritz row is unmodified OPTIM. Its keywords are the 2014
+``odata.preamble``: ``USEDIAG 3``, ``eigenonly 1D-13 0.99``, ``updates 4 30``,
+``maxbfgs 0.2 0.3``. The geometry is the harness ASE socket.
 """
 
 from __future__ import annotations
@@ -38,6 +37,15 @@ SHA256 = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
 SVNREV = "df8da599267534fbe43a250e578f7396a7946311"
 CODE_VERSION = "df8da599"
 _RELAY = Path(__file__).with_name("fmlip_relay.py")
+_PREAMBLE = (
+    Path(__file__).resolve().parents[2]
+    / "archive"
+    / "entries"
+    / "lowest-eigenvector"
+    / "lj38"
+    / "optim-first-order"
+    / "odata.preamble"
+)
 
 
 class _Calls:
@@ -166,24 +174,49 @@ def _odata(folder: Path, python: str, hook: Path, gmax: float, updates: int, ste
     (folder / "odata").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
-def _odata_rr(folder: Path, python: str, hook: Path, section: dict, cap: int) -> None:
-    """Stock odata. ``1.0D-10`` is the source ``CEIG``. The second value sets ``OVERCONV``.
+def _archive_preamble() -> list[str]:
+    """Keyword lines from the 2014 ``optim-first-order.tgz`` preamble."""
+    lines = []
+    for raw in _PREAMBLE.read_text(encoding="utf-8").splitlines():
+        line = raw.strip()
+        if line:
+            lines.append(line)
+    if not any(line.upper().startswith("USEDIAG 3") for line in lines):
+        raise ValueError(f"{_PREAMBLE} is not the first-order preamble")
+    if any(line.upper().startswith("BFGSTS") for line in lines):
+        raise ValueError(f"{_PREAMBLE} switches on BFGSTS")
+    return lines
 
-    ``NEVS`` defaults to 500 and ``beig`` passes it to ``xmylbfgs`` as the
-    Rayleigh-Ritz iteration limit. ``BFGSTS`` would set ``NEVS`` and leave
-    this branch. ``CHECKINDEX`` is the documented way to set that same
-    integer when ``BFGSTS`` is absent, so it carries the problem cap.
+
+def _odata_rr(folder: Path, python: str, hook: Path, section: dict) -> None:
+    """2014 preamble plus the harness ASE geometry.
+
+    The preamble is ``debug``, ``bfgssteps 1000``, ``nohess``,
+    ``eigenonly 1D-13 0.99``, ``USEDIAG 3``, ``BFGSCONV 1D10``,
+    ``CONVERGE 1D10``, ``maxbfgs 0.2 0.3``, ``updates 4 30``, ``READVEC``.
+    It does not set ``BFGSTS`` or ``CHECKINDEX``. ``NEVS`` stays 500.
     """
+    if int(section["usediag"]) != 3:
+        raise ValueError(f"USEDIAG {section['usediag']} is not the first-order quotient")
     lines = [
         "NOTE optbench",
         f"ASE geom.xyz {python} {hook} dummy dummy cpu FIXCELL NOPBC EV ANG",
-        f"EIGENONLY 1.0D-10 {_fortran_float(section['cover'])}",
-        f"USEDIAG {int(section['usediag'])}",
-        "READVEC",
-        "DUMPVECTOR",
-        f"CHECKINDEX {int(cap)}",
+        *_archive_preamble(),
     ]
     (folder / "odata").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def _logged_overlap(log: str) -> float | None:
+    """Last Rayleigh-Ritz overlap printed against ``target.vector``."""
+    value = None
+    for line in log.splitlines():
+        if "overlap between current and target vector" not in line:
+            continue
+        try:
+            value = float(line.split()[-1])
+        except ValueError:
+            continue
+    return value
 
 
 def paper_calls(log: str) -> tuple[int | None, bool]:
@@ -397,9 +430,6 @@ def _execute_rr(job: dict) -> dict:
     os.environ.setdefault("OMP_NUM_THREADS", "1")
     positions = np.asarray(job["positions"], dtype=np.float64)
     cap = int(job["cap"])
-    natoms = int(positions.shape[0])
-    nopt = 3 * natoms
-    reference = np.asarray(job["reference"], dtype=np.float64).reshape(-1)
     binary = binary_path()
     calls = 0
     capped = False
@@ -419,7 +449,7 @@ def _execute_rr(job: dict) -> dict:
             _write_xyz(folder / "geom.xyz", positions, None)
             _write_vector_dump(folder / "vector.dump", str(job["initial_mode"]))
             (folder / "target.vector").write_text(str(job["target"]), encoding="utf-8")
-            _odata_rr(folder, sys.executable, hook, job["section"], int(job["cap"]))
+            _odata_rr(folder, sys.executable, hook, job["section"])
             env = _relay_env(folder, job)
             stdout_path = folder / "stdout.txt"
             stderr_path = folder / "stderr.txt"
@@ -444,7 +474,8 @@ def _execute_rr(job: dict) -> dict:
             if count_path.is_file():
                 calls = int(count_path.read_text(encoding="utf-8").strip() or "0")
             capped = (folder / "capped.txt").is_file() or calls >= cap
-            overlap = _overlap(_dumped_vector(folder / "vector.dump", nopt), reference)
+            logged = _logged_overlap(log)
+            overlap = 0.0 if logged is None else logged
             if proc is not None and proc.returncode != 0 and not capped and not error and not converged:
                 detail = _tail(stderr_path) or _tail(stdout_path) or f"exit {proc.returncode}"
                 error = f"OPTIM exit {proc.returncode}: {detail}"
@@ -579,23 +610,32 @@ def _run_rr(root, problem, template, settings, scratch, output, workers: int) ->
     ]
     records = run_jobs(jobs, _execute_rr, workers)
     comment = (
-        f"# OPTIM SVNREV {CODE_VERSION} ({SVNREV}), unmodified, stock keywords.\n"
+        f"# OPTIM SVNREV {CODE_VERSION} ({SVNREV}), unmodified.\n"
         "# counter harness. Each ASE COMPUTE is one pes.evaluate. "
         "OPTIM energy+gradient calls are recorded and are not the score.\n"
-        "# Rayleigh-Ritz EIGENONLY 1.0D-10 0.99, USEDIAG 3 (forward differences). "
-        f"CHECKINDEX {int(settings['cap'])} is NEVS, the problem cap. "
-        "Memory, step, and BFGSTSPC stay at the source defaults.\n"
+        "# Keywords are the 2014 odata.preamble: debug, bfgssteps 1000, nohess, "
+        "eigenonly 1D-13 0.99, USEDIAG 3, BFGSCONV 1D10, CONVERGE 1D10, "
+        "maxbfgs 0.2 0.3, updates 4 30, READVEC.\n"
         "# vector.dump is 100 plus the shared initial_mode. "
         "target.vector is the per-start mode file.\n"
-        "# A success is CONVERGED, under the cap, and absolute overlap of at least 0.99."
+        "# CONVERGED requires absolute overlap of at least 0.99 and a call count under the cap."
     )
     parameters = {
         "method": "rr-ffd",
         "keyword": "EIGENONLY",
-        "usediag": section["usediag"],
-        "ceig": 1.0e-10,
+        "preamble": "archive/entries/lowest-eigenvector/lj38/optim-first-order/odata.preamble",
+        "usediag": 3,
+        "ceig": 1.0e-13,
         "cover": section["cover"],
-        "nevs": int(settings["cap"]),
+        "bfgssteps": 1000,
+        "maxbfgs": 0.2,
+        "maxxbfgs": 0.3,
+        "mupdate": 4,
+        "xmupdate": 30,
+        "bfgsconv": 1.0e10,
+        "converge": 1.0e10,
+        "nohess": True,
+        "nevs": 500,
         "version": CODE_VERSION,
         "svnrev": SVNREV,
         "counter": "harness",

@@ -1,8 +1,8 @@
-# OPTIM SVNREV df8da599 (df8da599267534fbe43a250e578f7396a7946311), unmodified, stock keywords.
+# OPTIM SVNREV df8da599 (df8da599267534fbe43a250e578f7396a7946311), unmodified.
 # counter harness. Each ASE COMPUTE is one pes.evaluate. OPTIM energy+gradient calls are recorded and are not the score.
-# Rayleigh-Ritz EIGENONLY 1.0D-10 0.99, USEDIAG 3 (forward differences). CHECKINDEX 10000 is NEVS, the problem cap. Memory, step, and BFGSTSPC stay at the source defaults.
+# Keywords are the 2014 odata.preamble: debug, bfgssteps 1000, nohess, eigenonly 1D-13 0.99, USEDIAG 3, BFGSCONV 1D10, CONVERGE 1D10, maxbfgs 0.2 0.3, updates 4 30, READVEC.
 # vector.dump is 100 plus the shared initial_mode. target.vector is the per-start mode file.
-# A success is CONVERGED, under the cap, and absolute overlap of at least 0.99.
+# CONVERGED requires absolute overlap of at least 0.99 and a call count under the cap.
 successes 0
 nfailed 200
 n 200

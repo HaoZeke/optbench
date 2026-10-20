@@ -7,6 +7,7 @@ the code page, and the labelled 2014 archive those pages include.
 from __future__ import annotations
 
 import html
+import json
 import tomllib
 from pathlib import Path
 
@@ -223,6 +224,30 @@ def campaign_problem(stem: str) -> str | None:
     return None
 
 
+_SIDE_BY_SIDE = "lowest-eigenvector/lj38/optim-first-order"
+
+
+def _latest_rr_figure() -> str:
+    """Latest harness figure for the OPTIM first-order row."""
+    root = Path(__file__).resolve().parents[1]
+    dat = root / "results" / "campaign" / "optim-df8da599-rr-loweig.dat"
+    if dat.is_file():
+        for line in dat.read_text(encoding="utf-8").splitlines():
+            if line.startswith("force_calls "):
+                return line.split(maxsplit=1)[1].strip()
+    path = root / "results" / "campaign" / "optim-df8da599-rr-loweig.v2.json"
+    if not path.is_file():
+        return ""
+    score = json.loads(path.read_text(encoding="utf-8")).get("score") or {}
+    value = score.get("par2_mean")
+    if value is None:
+        return ""
+    number = float(value)
+    if abs(number - round(number)) < 1e-6:
+        return str(int(round(number)))
+    return f"{number:.6g}"
+
+
 def _not_reproduced() -> set[str]:
     """Archive rows whose exact-setup rerun missed the tolerance."""
     from .reproduction import load_ledger
@@ -286,7 +311,8 @@ def problem_html(
         held = _held(fields)
         code = _code_label(fields)
         row_id = _slug(f"{problem['id']}-{row['entry']}")
-        missed = f"{problem['id']}/{row['entry']}" in misses
+        row_key = f"{problem['id']}/{row['entry']}"
+        missed = row_key in misses and row_key != _SIDE_BY_SIDE
         any_miss = any_miss or missed
         label = row["entry"]
         if held:
@@ -305,6 +331,7 @@ def problem_html(
                 "best": best is not None and value == best,
                 "held": held,
                 "current": bool(row.get("current")),
+                "side_by_side": row_key == _SIDE_BY_SIDE,
             }
         )
     legacy = (
@@ -333,7 +360,12 @@ def problem_html(
         class_attr = f' class="{" ".join(classes)}"' if classes else ""
         cells = [str(point["rank"]), point["label"], point["code"]]
         for metric in metrics:
-            cells.append(point["fields"].get(metric, ""))
+            cell = point["fields"].get(metric, "")
+            if point.get("side_by_side") and metric == "force_calls":
+                latest = _latest_rr_figure()
+                if latest:
+                    cell = f"{cell} | {latest}"
+            cells.append(cell)
         cells.append(point["fields"].get("contributor", ""))
         cells.append(point["fields"].get("date", ""))
         lines.append(f'<tr id="{html.escape(point["id"])}"{class_attr}>')
