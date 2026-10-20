@@ -1080,12 +1080,26 @@ The number is written only after the run finishes under the problem rule.
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
    <td>machine learning optimization</td>
-   <td>8037eb98</td>
-   <td>8037eb98e228</td>
+   <td>240f51d0</td>
+   <td>240f51d01ca2</td>
    <td><a href="https://gitlab.com/pyamff/pyamff">https://gitlab.com/pyamff/pyamff</a></td>
    </tr>
    </tbody></table></div>
-   <p>No full ranked run.</p>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="mlopt/C2H4" data-template="pyamff/c2h4-adam10-7-fcoeff0">
+   <td>C2H4</td>
+   <td data-field="template">pyamff/c2h4-adam10-7-fcoeff0</td>
+   <td data-field="version">Pyamff 240f51d0</td>
+   <td data-field="commit">240f51d01ca2</td>
+   <td data-field="par2_mean">4489.52</td>
+   <td data-field="mean_calls">4489.52</td>
+   <td data-field="median_calls">4246</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   </tbody></table></div>
    <p>No full ranked run</p><ul>
    <li>pyamff/c2h4-adam10-7-fcoeff0: no per-start record.</li>
    </ul>

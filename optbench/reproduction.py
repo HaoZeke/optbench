@@ -206,7 +206,7 @@ MATCHES: list[dict] = [
         "key": "mlopt/C2H4/pyamff-adam10-7-fcoeff0",
         "template": "pyamff/c2h4-adam10-7-fcoeff0",
         "branch": "repro/mlopt-c2h4-pyamff-adam10-7-fcoeff0",
-        "path": "results/campaign/pyamff-8037eb98-c2h4-adam10-7-fcoeff0.dat",
+        "path": "results/campaign/pyamff-240f51d0-c2h4-adam10-7-fcoeff0.dat",
         "metrics": [
             "mean_epoch",
             "median_epoch",

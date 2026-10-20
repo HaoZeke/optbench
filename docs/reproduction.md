@@ -148,7 +148,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
-| C2H4/pyamff-adam10-7-fcoeff0 | mean_epoch 4395.3, median_epoch 4106, mean_energy_rmse 0.0117657, median_energy_rmse 0.0120491, mean_force_rmse -1, median_force_rmse -1 | 4282.86, 3852.5, 0.0119846, 0.0124457, -1, -1 | reproduced |
+| C2H4/pyamff-adam10-7-fcoeff0 | mean_epoch 4395.3, median_epoch 4106, mean_energy_rmse 0.0117657, median_energy_rmse 0.0120491, mean_force_rmse -1, median_force_rmse -1 | 4489.52, 4246, 0.0111042, 0.0111026, -1, -1 | reproduced |
 | C2H4/pyamff-adam10-7-fcoeff0_1 | — | — | not rerun |
 | C2H4/pyamff-lbfgs10-7-fcoeff0 | — | — | not rerun |
 | C2H4/pyamff-lbfgs10-7-fcoeff0_1 | — | — | not rerun |
