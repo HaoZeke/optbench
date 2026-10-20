@@ -195,6 +195,8 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | pt-island/eon-dimer-lbfgs-5-rotations-20-bowl_breakout | — | — | not rerun |
 | pt-island/eon-md | — | — | not rerun |
 
+The pt-island/eon-dimer-lbfgs-20-rotations archive is the paper row and stays not rerun. EON and eOn are different codes, ranked stock beside that row. EON (SVN r2549) paper-rule force calls 7313752, unique saddles 120, fraction connected 0.748886, searches 19740. eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) paper-rule force calls 2208099, unique saddles 76, fraction connected 0.745147, searches 15350. Both harness PAR-2 scores are 10128. The Cartesian RMSD 0.5 link accepts no client-good saddle. Gaps against the archive are findings.
+
 ## tsopt
 
 | Row | Archive | Rerun | Status |

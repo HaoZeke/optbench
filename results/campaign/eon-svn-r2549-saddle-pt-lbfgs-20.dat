@@ -1,0 +1,29 @@
+# paper-rule force_calls 7313752 unique_saddles 120 fraction_connected 0.748885511651 total_searches 19740 qualifying 27
+code EON
+code_version (SVN r2549)
+commit r2549
+counter harness
+contributor Rohit Goswami
+template eon-svn/saddle-pt-lbfgs-20
+problem saddle-search/pt-island
+algorithm Dimer L-BFGS
+tuning default
+reducer harness
+cap 5064
+n 19740
+par2_mean 10128.0
+median 10128.0
+median_low 10128.0
+median_high 10128.0
+wilson_low 0.0
+wilson_high 0.00019456491426484424
+nfailed 19740
+n_cap 0
+n_divergence 19739
+n_wrong_stationary 1
+n_crash 0
+paper_rule_force_calls 7313752
+paper_rule_unique_saddles 120
+paper_rule_fraction_connected 0.748885511651
+paper_rule_total_searches 19740
+paper_rule_qualifying 27

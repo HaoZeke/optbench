@@ -7,16 +7,17 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>EON</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="saddle-search/pt-island">
    <th scope="row"><a href="#pt-island">Pt heptamer island</a></th>
-   <td data-code="eOn">—</td>
+   <td data-code="eOn" data-template="eon/develop-saddle-pt-lbfgs-20" data-par2="10128"><span class="bench-score">10128</span><a href="#pt-island-templates">eon/develop-saddle-pt-lbfgs-20</a></td>
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/saddle-dimer-rotskip-tuned" data-par2="10127.1"><span class="bench-score">10127.1</span><a href="#pt-island-templates">rgsaddle/saddle-dimer-rotskip-tuned</a></td>
    <td data-code="ASE">—</td>
    <td data-code="Sella" data-template="sella/pt-island-search-default" data-par2="5201.62"><span class="bench-score">5201.62</span><a href="#pt-island-templates">sella/pt-island-search-default</a></td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="EON" data-template="eon-svn/saddle-pt-lbfgs-20" data-par2="10128"><span class="bench-score">10128</span><a href="#pt-island-templates">eon-svn/saddle-pt-lbfgs-20</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -38,7 +39,7 @@
    <figure class="bench-plot"><a href="../../_static/board/saddle-search-pt-island-cost.svg"><picture><source srcset="../../_static/board/saddle-search-pt-island-cost.webp" type="image/webp"><img src="../../_static/board/saddle-search-pt-island-cost.png" alt="Cost versus success for saddle-search/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <p class="bench-gaps">No performance profile. The ranked rows do not share one start set.</p>
    <details class="bench-details" id="pt-island-templates">
-   <summary>All templates (10 ranked)</summary>
+   <summary>All templates (12 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="saddle-search/pt-island">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
@@ -46,6 +47,8 @@
    <tr><td data-field="template">sella/pt-island-search-default</td><td data-field="version">Sella 2.6.0</td><td data-field="commit">6cfb60cdb100</td><td data-field="source">asv</td><td data-field="current">yes</td><td data-field="par2_mean">5201.62</td><td data-field="success_rate">0.75</td><td data-field="wilson_low">0.505017</td><td data-field="wilson_high">0.898179</td><td data-field="median_calls">225</td><td data-field="mean_calls">247.812</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 4</td><td data-field="n">16</td></tr>
    <tr><td data-field="template">sella/pt-island-search-tuned</td><td data-field="version">Sella 2.6.0</td><td data-field="commit">6cfb60cdb100</td><td data-field="source">asv</td><td data-field="current">yes</td><td data-field="par2_mean">6420.12</td><td data-field="success_rate">0.6875</td><td data-field="wilson_low">0.444044</td><td data-field="wilson_high">0.858354</td><td data-field="median_calls">249.5</td><td data-field="mean_calls">314.438</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 5</td><td data-field="n">16</td></tr>
    <tr><td data-field="template">rgsaddle/saddle-dimer-rotskip-tuned</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">10127.1</td><td data-field="success_rate">0.0001</td><td data-field="wilson_low">2.7424e-05</td><td data-field="wilson_high">0.000364574</td><td data-field="median_calls">550</td><td data-field="mean_calls">619.017</td><td data-field="failures">crash 0, divergence 17717, cap 2246, wrong_stationary 35</td><td data-field="n">20000</td></tr>
+   <tr><td data-field="template">eon-svn/saddle-pt-lbfgs-20</td><td data-field="version">EON (SVN r2549)</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">10128</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.000194565</td><td data-field="median_calls">366</td><td data-field="mean_calls">370.504</td><td data-field="failures">crash 0, divergence 19739, cap 0, wrong_stationary 1</td><td data-field="n">19740</td></tr>
+   <tr><td data-field="template">eon/develop-saddle-pt-lbfgs-20</td><td data-field="version">eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)</td><td data-field="commit">a7aa57472fb7</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">10128</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.000250195</td><td data-field="median_calls">176</td><td data-field="mean_calls">143.85</td><td data-field="failures">crash 0, divergence 15348, cap 0, wrong_stationary 2</td><td data-field="n">15350</td></tr>
    <tr><td data-field="template">rgsaddle/saddle-dimer-fire</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">10128</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.000192036</td><td data-field="median_calls">1013</td><td data-field="mean_calls">1011.03</td><td data-field="failures">crash 0, divergence 1, cap 19999, wrong_stationary 0</td><td data-field="n">20000</td></tr>
    <tr><td data-field="template">rgsaddle/saddle-dimer-fire-tuned</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">10128</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.000192036</td><td data-field="median_calls">1004</td><td data-field="mean_calls">1004.47</td><td data-field="failures">crash 0, divergence 9, cap 19991, wrong_stationary 0</td><td data-field="n">20000</td></tr>
    <tr><td data-field="template">rgsaddle/saddle-dimer-lbfgs</td><td data-field="version">rgsaddle 0.2.2</td><td data-field="commit">c0db2b8d333c</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">10128</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.000192036</td><td data-field="median_calls">1013</td><td data-field="mean_calls">1012.16</td><td data-field="failures">crash 0, divergence 0, cap 20000, wrong_stationary 0</td><td data-field="n">20000</td></tr>
