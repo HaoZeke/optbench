@@ -1,0 +1,29 @@
+# rep 1 seed 1000 harness_force_calls 5064.0 client_force_calls 4438 unique_saddles 2 fraction_connected 0.8823529411764706 total_searches 34 qualifying 0 success 0
+# rep 2 seed 1001 harness_force_calls 5064.0 client_force_calls 4911 unique_saddles 4 fraction_connected 0.9642857142857143 total_searches 56 qualifying 0 success 0
+# rep 3 seed 1002 harness_force_calls 5064.0 client_force_calls 4567 unique_saddles 3 fraction_connected 0.875 total_searches 24 qualifying 0 success 0
+# rep 4 seed 1003 harness_force_calls 5064.0 client_force_calls 5019 unique_saddles 3 fraction_connected 0.926829268292683 total_searches 41 qualifying 1 success 0
+# rep 5 seed 1004 harness_force_calls 5064.0 client_force_calls 4309 unique_saddles 1 fraction_connected 0.8823529411764706 total_searches 34 qualifying 1 success 0
+# rep 6 seed 1005 harness_force_calls 5064.0 client_force_calls 3942 unique_saddles 1 fraction_connected 0.7619047619047619 total_searches 21 qualifying 0 success 0
+# rep 7 seed 1006 harness_force_calls 5064.0 client_force_calls 4518 unique_saddles 3 fraction_connected 0.875 total_searches 32 qualifying 2 success 0
+# rep 8 seed 1007 harness_force_calls 5064.0 client_force_calls 4770 unique_saddles 1 fraction_connected 0.8076923076923077 total_searches 26 qualifying 1 success 0
+# rep 9 seed 1008 harness_force_calls 5064.0 client_force_calls 4203 unique_saddles 2 fraction_connected 0.7142857142857143 total_searches 14 qualifying 1 success 0
+code eOn
+code_version (develop 500350d9)
+commit 500350d9fae881f06c7ef194e5868da079c4be5a
+algorithm Dimer
+tuning default
+template eon/develop-saddle-pt-lbfgs-bowl
+problem saddle-search/pt-island
+reducer harness
+counter harness
+contributor Rohit Goswami
+repetitions 9
+nfailed 9
+force_calls 5064
+force_calls_mean_error 0
+client_force_calls 4519.666667
+client_force_calls_mean_error 325.3053267
+unique_saddles 2.222222222
+fraction_connected 0.8544115165
+total_searches 31.33333333
+note Stock untuned eOn (develop 500350d9). Pt-island displacement. Stop at 27 good saddles below 1.5 eV. The force-call budget is problems/saddle-search/pt-island.toml scoring.v2: climb budget 1000, 64 calls of overshoot, and two endpoint budgets of 2000, which is 5064. The initial minimization is outside that count. Nine seeds 1000-1008. Harness force calls are ext_pot evaluations of the cutoff-9.5 shifted Morse. A seed that spends the budget before 27 qualifying saddles is a cap failure.

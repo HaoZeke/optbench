@@ -6,9 +6,9 @@ code_version = "(SVN r2549)"
 commit = "r2549"
 algorithm = "Dimer"
 reducer = "harness"
-failure_cap = 100000000
+failure_cap = 5064
 tuning = "default"
-note = """Stock EON SVN r2549, unpatched, Fortran potentials linked. Label EON (SVN r2549). This is not the git code eOn. Pt-island displacement and stop, with every unset key left at the r2549 default. Dimer rotations_max 5, converged_angle 20, translation L-BFGS, max_energy 5 eV, confine_positive and bowl_breakout on, confine_positive_min_active 20. bowl_active_atoms stays the default 20. improved stays the default true. The dimer rotation optimizer stays the default CG. Displacement is atoms 0-6, radius 3.3, magnitude 0.1. Stop at 27 good saddles below 1.5 eV. The harness counts ext_pot calls on r2549 Morse::force (cutoff 9.5, shifted, minimum image). No parameter was moved."""
+note = """Stock EON SVN r2549, unpatched, Fortran potentials linked. Label EON (SVN r2549). This is not the git code eOn. Pt-island displacement and stop, with every unset key left at the r2549 default. Dimer rotations_max 5, converged_angle 20, translation L-BFGS, max_energy 5 eV, confine_positive and bowl_breakout on, confine_positive_min_active 20. bowl_active_atoms stays the default 20. improved stays the default true. The dimer rotation optimizer stays the default CG. Displacement is atoms 0-6, radius 3.3, magnitude 0.1. Stop at 27 good saddles below 1.5 eV. The force-call budget is the problem file scoring.v2 note: climb budget 1000, 64 calls of overshoot, and two endpoint budgets of 2000, which is 5064. The initial minimization is outside that count. The harness counts ext_pot calls on r2549 Morse::force (cutoff 9.5, shifted, minimum image). No parameter was moved."""
 
 pass_limit = 2000
 

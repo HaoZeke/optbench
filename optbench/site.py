@@ -486,8 +486,24 @@ def _code_keys(pins: list[dict]) -> set[str]:
     return keys
 
 
-def _matches_code(row: dict, keys: set[str]) -> bool:
-    return str(row.get("code") or "").lower() in keys
+def _code_group(code: str, grouped: dict[str, list[dict]]) -> str | None:
+    """Registry section for a row code.
+
+    An exact pin name wins. ``EON`` and ``eOn`` fold to the same letters,
+    and the exact name keeps those rows in different sections. A code
+    with no exact name still matches a case-folded id, which is how
+    ``tsase`` stays on the TSASE pin.
+    """
+    if not code:
+        return None
+    for name in grouped:
+        if code == name:
+            return name
+    folded = code.lower()
+    for name, pins in grouped.items():
+        if folded in _code_keys(pins):
+            return name
+    return None
 
 
 def _codes_html(root: Path, document: dict) -> str:
@@ -523,7 +539,6 @@ def _codes_html(root: Path, document: dict) -> str:
     )
     for name in order:
         group = grouped[name]
-        keys = _code_keys(group)
         lines.append(f"<h3>{html.escape(name)}</h3>")
         lines.append('<div class="bench-scroll"><table>')
         lines.append("<caption>Registry pins.</caption>")
@@ -542,7 +557,11 @@ def _codes_html(root: Path, document: dict) -> str:
         lines.append("</tbody></table></div>")
         best: list[tuple[dict, dict]] = []
         for problem in (document.get("problems") or {}).values():
-            matched = [row for row in problem.get("ranked") or [] if _matches_code(row, keys)]
+            matched = [
+                row
+                for row in problem.get("ranked") or []
+                if _code_group(str(row.get("code") or ""), grouped) == name
+            ]
             if not matched:
                 continue
             matched.sort(key=lambda row: (row.get("par2_mean") is None, float(row.get("par2_mean") or 0)))
@@ -573,8 +592,16 @@ def _codes_html(root: Path, document: dict) -> str:
             lines.append("<p>No full ranked run.</p>")
         missing: list[str] = []
         for problem in (document.get("problems") or {}).values():
-            partial = [row for row in problem.get("partial") or [] if _matches_code(row, keys)]
-            off = [row for row in problem.get("not_comparable") or [] if _matches_code(row, keys)]
+            partial = [
+                row
+                for row in problem.get("partial") or []
+                if _code_group(str(row.get("code") or ""), grouped) == name
+            ]
+            off = [
+                row
+                for row in problem.get("not_comparable") or []
+                if _code_group(str(row.get("code") or ""), grouped) == name
+            ]
             if not partial and not off:
                 continue
             reasons = []
@@ -585,7 +612,7 @@ def _codes_html(root: Path, document: dict) -> str:
             title = str(problem.get("title") or problem["id"])
             missing.append(f"<li>{html.escape(title)}: {html.escape(', '.join(reasons))}.</li>")
         for row in document.get("unparsed") or []:
-            if not _matches_code(row, keys) or not row.get("problem"):
+            if _code_group(str(row.get("code") or ""), grouped) != name or not row.get("problem"):
                 continue
             label = str(row.get("template") or row.get("entry") or row.get("path") or "")
             note = str(row.get("note") or "no per-start record")

@@ -1,12 +1,12 @@
-# rep 1 seed 1000 harness_force_calls 570875.0 client_force_calls 566107 unique_saddles 105 fraction_connected 0.8526430123099203 total_searches 2762 qualifying 27 success 1
-# rep 2 seed 1001 harness_force_calls 1430217.0 client_force_calls 1428110 unique_saddles 138 fraction_connected 0.8574828503429931 total_searches 7143 qualifying 27 success 1
-# rep 3 seed 1002 harness_force_calls 1277411.0 client_force_calls 1275257 unique_saddles 131 fraction_connected 0.8603503184713376 total_searches 6280 qualifying 27 success 1
-# rep 4 seed 1003 harness_force_calls 636599.0 client_force_calls 635210 unique_saddles 116 fraction_connected 0.8615819209039548 total_searches 3186 qualifying 27 success 1
-# rep 5 seed 1004 harness_force_calls 1419326.0 client_force_calls 1417088 unique_saddles 134 fraction_connected 0.8606197820857506 total_searches 7067 qualifying 27 success 1
-# rep 6 seed 1005 harness_force_calls 557058.0 client_force_calls 554423 unique_saddles 106 fraction_connected 0.862844702467344 total_searches 2756 qualifying 27 success 1
-# rep 7 seed 1006 harness_force_calls 958534.0 client_force_calls 956807 unique_saddles 123 fraction_connected 0.8514445881845623 total_searches 4638 qualifying 27 success 1
-# rep 8 seed 1007 harness_force_calls 1004851.0 client_force_calls 1002648 unique_saddles 120 fraction_connected 0.8548548548548549 total_searches 4995 qualifying 27 success 1
-# rep 9 seed 1008 harness_force_calls 1047161.0 client_force_calls 1044060 unique_saddles 123 fraction_connected 0.8552081258713403 total_searches 5021 qualifying 27 success 1
+# rep 1 seed 1000 harness_force_calls 5064.0 client_force_calls 3906 unique_saddles 6 fraction_connected 0.9444444444444444 total_searches 36 qualifying 4 success 0
+# rep 2 seed 1001 harness_force_calls 5064.0 client_force_calls 4843 unique_saddles 2 fraction_connected 0.76 total_searches 25 qualifying 1 success 0
+# rep 3 seed 1002 harness_force_calls 5064.0 client_force_calls 4842 unique_saddles 4 fraction_connected 0.9130434782608695 total_searches 23 qualifying 1 success 0
+# rep 4 seed 1003 harness_force_calls 5064.0 client_force_calls 4505 unique_saddles 3 fraction_connected 0.782608695652174 total_searches 23 qualifying 1 success 0
+# rep 5 seed 1004 harness_force_calls 5064.0 client_force_calls 4080 unique_saddles 3 fraction_connected 0.8888888888888888 total_searches 27 qualifying 2 success 0
+# rep 6 seed 1005 harness_force_calls 5064.0 client_force_calls 4270 unique_saddles 5 fraction_connected 0.85 total_searches 20 qualifying 3 success 0
+# rep 7 seed 1006 harness_force_calls 5064.0 client_force_calls 4579 unique_saddles 6 fraction_connected 0.8181818181818182 total_searches 22 qualifying 2 success 0
+# rep 8 seed 1007 harness_force_calls 5064.0 client_force_calls 4974 unique_saddles 6 fraction_connected 0.7916666666666666 total_searches 24 qualifying 4 success 0
+# rep 9 seed 1008 harness_force_calls 5064.0 client_force_calls 4312 unique_saddles 4 fraction_connected 0.7692307692307693 total_searches 13 qualifying 2 success 0
 code EON
 code_version (SVN r2549)
 commit r2549
@@ -18,12 +18,12 @@ reducer harness
 counter harness
 contributor Rohit Goswami
 repetitions 9
-nfailed 0
-force_calls 989114.6667
-force_calls_mean_error 325437.2612
-client_force_calls 986634.4444
-client_force_calls_mean_error 325761.8282
-unique_saddles 121.7777778
-fraction_connected 0.8574477951
-total_searches 4872
-note Stock untuned EON (SVN r2549). Pt-island displacement, 27 good saddles below 1.5 eV, nine seeds 1000-1008. Harness force calls are ext_pot evaluations of the cutoff-9.5 shifted Morse. client_force_calls is sad-fcs+mins-fcs at the 27th qualifier.
+nfailed 9
+force_calls 5064
+force_calls_mean_error 0
+client_force_calls 4479
+client_force_calls_mean_error 346.2603388
+unique_saddles 4.333333333
+fraction_connected 0.835340529
+total_searches 23.66666667
+note Stock untuned EON (SVN r2549). Pt-island displacement. Stop at 27 good saddles below 1.5 eV. The force-call budget is problems/saddle-search/pt-island.toml scoring.v2: climb budget 1000, 64 calls of overshoot, and two endpoint budgets of 2000, which is 5064. The initial minimization is outside that count. Nine seeds 1000-1008. Harness force calls are ext_pot evaluations of the cutoff-9.5 shifted Morse. A seed that spends the budget before 27 qualifying saddles is a cap failure.
