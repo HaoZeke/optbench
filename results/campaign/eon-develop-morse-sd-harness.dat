@@ -1,0 +1,24 @@
+# counter harness. One force call is one ext_pot evaluation.
+# The potential is morse_bulk, cutoff 7, shifted, orthorhombic minimum image.
+# sd_alpha, sd_twopoint, and max_move are omitted, so the client keeps its constructor step.
+# v2 success is under the cap, at the force stop, and Hessian index 0.
+# Stock steepest descent on the harness Morse bulk potential. opt_method is sd. converged_force is the problem force norm, 0.001. max_iterations is the problem cap, 10000. sd_alpha, sd_twopoint, and max_move are omitted, so develop keeps its constructor step. The client is eOn develop a7aa57472fb7, a different code from EON r2549. Force calls are HarnessCounter charges through ext_pot.
+nfailed 100
+code eOn
+code_version (develop a7aa57472fb7)
+commit a7aa57472fb7d823953fd36b78cd755fa4842d30
+algorithm SD
+template eon-develop/morse-sd-harness
+tuning default
+counter harness
+problem minimization/morse-bulk
+reducer harness
+par2_mean 20000
+wilson_low 0
+wilson_high 0.036993498207
+par2_median 20000
+par2_median_low 20000
+par2_median_high 20000
+v2_nfailed 100
+v2_successes 0
+n 100

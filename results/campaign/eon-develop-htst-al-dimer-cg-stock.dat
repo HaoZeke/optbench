@@ -1,0 +1,36 @@
+# counter harness. One force call is one ext_pot evaluation of the r2549 Aluminum EAM.
+# A window's calls are its share of the server total, split by sad-fcs inside each pass.
+# The dimer block is CG, rotations_max 50, converged_angle 1. Other options stay at the constructor.
+# barrier windows closed: 0. Archive averages used 639 barrier windows and 20 rate windows.
+# No reference window closed. force_calls is the mean harness cost of the finished searches, not a window mean.
+# Stock dimer CG on the Al reactant. The dimer block is the published algorithm, CG with 50 rotations and angle 1. Confidence, displacement, prefactor, and the optimizer iteration limit stay at the develop constructor. The kernel is the same Fortran Aluminum EAM through ext_pot. The client is eOn develop a7aa57472fb7, a different code from EON r2549. Stock confidence does not stop a reactant that has not collected the reference processes, so the run is 64 AKMC passes unless both window targets close first. That bound is the observation, not an optimizer parameter.
+force_calls 4722
+force_calls_min 1665
+force_calls_max 8039
+nfailed 0
+code eOn
+code_version (develop a7aa57472fb7)
+commit a7aa57472fb7d823953fd36b78cd755fa4842d30
+algorithm Dimer-CG rotation: max=50 tol=1
+template eon-develop/htst-al-dimer-cg-stock
+tuning default
+counter harness
+problem hTST/Al
+reducer harness
+par2_mean 4721.53125
+wilson_low 0.9433759402071946
+wilson_high 1.0
+par2_median 4562.5
+par2_median_low 3983.0
+par2_median_high 4953.5
+v2_nfailed 0
+v2_successes 64
+n 64
+cap 100000000
+window barrier
+window_count 0
+searches 64
+harness_total 302178
+barrier_jobs 0
+barrier_force_calls 0
+barrier_sad_fcs 0

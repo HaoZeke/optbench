@@ -8,7 +8,8 @@
     "area_log10": {
       "airss/lj38 0.9.4 default campaign 5593cc4": 1.1062852340651308,
       "eon-client/bh-lj38 3.5.0 campaign 4d8b34b": 0.5252973424336471,
-      "eon-svn/bh-lj38 r2549 campaign r2549": 0.4786376931057301
+      "eon-svn/bh-lj38 r2549 campaign r2549": 0.4786376931057301,
+      "pele/lj38-basinhopping 0.1.2 default campaign b7081b9": 0.022577249674798593
     },
     "rho": {
       "airss/lj38 0.9.4 default campaign 5593cc4": [
@@ -31,12 +32,20 @@
         0.38,
         0.57,
         0.74
+      ],
+      "pele/lj38-basinhopping 0.1.2 default campaign b7081b9": [
+        0.0,
+        0.0,
+        0.01,
+        0.03,
+        0.07
       ]
     },
     "solved": {
       "airss/lj38 0.9.4 default campaign 5593cc4": 1.0,
       "eon-client/bh-lj38 3.5.0 campaign 4d8b34b": 1.0,
-      "eon-svn/bh-lj38 r2549 campaign r2549": 0.98
+      "eon-svn/bh-lj38 r2549 campaign r2549": 0.98,
+      "pele/lj38-basinhopping 0.1.2 default campaign b7081b9": 0.14
     },
     "taus": [
       1.0,
@@ -181,6 +190,51 @@
       "tuning": "",
       "wilson_high": 0.9944980324498376,
       "wilson_low": 0.929988209271456
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 3000000,
+      "code": "pele",
+      "code_version": "0.1.2",
+      "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "pele-b7081b93-lj38-basinhopping",
+      "failures": {
+        "cap": 86,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 100,
+      "history": false,
+      "max_calls": 3000000.0,
+      "mean_calls": 2795223.79,
+      "mean_per_image": null,
+      "median": 6000000.0,
+      "median_calls": 3000000.0,
+      "median_high": 6000000.0,
+      "median_low": 6000000.0,
+      "median_per_image": null,
+      "min_calls": 313041.0,
+      "n": 100,
+      "nfailed": 86,
+      "note": "starts.jsonl",
+      "par2_mean": 5375223.79,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat",
+      "problem": "globalopt/lj38",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 0.14,
+      "template": "pele/lj38-basinhopping",
+      "tuning": "default",
+      "wilson_high": 0.22137188210963837,
+      "wilson_low": 0.08526343659939134
     }
   ],
   "title": "Lennard-Jones 38 global minimum"

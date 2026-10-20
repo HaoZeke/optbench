@@ -1,0 +1,24 @@
+# counter harness. One force call is one ext_pot evaluation.
+# The potential is morse_bulk, cutoff 7, shifted, orthorhombic minimum image.
+# sd_alpha, sd_twopoint, and max_move are omitted, so the client keeps its constructor step.
+# v2 success is under the cap, at the force stop, and Hessian index 0.
+# Stock steepest descent on the harness Morse bulk potential. opt_method is sd. converged_force is the problem force norm, 0.001. max_iterations is the problem cap, 10000. sd_alpha, sd_twopoint, and max_move are omitted, so r2549 keeps its constructor step, 0.1, and its constructor max move, 0.2. The client is the Fortran r2549 build. Force calls are HarnessCounter charges through ext_pot.
+nfailed 100
+code EON
+code_version (SVN r2549)
+commit r2549
+algorithm SD
+template eon-svn/morse-sd-harness
+tuning default
+counter harness
+problem minimization/morse-bulk
+reducer harness
+par2_mean 20000
+wilson_low 0
+wilson_high 0.036993498207
+par2_median 20000
+par2_median_low 20000
+par2_median_high 20000
+v2_nfailed 100
+v2_successes 0
+n 100

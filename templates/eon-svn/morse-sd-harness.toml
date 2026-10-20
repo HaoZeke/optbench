@@ -1,0 +1,21 @@
+id = "eon-svn/morse-sd-harness"
+engine = "eon"
+problem = "minimization/morse-bulk"
+task = "minimize"
+reducer = "harness"
+client_family = "svn"
+code = "EON"
+code_version = "(SVN r2549)"
+commit = "r2549"
+algorithm = "SD"
+tuning = "default"
+note = "Stock steepest descent on the harness Morse bulk potential. opt_method is sd. converged_force is the problem force norm, 0.001. max_iterations is the problem cap, 10000. sd_alpha, sd_twopoint, and max_move are omitted, so r2549 keeps its constructor step, 0.1, and its constructor max move, 0.2. The client is the Fortran r2549 build. Force calls are HarnessCounter charges through ext_pot."
+
+[ini.Main]
+job = "minimization"
+
+[ini.Optimizer]
+opt_method = "sd"
+convergence_metric = "norm"
+converged_force = 0.001
+max_iterations = 10000

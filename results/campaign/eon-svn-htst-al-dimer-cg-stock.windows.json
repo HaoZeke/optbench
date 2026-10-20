@@ -1,0 +1,22 @@
+{
+  "schema": "optbench.htst/stock",
+  "error": "",
+  "searches": 64,
+  "reference_ids": [
+    1
+  ],
+  "missed_barriers": [
+    0.233,
+    0.233,
+    0.233,
+    0.372,
+    0.372,
+    0.372,
+    0.372
+  ],
+  "harness_total": 307365,
+  "barrier_windows": [],
+  "rate_windows": [],
+  "workers": 1,
+  "assignment": "one search per AKMC pass; harness delta from the pass log"
+}
