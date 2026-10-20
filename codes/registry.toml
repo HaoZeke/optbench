@@ -190,6 +190,14 @@ profile = "archive"
 task = "lowest-eigenvector"
 ranked = true
 
+[[template]]
+id = "gman/neb-pt-glbfgs-line"
+code = "gman"
+problem = "neb/Pt-heptamer"
+profile = "default"
+task = "neb"
+ranked = true
+
 # generated ASE and Sella templates
 
 [[template]]
@@ -687,11 +695,3 @@ problem = "saddle-search/pt-island"
 profile = "tuned"
 task = "sella-search"
 ranked = false
-
-[[template]]
-id = "gman/neb-pt-glbfgs-line"
-code = "gman"
-problem = "neb/Pt-heptamer"
-profile = "default"
-task = "neb"
-ranked = true
