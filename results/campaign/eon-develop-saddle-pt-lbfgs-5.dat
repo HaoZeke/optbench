@@ -1,14 +1,22 @@
-# rep 1 force_calls 3233357 unique_saddles 106 fraction_connected 0.7553296752721058 total_searches 11117
-# One stock repetition of eOn develop a7aa57472fb7. HarnessCounter through ext_pot, kernel morse/smooth/linear. Seed 1, start pt-island, stop at 27 good saddles below 1.5 eV. client_calls 1643380. This is not the 2014 archive row.
-force_calls 3233357
-force_calls_mean_error 0
-unique_saddles 106
-fraction_connected 0.7553296752721058
-total_searches 11117
+# rep 1 force_calls 3233357 unique_saddles 106 fraction_connected 0.7553296752721058 total_searches 11117 client_calls 3214908
+# rep 2 force_calls 1269723 unique_saddles 76 fraction_connected 0.746996303142329 total_searches 4328 client_calls 1251447
+# rep 3 force_calls 1105090 unique_saddles 80 fraction_connected 0.7345494146474272 total_searches 3673 client_calls 1090805
+# rep 4 force_calls 1603500 unique_saddles 79 fraction_connected 0.7549981824790986 total_searches 5502 client_calls 1589614
+# rep 5 force_calls 2938603 unique_saddles 101 fraction_connected 0.7446936323588306 total_searches 9988 client_calls 2914124
+# rep 6 force_calls 3077104 unique_saddles 99 fraction_connected 0.7441552295314718 total_searches 10565 client_calls 3053370
+# rep 7 force_calls 1284408 unique_saddles 84 fraction_connected 0.7407662307868778 total_searches 4359 client_calls 1267384
+# rep 8 force_calls 4509320 unique_saddles 115 fraction_connected 0.7530959255694578 total_searches 15585 client_calls 4482552
+# rep 9 force_calls 2251979 unique_saddles 101 fraction_connected 0.7494858611825193 total_searches 7780 client_calls 2229694
+# Nine campaigns, seeds 1 through 9. The ranked cost of each campaign is its harness force-call total. The client_calls value is the search-table sum of sad-fcs and mins-fcs.
+force_calls 2363676
+force_calls_mean_error 1092173.61538173049
+unique_saddles 93.44444444444
+fraction_connected 0.74711893944
+total_searches 8099.66666666667
 nfailed 0
-code eOn (develop a7aa57472fb7)
-code_version a7aa57472fb7
-commit a7aa57472fb7d823953fd36b78cd755fa4842d30
+code eOn (develop 500350d9)
+code_version 500350d9
+commit 500350d9fae881f06c7ef194e5868da079c4be5a
 algorithm Dimer
 template eon/develop-saddle-pt-lbfgs-5
 problem saddle-search/pt-island

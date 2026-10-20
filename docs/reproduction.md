@@ -14,7 +14,7 @@ Table 10 prints EON Lanczos 165. The archive file is 325. CI-NEB(3) prints 3 fai
 
 Endpoint minima are free-atom float32 deltas against the reactant, compressed. A file over 1 MB is a git-LFS pointer, not a loose blob.
 
-EON, the old SVN code, and eOn (https://eondocs.org, https://github.com/TheochemUI/eon) are different codes. The Pt-island dimer L-BFGS row with 5 rotations stays the 2014 archive number and is not rerun. One stock repetition of each later code was scored with the harness on the same problem, the same pt-island start, and the same stop: dimer, L-BFGS, rotations_max 5, converged force 0.001, 27 good saddles below 1.5 eV. EON (SVN r2549) recorded force_calls 2237859, unique_saddles 121, fraction_connected 0.7482888432580425, and total_searches 5844. eOn (develop a7aa57472fb7) recorded force_calls 3233357, unique_saddles 106, fraction_connected 0.7553296752721058, and total_searches 11117. The archive is force_calls 1684436.77778 (standard error 547855.076197), unique_saddles 113.111111111, fraction_connected 0.747722, and total_searches 4664.88888889. Force calls and searches sit outside 10% and outside that standard error. Unique saddles and the connected fraction sit inside 10%. The gaps are findings. Neither campaign reproduces the archive.
+EON, the old SVN code, and eOn (https://eondocs.org, https://github.com/TheochemUI/eon) are different codes. The Pt-island dimer L-BFGS row with 5 rotations stays the 2014 archive number. Nine stock campaigns of each later code, seeds 1 through 9, were scored with the harness on the same problem, the same pt-island start, and the same stop: dimer, L-BFGS, rotations_max 5, converged force 0.001, 27 good saddles below 1.5 eV. The ranked cost is the harness force-call total of each campaign. EON (SVN r2549) mean force_calls 1985664, unique_saddles 116.11111111111, fraction_connected 0.74931752659, total_searches 5152.55555555556, force_calls_mean_error 830098.41028639488. eOn (develop 500350d9), commit 500350d9fae881f06c7ef194e5868da079c4be5a, mean force_calls 2363676, unique_saddles 93.44444444444, fraction_connected 0.74711893944, total_searches 8099.66666666667, force_calls_mean_error 1092173.61538173049. The archive is force_calls 1684436.77778, force_calls_mean_error 547855.076197, unique_saddles 113.111111111, fraction_connected 0.747722, total_searches 4664.88888889.
 
 ## accelerated-md
 
@@ -193,7 +193,7 @@ EON, the old SVN code, and eOn (https://eondocs.org, https://github.com/Theochem
 | pt-island/eon-dimer-cg-5-rotations-20-bowl_breakout | — | — | not rerun |
 | pt-island/eon-dimer-lbfgs-20-rotations | — | — | not rerun |
 | pt-island/eon-dimer-lbfgs-20-rotations-20-bowl_breakout | — | — | not rerun |
-| pt-island/eon-dimer-lbfgs-5-rotations | — | — | not rerun |
+| pt-island/eon-dimer-lbfgs-5-rotations | force_calls 1684436.77778, unique_saddles 113.111111111, fraction_connected 0.747722, total_searches 4664.88888889 | EON (SVN r2549) force_calls 1985664, unique_saddles 116.11111111111, fraction_connected 0.74931752659, total_searches 5152.55555555556; eOn (develop 500350d9) force_calls 2363676, unique_saddles 93.44444444444, fraction_connected 0.74711893944, total_searches 8099.66666666667 | scored |
 | pt-island/eon-dimer-lbfgs-5-rotations-20-bowl_breakout | — | — | not rerun |
 | pt-island/eon-md | — | — | not rerun |
 

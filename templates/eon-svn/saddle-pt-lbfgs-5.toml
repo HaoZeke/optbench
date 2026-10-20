@@ -13,11 +13,11 @@ kernel = "morse"
 asv_class = "EonSvnSaddlePtLbfgs5"
 asv_full = false
 asv_timeout = 7200
-seeds = [1]
+seeds = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 starts = ["pt-island"]
 pass_limit = 5000
 workers = 4
-note = """Stock SVN r2549 AKMC on the Pt island. The archived paper row stays the 2014 number. This run is the current SVN code, Fortran build, algorithm unpatched, labelled EON (SVN r2549). It is not the git eOn code. Optimizer L-BFGS, dimer rotations_max 5, converged_force 0.001, max_energy 5, temperature 700, confidence 1.1, thermally_accessible_window 99999, prefactor 5e12, displacement of atoms 0-6 at radius 3.3 and magnitude 0.1. Dimer improved and the rotation optimizer stay at the r2549 defaults. The harness kernel is morse/smooth/linear, cutoff 9.5, periodic in x and y. One seed, the pt-island start. The pass limit is only a ceiling. Success is 27 good saddles below 1.5 eV."""
+note = """Stock SVN r2549 AKMC on the Pt island. The 2014 archive row stays the archived number. This run is the SVN code at r2549, Fortran build, algorithm unpatched, labelled EON (SVN r2549). It is not the git eOn code. Optimizer L-BFGS, dimer rotations_max 5, converged_force 0.001, max_energy 5, temperature 700, confidence 1.1, thermally_accessible_window 99999, prefactor 5e12, displacement of atoms 0-6 at radius 3.3 and magnitude 0.1. Dimer improved and the rotation optimizer stay at the r2549 defaults. The harness kernel is morse/smooth/linear, cutoff 9.5, periodic in x and y. Seeds 1 through 9, the pt-island start. The pass limit is only a ceiling. The stop is 27 good saddles below 1.5 eV. Each ranked cost is that campaign's harness force-call total."""
 
 [ini.Main]
 job = "akmc"

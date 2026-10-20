@@ -1,10 +1,18 @@
-# rep 1 force_calls 2237859 unique_saddles 121 fraction_connected 0.7482888432580425 total_searches 5844
-# One stock repetition of EON SVN r2549. HarnessCounter through ext_pot, kernel morse/smooth/linear. Seed 1, start pt-island, stop at 27 good saddles below 1.5 eV. client_calls 2221431. This is not the 2014 archive row.
-force_calls 2237859
-force_calls_mean_error 0
-unique_saddles 121
-fraction_connected 0.7482888432580425
-total_searches 5844
+# rep 1 force_calls 2237859 unique_saddles 121 fraction_connected 0.7482888432580425 total_searches 5844 client_calls 2221431
+# rep 2 force_calls 1069356 unique_saddles 101 fraction_connected 0.7594254937163375 total_searches 2785 client_calls 1045353
+# rep 3 force_calls 1307958 unique_saddles 115 fraction_connected 0.7473620741634006 total_searches 3317 client_calls 1292972
+# rep 4 force_calls 1471683 unique_saddles 113 fraction_connected 0.7537608867775138 total_searches 3789 client_calls 1451769
+# rep 5 force_calls 1710588 unique_saddles 116 fraction_connected 0.7442799461641992 total_searches 4458 client_calls 1689357
+# rep 6 force_calls 2750403 unique_saddles 124 fraction_connected 0.7451640033641715 total_searches 7134 client_calls 2737651
+# rep 7 force_calls 2387109 unique_saddles 121 fraction_connected 0.7485521235521235 total_searches 6216 client_calls 2365418
+# rep 8 force_calls 3750180 unique_saddles 130 fraction_connected 0.7514332514332515 total_searches 9768 client_calls 3727339
+# rep 9 force_calls 1185840 unique_saddles 104 fraction_connected 0.7455911169170477 total_searches 3062 client_calls 1166322
+# Nine campaigns, seeds 1 through 9. The ranked cost of each campaign is its harness force-call total. The client_calls value is the search-table sum of sad-fcs and mins-fcs.
+force_calls 1985664
+force_calls_mean_error 830098.41028639488
+unique_saddles 116.11111111111
+fraction_connected 0.74931752659
+total_searches 5152.55555555556
 nfailed 0
 code EON (SVN r2549)
 code_version r2549

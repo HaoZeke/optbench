@@ -1,9 +1,9 @@
 id = "eon/develop-saddle-pt-lbfgs-5"
 engine = "eon"
 problem = "saddle-search/pt-island"
-code = "eOn (develop a7aa57472fb7)"
-code_version = "a7aa57472fb7"
-commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+code = "eOn (develop 500350d9)"
+code_version = "500350d9"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
 algorithm = "Dimer"
 reducer = "harness"
 failure_cap = 100000000
@@ -13,11 +13,11 @@ kernel = "morse"
 asv_class = "EonDevelopSaddlePtLbfgs5"
 asv_full = false
 asv_timeout = 7200
-seeds = [1]
+seeds = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 starts = ["pt-island"]
 pass_limit = 5000
 workers = 4
-note = """Stock develop AKMC on the Pt island. The archived paper row stays the 2014 number. This run is current develop of https://github.com/TheochemUI/eon at a7aa57472fb7d823953fd36b78cd755fa4842d30, Fortran build, algorithm untuned, labelled eOn (develop a7aa57472fb7). It is not the SVN code. Optimizer L-BFGS, dimer rotations_max 5, converged_force 0.001, max_energy 5, temperature 700, confidence 1.1, thermally_accessible_window 99999, prefactor 5e12, displacement of atoms 0-6 at radius 3.3 and magnitude 0.1. Dimer improved and the rotation optimizer stay at the develop defaults. The harness kernel is morse/smooth/linear, cutoff 9.5, periodic in x and y. One seed, the pt-island start. The pass limit is only a ceiling. Success is 27 good saddles below 1.5 eV."""
+note = """Stock AKMC on the Pt island from https://github.com/TheochemUI/eon commit 500350d9fae881f06c7ef194e5868da079c4be5a on branch fix/develop-regressions-vs-350, Fortran build, algorithm untuned, labelled eOn (develop 500350d9). It is not the SVN code. The 2014 archive row stays the archived number. Optimizer L-BFGS, dimer rotations_max 5, converged_force 0.001, max_energy 5, temperature 700, confidence 1.1, thermally_accessible_window 99999, prefactor 5e12, displacement of atoms 0-6 at radius 3.3 and magnitude 0.1. Dimer improved and the rotation optimizer stay at that commit's defaults. The harness kernel is morse/smooth/linear, cutoff 9.5, periodic in x and y. Seeds 1 through 9, the pt-island start. The pass limit is only a ceiling. The stop is 27 good saddles below 1.5 eV. Each ranked cost is that campaign's harness force-call total."""
 
 [ini.Main]
 job = "akmc"

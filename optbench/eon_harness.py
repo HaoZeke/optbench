@@ -87,8 +87,8 @@ FAMILIES = {
         "env": "EON_DEVELOP_CLIENT",
         "default": Path.home() / "opt" / "eon-develop" / "bin" / "eonclient",
         "flag": "--version",
-        "token": "a7aa574",
-        "cache": "a7aa574",
+        "token": "500350d9",
+        "cache": "500350d9",
     },
 }
 

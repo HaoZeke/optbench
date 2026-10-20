@@ -55,14 +55,14 @@ committed = "2026-01-23"
 note = "The old SVN code, latest revision r2549, Fortran potentials linked, algorithm unpatched. eonclient -v prints r2549. This is not the git eOn project and not the Eon svn pin used by the other r2549 rows."
 
 [[code]]
-id = "eon-develop-current"
-name = "eOn (develop a7aa57472fb7)"
+id = "eon-develop-500350d9"
+name = "eOn (develop 500350d9)"
 role = "saddle search"
 repository = "https://github.com/TheochemUI/eon"
-ref = "develop"
-commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
-committed = "2026-10-18"
-note = "Current develop of https://github.com/TheochemUI/eon, the code documented at https://eondocs.org. Commit a7aa57472fb7d823953fd36b78cd755fa4842d30. Fortran potentials are on. This is not a version of the SVN code."
+ref = "fix/develop-regressions-vs-350"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
+committed = "2026-10-20"
+note = "https://github.com/TheochemUI/eon at 500350d9fae881f06c7ef194e5868da079c4be5a on branch fix/develop-regressions-vs-350, the code documented at https://eondocs.org. Fortran potentials are on. This is not a version of the SVN code."
 
 [[code]]
 id = "rgmin"
