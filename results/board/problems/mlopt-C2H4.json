@@ -42,7 +42,7 @@
       "partial_reason": "",
       "path": "results/campaign/pyamff-0.1.0-beta-c2h4-lbfgs10-7-fcoeff0.dat",
       "problem": "mlopt/C2H4",
-      "registry_match": true,
+      "registry_match": false,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.94,

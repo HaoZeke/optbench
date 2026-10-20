@@ -173,16 +173,6 @@ commit = "0.1.1"
 committed = "2019-12-10"
 note = "Sella 0.1.1 PESWrapper.diag for the lowest-eigenvector row. eta 1e-6, gamma 1e-16, vreftol 0.99, gradient v0, rigid-mode projection. This pin is not Sella 2.6.0."
 
-[[code]]
-id = "pyamff"
-name = "Pyamff"
-role = "neural network force field"
-repository = "https://gitlab.com/pyamff/pyamff"
-ref = "master"
-commit = "240f51d01ca22969369f9bc21760c61cbb3b6665"
-committed = "2026-07-04"
-note = "Pyamff 0.1.0-beta, master 240f51d0, 2026-07-04. The last tag is v3.0.0. The C2H4 row uses this source unmodified: archived trajectory, 50 random_uniform starts, layers 10 7, tanh, NoScaler, force coefficient 0, LBFGS, loss grad tol 0.02, epoch cap 10000. The loss name in this release is SSE. One harness call is one logged training epoch."
-
 [[template]]
 id = "sella-0.1.1/lj38-loweig"
 code = "sella-0.1.1"
