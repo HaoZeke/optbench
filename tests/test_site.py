@@ -95,6 +95,16 @@ def test_rendered_pages_use_the_board_rank():
     tsopt = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "tsopt.org").read_text(encoding="utf-8")
     assert "Sella 0.1.1 legacy" in tsopt
     assert "2.6.0 legacy" not in tsopt
+    lj150 = document["problems"]["globalopt/lj150"]["ranked"]
+    assert [row["template"] for row in lj150] == ["gmin/lj150-symmetrise"]
+    assert lj150[0]["partial"] is False
+    assert lj150[0]["counter"] == "harness"
+    assert lj150[0]["n"] == 100
+    assert lj150[0]["nfailed"] == 0
+    assert document["problems"]["globalopt/lj150"]["partial"] == []
+    globalopt = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "globalopt.org").read_text(encoding="utf-8")
+    assert "gmin/lj150-symmetrise" in globalopt
+    assert "Legacy 2014 archive" in globalopt
     ts_ranked = [row["template"] for row in document["problems"]["tsopt/LJ38"]["ranked"]]
     assert "sella/lj38-ts-default" in ts_ranked
     assert "sella/lj38-ts-tuned" not in ts_ranked

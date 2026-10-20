@@ -35,8 +35,31 @@ def test_the_ledger_covers_the_oracle_in_order():
             assert row["cause"]
         if (row.get("rerun") or {}).get("paper_baseline"):
             assert status == "reproduced"
-    assert counts == {"reproduced": 46, "not_reproduced": 29, "not_rerun": 76}
+    assert counts == {"reproduced": 46, "not_reproduced": 30, "not_rerun": 75}
     assert reproduction_errors(ROOT) == []
+
+
+def test_lj150_gmin_stock_is_ranked_beside_the_archive():
+    ledger = {row_id(row): row for row in load_ledger(ROOT / "oracle" / "reproduction.jsonl")}
+    row = ledger["globalopt/lj150/gmin-symmetrise"]
+    assert row["status"] == "not_reproduced"
+    assert row["cause"] == "gmin_latest_stock"
+    assert row["in_paper"] is False
+    assert row["rerun"]["paper_baseline"] is False
+    assert row["rerun"]["code_version"] == "df8da599267534fbe43a250e578f7396a7946311"
+    assert row["rerun"]["commit"] == "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
+    assert "template" not in row["rerun"]
+    assert "path" not in row["rerun"]
+    assert row["failure_check"]["ok"] is True
+    assert row["failure_check"]["rerun"] == 0
+    by_metric = {item["metric"]: item for item in row["checks"]}
+    assert by_metric["basin_hopping_steps_mean"]["ok"] is True
+    assert by_metric["energy_calls_mean"]["ok"] is True
+    assert by_metric["basin_hopping_steps_stddev"]["ok"] is False
+    assert by_metric["cpu_time_mean"]["ok"] is False
+    held = holdback(ROOT)
+    assert ("globalopt/lj150", "gmin/lj150-symmetrise") not in held.templates
+    assert "results/campaign/gmin-df8da599-lj150-symmetrise.dat" not in held.paths
 
 
 def test_pele_paper_baseline_is_the_2014_stop():

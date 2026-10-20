@@ -1,0 +1,14 @@
+# Latest GMIN, archived LJ150 symmetrise data file, stock keywords.
+id = "gmin/lj150-symmetrise"
+engine = "gmin"
+problem = "globalopt/lj150"
+code = "gmin"
+code_version = "df8da599267534fbe43a250e578f7396a7946311"
+commit = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
+algorithm = "core orbits symmetrisation scheme"
+tuning = "stock"
+note = "GMIN SVNREV df8da599 from the current Wales svn.tar.bz2. Native Lennard-Jones, the archived data file, coords.1-100, seed 0. The score is GMIN function calls at Target hit."
+
+[gmin]
+method = "symmetrise"
+data = "templates/gmin/lj150-symmetrise.data"

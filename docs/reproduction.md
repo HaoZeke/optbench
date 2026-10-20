@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+46 reproduced, 30 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -54,7 +54,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | lj100-binary/eon-basinhopping | — | — | not rerun |
 | lj100-binary/gmin | — | — | not rerun |
 | lj150/gmin-nosym | — | — | not rerun |
-| lj150/gmin-symmetrise | — | — | not rerun |
+| lj150/gmin-symmetrise | basin_hopping_steps_mean 667.38, basin_hopping_steps_stddev 543.47, energy_calls_mean 127559, energy_calls_stddev 106387, cpu_time_mean 51.59, cpu_time_stddev 42.91 | 723.14, 825.173, 138033, 158246, 13.3162, 15.2214 | not reproduced; gmin_latest_stock |
 | lj38/eon-basinhopping | force_calls 508011 | 503146 | reproduced |
 | lj38/gmin-csm | — | — | not rerun |
 | lj38/gmin-nosym | — | — | not rerun |
@@ -357,5 +357,11 @@ Sella 2.6.0 with the archived trust-region numbers (eta, gamma, delta0, rho, sig
 
 - tsopt/LJ38/sella
 - tsopt/pt-island/sella
+
+### gmin_latest_stock
+
+Latest GMIN SVNREV df8da599267534fbe43a250e578f7396a7946311 (Wales svn.tar.bz2 sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31) is unmodified. The run uses the archived data file, coords.1-100, and seed 0. The harness score is GMIN function calls at Target hit. Basin-hopping steps are 723.14 (sd 825.173) beside the archive 667.38 (sd 543.47). Energy calls are 138033 (sd 158246) beside 127559 (sd 106387). CPU time is 13.3162 s (sd 15.2214) beside 51.59 s (sd 42.91). The step and energy means are inside 10 percent. Both standard deviations and both CPU figures are not. The keywords were not changed to close that gap.
+
+- globalopt/lj150/gmin-symmetrise
 
 Rows with no exact-setup campaign stay not rerun and are not given a cause. AKMC on aladatom is a different method from Langevin parallel replica; the ratios above are that comparison, and the archive rows stay not rerun.

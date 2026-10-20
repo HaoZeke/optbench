@@ -328,6 +328,19 @@ def run(
             limit=limit,
             resume=resume,
         )
+    if template["engine"] == "gmin":
+        from .engines.gmin_search import run as run_gmin
+
+        stated = template.get("problem")
+        if stated and stated != problem_name:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_gmin(
+            root,
+            problem_name,
+            template_name,
+            output=output,
+            workers=workers,
+        )
     from .engines import find as find_engine
 
     plugged = find_engine(str(template["engine"]))
