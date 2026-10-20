@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pele</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="minimization/lj38">
    <th scope="row"><a href="#lj38">Lennard-Jones 38 clusters</a></th>
    <td data-code="eOn" data-template="eon/lj38-lbfgs-m100" data-par2="180.137"><span class="bench-score">180.137</span><a href="#lj38-templates">eon/lj38-lbfgs-m100</a></td>
@@ -16,6 +16,7 @@
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE" data-template="ase/lj38-lbfgs-tuned" data-par2="395.645"><span class="bench-score">395.645</span><a href="#lj38-templates">ase/lj38-lbfgs-tuned</a></td>
    <td data-code="Sella" data-template="sella/lj38-min-tuned" data-par2="253.921"><span class="bench-score">253.921</span><a href="#lj38-templates">sella/lj38-min-tuned</a></td>
+   <td data-code="pele" data-template="pele/lj38-fire-default" data-par2="2141.38"><span class="bench-score">2141.38</span><a href="#lj38-templates">pele/lj38-fire-default</a></td>
    <td data-code="pysisyphus" data-template="pysisyphus/cg-lj38" data-par2="15124.7"><span class="bench-score">15124.7</span><a href="#lj38-templates">pysisyphus/cg-lj38</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
@@ -32,6 +33,7 @@
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE" data-template="noise/ase-lbfgs-s0" data-par2="396.55"><span class="bench-score">396.55</span><a href="#lj38-noise-templates">noise/ase-lbfgs-s0</a></td>
    <td data-code="Sella" data-template="noise/sella-min-s0" data-par2="729.433"><span class="bench-score">729.433</span><a href="#lj38-noise-templates">noise/sella-min-s0</a></td>
+   <td data-code="pele">—</td>
    <td data-code="pysisyphus">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
@@ -48,6 +50,7 @@
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE" data-template="ase/morse-bfgslinesearch-default" data-par2="28.91"><span class="bench-score">28.91</span><a href="#morse-bulk-templates">ase/morse-bfgslinesearch-default</a></td>
    <td data-code="Sella" data-template="sella/morse-min-default" data-par2="28.89"><span class="bench-score">28.89</span><a href="#morse-bulk-templates">sella/morse-min-default</a></td>
+   <td data-code="pele">—</td>
    <td data-code="pysisyphus">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
@@ -70,7 +73,7 @@
    <figure class="bench-plot"><a href="../../_static/board/minimization-lj38-profile.svg"><picture><source srcset="../../_static/board/minimization-lj38-profile.webp" type="image/webp"><img src="../../_static/board/minimization-lj38-profile.png" alt="Dolan-More profile for minimization/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/minimization-lj38-cost.svg"><picture><source srcset="../../_static/board/minimization-lj38-cost.webp" type="image/webp"><img src="../../_static/board/minimization-lj38-cost.png" alt="Cost versus success for minimization/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="lj38-templates">
-   <summary>All templates (102 ranked)</summary>
+   <summary>All templates (103 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="minimization/lj38">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
@@ -151,6 +154,7 @@
    <tr><td data-field="template">rgmin/lj38-diis</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">f15726f1c798</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">1967.42</td><td data-field="success_rate">0.998</td><td data-field="wilson_low">0.992737</td><td data-field="wilson_high">0.999451</td><td data-field="median_calls">1652</td><td data-field="mean_calls">1930.92</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 2</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">rgmin/lj38-diis-tuned</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">1967.42</td><td data-field="success_rate">0.998</td><td data-field="wilson_low">0.992737</td><td data-field="wilson_high">0.999451</td><td data-field="median_calls">1652</td><td data-field="mean_calls">1930.92</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 2</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">rgmin/lj38-diis-tuned</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">f15726f1c798</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">1967.42</td><td data-field="success_rate">0.998</td><td data-field="wilson_low">0.992737</td><td data-field="wilson_high">0.999451</td><td data-field="median_calls">1652</td><td data-field="mean_calls">1930.92</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 2</td><td data-field="n">1000</td></tr>
+   <tr><td data-field="template">pele/lj38-fire-default</td><td data-field="version">pele 0.1.2</td><td data-field="commit">b7081b932a06</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">2141.38</td><td data-field="success_rate">0.952</td><td data-field="wilson_low">0.936934</td><td data-field="wilson_high">0.963607</td><td data-field="median_calls">739</td><td data-field="mean_calls">1325.29</td><td data-field="failures">crash 0, divergence 0, cap 7, wrong_stationary 41</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">rgmin/lj38-sr1</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">2185.66</td><td data-field="success_rate">0.994</td><td data-field="wilson_low">0.986972</td><td data-field="wilson_high">0.997247</td><td data-field="median_calls">1728</td><td data-field="mean_calls">2093.01</td><td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 4</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">rgmin/lj38-sr1</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">f15726f1c798</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">2185.66</td><td data-field="success_rate">0.994</td><td data-field="wilson_low">0.986972</td><td data-field="wilson_high">0.997247</td><td data-field="median_calls">1728</td><td data-field="mean_calls">2093.01</td><td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 4</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">rgmin/lj38-sr1-tuned</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="current">yes</td><td data-field="par2_mean">2185.66</td><td data-field="success_rate">0.994</td><td data-field="wilson_low">0.986972</td><td data-field="wilson_high">0.997247</td><td data-field="median_calls">1728</td><td data-field="mean_calls">2093.01</td><td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 4</td><td data-field="n">1000</td></tr>
@@ -215,6 +219,7 @@
    <h3>Partial</h3><ul>
    <li>ase/lj38-lbfgslinesearch-tuned ASE campaign, asv n=1000, does not reproduce the 2014 archive.</li>
    <li>ase/lj38-preconlbfgs-tuned ASE campaign, asv n=1000, does not reproduce the 2014 archive.</li>
+   <li>pele/lj38-fire pele campaign n=1000, does not reproduce the 2014 archive.</li>
    <li>ase/lj38-lbfgs-default ASE asv n=1, smoke run; scored 1 of 1000 starts.</li>
    <li>ase/lj38-gpmin-default ASE asv n=1, smoke run; scored 1 of 1000 starts.</li>
    <li>ase/lj38-bfgs-default ASE asv n=1, smoke run; scored 1 of 1000 starts.</li>

@@ -247,7 +247,7 @@ CAUSE_TEXT = {
         "The Rayleigh-Ritz template uses updates 4. The archived first-order mean is 25 and the second-order mean is 46. "
         "This default scores 61, so it is not either archived order."
     ),
-    "pele_fire": "pele FIRE on LJ38 scores 1264 with 7 failures. The archive is 709 with 0 failures. The M100 L-BFGS row on the same build reproduces, so this is the FIRE step, not the LJ kernel.",
+    "pele_fire": "pele 0.1.2, release v0.1.2, FIRE at the Fire constructor values scores 1264 with 7 failures on the archived LJ38 starts and force norm. The archive row is 709 with 0 failures. The ranked harness row is pele/lj38-fire-default. M100 L-BFGS on this release reproduces.",
     "pele_morse": "pele Morse L-BFGS scores 92. The archive is 51. eOn Morse L-BFGS on the same bulk file reproduces at 52, so the gap is the pele memory and step, not the shared Morse parameters.",
     "morse_sd": "eOn Morse steepest descent scores 7038 with 19 failures. The archive is 196 with 0. Morse L-BFGS, CG, and FIRE on the same client reproduce, so the kernel is not the split.",
     "improved_unset": "The r2549 template turns improved on. The 2014 ini left that key unset. The mean lands outside 10 percent.",

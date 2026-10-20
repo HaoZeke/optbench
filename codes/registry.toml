@@ -89,10 +89,10 @@ id = "pele"
 name = "pele"
 role = "minimization"
 repository = "https://github.com/pele-python/pele"
-ref = "main"
+ref = "v0.1.2"
 commit = "b7081b932a060be11342fbe8287ac35da8ada879"
 committed = "2026-10-12"
-note = "0.1.2 at main b7081b93. FIRE is pele.optimize.Fire. The LJ38 archive row sets maxstep 0.1; the other FIRE parameters stay at the constructor values. Campaigns call the harness Lennard-Jones potential. One force call is one getEnergyGradient entry."
+note = "0.1.2 is the current release, tag v0.1.2 at b7081b93. The ranked LJ38 FIRE row uses the Fire constructor values and the problem force norm. One force call is one getEnergyGradient entry on the harness Lennard-Jones potential."
 
 [[code]]
 id = "artn"

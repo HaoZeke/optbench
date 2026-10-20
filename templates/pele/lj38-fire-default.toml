@@ -1,0 +1,16 @@
+id = "pele/lj38-fire-default"
+engine = "pele"
+problem = "minimization/lj38"
+code = "pele"
+code_version = "0.1.2"
+commit = "b7081b932a060be11342fbe8287ac35da8ada879"
+algorithm = "FIRE"
+tuning = "default"
+note = "pele 0.1.2, the current release. FIRE uses the Fire constructor values. The stop is the problem Euclidean force norm 0.01. The iteration budget is the force-call cap. The same values are used for every start."
+
+[pele]
+method = "fire"
+
+[ini.Optimizer]
+converged_force = 0.01
+max_iterations = 10000

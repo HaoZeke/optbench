@@ -295,7 +295,7 @@ ASE 3.29 PreconLBFGS with the archived opt.py setup (Exp A 3, maxstep 0.1, ASE f
 
 ### pele_fire
 
-pele FIRE on LJ38 scores 1264 with 7 failures. The archive is 709 with 0 failures. The M100 L-BFGS row on the same build reproduces, so this is the FIRE step, not the LJ kernel.
+pele 0.1.2, release v0.1.2, FIRE at the Fire constructor values scores 1264 with 7 failures on the archived LJ38 starts and force norm. The archive row is 709 with 0 failures. The ranked harness row is pele/lj38-fire-default. M100 L-BFGS on this release reproduces.
 
 - minimization/lj38/pele-fire
 
