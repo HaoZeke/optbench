@@ -56,13 +56,13 @@ note = "Latest SVN EON, revision 2549, built with Fortran and unpatched. eonclie
 
 [[code]]
 id = "eon-develop-500350d9"
-name = "eOn (develop 500350d9)"
+name = "eOn (develop 8468a7cd)"
 role = "minimization and saddle search"
 repository = "https://github.com/TheochemUI/eon"
-ref = "fix/develop-regressions-vs-350"
-commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
+ref = "develop"
+commit = "8468a7cded5a40de7c7423ad4dc78f19b8205763"
 committed = "2026-10-20"
-note = "Commit 500350d9 on fix/develop-regressions-vs-350. develop at a7aa5747 does not contain it. Version string 3.6.0 (500350d9). Stock meson build with its default Fortran potentials. This is the git eOn code, not SVN EON. The binary LJ100 basin hop uses stock defaults and the archive force tolerance 0.001."
+note = "origin/develop 8468a7cd. git merge-base --is-ancestor confirms it contains 500350d9. Version string 3.6.0. Stock meson build with its default Fortran potentials. This is the git eOn code, not SVN EON. The binary LJ100 basin hop uses the archive config.ini: 60000 steps, displacement 0.3, temperature 14000, L-BFGS, max_iterations 10000, converged_force 0.001. The cap is 2000000 and a capped start is charged 4000000."
 
 [[code]]
 id = "rgmin"
