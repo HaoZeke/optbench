@@ -374,6 +374,7 @@ def _execute_dimer(job: dict) -> dict:
             mode[~free] = 0.0
             scale = float(np.linalg.norm(mode))
             mode = mode / scale
+            seen = {"overlap": 0.0}
             try:
                 with log.open("w", encoding="utf-8") as handle, redirect_stdout(handle):
                     dimer = dimer_cls(
@@ -387,41 +388,58 @@ def _execute_dimer(job: dict) -> dict:
                         noZeroModes=bool(np.all(free)),
                         rotationOpt=str(job["rotation_opt"]),
                     )
+                    n_atoms = positions.shape[0]
+                    reference = job["reference"]
+                    target = float(job["overlap"])
                     if bound_by_cap:
+                        # phi_tol ends one rotation. Calling get_forces again
+                        # repeats that rotation. search() is the library loop:
+                        # rotate, then translate, then rotate at the new point.
                         original_update = dimer.update_general_forces
-                        n_atoms = positions.shape[0]
-                        reference = job["reference"]
-                        target = float(job["overlap"])
+                        original_forces = dimer.get_forces
 
                         def update_general_forces(Ri, original=original_update):
                             if int(dimer.forceCalls) >= 1:
                                 found = _mode_overlap(dimer.N, n_atoms, free, reference)
+                                seen["overlap"] = found
                                 if found >= target:
                                     raise _OverlapReached(found)
                             return original(Ri)
 
+                        def get_forces(original=original_forces):
+                            result = original()
+                            found = _mode_overlap(dimer.N, n_atoms, free, reference)
+                            seen["overlap"] = found
+                            if found >= target:
+                                raise _OverlapReached(found)
+                            return result
+
                         dimer.update_general_forces = update_general_forces
+                        dimer.get_forces = get_forces
+                        try:
+                            dimer.search()
+                        except _OverlapReached as hit:
+                            overlap = hit.overlap
+                            seen["overlap"] = overlap
+                        else:
+                            overlap = _mode_overlap(dimer.N, n_atoms, free, reference)
+                            seen["overlap"] = overlap
                     stalled = 0
                     previous_overlap = None
-                    while counter.calls < cap:
+                    while not bound_by_cap and counter.calls < cap:
                         before = counter.calls
                         if task == "mode":
-                            try:
-                                dimer.get_forces()
-                            except _OverlapReached as hit:
-                                overlap = hit.overlap
+                            dimer.get_forces()
+                            overlap = _mode_overlap(dimer.N, n_atoms, free, reference)
+                            if overlap >= target:
                                 break
-                            overlap = _mode_overlap(dimer.N, positions.shape[0], free, job["reference"])
-                            if overlap >= float(job["overlap"]):
+                            if previous_overlap is not None and abs(overlap - previous_overlap) < 1e-6:
+                                stalled += 1
+                            else:
+                                stalled = 0
+                            previous_overlap = overlap
+                            if stalled >= 3:
                                 break
-                            if not bound_by_cap:
-                                if previous_overlap is not None and abs(overlap - previous_overlap) < 1e-6:
-                                    stalled += 1
-                                else:
-                                    stalled = 0
-                                previous_overlap = overlap
-                                if stalled >= 3:
-                                    break
                         else:
                             dimer.step()
                             coords = atoms.get_positions()
@@ -433,6 +451,8 @@ def _execute_dimer(job: dict) -> dict:
                         if counter.calls == before:
                             break
             finally:
+                if seen["overlap"] > overlap:
+                    overlap = seen["overlap"]
                 if log.is_file():
                     log_text = log.read_text(encoding="utf-8", errors="replace")
             point = np.asarray(atoms.get_positions(), dtype=np.float64)
@@ -645,7 +665,8 @@ def _run_points(root, problem, template, settings, output: Path, workers: int, e
                 "# counter harness. One force call is one ASE calculate inside the solid-state dimer.\n"
                 f"# rotationOpt is {rotation}. rotationMax is the {int(settings['cap'])}-call cap.\n"
                 "# maxStep, dR, and phi_tol stay at the SSDimer constructor defaults.\n"
-                "# The rotation stops at overlap 0.99 or that cap. TSASE forceCalls is not this count."
+                "# SSDimer.search owns translation and rotation. Overlap 0.99 or the call cap stops the problem.\n"
+                "# TSASE forceCalls is not this count."
             )
         else:
             comment = (

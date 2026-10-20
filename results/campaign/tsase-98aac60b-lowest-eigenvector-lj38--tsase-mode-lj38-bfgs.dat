@@ -1,17 +1,18 @@
 # counter harness. One force call is one ASE calculate inside the solid-state dimer.
 # rotationOpt is bfgs. rotationMax is the 10000-call cap.
 # maxStep, dR, and phi_tol stay at the SSDimer constructor defaults.
-# The rotation stops at overlap 0.99 or that cap. TSASE forceCalls is not this count.
-force_calls 88
+# SSDimer.search owns translation and rotation. Overlap 0.99 or the call cap stops the problem.
+# TSASE forceCalls is not this count.
+force_calls 40
 force_calls_min 12
-force_calls_max 1929
-force_calls_median 28
-successes 185
-nfailed 15
+force_calls_max 397
+force_calls_median 25
+successes 127
+nfailed 73
 n 200
 transition_states 0
 code TSASE
-code_version 98aac60b
+code_version 1.0 (98aac60)
 commit 98aac60b5d9905e81ee4e6b8c385f169258d0218
 algorithm SSDimer BFGS
 template tsase/mode-lj38-bfgs
