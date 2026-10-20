@@ -1,0 +1,21 @@
+barrier_jobs 1101
+barrier_force_calls 7.788e+05
+barrier_windows 13
+rate_jobs 66
+rate_force_calls  4.705e+04
+rate_windows 224
+searches 0
+missed_barriers 0
+unexpected_barriers 0
+reference_processes 15
+code Eon r2006
+code_version r2006
+commit r2006
+counter htst-reducer
+reducer harness-htst
+contributor Penghao Xiao
+algorithm Dimer-LBFGS rotation: max=50, tol=1
+template archive/htst-pt-eon-dimer-lbfgs
+problem hTST/Pt
+count_keys sad-fcs
+published_mean true

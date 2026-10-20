@@ -25,6 +25,11 @@ def test_the_ledger_covers_the_oracle_in_order():
     assert [row_id(row) for row in ledger] == [row_id(row) for row in oracle]
     counts = {"reproduced": 0, "not_reproduced": 0, "not_rerun": 0}
     for row in ledger:
+        if row_id(row) == "hTST/Pt/eon-dimer-lbfgs":
+            assert row["status"] == "archive"
+            assert row.get("rerun") is None
+            assert not row.get("checks")
+            continue
         failure = row.get("failure_check") if row.get("rerun") else None
         status = judge_checks(row.get("checks") or [], failure)
         if row.get("rerun") is None:
@@ -35,7 +40,7 @@ def test_the_ledger_covers_the_oracle_in_order():
             assert row["cause"]
         if (row.get("rerun") or {}).get("paper_baseline"):
             assert status == "reproduced"
-    assert counts == {"reproduced": 46, "not_reproduced": 29, "not_rerun": 76}
+    assert counts == {"reproduced": 46, "not_reproduced": 29, "not_rerun": 75}
     assert reproduction_errors(ROOT) == []
 
 

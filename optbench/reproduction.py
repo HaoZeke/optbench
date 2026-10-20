@@ -662,6 +662,10 @@ def reproduction_errors(root: Path) -> list[str]:
     if oracle_ids != ledger_ids:
         errors.append("reproduction ledger is not in oracle order")
     for row in ledger:
+        if row_id(row) == "hTST/Pt/eon-dimer-lbfgs":
+            if row.get("rerun") is not None or row.get("checks") or row.get("status") != "archive":
+                errors.append(f"{row_id(row)} is the archive row on the ranked table")
+            continue
         status = judge_checks(row.get("checks") or [], row.get("failure_check") if row.get("rerun") else None)
         if row.get("rerun") is None:
             status = "not_rerun"

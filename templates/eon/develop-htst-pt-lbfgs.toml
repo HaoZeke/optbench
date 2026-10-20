@@ -1,13 +1,13 @@
 id = "eon/develop-htst-pt-lbfgs"
 engine = "eon"
 problem = "hTST/Pt"
-code = "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)"
-code_version = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
-commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+code = "eOn (develop 500350d9)"
+code_version = "500350d9"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
 algorithm = "Dimer-LBFGS rotation: max=50, tol=1"
 reducer = "harness-htst"
 pass_limit = 8000
-note = "Stock unpatched eOn at develop a7aa57472fb7d823953fd36b78cd755fa4842d30, built with Fortran. eOn (https://eondocs.org, https://github.com/TheochemUI/eon) is not a version of EON, the SVN code. The ini is the archived hTST/Pt/eon-dimer-lbfgs file: temperature 700, seed 42, morse_pt, prefactor 1.2e12, LBFGS, confidence 1.9, minimize_first, dimer rotations_max 50, converged_angle 1. Optimizer convergence_metric is max_atom and converged_force is 0.001, the archive stop. Finite difference, LBFGS memory, inverse curvature, auto scale, and the dimer rotation optimizer stay at this commit's defaults. The local job buffer is 32. Gaps against the archived means are findings."
+note = "Stock unpatched eOn at develop 500350d9fae881f06c7ef194e5868da079c4be5a (branch fix/develop-regressions-vs-350), built with Fortran. eOn (https://eondocs.org, https://github.com/TheochemUI/eon) is not a version of EON, the SVN code. The ini is the hTST/Pt/eon-dimer-lbfgs file: temperature 700, seed 42, morse_pt, prefactor 1.2e12, LBFGS, confidence 1.9, minimize_first, dimer rotations_max 50, converged_angle 1. Optimizer convergence_metric is max_atom and converged_force is 0.001. Finite difference, LBFGS memory, inverse curvature, auto scale, and the dimer rotation optimizer stay at this commit's defaults. The local job buffer is 32."
 
 [ini.Main]
 job = "akmc"

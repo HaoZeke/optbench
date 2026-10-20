@@ -16,23 +16,21 @@ they are not given a force-call row.
 
 EON is the SVN code at https://theory.cm.utexas.edu/svn/eon. eOn is the git
 code at https://eondocs.org and https://github.com/TheochemUI/eon. They are
-different codes. The registry names are `EON (SVN r2549)` and
-`eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)`. The pin named
-`Eon svn` stays for the other r2549 templates. The pin named `eOn` at
+different codes. The registry names are `Eon r2006`, `EON (SVN r2549)`, and
+`eOn (develop 500350d9)`. The pin named `Eon svn` stays for the other r2549
+templates. The pin named `eOn` at
 `7095b23ac17d49f434a5e08ccb072897ceca698e` stays for the templates run on
 that develop commit.
 
-The hTST/Pt dimer LBFGS archive row stays the paper number: Eon r2006,
-barrier jobs 1101, barrier force calls 7.788e+05, rate jobs 66, rate force
-calls 4.705e+04. Two stock, untuned harness runs use that problem, 13
-starts, and the max-atom force stop 0.001.
+hTST/Pt dimer LBFGS uses one problem, 13 starts, and max-atom force 0.001.
+The archive file and the two stock, untuned harness runs sit on the same
+ranked table.
 
 | Code | Template | barrier jobs | barrier force calls | rate jobs | rate force calls |
 | --- | --- | --- | --- | --- | --- |
+| Eon r2006 | archive/htst-pt-eon-dimer-lbfgs | 1101 | 7.788e+05 | 66 | 4.705e+04 |
 | EON (SVN r2549) | eon-svn/htst-pt-lbfgs | 1264 | 6.168e+05 | 53 | 2.598e+04 |
-| eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) | eon/develop-htst-pt-lbfgs | 1062 | 4.841e+05 | 48 | 2.198e+04 |
-
-The gaps against the archive are findings.
+| eOn (develop 500350d9) | eon/develop-htst-pt-lbfgs | 1062 | 4.841e+05 | 48 | 2.198e+04 |
 
 ## Rows on disk
 

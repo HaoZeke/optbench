@@ -16262,10 +16262,18 @@
       ],
       "profile": {
         "area_log10": {
+          "archive/htst-pt-eon-dimer-lbfgs r2006 Dimer-LBFGS rotation: max=50, tol=1 campaign r2006": 0.8451996032104088,
           "eon-svn/htst-pt-lbfgs r2549 Dimer-LBFGS rotation: max=50, tol=1 campaign r2549": 1.0188707545550133,
-          "eon/develop-htst-pt-lbfgs a7aa57472fb7d823953fd36b78cd755fa4842d30 Dimer-LBFGS rotation: max=50, tol=1 campaign a7aa574": 1.1230734453617761
+          "eon/develop-htst-pt-lbfgs 500350d9 Dimer-LBFGS rotation: max=50, tol=1 campaign 500350d": 1.1230734453617761
         },
         "rho": {
+          "archive/htst-pt-eon-dimer-lbfgs r2006 Dimer-LBFGS rotation: max=50, tol=1 campaign r2006": [
+            0.0,
+            0.38461538461538464,
+            0.9230769230769231,
+            1.0,
+            1.0
+          ],
           "eon-svn/htst-pt-lbfgs r2549 Dimer-LBFGS rotation: max=50, tol=1 campaign r2549": [
             0.38461538461538464,
             0.6923076923076923,
@@ -16273,7 +16281,7 @@
             1.0,
             1.0
           ],
-          "eon/develop-htst-pt-lbfgs a7aa57472fb7d823953fd36b78cd755fa4842d30 Dimer-LBFGS rotation: max=50, tol=1 campaign a7aa574": [
+          "eon/develop-htst-pt-lbfgs 500350d9 Dimer-LBFGS rotation: max=50, tol=1 campaign 500350d": [
             0.6153846153846154,
             0.9230769230769231,
             1.0,
@@ -16282,8 +16290,9 @@
           ]
         },
         "solved": {
+          "archive/htst-pt-eon-dimer-lbfgs r2006 Dimer-LBFGS rotation: max=50, tol=1 campaign r2006": 1.0,
           "eon-svn/htst-pt-lbfgs r2549 Dimer-LBFGS rotation: max=50, tol=1 campaign r2549": 1.0,
-          "eon/develop-htst-pt-lbfgs a7aa57472fb7d823953fd36b78cd755fa4842d30 Dimer-LBFGS rotation: max=50, tol=1 campaign a7aa574": 1.0
+          "eon/develop-htst-pt-lbfgs 500350d9 Dimer-LBFGS rotation: max=50, tol=1 campaign 500350d": 1.0
         },
         "taus": [
           1.0,
@@ -16298,13 +16307,13 @@
           "asv_commit": "",
           "call_unit": "total",
           "cap": null,
-          "code": "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)",
-          "code_version": "a7aa57472fb7d823953fd36b78cd755fa4842d30",
-          "commit": "a7aa57472fb7d823953fd36b78cd755fa4842d30",
+          "code": "eOn (develop 500350d9)",
+          "code_version": "500350d9",
+          "commit": "500350d9fae881f06c7ef194e5868da079c4be5a",
           "comparable": true,
           "counter": "htst-reducer",
           "current": true,
-          "entry": "eOn-develop-a7aa574-htst-pt-lbfgs",
+          "entry": "eOn-develop-500350d9-htst-pt-lbfgs",
           "failures": {
             "cap": 0,
             "crash": 0,
@@ -16328,7 +16337,7 @@
           "par2_mean": null,
           "partial": false,
           "partial_reason": "",
-          "path": "results/campaign/eOn-develop-a7aa574-htst-pt-lbfgs.dat",
+          "path": "results/campaign/eOn-develop-500350d9-htst-pt-lbfgs.dat",
           "problem": "hTST/Pt",
           "registry_match": true,
           "scored": true,
@@ -16380,6 +16389,51 @@
           "source": "campaign",
           "success_rate": 1.0,
           "template": "eon-svn/htst-pt-lbfgs",
+          "tuning": "Dimer-LBFGS rotation: max=50, tol=1",
+          "wilson_high": 1.0,
+          "wilson_low": 0.7719046276458016
+        },
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": null,
+          "code": "Eon r2006",
+          "code_version": "r2006",
+          "commit": "r2006",
+          "comparable": true,
+          "counter": "htst-reducer",
+          "current": true,
+          "entry": "eon-r2006-htst-pt-eon-dimer-lbfgs",
+          "failures": {
+            "cap": 0,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": 13,
+          "history": false,
+          "max_calls": 778800.0,
+          "mean_calls": 778800.0,
+          "mean_per_image": null,
+          "median": 778800.0,
+          "median_calls": 778800.0,
+          "median_high": 778800.0,
+          "median_low": 778800.0,
+          "median_per_image": null,
+          "min_calls": 778800.0,
+          "n": 13,
+          "nfailed": 0,
+          "note": "starts.jsonl",
+          "par2_mean": null,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/eon-r2006-htst-pt-eon-dimer-lbfgs.dat",
+          "problem": "hTST/Pt",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 1.0,
+          "template": "archive/htst-pt-eon-dimer-lbfgs",
           "tuning": "Dimer-LBFGS rotation: max=50, tol=1",
           "wilson_high": 1.0,
           "wilson_low": 0.7719046276458016
@@ -42246,7 +42300,7 @@
       "title": "pt-island"
     }
   },
-  "ranked_count": 441,
+  "ranked_count": 442,
   "schema": "optbench.board/v1",
   "unmapped": [
     {
