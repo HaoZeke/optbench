@@ -35,7 +35,7 @@ def test_the_ledger_covers_the_oracle_in_order():
             assert row["cause"]
         if (row.get("rerun") or {}).get("paper_baseline"):
             assert status == "reproduced"
-    assert counts == {"reproduced": 45, "not_reproduced": 27, "not_rerun": 79}
+    assert counts == {"reproduced": 48, "not_reproduced": 24, "not_rerun": 79}
     assert reproduction_errors(ROOT) == []
 
 
@@ -56,7 +56,7 @@ def test_pele_paper_baseline_is_the_2014_stop():
     assert island["rerun"]["paper_baseline"] is True
     assert "starting set" in forward["note"]
     held = holdback(ROOT)
-    assert ("tsopt/LJ38", "sella/lj38-ts-tuned") in held.templates
+    assert ("tsopt/LJ38", "sella/lj38-ts-tuned") not in held.templates
     assert ("tsopt/LJ38", "sella/lj38-ts-default") not in held.templates
     assert ("double-ended-saddle-search/lj38", "eon-client/de-lj38-ci-swdneb") in held.templates
     assert "results/campaign/eon-3.5.0-saddle-pt-classic.dat" in held.paths

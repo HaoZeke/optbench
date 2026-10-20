@@ -620,25 +620,25 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 4</td>
    <td data-field="n">16</td>
    </tr>
-   <tr data-problem="tsopt/LJ38" data-template="sella/lj38-ts-default">
+   <tr data-problem="tsopt/LJ38" data-template="sella/lj38-ts-tuned">
    <td>LJ38</td>
-   <td data-field="template">sella/lj38-ts-default</td>
+   <td data-field="template">sella/lj38-ts-tuned</td>
    <td data-field="version">Sella 2.6.0</td>
    <td data-field="commit">6cfb60cdb100</td>
-   <td data-field="par2_mean">68.74</td>
-   <td data-field="mean_calls">68.74</td>
-   <td data-field="median_calls">59.5</td>
+   <td data-field="par2_mean">65.07</td>
+   <td data-field="mean_calls">65.07</td>
+   <td data-field="median_calls">58</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
-   <tr data-problem="tsopt/pt-island" data-template="sella/pt-island-ts-default">
+   <tr data-problem="tsopt/pt-island" data-template="sella/pt-island-ts-tuned">
    <td>pt-island</td>
-   <td data-field="template">sella/pt-island-ts-default</td>
+   <td data-field="template">sella/pt-island-ts-tuned</td>
    <td data-field="version">Sella 2.6.0</td>
    <td data-field="commit">6cfb60cdb100</td>
-   <td data-field="par2_mean">74.2857</td>
-   <td data-field="mean_calls">74.2857</td>
-   <td data-field="median_calls">71</td>
+   <td data-field="par2_mean">57.898</td>
+   <td data-field="mean_calls">57.898</td>
+   <td data-field="median_calls">55</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>
@@ -1045,36 +1045,36 @@ The number is written only after the run finishes under the problem rule.
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="double-ended-saddle-search/lj38" data-template="optim/de-lj38">
+   <tr data-problem="double-ended-saddle-search/lj38" data-template="pathsample/de-lj38">
    <td>LJ38 double-ended saddle</td>
-   <td data-field="template">optim/de-lj38</td>
+   <td data-field="template">pathsample/de-lj38</td>
    <td data-field="version">optim svn-snapshot</td>
    <td data-field="commit">02aaf45245af</td>
-   <td data-field="par2_mean">146.82</td>
-   <td data-field="mean_calls">146.82</td>
-   <td data-field="median_calls">129</td>
+   <td data-field="par2_mean">148.84</td>
+   <td data-field="mean_calls">148.84</td>
+   <td data-field="median_calls">131</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="optim/de-2ts">
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="pathsample/de-2ts">
    <td>lj38_2ts_separation</td>
-   <td data-field="template">optim/de-2ts</td>
+   <td data-field="template">pathsample/de-2ts</td>
    <td data-field="version">optim svn-snapshot</td>
    <td data-field="commit">02aaf45245af</td>
-   <td data-field="par2_mean">5725.16</td>
-   <td data-field="mean_calls">4352.61</td>
-   <td data-field="median_calls">3268</td>
-   <td data-field="failures">crash 0, divergence 0, cap 7, wrong_stationary 0</td>
+   <td data-field="par2_mean">6094.49</td>
+   <td data-field="mean_calls">4525.86</td>
+   <td data-field="median_calls">3377</td>
+   <td data-field="failures">crash 0, divergence 0, cap 8, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/pt-island" data-template="optim/de-pt">
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="pathsample/de-pt">
    <td>pt-island</td>
-   <td data-field="template">optim/de-pt</td>
+   <td data-field="template">pathsample/de-pt</td>
    <td data-field="version">optim svn-snapshot</td>
    <td data-field="commit">02aaf45245af</td>
-   <td data-field="par2_mean">138</td>
-   <td data-field="mean_calls">138</td>
-   <td data-field="median_calls">133</td>
+   <td data-field="par2_mean">145.559</td>
+   <td data-field="mean_calls">145.559</td>
+   <td data-field="median_calls">137</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
@@ -1101,4 +1101,9 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
+   <p>No full ranked run</p><ul>
+   <li>LJ38 double-ended saddle: partial.</li>
+   <li>lj38_2ts_separation: partial.</li>
+   <li>pt-island: partial.</li>
+   </ul>
    </section>

@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-45 reproduced, 27 not reproduced, 79 not rerun. 151 archive rows.
+48 reproduced, 24 not reproduced, 79 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -182,9 +182,9 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
-| pt-island/adaptive_HSphere-lbfgs-davidson-sm50 | force_calls 423491, unique_saddles 114.9, fraction_connected 0.8 | 5.2987e+06, 0, 1 | not reproduced; saddle_novelty |
-| pt-island/adaptive_HSphere-lbfgs-lanczos-sm0 | force_calls 1.00343e+06, unique_saddles 130.4, fraction_connected 0.9 | 1.92665e+06, 0.5, 0.9682 | not reproduced; saddle_novelty |
-| pt-island/adaptive_HSphere-lbfgs-lanczos-sm50 | force_calls 814519, unique_saddles 142.6, fraction_connected 0.9 | 1.58264e+06, 0.7, 0.93584 | not reproduced; saddle_novelty |
+| pt-island/adaptive_HSphere-lbfgs-davidson-sm50 | force_calls 423491, unique_saddles 114.9, fraction_connected 0.8 | 406030, 115.5, 0.815086 | reproduced |
+| pt-island/adaptive_HSphere-lbfgs-lanczos-sm0 | force_calls 1.00343e+06, unique_saddles 130.4, fraction_connected 0.9 | 1.50684e+06, 177.8, 0.675371 | not reproduced; saddle_novelty |
+| pt-island/adaptive_HSphere-lbfgs-lanczos-sm50 | force_calls 814519, unique_saddles 142.6, fraction_connected 0.9 | 927874, 169.1, 0.679923 | not reproduced; saddle_novelty |
 | pt-island/eon-dimer | force_calls 3.77888e+06, unique_saddles 109.222, fraction_connected 0.746017 | 6.97488e+06, 91.7, 0.691952 | not reproduced; eon_saddle_count |
 | pt-island/eon-dimer-cg-20-rotations | — | — | not rerun |
 | pt-island/eon-dimer-cg-20-rotations-20-bowl_breakout | — | — | not rerun |
@@ -206,14 +206,14 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | LJ38/optim_ffd | force_calls 145 | 489 | not reproduced; optim_lj38_ts |
 | LJ38/pele_cd | force_calls 254 | 263.52 | reproduced; residual |
 | LJ38/pele_ffd | force_calls 192 | 207.51 | reproduced; residual |
-| LJ38/sella | force_calls 69.55 | 93 | not reproduced; sella_trust |
+| LJ38/sella | force_calls 69.55 | 65 | reproduced |
 | pt-island/eon-dimer | force_calls 116 | 115 | reproduced |
 | pt-island/eon-lanczos | force_calls 143 | 146 | reproduced |
 | pt-island/eon-lanczos-improved | force_calls 106 | 106 | reproduced |
 | pt-island/optim_cd | — | — | not rerun |
 | pt-island/optim_ffd | force_calls 71 | 170 | not reproduced; optim_pt_units |
 | pt-island/pele | force_calls 88 | 88.551 | reproduced |
-| pt-island/sella | force_calls 53 | 88 | not reproduced; sella_trust |
+| pt-island/sella | force_calls 53 | 58 | reproduced |
 
 ## Residuals inside the band
 
@@ -321,15 +321,14 @@ The 3.5.0 file already stores the per-image mean, 142 against the archive 120. L
 
 ### saddle_novelty
 
-The harness link and novelty test uses Cartesian RMSD 0.5 over the full island. Distinct saddles collapse: benchmark_unique_saddles is 0, 0.7, and 0.5 against the archive 115, 143, and 130. benchmark_fraction_connected stays near 1 while the v2 connected fraction is about 0. The per-search cap of 5064 then puts every repetition on the PAR-2 cap.
+The paper ini is batch 25, radius scheme 2, and the official 5500-point hypersphere, with 8 Lanczos iterations. Lanczos-sm50 force calls 927874 are inside 814519 plus or minus 314660, but connected saddles 169.1 miss 142.6 and the fraction 0.680 misses 0.9. Lanczos-sm0 misses all three: force calls 1506841 against 1003433 plus or minus 417022, connected saddles 177.8 against 130.4, and fraction 0.675 against 0.9. The 8-iteration mode crosses lambda zero a few angstroms from the minimum, the adaptive radius leaves 0.1, and unconnected saddles accumulate. One repetition of each row stopped at the 5500-search cap with 26 qualifying saddles.
 
-- saddle-search/pt-island/adaptive_HSphere-lbfgs-davidson-sm50
 - saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm0
 - saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm50
 
 ### eon_saddle_count
 
-The classic dimer campaign (improved false, the 2014 key) has fraction_connected 0.692 against 0.746, inside 10 percent, but force calls 6.97e6 against 3.78e6 and unique saddles 91.7 against 109.2. The archive standard error on the force calls is 5.27e5. This eOn AKMC counter is not the harness RMSD link test.
+The installed classic dimer file (improved false) has fraction_connected 0.692 against 0.746, force calls 6.97e6 against 3.78e6, and unique saddles 91.7 against 109.2. The archive standard error on the force calls is 5.27e5, so the force window ends at 4.31e6. Seeds 1000-1009 on Eon svn r2549, the same improved-false template, pass limit 800, and six jobs, all reached 27 saddles: force calls 5.719e6, unique saddles 112.6, fraction 0.702. Unique saddles and the fraction are inside the window. The force mean is not, so that rerun was not installed. This eOn AKMC counter is sad-fcs plus mins-fcs from search_results.txt.
 
 - saddle-search/pt-island/eon-dimer
 
@@ -338,12 +337,5 @@ The classic dimer campaign (improved false, the 2014 key) has fraction_connected
 Archive run.sh unpacks coords-xyz.tar.gz. The harness uses the problem coords-con set (Kabsch RMS about 6.33). The odata preamble is not in the archive snapshot. The template uses updates 4. The mean is 489 against 145.
 
 - tsopt/LJ38/optim_ffd
-
-### sella_trust
-
-Sella 2.6.0 with the archived trust-region numbers (eta, gamma, delta0, rho, sigma) is the parameter_source=archive row. It misses the 2014 mean. The constructor-default row is a different setup.
-
-- tsopt/LJ38/sella
-- tsopt/pt-island/sella
 
 Rows with no exact-setup campaign stay not rerun and are not given a cause. AKMC on aladatom is a different method from Langevin parallel replica; the ratios above are that comparison, and the archive rows stay not rerun.

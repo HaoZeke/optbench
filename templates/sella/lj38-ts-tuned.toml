@@ -10,7 +10,7 @@ profile = "tuned"
 reducer = "all"
 ranked = true
 parameter_source = "archive"
-note = "Archived Sella trust region: eta 1e-6, gamma 0.4, delta0 1.3e-3, rho_inc 1.035, rho_dec 5, sigma_inc 1.15, sigma_dec 0.65."
+note = "Archived Sella trust region: eta 1e-6, gamma 0.4, delta0 1.3e-3, rho_inc 1.035, rho_dec 5, sigma_inc 1.15, sigma_dec 0.65. delta0 is angstroms per free coordinate. rs tr is the Sella 0.1.1 L2 trust radius, delta0 times the free dimension."
 
 [optimizer]
 name = "Sella"
@@ -24,6 +24,7 @@ rho_dec = 5.0
 sigma_inc = 1.15
 sigma_dec = 0.65
 delta0 = 0.0013
+rs = "tr"
 
 [potential]
 kind = "lennard-jones"

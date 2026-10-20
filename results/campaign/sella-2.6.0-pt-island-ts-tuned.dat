@@ -1,7 +1,7 @@
-force_calls 88
-force_calls_min 67
-force_calls_median 88
-force_calls_max 141
+force_calls 58
+force_calls_min 40
+force_calls_median 55
+force_calls_max 167
 nfailed 0
 starts 49
 code Sella
@@ -14,8 +14,21 @@ problem tsopt/pt-island
 counter harness
 reducer all
 parameter_source archive
-method {"counter":"harness calculator force evaluations","parameter_source":"archive","parameters":{"delta0":0.0013,"eig":true,"eta":1e-06,"gamma":0.4,"internal":false,"method":"prfo","order":1,"rho_dec":5.0,"rho_inc":1.035,"sigma_dec":0.65,"sigma_inc":1.15,"threepoint":false,"v0":"reactant"},"potential":{"D":0.7102,"alpha":1.6047,"form":"smooth","kind":"morse","pbc":[true,true,false],"r0":2.897,"rc":9.5},"profile":"tuned","reducer":"all","stop":{"force_norm":0.001,"max_force_calls":100000,"max_steps":1000,"norm":"l2"}}
-note Archived Sella trust region: eta 1e-6, gamma 0.4, delta0 1.3e-3, rho_inc 1.035, rho_dec 5, sigma_inc 1.15, sigma_dec 0.65. The initial mode is the displacement from reactant.con.
+method {"counter":"harness attach_ase_counter","parameter_source":"archive","parameters":{"delta":0.6825,"delta0":0.0013,"eig":true,"eta":1e-06,"gamma":0.4,"internal":false,"method":"prfo","order":1,"rho_dec":5.0,"rho_inc":1.035,"rs":"tr","sigma_dec":0.65,"sigma_inc":1.15,"threepoint":false,"v0":"reactant"},"potential":{"D":0.7102,"alpha":1.6047,"form":"smooth","kind":"morse","pbc":[true,true,false],"r0":2.897,"rc":9.5},"profile":"tuned","reducer":"all","stop":{"force_norm":0.001,"max_force_calls":100000,"max_steps":1000,"norm":"l2"}}
+note Archived Sella trust region: eta 1e-6, gamma 0.4, delta0 1.3e-3, rho_inc 1.035, rho_dec 5, sigma_inc 1.15, sigma_dec 0.65. delta0 is angstroms per free coordinate. rs tr is the Sella 0.1.1 L2 trust radius, delta0 times the free dimension. The initial mode is the displacement from reactant.con. v2 success is the harness cap, the stop norm, and the Hessian index (0 minimum, 1 saddle) after rigid modes are projected out when no atom is fixed. Energy and Kabsch RMSD are not applied: these starts have no reference geometry.
 host cursor
-date 2026-10-15
+date 2026-10-19
 contributor Rohit Goswami
+scoring par2-wilson-bootstrap
+par2_mean 57.89795918
+par2_median 55
+par2_median_low 50
+par2_median_high 57
+par2_iqr 14
+success_rate 1
+wilson_low 0.9273021808
+wilson_high 1
+par_applied true
+par_factor 2
+bootstrap_resamples 2000
+bootstrap_seed 20261015

@@ -708,7 +708,7 @@ def _snapshot_sella(opt, order: int, requested: dict) -> dict:
         if hasattr(opt, key):
             params[key] = _plain(getattr(opt, key))
     if hasattr(opt, "delta"):
-        params["delta0"] = float(opt.delta)
+        params["delta"] = float(opt.delta)
     diag = getattr(opt, "diagkwargs", {}) or {}
     if "gamma" in diag:
         params["gamma"] = float(diag["gamma"])
@@ -820,26 +820,31 @@ def _run_minimize(payload: dict, bucket: CallCounter) -> dict:
     return row
 
 
-def _reactant_mode(atoms, reference) -> object:
-    """Unit displacement from the reactant, in the free-atom coordinates."""
+def _assign_reactant_mode(opt, atoms, reference) -> None:
+    """Seed Sella with the reactant displacement in the free basis.
+
+    The 0.1.1 Pt-island script normalizes the full Cartesian displacement.
+    Sella 2.6.0 reads ``v0`` in the columns of ``Ufree``. Those columns are
+    a signed permutation once atoms are fixed, so the free-atom slice is a
+    different direction.
+    """
     import numpy as np
-    from ase.constraints import FixAtoms
 
     if reference is None:
-        return None
+        return
     reference = np.asarray(reference, dtype=float)
     if reference.shape != atoms.positions.shape:
-        return None
-    displacement = atoms.positions - reference
-    free = np.ones(len(atoms), dtype=bool)
-    for constraint in atoms.constraints:
-        if isinstance(constraint, FixAtoms):
-            free[np.asarray(constraint.index, dtype=int)] = False
-    vector = displacement[free].ravel()
-    scale = float(np.linalg.norm(vector))
+        return
+    displacement = (atoms.positions - reference).ravel()
+    scale = float(np.linalg.norm(displacement))
     if scale == 0.0:
-        return None
-    return vector / scale
+        return
+    basis = np.asarray(opt.pes.get_Ufree())
+    mode = basis.T @ (displacement / scale)
+    norm = float(np.linalg.norm(mode))
+    if norm == 0.0:
+        return
+    opt.pes.v0 = mode / norm
 
 
 def _safe_energy(atoms) -> float | None:
@@ -867,9 +872,9 @@ def _run_sella(payload: dict, bucket: CallCounter) -> dict:
     atoms = _attach(_read_atoms(Path(payload["paths"][0])), payload["potential"], bucket)
     requested = dict(payload["optimizer"].get("parameters") or {})
     order = int(requested.pop("order", payload.get("sella", {}).get("order", 1)))
-    v0 = _reactant_mode(atoms, payload.get("reactant_positions"))
     kwargs = {key: value for key, value in requested.items() if value is not None}
-    opt = Sella(atoms, logfile=None, order=order, v0=v0, **kwargs)
+    opt = Sella(atoms, logfile=None, order=order, v0=None, **kwargs)
+    _assign_reactant_mode(opt, atoms, payload.get("reactant_positions"))
     row = {"failed": True, "force_norm": None, "expected_index": order}
     if payload.get("snapshot"):
         snapped = _snapshot_sella(opt, order, requested)

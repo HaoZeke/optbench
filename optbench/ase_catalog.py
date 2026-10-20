@@ -347,9 +347,14 @@ def _ts_specs() -> list[dict]:
                     + row["pbc_note"]
                 )
             else:
-                params = {"order": 1, **SELLA_TUNED}
+                params = {"order": 1, **SELLA_TUNED, "rs": "tr"}
                 source = "archive"
-                note = SELLA_TUNED_NOTE + row["pbc_note"]
+                note = (
+                    SELLA_TUNED_NOTE
+                    + " delta0 is angstroms per free coordinate. "
+                    + "rs tr is the Sella 0.1.1 L2 trust radius, delta0 times the free dimension."
+                    + row["pbc_note"]
+                )
             specs.append(
                 {
                     "id": f"sella/{row['slug']}-{profile}",

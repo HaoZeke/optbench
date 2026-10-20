@@ -417,6 +417,12 @@ def _load_group_records(
         text = group["dat"].read_text(encoding="utf-8")
         fields, _duplicates = parse_lenient(text)
         collected = _records_from_repetitions(text, fields)
+        # ``n`` is the start count the file scored. Repetition comments are
+        # campaign totals. Using them as the start set would mark a whole
+        # search batch successful and rank that average.
+        stated = fields.get("n")
+        if collected and stated not in (None, "") and int(float(stated)) != len(collected):
+            collected = []
         if collected:
             return collected, "repetitions"
     return [], ""

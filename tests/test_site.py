@@ -97,7 +97,7 @@ def test_rendered_pages_use_the_board_rank():
     assert "2.6.0 legacy" not in tsopt
     ts_ranked = [row["template"] for row in document["problems"]["tsopt/LJ38"]["ranked"]]
     assert "sella/lj38-ts-default" in ts_ranked
-    assert "sella/lj38-ts-tuned" not in ts_ranked
+    assert "sella/lj38-ts-tuned" in ts_ranked
     assert "rgsaddle/dimer-rotskip-tuned" in ts_ranked
     assert "tsopt-LJ38-profile.svg" in tsopt
     saddle = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "saddle-search.org").read_text(encoding="utf-8")

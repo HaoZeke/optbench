@@ -156,14 +156,14 @@ MATCHES: list[dict] = [
     {"key": "tsopt/LJ38/eon-dimer", "template": "eon-svn/ts-lj38-dimer-ljcut", "branch": "main", "path": "results/campaign/eon-svn-ts-lj38-dimer-ljcut.dat"},
     {"key": "tsopt/LJ38/eon-lanczos", "template": "eon-svn/ts-lj38-lanczos-ljcut", "branch": "main", "path": "results/campaign/eon-svn-ts-lj38-lanczos-ljcut.dat"},
     {"key": "tsopt/LJ38/eon-lanczos-improved", "template": "eon-svn/ts-lj38-lanczos-improved", "branch": "main", "path": "results/campaign/eon-svn-ts-lj38-lanczos-improved.dat", "cause": "improved_unset"},
-    {"key": "tsopt/LJ38/sella", "template": "sella/lj38-ts-tuned", "branch": "main", "path": "results/campaign/sella-2.6.0-lj38-ts-tuned.dat", "cause": "sella_trust"},
+    {"key": "tsopt/LJ38/sella", "template": "sella/lj38-ts-tuned", "branch": "main", "path": "results/campaign/sella-2.6.0-lj38-ts-tuned.dat"},
     {"key": "tsopt/LJ38/pele_ffd", "template": "pele/lj38-ts-ffd", "branch": "cells/pele/ts-repro", "path": "results/campaign/pele-b7081b93-lj38-ts-ffd.screen.jsonl", "kind": "screen", "cause": "lj38_ts_starts"},
     {"key": "tsopt/LJ38/pele_cd", "template": "pele/lj38-ts-cd", "branch": "cells/pele/ts-repro", "path": "results/campaign/pele-b7081b93-lj38-ts-cd.screen.jsonl", "kind": "screen", "cause": "lj38_ts_starts_cd"},
     {"key": "tsopt/LJ38/optim_ffd", "template": "optim/hef-ffd-ts-lj38", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-df8da599-hef-ffd-ts-lj38.dat", "cause": "optim_lj38_ts"},
     {"key": "tsopt/pt-island/eon-dimer", "template": "eon-svn/ts-pt-dimer-smooth", "branch": "main", "path": "results/campaign/eon-svn-ts-pt-dimer-smooth.dat"},
     {"key": "tsopt/pt-island/eon-lanczos", "template": "eon-svn/ts-pt-lanczos-smooth", "branch": "main", "path": "results/campaign/eon-svn-ts-pt-lanczos-smooth.dat"},
     {"key": "tsopt/pt-island/eon-lanczos-improved", "template": "eon-svn/ts-pt-lanczos-improved", "branch": "main", "path": "results/campaign/eon-svn-ts-pt-lanczos-improved.dat"},
-    {"key": "tsopt/pt-island/sella", "template": "sella/pt-island-ts-tuned", "branch": "main", "path": "results/campaign/sella-2.6.0-pt-island-ts-tuned.dat", "cause": "sella_trust"},
+    {"key": "tsopt/pt-island/sella", "template": "sella/pt-island-ts-tuned", "branch": "main", "path": "results/campaign/sella-2.6.0-pt-island-ts-tuned.dat"},
     {"key": "tsopt/pt-island/pele", "template": "pele/pt-island-ts-ffd", "branch": "cells/pele/ts-repro", "path": "results/campaign/pele-b7081b93-pt-island-ts-ffd.screen.jsonl", "kind": "screen"},
     {"key": "tsopt/pt-island/optim_ffd", "template": "optim/hef-ffd-ts-pt", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-df8da599-hef-ffd-ts-pt.dat", "cause": "optim_pt_units"},
     # double-ended
@@ -187,9 +187,9 @@ MATCHES: list[dict] = [
     {"key": "neb/Pt-heptamer/eon-qm", "template": "eon-qm", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-qm.dat", "hold": ["eon-client/neb-pt-qm"]},
     # saddle search
     {"key": "saddle-search/pt-island/eon-dimer", "template": "eon-svn/saddle-pt-dimer", "branch": "main", "path": "results/campaign/eon-3.5.0-saddle-pt-classic.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "cause": "eon_saddle_count"},
-    {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-davidson-sm50", "template": "softsaddle/saddle-davidson-sm50", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-davidson-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
-    {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm50", "template": "softsaddle/saddle-lanczos-sm50", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
-    {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm0", "template": "softsaddle/saddle-lanczos-sm0", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm0.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
+    {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-davidson-sm50", "template": "softsaddle/saddle-davidson-sm50", "branch": "main", "path": "results/campaign/softsaddle-2019.04-saddle-davidson-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}},
+    {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm50", "template": "softsaddle/saddle-lanczos-sm50", "branch": "main", "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
+    {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm0", "template": "softsaddle/saddle-lanczos-sm0", "branch": "main", "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm0.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
     # globalopt and htst and aladatom rates
     {"key": "globalopt/lj38/eon-basinhopping", "template": "eon-client/bh-lj38", "branch": "entries/eon-svn-lane-a", "path": "results/campaign/eon-client-bh-lj38.dat"},
     {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "cells/pele/go", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
@@ -247,20 +247,24 @@ CAUSE_TEXT = {
     "pele_morse": "pele Morse L-BFGS scores 92. The archive is 51. eOn Morse L-BFGS on the same bulk file reproduces at 52, so the gap is the pele memory and step, not the shared Morse parameters.",
     "morse_sd": "eOn Morse steepest descent scores 7038 with 19 failures. The archive is 196 with 0. Morse L-BFGS, CG, and FIRE on the same client reproduce, so the kernel is not the split.",
     "improved_unset": "The r2549 template turns improved on. The 2014 ini left that key unset. The mean lands outside 10 percent.",
-    "sella_trust": "Sella 2.6.0 with the archived trust-region numbers (eta, gamma, delta0, rho, sigma) is the parameter_source=archive row. It misses the 2014 mean. The constructor-default row is a different setup.",
+    "sella_trust": "Sella 2.6.0 scales the trust radius by the number of free coordinates when rs is tr, which is how Sella 0.1.1 defined delta. LJ38 uses delta 0.1404 and the Pt island uses delta 0.6825 with the reactant mode projected onto the free basis.",
     "heptamer_cg": "The 3.5.0 file already stores the per-image mean, 142 against the archive 120. L-BFGS, FIRE, and QM on the same 8-image spring-5 climb reproduce, so the image count is not the split.",
     "de_exclusion": "The 3.5.0 doubly-nudged file is the per-band mean under the 2500-call exclusion (708, 5 failures). The archive mean is 861. The client total is a different counter and is also outside 10 percent.",
     "eon_saddle_count": (
-        "The classic dimer campaign (improved false, the 2014 key) has fraction_connected 0.692 against 0.746, inside 10 percent, "
-        "but force calls 6.97e6 against 3.78e6 and unique saddles 91.7 against 109.2. "
-        "The archive standard error on the force calls is 5.27e5. "
-        "This eOn AKMC counter is not the harness RMSD link test."
+        "The installed classic dimer file (improved false) has fraction_connected 0.692 against 0.746, "
+        "force calls 6.97e6 against 3.78e6, and unique saddles 91.7 against 109.2. "
+        "The archive standard error on the force calls is 5.27e5, so the force window ends at 4.31e6. "
+        "Seeds 1000-1009 on Eon svn r2549, the same improved-false template, pass limit 800, and six jobs, "
+        "all reached 27 saddles: force calls 5.719e6, unique saddles 112.6, fraction 0.702. "
+        "Unique saddles and the fraction are inside the window. The force mean is not, so that rerun was not installed. "
+        "This eOn AKMC counter is sad-fcs plus mins-fcs from search_results.txt."
     ),
     "saddle_novelty": (
-        "The harness link and novelty test uses Cartesian RMSD 0.5 over the full island. "
-        "Distinct saddles collapse: benchmark_unique_saddles is 0, 0.7, and 0.5 against the archive 115, 143, and 130. "
-        "benchmark_fraction_connected stays near 1 while the v2 connected fraction is about 0. "
-        "The per-search cap of 5064 then puts every repetition on the PAR-2 cap."
+        "The paper ini is batch 25, radius scheme 2, and the official 5500-point hypersphere, with 8 Lanczos iterations. "
+        "Lanczos-sm50 force calls 927874 are inside 814519 plus or minus 314660, but connected saddles 169.1 miss 142.6 and the fraction 0.680 misses 0.9. "
+        "Lanczos-sm0 misses all three: force calls 1506841 against 1003433 plus or minus 417022, connected saddles 177.8 against 130.4, and fraction 0.675 against 0.9. "
+        "The 8-iteration mode crosses lambda zero a few angstroms from the minimum, the adaptive radius leaves 0.1, and unconnected saddles accumulate. "
+        "One repetition of each row stopped at the 5500-search cap with 26 qualifying saddles."
     ),
     "pele_bh_defaults": (
         "The archived driver is the dangling path bin/js850/globalopt.py. "
@@ -502,6 +506,20 @@ def _local_fields(root: Path, rerun: dict) -> dict[str, str] | None:
     return None
 
 
+def _match_value_from(path: str) -> dict[str, str] | None:
+    """Campaign field names for one scored path.
+
+    SoftSaddle stores the paper's connected-saddle mean in
+    ``benchmark_unique_saddles``. The top-level ``unique_saddles`` is the
+    total novel count, which is not the archived metric.
+    """
+    for item in MATCHES:
+        if item.get("path") == path:
+            renaming = item.get("value_from")
+            return renaming if isinstance(renaming, dict) else None
+    return None
+
+
 def baseline_errors(root: Path) -> list[str]:
     """Paper-baseline rows whose live campaign misses the archive tolerance."""
     errors = []
@@ -524,7 +542,7 @@ def baseline_errors(root: Path) -> list[str]:
             {item["metric"]: str(item["archive"]) for item in row["checks"]},
             fields,
             names,
-            None,
+            _match_value_from(str(rerun.get("path") or "")),
         )
         # The archived side of a stored check has no mean-error key. Carry se.
         by_metric = {item["metric"]: item for item in row["checks"]}

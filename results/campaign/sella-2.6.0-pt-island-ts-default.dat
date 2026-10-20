@@ -1,7 +1,7 @@
-force_calls 74
-force_calls_min 41
-force_calls_median 71
-force_calls_max 128
+force_calls 59
+force_calls_min 34
+force_calls_median 60
+force_calls_max 110
 nfailed 0
 starts 49
 code Sella
@@ -14,8 +14,21 @@ problem tsopt/pt-island
 counter harness
 reducer all
 parameter_source default
-method {"counter":"harness calculator force evaluations","parameter_source":"default","parameters":{"delta0":0.1,"eig":true,"eta":0.0001,"gamma":0.1,"internal":false,"method":"prfo","order":1,"rho_dec":5.0,"rho_inc":1.035,"sigma_dec":0.65,"sigma_inc":1.15,"threepoint":false,"v0":"reactant"},"potential":{"D":0.7102,"alpha":1.6047,"form":"smooth","kind":"morse","pbc":[true,true,false],"r0":2.897,"rc":9.5},"profile":"default","reducer":"all","stop":{"force_norm":0.001,"max_force_calls":100000,"max_steps":1000,"norm":"l2"}}
-note Sella 2.6.0 saddle defaults, order 1. The initial mode is the displacement from reactant.con.
+method {"counter":"harness attach_ase_counter","parameter_source":"default","parameters":{"delta":0.1,"delta0":0.1,"eig":true,"eta":0.0001,"gamma":0.1,"internal":false,"method":"prfo","order":1,"rho_dec":5.0,"rho_inc":1.035,"sigma_dec":0.65,"sigma_inc":1.15,"threepoint":false,"v0":"reactant"},"potential":{"D":0.7102,"alpha":1.6047,"form":"smooth","kind":"morse","pbc":[true,true,false],"r0":2.897,"rc":9.5},"profile":"default","reducer":"all","stop":{"force_norm":0.001,"max_force_calls":100000,"max_steps":1000,"norm":"l2"}}
+note Sella 2.6.0 saddle defaults, order 1. The initial mode is the displacement from reactant.con. v2 success is the harness cap, the stop norm, and the Hessian index (0 minimum, 1 saddle) after rigid modes are projected out when no atom is fixed. Energy and Kabsch RMSD are not applied: these starts have no reference geometry.
 host cursor
-date 2026-10-15
+date 2026-10-19
 contributor Rohit Goswami
+scoring par2-wilson-bootstrap
+par2_mean 59.32653061
+par2_median 60
+par2_median_low 55
+par2_median_high 61
+par2_iqr 10
+success_rate 1
+wilson_low 0.9273021808
+wilson_high 1
+par_applied true
+par_factor 2
+bootstrap_resamples 2000
+bootstrap_seed 20261015

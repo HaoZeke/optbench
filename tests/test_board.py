@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from optbench.board import MissingAsvCommit, build_board, write_board
+from optbench.board import MissingAsvCommit, _load_group_records, build_board, write_board
 from optbench.score import wilson_interval
 
 PIN = "a" * 40
@@ -794,3 +794,37 @@ def test_the_current_ase_benchmark_records_the_band_total():
         text=True,
     )
     assert 'float(record["force_calls"]) / images' in old
+
+
+def test_repetition_comments_are_not_starts_when_n_disagrees(tmp_path: Path):
+    path = tmp_path / "campaign.dat"
+    path.write_text(
+        "\n".join(
+            [
+                "# rep 1 force_calls 1000 unique_saddles 4 fraction_connected 0.5 total_searches 10",
+                "# rep 2 force_calls 2000 unique_saddles 4 fraction_connected 0.5 total_searches 20",
+                "n 100",
+                "nfailed 0",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    records, source = _load_group_records({"dat": path}, None, None)
+    assert records == []
+    assert source == ""
+    path.write_text(
+        "\n".join(
+            [
+                "# rep 1 force_calls 100 unique_saddles 1 fraction_connected 0.5 total_searches 10",
+                "n 1",
+                "nfailed 0",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    records, source = _load_group_records({"dat": path}, None, None)
+    assert source == "repetitions"
+    assert len(records) == 1
+    assert records[0]["force_calls"] == 10

@@ -41,6 +41,33 @@ def _fmt(value: float) -> str:
     return f"{value:.10g}"
 
 
+def honor_configured_void_bias() -> None:
+    """Use ``Saddle Search`` ``void_bias_fraction`` from the client config.
+
+    eOn 3.6.0 ``Displace.__init__`` assigns 0.2 and does not read the
+    config. The yaml default is 0, which is the 2014 displacement: a
+    Gaussian kick with no void repulsion. The hardcoded mix pulls every
+    Pt-island search toward a void and finds the 27 low barriers early.
+    """
+    try:
+        from eon import displace
+    except ImportError:
+        return
+    if getattr(displace.Displace.__init__, "_optbench_void_bias", False):
+        return
+    original = displace.Displace.__init__
+
+    def init(self, *args, **kwargs):
+        original(self, *args, **kwargs)
+        config = getattr(self, "config", None)
+        fraction = 0.0 if config is None else float(getattr(config, "void_bias_fraction", 0.0))
+        self.void_bias_fraction = fraction
+
+    init._optbench_void_bias = True
+    displace.Displace.__init__ = init
+    print("eon displacement void_bias_fraction follows the config value", flush=True)
+
+
 def prepare_client_env(client: Path) -> None:
     """Put the installed eOn libraries on the path this process already uses.
 
@@ -148,6 +175,7 @@ def _one_repetition(
                 config = shared_config
                 config.init_done = False
             config.init()
+            honor_configured_void_bias()
             # get_communicator caches the first Local object. A second
             # seed in this process would keep the old scratch path.
             from eon import communicator
