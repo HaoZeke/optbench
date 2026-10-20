@@ -1,4 +1,4 @@
-"""The Pt dimer-CG max=50 template uses the 2014 barrier list."""
+"""Pt dimer-CG max=50: the archive is the paper row, and the two codes stay stock."""
 
 from pathlib import Path
 
@@ -7,39 +7,61 @@ from optbench.htst import Process, Search, reduce_htst, spec_from_problem
 
 ROOT = Path(__file__).resolve().parents[1]
 
+BARRIERS = (
+    0.601,
+    0.601,
+    0.620,
+    0.986,
+    0.987,
+    0.989,
+    0.986,
+    0.987,
+    0.989,
+    1.196,
+    1.196,
+    1.196,
+    1.196,
+    1.207,
+    1.207,
+)
 
-def test_pt_dimer_cg2_keeps_the_archived_rotation():
-    template = load_template(ROOT, "eon-svn/htst-pt-dimer-cg2")
+
+def _untuned(template: dict) -> None:
     dimer = template["ini"]["Dimer"]
-    assert dimer["opt_method"] == "cg"
     assert dimer["rotations_max"] == 50
     assert dimer["converged_angle"] == 1.0
-    assert dimer["improved"] is True
+    assert "opt_method" not in dimer
+    assert "improved" not in dimer
     assert template["ini"]["Potential"]["potential"] == "morse_pt"
-    assert template["ini"]["AKMC"]["thermally_accessible_window"] == 22
-    assert template["ini"]["Optimizer"]["opt_method"] == "cg"
-    assert template["ini"]["Optimizer"]["convergence_metric"] == "max_atom"
-    assert template["window_target"] == 13
+    assert template["ini"]["Main"]["random_seed"] == 42
+    assert template["ini"]["AKMC"]["confidence"] == 1.9
+    assert "thermally_accessible_window" not in template["ini"]["AKMC"]
+    assert "confidence_scheme" not in template["ini"]["AKMC"]
+    assert "finite_difference" not in template["ini"]["Main"]
+    optimizer = template["ini"]["Optimizer"]
+    assert optimizer["converged_force"] == 0.001
+    assert optimizer["max_iterations"] == 5000
+    assert "opt_method" not in optimizer
+    assert "convergence_metric" not in optimizer
+    assert template["window_target"] == 9
+    assert template.get("paper_baseline") is not True
     spec = spec_from_problem({"id": template["id"], "htst": template["htst"]})
-    assert spec.barriers == (
-        0.601,
-        0.601,
-        0.620,
-        0.986,
-        0.987,
-        0.989,
-        0.986,
-        0.987,
-        0.989,
-        1.196,
-        1.196,
-        1.196,
-        1.196,
-        1.207,
-        1.207,
-    )
+    assert spec.barriers == BARRIERS
     assert spec.rate_ref == 155055901.244
     assert spec.prefactor == 1.2e12
+
+
+def test_eon_svn_and_eon_git_are_separate_stock_rows():
+    eon = load_template(ROOT, "EON/htst-pt-dimer-cg2")
+    git = load_template(ROOT, "eOn/develop-htst-pt-dimer-cg2")
+    assert eon["code"] == "EON (SVN r2549)"
+    assert eon["code_version"] == "r2549"
+    assert eon["commit"] == "r2549"
+    assert git["code"] == "eOn (develop a7aa57472fb7)"
+    assert git["commit"] == "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+    assert eon["code"] != git["code"]
+    _untuned(eon)
+    _untuned(git)
     process = Process(
         id=1,
         saddle_energy=-1.0,
@@ -50,6 +72,6 @@ def test_pt_dimer_cg2_keeps_the_archived_rotation():
         repeats=0,
     )
     search = Search(force_calls=10, barrier=0.6012, status="good", process_id=1)
-    reduction = reduce_htst([process], [search], spec)
+    reduction = reduce_htst([process], [search], spec_from_problem({"id": eon["id"], "htst": eon["htst"]}))
     assert reduction.missed_barriers
     assert reduction.barrier_windows == 0

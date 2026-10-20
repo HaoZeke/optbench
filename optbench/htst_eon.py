@@ -113,8 +113,6 @@ def _campaign_text(
     lines.append(f"template {template['id']}")
     lines.append(f"problem {template.get('problem', '')}")
     lines.append("count_keys sad-fcs")
-    # Window totals are the 2014 reducer, not a v2 per-search score.
-    lines.append("ranked false")
     if left_state0:
         lines.append("left_state0 true")
     complete = reduction.barrier_windows >= target and not reduction.missed_barriers
