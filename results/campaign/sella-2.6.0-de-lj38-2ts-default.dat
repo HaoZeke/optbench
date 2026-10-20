@@ -1,7 +1,7 @@
-force_calls 143927
-force_calls_min 12873
-force_calls_median 167862
-force_calls_max 200846
+force_calls 2869
+force_calls_min 635
+force_calls_median 2287
+force_calls_max 11189
 nfailed 0
 starts 51
 code Sella
@@ -14,17 +14,17 @@ problem double-ended-saddle-search/lj38_2ts_separation
 counter harness
 reducer capped
 parameter_source default
-method {"counter":"harness attach_ase_counter","parameter_source":"default","parameters":{"Nmin":5,"a":0.1,"astart":0.1,"band_optimizer":"FIRE","climb":false,"delta0":0.01660913049555926,"downhill_check":false,"dt":0.011352812917316053,"dtmax":1.0,"eig":true,"eta":0.0001,"fa":0.99,"fdec":0.5,"finc":1.1,"gamma":0.1,"internal":false,"maxstep":0.2,"method":"prfo","moving_images":5,"order":1,"reserve":0.2,"rho_dec":5.0,"rho_inc":1.035,"sigma_dec":0.65,"sigma_inc":1.15,"spring":0.1,"threepoint":false,"v0":"none"},"potential":{"epsilon":1.0,"kind":"lennard-jones","pbc":[false,false,false],"rc":40.0,"sigma":1.0},"profile":"default","reducer":"capped","stop":{"force_norm":0.001,"max_force_calls":250000,"max_steps":250000,"norm":"fmax"}}
-note Sella 2.6.0 order 1 defaults refine the highest-energy image after the ASE default band (FIRE, spring 0.1, climb off, linear interpolation). The band stops at 80 percent of the call cap and both stages share one harness counter. v0 is unset: a free cluster drops rigid modes, so a full Cartesian mode has the wrong length. ASE NEB defaults on the same pairs: spring 0.1, climb off, FIRE. The stop is the problem cap of 250000 force calls and fmax 0.001. archive/entries/double-ended-saddle-search/lj38_2ts_separation/pele/benchmark.dat records an observed maximum of 114490 force calls, and the archive ran uncapped. v2 success is the harness cap and the template fmax stop. The band has no reference saddle, so the Hessian and Kabsch RMSD are not applied.
+method {"counter":"harness attach_ase_counter","parameter_source":"default","parameters":{"Nmin":5,"a":0.08261686238355864,"astart":0.1,"band_fmax":0.05,"band_optimizer":"FIRE","climb":false,"delta0":0.0046620773485991545,"downhill_check":false,"dt":0.052676542756605174,"dtmax":1.0,"eig":true,"eta":0.0001,"fa":0.99,"fdec":0.5,"finc":1.1,"gamma":0.1,"internal":false,"maxstep":0.2,"method":"prfo","moving_images":5,"order":1,"rho_dec":5.0,"rho_inc":1.035,"sigma_dec":0.65,"sigma_inc":1.15,"spring":0.1,"threepoint":false,"v0":"none"},"potential":{"epsilon":1.0,"kind":"lennard-jones","pbc":[false,false,false],"rc":40.0,"sigma":1.0},"profile":"default","reducer":"capped","stop":{"force_norm":0.001,"max_force_calls":250000,"max_steps":250000,"norm":"l2"}}
+note Sella 2.6.0 order 1 defaults refine the highest-energy image after the ASE default band (FIRE, spring 0.1, climb off, linear interpolation). The band runs at ASE stock defaults until the NEB residual reaches ASE's stock fmax or the highest-energy image's true-force L2 norm is at most 0.001. Sella then refines that image at order-1 defaults until the same L2 stop or the shared cap of 250000 force calls. v0 is unset: a free cluster drops rigid modes, so a full Cartesian mode has the wrong length. ASE NEB defaults on the same pairs: spring 0.1, climb off, FIRE. The harness stops when the L2 norm of the true force on the highest-energy image is at most 0.001, or at the problem cap of 250000 force calls. archive/entries/double-ended-saddle-search/lj38_2ts_separation/pele/benchmark.dat records an observed maximum of 114490 force calls, and the archive ran uncapped. v2 success is the harness cap and the L2 norm of the true force on the highest-energy image. The band has no reference saddle, so the Hessian and Kabsch RMSD are not applied.
 host cursor
 date 2026-10-20
 contributor Rohit Goswami
 scoring par2-wilson-bootstrap
-par2_mean 143926.9608
-par2_median 167862
-par2_median_low 128497
-par2_median_high 200002
-par2_iqr 110602
+par2_mean 2868.745098
+par2_median 2287
+par2_median_low 1717
+par2_median_high 2745
+par2_iqr 1983.5
 success_rate 1
 wilson_low 0.9299533801
 wilson_high 1
