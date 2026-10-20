@@ -1050,10 +1050,10 @@
    <td data-field="template">optim/de-pt-stock</td>
    <td data-field="version">optim df8da599</td>
    <td data-field="commit">738fafe3df5a</td>
-   <td data-field="par2_mean">3842.9</td>
-   <td data-field="mean_calls">4442</td>
-   <td data-field="median_calls">3570</td>
-   <td data-field="failures">crash 0, divergence 0, cap 36, wrong_stationary 0</td>
+   <td data-field="par2_mean">222.203</td>
+   <td data-field="mean_calls">222.203</td>
+   <td data-field="median_calls">236</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
    <tr data-problem="minimization/lj38" data-template="optim/lbfgs-lj38">

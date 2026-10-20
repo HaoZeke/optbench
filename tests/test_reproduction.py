@@ -48,16 +48,16 @@ def test_pt_island_optim_6_records_the_current_image():
     assert row["rerun"]["paper_baseline"] is False
     assert row["rerun"]["template"] == "optim/de-pt-stock"
     assert row["rerun"]["code_version"] == "df8da599"
-    assert row["rerun"]["sha"] == "c10732e984e3248a24f20751032e2f115977dc69"
+    assert row["rerun"]["sha"] == "5cf800a3398782e6d95e4b79a76ca0c82c65ab3d"
     assert row["failure_check"]["archive"] == 0.0
-    assert row["failure_check"]["rerun"] == 36.0
-    assert row["failure_check"]["ok"] is False
+    assert row["failure_check"]["rerun"] == 0.0
+    assert row["failure_check"]["ok"] is True
     text = (ROOT / "results" / "campaign" / "optim-df8da599-de-pt-stock.dat").read_text(encoding="utf-8")
     assert "counter harness" in text
     assert "code_version df8da599" in text
-    assert "force_calls 467" in text
+    assert "force_calls 222" in text
     assert "n 59" in text
-    assert "nfailed 36" in text
+    assert "nfailed 0" in text
     assert "ranked" not in text
     assert "partial" not in text
 

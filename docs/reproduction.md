@@ -8,7 +8,7 @@ The pele transition-state paper score is the 2014 stop: break at the first RMS b
 
 OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.
 
-OPTIM df8da599 on the Pt-island DNEB row is the current svn.tar.bz2, sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. The optim-6 entry uses six DNEB images. NEWNEB iterations, BFGSTS steps, BFGSSTEPS, and STEPS are the problem cap 3000. The band RMS stays at the OPTIM default 0.01, and BFGSMIN is the problem RMS gradient 0.001. The tally is the last energy+gradient line, a band total, which is the unit the archive script stored and the unit the other rows rank. The cap 3000 is that total. All 59 logs contain Converged to TS. 23 tallies are under the cap. Their success mean is 467, median 499, min 273, max 654, nfailed 36. The archive success mean stays 117 with nfailed 0. The harness rank is PAR-2 3842.9.
+OPTIM df8da599 on the Pt-island DNEB row is the current svn.tar.bz2, sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. The optim-6 entry uses six DNEB images. STEPS is the outer transition-state step count and equals the problem cap 3000. BFGSSTEPS and the NEWNEB iteration field are that same cap. BFGSTS is the archive line 11 7 30 0.08 100. USEDIAG 3 is the archive first-order Rayleigh-Ritz difference, and OPTIMIZETS is the archive eigenvector-following keyword. The archive deck has no CONVERGE line and no MAXERISE line, so those stay at OPTIM defaults. The band RMS stays at the OPTIM default 0.01, and BFGSMIN is the problem RMS gradient 0.001. The tally is the last energy+gradient line, a band total. The cap 3000 is that total. All 59 logs contain Converged to TS and every tally is under the cap. The success mean is 222, median 236, min 76, max 383, nfailed 0. The harness rank is PAR-2 222.203. The archived tally is 117 with nfailed 0.
 
 EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.
 
@@ -45,7 +45,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | pt-island/eon-lanczos | force_calls 325 | 222 | not reproduced; pt_lanczos |
 | pt-island/eon-lanczos-improved | force_calls 222 | 181 | not reproduced; pt_lanczos |
 | pt-island/optim | force_calls 103 | 138 | not reproduced; optim_pt_units |
-| pt-island/optim-6 | nfailed 0 | nfailed 36 | not rerun |
+| pt-island/optim-6 | nfailed 0 | nfailed 0 | not rerun |
 | pt-island/optim-cl-string | — | — | not rerun |
 | pt-island/pele | — | — | not rerun |
 

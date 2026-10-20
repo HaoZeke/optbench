@@ -167,26 +167,35 @@ OPTIM source `df8da599267534fbe43a250e578f7396a7946311`, INCLUDE
 revision 26635. The source is unmodified. `BFGSSTEPS` and `STEPS`
 default to 1, and `NEWNEB` has no default iteration count in the
 manual, so a deck that omits those fields stops after one step. The
-deck is `NEWCONNECT`, `NEWNEB 6 3000`, `BFGSTS 3000 3000 3000`,
-`BFGSMIN 0.001`, `BFGSSTEPS 3000`, and `STEPS 3000`. The six images
-are the optim-6 entry: `comments.txt` says six images are used in
-DNEB, and `NEWNEB`'s first field is that interior count. The problem
-file `band.interior_images` is 3, which is the per-image divisor the
-other rows on this problem use. The iteration and step fields are the
-problem cap 3000. The band RMS stays at the OPTIM default 0.01.
-`BFGSMIN` is the problem RMS gradient 0.001. Spring constant,
-push-off, eigenvalue tolerance, and image density stay at OPTIM
-defaults. `BULK` repeats the periodic cell already written on
+deck is `NEWCONNECT`, `NEWNEB 6 3000`, `BFGSTS 11 7 30 0.08 100`,
+`BFGSMIN 0.001`, `BFGSSTEPS 3000`, `STEPS 3000`, `USEDIAG 3`, and
+`OPTIMIZETS`. The six images are the optim-6 entry: `comments.txt`
+says six images are used in DNEB, and `NEWNEB`'s first field is that
+interior count. The problem file `band.interior_images` is 3, which is
+the per-image divisor the other rows on this problem use. `STEPS` is
+the outer transition-state step count and equals the problem cap 3000.
+`BFGSSTEPS` and the `NEWNEB` iteration field are that same cap. The
+`BFGSTS` fields are the archive eigenvector search: 11
+smallest-eigenvector steps, 7 and 30 tangent-space steps, eigenvalue
+RMS 0.08, and 100 largest-eigenvector steps. The archive deck has no
+`CONVERGE` line and no `MAXERISE` line, so those stay at OPTIM
+defaults. `USEDIAG 3` is the archive first-order Rayleigh-Ritz
+difference. `OPTIMIZETS` is the archive eigenvector-following keyword.
+The band RMS stays at the OPTIM default 0.01. `BFGSMIN` is the problem
+RMS gradient 0.001. Spring constant, push-off, and image density stay
+at OPTIM defaults. `BULK` repeats the periodic cell already written on
 `PARAMS`, in the same reduced units. `NOHESS` is set because this
 OPTIM has no analytic second derivatives for morse bulk. `NONEBMIND`
 keeps the supplied endpoints. The score is the last energy+gradient
 count. That line is the band total the 2014 `run_optim.sh` stored, and
 it is the unit the other rows rank. The cap 3000 is that total. A
 start is kept when the log contains `Converged to TS` and the count is
-under the cap. All 59 logs contain that line. 23 tallies are under
-3000. Their success mean is 467, median 499, min 273, max 654. The
-other 36 are cap failures. The harness PAR-2 is 3842.9. The archive
-success mean stays 117 with nfailed 0. Other saddle search, NEB, tsopt, and hTST
+under the cap. All 59 logs contain that line, and every tally is under
+3000. The success mean is 222, median 236, min 76, max 383, nfailed 0.
+The harness PAR-2 is 222.203. The archived tally is 117 with nfailed 0.
+On product 33 the band takes 13 iterations and 86 calls, the
+transition-state search takes 3 iterations and 40 calls, and the later
+path takes 110 calls. Other saddle search, NEB, tsopt, and hTST
 keywords are not connected to the ASE
 socket. PATHSAMPLE is in the same snapshot. The PATHSAMPLE target linked
 (gfortran, `WITH_OPENMP` off). It does not call `pes.evaluate`. It writes
