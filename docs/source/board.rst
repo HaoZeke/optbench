@@ -230,7 +230,7 @@ It does not run a campaign.
    <td data-code="optim">—</td>
    <td data-code="optking">—</td>
    <td data-code="softsaddle">—</td>
-   <td data-code="tsase" data-template="tsase/lj75-basinhopping" data-par2="2e+06"><span class="bench-score">2e+06</span><a href="generated/suites/globalopt.html#lj75-templates">tsase/lj75-basinhopping</a></td>
+   <td data-code="tsase" data-template="tsase/lj75-minimahopping" data-par2="1.94151e+06"><span class="bench-score">1.94151e+06</span><a href="generated/suites/globalopt.html#lj75-templates">tsase/lj75-minimahopping</a></td>
    </tr>
    <tr data-problem="lowest-eigenvector/lj38">
    <th scope="row"><a href="generated/suites/lowest-eigenvector.html#lj38">lj38</a></th>

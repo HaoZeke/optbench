@@ -102,7 +102,7 @@
    <td data-code="optim">—</td>
    <td data-code="optking">—</td>
    <td data-code="softsaddle">—</td>
-   <td data-code="tsase" data-template="tsase/lj75-basinhopping" data-par2="2e+06"><span class="bench-score">2e+06</span><a href="#lj75-templates">tsase/lj75-basinhopping</a></td>
+   <td data-code="tsase" data-template="tsase/lj75-minimahopping" data-par2="1.94151e+06"><span class="bench-score">1.94151e+06</span><a href="#lj75-templates">tsase/lj75-minimahopping</a></td>
    </tr>
    <tr data-problem="globalopt/lj98">
    <th scope="row"><a href="#lj98">lj98</a></th>
@@ -346,7 +346,7 @@
    <figure class="bench-plot"><a href="../../_static/board/globalopt-lj38-profile.svg"><picture><source srcset="../../_static/board/globalopt-lj38-profile.webp" type="image/webp"><img src="../../_static/board/globalopt-lj38-profile.png" alt="Dolan-More profile for globalopt/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/globalopt-lj38-cost.svg"><picture><source srcset="../../_static/board/globalopt-lj38-cost.webp" type="image/webp"><img src="../../_static/board/globalopt-lj38-cost.png" alt="Cost versus success for globalopt/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="lj38-templates">
-   <summary>All templates (6 ranked)</summary>
+   <summary>All templates (5 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="globalopt/lj38">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
@@ -356,7 +356,6 @@
    <tr><td data-field="template">eon-svn/bh-lj38</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">598530</td><td data-field="success_rate">0.98</td><td data-field="wilson">0.929988–0.994498</td><td data-field="median_calls">423226</td><td data-field="mean_calls">558530</td><td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">tsase/lj38-minimahopping</td><td data-field="version">tsase 1.0</td><td data-field="commit">98aac60b5d99</td><td data-field="source">campaign</td><td data-field="par2_mean">2.29692e+06</td><td data-field="success_rate">0.45</td><td data-field="wilson">0.356145–0.547554</td><td data-field="median_calls">2e+06</td><td data-field="mean_calls">1.19692e+06</td><td data-field="failures">crash 0, divergence 0, cap 55, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">tsase/lj38-basinhopping</td><td data-field="version">tsase 1.0</td><td data-field="commit">98aac60b5d99</td><td data-field="source">campaign</td><td data-field="par2_mean">3.65752e+06</td><td data-field="success_rate">0.11</td><td data-field="wilson">0.062542–0.186313</td><td data-field="median_calls">2e+06</td><td data-field="mean_calls">1.87752e+06</td><td data-field="failures">crash 0, divergence 0, cap 89, wrong_stationary 0</td><td data-field="n">100</td></tr>
-   <tr><td data-field="template">tsase/lj38-basinhopping-tuned</td><td data-field="version">tsase 1.0</td><td data-field="commit">98aac60b5d99</td><td data-field="source">campaign</td><td data-field="par2_mean">3.92199e+06</td><td data-field="success_rate">0.02</td><td data-field="wilson">0.00550197–0.0700118</td><td data-field="median_calls">2e+06</td><td data-field="mean_calls">1.96199e+06</td><td data-field="failures">crash 0, divergence 0, cap 98, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    </details>
    </section><section class="bench bench-legacy-section" id="lj38-legacy">
@@ -451,15 +450,14 @@
    <figure class="bench-plot"><a href="../../_static/board/globalopt-lj75-cost.svg"><picture><source srcset="../../_static/board/globalopt-lj75-cost.webp" type="image/webp"><img src="../../_static/board/globalopt-lj75-cost.png" alt="Cost versus success for globalopt/lj75" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <p class="bench-gaps">No performance profile. One start has no finite cost.</p>
    <details class="bench-details" id="lj75-templates">
-   <summary>All templates (4 ranked)</summary>
+   <summary>All templates (3 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="globalopt/lj75">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td data-field="template">tsase/lj75-minimahopping</td><td data-field="version">tsase 1.0</td><td data-field="commit">98aac60b5d99</td><td data-field="source">campaign</td><td data-field="par2_mean">1.94151e+06</td><td data-field="success_rate">0.035</td><td data-field="wilson">0.0170555–0.0704706</td><td data-field="median_calls">1e+06</td><td data-field="mean_calls">976514</td><td data-field="failures">crash 0, divergence 0, cap 193, wrong_stationary 0</td><td data-field="n">200</td></tr>
    <tr><td data-field="template">ase-globalopt/lj75-basinhopping</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">campaign</td><td data-field="par2_mean">2e+06</td><td data-field="success_rate">0</td><td data-field="wilson">0–0.0188453</td><td data-field="median_calls">1e+06</td><td data-field="mean_calls">1e+06</td><td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td><td data-field="n">200</td></tr>
    <tr><td data-field="template">tsase/lj75-basinhopping</td><td data-field="version">tsase 1.0</td><td data-field="commit">98aac60b5d99</td><td data-field="source">campaign</td><td data-field="par2_mean">2e+06</td><td data-field="success_rate">0</td><td data-field="wilson">0–0.0188453</td><td data-field="median_calls">1e+06</td><td data-field="mean_calls">1e+06</td><td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td><td data-field="n">200</td></tr>
-   <tr><td data-field="template">tsase/lj75-basinhopping-tuned</td><td data-field="version">tsase 1.0</td><td data-field="commit">98aac60b5d99</td><td data-field="source">campaign</td><td data-field="par2_mean">2e+06</td><td data-field="success_rate">0</td><td data-field="wilson">0–0.0188453</td><td data-field="median_calls">1e+06</td><td data-field="mean_calls">1e+06</td><td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td><td data-field="n">200</td></tr>
-   <tr><td data-field="template">tsase/lj75-minimahopping</td><td data-field="version">tsase 1.0</td><td data-field="commit">98aac60b5d99</td><td data-field="source">campaign</td><td data-field="par2_mean">2e+06</td><td data-field="success_rate">0</td><td data-field="wilson">0–0.0188453</td><td data-field="median_calls">2</td><td data-field="mean_calls">55002</td><td data-field="failures">crash 0, divergence 189, cap 11, wrong_stationary 0</td><td data-field="n">200</td></tr>
    </tbody></table></div>
    <h3>Partial</h3><ul>
    <li>airss/lj75 AIRSS campaign n=200, result file sets partial true.</li>

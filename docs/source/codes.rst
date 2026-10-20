@@ -1029,15 +1029,15 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 55, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
-   <tr data-problem="globalopt/lj75" data-template="tsase/lj75-basinhopping">
+   <tr data-problem="globalopt/lj75" data-template="tsase/lj75-minimahopping">
    <td>lj75</td>
-   <td data-field="template">tsase/lj75-basinhopping</td>
+   <td data-field="template">tsase/lj75-minimahopping</td>
    <td data-field="version">tsase 1.0</td>
    <td data-field="commit">98aac60b5d99</td>
-   <td data-field="par2_mean">2e+06</td>
-   <td data-field="mean_calls">1e+06</td>
+   <td data-field="par2_mean">1.94151e+06</td>
+   <td data-field="mean_calls">976514</td>
    <td data-field="median_calls">1e+06</td>
-   <td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 193, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="lowest-eigenvector/lj38" data-template="tsase/mode-lj38">

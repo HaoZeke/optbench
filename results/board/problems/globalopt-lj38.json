@@ -6,16 +6,15 @@
   "partial": [],
   "profile": {
     "area_log10": {
-      "airss/lj38 0.9.4 default campaign 5593cc4": 1.0761822344987328,
-      "eon-client/bh-lj38 3.5.0 campaign 4d8b34b": 0.49970979280220884,
-      "eon-svn/bh-lj38 r2549 campaign r2549": 0.44100894364773247,
-      "tsase/lj38-basinhopping 1.0 default campaign 98aac60": 0.04063904941463746,
-      "tsase/lj38-basinhopping-tuned 1.0 tuned campaign 98aac60": 0.013546349804879154,
+      "airss/lj38 0.9.4 default campaign 5593cc4": 1.0776873844770527,
+      "eon-client/bh-lj38 3.5.0 campaign 4d8b34b": 0.5027200927588487,
+      "eon-svn/bh-lj38 r2549 campaign r2549": 0.4425140936260524,
+      "tsase/lj38-basinhopping 1.0 default campaign 98aac60": 0.04364934937127727,
       "tsase/lj38-minimahopping 1.0 default campaign 98aac60": 0.3025351456423011
     },
     "rho": {
       "airss/lj38 0.9.4 default campaign 5593cc4": [
-        0.71,
+        0.72,
         0.84,
         0.92,
         0.97,
@@ -24,7 +23,7 @@
       "eon-client/bh-lj38 3.5.0 campaign 4d8b34b": [
         0.12,
         0.25,
-        0.39,
+        0.4,
         0.59,
         0.74
       ],
@@ -33,21 +32,14 @@
         0.19,
         0.35,
         0.53,
-        0.7
+        0.71
       ],
       "tsase/lj38-basinhopping 1.0 default campaign 98aac60": [
         0.01,
         0.02,
-        0.02,
+        0.03,
         0.06,
         0.06
-      ],
-      "tsase/lj38-basinhopping-tuned 1.0 tuned campaign 98aac60": [
-        0.01,
-        0.01,
-        0.01,
-        0.01,
-        0.02
       ],
       "tsase/lj38-minimahopping 1.0 default campaign 98aac60": [
         0.06,
@@ -62,7 +54,6 @@
       "eon-client/bh-lj38 3.5.0 campaign 4d8b34b": 1.0,
       "eon-svn/bh-lj38 r2549 campaign r2549": 0.98,
       "tsase/lj38-basinhopping 1.0 default campaign 98aac60": 0.11,
-      "tsase/lj38-basinhopping-tuned 1.0 tuned campaign 98aac60": 0.02,
       "tsase/lj38-minimahopping 1.0 default campaign 98aac60": 0.45
     },
     "taus": [
@@ -298,51 +289,6 @@
       "tuning": "default",
       "wilson_high": 0.18631296503080313,
       "wilson_low": 0.06254196357064568
-    },
-    {
-      "asv_commit": "",
-      "call_unit": "total",
-      "cap": 2000000,
-      "code": "tsase",
-      "code_version": "1.0",
-      "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
-      "comparable": true,
-      "counter": "harness",
-      "current": true,
-      "entry": "tsase-98aac60b-lj38-basinhopping-tuned",
-      "failures": {
-        "cap": 98,
-        "crash": 0,
-        "divergence": 0,
-        "wrong_stationary": 0
-      },
-      "full_n": 100,
-      "history": false,
-      "max_calls": 2000000.0,
-      "mean_calls": 1961992.16,
-      "mean_per_image": null,
-      "median": 4000000.0,
-      "median_calls": 2000000.0,
-      "median_high": 4000000.0,
-      "median_low": 4000000.0,
-      "median_per_image": null,
-      "min_calls": 75939.0,
-      "n": 100,
-      "nfailed": 98,
-      "note": "starts.jsonl",
-      "par2_mean": 3921992.16,
-      "partial": false,
-      "partial_reason": "",
-      "path": "results/campaign/tsase-98aac60b-lj38-basinhopping-tuned.dat",
-      "problem": "globalopt/lj38",
-      "registry_match": true,
-      "scored": true,
-      "source": "campaign",
-      "success_rate": 0.02,
-      "template": "tsase/lj38-basinhopping-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.07001179072854388,
-      "wilson_low": 0.00550196755016235
     }
   ],
   "title": "Lennard-Jones 38 global minimum"
