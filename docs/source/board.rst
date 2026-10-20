@@ -206,7 +206,7 @@ It does not run a campaign.
    <td data-code="pysisyphus">—</td>
    <td data-code="AIRSS">—</td>
    <td data-code="vc-SQNM">—</td>
-   <td data-code="FLAME" data-template="flame/lj150-minhocao" data-par2="2e+07"><span class="bench-score">2e+07</span><a href="generated/suites/globalopt.html#lj150-templates">flame/lj150-minhocao</a></td>
+   <td data-code="FLAME">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -281,7 +281,7 @@ It does not run a campaign.
    <td data-code="pysisyphus">—</td>
    <td data-code="AIRSS">—</td>
    <td data-code="vc-SQNM">—</td>
-   <td data-code="FLAME" data-template="flame/lj98-minhocao" data-par2="2e+09"><span class="bench-score">2e+09</span><a href="generated/suites/globalopt.html#lj98-templates">flame/lj98-minhocao</a></td>
+   <td data-code="FLAME">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>

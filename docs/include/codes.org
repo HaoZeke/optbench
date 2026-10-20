@@ -1492,17 +1492,6 @@
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="globalopt/lj150" data-template="flame/lj150-minhocao">
-   <td>lj150</td>
-   <td data-field="template">flame/lj150-minhocao</td>
-   <td data-field="version">FLAME 1.0</td>
-   <td data-field="commit">99a615acaef6</td>
-   <td data-field="par2_mean">2e+07</td>
-   <td data-field="mean_calls">121364</td>
-   <td data-field="median_calls">104378</td>
-   <td data-field="failures">crash 0, divergence 100, cap 0, wrong_stationary 0</td>
-   <td data-field="n">100</td>
-   </tr>
    <tr data-problem="globalopt/lj38" data-template="flame/lj38-minhocao">
    <td>Lennard-Jones 38 global minimum</td>
    <td data-field="template">flame/lj38-minhocao</td>
@@ -1520,21 +1509,10 @@
    <td data-field="version">FLAME 1.0</td>
    <td data-field="commit">99a615acaef6</td>
    <td data-field="par2_mean">2e+06</td>
-   <td data-field="mean_calls">535937</td>
-   <td data-field="median_calls">472138</td>
-   <td data-field="failures">crash 0, divergence 147, cap 53, wrong_stationary 0</td>
+   <td data-field="mean_calls">1e+06</td>
+   <td data-field="median_calls">1e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td>
    <td data-field="n">200</td>
-   </tr>
-   <tr data-problem="globalopt/lj98" data-template="flame/lj98-minhocao">
-   <td>lj98</td>
-   <td data-field="template">flame/lj98-minhocao</td>
-   <td data-field="version">FLAME 1.0</td>
-   <td data-field="commit">99a615acaef6</td>
-   <td data-field="par2_mean">2e+09</td>
-   <td data-field="mean_calls">600909</td>
-   <td data-field="median_calls">253500</td>
-   <td data-field="failures">crash 0, divergence 100, cap 0, wrong_stationary 0</td>
-   <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>

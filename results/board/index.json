@@ -17484,54 +17484,7 @@
           "wilson_low": 0.0
         }
       ],
-      "profile_gap": "No performance profile. One start has no finite cost.",
-      "ranked": [
-        {
-          "asv_commit": "",
-          "call_unit": "total",
-          "cap": 10000000,
-          "code": "FLAME",
-          "code_version": "1.0",
-          "commit": "99a615acaef6bc6afe44d895f666c6d60250f7d8",
-          "comparable": true,
-          "counter": "harness",
-          "current": true,
-          "entry": "flame-1.0-lj150-minhocao",
-          "failures": {
-            "cap": 0,
-            "crash": 0,
-            "divergence": 100,
-            "wrong_stationary": 0
-          },
-          "full_n": 100,
-          "history": false,
-          "max_calls": 285533.0,
-          "mean_calls": 121363.79,
-          "mean_per_image": null,
-          "median": 20000000.0,
-          "median_calls": 104378.5,
-          "median_high": 20000000.0,
-          "median_low": 20000000.0,
-          "median_per_image": null,
-          "min_calls": 44167.0,
-          "n": 100,
-          "nfailed": 100,
-          "note": "starts.jsonl",
-          "par2_mean": 20000000.0,
-          "partial": false,
-          "partial_reason": "",
-          "path": "results/campaign/flame-1.0-lj150-minhocao.dat",
-          "problem": "globalopt/lj150",
-          "registry_match": true,
-          "scored": true,
-          "source": "campaign",
-          "success_rate": 0.0,
-          "template": "flame/lj150-minhocao",
-          "tuning": "dtinit",
-          "wilson_high": 0.03699349820698568,
-          "wilson_low": 0.0
-        }
-      ],
+      "ranked": [],
       "title": "lj150"
     },
     "globalopt/lj38": {
@@ -17977,22 +17930,22 @@
           "current": true,
           "entry": "flame-1.0-lj75-minhocao",
           "failures": {
-            "cap": 53,
+            "cap": 200,
             "crash": 0,
-            "divergence": 147,
+            "divergence": 0,
             "wrong_stationary": 0
           },
           "full_n": 200,
           "history": false,
           "max_calls": 1000000.0,
-          "mean_calls": 535936.57,
+          "mean_calls": 1000000.0,
           "mean_per_image": null,
           "median": 2000000.0,
-          "median_calls": 472138.0,
+          "median_calls": 1000000.0,
           "median_high": 2000000.0,
           "median_low": 2000000.0,
           "median_per_image": null,
-          "min_calls": 65671.0,
+          "min_calls": 1000000.0,
           "n": 200,
           "nfailed": 200,
           "note": "starts.jsonl",
@@ -18006,7 +17959,7 @@
           "source": "campaign",
           "success_rate": 0.0,
           "template": "flame/lj75-minhocao",
-          "tuning": "dtinit",
+          "tuning": "published",
           "wilson_high": 0.018845326377266575,
           "wilson_low": 0.0
         }
@@ -18065,54 +18018,7 @@
           "wilson_low": 0.0
         }
       ],
-      "profile_gap": "No performance profile. One start has no finite cost.",
-      "ranked": [
-        {
-          "asv_commit": "",
-          "call_unit": "total",
-          "cap": 1000000000,
-          "code": "FLAME",
-          "code_version": "1.0",
-          "commit": "99a615acaef6bc6afe44d895f666c6d60250f7d8",
-          "comparable": true,
-          "counter": "harness",
-          "current": true,
-          "entry": "flame-1.0-lj98-minhocao",
-          "failures": {
-            "cap": 0,
-            "crash": 0,
-            "divergence": 100,
-            "wrong_stationary": 0
-          },
-          "full_n": 100,
-          "history": false,
-          "max_calls": 26659125.0,
-          "mean_calls": 600908.59,
-          "mean_per_image": null,
-          "median": 2000000000.0,
-          "median_calls": 253500.5,
-          "median_high": 2000000000.0,
-          "median_low": 2000000000.0,
-          "median_per_image": null,
-          "min_calls": 43857.0,
-          "n": 100,
-          "nfailed": 100,
-          "note": "starts.jsonl",
-          "par2_mean": 2000000000.0,
-          "partial": false,
-          "partial_reason": "",
-          "path": "results/campaign/flame-1.0-lj98-minhocao.dat",
-          "problem": "globalopt/lj98",
-          "registry_match": true,
-          "scored": true,
-          "source": "campaign",
-          "success_rate": 0.0,
-          "template": "flame/lj98-minhocao",
-          "tuning": "dtinit",
-          "wilson_high": 0.03699349820698568,
-          "wilson_low": 0.0
-        }
-      ],
+      "ranked": [],
       "title": "lj98"
     },
     "hTST/Al": {
@@ -48593,7 +48499,7 @@
       "title": "pt-island"
     }
   },
-  "ranked_count": 564,
+  "ranked_count": 562,
   "schema": "optbench.board/v1",
   "unmapped": [
     {
