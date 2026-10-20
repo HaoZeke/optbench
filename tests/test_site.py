@@ -63,7 +63,7 @@ def test_rendered_pages_use_the_board_rank():
     cells = dict(ranked_cells(lj38, False))
     sota = (ROOT / "docs" / "include" / "sota.org").read_text(encoding="utf-8")
     assert f'data-board-table="headline" data-problem="minimization/lj38"' in sota
-    assert 'data-field="current"' not in sota
+    assert 'data-field="newest"' not in sota
     assert cells["template"] in sota
     assert f'data-field="par2_mean">{cells["par2_mean"]}<' in sota
     assert "Present sources. The cell is the record." not in sota
@@ -77,30 +77,30 @@ def test_rendered_pages_use_the_board_rank():
     minimization = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "minimization.org").read_text(encoding="utf-8")
     assert f'data-board-table="ranked" data-problem="minimization/lj38"' in minimization
     assert f'data-field="par2_mean">{cells["par2_mean"]}<' in minimization
-    assert 'data-field="current"' not in minimization
+    assert 'data-field="newest"' not in minimization
     assert "<th>Current</th>" not in minimization
-    assert 'data-field="wilson_low"' not in minimization
-    assert 'data-field="wilson_high"' not in minimization
-    assert f'data-field="wilson">{cells["wilson"]}<' in minimization
-    assert "<th>Wilson</th>" in minimization
-    assert lj38["current"] is True
+    assert 'data-field="rate_low"' not in minimization
+    assert 'data-field="rate_high"' not in minimization
+    assert f'data-field="rate">{cells["rate"]}<' in minimization
+    assert "<th>Rate</th>" in minimization
+    assert lj38["newest"] is True
     assert "minimization-lj38-profile.svg" in minimization
     assert "minimization-lj38-profile.webp" in minimization
     assert 'loading="lazy"' in minimization
     assert 'data-board-table="summary"' in minimization
     assert f'data-par2="{cells["par2_mean"]}"' in minimization
     assert "<details" in minimization
-    assert "Legacy 2014 archive" in minimization
+    assert "2014 archive" in minimization
     assert "eon-cg" in minimization
-    assert "par2-wilson-bootstrap" in minimization
+    assert "par2-rate-bootstrap" in minimization
     assert "Present runs. Fewer force calls first." not in minimization
     neb_page = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "neb.org").read_text(encoding="utf-8")
     assert neb["template"] in neb_page
     assert "not yet on the harness counter" in neb_page
-    assert "Legacy 2014 scores. Fewer calls is to the left." in neb_page
+    assert "2014 archive scores. Fewer calls is to the left." in neb_page
     tsopt = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "tsopt.org").read_text(encoding="utf-8")
-    assert "Sella 0.1.1 legacy" in tsopt
-    assert "2.6.0 legacy" not in tsopt
+    assert "Sella 0.1.1 archive" in tsopt
+    assert "2.6.0 archive" not in tsopt
     assert "tsopt-LJ38-profile.svg" in tsopt
     saddle = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "saddle-search.org").read_text(encoding="utf-8")
     assert 'data-board-table="ranked" data-problem="saddle-search/pt-island"' in saddle

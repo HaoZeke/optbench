@@ -1,6 +1,6 @@
 {
   "counter": "harness",
-  "legacy": {
+  "success_mean": {
     "force_calls": 561,
     "force_calls_max": 662,
     "force_calls_median": 548,
@@ -55,12 +55,12 @@
     "par_factor": 2,
     "q25": 514.0,
     "q75": 633.0,
-    "scoring": "par2-wilson-bootstrap",
+    "scoring": "par2-rate-bootstrap",
     "success_only_mean": 561.4615384615385,
     "success_rate": 1.0,
     "successes": 13,
-    "wilson_high": 1.0,
-    "wilson_low": 0.7719046276458016
+    "rate_high": 1.0,
+    "rate_low": 0.7719046276458016
   },
   "template": "compass/sqnm"
 }

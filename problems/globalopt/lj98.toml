@@ -4,7 +4,7 @@ suite = "globalopt"
 problem = "lj98"
 contract = "partial"
 entry_count = 2
-remark = "Success is an energy at or below the Cambridge Cluster Database N=98 minimum plus 0.001. The start set is the 100 numbered coordinate files. The archive symmetrise data file sets STEPS to 100000 and states no MAX_NPCALL. Its 03 Oct 2022 energy-call mean is 2.4953780e+05 and its standard deviation is 2.0578948e+05, so one trajectory's mean plus ten standard deviations is 2307432.6. The harness counts every replica. Basin-hopping is one replica and parallel tempering is four, so the shared cap is 9229732, four times that ceiling, and MAX_NPCALL is the same budget. The archived nosym mean plus ten standard deviations is 6.81447541e+08. A cap of 1000000000 is not used, because a search that stops near two million calls would then be charged two billion under PAR-2."
+remark = "Success is an energy at or below the Cambridge Cluster Database N=98 minimum plus 0.001. The start set is the 100 numbered coordinate files. The cap is this file's convergence.max_force_calls, 1000000000."
 
 [potential]
 kind = "lennard-jones"
@@ -23,7 +23,7 @@ starts = 100
 
 [convergence]
 energy_above_minimum = 0.001
-max_force_calls = 9229732
+max_force_calls = 1000000000
 
 [input]
 archive_path = "website/globalopt/lj98/lj98_clusters.tgz"
@@ -31,12 +31,12 @@ archive_path = "website/globalopt/lj98/lj98_clusters.tgz"
 [metrics]
 required = ["basin_hopping_steps_mean", "basin_hopping_steps_stddev", "cpu_time_mean", "cpu_time_stddev", "energy_calls_mean", "energy_calls_stddev", "nfailed"]
 
-[scoring.legacy]
-label = "legacy"
-rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row stays labelled legacy."
+[scoring.archive]
+label = "archive"
+rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row stays on the archive table."
 
 [scoring.v2]
-version = "par2-wilson-bootstrap"
+version = "par2-rate-bootstrap"
 par_factor = 2
 bootstrap_resamples = 2000
 bootstrap_seed = 20261015
@@ -56,8 +56,8 @@ required = [
   "median",
   "median_low",
   "median_high",
-  "wilson_low",
-  "wilson_high",
+  "rate_low",
+  "rate_high",
   "n",
   "nfailed",
   "n_cap",

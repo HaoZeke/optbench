@@ -99,13 +99,13 @@ def check(problems_dir: Path, oracle_path: Path) -> int:
             print(line)
         return 1
     print("site tables match the board")
-    from .reproduction import reproduction_errors
+    from .findings import findings_errors
 
-    reproduced = reproduction_errors(root)
-    if reproduced:
-        print(f"reproduction {len(reproduced)}")
-        for line in reproduced:
+    finding_errors = findings_errors(root)
+    if finding_errors:
+        print(f"findings {len(finding_errors)}")
+        for line in finding_errors:
             print(line)
         return 1
-    print("reproduction ledger matches the archive")
+    print("findings match the archive rows")
     return 0

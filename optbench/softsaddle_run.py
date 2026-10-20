@@ -1098,8 +1098,8 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
         text += (
             f"par2_mean {metrics['par2_mean']}\n"
             f"successes {metrics['successes']}\n"
-            f"wilson_low {metrics['wilson_low']}\n"
-            f"wilson_high {metrics['wilson_high']}\n"
+            f"rate_low {metrics['rate_low']}\n"
+            f"rate_high {metrics['rate_high']}\n"
             f"par2_median {metrics['median']}\n"
             f"n_cap {metrics['n_cap']}\n"
             f"n_wrong_stationary {metrics['n_wrong_stationary']}\n"
@@ -1127,7 +1127,7 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
             "schema": "optbench.result/v2",
             "status": "measured" if finished else "partial",
             "problem": problem["id"],
-            "scoring": "par2-wilson-bootstrap",
+            "scoring": "par2-rate-bootstrap",
             "par_factor": 2,
             "bootstrap_resamples": 2000,
             "bootstrap_seed": 20261015,
@@ -1220,8 +1220,8 @@ def _run_modes(root: Path, problem: dict, template: dict, *, output: Path, cap: 
     lines.append(f"nfailed {metrics['nfailed']}")
     lines.append(f"par2_mean {metrics['par2_mean']:.10f}")
     lines.append(f"successes {metrics['successes']}")
-    lines.append(f"wilson_low {metrics['wilson_low']:.10f}")
-    lines.append(f"wilson_high {metrics['wilson_high']:.10f}")
+    lines.append(f"rate_low {metrics['rate_low']:.10f}")
+    lines.append(f"rate_high {metrics['rate_high']:.10f}")
     lines.append(f"par2_median {metrics['median']:.10f}")
     lines.append(f"n_cap {metrics['n_cap']}")
     lines.append(f"n_wrong_stationary {metrics['n_wrong_stationary']}")

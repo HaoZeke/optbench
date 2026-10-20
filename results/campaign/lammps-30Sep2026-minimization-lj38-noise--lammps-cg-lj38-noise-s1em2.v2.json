@@ -1,6 +1,6 @@
 {
   "counter": "harness",
-  "legacy": {
+  "success_mean": {
     "force_calls": 1484,
     "force_calls_max": 4471,
     "force_calls_median": 1310.0,
@@ -53,12 +53,12 @@
     "par_factor": 2,
     "q25": 1074.75,
     "q75": 2178.25,
-    "scoring": "par2-wilson-bootstrap",
+    "scoring": "par2-rate-bootstrap",
     "success_only_mean": 1483.558352402746,
     "success_rate": 0.874,
     "successes": 874,
-    "wilson_high": 0.8931470893129909,
-    "wilson_low": 0.8519904953398139
+    "rate_high": 0.8931470893129909,
+    "rate_low": 0.8519904953398139
   },
   "template": "lammps/cg-lj38-noise-s1em2"
 }

@@ -12,7 +12,7 @@
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "entry": "rgmin-lj38-bb",
-      "legacy": {
+      "success_mean": {
         "force_calls": 521,
         "force_calls_max": 1596,
         "force_calls_min": 172,
@@ -42,12 +42,12 @@
         "par_factor": 2,
         "q25": 358.0,
         "q75": 633.0,
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-rate-bootstrap",
         "success_only_mean": 522.6096579476862,
         "success_rate": 0.994,
         "successes": 994,
-        "wilson_high": 0.9972473308581237,
-        "wilson_low": 0.9869718317581478
+        "rate_high": 0.9972473308581237,
+        "rate_low": 0.9869718317581478
       },
       "parameters": {
         "gtol": 0.01,
@@ -29091,6 +29091,6 @@
     }
   ],
   "schema": "optbench.result/v2",
-  "scoring": "par2-wilson-bootstrap",
+  "scoring": "par2-rate-bootstrap",
   "status": "archive"
 }

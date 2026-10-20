@@ -1,6 +1,6 @@
 {
   "counter": "harness",
-  "legacy": {
+  "success_mean": {
     "force_calls": 21,
     "force_calls_max": 26,
     "force_calls_median": 22.0,
@@ -53,12 +53,12 @@
     "par_factor": 2,
     "q25": 20.0,
     "q75": 26.0,
-    "scoring": "par2-wilson-bootstrap",
+    "scoring": "par2-rate-bootstrap",
     "success_only_mean": 21.425,
     "success_rate": 0.8,
     "successes": 160,
-    "wilson_high": 0.8495479907390189,
-    "wilson_low": 0.7391448134346212
+    "rate_high": 0.8495479907390189,
+    "rate_low": 0.7391448134346212
   },
   "template": "pysisyphus/lanczos-lj38"
 }

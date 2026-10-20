@@ -6,7 +6,7 @@ import tomllib
 from pathlib import Path
 
 from optbench.campaign import _check_stop, list_templates, resolve_problem
-from optbench.runners.gmin_go import CODE_VERSION, TARBALL_SHA256, _coords_text, _data_text
+from optbench.runners.gmin_go import CODE_VERSION, PIN_REF, TARBALL_SHA256, _coords_text, _data_text
 
 ROOT = Path(__file__).resolve().parents[1]
 PROBLEMS = (
@@ -22,20 +22,23 @@ def test_registry_pins_the_tarball():
     row = next(item for item in registry["code"] if item["id"] == "gmin-bh")
     assert row["name"] == "GMIN"
     assert row["commit"] == TARBALL_SHA256
-    assert row["ref"] == CODE_VERSION
+    assert row["ref"] == PIN_REF
+    assert CODE_VERSION == "df8da599"
     assert TARBALL_SHA256.startswith(row["ref"])
     quench = next(item for item in registry["code"] if item["id"] == "gmin")
     assert TARBALL_SHA256 in quench["note"]
 
 
-def test_eight_templates_cover_bh_and_bhpt():
+def test_bh_bhpt_and_csm_templates():
     found = [item for item in list_templates(ROOT) if item.get("engine") == "gmin-bh"]
     ids = sorted(item["id"] for item in found)
-    assert ids == sorted(
+    expected = [
         f"gmin/{problem.split('/')[1]}-{method}"
         for problem in PROBLEMS
         for method in ("bh", "bhpt")
-    )
+    ]
+    expected.append("gmin/lj38-csm")
+    assert ids == sorted(expected)
     for template in found:
         assert template["code"] == "GMIN"
         assert template["code_version"] == CODE_VERSION
@@ -115,13 +118,10 @@ def test_bhpt_keyword_order_and_repeated_coords():
     assert len(coords.splitlines()) == 8
 
 
-def test_lj98_cap_is_the_symmetrise_envelope_and_the_data_file_uses_it():
+def test_lj98_cap_is_the_problem_cap_and_the_data_file_uses_it():
     problem = resolve_problem(ROOT, "globalopt/lj98")
     cap = int(problem["convergence"]["max_force_calls"])
-    # ceil(2.4953780e5 + 10 * 2.0578948e5) = 2307433 for one trajectory.
-    # The harness sums replicas, and BHPT runs four, so the shared cap is 4 * 2307433.
-    assert cap == 4 * 2_307_433
-    assert cap != 1_000_000_000
+    assert cap == 1_000_000_000
     for name in ("gmin/lj98-bh", "gmin/lj98-bhpt"):
         template = next(item for item in list_templates(ROOT) if item["id"] == name)
         assert int(template["failure_cap"]) == cap
@@ -162,13 +162,65 @@ def test_lj98_cap_is_the_symmetrise_envelope_and_the_data_file_uses_it():
         assert "STEPS 100000 1.0" in text
         assert "RADIUS" not in text
         assert "RANSEED" not in text
-        assert "1000000000" not in text
+        assert "MAX_NPCALL 1000000000" in text
         assert section["center"] is False
         if section["method"] == "bh":
             assert "BHPT" not in text
             assert "TEMPERATURE 1.30000000" in text
         else:
             assert text.startswith("MPI\nBHPT 0.10000000 1.30000000 0.10000000\n")
+
+
+def test_lj38_csm_uses_the_archive_deck_on_df8da599():
+    problem = resolve_problem(ROOT, "globalopt/lj38")
+    assert problem["convergence"].get("max_force_calls") is None
+    template = next(item for item in list_templates(ROOT) if item["id"] == "gmin/lj38-csm")
+    assert template["code_version"] == "df8da599"
+    assert int(template["failure_cap"]) == 2_000_000
+    section = template["gmin"]
+    text = _data_text(
+        {
+            "replicas": int(section["replicas"]),
+            "pttmin": float(section["pttmin"]),
+            "pttmax": float(section["pttmax"]),
+            "exchprob": float(section["exchprob"]),
+            "sloppyconv": float(section["sloppyconv"]),
+            "tightconv": float(section["tightconv"]),
+            "ediff": float(section["ediff"]),
+            "maxit": int(section["maxit"]),
+            "maxit2": int(section["maxit2"]),
+            "radius": float(section["radius"]),
+            "temperature": float(section["temperature"]),
+            "step": float(section["step"]),
+            "astep": float(section["astep"]),
+            "steps": int(section["steps"]),
+            "seed": int(section["seed"]),
+            "reference": -173.928426511789,
+            "cap": int(template["failure_cap"]),
+            "fixboth": section["fixboth"],
+            "permdist": section["permdist"],
+            "newrestart": section["newrestart"],
+            "sort": section["sort"],
+            "save": int(section["save"]),
+            "tfac": float(section["tfac"]),
+            "emit_seed": bool(section["emit_seed"]),
+            "avoid": section["avoid"],
+            "symmetrisecsm": section["symmetrisecsm"],
+        }
+    )
+    assert "SYMMETRISECSM 1 CI 1.0D-6 30 1 50" in text
+    assert "AVOID 1.25 18" in text
+    assert "TEMPERATURE 3.00000000" in text
+    assert "NEWRESTART 30" in text
+    assert "PERMDIST 0.00500000" in text
+    assert "STEPS 90000000 1.0" in text
+    assert "MAX_NPCALL 2000000" in text
+    assert "EDIFF 0.00100000" in text
+    assert "RANSEED" not in text
+    assert "RADIUS" not in text
+    assert "BHPT" not in text
+    assert "wales-27058" in template["note"]
+    assert "not published" in template["note"]
 
 
 def test_asv_classes_import_with_one_start():
@@ -179,7 +231,7 @@ def test_asv_classes_import_with_one_start():
         for value in vars(bench).values()
         if isinstance(value, type) and getattr(value, "param_names", None) == ["seed", "start"]
     ]
-    assert len(classes) == 8
+    assert len(classes) == 9
     caps = {
         item["id"]: int(item["failure_cap"])
         for item in list_templates(ROOT)

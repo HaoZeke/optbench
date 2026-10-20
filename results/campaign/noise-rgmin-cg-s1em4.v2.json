@@ -12,7 +12,7 @@
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "entry": "noise-rgmin-cg-s1em4",
-      "legacy": {
+      "success_mean": {
         "force_calls": 608,
         "force_calls_max": 2090,
         "force_calls_min": 178,
@@ -42,12 +42,12 @@
         "par_factor": 2,
         "q25": 424.75,
         "q75": 739.0,
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-rate-bootstrap",
         "success_only_mean": 608.5739219712526,
         "success_rate": 0.974,
         "successes": 974,
-        "wilson_high": 0.9821960617983837,
-        "wilson_low": 0.9621761711573101
+        "rate_high": 0.9821960617983837,
+        "rate_low": 0.9621761711573101
       },
       "parameters": {
         "cap": 10000,
@@ -31135,6 +31135,6 @@
     }
   ],
   "schema": "optbench.result/v2",
-  "scoring": "par2-wilson-bootstrap",
+  "scoring": "par2-rate-bootstrap",
   "status": "archive"
 }

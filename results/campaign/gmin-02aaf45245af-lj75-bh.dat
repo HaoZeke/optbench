@@ -8,7 +8,7 @@ force_calls_max 417364
 nfailed 199
 median 417364
 code GMIN
-code_version 02aaf45245af
+code_version df8da599
 commit 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f
 algorithm basin-hopping
 template gmin/lj75-bh
@@ -16,8 +16,8 @@ tuning default
 problem globalopt/lj75
 counter harness
 par2_mean 1992086.82
-wilson_low 0.000883168715601
-wilson_high 0.0277737043979
+rate_low 0.000883168715601
+rate_high 0.0277737043979
 par2_median 2000000
 par2_median_low 2000000
 par2_median_high 2000000

@@ -1,14 +1,14 @@
 # counter harness. One force call is one GMIN potential request to lennard_jones.
 # The binary was built from the Wales tarball named by commit. The pin is that sha256.
 # energy is the lowest quench at or below SLOPPYCONV. lowest_energy on each start is the lowest finite evaluation.
-# Serial basin-hopping with the archived lj98 symmetrise moves. One replica at temperature 1.3. BHPT is unset, so the MPI temperature reset keeps TEMPERATURE 1.3. Quenches are L-BFGS with SLOPPYCONV 0.007, TIGHTCONV 1.0e-5, and MAXIT 1000 and 1000. STEP is 0.46 and ASTEP is 0.47. FIXBOTH, PERMDIST 0.01, NEWRESTART 6, SORT, SAVE 1, and SYMMETRISE 1 0.01 0.05 0.3 0.1 0.6 3 0.3 2.1 are the archive data file. STEPS is 100000 1.0, the archive stop, which does not bind before the call budget. The archive sets no RADIUS and no RANSEED. A fixed radius of 50 lets the cluster evaporate and miss the minimum inside the call budget, so RADIUS is omitted and the coordinates are not translated before CENTRE. The archive states no MAX_NPCALL. The failure cap and MAX_NPCALL are both 2307433, the ceiling of the 03 Oct 2022 energy-call mean 2.4953780e+05 plus ten times its standard deviation 2.0578948e+05. A 1000000000 cap is not used. EDIFF is 0.001, the problem energy_above_minimum. TARGET is the harness energy of codes/gmin/reference/lj98.points. The data file starts with MPI because the binary is the MPI build, and mpirun launches it. Starts are the 100 numbered coords files. The unnumbered coords file is not a start.
+# Serial basin-hopping with the archived lj98 symmetrise moves. One replica at temperature 1.3. BHPT is unset, so the MPI temperature reset keeps TEMPERATURE 1.3. Quenches are L-BFGS with SLOPPYCONV 0.007, TIGHTCONV 1.0e-5, and MAXIT 1000 and 1000. STEP is 0.46 and ASTEP is 0.47. FIXBOTH, PERMDIST 0.01, NEWRESTART 6, SORT, SAVE 1, and SYMMETRISE 1 0.01 0.05 0.3 0.1 0.6 3 0.3 2.1 are the archive data file. STEPS is 100000 1.0. The archive sets no RADIUS and no RANSEED. RADIUS is omitted and the coordinates are not translated before CENTRE. The cap and MAX_NPCALL are problems/globalopt/lj98.toml convergence.max_force_calls, 1000000000. EDIFF is 0.001, the problem energy_above_minimum. TARGET is the harness energy of codes/gmin/reference/lj98.points. The data file starts with MPI because the binary is the MPI build, and mpirun launches it. Starts are the 100 numbered coords files. The unnumbered coords file is not a start. A start that already succeeded keeps its call count.
 force_calls 282815
 force_calls_min 1254
 force_calls_max 1342044
 nfailed 0
 median 173058.5
 code GMIN
-code_version 02aaf45245af
+code_version df8da599
 commit 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f
 algorithm basin-hopping with core-orbit symmetrisation
 template gmin/lj98-bh
@@ -16,8 +16,8 @@ tuning default
 problem globalopt/lj98
 counter harness
 par2_mean 282815.36
-wilson_low 0.963006501793
-wilson_high 1
+rate_low 0.963006501793
+rate_high 1
 par2_median 173058.5
 par2_median_low 141431.5
 par2_median_high 296783.5
@@ -26,4 +26,4 @@ v2_successes 100
 n 100
 energy_min -543.665360771
 energy_max -543.66536077
-cap 2307433
+cap 1000000000

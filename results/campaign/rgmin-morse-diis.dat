@@ -17,8 +17,8 @@ template rgmin/morse-diis
 tuning default
 counter harness
 par2_mean 16153.43
-wilson_low 0.133366933331
-wilson_high 0.288829165593
+rate_low 0.133366933331
+rate_high 0.288829165593
 par2_median 20000
 par2_median_low 20000
 par2_median_high 20000

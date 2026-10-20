@@ -12,7 +12,6 @@
       "commit": "1d71c944501832bfafb955ffe13b9aae50c8efd4",
       "comparable": false,
       "counter": "",
-      "current": false,
       "entry": "eon-main-neb-pt-lbfgs-m100",
       "failures": {
         "cap": 0,
@@ -32,6 +31,7 @@
       "median_per_image": 464.0,
       "min_calls": 256.0,
       "n": 13,
+      "newest": false,
       "nfailed": 0,
       "note": "starts",
       "par2_mean": 3521.846153846154,
@@ -39,14 +39,14 @@
       "partial_reason": "",
       "path": "results/campaign/eon-main-neb-pt-lbfgs-m100.dat",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon/neb-pt-lbfgs-m100",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": ""
     }
   ],
   "partial": [
@@ -59,7 +59,6 @@
       "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "eon-client-neb-pt-cg",
       "failures": {
         "cap": 0,
@@ -79,6 +78,7 @@
       "median_per_image": 97.25,
       "min_calls": 410.0,
       "n": 13,
+      "newest": false,
       "nfailed": 0,
       "note": "starts",
       "par2_mean": 1138.6153846153845,
@@ -86,14 +86,14 @@
       "partial_reason": "result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5)",
       "path": "results/campaign/eon-client-neb-pt-cg.dat",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon-client/neb-pt-cg",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -104,7 +104,6 @@
       "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "eon-client-neb-pt-fire",
       "failures": {
         "cap": 0,
@@ -124,6 +123,7 @@
       "median_per_image": 88.25,
       "min_calls": 546.0,
       "n": 13,
+      "newest": false,
       "nfailed": 0,
       "note": "starts",
       "par2_mean": 684.4615384615385,
@@ -131,14 +131,14 @@
       "partial_reason": "result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5)",
       "path": "results/campaign/eon-client-neb-pt-fire.dat",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon-client/neb-pt-fire",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -149,7 +149,6 @@
       "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "eon-client-neb-pt-lbfgs",
       "failures": {
         "cap": 0,
@@ -169,6 +168,7 @@
       "median_per_image": 39.25,
       "min_calls": 218.0,
       "n": 13,
+      "newest": false,
       "nfailed": 0,
       "note": "starts",
       "par2_mean": 317.0769230769231,
@@ -176,14 +176,14 @@
       "partial_reason": "result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5)",
       "path": "results/campaign/eon-client-neb-pt-lbfgs.dat",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon-client/neb-pt-lbfgs",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -194,7 +194,6 @@
       "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "eon-client-neb-pt-qm",
       "failures": {
         "cap": 0,
@@ -214,6 +213,7 @@
       "median_per_image": 155.25,
       "min_calls": 714.0,
       "n": 13,
+      "newest": false,
       "nfailed": 0,
       "note": "starts",
       "par2_mean": 1322.6153846153845,
@@ -221,14 +221,14 @@
       "partial_reason": "result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5)",
       "path": "results/campaign/eon-client-neb-pt-qm.dat",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon-client/neb-pt-qm",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -239,7 +239,6 @@
       "commit": "1d71c944501832bfafb955ffe13b9aae50c8efd4",
       "comparable": false,
       "counter": "",
-      "current": false,
       "entry": "eon-main-neb-pt-lbfgs",
       "failures": {
         "cap": 0,
@@ -259,21 +258,22 @@
       "median_per_image": 467.0,
       "min_calls": 256.0,
       "n": 13,
+      "newest": false,
       "nfailed": 0,
       "note": "starts",
       "par2_mean": 3515.6923076923076,
       "partial": true,
-      "partial_reason": "does not reproduce the 2014 archive",
+      "partial_reason": "different counter from the archive row",
       "path": "results/campaign/eon-main-neb-pt-lbfgs.dat",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon/neb-pt-lbfgs",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": ""
     },
     {
       "asv_commit": "b242f2385b227838da8c9dfe0a738b13bacdcebd",
@@ -284,7 +284,6 @@
       "commit": "1d71c944501832bfafb955ffe13b9aae50c8efd4",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_eon_develop.EonDevelopNebPtLbfgs",
       "failures": {
         "cap": 0,
@@ -304,21 +303,22 @@
       "median_per_image": 467.25,
       "min_calls": 258.0,
       "n": 13,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 3517.6923076923076,
       "partial": true,
-      "partial_reason": "does not reproduce the 2014 archive",
+      "partial_reason": "different counter from the archive row",
       "path": "results/asv/b242f2385b227838da8c9dfe0a738b13bacdcebd",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "eon/neb-pt-lbfgs",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": ""
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -329,7 +329,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseNebPtHeptamerDefault",
       "failures": {
         "cap": 0,
@@ -349,6 +348,7 @@
       "median_per_image": 47.25,
       "min_calls": 378.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 378.0,
@@ -356,14 +356,14 @@
       "partial_reason": "smoke run; scored 1 of 13 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/neb-pt-heptamer-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -374,7 +374,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseNebPtHeptamerTuned",
       "failures": {
         "cap": 0,
@@ -394,6 +393,7 @@
       "median_per_image": 33.25,
       "min_calls": 266.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 266.0,
@@ -401,14 +401,14 @@
       "partial_reason": "smoke run; scored 1 of 13 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/neb-pt-heptamer-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "tuned"
     }
   ],
   "profile": {
@@ -706,7 +706,6 @@
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgsaddle-0.2.2-neb-Pt-heptamer--rgsaddle-idpp-ci-neb-lbfgs",
       "failures": {
         "cap": 0,
@@ -726,6 +725,7 @@
       "median_per_image": 39.25,
       "min_calls": 210.0,
       "n": 13,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 318.3076923076923,
@@ -733,14 +733,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgsaddle-0.2.2-neb-Pt-heptamer--rgsaddle-idpp-ci-neb-lbfgs.dat; results/asv/19e5e5f275cc59e67893ae3e761f1fb0097841f2",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgsaddle/idpp-ci-neb-lbfgs",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": "tuned"
     },
     {
       "asv_commit": "21ca7a8cdb95342b07929c946488380ef3d90bfb",
@@ -751,7 +751,6 @@
       "commit": "476aa041f562d37d5fb4121b86817a52d75e4c5d",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "geodesic-1.0.0-heptamer-ci-neb-lbfgs",
       "failures": {
         "cap": 0,
@@ -771,6 +770,7 @@
       "median_per_image": 39.25,
       "min_calls": 210.0,
       "n": 13,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 318.9230769230769,
@@ -778,14 +778,14 @@
       "partial_reason": "",
       "path": "results/campaign/geodesic-1.0.0-heptamer-ci-neb-lbfgs.dat; results/asv/21ca7a8cdb95342b07929c946488380ef3d90bfb",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "geodesic/ci-neb-lbfgs",
-      "tuning": "ablation",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": "ablation"
     },
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",
@@ -796,7 +796,6 @@
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgsaddle-0.2.2-neb-Pt-heptamer--rgsaddle-sidpp-ci-neb-lbfgs",
       "failures": {
         "cap": 0,
@@ -816,6 +815,7 @@
       "median_per_image": 39.25,
       "min_calls": 210.0,
       "n": 13,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 318.9230769230769,
@@ -823,14 +823,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgsaddle-0.2.2-neb-Pt-heptamer--rgsaddle-sidpp-ci-neb-lbfgs.dat; results/asv/19e5e5f275cc59e67893ae3e761f1fb0097841f2",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgsaddle/sidpp-ci-neb-lbfgs",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": "tuned"
     },
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",
@@ -841,7 +841,6 @@
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgsaddle-0.2.2-neb-Pt-heptamer--rgsaddle-ci-neb-lbfgs",
       "failures": {
         "cap": 0,
@@ -861,6 +860,7 @@
       "median_per_image": 41.25,
       "min_calls": 218.0,
       "n": 13,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 319.53846153846155,
@@ -868,14 +868,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgsaddle-0.2.2-neb-Pt-heptamer--rgsaddle-ci-neb-lbfgs.dat; results/asv/19e5e5f275cc59e67893ae3e761f1fb0097841f2",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgsaddle/ci-neb-lbfgs",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": "tuned"
     },
     {
       "asv_commit": "c1ecf607a10f7ab78d1615e4cbf9af030bebcdbf",
@@ -886,7 +886,6 @@
       "commit": "r2549",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "eon-svn-r2549-neb-pt-ci",
       "failures": {
         "cap": 0,
@@ -906,6 +905,7 @@
       "median_per_image": 42.25,
       "min_calls": 218.0,
       "n": 13,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 336.7692307692308,
@@ -913,14 +913,14 @@
       "partial_reason": "",
       "path": "results/campaign/eon-svn-r2549-neb-pt-ci.dat; results/asv/c1ecf607a10f7ab78d1615e4cbf9af030bebcdbf",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "eon-svn/neb-pt-ci",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -931,7 +931,6 @@
       "commit": "r2549",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "eon-svn-neb-pt-lbfgs",
       "failures": {
         "cap": 0,
@@ -951,6 +950,7 @@
       "median_per_image": 42.25,
       "min_calls": 218.0,
       "n": 13,
+      "newest": true,
       "nfailed": 0,
       "note": "starts",
       "par2_mean": 336.7692307692308,
@@ -958,14 +958,14 @@
       "partial_reason": "",
       "path": "results/campaign/eon-svn-neb-pt-lbfgs.dat",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon-svn/neb-pt-lbfgs",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": ""
     },
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",
@@ -976,7 +976,6 @@
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgsaddle-0.2.2-neb-Pt-heptamer--rgsaddle-oci-neb-lbfgs",
       "failures": {
         "cap": 0,
@@ -996,6 +995,7 @@
       "median_per_image": 44.5,
       "min_calls": 244.0,
       "n": 13,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 345.53846153846155,
@@ -1003,14 +1003,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgsaddle-0.2.2-neb-Pt-heptamer--rgsaddle-oci-neb-lbfgs.dat; results/asv/19e5e5f275cc59e67893ae3e761f1fb0097841f2",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgsaddle/oci-neb-lbfgs",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": "tuned"
     },
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",
@@ -1021,7 +1021,6 @@
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgsaddle-0.2.2-neb-Pt-heptamer--rgsaddle-ew-ci-neb-lbfgs",
       "failures": {
         "cap": 0,
@@ -1041,6 +1040,7 @@
       "median_per_image": 41.5,
       "min_calls": 220.0,
       "n": 13,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 357.2307692307692,
@@ -1048,14 +1048,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgsaddle-0.2.2-neb-Pt-heptamer--rgsaddle-ew-ci-neb-lbfgs.dat; results/asv/19e5e5f275cc59e67893ae3e761f1fb0097841f2",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgsaddle/ew-ci-neb-lbfgs",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": "tuned"
     },
     {
       "asv_commit": "c1ecf607a10f7ab78d1615e4cbf9af030bebcdbf",
@@ -1066,7 +1066,6 @@
       "commit": "r2549",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "eon-svn-r2549-neb-pt-neb",
       "failures": {
         "cap": 0,
@@ -1086,6 +1085,7 @@
       "median_per_image": 47.25,
       "min_calls": 194.0,
       "n": 13,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 370.61538461538464,
@@ -1093,14 +1093,14 @@
       "partial_reason": "",
       "path": "results/campaign/eon-svn-r2549-neb-pt-neb.dat; results/asv/c1ecf607a10f7ab78d1615e4cbf9af030bebcdbf",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "eon-svn/neb-pt-neb",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": "default"
     },
     {
       "asv_commit": "21ca7a8cdb95342b07929c946488380ef3d90bfb",
@@ -1111,7 +1111,6 @@
       "commit": "476aa041f562d37d5fb4121b86817a52d75e4c5d",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "geodesic-1.0.0-ase-heptamer-tuned",
       "failures": {
         "cap": 0,
@@ -1131,6 +1130,7 @@
       "median_per_image": 55.25,
       "min_calls": 226.0,
       "n": 13,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 425.38461538461536,
@@ -1138,14 +1138,14 @@
       "partial_reason": "",
       "path": "results/campaign/geodesic-1.0.0-ase-heptamer-tuned.dat; results/asv/21ca7a8cdb95342b07929c946488380ef3d90bfb",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "geodesic/ase-heptamer-tuned",
-      "tuning": "ablation",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": "ablation"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -1156,7 +1156,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "ase-3.29.0-neb-pt-heptamer-tuned",
       "failures": {
         "cap": 0,
@@ -1176,6 +1175,7 @@
       "median_per_image": 56.25,
       "min_calls": 250.0,
       "n": 13,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 442.61538461538464,
@@ -1183,14 +1183,14 @@
       "partial_reason": "",
       "path": "results/campaign/ase-3.29.0-neb-pt-heptamer-tuned.dat; results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "ase/neb-pt-heptamer-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": "tuned"
     },
     {
       "asv_commit": "21ca7a8cdb95342b07929c946488380ef3d90bfb",
@@ -1201,7 +1201,6 @@
       "commit": "476aa041f562d37d5fb4121b86817a52d75e4c5d",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "geodesic-1.0.0-ase-heptamer-default",
       "failures": {
         "cap": 0,
@@ -1221,6 +1220,7 @@
       "median_per_image": 65.25,
       "min_calls": 330.0,
       "n": 13,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 543.5384615384615,
@@ -1228,14 +1228,14 @@
       "partial_reason": "",
       "path": "results/campaign/geodesic-1.0.0-ase-heptamer-default.dat; results/asv/21ca7a8cdb95342b07929c946488380ef3d90bfb",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "geodesic/ase-heptamer-default",
-      "tuning": "ablation",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": "ablation"
     },
     {
       "asv_commit": "",
@@ -1246,7 +1246,6 @@
       "commit": "22da7bd5f69cbd64d59853c8f8d7f8d44c2d18df",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "compass-1.0.0-neb-Pt-heptamer--compass-sqnm",
       "failures": {
         "cap": 0,
@@ -1266,6 +1265,7 @@
       "median_per_image": 68.5,
       "min_calls": 426.0,
       "n": 13,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 561.4615384615385,
@@ -1273,14 +1273,14 @@
       "partial_reason": "",
       "path": "results/campaign/compass-1.0.0-neb-Pt-heptamer--compass-sqnm.dat",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "compass/sqnm",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -1291,7 +1291,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "ase-3.29.0-neb-pt-heptamer-default",
       "failures": {
         "cap": 0,
@@ -1311,6 +1310,7 @@
       "median_per_image": 77.25,
       "min_calls": 378.0,
       "n": 13,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 606.9230769230769,
@@ -1318,14 +1318,14 @@
       "partial_reason": "",
       "path": "results/campaign/ase-3.29.0-neb-pt-heptamer-default.dat; results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "ase/neb-pt-heptamer-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -1336,7 +1336,6 @@
       "commit": "r2549",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "eon-svn-neb-pt-fire",
       "failures": {
         "cap": 0,
@@ -1356,6 +1355,7 @@
       "median_per_image": 83.25,
       "min_calls": 546.0,
       "n": 13,
+      "newest": true,
       "nfailed": 0,
       "note": "starts",
       "par2_mean": 678.9230769230769,
@@ -1363,14 +1363,14 @@
       "partial_reason": "",
       "path": "results/campaign/eon-svn-neb-pt-fire.dat",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon-svn/neb-pt-fire",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": ""
     },
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",
@@ -1381,7 +1381,6 @@
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgsaddle-0.2.2-neb-Pt-heptamer--rgsaddle-sidpp-ci-neb",
       "failures": {
         "cap": 0,
@@ -1401,6 +1400,7 @@
       "median_per_image": 85.25,
       "min_calls": 650.0,
       "n": 13,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 732.4615384615385,
@@ -1408,14 +1408,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgsaddle-0.2.2-neb-Pt-heptamer--rgsaddle-sidpp-ci-neb.dat; results/asv/19e5e5f275cc59e67893ae3e761f1fb0097841f2",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgsaddle/sidpp-ci-neb",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": "default"
     },
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",
@@ -1426,7 +1426,6 @@
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgsaddle-0.2.2-neb-Pt-heptamer--rgsaddle-idpp-ci-neb",
       "failures": {
         "cap": 0,
@@ -1446,6 +1445,7 @@
       "median_per_image": 88.25,
       "min_calls": 650.0,
       "n": 13,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 735.5384615384615,
@@ -1453,14 +1453,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgsaddle-0.2.2-neb-Pt-heptamer--rgsaddle-idpp-ci-neb.dat; results/asv/19e5e5f275cc59e67893ae3e761f1fb0097841f2",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgsaddle/idpp-ci-neb",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": "default"
     },
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",
@@ -1471,7 +1471,6 @@
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgsaddle-0.2.2-neb-Pt-heptamer--rgsaddle-ci-neb",
       "failures": {
         "cap": 0,
@@ -1491,6 +1490,7 @@
       "median_per_image": 87.25,
       "min_calls": 594.0,
       "n": 13,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 736.7692307692307,
@@ -1498,14 +1498,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgsaddle-0.2.2-neb-Pt-heptamer--rgsaddle-ci-neb.dat; results/asv/19e5e5f275cc59e67893ae3e761f1fb0097841f2",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgsaddle/ci-neb",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": "default"
     },
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",
@@ -1516,7 +1516,6 @@
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgsaddle-0.2.2-neb-Pt-heptamer--rgsaddle-ew-ci-neb",
       "failures": {
         "cap": 0,
@@ -1536,6 +1535,7 @@
       "median_per_image": 92.5,
       "min_calls": 548.0,
       "n": 13,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 759.6923076923077,
@@ -1543,14 +1543,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgsaddle-0.2.2-neb-Pt-heptamer--rgsaddle-ew-ci-neb.dat; results/asv/19e5e5f275cc59e67893ae3e761f1fb0097841f2",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgsaddle/ew-ci-neb",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": "default"
     },
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",
@@ -1561,7 +1561,6 @@
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgsaddle-0.2.2-neb-Pt-heptamer--rgsaddle-oci-neb",
       "failures": {
         "cap": 0,
@@ -1581,6 +1580,7 @@
       "median_per_image": 90.25,
       "min_calls": 618.0,
       "n": 13,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 760.7692307692307,
@@ -1588,14 +1588,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgsaddle-0.2.2-neb-Pt-heptamer--rgsaddle-oci-neb.dat; results/asv/19e5e5f275cc59e67893ae3e761f1fb0097841f2",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgsaddle/oci-neb",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": "default"
     },
     {
       "asv_commit": "21ca7a8cdb95342b07929c946488380ef3d90bfb",
@@ -1606,7 +1606,6 @@
       "commit": "476aa041f562d37d5fb4121b86817a52d75e4c5d",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "geodesic-1.0.0-heptamer-ci-neb",
       "failures": {
         "cap": 0,
@@ -1626,6 +1625,7 @@
       "median_per_image": 95.25,
       "min_calls": 602.0,
       "n": 13,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 762.6153846153846,
@@ -1633,14 +1633,14 @@
       "partial_reason": "",
       "path": "results/campaign/geodesic-1.0.0-heptamer-ci-neb.dat; results/asv/21ca7a8cdb95342b07929c946488380ef3d90bfb",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "geodesic/ci-neb",
-      "tuning": "ablation",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": "ablation"
     },
     {
       "asv_commit": "",
@@ -1651,7 +1651,6 @@
       "commit": "r2549",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "eon-svn-neb-pt-cg",
       "failures": {
         "cap": 0,
@@ -1671,6 +1670,7 @@
       "median_per_image": 97.25,
       "min_calls": 410.0,
       "n": 13,
+      "newest": true,
       "nfailed": 0,
       "note": "starts",
       "par2_mean": 929.3846153846154,
@@ -1678,14 +1678,14 @@
       "partial_reason": "",
       "path": "results/campaign/eon-svn-neb-pt-cg.dat",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon-svn/neb-pt-cg",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -1696,7 +1696,6 @@
       "commit": "r2549",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "eon-svn-neb-pt-qm",
       "failures": {
         "cap": 0,
@@ -1716,6 +1715,7 @@
       "median_per_image": 155.25,
       "min_calls": 714.0,
       "n": 13,
+      "newest": true,
       "nfailed": 0,
       "note": "starts",
       "par2_mean": 1322.0,
@@ -1723,14 +1723,14 @@
       "partial_reason": "",
       "path": "results/campaign/eon-svn-neb-pt-qm.dat",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon-svn/neb-pt-qm",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": ""
     },
     {
       "asv_commit": "de7400eba879167cc6caa0b22c8c8a4313e04981",
@@ -1741,7 +1741,6 @@
       "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "lammps-30Sep2026-neb-Pt-heptamer-ci-fire",
       "failures": {
         "cap": 0,
@@ -1761,6 +1760,7 @@
       "median_per_image": 175.0,
       "min_calls": 920.0,
       "n": 13,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 1398.4615384615386,
@@ -1768,14 +1768,14 @@
       "partial_reason": "",
       "path": "results/campaign/lammps-30Sep2026-neb-Pt-heptamer-ci-fire.dat; results/asv/de7400eba879167cc6caa0b22c8c8a4313e04981",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "lammpsneb/ci-fire",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -1786,7 +1786,6 @@
       "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "tsase-1.0-neb-Pt-heptamer--tsase-ci-neb",
       "failures": {
         "cap": 0,
@@ -1806,6 +1805,7 @@
       "median_per_image": 178.375,
       "min_calls": 803.0,
       "n": 13,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 1521.1538461538462,
@@ -1813,14 +1813,14 @@
       "partial_reason": "",
       "path": "results/campaign/tsase-1.0-neb-Pt-heptamer--tsase-ci-neb.dat",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "tsase/ci-neb",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": "default"
     },
     {
       "asv_commit": "de7400eba879167cc6caa0b22c8c8a4313e04981",
@@ -1831,7 +1831,6 @@
       "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "lammps-30Sep2026-neb-Pt-heptamer-ci-quickmin",
       "failures": {
         "cap": 0,
@@ -1851,6 +1850,7 @@
       "median_per_image": 502.5,
       "min_calls": 2200.0,
       "n": 13,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 3417.6923076923076,
@@ -1858,14 +1858,14 @@
       "partial_reason": "",
       "path": "results/campaign/lammps-30Sep2026-neb-Pt-heptamer-ci-quickmin.dat; results/asv/de7400eba879167cc6caa0b22c8c8a4313e04981",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "lammpsneb/ci-quickmin",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": "default"
     },
     {
       "asv_commit": "b242f2385b227838da8c9dfe0a738b13bacdcebd",
@@ -1876,7 +1876,6 @@
       "commit": "1d71c944501832bfafb955ffe13b9aae50c8efd4",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "bench_eon_develop.EonDevelopNebPtLbfgsM100",
       "failures": {
         "cap": 0,
@@ -1896,6 +1895,7 @@
       "median_per_image": 464.25,
       "min_calls": 258.0,
       "n": 13,
+      "newest": true,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 3523.846153846154,
@@ -1903,14 +1903,14 @@
       "partial_reason": "",
       "path": "results/asv/b242f2385b227838da8c9dfe0a738b13bacdcebd",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 1.0,
+      "rate_low": 0.7719046276458016,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "eon/neb-pt-lbfgs-m100",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7719046276458016
+      "tuning": ""
     },
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",
@@ -1921,7 +1921,6 @@
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgsaddle-0.2.2-neb-Pt-heptamer--rgsaddle-neb",
       "failures": {
         "cap": 0,
@@ -1941,6 +1940,7 @@
       "median_per_image": 120.25,
       "min_calls": 786.0,
       "n": 13,
+      "newest": true,
       "nfailed": 13,
       "note": "starts.jsonl",
       "par2_mean": 20000.0,
@@ -1948,14 +1948,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgsaddle-0.2.2-neb-Pt-heptamer--rgsaddle-neb.dat; results/asv/19e5e5f275cc59e67893ae3e761f1fb0097841f2",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 0.22809537235419838,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.0,
       "template": "rgsaddle/neb",
-      "tuning": "default",
-      "wilson_high": 0.22809537235419838,
-      "wilson_low": 0.0
+      "tuning": "default"
     },
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",
@@ -1966,7 +1966,6 @@
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgsaddle-0.2.2-neb-Pt-heptamer--rgsaddle-neb-lbfgs",
       "failures": {
         "cap": 0,
@@ -1986,6 +1985,7 @@
       "median_per_image": 51.25,
       "min_calls": 266.0,
       "n": 13,
+      "newest": true,
       "nfailed": 13,
       "note": "starts.jsonl",
       "par2_mean": 20000.0,
@@ -1993,14 +1993,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgsaddle-0.2.2-neb-Pt-heptamer--rgsaddle-neb-lbfgs.dat; results/asv/19e5e5f275cc59e67893ae3e761f1fb0097841f2",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 0.22809537235419838,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.0,
       "template": "rgsaddle/neb-lbfgs",
-      "tuning": "tuned",
-      "wilson_high": 0.22809537235419838,
-      "wilson_low": 0.0
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -2011,7 +2011,6 @@
       "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "tsase-1.0-neb-Pt-heptamer--tsase-neb",
       "failures": {
         "cap": 0,
@@ -2031,6 +2030,7 @@
       "median_per_image": 182.375,
       "min_calls": 667.0,
       "n": 13,
+      "newest": true,
       "nfailed": 13,
       "note": "starts.jsonl",
       "par2_mean": 20000.0,
@@ -2038,14 +2038,14 @@
       "partial_reason": "",
       "path": "results/campaign/tsase-1.0-neb-Pt-heptamer--tsase-neb.dat",
       "problem": "neb/Pt-heptamer",
+      "rate_high": 0.22809537235419838,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
       "template": "tsase/neb",
-      "tuning": "default",
-      "wilson_high": 0.22809537235419838,
-      "wilson_low": 0.0
+      "tuning": "default"
     }
   ],
   "title": "Pt-heptamer"

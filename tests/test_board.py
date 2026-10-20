@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 from optbench.board import MissingAsvCommit, build_board, write_board
-from optbench.score import wilson_interval
+from optbench.score import rate_interval
 
 PIN = "a" * 40
 OTHER = "b" * 40
@@ -150,10 +150,10 @@ def test_full_harness_row_is_ranked_by_par2(tmp_path: Path):
     assert row["nfailed"] == 1
     assert row["failures"]["cap"] == 1
     assert row["success_rate"] == 0.5
-    low, high = wilson_interval(1, 2)
-    assert row["wilson_low"] == low
-    assert row["wilson_high"] == high
-    assert row["current"] is True
+    low, high = rate_interval(1, 2)
+    assert row["rate_low"] == low
+    assert row["rate_high"] == high
+    assert row["newest"] is True
     assert row["registry_match"] is True
     assert row["partial"] is False
 
@@ -189,8 +189,8 @@ def test_duplicate_files_are_kept_and_the_registry_commit_is_current(tmp_path: P
     assert len(ranked) == 2
     by_commit = {row["commit"]: row for row in ranked}
     assert set(by_commit) == {PIN, OTHER}
-    assert by_commit[PIN]["current"] is True
-    assert by_commit[OTHER]["current"] is True
+    assert by_commit[PIN]["newest"] is True
+    assert by_commit[OTHER]["newest"] is True
     assert by_commit[PIN]["history"] is False
     assert by_commit[OTHER]["history"] is False
     assert kept.is_file()
@@ -205,7 +205,7 @@ def test_duplicate_files_are_kept_and_the_registry_commit_is_current(tmp_path: P
     tied_board = build_board(tmp_path)["problems"]["minimization/toy"]["ranked"]
     same = [row["commit"] for row in tied_board if row["par2_mean"] == 3]
     assert same == [OTHER, PIN]
-    assert {row["current"] for row in tied_board if row["par2_mean"] == 3} == {True}
+    assert {row["newest"] for row in tied_board if row["par2_mean"] == 3} == {True}
 
 
 def test_client_counter_is_not_on_the_ranked_board(tmp_path: Path):
@@ -499,17 +499,17 @@ def test_only_the_newest_full_version_is_ranked(tmp_path: Path):
     _template(tmp_path)
     _registry(tmp_path)
     old = _dat(tmp_path, "old", PIN, version="0.4.0")
-    current = _dat(tmp_path, "current", PIN, version="0.4.1")
+    current = _dat(tmp_path, "newest", PIN, version="0.4.1")
     _dat(tmp_path, "short", PIN, version="0.4.2")
     _starts(tmp_path, "old", [_row(4, True, "0"), _row(4, True, "1")])
-    _starts(tmp_path, "current", [_row(3, True, "0"), _row(3, True, "1")])
+    _starts(tmp_path, "newest", [_row(3, True, "0"), _row(3, True, "1")])
     _starts(tmp_path, "short", [_row(1, True, "0")])
 
     problem = build_board(tmp_path)["problems"]["minimization/toy"]
     assert [row["code_version"] for row in problem["ranked"]] == ["0.4.1"]
-    assert problem["ranked"][0]["current"] is True
+    assert problem["ranked"][0]["newest"] is True
     assert [row["code_version"] for row in problem["history"]] == ["0.4.0"]
-    assert problem["history"][0]["current"] is False
+    assert problem["history"][0]["newest"] is False
     assert problem["history"][0]["history"] is True
     assert [row["code_version"] for row in problem["partial"]] == ["0.4.2"]
     assert old.is_file()

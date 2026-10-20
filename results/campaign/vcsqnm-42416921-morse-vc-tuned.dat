@@ -19,8 +19,8 @@ template vcsqnm/morse-vc-tuned
 tuning tuned
 counter harness
 par2_mean 49.56
-wilson_low 0.963006501793
-wilson_high 1
+rate_low 0.963006501793
+rate_high 1
 par2_median 46
 par2_median_low 44
 par2_median_high 48

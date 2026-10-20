@@ -6,18 +6,18 @@
   "partial": [],
   "profile": {
     "area_log10": {
-      "gmin/lj98-bh 02aaf45245af default campaign 02aaf45": 1.071666784563773,
-      "gmin/lj98-bhpt 02aaf45245af default campaign 02aaf45": 0.8097706883361093
+      "gmin/lj98-bh df8da599 default campaign 02aaf45": 1.071666784563773,
+      "gmin/lj98-bhpt df8da599 default campaign 02aaf45": 0.8097706883361093
     },
     "rho": {
-      "gmin/lj98-bh 02aaf45245af default campaign 02aaf45": [
+      "gmin/lj98-bh df8da599 default campaign 02aaf45": [
         0.68,
         0.83,
         0.93,
         0.97,
         0.98
       ],
-      "gmin/lj98-bhpt 02aaf45245af default campaign 02aaf45": [
+      "gmin/lj98-bhpt df8da599 default campaign 02aaf45": [
         0.32,
         0.52,
         0.71,
@@ -26,8 +26,8 @@
       ]
     },
     "solved": {
-      "gmin/lj98-bh 02aaf45245af default campaign 02aaf45": 1.0,
-      "gmin/lj98-bhpt 02aaf45245af default campaign 02aaf45": 1.0
+      "gmin/lj98-bh df8da599 default campaign 02aaf45": 1.0,
+      "gmin/lj98-bhpt df8da599 default campaign 02aaf45": 1.0
     },
     "taus": [
       1.0,
@@ -41,13 +41,12 @@
     {
       "asv_commit": "",
       "call_unit": "total",
-      "cap": 9229732,
+      "cap": 1000000000,
       "code": "GMIN",
-      "code_version": "02aaf45245af",
+      "code_version": "df8da599",
       "commit": "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "gmin-02aaf45245af-lj98-bh",
       "failures": {
         "cap": 0,
@@ -67,6 +66,7 @@
       "median_per_image": null,
       "min_calls": 1254.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 282815.36,
@@ -74,25 +74,24 @@
       "partial_reason": "",
       "path": "results/campaign/gmin-02aaf45245af-lj98-bh.dat",
       "problem": "globalopt/lj98",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "gmin/lj98-bh",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "",
       "call_unit": "total",
-      "cap": 9229732,
+      "cap": 1000000000,
       "code": "GMIN",
-      "code_version": "02aaf45245af",
+      "code_version": "df8da599",
       "commit": "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "gmin-02aaf45245af-lj98-bhpt",
       "failures": {
         "cap": 0,
@@ -112,6 +111,7 @@
       "median_per_image": null,
       "min_calls": 5844.0,
       "n": 100,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 523211.69,
@@ -119,14 +119,14 @@
       "partial_reason": "",
       "path": "results/campaign/gmin-02aaf45245af-lj98-bhpt.dat",
       "problem": "globalopt/lj98",
+      "rate_high": 1.0,
+      "rate_low": 0.9630065017930143,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "gmin/lj98-bhpt",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     }
   ],
   "title": "lj98"

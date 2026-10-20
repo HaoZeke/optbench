@@ -1,19 +1,19 @@
-=============
-Current codes
-=============
+=====
+Codes
+=====
 
 
 The table is the registry pin and the ranked harness runs for that code.
 A code with no full run on a problem is listed with the reason.
 The sections each client reads, and the commands that rerun a score, are in the README and on the Run a score page.
 A timestep or a band method in the wrong section is ignored.
-The Sella 0.1.1 rows stay on the 2014 tables and are labelled legacy.
+The Sella 0.1.1 rows stay on the 2014 tables and are archive rows.
 A new score is entered by Rohit Goswami.
 The number is written only after the run finishes under the problem rule.
 
 .. raw:: html
 
-   <section class="bench" id="current-codes">
+   <section class="bench" id="ranked-codes">
    <h2>Current codes</h2>
    <p>The benchmark contributor is Rohit Goswami. A ranked row is a full harness run. The commit on that row is the commit that produced the score.</p>
    <h3>eOn</h3>
@@ -178,8 +178,8 @@ The number is written only after the run finishes under the problem rule.
    <li>LJ38: not yet on the harness counter, partial.</li>
    <li>pt-island: not yet on the harness counter, partial.</li>
    <li>eon-ci-neb: no per-start record.</li>
-   <li>eon-ci-swdneb: no per-start record; does not reproduce the 2014 archive.</li>
-   <li>eon-cg: no per-start record; does not reproduce the 2014 archive.</li>
+   <li>eon-ci-swdneb: no per-start record.</li>
+   <li>eon-cg: no per-start record.</li>
    <li>eon-fire: no per-start record.</li>
    <li>eon-lbfgs: no per-start record.</li>
    <li>eon-qm: no per-start record.</li>
@@ -190,7 +190,7 @@ The number is written only after the run finishes under the problem rule.
    <li>eon-client/morse-cg: no per-start record.</li>
    <li>eon-client/morse-fire: no per-start record.</li>
    <li>eon-client/morse-lbfgs: no per-start record.</li>
-   <li>eon-client/morse-sd: no per-start record; does not reproduce the 2014 archive.</li>
+   <li>eon-client/morse-sd: no per-start record.</li>
    <li>eon-client/qm: no per-start record.</li>
    <li>eon-client/sd-twopoint: no per-start record.</li>
    <li>eon-client/sd: no per-start record.</li>
@@ -231,14 +231,14 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/pt-island" data-template="eon-svn/de-pt-dimer">
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="eon-svn/de-pt-lanczos-improved">
    <td>pt-island</td>
-   <td data-field="template">eon-svn/de-pt-dimer</td>
+   <td data-field="template">eon-svn/de-pt-lanczos-improved</td>
    <td data-field="version">Eon svn r2549</td>
    <td data-field="commit">r2549</td>
-   <td data-field="par2_mean">192.051</td>
-   <td data-field="mean_calls">192.051</td>
-   <td data-field="median_calls">188</td>
+   <td data-field="par2_mean">180.644</td>
+   <td data-field="mean_calls">180.644</td>
+   <td data-field="median_calls">161</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
@@ -286,14 +286,14 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
-   <tr data-problem="tsopt/LJ38" data-template="eon-svn/ts-lj38-lanczos-ljcut">
+   <tr data-problem="tsopt/LJ38" data-template="eon-svn/ts-lj38-lanczos-improved">
    <td>LJ38</td>
-   <td data-field="template">eon-svn/ts-lj38-lanczos-ljcut</td>
+   <td data-field="template">eon-svn/ts-lj38-lanczos-improved</td>
    <td data-field="version">Eon svn r2549</td>
    <td data-field="commit">r2549</td>
-   <td data-field="par2_mean">292.78</td>
-   <td data-field="mean_calls">292.78</td>
-   <td data-field="median_calls">219</td>
+   <td data-field="par2_mean">270.85</td>
+   <td data-field="mean_calls">270.85</td>
+   <td data-field="median_calls">180</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
@@ -311,9 +311,7 @@ The number is written only after the run finishes under the problem rule.
    </tbody></table></div>
    <p>No full ranked run</p><ul>
    <li>Al adatom on Al(100) at 250 K: partial.</li>
-   <li>LJ38 double-ended saddle: partial.</li>
    <li>lj38_2ts_separation: partial.</li>
-   <li>pt-island: partial.</li>
    <li>Al: partial.</li>
    <li>Pt: partial.</li>
    <li>lj38: partial.</li>
@@ -802,7 +800,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="globalopt/lj150" data-template="gmin/lj150-bh">
    <td>lj150</td>
    <td data-field="template">gmin/lj150-bh</td>
-   <td data-field="version">GMIN 02aaf45245af</td>
+   <td data-field="version">GMIN df8da599</td>
    <td data-field="commit">02aaf45245af</td>
    <td data-field="par2_mean">1.75804e+06</td>
    <td data-field="mean_calls">1.65804e+06</td>
@@ -810,21 +808,21 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
-   <tr data-problem="globalopt/lj38" data-template="gmin/lj38-bh">
+   <tr data-problem="globalopt/lj38" data-template="gmin/lj38-csm">
    <td>Lennard-Jones 38 global minimum</td>
-   <td data-field="template">gmin/lj38-bh</td>
-   <td data-field="version">GMIN 02aaf45245af</td>
+   <td data-field="template">gmin/lj38-csm</td>
+   <td data-field="version">GMIN df8da599</td>
    <td data-field="commit">02aaf45245af</td>
-   <td data-field="par2_mean">432092</td>
-   <td data-field="mean_calls">412092</td>
-   <td data-field="median_calls">301962</td>
-   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
+   <td data-field="par2_mean">5883.83</td>
+   <td data-field="mean_calls">5883.83</td>
+   <td data-field="median_calls">3980.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="globalopt/lj75" data-template="gmin/lj75-bhpt">
    <td>lj75</td>
    <td data-field="template">gmin/lj75-bhpt</td>
-   <td data-field="version">GMIN 02aaf45245af</td>
+   <td data-field="version">GMIN df8da599</td>
    <td data-field="commit">02aaf45245af</td>
    <td data-field="par2_mean">1.96655e+06</td>
    <td data-field="mean_calls">986545</td>
@@ -835,7 +833,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="globalopt/lj98" data-template="gmin/lj98-bh">
    <td>lj98</td>
    <td data-field="template">gmin/lj98-bh</td>
-   <td data-field="version">GMIN 02aaf45245af</td>
+   <td data-field="version">GMIN df8da599</td>
    <td data-field="commit">02aaf45245af</td>
    <td data-field="par2_mean">282815</td>
    <td data-field="mean_calls">282815</td>
@@ -913,9 +911,9 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 1</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/morse-bulk" data-template="pele/morse-mylbfgs">
+   <tr data-problem="minimization/morse-bulk" data-template="pele/morse-lbfgs">
    <td>Morse bulk</td>
-   <td data-field="template">pele/morse-mylbfgs</td>
+   <td data-field="template">pele/morse-lbfgs</td>
    <td data-field="version">pele 0.1.2</td>
    <td data-field="commit">b7081b932a06</td>
    <td data-field="par2_mean">92.06</td>
@@ -926,8 +924,6 @@ The number is written only after the run finishes under the problem rule.
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>Lennard-Jones 38 clusters: partial.</li>
-   <li>Morse bulk: partial.</li>
    <li>pele-lbfgs-M1-maxstep0.1: no per-start record.</li>
    <li>pele-lbfgs-M10-maxstep0.1: no per-start record.</li>
    <li>pele-lbfgs-M100-maxstep0.2: no per-start record.</li>
@@ -1532,8 +1528,16 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
+   <tr data-problem="saddle-search/pt-island" data-template="softsaddle/saddle-lanczos-sm0">
+   <td>Pt heptamer island</td>
+   <td data-field="template">softsaddle/saddle-lanczos-sm0</td>
+   <td data-field="version">softsaddle 2019.04</td>
+   <td data-field="commit">5a00aeede06f</td>
+   <td data-field="par2_mean">10124.2</td>
+   <td data-field="mean_calls">431.839</td>
+   <td data-field="median_calls">389</td>
+   <td data-field="failures">crash 0, divergence 4884, cap 108, wrong_stationary 6</td>
+   <td data-field="n">5000</td>
+   </tr>
    </tbody></table></div>
-   <p>No full ranked run</p><ul>
-   <li>Pt heptamer island: partial.</li>
-   </ul>
    </section>

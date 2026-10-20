@@ -490,7 +490,7 @@ def _blank_row(**values) -> dict:
         "comparable": False,
         "partial": False,
         "partial_reason": "",
-        "current": False,
+        "newest": False,
         "history": False,
         "registry_match": False,
         "call_unit": "",
@@ -500,8 +500,8 @@ def _blank_row(**values) -> dict:
         "full_n": None,
         "par2_mean": None,
         "success_rate": None,
-        "wilson_low": None,
-        "wilson_high": None,
+        "rate_low": None,
+        "rate_high": None,
         "median": None,
         "median_low": None,
         "median_high": None,
@@ -551,8 +551,8 @@ def _apply_summary(row: dict, summary: dict, records: list[dict]) -> None:
     row["n"] = int(summary["n"])
     row["par2_mean"] = summary["par2_mean"]
     row["success_rate"] = summary["success_rate"]
-    row["wilson_low"] = summary["wilson_low"]
-    row["wilson_high"] = summary["wilson_high"]
+    row["rate_low"] = summary["rate_low"]
+    row["rate_high"] = summary["rate_high"]
     row["median"] = summary["median"]
     row["median_low"] = summary["median_low"]
     row["median_high"] = summary["median_high"]
@@ -600,13 +600,13 @@ def _version_key(text: str) -> tuple[int, ...]:
 
 
 def _mark_versions(rows: list[dict]) -> None:
-    """The newest full version of a template is current. Older full versions are history."""
+    """The newest full version of a template is ranked. Older full versions are history."""
     groups: dict[tuple, list[dict]] = defaultdict(list)
     for row in rows:
         template = row.get("template") or ""
         if not template:
             row["history"] = False
-            row["current"] = bool(row.get("comparable") and not row.get("partial"))
+            row["newest"] = bool(row.get("comparable") and not row.get("partial"))
             continue
         groups[(row.get("problem"), template)].append(row)
     for group in groups.values():
@@ -615,13 +615,13 @@ def _mark_versions(rows: list[dict]) -> None:
         newest = max((_version_key(str(row.get("code_version") or "")) for row in eligible), default=None)
         for row in group:
             if id(row) in eligible_ids and _version_key(str(row.get("code_version") or "")) == newest:
-                row["current"] = True
+                row["newest"] = True
                 row["history"] = False
             elif id(row) in eligible_ids:
-                row["current"] = False
+                row["newest"] = False
                 row["history"] = True
             else:
-                row["current"] = False
+                row["newest"] = False
                 row["history"] = False
 
 
@@ -984,14 +984,14 @@ def _matches_hold(row: dict, held) -> bool:
     return any(path in held.paths for path in paths)
 
 
-def _apply_reproduction_hold(row: dict, held) -> None:
-    """Keep an exact archive rerun that missed the tolerance off the ranked table."""
+def _apply_omitted(row: dict, held) -> None:
+    """Keep a different counter off the ranked table. A numeric gap stays ranked."""
     if not _matches_hold(row, held) or row.get("_declared_partial"):
         return
     n = int(row.get("n") or 0)
     if _source_parts(row) == {"asv"} and n <= 1:
         return
-    reason = "does not reproduce the 2014 archive"
+    reason = "different counter from the archive row"
     if not row.get("scored"):
         note = str(row.get("note") or "")
         if reason not in note:
@@ -1010,13 +1010,13 @@ def build_board(root: Path) -> dict:
     asv_rows, asv_unparsed, unmapped = _asv_rows(root, problems, templates)
     unparsed.extend(asv_unparsed)
     rows = _dedup(campaign + asv_rows)
-    from .reproduction import holdback
+    from .findings import holdback
 
     held = holdback(root)
     for row in rows:
-        _apply_reproduction_hold(row, held)
+        _apply_omitted(row, held)
     for row in unparsed:
-        _apply_reproduction_hold(row, held)
+        _apply_omitted(row, held)
     full_n: dict[str, int | None] = {}
     for problem_id, problem in problems.items():
         full_n[problem_id] = stated_full_n(root, problem)
@@ -1307,11 +1307,15 @@ def _show_per_image(problem: dict) -> bool:
     return any(row.get("mean_per_image") is not None for row in rows)
 
 
+def _span(problem: dict) -> bool:
+    return str(problem.get("id") or "").startswith("globalopt/")
+
+
 def _headers(problem: dict) -> list[str]:
-    # The ranked table and the headline table list the current version only.
-    # Older versions stay in the history list, so a Current column is yes on
-    # every ranked row. The Wilson interval is one cell, low then high.
-    # Two separate columns push the minimization page over the DOM budget.
+    # The ranked table and the headline table list the newest version only.
+    # Older versions stay in the history list. The success-rate interval is
+    # one cell, low then high. Two separate columns push the minimization
+    # page over the DOM budget.
     headers = [
         "Template",
         "Version",
@@ -1319,23 +1323,25 @@ def _headers(problem: dict) -> list[str]:
         "Source",
         "PAR-2",
         "Success",
-        "Wilson",
+        "Rate",
         "Median calls",
         "Mean calls",
     ]
+    if _span(problem):
+        headers.extend(["Min", "Max"])
     if _show_per_image(problem):
         headers.append("Per-image mean")
     headers.extend(["Failures", "n"])
     return headers
 
 
-def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
+def ranked_cells(row: dict, per_image: bool, span: bool = False) -> list[tuple[str, str]]:
     """Visible ranked-table cells, in column order.
 
     The site check compares these strings with the rendered table.
-    The current flag stays on the board document. Every ranked row is
-    the newest full version of its template, and the paragraph above
-    the table already says so.
+    ``newest`` stays on the board document. Every ranked row is the
+    newest full version of its template, and the paragraph above the
+    table already says so.
     """
     cells = [
         ("template", str(row.get("template") or row.get("entry") or "")),
@@ -1345,12 +1351,15 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
         ("par2_mean", _format_number(row.get("par2_mean"))),
         ("success_rate", _format_number(row.get("success_rate"))),
         (
-            "wilson",
-            f"{_format_number(row.get('wilson_low'))}–{_format_number(row.get('wilson_high'))}",
+            "rate",
+            f"{_format_number(row.get('rate_low'))}–{_format_number(row.get('rate_high'))}",
         ),
         ("median_calls", _format_number(row.get("median_calls"))),
         ("mean_calls", _format_number(row.get("mean_calls"))),
     ]
+    if span:
+        cells.append(("min_calls", _format_number(row.get("min_calls"))))
+        cells.append(("max_calls", _format_number(row.get("max_calls"))))
     if per_image:
         cells.append(("mean_per_image", _format_number(row.get("mean_per_image"))))
     cells.append(("failures", _failure_text(row.get("failures") or {})))
@@ -1358,9 +1367,10 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
     return cells
 
 
-def _row_cells(row: dict, per_image: bool) -> str:
+def _row_cells(row: dict, per_image: bool, span: bool = False) -> str:
     return "".join(
-        f'<td data-field="{field}">{_cell(value)}</td>' for field, value in ranked_cells(row, per_image)
+        f'<td data-field="{field}">{_cell(value)}</td>'
+        for field, value in ranked_cells(row, per_image, span)
     )
 
 
@@ -1550,7 +1560,7 @@ def headline_table(problem: dict) -> str:
     ]
     ranked = list(problem.get("ranked") or [])
     if ranked:
-        lines.append(f"<tr>{_row_cells(ranked[0], per_image)}</tr>")
+        lines.append(f"<tr>{_row_cells(ranked[0], per_image, _span(problem))}</tr>")
     else:
         lines.append(f'<tr><td colspan="{len(headers)}">No full harness row.</td></tr>')
     lines.append("</tbody></table></div>")
@@ -1593,7 +1603,7 @@ def _table(
     headers = _headers(problem)
     caption = (
         "Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. "
-        "Wilson bounds are the 95% interval on the success rate."
+        "Rate bounds are the 95% interval on the success rate."
     )
     if per_image:
         caption += " Per-image mean divides that total by the problem's moving images, the same way for every code."
@@ -1628,7 +1638,7 @@ def _table(
     lines.append(f"<caption>{caption}</caption>")
     lines.append("<thead><tr>" + "".join(f"<th>{_cell(header)}</th>" for header in headers) + "</tr></thead><tbody>")
     for row in ranked:
-        lines.append(f"<tr>{_row_cells(row, per_image)}</tr>")
+        lines.append(f"<tr>{_row_cells(row, per_image, _span(problem))}</tr>")
     if not ranked:
         lines.append(f'<tr><td colspan="{len(headers)}">No full harness row.</td></tr>')
     lines.append("</tbody></table></div>")

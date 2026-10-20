@@ -1,4 +1,4 @@
-"""The archived GMIN log line is the reproduction counter."""
+"""The archived GMIN log line is the function-call counter."""
 
 from optbench.runners.gmin_paper import parse_log
 

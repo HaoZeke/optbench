@@ -12,7 +12,7 @@
       "code_version": "0.1.2",
       "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
       "entry": "pele-b7081b93-lj38-fire",
-      "legacy": {
+      "success_mean": {
         "force_calls": 1264,
         "force_calls_max": 9168,
         "force_calls_min": 262,
@@ -42,12 +42,12 @@
         "par_factor": 2,
         "q25": 537.0,
         "q75": 1318.25,
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-rate-bootstrap",
         "success_only_mean": 1240.9464285714287,
         "success_rate": 0.952,
         "successes": 952,
-        "wilson_high": 0.963606698979192,
-        "wilson_low": 0.936933911349866
+        "rate_high": 0.963606698979192,
+        "rate_low": 0.936933911349866
       },
       "parameters": {
         "Nmin": 5,
@@ -27191,6 +27191,6 @@
     }
   ],
   "schema": "optbench.result/v2",
-  "scoring": "par2-wilson-bootstrap",
+  "scoring": "par2-rate-bootstrap",
   "status": "archive"
 }

@@ -1,23 +1,17 @@
-"""Reproduction ledger for the 2014 archive and the JCTC tables.
+"""Archive rows beside later campaign files.
 
-A row is reproduced when every archived metric is within one archived
-standard error or 10 percent, and the failure count sits in the Wilson
-interval of the archived failure count. The ledger is
-``oracle/reproduction.jsonl``. ``paper_baseline`` marks the rerun whose
-score is the published comparison. The 2014 pele transition-state stop
-is the first RMS crossing plus one eigenvector search, with the
-transverse-screen calls left out.
+The archived numbers are the paper rows. A campaign file recorded next
+to a row is a finding: the same metric, both numbers, and the gap.
+There is no pass/fail window. ``oracle/findings.jsonl`` is that record.
+The 2014 pele transition-state stop is the first RMS crossing plus one
+eigenvector search, with the transverse-screen calls left out.
 """
 
 from __future__ import annotations
 
 import json
-import math
 import subprocess
 from pathlib import Path
-
-RELATIVE = 0.10
-Z = 1.96
 
 # Numbered tables in Chill et al., JCTC 2014, 10, 5476. SoftSaddle is the
 # April 2019 website, already in the oracle, and is not one of those tables.
@@ -117,6 +111,7 @@ SHA = {
     "entries/eon-svn-htst": "715bc521c827f1f18102c1c027d99d0d8624b0fb",
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "cells/gmin/go-paper": "71f366d9e50b7eedcdc22c75ab0cbba0188d578c",
+    "cells/gmin/go": "0281132677ac00e546303eb6061e76fa9b177cdb",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
 }
 
@@ -202,11 +197,11 @@ MATCHES: list[dict] = [
     {"key": "globalopt/lj38/eon-basinhopping", "template": "eon-client/bh-lj38", "branch": "entries/eon-svn-lane-a", "path": "results/campaign/eon-client-bh-lj38.dat"},
     {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "cells/pele/go", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
     {"key": "globalopt/lj38/gmin-nosym", "template": "gmin-paper/lj38-nosym", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-lj38-nosym.dat"},
-    {"key": "globalopt/lj38/gmin-csm", "template": "gmin-paper/lj38-csm", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-lj38-csm.dat", "cause": "gmin_csm"},
+    {"key": "globalopt/lj38/gmin-csm", "template": "gmin/lj38-csm", "branch": "cells/gmin/go", "path": "results/campaign/gmin-df8da599-lj38-csm.dat", "cause": "gmin_csm", "ranked_path": "results/campaign/gmin-df8da599-lj38-csm.dat", "ranked_branch": "cells/gmin/go"},
     {"key": "globalopt/lj38/gmin-symmetrise", "template": "gmin-paper/lj38-symmetrise", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-lj38-symmetrise.dat"},
     {"key": "globalopt/lj75/gmin", "template": "gmin-paper/lj75", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-lj75.dat"},
     {"key": "globalopt/lj98/gmin-nosym", "template": "gmin-paper/lj98-nosym", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-lj98-nosym.dat", "metrics": ["energy_calls_mean", "basin_hopping_steps_mean"], "cause": "gmin_nosym_calls"},
-    {"key": "globalopt/lj98/gmin-symmetrise", "template": "gmin-paper/lj98-symmetrise", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-lj98-symmetrise.dat", "metrics": ["energy_calls_mean", "basin_hopping_steps_mean"], "cause": "gmin_quench_count"},
+    {"key": "globalopt/lj98/gmin-symmetrise", "template": "gmin-paper/lj98-symmetrise", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-lj98-symmetrise.dat", "metrics": ["energy_calls_mean", "basin_hopping_steps_mean"], "cause": "gmin_quench_count", "ranked_path": "results/campaign/gmin-02aaf45245af-lj98-bh.dat", "ranked_branch": "cells/gmin/go"},
     {"key": "globalopt/lj150/gmin-nosym", "template": "gmin-paper/lj150-nosym", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-lj150-nosym.dat", "metrics": ["energy_calls_mean", "basin_hopping_steps_mean"], "cause": "gmin_quench_count"},
     {"key": "globalopt/lj150/gmin-symmetrise", "template": "gmin-paper/lj150-symmetrise", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-lj150-symmetrise.dat", "metrics": ["energy_calls_mean", "basin_hopping_steps_mean"], "cause": "gmin_quench_count"},
     {"key": "globalopt/tip4p10/gmin", "template": "gmin-paper/tip4p10", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-tip4p10.dat"},
@@ -222,17 +217,17 @@ MATCHES: list[dict] = [
 
 CAUSE_TEXT = {
     "lj38_ts_starts": (
-        "Inside the 10% band (207.51 vs 192). "
+        "The 2014-stop mean is 207.51 against the archive 192. "
         "Archive run.sh unpacks coords-xyz.tar.gz (200 xyz, max pair about 4.4). "
         "The harness problem points at coords-con.tar.gz (max pair about 37). "
         "Kabsch RMS is about 6.33, so the sets are not the same geometry. "
         "Neither set has a pair past cutoff 40, and both drivers use RMS tolerance 1e-3/sqrt(114). "
-        "The 8% residual is the starting set. The paper baseline is this 2014-stop mean, not the harness-stop mean 254.48."
+        "The starting set is the gap. The archive row is this 2014-stop mean. The harness-stop mean is 254.48."
     ),
     "lj38_ts_starts_cd": (
-        "Inside the 10% band (263.52 vs 254). The same xyz-versus-con starting set as ts-ffd. "
+        "The 2014-stop mean is 263.52 against the archive 254. The same xyz-versus-con starting set as ts-ffd. "
         "findTS_local.py for the CD row does not pass orthogZeroEigs; the harness template sets orthog translations-rotations. "
-        "The paper baseline is this 2014-stop mean, not the harness-stop mean 335.06."
+        "The archive row is this 2014-stop mean. The harness-stop mean is 335.06."
     ),
     "optim_lj38_ts": (
         "Archive run.sh unpacks coords-xyz.tar.gz. The harness uses the problem coords-con set (Kabsch RMS about 6.33). "
@@ -240,13 +235,13 @@ CAUSE_TEXT = {
     ),
     "pt_lanczos": (
         "The svn template uses the archived Lanczos keys (10 iterations, tolerance 0.05) and shifted Morse::force. "
-        "Dimer and climbing-image on that kernel reproduce. Lanczos does not, and the failure count is 0 against 5 or 8."
+        "Dimer and climbing-image on that kernel match the archive counts. Lanczos does not, and the failure count is 0 against 5 or 8."
     ),
     "ase_morse_script": (
         "ASE 3.29 with the archived Morse script (L-BFGS memory 20, maxstep 0.2, alpha 25; FIRE maxstep 0.2; PreconLBFGS Exp A 3) "
         "scores 32, 113, and 29 against 53.8, 147.47, and 34. "
         "Constructor-default L-BFGS scores 53, next to 53.8, but that is not the archived alpha and memory. "
-        "eOn Morse L-BFGS and FIRE on the same bulk file reproduce, so the geometry set is not the split."
+        "eOn Morse L-BFGS and FIRE on the same bulk file match the archive, so the geometry set is not the split."
     ),
     "optim_pt_units": (
         "archive run.sh divides coordinates by r0 = 2.897 and scales rho and rcut into those units. "
@@ -257,7 +252,7 @@ CAUSE_TEXT = {
         "The harness score is pes.evaluate on the harness potential."
     ),
     "optim_morse_memory": (
-        "comments.txt sets L-BFGS memory 100 and maximum move 2.0. That rerun scores 27. "
+        "comments.txt sets L-BFGS memory 100 and maximum move 2.0. That run scores 27. "
         "OPTIM defaults (updates 4) score 46, which is the archived integer, but that is not the comment's setup. "
         "The odata preamble was not archived."
     ),
@@ -265,17 +260,17 @@ CAUSE_TEXT = {
         "The Rayleigh-Ritz template uses updates 4. The archived first-order mean is 25 and the second-order mean is 46. "
         "This default scores 61, so it is not either archived order."
     ),
-    "pele_fire": "pele FIRE on LJ38 scores 1264 with 7 failures. The archive is 709 with 0 failures. The M100 L-BFGS row on the same build reproduces, so this is the FIRE step, not the LJ kernel.",
-    "pele_morse": "pele Morse L-BFGS scores 92. The archive is 51. eOn Morse L-BFGS on the same bulk file reproduces at 52, so the gap is the pele memory and step, not the shared Morse parameters.",
-    "morse_sd": "eOn Morse steepest descent scores 7038 with 19 failures. The archive is 196 with 0. Morse L-BFGS, CG, and FIRE on the same client reproduce, so the kernel is not the split.",
-    "improved_unset": "The r2549 template turns improved on. The 2014 ini left that key unset. The mean lands outside 10 percent.",
-    "sella_trust": "Sella 2.6.0 with the archived trust-region numbers (eta, gamma, delta0, rho, sigma) is the parameter_source=archive row. It misses the 2014 mean. The constructor-default row is a different setup.",
-    "heptamer_cg": "The 3.5.0 file already stores the per-image mean, 142 against the archive 120. L-BFGS, FIRE, and QM on the same 8-image spring-5 climb reproduce, so the image count is not the split.",
-    "de_exclusion": "The 3.5.0 doubly-nudged file is the per-band mean under the 2500-call exclusion (708, 5 failures). The archive mean is 861. The client total is a different counter and is also outside 10 percent.",
+    "pele_fire": "pele FIRE on LJ38 scores 1264 with 7 failures. The archive is 709 with 0 failures. The M100 L-BFGS row on the same build matches the archive, so this is the FIRE step, not the LJ kernel.",
+    "pele_morse": "pele Morse L-BFGS scores 92. The archive is 51. eOn Morse L-BFGS on the same bulk file matches the archive at 52, so the gap is the pele memory and step, not the shared Morse parameters.",
+    "morse_sd": "eOn Morse steepest descent scores 7038 with 19 failures. The archive is 196 with 0. Morse L-BFGS, CG, and FIRE on the same client match the archive, so the kernel is not the split.",
+    "improved_unset": "The r2549 template turns improved on. The 2014 ini left that key unset. The means differ.",
+    "sella_trust": "Sella 2.6.0 with the archived trust-region numbers (eta, gamma, delta0, rho, sigma) is the parameter_source=archive row. The mean differs from the 2014 row. The constructor-default row is a different setup.",
+    "heptamer_cg": "The 3.5.0 file already stores the per-image mean, 142 against the archive 120. L-BFGS, FIRE, and QM on the same 8-image spring-5 climb match the archive, so the image count is not the split.",
+    "de_exclusion": "The 3.5.0 doubly-nudged file is the per-band mean under the 2500-call exclusion (708, 5 failures). The archive mean is 861. The client total is a different counter and differs as well.",
     "eon_saddle_count": (
-        "The classic dimer campaign (improved false, the 2014 key) has fraction_connected 0.692 against 0.746, inside 10 percent, "
-        "but force calls 6.97e6 against 3.78e6 and unique saddles 91.7 against 109.2. "
-        "The archive standard error on the force calls is 5.27e5. "
+        "The classic dimer campaign (improved false, the 2014 key) has fraction_connected 0.692 against 0.746, "
+        "force calls 6.97e6 against 3.78e6, and unique saddles 91.7 against 109.2. "
+        "The archive dispersion on the force calls is 5.27e5. "
         "This eOn AKMC counter is not the harness RMSD link test."
     ),
     "saddle_novelty": (
@@ -289,44 +284,43 @@ CAUSE_TEXT = {
         "The harness uses pele LJCluster defaults (temperature 1, step 0.6, LBFGS memory 4) on unshifted cutoff 40. "
         "The mean is 688720 against 521595."
     ),
-    "htst_al": "The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) misses barrier_force_calls and rate_force_calls by about 30 percent. Pt dimer CG with max 10 reproduces all four hTST counts.",
+    "htst_al": "The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) differs on barrier_force_calls and rate_force_calls by about 30 percent. Pt dimer CG with max 10 matches all four hTST counts.",
     "akmc_vs_langevin": (
         "The archive rows are Langevin parallel replica. The harness rows are AKMC. "
         "On infra/aladatom-repro, eon/aladatom-akmc true_rate 3.597591452e9 is 14.1 times 2.542941e8, "
         "and eon/standard-aladatom-akmc true_rate 3.80613e7 is 45.5 times 8.359e5."
     ),
     "gmin_csm": (
-        "The 06 Aug 2014 file names code wales-27058. This rerun is serial GMIN at SVNREV df8da599, "
-        "the live svn tarball, whose sha256 is not the pinned 02aaf452 source. "
-        "The data file is the archive file, RANSEED is unset, and the potential is GMIN's own LJ. "
-        "nosym on that binary is 3.8 percent high and symmetrise is 7.7 percent high. "
-        "SYMMETRISECSM is 4978 against 6421. The 2014 tarball is not published."
+        "The 06 Aug 2014 file names code wales-27058. That binary is not published. "
+        "GMIN df8da599 has SYMMETRISECSM, so the ranked row runs on df8da599. "
+        "The deck is the archive data file: TEMPERATURE 3.0, NEWRESTART 30, AVOID 1.25 18, "
+        "STEP 0.43 0.52, SLOPPYCONV 0.002, PERMDIST 0.005, MAXIT 1000 1000, STEPS 90000000 1.0, "
+        "SAVE 1, SORT, and SYMMETRISECSM 1 CI 1.0D-6 30 1 50. RANSEED is unset. "
+        "The problem file states no max_force_calls, so the campaign cap is the lj38 template budget 2000000."
     ),
     "gmin_quench_count": (
-        "The 03 Oct 2022 files and this rerun use the same data file, SDPRND seed 0, and serial GMIN. "
-        "Calls per quench match. The rerun takes more quenches, so both the energy-call mean and the step mean move together. "
-        "lj150 symmetrise energy stays inside 10 percent and the step mean does not. nfailed is 0. "
-        "The archived lj98 and lj150 run.sh loops to 200 and names a directory that is not in the tarball. "
-        "The tarball has 100 numbered coords files, which is the sample."
+        "The 03 Oct 2022 files and the serial df8da599 run use the same data file and SDPRND seed 0. "
+        "Calls per quench match. The run takes more quenches, so the energy-call mean and the step mean move together. "
+        "nfailed is 0. The archived lj98 and lj150 run.sh loops to 200 and names a directory that is not in the tarball. "
+        "The tarball has 100 numbered coords files, which is the sample. "
+        "The lj98 symmetrise harness rows are GMIN df8da599 on that deck."
     ),
     "gmin_tip4p15": (
         "tip4p10 basin-hopping and temperature basin-paving, and tip4p15 temperature basin-paving, "
-        "are inside 10 percent on this serial binary. tip4p15 basin-hopping is 580721 against 670645. "
+        "are close to the archive on this serial binary. tip4p15 basin-hopping is 580721 against 670645. "
         "The data file is the archive file, including MAXIT 1.D4 and STEPS 1.D7, and RANSEED is 100."
     ),
     "gmin_tip4p20": (
-        "tip4p20 temperature basin-paving is 28089000 against 25566700 and stays inside 10 percent. "
+        "tip4p20 temperature basin-paving is 28089000 against 25566700. "
         "Basin-hopping is 32513200 against 28596700. The median is 19448700 against 19467100. "
         "Start 32 hits at 317150614 calls. The 09 May 2014 maximum is 141910000. nfailed is 0. "
-        "The data file is the archive file, including STEP 0 0 1.41, STEPS 4.D7, RADIUS 1.D1, and RANSEED 100. "
-        "The 2014 file has no standard deviation, so the gate is 10 percent."
+        "The data file is the archive file, including STEP 0 0 1.41, STEPS 4.D7, RADIUS 1.D1, and RANSEED 100."
     ),
     "gmin_nosym_calls": (
-        "The 03 Oct 2022 nosym file and this rerun use the same data file: STEPS 10000000 1.0, "
+        "The 03 Oct 2022 nosym file and the serial df8da599 run use the same data file: STEPS 10000000 1.0, "
         "TEMPERATURE 0.44, NEWRESTART 200, AVOID 3.0 20, SAVE 5, and no RANSEED. nfailed is 0. "
         "Quenches are 49658 against 43820. Function calls are 6791676 against 59885724. "
-        "Calls per quench are 137 against 1367. Symmetrise on this serial binary keeps the archived "
-        "calls per quench, about 195."
+        "Calls per quench are 137 against 1367. Symmetrise on this serial binary keeps about 195 calls per quench."
     ),
 }
 
@@ -335,34 +329,23 @@ def row_id(row: dict) -> str:
     return f"{row['suite']}/{row['problem']}/{row['entry']}"
 
 
-def within_mean(archive: float, rerun: float, se: float | None) -> bool:
-    """True when the rerun is inside one standard error or 10 percent."""
-    if archive == 0:
-        close = rerun == 0
-    else:
-        close = abs(rerun - archive) / abs(archive) <= RELATIVE + 1e-12
-    if se is None:
-        return close
-    return close or abs(rerun - archive) <= float(se) + 1e-9
-
-
-def wilson_count_bounds(failures: float, sample: int, z: float = Z) -> tuple[float, float]:
-    """Wilson interval on the archived failure count, in counts."""
-    if sample <= 0:
-        return 0.0, 0.0
-    proportion = failures / sample
-    z2 = z * z
-    denominator = 1.0 + z2 / sample
-    center = (proportion + z2 / (2.0 * sample)) / denominator
-    margin = z * math.sqrt(proportion * (1.0 - proportion) / sample + z2 / (4.0 * sample * sample)) / denominator
-    low = max(0.0, center - margin) * sample
-    high = min(1.0, center + margin) * sample
-    return low, high
-
-
-def failure_inside(archive_failures: float, rerun_failures: float, sample: int) -> bool:
-    low, high = wilson_count_bounds(archive_failures, sample)
-    return low - 1e-9 <= rerun_failures <= high + 1e-9
+LOCAL_BRANCHES = {"main", "cells/gmin/go", "cells/gmin/go-paper"}
+FINDINGS_PATH = "oracle/findings.jsonl"
+FORBIDDEN = (
+    "reproduced",
+    "reproduce",
+    "reproduction ledger",
+    "Wilson",
+    "10% band",
+    "10 percent",
+    "standard error",
+    "standard-error",
+    "not_rerun",
+    "not rerun",
+    "legacy",
+    "paper baseline",
+    "paper_baseline",
+)
 
 
 def _float(value: str | None) -> float | None:
@@ -386,30 +369,6 @@ def parse_dat(text: str) -> dict[str, str]:
     return fields
 
 
-def standard_error(
-    fields: dict[str, str],
-    metric: str,
-    archive: float,
-    sample: int | None = None,
-) -> float | None:
-    if metric == "force_calls":
-        found = _float(fields.get("force_calls_mean_error"))
-        if found is not None:
-            return found
-    if metric == "true_rate":
-        found = _float(fields.get("uncertainty") or fields.get("uncertanity"))
-        if found is not None:
-            return found
-        percent = _float(fields.get("percent_uncertainty"))
-        if percent is not None:
-            return abs(archive) * percent / 100.0
-    if metric.endswith("_mean") and sample:
-        std = _float(fields.get(metric[: -len("_mean")] + "_stddev"))
-        if std is not None:
-            return float(std) / math.sqrt(sample)
-    return None
-
-
 def metrics_for(fields: dict[str, str], kind: str, explicit: list[str] | None) -> list[str]:
     if explicit:
         return list(explicit)
@@ -426,41 +385,22 @@ def metrics_for(fields: dict[str, str], kind: str, explicit: list[str] | None) -
     return ["force_calls"]
 
 
-def judge_checks(checks: list[dict], failure: dict | None) -> str:
-    if not checks:
-        return "not_rerun"
-    ok = all(item["ok"] for item in checks)
-    if failure is not None and not failure["ok"]:
-        ok = False
-    return "reproduced" if ok else "not_reproduced"
-
-
-def build_checks(
+def collect_values(
     archived_fields: dict[str, str],
-    rerun_fields: dict[str, str],
+    campaign_fields: dict[str, str],
     names: list[str],
     value_from: dict[str, str] | None,
-    sample: int | None = None,
 ) -> list[dict]:
-    checks = []
+    values = []
     renaming = value_from or {}
     for name in names:
         archive = _float(archived_fields.get(name))
         source = renaming.get(name, name)
-        rerun = _float(rerun_fields.get(source))
-        if archive is None or rerun is None:
+        harness = _float(campaign_fields.get(source))
+        if archive is None or harness is None:
             continue
-        error = standard_error(archived_fields, name, archive, sample)
-        checks.append(
-            {
-                "metric": name,
-                "archive": archive,
-                "rerun": rerun,
-                "se": error,
-                "ok": within_mean(archive, rerun, error),
-            }
-        )
-    return checks
+        values.append({"metric": name, "archive": archive, "harness": harness})
+    return values
 
 
 def screen_fields(text: str) -> dict[str, str]:
@@ -483,19 +423,16 @@ def screen_fields(text: str) -> dict[str, str]:
         "nfailed": str(failed),
         "n": str(count),
         "harness_stop_mean": f"{harness_mean:.6g}",
-        "baseline_metric": "stop2014_calls",
+        "metric": "stop2014_calls",
     }
 
 
 def read_campaign(root: Path, branch: str, path: str) -> str:
     local = root / path
-    # This branch's campaigns are in the working tree until the tip is on origin.
-    if branch in {"main", "cells/gmin/go-paper"} and local.is_file():
+    if branch in LOCAL_BRANCHES and local.is_file():
         return local.read_text(encoding="utf-8")
     if branch == "main":
         return local.read_text(encoding="utf-8")
-    import subprocess
-
     return subprocess.check_output(
         ["git", "show", f"origin/{branch}:{path}"],
         cwd=root,
@@ -505,15 +442,11 @@ def read_campaign(root: Path, branch: str, path: str) -> str:
 
 def _sha(branch: str) -> str:
     if branch == "cells/optim/saddle-pt" and len(SHA.get(branch, "")) < 12:
-        import subprocess
-
         SHA[branch] = subprocess.check_output(
             ["git", "rev-parse", "origin/cells/optim/saddle-pt"],
             text=True,
         ).strip()
     if branch == "cells/pele/ts" and "cells/pele/ts" not in SHA:
-        import subprocess
-
         SHA[branch] = subprocess.check_output(
             ["git", "rev-parse", "origin/cells/pele/ts"],
             text=True,
@@ -532,7 +465,7 @@ def load_ledger(path: Path) -> list[dict]:
 
 
 class Hold:
-    """Exact-setup reruns that must stay off the ranked table."""
+    """Templates kept off the ranked table because they are a different counter."""
 
     def __init__(self) -> None:
         self.templates: set[tuple[str, str]] = set()
@@ -543,94 +476,48 @@ class Hold:
 
 
 def holdback(root: Path) -> Hold:
-    """Templates and campaign paths whose archive rerun missed the tolerance.
-
-    ``hold`` entries are included for every ledger row. A reproduced
-    per-image file can still keep a raw-total template off the table.
-    """
+    """Explicit omitted templates. A numeric gap does not remove a row."""
     found = Hold()
-    for row in load_ledger(root / "oracle" / "reproduction.jsonl"):
-        rerun = row.get("rerun") or {}
+    for row in load_ledger(root / FINDINGS_PATH):
+        beside = row.get("beside") or {}
         problem = f"{row['suite']}/{row['problem']}"
-        template = str(rerun.get("template") or "")
-        if row.get("status") == "not_reproduced":
-            if template:
-                found.templates.add((problem, template))
-            rel = str(rerun.get("path") or "")
-            if rel:
-                found.paths.add(rel)
-        for extra in rerun.get("hold") or []:
+        for extra in beside.get("omitted") or []:
             found.templates.add((problem, str(extra)))
     return found
 
 
-def _local_fields(root: Path, rerun: dict) -> dict[str, str] | None:
-    path = root / str(rerun.get("path") or "")
-    branch = str(rerun.get("branch") or "")
-    if path.is_file() and branch in {"main", "cells/gmin/go-paper"} and rerun.get("kind", "dat") == "dat":
+def _local_fields(root: Path, beside: dict) -> dict[str, str] | None:
+    path = root / str(beside.get("path") or "")
+    branch = str(beside.get("branch") or "")
+    if path.is_file() and branch in LOCAL_BRANCHES and beside.get("kind", "dat") == "dat":
         return parse_dat(path.read_text(encoding="utf-8"))
     return None
 
 
-def baseline_errors(root: Path) -> list[str]:
-    """Paper-baseline rows whose live campaign misses the archive tolerance."""
+def campaign_mismatch(root: Path) -> list[str]:
+    """Stored harness numbers must equal the campaign file on disk."""
     errors = []
-    ledger = load_ledger(root / "oracle" / "reproduction.jsonl")
-    marked = []
-    for row in ledger:
-        rerun = row.get("rerun") or {}
-        if not rerun.get("paper_baseline"):
+    for row in load_ledger(root / FINDINGS_PATH):
+        beside = row.get("beside") or {}
+        if not beside:
             continue
-        ident = row_id(row)
-        marked.append(rerun.get("template"))
-        if row.get("status") != "reproduced":
-            errors.append(f"{ident} is paper_baseline and {row.get('status')}")
-            continue
-        fields = _local_fields(root, rerun)
+        fields = _local_fields(root, beside)
         if fields is None:
             continue
-        names = [item["metric"] for item in row.get("checks") or []]
-        fresh = build_checks(
-            {item["metric"]: str(item["archive"]) for item in row["checks"]},
-            fields,
-            names,
-            None,
-        )
-        # The archived side of a stored check has no mean-error key. Carry se.
-        by_metric = {item["metric"]: item for item in row["checks"]}
-        for item in fresh:
-            stored = by_metric.get(item["metric"])
-            if stored is None:
+        ident = row_id(row)
+        for item in row.get("values") or []:
+            live = _float(fields.get(item["metric"]))
+            if live is None:
                 continue
-            item["se"] = stored.get("se")
-            item["ok"] = within_mean(item["archive"], item["rerun"], item["se"])
-            if not item["ok"]:
+            if live != item["harness"]:
                 errors.append(
-                    f"{ident} {item['metric']} is {item['rerun']} outside the archive {item['archive']}"
+                    f"{ident} {item['metric']} stored {item['harness']} and the campaign file has {live}"
                 )
-        failure = row.get("failure_check")
-        if failure and "nfailed" in fields and failure.get("sample"):
-            rerun_failures = _float(fields.get("nfailed"))
-            if rerun_failures is not None and not failure_inside(
-                float(failure["archive"]), rerun_failures, int(failure["sample"])
-            ):
-                errors.append(f"{ident} nfailed {rerun_failures} is outside the archived interval")
-    templates = root / "templates"
-    if templates.is_dir():
-        import tomllib
-
-        known = {item for item in marked if item}
-        for path in templates.rglob("*.toml"):
-            data = tomllib.loads(path.read_text(encoding="utf-8"))
-            if data.get("paper_baseline") and data.get("id") not in known:
-                errors.append(f"{data.get('id')} sets paper_baseline and is not a reproduced ledger row")
     return errors
 
 
 def _git_blob_size(root: Path, path: Path) -> int | None:
     rel = path.relative_to(root).as_posix()
-    import subprocess
-
     try:
         out = subprocess.check_output(
             ["git", "cat-file", "-s", f":{rel}"],
@@ -645,8 +532,6 @@ def _git_blob_size(root: Path, path: Path) -> int | None:
 
 def _lfs_tracked(root: Path, path: Path) -> bool:
     rel = path.relative_to(root).as_posix()
-    import subprocess
-
     try:
         out = subprocess.check_output(
             ["git", "check-attr", "filter", "--", rel],
@@ -685,52 +570,91 @@ def large_endpoint_files(root: Path, limit: int = 1_000_000) -> list[str]:
     return errors
 
 
-def reproduction_errors(root: Path) -> list[str]:
-    ledger_path = root / "oracle" / "reproduction.jsonl"
+def _forbidden(text: str) -> list[str]:
+    found = []
+    for phrase in FORBIDDEN:
+        if phrase in text:
+            found.append(phrase)
+    return found
+
+
+def findings_errors(root: Path) -> list[str]:
+    ledger_path = root / FINDINGS_PATH
     if not ledger_path.is_file():
-        return ["oracle/reproduction.jsonl is missing"]
+        return [f"{FINDINGS_PATH} is missing"]
     from .check import load_oracle
 
     oracle = load_oracle(root / "oracle" / "entries.jsonl")
-    ledger = load_ledger(ledger_path)
+    stored = load_ledger(ledger_path)
     errors = []
-    if len(ledger) != len(oracle):
-        errors.append(f"reproduction ledger has {len(ledger)} rows and the oracle has {len(oracle)}")
-    oracle_ids = [row_id(row) for row in oracle]
-    ledger_ids = [row_id(row) for row in ledger]
-    if oracle_ids != ledger_ids:
-        errors.append("reproduction ledger is not in oracle order")
-    for row in ledger:
-        status = judge_checks(row.get("checks") or [], row.get("failure_check") if row.get("rerun") else None)
-        if row.get("rerun") is None:
-            status = "not_rerun"
-        if status != row.get("status"):
-            errors.append(f"{row_id(row)} stored {row.get('status')} and the checks say {status}")
-        if row.get("rerun", {}) and row["rerun"].get("paper_baseline") and row.get("status") != "reproduced":
-            errors.append(f"{row_id(row)} paper_baseline is not reproduced")
-    errors.extend(baseline_errors(root))
+    if len(stored) != len(oracle):
+        errors.append(f"findings have {len(stored)} rows and the oracle has {len(oracle)}")
+    if [row_id(row) for row in stored] != [row_id(row) for row in oracle]:
+        errors.append("findings are not in oracle order")
+    fresh = build_rows(root)
+    for left, right in zip(stored, fresh):
+        if left != right:
+            errors.append(f"{row_id(left)} stored finding does not match the campaign files")
+            break
+    errors.extend(campaign_mismatch(root))
+    blob = ledger_path.read_text(encoding="utf-8")
+    for phrase in _forbidden(blob):
+        errors.append(f"findings contain {phrase}")
+    note = root / "docs" / "findings.md"
+    if note.is_file():
+        for phrase in _forbidden(note.read_text(encoding="utf-8")):
+            errors.append(f"docs/findings.md contains {phrase}")
+    else:
+        errors.append("docs/findings.md is missing")
     errors.extend(large_endpoint_files(root))
     return errors
 
 
-def _gap(checks: list[dict], failure: dict | None) -> str:
+def _gap(values: list[dict], failure: dict | None) -> str:
     parts = []
-    for item in checks:
-        if item["ok"]:
-            continue
+    for item in values:
         archive = item["archive"]
-        rerun = item["rerun"]
+        harness = item["harness"]
+        if archive == harness:
+            continue
         if archive:
-            relative = abs(rerun - archive) / abs(archive)
-            parts.append(f"{item['metric']} {rerun:g} vs {archive:g} ({relative:.1%})")
+            relative = abs(harness - archive) / abs(archive)
+            parts.append(f"{item['metric']} {harness:g} vs {archive:g} ({relative:.1%})")
         else:
-            parts.append(f"{item['metric']} {rerun:g} vs {archive:g}")
-    if failure and not failure["ok"]:
-        parts.append(
-            f"nfailed {failure['rerun']:g} vs {failure['archive']:g} "
-            f"(interval {failure['low']:.2f} to {failure['high']:.2f})"
-        )
+            parts.append(f"{item['metric']} {harness:g} vs {archive:g}")
+    if failure and failure["archive"] != failure["harness"]:
+        parts.append(f"nfailed {failure['harness']:g} vs {failure['archive']:g}")
     return "; ".join(parts)
+
+
+def _drop_none(row: dict) -> dict:
+    return {key: value for key, value in row.items() if value is not None}
+
+
+def _ranked_block(text: str) -> dict | None:
+    fields = parse_dat(text)
+    if "par2_mean" not in fields and "n" not in fields:
+        return None
+    n = _float(fields.get("n"))
+    failed = _float(fields.get("nfailed") or fields.get("v2_nfailed"))
+    successes = None if n is None or failed is None else n - failed
+    code = fields.get("code", "")
+    version = fields.get("code_version", "")
+    block = _drop_none(
+        {
+            "label": f"{code} {version}".strip(),
+            "n": n,
+            "successes": successes,
+            "nfailed": failed,
+            "par2_mean": _float(fields.get("par2_mean")),
+            "mean": _float(fields.get("force_calls")),
+            "median": _float(fields.get("median") or fields.get("par2_median")),
+            "min": _float(fields.get("force_calls_min")),
+            "max": _float(fields.get("force_calls_max")),
+            "cap": _float(fields.get("cap")),
+        }
+    )
+    return block or None
 
 
 def build_rows(root: Path) -> list[dict]:
@@ -756,76 +680,92 @@ def build_rows(root: Path) -> list[dict]:
                 "algorithm": fields.get("algorithm", ""),
                 "code_version": fields.get("code_version", ""),
             },
-            "rerun": None,
-            "checks": [],
-            "failure_check": None,
-            "status": "not_rerun",
+            "beside": None,
+            "values": [],
+            "failure_counts": None,
             "gap": "",
-            "cause": "",
-            "cause_detail": "",
+            "finding_id": "",
+            "finding": "",
         }
         paper = PAPER_METRIC.get(ident)
         if paper:
-            record["paper_metric"] = {"name": paper[0], "value": paper[1]}
+            record["table_metric"] = {"name": paper[0], "value": paper[1]}
         if match is None:
             if ident.startswith("accelerated-md/"):
-                record["cause"] = "akmc_vs_langevin"
-                record["cause_detail"] = CAUSE_TEXT["akmc_vs_langevin"]
+                record["finding_id"] = "akmc_vs_langevin"
+                record["finding"] = CAUSE_TEXT["akmc_vs_langevin"]
             built.append(record)
             continue
         kind = match.get("kind", "dat")
         try:
             text = read_campaign(root, match["branch"], match["path"])
         except (OSError, subprocess.CalledProcessError):
+            named = match.get("cause", "")
+            if named:
+                record["finding_id"] = named
+                record["finding"] = CAUSE_TEXT.get(named, "")
             built.append(record)
             continue
-        rerun_fields = screen_fields(text) if kind == "screen" else parse_dat(text)
+        campaign_fields = screen_fields(text) if kind == "screen" else parse_dat(text)
         names = metrics_for(fields, kind, match.get("metrics"))
-        checks = build_checks(fields, rerun_fields, names, match.get("value_from"), sample)
+        values = collect_values(fields, campaign_fields, names, match.get("value_from"))
         failure = None
         archive_failures = _float(fields.get("nfailed"))
-        rerun_failures = _float(rerun_fields.get("nfailed"))
-        if archive_failures is not None and rerun_failures is not None and sample:
-            low, high = wilson_count_bounds(archive_failures, sample)
-            failure = {
-                "archive": archive_failures,
-                "rerun": rerun_failures,
-                "sample": sample,
-                "low": low,
-                "high": high,
-                "ok": failure_inside(archive_failures, rerun_failures, sample),
-            }
-        status = judge_checks(checks, failure)
+        campaign_failures = _float(campaign_fields.get("nfailed"))
+        if archive_failures is not None and campaign_failures is not None:
+            failure = {"archive": archive_failures, "harness": campaign_failures}
+            if sample:
+                failure["sample"] = sample
         named = match.get("cause", "")
-        cause = named if status == "not_reproduced" else ""
-        record["checks"] = checks
-        record["failure_check"] = failure
-        record["status"] = status
-        record["gap"] = _gap(checks, failure) if status == "not_reproduced" else ""
-        record["cause"] = cause
-        record["cause_detail"] = CAUSE_TEXT.get(cause, "") if cause else ""
-        record["note"] = CAUSE_TEXT.get(named, "") if status == "reproduced" and named else ""
-        baseline = status == "reproduced"
-        # The ranked harness-stop mean is not the 2014 pele score.
-        if kind == "screen":
-            baseline = status == "reproduced"
-        rerun = {
+        record["values"] = values
+        record["failure_counts"] = failure
+        record["gap"] = _gap(values, failure)
+        record["finding_id"] = named
+        record["finding"] = CAUSE_TEXT.get(named, "") if named else ""
+        beside = {
             "template": match["template"],
             "branch": match["branch"],
             "sha": _sha(match["branch"]),
             "path": match["path"],
             "kind": kind,
-            "paper_baseline": baseline,
-            "baseline_metric": rerun_fields.get("baseline_metric", names[0] if names else "force_calls"),
-            "hold": match.get("hold") or [],
+            "metric": campaign_fields.get("metric", names[0] if names else "force_calls"),
         }
         if kind == "screen":
-            rerun["stop2014_calls"] = _float(rerun_fields.get("force_calls"))
-            rerun["harness_stop_mean"] = _float(rerun_fields.get("harness_stop_mean"))
-            rerun["baseline_metric"] = "stop2014_calls"
+            beside["stop2014_calls"] = _float(campaign_fields.get("force_calls"))
+            beside["harness_stop_mean"] = _float(campaign_fields.get("harness_stop_mean"))
+            beside["metric"] = "stop2014_calls"
+        omitted = match.get("hold") or []
+        if omitted:
+            beside["omitted"] = list(omitted)
         if match.get("extra"):
-            rerun.update(match["extra"])
-        record["rerun"] = rerun
+            beside.update(match["extra"])
+        ranked_path = match.get("ranked_path")
+        if ranked_path:
+            try:
+                ranked_text = read_campaign(root, match.get("ranked_branch", match["branch"]), ranked_path)
+            except (OSError, subprocess.CalledProcessError):
+                ranked_text = ""
+            ranked = _ranked_block(ranked_text) if ranked_text else None
+            if ranked:
+                ranked["path"] = ranked_path
+                problem_file = root / "problems" / entry["suite"] / f"{entry['problem']}.toml"
+                stated_cap = None
+                if problem_file.is_file():
+                    import tomllib
+
+                    stated = tomllib.loads(problem_file.read_text(encoding="utf-8"))
+                    stated_cap = (stated.get("convergence") or {}).get("max_force_calls")
+                if stated_cap not in (None, ""):
+                    ranked["cap_source"] = (
+                        f"problems/{entry['suite']}/{entry['problem']}.toml convergence.max_force_calls"
+                    )
+                else:
+                    ranked["cap_source"] = (
+                        f"problems/{entry['suite']}/{entry['problem']}.toml states no max_force_calls; "
+                        f"template failure_cap {int(ranked['cap']) if ranked.get('cap') is not None else ''}"
+                    )
+                beside["ranked"] = ranked
+        record["beside"] = beside
         built.append(record)
     return built
 
@@ -839,97 +779,83 @@ def _fmt(value: float) -> str:
 
 
 def render_markdown(rows: list[dict]) -> str:
-    counts = {"reproduced": 0, "not_reproduced": 0, "not_rerun": 0}
-    for row in rows:
-        counts[row["status"]] = counts.get(row["status"], 0) + 1
+    with_file = sum(1 for row in rows if row.get("beside"))
+    without_file = len(rows) - with_file
     lines = [
-        "# Reproduction",
+        "# Findings",
         "",
-        "Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.",
+        "Archive commit `0f26b796`. The archived numbers are the paper rows. A campaign file beside a row records both numbers and the gap. There is no pass/fail window.",
         "",
-        f"{counts['reproduced']} reproduced, {counts['not_reproduced']} not reproduced, {counts['not_rerun']} not rerun. {len(rows)} archive rows.",
+        f"{with_file} archive rows have a campaign file beside them. {without_file} archive rows have no campaign file. {len(rows)} archive rows.",
         "",
-        "The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.",
+        "The pele transition-state archive score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are a different stop.",
         "",
         "OPTIM LJ38 L-BFGS tuned: the archived integer is 176 and the unrounded harness mean is 175.537.",
         "",
-        "EON FIRE in JCTC Table 1 is 645. The archive file and the rerun are both 731.",
+        "EON FIRE in JCTC Table 1 is 645. The archive file and the later run are both 731.",
         "",
         "Table 10 prints EON Lanczos 165. The archive file is 325. CI-NEB(3) prints 3 failures; the archive file has 0.",
         "",
         "Endpoint minima are free-atom float32 deltas against the reactant, compressed. A file over 1 MB is a git-LFS pointer, not a loose blob.",
         "",
+        "The 2014 GMIN CSM binary wales-27058 is not published. GMIN df8da599 has SYMMETRISECSM, so that row runs on df8da599.",
+        "",
     ]
-    current = ""
+    previous = ""
     for row in rows:
         suite = row["suite"]
-        if suite != current:
-            if current:
+        if suite != previous:
+            if previous:
                 lines.append("")
-            current = suite
+            previous = suite
             lines.append(f"## {suite}")
             lines.append("")
-            lines.append("| Row | Archive | Rerun | Status |")
+            lines.append("| Row | Archive | Campaign | Gap |")
             lines.append("| --- | --- | --- | --- |")
         ident = f"{row['problem']}/{row['entry']}"
-        if row["checks"]:
-            archive = ", ".join(f"{item['metric']} {_fmt(item['archive'])}" for item in row["checks"])
-            rerun = ", ".join(f"{_fmt(item['rerun'])}" for item in row["checks"])
+        if row["values"]:
+            archive = ", ".join(f"{item['metric']} {_fmt(item['archive'])}" for item in row["values"])
+            campaign = ", ".join(f"{_fmt(item['harness'])}" for item in row["values"])
         else:
             archive = "—"
-            rerun = "—"
-        status = row["status"].replace("_", " ")
-        if row.get("cause"):
-            status = f"{status}; {row['cause']}"
-        if row.get("note"):
-            status = f"{status}; residual"
-        lines.append(f"| {ident} | {archive} | {rerun} | {status} |")
+            campaign = "—"
+        gap = row.get("gap") or ""
+        if row.get("finding_id"):
+            gap = f"{gap}; {row['finding_id']}" if gap else row["finding_id"]
+        lines.append(f"| {ident} | {archive} | {campaign} | {gap} |")
     lines.append("")
-    lines.append("## Residuals inside the band")
+    lines.append("## Notes")
     lines.append("")
     for row in rows:
-        if row.get("note"):
-            lines.append(f"- {row['suite']}/{row['problem']}/{row['entry']}: {row['note']}")
-    lines.append("")
-    lines.append("## Causes")
-    lines.append("")
-    grouped: dict[str, list[str]] = {}
-    for row in rows:
-        if not row.get("cause"):
-            continue
-        grouped.setdefault(row["cause"], []).append(f"{row['suite']}/{row['problem']}/{row['entry']}")
-    for cause, idents in grouped.items():
-        lines.append(f"### {cause}")
-        lines.append("")
-        lines.append(CAUSE_TEXT.get(cause, ""))
-        lines.append("")
-        for ident in idents:
-            lines.append(f"- {ident}")
-        lines.append("")
-    lines.append("Rows with no exact-setup campaign stay not rerun and are not given a cause. AKMC on aladatom is a different method from Langevin parallel replica; the ratios above are that comparison, and the archive rows stay not rerun.")
+        if row.get("finding"):
+            lines.append(f"- {row['suite']}/{row['problem']}/{row['entry']}: {row['finding']}")
     lines.append("")
     return "\n".join(lines)
 
 
 def write_ledger(root: Path) -> list[dict]:
     rows = build_rows(root)
-    path = root / "oracle" / "reproduction.jsonl"
+    path = root / FINDINGS_PATH
     payload = "\n".join(json.dumps(row, sort_keys=True) for row in rows) + "\n"
     path.write_text(payload, encoding="utf-8")
-    (root / "docs" / "reproduction.md").write_text(render_markdown(rows), encoding="utf-8")
+    (root / "docs" / "findings.md").write_text(render_markdown(rows), encoding="utf-8")
+    old = root / "oracle" / "reproduction.jsonl"
+    if old.is_file():
+        old.unlink()
+    old_doc = root / "docs" / "reproduction.md"
+    if old_doc.is_file():
+        old_doc.unlink()
     return rows
 
 
 def main() -> None:
     root = Path(__file__).resolve().parents[1]
     rows = write_ledger(root)
-    counts: dict[str, int] = {}
+    with_file = sum(1 for row in rows if row.get("beside"))
+    print({"beside": with_file, "archive_only": len(rows) - with_file, "rows": len(rows)})
     for row in rows:
-        counts[row["status"]] = counts.get(row["status"], 0) + 1
-    print(counts)
-    for row in rows:
-        if row["status"] == "not_reproduced":
-            print(f"{row_id(row)} {row['cause']} {row['gap']}")
+        if row.get("gap"):
+            print(f"{row_id(row)} {row.get('finding_id', '')} {row['gap']}")
 
 
 if __name__ == "__main__":

@@ -10,7 +10,7 @@ The Python package also multiplies the lattice derivative by minus one,
 so a variable-cell step is given ``-dE/dA``. The ASE wrapper builds the
 same input from ``cell_stress``.
 
-A legacy success is under the cap and at the problem force stop. A v2
+A success-only tally is under the cap and at the problem force stop. A v2
 success also has Hessian index 0. The variable-cell loop stops only when
 the atomic norm and the max-norm of ``dE/dA`` are both at that stop, so
 the recorded point meets the atomic test or it has hit the cap.
@@ -554,8 +554,8 @@ def _dat(summary: dict, template: dict, metrics: dict, commit: str, version: str
         "tuning": template.get("tuning", ""),
         "counter": "harness",
         "par2_mean": metrics.get("par2_mean"),
-        "wilson_low": metrics.get("wilson_low"),
-        "wilson_high": metrics.get("wilson_high"),
+        "rate_low": metrics.get("rate_low"),
+        "rate_high": metrics.get("rate_high"),
         "par2_median": metrics.get("median"),
         "par2_median_low": metrics.get("median_low"),
         "par2_median_high": metrics.get("median_high"),
@@ -666,8 +666,8 @@ def run_template(
     records.sort(key=lambda row: row["index"])
     for record in records:
         record.pop("index", None)
-    legacy_counts = [cap if not record["converged"] else int(record["force_calls"]) for record in records]
-    summary = summarize_capped(legacy_counts, cap)
+    capped_counts = [cap if not record["converged"] else int(record["force_calls"]) for record in records]
+    summary = summarize_capped(capped_counts, cap)
     successes = [int(record["force_calls"]) for record in records if record["converged"]]
     summary["median"] = statistics.median(successes) if successes else None
     energies = [float(record["energy"]) for record in records if record.get("energy") is not None]
@@ -692,7 +692,7 @@ def run_template(
         "schema": "optbench.result/v2",
         "status": "archive",
         "problem": problem["id"],
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-rate-bootstrap",
         "par_factor": 2,
         "bootstrap_resamples": 2000,
         "bootstrap_seed": 20261015,
@@ -713,7 +713,7 @@ def run_template(
                 "parameters": passed,
                 "provenance": provenance,
                 "metrics": metrics,
-                "legacy": {
+                "success_mean": {
                     "force_calls": summary.get("force_calls"),
                     "force_calls_min": summary.get("force_calls_min"),
                     "force_calls_max": summary.get("force_calls_max"),

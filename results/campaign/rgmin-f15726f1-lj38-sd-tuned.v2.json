@@ -12,7 +12,7 @@
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "entry": "rgmin-f15726f1-lj38-sd-tuned",
-      "legacy": {
+      "success_mean": {
         "force_calls": 5438,
         "force_calls_max": 9993,
         "force_calls_min": 1141,
@@ -42,12 +42,12 @@
         "par_factor": 2,
         "q25": 4156.0,
         "q75": 8951.75,
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-rate-bootstrap",
         "success_only_mean": 5436.321204516938,
         "success_rate": 0.797,
         "successes": 797,
-        "wilson_high": 0.8207718212398687,
-        "wilson_low": 0.7709550842197117
+        "rate_high": 0.8207718212398687,
+        "rate_low": 0.7709550842197117
       },
       "parameters": {
         "gtol": 0.01,
@@ -29609,6 +29609,6 @@
     }
   ],
   "schema": "optbench.result/v2",
-  "scoring": "par2-wilson-bootstrap",
+  "scoring": "par2-rate-bootstrap",
   "status": "archive"
 }

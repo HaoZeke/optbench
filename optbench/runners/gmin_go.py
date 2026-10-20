@@ -38,7 +38,8 @@ from optbench.score import score_v2, summarize_capped
 from optbench.v2 import collect_provenance, write_starts
 
 TARBALL_SHA256 = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
-CODE_VERSION = "02aaf45245af"
+PIN_REF = "02aaf45245af"
+CODE_VERSION = "df8da599"
 CODE_NAME = "GMIN"
 
 
@@ -179,6 +180,12 @@ def _archive_lines(job: dict) -> list[str]:
     symmetrise = str(job.get("symmetrise") or "").strip()
     if symmetrise:
         lines.append(f"SYMMETRISE {symmetrise}")
+    avoid = str(job.get("avoid") or "").strip()
+    if avoid:
+        lines.append(f"AVOID {avoid}")
+    symmetrisecsm = str(job.get("symmetrisecsm") or "").strip()
+    if symmetrisecsm:
+        lines.append(f"SYMMETRISECSM {symmetrisecsm}")
     return lines
 
 
@@ -370,8 +377,8 @@ def _dat(summary: dict, template: dict, metrics: dict, partial: bool) -> str:
         "problem": template.get("problem"),
         "counter": "harness",
         "par2_mean": metrics.get("par2_mean"),
-        "wilson_low": metrics.get("wilson_low"),
-        "wilson_high": metrics.get("wilson_high"),
+        "rate_low": metrics.get("rate_low"),
+        "rate_high": metrics.get("rate_high"),
         "par2_median": metrics.get("median"),
         "par2_median_low": metrics.get("median_low"),
         "par2_median_high": metrics.get("median_high"),
@@ -404,8 +411,8 @@ def _write_result(output: Path, problem: dict, template: dict, records: list[dic
     ordered = sorted(records, key=lambda row: int(row["index"]))
     for record in ordered:
         record.pop("index", None)
-    legacy_counts = [cap if not record["success"] else int(record["force_calls"]) for record in ordered]
-    summary = summarize_capped(legacy_counts, cap)
+    capped_counts = [cap if not record["success"] else int(record["force_calls"]) for record in ordered]
+    summary = summarize_capped(capped_counts, cap)
     successes = [int(record["force_calls"]) for record in ordered if record["success"]]
     import statistics
 
@@ -441,7 +448,7 @@ def _write_result(output: Path, problem: dict, template: dict, records: list[dic
         "schema": "optbench.result/v2",
         "status": "partial" if partial else "archive",
         "problem": problem["id"],
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-rate-bootstrap",
         "par_factor": 2,
         "bootstrap_resamples": 2000,
         "bootstrap_seed": 20261015,
@@ -556,6 +563,8 @@ def run_template(
         "newrestart": section.get("newrestart"),
         "sort": bool(section.get("sort", False)),
         "symmetrise": str(section.get("symmetrise") or ""),
+        "avoid": str(section.get("avoid") or ""),
+        "symmetrisecsm": str(section.get("symmetrisecsm") or ""),
         "save": int(section.get("save") or 2),
         "tfac": section.get("tfac"),
         "emit_seed": bool(section.get("emit_seed", True)),
@@ -601,6 +610,8 @@ def run_template(
                 "newrestart": passed["newrestart"],
                 "sort": passed["sort"],
                 "symmetrise": passed["symmetrise"],
+                "avoid": passed["avoid"],
+                "symmetrisecsm": passed["symmetrisecsm"],
             }
         )
     if workers <= 1:

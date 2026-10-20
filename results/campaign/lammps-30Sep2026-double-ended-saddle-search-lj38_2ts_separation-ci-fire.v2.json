@@ -1,6 +1,6 @@
 {
   "counter": "harness",
-  "legacy": {
+  "success_mean": {
     "n": 51,
     "nfailed": 51,
     "successes": 0,
@@ -64,12 +64,12 @@
     "par_factor": 2,
     "q25": 20000.0,
     "q75": 20000.0,
-    "scoring": "par2-wilson-bootstrap",
+    "scoring": "par2-rate-bootstrap",
     "success_only_mean": null,
     "success_rate": 0.0,
     "successes": 0,
-    "wilson_high": 0.07004661989853143,
-    "wilson_low": 0.0
+    "rate_high": 0.07004661989853143,
+    "rate_low": 0.0
   },
   "template": "lammpsneb/ci-fire"
 }

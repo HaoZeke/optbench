@@ -1,6 +1,6 @@
 {
   "counter": "harness",
-  "legacy": {
+  "success_mean": {
     "force_calls": 1521,
     "force_calls_max": 2419,
     "force_calls_median": 1427,
@@ -62,12 +62,12 @@
     "par_factor": 2,
     "q25": 1395.0,
     "q75": 1611.0,
-    "scoring": "par2-wilson-bootstrap",
+    "scoring": "par2-rate-bootstrap",
     "success_only_mean": 1521.1538461538462,
     "success_rate": 1.0,
     "successes": 13,
-    "wilson_high": 1.0,
-    "wilson_low": 0.7719046276458016
+    "rate_high": 1.0,
+    "rate_low": 0.7719046276458016
   },
   "template": "tsase/ci-neb"
 }

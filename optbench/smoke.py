@@ -188,7 +188,7 @@ def build_smoke(commit: str = "", machine: dict | str | None = None) -> dict:
         "schema": "optbench.result/v2",
         "status": "smoke",
         "problem": "smoke/quadratic",
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-rate-bootstrap",
         "par_factor": 2,
         "bootstrap_resamples": 2000,
         "bootstrap_seed": 20261015,

@@ -1,6 +1,6 @@
 {
   "counter": "harness",
-  "legacy": {
+  "success_mean": {
     "force_calls": 236,
     "force_calls_max": 1310,
     "force_calls_median": 215.0,
@@ -73,12 +73,12 @@
     "par_factor": 2,
     "q25": 171.5,
     "q75": 273.5,
-    "scoring": "par2-wilson-bootstrap",
+    "scoring": "par2-rate-bootstrap",
     "success_only_mean": 236.0,
     "success_rate": 0.847457627118644,
     "successes": 50,
-    "wilson_high": 0.9176153600140352,
-    "wilson_low": 0.7348201621622644
+    "rate_high": 0.9176153600140352,
+    "rate_low": 0.7348201621622644
   },
   "template": "geodesic/ci-neb-lbfgs"
 }

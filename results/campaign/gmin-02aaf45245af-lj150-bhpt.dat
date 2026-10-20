@@ -8,7 +8,7 @@ force_calls_max 8657251
 nfailed 1
 median 2030841
 code GMIN
-code_version 02aaf45245af
+code_version df8da599
 commit 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f
 algorithm parallel tempering basin-hopping
 template gmin/lj150-bhpt
@@ -16,8 +16,8 @@ tuning default
 problem globalopt/lj150
 counter harness
 par2_mean 2771775.22
-wilson_low 0.945513803821
-wilson_high 0.998232567936
+rate_low 0.945513803821
+rate_high 0.998232567936
 par2_median 2051743
 par2_median_low 1773233
 par2_median_high 2405236

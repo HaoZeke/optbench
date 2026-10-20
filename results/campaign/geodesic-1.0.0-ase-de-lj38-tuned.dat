@@ -26,8 +26,8 @@ par2_median_low 3688.5
 par2_median_high 5000
 par2_iqr 3221.75
 success_rate 0.36
-wilson_low 0.2413874965
-wilson_high 0.4985898312
+rate_low 0.2413874965
+rate_high 0.4985898312
 par_applied true
 par_factor 2
 bootstrap_resamples 2000

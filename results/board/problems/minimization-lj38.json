@@ -10,7 +10,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-dogleg",
       "failures": {
         "cap": 0,
@@ -30,6 +29,7 @@
       "median_per_image": null,
       "min_calls": 45.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 81.881,
@@ -37,14 +37,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-dogleg.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.996173241514445,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/lj38-dogleg",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.996173241514445
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -55,7 +55,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-dogleg-tuned",
       "failures": {
         "cap": 0,
@@ -75,6 +74,7 @@
       "median_per_image": null,
       "min_calls": 45.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 81.881,
@@ -82,14 +82,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-dogleg-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.996173241514445,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/lj38-dogleg-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.996173241514445
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -100,7 +100,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-newton",
       "failures": {
         "cap": 0,
@@ -120,6 +119,7 @@
       "median_per_image": null,
       "min_calls": 35.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 5,
       "note": "starts.jsonl",
       "par2_mean": 166.337,
@@ -127,14 +127,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-newton.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9978624644726756,
+      "rate_low": 0.9883490446266249,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.995,
       "template": "rgmin/lj38-newton",
-      "tuning": "default",
-      "wilson_high": 0.9978624644726756,
-      "wilson_low": 0.9883490446266249
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -145,7 +145,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-newton-tuned",
       "failures": {
         "cap": 0,
@@ -165,6 +164,7 @@
       "median_per_image": null,
       "min_calls": 35.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 5,
       "note": "starts.jsonl",
       "par2_mean": 166.337,
@@ -172,14 +172,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-newton-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9978624644726756,
+      "rate_low": 0.9883490446266249,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.995,
       "template": "rgmin/lj38-newton-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9978624644726756,
-      "wilson_low": 0.9883490446266249
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -190,7 +190,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-lbfgs-m100",
       "failures": {
         "cap": 0,
@@ -210,6 +209,7 @@
       "median_per_image": null,
       "min_calls": 96.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 1,
       "note": "starts.jsonl",
       "par2_mean": 197.228,
@@ -217,14 +217,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-lbfgs-m100.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9998234536293739,
+      "rate_low": 0.9943574414020421,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.999,
       "template": "rgmin/lj38-lbfgs-m100",
-      "tuning": "default",
-      "wilson_high": 0.9998234536293739,
-      "wilson_low": 0.9943574414020421
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -235,7 +235,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-lbfgs-m100-tuned",
       "failures": {
         "cap": 0,
@@ -255,6 +254,7 @@
       "median_per_image": null,
       "min_calls": 96.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 1,
       "note": "starts.jsonl",
       "par2_mean": 197.228,
@@ -262,14 +262,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-lbfgs-m100-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9998234536293739,
+      "rate_low": 0.9943574414020421,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.999,
       "template": "rgmin/lj38-lbfgs-m100-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9998234536293739,
-      "wilson_low": 0.9943574414020421
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -280,7 +280,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-lbfgs-m20",
       "failures": {
         "cap": 0,
@@ -300,6 +299,7 @@
       "median_per_image": null,
       "min_calls": 94.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 4,
       "note": "starts.jsonl",
       "par2_mean": 282.64,
@@ -307,14 +307,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-lbfgs-m20.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9984434118595916,
+      "rate_low": 0.9897604437227377,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.996,
       "template": "rgmin/lj38-lbfgs-m20",
-      "tuning": "default",
-      "wilson_high": 0.9984434118595916,
-      "wilson_low": 0.9897604437227377
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -325,7 +325,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-lbfgs-m20-tuned",
       "failures": {
         "cap": 0,
@@ -345,6 +344,7 @@
       "median_per_image": null,
       "min_calls": 94.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 4,
       "note": "starts.jsonl",
       "par2_mean": 282.64,
@@ -352,14 +352,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-lbfgs-m20-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9984434118595916,
+      "rate_low": 0.9897604437227377,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.996,
       "template": "rgmin/lj38-lbfgs-m20-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9984434118595916,
-      "wilson_low": 0.9897604437227377
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -370,7 +370,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-lbfgs",
       "failures": {
         "cap": 0,
@@ -390,6 +389,7 @@
       "median_per_image": null,
       "min_calls": 91.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 4,
       "note": "starts.jsonl",
       "par2_mean": 294.105,
@@ -397,14 +397,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-lbfgs.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9984434118595916,
+      "rate_low": 0.9897604437227377,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.996,
       "template": "rgmin/lj38-lbfgs",
-      "tuning": "default",
-      "wilson_high": 0.9984434118595916,
-      "wilson_low": 0.9897604437227377
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -415,7 +415,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-lbfgs-tuned",
       "failures": {
         "cap": 0,
@@ -435,6 +434,7 @@
       "median_per_image": null,
       "min_calls": 91.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 4,
       "note": "starts.jsonl",
       "par2_mean": 294.105,
@@ -442,14 +442,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-lbfgs-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9984434118595916,
+      "rate_low": 0.9897604437227377,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.996,
       "template": "rgmin/lj38-lbfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9984434118595916,
-      "wilson_low": 0.9897604437227377
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -460,7 +460,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-bb",
       "failures": {
         "cap": 0,
@@ -480,6 +479,7 @@
       "median_per_image": null,
       "min_calls": 172.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 6,
       "note": "starts.jsonl",
       "par2_mean": 639.474,
@@ -487,14 +487,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-bb.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9972473308581237,
+      "rate_low": 0.9869718317581478,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.994,
       "template": "rgmin/lj38-bb",
-      "tuning": "default",
-      "wilson_high": 0.9972473308581237,
-      "wilson_low": 0.9869718317581478
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -505,7 +505,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-bb-tuned",
       "failures": {
         "cap": 0,
@@ -525,6 +524,7 @@
       "median_per_image": null,
       "min_calls": 172.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 6,
       "note": "starts.jsonl",
       "par2_mean": 639.474,
@@ -532,14 +532,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-bb-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9972473308581237,
+      "rate_low": 0.9869718317581478,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.994,
       "template": "rgmin/lj38-bb-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9972473308581237,
-      "wilson_low": 0.9869718317581478
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -550,7 +550,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-cg",
       "failures": {
         "cap": 0,
@@ -570,6 +569,7 @@
       "median_per_image": null,
       "min_calls": 191.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 4,
       "note": "starts.jsonl",
       "par2_mean": 669.237,
@@ -577,14 +577,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-cg.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9984434118595916,
+      "rate_low": 0.9897604437227377,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.996,
       "template": "rgmin/lj38-cg",
-      "tuning": "default",
-      "wilson_high": 0.9984434118595916,
-      "wilson_low": 0.9897604437227377
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -595,7 +595,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-cg-tuned",
       "failures": {
         "cap": 0,
@@ -615,6 +614,7 @@
       "median_per_image": null,
       "min_calls": 191.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 4,
       "note": "starts.jsonl",
       "par2_mean": 669.237,
@@ -622,14 +622,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-cg-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9984434118595916,
+      "rate_low": 0.9897604437227377,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.996,
       "template": "rgmin/lj38-cg-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9984434118595916,
-      "wilson_low": 0.9897604437227377
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -640,7 +640,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-fire",
       "failures": {
         "cap": 0,
@@ -660,6 +659,7 @@
       "median_per_image": null,
       "min_calls": 230.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 3,
       "note": "starts.jsonl",
       "par2_mean": 769.36,
@@ -667,14 +667,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-fire.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9989792161188614,
+      "rate_low": 0.9912169859464969,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.997,
       "template": "rgmin/lj38-fire",
-      "tuning": "default",
-      "wilson_high": 0.9989792161188614,
-      "wilson_low": 0.9912169859464969
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -685,7 +685,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-fire-tuned",
       "failures": {
         "cap": 0,
@@ -705,6 +704,7 @@
       "median_per_image": null,
       "min_calls": 230.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 3,
       "note": "starts.jsonl",
       "par2_mean": 769.36,
@@ -712,14 +712,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-fire-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9989792161188614,
+      "rate_low": 0.9912169859464969,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.997,
       "template": "rgmin/lj38-fire-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9989792161188614,
-      "wilson_low": 0.9912169859464969
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -730,7 +730,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-fire2",
       "failures": {
         "cap": 0,
@@ -750,6 +749,7 @@
       "median_per_image": null,
       "min_calls": 236.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 6,
       "note": "starts.jsonl",
       "par2_mean": 845.947,
@@ -757,14 +757,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-fire2.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9972473308581237,
+      "rate_low": 0.9869718317581478,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.994,
       "template": "rgmin/lj38-fire2",
-      "tuning": "default",
-      "wilson_high": 0.9972473308581237,
-      "wilson_low": 0.9869718317581478
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -775,7 +775,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-fire2-tuned",
       "failures": {
         "cap": 0,
@@ -795,6 +794,7 @@
       "median_per_image": null,
       "min_calls": 236.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 6,
       "note": "starts.jsonl",
       "par2_mean": 845.947,
@@ -802,14 +802,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-fire2-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9972473308581237,
+      "rate_low": 0.9869718317581478,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.994,
       "template": "rgmin/lj38-fire2-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9972473308581237,
-      "wilson_low": 0.9869718317581478
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -820,7 +820,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-bfgs",
       "failures": {
         "cap": 0,
@@ -840,6 +839,7 @@
       "median_per_image": null,
       "min_calls": 595.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 1010.446,
@@ -847,14 +847,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-bfgs.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.996173241514445,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/lj38-bfgs",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.996173241514445
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -865,7 +865,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-bfgs-tuned",
       "failures": {
         "cap": 0,
@@ -885,6 +884,7 @@
       "median_per_image": null,
       "min_calls": 595.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 1010.446,
@@ -892,14 +892,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-bfgs-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.996173241514445,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/lj38-bfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.996173241514445
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -910,7 +910,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-quickmin",
       "failures": {
         "cap": 0,
@@ -930,6 +929,7 @@
       "median_per_image": null,
       "min_calls": 467.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 2,
       "note": "starts.jsonl",
       "par2_mean": 1932.997,
@@ -937,14 +937,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-quickmin.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9994513564118793,
+      "rate_low": 0.9927371921365079,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.998,
       "template": "rgmin/lj38-quickmin",
-      "tuning": "default",
-      "wilson_high": 0.9994513564118793,
-      "wilson_low": 0.9927371921365079
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -955,7 +955,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-quickmin-tuned",
       "failures": {
         "cap": 0,
@@ -975,6 +974,7 @@
       "median_per_image": null,
       "min_calls": 467.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 2,
       "note": "starts.jsonl",
       "par2_mean": 1932.997,
@@ -982,14 +982,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-quickmin-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9994513564118793,
+      "rate_low": 0.9927371921365079,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.998,
       "template": "rgmin/lj38-quickmin-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9994513564118793,
-      "wilson_low": 0.9927371921365079
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1000,7 +1000,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-sd",
       "failures": {
         "cap": 200,
@@ -1020,6 +1019,7 @@
       "median_per_image": null,
       "min_calls": 1141.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 203,
       "note": "starts.jsonl",
       "par2_mean": 8392.748,
@@ -1027,14 +1027,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-sd.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 0.8207718212398687,
+      "rate_low": 0.7709550842197117,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.797,
       "template": "rgmin/lj38-sd",
-      "tuning": "default",
-      "wilson_high": 0.8207718212398687,
-      "wilson_low": 0.7709550842197117
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1045,7 +1045,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-sd-tuned",
       "failures": {
         "cap": 200,
@@ -1065,6 +1064,7 @@
       "median_per_image": null,
       "min_calls": 1141.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 203,
       "note": "starts.jsonl",
       "par2_mean": 8392.748,
@@ -1072,14 +1072,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-sd-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 0.8207718212398687,
+      "rate_low": 0.7709550842197117,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.797,
       "template": "rgmin/lj38-sd-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.8207718212398687,
-      "wilson_low": 0.7709550842197117
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1090,7 +1090,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-adam",
       "failures": {
         "cap": 731,
@@ -1110,6 +1109,7 @@
       "median_per_image": null,
       "min_calls": 2033.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 731,
       "note": "starts.jsonl",
       "par2_mean": 16420.159,
@@ -1117,14 +1117,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-adam.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 0.297329771135414,
+      "rate_low": 0.24243819128491245,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.269,
       "template": "rgmin/lj38-adam",
-      "tuning": "default",
-      "wilson_high": 0.297329771135414,
-      "wilson_low": 0.24243819128491245
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1135,7 +1135,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-adam-tuned",
       "failures": {
         "cap": 731,
@@ -1155,6 +1154,7 @@
       "median_per_image": null,
       "min_calls": 2033.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 731,
       "note": "starts.jsonl",
       "par2_mean": 16420.159,
@@ -1162,14 +1162,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-adam-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 0.297329771135414,
+      "rate_low": 0.24243819128491245,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.269,
       "template": "rgmin/lj38-adam-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.297329771135414,
-      "wilson_low": 0.24243819128491245
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1180,7 +1180,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-sr1",
       "failures": {
         "cap": 799,
@@ -1200,6 +1199,7 @@
       "median_per_image": null,
       "min_calls": 234.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 995,
       "note": "starts.jsonl",
       "par2_mean": 19908.901,
@@ -1207,14 +1207,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-sr1.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 0.011650955373375113,
+      "rate_low": 0.0021375355273244596,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.005,
       "template": "rgmin/lj38-sr1",
-      "tuning": "default",
-      "wilson_high": 0.011650955373375113,
-      "wilson_low": 0.0021375355273244596
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1225,7 +1225,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-sr1-tuned",
       "failures": {
         "cap": 799,
@@ -1245,6 +1244,7 @@
       "median_per_image": null,
       "min_calls": 234.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 995,
       "note": "starts.jsonl",
       "par2_mean": 19908.901,
@@ -1252,14 +1252,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-sr1-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 0.011650955373375113,
+      "rate_low": 0.0021375355273244596,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.005,
       "template": "rgmin/lj38-sr1-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.011650955373375113,
-      "wilson_low": 0.0021375355273244596
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1270,7 +1270,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-diis",
       "failures": {
         "cap": 964,
@@ -1290,6 +1289,7 @@
       "median_per_image": null,
       "min_calls": 1690.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 996,
       "note": "starts.jsonl",
       "par2_mean": 19945.03,
@@ -1297,14 +1297,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-diis.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 0.010239556277262253,
+      "rate_low": 0.0015565881404084308,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.004,
       "template": "rgmin/lj38-diis",
-      "tuning": "default",
-      "wilson_high": 0.010239556277262253,
-      "wilson_low": 0.0015565881404084308
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1315,7 +1315,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-diis-tuned",
       "failures": {
         "cap": 964,
@@ -1335,6 +1334,7 @@
       "median_per_image": null,
       "min_calls": 1690.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 996,
       "note": "starts.jsonl",
       "par2_mean": 19945.03,
@@ -1342,14 +1342,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-diis-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 0.010239556277262253,
+      "rate_low": 0.0015565881404084308,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.004,
       "template": "rgmin/lj38-diis-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.010239556277262253,
-      "wilson_low": 0.0015565881404084308
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1360,7 +1360,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-sr2",
       "failures": {
         "cap": 999,
@@ -1380,6 +1379,7 @@
       "median_per_image": null,
       "min_calls": 449.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 1000,
       "note": "starts.jsonl",
       "par2_mean": 20000.0,
@@ -1387,14 +1387,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-sr2.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 0.0038267584855551234,
+      "rate_low": 0.0,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.0,
       "template": "rgmin/lj38-sr2",
-      "tuning": "default",
-      "wilson_high": 0.0038267584855551234,
-      "wilson_low": 0.0
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1405,7 +1405,6 @@
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "rgmin-lj38-sr2-tuned",
       "failures": {
         "cap": 999,
@@ -1425,6 +1424,7 @@
       "median_per_image": null,
       "min_calls": 449.0,
       "n": 1000,
+      "newest": false,
       "nfailed": 1000,
       "note": "starts.jsonl",
       "par2_mean": 20000.0,
@@ -1432,64 +1432,19 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-lj38-sr2-tuned.dat; results/asv/9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
       "problem": "minimization/lj38",
+      "rate_high": 0.0038267584855551234,
+      "rate_low": 0.0,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.0,
       "template": "rgmin/lj38-sr2-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.0038267584855551234,
-      "wilson_low": 0.0
+      "tuning": "tuned"
     }
   ],
   "id": "minimization/lj38",
   "not_comparable": [],
   "partial": [
-    {
-      "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
-      "call_unit": "total",
-      "cap": 10000,
-      "code": "pele",
-      "code_version": "0.1.2",
-      "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
-      "comparable": true,
-      "counter": "harness",
-      "current": false,
-      "entry": "pele-b7081b93-lj38-fire",
-      "failures": {
-        "cap": 7,
-        "crash": 0,
-        "divergence": 0,
-        "wrong_stationary": 41
-      },
-      "full_n": 1000,
-      "history": false,
-      "max_calls": 10000.0,
-      "mean_calls": 1325.29,
-      "mean_per_image": null,
-      "median": 754.5,
-      "median_calls": 739.0,
-      "median_high": 801.0,
-      "median_low": 723.0,
-      "median_per_image": null,
-      "min_calls": 262.0,
-      "n": 1000,
-      "nfailed": 48,
-      "note": "starts.jsonl",
-      "par2_mean": 2141.381,
-      "partial": true,
-      "partial_reason": "does not reproduce the 2014 archive",
-      "path": "results/campaign/pele-b7081b93-lj38-fire.dat; results/asv/52ce661f309ef267b070534a1e52e4a15fed6d11",
-      "problem": "minimization/lj38",
-      "registry_match": true,
-      "scored": true,
-      "source": "campaign, asv",
-      "success_rate": 0.952,
-      "template": "pele/lj38-fire",
-      "tuning": "default",
-      "wilson_high": 0.963606698979192,
-      "wilson_low": 0.936933911349866
-    },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "call_unit": "total",
@@ -1499,7 +1454,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseLj38LbfgsDefault",
       "failures": {
         "cap": 0,
@@ -1519,6 +1473,7 @@
       "median_per_image": null,
       "min_calls": 214.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 214.0,
@@ -1526,14 +1481,14 @@
       "partial_reason": "smoke run; scored 1 of 1000 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/lj38-lbfgs-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1544,7 +1499,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseLj38GpminDefault",
       "failures": {
         "cap": 0,
@@ -1564,6 +1518,7 @@
       "median_per_image": null,
       "min_calls": 51.0,
       "n": 1,
+      "newest": false,
       "nfailed": 1,
       "note": "asv track_force_calls",
       "par2_mean": 20000.0,
@@ -1571,14 +1526,14 @@
       "partial_reason": "smoke run; scored 1 of 1000 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/lj38",
+      "rate_high": 0.7934506856227626,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 0.0,
       "template": "ase/lj38-gpmin-default",
-      "tuning": "default",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1589,7 +1544,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseLj38BfgsDefault",
       "failures": {
         "cap": 0,
@@ -1609,6 +1563,7 @@
       "median_per_image": null,
       "min_calls": 365.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 365.0,
@@ -1616,14 +1571,14 @@
       "partial_reason": "smoke run; scored 1 of 1000 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/lj38-bfgs-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1634,7 +1589,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseLj38BfgslinesearchDefault",
       "failures": {
         "cap": 0,
@@ -1654,6 +1608,7 @@
       "median_per_image": null,
       "min_calls": 440.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 440.0,
@@ -1661,14 +1616,14 @@
       "partial_reason": "smoke run; scored 1 of 1000 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/lj38-bfgslinesearch-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1679,7 +1634,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseLj38FireDefault",
       "failures": {
         "cap": 0,
@@ -1699,6 +1653,7 @@
       "median_per_image": null,
       "min_calls": 726.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 726.0,
@@ -1706,14 +1661,14 @@
       "partial_reason": "smoke run; scored 1 of 1000 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/lj38-fire-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1724,7 +1679,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseLj38LbfgsTuned",
       "failures": {
         "cap": 0,
@@ -1744,6 +1698,7 @@
       "median_per_image": null,
       "min_calls": 298.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 298.0,
@@ -1751,14 +1706,14 @@
       "partial_reason": "smoke run; scored 1 of 1000 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/lj38-lbfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "tuned"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1769,7 +1724,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseLj38PreconfireTuned",
       "failures": {
         "cap": 1,
@@ -1789,6 +1743,7 @@
       "median_per_image": null,
       "min_calls": 10002.0,
       "n": 1,
+      "newest": false,
       "nfailed": 1,
       "note": "asv track_force_calls",
       "par2_mean": 20000.0,
@@ -1796,14 +1751,14 @@
       "partial_reason": "smoke run; scored 1 of 1000 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/lj38",
+      "rate_high": 0.7934506856227626,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 0.0,
       "template": "ase/lj38-preconfire-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": "tuned"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1814,7 +1769,6 @@
       "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.SellaLj38MinDefault",
       "failures": {
         "cap": 0,
@@ -1834,6 +1788,7 @@
       "median_per_image": null,
       "min_calls": 943.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 943.0,
@@ -1841,14 +1796,14 @@
       "partial_reason": "smoke run; scored 1 of 1000 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "sella/lj38-min-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1859,7 +1814,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseLj38GpminTuned",
       "failures": {
         "cap": 0,
@@ -1879,6 +1833,7 @@
       "median_per_image": null,
       "min_calls": 17.0,
       "n": 1,
+      "newest": false,
       "nfailed": 1,
       "note": "asv track_force_calls",
       "par2_mean": 20000.0,
@@ -1886,14 +1841,14 @@
       "partial_reason": "smoke run; scored 1 of 1000 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/lj38",
+      "rate_high": 0.7934506856227626,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 0.0,
       "template": "ase/lj38-gpmin-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": "tuned"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1904,7 +1859,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseLj38Preconode12rTuned",
       "failures": {
         "cap": 0,
@@ -1924,6 +1878,7 @@
       "median_per_image": null,
       "min_calls": 3.0,
       "n": 1,
+      "newest": false,
       "nfailed": 1,
       "note": "asv track_force_calls",
       "par2_mean": 20000.0,
@@ -1931,14 +1886,14 @@
       "partial_reason": "smoke run; scored 1 of 1000 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/lj38",
+      "rate_high": 0.7934506856227626,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 0.0,
       "template": "ase/lj38-preconode12r-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": "tuned"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1949,7 +1904,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseLj38PreconlbfgsDefault",
       "failures": {
         "cap": 0,
@@ -1969,6 +1923,7 @@
       "median_per_image": null,
       "min_calls": 697.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 697.0,
@@ -1976,14 +1931,14 @@
       "partial_reason": "smoke run; scored 1 of 1000 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/lj38-preconlbfgs-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1994,7 +1949,6 @@
       "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.SellaLj38MinTuned",
       "failures": {
         "cap": 0,
@@ -2014,6 +1968,7 @@
       "median_per_image": null,
       "min_calls": 260.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 260.0,
@@ -2021,14 +1976,14 @@
       "partial_reason": "smoke run; scored 1 of 1000 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "sella/lj38-min-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "tuned"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -2039,7 +1994,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseLj38Preconode12rDefault",
       "failures": {
         "cap": 0,
@@ -2059,6 +2013,7 @@
       "median_per_image": null,
       "min_calls": 3.0,
       "n": 1,
+      "newest": false,
       "nfailed": 1,
       "note": "asv track_force_calls",
       "par2_mean": 20000.0,
@@ -2066,14 +2021,14 @@
       "partial_reason": "smoke run; scored 1 of 1000 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/lj38",
+      "rate_high": 0.7934506856227626,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 0.0,
       "template": "ase/lj38-preconode12r-default",
-      "tuning": "default",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -2084,7 +2039,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseLj38BfgsTuned",
       "failures": {
         "cap": 0,
@@ -2104,6 +2058,7 @@
       "median_per_image": null,
       "min_calls": 365.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 365.0,
@@ -2111,14 +2066,14 @@
       "partial_reason": "smoke run; scored 1 of 1000 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/lj38-bfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "tuned"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -2129,7 +2084,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseLj38BfgslinesearchTuned",
       "failures": {
         "cap": 0,
@@ -2149,6 +2103,7 @@
       "median_per_image": null,
       "min_calls": 478.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 478.0,
@@ -2156,14 +2111,14 @@
       "partial_reason": "smoke run; scored 1 of 1000 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/lj38-bfgslinesearch-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "tuned"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -2174,7 +2129,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseLj38FireTuned",
       "failures": {
         "cap": 0,
@@ -2194,6 +2148,7 @@
       "median_per_image": null,
       "min_calls": 783.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 783.0,
@@ -2201,14 +2156,14 @@
       "partial_reason": "smoke run; scored 1 of 1000 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/lj38-fire-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "tuned"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -2219,7 +2174,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseLj38PreconfireDefault",
       "failures": {
         "cap": 0,
@@ -2239,6 +2193,7 @@
       "median_per_image": null,
       "min_calls": 1988.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 1988.0,
@@ -2246,14 +2201,14 @@
       "partial_reason": "smoke run; scored 1 of 1000 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/lj38-preconfire-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -2264,7 +2219,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseLj38PreconlbfgsTuned",
       "failures": {
         "cap": 0,
@@ -2284,6 +2238,7 @@
       "median_per_image": null,
       "min_calls": 2341.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 2341.0,
@@ -2291,14 +2246,14 @@
       "partial_reason": "smoke run; scored 1 of 1000 starts",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/lj38-preconlbfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "tuned"
     }
   ],
   "profile": {
@@ -2335,6 +2290,7 @@
       "lammps/quickmin-lj38 30 Sep 2026 default campaign 8de817d": 0.004364934937127729,
       "lammps/sd-lj38 30 Sep 2026 default campaign 8de817d": 0.0,
       "optim/lbfgs-lj38 svn-snapshot default campaign 02aaf45": 0.6592556905041189,
+      "pele/lj38-fire 0.1.2 default campaign, asv b7081b9": 0.1652654676195257,
       "pele/lj38-lbfgs 0.1.2 default campaign, asv b7081b9": 0.6207238510591293,
       "pele/lj38-lbfgs-m100 0.1.2 tuned campaign, asv b7081b9": 0.7623584640190324,
       "pele/lj38-mylbfgs 0.1.2 default campaign, asv b7081b9": 0.623884666013601,
@@ -2639,6 +2595,13 @@
         0.662,
         0.989,
         0.998
+      ],
+      "pele/lj38-fire 0.1.2 default campaign, asv b7081b9": [
+        0.0,
+        0.0,
+        0.007,
+        0.224,
+        0.636
       ],
       "pele/lj38-lbfgs 0.1.2 default campaign, asv b7081b9": [
         0.0,
@@ -3227,6 +3190,7 @@
       "lammps/quickmin-lj38 30 Sep 2026 default campaign 8de817d": 0.991,
       "lammps/sd-lj38 30 Sep 2026 default campaign 8de817d": 0.383,
       "optim/lbfgs-lj38 svn-snapshot default campaign 02aaf45": 0.998,
+      "pele/lj38-fire 0.1.2 default campaign, asv b7081b9": 0.952,
       "pele/lj38-lbfgs 0.1.2 default campaign, asv b7081b9": 0.998,
       "pele/lj38-lbfgs-m100 0.1.2 tuned campaign, asv b7081b9": 0.999,
       "pele/lj38-mylbfgs 0.1.2 default campaign, asv b7081b9": 0.999,
@@ -3325,7 +3289,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-dogleg",
       "failures": {
         "cap": 0,
@@ -3345,6 +3308,7 @@
       "median_per_image": null,
       "min_calls": 45.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 81.881,
@@ -3352,14 +3316,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-dogleg.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.996173241514445,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/lj38-dogleg",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.996173241514445
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -3370,7 +3334,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-dogleg",
       "failures": {
         "cap": 0,
@@ -3390,6 +3353,7 @@
       "median_per_image": null,
       "min_calls": 45.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 81.881,
@@ -3397,14 +3361,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-dogleg.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.996173241514445,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/lj38-dogleg",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.996173241514445
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -3415,7 +3379,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-dogleg-tuned",
       "failures": {
         "cap": 0,
@@ -3435,6 +3398,7 @@
       "median_per_image": null,
       "min_calls": 45.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 81.881,
@@ -3442,14 +3406,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-dogleg-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.996173241514445,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/lj38-dogleg-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.996173241514445
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -3460,7 +3424,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-dogleg-tuned",
       "failures": {
         "cap": 0,
@@ -3480,6 +3443,7 @@
       "median_per_image": null,
       "min_calls": 45.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 81.881,
@@ -3487,14 +3451,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-dogleg-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.996173241514445,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/lj38-dogleg-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.996173241514445
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -3505,7 +3469,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-newton",
       "failures": {
         "cap": 0,
@@ -3525,6 +3488,7 @@
       "median_per_image": null,
       "min_calls": 35.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 5,
       "note": "starts.jsonl",
       "par2_mean": 166.337,
@@ -3532,14 +3496,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-newton.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9978624644726756,
+      "rate_low": 0.9883490446266249,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.995,
       "template": "rgmin/lj38-newton",
-      "tuning": "default",
-      "wilson_high": 0.9978624644726756,
-      "wilson_low": 0.9883490446266249
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -3550,7 +3514,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-newton",
       "failures": {
         "cap": 0,
@@ -3570,6 +3533,7 @@
       "median_per_image": null,
       "min_calls": 35.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 5,
       "note": "starts.jsonl",
       "par2_mean": 166.337,
@@ -3577,14 +3541,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-newton.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 0.9978624644726756,
+      "rate_low": 0.9883490446266249,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.995,
       "template": "rgmin/lj38-newton",
-      "tuning": "default",
-      "wilson_high": 0.9978624644726756,
-      "wilson_low": 0.9883490446266249
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -3595,7 +3559,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-newton-tuned",
       "failures": {
         "cap": 0,
@@ -3615,6 +3578,7 @@
       "median_per_image": null,
       "min_calls": 35.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 5,
       "note": "starts.jsonl",
       "par2_mean": 166.337,
@@ -3622,14 +3586,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-newton-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9978624644726756,
+      "rate_low": 0.9883490446266249,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.995,
       "template": "rgmin/lj38-newton-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9978624644726756,
-      "wilson_low": 0.9883490446266249
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -3640,7 +3604,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-newton-tuned",
       "failures": {
         "cap": 0,
@@ -3660,6 +3623,7 @@
       "median_per_image": null,
       "min_calls": 35.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 5,
       "note": "starts.jsonl",
       "par2_mean": 166.337,
@@ -3667,14 +3631,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-newton-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 0.9978624644726756,
+      "rate_low": 0.9883490446266249,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.995,
       "template": "rgmin/lj38-newton-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9978624644726756,
-      "wilson_low": 0.9883490446266249
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -3685,7 +3649,6 @@
       "commit": "1d71c944501832bfafb955ffe13b9aae50c8efd4",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "eon-main-lj38-lbfgs-m100",
       "failures": {
         "cap": 0,
@@ -3705,6 +3668,7 @@
       "median_per_image": null,
       "min_calls": 90.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 0,
       "note": "starts",
       "par2_mean": 180.137,
@@ -3712,14 +3676,14 @@
       "partial_reason": "",
       "path": "results/campaign/eon-main-lj38-lbfgs-m100.dat",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.996173241514445,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon/lj38-lbfgs-m100",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.996173241514445
+      "tuning": ""
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -3730,7 +3694,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-lbfgs-m100",
       "failures": {
         "cap": 0,
@@ -3750,6 +3713,7 @@
       "median_per_image": null,
       "min_calls": 96.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 1,
       "note": "starts.jsonl",
       "par2_mean": 197.228,
@@ -3757,14 +3721,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-lbfgs-m100.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9998234536293739,
+      "rate_low": 0.9943574414020421,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.999,
       "template": "rgmin/lj38-lbfgs-m100",
-      "tuning": "default",
-      "wilson_high": 0.9998234536293739,
-      "wilson_low": 0.9943574414020421
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -3775,7 +3739,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-lbfgs-m100",
       "failures": {
         "cap": 0,
@@ -3795,6 +3758,7 @@
       "median_per_image": null,
       "min_calls": 96.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 1,
       "note": "starts.jsonl",
       "par2_mean": 197.228,
@@ -3802,14 +3766,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-lbfgs-m100.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 0.9998234536293739,
+      "rate_low": 0.9943574414020421,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.999,
       "template": "rgmin/lj38-lbfgs-m100",
-      "tuning": "default",
-      "wilson_high": 0.9998234536293739,
-      "wilson_low": 0.9943574414020421
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -3820,7 +3784,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-lbfgs-m100-tuned",
       "failures": {
         "cap": 0,
@@ -3840,6 +3803,7 @@
       "median_per_image": null,
       "min_calls": 96.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 1,
       "note": "starts.jsonl",
       "par2_mean": 197.228,
@@ -3847,14 +3811,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-lbfgs-m100-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9998234536293739,
+      "rate_low": 0.9943574414020421,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.999,
       "template": "rgmin/lj38-lbfgs-m100-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9998234536293739,
-      "wilson_low": 0.9943574414020421
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -3865,7 +3829,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-lbfgs-m100-tuned",
       "failures": {
         "cap": 0,
@@ -3885,6 +3848,7 @@
       "median_per_image": null,
       "min_calls": 96.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 1,
       "note": "starts.jsonl",
       "par2_mean": 197.228,
@@ -3892,14 +3856,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-lbfgs-m100-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 0.9998234536293739,
+      "rate_low": 0.9943574414020421,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.999,
       "template": "rgmin/lj38-lbfgs-m100-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9998234536293739,
-      "wilson_low": 0.9943574414020421
+      "tuning": "tuned"
     },
     {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
@@ -3910,7 +3874,6 @@
       "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "pele-b7081b93-lj38-lbfgs-m100",
       "failures": {
         "cap": 0,
@@ -3930,6 +3893,7 @@
       "median_per_image": null,
       "min_calls": 89.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 1,
       "note": "starts.jsonl",
       "par2_mean": 197.936,
@@ -3937,14 +3901,14 @@
       "partial_reason": "",
       "path": "results/campaign/pele-b7081b93-lj38-lbfgs-m100.dat; results/asv/52ce661f309ef267b070534a1e52e4a15fed6d11",
       "problem": "minimization/lj38",
+      "rate_high": 0.9998234536293739,
+      "rate_low": 0.9943574414020421,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.999,
       "template": "pele/lj38-lbfgs-m100",
-      "tuning": "tuned",
-      "wilson_high": 0.9998234536293739,
-      "wilson_low": 0.9943574414020421
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -3955,7 +3919,6 @@
       "commit": "1d71c944501832bfafb955ffe13b9aae50c8efd4",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "eon-main-lj38-lbfgs",
       "failures": {
         "cap": 0,
@@ -3975,6 +3938,7 @@
       "median_per_image": null,
       "min_calls": 98.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 0,
       "note": "starts",
       "par2_mean": 203.898,
@@ -3982,14 +3946,14 @@
       "partial_reason": "",
       "path": "results/campaign/eon-main-lj38-lbfgs.dat",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.996173241514445,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon/lj38-lbfgs",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.996173241514445
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -4000,7 +3964,6 @@
       "commit": "4167998d16d8dac4a484ba9305f27d6325a7a28d",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "dlfind-0.0.3-minimization-lj38--dlfind-lbfgs-lj38",
       "failures": {
         "cap": 1,
@@ -4020,6 +3983,7 @@
       "median_per_image": null,
       "min_calls": 99.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 2,
       "note": "starts.jsonl",
       "par2_mean": 231.908,
@@ -4027,14 +3991,14 @@
       "partial_reason": "",
       "path": "results/campaign/dlfind-0.0.3-minimization-lj38--dlfind-lbfgs-lj38.dat",
       "problem": "minimization/lj38",
+      "rate_high": 0.9994513564118793,
+      "rate_low": 0.9927371921365079,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.998,
       "template": "dlfind/lbfgs-lj38",
-      "tuning": "default",
-      "wilson_high": 0.9994513564118793,
-      "wilson_low": 0.9927371921365079
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -4045,7 +4009,6 @@
       "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "sella-2.6.0-lj38-min-tuned",
       "failures": {
         "cap": 0,
@@ -4065,6 +4028,7 @@
       "median_per_image": null,
       "min_calls": 150.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 253.921,
@@ -4072,14 +4036,14 @@
       "partial_reason": "",
       "path": "results/campaign/sella-2.6.0-lj38-min-tuned.dat; results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.996173241514445,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "sella/lj38-min-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.996173241514445
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -4090,7 +4054,6 @@
       "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "tsase-1.0-minimization-lj38--tsase-lbfgs-lj38",
       "failures": {
         "cap": 0,
@@ -4110,6 +4073,7 @@
       "median_per_image": null,
       "min_calls": 89.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 4,
       "note": "starts.jsonl",
       "par2_mean": 257.2,
@@ -4117,14 +4081,14 @@
       "partial_reason": "",
       "path": "results/campaign/tsase-1.0-minimization-lj38--tsase-lbfgs-lj38.dat",
       "problem": "minimization/lj38",
+      "rate_high": 0.9984434118595916,
+      "rate_low": 0.9897604437227377,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.996,
       "template": "tsase/lbfgs-lj38",
-      "tuning": "default",
-      "wilson_high": 0.9984434118595916,
-      "wilson_low": 0.9897604437227377
+      "tuning": "default"
     },
     {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
@@ -4135,7 +4099,6 @@
       "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "pele-b7081b93-lj38-mylbfgs",
       "failures": {
         "cap": 0,
@@ -4155,6 +4118,7 @@
       "median_per_image": null,
       "min_calls": 127.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 1,
       "note": "starts.jsonl",
       "par2_mean": 268.036,
@@ -4162,14 +4126,14 @@
       "partial_reason": "",
       "path": "results/campaign/pele-b7081b93-lj38-mylbfgs.dat; results/asv/52ce661f309ef267b070534a1e52e4a15fed6d11",
       "problem": "minimization/lj38",
+      "rate_high": 0.9998234536293739,
+      "rate_low": 0.9943574414020421,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.999,
       "template": "pele/lj38-mylbfgs",
-      "tuning": "default",
-      "wilson_high": 0.9998234536293739,
-      "wilson_low": 0.9943574414020421
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -4180,7 +4144,6 @@
       "commit": "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "optim-svn-snapshot-minimization-lj38--optim-lbfgs-lj38",
       "failures": {
         "cap": 0,
@@ -4200,6 +4163,7 @@
       "median_per_image": null,
       "min_calls": 102.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 2,
       "note": "starts.jsonl",
       "par2_mean": 270.341,
@@ -4207,14 +4171,14 @@
       "partial_reason": "",
       "path": "results/campaign/optim-svn-snapshot-minimization-lj38--optim-lbfgs-lj38.dat",
       "problem": "minimization/lj38",
+      "rate_high": 0.9994513564118793,
+      "rate_low": 0.9927371921365079,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.998,
       "template": "optim/lbfgs-lj38",
-      "tuning": "default",
-      "wilson_high": 0.9994513564118793,
-      "wilson_low": 0.9927371921365079
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -4225,7 +4189,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-lbfgs-m20",
       "failures": {
         "cap": 0,
@@ -4245,6 +4208,7 @@
       "median_per_image": null,
       "min_calls": 94.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 4,
       "note": "starts.jsonl",
       "par2_mean": 282.64,
@@ -4252,14 +4216,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-lbfgs-m20.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9984434118595916,
+      "rate_low": 0.9897604437227377,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.996,
       "template": "rgmin/lj38-lbfgs-m20",
-      "tuning": "default",
-      "wilson_high": 0.9984434118595916,
-      "wilson_low": 0.9897604437227377
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -4270,7 +4234,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-lbfgs-m20",
       "failures": {
         "cap": 0,
@@ -4290,6 +4253,7 @@
       "median_per_image": null,
       "min_calls": 94.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 4,
       "note": "starts.jsonl",
       "par2_mean": 282.64,
@@ -4297,14 +4261,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-lbfgs-m20.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 0.9984434118595916,
+      "rate_low": 0.9897604437227377,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.996,
       "template": "rgmin/lj38-lbfgs-m20",
-      "tuning": "default",
-      "wilson_high": 0.9984434118595916,
-      "wilson_low": 0.9897604437227377
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -4315,7 +4279,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-lbfgs-m20-tuned",
       "failures": {
         "cap": 0,
@@ -4335,6 +4298,7 @@
       "median_per_image": null,
       "min_calls": 94.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 4,
       "note": "starts.jsonl",
       "par2_mean": 282.64,
@@ -4342,14 +4306,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-lbfgs-m20-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9984434118595916,
+      "rate_low": 0.9897604437227377,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.996,
       "template": "rgmin/lj38-lbfgs-m20-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9984434118595916,
-      "wilson_low": 0.9897604437227377
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -4360,7 +4324,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-lbfgs-m20-tuned",
       "failures": {
         "cap": 0,
@@ -4380,6 +4343,7 @@
       "median_per_image": null,
       "min_calls": 94.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 4,
       "note": "starts.jsonl",
       "par2_mean": 282.64,
@@ -4387,14 +4351,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-lbfgs-m20-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 0.9984434118595916,
+      "rate_low": 0.9897604437227377,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.996,
       "template": "rgmin/lj38-lbfgs-m20-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9984434118595916,
-      "wilson_low": 0.9897604437227377
+      "tuning": "tuned"
     },
     {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
@@ -4405,7 +4369,6 @@
       "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "pele-b7081b93-lj38-lbfgs",
       "failures": {
         "cap": 0,
@@ -4425,6 +4388,7 @@
       "median_per_image": null,
       "min_calls": 127.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 2,
       "note": "starts.jsonl",
       "par2_mean": 288.145,
@@ -4432,14 +4396,14 @@
       "partial_reason": "",
       "path": "results/campaign/pele-b7081b93-lj38-lbfgs.dat; results/asv/52ce661f309ef267b070534a1e52e4a15fed6d11",
       "problem": "minimization/lj38",
+      "rate_high": 0.9994513564118793,
+      "rate_low": 0.9927371921365079,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.998,
       "template": "pele/lj38-lbfgs",
-      "tuning": "default",
-      "wilson_high": 0.9994513564118793,
-      "wilson_low": 0.9927371921365079
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -4450,7 +4414,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-lbfgs",
       "failures": {
         "cap": 0,
@@ -4470,6 +4433,7 @@
       "median_per_image": null,
       "min_calls": 91.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 4,
       "note": "starts.jsonl",
       "par2_mean": 294.105,
@@ -4477,14 +4441,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-lbfgs.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9984434118595916,
+      "rate_low": 0.9897604437227377,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.996,
       "template": "rgmin/lj38-lbfgs",
-      "tuning": "default",
-      "wilson_high": 0.9984434118595916,
-      "wilson_low": 0.9897604437227377
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -4495,7 +4459,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-lbfgs",
       "failures": {
         "cap": 0,
@@ -4515,6 +4478,7 @@
       "median_per_image": null,
       "min_calls": 91.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 4,
       "note": "starts.jsonl",
       "par2_mean": 294.105,
@@ -4522,14 +4486,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-lbfgs.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 0.9984434118595916,
+      "rate_low": 0.9897604437227377,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.996,
       "template": "rgmin/lj38-lbfgs",
-      "tuning": "default",
-      "wilson_high": 0.9984434118595916,
-      "wilson_low": 0.9897604437227377
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -4540,7 +4504,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-lbfgs-tuned",
       "failures": {
         "cap": 0,
@@ -4560,6 +4523,7 @@
       "median_per_image": null,
       "min_calls": 91.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 4,
       "note": "starts.jsonl",
       "par2_mean": 294.105,
@@ -4567,14 +4531,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-lbfgs-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9984434118595916,
+      "rate_low": 0.9897604437227377,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.996,
       "template": "rgmin/lj38-lbfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9984434118595916,
-      "wilson_low": 0.9897604437227377
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -4585,7 +4549,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-lbfgs-tuned",
       "failures": {
         "cap": 0,
@@ -4605,6 +4568,7 @@
       "median_per_image": null,
       "min_calls": 91.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 4,
       "note": "starts.jsonl",
       "par2_mean": 294.105,
@@ -4612,14 +4576,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-lbfgs-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 0.9984434118595916,
+      "rate_low": 0.9897604437227377,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.996,
       "template": "rgmin/lj38-lbfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9984434118595916,
-      "wilson_low": 0.9897604437227377
+      "tuning": "tuned"
     },
     {
       "asv_commit": "1999eab667e0b9e0e4108c2d59c0fb9d9a6fadec",
@@ -4630,7 +4594,6 @@
       "commit": "df8da599267534fbe43a250e578f7396a7946311",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "gmin-df8da5992675-lj38-lbfgs",
       "failures": {
         "cap": 0,
@@ -4650,6 +4613,7 @@
       "median_per_image": null,
       "min_calls": 100.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 3,
       "note": "starts.jsonl",
       "par2_mean": 301.399,
@@ -4657,14 +4621,14 @@
       "partial_reason": "",
       "path": "results/campaign/gmin-df8da5992675-lj38-lbfgs.dat; results/asv/1999eab667e0b9e0e4108c2d59c0fb9d9a6fadec",
       "problem": "minimization/lj38",
+      "rate_high": 0.9989792161188614,
+      "rate_low": 0.9912169859464969,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.997,
       "template": "gmin/lj38-lbfgs",
-      "tuning": "default",
-      "wilson_high": 0.9989792161188614,
-      "wilson_low": 0.9912169859464969
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -4675,7 +4639,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "ase-3.29.0-lj38-lbfgs-tuned",
       "failures": {
         "cap": 2,
@@ -4695,6 +4658,7 @@
       "median_per_image": null,
       "min_calls": 166.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 2,
       "note": "starts.jsonl",
       "par2_mean": 395.645,
@@ -4702,14 +4666,14 @@
       "partial_reason": "",
       "path": "results/campaign/ase-3.29.0-lj38-lbfgs-tuned.dat",
       "problem": "minimization/lj38",
+      "rate_high": 0.9994513564118793,
+      "rate_low": 0.9927371921365079,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.998,
       "template": "ase/lj38-lbfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9994513564118793,
-      "wilson_low": 0.9927371921365079
+      "tuning": "tuned"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -4720,7 +4684,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "bench_ase_sella.AseLj38LbfgsTuned",
       "failures": {
         "cap": 2,
@@ -4740,6 +4703,7 @@
       "median_per_image": null,
       "min_calls": 166.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 5,
       "note": "asv track_force_calls",
       "par2_mean": 453.075,
@@ -4747,14 +4711,14 @@
       "partial_reason": "",
       "path": "results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "minimization/lj38",
+      "rate_high": 0.9978624644726756,
+      "rate_low": 0.9883490446266249,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 0.995,
       "template": "ase/lj38-lbfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9978624644726756,
-      "wilson_low": 0.9883490446266249
+      "tuning": "tuned"
     },
     {
       "asv_commit": "739fce9b10553193c9e8d49c56a7226020617bf5",
@@ -4765,7 +4729,6 @@
       "commit": "4241692173cccb42a9ae05974bfd62285ec2cd7b",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "vcsqnm-42416921-lj38-ase-tuned",
       "failures": {
         "cap": 0,
@@ -4785,6 +4748,7 @@
       "median_per_image": null,
       "min_calls": 248.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 5,
       "note": "starts.jsonl",
       "par2_mean": 482.515,
@@ -4792,14 +4756,14 @@
       "partial_reason": "",
       "path": "results/campaign/vcsqnm-42416921-lj38-ase-tuned.dat; results/asv/739fce9b10553193c9e8d49c56a7226020617bf5",
       "problem": "minimization/lj38",
+      "rate_high": 0.9978624644726756,
+      "rate_low": 0.9883490446266249,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.995,
       "template": "vcsqnm/lj38-ase-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9978624644726756,
-      "wilson_low": 0.9883490446266249
+      "tuning": "tuned"
     },
     {
       "asv_commit": "739fce9b10553193c9e8d49c56a7226020617bf5",
@@ -4810,7 +4774,6 @@
       "commit": "4241692173cccb42a9ae05974bfd62285ec2cd7b",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "vcsqnm-42416921-lj38-sqnm-tuned",
       "failures": {
         "cap": 0,
@@ -4830,6 +4793,7 @@
       "median_per_image": null,
       "min_calls": 248.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 5,
       "note": "starts.jsonl",
       "par2_mean": 482.515,
@@ -4837,14 +4801,14 @@
       "partial_reason": "",
       "path": "results/campaign/vcsqnm-42416921-lj38-sqnm-tuned.dat; results/asv/739fce9b10553193c9e8d49c56a7226020617bf5",
       "problem": "minimization/lj38",
+      "rate_high": 0.9978624644726756,
+      "rate_low": 0.9883490446266249,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.995,
       "template": "vcsqnm/lj38-sqnm-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9978624644726756,
-      "wilson_low": 0.9883490446266249
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -4855,7 +4819,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "ase-3.29.0-lj38-bfgslinesearch-tuned",
       "failures": {
         "cap": 0,
@@ -4875,6 +4838,7 @@
       "median_per_image": null,
       "min_calls": 323.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 506.049,
@@ -4882,14 +4846,14 @@
       "partial_reason": "",
       "path": "results/campaign/ase-3.29.0-lj38-bfgslinesearch-tuned.dat",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.996173241514445,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "ase/lj38-bfgslinesearch-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.996173241514445
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -4900,7 +4864,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "ase-3.29.0-lj38-bfgs-tuned",
       "failures": {
         "cap": 3,
@@ -4920,6 +4883,7 @@
       "median_per_image": null,
       "min_calls": 244.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 3,
       "note": "starts.jsonl",
       "par2_mean": 519.938,
@@ -4927,14 +4891,14 @@
       "partial_reason": "",
       "path": "results/campaign/ase-3.29.0-lj38-bfgs-tuned.dat",
       "problem": "minimization/lj38",
+      "rate_high": 0.9989792161188614,
+      "rate_low": 0.9912169859464969,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.997,
       "template": "ase/lj38-bfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9989792161188614,
-      "wilson_low": 0.9912169859464969
+      "tuning": "tuned"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -4945,7 +4909,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "bench_ase_sella.AseLj38BfgslinesearchTuned",
       "failures": {
         "cap": 0,
@@ -4965,6 +4928,7 @@
       "median_per_image": null,
       "min_calls": 323.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 1,
       "note": "asv track_force_calls",
       "par2_mean": 525.526,
@@ -4972,14 +4936,14 @@
       "partial_reason": "",
       "path": "results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "minimization/lj38",
+      "rate_high": 0.9998234536293739,
+      "rate_low": 0.9943574414020421,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 0.999,
       "template": "ase/lj38-bfgslinesearch-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9998234536293739,
-      "wilson_low": 0.9943574414020421
+      "tuning": "tuned"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -4990,7 +4954,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "bench_ase_sella.AseLj38LbfgsDefault",
       "failures": {
         "cap": 7,
@@ -5010,6 +4973,7 @@
       "median_per_image": null,
       "min_calls": 162.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 13,
       "note": "asv track_force_calls",
       "par2_mean": 532.882,
@@ -5017,14 +4981,14 @@
       "partial_reason": "",
       "path": "results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "minimization/lj38",
+      "rate_high": 0.9923871796106489,
+      "rate_low": 0.9778855576244203,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 0.987,
       "template": "ase/lj38-lbfgs-default",
-      "tuning": "default",
-      "wilson_high": 0.9923871796106489,
-      "wilson_low": 0.9778855576244203
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -5035,7 +4999,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "ase-3.29.0-lj38-bfgslinesearch-default",
       "failures": {
         "cap": 0,
@@ -5055,6 +5018,7 @@
       "median_per_image": null,
       "min_calls": 366.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 561.466,
@@ -5062,14 +5026,14 @@
       "partial_reason": "",
       "path": "results/campaign/ase-3.29.0-lj38-bfgslinesearch-default.dat",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.996173241514445,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "ase/lj38-bfgslinesearch-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.996173241514445
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -5080,7 +5044,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "bench_ase_sella.AseLj38BfgslinesearchDefault",
       "failures": {
         "cap": 0,
@@ -5100,6 +5063,7 @@
       "median_per_image": null,
       "min_calls": 366.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 1,
       "note": "asv track_force_calls",
       "par2_mean": 580.893,
@@ -5107,14 +5071,14 @@
       "partial_reason": "",
       "path": "results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "minimization/lj38",
+      "rate_high": 0.9998234536293739,
+      "rate_low": 0.9943574414020421,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 0.999,
       "template": "ase/lj38-bfgslinesearch-default",
-      "tuning": "default",
-      "wilson_high": 0.9998234536293739,
-      "wilson_low": 0.9943574414020421
+      "tuning": "default"
     },
     {
       "asv_commit": "739fce9b10553193c9e8d49c56a7226020617bf5",
@@ -5125,7 +5089,6 @@
       "commit": "4241692173cccb42a9ae05974bfd62285ec2cd7b",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "vcsqnm-42416921-lj38-ase",
       "failures": {
         "cap": 0,
@@ -5145,6 +5108,7 @@
       "median_per_image": null,
       "min_calls": 248.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 11,
       "note": "starts.jsonl",
       "par2_mean": 598.05,
@@ -5152,14 +5116,14 @@
       "partial_reason": "",
       "path": "results/campaign/vcsqnm-42416921-lj38-ase.dat; results/asv/739fce9b10553193c9e8d49c56a7226020617bf5",
       "problem": "minimization/lj38",
+      "rate_high": 0.9938468259019134,
+      "rate_low": 0.9804106042992137,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.989,
       "template": "vcsqnm/lj38-ase",
-      "tuning": "default",
-      "wilson_high": 0.9938468259019134,
-      "wilson_low": 0.9804106042992137
+      "tuning": "default"
     },
     {
       "asv_commit": "739fce9b10553193c9e8d49c56a7226020617bf5",
@@ -5170,7 +5134,6 @@
       "commit": "4241692173cccb42a9ae05974bfd62285ec2cd7b",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "vcsqnm-42416921-lj38-sqnm",
       "failures": {
         "cap": 0,
@@ -5190,6 +5153,7 @@
       "median_per_image": null,
       "min_calls": 248.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 11,
       "note": "starts.jsonl",
       "par2_mean": 598.05,
@@ -5197,14 +5161,14 @@
       "partial_reason": "",
       "path": "results/campaign/vcsqnm-42416921-lj38-sqnm.dat; results/asv/739fce9b10553193c9e8d49c56a7226020617bf5",
       "problem": "minimization/lj38",
+      "rate_high": 0.9938468259019134,
+      "rate_low": 0.9804106042992137,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.989,
       "template": "vcsqnm/lj38-sqnm",
-      "tuning": "default",
-      "wilson_high": 0.9938468259019134,
-      "wilson_low": 0.9804106042992137
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -5215,7 +5179,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-bb",
       "failures": {
         "cap": 0,
@@ -5235,6 +5198,7 @@
       "median_per_image": null,
       "min_calls": 172.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 6,
       "note": "starts.jsonl",
       "par2_mean": 639.474,
@@ -5242,14 +5206,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-bb.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9972473308581237,
+      "rate_low": 0.9869718317581478,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.994,
       "template": "rgmin/lj38-bb",
-      "tuning": "default",
-      "wilson_high": 0.9972473308581237,
-      "wilson_low": 0.9869718317581478
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -5260,7 +5224,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-bb",
       "failures": {
         "cap": 0,
@@ -5280,6 +5243,7 @@
       "median_per_image": null,
       "min_calls": 172.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 6,
       "note": "starts.jsonl",
       "par2_mean": 639.474,
@@ -5287,14 +5251,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-bb.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 0.9972473308581237,
+      "rate_low": 0.9869718317581478,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.994,
       "template": "rgmin/lj38-bb",
-      "tuning": "default",
-      "wilson_high": 0.9972473308581237,
-      "wilson_low": 0.9869718317581478
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -5305,7 +5269,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-bb-tuned",
       "failures": {
         "cap": 0,
@@ -5325,6 +5288,7 @@
       "median_per_image": null,
       "min_calls": 172.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 6,
       "note": "starts.jsonl",
       "par2_mean": 639.474,
@@ -5332,14 +5296,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-bb-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9972473308581237,
+      "rate_low": 0.9869718317581478,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.994,
       "template": "rgmin/lj38-bb-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9972473308581237,
-      "wilson_low": 0.9869718317581478
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -5350,7 +5314,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-bb-tuned",
       "failures": {
         "cap": 0,
@@ -5370,6 +5333,7 @@
       "median_per_image": null,
       "min_calls": 172.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 6,
       "note": "starts.jsonl",
       "par2_mean": 639.474,
@@ -5377,14 +5341,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-bb-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 0.9972473308581237,
+      "rate_low": 0.9869718317581478,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.994,
       "template": "rgmin/lj38-bb-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9972473308581237,
-      "wilson_low": 0.9869718317581478
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -5395,7 +5359,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-cg",
       "failures": {
         "cap": 0,
@@ -5415,6 +5378,7 @@
       "median_per_image": null,
       "min_calls": 191.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 4,
       "note": "starts.jsonl",
       "par2_mean": 669.237,
@@ -5422,14 +5386,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-cg.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9984434118595916,
+      "rate_low": 0.9897604437227377,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.996,
       "template": "rgmin/lj38-cg",
-      "tuning": "default",
-      "wilson_high": 0.9984434118595916,
-      "wilson_low": 0.9897604437227377
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -5440,7 +5404,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-cg",
       "failures": {
         "cap": 0,
@@ -5460,6 +5423,7 @@
       "median_per_image": null,
       "min_calls": 191.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 4,
       "note": "starts.jsonl",
       "par2_mean": 669.237,
@@ -5467,14 +5431,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-cg.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 0.9984434118595916,
+      "rate_low": 0.9897604437227377,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.996,
       "template": "rgmin/lj38-cg",
-      "tuning": "default",
-      "wilson_high": 0.9984434118595916,
-      "wilson_low": 0.9897604437227377
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -5485,7 +5449,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-cg-tuned",
       "failures": {
         "cap": 0,
@@ -5505,6 +5468,7 @@
       "median_per_image": null,
       "min_calls": 191.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 4,
       "note": "starts.jsonl",
       "par2_mean": 669.237,
@@ -5512,14 +5476,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-cg-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9984434118595916,
+      "rate_low": 0.9897604437227377,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.996,
       "template": "rgmin/lj38-cg-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9984434118595916,
-      "wilson_low": 0.9897604437227377
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -5530,7 +5494,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-cg-tuned",
       "failures": {
         "cap": 0,
@@ -5550,6 +5513,7 @@
       "median_per_image": null,
       "min_calls": 191.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 4,
       "note": "starts.jsonl",
       "par2_mean": 669.237,
@@ -5557,14 +5521,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-cg-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 0.9984434118595916,
+      "rate_low": 0.9897604437227377,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.996,
       "template": "rgmin/lj38-cg-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9984434118595916,
-      "wilson_low": 0.9897604437227377
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -5575,7 +5539,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "ase-3.29.0-lj38-preconlbfgs-default",
       "failures": {
         "cap": 0,
@@ -5595,6 +5558,7 @@
       "median_per_image": null,
       "min_calls": 355.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 690.119,
@@ -5602,14 +5566,14 @@
       "partial_reason": "",
       "path": "results/campaign/ase-3.29.0-lj38-preconlbfgs-default.dat",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.996173241514445,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "ase/lj38-preconlbfgs-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.996173241514445
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -5620,7 +5584,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "ase-3.29.0-lj38-fire-default",
       "failures": {
         "cap": 0,
@@ -5640,6 +5603,7 @@
       "median_per_image": null,
       "min_calls": 199.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 706.005,
@@ -5647,14 +5611,14 @@
       "partial_reason": "",
       "path": "results/campaign/ase-3.29.0-lj38-fire-default.dat",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.996173241514445,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "ase/lj38-fire-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.996173241514445
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -5665,7 +5629,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "bench_ase_sella.AseLj38BfgsDefault",
       "failures": {
         "cap": 3,
@@ -5685,6 +5648,7 @@
       "median_per_image": null,
       "min_calls": 244.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 14,
       "note": "asv track_force_calls",
       "par2_mean": 706.622,
@@ -5692,14 +5656,14 @@
       "partial_reason": "",
       "path": "results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "minimization/lj38",
+      "rate_high": 0.9916424248695761,
+      "rate_low": 0.9766379658824644,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 0.986,
       "template": "ase/lj38-bfgs-default",
-      "tuning": "default",
-      "wilson_high": 0.9916424248695761,
-      "wilson_low": 0.9766379658824644
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -5710,7 +5674,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "bench_ase_sella.AseLj38BfgsTuned",
       "failures": {
         "cap": 3,
@@ -5730,6 +5693,7 @@
       "median_per_image": null,
       "min_calls": 244.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 14,
       "note": "asv track_force_calls",
       "par2_mean": 706.622,
@@ -5737,14 +5701,14 @@
       "partial_reason": "",
       "path": "results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "minimization/lj38",
+      "rate_high": 0.9916424248695761,
+      "rate_low": 0.9766379658824644,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 0.986,
       "template": "ase/lj38-bfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9916424248695761,
-      "wilson_low": 0.9766379658824644
+      "tuning": "tuned"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -5755,7 +5719,6 @@
       "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "sella-2.6.0-lj38-min-default",
       "failures": {
         "cap": 0,
@@ -5775,6 +5738,7 @@
       "median_per_image": null,
       "min_calls": 410.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 710.089,
@@ -5782,14 +5746,14 @@
       "partial_reason": "",
       "path": "results/campaign/sella-2.6.0-lj38-min-default.dat; results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.996173241514445,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "sella/lj38-min-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.996173241514445
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -5800,7 +5764,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "ase-3.29.0-lj38-fire-tuned",
       "failures": {
         "cap": 0,
@@ -5820,6 +5783,7 @@
       "median_per_image": null,
       "min_calls": 208.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 719.638,
@@ -5827,14 +5791,14 @@
       "partial_reason": "",
       "path": "results/campaign/ase-3.29.0-lj38-fire-tuned.dat",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.996173241514445,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "ase/lj38-fire-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.996173241514445
+      "tuning": "tuned"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -5845,7 +5809,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "bench_ase_sella.AseLj38PreconlbfgsDefault",
       "failures": {
         "cap": 0,
@@ -5865,6 +5828,7 @@
       "median_per_image": null,
       "min_calls": 355.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 2,
       "note": "asv track_force_calls",
       "par2_mean": 728.405,
@@ -5872,14 +5836,14 @@
       "partial_reason": "",
       "path": "results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "minimization/lj38",
+      "rate_high": 0.9994513564118793,
+      "rate_low": 0.9927371921365079,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 0.998,
       "template": "ase/lj38-preconlbfgs-default",
-      "tuning": "default",
-      "wilson_high": 0.9994513564118793,
-      "wilson_low": 0.9927371921365079
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -5890,7 +5854,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "bench_ase_sella.AseLj38FireTuned",
       "failures": {
         "cap": 0,
@@ -5910,6 +5873,7 @@
       "median_per_image": null,
       "min_calls": 208.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 1,
       "note": "asv track_force_calls",
       "par2_mean": 738.781,
@@ -5917,14 +5881,14 @@
       "partial_reason": "",
       "path": "results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "minimization/lj38",
+      "rate_high": 0.9998234536293739,
+      "rate_low": 0.9943574414020421,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 0.999,
       "template": "ase/lj38-fire-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9998234536293739,
-      "wilson_low": 0.9943574414020421
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -5935,7 +5899,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-fire",
       "failures": {
         "cap": 0,
@@ -5955,6 +5918,7 @@
       "median_per_image": null,
       "min_calls": 230.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 3,
       "note": "starts.jsonl",
       "par2_mean": 769.36,
@@ -5962,14 +5926,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-fire.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9989792161188614,
+      "rate_low": 0.9912169859464969,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.997,
       "template": "rgmin/lj38-fire",
-      "tuning": "default",
-      "wilson_high": 0.9989792161188614,
-      "wilson_low": 0.9912169859464969
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -5980,7 +5944,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-fire",
       "failures": {
         "cap": 0,
@@ -6000,6 +5963,7 @@
       "median_per_image": null,
       "min_calls": 230.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 3,
       "note": "starts.jsonl",
       "par2_mean": 769.36,
@@ -6007,14 +5971,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-fire.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 0.9989792161188614,
+      "rate_low": 0.9912169859464969,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.997,
       "template": "rgmin/lj38-fire",
-      "tuning": "default",
-      "wilson_high": 0.9989792161188614,
-      "wilson_low": 0.9912169859464969
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -6025,7 +5989,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-fire-tuned",
       "failures": {
         "cap": 0,
@@ -6045,6 +6008,7 @@
       "median_per_image": null,
       "min_calls": 230.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 3,
       "note": "starts.jsonl",
       "par2_mean": 769.36,
@@ -6052,14 +6016,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-fire-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9989792161188614,
+      "rate_low": 0.9912169859464969,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.997,
       "template": "rgmin/lj38-fire-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9989792161188614,
-      "wilson_low": 0.9912169859464969
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -6070,7 +6034,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-fire-tuned",
       "failures": {
         "cap": 0,
@@ -6090,6 +6053,7 @@
       "median_per_image": null,
       "min_calls": 230.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 3,
       "note": "starts.jsonl",
       "par2_mean": 769.36,
@@ -6097,14 +6061,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-fire-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 0.9989792161188614,
+      "rate_low": 0.9912169859464969,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.997,
       "template": "rgmin/lj38-fire-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9989792161188614,
-      "wilson_low": 0.9912169859464969
+      "tuning": "tuned"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -6115,7 +6079,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "bench_ase_sella.AseLj38FireDefault",
       "failures": {
         "cap": 0,
@@ -6135,6 +6098,7 @@
       "median_per_image": null,
       "min_calls": 199.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 5,
       "note": "asv track_force_calls",
       "par2_mean": 802.368,
@@ -6142,14 +6106,14 @@
       "partial_reason": "",
       "path": "results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "minimization/lj38",
+      "rate_high": 0.9978624644726756,
+      "rate_low": 0.9883490446266249,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 0.995,
       "template": "ase/lj38-fire-default",
-      "tuning": "default",
-      "wilson_high": 0.9978624644726756,
-      "wilson_low": 0.9883490446266249
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -6160,7 +6124,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-fire2",
       "failures": {
         "cap": 0,
@@ -6180,6 +6143,7 @@
       "median_per_image": null,
       "min_calls": 236.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 6,
       "note": "starts.jsonl",
       "par2_mean": 845.947,
@@ -6187,14 +6151,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-fire2.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9972473308581237,
+      "rate_low": 0.9869718317581478,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.994,
       "template": "rgmin/lj38-fire2",
-      "tuning": "default",
-      "wilson_high": 0.9972473308581237,
-      "wilson_low": 0.9869718317581478
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -6205,7 +6169,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-fire2",
       "failures": {
         "cap": 0,
@@ -6225,6 +6188,7 @@
       "median_per_image": null,
       "min_calls": 236.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 6,
       "note": "starts.jsonl",
       "par2_mean": 845.947,
@@ -6232,14 +6196,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-fire2.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 0.9972473308581237,
+      "rate_low": 0.9869718317581478,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.994,
       "template": "rgmin/lj38-fire2",
-      "tuning": "default",
-      "wilson_high": 0.9972473308581237,
-      "wilson_low": 0.9869718317581478
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -6250,7 +6214,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-fire2-tuned",
       "failures": {
         "cap": 0,
@@ -6270,6 +6233,7 @@
       "median_per_image": null,
       "min_calls": 236.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 6,
       "note": "starts.jsonl",
       "par2_mean": 845.947,
@@ -6277,14 +6241,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-fire2-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9972473308581237,
+      "rate_low": 0.9869718317581478,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.994,
       "template": "rgmin/lj38-fire2-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9972473308581237,
-      "wilson_low": 0.9869718317581478
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -6295,7 +6259,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-fire2-tuned",
       "failures": {
         "cap": 0,
@@ -6315,6 +6278,7 @@
       "median_per_image": null,
       "min_calls": 236.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 6,
       "note": "starts.jsonl",
       "par2_mean": 845.947,
@@ -6322,14 +6286,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-fire2-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 0.9972473308581237,
+      "rate_low": 0.9869718317581478,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.994,
       "template": "rgmin/lj38-fire2-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9972473308581237,
-      "wilson_low": 0.9869718317581478
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -6340,7 +6304,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "ase-3.29.0-lj38-bfgs-default",
       "failures": {
         "cap": 18,
@@ -6360,6 +6323,7 @@
       "median_per_image": null,
       "min_calls": 261.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 18,
       "note": "starts.jsonl",
       "par2_mean": 1003.995,
@@ -6367,14 +6331,14 @@
       "partial_reason": "",
       "path": "results/campaign/ase-3.29.0-lj38-bfgs-default.dat",
       "problem": "minimization/lj38",
+      "rate_high": 0.9885842599904322,
+      "rate_low": 0.9717267448294926,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.982,
       "template": "ase/lj38-bfgs-default",
-      "tuning": "default",
-      "wilson_high": 0.9885842599904322,
-      "wilson_low": 0.9717267448294926
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -6385,7 +6349,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-bfgs",
       "failures": {
         "cap": 0,
@@ -6405,6 +6368,7 @@
       "median_per_image": null,
       "min_calls": 595.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 1010.446,
@@ -6412,14 +6376,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-bfgs.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.996173241514445,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/lj38-bfgs",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.996173241514445
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -6430,7 +6394,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-bfgs",
       "failures": {
         "cap": 0,
@@ -6450,6 +6413,7 @@
       "median_per_image": null,
       "min_calls": 595.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 1010.446,
@@ -6457,14 +6421,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-bfgs.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.996173241514445,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/lj38-bfgs",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.996173241514445
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -6475,7 +6439,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-bfgs-tuned",
       "failures": {
         "cap": 0,
@@ -6495,6 +6458,7 @@
       "median_per_image": null,
       "min_calls": 595.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 1010.446,
@@ -6502,14 +6466,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-bfgs-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.996173241514445,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/lj38-bfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.996173241514445
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -6520,7 +6484,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-bfgs-tuned",
       "failures": {
         "cap": 0,
@@ -6540,6 +6503,7 @@
       "median_per_image": null,
       "min_calls": 595.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 1010.446,
@@ -6547,14 +6511,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-bfgs-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.996173241514445,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgmin/lj38-bfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.996173241514445
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -6565,7 +6529,6 @@
       "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "lammps-30Sep2026-minimization-lj38--lammps-hftn-lj38",
       "failures": {
         "cap": 0,
@@ -6585,6 +6548,7 @@
       "median_per_image": null,
       "min_calls": 463.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 3,
       "note": "starts.jsonl",
       "par2_mean": 1123.814,
@@ -6592,14 +6556,14 @@
       "partial_reason": "",
       "path": "results/campaign/lammps-30Sep2026-minimization-lj38--lammps-hftn-lj38.dat",
       "problem": "minimization/lj38",
+      "rate_high": 0.9989792161188614,
+      "rate_low": 0.9912169859464969,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.997,
       "template": "lammps/hftn-lj38",
-      "tuning": "default",
-      "wilson_high": 0.9989792161188614,
-      "wilson_low": 0.9912169859464969
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -6610,7 +6574,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "ase-3.29.0-lj38-lbfgs-default",
       "failures": {
         "cap": 42,
@@ -6630,6 +6593,7 @@
       "median_per_image": null,
       "min_calls": 175.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 42,
       "note": "starts.jsonl",
       "par2_mean": 1189.647,
@@ -6637,14 +6601,14 @@
       "partial_reason": "",
       "path": "results/campaign/ase-3.29.0-lj38-lbfgs-default.dat",
       "problem": "minimization/lj38",
+      "rate_high": 0.9687791144538346,
+      "rate_low": 0.9437155747733968,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.958,
       "template": "ase/lj38-lbfgs-default",
-      "tuning": "default",
-      "wilson_high": 0.9687791144538346,
-      "wilson_low": 0.9437155747733968
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -6655,7 +6619,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "ase-3.29.0-lj38-preconfire-default",
       "failures": {
         "cap": 0,
@@ -6675,6 +6638,7 @@
       "median_per_image": null,
       "min_calls": 659.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 1816.586,
@@ -6682,14 +6646,14 @@
       "partial_reason": "",
       "path": "results/campaign/ase-3.29.0-lj38-preconfire-default.dat",
       "problem": "minimization/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.996173241514445,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "ase/lj38-preconfire-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.996173241514445
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -6700,7 +6664,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "bench_ase_sella.AseLj38PreconfireDefault",
       "failures": {
         "cap": 0,
@@ -6720,6 +6683,7 @@
       "median_per_image": null,
       "min_calls": 659.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 2,
       "note": "asv track_force_calls",
       "par2_mean": 1850.864,
@@ -6727,14 +6691,14 @@
       "partial_reason": "",
       "path": "results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "minimization/lj38",
+      "rate_high": 0.9994513564118793,
+      "rate_low": 0.9927371921365079,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 0.998,
       "template": "ase/lj38-preconfire-default",
-      "tuning": "default",
-      "wilson_high": 0.9994513564118793,
-      "wilson_low": 0.9927371921365079
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -6745,7 +6709,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-quickmin",
       "failures": {
         "cap": 0,
@@ -6765,6 +6728,7 @@
       "median_per_image": null,
       "min_calls": 467.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 2,
       "note": "starts.jsonl",
       "par2_mean": 1932.997,
@@ -6772,14 +6736,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-quickmin.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9994513564118793,
+      "rate_low": 0.9927371921365079,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.998,
       "template": "rgmin/lj38-quickmin",
-      "tuning": "default",
-      "wilson_high": 0.9994513564118793,
-      "wilson_low": 0.9927371921365079
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -6790,7 +6754,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-quickmin",
       "failures": {
         "cap": 0,
@@ -6810,6 +6773,7 @@
       "median_per_image": null,
       "min_calls": 467.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 2,
       "note": "starts.jsonl",
       "par2_mean": 1932.997,
@@ -6817,14 +6781,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-quickmin.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 0.9994513564118793,
+      "rate_low": 0.9927371921365079,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.998,
       "template": "rgmin/lj38-quickmin",
-      "tuning": "default",
-      "wilson_high": 0.9994513564118793,
-      "wilson_low": 0.9927371921365079
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -6835,7 +6799,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-quickmin-tuned",
       "failures": {
         "cap": 0,
@@ -6855,6 +6818,7 @@
       "median_per_image": null,
       "min_calls": 467.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 2,
       "note": "starts.jsonl",
       "par2_mean": 1932.997,
@@ -6862,14 +6826,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-quickmin-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9994513564118793,
+      "rate_low": 0.9927371921365079,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.998,
       "template": "rgmin/lj38-quickmin-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9994513564118793,
-      "wilson_low": 0.9927371921365079
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -6880,7 +6844,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-quickmin-tuned",
       "failures": {
         "cap": 0,
@@ -6900,6 +6863,7 @@
       "median_per_image": null,
       "min_calls": 467.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 2,
       "note": "starts.jsonl",
       "par2_mean": 1932.997,
@@ -6907,14 +6871,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-quickmin-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 0.9994513564118793,
+      "rate_low": 0.9927371921365079,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.998,
       "template": "rgmin/lj38-quickmin-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9994513564118793,
-      "wilson_low": 0.9927371921365079
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -6925,7 +6889,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-diis",
       "failures": {
         "cap": 0,
@@ -6945,6 +6908,7 @@
       "median_per_image": null,
       "min_calls": 395.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 2,
       "note": "starts.jsonl",
       "par2_mean": 1967.417,
@@ -6952,14 +6916,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-diis.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9994513564118793,
+      "rate_low": 0.9927371921365079,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.998,
       "template": "rgmin/lj38-diis",
-      "tuning": "default",
-      "wilson_high": 0.9994513564118793,
-      "wilson_low": 0.9927371921365079
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -6970,7 +6934,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-diis",
       "failures": {
         "cap": 0,
@@ -6990,6 +6953,7 @@
       "median_per_image": null,
       "min_calls": 395.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 2,
       "note": "starts.jsonl",
       "par2_mean": 1967.417,
@@ -6997,14 +6961,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-diis.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 0.9994513564118793,
+      "rate_low": 0.9927371921365079,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.998,
       "template": "rgmin/lj38-diis",
-      "tuning": "default",
-      "wilson_high": 0.9994513564118793,
-      "wilson_low": 0.9927371921365079
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -7015,7 +6979,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-diis-tuned",
       "failures": {
         "cap": 0,
@@ -7035,6 +6998,7 @@
       "median_per_image": null,
       "min_calls": 395.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 2,
       "note": "starts.jsonl",
       "par2_mean": 1967.417,
@@ -7042,14 +7006,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-diis-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9994513564118793,
+      "rate_low": 0.9927371921365079,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.998,
       "template": "rgmin/lj38-diis-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9994513564118793,
-      "wilson_low": 0.9927371921365079
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -7060,7 +7024,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-diis-tuned",
       "failures": {
         "cap": 0,
@@ -7080,6 +7043,7 @@
       "median_per_image": null,
       "min_calls": 395.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 2,
       "note": "starts.jsonl",
       "par2_mean": 1967.417,
@@ -7087,14 +7051,59 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-diis-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 0.9994513564118793,
+      "rate_low": 0.9927371921365079,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.998,
       "template": "rgmin/lj38-diis-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9994513564118793,
-      "wilson_low": 0.9927371921365079
+      "tuning": "tuned"
+    },
+    {
+      "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "pele",
+      "code_version": "0.1.2",
+      "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
+      "comparable": true,
+      "counter": "harness",
+      "entry": "pele-b7081b93-lj38-fire",
+      "failures": {
+        "cap": 7,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 41
+      },
+      "full_n": 1000,
+      "history": false,
+      "max_calls": 10000.0,
+      "mean_calls": 1325.29,
+      "mean_per_image": null,
+      "median": 754.5,
+      "median_calls": 739.0,
+      "median_high": 801.0,
+      "median_low": 723.0,
+      "median_per_image": null,
+      "min_calls": 262.0,
+      "n": 1000,
+      "newest": true,
+      "nfailed": 48,
+      "note": "starts.jsonl",
+      "par2_mean": 2141.381,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/pele-b7081b93-lj38-fire.dat; results/asv/52ce661f309ef267b070534a1e52e4a15fed6d11",
+      "problem": "minimization/lj38",
+      "rate_high": 0.963606698979192,
+      "rate_low": 0.936933911349866,
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign, asv",
+      "success_rate": 0.952,
+      "template": "pele/lj38-fire",
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -7105,7 +7114,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-sr1",
       "failures": {
         "cap": 2,
@@ -7125,6 +7133,7 @@
       "median_per_image": null,
       "min_calls": 292.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 6,
       "note": "starts.jsonl",
       "par2_mean": 2185.659,
@@ -7132,14 +7141,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-sr1.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9972473308581237,
+      "rate_low": 0.9869718317581478,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.994,
       "template": "rgmin/lj38-sr1",
-      "tuning": "default",
-      "wilson_high": 0.9972473308581237,
-      "wilson_low": 0.9869718317581478
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -7150,7 +7159,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-sr1",
       "failures": {
         "cap": 2,
@@ -7170,6 +7178,7 @@
       "median_per_image": null,
       "min_calls": 292.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 6,
       "note": "starts.jsonl",
       "par2_mean": 2185.659,
@@ -7177,14 +7186,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-sr1.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 0.9972473308581237,
+      "rate_low": 0.9869718317581478,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.994,
       "template": "rgmin/lj38-sr1",
-      "tuning": "default",
-      "wilson_high": 0.9972473308581237,
-      "wilson_low": 0.9869718317581478
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -7195,7 +7204,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-sr1-tuned",
       "failures": {
         "cap": 2,
@@ -7215,6 +7223,7 @@
       "median_per_image": null,
       "min_calls": 292.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 6,
       "note": "starts.jsonl",
       "par2_mean": 2185.659,
@@ -7222,14 +7231,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-sr1-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9972473308581237,
+      "rate_low": 0.9869718317581478,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.994,
       "template": "rgmin/lj38-sr1-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9972473308581237,
-      "wilson_low": 0.9869718317581478
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -7240,7 +7249,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-sr1-tuned",
       "failures": {
         "cap": 2,
@@ -7260,6 +7268,7 @@
       "median_per_image": null,
       "min_calls": 292.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 6,
       "note": "starts.jsonl",
       "par2_mean": 2185.659,
@@ -7267,14 +7276,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-sr1-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 0.9972473308581237,
+      "rate_low": 0.9869718317581478,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.994,
       "template": "rgmin/lj38-sr1-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9972473308581237,
-      "wilson_low": 0.9869718317581478
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -7285,7 +7294,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-sr2",
       "failures": {
         "cap": 5,
@@ -7305,6 +7313,7 @@
       "median_per_image": null,
       "min_calls": 319.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 6,
       "note": "starts.jsonl",
       "par2_mean": 2298.441,
@@ -7312,14 +7321,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-sr2.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9972473308581237,
+      "rate_low": 0.9869718317581478,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.994,
       "template": "rgmin/lj38-sr2",
-      "tuning": "default",
-      "wilson_high": 0.9972473308581237,
-      "wilson_low": 0.9869718317581478
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -7330,7 +7339,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-sr2",
       "failures": {
         "cap": 5,
@@ -7350,6 +7358,7 @@
       "median_per_image": null,
       "min_calls": 319.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 6,
       "note": "starts.jsonl",
       "par2_mean": 2298.441,
@@ -7357,14 +7366,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-sr2.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 0.9972473308581237,
+      "rate_low": 0.9869718317581478,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.994,
       "template": "rgmin/lj38-sr2",
-      "tuning": "default",
-      "wilson_high": 0.9972473308581237,
-      "wilson_low": 0.9869718317581478
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -7375,7 +7384,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-sr2-tuned",
       "failures": {
         "cap": 5,
@@ -7395,6 +7403,7 @@
       "median_per_image": null,
       "min_calls": 319.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 6,
       "note": "starts.jsonl",
       "par2_mean": 2298.441,
@@ -7402,14 +7411,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-sr2-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 0.9972473308581237,
+      "rate_low": 0.9869718317581478,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.994,
       "template": "rgmin/lj38-sr2-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9972473308581237,
-      "wilson_low": 0.9869718317581478
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -7420,7 +7429,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-sr2-tuned",
       "failures": {
         "cap": 5,
@@ -7440,6 +7448,7 @@
       "median_per_image": null,
       "min_calls": 319.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 6,
       "note": "starts.jsonl",
       "par2_mean": 2298.441,
@@ -7447,14 +7456,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-sr2-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 0.9972473308581237,
+      "rate_low": 0.9869718317581478,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.994,
       "template": "rgmin/lj38-sr2-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9972473308581237,
-      "wilson_low": 0.9869718317581478
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -7465,7 +7474,6 @@
       "commit": "4167998d16d8dac4a484ba9305f27d6325a7a28d",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "dlfind-0.0.3-minimization-lj38--dlfind-cg-lj38",
       "failures": {
         "cap": 9,
@@ -7485,6 +7493,7 @@
       "median_per_image": null,
       "min_calls": 693.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 9,
       "note": "starts.jsonl",
       "par2_mean": 3048.625,
@@ -7492,14 +7501,14 @@
       "partial_reason": "",
       "path": "results/campaign/dlfind-0.0.3-minimization-lj38--dlfind-cg-lj38.dat",
       "problem": "minimization/lj38",
+      "rate_high": 0.9952579393325229,
+      "rate_low": 0.982984183834662,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.991,
       "template": "dlfind/cg-lj38",
-      "tuning": "default",
-      "wilson_high": 0.9952579393325229,
-      "wilson_low": 0.982984183834662
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -7510,7 +7519,6 @@
       "commit": "4167998d16d8dac4a484ba9305f27d6325a7a28d",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "dlfind-0.0.3-minimization-lj38--dlfind-sd-lj38",
       "failures": {
         "cap": 10,
@@ -7530,6 +7538,7 @@
       "median_per_image": null,
       "min_calls": 690.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 10,
       "note": "starts.jsonl",
       "par2_mean": 3093.738,
@@ -7537,14 +7546,14 @@
       "partial_reason": "",
       "path": "results/campaign/dlfind-0.0.3-minimization-lj38--dlfind-sd-lj38.dat",
       "problem": "minimization/lj38",
+      "rate_high": 0.9945592455544707,
+      "rate_low": 0.9816905311296853,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.99,
       "template": "dlfind/sd-lj38",
-      "tuning": "default",
-      "wilson_high": 0.9945592455544707,
-      "wilson_low": 0.9816905311296853
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -7555,7 +7564,6 @@
       "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "lammps-30Sep2026-minimization-lj38--lammps-quickmin-lj38",
       "failures": {
         "cap": 0,
@@ -7575,6 +7583,7 @@
       "median_per_image": null,
       "min_calls": 681.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 9,
       "note": "starts.jsonl",
       "par2_mean": 3138.208,
@@ -7582,14 +7591,14 @@
       "partial_reason": "",
       "path": "results/campaign/lammps-30Sep2026-minimization-lj38--lammps-quickmin-lj38.dat",
       "problem": "minimization/lj38",
+      "rate_high": 0.9952579393325229,
+      "rate_low": 0.982984183834662,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.991,
       "template": "lammps/quickmin-lj38",
-      "tuning": "default",
-      "wilson_high": 0.9952579393325229,
-      "wilson_low": 0.982984183834662
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -7600,7 +7609,6 @@
       "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "lammps-30Sep2026-minimization-lj38--lammps-cg-lj38",
       "failures": {
         "cap": 148,
@@ -7620,6 +7628,7 @@
       "median_per_image": null,
       "min_calls": 393.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 152,
       "note": "starts.jsonl",
       "par2_mean": 4361.301,
@@ -7627,14 +7636,14 @@
       "partial_reason": "",
       "path": "results/campaign/lammps-30Sep2026-minimization-lj38--lammps-cg-lj38.dat",
       "problem": "minimization/lj38",
+      "rate_high": 0.868917497437021,
+      "rate_low": 0.8244190786570326,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.848,
       "template": "lammps/cg-lj38",
-      "tuning": "default",
-      "wilson_high": 0.868917497437021,
-      "wilson_low": 0.8244190786570326
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -7645,7 +7654,6 @@
       "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "lammps-30Sep2026-minimization-lj38--lammps-fire-lj38",
       "failures": {
         "cap": 0,
@@ -7665,6 +7673,7 @@
       "median_per_image": null,
       "min_calls": 3.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 273,
       "note": "starts.jsonl",
       "par2_mean": 5844.902,
@@ -7672,14 +7681,14 @@
       "partial_reason": "",
       "path": "results/campaign/lammps-30Sep2026-minimization-lj38--lammps-fire-lj38.dat",
       "problem": "minimization/lj38",
+      "rate_high": 0.7537040510828288,
+      "rate_low": 0.6985586005647291,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.727,
       "template": "lammps/fire-lj38",
-      "tuning": "default",
-      "wilson_high": 0.7537040510828288,
-      "wilson_low": 0.6985586005647291
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -7690,7 +7699,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-sd",
       "failures": {
         "cap": 200,
@@ -7710,6 +7718,7 @@
       "median_per_image": null,
       "min_calls": 1141.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 203,
       "note": "starts.jsonl",
       "par2_mean": 8392.748,
@@ -7717,14 +7726,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-sd.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 0.8207718212398687,
+      "rate_low": 0.7709550842197117,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.797,
       "template": "rgmin/lj38-sd",
-      "tuning": "default",
-      "wilson_high": 0.8207718212398687,
-      "wilson_low": 0.7709550842197117
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -7735,7 +7744,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-sd",
       "failures": {
         "cap": 200,
@@ -7755,6 +7763,7 @@
       "median_per_image": null,
       "min_calls": 1141.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 203,
       "note": "starts.jsonl",
       "par2_mean": 8392.748,
@@ -7762,14 +7771,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-sd.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 0.8207718212398687,
+      "rate_low": 0.7709550842197117,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.797,
       "template": "rgmin/lj38-sd",
-      "tuning": "default",
-      "wilson_high": 0.8207718212398687,
-      "wilson_low": 0.7709550842197117
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -7780,7 +7789,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-sd-tuned",
       "failures": {
         "cap": 200,
@@ -7800,6 +7808,7 @@
       "median_per_image": null,
       "min_calls": 1141.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 203,
       "note": "starts.jsonl",
       "par2_mean": 8392.748,
@@ -7807,14 +7816,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-sd-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 0.8207718212398687,
+      "rate_low": 0.7709550842197117,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.797,
       "template": "rgmin/lj38-sd-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.8207718212398687,
-      "wilson_low": 0.7709550842197117
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -7825,7 +7834,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-sd-tuned",
       "failures": {
         "cap": 200,
@@ -7845,6 +7853,7 @@
       "median_per_image": null,
       "min_calls": 1141.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 203,
       "note": "starts.jsonl",
       "par2_mean": 8392.748,
@@ -7852,14 +7861,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-sd-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 0.8207718212398687,
+      "rate_low": 0.7709550842197117,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.797,
       "template": "rgmin/lj38-sd-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.8207718212398687,
-      "wilson_low": 0.7709550842197117
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -7870,7 +7879,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-adam",
       "failures": {
         "cap": 547,
@@ -7890,6 +7898,7 @@
       "median_per_image": null,
       "min_calls": 852.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 547,
       "note": "starts.jsonl",
       "par2_mean": 13835.677,
@@ -7897,14 +7906,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-adam.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 0.483973828822868,
+      "rate_low": 0.42238588647477426,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.453,
       "template": "rgmin/lj38-adam",
-      "tuning": "default",
-      "wilson_high": 0.483973828822868,
-      "wilson_low": 0.42238588647477426
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -7915,7 +7924,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-adam",
       "failures": {
         "cap": 547,
@@ -7935,6 +7943,7 @@
       "median_per_image": null,
       "min_calls": 852.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 547,
       "note": "starts.jsonl",
       "par2_mean": 13835.677,
@@ -7942,14 +7951,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-adam.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 0.483973828822868,
+      "rate_low": 0.42238588647477426,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.453,
       "template": "rgmin/lj38-adam",
-      "tuning": "default",
-      "wilson_high": 0.483973828822868,
-      "wilson_low": 0.42238588647477426
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -7960,7 +7969,6 @@
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-0.4.1-lj38-adam-tuned",
       "failures": {
         "cap": 547,
@@ -7980,6 +7988,7 @@
       "median_per_image": null,
       "min_calls": 852.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 547,
       "note": "starts.jsonl",
       "par2_mean": 13835.677,
@@ -7987,14 +7996,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-0.4.1-lj38-adam-tuned.dat; results/asv/de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
       "problem": "minimization/lj38",
+      "rate_high": 0.483973828822868,
+      "rate_low": 0.42238588647477426,
       "registry_match": false,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.453,
       "template": "rgmin/lj38-adam-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.483973828822868,
-      "wilson_low": 0.42238588647477426
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -8005,7 +8014,6 @@
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgmin-f15726f1-lj38-adam-tuned",
       "failures": {
         "cap": 547,
@@ -8025,6 +8033,7 @@
       "median_per_image": null,
       "min_calls": 852.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 547,
       "note": "starts.jsonl",
       "par2_mean": 13835.677,
@@ -8032,14 +8041,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgmin-f15726f1-lj38-adam-tuned.dat; results/asv/076234c0a46310ccd6d15d60aac0543aaee9198e",
       "problem": "minimization/lj38",
+      "rate_high": 0.483973828822868,
+      "rate_low": 0.42238588647477426,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.453,
       "template": "rgmin/lj38-adam-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.483973828822868,
-      "wilson_low": 0.42238588647477426
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -8050,7 +8059,6 @@
       "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "lammps-30Sep2026-minimization-lj38--lammps-sd-lj38",
       "failures": {
         "cap": 617,
@@ -8070,6 +8078,7 @@
       "median_per_image": null,
       "min_calls": 1656.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 617,
       "note": "starts.jsonl",
       "par2_mean": 14468.187,
@@ -8077,14 +8086,14 @@
       "partial_reason": "",
       "path": "results/campaign/lammps-30Sep2026-minimization-lj38--lammps-sd-lj38.dat",
       "problem": "minimization/lj38",
+      "rate_high": 0.41352273011601154,
+      "rate_low": 0.3533727313696084,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.383,
       "template": "lammps/sd-lj38",
-      "tuning": "default",
-      "wilson_high": 0.41352273011601154,
-      "wilson_low": 0.3533727313696084
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -8095,7 +8104,6 @@
       "commit": "a4ce10dd6d7fdcb3d813f1c730eb365d29041999",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "pysisyphus-0.1.dev1-minimization-lj38--pysisyphus-cg-lj38",
       "failures": {
         "cap": 745,
@@ -8115,6 +8123,7 @@
       "median_per_image": null,
       "min_calls": 220.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 746,
       "note": "starts.jsonl",
       "par2_mean": 15124.683,
@@ -8122,14 +8131,14 @@
       "partial_reason": "",
       "path": "results/campaign/pysisyphus-0.1.dev1-minimization-lj38--pysisyphus-cg-lj38.dat",
       "problem": "minimization/lj38",
+      "rate_high": 0.2818856900762812,
+      "rate_low": 0.2279970750986118,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.254,
       "template": "pysisyphus/cg-lj38",
-      "tuning": "default",
-      "wilson_high": 0.2818856900762812,
-      "wilson_low": 0.2279970750986118
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -8140,7 +8149,6 @@
       "commit": "a4ce10dd6d7fdcb3d813f1c730eb365d29041999",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "pysisyphus-0.1.dev1-minimization-lj38--pysisyphus-sd-lj38",
       "failures": {
         "cap": 795,
@@ -8160,6 +8168,7 @@
       "median_per_image": null,
       "min_calls": 320.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 795,
       "note": "starts.jsonl",
       "par2_mean": 16094.784,
@@ -8167,14 +8176,14 @@
       "partial_reason": "",
       "path": "results/campaign/pysisyphus-0.1.dev1-minimization-lj38--pysisyphus-sd-lj38.dat",
       "problem": "minimization/lj38",
+      "rate_high": 0.23112770103057595,
+      "rate_low": 0.18113008647590156,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.205,
       "template": "pysisyphus/sd-lj38",
-      "tuning": "default",
-      "wilson_high": 0.23112770103057595,
-      "wilson_low": 0.18113008647590156
+      "tuning": "default"
     },
     {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
@@ -8185,7 +8194,6 @@
       "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "pele-b7081b93-lj38-sd",
       "failures": {
         "cap": 1000,
@@ -8205,6 +8213,7 @@
       "median_per_image": null,
       "min_calls": 10000.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 1000,
       "note": "starts.jsonl",
       "par2_mean": 20000.0,
@@ -8212,14 +8221,14 @@
       "partial_reason": "",
       "path": "results/campaign/pele-b7081b93-lj38-sd.dat; results/asv/52ce661f309ef267b070534a1e52e4a15fed6d11",
       "problem": "minimization/lj38",
+      "rate_high": 0.0038267584855551234,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.0,
       "template": "pele/lj38-sd",
-      "tuning": "default",
-      "wilson_high": 0.0038267584855551234,
-      "wilson_low": 0.0
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -8230,7 +8239,6 @@
       "commit": "a4ce10dd6d7fdcb3d813f1c730eb365d29041999",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "pysisyphus-0.1.dev1-minimization-lj38--pysisyphus-lbfgs-lj38",
       "failures": {
         "cap": 1000,
@@ -8250,6 +8258,7 @@
       "median_per_image": null,
       "min_calls": 10000.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 1000,
       "note": "starts.jsonl",
       "par2_mean": 20000.0,
@@ -8257,14 +8266,14 @@
       "partial_reason": "",
       "path": "results/campaign/pysisyphus-0.1.dev1-minimization-lj38--pysisyphus-lbfgs-lj38.dat",
       "problem": "minimization/lj38",
+      "rate_high": 0.0038267584855551234,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
       "template": "pysisyphus/lbfgs-lj38",
-      "tuning": "default",
-      "wilson_high": 0.0038267584855551234,
-      "wilson_low": 0.0
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -8275,7 +8284,6 @@
       "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "tsase-1.0-minimization-lj38--tsase-mdmin-lj38",
       "failures": {
         "cap": 1000,
@@ -8295,6 +8303,7 @@
       "median_per_image": null,
       "min_calls": 10000.0,
       "n": 1000,
+      "newest": true,
       "nfailed": 1000,
       "note": "starts.jsonl",
       "par2_mean": 20000.0,
@@ -8302,14 +8311,14 @@
       "partial_reason": "",
       "path": "results/campaign/tsase-1.0-minimization-lj38--tsase-mdmin-lj38.dat",
       "problem": "minimization/lj38",
+      "rate_high": 0.0038267584855551234,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
       "template": "tsase/mdmin-lj38",
-      "tuning": "default",
-      "wilson_high": 0.0038267584855551234,
-      "wilson_low": 0.0
+      "tuning": "default"
     }
   ],
   "title": "Lennard-Jones 38 clusters"

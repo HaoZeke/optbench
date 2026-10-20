@@ -12,7 +12,7 @@
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "entry": "noise-ase-bfgs-s1em2",
-      "legacy": {
+      "success_mean": {
         "force_calls": 788,
         "force_calls_max": 9974,
         "force_calls_min": 292,
@@ -42,12 +42,12 @@
         "par_factor": 2,
         "q25": 536.0,
         "q75": 902.25,
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-rate-bootstrap",
         "success_only_mean": 785.0842217484009,
         "success_rate": 0.938,
         "successes": 938,
-        "wilson_high": 0.9513358198800193,
-        "wilson_low": 0.9213119396866343
+        "rate_high": 0.9513358198800193,
+        "rate_low": 0.9213119396866343
       },
       "parameters": {
         "cap": 10000,
@@ -31207,6 +31207,6 @@
     }
   ],
   "schema": "optbench.result/v2",
-  "scoring": "par2-wilson-bootstrap",
+  "scoring": "par2-rate-bootstrap",
   "status": "archive"
 }

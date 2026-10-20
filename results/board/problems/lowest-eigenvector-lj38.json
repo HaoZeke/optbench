@@ -13,7 +13,6 @@
       "commit": "r2549",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "eon-svn-r2549-low-lj38-dimer",
       "failures": {
         "cap": 0,
@@ -33,6 +32,7 @@
       "median_per_image": null,
       "min_calls": 14.0,
       "n": 200,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 30.355,
@@ -40,14 +40,14 @@
       "partial_reason": "result file sets ranked false; potential ljcluster (shifted, cutoff 15)",
       "path": "results/campaign/eon-svn-r2549-low-lj38-dimer.dat; results/asv/c1ecf607a10f7ab78d1615e4cbf9af030bebcdbf",
       "problem": "lowest-eigenvector/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.9811546736227335,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "eon-svn/low-lj38-dimer",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9811546736227335
+      "tuning": "default"
     },
     {
       "asv_commit": "c1ecf607a10f7ab78d1615e4cbf9af030bebcdbf",
@@ -58,7 +58,6 @@
       "commit": "r2549",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "eon-svn-r2549-low-lj38-lanczos",
       "failures": {
         "cap": 0,
@@ -78,6 +77,7 @@
       "median_per_image": null,
       "min_calls": 13.0,
       "n": 200,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 26.385,
@@ -85,14 +85,14 @@
       "partial_reason": "result file sets ranked false; potential ljcluster (shifted, cutoff 15)",
       "path": "results/campaign/eon-svn-r2549-low-lj38-lanczos.dat; results/asv/c1ecf607a10f7ab78d1615e4cbf9af030bebcdbf",
       "problem": "lowest-eigenvector/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.9811546736227335,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "eon-svn/low-lj38-lanczos",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9811546736227335
+      "tuning": "default"
     },
     {
       "asv_commit": "773f8e16a8c96df68d7a05af605491f9b7272596",
@@ -103,7 +103,6 @@
       "commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_eon_develop.EonDevelopLowLj38Dimer",
       "failures": {
         "cap": 0,
@@ -123,6 +122,7 @@
       "median_per_image": null,
       "min_calls": 30.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 30.0,
@@ -130,14 +130,14 @@
       "partial_reason": "smoke run; scored 1 of 200 starts",
       "path": "results/asv/773f8e16a8c96df68d7a05af605491f9b7272596; results/asv/e172a4b674067643a20f44d30d9ca4a93025acac",
       "problem": "lowest-eigenvector/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "eon/develop-low-lj38-dimer",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": ""
     },
     {
       "asv_commit": "773f8e16a8c96df68d7a05af605491f9b7272596",
@@ -148,7 +148,6 @@
       "commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_eon_develop.EonDevelopLowLj38Lanczos",
       "failures": {
         "cap": 0,
@@ -168,6 +167,7 @@
       "median_per_image": null,
       "min_calls": 29.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 29.0,
@@ -175,14 +175,14 @@
       "partial_reason": "smoke run; scored 1 of 200 starts",
       "path": "results/asv/773f8e16a8c96df68d7a05af605491f9b7272596; results/asv/e172a4b674067643a20f44d30d9ca4a93025acac",
       "problem": "lowest-eigenvector/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "eon/develop-low-lj38-lanczos",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": ""
     }
   ],
   "profile": {
@@ -381,7 +381,6 @@
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgsaddle-0.2.2-mode-lanczos-loweig",
       "failures": {
         "cap": 0,
@@ -401,6 +400,7 @@
       "median_per_image": null,
       "min_calls": 14.0,
       "n": 200,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 26.12,
@@ -408,14 +408,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgsaddle-0.2.2-mode-lanczos-loweig.dat; results/asv/a914203cbb891442232aea2c92f960df9a48dc1d",
       "problem": "lowest-eigenvector/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.9811546736227335,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgsaddle/mode-lanczos",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9811546736227335
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -426,7 +426,6 @@
       "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "eon-client-low-lj38-lanczos",
       "failures": {
         "cap": 0,
@@ -446,6 +445,7 @@
       "median_per_image": null,
       "min_calls": 13.0,
       "n": 200,
+      "newest": true,
       "nfailed": 0,
       "note": "starts",
       "par2_mean": 26.385,
@@ -453,14 +453,14 @@
       "partial_reason": "",
       "path": "results/campaign/eon-client-low-lj38-lanczos.dat",
       "problem": "lowest-eigenvector/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.9811546736227335,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon-client/low-lj38-lanczos",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9811546736227335
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -471,7 +471,6 @@
       "commit": "r2549",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "eon-svn-low-lj38-lanczos-ljcut",
       "failures": {
         "cap": 0,
@@ -491,6 +490,7 @@
       "median_per_image": null,
       "min_calls": 13.0,
       "n": 200,
+      "newest": true,
       "nfailed": 0,
       "note": "starts",
       "par2_mean": 26.385,
@@ -498,14 +498,14 @@
       "partial_reason": "",
       "path": "results/campaign/eon-svn-low-lj38-lanczos-ljcut.dat",
       "problem": "lowest-eigenvector/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.9811546736227335,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon-svn/low-lj38-lanczos-ljcut",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9811546736227335
+      "tuning": ""
     },
     {
       "asv_commit": "06efc6dd8ad69a707789c55bfe2f012e8503f05c",
@@ -516,7 +516,6 @@
       "commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "bench_eon_develop.EonDevelopLowLj38Lanczos",
       "failures": {
         "cap": 0,
@@ -536,6 +535,7 @@
       "median_per_image": null,
       "min_calls": 13.0,
       "n": 200,
+      "newest": true,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 26.385,
@@ -543,14 +543,14 @@
       "partial_reason": "",
       "path": "results/asv/06efc6dd8ad69a707789c55bfe2f012e8503f05c",
       "problem": "lowest-eigenvector/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.9811546736227335,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "eon/develop-low-lj38-lanczos",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9811546736227335
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -561,7 +561,6 @@
       "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "eon-client-low-lj38-dimer-lbfgs",
       "failures": {
         "cap": 0,
@@ -581,6 +580,7 @@
       "median_per_image": null,
       "min_calls": 14.0,
       "n": 200,
+      "newest": true,
       "nfailed": 0,
       "note": "starts",
       "par2_mean": 28.33,
@@ -588,14 +588,14 @@
       "partial_reason": "",
       "path": "results/campaign/eon-client-low-lj38-dimer-lbfgs.dat",
       "problem": "lowest-eigenvector/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.9811546736227335,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon-client/low-lj38-dimer-lbfgs",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9811546736227335
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -606,7 +606,6 @@
       "commit": "r2549",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "eon-svn-low-lj38-dimer-lbfgs",
       "failures": {
         "cap": 0,
@@ -626,6 +625,7 @@
       "median_per_image": null,
       "min_calls": 14.0,
       "n": 200,
+      "newest": true,
       "nfailed": 0,
       "note": "starts",
       "par2_mean": 28.33,
@@ -633,14 +633,14 @@
       "partial_reason": "",
       "path": "results/campaign/eon-svn-low-lj38-dimer-lbfgs.dat",
       "problem": "lowest-eigenvector/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.9811546736227335,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon-svn/low-lj38-dimer-lbfgs",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9811546736227335
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -651,7 +651,6 @@
       "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "eon-client-low-lj38-dimer-cg",
       "failures": {
         "cap": 0,
@@ -671,6 +670,7 @@
       "median_per_image": null,
       "min_calls": 14.0,
       "n": 200,
+      "newest": true,
       "nfailed": 0,
       "note": "starts",
       "par2_mean": 30.355,
@@ -678,14 +678,14 @@
       "partial_reason": "",
       "path": "results/campaign/eon-client-low-lj38-dimer-cg.dat",
       "problem": "lowest-eigenvector/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.9811546736227335,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon-client/low-lj38-dimer-cg",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9811546736227335
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -696,7 +696,6 @@
       "commit": "r2549",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "eon-svn-low-lj38-dimer-cg",
       "failures": {
         "cap": 0,
@@ -716,6 +715,7 @@
       "median_per_image": null,
       "min_calls": 14.0,
       "n": 200,
+      "newest": true,
       "nfailed": 0,
       "note": "starts",
       "par2_mean": 30.355,
@@ -723,14 +723,14 @@
       "partial_reason": "",
       "path": "results/campaign/eon-svn-low-lj38-dimer-cg.dat",
       "problem": "lowest-eigenvector/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.9811546736227335,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon-svn/low-lj38-dimer-cg",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9811546736227335
+      "tuning": ""
     },
     {
       "asv_commit": "06efc6dd8ad69a707789c55bfe2f012e8503f05c",
@@ -741,7 +741,6 @@
       "commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "bench_eon_develop.EonDevelopLowLj38Dimer",
       "failures": {
         "cap": 0,
@@ -761,6 +760,7 @@
       "median_per_image": null,
       "min_calls": 14.0,
       "n": 200,
+      "newest": true,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 30.355,
@@ -768,14 +768,14 @@
       "partial_reason": "",
       "path": "results/asv/06efc6dd8ad69a707789c55bfe2f012e8503f05c",
       "problem": "lowest-eigenvector/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.9811546736227335,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "eon/develop-low-lj38-dimer",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9811546736227335
+      "tuning": ""
     },
     {
       "asv_commit": "a914203cbb891442232aea2c92f960df9a48dc1d",
@@ -786,7 +786,6 @@
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgsaddle-0.2.2-mode-dimer-loweig",
       "failures": {
         "cap": 0,
@@ -806,6 +805,7 @@
       "median_per_image": null,
       "min_calls": 23.0,
       "n": 200,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 31.4,
@@ -813,14 +813,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgsaddle-0.2.2-mode-dimer-loweig.dat; results/asv/a914203cbb891442232aea2c92f960df9a48dc1d",
       "problem": "lowest-eigenvector/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.9811546736227335,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgsaddle/mode-dimer",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9811546736227335
+      "tuning": "default"
     },
     {
       "asv_commit": "8cb1889ce716ee3b227e40eb83ba7395d4179564",
@@ -831,7 +831,6 @@
       "commit": "5a00aeede06fd822ef302624ec4c9bc7889d21fc0b5804b701a5785695c68d16",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "softsaddle-2019.04-mode-lanczos-tuned-loweig",
       "failures": {
         "cap": 0,
@@ -851,6 +850,7 @@
       "median_per_image": null,
       "min_calls": 23.0,
       "n": 200,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 34.73,
@@ -858,14 +858,14 @@
       "partial_reason": "",
       "path": "results/campaign/softsaddle-2019.04-mode-lanczos-tuned-loweig.dat; results/asv/8cb1889ce716ee3b227e40eb83ba7395d4179564",
       "problem": "lowest-eigenvector/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.9811546736227335,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "softsaddle/mode-lanczos-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9811546736227335
+      "tuning": "tuned"
     },
     {
       "asv_commit": "a914203cbb891442232aea2c92f960df9a48dc1d",
@@ -876,7 +876,6 @@
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgsaddle-0.2.2-mode-lanczos-tuned-loweig",
       "failures": {
         "cap": 0,
@@ -896,6 +895,7 @@
       "median_per_image": null,
       "min_calls": 18.0,
       "n": 200,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 36.56,
@@ -903,14 +903,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgsaddle-0.2.2-mode-lanczos-tuned-loweig.dat; results/asv/a914203cbb891442232aea2c92f960df9a48dc1d",
       "problem": "lowest-eigenvector/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.9811546736227335,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgsaddle/mode-lanczos-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9811546736227335
+      "tuning": "tuned"
     },
     {
       "asv_commit": "a914203cbb891442232aea2c92f960df9a48dc1d",
@@ -921,7 +921,6 @@
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgsaddle-0.2.2-mode-dimer-tuned-loweig",
       "failures": {
         "cap": 0,
@@ -941,6 +940,7 @@
       "median_per_image": null,
       "min_calls": 33.0,
       "n": 200,
+      "newest": true,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 45.555,
@@ -948,14 +948,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgsaddle-0.2.2-mode-dimer-tuned-loweig.dat; results/asv/a914203cbb891442232aea2c92f960df9a48dc1d",
       "problem": "lowest-eigenvector/lj38",
+      "rate_high": 1.0,
+      "rate_low": 0.9811546736227335,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "rgsaddle/mode-dimer-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9811546736227335
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -966,7 +966,6 @@
       "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "tsase-1.0-lowest-eigenvector-lj38--tsase-mode-lj38",
       "failures": {
         "cap": 0,
@@ -986,6 +985,7 @@
       "median_per_image": null,
       "min_calls": 25.0,
       "n": 200,
+      "newest": true,
       "nfailed": 22,
       "note": "starts.jsonl",
       "par2_mean": 2420.605,
@@ -993,14 +993,14 @@
       "partial_reason": "",
       "path": "results/campaign/tsase-1.0-lowest-eigenvector-lj38--tsase-mode-lj38.dat",
       "problem": "lowest-eigenvector/lj38",
+      "rate_high": 0.926227555398747,
+      "rate_low": 0.839073090026985,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.89,
       "template": "tsase/mode-lj38",
-      "tuning": "default",
-      "wilson_high": 0.926227555398747,
-      "wilson_low": 0.839073090026985
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -1011,7 +1011,6 @@
       "commit": "9b753517c6c0eccae51425b83eb4e04ef554550b",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "artn-1.1.0-lowest-eigenvector-lj38--partn-mode-lj38",
       "failures": {
         "cap": 0,
@@ -1031,6 +1030,7 @@
       "median_per_image": null,
       "min_calls": 14.0,
       "n": 200,
+      "newest": true,
       "nfailed": 26,
       "note": "starts.jsonl",
       "par2_mean": 2619.835,
@@ -1038,14 +1038,14 @@
       "partial_reason": "",
       "path": "results/campaign/artn-1.1.0-lowest-eigenvector-lj38--partn-mode-lj38.dat",
       "problem": "lowest-eigenvector/lj38",
+      "rate_high": 0.9097179772033067,
+      "rate_low": 0.8163364812775159,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.87,
       "template": "partn/mode-lj38",
-      "tuning": "default",
-      "wilson_high": 0.9097179772033067,
-      "wilson_low": 0.8163364812775159
+      "tuning": "default"
     },
     {
       "asv_commit": "8cb1889ce716ee3b227e40eb83ba7395d4179564",
@@ -1056,7 +1056,6 @@
       "commit": "5a00aeede06fd822ef302624ec4c9bc7889d21fc0b5804b701a5785695c68d16",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "softsaddle-2019.04-mode-davidson-tuned-loweig",
       "failures": {
         "cap": 0,
@@ -1076,6 +1075,7 @@
       "median_per_image": null,
       "min_calls": 490.0,
       "n": 200,
+      "newest": true,
       "nfailed": 29,
       "note": "starts.jsonl",
       "par2_mean": 3344.19,
@@ -1083,14 +1083,14 @@
       "partial_reason": "",
       "path": "results/campaign/softsaddle-2019.04-mode-davidson-tuned-loweig.dat; results/asv/8cb1889ce716ee3b227e40eb83ba7395d4179564",
       "problem": "lowest-eigenvector/lj38",
+      "rate_high": 0.8971064935799559,
+      "rate_low": 0.7995133246921847,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.855,
       "template": "softsaddle/mode-davidson-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.8971064935799559,
-      "wilson_low": 0.7995133246921847
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -1101,7 +1101,6 @@
       "commit": "a4ce10dd6d7fdcb3d813f1c730eb365d29041999",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "pysisyphus-0.1.dev1-lowest-eigenvector-lj38--pysisyphus-lanczos-lj38",
       "failures": {
         "cap": 0,
@@ -1121,6 +1120,7 @@
       "median_per_image": null,
       "min_calls": 13.0,
       "n": 200,
+      "newest": true,
       "nfailed": 40,
       "note": "starts.jsonl",
       "par2_mean": 4017.14,
@@ -1128,14 +1128,14 @@
       "partial_reason": "",
       "path": "results/campaign/pysisyphus-0.1.dev1-lowest-eigenvector-lj38--pysisyphus-lanczos-lj38.dat",
       "problem": "lowest-eigenvector/lj38",
+      "rate_high": 0.8495479907390189,
+      "rate_low": 0.7391448134346212,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.8,
       "template": "pysisyphus/lanczos-lj38",
-      "tuning": "default",
-      "wilson_high": 0.8495479907390189,
-      "wilson_low": 0.7391448134346212
+      "tuning": "default"
     },
     {
       "asv_commit": "8cb1889ce716ee3b227e40eb83ba7395d4179564",
@@ -1146,7 +1146,6 @@
       "commit": "5a00aeede06fd822ef302624ec4c9bc7889d21fc0b5804b701a5785695c68d16",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "softsaddle-2019.04-mode-lanczos-loweig",
       "failures": {
         "cap": 0,
@@ -1166,6 +1165,7 @@
       "median_per_image": null,
       "min_calls": 8.0,
       "n": 200,
+      "newest": true,
       "nfailed": 187,
       "note": "starts.jsonl",
       "par2_mean": 18700.635,
@@ -1173,14 +1173,14 @@
       "partial_reason": "",
       "path": "results/campaign/softsaddle-2019.04-mode-lanczos-loweig.dat; results/asv/8cb1889ce716ee3b227e40eb83ba7395d4179564",
       "problem": "lowest-eigenvector/lj38",
+      "rate_high": 0.10801907929906895,
+      "rate_low": 0.03837635464915299,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.065,
       "template": "softsaddle/mode-lanczos",
-      "tuning": "default",
-      "wilson_high": 0.10801907929906895,
-      "wilson_low": 0.03837635464915299
+      "tuning": "default"
     },
     {
       "asv_commit": "8cb1889ce716ee3b227e40eb83ba7395d4179564",
@@ -1191,7 +1191,6 @@
       "commit": "5a00aeede06fd822ef302624ec4c9bc7889d21fc0b5804b701a5785695c68d16",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "softsaddle-2019.04-mode-davidson-loweig",
       "failures": {
         "cap": 0,
@@ -1211,6 +1210,7 @@
       "median_per_image": null,
       "min_calls": 465.0,
       "n": 200,
+      "newest": true,
       "nfailed": 189,
       "note": "starts.jsonl",
       "par2_mean": 18925.575,
@@ -1218,14 +1218,14 @@
       "partial_reason": "",
       "path": "results/campaign/softsaddle-2019.04-mode-davidson-loweig.dat; results/asv/8cb1889ce716ee3b227e40eb83ba7395d4179564",
       "problem": "lowest-eigenvector/lj38",
+      "rate_high": 0.0957869987723084,
+      "rate_low": 0.03098534170345884,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.055,
       "template": "softsaddle/mode-davidson",
-      "tuning": "default",
-      "wilson_high": 0.0957869987723084,
-      "wilson_low": 0.03098534170345884
+      "tuning": "default"
     }
   ],
   "title": "lj38"
