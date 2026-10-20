@@ -155,7 +155,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | C2H4/pyamff-rprop10-7-fcoeff0 | — | — | not rerun |
 | C2H4/pyamff-rprop10-7-fcoeff0_1 | — | — | not rerun |
 | emt-pt38/pyamff-adam10-7-fcoeff0 | — | — | not rerun |
-| emt-pt38/pyamff-adam10-7-fcoeff0_1 | — | — | not rerun |
+| emt-pt38/pyamff-adam10-7-fcoeff0_1 | — | — | not rerun; residual |
 | emt-pt38/pyamff-lbfgs10-7-fcoeff0 | — | — | not rerun |
 | emt-pt38/pyamff-lbfgs10-7-fcoeff0_1 | — | — | not rerun |
 | emt-pt38/pyamff-rprop10-7-fcoeff0 | — | — | not rerun |
@@ -219,6 +219,8 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 - tsopt/LJ38/pele_cd: Inside the 10% band (263.52 vs 254). The same xyz-versus-con starting set as ts-ffd. findTS_local.py for the CD row does not pass orthogZeroEigs; the harness template sets orthog translations-rotations. The paper baseline is this 2014-stop mean, not the harness-stop mean 335.06.
 - tsopt/LJ38/pele_ffd: Inside the 10% band (207.51 vs 192). Archive run.sh unpacks coords-xyz.tar.gz (200 xyz, max pair about 4.4). The harness problem points at coords-con.tar.gz (max pair about 37). Kabsch RMS is about 6.33, so the sets are not the same geometry. Neither set has a pair past cutoff 40, and both drivers use RMS tolerance 1e-3/sqrt(114). The 8% residual is the starting set. The paper baseline is this 2014-stop mean, not the harness-stop mean 254.48.
+
+- mlopt/emt-pt38/pyamff-adam10-7-fcoeff0_1: Latest PyAMFF master 240f51d01ca22969369f9bc21760c61cbb3b6665, VERSION 0.1.0-beta (2026-07-04). Harness rank results/campaign/pyamff-0.1.0-beta-emt-pt38-adam10-7-fcoeff0_1.dat on the archive starts and max-abs loss-gradient stop 0.1, cap 30000. mean_epoch 1788.26 vs 1708.8 (4.7%), median_epoch 1597.5 vs 1597, mean_energy_rmse 0.000904068 vs 0.000899678, median_energy_rmse 0.000906725 vs 0.000899985, mean_force_rmse 0.106610 vs 0.105311, median_force_rmse 0.108326 vs 0.104343, nfailed 0. The archive row stays the paper number. Schema only: loss_type SE is named SSE, and init_model_parameters false now opens a saved-parameter file, so the run uses true, the random-uniform start. Runtime Python 3.10.22, torch 1.13.1+cpu, gfortran 13.3.0.
 
 ## Causes
 
