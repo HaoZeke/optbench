@@ -1,0 +1,62 @@
+{
+  "code": "EON (SVN r2549)",
+  "code_version": "r2549",
+  "commit": "r2549",
+  "template": "eon-svn/htst-al-dimer-cg2-r2549",
+  "seed": 42,
+  "searches": 318,
+  "reference_ids": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "reference_complete": true,
+  "barrier_windows": 4,
+  "barrier_target": 432,
+  "rate_windows": 0,
+  "rate_target": 11,
+  "barrier_jobs": {
+    "n": 4,
+    "mean": 63.0,
+    "median": 72.0,
+    "min": 17.0,
+    "max": 91.0
+  },
+  "barrier_force_calls": {
+    "n": 4,
+    "mean": 65092.0,
+    "median": 76462.0,
+    "min": 11146.0,
+    "max": 96298.0
+  },
+  "barrier_sad_fcs": {
+    "n": 4,
+    "mean": 55441.5,
+    "median": 64104.5,
+    "min": 8363.0,
+    "max": 85194.0
+  },
+  "barrier_mins_fcs": {
+    "n": 4,
+    "mean": 9650.5,
+    "median": 11034.0,
+    "min": 2783.0,
+    "max": 13751.0
+  },
+  "rate_jobs": null,
+  "rate_force_calls": null,
+  "rate_sad_fcs": null,
+  "rate_mins_fcs": null,
+  "open_barrier_jobs": 66,
+  "open_rate_jobs": 318,
+  "open_rate_sum": 591078558.4590724,
+  "client_matches_harness": true,
+  "client_mismatch": 0,
+  "done": false,
+  "running_s": 1297.3723074721638
+}

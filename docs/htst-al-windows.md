@@ -70,16 +70,19 @@ Mean, median, min, and max are over the closed windows.
 
 | | archive | EON (SVN r2549) | eOn (develop 500350d9) |
 | --- | ---: | ---: | ---: |
-| barrier windows | 432 | 0 / 432 | 0 / 432 |
+| barrier windows | 432 | 4 / 432 | 11 / 432 |
 | rate windows | 11 | 0 / 11 | 0 / 11 |
-| barrier jobs | 46 |  |  |
-| barrier harness calls |  |  |  |
-| barrier sad-fcs | 21070 |  |  |
-| barrier mins-fcs |  |  |  |
+| barrier jobs | 46 | 63 / 72 / 17 / 91 | 28.8182 / 28 / 14 / 55 |
+| barrier harness calls |  | 65092 / 76462 / 11146 / 96298 | 27075.1 / 17072 / 7567 / 80742 |
+| barrier sad-fcs | 21070 | 55441.5 / 64104.5 / 8363 / 85194 | 22655.4 / 12803 / 5399 / 74849 |
+| barrier mins-fcs |  | 9650.5 / 11034 / 2783 / 13751 | 4419.55 / 4377 / 2168 / 8583 |
 | rate jobs | 1671 |  |  |
 | rate harness calls |  |  |  |
 | rate sad-fcs | 766300 |  |  |
 | rate mins-fcs |  |  |  |
+
+EON (SVN r2549): 318 searches, reference ids 8/8, open barrier jobs 66, open rate jobs 318, client_matches_harness True.
+eOn (develop 500350d9): 326 searches, reference ids 8/8, open barrier jobs 9, open rate jobs 326, client_matches_harness False.
 <!-- counts:end -->
 
 ## Clients
