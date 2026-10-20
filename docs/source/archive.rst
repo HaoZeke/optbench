@@ -47,7 +47,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tr></thead><tbody>
    <tr id="minimization-lj38-newton-method" class="best">
    <td class="num">1</td>
-   <td class="text">newton-method</td>
+   <td class="text">newton-method · not reproduced</td>
    <td class="text"></td>
    <td class="num">79</td>
    <td class="num">144</td>
