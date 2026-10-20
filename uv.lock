@@ -9,12 +9,38 @@ resolution-markers = [
 ]
 
 [[package]]
+name = "anneal"
+version = "0.11.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "array-api-compat" },
+    { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
+    { name = "numpy", version = "2.5.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/df/7a/07d12ad94820728a28d516e8a2b7a4c1e92837d72adaf9569c2e15d1d2a6/anneal-0.11.1.tar.gz", hash = "sha256:d3b34913c23cb6c68e1376096063fc705328360ba5ebaef698e0d6919e671bab", size = 5690590, upload-time = "2026-10-11T21:54:07.262Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d6/c3/26b6af826fec160cea4d304fd37016ec38d31ecf2e33f029c5e822c28960/anneal-0.11.1-cp310-abi3-macosx_10_12_x86_64.whl", hash = "sha256:c778d76567bdf5cc22d73ba7bc8c3963e26bb2da65d5e3f1b4be8d4b1331aaf4", size = 3173874, upload-time = "2026-10-11T21:53:58.532Z" },
+    { url = "https://files.pythonhosted.org/packages/81/99/2c297ab241f5583bd29b4d8e919adf3b52fe1b76baf2ba181259f9f43f64/anneal-0.11.1-cp310-abi3-macosx_11_0_arm64.whl", hash = "sha256:8fa53a4e5a9771e8fe564da4263432458cbe5a2f8b24f9980e2ce36ce0a04a1a", size = 2912770, upload-time = "2026-10-11T21:54:01.175Z" },
+    { url = "https://files.pythonhosted.org/packages/88/93/d1f48f53c88f2ecd613a95b4f1528197e743eee9868b41f85a21a67b0e19/anneal-0.11.1-cp310-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:132daf493a2794c3ca4808a0a45c2b86bcc5637b16f79ed2d3b069c3932ec3a2", size = 3141842, upload-time = "2026-10-11T21:54:03.043Z" },
+    { url = "https://files.pythonhosted.org/packages/c1/e2/d5ad6eb1f20a3c8dfeb999fc34b77a5b8c216cd2c86f5ccc823b07797aa9/anneal-0.11.1-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:f0107c88a842fc29d7927e6b786de07f033192c4e325794972e7a8ae3705b4f2", size = 3321257, upload-time = "2026-10-11T21:54:05.037Z" },
+]
+
+[[package]]
 name = "annotated-types"
 version = "0.8.0"
 source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/5f/56/a8120250d128bed162cd73c76d45f6ef9991f3e068f62a8ee060afa3104a/annotated_types-0.8.0.tar.gz", hash = "sha256:13b2beaad985e05e2d6407ee4c4f35590b11f8d693a258a561055cac8f64cab7", size = 15893, upload-time = "2026-07-23T20:16:13.995Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/99/91/8acff4f5e50511b911bbccb72b8628a49c68ce14148cd9f6431094859a90/annotated_types-0.8.0-py3-none-any.whl", hash = "sha256:f072f4d804ea359e4eaf198b1af7a8b0943881a87f31bb764f8bf219bb9419e0", size = 13427, upload-time = "2026-07-23T20:16:12.938Z" },
+]
+
+[[package]]
+name = "array-api-compat"
+version = "1.15.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/86/12/65d297d3e425cb7fe5247b7ec14b4ed83539e9b5e89b65c15ea7ee274182/array_api_compat-1.15.0.tar.gz", hash = "sha256:53c5f922491bf15f62847afafc4e39eedfae57d218988fefb8cce39c2a9b3dea", size = 129305, upload-time = "2026-06-07T20:53:24.964Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/86/16/1a8fd2b19544b84575cf84ef7aa3ad4c173b756d5f087c91f85d1b295777/array_api_compat-1.15.0-py3-none-any.whl", hash = "sha256:7b1b9c53269061403fd5f45a8de349f16e7887653328bfa0c5f2d45299ff0a8e", size = 79113, upload-time = "2026-06-07T20:53:23.621Z" },
 ]
 
 [[package]]
@@ -1113,6 +1139,7 @@ dependencies = [
 
 [package.dev-dependencies]
 campaign = [
+    { name = "anneal" },
     { name = "ase" },
     { name = "geodesic-interpolate" },
     { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
@@ -1138,6 +1165,7 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 campaign = [
+    { name = "anneal", specifier = "==0.11.1" },
     { name = "ase", specifier = "==3.29.0" },
     { name = "geodesic-interpolate", git = "https://github.com/virtualzx-nad/geodesic-interpolate.git?rev=476aa041f562d37d5fb4121b86817a52d75e4c5d" },
     { name = "numpy" },

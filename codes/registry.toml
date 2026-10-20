@@ -243,6 +243,16 @@ commit = "8de817dd79bfe4525d5d39246a212d833e6dee07"
 committed = "2026-09-30"
 note = "LAMMPS 30 Sep 2026, tag stable_30Sep2026. Band rows use fix neb with a climbing stage and min_style quickmin or fire. The pair style is the spec potential: lj/cut 40 with no shift, and morse 9.5 with pair_modify shift yes. Kspring is 1.0 with the default parallel neigh spring. The timestep is the unit default. Force calls are pair computes summed across replicas. The FIRE row leaves one fifth of the cap unused so a velocity-reset evaluation stays inside the cap."
 
+[[code]]
+id = "anneal"
+name = "anneal"
+role = "global optimization"
+repository = "https://github.com/HaoZeke/anneal"
+ref = "0.11.1"
+commit = "db22b99d09a0cdf1d4f004136f9ecb04104fcb39"
+committed = "2026-10-11"
+note = "Release 0.11.1, commit db22b99d, 2026-10-11. Ranked rows use cluster_search with the stock presets communicating and recommended. Quenches go through rgmin 0.2.0 at 20832fd169932a1cd0d47ac84dc77fa9b435f940, the crate that wheel links. Documentation is https://anneal.rgoswami.me."
+
 # generated ASE and Sella templates
 
 [[template]]
