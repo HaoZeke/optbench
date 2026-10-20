@@ -1863,3 +1863,1569 @@
     1860     random    0.23285    0.00000        360        159          0    repeat-6
     1861     random    0.37203    0.00000        179        141          0    repeat-0
     1862     random    0.00000    0.00000        729        185          0    Not Connected
+    1863     random    0.37203    0.00000        237        141          0    repeat-2
+    1864     random    0.23285    0.00000        513        159          0    repeat-6
+    1865     random    0.37204    0.00000        338        141          0    repeat-7
+    1866     random    0.23285    0.00000        407        161          0    repeat-5
+    1867     random    0.23285    0.00000        308        161          0    repeat-4
+    1868     random    0.00000    0.00000        664        191          0    Not Connected
+    1869     random    0.45951    0.00000        529        165          0    repeat-12
+    1870     random    0.23285    0.00000        413        157          0    repeat-5
+    1871     random    0.37203    0.00000        276        141          0    repeat-0
+    1872     random    0.37203    0.00000        446        139          0    repeat-0
+    1873     random    0.37203    0.00000        339        141          0    repeat-2
+    1874     random    0.37203    0.00000        334        141          0    repeat-1
+    1875     random    0.23285    0.00000        461        161          0    repeat-3
+    1876     random    0.00000    0.00000        612        193          0    Not Connected
+    1877     random    0.45952    0.00000        650        167          0    repeat-18
+    1878     random    0.37203    0.00000        203        141          0    repeat-2
+    1879     random    0.00000    0.00000        717        155          0    Not Connected
+    1880     random    0.37203    0.00000        674        141          0    repeat-1
+    1881     random    0.37203    0.00000        294        141          0    repeat-0
+    1882     random    0.00000    0.00000        844        193          0    Not Connected
+    1883     random    0.37204    0.00000        393        139          0    repeat-7
+    1884     random    0.37204    0.00000        241        141          0    repeat-7
+    1885     random    0.37203    0.00000        206        141          0    repeat-0
+    1886     random    0.37203    0.00000        297        141          0    repeat-1
+    1887     random    0.23285    0.00000        589        155          0    repeat-6
+    1888     random    0.37203    0.00000        157        141          0    repeat-2
+    1889     random    0.45953    0.00000        604        169          0    repeat-18
+    1890     random    0.37203    0.00000        214        141          0    repeat-2
+    1891     random    7.00057    0.00000       1098        347          0    barrier > max_thermal_window
+    1892     random    0.37203    0.00000        272        141          0    repeat-1
+    1893     random    0.23285    0.00000        282        159          0    repeat-6
+    1894     random    0.23285    0.00000        285        157          0    repeat-6
+    1895     random    0.00000    0.00000        607        193          0    Not Connected
+    1896     random    0.37203    0.00000        244        141          0    repeat-1
+    1897     random    0.37203    0.00000        510        141          0    repeat-0
+    1898     random    0.37203    0.00000        244        141          0    repeat-1
+    1899     random    0.45953    0.00000        488        169          0    repeat-8
+    1900     random    0.00000    0.00000        707        277          0    Not Connected
+    1901     random    0.37203    0.00000        318        139          0    repeat-2
+    1902     random    0.37203    0.00000        231        141          0    repeat-1
+    1903     random    0.23285    0.00000        501        159          0    repeat-5
+    1904     random    0.00000    0.00000        927        167          0    Not Connected
+    1905     random    0.37204    0.00000        283        141          0    repeat-0
+    1906     random    0.00000    0.00000        556        207          0    Not Connected
+    1907     random    0.37203    0.00000        228        141          0    repeat-7
+    1908     random    0.23285    0.00000        442        157          0    repeat-6
+    1909     random    0.23285    0.00000        331        159          0    repeat-3
+    1910     random    0.37203    0.00000        249        139          0    repeat-1
+    1911     random    0.37203    0.00000        254        141          0    repeat-1
+    1912     random    0.45952    0.00000        875        167          0    repeat-10
+    1913     random    0.45242    0.00000        683        195          0    repeat-21
+    1914     random    0.23285    0.00000        339        159          0    repeat-6
+    1915     random    0.00000    0.00000       1020        195          0    Not Connected
+    1916     random    0.45952    0.00000        768        169          0    repeat-12
+    1917     random    0.37203    0.00000        397        141          0    repeat-0
+    1918     random    0.23285    0.00000        404        157          0    repeat-3
+    1919     random    0.37203    0.00000        186        141          0    repeat-1
+    1920     random    0.37203    0.00000        205        141          0    repeat-7
+    1921     random    0.00000    0.00000        939        195          0    Not Connected
+    1922     random    0.37204    0.00000        292        141          0    repeat-1
+    1923     random    0.23285    0.00000        371        157          0    repeat-6
+    1924     random    0.37203    0.00000        362        141          0    repeat-0
+    1925     random    0.37203    0.00000        218        139          0    repeat-2
+    1926     random    0.37203    0.00000        225        141          0    repeat-7
+    1927     random    0.00000    0.00000        686        203          0    Not Connected
+    1928     random    0.00000    0.00000       1267        189          0    Not Connected
+    1929     random    0.00000    0.00000        811        189          0    Not Connected
+    1930     random    0.37204    0.00000        303        141          0    repeat-2
+    1931     random    0.37204    0.00000        292        141          0    repeat-0
+    1932     random    0.37203    0.00000        197        141          0    repeat-1
+    1933     random    0.00000    0.00000       1088        189          0    Not Connected
+    1934     random    0.37203    0.00000        248        141          0    repeat-7
+    1935     random    0.37203    0.00000        250        141          0    repeat-7
+    1936     random    0.37203    0.00000        303        141          0    repeat-2
+    1937     random    0.23285    0.00000        734        159          0    repeat-5
+    1938     random    0.23285    0.00000        248        157          0    repeat-4
+    1939     random    0.37203    0.00000        172        141          0    repeat-2
+    1940     random    0.37203    0.00000        226        141          0    repeat-0
+    1941     random    0.00000    0.00000        794        191          0    Not Connected
+    1942     random    0.23285    0.00000        290        159          0    repeat-6
+    1943     random    0.37203    0.00000        230        141          0    repeat-1
+    1944     random    0.23285    0.00000        328        155          0    repeat-5
+    1945     random    0.23285    0.00000        290        157          0    repeat-4
+    1946     random    0.37203    0.00000        202        141          0    repeat-7
+    1947     random    0.37203    0.00000        303        141          0    repeat-1
+    1948     random    0.37203    0.00000        406        141          0    repeat-1
+    1949     random    0.00000    0.00000        937        189          0    Not Connected
+    1950     random    0.37203    0.00000        329        141          0    repeat-2
+    1951     random    0.00000    0.00000        626        203          0    Not Connected
+    1952     random    0.37204    0.00000        239        139          0    repeat-0
+    1953     random    0.23285    0.00000        345        159          0    repeat-5
+    1954     random    0.23285    0.00000        931        159          0    repeat-5
+    1955     random    0.23285    0.00000        377        157          0    repeat-6
+    1956     random    0.00000    0.00000          9          1          0    Saddle Search Terminated High Energy
+    1957     random    0.23285    0.00000        302        161          0    repeat-4
+    1958     random    0.37203    0.00000        315        141          0    repeat-1
+    1959     random    0.37203    0.00000        259        139          0    repeat-2
+    1960     random    0.37203    0.00000        243        141          0    repeat-1
+    1961     random    0.00000    0.00000        553        193          0    Not Connected
+    1962     random    0.37203    0.00000        303        141          0    repeat-1
+    1963     random    0.37203    0.00000        361        141          0    repeat-2
+    1964     random    0.37203    0.00000        294        141          0    repeat-1
+    1965     random    0.00000    0.00000        838        193          0    Not Connected
+    1966     random    0.37203    0.00000        263        141          0    repeat-7
+    1967     random    0.00000    0.00000       1618        189          0    Not Connected
+    1968     random    0.37203    0.00000        819        141          0    repeat-7
+    1969     random    0.37203    0.00000        220        141          0    repeat-7
+    1970     random    0.37203    0.00000        178        141          0    repeat-1
+    1971     random    0.00000    0.00000        733        193          0    Not Connected
+    1972     random    0.37203    0.00000        215        139          0    repeat-0
+    1973     random    0.37203    0.00000        255        141          0    repeat-1
+    1974     random    0.37203    0.00000        279        141          0    repeat-2
+    1975     random    0.45953    0.00000        742        167          0    repeat-9
+    1976     random    0.37204    0.00000        232        139          0    repeat-2
+    1977     random    0.00000    0.00000        669        193          0    Not Connected
+    1978     random    0.23285    0.00000        314        159          0    repeat-6
+    1979     random    0.37203    0.00000        248        141          0    repeat-2
+    1980     random    0.37203    0.00000        285        139          0    repeat-1
+    1981     random    0.00000    0.00000       1259        191          0    Not Connected
+    1982     random    0.37203    0.00000        222        141          0    repeat-0
+    1983     random    0.37203    0.00000        215        141          0    repeat-1
+    1984     random    0.23285    0.00000        412        159          0    repeat-5
+    1985     random    0.37203    0.00000        215        141          0    repeat-1
+    1986     random    0.37203    0.00000        334        141          0    repeat-7
+    1987     random    0.37203    0.00000        266        141          0    repeat-0
+    1988     random    0.45953    0.00000        779        169          0    repeat-20
+    1989     random    0.37203    0.00000        303        139          0    repeat-2
+    1990     random    0.37203    0.00000        248        141          0    repeat-7
+    1991     random    0.37203    0.00000        248        141          0    repeat-2
+    1992     random    0.37203    0.00000        283        141          0    repeat-1
+    1993     random    0.37203    0.00000        191        141          0    repeat-1
+    1994     random    0.00000    0.00000        604        191          0    Not Connected
+    1995     random    0.00000    0.00000        761        191          0    Not Connected
+    1996     random    0.37203    0.00000        225        139          0    repeat-2
+    1997     random    0.00000    0.00000       1259        195          0    Not Connected
+    1998     random    0.37203    0.00000        261        139          0    repeat-7
+    1999     random    0.00000    0.00000       1037        221          0    Not Connected
+    2000     random    0.45951    0.00000        763        169          0    repeat-10
+    2001     random    0.23285    0.00000        433        159          0    repeat-4
+    2002     random    0.45240    0.00000        568        193          0    repeat-23
+    2003     random    0.37203    0.00000        201        139          0    repeat-7
+    2004     random    0.37203    0.00000        344        141          0    repeat-1
+    2005     random    0.37203    0.00000        338        141          0    repeat-7
+    2006     random    0.37203    0.00000        336        141          0    repeat-1
+    2007     random    0.37203    0.00000        156        141          0    repeat-1
+    2008     random    0.00000    0.00000        942        195          0    Not Connected
+    2009     random    0.37203    0.00000        191        141          0    repeat-1
+    2010     random    0.23285    0.00000        365        157          0    repeat-6
+    2011     random    0.37203    0.00000        236        139          0    repeat-7
+    2012     random    0.23285    0.00000        264        161          0    repeat-5
+    2013     random    0.45952    0.00000        959        167          0    repeat-8
+    2014     random    0.00000    0.00000       1907        163          0    Not Connected
+    2015     random    0.37204    0.00000        349        141          0    repeat-2
+    2016     random    0.00000    0.00000       1005        199          0    Not Connected
+    2017     random    0.23285    0.00000        338        159          0    repeat-4
+    2018     random    0.37203    0.00000        316        141          0    repeat-1
+    2019     random    0.37203    0.00000        271        139          0    repeat-1
+    2020     random    0.00000    0.00000       1035        191          0    Not Connected
+    2021     random    0.23285    0.00000        315        159          0    repeat-6
+    2022     random    0.37203    0.00000        301        141          0    repeat-1
+    2023     random    0.00000    0.00000       1001        193          0    Not Connected
+    2024     random    0.37203    0.00000        243        139          0    repeat-7
+    2025     random    0.37203    0.00000        180        141          0    repeat-2
+    2026     random    0.23285    0.00000        346        159          0    repeat-3
+    2027     random    0.00000    0.00000        898        191          0    Not Connected
+    2028     random    0.37203    0.00000        383        141          0    repeat-1
+    2029     random    0.37203    0.00000        209        139          0    repeat-2
+    2030     random    0.37203    0.00000        284        141          0    repeat-1
+    2031     random    0.37203    0.00000        280        141          0    repeat-1
+    2032     random    0.00000    0.00000        853        187          0    Not Connected
+    2033     random    0.37203    0.00000        251        139          0    repeat-0
+    2034     random    0.37203    0.00000        189        141          0    repeat-0
+    2035     random    0.37203    0.00000        230        141          0    repeat-7
+    2036     random    0.00000    0.00000        932        191          0    Not Connected
+    2037     random    0.37203    0.00000        264        141          0    repeat-1
+    2038     random    0.00000    0.00000        970        191          0    Not Connected
+    2039     random    0.37203    0.00000        196        141          0    repeat-1
+    2040     random    0.23285    0.00000        506        161          0    repeat-3
+    2041     random    0.37203    0.00000        252        139          0    repeat-2
+    2042     random    0.37203    0.00000        557        141          0    repeat-1
+    2043     random    0.23285    0.00000        444        159          0    repeat-5
+    2044     random    0.37203    0.00000        208        139          0    repeat-0
+    2045     random    0.37203    0.00000        219        141          0    repeat-1
+    2046     random    0.00000    0.00000       1005        197          0    Not Connected
+    2047     random    0.37203    0.00000        184        141          0    repeat-2
+    2048     random    0.37203    0.00000        252        139          0    repeat-2
+    2049     random    0.23285    0.00000        318        157          0    repeat-6
+    2050     random    0.37203    0.00000        243        141          0    repeat-7
+    2051     random    0.37203    0.00000        218        141          0    repeat-2
+    2052     random    0.37203    0.00000        213        141          0    repeat-2
+    2053     random    0.37203    0.00000        180        141          0    repeat-1
+    2054     random    0.37203    0.00000        211        139          0    repeat-7
+    2055     random    0.00000    0.00000        769        193          0    Not Connected
+    2056     random    0.23285    0.00000        316        159          0    repeat-5
+    2057     random    0.00000    0.00000        794        195          0    Not Connected
+    2058     random    0.00000    0.00000        969        193          0    Not Connected
+    2059     random    0.00000    0.00000        435        141          0    Not Connected
+    2060     random    0.00000    0.00000        962        171          0    Not Connected
+    2061     random    0.37203    0.00000        222        139          0    repeat-2
+    2062     random    0.00000    0.00000        968        197          0    Not Connected
+    2063     random    0.37203    0.00000        183        139          0    repeat-7
+    2064     random    0.23285    0.00000        356        159          0    repeat-5
+    2065     random    0.23285    0.00000        517        157          0    repeat-5
+    2066     random    0.37203    0.00000        217        141          0    repeat-2
+    2067     random    0.37203    0.00000        351        139          0    repeat-0
+    2068     random    0.37203    0.00000        292        141          0    repeat-1
+    2069     random    0.37203    0.00000        231        141          0    repeat-1
+    2070     random    0.00000    0.00000        869        191          0    Not Connected
+    2071     random    0.37203    0.00000        242        139          0    repeat-7
+    2072     random    0.37203    0.00000        209        141          0    repeat-2
+    2073     random    0.37203    0.00000        281        141          0    repeat-0
+    2074     random    0.37203    0.00000        211        139          0    repeat-7
+    2075     random    0.00000    0.00000       1029        191          0    Not Connected
+    2076     random    0.00000    0.00000        854        193          0    Not Connected
+    2077     random    0.00000    0.00000       1367        189          0    Not Connected
+    2078     random    0.37203    0.00000        182        139          0    repeat-1
+    2079     random    0.37203    0.00000        204        139          0    repeat-7
+    2080     random    0.37203    0.00000        510        141          0    repeat-2
+    2081     random    0.37203    0.00000        267        141          0    repeat-2
+    2082     random    0.45952    0.00000        810        167          0    repeat-17
+    2083     random    0.23285    0.00000        414        155          0    repeat-3
+    2084     random    0.23285    0.00000        259        159          0    repeat-4
+    2085     random    0.37203    0.00000        221        141          0    repeat-0
+    2086     random    0.37204    0.00000        317        141          0    repeat-1
+    2087     random    0.00000    0.00000       1221        193          0    Not Connected
+    2088     random    0.37203    0.00000        266        141          0    repeat-0
+    2089     random    0.00000    0.00000        718        167          0    Not Connected
+    2090     random    0.00000    0.00000       1241        205          0    Not Connected
+    2091     random    0.37203    0.00000        239        141          0    repeat-7
+    2092     random    0.37203    0.00000        384        139          0    repeat-1
+    2093     random    0.23285    0.00000        452        159          0    repeat-6
+    2094     random    0.37204    0.00000        419        141          0    repeat-1
+    2095     random    0.37203    0.00000        228        141          0    repeat-7
+    2096     random    0.00000    0.00000      43000          1          0    Saddle Search Terminated Total Iterations
+    2097     random    0.37203    0.00000        241        141          0    repeat-2
+    2098     random    0.37203    0.00000        405        141          0    repeat-1
+    2099     random    0.23285    0.00000        440        159          0    repeat-6
+    2100     random    0.37203    0.00000        646        141          0    repeat-1
+    2101     random    0.37203    0.00000        237        141          0    repeat-1
+    2102     random    0.00000    0.00000        595        191          0    Not Connected
+    2103     random    0.23285    0.00000        396        157          0    repeat-5
+    2104     random    0.00000    0.00000        553        193          0    Not Connected
+    2105     random    0.37203    0.00000        222        139          0    repeat-7
+    2106     random    0.37203    0.00000        199        139          0    repeat-7
+    2107     random    0.00000    0.00000        628        167          0    Not Connected
+    2108     random    0.37204    0.00000        277        141          0    repeat-0
+    2109     random    0.37203    0.00000        225        141          0    repeat-2
+    2110     random    0.37203    0.00000        261        139          0    repeat-2
+    2111     random    0.37203    0.00000        237        141          0    repeat-7
+    2112     random    0.37203    0.00000        369        141          0    repeat-1
+    2113     random    0.00000    0.00000        502        191          0    Not Connected
+    2114     random    0.37203    0.00000        193        139          0    repeat-1
+    2115     random    0.37203    0.00000        246        141          0    repeat-1
+    2116     random    0.23285    0.00000        514        159          0    repeat-3
+    2117     random    0.37204    0.00000        336        141          0    repeat-1
+    2118     random    0.37204    0.00000        352        141          0    repeat-2
+    2119     random    0.23285    0.00000        390        159          0    repeat-6
+    2120     random    0.37204    0.00000        348        141          0    repeat-1
+    2121     random    0.37203    0.00000        287        141          0    repeat-2
+    2122     random    0.45953    0.00000        531        171          0    repeat-17
+    2123     random    0.00000    0.00000          7          1          0    Saddle Search Terminated High Energy
+    2124     random    0.37203    0.00000        279        141          0    repeat-7
+    2125     random    0.37203    0.00000        218        141          0    repeat-0
+    2126     random    0.23285    0.00000        393        159          0    repeat-5
+    2127     random    0.37203    0.00000        267        141          0    repeat-7
+    2128     random    0.45953    0.00000        836        171          0    repeat-13
+    2129     random    0.37203    0.00000        214        141          0    repeat-2
+    2130     random    0.23285    0.00000        580        153          0    repeat-6
+    2131     random    0.45952    0.00000        871        167          0    repeat-8
+    2132     random    0.00000    0.00000       1023        195          0    Not Connected
+    2133     random    0.37203    0.00000        159        141          0    repeat-1
+    2134     random    0.37204    0.00000        296        141          0    repeat-0
+    2135     random    0.37203    0.00000        225        141          0    repeat-2
+    2136     random    0.37203    0.00000        211        141          0    repeat-0
+    2137     random    0.37203    0.00000        235        141          0    repeat-1
+    2138     random    0.45952    0.00000        864        167          0    repeat-9
+    2139     random    0.37203    0.00000        247        141          0    repeat-2
+    2140     random    0.37203    0.00000        306        141          0    repeat-2
+    2141     random    0.00000    0.00000        694        197          0    Not Connected
+    2142     random    0.00000    0.00000        846        189          0    Not Connected
+    2143     random    0.37203    0.00000        229        141          0    repeat-1
+    2144     random    0.00000    0.00000        722        199          0    Not Connected
+    2145     random    0.37203    0.00000        271        141          0    repeat-1
+    2146     random    0.37203    0.00000        456        141          0    repeat-2
+    2147     random    0.00000    0.00000        633        193          0    Not Connected
+    2148     random    0.00000    0.00000       1050        189          0    Not Connected
+    2149     random    0.23285    0.00000        321        157          0    repeat-6
+    2150     random    0.37203    0.00000        211        141          0    repeat-2
+    2151     random    0.37203    0.00000        211        141          0    repeat-2
+    2152     random    0.37203    0.00000        197        141          0    repeat-2
+    2153     random    0.37203    0.00000        179        139          0    repeat-0
+    2154     random    0.23285    0.00000        291        159          0    repeat-3
+    2155     random    0.37203    0.00000        211        141          0    repeat-2
+    2156     random    0.37203    0.00000        314        141          0    repeat-2
+    2157     random    0.23285    0.00000        381        159          0    repeat-6
+    2158     random    0.37203    0.00000        209        139          0    repeat-0
+    2159     random    0.00000    0.00000       1076        189          0    Not Connected
+    2160     random    0.37203    0.00000        215        141          0    repeat-7
+    2161     random    0.37203    0.00000        215        141          0    repeat-7
+    2162     random    0.37203    0.00000        294        141          0    repeat-2
+    2163     random    0.00000    0.00000        742        171          0    Not Connected
+    2164     random    0.23285    0.00000        251        157          0    repeat-5
+    2165     random    0.37203    0.00000        229        141          0    repeat-7
+    2166     random    0.37203    0.00000        237        141          0    repeat-2
+    2167     random    0.37203    0.00000        199        141          0    repeat-2
+    2168     random    0.37203    0.00000        313        141          0    repeat-1
+    2169     random    0.37204    0.00000        329        139          0    repeat-2
+    2170     random    0.23285    0.00000        405        159          0    repeat-5
+    2171     random    0.37203    0.00000        193        141          0    repeat-0
+    2172     random    0.37203    0.00000        198        141          0    repeat-1
+    2173     random    0.45952    0.00000        700        167          0    repeat-18
+    2174     random    0.37203    0.00000        257        141          0    repeat-1
+    2175     random    0.45952    0.00000        807        167          0    repeat-8
+    2176     random    0.00000    0.00000        727        189          0    Not Connected
+    2177     random    0.37204    0.00000        241        141          0    repeat-1
+    2178     random    0.37203    0.00000        230        141          0    repeat-7
+    2179     random    0.37203    0.00000        281        141          0    repeat-7
+    2180     random    0.37203    0.00000        282        139          0    repeat-1
+    2181     random    0.23285    0.00000        356        157          0    repeat-3
+    2182     random    0.00000    0.00000        862        221          0    Not Connected
+    2183     random    0.37204    0.00000        345        141          0    repeat-7
+    2184     random    0.00000    0.00000        910        189          0    Not Connected
+    2185     random    0.37203    0.00000        285        141          0    repeat-2
+    2186     random    0.37203    0.00000        233        141          0    repeat-1
+    2187     random    0.00000    0.00000        508        191          0    Not Connected
+    2188     random    0.37203    0.00000        280        141          0    repeat-0
+    2189     random    0.37203    0.00000        167        141          0    repeat-2
+    2190     random    0.23285    0.00000        429        157          0    repeat-4
+    2191     random    0.23285    0.00000        359        157          0    repeat-6
+    2192     random    0.37203    0.00000        176        141          0    repeat-0
+    2193     random    0.23285    0.00000        325        157          0    repeat-3
+    2194     random    0.37203    0.00000        197        141          0    repeat-2
+    2195     random    0.37203    0.00000        377        141          0    repeat-0
+    2196     random    0.23285    0.00000        332        157          0    repeat-4
+    2197     random    0.37203    0.00000        284        141          0    repeat-1
+    2198     random    0.37203    0.00000        309        141          0    repeat-7
+    2199     random    0.00000    0.00000        836        205          0    Not Connected
+    2200     random    0.37203    0.00000        195        141          0    repeat-2
+    2201     random    0.00000    0.00000        565        189          0    Not Connected
+    2202     random    0.37203    0.00000        245        141          0    repeat-1
+    2203     random    0.37203    0.00000        404        141          0    repeat-0
+    2204     random    0.23285    0.00000        545        153          0    repeat-3
+    2205     random    0.23285    0.00000        346        159          0    repeat-3
+    2206     random    0.37203    0.00000        347        141          0    repeat-0
+    2207     random    0.37203    0.00000        572        139          0    repeat-1
+    2208     random    0.37203    0.00000        223        139          0    repeat-7
+    2209     random    0.37203    0.00000        214        141          0    repeat-1
+    2210     random    0.37203    0.00000        337        139          0    repeat-7
+    2211     random    0.37203    0.00000        272        141          0    repeat-2
+    2212     random    0.37203    0.00000        338        139          0    repeat-2
+    2213     random    0.23285    0.00000        413        159          0    repeat-5
+    2214     random    0.37203    0.00000        258        141          0    repeat-1
+    2215     random    0.45951    0.00000        764        167          0    good-24
+    2216     random    0.23285    0.00000        473        159          0    repeat-5
+    2217     random    0.37204    0.00000        270        141          0    repeat-7
+    2218     random    0.23285    0.00000        414        157          0    repeat-6
+    2219     random    0.37203    0.00000        206        139          0    repeat-7
+    2220     random    0.37203    0.00000        285        139          0    repeat-0
+    2221     random    0.45952    0.00000        826        169          0    repeat-12
+    2222     random    0.00000    0.00000       1020        201          0    Not Connected
+    2223     random    0.37203    0.00000        273        141          0    repeat-7
+    2224     random    0.37204    0.00000        338        141          0    repeat-0
+    2225     random    0.37203    0.00000        369        141          0    repeat-1
+    2226     random    0.23285    0.00000        394        159          0    repeat-3
+    2227     random    0.37203    0.00000        299        141          0    repeat-7
+    2228     random    0.37204    0.00000        323        141          0    repeat-0
+    2229     random    0.37203    0.00000        194        141          0    repeat-0
+    2230     random    0.23285    0.00000        393        155          0    repeat-6
+    2231     random    0.00000    0.00000        658        193          0    Not Connected
+    2232     random    0.00000    0.00000        853        171          0    Not Connected
+    2233     random    0.37203    0.00000        247        139          0    repeat-0
+    2234     random    0.37203    0.00000        197        141          0    repeat-1
+    2235     random    0.37203    0.00000        216        141          0    repeat-2
+    2236     random    0.37203    0.00000        186        141          0    repeat-0
+    2237     random    0.23285    0.00000        376        157          0    repeat-4
+    2238     random    0.00000    0.00000        793        193          0    Not Connected
+    2239     random    0.37204    0.00000        306        141          0    repeat-7
+    2240     random    0.37203    0.00000        363        139          0    repeat-7
+    2241     random    0.00000    0.00000          7          1          0    Saddle Search Terminated High Energy
+    2242     random    0.37203    0.00000        464        141          0    repeat-2
+    2243     random    0.23285    0.00000        378        159          0    repeat-6
+    2244     random    0.23285    0.00000        343        161          0    repeat-3
+    2245     random    0.37203    0.00000        184        141          0    repeat-7
+    2246     random    0.37203    0.00000        398        141          0    repeat-1
+    2247     random    0.23285    0.00000        363        157          0    repeat-5
+    2248     random    0.23285    0.00000        334        159          0    repeat-6
+    2249     random    0.37203    0.00000        314        141          0    repeat-2
+    2250     random    0.00000    0.00000        838        195          0    Not Connected
+    2251     random    0.37203    0.00000        224        141          0    repeat-1
+    2252     random    0.37203    0.00000        532        139          0    repeat-0
+    2253     random    0.00000    0.00000        953        193          0    Not Connected
+    2254     random    0.37203    0.00000        222        141          0    repeat-1
+    2255     random    0.37203    0.00000        218        139          0    repeat-7
+    2256     random    0.37203    0.00000        210        141          0    repeat-7
+    2257     random    0.00000    0.00000        501        169          0    Not Connected
+    2258     random    0.00000    0.00000        981        195          0    Not Connected
+    2259     random    0.37204    0.00000        227        141          0    repeat-1
+    2260     random    0.37204    0.00000        315        139          0    repeat-0
+    2261     random    0.37203    0.00000        383        141          0    repeat-0
+    2262     random    0.00000    0.00000       1017        201          0    Not Connected
+    2263     random    0.45953    0.00000        719        169          0    repeat-10
+    2264     random    0.00000    0.00000         14          1          0    Saddle Search Terminated High Energy
+    2265     random    0.37203    0.00000        242        141          0    repeat-1
+    2266     random    0.37203    0.00000        228        139          0    repeat-2
+    2267     random    0.37203    0.00000        407        141          0    repeat-0
+    2268     random    1.15302    0.00000        581        175          0    barrier > max_thermal_window
+    2269     random    0.37203    0.00000        286        141          0    repeat-0
+    2270     random    0.37203    0.00000        204        141          0    repeat-1
+    2271     random    0.00000    0.00000       1116        191          0    Not Connected
+    2272     random    0.37203    0.00000        228        141          0    repeat-1
+    2273     random    0.00000    0.00000       1063        191          0    Not Connected
+    2274     random    0.23285    0.00000        517        155          0    repeat-3
+    2275     random    0.37203    0.00000        227        141          0    repeat-0
+    2276     random    0.23285    0.00000        446        159          0    repeat-3
+    2277     random    0.37203    0.00000        267        141          0    repeat-2
+    2278     random    0.37203    0.00000        272        141          0    repeat-2
+    2279     random    0.37203    0.00000        240        141          0    repeat-7
+    2280     random    0.37203    0.00000        311        141          0    repeat-2
+    2281     random    0.37203    0.00000        220        141          0    repeat-0
+    2282     random    1.15301    0.00000        624        175          0    barrier > max_thermal_window
+    2283     random    0.37203    0.00000        224        141          0    repeat-1
+    2284     random    0.45952    0.00000        933        167          0    repeat-8
+    2285     random    0.37203    0.00000        564        141          0    repeat-1
+    2286     random    0.00000    0.00000        891        193          0    Not Connected
+    2287     random    0.00000    0.00000        608        193          0    Not Connected
+    2288     random    0.37203    0.00000        249        139          0    repeat-0
+    2289     random    0.00000    0.00000      57987          1          0    Saddle Search Terminated Total Iterations
+    2290     random    0.37204    0.00000        318        141          0    repeat-7
+    2291     random    0.00000    0.00000        956        193          0    Not Connected
+    2292     random    0.23285    0.00000        315        161          0    repeat-6
+    2293     random    0.23285    0.00000        315        159          0    repeat-6
+    2294     random    0.37203    0.00000        202        141          0    repeat-7
+    2295     random    0.00000    0.00000        605        199          0    Not Connected
+    2296     random    0.37203    0.00000        211        139          0    repeat-7
+    2297     random    0.37203    0.00000        228        141          0    repeat-0
+    2298     random    0.37203    0.00000        216        141          0    repeat-1
+    2299     random    0.37204    0.00000        275        141          0    repeat-7
+    2300     random    0.37203    0.00000        197        141          0    repeat-0
+    2301     random    0.37203    0.00000        189        141          0    repeat-1
+    2302     random    0.45953    0.00000        796        165          0    repeat-10
+    2303     random    0.37203    0.00000        275        141          0    repeat-1
+    2304     random    0.23285    0.00000        311        159          0    repeat-5
+    2305     random    0.37203    0.00000        233        141          0    repeat-1
+    2306     random    0.37203    0.00000        257        139          0    repeat-0
+    2307     random    0.37203    0.00000        268        141          0    repeat-0
+    2308     random    0.00000    0.00000        832        189          0    Not Connected
+    2309     random    0.23285    0.00000        352        159          0    repeat-5
+    2310     random    0.37203    0.00000        241        141          0    repeat-1
+    2311     random    0.00000    0.00000       1246        189          0    Not Connected
+    2312     random    0.37203    0.00000        294        139          0    repeat-1
+    2313     random    0.37203    0.00000        163        141          0    repeat-1
+    2314     random    0.37203    0.00000        267        141          0    repeat-2
+    2315     random    0.37203    0.00000        284        141          0    repeat-1
+    2316     random    0.23285    0.00000        397        163          0    repeat-3
+    2317     random    0.00000    0.00000        726        195          0    Not Connected
+    2318     random    0.23285    0.00000        271        155          0    repeat-5
+    2319     random    0.37203    0.00000        270        139          0    repeat-2
+    2320     random    0.37203    0.00000        212        141          0    repeat-2
+    2321     random    0.37203    0.00000        283        139          0    repeat-2
+    2322     random    0.37203    0.00000        212        139          0    repeat-2
+    2323     random    0.23285    0.00000        562        159          0    repeat-3
+    2324     random    0.37203    0.00000       1367        141          0    repeat-7
+    2325     random    0.37204    0.00000        315        139          0    repeat-0
+    2326     random    0.00000    0.00000        679        191          0    Not Connected
+    2327     random    0.00000    0.00000        630        189          0    Not Connected
+    2328     random    0.37203    0.00000        202        139          0    repeat-2
+    2329     random    0.37204    0.00000        295        141          0    repeat-0
+    2330     random    0.37203    0.00000        288        141          0    repeat-2
+    2331     random    0.37203    0.00000        362        141          0    repeat-1
+    2332     random    0.37203    0.00000        323        139          0    repeat-0
+    2333     random    0.23285    0.00000        515        157          0    repeat-6
+    2334     random    0.37203    0.00000        222        141          0    repeat-7
+    2335     random    0.37203    0.00000        193        139          0    repeat-1
+    2336     random    0.00000    0.00000        931        191          0    Not Connected
+    2337     random    0.37203    0.00000        212        141          0    repeat-7
+    2338     random    0.37203    0.00000        291        141          0    repeat-0
+    2339     random    0.00000    0.00000        467        189          0    Not Connected
+    2340     random    0.23285    0.00000        377        159          0    repeat-4
+    2341     random    0.37203    0.00000        201        141          0    repeat-1
+    2342     random    0.00000    0.00000        696        169          0    Not Connected
+    2343     random    0.37203    0.00000        214        141          0    repeat-0
+    2344     random    0.37203    0.00000        262        139          0    repeat-7
+    2345     random    0.45951    0.00000        815        167          0    repeat-10
+    2346     random    0.37203    0.00000        194        141          0    repeat-1
+    2347     random    0.37203    0.00000        268        139          0    repeat-2
+    2348     random    0.37203    0.00000        349        141          0    repeat-2
+    2349     random    0.00000    0.00000        366        157          0    Not Connected
+    2350     random    0.37203    0.00000        290        141          0    repeat-7
+    2351     random    0.00000    0.00000        814        195          0    Not Connected
+    2352     random    0.37203    0.00000        220        139          0    repeat-0
+    2353     random    0.00000    0.00000       1476        169          0    Not Connected
+    2354     random    0.00000    0.00000        474        195          0    Not Connected
+    2355     random    0.37203    0.00000        250        141          0    repeat-7
+    2356     random    0.00000    0.00000        619        199          0    Not Connected
+    2357     random    0.37203    0.00000        236        141          0    repeat-7
+    2358     random    0.00000    0.00000        659        159          0    Not Connected
+    2359     random    0.23285    0.00000        382        157          0    repeat-4
+    2360     random    0.37203    0.00000        219        141          0    repeat-1
+    2361     random    0.23285    0.00000        491        159          0    repeat-5
+    2362     random    0.00000    0.00000        596        157          0    Not Connected
+    2363     random    0.37203    0.00000        221        141          0    repeat-0
+    2364     random    0.45953    0.00000        748        169          0    repeat-8
+    2365     random    0.37203    0.00000        262        141          0    repeat-2
+    2366     random    0.00000    0.00000        857        189          0    Not Connected
+    2367     random    0.00000    0.00000       1640        181          0    Not Connected
+    2368     random    0.37203    0.00000        237        141          0    repeat-7
+    2369     random    0.23285    0.00000        568        159          0    repeat-4
+    2370     random    0.37204    0.00000        258        139          0    repeat-7
+    2371     random    0.37203    0.00000        232        141          0    repeat-2
+    2372     random    0.00000    0.00000        841        187          0    Not Connected
+    2373     random    0.37203    0.00000        232        139          0    repeat-0
+    2374     random    0.37203    0.00000        205        141          0    repeat-7
+    2375     random    0.45953    0.00000        694        167          0    repeat-10
+    2376     random    0.45953    0.00000       1144        167          0    repeat-8
+    2377     random    0.37203    0.00000        259        141          0    repeat-1
+    2378     random    0.00000    0.00000        766        191          0    Not Connected
+    2379     random    0.00000    0.00000        745        203          0    Not Connected
+    2380     random    0.37203    0.00000        226        141          0    repeat-2
+    2381     random    0.37203    0.00000        196        141          0    repeat-2
+    2382     random    0.37203    0.00000        210        141          0    repeat-7
+    2383     random    0.37203    0.00000        272        141          0    repeat-7
+    2384     random    0.37203    0.00000        206        141          0    repeat-0
+    2385     random    0.00000    0.00000        790        187          0    Not Connected
+    2386     random    0.37203    0.00000        208        139          0    repeat-0
+    2387     random    0.37203    0.00000        601        141          0    repeat-0
+    2388     random    0.37203    0.00000        181        141          0    repeat-7
+    2389     random    0.37203    0.00000        227        141          0    repeat-7
+    2390     random    0.37203    0.00000        501        141          0    repeat-7
+    2391     random    0.37203    0.00000        243        141          0    repeat-2
+    2392     random    0.00000    0.00000       1156        189          0    Not Connected
+    2393     random    0.37203    0.00000        208        141          0    repeat-7
+    2394     random    0.37203    0.00000        239        141          0    repeat-1
+    2395     random    0.37203    0.00000        345        141          0    repeat-0
+    2396     random    0.00000    0.00000        631        169          0    Not Connected
+    2397     random    0.37203    0.00000        242        139          0    repeat-7
+    2398     random    0.00000    0.00000       1267        191          0    Not Connected
+    2399     random    0.37203    0.00000        207        141          0    repeat-7
+    2400     random    0.37203    0.00000        386        141          0    repeat-2
+    2401     random    0.37203    0.00000        222        139          0    repeat-2
+    2402     random    0.00000    0.00000       1069        167          0    Not Connected
+    2403     random    0.37203    0.00000        254        141          0    repeat-2
+    2404     random    0.37203    0.00000        197        141          0    repeat-1
+    2405     random    0.37203    0.00000        189        141          0    repeat-7
+    2406     random    0.37203    0.00000        212        141          0    repeat-7
+    2407     random    0.37203    0.00000        258        141          0    repeat-2
+    2408     random    0.37203    0.00000        259        141          0    repeat-0
+    2409     random    0.37203    0.00000        229        141          0    repeat-1
+    2410     random    0.23285    0.00000        393        159          0    repeat-3
+    2411     random    0.23285    0.00000        475        161          0    repeat-4
+    2412     random    0.37203    0.00000        166        139          0    repeat-0
+    2413     random    0.37203    0.00000        213        139          0    repeat-7
+    2414     random    0.37204    0.00000        276        139          0    repeat-0
+    2415     random    0.23285    0.00000        303        153          0    repeat-6
+    2416     random    0.37203    0.00000        226        141          0    repeat-7
+    2417     random    0.37204    0.00000        263        141          0    repeat-0
+    2418     random    0.37203    0.00000        262        139          0    repeat-1
+    2419     random    1.15302    0.00000        789        173          0    barrier > max_thermal_window
+    2420     random    0.37203    0.00000        270        141          0    repeat-2
+    2421     random    0.00000    0.00000        747        191          0    Not Connected
+    2422     random    0.37203    0.00000        253        139          0    repeat-2
+    2423     random    0.37203    0.00000        364        141          0    repeat-2
+    2424     random    0.23285    0.00000        422        157          0    repeat-5
+    2425     random    0.37204    0.00000        472        141          0    repeat-1
+    2426     random    0.37203    0.00000        215        141          0    repeat-7
+    2427     random    0.37203    0.00000        252        141          0    repeat-1
+    2428     random    0.37204    0.00000        244        141          0    repeat-1
+    2429     random    0.37203    0.00000        197        139          0    repeat-0
+    2430     random    0.45952    0.00000        694        167          0    repeat-8
+    2431     random    0.23285    0.00000        588        159          0    repeat-3
+    2432     random    0.00000    0.00000      42881          1          0    Saddle Search Terminated Total Iterations
+    2433     random    0.37203    0.00000        212        141          0    repeat-7
+    2434     random    0.00000    0.00000        843        191          0    Not Connected
+    2435     random    0.00000    0.00000          9          1          0    Saddle Search Terminated High Energy
+    2436     random    0.23285    0.00000        397        159          0    repeat-3
+    2437     random    0.37203    0.00000        249        139          0    repeat-7
+    2438     random    0.45952    0.00000        858        167          0    repeat-13
+    2439     random    0.00000    0.00000        734        193          0    Not Connected
+    2440     random    0.37203    0.00000        240        139          0    repeat-2
+    2441     random    0.00000    0.00000       1231        193          0    Not Connected
+    2442     random    0.96120    0.00000        882        197          0    barrier > max_thermal_window
+    2443     random    0.37204    0.00000        453        141          0    repeat-0
+    2444     random    0.00000    0.00000        993        195          0    Not Connected
+    2445     random    0.00000    0.00000        865        193          0    Not Connected
+    2446     random    0.37203    0.00000        303        141          0    repeat-0
+    2447     random    0.00000    0.00000        723        191          0    Not Connected
+    2448     random    0.00000    0.00000        821        191          0    Not Connected
+    2449     random    0.23285    0.00000        334        161          0    repeat-5
+    2450     random    0.00000    0.00000        739        203          0    Not Connected
+    2451     random    0.37203    0.00000        181        141          0    repeat-0
+    2452     random    0.45952    0.00000        997        165          0    repeat-10
+    2453     random    0.23285    0.00000        298        157          0    repeat-4
+    2454     random    0.00000    0.00000       1078        197          0    Not Connected
+    2455     random    0.23285    0.00000        476        161          0    repeat-4
+    2456     random    0.37203    0.00000        305        139          0    repeat-2
+    2457     random    0.37203    0.00000        205        141          0    repeat-7
+    2458     random    0.37203    0.00000        158        141          0    repeat-1
+    2459     random    0.37203    0.00000        313        139          0    repeat-0
+    2460     random    0.00000    0.00000        692        195          0    Not Connected
+    2461     random    0.37203    0.00000        173        139          0    repeat-0
+    2462     random    0.37203    0.00000        250        141          0    repeat-7
+    2463     random    0.00000    0.00000       1221        187          0    Not Connected
+    2464     random    0.37203    0.00000        232        139          0    repeat-7
+    2465     random    0.23285    0.00000        336        159          0    repeat-4
+    2466     random    0.37203    0.00000        339        139          0    repeat-1
+    2467     random    0.23285    0.00000        307        159          0    repeat-6
+    2468     random    0.37203    0.00000        177        141          0    repeat-2
+    2469     random    0.37203    0.00000        189        139          0    repeat-7
+    2470     random    0.23285    0.00000        430        161          0    repeat-5
+    2471     random    0.37204    0.00000        245        141          0    repeat-1
+    2472     random    0.23285    0.00000        309        159          0    repeat-5
+    2473     random    0.00000    0.00000        723        203          0    Not Connected
+    2474     random    0.00000    0.00000        681        187          0    Not Connected
+    2475     random    0.37203    0.00000        323        141          0    repeat-2
+    2476     random    0.00000    0.00000        741        193          0    Not Connected
+    2477     random    0.37203    0.00000        199        141          0    repeat-1
+    2478     random    0.37203    0.00000        342        141          0    repeat-1
+    2479     random    0.37203    0.00000        192        141          0    repeat-1
+    2480     random    0.37203    0.00000        283        141          0    repeat-0
+    2481     random    0.37203    0.00000        208        139          0    repeat-1
+    2482     random    0.00000    0.00000        878        189          0    Not Connected
+    2483     random    0.37203    0.00000        250        139          0    repeat-1
+    2484     random    0.37203    0.00000        193        141          0    repeat-2
+    2485     random    0.00000    0.00000       1036        191          0    Not Connected
+    2486     random    0.23285    0.00000        383        159          0    repeat-6
+    2487     random    0.37203    0.00000        170        141          0    repeat-7
+    2488     random    0.37203    0.00000        182        141          0    repeat-0
+    2489     random    0.23285    0.00000        378        161          0    repeat-6
+    2490     random    0.23285    0.00000        813        159          0    repeat-3
+    2491     random    0.23285    0.00000        368        159          0    repeat-5
+    2492     random    0.37203    0.00000        186        139          0    repeat-7
+    2493     random    0.37203    0.00000        378        141          0    repeat-7
+    2494     random    0.37203    0.00000        415        139          0    repeat-1
+    2495     random    0.00000    0.00000       1014        189          0    Not Connected
+    2496     random    0.00000    0.00000        785        191          0    Not Connected
+    2497     random    0.37203    0.00000        211        141          0    repeat-2
+    2498     random    0.37203    0.00000        204        141          0    repeat-2
+    2499     random    0.00000    0.00000       1037        199          0    Not Connected
+    2500     random    0.00000    0.00000        974        189          0    Not Connected
+    2501     random    0.37203    0.00000        201        141          0    repeat-7
+    2502     random    0.37203    0.00000        290        141          0    repeat-2
+    2503     random    0.23285    0.00000        582        159          0    repeat-5
+    2504     random    0.37203    0.00000        184        139          0    repeat-2
+    2505     random    0.00000    0.00000        460        193          0    Not Connected
+    2506     random    0.37203    0.00000        236        141          0    repeat-1
+    2507     random    0.37204    0.00000        362        139          0    repeat-0
+    2508     random    0.00000    0.00000       1467        197          0    Not Connected
+    2509     random    0.00000    0.00000        737        193          0    Not Connected
+    2510     random    0.00000    0.00000       1005        167          0    Not Connected
+    2511     random    0.37203    0.00000        310        141          0    repeat-2
+    2512     random    0.23285    0.00000        506        159          0    repeat-4
+    2513     random    0.00000    0.00000       4235        255          0    Not Connected
+    2514     random    0.37203    0.00000        264        141          0    repeat-2
+    2515     random    0.00000    0.00000       1264        189          0    Not Connected
+    2516     random    0.23285    0.00000        385        155          0    repeat-4
+    2517     random    0.37203    0.00000        218        141          0    repeat-0
+    2518     random    0.00000    0.00000        809        189          0    Not Connected
+    2519     random    0.37204    0.00000        330        141          0    repeat-0
+    2520     random    0.00000    0.00000        567        155          0    Not Connected
+    2521     random    0.37204    0.00000        358        141          0    repeat-1
+    2522     random    0.37203    0.00000        225        141          0    repeat-0
+    2523     random    0.00000    0.00000        698        169          0    Not Connected
+    2524     random    0.37203    0.00000        212        139          0    repeat-0
+    2525     random    0.37203    0.00000        370        141          0    repeat-0
+    2526     random    0.00000    0.00000        895        189          0    Not Connected
+    2527     random    0.00000    0.00000        288        139          0    Not Connected
+    2528     random    0.37203    0.00000        271        141          0    repeat-1
+    2529     random    0.37203    0.00000        261        141          0    repeat-2
+    2530     random    0.23285    0.00000        311        159          0    repeat-3
+    2531     random    0.00000    0.00000        621        199          0    Not Connected
+    2532     random    0.37203    0.00000        179        139          0    repeat-7
+    2533     random    0.37203    0.00000        178        139          0    repeat-1
+    2534     random    0.37203    0.00000        208        139          0    repeat-7
+    2535     random    0.37203    0.00000        246        141          0    repeat-2
+    2536     random    1.15301    0.00000        761        177          0    barrier > max_thermal_window
+    2537     random    0.37204    0.00000        280        141          0    repeat-7
+    2538     random    0.37203    0.00000        265        141          0    repeat-2
+    2539     random    0.37203    0.00000        342        141          0    repeat-2
+    2540     random    0.37203    0.00000        257        143          0    repeat-0
+    2541     random    0.37203    0.00000        217        141          0    repeat-2
+    2542     random    0.37203    0.00000        245        141          0    repeat-7
+    2543     random    0.37203    0.00000        236        141          0    repeat-1
+    2544     random    0.23285    0.00000        323        161          0    repeat-6
+    2545     random    0.00000    0.00000        697        195          0    Not Connected
+    2546     random    0.23285    0.00000        514        155          0    repeat-3
+    2547     random    0.37203    0.00000        270        141          0    repeat-7
+    2548     random    0.37203    0.00000        202        141          0    repeat-0
+    2549     random    0.37203    0.00000        334        141          0    repeat-7
+    2550     random    0.37203    0.00000        246        141          0    repeat-0
+    2551     random    0.37203    0.00000        255        141          0    repeat-0
+    2552     random    0.00000    0.00000         11          1          0    Saddle Search Terminated High Energy
+    2553     random    0.37203    0.00000        322        139          0    repeat-1
+    2554     random    0.23285    0.00000        468        159          0    repeat-3
+    2555     random    0.23285    0.00000        249        157          0    repeat-5
+    2556     random    0.23285    0.00000        383        157          0    repeat-6
+    2557     random    0.00000    0.00000        786        203          0    Not Connected
+    2558     random    0.37203    0.00000        226        141          0    repeat-2
+    2559     random    0.37203    0.00000        232        141          0    repeat-7
+    2560     random    0.96118    0.00000        764        197          0    barrier > max_thermal_window
+    2561     random    0.37203    0.00000        732        141          0    repeat-0
+    2562     random    0.23285    0.00000        255        155          0    repeat-3
+    2563     random    0.23285    0.00000        297        159          0    repeat-4
+    2564     random    0.37203    0.00000        253        141          0    repeat-2
+    2565     random    0.37203    0.00000        254        139          0    repeat-1
+    2566     random    1.15302    0.00000        598        173          0    barrier > max_thermal_window
+    2567     random    0.00000    0.00000       1664        187          0    Not Connected
+    2568     random    0.23285    0.00000        363        157          0    repeat-5
+    2569     random    0.37203    0.00000        196        139          0    repeat-1
+    2570     random    0.37204    0.00000        286        141          0    repeat-1
+    2571     random    0.45953    0.00000        732        167          0    repeat-12
+    2572     random    0.00000    0.00000       1061        193          0    Not Connected
+    2573     random    0.23285    0.00000        307        159          0    repeat-6
+    2574     random    0.37203    0.00000        260        141          0    repeat-2
+    2575     random    0.00000    0.00000        766        191          0    Not Connected
+    2576     random    0.37203    0.00000        197        141          0    repeat-2
+    2577     random    0.23285    0.00000        577        157          0    repeat-5
+    2578     random    0.45951    0.00000        577        169          0    repeat-18
+    2579     random    0.37203    0.00000        241        141          0    repeat-1
+    2580     random    0.00000    0.00000        605        169          0    Not Connected
+    2581     random    0.37203    0.00000        207        139          0    repeat-7
+    2582     random    0.37203    0.00000        211        141          0    repeat-1
+    2583     random    0.37203    0.00000        244        141          0    repeat-0
+    2584     random    0.37204    0.00000        334        139          0    repeat-0
+    2585     random    0.37203    0.00000        193        141          0    repeat-1
+    2586     random    0.37203    0.00000        207        139          0    repeat-0
+    2587     random    0.37203    0.00000        174        141          0    repeat-7
+    2588     random    0.37203    0.00000        230        141          0    repeat-7
+    2589     random    0.37203    0.00000        331        141          0    repeat-7
+    2590     random    0.23285    0.00000        544        159          0    repeat-6
+    2591     random    0.37203    0.00000        268        141          0    repeat-2
+    2592     random    0.23285    0.00000        336        161          0    repeat-3
+    2593     random    0.37203    0.00000        231        141          0    repeat-1
+    2594     random    0.37203    0.00000        199        141          0    repeat-2
+    2595     random    0.37204    0.00000        301        141          0    repeat-0
+    2596     random    0.00000    0.00000        644        199          0    Not Connected
+    2597     random    0.37203    0.00000        237        141          0    repeat-1
+    2598     random    0.37204    0.00000        268        141          0    repeat-1
+    2599     random    0.37203    0.00000        235        141          0    repeat-0
+    2600     random    0.23285    0.00000        314        157          0    repeat-6
+    2601     random    0.45953    0.00000        635        173          0    repeat-9
+    2602     random    0.37203    0.00000        224        139          0    repeat-7
+    2603     random    0.23285    0.00000        352        159          0    repeat-5
+    2604     random    0.37203    0.00000        646        141          0    repeat-1
+    2605     random    0.37203    0.00000        247        141          0    repeat-1
+    2606     random    0.37203    0.00000        173        141          0    repeat-7
+    2607     random    0.96118    0.00000       1583        195          0    barrier > max_thermal_window
+    2608     random    0.23285    0.00000        350        157          0    repeat-4
+    2609     random    0.37203    0.00000        223        141          0    repeat-2
+    2610     random    0.37203    0.00000        457        141          0    repeat-0
+    2611     random    0.37203    0.00000        222        141          0    repeat-7
+    2612     random    0.37203    0.00000        189        141          0    repeat-0
+    2613     random    0.45951    0.00000        796        165          0    repeat-14
+    2614     random    0.23285    0.00000        486        161          0    repeat-5
+    2615     random    0.00000    0.00000       1061        189          0    Not Connected
+    2616     random    0.00000    0.00000       1078        201          0    Not Connected
+    2617     random    0.37203    0.00000        212        141          0    repeat-2
+    2618     random    0.00000    0.00000       1035        197          0    Not Connected
+    2619     random    0.37203    0.00000        417        141          0    repeat-1
+    2620     random    0.37203    0.00000        248        141          0    repeat-0
+    2621     random    0.37203    0.00000        232        141          0    repeat-7
+    2622     random    0.37203    0.00000        319        141          0    repeat-0
+    2623     random    0.92565    0.00000       2070        195          0    barrier > max_thermal_window
+    2624     random    0.23285    0.00000        371        159          0    repeat-4
+    2625     random    0.37203    0.00000        194        139          0    repeat-7
+    2626     random    0.23285    0.00000        443        161          0    repeat-4
+    2627     random    0.00000    0.00000        741        221          0    Not Connected
+    2628     random    0.00000    0.00000       1485        195          0    Not Connected
+    2629     random    0.37203    0.00000        789        141          0    repeat-7
+    2630     random    0.37203    0.00000        787        139          0    repeat-7
+    2631     random    0.37203    0.00000        236        141          0    repeat-2
+    2632     random    0.37203    0.00000        305        141          0    repeat-0
+    2633     random    0.37203    0.00000        244        141          0    repeat-1
+    2634     random    0.00000    0.00000       1051        191          0    Not Connected
+    2635     random    0.23285    0.00000        363        159          0    repeat-6
+    2636     random    0.37203    0.00000        263        141          0    repeat-1
+    2637     random    0.23285    0.00000       1196        159          0    repeat-3
+    2638     random    0.00000    0.00000        289        141          0    Not Connected
+    2639     random    0.37203    0.00000        213        141          0    repeat-1
+    2640     random    0.23285    0.00000        283        157          0    repeat-3
+    2641     random    0.37203    0.00000        201        139          0    repeat-1
+    2642     random    0.23285    0.00000        354        159          0    repeat-5
+    2643     random    0.23285    0.00000        333        159          0    repeat-5
+    2644     random    0.00000    0.00000        844        191          0    Not Connected
+    2645     random    0.37203    0.00000        234        141          0    repeat-7
+    2646     random    0.37204    0.00000        213        139          0    repeat-2
+    2647     random    0.00000    0.00000        976        187          0    Not Connected
+    2648     random    0.37203    0.00000        252        141          0    repeat-7
+    2649     random    0.00000    0.00000        875        221          0    Not Connected
+    2650     random    0.37203    0.00000        256        141          0    repeat-2
+    2651     random    0.00000    0.00000        739        189          0    Not Connected
+    2652     random    0.37203    0.00000        213        141          0    repeat-1
+    2653     random    0.45951    0.00000        913        165          0    repeat-9
+    2654     random    0.23285    0.00000        303        163          0    repeat-6
+    2655     random    0.45952    0.00000        589        167          0    repeat-8
+    2656     random    0.00000    0.00000        894        167          0    Not Connected
+    2657     random    0.37203    0.00000        236        141          0    repeat-7
+    2658     random    0.37203    0.00000        394        141          0    repeat-7
+    2659     random    0.37203    0.00000        167        141          0    repeat-1
+    2660     random    0.23285    0.00000        361        159          0    repeat-6
+    2661     random    0.00000    0.00000        245        141          0    Not Connected
+    2662     random    0.00000    0.00000      52449          1          0    Saddle Search Terminated Total Iterations
+    2663     random    0.23285    0.00000        329        157          0    repeat-3
+    2664     random    0.37203    0.00000        226        141          0    repeat-0
+    2665     random    0.00000    0.00000        478        189          0    Not Connected
+    2666     random    0.37203    0.00000        448        141          0    repeat-7
+    2667     random    0.23285    0.00000        393        159          0    repeat-3
+    2668     random    0.37203    0.00000        222        139          0    repeat-2
+    2669     random    0.37203    0.00000        449        141          0    repeat-7
+    2670     random    0.37203    0.00000        252        141          0    repeat-7
+    2671     random    0.23285    0.00000        348        157          0    repeat-5
+    2672     random    0.00000    0.00000        809        195          0    Not Connected
+    2673     random    0.37203    0.00000        301        141          0    repeat-2
+    2674     random    0.45953    0.00000        677        169          0    repeat-14
+    2675     random    0.00000    0.00000        544        189          0    Not Connected
+    2676     random    0.00000    0.00000       1053        193          0    Not Connected
+    2677     random    0.00000    0.00000       1469        191          0    Not Connected
+    2678     random    0.37203    0.00000        404        141          0    repeat-1
+    2679     random    0.37204    0.00000        156        139          0    repeat-0
+    2680     random    0.23285    0.00000        421        159          0    repeat-4
+    2681     random    0.37203    0.00000        188        141          0    repeat-1
+    2682     random    0.00000    0.00000        678        195          0    Not Connected
+    2683     random    0.37203    0.00000        322        139          0    repeat-7
+    2684     random    0.00000    0.00000       1457        191          0    Not Connected
+    2685     random    0.23285    0.00000        314        157          0    repeat-4
+    2686     random    0.37204    0.00000        351        139          0    repeat-1
+    2687     random    0.23285    0.00000        326        159          0    repeat-3
+    2688     random    0.37203    0.00000        273        141          0    repeat-2
+    2689     random    0.37203    0.00000        225        141          0    repeat-2
+    2690     random    0.00000    0.00000        716        169          0    Not Connected
+    2691     random    0.37203    0.00000        219        141          0    repeat-0
+    2692     random    0.37203    0.00000        635        139          0    repeat-0
+    2693     random    0.37203    0.00000        219        141          0    repeat-7
+    2694     random    0.37203    0.00000        228        141          0    repeat-1
+    2695     random    0.00000    0.00000        591        199          0    Not Connected
+    2696     random    0.37203    0.00000        200        139          0    repeat-7
+    2697     random    0.00000    0.00000        854        193          0    Not Connected
+    2698     random    0.23285    0.00000        558        161          0    repeat-4
+    2699     random    0.00000    0.00000        544        195          0    Not Connected
+    2700     random    0.00000    0.00000        743        189          0    Not Connected
+    2701     random    0.37203    0.00000        209        141          0    repeat-0
+    2702     random    0.23285    0.00000        449        163          0    repeat-6
+    2703     random    0.37203    0.00000        233        141          0    repeat-1
+    2704     random    0.96119    0.00000        732        207          0    barrier > max_thermal_window
+    2705     random    0.00000    0.00000        994        193          0    Not Connected
+    2706     random    0.37204    0.00000        233        139          0    repeat-0
+    2707     random    0.23285    0.00000        463        159          0    repeat-5
+    2708     random    0.23285    0.00000        288        157          0    repeat-5
+    2709     random    0.37203    0.00000        263        139          0    repeat-7
+    2710     random    0.37203    0.00000        324        141          0    repeat-0
+    2711     random    0.37203    0.00000        260        141          0    repeat-7
+    2712     random    0.37203    0.00000        246        141          0    repeat-2
+    2713     random    0.37203    0.00000        181        141          0    repeat-2
+    2714     random    0.00000    0.00000        774        185          0    Not Connected
+    2715     random    0.00000    0.00000       1038        193          0    Not Connected
+    2716     random    0.37203    0.00000        229        139          0    repeat-7
+    2717     random    0.23285    0.00000        295        155          0    repeat-5
+    2718     random    0.37203    0.00000        218        141          0    repeat-1
+    2719     random    0.37203    0.00000        167        139          0    repeat-7
+    2720     random    0.00000    0.00000          7          1          0    Saddle Search Terminated High Energy
+    2721     random    0.37203    0.00000        243        141          0    repeat-1
+    2722     random    0.37203    0.00000        321        141          0    repeat-0
+    2723     random    0.37204    0.00000        342        141          0    repeat-1
+    2724     random    0.37203    0.00000        205        141          0    repeat-1
+    2725     random    0.00000    0.00000        961        187          0    Not Connected
+    2726     random    0.45953    0.00000        664        165          0    repeat-12
+    2727     random    0.23285    0.00000        428        159          0    repeat-3
+    2728     random    0.23285    0.00000        381        157          0    repeat-3
+    2729     random    0.37203    0.00000        346        139          0    repeat-1
+    2730     random    0.00000    0.00000        582        195          0    Not Connected
+    2731     random    0.37203    0.00000        327        139          0    repeat-7
+    2732     random    0.37203    0.00000        426        141          0    repeat-1
+    2733     random    0.45953    0.00000        936        167          0    repeat-10
+    2734     random    0.37203    0.00000        245        141          0    repeat-1
+    2735     random    0.37203    0.00000        274        141          0    repeat-2
+    2736     random    0.37203    0.00000        224        141          0    repeat-1
+    2737     random    0.45953    0.00000        902        167          0    repeat-17
+    2738     random    0.45952    0.00000        663        163          0    repeat-8
+    2739     random    0.37203    0.00000        248        141          0    repeat-1
+    2740     random    0.37203    0.00000        202        141          0    repeat-2
+    2741     random    0.37203    0.00000        176        141          0    repeat-2
+    2742     random    0.37203    0.00000        330        141          0    repeat-7
+    2743     random    0.37203    0.00000        205        141          0    repeat-7
+    2744     random    0.23285    0.00000        447        159          0    repeat-4
+    2745     random    0.37203    0.00000        191        141          0    repeat-2
+    2746     random    0.23285    0.00000        451        159          0    repeat-5
+    2747     random    0.37203    0.00000        193        141          0    repeat-2
+    2748     random    0.00000    0.00000        782        191          0    Not Connected
+    2749     random    1.14981    0.00000        437        189          0    barrier > max_thermal_window
+    2750     random    0.45952    0.00000       1191        167          0    repeat-18
+    2751     random    0.00000    0.00000        687        193          0    Not Connected
+    2752     random    0.00000    0.00000        632        195          0    Not Connected
+    2753     random    0.23285    0.00000        331        159          0    repeat-6
+    2754     random    0.37203    0.00000        244        141          0    repeat-1
+    2755     random    0.00000    0.00000       1605        191          0    Not Connected
+    2756     random    0.37203    0.00000        217        139          0    repeat-0
+    2757     random    0.00000    0.00000        634        191          0    Not Connected
+    2758     random    0.23285    0.00000        316        157          0    repeat-6
+    2759     random    0.45951    0.00000        719        167          0    repeat-13
+    2760     random    0.37204    0.00000        307        139          0    repeat-1
+    2761     random    0.37203    0.00000        189        139          0    repeat-2
+    2762     random    0.00000    0.00000       1049        191          0    Not Connected
+    2763     random    0.37203    0.00000        283        141          0    repeat-7
+    2764     random    0.23285    0.00000        452        157          0    repeat-5
+    2765     random    0.37203    0.00000        229        141          0    repeat-1
+    2766     random    0.23285    0.00000        420        163          0    repeat-3
+    2767     random    0.00000    0.00000        621        191          0    Not Connected
+    2768     random    0.37203    0.00000        206        141          0    repeat-7
+    2769     random    0.37203    0.00000        241        141          0    repeat-1
+    2770     random    0.37203    0.00000        215        141          0    repeat-0
+    2771     random    0.37203    0.00000        213        141          0    repeat-7
+    2772     random    0.37203    0.00000        281        141          0    repeat-1
+    2773     random    0.37203    0.00000        195        141          0    repeat-2
+    2774     random    0.23285    0.00000        369        159          0    repeat-3
+    2775     random    0.37203    0.00000        274        141          0    repeat-2
+    2776     random    0.00000    0.00000          7          1          0    Saddle Search Terminated High Energy
+    2777     random    0.37204    0.00000        223        139          0    repeat-0
+    2778     random    0.37203    0.00000        181        141          0    repeat-0
+    2779     random    0.37203    0.00000        206        139          0    repeat-2
+    2780     random    0.00000    0.00000       1161        179          0    Not Connected
+    2781     random    0.45952    0.00000        862        167          0    repeat-9
+    2782     random    0.37203    0.00000        236        141          0    repeat-2
+    2783     random    0.23285    0.00000        308        161          0    repeat-4
+    2784     random    0.37203    0.00000        187        141          0    repeat-0
+    2785     random    0.37203    0.00000        187        141          0    repeat-7
+    2786     random    0.23285    0.00000        492        157          0    repeat-5
+    2787     random    0.23285    0.00000        260        159          0    repeat-3
+    2788     random    0.37203    0.00000        269        141          0    repeat-1
+    2789     random    0.23285    0.00000        535        161          0    repeat-3
+    2790     random    0.45240    0.00000        815        191          0    repeat-21
+    2791     random    0.37203    0.00000        225        141          0    repeat-7
+    2792     random    0.00000    0.00000       1216        189          0    Not Connected
+    2793     random    0.00000    0.00000        750        191          0    Not Connected
+    2794     random    0.37203    0.00000        304        141          0    repeat-1
+    2795     random    0.37203    0.00000        207        139          0    repeat-1
+    2796     random    0.00000    0.00000        479        191          0    Not Connected
+    2797     random    0.23285    0.00000        344        161          0    repeat-6
+    2798     random    0.37203    0.00000        224        141          0    repeat-2
+    2799     random    0.37203    0.00000        414        141          0    repeat-7
+    2800     random    0.00000    0.00000        572        193          0    Not Connected
+    2801     random    0.00000    0.00000        848        189          0    Not Connected
+    2802     random    0.37203    0.00000        228        139          0    repeat-7
+    2803     random    0.37203    0.00000        251        141          0    repeat-7
+    2804     random    0.00000    0.00000        571        189          0    Not Connected
+    2805     random    0.37203    0.00000        442        141          0    repeat-7
+    2806     random    0.23285    0.00000        275        157          0    repeat-4
+    2807     random    0.37203    0.00000        228        141          0    repeat-1
+    2808     random    0.00000    0.00000        647        193          0    Not Connected
+    2809     random    0.37203    0.00000        391        141          0    repeat-1
+    2810     random    0.23285    0.00000        265        159          0    repeat-6
+    2811     random    0.00000    0.00000      42965          1          0    Saddle Search Terminated Total Iterations
+    2812     random    0.37203    0.00000        482        141          0    repeat-0
+    2813     random    0.43772    0.00000        590        185          0    good-25
+    2814     random    0.00000    0.00000       1098        195          0    Not Connected
+    2815     random    0.37203    0.00000        317        141          0    repeat-0
+    2816     random    0.37203    0.00000        237        141          0    repeat-7
+    2817     random    0.00000    0.00000        754        195          0    Not Connected
+    2818     random    0.37203    0.00000        208        141          0    repeat-7
+    2819     random    0.00000    0.00000       1562        189          0    Not Connected
+    2820     random    0.37203    0.00000        234        141          0    repeat-7
+    2821     random    0.00000    0.00000        706        197          0    Not Connected
+    2822     random    0.37203    0.00000        479        139          0    repeat-0
+    2823     random    0.37203    0.00000        463        141          0    repeat-7
+    2824     random    0.37203    0.00000        224        141          0    repeat-0
+    2825     random    0.45953    0.00000        593        171          0    repeat-10
+    2826     random    0.23285    0.00000        438        159          0    repeat-6
+    2827     random    0.37204    0.00000        276        139          0    repeat-0
+    2828     random    0.37203    0.00000        190        141          0    repeat-1
+    2829     random    0.37203    0.00000        306        141          0    repeat-7
+    2830     random    0.23285    0.00000        303        157          0    repeat-4
+    2831     random    0.37203    0.00000        221        139          0    repeat-7
+    2832     random    0.37203    0.00000        229        141          0    repeat-7
+    2833     random    0.23285    0.00000        483        159          0    repeat-6
+    2834     random    0.23285    0.00000        403        159          0    repeat-5
+    2835     random    0.37203    0.00000        307        139          0    repeat-1
+    2836     random    0.37203    0.00000        219        141          0    repeat-2
+    2837     random    0.37203    0.00000        189        141          0    repeat-7
+    2838     random    0.23285    0.00000        347        161          0    repeat-4
+    2839     random    0.37203    0.00000        226        141          0    repeat-1
+    2840     random    0.00000    0.00000        879        191          0    Not Connected
+    2841     random    0.37203    0.00000        256        141          0    repeat-1
+    2842     random    0.00000    0.00000         14          1          0    Saddle Search Terminated High Energy
+    2843     random    0.37203    0.00000        244        141          0    repeat-1
+    2844     random    0.37203    0.00000        199        141          0    repeat-2
+    2845     random    0.37203    0.00000        203        141          0    repeat-7
+    2846     random    0.00000    0.00000         13          1          0    Saddle Search Terminated High Energy
+    2847     random    0.23285    0.00000        369        157          0    repeat-4
+    2848     random    0.23285    0.00000        323        157          0    repeat-5
+    2849     random    0.37203    0.00000        251        141          0    repeat-1
+    2850     random    0.37203    0.00000        317        141          0    repeat-7
+    2851     random    0.45952    0.00000        781        167          0    repeat-14
+    2852     random    0.37203    0.00000        372        141          0    repeat-2
+    2853     random    0.45953    0.00000        538        171          0    repeat-9
+    2854     random    0.23285    0.00000        276        161          0    repeat-5
+    2855     random    0.00000    0.00000       1416        251          0    Not Connected
+    2856     random    0.23285    0.00000        325        161          0    repeat-3
+    2857     random    0.23285    0.00000        652        155          0    repeat-5
+    2858     random    0.37203    0.00000        231        141          0    repeat-0
+    2859     random    0.00000    0.00000        628        189          0    Not Connected
+    2860     random    0.37203    0.00000        282        141          0    repeat-1
+    2861     random    0.00000    0.00000        704        189          0    Not Connected
+    2862     random    0.23285    0.00000        339        159          0    repeat-5
+    2863     random    0.00000    0.00000        571        189          0    Not Connected
+    2864     random    0.37203    0.00000        201        139          0    repeat-1
+    2865     random    0.23285    0.00000        398        155          0    repeat-3
+    2866     random    0.00000    0.00000        968        197          0    Not Connected
+    2867     random    0.37203    0.00000        256        141          0    repeat-0
+    2868     random    0.00000    0.00000        649        187          0    Not Connected
+    2869     random    0.00000    0.00000        713        159          0    Not Connected
+    2870     random    0.37203    0.00000        237        139          0    repeat-1
+    2871     random    0.37203    0.00000        223        139          0    repeat-7
+    2872     random    0.45953    0.00000        784        173          0    repeat-10
+    2873     random    0.37203    0.00000        261        139          0    repeat-2
+    2874     random    0.37203    0.00000        330        141          0    repeat-2
+    2875     random    0.00000    0.00000       1135        199          0    Not Connected
+    2876     random    0.37203    0.00000        226        141          0    repeat-2
+    2877     random    0.00000    0.00000        727        197          0    Not Connected
+    2878     random    0.37203    0.00000        320        139          0    repeat-7
+    2879     random    0.23285    0.00000        313        157          0    repeat-6
+    2880     random    0.37203    0.00000        291        141          0    repeat-1
+    2881     random    0.00000    0.00000        979        197          0    Not Connected
+    2882     random    0.37203    0.00000        202        139          0    repeat-2
+    2883     random    0.23285    0.00000        513        159          0    repeat-6
+    2884     random    0.37204    0.00000        291        141          0    repeat-1
+    2885     random    0.37203    0.00000        288        139          0    repeat-0
+    2886     random    0.23285    0.00000        365        159          0    repeat-3
+    2887     random    0.37203    0.00000        198        141          0    repeat-0
+    2888     random    0.00000    0.00000        708        189          0    Not Connected
+    2889     random    0.23285    0.00000        407        157          0    repeat-5
+    2890     random    0.00000    0.00000        671        189          0    Not Connected
+    2891     random    0.45953    0.00000        655        169          0    repeat-18
+    2892     random    0.23285    0.00000        450        157          0    repeat-3
+    2893     random    0.23285    0.00000        326        159          0    repeat-5
+    2894     random    0.91721    0.00000        504        171          0    barrier > max_thermal_window
+    2895     random    0.00000    0.00000        881        189          0    Not Connected
+    2896     random    0.37203    0.00000        339        141          0    repeat-7
+    2897     random    0.00000    0.00000       1677        197          0    Not Connected
+    2898     random    0.00000    0.00000       1084        189          0    Not Connected
+    2899     random    0.37204    0.00000        344        141          0    repeat-1
+    2900     random    0.37204    0.00000        470        139          0    repeat-1
+    2901     random    0.37203    0.00000        359        139          0    repeat-2
+    2902     random    0.23285    0.00000        441        157          0    repeat-4
+    2903     random    0.37203    0.00000        230        141          0    repeat-7
+    2904     random    0.00000    0.00000        965        191          0    Not Connected
+    2905     random    0.37203    0.00000        672        141          0    repeat-7
+    2906     random    0.00000    0.00000        991        191          0    Not Connected
+    2907     random    0.37203    0.00000        887        141          0    repeat-2
+    2908     random    0.23285    0.00000        341        159          0    repeat-5
+    2909     random    0.37203    0.00000        390        141          0    repeat-1
+    2910     random    0.00000    0.00000        965        195          0    Not Connected
+    2911     random    0.00000    0.00000       1216        199          0    Not Connected
+    2912     random    0.37203    0.00000        236        141          0    repeat-1
+    2913     random    0.37203    0.00000        249        141          0    repeat-1
+    2914     random    0.00000    0.00000       1040        195          0    Not Connected
+    2915     random    0.45953    0.00000        761        171          0    repeat-15
+    2916     random    0.37203    0.00000        260        141          0    repeat-7
+    2917     random    0.37203    0.00000        191        141          0    repeat-0
+    2918     random    0.23285    0.00000        273        155          0    repeat-3
+    2919     random    0.37203    0.00000        286        141          0    repeat-2
+    2920     random    0.37203    0.00000        251        141          0    repeat-7
+    2921     random    0.37203    0.00000        231        139          0    repeat-7
+    2922     random    0.37203    0.00000        207        139          0    repeat-7
+    2923     random    0.37203    0.00000        264        141          0    repeat-7
+    2924     random    0.37203    0.00000        209        141          0    repeat-1
+    2925     random    0.00000    0.00000        598        193          0    Not Connected
+    2926     random    0.00000    0.00000        770        187          0    Not Connected
+    2927     random    0.00000    0.00000        884        193          0    Not Connected
+    2928     random    0.00000    0.00000        532        187          0    Not Connected
+    2929     random    0.37203    0.00000        320        141          0    repeat-7
+    2930     random    0.37203    0.00000        274        141          0    repeat-0
+    2931     random    0.00000    0.00000        708        195          0    Not Connected
+    2932     random    0.00000    0.00000        794        189          0    Not Connected
+    2933     random    0.23285    0.00000        296        159          0    repeat-3
+    2934     random    0.37203    0.00000        202        139          0    repeat-0
+    2935     random    0.37203    0.00000        213        141          0    repeat-1
+    2936     random    0.23285    0.00000        323        163          0    repeat-4
+    2937     random    0.37203    0.00000        224        139          0    repeat-7
+    2938     random    0.23285    0.00000        320        159          0    repeat-5
+    2939     random    0.37203    0.00000        219        141          0    repeat-2
+    2940     random    0.00000    0.00000        535        195          0    Not Connected
+    2941     random    0.00000    0.00000       1174        191          0    Not Connected
+    2942     random    0.37203    0.00000        388        141          0    repeat-2
+    2943     random    0.00000    0.00000       1247        193          0    Not Connected
+    2944     random    0.37203    0.00000        176        141          0    repeat-7
+    2945     random    0.37203    0.00000        253        139          0    repeat-0
+    2946     random    0.00000    0.00000        877        193          0    Not Connected
+    2947     random    0.23285    0.00000        312        155          0    repeat-4
+    2948     random    0.23285    0.00000        444        157          0    repeat-4
+    2949     random    0.37203    0.00000        210        139          0    repeat-1
+    2950     random    0.23285    0.00000        328        155          0    repeat-5
+    2951     random    0.37203    0.00000        262        141          0    repeat-2
+    2952     random    0.37203    0.00000        278        141          0    repeat-7
+    2953     random    0.37203    0.00000        223        141          0    repeat-1
+    2954     random    0.23285    0.00000        471        159          0    repeat-5
+    2955     random    0.00000    0.00000        827        189          0    Not Connected
+    2956     random    0.37203    0.00000        258        139          0    repeat-2
+    2957     random    0.37203    0.00000        263        141          0    repeat-2
+    2958     random    0.37203    0.00000        236        141          0    repeat-0
+    2959     random    0.37203    0.00000        206        141          0    repeat-7
+    2960     random    0.37203    0.00000        218        139          0    repeat-0
+    2961     random    0.37203    0.00000        177        139          0    repeat-0
+    2962     random    0.37203    0.00000        190        141          0    repeat-7
+    2963     random    0.37204    0.00000        210        139          0    repeat-1
+    2964     random    0.23285    0.00000        503        159          0    repeat-4
+    2965     random    0.37203    0.00000        265        141          0    repeat-2
+    2966     random    0.37203    0.00000        202        139          0    repeat-1
+    2967     random    0.00000    0.00000       1237        141          0    Not Connected
+    2968     random    0.00000    0.00000        737        201          0    Not Connected
+    2969     random    0.37203    0.00000        187        141          0    repeat-7
+    2970     random    0.37203    0.00000        190        141          0    repeat-7
+    2971     random    0.37203    0.00000        234        141          0    repeat-1
+    2972     random    0.23285    0.00000        382        159          0    repeat-6
+    2973     random    0.37203    0.00000        145        141          0    repeat-2
+    2974     random    0.00000    0.00000        709        191          0    Not Connected
+    2975     random    0.00000    0.00000        896        197          0    Not Connected
+    2976     random    0.37203    0.00000        197        139          0    repeat-1
+    2977     random    0.37203    0.00000        189        141          0    repeat-2
+    2978     random    0.37203    0.00000        239        141          0    repeat-7
+    2979     random    0.37203    0.00000        285        141          0    repeat-7
+    2980     random    1.06365    0.00000        662        169          0    barrier > max_thermal_window
+    2981     random    0.00000    0.00000        808        193          0    Not Connected
+    2982     random    0.37203    0.00000        304        141          0    repeat-2
+    2983     random    0.37203    0.00000        235        141          0    repeat-1
+    2984     random    0.23285    0.00000        368        157          0    repeat-3
+    2985     random    0.00000    0.00000        823        191          0    Not Connected
+    2986     random    0.37203    0.00000        236        141          0    repeat-1
+    2987     random    0.37203    0.00000        241        141          0    repeat-1
+    2988     random    0.00000    0.00000       1319        189          0    Not Connected
+    2989     random    0.23285    0.00000        353        159          0    repeat-6
+    2990     random    0.23285    0.00000        349        159          0    repeat-5
+    2991     random    0.37203    0.00000        237        139          0    repeat-2
+    2992     random    0.37203    0.00000        186        141          0    repeat-7
+    2993     random    0.37204    0.00000        260        141          0    repeat-0
+    2994     random    0.37203    0.00000        231        139          0    repeat-2
+    2995     random    0.37203    0.00000        384        139          0    repeat-0
+    2996     random    0.00000    0.00000        858        193          0    Not Connected
+    2997     random    0.45953    0.00000        685        171          0    repeat-12
+    2998     random    0.37204    0.00000        293        139          0    repeat-7
+    2999     random    0.37203    0.00000        189        139          0    repeat-0
+    3000     random    0.37203    0.00000        213        141          0    repeat-0
+    3001     random    7.02190    0.00000       2246        301          0    barrier > max_thermal_window
+    3002     random    0.37203    0.00000        366        141          0    repeat-2
+    3003     random    0.00000    0.00000        680        191          0    Not Connected
+    3004     random    0.00000    0.00000        606        193          0    Not Connected
+    3005     random    0.23285    0.00000        919        159          0    repeat-3
+    3006     random    0.37203    0.00000        332        141          0    repeat-1
+    3007     random    0.37203    0.00000        412        141          0    repeat-0
+    3008     random    0.00000    0.00000      55829          1          0    Saddle Search Terminated Total Iterations
+    3009     random    0.23285    0.00000        567        159          0    repeat-4
+    3010     random    0.23285    0.00000        353        159          0    repeat-4
+    3011     random    0.37203    0.00000        671        139          0    repeat-2
+    3012     random    0.37203    0.00000        379        141          0    repeat-1
+    3013     random    0.00000    0.00000        652        171          0    Not Connected
+    3014     random    0.37203    0.00000        214        141          0    repeat-0
+    3015     random    0.37203    0.00000        349        139          0    repeat-2
+    3016     random    0.37203    0.00000        265        141          0    repeat-7
+    3017     random    0.37203    0.00000        197        141          0    repeat-1
+    3018     random    0.23285    0.00000        493        161          0    repeat-3
+    3019     random    0.37204    0.00000        256        143          0    repeat-7
+    3020     random    0.23285    0.00000        366        161          0    repeat-3
+    3021     random    0.23285    0.00000        350        159          0    repeat-6
+    3022     random    0.37203    0.00000        435        141          0    repeat-2
+    3023     random    0.00000    0.00000        559        189          0    Not Connected
+    3024     random    0.23285    0.00000        437        159          0    repeat-6
+    3025     random    0.37203    0.00000        222        139          0    repeat-7
+    3026     random    0.37203    0.00000        305        139          0    repeat-1
+    3027     random    0.37203    0.00000        277        141          0    repeat-2
+    3028     random    0.37203    0.00000        271        141          0    repeat-1
+    3029     random    0.37203    0.00000        182        141          0    repeat-7
+    3030     random    0.23285    0.00000        371        157          0    repeat-4
+    3031     random    0.37203    0.00000        209        139          0    repeat-2
+    3032     random    0.23285    0.00000        449        157          0    repeat-6
+    3033     random    0.37203    0.00000        320        141          0    repeat-1
+    3034     random    0.00000    0.00000        503        199          0    Not Connected
+    3035     random    0.00000    0.00000       1488        199          0    Not Connected
+    3036     random    0.23285    0.00000        553        157          0    repeat-3
+    3037     random    0.00000    0.00000         13          1          0    Saddle Search Terminated High Energy
+    3038     random    0.00000    0.00000        733        189          0    Not Connected
+    3039     random    0.00000    0.00000        277        141          0    Not Connected
+    3040     random    0.37203    0.00000        205        141          0    repeat-1
+    3041     random    0.00000    0.00000        925        189          0    Not Connected
+    3042     random    0.45952    0.00000       1103        169          0    repeat-14
+    3043     random    0.37203    0.00000        225        139          0    repeat-0
+    3044     random    0.00000    0.00000        693        191          0    Not Connected
+    3045     random    0.23285    0.00000        397        159          0    repeat-6
+    3046     random    0.37203    0.00000        259        139          0    repeat-0
+    3047     random    0.37203    0.00000        226        141          0    repeat-0
+    3048     random    0.00000    0.00000        672        189          0    Not Connected
+    3049     random    0.37203    0.00000        234        139          0    repeat-2
+    3050     random    1.14983    0.00000        369        189          0    barrier > max_thermal_window
+    3051     random    0.37203    0.00000        224        141          0    repeat-1
+    3052     random    0.37204    0.00000        277        141          0    repeat-7
+    3053     random    0.37203    0.00000        237        141          0    repeat-2
+    3054     random    0.37203    0.00000        192        141          0    repeat-7
+    3055     random    0.37203    0.00000        275        141          0    repeat-2
+    3056     random    0.37203    0.00000        298        141          0    repeat-0
+    3057     random    0.37203    0.00000        195        141          0    repeat-2
+    3058     random    0.00000    0.00000        701        195          0    Not Connected
+    3059     random    0.23285    0.00000        342        155          0    repeat-6
+    3060     random    0.37203    0.00000        219        139          0    repeat-0
+    3061     random    0.37203    0.00000        232        139          0    repeat-0
+    3062     random    0.37203    0.00000        265        141          0    repeat-0
+    3063     random    0.00000    0.00000          8          1          0    Saddle Search Terminated High Energy
+    3064     random    0.37203    0.00000        327        141          0    repeat-2
+    3065     random    0.37203    0.00000        335        141          0    repeat-1
+    3066     random    0.37203    0.00000        532        141          0    repeat-0
+    3067     random    0.37203    0.00000        212        141          0    repeat-0
+    3068     random    0.00000    0.00000        848        187          0    Not Connected
+    3069     random    0.23285    0.00000        647        159          0    repeat-5
+    3070     random    0.37203    0.00000        373        141          0    repeat-7
+    3071     random    0.37203    0.00000        194        141          0    repeat-0
+    3072     random    0.37203    0.00000        209        139          0    repeat-1
+    3073     random    0.00000    0.00000        718        195          0    Not Connected
+    3074     random    0.23285    0.00000        336        159          0    repeat-5
+    3075     random    0.23285    0.00000        341        159          0    repeat-4
+    3076     random    0.45953    0.00000        659        171          0    good-26
+    3077     random    0.00000    0.00000       1010        189          0    Not Connected
+    3078     random    0.37203    0.00000        318        141          0    repeat-2
+    3079     random    0.00000    0.00000        768        169          0    Not Connected
+    3080     random    1.15301    0.00000        723        177          0    barrier > max_thermal_window
+    3081     random    0.00000    0.00000       1263        189          0    Not Connected
+    3082     random    0.00000    0.00000       1283        193          0    Not Connected
+    3083     random    0.37203    0.00000        319        139          0    repeat-1
+    3084     random    0.00000    0.00000        502        189          0    Not Connected
+    3085     random    0.37203    0.00000        306        141          0    repeat-0
+    3086     random    0.23285    0.00000        396        159          0    repeat-6
+    3087     random    0.00000    0.00000        816        189          0    Not Connected
+    3088     random    0.37203    0.00000        232        141          0    repeat-0
+    3089     random    0.37203    0.00000        312        141          0    repeat-2
+    3090     random    0.37203    0.00000        247        141          0    repeat-2
+    3091     random    0.37204    0.00000        308        139          0    repeat-2
+    3092     random    0.37203    0.00000        213        139          0    repeat-0
+    3093     random    0.37204    0.00000        298        141          0    repeat-2
+    3094     random    0.37203    0.00000        232        141          0    repeat-0
+    3095     random    0.23285    0.00000        422        159          0    repeat-5
+    3096     random    0.00000    0.00000        612        183          0    Not Connected
+    3097     random    0.37204    0.00000        284        139          0    repeat-0
+    3098     random    0.00000    0.00000        752        225          0    Not Connected
+    3099     random    0.23285    0.00000        364        159          0    repeat-3
+    3100     random    0.37203    0.00000        199        141          0    repeat-0
+    3101     random    0.37203    0.00000        295        141          0    repeat-7
+    3102     random    0.37203    0.00000        224        139          0    repeat-1
+    3103     random    0.23285    0.00000        443        159          0    repeat-5
+    3104     random    0.37203    0.00000        242        141          0    repeat-2
+    3105     random    0.23285    0.00000        283        157          0    repeat-5
+    3106     random    0.23285    0.00000        379        159          0    repeat-6
+    3107     random    0.37203    0.00000        207        139          0    repeat-2
+    3108     random    0.23285    0.00000        455        163          0    repeat-3
+    3109     random    0.37203    0.00000        263        141          0    repeat-1
+    3110     random    0.37203    0.00000        258        141          0    repeat-0
+    3111     random    0.23285    0.00000        264        159          0    repeat-6
+    3112     random    0.37203    0.00000        208        141          0    repeat-2
+    3113     random    0.37203    0.00000        207        141          0    repeat-1
+    3114     random    0.23285    0.00000        267        157          0    repeat-4
+    3115     random    0.23285    0.00000        340        159          0    repeat-3
+    3116     random    0.00000    0.00000        915        193          0    Not Connected
+    3117     random    0.37203    0.00000        223        139          0    repeat-2
+    3118     random    0.23285    0.00000        463        159          0    repeat-3
+    3119     random    0.00000    0.00000        495        191          0    Not Connected
+    3120     random    0.23285    0.00000        331        159          0    repeat-4
+    3121     random    0.37203    0.00000        204        141          0    repeat-1
+    3122     random    0.37203    0.00000        194        141          0    repeat-2
+    3123     random    0.37203    0.00000        207        141          0    repeat-1
+    3124     random    0.00000    0.00000        692        195          0    Not Connected
+    3125     random    0.00000    0.00000       1378        193          0    Not Connected
+    3126     random    0.45952    0.00000        905        167          0    repeat-18
+    3127     random    0.37203    0.00000        273        141          0    repeat-2
+    3128     random    0.00000    0.00000        958        193          0    Not Connected
+    3129     random    0.23285    0.00000        343        157          0    repeat-5
+    3130     random    0.37203    0.00000        326        141          0    repeat-7
+    3131     random    0.37203    0.00000        244        139          0    repeat-7
+    3132     random    0.00000    0.00000        794        187          0    Not Connected
+    3133     random    0.23285    0.00000        339        161          0    repeat-4
+    3134     random    0.37203    0.00000        179        141          0    repeat-1
+    3135     random    0.37203    0.00000        256        141          0    repeat-2
+    3136     random    0.23285    0.00000        510        157          0    repeat-3
+    3137     random    0.37203    0.00000        216        141          0    repeat-7
+    3138     random    0.37203    0.00000        199        141          0    repeat-1
+    3139     random    0.37203    0.00000        202        139          0    repeat-7
+    3140     random    0.00000    0.00000       1053        195          0    Not Connected
+    3141     random    0.00000    0.00000        764        191          0    Not Connected
+    3142     random    0.37203    0.00000        239        141          0    repeat-1
+    3143     random    0.37203    0.00000        269        139          0    repeat-1
+    3144     random    0.00000    0.00000        872        195          0    Not Connected
+    3145     random    0.00000    0.00000        734        227          0    Not Connected
+    3146     random    0.45951    0.00000        842        165          0    repeat-12
+    3147     random    0.37203    0.00000        241        141          0    repeat-7
+    3148     random    0.37203    0.00000        206        141          0    repeat-7
+    3149     random    0.37203    0.00000        190        141          0    repeat-1
+    3150     random    0.37203    0.00000        370        141          0    repeat-0
+    3151     random    0.37203    0.00000        275        141          0    repeat-7
+    3152     random    0.45953    0.00000        814        167          0    repeat-10
+    3153     random    0.37203    0.00000        217        141          0    repeat-0
+    3154     random    0.37203    0.00000        179        139          0    repeat-0
+    3155     random    0.37203    0.00000        209        141          0    repeat-1
+    3156     random    0.00000    0.00000        444        159          0    Not Connected
+    3157     random    0.23285    0.00000        382        159          0    repeat-3
+    3158     random    0.23285    0.00000        330        159          0    repeat-4
+    3159     random    0.00000    0.00000       1022        191          0    Not Connected
+    3160     random    0.37203    0.00000        703        141          0    repeat-7
+    3161     random    0.37203    0.00000        815        141          0    repeat-0
+    3162     random    0.37203    0.00000        174        141          0    repeat-7
+    3163     random    0.00000    0.00000        697        195          0    Not Connected
+    3164     random    0.23285    0.00000        382        161          0    repeat-3
+    3165     random    0.37203    0.00000        246        141          0    repeat-7
+    3166     random    0.37203    0.00000        203        141          0    repeat-7
+    3167     random    0.37203    0.00000        262        139          0    repeat-1
+    3168     random    0.23285    0.00000        341        161          0    repeat-5
+    3169     random    0.37203    0.00000        211        141          0    repeat-0
+    3170     random    0.91721    0.00000        613        171          0    barrier > max_thermal_window
+    3171     random    0.37203    0.00000        225        141          0    repeat-7
+    3172     random    0.00000    0.00000        589        187          0    Not Connected
+    3173     random    0.37203    0.00000        186        139          0    repeat-0
+    3174     random    0.37203    0.00000        220        141          0    repeat-7
+    3175     random    0.37203    0.00000        226        141          0    repeat-1
+    3176     random    0.23285    0.00000        356        155          0    repeat-3
+    3177     random    0.37203    0.00000        250        141          0    repeat-1
+    3178     random    0.37203    0.00000        253        139          0    repeat-1
+    3179     random    0.23285    0.00000        346        157          0    repeat-3
+    3180     random    0.45953    0.00000       1038        177          0    repeat-9
+    3181     random    0.37203    0.00000        357        141          0    repeat-1
+    3182     random    0.00000    0.00000        519        193          0    Not Connected
+    3183     random    0.45951    0.00000        836        169          0    repeat-12
+    3184     random    0.37203    0.00000        292        141          0    repeat-7
+    3185     random    0.37203    0.00000        284        141          0    repeat-7
+    3186     random    0.37203    0.00000        223        141          0    repeat-1
+    3187     random    0.37203    0.00000        242        139          0    repeat-7
+    3188     random    0.23285    0.00000        365        159          0    repeat-5
+    3189     random    0.23285    0.00000        527        159          0    repeat-6
+    3190     random    0.23285    0.00000        407        155          0    repeat-3
+    3191     random    0.37203    0.00000        326        141          0    repeat-0
+    3192     random    0.00000    0.00000        782        187          0    Not Connected
+    3193     random    0.37203    0.00000        262        141          0    repeat-7
+    3194     random    7.02191    0.00000       1766        337          0    barrier > max_thermal_window
+    3195     random    0.45952    0.00000        808        167          0    repeat-13
+    3196     random    0.00000    0.00000        670        193          0    Not Connected
+    3197     random    0.00000    0.00000       1610        195          0    Not Connected
+    3198     random    0.37203    0.00000        288        139          0    repeat-1
+    3199     random    0.37204    0.00000        253        139          0    repeat-7
+    3200     random    0.37203    0.00000        242        141          0    repeat-1
+    3201     random    0.37203    0.00000        184        139          0    repeat-7
+    3202     random    0.37203    0.00000        179        141          0    repeat-2
+    3203     random    0.37203    0.00000        252        141          0    repeat-7
+    3204     random    0.37203    0.00000        256        141          0    repeat-0
+    3205     random    0.00000    0.00000        650        159          0    Not Connected
+    3206     random    0.37204    0.00000        261        141          0    repeat-2
+    3207     random    0.37203    0.00000        206        139          0    repeat-7
+    3208     random    0.37203    0.00000        189        141          0    repeat-7
+    3209     random    0.00000    0.00000       1072        189          0    Not Connected
+    3210     random    0.00000    0.00000        731        187          0    Not Connected
+    3211     random    0.37203    0.00000        184        141          0    repeat-7
+    3212     random    0.37203    0.00000        327        139          0    repeat-1
+    3213     random    0.37203    0.00000        233        141          0    repeat-7
+    3214     random    0.37203    0.00000        257        139          0    repeat-7
+    3215     random    0.37203    0.00000        199        141          0    repeat-0
+    3216     random    0.37203    0.00000        386        141          0    repeat-0
+    3217     random    0.37203    0.00000        327        141          0    repeat-1
+    3218     random    0.37203    0.00000        597        141          0    repeat-7
+    3219     random    0.00000    0.00000        785        191          0    Not Connected
+    3220     random    0.37203    0.00000        377        141          0    repeat-1
+    3221     random    0.37203    0.00000        168        141          0    repeat-7
+    3222     random    0.37203    0.00000        286        141          0    repeat-1
+    3223     random    0.23285    0.00000        619        161          0    repeat-5
+    3224     random    0.37203    0.00000        214        141          0    repeat-0
+    3225     random    0.37203    0.00000        212        141          0    repeat-7
+    3226     random    0.37203    0.00000        390        141          0    repeat-1
+    3227     random    0.23285    0.00000        568        159          0    repeat-6
+    3228     random    0.37203    0.00000        303        141          0    repeat-0
+    3229     random    0.00000    0.00000        863        193          0    Not Connected
+    3230     random    0.37203    0.00000        479        141          0    repeat-2
+    3231     random    0.37203    0.00000        227        141          0    repeat-0
+    3232     random    0.00000    0.00000        642        197          0    Not Connected
+    3233     random    0.00000    0.00000       1263        191          0    Not Connected
+    3234     random    0.37203    0.00000        323        141          0    repeat-7
+    3235     random    0.37203    0.00000        198        141          0    repeat-1
+    3236     random    0.23285    0.00000        313        159          0    repeat-3
+    3237     random    0.37203    0.00000        222        141          0    repeat-7
+    3238     random    0.23285    0.00000        318        161          0    repeat-5
+    3239     random    0.00000    0.00000       1102        189          0    Not Connected
+    3240     random    0.37203    0.00000        407        141          0    repeat-7
+    3241     random    0.37203    0.00000        245        139          0    repeat-7
+    3242     random    0.37203    0.00000        283        141          0    repeat-1
+    3243     random    0.37203    0.00000        230        141          0    repeat-7
+    3244     random    0.37203    0.00000        278        141          0    repeat-1
+    3245     random    0.37203    0.00000        269        141          0    repeat-0
+    3246     random    0.23285    0.00000        602        157          0    repeat-5
+    3247     random    0.37203    0.00000        175        141          0    repeat-1
+    3248     random    0.37203    0.00000        223        141          0    repeat-1
+    3249     random    0.37203    0.00000        225        141          0    repeat-2
+    3250     random    0.37203    0.00000        208        141          0    repeat-0
+    3251     random    0.00000    0.00000       1043        189          0    Not Connected
+    3252     random    0.23285    0.00000        290        159          0    repeat-3
+    3253     random    0.37203    0.00000        224        141          0    repeat-1
+    3254     random    0.00000    0.00000        780        191          0    Not Connected
+    3255     random    0.00000    0.00000       1056        193          0    Not Connected
+    3256     random    0.00000    0.00000       1283        185          0    Not Connected
+    3257     random    0.37203    0.00000        258        139          0    repeat-1
+    3258     random    0.00000    0.00000        691        191          0    Not Connected
+    3259     random    0.37203    0.00000        860        141          0    repeat-2
+    3260     random    0.00000    0.00000        703        189          0    Not Connected
+    3261     random    0.23285    0.00000        349        157          0    repeat-5
+    3262     random    0.00000    0.00000        698        191          0    Not Connected
+    3263     random    0.37203    0.00000        243        141          0    repeat-2
+    3264     random    0.37203    0.00000        183        141          0    repeat-7
+    3265     random    0.00000    0.00000        609        193          0    Not Connected
+    3266     random    0.00000    0.00000        831        199          0    Not Connected
+    3267     random    0.37204    0.00000        230        141          0    repeat-1
+    3268     random    0.00000    0.00000       1240        191          0    Not Connected
+    3269     random    0.37203    0.00000        183        139          0    repeat-2
+    3270     random    0.37203    0.00000        269        141          0    repeat-1
+    3271     random    0.23285    0.00000        347        159          0    repeat-5
+    3272     random    0.45951    0.00000        489        167          0    repeat-12
+    3273     random    0.23285    0.00000        428        157          0    repeat-4
+    3274     random    0.37203    0.00000        285        141          0    repeat-0
+    3275     random    0.37203    0.00000        225        141          0    repeat-2
+    3276     random    0.37203    0.00000        243        141          0    repeat-7
+    3277     random    0.23285    0.00000        459        161          0    repeat-3
+    3278     random    0.37203    0.00000        185        139          0    repeat-1
+    3279     random    0.00000    0.00000        608        187          0    Not Connected
+    3280     random    0.23285    0.00000        301        157          0    repeat-6
+    3281     random    0.43772    0.00000        996        179          0    good-27
+    3282     random    0.37203    0.00000        222        141          0    repeat-2
+    3283     random    0.00000    0.00000       1093        193          0    Not Connected
+    3284     random    0.23285    0.00000        308        159          0    repeat-3
+    3285     random    0.37203    0.00000        209        139          0    repeat-1
+    3286     random    0.37203    0.00000        271        139          0    repeat-2
+    3287     random    0.00000    0.00000       1294        165          0    Not Connected
+    3288     random    0.00000    0.00000       1024        193          0    Not Connected
+    3289     random    0.23285    0.00000        484        159          0    repeat-3
+    3290     random    0.37203    0.00000        308        139          0    repeat-1
+    3291     random    0.37203    0.00000        221        141          0    repeat-1
+    3292     random    0.00000    0.00000       1177        193          0    Not Connected
+    3293     random    0.37203    0.00000        284        139          0    repeat-0
+    3294     random    0.37203    0.00000        287        141          0    repeat-2
+    3295     random    0.37203    0.00000        218        141          0    repeat-2
+    3296     random    0.37203    0.00000        236        139          0    repeat-1
+    3297     random    0.00000    0.00000        725        193          0    Not Connected
+    3298     random    0.37203    0.00000        315        141          0    repeat-7
+    3299     random    0.37203    0.00000        305        141          0    repeat-7
+    3300     random    0.37203    0.00000        373        141          0    repeat-1
+    3301     random    0.37203    0.00000        221        141          0    repeat-0
+    3302     random    0.37203    0.00000        276        139          0    repeat-1
+    3303     random    0.37203    0.00000        216        141          0    repeat-2
+    3304     random    0.23285    0.00000        338        157          0    repeat-4
+    3305     random    0.37203    0.00000        212        139          0    repeat-1
+    3306     random    0.37203    0.00000        221        141          0    repeat-1
+    3307     random    0.00000    0.00000        554        195          0    Not Connected
+    3308     random    0.37203    0.00000        219        141          0    repeat-1
+    3309     random    0.23285    0.00000        306        159          0    repeat-5
+    3310     random    0.37203    0.00000        188        141          0    repeat-7
+    3311     random    0.45952    0.00000        775        169          0    repeat-10
+    3312     random    0.37203    0.00000        258        141          0    repeat-0
+    3313     random    0.23285    0.00000        404        159          0    repeat-5
+    3314     random    0.37203    0.00000        195        139          0    repeat-1
+    3315     random    0.23285    0.00000        440        155          0    repeat-5
+    3316     random    0.23285    0.00000        743        155          0    repeat-4
+    3317     random    0.00000    0.00000        891        171          0    Not Connected
+    3318     random    0.37203    0.00000        325        141          0    repeat-2
+    3319     random    0.23285    0.00000        356        161          0    repeat-4
+    3320     random    0.45240    0.00000        637        191          0    good-28
+    3321     random    0.37203    0.00000        205        141          0    repeat-7
+    3322     random    0.37203    0.00000        280        141          0    repeat-7
+    3323     random    0.23285    0.00000        465        161          0    repeat-3
+    3324     random    0.37203    0.00000        252        141          0    repeat-7
+    3325     random    0.37203    0.00000        222        141          0    repeat-7
+    3326     random    0.45953    0.00000        931        173          0    repeat-8
+    3327     random    0.00000    0.00000        987        195          0    Not Connected
+    3328     random    0.00000    0.00000        851        189          0    Not Connected
+    3329     random    0.37203    0.00000        217        141          0    repeat-1
+    3330     random    0.23285    0.00000        291        159          0    repeat-4
+    3331     random    0.00000    0.00000       1036        175          0    Not Connected
+    3332     random    0.37203    0.00000        245        141          0    repeat-0
+    3333     random    0.23285    0.00000        283        159          0    repeat-6
+    3334     random    0.37203    0.00000        205        139          0    repeat-7
+    3335     random    0.37203    0.00000        207        139          0    repeat-0
+    3336     random    0.00000    0.00000         14          1          0    Saddle Search Terminated High Energy
+    3337     random    0.45242    0.00000        622        189          0    repeat-21
+    3338     random    0.37203    0.00000        249        141          0    repeat-2
+    3339     random    0.37203    0.00000        214        141          0    repeat-2
+    3340     random    0.00000    0.00000        714        189          0    Not Connected
+    3341     random    0.23285    0.00000        321        155          0    repeat-6
+    3342     random    0.23285    0.00000        502        159          0    repeat-6
+    3343     random    0.23285    0.00000        300        161          0    repeat-5
+    3344     random    0.00000    0.00000         11          1          0    Saddle Search Terminated High Energy
+    3345     random    0.37203    0.00000        247        141          0    repeat-2
+    3346     random    0.00000    0.00000       1021        191          0    Not Connected
+    3347     random    0.00000    0.00000       1159        193          0    Not Connected
+    3348     random    0.37203    0.00000        221        139          0    repeat-2
+    3349     random    0.23285    0.00000        413        159          0    repeat-5
+    3350     random    0.45953    0.00000       1087        169          0    repeat-17
+    3351     random    0.37203    0.00000        208        139          0    repeat-7
+    3352     random    0.23285    0.00000        300        159          0    repeat-6
+    3353     random    0.23285    0.00000        492        161          0    repeat-4
+    3354     random    0.37203    0.00000        322        141          0    repeat-1
+    3355     random    0.23285    0.00000        414        163          0    repeat-6
+    3356     random    0.37203    0.00000        272        141          0    repeat-2
+    3357     random    0.23285    0.00000        333        159          0    repeat-5
+    3358     random    0.37203    0.00000        248        141          0    repeat-7
+    3359     random    0.37203    0.00000        241        141          0    repeat-1
+    3360     random    0.37203    0.00000        193        141          0    repeat-1
+    3361     random    0.45953    0.00000        891        163          0    repeat-18
+    3362     random    0.37203    0.00000        345        141          0    repeat-2
+    3363     random    0.00000    0.00000       1129        191          0    Not Connected
+    3364     random    0.37203    0.00000        191        139          0    repeat-1
+    3365     random    0.37203    0.00000        211        139          0    repeat-7
+    3366     random    0.37203    0.00000        262        141          0    repeat-7
+    3367     random    0.37203    0.00000        227        141          0    repeat-0
+    3368     random    0.37203    0.00000        401        141          0    repeat-0
+    3369     random    0.37203    0.00000        273        139          0    repeat-7
+    3370     random    0.37203    0.00000        467        141          0    repeat-2
+    3371     random    0.37203    0.00000        198        139          0    repeat-2
+    3372     random    0.37203    0.00000        237        139          0    repeat-1
+    3373     random    0.23285    0.00000        620        157          0    repeat-4
+    3374     random    0.37203    0.00000        264        141          0    repeat-0
+    3375     random    0.37203    0.00000        277        139          0    repeat-7
+    3376     random    0.37203    0.00000        291        141          0    repeat-7
+    3377     random    0.00000    0.00000        871        173          0    Not Connected
+    3378     random    0.00000    0.00000          6          1          0    Saddle Search Terminated High Energy
+    3379     random    0.45952    0.00000        883        167          0    repeat-17
+    3380     random    0.23285    0.00000        338        157          0    repeat-5
+    3381     random    0.37203    0.00000        393        141          0    repeat-1
+    3382     random    0.00000    0.00000        997        167          0    Not Connected
+    3383     random    0.00000    0.00000        666        189          0    Not Connected
+    3384     random    0.37203    0.00000        281        141          0    repeat-2
+    3385     random    0.37203    0.00000        364        141          0    repeat-7
+    3386     random    0.37203    0.00000        277        141          0    repeat-1
+    3387     random    0.00000    0.00000        883        193          0    Not Connected
+    3388     random    0.37203    0.00000        250        139          0    repeat-0
+    3389     random    0.23285    0.00000        340        157          0    repeat-4
+    3390     random    7.02191    0.00000       1423        293          0    barrier > max_thermal_window
+    3391     random    0.23285    0.00000        241        159          0    repeat-4
+    3392     random    0.37203    0.00000        503        141          0    repeat-2
+    3393     random    0.37203    0.00000        266        141          0    repeat-1
+    3394     random    0.37203    0.00000        211        139          0    repeat-1
+    3395     random    0.37203    0.00000        298        141          0    repeat-7
+    3396     random    0.45953    0.00000        625        167          0    repeat-17
+    3397     random    0.00000    0.00000        821        167          0    Not Connected
+    3398     random    0.37203    0.00000        294        141          0    repeat-7
+    3399     random    0.00000    0.00000        764        167          0    Not Connected
+    3400     random    0.45951    0.00000        733        167          0    repeat-15
+    3401     random    0.45952    0.00000       1073        167          0    repeat-17
+    3402     random    0.23285    0.00000       2555        159          0    repeat-3
+    3403     random    0.23285    0.00000        423        159          0    repeat-5
+    3404     random    0.23285    0.00000        274        157          0    repeat-3
+    3405     random    0.23285    0.00000        373        161          0    repeat-3
+    3406     random    0.37203    0.00000        244        141          0    repeat-2
+    3407     random    0.23285    0.00000        273        157          0    repeat-4
+    3408     random    0.23285    0.00000        367        159          0    repeat-5
+    3409     random    0.37204    0.00000        232        141          0    repeat-2
+    3410     random    0.37203    0.00000        275        139          0    repeat-0
+    3411     random    0.37203    0.00000        196        139          0    repeat-2
+    3412     random    0.37203    0.00000        314        141          0    repeat-1
+    3413     random    0.37203    0.00000        364        141          0    repeat-2
+    3414     random    0.37203    0.00000        208        141          0    repeat-0
+    3415     random    0.23285    0.00000        425        155          0    repeat-4
+    3416     random    0.23285    0.00000        406        159          0    repeat-4
+    3417     random    0.37203    0.00000        283        139          0    repeat-1
+    3418     random    0.37203    0.00000        196        141          0    repeat-1
+    3419     random    0.23285    0.00000        403        159          0    repeat-3
+    3420     random    0.37203    0.00000        202        139          0    repeat-0
+    3421     random    0.37203    0.00000        169        141          0    repeat-7
+    3422     random    0.23285    0.00000        300        159          0    repeat-6
+    3423     random    0.23285    0.00000        338        157          0    repeat-5
+    3424     random    0.37203    0.00000        319        141          0    repeat-1
+    3425     random    0.00000    0.00000       1361        187          0    Not Connected
+    3426     random    0.37203    0.00000        238        141          0    repeat-7
+    3427     random    0.37203    0.00000        179        141          0    repeat-1
+    3428     random    0.23285    0.00000        424        157          0    repeat-3

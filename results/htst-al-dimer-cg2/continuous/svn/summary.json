@@ -4,7 +4,7 @@
   "commit": "r2549",
   "template": "eon-svn/htst-al-dimer-cg2-r2549",
   "seed": 42,
-  "searches": 1862,
+  "searches": 3428,
   "reference_ids": [
     0,
     1,
@@ -16,47 +16,71 @@
     7
   ],
   "reference_complete": true,
-  "barrier_windows": 40,
+  "barrier_windows": 73,
   "barrier_target": 432,
-  "rate_windows": 0,
+  "rate_windows": 1,
   "rate_target": 11,
   "barrier_jobs": {
-    "n": 40,
-    "mean": 45.9,
-    "median": 38.5,
-    "min": 17.0,
-    "max": 96.0
+    "n": 73,
+    "mean": 46.89041095890411,
+    "median": 40.0,
+    "min": 13.0,
+    "max": 106.0
   },
   "barrier_force_calls": {
-    "n": 40,
-    "mean": 38258.35,
-    "median": 24698.5,
-    "min": 11146.0,
+    "n": 73,
+    "mean": 38031.17808219178,
+    "median": 26348.0,
+    "min": 6413.0,
     "max": 135807.0
   },
   "barrier_sad_fcs": {
-    "n": 40,
-    "mean": 31205.2,
-    "median": 18497.5,
-    "min": 8363.0,
+    "n": 73,
+    "mean": 30815.794520547945,
+    "median": 19887.0,
+    "min": 4194.0,
     "max": 126395.0
   },
   "barrier_mins_fcs": {
-    "n": 40,
-    "mean": 7053.15,
-    "median": 6109.0,
-    "min": 2783.0,
-    "max": 14978.0
+    "n": 73,
+    "mean": 7215.3835616438355,
+    "median": 6234.0,
+    "min": 2091.0,
+    "max": 15988.0
   },
-  "rate_jobs": null,
-  "rate_force_calls": null,
-  "rate_sad_fcs": null,
-  "rate_mins_fcs": null,
-  "open_barrier_jobs": 26,
-  "open_rate_jobs": 1862,
-  "open_rate_sum": 591306259.9002621,
+  "rate_jobs": {
+    "n": 1,
+    "mean": 3282.0,
+    "median": 3282.0,
+    "min": 3282.0,
+    "max": 3282.0
+  },
+  "rate_force_calls": {
+    "n": 1,
+    "mean": 2692466.0,
+    "median": 2692466.0,
+    "min": 2692466.0,
+    "max": 2692466.0
+  },
+  "rate_sad_fcs": {
+    "n": 1,
+    "mean": 2187062.0,
+    "median": 2187062.0,
+    "min": 2187062.0,
+    "max": 2187062.0
+  },
+  "rate_mins_fcs": {
+    "n": 1,
+    "mean": 505404.0,
+    "median": 505404.0,
+    "min": 505404.0,
+    "max": 505404.0
+  },
+  "open_barrier_jobs": 5,
+  "open_rate_jobs": 146,
+  "open_rate_sum": 591085800.8340697,
   "client_matches_harness": true,
   "client_mismatch": 0,
   "done": false,
-  "running_s": 6689.749897842405
+  "running_s": 12072.562603654333
 }

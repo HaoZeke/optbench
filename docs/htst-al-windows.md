@@ -70,19 +70,19 @@ Mean, median, min, and max are over the closed windows.
 
 | | archive | EON (SVN r2549) | eOn (develop 500350d9) |
 | --- | ---: | ---: | ---: |
-| barrier windows | 432 | 40 / 432 | 40 / 432 |
-| rate windows | 11 | 0 / 11 | 0 / 11 |
-| barrier jobs | 46 | 45.9 / 38.5 / 17 / 96 | 36.975 / 33 / 14 / 94 |
-| barrier harness calls |  | 38258.3 / 24698.5 / 11146 / 135807 | 39943.1 / 23798.5 / 7567 / 152624 |
-| barrier sad-fcs | 21070 | 31205.2 / 18497.5 / 8363 / 126395 | 34254.2 / 17617.5 / 5399 / 142907 |
-| barrier mins-fcs |  | 7053.15 / 6109 / 2783 / 14978 | 5688.68 / 4936 / 2168 / 14232 |
-| rate jobs | 1671 |  |  |
-| rate harness calls |  |  |  |
-| rate sad-fcs | 766300 |  |  |
-| rate mins-fcs |  |  |  |
+| barrier windows | 432 | 73 / 432 | 69 / 432 |
+| rate windows | 11 | 1 / 11 | 1 / 11 |
+| barrier jobs | 46 | 46.8904 / 40 / 13 / 106 | 43.7971 / 40 / 11 / 168 |
+| barrier harness calls |  | 38031.2 / 26348 / 6413 / 135807 | 44317.2 / 26978 / 6563 / 180850 |
+| barrier sad-fcs | 21070 | 30815.8 / 19887 / 4194 / 126395 | 37583.2 / 19999 / 4360 / 164641 |
+| barrier mins-fcs |  | 7215.38 / 6234 / 2091 / 15988 | 6733.65 / 5892 / 1707 / 25800 |
+| rate jobs | 1671 | 3282 / 3282 / 3282 / 3282 | 2139 / 2139 / 2139 / 2139 |
+| rate harness calls |  | 2.69247e+06 / 2.69247e+06 / 2.69247e+06 / 2.69247e+06 | 2.3358e+06 / 2.3358e+06 / 2.3358e+06 / 2.3358e+06 |
+| rate sad-fcs | 766300 | 2.18706e+06 / 2.18706e+06 / 2.18706e+06 / 2.18706e+06 | 2.00592e+06 / 2.00592e+06 / 2.00592e+06 / 2.00592e+06 |
+| rate mins-fcs |  | 505404 / 505404 / 505404 / 505404 | 329861 / 329861 / 329861 / 329861 |
 
-EON (SVN r2549): 1862 searches, reference ids 8/8, open barrier jobs 26, open rate jobs 1862, client_matches_harness True.
-eOn (develop 500350d9): 1603 searches, reference ids 8/8, open barrier jobs 124, open rate jobs 1603, client_matches_harness False.
+EON (SVN r2549): 3428 searches, reference ids 8/8, open barrier jobs 5, open rate jobs 146, client_matches_harness True.
+eOn (develop 500350d9): 3035 searches, reference ids 8/8, open barrier jobs 13, open rate jobs 896, client_matches_harness False.
 <!-- counts:end -->
 
 ## Clients
