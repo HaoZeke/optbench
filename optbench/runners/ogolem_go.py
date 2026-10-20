@@ -34,6 +34,7 @@ import statistics
 import subprocess
 import threading
 import time
+from collections import Counter
 from pathlib import Path
 
 from optbench.counter import ForceCallCap, HarnessCounter
@@ -600,9 +601,14 @@ def _partial_reason(problem: dict, records: list[dict], scored: bool, full: int 
         lowest = min(energies)
         printed = f"{lowest:.8f}"
         parts.append(f"lowest energy {printed}")
-        same = sum(1 for energy in energies if f"{energy:.8f}" == printed)
+        labels = [f"{energy:.8f}" for energy in energies]
+        same = sum(1 for label in labels if label == printed)
         if same >= 2:
             parts.append(f"{same} of {len(records)} starts at {printed}")
+        counts = Counter(labels)
+        modal, modal_n = counts.most_common(1)[0]
+        if modal != printed and modal_n >= 2:
+            parts.append(f"{modal_n} of {len(records)} starts at {modal}")
     if calls:
         parts.append(f"mean calls {statistics.fmean(calls):.1f}")
         parts.append(f"median calls {statistics.median(calls):.1f}")

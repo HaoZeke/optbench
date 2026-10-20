@@ -173,6 +173,14 @@ def test_partial_reason_counts_starts_on_the_lowest_energy():
         "scored 3 of 200 starts; lowest energy -396.28224883; "
         "2 of 3 starts at -396.28224883; mean calls 1000000.0; median calls 1000000.0"
     )
+    hit = dict(records[0])
+    hit["energy"] = -397.4913461429096
+    hit["force_calls"] = 544484
+    mixed = _partial_reason(problem, [hit, *records], True, 200)
+    assert mixed == (
+        "scored 4 of 200 starts; lowest energy -397.49134614; "
+        "2 of 4 starts at -396.28224883; mean calls 886121.0; median calls 1000000.0"
+    )
 
 
 def test_partial_reason_is_kept_when_the_problem_states_no_full_set(tmp_path: Path):
