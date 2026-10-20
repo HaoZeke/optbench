@@ -111,7 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
-    "repro/lowest-eigenvector-lj38-optim-first-order": "75a0ccee1741584a46203f7e30d026c8e466981e",
+    "repro/lowest-eigenvector-lj38-optim-first-order": "5c17f10b0f8ab5eaf654ad1ee2e7fae0111578fe",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -245,14 +245,21 @@ CAUSE_TEXT = {
         "The odata preamble was not archived."
     ),
     "optim_rr_stock": (
-        "Unmodified OPTIM SVNREV df8da599267534fbe43a250e578f7396a7946311, stock keywords, "
-        "USEDIAG 3, and the archive overlap stop 0.99, on the same 200 coords-con starts. "
-        "The stock EIGENONLY path leaves the base gradient unset. "
-        "No start prints CONVERGED. The best overlap is 0.8918. "
-        "Harness calls run from 501 to 515. "
+        "Unmodified OPTIM SVNREV df8da599267534fbe43a250e578f7396a7946311, stock method keywords, "
+        "on the same 200 coords-con starts and the archive overlap stop 0.99. "
+        "USEDIAG 3 is the first-order forward quotient. "
+        "CHECKINDEX 10000 sets NEVS, the Rayleigh-Ritz iteration limit whose source default is 500, to the problem cap. "
+        "Memory, step, and BFGSTSPC stay at the source defaults. "
+        "Every start uses 10000 harness calls and stops at the cap. "
+        "None prints CONVERGED. The best absolute overlap is 0.1284. "
         "OPTIM exits before the energy+gradient summary, so that native line is absent and the score is the harness count. "
         "Zero successes, so there is no half-even success mean beside the archived 25. "
-        "nfailed is 200 against 0. The gap is the finding."
+        "nfailed is 200 against 0. "
+        "The documented EIGENONLY input is ceig and cover and does not evaluate the gradient. "
+        "secdiag.F90 lines 315-318 require that gradient when NSECDIAG is greater than 2. "
+        "geopt.F90 line 369 passes GRAD into BEIG with no preceding POTENTIAL call. "
+        "BFGSTS does call POTENTIAL first, and that keyword leaves this search. "
+        "The source was not patched."
     ),
     "pele_fire": "pele FIRE on LJ38 scores 1264 with 7 failures. The archive is 709 with 0 failures. The M100 L-BFGS row on the same build reproduces, so this is the FIRE step, not the LJ kernel.",
     "pele_morse": "pele Morse L-BFGS scores 92. The archive is 51. eOn Morse L-BFGS on the same bulk file reproduces at 52, so the gap is the pele memory and step, not the shared Morse parameters.",
