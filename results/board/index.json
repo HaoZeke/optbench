@@ -17607,6 +17607,85 @@
       ],
       "title": "lj75"
     },
+    "globalopt/lj98": {
+      "full_n": 100,
+      "history": [],
+      "id": "globalopt/lj98",
+      "not_comparable": [],
+      "partial": [],
+      "profile": {
+        "area_log10": {
+          "airss/lj98 0.9.4 default campaign 5593cc4": 1.2041199826559248
+        },
+        "rho": {
+          "airss/lj98 0.9.4 default campaign 5593cc4": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "solved": {
+          "airss/lj98 0.9.4 default campaign 5593cc4": 1.0
+        },
+        "taus": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ]
+      },
+      "ranked": [
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": 1000000000,
+          "code": "AIRSS",
+          "code_version": "0.9.4",
+          "commit": "5593cc4ee360d998764fceb188284fdf0ef781d206754176dcb360c65103ddaa",
+          "comparable": true,
+          "counter": "harness",
+          "current": true,
+          "entry": "airss-0.9.4-lj98",
+          "failures": {
+            "cap": 0,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": 100,
+          "history": false,
+          "max_calls": 34133232.0,
+          "mean_calls": 7794640.17,
+          "mean_per_image": null,
+          "median": 5102477.0,
+          "median_calls": 5102477.0,
+          "median_high": 7162460.0,
+          "median_low": 3478668.5875,
+          "median_per_image": null,
+          "min_calls": 15293.0,
+          "n": 100,
+          "nfailed": 0,
+          "note": "starts.jsonl",
+          "par2_mean": 7794640.17,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/airss-0.9.4-lj98.dat",
+          "problem": "globalopt/lj98",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 1.0,
+          "template": "airss/lj98",
+          "tuning": "default",
+          "wilson_high": 1.0,
+          "wilson_low": 0.9630065017930143
+        }
+      ],
+      "title": "lj98"
+    },
     "hTST/Al": {
       "full_n": null,
       "history": [],
@@ -48085,7 +48164,7 @@
       "title": "pt-island"
     }
   },
-  "ranked_count": 563,
+  "ranked_count": 564,
   "schema": "optbench.board/v1",
   "unmapped": [
     {
