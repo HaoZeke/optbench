@@ -328,6 +328,14 @@ def run(
             limit=limit,
             resume=resume,
         )
+    if template["engine"] == "pathsample":
+        from .engines.pathsample_stock import run_pathsample_stock
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_pathsample_stock(root, problem, template, output, workers)
     from .engines import find as find_engine
 
     plugged = find_engine(str(template["engine"]))

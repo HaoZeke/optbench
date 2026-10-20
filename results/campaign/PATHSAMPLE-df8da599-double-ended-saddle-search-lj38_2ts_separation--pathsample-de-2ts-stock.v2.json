@@ -1,0 +1,72 @@
+{
+  "counter": "harness",
+  "legacy": {
+    "force_calls": 127186,
+    "force_calls_max": 127186,
+    "force_calls_median": 127186,
+    "force_calls_min": 127186,
+    "n": 51,
+    "nfailed": 50,
+    "successes": 1,
+    "transition_states": 0
+  },
+  "problem": "double-ended-saddle-search/lj38_2ts_separation",
+  "provenance": {
+    "code": "PATHSAMPLE",
+    "code_version": "df8da599",
+    "commit": "df8da599267534fbe43a250e578f7396a7946311",
+    "machine": {
+      "machine": "x86_64",
+      "node": "cursor",
+      "python": "3.12.15",
+      "system": "Linux"
+    },
+    "parameters": {
+      "bfgssteps": 250000,
+      "connections": 1,
+      "counter": "sum of child OPTIM energy+gradient calls",
+      "cycles": 250000,
+      "endpoint_bfgssteps": 250000,
+      "keywords": "newconnect.bfgsts.nohess",
+      "maxtsattempts": 250000,
+      "method": "pathsample-stock",
+      "newconnect_cycles": 250000,
+      "newneb_iterations": 250000,
+      "pairs": 51,
+      "potential": "LJDIFF",
+      "version": "df8da599"
+    }
+  },
+  "schema": "optbench.score/v2",
+  "score": {
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 20261015,
+    "cap": 250000,
+    "includes_failures": true,
+    "iqr": 0.0,
+    "iqr_high": 0.0,
+    "iqr_low": 0.0,
+    "mean": 492689.92156862747,
+    "median": 500000.0,
+    "median_high": 500000.0,
+    "median_low": 500000.0,
+    "n": 51,
+    "n_cap": 48,
+    "n_crash": 1,
+    "n_divergence": 1,
+    "n_wrong_stationary": 0,
+    "nfailed": 50,
+    "par2_mean": 492689.92156862747,
+    "par_applied": true,
+    "par_factor": 2,
+    "q25": 500000.0,
+    "q75": 500000.0,
+    "scoring": "par2-wilson-bootstrap",
+    "success_only_mean": 127186.0,
+    "success_rate": 0.0196078431372549,
+    "successes": 1,
+    "wilson_high": 0.10304568726144975,
+    "wilson_low": 0.0034696926410608536
+  },
+  "template": "pathsample/de-2ts-stock"
+}
