@@ -18,7 +18,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
-| aladatom/true_standard/eon-pr-langevin | true_rate 2.542941e8 1/s | eOn (develop 500350d9) true_rate 1.179001e9 1/s, 133662174 force calls | archive row |
+| aladatom/true_standard/eon-pr-langevin | true_rate 2.542941e8 1/s | EON (SVN r2549) true_rate 1.267009e9 1/s, 124390765 force calls; eOn (develop 500350d9) true_rate 1.179001e9 1/s, 133662174 force calls | archive row |
 | standard_aladatom/eon-md-langevin | — | — | not rerun; akmc_vs_langevin |
 
 ## double-ended-saddle-search
@@ -363,4 +363,4 @@ EON and eOn are different codes. The aladatom archive row is the true rate 2.542
 
 eOn (develop 500350d9) ran that protocol on seeds 1 through 150. All 150 trajectories confirmed a transition. The rate is 1.179001e+09 1/s, the uncertainty is 8.103471e+07 1/s, and the harness counted 133662174 force calls (mean 891081). Stop: the product was minimized and it differs from the reactant.
 
-EON (SVN r2549) is Fortran and unpatched. The harness stops that client when it logs the refined transition time. The same 150-trajectory protocol is the r2549 sample. This row records the eOn develop sample.
+EON (SVN r2549) is Fortran and unpatched. The harness stops that client when it logs the refined transition time. Seeds 1 through 150 all confirmed a transition. The rate is 1.267009e+09 1/s, the uncertainty is 9.562560e+07 1/s, and the harness counted 124390765 force calls (mean 829272). Stop: the product was minimized and it differs from the reactant.

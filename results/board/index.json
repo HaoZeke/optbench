@@ -3427,51 +3427,6 @@
     {
       "asv_commit": "",
       "call_unit": "total",
-      "cap": 50000000,
-      "code": "EON (SVN r2549)",
-      "code_version": "r2549",
-      "commit": "r2549",
-      "comparable": true,
-      "counter": "harness",
-      "current": false,
-      "entry": "eon-r2549-aladatom-pr-langevin",
-      "failures": {
-        "cap": 0,
-        "crash": 0,
-        "divergence": 0,
-        "wrong_stationary": 0
-      },
-      "full_n": 150,
-      "history": false,
-      "max_calls": 1000000.0,
-      "mean_calls": 1000000.0,
-      "mean_per_image": null,
-      "median": 1000000.0,
-      "median_calls": 1000000.0,
-      "median_high": 1000000.0,
-      "median_low": 1000000.0,
-      "median_per_image": null,
-      "min_calls": 1000000.0,
-      "n": 1,
-      "nfailed": 0,
-      "note": "starts",
-      "par2_mean": 1000000.0,
-      "partial": true,
-      "partial_reason": "scored 1 of 150 starts",
-      "path": "results/campaign/eon-r2549-aladatom-pr-langevin.dat",
-      "problem": "accelerated-md/aladatom",
-      "registry_match": true,
-      "scored": true,
-      "source": "campaign",
-      "success_rate": 1.0,
-      "template": "eon-r2549/aladatom-pr-langevin",
-      "tuning": "stock",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
-    },
-    {
-      "asv_commit": "",
-      "call_unit": "total",
       "cap": 1000000,
       "code": "Eon svn",
       "code_version": "r2549",
@@ -9240,51 +9195,6 @@
         {
           "asv_commit": "",
           "call_unit": "total",
-          "cap": 50000000,
-          "code": "EON (SVN r2549)",
-          "code_version": "r2549",
-          "commit": "r2549",
-          "comparable": true,
-          "counter": "harness",
-          "current": false,
-          "entry": "eon-r2549-aladatom-pr-langevin",
-          "failures": {
-            "cap": 0,
-            "crash": 0,
-            "divergence": 0,
-            "wrong_stationary": 0
-          },
-          "full_n": 150,
-          "history": false,
-          "max_calls": 1000000.0,
-          "mean_calls": 1000000.0,
-          "mean_per_image": null,
-          "median": 1000000.0,
-          "median_calls": 1000000.0,
-          "median_high": 1000000.0,
-          "median_low": 1000000.0,
-          "median_per_image": null,
-          "min_calls": 1000000.0,
-          "n": 1,
-          "nfailed": 0,
-          "note": "starts",
-          "par2_mean": 1000000.0,
-          "partial": true,
-          "partial_reason": "scored 1 of 150 starts",
-          "path": "results/campaign/eon-r2549-aladatom-pr-langevin.dat",
-          "problem": "accelerated-md/aladatom",
-          "registry_match": true,
-          "scored": true,
-          "source": "campaign",
-          "success_rate": 1.0,
-          "template": "eon-r2549/aladatom-pr-langevin",
-          "tuning": "stock",
-          "wilson_high": 1.0,
-          "wilson_low": 0.20654931437723745
-        },
-        {
-          "asv_commit": "",
-          "call_unit": "total",
           "cap": 1000000,
           "code": "Eon svn",
           "code_version": "r2549",
@@ -9375,7 +9285,8 @@
       ],
       "profile": {
         "area_log10": {
-          "eon-develop/aladatom-pr-langevin 3.6.0 stock campaign 500350d": 1.2041199826559248
+          "eon-develop/aladatom-pr-langevin 3.6.0 stock campaign 500350d": 1.2041199826559248,
+          "eon-r2549/aladatom-pr-langevin r2549 stock campaign r2549": 0.752574989159953
         },
         "rho": {
           "eon-develop/aladatom-pr-langevin 3.6.0 stock campaign 500350d": [
@@ -9384,10 +9295,18 @@
             1.0,
             1.0,
             1.0
+          ],
+          "eon-r2549/aladatom-pr-langevin r2549 stock campaign r2549": [
+            0.0,
+            0.0,
+            1.0,
+            1.0,
+            1.0
           ]
         },
         "solved": {
-          "eon-develop/aladatom-pr-langevin 3.6.0 stock campaign 500350d": 1.0
+          "eon-develop/aladatom-pr-langevin 3.6.0 stock campaign 500350d": 1.0,
+          "eon-r2549/aladatom-pr-langevin r2549 stock campaign r2549": 1.0
         },
         "taus": [
           1.0,
@@ -9398,6 +9317,51 @@
         ]
       },
       "ranked": [
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": 50000000,
+          "code": "EON (SVN r2549)",
+          "code_version": "r2549",
+          "commit": "r2549",
+          "comparable": true,
+          "counter": "harness",
+          "current": true,
+          "entry": "eon-r2549-aladatom-pr-langevin",
+          "failures": {
+            "cap": 0,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": 150,
+          "history": false,
+          "max_calls": 3469890.0,
+          "mean_calls": 829271.7666666667,
+          "mean_per_image": null,
+          "median": 557591.0,
+          "median_calls": 557591.0,
+          "median_high": 725829.0,
+          "median_low": 433274.5,
+          "median_per_image": null,
+          "min_calls": 3339.0,
+          "n": 150,
+          "nfailed": 0,
+          "note": "starts",
+          "par2_mean": 829271.7666666667,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/eon-r2549-aladatom-pr-langevin.dat",
+          "problem": "accelerated-md/aladatom",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 1.0,
+          "template": "eon-r2549/aladatom-pr-langevin",
+          "tuning": "stock",
+          "wilson_high": 1.0,
+          "wilson_low": 0.9750297556319235
+        },
         {
           "asv_commit": "",
           "call_unit": "total",
@@ -42282,7 +42246,7 @@
       "title": "pt-island"
     }
   },
-  "ranked_count": 440,
+  "ranked_count": 441,
   "schema": "optbench.board/v1",
   "unmapped": [
     {
