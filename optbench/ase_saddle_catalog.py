@@ -306,6 +306,7 @@ def run_template(
     magnitude = float(search.get("displace_magnitude", 0.1))
     radius = float(search.get("displace_radius", 3.3))
     max_searches = int(search.get("max_searches", 20000))
+    stop_at_goal = str(search.get("stop", "goal")) != "budget"
     pbc = problem_pbc(problem)
     tolerance = link_tolerance(problem)
     force_tol = float((problem.get("convergence") or {}).get("force_norm", 1e-3))
@@ -433,8 +434,8 @@ def run_template(
                 else:
                     pending[pool.submit(_catalog_job, item)] = attempt
 
-            while catalog.qualifying < goal and catalog.searches < max_searches:
-                while next_attempt <= max_searches and len(pending) < width and catalog.qualifying < goal:
+            while (catalog.qualifying < goal or not stop_at_goal) and catalog.searches < max_searches:
+                while next_attempt <= max_searches and len(pending) < width and (catalog.qualifying < goal or not stop_at_goal):
                     _submit(next_attempt)
                     next_attempt += 1
                     if pool is None:

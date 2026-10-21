@@ -26,6 +26,7 @@ displace_magnitude = 0.1
 displace_radius = 3.3
 max_searches = 20000
 connected = 27
+stop = "budget"
 
 [stop]
 force_norm = 0.001
