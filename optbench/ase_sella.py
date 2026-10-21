@@ -827,7 +827,16 @@ def _run_minimize(payload: dict, bucket: CallCounter) -> dict:
     if payload.get("snapshot"):
         row["parameters"] = _snapshot_optimizer(opt, payload["optimizer"])
     try:
-        failed, norm = _drive_l2(opt, atoms.calc, bucket, payload["tol"], payload["max_steps"], atoms)
+        measure = (lambda: _fmax(atoms)) if payload.get("norm") == "fmax" else None
+        failed, norm = _drive_l2(
+            opt,
+            atoms.calc,
+            bucket,
+            payload["tol"],
+            payload["max_steps"],
+            atoms,
+            norm_of=measure,
+        )
     except Exception as exc:
         if _cap_error(exc):
             return _cap_row(row, atoms)
@@ -1536,6 +1545,7 @@ def run_template(
                 "reactant_positions": reactant_positions,
                 "seed": 0 if seed is None else seed,
                 "tol": tol,
+                "norm": str(template["stop"].get("norm") or "l2"),
                 "max_steps": int(template["stop"]["max_steps"]),
                 "raw_cap": cap,
                 "snapshot": False,
@@ -1652,6 +1662,7 @@ def run_point(root: Path, template_name: str, start: str, seed: int, *, cache: P
         "reactant_positions": reactant_positions,
         "seed": job_seed_i,
         "tol": tol,
+        "norm": str(template["stop"].get("norm") or "l2"),
         "max_steps": int(template["stop"]["max_steps"]),
         "raw_cap": raw_cap(template),
         "snapshot": True,
