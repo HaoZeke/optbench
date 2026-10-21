@@ -1,0 +1,30 @@
+# counter harness. One force call is one L-BFGS-B evaluation of optbench.potentials.lennard_jones.
+# The potential is epsilon 1, sigma 1, cutoff 40, no shift.
+# A success is a quenched energy within energy_above_minimum of the reference, under the force cap.
+# Tuned pool. The loop, the pool size, and the force cap match the default. The mutation is move, which displaces 20 percent of the atoms by up to 1, and r_ij is 2**(1/6), the Lennard-Jones nearest-neighbour distance. random and r_ij 3.0 are the metal-example settings.
+force_calls 74147
+force_calls_min 13104
+force_calls_max 144553
+force_calls_median 73901.5
+nfailed 92
+code BPGA
+code_version 0
+commit b32cd227e8071429825f990449048eb21c7f8730
+algorithm pool GA
+template bpga/lj38-pool-tuned
+problem globalopt/lj38
+tuning tuned
+counter harness
+cap 1010000
+par2_mean 1864331.73
+wilson_low 0.041093461484380624
+wilson_high 0.14998107700948735
+par2_median 2020000.0
+par2_median_low 2020000.0
+par2_median_high 2020000.0
+v2_nfailed 92
+v2_successes 8
+n 100
+energy_min -173.92842658733855
+energy_max -171.35733953659707
+reference_energy -173.92842659062876

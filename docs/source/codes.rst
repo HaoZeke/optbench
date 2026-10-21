@@ -587,6 +587,17 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 5, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
+   <tr data-problem="globalopt/lj75" data-template="ase-globalopt/lj75-basinhopping">
+   <td>lj75</td>
+   <td data-field="template">ase-globalopt/lj75-basinhopping</td>
+   <td data-field="version">ASE 3.29.0</td>
+   <td data-field="commit">f27c0005ae6a</td>
+   <td data-field="par2_mean">2e+06</td>
+   <td data-field="mean_calls">1e+06</td>
+   <td data-field="median_calls">1e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
    <tr data-problem="minimization/lj38" data-template="ase/lj38-lbfgs-tuned">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="template">ase/lj38-lbfgs-tuned</td>
@@ -1477,6 +1488,80 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="median_calls">389</td>
    <td data-field="failures">crash 0, divergence 4884, cap 108, wrong_stationary 6</td>
    <td data-field="n">5000</td>
+   </tr>
+   </tbody></table></div>
+   <h3>BPGA</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>global optimization</td>
+   <td>master</td>
+   <td>b32cd227e807</td>
+   <td><a href="https://github.com/jbadavis/bpga">https://github.com/jbadavis/bpga</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="globalopt/lj38" data-template="bpga/lj38-pool-tuned">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="template">bpga/lj38-pool-tuned</td>
+   <td data-field="version">BPGA 0</td>
+   <td data-field="commit">b32cd227e807</td>
+   <td data-field="par2_mean">1.86433e+06</td>
+   <td data-field="mean_calls">198821</td>
+   <td data-field="median_calls">209868</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 92</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="globalopt/lj75" data-template="bpga/lj75-pool">
+   <td>lj75</td>
+   <td data-field="template">bpga/lj75-pool</td>
+   <td data-field="version">BPGA 0</td>
+   <td data-field="commit">b32cd227e807</td>
+   <td data-field="par2_mean">2e+06</td>
+   <td data-field="mean_calls">892194</td>
+   <td data-field="median_calls">889262</td>
+   <td data-field="failures">crash 0, divergence 0, cap 18, wrong_stationary 182</td>
+   <td data-field="n">200</td>
+   </tr>
+   </tbody></table></div>
+   <h3>PyBCGA</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>global optimization</td>
+   <td>master</td>
+   <td>fb646c19b182</td>
+   <td><a href="https://github.com/marktoakley/PyBCGA">https://github.com/marktoakley/PyBCGA</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="globalopt/lj38" data-template="bpga/lj38-pybcga">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="template">bpga/lj38-pybcga</td>
+   <td data-field="version">PyBCGA 0</td>
+   <td data-field="commit">fb646c19b182</td>
+   <td data-field="par2_mean">534709</td>
+   <td data-field="mean_calls">20880.3</td>
+   <td data-field="median_calls">21087</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 99</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="globalopt/lj75" data-template="bpga/lj75-pybcga">
+   <td>lj75</td>
+   <td data-field="template">bpga/lj75-pybcga</td>
+   <td data-field="version">PyBCGA 0</td>
+   <td data-field="commit">fb646c19b182</td>
+   <td data-field="par2_mean">2e+06</td>
+   <td data-field="mean_calls">29903.2</td>
+   <td data-field="median_calls">29532</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 200</td>
+   <td data-field="n">200</td>
    </tr>
    </tbody></table></div>
    </section>

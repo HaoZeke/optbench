@@ -243,6 +243,34 @@ commit = "8de817dd79bfe4525d5d39246a212d833e6dee07"
 committed = "2026-09-30"
 note = "LAMMPS 30 Sep 2026, tag stable_30Sep2026. Band rows use fix neb with a climbing stage and min_style quickmin or fire. The pair style is the spec potential: lj/cut 40 with no shift, and morse 9.5 with pair_modify shift yes. Kspring is 1.0 with the default parallel neigh spring. The timestep is the unit default. Force calls are pair computes summed across replicas. The FIRE row leaves one fifth of the cap unused so a velocity-reset evaluation stays inside the cap."
 
+[[code]]
+id = "bpga"
+name = "BPGA"
+role = "global optimization"
+repository = "https://github.com/jbadavis/bpga"
+ref = "master"
+commit = "b32cd227e8071429825f990449048eb21c7f8730"
+committed = "2016-05-23"
+note = "Pool genetic algorithm at b32cd227. The repository has no release number, so the recorded version is 0. The build imports on Python 3: three print statements gain parentheses, four mixed tab indents are rewritten at the same column, MinimiseRan passes calcNum into Database.updatePool, and Database.addEle uses integer division. fixOverlap stops after 100000 separation steps; a crossover geometry can otherwise cycle in that loop. The potential is the harness Lennard-Jones kernel. The code's POSCAR command is answered in process. Homotop mutation expects two elements and is not used."
+
+[[code]]
+id = "pybcga"
+name = "PyBCGA"
+role = "global optimization"
+repository = "https://github.com/marktoakley/PyBCGA"
+ref = "master"
+commit = "fb646c19b1829656bf16cc72ca318bef2d37bfeb"
+committed = "2016-02-26"
+note = "Birmingham cluster genetic algorithm, setup.py version 0, commit fb646c19. Each local relaxation is L-BFGS-B on the harness Lennard-Jones potential. Pele's Lennard-Jones is not called."
+
+[[template]]
+id = "ase-globalopt/lj75-basinhopping"
+code = "ase"
+problem = "globalopt/lj75"
+profile = "default"
+task = "basin-hopping"
+ranked = true
+
 # generated ASE and Sella templates
 
 [[template]]
