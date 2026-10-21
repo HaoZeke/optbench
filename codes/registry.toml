@@ -214,6 +214,16 @@ commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
 note = "No public git commit. The pin is the sha256 of the Wales svn.tar.bz2 snapshot, 122743078 bytes. Minimization L-BFGS calls the ASE socket and pes.evaluate. OPTIM's own call counter is not a score. Saddle search, NEB, noise, and PATHSAMPLE are not scored."
 
 [[code]]
+id = "n2p2"
+name = "n2p2"
+role = "neural network training"
+repository = "https://github.com/CompPhysVienna/n2p2"
+ref = "master"
+commit = "29b9c9f10b1ac9ea45631b3d556a129ca3b701c2"
+committed = "2025-03-17"
+note = "n2p2 2.3.0 is the latest release, tag e51667abf784bb9a6fd659857b6a9a878fdc6a90 (2024-11-23). Rows record commit 29b9c9f10b1ac9ea45631b3d556a129ca3b701c2. KalmanFilter::update matches the tag aside from three commented diagnostics. The standard Kalman filter uses the defaults in examples/input.nn.recommended: epsilon 0.01, q0 0.01, qtau 2.302, qmin 1e-6, eta 0.01, etatau 2.302, etamax 1. The fading-memory block there is commented and is not used. Training.cpp divides qtau and etatau by the projected updates in one epoch: the structure count for an energy row, and that count times one plus force_energy_ratio 3 for a force row. Force rows also use the recommended force_weight 1 and one force component per update. The comparable loss is the pyamff 8037eb98 squared error on the problem trajectory and fpParas.dat. Dataset normalization stays off; units.rst marks it optional, and the pyamff rows use NoScaler. A force call is one loss-gradient evaluation. Structure order is the one-process std::mt19937_64 shuffle from random_seed 1234567. A force epoch shuffles the property schedule with rngGlobalNew. Weights are the harness uniform[-1, 1) draw. On the C2H4 energy row the documented filter meets the 0.02 batch-gradient stop on 10 of 50 starts inside 10000 evaluations. The 40 capped starts have per-atom energy RMSE from 0.0004986 to 0.0009369, median 0.0006811, while the batch gradient stays above the tolerance, median max-abs 1.323. The Kalman update is one structure at a time. The stop looks at the gradient of the summed loss. On the EMT and C2H4 force rows the same filter meets the 0.1 batch-gradient stop on 0 of 50 starts inside 30000 evaluations. The 50 EMT starts have per-atom energy RMSE from 0.0001565 to 0.0002135, median 0.0001758, force RMSE from 0.02218 to 0.02401, median 0.02269, and batch-gradient max-abs from 2.928 to 23.87, median 7.818. The 50 C2H4 starts have per-atom energy RMSE from 0.005014 to 0.01075, median 0.007214, force RMSE from 0.07070 to 0.08664, median 0.07509, and batch-gradient max-abs from 7.267 to 163.0, median 35.18. A force-row Kalman update is one structure or one force component at a time. The stop still looks at the gradient of the summed loss."
+
+[[code]]
 id = "airss"
 name = "AIRSS"
 role = "random structure search"

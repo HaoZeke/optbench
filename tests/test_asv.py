@@ -153,6 +153,7 @@ def test_pending_grid_is_every_problem_and_code():
         "compass",
         "pysisyphus",
         "optim",
+        "n2p2",
         "airss",
         "vcsqnm",
         "softsaddle",
