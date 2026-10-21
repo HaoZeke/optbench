@@ -1,0 +1,34 @@
+# counter harness. One fresh coordinate is one force call.
+# A repeated coordinate is free. A call at the cap is refused and is not counted.
+# A hit is a converged quench inside the energy window, with the call count strictly under the cap.
+# EZGA 1.2.31. The relaxer is FIRE at fmax 0.05 with no MD. steps_max and the generation count are the force-call cap. The population is 16 copies of the archived start. A hit is a quench inside fmax and inside the energy window.
+force_calls 376332
+force_calls_min 57318
+force_calls_max 812805
+force_calls_median 346463
+nfailed 92
+median 346463
+code ezga
+code_version 1.2.31
+commit 1395e8de01f003e40a3352987377d5f863a2e388
+algorithm GA
+template ezga/lj38
+problem globalopt/lj38
+tuning default
+counter harness
+cap 1000000
+par2_mean 1870106.59
+wilson_low 0.0410934614844
+wilson_high 0.149981077009
+par2_median 2000000
+par2_median_low 2000000
+par2_median_high 2000000
+v2_nfailed 92
+v2_successes 8
+n 100
+n_cap 92
+n_wrong_stationary 0
+n_divergence 0
+n_crash 0
+energy_min -173.928374556
+energy_max -171.500392169
