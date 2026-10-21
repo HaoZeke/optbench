@@ -1,0 +1,67 @@
+id = "eon/develop-500350d9-de-2ts-ew"
+engine = "eon"
+problem = "double-ended-saddle-search/lj38_2ts_separation"
+code = "eOn"
+code_version = "(develop 500350d9)"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
+algorithm = "LBFGS"
+method = "energy-weighted CI-NEB"
+reducer = "harness"
+failure_cap = 250000
+kind = "de-2ts"
+kernel = "ljcluster"
+note = "Climbing-image NEB with energy-weighted springs on all 51 pairs. energy_weighted true, ew_trigger 10, ew_ksp_min 0.972, ew_ksp_max 9.72, ci_mmf false. Potential ljcluster, shifted cutoff 15, run through ext_pot. The harness kernel is that ljcluster. Five images, spring 5, max_move 0.05, converged_force 0.001. The stop is the L2 norm. climbing_image_converged_only is true and the band slack is 10. Optimizer max_iterations, band max_iterations, and failure_cap are 250000. The binary is eOn develop 500350d9."
+
+[ini.Main]
+job = "nudged_elastic_band"
+random_seed = 1
+
+[ini.Potential]
+potential = "ljcluster"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+convergence_metric = "norm"
+converged_force = 0.001
+max_move = 0.05
+max_iterations = 250000
+
+[ini."Nudged Elastic Band"]
+images = 5
+spring = 5.0
+climbing_image_method = true
+climbing_image_converged_only = true
+climbing_image_band_slack = 10.0
+doubly_nudged = false
+doubly_nudged_switching = false
+old_tangent = false
+opt_method = "lbfgs"
+converged_force = 0.001
+max_iterations = 250000
+setup_mmf_peaks = true
+energy_weighted = true
+ew_trigger = 10.0
+ew_ksp_min = 0.972
+ew_ksp_max = 9.72
+ci_mmf = false
+
+[ini.LBFGS]
+lbfgs_memory = 20
+lbfgs_inverse_curvature = 0.01
+lbfgs_max_inverse_curvature = 0.0
+lbfgs_auto_scale = true
+lbfgs_angle_reset = true
+lbfgs_distance_reset = true
+lbfgs_curvature = "reset"
+lbfgs_project_rigid = false
+lbfgs_secant = "standard"
+lbfgs_precon = "none"
+lbfgs_step = "lbfgs"
+lbfgs_h0 = "sy_yy"
+lbfgs_accept = "energy"
+lbfgs_extra_updates = 0
+lbfgs_cautious_eps = 1.0e-6
+lbfgs_cautious_alpha = 0.01
+lbfgs_precon_A = 3.0
+lbfgs_precon_mu = 1.0
+lbfgs_precon_rcut = 0.0
