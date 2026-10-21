@@ -1,12 +1,12 @@
-avg_energy -581.415
+avg_energy -582.04
 min_energy -594.164
 max_energy -575.048
-n 12
+n 20
 hits 0
 par2_mean 4e+06
 call_mean 2e+06
 call_median 2e+06
-quench_mean 9714.67
+quench_mean 9790.95
 code eOn (develop b0bd4d5a)
 code_version 3.6.0
 commit b0bd4d5a5e0f4011831e45f4de389a4efa348e83
