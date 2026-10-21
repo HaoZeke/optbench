@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from optbench.score import distribution_summary, penalised_cost, quantile, score_v2, wilson_interval
+from optbench.score import distribution_summary, penalised_cost, quantile, score_v2, rate_interval
 from optbench.smoke import build_smoke
 from optbench.v2 import parse_repetitions
 
@@ -9,17 +9,17 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_wilson_locks_the_published_counts():
-    full_low, full_high = wilson_interval(1000, 1000)
-    quickmin_low, quickmin_high = wilson_interval(975, 1000)
-    steep_low, steep_high = wilson_interval(904, 1000)
+    full_low, full_high = rate_interval(1000, 1000)
+    quickmin_low, quickmin_high = rate_interval(975, 1000)
+    steep_low, steep_high = rate_interval(904, 1000)
     assert f"{full_low:.6f}" == "0.996173"
     assert f"{full_high:.6f}" == "1.000000"
     assert f"{quickmin_low:.6f}" == "0.963355"
     assert f"{quickmin_high:.6f}" == "0.983010"
     assert f"{steep_low:.6f}" == "0.884165"
     assert f"{steep_high:.6f}" == "0.920743"
-    zero_low, _zero_high = wilson_interval(0, 10)
-    _all_low, all_high = wilson_interval(10, 10)
+    zero_low, _zero_high = rate_interval(0, 10)
+    _all_low, all_high = rate_interval(10, 10)
     assert zero_low == 0.0
     assert all_high == 1.0
 

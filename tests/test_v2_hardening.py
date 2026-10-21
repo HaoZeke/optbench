@@ -152,7 +152,7 @@ def test_seeded_sample_scores_every_start():
     assert sum(metrics[f"n_{name}"] for name in FAILURES) == metrics["nfailed"]
     assert all(start["counter"] == "harness" for start in starts)
     assert all(start["success"] for start in starts)
-    assert "median_low" in metrics and "wilson_low" in metrics
+    assert "median_low" in metrics and "rate_low" in metrics
 
     outcome = dimer_search(type("P", (), {"energy_forces": staticmethod(saddle)})(), (0.4, -0.3), (1.0, 0.0))
     assert outcome["converged"] is True
@@ -296,7 +296,7 @@ def test_every_problem_carries_legacy_and_the_v2_keys():
     assert noise["noise"]["window"] == WINDOW
     assert noise["noise"]["seed"] == 20261016
     text = (ROOT / "docs" / "v2.md").read_text(encoding="utf-8")
-    for phrase in ("HarnessCounter", "Dolan", "PAR-2", "Wilson", "wrong_stationary", "legacy"):
+    for phrase in ("HarnessCounter", "Dolan", "PAR-2", "rate interval", "wrong_stationary", "legacy"):
         assert phrase in text
 
 

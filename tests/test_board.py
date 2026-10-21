@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 from optbench.board import MissingAsvCommit, build_board, write_board
-from optbench.score import wilson_interval
+from optbench.score import rate_interval
 
 PIN = "a" * 40
 OTHER = "b" * 40
@@ -150,9 +150,9 @@ def test_full_harness_row_is_ranked_by_par2(tmp_path: Path):
     assert row["nfailed"] == 1
     assert row["failures"]["cap"] == 1
     assert row["success_rate"] == 0.5
-    low, high = wilson_interval(1, 2)
-    assert row["wilson_low"] == low
-    assert row["wilson_high"] == high
+    low, high = rate_interval(1, 2)
+    assert row["rate_low"] == low
+    assert row["rate_high"] == high
     assert row["current"] is True
     assert row["registry_match"] is True
     assert row["partial"] is False
