@@ -794,3 +794,14 @@ def test_the_current_ase_benchmark_records_the_band_total():
         text=True,
     )
     assert 'float(record["force_calls"]) / images' in old
+
+
+def test_recorded_cap_scores_a_row_when_the_problem_states_none():
+    from optbench.board import _cap_of
+
+    silent = {"convergence": {"energy_above_minimum": 0.001}}
+    template = {"stop": {"max_force_calls": 2000000}, "failure_cap": 2000000}
+    assert _cap_of(silent, template, {"cap": "500000"}) == 500000
+    stated = {"convergence": {"max_force_calls": 1000000}}
+    assert _cap_of(stated, template, {"cap": "500000"}) == 1000000
+    assert _cap_of(silent, template, {}) == 2000000
