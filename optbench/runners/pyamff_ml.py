@@ -617,12 +617,14 @@ def _load_done(output: Path) -> dict[int, dict]:
             if not line.strip():
                 continue
             row = json.loads(line)
-            found[int(row["start"])] = row
+            if row.get("stop_norm") == "max_abs":
+                found[int(row["start"])] = row
     directory = _record_dir(output)
     if directory.is_dir():
         for path in sorted(directory.glob("*.json")):
             row = json.loads(path.read_text(encoding="utf-8"))
-            found[int(row["start"])] = row
+            if row.get("stop_norm") == "max_abs":
+                found[int(row["start"])] = row
     return found
 
 
