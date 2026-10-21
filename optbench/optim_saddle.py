@@ -12,6 +12,7 @@ The climb budget is the template iteration limit. Each endpoint quench
 has its own budget. The initial quench is outside the search count.
 A search that spends the climb budget is a cap. Hessian finite
 differences are verification and are not part of that count.
+The link and the novelty test are ``optbench.connection``.
 """
 
 from __future__ import annotations
@@ -30,6 +31,7 @@ from pathlib import Path
 
 import numpy as np
 
+from .connection import ProcessTable, connected, per_atom_max, periodic_lengths, tolerances
 from .engines.optim_search import COMMIT, _RELAY, _fortran_float, _read_points, _write_xyz, binary_path
 from .failures import classify_failure
 from .rgsaddle_minmode import HarnessSurface, _bind, _hessian_spectrum, _norm, _stored, _unit
@@ -117,11 +119,15 @@ def climb_reasons(
 
 
 def link_reasons(*, linked: bool, novel: bool, barrier: float, barrier_max: float) -> list[str]:
-    """Empty when exactly one endpoint links, the saddle is new, and the barrier is inside the goal."""
+    """Empty when exactly one endpoint links, the saddle is new, and the barrier is inside the goal.
+
+    A saddle that misses the link is not a repeat. Only a linked saddle
+    can be a duplicate of one already in the process table.
+    """
     reasons: list[str] = []
     if not linked:
         reasons.append("not_connected")
-    if not novel:
+    elif not novel:
         reasons.append("duplicate")
     if not math.isfinite(barrier) or float(barrier) >= float(barrier_max):
         reasons.append("barrier")
@@ -222,9 +228,16 @@ def read_vector_dump(path: Path, nopt: int) -> np.ndarray | None:
     return np.asarray(numbers[start + 1 : start + width], dtype=np.float64)
 
 
-def _cartesian_rmsd(moved: np.ndarray, reference: np.ndarray) -> float:
-    delta = np.asarray(moved, dtype=np.float64) - np.asarray(reference, dtype=np.float64)
-    return float(np.sqrt(np.mean(np.sum(delta * delta, axis=-1))))
+def _process_table(problem: dict, cell: np.ndarray, saved: list[dict]) -> ProcessTable:
+    """Connected saddles already stored, under the problem's per-atom test."""
+    distance, energy = tolerances(problem)
+    lengths = periodic_lengths(cell, (problem.get("potential") or {}).get("pbc"))
+    table = ProcessTable(lengths, distance, energy)
+    for row in saved:
+        point = row.get("saddle_x")
+        if point is not None:
+            table.add(point, float(row["barrier"]))
+    return table
 
 
 def _full(reference: np.ndarray, free: np.ndarray, flat: np.ndarray) -> np.ndarray:
@@ -549,7 +562,6 @@ def run_saddle(
         raise RuntimeError(f"{template['id']} sets a displacement radius; this problem moves one listed atom")
     listed = [int(part) for part in str(search.get("displace_atoms", "0,1,2,3,4,5,6")).split(",") if str(part).strip()]
     magnitude = float(search.get("displace_magnitude", 0.1))
-    connect_rmsd = float(search.get("rmsd_connect", 0.5))
     max_searches = int(search.get("max_searches", 20000))
     if int(limit) > 0:
         max_searches = min(max_searches, int(limit))
@@ -614,7 +626,7 @@ def run_saddle(
             flush=True,
         )
     saved = _load_jsonl(checkpoint_path)
-    found = [np.asarray(row["saddle_x"], dtype=np.float64) for row in saved if row.get("saddle_x") is not None]
+    found = _process_table(problem, cell, saved)
     connected = sum(1 for row in saved if row.get("success"))
     common = {
         "reference": reference,
@@ -671,7 +683,6 @@ def run_saddle(
             fixed,
             force_tol,
             climb_cap,
-            connect_rmsd,
             barrier_max,
             min_energy,
             found,
@@ -679,7 +690,7 @@ def run_saddle(
             workers,
         )
         saved = _load_jsonl(checkpoint_path)
-        found = [np.asarray(row["saddle_x"], dtype=np.float64) for row in saved if row.get("saddle_x") is not None]
+        found = _process_table(problem, cell, saved)
         connected = sum(1 for row in saved if row.get("success"))
         header["rng_state"] = rng_after
         _write_json(header_path, header)
@@ -690,7 +701,7 @@ def run_saddle(
             flush=True,
         )
     saved = _until_goal(saved, goal)
-    found = [np.asarray(row["saddle_x"], dtype=np.float64) for row in saved if row.get("saddle_x") is not None]
+    found = _process_table(problem, cell, saved)
     connected = sum(1 for row in saved if row.get("success"))
     return _finish(
         output,
@@ -775,7 +786,6 @@ def _run_window(
     fixed,
     force_tol,
     climb_cap,
-    connect_rmsd,
     barrier_max,
     min_energy,
     found,
@@ -855,20 +865,20 @@ def _run_window(
         for (item, label), result in zip(pending, quenched):
             item[label] = result
     for item in judged:
-        record = _record(item, reference, free, found, connect_rmsd, barrier_max, min_energy, force_tol)
+        record = _record(item, reference, free, found, barrier_max, min_energy, force_tol)
         _append_jsonl(checkpoint_path, record)
         if record.get("saddle_x") is not None:
-            found.append(np.asarray(record["saddle_x"], dtype=np.float64))
+            found.add(record["saddle_x"], float(record["barrier"]))
 
 
-def _record(item, reference, free, found, connect_rmsd, barrier_max, min_energy, force_tol) -> dict:
+def _record(item, reference, free, found: ProcessTable, barrier_max, min_energy, force_tol) -> dict:
     job = item["job"]
     climb = item["climb"]
     reasons = list(item["reasons"] or [])
     endpoint_calls = 0
     barrier = None
-    plus_rmsd = None
-    minus_rmsd = None
+    plus_max = None
+    minus_max = None
     saved_point = None
     saddle = None if item["coords"] is None else np.asarray(item["coords"], dtype=np.float64)[free].reshape(-1)
     if item["reasons"] is None and saddle is not None and item["plus"] is not None and item["minus"] is not None:
@@ -883,11 +893,13 @@ def _record(item, reference, free, found, connect_rmsd, barrier_max, min_energy,
             plus_free = plus_coords[free].reshape(-1, 3)
             minus_free = minus_coords[free].reshape(-1, 3)
             minimum = np.asarray(reference, dtype=np.float64)[free].reshape(-1, 3)
-            plus_rmsd = _cartesian_rmsd(plus_free, minimum)
-            minus_rmsd = _cartesian_rmsd(minus_free, minimum)
-            linked = (plus_rmsd <= connect_rmsd) ^ (minus_rmsd <= connect_rmsd)
-            novel = all(_cartesian_rmsd(saddle.reshape(-1, 3), old.reshape(-1, 3)) > connect_rmsd for old in found)
+            lengths = found.lengths
+            distance = found.tolerance
+            plus_max = per_atom_max(plus_free, minimum, lengths)
+            minus_max = per_atom_max(minus_free, minimum, lengths)
+            linked = connected(minimum, plus_free, minus_free, lengths, distance)
             barrier = float(item["energy"] - float(min_energy))
+            novel = linked and not found.repeat(saddle, barrier)
             reasons = link_reasons(linked=linked, novel=novel, barrier=barrier, barrier_max=barrier_max)
             if novel:
                 saved_point = saddle
@@ -910,8 +922,8 @@ def _record(item, reference, free, found, connect_rmsd, barrier_max, min_energy,
         "force_norm": item["force"],
         "energy": item["energy"],
         "barrier": barrier,
-        "rmsd_plus": plus_rmsd,
-        "rmsd_minus": minus_rmsd,
+        "per_atom_max_plus": plus_max,
+        "per_atom_max_minus": minus_max,
         "displace_atom": int(job["atom"]),
     }
     if saved_point is not None:

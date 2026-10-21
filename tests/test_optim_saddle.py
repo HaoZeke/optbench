@@ -4,10 +4,13 @@ import math
 from pathlib import Path
 
 import numpy as np
+import pytest
 
 from optbench.campaign import load_template
+from optbench.connection import ProcessTable
 from optbench.failures import classify_failure
 from optbench.optim_saddle import (
+    _record,
     climb_odata,
     climb_reasons,
     draw_island_kick,
@@ -170,3 +173,65 @@ def test_cap_is_not_a_divergence_and_the_link_needs_one_endpoint():
     assert classify_failure(["hessian_index"]) == "wrong_stationary"
     assert link_reasons(linked=True, novel=True, barrier=0.4, barrier_max=1.5) == []
     assert link_reasons(linked=False, novel=True, barrier=0.4, barrier_max=1.5) == ["not_connected"]
+    assert link_reasons(linked=False, novel=False, barrier=0.4, barrier_max=1.5) == ["not_connected"]
+    assert link_reasons(linked=True, novel=False, barrier=0.4, barrier_max=1.5) == ["duplicate"]
+
+
+def _judged(name, saddle, plus, minus, energy):
+    return {
+        "job": {"name": name, "atom": 0},
+        "climb": {"calls": 10},
+        "coords": saddle,
+        "energy": energy,
+        "force": 1e-4,
+        "reasons": None,
+        "index": 1,
+        "lowest": -0.2,
+        "verify_calls": 0,
+        "plus": {"calls": 4, "coords": plus},
+        "minus": {"calls": 4, "coords": minus},
+    }
+
+
+def test_a_one_atom_hop_is_connected_and_a_second_copy_is_a_repeat():
+    reactant = np.zeros((175, 3))
+    product = reactant.copy()
+    product[3, 0] = 2.77
+    rmsd = float(np.sqrt(np.mean(np.sum((product - reactant) ** 2, axis=1))))
+    assert rmsd < 0.5
+    free = np.arange(175)
+    table = ProcessTable(np.zeros(3), 0.1, 0.01)
+    first = _record(
+        _judged("rep1-search1", reactant, reactant, product, -1.4),
+        reactant,
+        free,
+        table,
+        1.5,
+        -2.0,
+        1e-3,
+    )
+    assert first["success"] is True
+    assert first["reasons"] == []
+    assert first["per_atom_max_minus"] == pytest.approx(2.77)
+    table.add(first["saddle_x"], first["barrier"])
+    second = _record(
+        _judged("rep1-search2", reactant, product, reactant, -1.4),
+        reactant,
+        free,
+        table,
+        1.5,
+        -2.0,
+        1e-3,
+    )
+    assert second["success"] is False
+    assert second["reasons"] == ["duplicate"]
+    both = _record(
+        _judged("rep1-search3", reactant, reactant, reactant, -1.4),
+        reactant,
+        free,
+        table,
+        1.5,
+        -2.0,
+        1e-3,
+    )
+    assert both["reasons"] == ["not_connected"]
