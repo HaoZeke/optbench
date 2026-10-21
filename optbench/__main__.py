@@ -323,7 +323,7 @@ def board(
     root: Path = Path("."),
     output: Path = Path("results/board"),
 ) -> None:
-    """Score committed results and write the v2 leaderboard. This does not run a campaign."""
+    """Score committed results and write the v2 leaderboard."""
     from optbench.board import write_board
 
     destination = output if output.is_absolute() else root / output
