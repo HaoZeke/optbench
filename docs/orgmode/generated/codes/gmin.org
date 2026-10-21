@@ -1,0 +1,276 @@
+#+TITLE: GMIN
+#+OPTIONS: toc:nil num:nil author:nil
+
+#+begin_export rst
+.. raw:: html
+
+   <section class="bench" id="code-gmin">
+   <h2>GMIN</h2>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization</td>
+   <td>svn.tar.bz2</td>
+   <td>df8da5992675</td>
+   <td><a href="https://www-wales.ch.cam.ac.uk/svn.tar.bz2">https://www-wales.ch.cam.ac.uk/svn.tar.bz2</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-rows">
+   <caption>Every ranked row for this code.</caption>
+   <thead><tr><th>Problem</th><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="globalopt/lj100-binary" data-label="GMIN · basin-hopping">
+   <td>Binary Lennard-Jones 100</td>
+   <td data-field="label">GMIN · basin-hopping</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">1</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">-589.507</td>
+   <td data-field="median_calls"></td>
+   <td data-field="mean_calls">-589.507</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="globalopt/lj150" data-label="GMIN · core orbits symmetrisation scheme">
+   <td>lj150</td>
+   <td data-field="label">GMIN · core orbits symmetrisation scheme</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">1</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">667.38</td>
+   <td data-field="median_calls"></td>
+   <td data-field="mean_calls">667.38</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">0</td>
+   </tr>
+   <tr data-problem="globalopt/lj150" data-label="GMIN · no symmetrisation">
+   <td>lj150</td>
+   <td data-field="label">GMIN · no symmetrisation</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">2</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">3280.89</td>
+   <td data-field="median_calls"></td>
+   <td data-field="mean_calls">3280.89</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">0</td>
+   </tr>
+   <tr data-problem="globalopt/lj38" data-label="GMIN · basin-hopping with symmetrise csm moves">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="label">GMIN · basin-hopping with symmetrise csm moves</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">1</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">6421</td>
+   <td data-field="median_calls">4771</td>
+   <td data-field="mean_calls">6421</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="globalopt/lj38" data-label="GMIN · basin-hopping with symmetrise moves">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="label">GMIN · basin-hopping with symmetrise moves</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">2</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">22711</td>
+   <td data-field="median_calls">15998</td>
+   <td data-field="mean_calls">22711</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="globalopt/lj38" data-label="GMIN · basin-hopping">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="label">GMIN · basin-hopping</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">3</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">265951</td>
+   <td data-field="median_calls">202167</td>
+   <td data-field="mean_calls">265951</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="globalopt/lj75" data-label="GMIN · basin-hopping with symmetrise csm moves">
+   <td>lj75</td>
+   <td data-field="label">GMIN · basin-hopping with symmetrise csm moves</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">1</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">60692</td>
+   <td data-field="median_calls">38118</td>
+   <td data-field="mean_calls">60692</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">0</td>
+   </tr>
+   <tr data-problem="globalopt/lj98" data-label="GMIN · core orbits symmetrisation scheme">
+   <td>lj98</td>
+   <td data-field="label">GMIN · core orbits symmetrisation scheme</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">1</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">1281.92</td>
+   <td data-field="median_calls"></td>
+   <td data-field="mean_calls">1281.92</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">0</td>
+   </tr>
+   <tr data-problem="globalopt/lj98" data-label="GMIN · no symmetrisation">
+   <td>lj98</td>
+   <td data-field="label">GMIN · no symmetrisation</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">2</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">43819.8</td>
+   <td data-field="median_calls"></td>
+   <td data-field="mean_calls">43819.8</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">0</td>
+   </tr>
+   <tr data-problem="globalopt/tip4p10" data-label="GMIN · linear temperature basin-paving">
+   <td>tip4p10</td>
+   <td data-field="label">GMIN · linear temperature basin-paving</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">1</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">16099</td>
+   <td data-field="median_calls">11387</td>
+   <td data-field="mean_calls">16099</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">0</td>
+   </tr>
+   <tr data-problem="globalopt/tip4p10" data-label="GMIN · basin-hopping">
+   <td>tip4p10</td>
+   <td data-field="label">GMIN · basin-hopping</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">2</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">16236</td>
+   <td data-field="median_calls">11444</td>
+   <td data-field="mean_calls">16236</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">0</td>
+   </tr>
+   <tr data-problem="globalopt/tip4p15" data-label="GMIN · linear temperature basin-paving">
+   <td>tip4p15</td>
+   <td data-field="label">GMIN · linear temperature basin-paving</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">1</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">625362</td>
+   <td data-field="median_calls">416929</td>
+   <td data-field="mean_calls">625362</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">0</td>
+   </tr>
+   <tr data-problem="globalopt/tip4p15" data-label="GMIN · basin-hopping">
+   <td>tip4p15</td>
+   <td data-field="label">GMIN · basin-hopping</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">2</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">670645</td>
+   <td data-field="median_calls">490919</td>
+   <td data-field="mean_calls">670645</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">0</td>
+   </tr>
+   <tr data-problem="globalopt/tip4p20" data-label="GMIN · linear temperature basin-paving">
+   <td>tip4p20</td>
+   <td data-field="label">GMIN · linear temperature basin-paving</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">1</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">2.55667e+07</td>
+   <td data-field="median_calls">1.81821e+07</td>
+   <td data-field="mean_calls">2.55667e+07</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">0</td>
+   </tr>
+   <tr data-problem="globalopt/tip4p20" data-label="GMIN · basin-hopping">
+   <td>tip4p20</td>
+   <td data-field="label">GMIN · basin-hopping</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">2</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">2.85967e+07</td>
+   <td data-field="median_calls">1.94671e+07</td>
+   <td data-field="mean_calls">2.85967e+07</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">0</td>
+   </tr>
+   <tr data-problem="minimization/lj38" data-label="GMIN (df8da5992675) · LBFGS">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="label">GMIN (df8da5992675) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">19</td>
+   <td data-field="par2_mean">301.399</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">223</td>
+   <td data-field="mean_calls">242.093</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="GMIN (df8da5992675) · LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">GMIN (df8da5992675) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">8</td>
+   <td data-field="par2_mean">301.399</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">223</td>
+   <td data-field="mean_calls">242.093</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-label="GMIN (df8da5992675) · LBFGS">
+   <td>Morse bulk</td>
+   <td data-field="label">GMIN (df8da5992675) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">12</td>
+   <td data-field="par2_mean">34.4</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">35</td>
+   <td data-field="mean_calls">34.4</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table></div>
+   </section>
+#+end_export

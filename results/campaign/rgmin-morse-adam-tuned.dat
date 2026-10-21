@@ -14,11 +14,11 @@ code_version 0.4.0
 commit 24236559f3815847cac89ba0a7be634ce0beb4a9
 algorithm ADAM
 template rgmin/morse-adam-tuned
-tuning tuned
+tuning adjusted
 counter harness
 par2_mean 285.73
-wilson_low 0.963006501793
-wilson_high 1
+rate_low 0.963006501793
+rate_high 1
 par2_median 285
 par2_median_low 281
 par2_median_high 290

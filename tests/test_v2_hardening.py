@@ -152,7 +152,7 @@ def test_seeded_sample_scores_every_start():
     assert sum(metrics[f"n_{name}"] for name in FAILURES) == metrics["nfailed"]
     assert all(start["counter"] == "harness" for start in starts)
     assert all(start["success"] for start in starts)
-    assert "median_low" in metrics and "wilson_low" in metrics
+    assert "median_low" in metrics and "rate_low" in metrics
 
     outcome = dimer_search(type("P", (), {"energy_forces": staticmethod(saddle)})(), (0.4, -0.3), (1.0, 0.0))
     assert outcome["converged"] is True
@@ -284,9 +284,9 @@ def test_every_problem_carries_legacy_and_the_v2_keys():
     problems = load_all(ROOT / "problems")
     assert "minimization/lj38-noise" in problems
     for ident, problem in problems.items():
-        legacy = (problem.get("scoring") or {}).get("legacy") or {}
+        half_even = (problem.get("scoring") or {}).get("half_even") or {}
         version2 = (problem.get("scoring") or {}).get("v2") or {}
-        assert legacy.get("label") == "legacy", ident
+        assert half_even.get("label") == "half-even", ident
         assert tuple(version2.get("required") or ()) == V2_KEYS, ident
     noise = load_problem(ROOT / "problems" / "minimization" / "lj38-noise.toml")
     assert noise["noise"]["distribution"] == "gaussian"
@@ -296,7 +296,7 @@ def test_every_problem_carries_legacy_and_the_v2_keys():
     assert noise["noise"]["window"] == WINDOW
     assert noise["noise"]["seed"] == 20261016
     text = (ROOT / "docs" / "v2.md").read_text(encoding="utf-8")
-    for phrase in ("HarnessCounter", "Dolan", "PAR-2", "Wilson", "wrong_stationary", "legacy"):
+    for phrase in ("HarnessCounter", "Dolan", "PAR-2", "rate interval", "wrong_stationary", "half-even"):
         assert phrase in text
 
 
