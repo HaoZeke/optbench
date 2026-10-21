@@ -151,6 +151,22 @@ def test_vibrational_index_drops_only_a_numerical_rigid_mode():
     assert negative_index(single, 1e-6) == 2
 
 
+# Min-mode Lanczos rows name the merge of rgsaddle pull request 23.
+# The other sessions stay on the 0.2.2 pin their campaign files record.
+_LANCZOS_COMMIT = "2db34b42e6e029ebcf5b9868b94fcdf969103c9f"
+_STOCK_COMMIT = "c0db2b8d333c557251635cb8bb7b3d81f0088a71"
+_LANCZOS_TEMPLATES = {
+    "rgsaddle/lanczos",
+    "rgsaddle/lanczos-tuned",
+    "rgsaddle/mode-lanczos",
+    "rgsaddle/mode-lanczos-tuned",
+    "rgsaddle/pt-lanczos",
+    "rgsaddle/pt-lanczos-tuned",
+    "rgsaddle/saddle-lanczos",
+    "rgsaddle/saddle-lanczos-tuned",
+}
+
+
 def test_rgsaddle_templates_match_their_problem_stop():
     found = []
     for template in list_templates(ROOT):
@@ -160,7 +176,8 @@ def test_rgsaddle_templates_match_their_problem_stop():
         problem = resolve_problem(ROOT, template["problem"])
         cap = _check_stop(problem, template)
         assert cap >= 1000
-        assert template["commit"] == "c0db2b8d333c557251635cb8bb7b3d81f0088a71"
+        expected = _LANCZOS_COMMIT if template["id"] in _LANCZOS_TEMPLATES else _STOCK_COMMIT
+        assert template["commit"] == expected
         assert template["engine"] == "rgsaddle"
     assert "rgsaddle/dimer-lbfgs" in found
     assert "rgsaddle/prfo-tuned" in found
