@@ -30,6 +30,16 @@ jobs:
         with:
           enable-cache: true
 
+      - name: Compilers and numeric libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            g++ make pkg-config \
+            libgsl-dev libblitz-dev libboost-dev
+
+      - name: Build the SoftSaddle eigen solvers
+        run: sh softsaddle/driver/build.sh
+
       - name: Tests
         run: uv run pytest
 

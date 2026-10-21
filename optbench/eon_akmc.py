@@ -2,7 +2,10 @@
 
 One repetition runs until ``states/0/search_results.txt`` contains 27
 good saddles below 1.5 eV, the template force-call cap is reached, or
-the pass limit is hit. A harness run stops on the harness counter.
+the pass limit is hit. ``failure_cap`` is a template key. The Pt-island
+problem file does not set ``convergence.max_force_calls``, so the
+per-search budget must not be copied into ``failure_cap`` and published
+as a repetition score. A harness run stops on the harness counter.
 The client sum ``sad-fcs + mins-fcs`` is kept beside that count.
 Prefactor calls stay out of the client sum.
 """

@@ -216,6 +216,64 @@ def _code_label(fields: dict[str, str]) -> str:
     return label
 
 
+def _archive_par2_gap(problem: dict, oracle: list[dict]) -> str:
+    """PAR-2 cell for the April 2019 lanczos-sm0 archive row.
+
+    The archived file stores means. PAR-2 needs each repetition.
+    """
+    if problem.get("id") != "saddle-search/pt-island":
+        return ""
+    row = next((item for item in oracle if item.get("entry") == "adaptive_HSphere-lbfgs-lanczos-sm0"), None)
+    if row is None:
+        return ""
+    fields = row["fields"]
+    missing = (
+        "missing the ten per-repetition force-call totals, "
+        "a success or failure for each repetition, and a force-call cap"
+    )
+    headers = (
+        "Entry",
+        "Code",
+        "Source",
+        "PAR-2",
+        "Success",
+        "Wilson",
+        "Median calls",
+        "Mean calls",
+        "Failures",
+        "n",
+    )
+    cells = (
+        row["entry"],
+        "SoftSaddle (April 2019)",
+        "benchmark.dat",
+        missing,
+        "not stored",
+        "not stored",
+        "not stored",
+        str(fields.get("force_calls") or ""),
+        "not stored",
+        "10 declared in iniConfig.m; the ten rows are not in benchmark.dat",
+    )
+    lines = [
+        '<section class="bench" id="pt-island-april-2019">',
+        "<h3>SoftSaddle (April 2019)</h3>",
+        "<p>adaptive_HSphere-lbfgs-lanczos-sm0. "
+        "softsaddle/upstream/test_run/get_data_for_web_benchmark.m averages ten repetitions "
+        "and writes that mean to benchmark.dat. "
+        "The ten rows go to result_27.con. "
+        "result_27.con, bench_olsen.mat, and statistic.mat are not in the archive. "
+        "The mean stays in the mean-calls cell. It is not a PAR-2 value.</p>",
+        '<div class="bench-scroll"><table>',
+        "<thead><tr>" + "".join(f"<th>{html.escape(header)}</th>" for header in headers) + "</tr></thead><tbody><tr>",
+    ]
+    for header, value in zip(headers, cells, strict=True):
+        field = header.lower().replace(" ", "_")
+        lines.append(f'<td data-field="{html.escape(field)}">{html.escape(value)}</td>')
+    lines.append("</tr></tbody></table></div></section>")
+    return "".join(lines)
+
+
 def campaign_problem(stem: str) -> str | None:
     """Map a results/campaign file name to a problem id."""
     if "morse" in stem:
@@ -466,6 +524,9 @@ def _collection_html(
             if lead:
                 lines.append(lead)
             lines.append(f'<p><a href="{html.escape(href)}">Full ranked table and performance profile</a>.</p>')
+            gap = _archive_par2_gap(problem, oracle)
+            if gap:
+                lines.append(gap)
             lines.append(_legacy_section(problem, oracle))
     lines.append("</section>")
     return "\n".join(lines)
@@ -686,6 +747,9 @@ def render(root: Path) -> None:
                     unparsed=pending.get(problem["id"]),
                 )
             )
+            gap = _archive_par2_gap(problem, oracle)
+            if gap:
+                sections.append(gap)
             sections.append(_legacy_section(problem, oracle))
         body = [
             f"#+TITLE: {suite_title(suite)}",

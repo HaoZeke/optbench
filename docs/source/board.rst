@@ -15,11 +15,10 @@ It does not run a campaign.
    <div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>EON</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="minimization/lj38">
    <th scope="row"><a href="generated/suites/minimization.html#lj38">Lennard-Jones 38 clusters</a></th>
    <td data-code="eOn" data-template="eon/lj38-lbfgs-m100" data-par2="180.137"><span class="bench-score">180.137</span><a href="generated/suites/minimization.html#lj38-templates">eon/lj38-lbfgs-m100</a></td>
-   <td data-code="EON">—</td>
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin" data-template="rgmin/lj38-dogleg" data-par2="81.881"><span class="bench-score">81.881</span><a href="generated/suites/minimization.html#lj38-templates">rgmin/lj38-dogleg</a></td>
    <td data-code="rgsaddle">—</td>
@@ -44,7 +43,6 @@ It does not run a campaign.
    <tr data-problem="minimization/lj38-noise">
    <th scope="row"><a href="generated/suites/minimization.html#lj38-noise">Lennard-Jones 38 clusters with Gaussian force noise</a></th>
    <td data-code="eOn">—</td>
-   <td data-code="EON">—</td>
    <td data-code="Eon svn" data-template="eon-svn/lj38-noise-0" data-par2="300.052"><span class="bench-score">300.052</span><a href="generated/suites/minimization.html#lj38-noise-templates">eon-svn/lj38-noise-0</a></td>
    <td data-code="rgmin" data-template="noise/rgmin-dogleg-s0" data-par2="81.881"><span class="bench-score">81.881</span><a href="generated/suites/minimization.html#lj38-noise-templates">noise/rgmin-dogleg-s0</a></td>
    <td data-code="rgsaddle">—</td>
@@ -69,7 +67,6 @@ It does not run a campaign.
    <tr data-problem="minimization/morse-bulk">
    <th scope="row"><a href="generated/suites/minimization.html#morse-bulk">Morse bulk</a></th>
    <td data-code="eOn" data-template="eon/morse-lbfgs-m100" data-par2="54.18"><span class="bench-score">54.18</span><a href="generated/suites/minimization.html#morse-bulk-templates">eon/morse-lbfgs-m100</a></td>
-   <td data-code="EON">—</td>
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin" data-template="rgmin/morse-newton" data-par2="8.35"><span class="bench-score">8.35</span><a href="generated/suites/minimization.html#morse-bulk-templates">rgmin/morse-newton</a></td>
    <td data-code="rgsaddle">—</td>
@@ -93,8 +90,7 @@ It does not run a campaign.
    </tr>
    <tr data-problem="saddle-search/pt-island">
    <th scope="row"><a href="generated/suites/saddle-search.html#pt-island">Pt heptamer island</a></th>
-   <td data-code="eOn" data-template="eOn/saddle-pt-lanczos" data-par2="10128"><span class="bench-score">10128</span><a href="generated/suites/saddle-search.html#pt-island-templates">eOn/saddle-pt-lanczos</a></td>
-   <td data-code="EON" data-template="EON/saddle-pt-lanczos" data-par2="10128"><span class="bench-score">10128</span><a href="generated/suites/saddle-search.html#pt-island-templates">EON/saddle-pt-lanczos</a></td>
+   <td data-code="eOn" data-template="eon/develop-saddle-pt-lanczos" data-par2="2e+08"><span class="bench-score">2e+08</span><a href="generated/suites/saddle-search.html#pt-island-templates">eon/develop-saddle-pt-lanczos</a></td>
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/saddle-dimer-rotskip-tuned" data-par2="10127.1"><span class="bench-score">10127.1</span><a href="generated/suites/saddle-search.html#pt-island-templates">rgsaddle/saddle-dimer-rotskip-tuned</a></td>
@@ -119,7 +115,6 @@ It does not run a campaign.
    <tr data-problem="double-ended-saddle-search/lj38">
    <th scope="row"><a href="generated/suites/double-ended-saddle-search.html#lj38">LJ38 double-ended saddle</a></th>
    <td data-code="eOn" data-template="eon-client/de-lj38-lanczos-improved" data-par2="259.46"><span class="bench-score">259.46</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">eon-client/de-lj38-lanczos-improved</a></td>
-   <td data-code="EON">—</td>
    <td data-code="Eon svn" data-template="eon-svn/de-lj38-lanczos-improved" data-par2="235.2"><span class="bench-score">235.2</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">eon-svn/de-lj38-lanczos-improved</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="853.56"><span class="bench-score">853.56</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
@@ -144,7 +139,6 @@ It does not run a campaign.
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation">
    <th scope="row"><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation">lj38_2ts_separation</a></th>
    <td data-code="eOn" data-template="eon-client/de-2ts-lanczos-improved" data-par2="520.333"><span class="bench-score">520.333</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">eon-client/de-2ts-lanczos-improved</a></td>
-   <td data-code="EON">—</td>
    <td data-code="Eon svn" data-template="eon-svn/de-2ts-lanczos-improved" data-par2="502.784"><span class="bench-score">502.784</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">eon-svn/de-2ts-lanczos-improved</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="8024.43"><span class="bench-score">8024.43</span><a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
@@ -169,7 +163,6 @@ It does not run a campaign.
    <tr data-problem="double-ended-saddle-search/pt-island">
    <th scope="row"><a href="generated/suites/double-ended-saddle-search.html#pt-island">pt-island</a></th>
    <td data-code="eOn" data-template="eon/develop-de-pt-oci" data-par2="3080.19"><span class="bench-score">3080.19</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">eon/develop-de-pt-oci</a></td>
-   <td data-code="EON">—</td>
    <td data-code="Eon svn" data-template="eon-svn/de-pt-lanczos-improved" data-par2="180.644"><span class="bench-score">180.644</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">eon-svn/de-pt-lanczos-improved</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="422.136"><span class="bench-score">422.136</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
@@ -194,7 +187,6 @@ It does not run a campaign.
    <tr data-problem="globalopt/lj38">
    <th scope="row"><a href="generated/suites/globalopt.html#lj38">Lennard-Jones 38 global minimum</a></th>
    <td data-code="eOn" data-template="eon-client/bh-lj38" data-par2="503146"><span class="bench-score">503146</span><a href="generated/suites/globalopt.html#lj38-templates">eon-client/bh-lj38</a></td>
-   <td data-code="EON">—</td>
    <td data-code="Eon svn" data-template="eon-svn/bh-lj38" data-par2="598530"><span class="bench-score">598530</span><a href="generated/suites/globalopt.html#lj38-templates">eon-svn/bh-lj38</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
@@ -219,7 +211,6 @@ It does not run a campaign.
    <tr data-problem="globalopt/lj75">
    <th scope="row"><a href="generated/suites/globalopt.html#lj75">lj75</a></th>
    <td data-code="eOn">—</td>
-   <td data-code="EON">—</td>
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
@@ -244,7 +235,6 @@ It does not run a campaign.
    <tr data-problem="lowest-eigenvector/lj38">
    <th scope="row"><a href="generated/suites/lowest-eigenvector.html#lj38">lj38</a></th>
    <td data-code="eOn" data-template="eon-client/low-lj38-lanczos" data-par2="26.385"><span class="bench-score">26.385</span><a href="generated/suites/lowest-eigenvector.html#lj38-templates">eon-client/low-lj38-lanczos</a></td>
-   <td data-code="EON">—</td>
    <td data-code="Eon svn" data-template="eon-svn/low-lj38-lanczos-ljcut" data-par2="26.385"><span class="bench-score">26.385</span><a href="generated/suites/lowest-eigenvector.html#lj38-templates">eon-svn/low-lj38-lanczos-ljcut</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/mode-lanczos" data-par2="26.12"><span class="bench-score">26.12</span><a href="generated/suites/lowest-eigenvector.html#lj38-templates">rgsaddle/mode-lanczos</a></td>
@@ -269,7 +259,6 @@ It does not run a campaign.
    <tr data-problem="tsopt/LJ38">
    <th scope="row"><a href="generated/suites/tsopt.html#LJ38">LJ38</a></th>
    <td data-code="eOn" data-template="eon-client/ts-lj38-lanczos-improved" data-par2="280.33"><span class="bench-score">280.33</span><a href="generated/suites/tsopt.html#LJ38-templates">eon-client/ts-lj38-lanczos-improved</a></td>
-   <td data-code="EON">—</td>
    <td data-code="Eon svn" data-template="eon-svn/ts-lj38-lanczos-improved" data-par2="270.85"><span class="bench-score">270.85</span><a href="generated/suites/tsopt.html#LJ38-templates">eon-svn/ts-lj38-lanczos-improved</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/prfo-tuned" data-par2="192.6"><span class="bench-score">192.6</span><a href="generated/suites/tsopt.html#LJ38-templates">rgsaddle/prfo-tuned</a></td>
@@ -294,7 +283,6 @@ It does not run a campaign.
    <tr data-problem="tsopt/pt-island">
    <th scope="row"><a href="generated/suites/tsopt.html#pt-island">pt-island</a></th>
    <td data-code="eOn" data-template="eon-client/ts-pt-lanczos-improved" data-par2="108.796"><span class="bench-score">108.796</span><a href="generated/suites/tsopt.html#pt-island-templates">eon-client/ts-pt-lanczos-improved</a></td>
-   <td data-code="EON">—</td>
    <td data-code="Eon svn" data-template="eon-svn/ts-pt-lanczos-improved" data-par2="106.388"><span class="bench-score">106.388</span><a href="generated/suites/tsopt.html#pt-island-templates">eon-svn/ts-pt-lanczos-improved</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/pt-dimer-rotskip" data-par2="223.898"><span class="bench-score">223.898</span><a href="generated/suites/tsopt.html#pt-island-templates">rgsaddle/pt-dimer-rotskip</a></td>
@@ -319,7 +307,6 @@ It does not run a campaign.
    <tr data-problem="neb/Pt-heptamer">
    <th scope="row"><a href="generated/suites/neb.html#Pt-heptamer">Pt-heptamer</a></th>
    <td data-code="eOn" data-template="eon/neb-pt-lbfgs" data-par2="3517.69"><span class="bench-score">3517.69</span><a href="generated/suites/neb.html#Pt-heptamer-templates">eon/neb-pt-lbfgs</a></td>
-   <td data-code="EON">—</td>
    <td data-code="Eon svn" data-template="eon-svn/neb-pt-ci" data-par2="336.769"><span class="bench-score">336.769</span><a href="generated/suites/neb.html#Pt-heptamer-templates">eon-svn/neb-pt-ci</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/idpp-ci-neb-lbfgs" data-par2="318.308"><span class="bench-score">318.308</span><a href="generated/suites/neb.html#Pt-heptamer-templates">rgsaddle/idpp-ci-neb-lbfgs</a></td>
@@ -344,7 +331,6 @@ It does not run a campaign.
    <tr data-problem="hTST/Al">
    <th scope="row"><a href="generated/suites/hTST.html#Al">Al</a></th>
    <td data-code="eOn">—</td>
-   <td data-code="EON">—</td>
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
@@ -369,7 +355,6 @@ It does not run a campaign.
    <tr data-problem="hTST/Pt">
    <th scope="row"><a href="generated/suites/hTST.html#Pt">Pt</a></th>
    <td data-code="eOn">—</td>
-   <td data-code="EON">—</td>
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
@@ -394,7 +379,6 @@ It does not run a campaign.
    <tr data-problem="accelerated-md/aladatom">
    <th scope="row"><a href="generated/suites/accelerated-md.html#aladatom">Al adatom on Al(100) at 250 K</a></th>
    <td data-code="eOn">—</td>
-   <td data-code="EON">—</td>
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
@@ -419,7 +403,6 @@ It does not run a campaign.
    <tr data-problem="accelerated-md/standard_aladatom">
    <th scope="row"><a href="generated/suites/accelerated-md.html#standard_aladatom">Al adatom on Al(100) at 150 K</a></th>
    <td data-code="eOn">—</td>
-   <td data-code="EON">—</td>
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
