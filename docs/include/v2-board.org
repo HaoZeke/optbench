@@ -238,7 +238,7 @@
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="geodesic">—</td>
-   <td data-code="ASE" data-template="ase-globalopt/lj75-basinhopping" data-par2="2e+06"><span class="bench-score">2e+06</span><a href="generated/suites/globalopt.html#lj75-templates">ase-globalopt/lj75-basinhopping</a></td>
+   <td data-code="ASE" data-template="ase-globalopt/lj75-basinhopping" data-par2="4e+06"><span class="bench-score">4e+06</span><a href="generated/suites/globalopt.html#lj75-templates">ase-globalopt/lj75-basinhopping</a></td>
    <td data-code="Sella">—</td>
    <td data-code="GMIN">—</td>
    <td data-code="pele">—</td>
@@ -246,7 +246,7 @@
    <td data-code="pysisyphus">—</td>
    <td data-code="AIRSS">—</td>
    <td data-code="vc-SQNM">—</td>
-   <td data-code="FLAME" data-template="flame/lj75-minhocao" data-par2="2e+06"><span class="bench-score">2e+06</span><a href="generated/suites/globalopt.html#lj75-templates">flame/lj75-minhocao</a></td>
+   <td data-code="FLAME" data-template="flame/lj75-minhocao" data-par2="4e+06"><span class="bench-score">4e+06</span><a href="generated/suites/globalopt.html#lj75-templates">flame/lj75-minhocao</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
