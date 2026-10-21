@@ -6,6 +6,11 @@ is the shifted LAMMPS Morse that ``archive/entries/minimization/morse-bulk``
 states matches ``morse_pt``: D0 0.7102, alpha 1.6047, r0 2.897, cutoff 7,
 energy shifted to zero at the cutoff, orthorhombic minimum image.
 
+``eam_al`` is the rgpot double-exponential embedded-atom aluminium that
+eOn selects for ``potential = eam_al``. The cutoff is 7.1 Angstrom. A
+pair at or beyond ``sqrt(0.9999)`` times that cutoff is dropped. The
+embedding polynomial is eighth order.
+
 The gradient is dE/dx. Its Euclidean norm is the force norm.
 Binary Lennard-Jones uses an arithmetic sigma for the unlike pair and the
 per-pair epsilons the caller passes. A missing cutoff sums every pair.
@@ -26,6 +31,33 @@ MORSE_D0 = 0.7102
 MORSE_ALPHA = 1.6047
 MORSE_R0 = 2.897
 MORSE_CUTOFF = 7.0
+
+# rgpot ``eam_al_params_t`` defaults. Distances are Angstrom and energies eV.
+EAM_AL_G = -0.60647886749203
+EAM_AL_PAIR_AMP_A = 2294.3609145535
+EAM_AL_PAIR_DECAY_A = 3.0205380362464
+EAM_AL_PAIR_AMP_B = -192.06894637533
+EAM_AL_PAIR_DECAY_B = 1.5102690181232
+EAM_AL_DENSITY_SCALE = 0.87928364657088
+EAM_AL_DENSITY_DECAY_A = 3.3068828537934
+EAM_AL_DENSITY_DECAY_B = 6.6137657075868
+EAM_AL_DENSITY_WEIGHT_B = 512.0
+EAM_AL_DENSITY_POWER = 6
+EAM_AL_EMBED = np.array(
+    [
+        4.4572157051836,
+        193.21775368064,
+        -1173.6502684704,
+        4203.3500116196,
+        -8785.1680280827,
+        10632.994102532,
+        -6921.0410455328,
+        1875.2698365752,
+    ],
+    dtype=np.float64,
+)
+EAM_AL_RCUT = 7.1
+EAM_AL_TRUNCATION_FRACTION = 0.9999
 
 
 def _as_positions(coords: Sequence[float] | np.ndarray) -> np.ndarray:
@@ -215,6 +247,94 @@ def morse_bulk_hessian(coords: Sequence[float] | np.ndarray, box: Sequence[float
     first = 2.0 * MORSE_D0 * MORSE_ALPHA * x * (1.0 - x) if r2.size else r2
     second = 2.0 * MORSE_D0 * MORSE_ALPHA * MORSE_ALPHA * x * (2.0 * x - 1.0) if r2.size else r2
     return _hessian_from_pairs(pos.shape[0], iu, ju, diff, r2, first, second)
+
+
+def _eam_pair_shift(rcut: float) -> float:
+    return float(
+        EAM_AL_PAIR_AMP_A * np.exp(-EAM_AL_PAIR_DECAY_A * rcut)
+        + EAM_AL_PAIR_AMP_B * np.exp(-EAM_AL_PAIR_DECAY_B * rcut)
+    )
+
+
+def _eam_density_shape(radius: float) -> float:
+    return float(
+        radius**EAM_AL_DENSITY_POWER
+        * (
+            np.exp(-EAM_AL_DENSITY_DECAY_A * radius)
+            + EAM_AL_DENSITY_WEIGHT_B * np.exp(-EAM_AL_DENSITY_DECAY_B * radius)
+        )
+    )
+
+
+def _eam_embed(rho: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    """``F(rho)`` and ``F'(rho)`` in Horner form."""
+    coeff = EAM_AL_EMBED
+    polynomial = np.full(rho.shape, coeff[7], dtype=np.float64)
+    derivative = np.zeros(rho.shape, dtype=np.float64)
+    for index in range(6, -1, -1):
+        derivative = derivative * rho + polynomial
+        polynomial = polynomial * rho + coeff[index]
+    energy = rho * (EAM_AL_G + polynomial)
+    slope = EAM_AL_G + polynomial + rho * derivative
+    return energy, slope
+
+
+def eam_al(coords: Sequence[float] | np.ndarray, box: Sequence[float]) -> tuple[float, np.ndarray]:
+    """Embedded-atom aluminium. The gradient is dE/dx, the negative of the physical force."""
+    pos = _as_positions(coords)
+    lengths = np.asarray(box, dtype=np.float64)
+    truncation = float(np.sqrt(EAM_AL_TRUNCATION_FRACTION) * EAM_AL_RCUT)
+    pair_shift = _eam_pair_shift(EAM_AL_RCUT)
+    density_shift = _eam_density_shape(EAM_AL_RCUT)
+    iu, ju, diff, r2 = _pairs(pos, truncation, lengths)
+    count = pos.shape[0]
+    if iu.size == 0:
+        embed, _slope = _eam_embed(np.zeros(count, dtype=np.float64))
+        return float(np.sum(embed)), np.zeros(pos.size, dtype=np.float64)
+    radius = np.sqrt(r2)
+    decay_a = np.exp(-EAM_AL_DENSITY_DECAY_A * radius)
+    weighted_b = EAM_AL_DENSITY_WEIGHT_B * np.exp(-EAM_AL_DENSITY_DECAY_B * radius)
+    radial_power = radius ** (EAM_AL_DENSITY_POWER - 1)
+    radial = radial_power * radius
+    density = EAM_AL_DENSITY_SCALE * (radial * (decay_a + weighted_b) - density_shift)
+    density_slope = EAM_AL_DENSITY_SCALE * (
+        EAM_AL_DENSITY_POWER * radial_power * (decay_a + weighted_b)
+        - radial * (EAM_AL_DENSITY_DECAY_A * decay_a + EAM_AL_DENSITY_DECAY_B * weighted_b)
+    )
+    rho = np.zeros(count, dtype=np.float64)
+    np.add.at(rho, iu, density)
+    np.add.at(rho, ju, density)
+    embed, embed_slope = _eam_embed(rho)
+    pair_a = EAM_AL_PAIR_AMP_A * np.exp(-EAM_AL_PAIR_DECAY_A * radius)
+    pair_b = EAM_AL_PAIR_AMP_B * np.exp(-EAM_AL_PAIR_DECAY_B * radius)
+    phi = pair_a + pair_b - pair_shift - 2.0 * EAM_AL_G * density
+    phi_slope = -(EAM_AL_PAIR_DECAY_A * pair_a + EAM_AL_PAIR_DECAY_B * pair_b) - 2.0 * EAM_AL_G * density_slope
+    radial_force = phi_slope + (embed_slope[iu] + embed_slope[ju]) * density_slope
+    energy = float(np.sum(phi) + np.sum(embed))
+    grad = _accumulate(count, iu, ju, diff, radial_force / radius)
+    return energy, grad.reshape(-1)
+
+
+def named_potential(name: str):
+    """Return the evaluator named by a problem file.
+
+    ``eam_al`` takes coordinates and an orthorhombic box. ``morse_pt`` is
+    the shifted Morse in :func:`optbench.pes.morse_pt`, cutoff 9.5, which
+    is the eOn ``MorsePot`` default. ``lj`` takes coordinates.
+    ``morse_bulk`` stays the cutoff-7 kernel used by the minimization
+    campaign.
+    """
+    from .pes import morse_pt
+
+    table = {
+        "eam_al": eam_al,
+        "morse_pt": morse_pt,
+        "lj": lennard_jones,
+    }
+    try:
+        return table[name]
+    except KeyError as exc:
+        raise ValueError(f"unknown potential {name}") from exc
 
 
 def read_con(text: str) -> tuple[np.ndarray, np.ndarray]:
