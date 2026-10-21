@@ -1,0 +1,57 @@
+id = "eon-stock/saddle-pt-dimer"
+engine = "eon-client"
+problem = "saddle-search/pt-island"
+code = "EON (SVN r2549)"
+code_version = "r2549"
+commit = "r2549"
+algorithm = "Dimer"
+reducer = "harness"
+failure_cap = 100000000
+tuning = "default"
+workers = 8
+note = "Stock EON SVN r2549 on the Pt island. The archived ini keys only: AKMC at 700 K, morse_pt swapped for the harness morse/smooth/linear kernel, L-BFGS, max_move 0.2, converged_force 0.001, max_iterations 1000, confidence 1.1, thermally_accessible_window 99999, minimize_first, 32 jobs, dimer rotations_max 20, converged_angle 5, displacement of atoms 0-6 at radius 3.3 and magnitude 0.1, max_energy 5, prefactor 5e12. improved, the dimer optimizer, finite_difference, and confidence_scheme stay at this code's defaults. Seeds 1000-1009. Stop is 27 good saddles below 1.5 eV. The binary is unpatched Fortran r2549."
+
+pass_limit = 800
+
+[ini.Main]
+job = "akmc"
+temperature = 700
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+converged_force = 0.001
+max_move = 0.2
+max_iterations = 1000
+
+[ini.AKMC]
+confidence = 1.1
+thermally_accessible_window = 99999
+
+[ini."Process Search"]
+minimize_first = true
+
+[ini.Communicator]
+type = "local"
+num_jobs = 32
+number_of_CPUs = 8
+client_path = "eonclient"
+
+[ini."Saddle Search"]
+min_mode_method = "dimer"
+displace_listed_atom_weight = 1
+displace_all_listed = false
+displace_radius = 3.3
+displace_atom_list = "0,1,2,3,4,5,6"
+displace_magnitude = 0.1
+max_energy = 5.0
+max_iterations = 1000
+
+[ini.Dimer]
+rotations_max = 20
+converged_angle = 5.0
+
+[ini.Prefactor]
+default_value = 5e12

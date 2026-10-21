@@ -341,7 +341,7 @@ The harness link and novelty test uses Cartesian RMSD 0.5 over the full island. 
 
 ### eon_saddle_count
 
-The classic dimer campaign (improved false, the 2014 key) has fraction_connected 0.692 against 0.746, inside 10 percent, but force calls 6.97e6 against 3.78e6 and unique saddles 91.7 against 109.2. The archive standard error on the force calls is 5.27e5. This eOn AKMC counter is not the harness RMSD link test.
+The classic dimer campaign (improved false, the 2014 key) has fraction_connected 0.692 against 0.746, inside 10 percent, but force calls 6.97e6 against 3.78e6 and unique saddles 91.7 against 109.2. The archive standard error on the force calls is 5.27e5. This eOn AKMC counter is not the harness RMSD link test. The archived number stays this paper row. EON (SVN r2549) and eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) are different codes. Each was run stock, with its own defaults left unset, on the same Pt island, seeds 1000-1009, and the 27-saddle stop. EON (SVN r2549) harness mean force calls are 5.29672e6, unique saddles 116.8, fraction_connected 0.75405, with one seed short of 27 saddles and PAR-2 2.43552e7. eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) harness mean force calls are 4.7715e6, unique saddles 74.2, fraction_connected 0.751779, with one seed short of 27 saddles and PAR-2 2.40642e7. Those gaps stay as measured.
 
 - saddle-search/pt-island/eon-dimer
 
