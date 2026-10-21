@@ -7,11 +7,12 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>eOn (develop 7095b23ac17d49f434a5e08ccb072897ceca698e)</th><th>EON (SVN r2549)</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="accelerated-md/aladatom">
    <th scope="row"><a href="#aladatom">aladatom</a></th>
    <td data-code="eOn">—</td>
-   <td data-code="Eon svn">—</td>
+   <td data-code="eOn (develop 7095b23ac17d49f434a5e08ccb072897ceca698e)">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
@@ -27,7 +28,8 @@
    <tr data-problem="accelerated-md/standard_aladatom">
    <th scope="row"><a href="#standard_aladatom">standard_aladatom</a></th>
    <td data-code="eOn">—</td>
-   <td data-code="Eon svn">—</td>
+   <td data-code="eOn (develop 7095b23ac17d49f434a5e08ccb072897ceca698e)">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
@@ -53,14 +55,14 @@
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="accelerated-md/aladatom">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
-   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="13">No full harness row.</td></tr>
+   <thead><tr><th>Template</th><th>Label</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td colspan="14">No full harness row.</td></tr>
    </tbody></table></div>
    <h3>Partial</h3><ul>
    <li>eon-client/amd-hyper eOn campaign n=1, result file sets partial true.</li>
    <li>eon-client/amd-prd eOn campaign n=1, result file sets partial true.</li>
-   <li>eon-svn/amd-hyper Eon svn campaign n=1, result file sets partial true.</li>
-   <li>eon-svn/amd-prd Eon svn campaign n=1, result file sets partial true.</li>
+   <li>eon-svn/amd-hyper EON (SVN r2549) campaign n=1, result file sets partial true.</li>
+   <li>eon-svn/amd-prd EON (SVN r2549) campaign n=1, result file sets partial true.</li>
    </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="aladatom-legacy">
@@ -108,8 +110,8 @@
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="accelerated-md/standard_aladatom">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
-   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="13">No full harness row.</td></tr>
+   <thead><tr><th>Template</th><th>Label</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td colspan="14">No full harness row.</td></tr>
    </tbody></table></div>
    </details>
    </section><section class="bench bench-legacy-section" id="standard_aladatom-legacy">
