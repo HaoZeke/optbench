@@ -285,7 +285,7 @@ It does not run a campaign.
    <td data-code="eOn" data-template="eon-client/ts-pt-lanczos-improved" data-par2="108.796"><span class="bench-score">108.796</span><a href="generated/suites/tsopt.html#pt-island-templates">eon-client/ts-pt-lanczos-improved</a></td>
    <td data-code="Eon svn" data-template="eon-svn/ts-pt-lanczos-improved" data-par2="106.388"><span class="bench-score">106.388</span><a href="generated/suites/tsopt.html#pt-island-templates">eon-svn/ts-pt-lanczos-improved</a></td>
    <td data-code="rgmin">—</td>
-   <td data-code="rgsaddle" data-template="rgsaddle/pt-lanczos-tuned" data-par2="147.592"><span class="bench-score">147.592</span><a href="generated/suites/tsopt.html#pt-island-templates">rgsaddle/pt-lanczos-tuned</a></td>
+   <td data-code="rgsaddle" data-template="rgsaddle/pt-lanczos" data-par2="209.98"><span class="bench-score">209.98</span><a href="generated/suites/tsopt.html#pt-island-templates">rgsaddle/pt-lanczos</a></td>
    <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella" data-template="sella/pt-island-ts-default" data-par2="74.2857"><span class="bench-score">74.2857</span><a href="generated/suites/tsopt.html#pt-island-templates">sella/pt-island-ts-default</a></td>
