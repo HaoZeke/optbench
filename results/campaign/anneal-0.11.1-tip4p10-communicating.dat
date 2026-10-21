@@ -1,0 +1,23 @@
+force_calls 15225.0271
+force_calls_median 10860.5
+force_calls_min 214
+force_calls_max 104100
+nfailed 0
+starts 10000
+code anneal
+code_version 0.11.1
+commit 41b970fa7d4574cf301a851640036d78b9fd032c
+algorithm basin-hopping
+template anneal/tip4p10-communicating
+problem globalopt/tip4p10
+counter harness
+tuning stock
+call_unit total
+cap 1000000
+avg_energy -391.0219729537986
+min_energy -391.0229189013
+max_energy -391.0216842183
+par2_mean 15225.0271
+note anneal 0.11.1 feat/binary-water 41b970fa7d4574cf301a851640036d78b9fd032c. Stock preset communicating. Rigid TIP4P with ten bodies. Every body is reoriented and the centres stay fixed. The acceptance factor may climb to 24. All 10000 starts reached the Cambridge window. The harness score is the charged value-and-gradient count on every start.
+contributor Rohit Goswami
+date 2026-10-21

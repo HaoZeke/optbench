@@ -1,0 +1,23 @@
+force_calls 1198479.5562249
+force_calls_median 816536.5
+force_calls_min 15626
+force_calls_max 10000000
+nfailed 2
+starts 500
+code anneal
+code_version 0.11.1
+commit 41b970fa7d4574cf301a851640036d78b9fd032c
+algorithm basin-hopping
+template anneal/tip4p15-recommended
+problem globalopt/tip4p15
+counter harness
+tuning stock
+call_unit total
+cap 10000000
+avg_energy -628.3710398395451
+min_energy -628.3725291201
+max_energy -628.2240966308
+par2_mean 1273685.638
+note anneal 0.11.1 feat/binary-water 41b970fa7d4574cf301a851640036d78b9fd032c. Stock preset recommended. Rigid TIP4P with fifteen bodies. Every body is reoriented and the centres stay fixed. The acceptance factor stays at or below 4. force_calls is the mean over starts that reached the Cambridge window. par2_mean charges a miss at twice the cap of 10000000.
+contributor Rohit Goswami
+date 2026-10-21

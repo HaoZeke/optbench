@@ -1,0 +1,23 @@
+force_calls 2000000
+force_calls_median 2000000
+force_calls_min 2000000
+force_calls_max 2000000
+nfailed 100
+starts 100
+code anneal
+code_version 0.11.1
+commit 41b970fa7d4574cf301a851640036d78b9fd032c
+algorithm basin-hopping
+template anneal/lj100-binary-recommended
+problem globalopt/lj100-binary
+counter harness
+tuning stock
+call_unit total
+cap 2000000
+avg_energy -599.0770752017651
+min_energy -602.3257619145
+max_energy -596.6622260349
+par2_mean 4000000
+note anneal 0.11.1 feat/binary-water 41b970fa7d4574cf301a851640036d78b9fd032c. Stock preset recommended. 42 atoms of type A and 58 of type B, diameters 1 and 1.3, cross diameter 1.15. The hop stops at the Cambridge energy window or at 2000000 force calls. No start reached that window. avg_energy, min_energy, and max_energy are the final quenched energies.
+contributor Rohit Goswami
+date 2026-10-21

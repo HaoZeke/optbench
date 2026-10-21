@@ -1,0 +1,133 @@
+{
+  "full_n": 10000,
+  "history": [],
+  "id": "globalopt/tip4p10",
+  "not_comparable": [],
+  "partial": [],
+  "profile": {
+    "area_log10": {
+      "anneal/tip4p10-communicating 0.11.1 stock campaign 41b970f": 0.9580580642001865,
+      "anneal/tip4p10-recommended 0.11.1 stock campaign 41b970f": 0.9655838140917862
+    },
+    "rho": {
+      "anneal/tip4p10-communicating 0.11.1 stock campaign 41b970f": [
+        0.4925,
+        0.6853,
+        0.8355,
+        0.9286,
+        0.9739
+      ],
+      "anneal/tip4p10-recommended 0.11.1 stock campaign 41b970f": [
+        0.5077,
+        0.6951,
+        0.8408,
+        0.9296,
+        0.9765
+      ]
+    },
+    "solved": {
+      "anneal/tip4p10-communicating 0.11.1 stock campaign 41b970f": 1.0,
+      "anneal/tip4p10-recommended 0.11.1 stock campaign 41b970f": 1.0
+    },
+    "taus": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ]
+  },
+  "ranked": [
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 1000000,
+      "code": "anneal",
+      "code_version": "0.11.1",
+      "commit": "41b970fa7d4574cf301a851640036d78b9fd032c",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "anneal-0.11.1-tip4p10-recommended",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 10000,
+      "history": false,
+      "max_calls": 133405.0,
+      "mean_calls": 14993.4295,
+      "mean_per_image": null,
+      "median": 10917.0,
+      "median_calls": 10917.0,
+      "median_high": 11178.0125,
+      "median_low": 10665.487500000001,
+      "median_per_image": null,
+      "min_calls": 214.0,
+      "n": 10000,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 14993.4295,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/anneal-0.11.1-tip4p10-recommended.dat",
+      "problem": "globalopt/tip4p10",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "anneal/tip4p10-recommended",
+      "tuning": "stock",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9996160016293234
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 1000000,
+      "code": "anneal",
+      "code_version": "0.11.1",
+      "commit": "41b970fa7d4574cf301a851640036d78b9fd032c",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "anneal-0.11.1-tip4p10-communicating",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 10000,
+      "history": false,
+      "max_calls": 104100.0,
+      "mean_calls": 15225.0271,
+      "mean_per_image": null,
+      "median": 10860.5,
+      "median_calls": 10860.5,
+      "median_high": 11163.0,
+      "median_low": 10620.0,
+      "median_per_image": null,
+      "min_calls": 214.0,
+      "n": 10000,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 15225.0271,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/anneal-0.11.1-tip4p10-communicating.dat",
+      "problem": "globalopt/tip4p10",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "anneal/tip4p10-communicating",
+      "tuning": "stock",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9996160016293234
+    }
+  ],
+  "title": "tip4p10"
+}

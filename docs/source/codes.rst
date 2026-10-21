@@ -1479,4 +1479,52 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">5000</td>
    </tr>
    </tbody></table></div>
+   <h3>anneal</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>global optimization</td>
+   <td>feat/binary-water</td>
+   <td>41b970fa7d45</td>
+   <td><a href="https://github.com/HaoZeke/anneal">https://github.com/HaoZeke/anneal</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="globalopt/lj100-binary" data-template="anneal/lj100-binary-communicating">
+   <td>Binary Lennard-Jones 100</td>
+   <td data-field="template">anneal/lj100-binary-communicating</td>
+   <td data-field="version">anneal 0.11.1</td>
+   <td data-field="commit">41b970fa7d45</td>
+   <td data-field="par2_mean">4e+06</td>
+   <td data-field="mean_calls">2e+06</td>
+   <td data-field="median_calls">2e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 100, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="globalopt/tip4p10" data-template="anneal/tip4p10-recommended">
+   <td>tip4p10</td>
+   <td data-field="template">anneal/tip4p10-recommended</td>
+   <td data-field="version">anneal 0.11.1</td>
+   <td data-field="commit">41b970fa7d45</td>
+   <td data-field="par2_mean">14993.4</td>
+   <td data-field="mean_calls">14993.4</td>
+   <td data-field="median_calls">10917</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">10000</td>
+   </tr>
+   <tr data-problem="globalopt/tip4p15" data-template="anneal/tip4p15-recommended">
+   <td>tip4p15</td>
+   <td data-field="template">anneal/tip4p15-recommended</td>
+   <td data-field="version">anneal 0.11.1</td>
+   <td data-field="commit">41b970fa7d45</td>
+   <td data-field="par2_mean">1.27369e+06</td>
+   <td data-field="mean_calls">1.23369e+06</td>
+   <td data-field="median_calls">816536</td>
+   <td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 0</td>
+   <td data-field="n">500</td>
+   </tr>
+   </tbody></table></div>
    </section>

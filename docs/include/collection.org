@@ -1008,9 +1008,8 @@
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/lj100-binary">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="11">No full harness row.</td></tr>
+   <tr><td data-field="template">anneal/lj100-binary-communicating</td><td data-field="version">anneal 0.11.1</td><td data-field="commit">41b970fa7d45</td><td data-field="source">campaign</td><td data-field="par2_mean">4e+06</td><td data-field="success_rate">0</td><td data-field="wilson">0–0.0369935</td><td data-field="median_calls">2e+06</td><td data-field="mean_calls">2e+06</td><td data-field="failures">crash 0, divergence 0, cap 100, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">No committed harness run.</p>
    <p><a href="generated/suites/globalopt.html#lj100-binary">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="lj100-binary-legacy">
    <h3>Legacy 2014 archive</h3>
@@ -1306,9 +1305,8 @@
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/tip4p10">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="11">No full harness row.</td></tr>
+   <tr><td data-field="template">anneal/tip4p10-recommended</td><td data-field="version">anneal 0.11.1</td><td data-field="commit">41b970fa7d45</td><td data-field="source">campaign</td><td data-field="par2_mean">14993.4</td><td data-field="success_rate">1</td><td data-field="wilson">0.999616–1</td><td data-field="median_calls">10917</td><td data-field="mean_calls">14993.4</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">10000</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">No committed harness run.</p>
    <p><a href="generated/suites/globalopt.html#tip4p10">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="tip4p10-legacy">
    <h3>Legacy 2014 archive</h3>
@@ -1361,9 +1359,8 @@
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/tip4p15">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="11">No full harness row.</td></tr>
+   <tr><td data-field="template">anneal/tip4p15-recommended</td><td data-field="version">anneal 0.11.1</td><td data-field="commit">41b970fa7d45</td><td data-field="source">campaign</td><td data-field="par2_mean">1.27369e+06</td><td data-field="success_rate">0.996</td><td data-field="wilson">0.985534–0.998902</td><td data-field="median_calls">816536</td><td data-field="mean_calls">1.23369e+06</td><td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 0</td><td data-field="n">500</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">No committed harness run.</p>
    <p><a href="generated/suites/globalopt.html#tip4p15">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="tip4p15-legacy">
    <h3>Legacy 2014 archive</h3>
