@@ -95,7 +95,7 @@ def test_templates_repeat_the_documented_numbers():
 
 def test_lj38_cap_is_the_existing_eon_failure_cap():
     problem = load_problem(ROOT / "problems" / "globalopt" / "lj38.toml")
-    assert "max_force_calls" not in problem["convergence"]
+    assert int(problem["convergence"]["max_force_calls"]) == 2000000
     eon = load_template(ROOT, "eon-svn/bh-lj38")
     for method in METHODS:
         template = load_template(ROOT, template_id("globalopt/lj38", method))

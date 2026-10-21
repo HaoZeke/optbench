@@ -29,7 +29,7 @@ kind = "lennard-jones"
 
 [stop]
 energy_above_minimum = 0.001
-max_force_calls = 1000000000
+max_force_calls = 2000000
 
 [input]
 archive_path = "website/globalopt/lj98/lj98_clusters.tgz"
