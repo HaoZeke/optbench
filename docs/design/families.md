@@ -61,5 +61,8 @@ that count times the coordinate count: one force call per coordinate,
 the forward-difference equivalent, so one full Hessian is 3N calls.
 A method that calls no analytic Hessian shows 0 and 0. The coordinate
 count is the problem's Cartesian size (`optbench.families.COORDINATES`,
-or `atoms` / `mobile_atoms` on the problem). When the size is unknown
-and the count is positive, `FD calls` is left blank.
+or `atoms` / `mobile_atoms` on the problem). Morse bulk states
+`atoms = 256`: every start `.con` in
+`website/minimization/morse-bulk/morse-bulk.tgz` has that many
+coordinate rows and no frozen atoms, so the coordinate count is 768.
+When the size is unknown and the count is positive, `FD calls` is left blank.

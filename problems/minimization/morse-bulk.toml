@@ -5,6 +5,10 @@ problem = "morse-bulk"
 contract = "stated"
 entry_count = 11
 
+# Every start in website/minimization/morse-bulk/morse-bulk.tgz is a
+# 256-atom .con with no frozen atoms. One Hessian is 3N coordinates.
+atoms = 256
+
 [convergence]
 force_norm = 1.0e-3
 force_unit = "eV/Ang"

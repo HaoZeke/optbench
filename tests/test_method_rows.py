@@ -13,6 +13,40 @@ def test_fd_calls_use_one_force_call_per_coordinate():
     assert finite_difference_calls(1.0, None) is None
 
 
+def test_morse_bulk_coordinates_follow_the_start_atom_count():
+    import tarfile
+
+    from optbench.campaign import geometry_archive
+    from optbench.families import coordinate_count
+    from optbench.potentials import read_con
+    from optbench.problems import load_problem
+
+    problem = load_problem(ROOT / "problems" / "minimization" / "morse-bulk.toml")
+    archive = geometry_archive(ROOT, problem)
+    counts = set()
+    with tarfile.open(archive) as packed:
+        members = [member for member in packed.getmembers() if member.name.endswith(".con")]
+        assert len(members) == 100
+        for member in members:
+            text = packed.extractfile(member).read().decode("utf-8")
+            positions, _box = read_con(text)
+            counts.add(int(positions.shape[0]))
+    assert counts == {256}
+    assert problem["atoms"] == 256
+    assert coordinate_count(problem) == 768
+    rows = [
+        row
+        for row in _document()["problems"]["minimization/morse-bulk"]["ranked"]
+        if row["hessian_calls"]
+    ]
+    assert {(row["label"], row["hessian_calls"], row["fd_calls"]) for row in rows} == {
+        ("rgmin (0.4.1) · NEWTON", 7.35, 7.35 * 768),
+        ("rgmin (0.4.0) · DOGLEG", 9.11, 9.11 * 768),
+        ("rgmin (0.4.1) · DOGLEG", 9.11, 9.11 * 768),
+        ("rgmin (0.4.0) · NEWTON", 295.69, 295.69 * 768),
+    }
+
+
 def test_a_parameter_record_is_not_the_method_name():
     blob = '{"counter":"harness","parameters":{"memory":100}}'
     assert method_name({"algorithm": "LBFGS"}, {"method": blob, "algorithm": "LBFGS"}) == "LBFGS"

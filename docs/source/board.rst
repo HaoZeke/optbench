@@ -28,7 +28,7 @@ It does not run a campaign.
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="minimization/morse-bulk">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="label">rgmin (0.4.1) · NEWTON</td><td data-field="family">Minimizers</td><td data-field="family_rank">1</td><td data-field="par2_mean">8.35</td><td data-field="published"></td><td data-field="median_calls">9</td><td data-field="mean_calls">8.35</td><td data-field="hessian_calls">7.35</td><td data-field="fd_calls"></td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="label">rgmin (0.4.1) · NEWTON</td><td data-field="family">Minimizers</td><td data-field="family_rank">1</td><td data-field="par2_mean">8.35</td><td data-field="published"></td><td data-field="median_calls">9</td><td data-field="mean_calls">8.35</td><td data-field="hessian_calls">7.35</td><td data-field="fd_calls">5644.8</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    <h2>Pt heptamer island</h2>
    <div class="bench-scroll">
