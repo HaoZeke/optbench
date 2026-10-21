@@ -50,6 +50,53 @@
       "wilson_low": 0.0
     }
   ],
-  "ranked": [],
+  "profile_gap": "No performance profile. One start has no finite cost.",
+  "ranked": [
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 1000000,
+      "code": "anneal",
+      "code_version": "0.11.1 (communicating)",
+      "commit": "db22b99d09a0cdf1d4f004136f9ecb04104fcb39",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "anneal-0.11.1-lj75-communicating",
+      "failures": {
+        "cap": 1,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 200,
+      "history": false,
+      "max_calls": 1000000.0,
+      "mean_calls": 79362.725,
+      "mean_per_image": null,
+      "median": 44549.5,
+      "median_calls": 44549.5,
+      "median_high": 55546.17499999999,
+      "median_low": 35394.0,
+      "median_per_image": null,
+      "min_calls": 1102.0,
+      "n": 200,
+      "nfailed": 1,
+      "note": "starts.jsonl",
+      "par2_mean": 84362.725,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/anneal-0.11.1-lj75-communicating.dat",
+      "problem": "globalopt/lj75",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 0.995,
+      "template": "anneal/lj75-communicating",
+      "tuning": "default",
+      "wilson_high": 0.9991168312843989,
+      "wilson_low": 0.9722262956021069
+    }
+  ],
   "title": "lj75"
 }
