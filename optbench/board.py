@@ -1074,6 +1074,7 @@ def build_board(root: Path) -> dict:
                 ranked.append(row)
         ranked.sort(key=_rank_key)
         held_history.sort(key=_rank_key)
+        _mark_label_column(ranked)
         problem = problems.get(problem_id) or {}
         problems_out[problem_id] = {
             "id": problem_id,
@@ -1314,21 +1315,44 @@ def _show_per_image(problem: dict) -> bool:
     return any(row.get("mean_per_image") is not None for row in rows)
 
 
+_PLAIN_LABELS = frozenset({"", "default", "tuned"})
+
+
+def _mark_label_column(rows: list[dict]) -> None:
+    """Omit the Label column when it only repeats blank, default, or tuned.
+
+    A real setting, such as ``target_ratio 0.5``, keeps the column on every
+    row of that table. The flag is stored on the row so the site check and
+    the renderer agree.
+    """
+    if any(visible_label(row) not in _PLAIN_LABELS for row in rows):
+        return
+    for row in rows:
+        row["label_column"] = False
+
+
+def _label_column(problem: dict) -> bool:
+    return any(row.get("label_column", True) for row in problem.get("ranked") or [])
+
+
 def _headers(problem: dict) -> list[str]:
-    headers = [
-        "Template",
-        "Label",
-        "Version",
-        "Commit",
-        "Source",
-        "Current",
-        "PAR-2",
-        "Success",
-        "Wilson low",
-        "Wilson high",
-        "Median calls",
-        "Mean calls",
-    ]
+    headers = ["Template"]
+    if _label_column(problem):
+        headers.append("Label")
+    headers.extend(
+        [
+            "Version",
+            "Commit",
+            "Source",
+            "Current",
+            "PAR-2",
+            "Success",
+            "Wilson low",
+            "Wilson high",
+            "Median calls",
+            "Mean calls",
+        ]
+    )
     if _show_per_image(problem):
         headers.append("Per-image mean")
     headers.extend(["Failures", "n"])
@@ -1342,18 +1366,23 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
     """
     cells = [
         ("template", str(row.get("template") or row.get("entry") or "")),
-        ("label", visible_label(row)),
-        ("version", f"{row.get('code') or ''} {row.get('code_version') or ''}"),
-        ("commit", str(row.get("commit") or "")[:12]),
-        ("source", str(row.get("source") or "")),
-        ("current", "yes" if row.get("current") else "no"),
-        ("par2_mean", _format_number(row.get("par2_mean"))),
-        ("success_rate", _format_number(row.get("success_rate"))),
-        ("wilson_low", _format_number(row.get("wilson_low"))),
-        ("wilson_high", _format_number(row.get("wilson_high"))),
-        ("median_calls", _format_number(row.get("median_calls"))),
-        ("mean_calls", _format_number(row.get("mean_calls"))),
     ]
+    if row.get("label_column", True):
+        cells.append(("label", visible_label(row)))
+    cells.extend(
+        [
+            ("version", f"{row.get('code') or ''} {row.get('code_version') or ''}"),
+            ("commit", str(row.get("commit") or "")[:12]),
+            ("source", str(row.get("source") or "")),
+            ("current", "yes" if row.get("current") else "no"),
+            ("par2_mean", _format_number(row.get("par2_mean"))),
+            ("success_rate", _format_number(row.get("success_rate"))),
+            ("wilson_low", _format_number(row.get("wilson_low"))),
+            ("wilson_high", _format_number(row.get("wilson_high"))),
+            ("median_calls", _format_number(row.get("median_calls"))),
+            ("mean_calls", _format_number(row.get("mean_calls"))),
+        ]
+    )
     if per_image:
         cells.append(("mean_per_image", _format_number(row.get("mean_per_image"))))
     cells.append(("failures", _failure_text(row.get("failures") or {})))

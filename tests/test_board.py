@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from optbench.board import MissingAsvCommit, build_board, write_board
+from optbench.board import MissingAsvCommit, build_board, headline_table, write_board
 from optbench.score import wilson_interval
 
 PIN = "a" * 40
@@ -156,6 +156,48 @@ def test_full_harness_row_is_ranked_by_par2(tmp_path: Path):
     assert row["current"] is True
     assert row["registry_match"] is True
     assert row["partial"] is False
+    assert row["label_column"] is False
+    plain = headline_table(problem)
+    assert "<th>Label</th>" not in plain
+    assert 'data-field="label"' not in plain
+
+
+def test_a_real_setting_keeps_the_label_column(tmp_path: Path):
+    _problem(tmp_path, starts=2, cap=10)
+    _template(tmp_path)
+    _registry(tmp_path)
+    ratio = tmp_path / "templates" / "toy" / "ratio.toml"
+    ratio.parent.mkdir(parents=True, exist_ok=True)
+    ratio.write_text(
+        "\n".join(
+            [
+                'id = "toy/ratio"',
+                'engine = "toy"',
+                'problem = "minimization/toy"',
+                'code = "toy"',
+                'code_version = "1.0"',
+                f'commit = "{PIN}"',
+                'tuning = "target-ratio-0.5"',
+                'label = "target_ratio 0.5"',
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    _dat(tmp_path, "toy-fast", PIN)
+    dat = _dat(tmp_path, "toy-ratio", PIN, template="toy/ratio")
+    dat.write_text(dat.read_text(encoding="utf-8").replace("tuning default", "tuning target-ratio-0.5\nlabel target_ratio 0.5"))
+    _starts(tmp_path, "toy-fast", [_row(3, True, "0"), _row(4, True, "1")])
+    _starts(tmp_path, "toy-ratio", [_row(5, True, "0"), _row(6, True, "1")])
+
+    document = build_board(tmp_path)
+    problem = document["problems"]["minimization/toy"]
+    labels = {row["label"] for row in problem["ranked"]}
+    assert labels == {"default", "target_ratio 0.5"}
+    assert all("label_column" not in row for row in problem["ranked"])
+    html = headline_table(problem)
+    assert "<th>Label</th>" in html
+    assert 'data-field="label"' in html
 
 
 def test_short_grid_stays_off_the_ranked_table(tmp_path: Path):
