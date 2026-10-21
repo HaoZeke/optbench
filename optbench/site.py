@@ -153,7 +153,7 @@ def _slug(text: str) -> str:
 
 def _caption(primary: str | None) -> str:
     captions = {
-        "force_calls": "Fewest force calls first. Failures are left out of this mean.",
+        "force_calls": "Fewest force calls first. Failures are left out of this mean. The 2014 archive rows stay in this table.",
         "mean_epoch": "Fewest epochs first. Failures are left out of this mean.",
         "mean_epochs": "Fewest epochs first. Failures are left out of this mean.",
         "avg_energy": "Lowest energy first.",
