@@ -263,8 +263,8 @@ def classify_client(*, calls, reason, cap, overlap_ok=None, crashed=False) -> di
     """Map one client result onto the v2 failure order.
 
     ``cap`` wins when the harness count reached the budget, including a
-    client that died when the counter refused the next call. A non-zero
-    reason under the cap is ``divergence``. A lowest-mode overlap miss
+    client that died when the counter refused the next call.     A non-zero
+    reason under the cap is ``not_converged``. A lowest-mode overlap miss
     under the cap is ``wrong_stationary``. Overlap success ignores client
     reason 5, which is the climb cap after the mode was computed.
     """
@@ -282,7 +282,10 @@ def classify_client(*, calls, reason, cap, overlap_ok=None, crashed=False) -> di
     if reason in (None, ""):
         return {"force_calls": float(count), "success": False, "failure": "crash"}
     if str(reason) != "0":
-        return {"force_calls": float(count), "success": False, "failure": "divergence"}
+        from optbench.failures import classify_outcome
+
+        failure = classify_outcome(calls=float(count), cap=cap, unmet=True)
+        return {"force_calls": float(count), "success": False, "failure": failure}
     return {"force_calls": float(count), "success": True, "failure": None}
 
 
@@ -331,6 +334,10 @@ def _evaluate(potential: str):
         return lambda positions, numbers, box: lj_cluster(positions, numbers, box)
     if potential == "morse_pt":
         return morse_cluster
+    if potential == "morse_eon":
+        from benchmarks.bench_eon_svn import _morse_fast
+
+        return _morse_fast
     if potential == "lammps":
         lammps = ROOT / "archive/entries/double-ended-saddle-search/lj38/eon-ci-neb/in.lammps"
         epsilon, sigma, cutoff = lammps_lj_params(lammps)

@@ -1,0 +1,11 @@
+# CP2K 2026.2 BAND. The problem file supplies the image count, the cap, the force norm, and the potential.
+id = "cp2k/ci-neb"
+engine = "cp2k-band"
+code = "CP2K"
+code_version = "2026.2"
+commit = "67b5da876dd6a76b8b021d5a04d1c81ba79a4c50"
+algorithm = "CI-NEB"
+tuning = "default"
+
+[band]
+band_type = "CI-NEB"

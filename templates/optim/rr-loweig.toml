@@ -1,0 +1,21 @@
+id = "optim/rr-loweig"
+engine = "optim"
+problem = "lowest-eigenvector/lj38"
+code = "optim"
+code_version = "df8da599"
+commit = "df8da599267534fbe43a250e578f7396a7946311"
+algorithm = "Rayleigh-Ritz"
+tuning = "default"
+
+[ini.Main]
+method = "rr-ffd"
+
+[ini.Optim]
+ceig = 1.0e-4
+cover = 0.99
+usediag = 2
+updates = 4
+seed = 2014
+
+[ini.Optimizer]
+max_iterations = 10000

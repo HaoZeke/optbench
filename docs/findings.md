@@ -184,9 +184,9 @@ The 2014 GMIN CSM binary wales-27058 is not published. GMIN df8da599 has SYMMETR
 
 | Row | Archive | Campaign | Gap |
 | --- | --- | --- | --- |
-| pt-island/adaptive_HSphere-lbfgs-davidson-sm50 | force_calls 423491, unique_saddles 114.9, fraction_connected 0.8 | 1.02189e+06, 131, 0.876085 | force_calls 1.02189e+06 vs 423491 (141.3%); unique_saddles 131 vs 114.9 (14.0%); fraction_connected 0.876085 vs 0.8 (9.5%); saddle_novelty |
-| pt-island/adaptive_HSphere-lbfgs-lanczos-sm0 | force_calls 1.00343e+06, unique_saddles 130.4, fraction_connected 0.9 | 1.61264e+06, 165.7, 0.717906 | force_calls 1.61264e+06 vs 1.00343e+06 (60.7%); unique_saddles 165.7 vs 130.4 (27.1%); fraction_connected 0.717906 vs 0.9 (20.2%); saddle_novelty |
-| pt-island/adaptive_HSphere-lbfgs-lanczos-sm50 | force_calls 814519, unique_saddles 142.6, fraction_connected 0.9 | 1.61864e+06, 180.2, 0.702107 | force_calls 1.61864e+06 vs 814519 (98.7%); unique_saddles 180.2 vs 142.6 (26.4%); fraction_connected 0.702107 vs 0.9 (22.0%); saddle_novelty |
+| pt-island/adaptive_HSphere-lbfgs-davidson-sm50 | force_calls 423491, unique_saddles 114.9, fraction_connected 0.8 | 5.2987e+06, 0, 1 | force_calls 5.2987e+06 vs 423491 (1151.2%); unique_saddles 0 vs 114.9 (100.0%); fraction_connected 1 vs 0.8 (25.0%); saddle_novelty |
+| pt-island/adaptive_HSphere-lbfgs-lanczos-sm0 | force_calls 1.00343e+06, unique_saddles 130.4, fraction_connected 0.9 | 1.92665e+06, 0.5, 0.9682 | force_calls 1.92665e+06 vs 1.00343e+06 (92.0%); unique_saddles 0.5 vs 130.4 (99.6%); fraction_connected 0.9682 vs 0.9 (7.6%); saddle_novelty |
+| pt-island/adaptive_HSphere-lbfgs-lanczos-sm50 | force_calls 814519, unique_saddles 142.6, fraction_connected 0.9 | 1.58264e+06, 0.7, 0.93584 | force_calls 1.58264e+06 vs 814519 (94.3%); unique_saddles 0.7 vs 142.6 (99.5%); fraction_connected 0.93584 vs 0.9 (4.0%); saddle_novelty |
 | pt-island/eon-dimer | force_calls 3.77888e+06, unique_saddles 109.222, fraction_connected 0.746017 | 6.97488e+06, 91.7, 0.691952 | force_calls 6.97488e+06 vs 3.77888e+06 (84.6%); unique_saddles 91.7 vs 109.222 (16.0%); fraction_connected 0.691952 vs 0.746017 (7.2%); eon_saddle_count |
 | pt-island/eon-dimer-cg-20-rotations | — | — |  |
 | pt-island/eon-dimer-cg-20-rotations-20-bowl_breakout | — | — |  |

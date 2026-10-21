@@ -1,0 +1,276 @@
+#+TITLE: GeometryOptimization.jl
+#+OPTIONS: toc:nil num:nil author:nil
+
+#+begin_export rst
+.. raw:: html
+
+   <section class="bench" id="code-geometryoptimization-jl">
+   <h2>GeometryOptimization.jl</h2>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization</td>
+   <td>0.1.6</td>
+   <td>5b145886c190</td>
+   <td><a href="https://github.com/JuliaMolSim/GeometryOptimization.jl">https://github.com/JuliaMolSim/GeometryOptimization.jl</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-rows">
+   <caption>Every ranked row for this code.</caption>
+   <thead><tr><th>Problem</th><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="minimization/lj38" data-label="GeometryOptimization.jl (0.1.6) · LBFGS">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="label">GeometryOptimization.jl (0.1.6) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">30</td>
+   <td data-field="par2_mean">450.659</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">372</td>
+   <td data-field="mean_calls">391.521</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38" data-label="GeometryOptimization.jl (0.1.6) · CG">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="label">GeometryOptimization.jl (0.1.6) · CG</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">33</td>
+   <td data-field="par2_mean">522.12</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">403</td>
+   <td data-field="mean_calls">423.853</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 5</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38" data-label="GeometryOptimization.jl (0.1.6) · GradientDescent">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="label">GeometryOptimization.jl (0.1.6) · GradientDescent</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">84</td>
+   <td data-field="par2_mean">20000</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="mean_calls">10000</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1000, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="GeometryOptimization.jl (0.1.6) · LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">GeometryOptimization.jl (0.1.6) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">30</td>
+   <td data-field="par2_mean">450.659</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">372</td>
+   <td data-field="mean_calls">391.521</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="GeometryOptimization.jl (0.1.6) · CG">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">GeometryOptimization.jl (0.1.6) · CG</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">36</td>
+   <td data-field="par2_mean">522.12</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">403</td>
+   <td data-field="mean_calls">423.853</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 5</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="GeometryOptimization.jl (0.1.6) · CG">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">GeometryOptimization.jl (0.1.6) · CG</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">39</td>
+   <td data-field="par2_mean">549.432</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">372</td>
+   <td data-field="mean_calls">392.24</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 3, wrong_stationary 5</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="GeometryOptimization.jl (0.1.6) · LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">GeometryOptimization.jl (0.1.6) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">49</td>
+   <td data-field="par2_mean">667.265</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">351.5</td>
+   <td data-field="mean_calls">373.239</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 4, wrong_stationary 11</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="GeometryOptimization.jl (0.1.6) · LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">GeometryOptimization.jl (0.1.6) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">52</td>
+   <td data-field="par2_mean">727.953</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">371</td>
+   <td data-field="mean_calls">394.185</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 14, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="GeometryOptimization.jl (0.1.6) · CG">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">GeometryOptimization.jl (0.1.6) · CG</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">55</td>
+   <td data-field="par2_mean">772.001</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">396.5</td>
+   <td data-field="mean_calls">419.511</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 13, wrong_stationary 5</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="GeometryOptimization.jl (0.1.6) · CG">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">GeometryOptimization.jl (0.1.6) · CG</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">85</td>
+   <td data-field="par2_mean">2184.05</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">295</td>
+   <td data-field="mean_calls">312.206</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 2, wrong_stationary 93</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="GeometryOptimization.jl (0.1.6) · LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">GeometryOptimization.jl (0.1.6) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">87</td>
+   <td data-field="par2_mean">2238.48</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">291</td>
+   <td data-field="mean_calls">308.08</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 3, wrong_stationary 95</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="GeometryOptimization.jl (0.1.6) · GradientDescent">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">GeometryOptimization.jl (0.1.6) · GradientDescent</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">132</td>
+   <td data-field="par2_mean">20000</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="mean_calls">10000</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1000, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="GeometryOptimization.jl (0.1.6) · GradientDescent">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">GeometryOptimization.jl (0.1.6) · GradientDescent</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">133</td>
+   <td data-field="par2_mean">20000</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="mean_calls">10000</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1000, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="GeometryOptimization.jl (0.1.6) · GradientDescent">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">GeometryOptimization.jl (0.1.6) · GradientDescent</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">134</td>
+   <td data-field="par2_mean">20000</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="mean_calls">10000</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1000, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="GeometryOptimization.jl (0.1.6) · GradientDescent">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">GeometryOptimization.jl (0.1.6) · GradientDescent</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">135</td>
+   <td data-field="par2_mean">20000</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="mean_calls">10000</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1000, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-label="GeometryOptimization.jl (0.1.6) · LBFGS">
+   <td>Morse bulk</td>
+   <td data-field="label">GeometryOptimization.jl (0.1.6) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">24</td>
+   <td data-field="par2_mean">46.28</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">47</td>
+   <td data-field="mean_calls">46.28</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-label="GeometryOptimization.jl (0.1.6) · CG">
+   <td>Morse bulk</td>
+   <td data-field="label">GeometryOptimization.jl (0.1.6) · CG</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">25</td>
+   <td data-field="par2_mean">46.32</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">47</td>
+   <td data-field="mean_calls">46.32</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-label="GeometryOptimization.jl (0.1.6) · GradientDescent">
+   <td>Morse bulk</td>
+   <td data-field="label">GeometryOptimization.jl (0.1.6) · GradientDescent</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">60</td>
+   <td data-field="par2_mean">169.08</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">135.5</td>
+   <td data-field="mean_calls">169.08</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table></div>
+   </section>
+#+end_export

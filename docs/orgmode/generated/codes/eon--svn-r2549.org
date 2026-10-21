@@ -13,9 +13,23 @@
    <div class="bench-scroll"><table data-board-table="code-rows">
    <caption>Every ranked row for this code.</caption>
    <thead><tr><th>Problem</th><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="hTST/Al" data-label="EON (SVN r2549) (r2549) · Dimer-CG rotation: max=50 tol=1">
+   <tr data-problem="globalopt/lj100-binary" data-label="EON (SVN r2549) · Basin hopping">
+   <td>Binary Lennard-Jones 100</td>
+   <td data-field="label">EON (SVN r2549) · Basin hopping</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">4</td>
+   <td data-field="par2_mean">4e+06</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">2e+06</td>
+   <td data-field="mean_calls">2e+06</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 100, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="hTST/Al" data-label="EON (SVN r2549) · Dimer-CG rotation: max=50 tol=1">
    <td>Al</td>
-   <td data-field="label">EON (SVN r2549) (r2549) · Dimer-CG rotation: max=50 tol=1</td>
+   <td data-field="label">EON (SVN r2549) · Dimer-CG rotation: max=50 tol=1</td>
    <td data-field="family">Minimum mode</td>
    <td data-field="family_rank">3</td>
    <td data-field="par2_mean"></td>
@@ -24,7 +38,7 @@
    <td data-field="mean_calls">45626.9</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">639</td>
    </tr>
    </tbody></table></div>

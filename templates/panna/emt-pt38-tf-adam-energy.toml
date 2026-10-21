@@ -1,0 +1,36 @@
+id = "panna/emt-pt38-tf-adam-energy"
+engine = "panna"
+problem = "mlopt/emt-pt38"
+code = "PANNA"
+code_version = "2.1.0"
+commit = "132a2df662598ecbbb2c9b8d37b992bb6ada6348"
+algorithm = "Adam"
+tuning = "default"
+profile = "default"
+ranked = true
+reducer = "capped"
+note = "TensorFlow Adam as constructed in PANNA 2.1.0 src/panna/neuralnet/config_parser_train.py. The learning rate is 0.01. beta1 is 0.9, beta2 is 0.999, epsilon is 1e-7, and amsgrad is off. The loss is the mlopt squared error on the archived Behler-Parrinello fingerprints, with hidden layers 10 and 7, tanh on the hidden layers, a linear output, uniform[-1, 1) weights, one batch, and no scaler. One harness call is one full-batch loss and gradient. The stop is the largest Euclidean norm of a parameter-tensor gradient. A call that reaches the cap is a cap failure. The network and the Adam update run in float64. The force coefficient is 0, so the force RMSE is -1."
+
+[panna]
+trainer = "tensorflow"
+loss = "squared-error"
+energy_coefficient = 1.0
+force_coefficient = 0.0
+hidden = [10, 7]
+activation = "tanh"
+fingerprints = "archive/entries/mlopt/emt-pt38/pyamff-adam10-7-fcoeff0/fpParas.dat"
+initialization = "uniform[-1, 1)"
+initialization_seed = 20261015
+batch = "full"
+
+[stop]
+grad_norm = 0.02
+grad_norm_reduction = "l2-parameter-set"
+max_force_calls = 10000
+
+[optimizer]
+learning_rate = 0.01
+beta_1 = 0.9
+beta_2 = 0.999
+epsilon = 1.0e-7
+amsgrad = false

@@ -25,6 +25,12 @@ force_norm = 0.01
 force_unit = "energy/distance"
 max_force_calls = 10000
 
+[bound]
+kind = "cluster"
+scale = 1.5
+length = "sigma"
+atoms = 38
+
 [metrics]
 required = ["force_calls", "force_calls_max", "force_calls_min", "nfailed"]
 
@@ -44,7 +50,7 @@ version = "par2-bootstrap"
 par_factor = 2
 bootstrap_resamples = 2000
 bootstrap_seed = 20261015
-success = "harness force calls under the cap, the force norm at the stop, and vibrational Hessian index 0. The six rigid modes of the free cluster are removed before the count. A curvature counts as negative only below -max(force_norm, 1e-8*||H||_F, 1e-6). Energy and Kabsch RMSD are not applied: this file has no energy_tol, rmsd_tol, or per-start reference."
+success = "harness force calls under the cap, the force norm at the stop, vibrational Hessian index 0, and one connected cluster. Neighbours lie within 1.5 sigma. The six rigid modes of the free cluster are removed before the count. A curvature counts as negative only below -max(force_norm, 1e-8*||H||_F, 1e-6). A dissociated cluster is divergence. Energy and Kabsch RMSD are not applied: this file has no energy_tol, rmsd_tol, or per-start reference."
 
 counter = "harness"
 required = [
@@ -69,6 +75,7 @@ required = [
   "n_cap",
   "n_wrong_stationary",
   "n_divergence",
+  "n_not_converged",
   "n_crash",
 ]
 

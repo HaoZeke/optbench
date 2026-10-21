@@ -24,7 +24,7 @@
    <td data-field="mean_calls">496000</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
    <tr data-problem="hTST/Pt" data-label="Eon r2006 · Lanczos-CG rotation: max=50, tol=0.05">
@@ -38,7 +38,7 @@
    <td data-field="mean_calls">653000</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
    <tr data-problem="hTST/Pt" data-label="Eon r2006 · Lanczos-CG rotation: max=10, tol=0.05">
@@ -52,7 +52,7 @@
    <td data-field="mean_calls">673700</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
    <tr data-problem="hTST/Pt" data-label="Eon r2006 · Dimer-CG rotation: max=50, tol=1">
@@ -66,7 +66,7 @@
    <td data-field="mean_calls">727100</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
    <tr data-problem="hTST/Pt" data-label="Eon r2006 · Dimer-LBFGS rotation: max=50, tol=1">
@@ -80,7 +80,7 @@
    <td data-field="mean_calls">778800</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
    <tr data-problem="hTST/Pt" data-label="Eon r2006 · Dimer-LBFGS rotation: max=10, tol=1">
@@ -94,7 +94,7 @@
    <td data-field="mean_calls">1.122e+06</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
    <tr data-problem="hTST/Pt" data-label="Eon r2006 · Lanczos-LBFGS rotation: max=10, tol=0.05">
@@ -108,7 +108,7 @@
    <td data-field="mean_calls">1.284e+06</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
    <tr data-problem="hTST/Pt" data-label="Eon r2006 · Lanczos-LBFGS rotation: max=50, tol=0.05">
@@ -122,7 +122,7 @@
    <td data-field="mean_calls">1.497e+06</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
    </tbody></table></div>

@@ -11,7 +11,13 @@
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
    <td>saddle search</td>
-   <td>svn-snapshot</td>
+   <td>df8da599267534fbe43a250e578f7396a7946311</td>
+   <td>df8da5992675</td>
+   <td><a href="https://www-wales.ch.cam.ac.uk/svn.tar.bz2">https://www-wales.ch.cam.ac.uk/svn.tar.bz2</a></td>
+   </tr>
+   <tr>
+   <td>minimization and saddle search</td>
+   <td>svn-export</td>
    <td>02aaf45245af</td>
    <td><a href="http://www-wales.ch.cam.ac.uk/svn.tar.bz2">http://www-wales.ch.cam.ac.uk/svn.tar.bz2</a></td>
    </tr>
@@ -30,21 +36,63 @@
    <td data-field="mean_calls">131</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38" data-label="OPTIM (df8da599) · DNEB + hybrid eigenvector following">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="label">OPTIM (df8da599) · DNEB + hybrid eigenvector following</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">2</td>
+   <td data-field="par2_mean">146.82</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">129</td>
+   <td data-field="mean_calls">146.82</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38" data-label="OPTIM (df8da599) · PATHSAMPLE">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="label">OPTIM (df8da599) · PATHSAMPLE</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">3</td>
+   <td data-field="par2_mean">148.84</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">131</td>
+   <td data-field="mean_calls">148.84</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38" data-label="OPTIM · climbing string">
    <td>LJ38 double-ended saddle</td>
    <td data-field="label">OPTIM · climbing string</td>
    <td data-field="family">Connect / double-ended</td>
-   <td data-field="family_rank">3</td>
+   <td data-field="family_rank">5</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">786</td>
    <td data-field="median_calls">625</td>
    <td data-field="mean_calls">786</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38" data-label="OPTIM (df8da599) · DNEB/HEF problem images">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="label">OPTIM (df8da599) · DNEB/HEF problem images</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">17</td>
+   <td data-field="par2_mean">4386.62</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">2500</td>
+   <td data-field="mean_calls">2386.62</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 40, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="OPTIM · DNEB + hybrid eigenvector following + Djikstra shortest path">
@@ -58,7 +106,49 @@
    <td data-field="mean_calls">2885</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="OPTIM (df8da599) · DNEB + hybrid eigenvector following + Dijkstra">
+   <td>lj38_2ts_separation</td>
+   <td data-field="label">OPTIM (df8da599) · DNEB + hybrid eigenvector following + Dijkstra</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">4</td>
+   <td data-field="par2_mean">71607.5</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">3268</td>
+   <td data-field="mean_calls">4352.61</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 7, wrong_stationary 0</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="OPTIM (df8da599) · PATHSAMPLE">
+   <td>lj38_2ts_separation</td>
+   <td data-field="label">OPTIM (df8da599) · PATHSAMPLE</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">5</td>
+   <td data-field="par2_mean">81388.6</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">3377</td>
+   <td data-field="mean_calls">4525.86</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 8, wrong_stationary 0</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="OPTIM (df8da599) · DNEB/HEF problem images">
+   <td>lj38_2ts_separation</td>
+   <td data-field="label">OPTIM (df8da599) · DNEB/HEF problem images</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">8</td>
+   <td data-field="par2_mean">277282</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="mean_calls">8115.2</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 27, wrong_stationary 1</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-label="OPTIM · DNEB + hybrid eigenvector following">
@@ -72,21 +162,63 @@
    <td data-field="mean_calls">103</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-label="OPTIM (df8da599) · DNEB + hybrid eigenvector following">
+   <td>pt-island</td>
+   <td data-field="label">OPTIM (df8da599) · DNEB + hybrid eigenvector following</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">2</td>
+   <td data-field="par2_mean">138</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">133</td>
+   <td data-field="mean_calls">138</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-label="OPTIM (df8da599) · PATHSAMPLE">
+   <td>pt-island</td>
+   <td data-field="label">OPTIM (df8da599) · PATHSAMPLE</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">3</td>
+   <td data-field="par2_mean">145.559</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">137</td>
+   <td data-field="mean_calls">145.559</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-label="OPTIM · climbing string">
    <td>pt-island</td>
    <td data-field="label">OPTIM · climbing string</td>
    <td data-field="family">Connect / double-ended</td>
-   <td data-field="family_rank">4</td>
+   <td data-field="family_rank">7</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">319</td>
    <td data-field="median_calls">286</td>
    <td data-field="mean_calls">319</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-label="OPTIM (df8da599) · DNEB/HEF problem images">
+   <td>pt-island</td>
+   <td data-field="label">OPTIM (df8da599) · DNEB/HEF problem images</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">17</td>
+   <td data-field="par2_mean">1465.73</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1379</td>
+   <td data-field="mean_calls">1465.73</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
    <tr data-problem="lowest-eigenvector/lj38" data-label="OPTIM · hybrid eigenvector following">
@@ -100,7 +232,21 @@
    <td data-field="mean_calls">25</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="lowest-eigenvector/lj38" data-label="OPTIM (df8da599) · Rayleigh-Ritz">
+   <td>lj38</td>
+   <td data-field="label">OPTIM (df8da599) · Rayleigh-Ritz</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">20</td>
+   <td data-field="par2_mean">60.97</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">58</td>
+   <td data-field="mean_calls">60.97</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="OPTIM · L-BFGS">
@@ -114,50 +260,148 @@
    <td data-field="mean_calls">176</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/lj38" data-label="OPTIM (svn-snapshot) · L-BFGS">
+   <tr data-problem="minimization/lj38" data-label="OPTIM (df8da599) · L-BFGS">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="label">OPTIM (svn-snapshot) · L-BFGS</td>
+   <td data-field="label">OPTIM (df8da599) · L-BFGS</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">17</td>
+   <td data-field="family_rank">18</td>
    <td data-field="par2_mean">270.341</td>
    <td data-field="published"></td>
    <td data-field="median_calls">217</td>
    <td data-field="mean_calls">230.724</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 2</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 2</td>
    <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38" data-label="OPTIM (df8da599) · LBFGS">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="label">OPTIM (df8da599) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">23</td>
+   <td data-field="par2_mean">290.805</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">218.5</td>
+   <td data-field="mean_calls">231.531</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="OPTIM (df8da599) · LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">OPTIM (df8da599) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">11</td>
+   <td data-field="par2_mean">290.805</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">218.5</td>
+   <td data-field="mean_calls">231.531</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="OPTIM (df8da599) · LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">OPTIM (df8da599) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">23</td>
+   <td data-field="par2_mean">389.496</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">219</td>
+   <td data-field="mean_calls">231.111</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 5, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="OPTIM (df8da599) · LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">OPTIM (df8da599) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">42</td>
+   <td data-field="par2_mean">575.481</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">205</td>
+   <td data-field="mean_calls">218.934</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 4, wrong_stationary 14</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="OPTIM (df8da599) · LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">OPTIM (df8da599) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">70</td>
+   <td data-field="par2_mean">1823.06</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">168</td>
+   <td data-field="mean_calls">177.256</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 4, wrong_stationary 79</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-label="OPTIM (df8da599) · LBFGS">
+   <td>Morse bulk</td>
+   <td data-field="label">OPTIM (df8da599) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">22</td>
+   <td data-field="par2_mean">45.7</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">46</td>
+   <td data-field="mean_calls">45.7</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="OPTIM · L-BFGS">
    <td>Morse bulk</td>
    <td data-field="label">OPTIM · L-BFGS</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">16</td>
+   <td data-field="family_rank">23</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">46</td>
    <td data-field="median_calls">45</td>
    <td data-field="mean_calls">46</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
-   <tr data-problem="minimization/morse-bulk" data-label="OPTIM (svn-snapshot) · L-BFGS">
+   <tr data-problem="minimization/morse-bulk" data-label="OPTIM (df8da599) · L-BFGS">
    <td>Morse bulk</td>
-   <td data-field="label">OPTIM (svn-snapshot) · L-BFGS</td>
+   <td data-field="label">OPTIM (df8da599) · L-BFGS</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">59</td>
+   <td data-field="family_rank">74</td>
    <td data-field="par2_mean">17408.8</td>
    <td data-field="published"></td>
    <td data-field="median_calls">65</td>
    <td data-field="mean_calls">65.19</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 87</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 87</td>
    <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-label="OPTIM (df8da599) · DNEB/HEF problem images">
+   <td>Pt-heptamer</td>
+   <td data-field="label">OPTIM (df8da599) · DNEB/HEF problem images</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">10</td>
+   <td data-field="par2_mean">913.538</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">888</td>
+   <td data-field="mean_calls">913.538</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-label="OPTIM · hybrid eigenvector following">
    <td>LJ38</td>
@@ -170,7 +414,35 @@
    <td data-field="mean_calls">145</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/LJ38" data-label="OPTIM (df8da599) · hybrid eigenvector-following">
+   <td>LJ38</td>
+   <td data-field="label">OPTIM (df8da599) · hybrid eigenvector-following</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">3</td>
+   <td data-field="par2_mean">488.835</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">360</td>
+   <td data-field="mean_calls">488.835</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/LJ38" data-label="OPTIM (df8da599) · BFGS-TS">
+   <td>LJ38</td>
+   <td data-field="label">OPTIM (df8da599) · BFGS-TS</td>
+   <td data-field="family">Single-ended saddle</td>
+   <td data-field="family_rank">6</td>
+   <td data-field="par2_mean">835.01</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">639</td>
+   <td data-field="mean_calls">835.01</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="tsopt/pt-island" data-label="OPTIM · hybrid eigenvector following">
@@ -184,7 +456,35 @@
    <td data-field="mean_calls">71</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">49</td>
+   </tr>
+   <tr data-problem="tsopt/pt-island" data-label="OPTIM (df8da599) · hybrid eigenvector-following">
+   <td>pt-island</td>
+   <td data-field="label">OPTIM (df8da599) · hybrid eigenvector-following</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">3</td>
+   <td data-field="par2_mean">170.122</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">178</td>
+   <td data-field="mean_calls">170.122</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">49</td>
+   </tr>
+   <tr data-problem="tsopt/pt-island" data-label="OPTIM (df8da599) · BFGS-TS">
+   <td>pt-island</td>
+   <td data-field="label">OPTIM (df8da599) · BFGS-TS</td>
+   <td data-field="family">Single-ended saddle</td>
+   <td data-field="family_rank">5</td>
+   <td data-field="par2_mean">281.592</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">297</td>
+   <td data-field="mean_calls">281.592</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>
    </tbody></table></div>

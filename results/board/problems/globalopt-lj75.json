@@ -62,6 +62,7 @@
         "cap": 196,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "family": "global",
@@ -112,6 +113,7 @@
         "cap": 199,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "family": "global",
@@ -162,6 +164,7 @@
         "cap": 200,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "family": "global",
@@ -211,9 +214,10 @@
       "counter": "harness",
       "entry": "airss-0.9.4-lj75",
       "failures": {
-        "cap": 200,
+        "cap": 0,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 200,
         "wrong_stationary": 0
       },
       "family": "global",

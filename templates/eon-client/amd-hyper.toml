@@ -11,11 +11,11 @@ kind = "hyper"
 kernel = "eam"
 asv_class = "EonClientAmdHyper"
 note = '''
-Safe hyperdynamics on the accelerated-md reactant. No 2014 ini is in the archive. bias_potential is bond_boost. The bond-boost amplitudes are the r2549 defaults, including bb_dvmax 0. The dynamics block matches the parallel-replica canary. SVN job name is safe_hyper. The 3.5.0 job name is safe_hyperdynamics. Success is transition_found 1. The row is partial. The harness kernel is the r2549 Aluminum EAM Fortran force routine, called in process.
+Safe hyperdynamics on the accelerated-md reactant. No 2014 ini is in the archive. bias_potential is bond_boost. The bond-boost amplitudes are the r2549 defaults, including bb_dvmax 0. The dynamics block matches the parallel-replica canary. SVN job name is safe_hyper. The 3.5.0 job name is safe_hyperdynamics. Success is transition_found 1. The row is short. The harness kernel is the r2549 Aluminum EAM Fortran force routine, called in process.
 '''
 seeds = [1000]
 starts = ["reactant"]
-declare_partial = true
+declare_short = true
 asv_full = false
 asv_timeout = 3600
 budget_seconds = 2400

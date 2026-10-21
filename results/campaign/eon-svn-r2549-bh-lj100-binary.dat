@@ -1,0 +1,18 @@
+avg_energy -530.059
+min_energy -550.76
+max_energy -512
+n 100
+code EON (SVN r2549)
+code_version r2549
+commit r2549
+algorithm Basin hopping
+template eon-svn-r2549/bh-lj100-binary
+problem globalopt/lj100-binary
+reducer harness
+counter harness
+tuning default
+cap 2000000
+call_unit total
+force_calls 2000000
+nfailed 100
+par2_mean 4e+06

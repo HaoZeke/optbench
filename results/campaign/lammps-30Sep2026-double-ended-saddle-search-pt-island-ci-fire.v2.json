@@ -40,7 +40,9 @@
       "potential": "morse_pt",
       "seed": "0",
       "spring_k": 1.0,
+      "step_budget": "slack",
       "timestep": 0.001,
+      "timestep_scale": 1.0,
       "units": "metal"
     }
   },
@@ -58,9 +60,9 @@
     "median_high": 1850.0,
     "median_low": 1655.0,
     "n": 59,
-    "n_cap": 0,
+    "n_cap": 6,
     "n_crash": 0,
-    "n_divergence": 6,
+    "n_divergence": 0,
     "n_wrong_stationary": 9,
     "nfailed": 15,
     "par2_mean": 2668.64406779661,

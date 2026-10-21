@@ -137,3 +137,79 @@ def test_registry_pins_r2549():
     row = next(item for item in data["code"] if item["id"] == "eon-svn")
     assert row["commit"] == "r2549"
     assert row["name"] == "Eon svn"
+
+
+def _dissociated_line() -> list[float]:
+    point = []
+    for index in range(38):
+        point.extend((float(index) * 3.0, 0.0, 0.0))
+    return point
+
+
+def test_noise_endpoint_marks_a_dissociated_cluster():
+    from benchmarks.bench_eon_svn import bind_noise_endpoint
+    from optbench.eon_svn import _endpoint_row, _public_row
+
+    point = _dissociated_line()
+    record = {"force_calls": 20.0, "success": False, "failure": "wrong_stationary", "hessian_index": 1}
+    bind_noise_endpoint(record, point, -100.0, 0.01)
+    assert record["success"] is False
+    assert record["failure"] == "divergence"
+    assert "divergence" in record["reasons"]
+    assert record["energy"] == -100.0
+    assert len(record["positions"]) == 114
+    public = _public_row({**record, "seed": "20261016", "start": "cluster_0000"})
+    assert "positions" not in public
+    assert public["energy"] == -100.0
+    assert public["failure"] == "divergence"
+    endpoint = _endpoint_row({**record, "seed": "20261016", "start": "cluster_0000"})
+    assert endpoint["positions"] == [float(value) for value in point]
+    assert endpoint["energy"] == -100.0
+
+
+def test_noise_endpoint_keeps_a_cap():
+    from benchmarks.bench_eon_svn import bind_noise_endpoint
+
+    point = _dissociated_line()
+    record = {"force_calls": 10000.0, "success": False, "failure": "cap"}
+    bind_noise_endpoint(record, point, -50.0, 0.01)
+    assert record["success"] is False
+    assert record["failure"] == "cap"
+    assert record["reasons"] == ["cap"]
+    assert record["energy"] == -50.0
+    assert record["positions"] == [float(value) for value in point]
+
+
+def test_method_pool_updates_every_copy_of_a_method():
+    from optbench.eon_svn import apply_method_pool
+
+    noise = "bench_eon_svn.EonSvnLj38Noise0.track_success"
+    other = "bench_eon_svn.EonSvnTsLj38Dimer.track_success"
+    first = {
+        "results": {
+            noise: [[0.0], [["'1'"]], "r2549", 1, 1.0],
+            other: [[1.0], [["'1'"]], "r2549", 1, 2.0],
+        }
+    }
+    second = {
+        "results": {
+            noise: [[0.0], [["'1'"]], "r2549", 1, 1.0],
+            "bench_other.Keep.track_success": [[1.0]],
+        }
+    }
+    untouched = {"results": {"bench_other.Keep.track_success": [[1.0]]}}
+    entry = [[1.0], [["'1'"]], "r2549", 9, 3.0]
+    changed, leftover = apply_method_pool([first, second, untouched], {noise: entry})
+    assert changed == [0, 1]
+    assert leftover == {}
+    assert first["results"][noise] == entry
+    assert second["results"][noise] == entry
+    assert first["results"][other] == [[1.0], [["'1'"]], "r2549", 1, 2.0]
+    assert "bench_eon_svn.EonSvnLj38Noise0.track_success" not in untouched["results"]
+    fresh = "bench_eon_svn.EonSvnLj38Noise1em2.track_success"
+    changed, leftover = apply_method_pool([first, second, untouched], {fresh: entry})
+    assert changed == [0]
+    assert leftover == {}
+    assert first["results"][fresh] == entry
+    assert fresh not in second["results"]
+    assert fresh not in untouched["results"]

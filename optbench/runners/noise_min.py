@@ -22,8 +22,9 @@ import time
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 
+from optbench.bound import note_unbound
 from optbench.counter import ForceCallCap, HarnessCounter
-from optbench.failures import classify_failure
+from optbench.failures import classify_outcome
 from optbench.noise import (
     KAPPA,
     WINDOW,
@@ -34,7 +35,7 @@ from optbench.noise import (
 from optbench.noise_catalog import HESSIAN_METHODS, allows_method
 from optbench.potentials import lennard_jones, lennard_jones_hessian
 from optbench.potserver import RgpotCounter
-from optbench.score import score_v2, summarize_capped
+from optbench.score import finite_difference_equivalent, score_v2, summarize_capped
 from optbench.stationary import curvature_tolerance, negative_index, vibrational_eigenvalues
 from optbench.v2 import collect_provenance, write_starts
 
@@ -217,7 +218,23 @@ def _minimize_job(job: dict) -> dict:
         reasons.append("force_norm")
     elif hessian_index != 0:
         reasons.append("hessian_index")
-    failure = classify_failure(reasons)
+    before = "divergence" in reasons
+    if finite and point is not None:
+        note_unbound(reasons, point, kind="lj")
+    cap_error = bool(error) and ("force-call cap" in error or "ForceCallCap" in error)
+    failure = classify_outcome(
+        energy=energy,
+        geometry=point,
+        force=force_norm,
+        calls=float(cap) if cap_error else calls,
+        cap=cap,
+        force_tol=threshold,
+        process_failed=bool(error) and not cap_error,
+        dissociated="divergence" in reasons and not before,
+        hessian_index=hessian_index,
+        expected_index=0 if hessian_index is not None else None,
+        force_above=False if at_force or not finite or cap_error or (error and not cap_error) else True,
+    )
     record = {
         "schema": "optbench.start/v2",
         "start": job["start"],
@@ -500,6 +517,8 @@ def _dat(summary: dict, template: dict, metrics: dict, sigma: float) -> str:
         "counter": "harness",
         "problem": template.get("problem"),
         "sigma": sigma,
+        "hessian_evals": metrics.get("hessian_evals"),
+        "fd_equivalent": metrics.get("fd_equivalent"),
         "par2_mean": metrics.get("par2_mean"),
         "rate_low": metrics.get("rate_low"),
         "rate_high": metrics.get("rate_high"),
@@ -520,6 +539,10 @@ def _dat(summary: dict, template: dict, metrics: dict, sigma: float) -> str:
         "# A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6).",
         "# Energy and Kabsch RMSD are not applied: the problem file has no per-start reference.",
     ]
+    if metrics.get("fd_equivalent") is not None:
+        lines.append(
+            "# fd_equivalent is the mean, over every start, of analytic Hessian evaluations times the coordinate count."
+        )
     note = str(template.get("note") or "").strip()
     if note:
         lines.append("# " + note.replace("\n", " "))
@@ -657,6 +680,13 @@ def run_template(
         ],
         cap,
     )
+    if str(solver.get("method") or "") in HESSIAN_METHODS and jobs:
+        coordinates = len(jobs[0]["coords"])
+        hessians = [float(record.get("hessian_calls") or 0) for record in records]
+        metrics["hessian_evals"] = sum(hessians) / len(hessians)
+        metrics["fd_equivalent"] = sum(
+            finite_difference_equivalent(value, coordinates) for value in hessians
+        ) / len(hessians)
     passed = {"sigma": sigma, "family": family, "method": method, "cap": cap, "energy_tol": energy_tol, **options}
     provenance = collect_provenance(
         code=str(template.get("code")),

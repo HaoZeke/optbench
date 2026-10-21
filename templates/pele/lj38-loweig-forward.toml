@@ -1,0 +1,24 @@
+id = "pele/lj38-loweig-forward"
+engine = "pele"
+code = "pele"
+code_version = "0.1.2"
+commit = "b7081b932a060be11342fbe8287ac35da8ada879"
+algorithm = "lowest eigenvector"
+problem = "lowest-eigenvector/lj38"
+task = "lowest-eigenvector"
+tuning = "tuned"
+note = "2014 first-order lowest-eigenvector search. The overlap stop is 0.99. Memory is 100 and the step cap is 2."
+
+[stop]
+max_force_calls = 10000
+
+[mode]
+first_order = true
+dx = 0.001
+nsteps = 500
+tol = 0.99
+overlap_stop = true
+maxstep = 2.0
+M = 100
+orthog = "translations-rotations"
+eigenvec0 = "initial-mode"

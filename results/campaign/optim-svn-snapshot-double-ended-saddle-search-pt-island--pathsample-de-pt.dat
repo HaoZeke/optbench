@@ -1,0 +1,20 @@
+# counter harness. PATHSAMPLE launches OPTIM. Each ASE COMPUTE on every child is one pes.evaluate.
+# odata.connect is de-pt.txt. Endpoint quenches are min-pt.txt plus DUMPDATA and NOFRQS.
+# CONNECTIONS 1 1. Archive OPTIM force_calls 103 is one OPTIM process on wales-27058.
+# wall_s_median 10.3028
+force_calls 146
+force_calls_min 99
+force_calls_max 459
+force_calls_median 137
+successes 59
+nfailed 0
+n 59
+transition_states 59
+code optim
+code_version svn-snapshot
+commit 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f
+algorithm PATHSAMPLE
+template pathsample/de-pt
+problem double-ended-saddle-search/pt-island
+tuning wales-2014
+counter harness

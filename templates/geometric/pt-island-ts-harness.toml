@@ -1,0 +1,43 @@
+id = "geometric/pt-island-ts-harness"
+engine = "geometric"
+code = "geomeTRIC"
+code_version = "1.1.1"
+commit = "f657e69bae9c81bf7a23e7375db98502ca5c8c30"
+algorithm = "geomeTRIC"
+problem = "tsopt/pt-island"
+task = "transition"
+profile = "harness"
+reducer = "all"
+ranked = true
+parameter_source = "harness"
+note = "geomeTRIC 1.1.1 transition-state search on the free atoms. Substrate atoms stay at the input coordinates. Coordinates are Cartesian because delocalized internals on this slab did not finish building. The initial Hessian is the harness smooth Morse Hessian on the free coordinates, charged as the 2*3*N finite-difference stencil it replaces. Net force and torque stay in the gradient. v2 success is the harness cap, the Euclidean force norm 0.001, and Hessian index 1."
+
+[optimizer]
+name = "geometric"
+
+[potential]
+kind = "morse"
+D = 0.7102
+alpha = 1.6047
+r0 = 2.897
+rc = 9.5
+form = "smooth"
+pbc = [true, true, false]
+
+[stop]
+norm = "l2"
+force_norm = 0.001
+max_steps = 10000
+max_force_calls = 10000
+
+[input]
+archive_path = "website/tsopt/pt-island/pt-island-con.tgz"
+select = "initial"
+
+[geometric]
+coordsys = "cart"
+hessian = "harness"
+subfrctor = 0
+maxiter = 10000
+convergence_gmax = 1e-8
+convergence_grms = 1e-8

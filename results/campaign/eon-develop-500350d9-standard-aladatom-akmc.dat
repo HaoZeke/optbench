@@ -1,0 +1,28 @@
+# rep 1 force_calls 1922222 total_searches 2360 repeats 20 eon_repeats 20 rate 38077380 confidence 0.95 reached 1
+# rep 2 force_calls 3614953 total_searches 4360 repeats 20 eon_repeats 20 rate 38073680 confidence 0.95 reached 1
+# rep 3 force_calls 3092343 total_searches 3808 repeats 20 eon_repeats 20 rate 38080200 confidence 0.95 reached 1
+code eOn
+code_version (develop 500350d9)
+commit 500350d9fae881f06c7ef194e5868da079c4be5a
+counter harness
+count_keys eon_search_calls
+contributor Rohit Goswami
+repetitions 3
+workers 8
+temperature_K 150
+thermostat akmc
+reference_rate 835900
+reference_products 5000
+true_rate 38077086.67
+uncertainty 1887.867698
+percent_uncertainty 0.004958015077
+rate_accuracy 0
+catalogue_accuracy 0.8250804257
+force_calls_per_simulated_time 2.190579354e+10
+force_calls 2876506
+nfailed 0
+algorithm AKMC dimer
+template eon-develop/standard-aladatom-akmc
+problem accelerated-md/standard_aladatom
+reducer amd-catalogue
+par2_mean 2.87651e+06

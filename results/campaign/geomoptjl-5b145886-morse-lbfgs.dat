@@ -1,0 +1,29 @@
+# counter harness. One force call is one RgpotCounter.calculate entry.
+# GeometryOptimization LBFGS, CG, and GradientDescent call the spec potential.
+# The callback stops at the problem Euclidean force norm, or the noise-aware rule.
+# v2 success is under the cap, at that stop, and Hessian index 0.
+# GeometryOptimization 0.1.6 OptimLBFGS uses the Hager-Zhang initial step. BackTracking linesearch of order 2 and maxstep 0.8 bohr. The iteration ceiling is the force-call cap. The potential is the harness callback. The callback stops at the Euclidean force norm 0.001 eV/Å. Positions are angstrom and the energy is eV. The solver converts those to atomic units internally. The recorded force is the spec gradient in eV/Å.
+force_calls 46
+force_calls_min 39
+force_calls_max 49
+nfailed 0
+median 47
+code GeometryOptimization.jl
+code_version 0.1.6
+commit 5b145886c19042f2ef13e21627f28d86027f719c
+algorithm LBFGS
+template geomoptjl/morse-lbfgs
+tuning default
+counter harness
+problem minimization/morse-bulk
+par2_mean 46.28
+wilson_low 0.963006501793
+wilson_high 1
+par2_median 47
+par2_median_low 47
+par2_median_high 47
+v2_nfailed 0
+v2_successes 100
+n 100
+energy_min -1396.17323767
+energy_max -1396.17323762

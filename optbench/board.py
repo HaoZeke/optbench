@@ -35,7 +35,7 @@ from pathlib import Path
 
 from .campaign import geometry_archive, list_templates
 from .dat import DatError, parse_lenient
-from .failures import FAILURES
+from .failures import FAILURES, apply_taxonomy, components_for
 from .families import (
     FAMILIES,
     coordinate_count,
@@ -44,9 +44,9 @@ from .families import (
     family_title,
     finite_difference_calls,
     is_adjusted,
+    display_version,
     method_name,
     row_label,
-    version_text,
 )
 from .problems import load_all
 from .profile import performance_profile, profile_cost
@@ -85,12 +85,13 @@ def _json_lines(path: Path) -> list[dict]:
 def stated_full_n(root: Path, problem: dict) -> int | None:
     """How many starts the problem file calls a complete score.
 
-    ``sample.starts`` or ``sample.pairs`` wins. A minimization archive
-    with no sample count uses the number of ``.con`` files, which is
-    the Morse bulk set.
+    ``sample.starts``, ``sample.pairs``, ``sample.repetitions``, or
+    ``sample.initializations`` wins. A minimization archive with no
+    sample count uses the number of ``.con`` files, which is the Morse
+    bulk set.
     """
     sample = problem.get("sample") or {}
-    for key in ("starts", "pairs", "repetitions"):
+    for key in ("starts", "pairs", "repetitions", "initializations"):
         value = sample.get(key)
         if value not in (None, "", 0, "0"):
             return int(value)
@@ -324,7 +325,12 @@ def _force_tol(problem: dict | None, template: dict | None) -> float | None:
     return None
 
 
-def _record_from_raw(raw: dict, cap: int | None, force_tol: float | None) -> dict | None:
+def _record_from_raw(
+    raw: dict,
+    cap: int | None,
+    force_tol: float | None,
+    problem_id: str | None = None,
+) -> dict | None:
     if not isinstance(raw, dict):
         return None
     calls = raw.get("force_calls", raw.get("raw", raw.get("per_search")))
@@ -361,25 +367,47 @@ def _record_from_raw(raw: dict, cap: int | None, force_tol: float | None) -> dic
             pass
     if raw.get("call_unit"):
         record["call_unit"] = str(raw["call_unit"])
-    if success:
-        return record
-    if failure in FAILURES:
+    for key in (
+        "energy",
+        "force_norm",
+        "geometry",
+        "coords",
+        "x",
+        "point",
+        "positions",
+        "hessian_index",
+        "expected_index",
+        "reasons",
+        "error",
+        "sigma",
+        "max_displacement",
+        "displacement_bound",
+        "client_reason",
+        "problem",
+        "overlap",
+        "lammps_stop",
+        "step_limit",
+        "replica_stops",
+        "replica_blocks",
+    ):
+        if key not in raw or raw[key] is None:
+            continue
+        if key in {"geometry", "coords", "x", "point", "positions"} and isinstance(raw[key], str):
+            continue
+        record[key] = raw[key]
+    record["success"] = success
+    if failure is not None:
         record["failure"] = failure
-        return record
-    reasons = raw.get("reasons")
-    if isinstance(reasons, list) and reasons:
-        record["reasons"] = [str(item) for item in reasons]
-        return record
-    if raw.get("error"):
-        record["failure"] = "crash"
-    elif cap is not None and calls >= cap:
-        record["failure"] = "cap"
-    elif force_tol is not None and raw.get("force_norm") not in (None, ""):
-        try:
-            above = float(raw["force_norm"]) > force_tol
-        except (TypeError, ValueError):
-            above = True
-        record["failure"] = "divergence" if above else "wrong_stationary"
+    stated = problem_id or (raw.get("problem") if isinstance(raw.get("problem"), str) else None)
+    revised = apply_taxonomy(record, cap, force_tol, components_for(record, stated))
+    record["success"] = revised["success"]
+    if "force_tol" in revised:
+        record["force_tol"] = revised["force_tol"]
+    if revised.get("failure") is None:
+        record.pop("failure", None)
+        record.pop("reasons", None)
+    else:
+        record["failure"] = revised["failure"]
     return record
 
 
@@ -401,11 +429,12 @@ def _load_group_records(
     cap: int | None,
     force_tol: float | None,
     images: int | None = None,
+    problem_id: str | None = None,
 ) -> tuple[list[dict], str]:
     if "starts_jsonl" in group:
         collected = []
         for raw in _json_lines(group["starts_jsonl"]):
-            record = _record_from_raw(normalize_start(raw, images), cap, force_tol)
+            record = _record_from_raw(normalize_start(raw, images), cap, force_tol, problem_id)
             if record is not None:
                 collected.append(record)
         if collected:
@@ -413,7 +442,7 @@ def _load_group_records(
     if "starts" in group:
         collected = []
         for raw in _json_lines(group["starts"]):
-            record = _record_from_raw(normalize_start(raw, images), cap, force_tol)
+            record = _record_from_raw(normalize_start(raw, images), cap, force_tol, problem_id)
             if record is not None:
                 collected.append(record)
         if collected:
@@ -424,7 +453,7 @@ def _load_group_records(
         collected = []
         for run in runs:
             for raw in run.get("starts") or []:
-                record = _record_from_raw(normalize_start(raw, images), cap, force_tol)
+                record = _record_from_raw(normalize_start(raw, images), cap, force_tol, problem_id)
                 if record is not None:
                     collected.append(record)
         if collected:
@@ -539,6 +568,73 @@ def _blank_row(**values) -> dict:
     }
     row.update(values)
     return row
+
+
+_SADDLE_SHORT_COUNTS = frozenset({2, 16})
+_SADDLE_PROBLEM = "saddle-search/pt-island"
+_RGMIN_CONTAINED_BY = {"9a2e7ff1": "f15726f1"}
+
+
+def _charge_omitted_saddle_starts(
+    records: list[dict],
+    problem: dict | None,
+    cap: int | None,
+    *,
+    skip: bool,
+) -> list[dict]:
+    """Charge omitted Pt-island searches so a 2-search or 16-search row is complete.
+
+    ``sample.searches`` is the catalog size. Each omitted search pays the
+    PAR-2 failure cost at that row's own cap. ``stated_full_n`` does not
+    read ``searches``, so a finished protocol with another count stays as
+    recorded. A row the result file already keeps off the ranked table is
+    left alone.
+    """
+    if skip or problem is None or cap is None:
+        return records
+    if problem.get("id") != _SADDLE_PROBLEM:
+        return records
+    full = (problem.get("sample") or {}).get("searches")
+    if full in (None, ""):
+        return records
+    full_n = int(full)
+    count = len(records)
+    if count not in _SADDLE_SHORT_COUNTS or count >= full_n:
+        return records
+    omitted = [
+        {
+            "force_calls": float(cap),
+            "success": False,
+            "failure": "cap",
+            "start": f"omitted-{index}",
+        }
+        for index in range(full_n - count)
+    ]
+    return [*records, *omitted]
+
+
+def _demote_contained_rgmin(rows: list[dict]) -> None:
+    """One ranked rgmin 0.4.1 row when a later commit contains an earlier one.
+
+    ``9a2e7ff`` is the parent of ``f15726f1``. The child stays ranked.
+    A method that exists on only one of those commits stays on that commit.
+    """
+    present: dict[tuple, dict[str, dict]] = defaultdict(dict)
+    for row in rows:
+        if row.get("short") or is_adjusted(row) or not row.get("comparable"):
+            continue
+        if str(row.get("code") or "").casefold() != "rgmin":
+            continue
+        if str(row.get("code_version") or "") != "0.4.1":
+            continue
+        prefix = str(row.get("commit") or "")[:8]
+        present[(row.get("problem"), row.get("template"))][prefix] = row
+    for commits in present.values():
+        for contained, container in _RGMIN_CONTAINED_BY.items():
+            if contained in commits and container in commits:
+                row = commits[contained]
+                row["short"] = True
+                row["short_reason"] = "an earlier ref of the same method"
 
 
 def _score_records(records: list[dict], cap: int | None) -> dict:
@@ -686,9 +782,12 @@ def _dedup(rows: list[dict]) -> list[dict]:
     return merged
 
 
-def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict]) -> tuple[list[dict], list[dict]]:
+def _campaign_rows(
+    root: Path, problems: dict[str, dict], templates: dict[str, dict]
+) -> tuple[list[dict], list[dict], set[str]]:
     rows: list[dict] = []
     unparsed: list[dict] = []
+    declared_short: set[str] = set()
     for stem, group in _campaign_groups(root / "results" / "campaign").items():
         path = group.get("dat") or group.get("v2") or group.get("starts_jsonl") or group.get("starts")
         fields: dict[str, str] = {}
@@ -721,7 +820,7 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
         force_tol = _force_tol(problem, template)
         images = _image_count(problem, template, fields)
         try:
-            records, record_source = _load_group_records(group, cap, force_tol, images)
+            records, record_source = _load_group_records(group, cap, force_tol, images, problem_id)
         except (json.JSONDecodeError, OSError, ValueError) as exc:
             unparsed.append(
                 _blank_row(
@@ -773,10 +872,18 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
             if named:
                 declared = f"{declared}; potential {named}"
             row["_declared_short"] = declared
+            if template_id:
+                declared_short.add(template_id)
         if not records:
             row["note"] = "no per-start record"
             unparsed.append(row)
             continue
+        records = _charge_omitted_saddle_starts(
+            records,
+            problem,
+            cap,
+            skip=bool(row.get("_declared_short")),
+        )
         try:
             summary = _score_records(records, cap)
         except (ValueError, RuntimeError) as exc:
@@ -785,7 +892,7 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
             continue
         _apply_summary(row, summary, records)
         rows.append(row)
-    return rows, unparsed
+    return rows, unparsed, declared_short
 
 
 def _benchmark_index() -> dict[str, dict]:
@@ -795,22 +902,36 @@ def _benchmark_index() -> dict[str, dict]:
     modules = (
         "benchmarks.bench_lj38",
         "benchmarks.bench_eon_develop",
+        "benchmarks.bench_eon_aladatom",
         "benchmarks.bench_eon_svn",
         "benchmarks.bench_eon_lane",
         "benchmarks.bench_eon_client",
         "benchmarks.bench_rgmin",
+        "benchmarks.bench_jaxmd",
         "benchmarks.bench_ase_sella",
+        "benchmarks.bench_geometric",
         "benchmarks.bench_rgsaddle",
+        "benchmarks.bench_saddlesearchjl",
         "benchmarks.bench_geodesic",
         "benchmarks.bench_airss",
         "benchmarks.bench_softsaddle",
         "benchmarks.bench_lammpsneb",
+        "benchmarks.bench_cp2k",
+        "benchmarks.bench_optim",
         "benchmarks.bench_noise",
-        "benchmarks.bench_n2p2",
         "benchmarks.bench_gmin",
+        "benchmarks.bench_gmin_bh",
         "benchmarks.bench_vcsqnm",
         "benchmarks.bench_pele",
         "benchmarks.bench_optking",
+        "benchmarks.bench_torchsim",
+        "benchmarks.bench_globalopt",
+        "benchmarks.bench_n2p2",
+        "benchmarks.bench_optax",
+        "benchmarks.bench_geomoptjl",
+        "benchmarks.bench_panna",
+        "benchmarks.bench_kliff",
+        "benchmarks.bench_sella_loweig",
         "benchmarks.quadratic",
     )
     for module_name in modules:
@@ -839,7 +960,12 @@ def _benchmark_index() -> dict[str, dict]:
     return index
 
 
-def _asv_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict]) -> tuple[list[dict], list[dict], list[dict]]:
+def _asv_rows(
+    root: Path,
+    problems: dict[str, dict],
+    templates: dict[str, dict],
+    declared_short: set[str] | None = None,
+) -> tuple[list[dict], list[dict], list[dict]]:
     results_dir = root / "results" / "asv"
     if not results_dir.is_dir():
         return [], [], []
@@ -848,6 +974,7 @@ def _asv_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict])
     from .asv_score import track_rows
 
     index = _benchmark_index()
+    declared_short = declared_short or set()
     rows: list[dict] = []
     unparsed: list[dict] = []
     unmapped: list[dict] = []
@@ -907,7 +1034,12 @@ def _asv_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict])
                         "failure": item["failure"],
                     }
                     raw = normalize_start(raw, images, per_image_track=per_image_track)
-                    record = _record_from_raw(raw, cap, _force_tol(problem, source_template or template))
+                    record = _record_from_raw(
+                        raw,
+                        cap,
+                        _force_tol(problem, source_template or template),
+                        problem_id,
+                    )
                     if record is not None:
                         record["start"] = tuple(item.get("params") or ())
                         records.append(record)
@@ -953,6 +1085,12 @@ def _asv_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict])
                 row["note"] = "asv track has no starts"
                 unparsed.append(row)
                 continue
+            records = _charge_omitted_saddle_starts(
+                records,
+                problem,
+                cap,
+                skip=template_id in declared_short,
+            )
             try:
                 summary = _score_records(records, cap)
             except (ValueError, RuntimeError) as exc:
@@ -990,7 +1128,16 @@ def _rank_key(row: dict) -> tuple:
 
 def _annotate_row(row: dict, problem: dict | None, registry: list[dict]) -> None:
     code = display_code(str(row.get("code") or ""), registry)
-    version = version_text(str(row.get("code_version") or ""), str(row.get("commit") or ""))
+    version = display_version(
+        str(row.get("code") or ""),
+        str(row.get("code_version") or ""),
+        str(row.get("commit") or ""),
+    )
+    if version == "SVN r2549":
+        code = "EON"
+    wrapped = f"({version})" if version else ""
+    if wrapped and code.endswith(wrapped):
+        code = code[: -len(wrapped)].strip()
     row["label"] = row_label(code, version, str(row.get("method") or ""))
     suite = str((problem or {}).get("suite") or str(row.get("problem") or "").split("/")[0])
     row["family"] = family_of(str(row.get("method") or ""), suite=suite, kind=str(row.get("kind") or ""))
@@ -1008,8 +1155,13 @@ def _method_key(row: dict) -> tuple:
     return (
         row.get("problem"),
         str(row.get("code") or "").casefold(),
-        version_text(str(row.get("code_version") or ""), str(row.get("commit") or "")).casefold(),
+        display_version(
+            str(row.get("code") or ""),
+            str(row.get("code_version") or ""),
+            str(row.get("commit") or ""),
+        ).casefold(),
         str(row.get("method") or "").casefold(),
+        str(row.get("template") or ""),
         row.get("origin") or "harness",
     )
 
@@ -1120,8 +1272,8 @@ def build_board(root: Path) -> dict:
     problems = load_all(root / "problems") if (root / "problems").is_dir() else {}
     templates = {item["id"]: item for item in list_templates(root)} if (root / "templates").is_dir() else {}
     registry = _registry(root)
-    campaign, unparsed = _campaign_rows(root, problems, templates)
-    asv_rows, asv_unparsed, unmapped = _asv_rows(root, problems, templates)
+    campaign, unparsed, declared_short = _campaign_rows(root, problems, templates)
+    asv_rows, asv_unparsed, unmapped = _asv_rows(root, problems, templates, declared_short)
     unparsed.extend(asv_unparsed)
     rows = _dedup(campaign + asv_rows)
     full_n: dict[str, int | None] = {}
@@ -1152,6 +1304,7 @@ def build_board(root: Path) -> dict:
         for row in group:
             row["registry_match"] = _registry_match(row, registry)
             _annotate_row(row, problem, registry)
+        _demote_contained_rgmin(group)
         by_problem[problem_id] = _collapse_methods(group)
 
     problems_out: dict[str, dict] = {}

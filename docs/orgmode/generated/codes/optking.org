@@ -23,56 +23,56 @@
    <td>LJ38</td>
    <td data-field="label">OptKing (0.5.1.dev2+g767e2c0c1) · P_RFO</td>
    <td data-field="family">Single-ended saddle</td>
-   <td data-field="family_rank">4</td>
+   <td data-field="family_rank">10</td>
    <td data-field="par2_mean">7030.36</td>
    <td data-field="published"></td>
    <td data-field="median_calls">555</td>
    <td data-field="mean_calls">1494.34</td>
    <td data-field="hessian_calls">1</td>
    <td data-field="fd_calls">114</td>
-   <td data-field="failures">crash 0, divergence 0, cap 3, wrong_stationary 64</td>
+   <td data-field="failures">crash 0, divergence 0, cap 3, not_converged 0, wrong_stationary 64</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-label="OptKing (0.5.1.dev2+g767e2c0c1) · RS_I_RFO">
    <td>LJ38</td>
    <td data-field="label">OptKing (0.5.1.dev2+g767e2c0c1) · RS_I_RFO</td>
    <td data-field="family">Single-ended saddle</td>
-   <td data-field="family_rank">5</td>
+   <td data-field="family_rank">11</td>
    <td data-field="par2_mean">7697.42</td>
    <td data-field="published"></td>
    <td data-field="median_calls">332.5</td>
    <td data-field="mean_calls">353.535</td>
    <td data-field="hessian_calls">1</td>
    <td data-field="fd_calls">114</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 75</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 75</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="tsopt/pt-island" data-label="OptKing (0.5.1.dev2+g767e2c0c1) · RS_I_RFO">
    <td>pt-island</td>
    <td data-field="label">OptKing (0.5.1.dev2+g767e2c0c1) · RS_I_RFO</td>
    <td data-field="family">Single-ended saddle</td>
-   <td data-field="family_rank">4</td>
+   <td data-field="family_rank">7</td>
    <td data-field="par2_mean">1059.98</td>
    <td data-field="published"></td>
    <td data-field="median_calls">1060</td>
    <td data-field="mean_calls">1059.98</td>
    <td data-field="hessian_calls">1</td>
    <td data-field="fd_calls">1029</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>
    <tr data-problem="tsopt/pt-island" data-label="OptKing (0.5.1.dev2+g767e2c0c1) · P_RFO">
    <td>pt-island</td>
    <td data-field="label">OptKing (0.5.1.dev2+g767e2c0c1) · P_RFO</td>
    <td data-field="family">Single-ended saddle</td>
-   <td data-field="family_rank">5</td>
+   <td data-field="family_rank">8</td>
    <td data-field="par2_mean">1060.63</td>
    <td data-field="published"></td>
    <td data-field="median_calls">1059</td>
    <td data-field="mean_calls">1060.63</td>
    <td data-field="hessian_calls">1</td>
    <td data-field="fd_calls">1029</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>
    </tbody></table></div>

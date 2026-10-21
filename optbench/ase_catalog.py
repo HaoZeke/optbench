@@ -67,6 +67,17 @@ MORSE_SLAB = {
     "form": "shift",
     "pbc": [True, True, False],
 }
+# eOn Morse::force on the Pt island: cutoff 9.5, energy shifted, force
+# unshifted. A cutoff of 7 is a different surface.
+MORSE_EON = {
+    "kind": "morse",
+    "D": 0.7102,
+    "alpha": 1.6047,
+    "r0": 2.897,
+    "rc": 9.5,
+    "form": "shift",
+    "pbc": [True, True, False],
+}
 MORSE_SMOOTH = {
     "kind": "morse",
     "D": 0.7102,
@@ -148,7 +159,7 @@ def _tuned_minimizer(problem: str, name: str) -> tuple[dict, str, str]:
                 "benchmark.dat labels the row M=5. The script sets memory 100. "
                 "The stop is the Euclidean force norm 0.01. "
                 "The script uses a tsase LJ cutoff of 25. This row uses the harness cutoff 40, "
-                "the same potential as the LBFGS row that reproduces.",
+                "the same potential as the LBFGS row.",
             ),
             "GPMin": (
                 {"update_hyperparams": True},
@@ -517,7 +528,9 @@ def _neb_specs() -> list[dict]:
             "tuned_source": "repaired",
             "tuned_note": (
                 "The problem run limit is 250000. The harness stop is that same limit. "
-                "Campaign rows are scored at the problem cap. This asv class uses the harness stop. "
+                "archive/entries/double-ended-saddle-search/lj38_2ts_separation/pele/benchmark.dat "
+                "records median 20638 and maximum 114490. "
+                "Campaign rows and this asv class share the problem cap. "
                 "The previous ASE campaign failed all 51 pairs at 2500. "
                 "Interpolation is IDPP. LBFGS maxstep is 0.01 and damping is 0.2. "
                 "Climb stays off until the maximum residual is at or below 0.4. "
@@ -525,8 +538,8 @@ def _neb_specs() -> list[dict]:
             ),
             "default_note": (
                 "ASE NEB defaults on the same pairs: spring 0.1, climb off, FIRE. "
-                "The harness stop is 250000, the same as the adjusted row. "
-                "Campaign rows use the problem cap. This asv class uses the harness stop."
+                "The harness stop is 250000, the problem run limit. "
+                "Campaign rows and this asv class share that cap."
             ),
         },
     )
@@ -677,10 +690,11 @@ def _sella_search_specs() -> list[dict]:
                     + "Sixteen searches, each a Gaussian displacement of standard deviation 0.1 "
                     + "on the free atoms, then Sella order 1 with v0 unset. "
                     + "One search is not the saddle catalog, so this row is not ranked and "
-                    + "fraction_connected is not reported. The cost is the per-search harness count."
+                    + "fraction_connected is not reported. The cost is the per-search harness count. "
+                    + "The potential is energy-shifted Morse at cutoff 9.5, the eOn Morse::force surface."
                 ),
                 "optimizer": {"name": "Sella", "parameters": params},
-                "potential": MORSE_SLAB,
+                "potential": MORSE_EON,
                 "stop": {
                     "norm": "l2",
                     "force_norm": 0.001,
@@ -729,9 +743,9 @@ def _dimer_specs() -> list[dict]:
                 "reducer": "capped",
                 "ranked": False,
                 "parameter_source": source,
-                "note": note,
+                "note": note + " The potential is energy-shifted Morse at cutoff 9.5, the eOn Morse::force surface.",
                 "optimizer": {"name": "Dimer", "parameters": params},
-                "potential": MORSE_SLAB,
+                "potential": MORSE_EON,
                 "stop": {
                     "norm": "l2",
                     "force_norm": 0.001,
@@ -749,7 +763,7 @@ def _dimer_specs() -> list[dict]:
 
 
 def all_specs() -> list[dict]:
-    return (
+    specs = (
         _minimization_specs()
         + _ts_specs()
         + _neb_specs()
@@ -757,6 +771,7 @@ def all_specs() -> list[dict]:
         + _dimer_specs()
         + _sella_search_specs()
     )
+    return [spec for spec in specs if spec.get("profile") != "tuned"]
 
 
 def _toml_scalar(value: object) -> str:
@@ -856,7 +871,10 @@ def write_all(root: Path) -> list[Path]:
                 path.unlink()
     registry = root / "codes" / "registry.toml"
     text = registry.read_text(encoding="utf-8")
+    # The hand-written registry has no generated block. Rewriting it here
+    # would append a second copy of every template. The mark is the only
+    # place a generated block is replaced.
     if _TEMPLATE_MARK in text:
         text = text[: text.index(_TEMPLATE_MARK)]
-    registry.write_text(text.rstrip() + "\n\n" + _registry_templates(specs), encoding="utf-8")
+        registry.write_text(text.rstrip() + "\n\n" + _registry_templates(specs), encoding="utf-8")
     return written

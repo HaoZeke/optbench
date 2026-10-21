@@ -17,8 +17,9 @@ from pathlib import Path
 
 import numpy as np
 
+from optbench.bound import note_unbound
 from optbench.campaign import geometry_archive, load_template, resolve_problem
-from optbench.failures import classify_failure
+from optbench.failures import classify_failure, classify_outcome
 from optbench.pes import evaluate, load_pairs
 from optbench.rgsaddle_band import vibrational_index
 from optbench.score import score_v2
@@ -209,7 +210,25 @@ def judge_saddle(
             if hessian_index != int(expected_index):
                 reasons.append("hessian_index")
             verify_calls = int(counter.verify_calls)
-    failure = classify_failure(reasons)
+    unbound = False
+    if int(expected_index) == 0 and finite_point and point is not None:
+        before = "divergence" in reasons
+        note_unbound(reasons, point, kind=kind, box=box)
+        unbound = "divergence" in reasons and not before
+    failure = classify_outcome(
+        energy=None if energy is None else float(energy),
+        geometry=None if point is None else np.asarray(point, dtype=np.float64),
+        force=force,
+        calls=calls,
+        cap=cap,
+        force_tol=force_norm,
+        process_failed="crash" in reasons,
+        dissociated=("divergence" in prefix) or unbound,
+        hessian_index=hessian_index,
+        expected_index=int(expected_index) if hessian_index is not None else None,
+        unmet=(not finite_point and "crash" not in reasons and "cap" not in reasons)
+        or ("force_norm" in reasons and force is None),
+    )
     return {
         "schema": "optbench.start/v2",
         "start": name,
@@ -245,7 +264,13 @@ def judge_mode(name: str, calls: int, cap: int, overlap: float, target: float, e
         reasons.append("mode_overlap")
     if matched:
         reasons = []
-    failure = classify_failure(reasons)
+    failure = classify_outcome(
+        calls=int(calls),
+        cap=cap,
+        process_failed="crash" in reasons,
+        stationary_rejected=False,
+        unmet="mode_overlap" in reasons,
+    )
     return {
         "schema": "optbench.start/v2",
         "start": name,

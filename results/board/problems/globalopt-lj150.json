@@ -139,6 +139,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "family": "global",
@@ -189,6 +190,7 @@
         "cap": 1,
         "crash": 0,
         "divergence": 0,
+        "not_converged": 0,
         "wrong_stationary": 0
       },
       "family": "global",

@@ -103,6 +103,19 @@ def iter_geometries(path: Path) -> list[Path]:
 _EON_ENGINES = {"eon-client", "eon"}
 
 
+_OPTIM_TRANSITION = frozenset({"hef-ffd", "bfgsts", "rr-ffd"})
+
+
+def _optim_transition(template: dict) -> bool:
+    """Transition-state, saddle, and lowest-eigenvector OPTIM templates.
+
+    Minimization L-BFGS stays on the engine plugin. That plugin refuses
+    every other OPTIM method.
+    """
+    main = ((template.get("ini") or {}).get("Main") or {})
+    return str(main.get("method") or "") in _OPTIM_TRANSITION
+
+
 def _check_stop(problem: dict, template: dict) -> int | None:
     """Return the force-call cap, or None when the problem does not state one.
 
@@ -283,6 +296,7 @@ def run(
             workers=workers,
             work=work,
             limit=limit,
+            resume=resume,
         )
     if template["engine"] == "gmin":
         from .runners.gmin_min import run_template
@@ -301,6 +315,24 @@ def run(
             work=work,
             limit=limit,
         )
+    if template["engine"] == "jaxmd":
+        from .runners.jaxmd_min import run_template
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_template(
+            root,
+            problem,
+            template,
+            geometries=geometries,
+            output=output,
+            workers=workers,
+            work=work,
+            limit=limit,
+            resume=resume,
+        )
     if template["engine"] == "gmin-bh":
         from .runners.gmin_go import run_template
 
@@ -317,6 +349,26 @@ def run(
             work=work,
             limit=limit,
             resume=resume,
+        )
+    if template["engine"] == "pele" and template.get("task") in {
+        "transition-state",
+        "lowest-eigenvector",
+        "saddle-search",
+    }:
+        from .pele_ts import run_template
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_template(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+            work=work,
+            limit=limit,
         )
     if template["engine"] == "pele":
         from .runners.pele_min import run_template
@@ -399,6 +451,76 @@ def run(
             workers=workers,
             work=work,
         )
+    if template["engine"] == "optim" and _optim_transition(template):
+        from .optim_campaign import run_template
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_template(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+            work=work,
+            limit=limit,
+            resume=resume,
+        )
+    # USERPOT rows. ASE-socket templates share this engine name and stay on optim_search.
+    if template["engine"] == "optim" and str(template.get("code_version")) == "02aaf45245af":
+        from .runners.optim_min import run_template
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_template(
+            root,
+            problem,
+            template,
+            geometries=geometries,
+            output=output,
+            workers=workers,
+            work=work,
+            limit=limit,
+            resume=resume,
+        )
+    if template["engine"] == "geomoptjl":
+        from .runners.geomoptjl_min import run_template
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_template(
+            root,
+            problem,
+            template,
+            geometries=geometries,
+            output=output,
+            workers=workers,
+            work=work,
+            limit=limit,
+            resume=resume,
+        )
+    if template["engine"] == "saddlesearchjl":
+        from .saddlesearchjl import run_template
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_template(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+            work=work,
+            limit=limit,
+        )
     if template["engine"] == "rgsaddle":
         from .rgsaddle_minmode import run_template
 
@@ -429,6 +551,72 @@ def run(
             output=output,
             workers=workers,
             work=work,
+            limit=limit,
+            resume=resume,
+        )
+    if template["engine"] == "kliff":
+        from .kliff_ml import run_template
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_template(
+            root,
+            problem,
+            template,
+            geometries=geometries,
+            output=output,
+            workers=workers,
+            work=work,
+            limit=limit,
+            resume=resume,
+        )
+    if template["engine"] == "cp2k":
+        from .cp2k_ts import run_template
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_template(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+            work=work,
+            limit=limit,
+            resume=resume,
+        )
+    if template["engine"] == "torchsim":
+        from .runners.torchsim_min import run_template
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_template(
+            root,
+            problem,
+            template,
+            geometries=geometries,
+            output=output,
+            workers=workers,
+            work=work,
+            limit=limit,
+            resume=resume,
+        )
+    if template["engine"] == "geometric":
+        from .geometric_ts import run_template
+
+        if template.get("problem") and template["problem"] != problem_name:
+            raise ValueError(f"{template_name} belongs to {template['problem']}")
+        return run_template(
+            root,
+            template_name,
+            output=output,
+            workers=workers,
             limit=limit,
             resume=resume,
         )

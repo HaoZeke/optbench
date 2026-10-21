@@ -76,7 +76,18 @@ def run(
     from optbench.campaign import run as run_campaign
 
     loaded = load_template(root, template)
-    if loaded["engine"] == "rgsaddle-band" or (
+    if loaded["engine"] == "optax":
+        from optbench.runners.optax_ml import run as run_optax
+
+        summary = run_optax(
+            root,
+            problem,
+            loaded,
+            output=output,
+            limit=limit,
+            resume=resume,
+        )
+    elif loaded["engine"] == "rgsaddle-band" or (
         loaded["engine"] == "geodesic" and loaded.get("backend") == "rgsaddle"
     ):
         from optbench.rgsaddle_band import run as run_band
@@ -92,6 +103,40 @@ def run(
         from optbench.lammps_neb import run as run_lammps
 
         summary = run_lammps(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+            limit=limit,
+            resume=resume,
+        )
+    elif loaded["engine"] == "optim-connect":
+        from optbench.optim_connect import run as run_optim
+
+        summary = run_optim(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+        )
+    elif loaded["engine"] == "pele-band":
+        from optbench.pele_band import run as run_pele
+
+        summary = run_pele(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+            resume=resume,
+            limit=limit,
+        )
+    elif loaded["engine"] == "cp2k-band":
+        from optbench.cp2k_band import run as run_cp2k_band
+
+        summary = run_cp2k_band(
             root,
             problem,
             template,
@@ -306,6 +351,22 @@ def statistics(
     )
 
 
+@app.command(name="taxonomy-diff")
+def taxonomy_diff(
+    root: Path = Path("."),
+    output: Path = Path("docs/failure-taxonomy-diff.md"),
+) -> None:
+    """Rescore stored starts and write the class and PAR-2 diff."""
+    from optbench.taxonomy_diff import write_diff
+
+    destination = output if output.is_absolute() else root / output
+    document = write_diff(root, destination)
+    print(
+        f"wrote {destination} and {destination.with_suffix('.json')} "
+        f"scored={document['scored']} changed={document['changed']} starts={document['starts']}"
+    )
+
+
 @app.command
 def sitesize(
     root: Path = Path("."),
@@ -350,6 +411,44 @@ def board(
                 f"success_rate={row['success_rate']} "
                 f"n={row['n']} nfailed={row['nfailed']} score={score}"
             )
+
+
+@app.command
+def htst(
+    name: str,
+    *,
+    root: Path = Path("."),
+    client: Path | None = None,
+    output: Path | None = None,
+    workers: int = 1,
+    work: Path | None = None,
+    resume: bool = False,
+) -> None:
+    """Run one hTST template and reduce states/0 with the barrier and rate windows."""
+    from optbench.htst_eon import run_htst
+
+    root = root.resolve()
+    destination = output or Path("results/campaign") / f"{name.replace('/', '-')}.dat"
+    if not destination.is_absolute():
+        destination = (root / destination).resolve()
+    work_dir = work or Path("work") / name.replace("/", "-")
+    if not work_dir.is_absolute():
+        work_dir = (root / work_dir).resolve()
+    summary = run_htst(
+        root,
+        name,
+        _eon_client(client),
+        destination,
+        work_dir,
+        workers,
+        resume=resume,
+    )
+    print(
+        f"{summary['problem']} {summary['template']} "
+        f"barrier_windows={summary['barrier_windows']}/{summary['target']} "
+        f"rate_windows={summary['rate_windows']} searches={summary['searches']} "
+        f"partial={summary['partial']}"
+    )
 
 
 @app.command(name="validate-counter")

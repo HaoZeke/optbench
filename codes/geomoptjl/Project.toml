@@ -1,0 +1,10 @@
+[deps]
+AtomsBase = "a963bdd2-2df7-4f54-a1ee-49d51e6be12a"
+AtomsCalculators = "a3e0e189-c65a-42c1-833c-339540406eb1"
+GeometryOptimization = "673bf261-a53d-43b9-876f-d3c1fc8329c2"
+JSON3 = "0f8b85d8-7281-11e9-16c2-39a750bddbf1"
+Optim = "429524aa-4258-5aef-a3af-852621145aeb"
+PythonCall = "6099a3de-0909-46bc-b1f4-468b9a2dfc0d"
+StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
+Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
+UnitfulAtomic = "a7773ee8-282e-5fa2-be4e-bd808c38a91a"

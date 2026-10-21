@@ -37,6 +37,34 @@
    <div class="bench-scroll"><table data-board-table="code-rows">
    <caption>Every ranked row for this code.</caption>
    <thead><tr><th>Problem</th><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="accelerated-md/aladatom" data-label="eOn (3.6.0) · AKMC dimer">
+   <td>Al adatom on Al(100) at 250 K</td>
+   <td data-field="label">eOn (3.6.0) · AKMC dimer</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">1</td>
+   <td data-field="par2_mean">2.74292e+06</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">2.79404e+06</td>
+   <td data-field="mean_calls">2.74292e+06</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">3</td>
+   </tr>
+   <tr data-problem="accelerated-md/aladatom" data-label="eOn (develop 500350d9) · AKMC dimer">
+   <td>Al adatom on Al(100) at 250 K</td>
+   <td data-field="label">eOn (develop 500350d9) · AKMC dimer</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">2</td>
+   <td data-field="par2_mean">2.87651e+06</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">3.09234e+06</td>
+   <td data-field="mean_calls">2.87651e+06</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">3</td>
+   </tr>
    <tr data-problem="accelerated-md/aladatom" data-label="eOn · parallel replica">
    <td>Al adatom on Al(100) at 250 K</td>
    <td data-field="label">eOn · parallel replica</td>
@@ -48,8 +76,8 @@
    <td data-field="mean_calls">2.54294e+08</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-   <td data-field="n">1</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">3</td>
    </tr>
    <tr data-problem="accelerated-md/standard_aladatom" data-label="eOn · parallel replica">
    <td>Al adatom on Al(100) at 150 K</td>
@@ -62,8 +90,36 @@
    <td data-field="mean_calls">835900</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-   <td data-field="n">1</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">3</td>
+   </tr>
+   <tr data-problem="accelerated-md/standard_aladatom" data-label="eOn (3.6.0) · AKMC dimer">
+   <td>Al adatom on Al(100) at 150 K</td>
+   <td data-field="label">eOn (3.6.0) · AKMC dimer</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">1</td>
+   <td data-field="par2_mean">2.74292e+06</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">2.79404e+06</td>
+   <td data-field="mean_calls">2.74292e+06</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">3</td>
+   </tr>
+   <tr data-problem="accelerated-md/standard_aladatom" data-label="eOn (develop 500350d9) · AKMC dimer">
+   <td>Al adatom on Al(100) at 150 K</td>
+   <td data-field="label">eOn (develop 500350d9) · AKMC dimer</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">2</td>
+   <td data-field="par2_mean">2.87651e+06</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">3.09234e+06</td>
+   <td data-field="mean_calls">2.87651e+06</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">3</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38" data-label="eOn (3.5.0) · Lanczos improved L-BFGS">
    <td>LJ38 double-ended saddle</td>
@@ -76,7 +132,7 @@
    <td data-field="mean_calls">259.46</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38" data-label="eOn (r2156) · eon-lanczos-improved">
@@ -90,7 +146,7 @@
    <td data-field="mean_calls">287</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38" data-label="eOn (r2156) · eon-dimer">
@@ -104,7 +160,7 @@
    <td data-field="mean_calls">337</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38" data-label="eOn (3.5.0) · Lanczos L-BFGS">
@@ -118,7 +174,7 @@
    <td data-field="mean_calls">342.28</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38" data-label="eOn (r2156) · eon-lanczos">
@@ -132,7 +188,7 @@
    <td data-field="mean_calls">364</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38" data-label="eOn (r2156) · eon-ci-neb">
@@ -146,7 +202,7 @@
    <td data-field="mean_calls">827</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38" data-label="eOn (r2156) · eon-ci-swdneb">
@@ -160,7 +216,7 @@
    <td data-field="mean_calls">861</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38" data-label="eOn (3.5.0) · CI-NEB">
@@ -174,35 +230,49 @@
    <td data-field="mean_calls">853.88</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 3, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 3, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/lj38" data-label="eOn (3.6.0) · LBFGS">
+   <tr data-problem="double-ended-saddle-search/lj38" data-label="eOn (develop 7095b23a) · LBFGS">
    <td>LJ38 double-ended saddle</td>
-   <td data-field="label">eOn (3.6.0) · LBFGS</td>
+   <td data-field="label">eOn (develop 7095b23a) · LBFGS</td>
    <td data-field="family">Connect / double-ended</td>
-   <td data-field="family_rank">4</td>
+   <td data-field="family_rank">6</td>
    <td data-field="par2_mean">1010.08</td>
    <td data-field="published"></td>
    <td data-field="median_calls">692</td>
    <td data-field="mean_calls">860.08</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 3, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 3, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/lj38" data-label="eOn ((develop 500350d9) · Doubly nudged CI-NEB) · Doubly nudged CI-NEB">
+   <tr data-problem="double-ended-saddle-search/lj38" data-label="eOn (3.5.0) · Doubly nudged CI-NEB">
    <td>LJ38 double-ended saddle</td>
-   <td data-field="label">eOn ((develop 500350d9) · Doubly nudged CI-NEB) · Doubly nudged CI-NEB</td>
+   <td data-field="label">eOn (3.5.0) · Doubly nudged CI-NEB</td>
    <td data-field="family">Band / NEB</td>
-   <td data-field="family_rank">6</td>
+   <td data-field="family_rank">5</td>
+   <td data-field="par2_mean">1160.5</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">687</td>
+   <td data-field="mean_calls">910.5</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 5, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38" data-label="eOn (develop 500350d9) · Doubly nudged CI-NEB">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="label">eOn (develop 500350d9) · Doubly nudged CI-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">7</td>
    <td data-field="par2_mean">1228.96</td>
    <td data-field="published"></td>
    <td data-field="median_calls">664.5</td>
    <td data-field="mean_calls">928.96</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 6, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 6, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38" data-label="eOn (3.5.0) · Dimer L-BFGS">
@@ -216,7 +286,49 @@
    <td data-field="mean_calls">1174.46</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 1, cap 16, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 16, not_converged 1, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38" data-label="eOn (develop 7095b23a) · LBFGS">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="label">eOn (develop 7095b23a) · LBFGS</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">11</td>
+   <td data-field="par2_mean">4549.48</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">15374.5</td>
+   <td data-field="mean_calls">17020</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 44, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38" data-label="eOn (develop 7095b23a) · LBFGS">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="label">eOn (develop 7095b23a) · LBFGS</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">12</td>
+   <td data-field="par2_mean">4568.14</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">15824.5</td>
+   <td data-field="mean_calls">40423.4</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 44, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38" data-label="eOn (develop 7095b23a) · LBFGS">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="label">eOn (develop 7095b23a) · LBFGS</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">14</td>
+   <td data-field="par2_mean">5000</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">26364.5</td>
+   <td data-field="mean_calls">22179.6</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 50, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="eOn (3.5.0) · Lanczos improved">
@@ -230,7 +342,7 @@
    <td data-field="mean_calls">520.333</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="eOn (develop 500350d9) · Lanczos improved">
@@ -244,7 +356,7 @@
    <td data-field="mean_calls">536.667</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="eOn (3.5.0) · Lanczos">
@@ -258,7 +370,7 @@
    <td data-field="mean_calls">564.647</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="eOn (develop 500350d9) · Lanczos">
@@ -272,7 +384,7 @@
    <td data-field="mean_calls">573.745</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="eOn (develop 500350d9) · dimer">
@@ -286,7 +398,7 @@
    <td data-field="mean_calls">3236.35</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="eOn (develop 500350d9) · energy-weighted CI-NEB">
@@ -300,7 +412,7 @@
    <td data-field="mean_calls">15260.3</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="eOn (develop 500350d9) · CI-NEB lj/cut">
@@ -314,7 +426,7 @@
    <td data-field="mean_calls">38080.5</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="eOn (develop 500350d9) · CI-NEB ljcluster">
@@ -328,7 +440,7 @@
    <td data-field="mean_calls">40196.5</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 2, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="eOn (develop 500350d9) · doubly nudged CI-NEB">
@@ -342,7 +454,7 @@
    <td data-field="mean_calls">52699.1</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 4, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 4, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="eOn (develop 500350d9) · OCI-NEB">
@@ -356,7 +468,7 @@
    <td data-field="mean_calls">65682.5</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 6, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 6, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="eOn (3.5.0) · dimer">
@@ -370,49 +482,91 @@
    <td data-field="mean_calls">1200.33</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 11, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 11, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="eOn (3.6.0) · LBFGS">
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="eOn (develop 7095b23a) · LBFGS">
    <td>lj38_2ts_separation</td>
-   <td data-field="label">eOn (3.6.0) · LBFGS</td>
+   <td data-field="label">eOn (develop 7095b23a) · LBFGS</td>
    <td data-field="family">Connect / double-ended</td>
-   <td data-field="family_rank">5</td>
+   <td data-field="family_rank">9</td>
    <td data-field="par2_mean">343644</td>
    <td data-field="published"></td>
    <td data-field="median_calls">44412</td>
    <td data-field="mean_calls">40738.4</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 34, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 34, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="eOn (develop 7095b23a) · LBFGS">
+   <td>lj38_2ts_separation</td>
+   <td data-field="label">eOn (develop 7095b23a) · LBFGS</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">10</td>
+   <td data-field="par2_mean">344446</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="mean_calls">8171.8</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 35, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="eOn (3.5.0) · doubly nudged CI-NEB">
    <td>lj38_2ts_separation</td>
    <td data-field="label">eOn (3.5.0) · doubly nudged CI-NEB</td>
    <td data-field="family">Band / NEB</td>
-   <td data-field="family_rank">8</td>
+   <td data-field="family_rank">9</td>
    <td data-field="par2_mean">363362</td>
    <td data-field="published"></td>
    <td data-field="median_calls">5002</td>
    <td data-field="mean_calls">4245.53</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 37, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 37, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="eOn (3.5.0) · CI-NEB lj/cut">
    <td>lj38_2ts_separation</td>
    <td data-field="label">eOn (3.5.0) · CI-NEB lj/cut</td>
    <td data-field="family">Band / NEB</td>
-   <td data-field="family_rank">11</td>
+   <td data-field="family_rank">12</td>
    <td data-field="par2_mean">402340</td>
    <td data-field="published"></td>
    <td data-field="median_calls">5002</td>
    <td data-field="mean_calls">4400.43</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 41, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 41, wrong_stationary 0</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="eOn (develop 7095b23a) · LBFGS">
+   <td>lj38_2ts_separation</td>
+   <td data-field="label">eOn (develop 7095b23a) · LBFGS</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">11</td>
+   <td data-field="par2_mean">415983</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">37212</td>
+   <td data-field="mean_calls">36099.9</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 42, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="eOn (develop 7095b23a) · LBFGS">
+   <td>lj38_2ts_separation</td>
+   <td data-field="label">eOn (develop 7095b23a) · LBFGS</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">12</td>
+   <td data-field="par2_mean">416487</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">37230</td>
+   <td data-field="mean_calls">36603.6</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 42, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-label="eOn (r2156) · eon-ci-neb-single">
@@ -426,7 +580,7 @@
    <td data-field="mean_calls">110</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-label="eOn (r2156) · eon-dimer">
@@ -440,7 +594,7 @@
    <td data-field="mean_calls">182</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-label="eOn (r2156) · eon-lanczos-improved">
@@ -454,7 +608,7 @@
    <td data-field="mean_calls">222</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-label="eOn (r2156) · eon-ci-neb">
@@ -468,7 +622,7 @@
    <td data-field="mean_calls">248</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-label="eOn (r2156) · eon-ci-swdneb">
@@ -482,7 +636,7 @@
    <td data-field="mean_calls">256</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-label="eOn (r2156) · eon-lanczos">
@@ -496,7 +650,7 @@
    <td data-field="mean_calls">325</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-label="eOn (r2156) · eon-ci-neb-5">
@@ -510,21 +664,35 @@
    <td data-field="mean_calls">391</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/pt-island" data-label="eOn (3.6.0) · LBFGS">
+   <tr data-problem="double-ended-saddle-search/pt-island" data-label="eOn (develop 7095b23a) · LBFGS">
    <td>pt-island</td>
-   <td data-field="label">eOn (3.6.0) · LBFGS</td>
+   <td data-field="label">eOn (develop 7095b23a) · LBFGS</td>
    <td data-field="family">Connect / double-ended</td>
-   <td data-field="family_rank">6</td>
+   <td data-field="family_rank">10</td>
    <td data-field="par2_mean">3080.19</td>
    <td data-field="published"></td>
    <td data-field="median_calls">2260</td>
    <td data-field="mean_calls">3220.9</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 21, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 21, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-label="eOn (develop 7095b23a) · LBFGS">
+   <td>pt-island</td>
+   <td data-field="label">eOn (develop 7095b23a) · LBFGS</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">11</td>
+   <td data-field="par2_mean">3206.76</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1967</td>
+   <td data-field="mean_calls">3113.25</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 24, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
    <tr data-problem="globalopt/lj100-binary" data-label="eOn (r2156) · eon-basinhopping">
@@ -538,35 +706,35 @@
    <td data-field="mean_calls">-584.579</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="globalopt/lj38" data-label="eOn (3.5.0) · Basin hopping">
    <td>Lennard-Jones 38 global minimum</td>
    <td data-field="label">eOn (3.5.0) · Basin hopping</td>
    <td data-field="family">Basin hopping / global</td>
-   <td data-field="family_rank">6</td>
+   <td data-field="family_rank">7</td>
    <td data-field="par2_mean">503146</td>
    <td data-field="published"></td>
    <td data-field="median_calls">369028</td>
    <td data-field="mean_calls">503146</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="globalopt/lj38" data-label="eOn (r2156) · eon-basinhopping">
    <td>Lennard-Jones 38 global minimum</td>
    <td data-field="label">eOn (r2156) · eon-basinhopping</td>
    <td data-field="family">Basin hopping / global</td>
-   <td data-field="family_rank">7</td>
+   <td data-field="family_rank">8</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">508011</td>
    <td data-field="median_calls"></td>
    <td data-field="mean_calls">508011</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="hTST/Al" data-label="eOn (r2006) · Dimer-CG rotation: max=10 tol=1">
@@ -580,7 +748,7 @@
    <td data-field="mean_calls">21070</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">639</td>
    </tr>
    <tr data-problem="hTST/Al" data-label="eOn (r2006) · Dimer-CG rotation: max=50 tol=1">
@@ -594,26 +762,68 @@
    <td data-field="mean_calls">28870</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">639</td>
+   </tr>
+   <tr data-problem="hTST/Al" data-label="eOn (3.6.0) · Dimer-CG rotation: max=50 tol=1">
+   <td>Al</td>
+   <td data-field="label">eOn (3.6.0) · Dimer-CG rotation: max=50 tol=1</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">5</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">4242</td>
+   <td data-field="mean_calls">5563.49</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">639</td>
+   </tr>
+   <tr data-problem="hTST/Al" data-label="eOn (develop 500350d9) · Dimer-CG rotation: max=50 tol=1">
+   <td>Al</td>
+   <td data-field="label">eOn (develop 500350d9) · Dimer-CG rotation: max=50 tol=1</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">6</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">15410</td>
+   <td data-field="mean_calls">19001.9</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">639</td>
+   </tr>
+   <tr data-problem="hTST/Pt" data-label="eOn (3.6.0) · Dimer-CG rotation: max=10, tol=1">
+   <td>Pt</td>
+   <td data-field="label">eOn (3.6.0) · Dimer-CG rotation: max=10, tol=1</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">12</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">343695</td>
+   <td data-field="mean_calls">423080</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="hTST/Pt" data-label="eOn (develop 500350d9) · Dimer-CG rotation: max=10, tol=1">
+   <td>Pt</td>
+   <td data-field="label">eOn (develop 500350d9) · Dimer-CG rotation: max=10, tol=1</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">13</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">337651</td>
+   <td data-field="mean_calls">422877</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
    </tr>
    <tr data-problem="lowest-eigenvector/lj38" data-label="eOn (3.5.0) · Lanczos CG">
    <td>lj38</td>
    <td data-field="label">eOn (3.5.0) · Lanczos CG</td>
-   <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">5</td>
-   <td data-field="par2_mean">26.385</td>
-   <td data-field="published"></td>
-   <td data-field="median_calls">25</td>
-   <td data-field="mean_calls">26.385</td>
-   <td data-field="hessian_calls">0</td>
-   <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-   <td data-field="n">200</td>
-   </tr>
-   <tr data-problem="lowest-eigenvector/lj38" data-label="eOn (3.6.0) · Lanczos">
-   <td>lj38</td>
-   <td data-field="label">eOn (3.6.0) · Lanczos</td>
    <td data-field="family">Minimum mode</td>
    <td data-field="family_rank">6</td>
    <td data-field="par2_mean">26.385</td>
@@ -622,26 +832,26 @@
    <td data-field="mean_calls">26.385</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="lowest-eigenvector/lj38" data-label="eOn (develop 7095b23a) · Lanczos">
+   <td>lj38</td>
+   <td data-field="label">eOn (develop 7095b23a) · Lanczos</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">7</td>
+   <td data-field="par2_mean">26.385</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">25</td>
+   <td data-field="mean_calls">26.385</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="lowest-eigenvector/lj38" data-label="eOn (r2156) · eon-dimer-lbfgs">
    <td>lj38</td>
    <td data-field="label">eOn (r2156) · eon-dimer-lbfgs</td>
-   <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">8</td>
-   <td data-field="par2_mean"></td>
-   <td data-field="published">28</td>
-   <td data-field="median_calls"></td>
-   <td data-field="mean_calls">28</td>
-   <td data-field="hessian_calls">0</td>
-   <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-   <td data-field="n">200</td>
-   </tr>
-   <tr data-problem="lowest-eigenvector/lj38" data-label="eOn (r2156) · eon-lanczos">
-   <td>lj38</td>
-   <td data-field="label">eOn (r2156) · eon-lanczos</td>
    <td data-field="family">Minimum mode</td>
    <td data-field="family_rank">9</td>
    <td data-field="par2_mean"></td>
@@ -650,63 +860,77 @@
    <td data-field="mean_calls">28</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="lowest-eigenvector/lj38" data-label="eOn (r2156) · eon-lanczos">
+   <td>lj38</td>
+   <td data-field="label">eOn (r2156) · eon-lanczos</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">10</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">28</td>
+   <td data-field="median_calls"></td>
+   <td data-field="mean_calls">28</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="lowest-eigenvector/lj38" data-label="eOn (3.5.0) · Dimer L-BFGS">
    <td>lj38</td>
    <td data-field="label">eOn (3.5.0) · Dimer L-BFGS</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">11</td>
+   <td data-field="family_rank">12</td>
    <td data-field="par2_mean">28.33</td>
    <td data-field="published"></td>
    <td data-field="median_calls">27</td>
    <td data-field="mean_calls">28.33</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="lowest-eigenvector/lj38" data-label="eOn (r2156) · eon-dimer-cg">
    <td>lj38</td>
    <td data-field="label">eOn (r2156) · eon-dimer-cg</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">13</td>
+   <td data-field="family_rank">14</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">30</td>
    <td data-field="median_calls"></td>
    <td data-field="mean_calls">30</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="lowest-eigenvector/lj38" data-label="eOn (3.5.0) · Dimer CG">
    <td>lj38</td>
    <td data-field="label">eOn (3.5.0) · Dimer CG</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">15</td>
+   <td data-field="family_rank">17</td>
    <td data-field="par2_mean">30.355</td>
    <td data-field="published"></td>
    <td data-field="median_calls">29</td>
    <td data-field="mean_calls">30.355</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
-   <tr data-problem="lowest-eigenvector/lj38" data-label="eOn (3.6.0) · Dimer">
+   <tr data-problem="lowest-eigenvector/lj38" data-label="eOn (develop 7095b23a) · Dimer">
    <td>lj38</td>
-   <td data-field="label">eOn (3.6.0) · Dimer</td>
+   <td data-field="label">eOn (develop 7095b23a) · Dimer</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">16</td>
+   <td data-field="family_rank">18</td>
    <td data-field="par2_mean">30.355</td>
    <td data-field="published"></td>
    <td data-field="median_calls">29</td>
    <td data-field="mean_calls">30.355</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="eOn (3.6.0) · LBFGS">
@@ -720,7 +944,7 @@
    <td data-field="mean_calls">180.137</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="eOn (r2025) · eon-lbfgs">
@@ -734,161 +958,189 @@
    <td data-field="mean_calls">181</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38" data-label="eOn (3.6.0) · LBFGS">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="label">eOn (3.6.0) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">13</td>
+   <td data-field="par2_mean">203.898</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">190</td>
+   <td data-field="mean_calls">203.898</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="eOn (r2025) · Conjugate Gradients">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">eOn (r2025) · Conjugate Gradients</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">22</td>
+   <td data-field="family_rank">31</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">453</td>
    <td data-field="median_calls"></td>
    <td data-field="mean_calls">453</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="eOn (r2025) · eon-sd-twopoint">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">eOn (r2025) · eon-sd-twopoint</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">25</td>
+   <td data-field="family_rank">35</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">539</td>
    <td data-field="median_calls"></td>
    <td data-field="mean_calls">539</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="eOn (r2025) · FIRE">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">eOn (r2025) · FIRE</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">39</td>
+   <td data-field="family_rank">49</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">731</td>
    <td data-field="median_calls"></td>
    <td data-field="mean_calls">731</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="eOn (r2025) · QuickMin">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">eOn (r2025) · QuickMin</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">58</td>
+   <td data-field="family_rank">70</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">3523</td>
    <td data-field="median_calls"></td>
    <td data-field="mean_calls">3523</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="eOn (r2025) · eon-sd">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">eOn (r2025) · eon-sd</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">60</td>
+   <td data-field="family_rank">72</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">4901</td>
    <td data-field="median_calls"></td>
    <td data-field="mean_calls">4901</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="eOn (r2030) · eon-lbfgs">
    <td>Morse bulk</td>
    <td data-field="label">eOn (r2030) · eon-lbfgs</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">21</td>
+   <td data-field="family_rank">30</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">52</td>
    <td data-field="median_calls"></td>
    <td data-field="mean_calls">52</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="eOn (3.6.0) · LBFGS">
    <td>Morse bulk</td>
    <td data-field="label">eOn (3.6.0) · LBFGS</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">27</td>
+   <td data-field="family_rank">36</td>
    <td data-field="par2_mean">54.18</td>
    <td data-field="published"></td>
    <td data-field="median_calls">53</td>
    <td data-field="mean_calls">54.18</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-label="eOn (3.6.0) · LBFGS">
+   <td>Morse bulk</td>
+   <td data-field="label">eOn (3.6.0) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">37</td>
+   <td data-field="par2_mean">54.31</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">52</td>
+   <td data-field="mean_calls">54.31</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="eOn (r2030) · eon-sd-twopoint">
    <td>Morse bulk</td>
    <td data-field="label">eOn (r2030) · eon-sd-twopoint</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">34</td>
+   <td data-field="family_rank">44</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">64</td>
    <td data-field="median_calls"></td>
    <td data-field="mean_calls">64</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="eOn (r2030) · eon-cg">
    <td>Morse bulk</td>
    <td data-field="label">eOn (r2030) · eon-cg</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">39</td>
+   <td data-field="family_rank">49</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">106</td>
    <td data-field="median_calls"></td>
    <td data-field="mean_calls">106</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="eOn (r2030) · eon-fire">
    <td>Morse bulk</td>
    <td data-field="label">eOn (r2030) · eon-fire</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">47</td>
+   <td data-field="family_rank">59</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">156</td>
    <td data-field="median_calls"></td>
    <td data-field="mean_calls">156</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="eOn (r2030) · eon-sd">
    <td>Morse bulk</td>
    <td data-field="label">eOn (r2030) · eon-sd</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">48</td>
+   <td data-field="family_rank">61</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">196</td>
    <td data-field="median_calls"></td>
    <td data-field="mean_calls">196</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="neb/Pt-heptamer" data-label="eOn (r2090) · eon-lbfgs">
@@ -902,7 +1154,7 @@
    <td data-field="mean_calls">42</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
    <tr data-problem="neb/Pt-heptamer" data-label="eOn (r2090) · eon-fire">
@@ -916,7 +1168,7 @@
    <td data-field="mean_calls">86</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
    <tr data-problem="neb/Pt-heptamer" data-label="eOn (r2090) · eon-cg">
@@ -930,7 +1182,7 @@
    <td data-field="mean_calls">120</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
    <tr data-problem="neb/Pt-heptamer" data-label="eOn (r2090) · eon-qm">
@@ -944,218 +1196,288 @@
    <td data-field="mean_calls">164</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
-   <tr data-problem="neb/Pt-heptamer" data-label="eOn ((develop 500350d9) · LBFGS) · LBFGS">
+   <tr data-problem="neb/Pt-heptamer" data-label="eOn (3.5.0) · LBFGS">
    <td>Pt-heptamer</td>
-   <td data-field="label">eOn ((develop 500350d9) · LBFGS) · LBFGS</td>
+   <td data-field="label">eOn (3.5.0) · LBFGS</td>
    <td data-field="family">Connect / double-ended</td>
    <td data-field="family_rank">6</td>
-   <td data-field="par2_mean">319.538</td>
+   <td data-field="par2_mean">317.077</td>
    <td data-field="published"></td>
-   <td data-field="median_calls">330</td>
-   <td data-field="mean_calls">319.538</td>
+   <td data-field="median_calls">314</td>
+   <td data-field="mean_calls">317.077</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-   <td data-field="n">13</td>
-   </tr>
-   <tr data-problem="neb/Pt-heptamer" data-label="eOn ((develop 500350d9) · FIRE) · FIRE">
-   <td>Pt-heptamer</td>
-   <td data-field="label">eOn ((develop 500350d9) · FIRE) · FIRE</td>
-   <td data-field="family">Connect / double-ended</td>
-   <td data-field="family_rank">10</td>
-   <td data-field="par2_mean">678.923</td>
-   <td data-field="published"></td>
-   <td data-field="median_calls">666</td>
-   <td data-field="mean_calls">678.923</td>
-   <td data-field="hessian_calls">0</td>
-   <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-   <td data-field="n">13</td>
-   </tr>
-   <tr data-problem="neb/Pt-heptamer" data-label="eOn ((develop 500350d9) · CG) · CG">
-   <td>Pt-heptamer</td>
-   <td data-field="label">eOn ((develop 500350d9) · CG) · CG</td>
-   <td data-field="family">Connect / double-ended</td>
-   <td data-field="family_rank">12</td>
-   <td data-field="par2_mean">1141.08</td>
-   <td data-field="published"></td>
-   <td data-field="median_calls">778</td>
-   <td data-field="mean_calls">1141.08</td>
-   <td data-field="hessian_calls">0</td>
-   <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-   <td data-field="n">13</td>
-   </tr>
-   <tr data-problem="neb/Pt-heptamer" data-label="eOn ((develop 500350d9) · QuickMin) · QuickMin">
-   <td>Pt-heptamer</td>
-   <td data-field="label">eOn ((develop 500350d9) · QuickMin) · QuickMin</td>
-   <td data-field="family">Connect / double-ended</td>
-   <td data-field="family_rank">14</td>
-   <td data-field="par2_mean">1322</td>
-   <td data-field="published"></td>
-   <td data-field="median_calls">1242</td>
-   <td data-field="mean_calls">1322</td>
-   <td data-field="hessian_calls">0</td>
-   <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
    <tr data-problem="neb/Pt-heptamer" data-label="eOn (3.6.0) · LBFGS">
    <td>Pt-heptamer</td>
    <td data-field="label">eOn (3.6.0) · LBFGS</td>
    <td data-field="family">Connect / double-ended</td>
-   <td data-field="family_rank">15</td>
+   <td data-field="family_rank">7</td>
+   <td data-field="par2_mean">317.077</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">314</td>
+   <td data-field="mean_calls">317.077</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-label="eOn (develop 500350d9) · LBFGS">
+   <td>Pt-heptamer</td>
+   <td data-field="label">eOn (develop 500350d9) · LBFGS</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">8</td>
+   <td data-field="par2_mean">317.077</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">314</td>
+   <td data-field="mean_calls">317.077</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-label="eOn (develop 500350d9) · LBFGS">
+   <td>Pt-heptamer</td>
+   <td data-field="label">eOn (develop 500350d9) · LBFGS</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">9</td>
+   <td data-field="par2_mean">317.077</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">314</td>
+   <td data-field="mean_calls">317.077</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-label="eOn (develop 500350d9) · LBFGS">
+   <td>Pt-heptamer</td>
+   <td data-field="label">eOn (develop 500350d9) · LBFGS</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">10</td>
+   <td data-field="par2_mean">319.538</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">330</td>
+   <td data-field="mean_calls">319.538</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-label="eOn (develop 500350d9) · FIRE">
+   <td>Pt-heptamer</td>
+   <td data-field="label">eOn (develop 500350d9) · FIRE</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">16</td>
+   <td data-field="par2_mean">678.923</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">666</td>
+   <td data-field="mean_calls">678.923</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-label="eOn (develop 500350d9) · CG">
+   <td>Pt-heptamer</td>
+   <td data-field="label">eOn (develop 500350d9) · CG</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">18</td>
+   <td data-field="par2_mean">1141.08</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">778</td>
+   <td data-field="mean_calls">1141.08</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-label="eOn (develop 500350d9) · QuickMin">
+   <td>Pt-heptamer</td>
+   <td data-field="label">eOn (develop 500350d9) · QuickMin</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">20</td>
+   <td data-field="par2_mean">1322</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1242</td>
+   <td data-field="mean_calls">1322</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-label="eOn (3.6.0) · LBFGS">
+   <td>Pt-heptamer</td>
+   <td data-field="label">eOn (3.6.0) · LBFGS</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">22</td>
    <td data-field="par2_mean">3517.69</td>
    <td data-field="published"></td>
    <td data-field="median_calls">3738</td>
    <td data-field="mean_calls">3517.69</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-label="eOn (3.6.0) · LBFGS">
+   <td>Pt-heptamer</td>
+   <td data-field="label">eOn (3.6.0) · LBFGS</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">23</td>
+   <td data-field="par2_mean">3523.85</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">3714</td>
+   <td data-field="mean_calls">3523.85</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
    <tr data-problem="saddle-search/pt-island" data-label="eOn (r2213) · eon-dimer-lbfgs-5-rotations-20-bowl_breakout">
    <td>Pt heptamer island</td>
    <td data-field="label">eOn (r2213) · eon-dimer-lbfgs-5-rotations-20-bowl_breakout</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">8</td>
+   <td data-field="family_rank">9</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">1.34547e+06</td>
    <td data-field="median_calls"></td>
    <td data-field="mean_calls">1.34547e+06</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">0</td>
    </tr>
    <tr data-problem="saddle-search/pt-island" data-label="eOn (r2205) · eon-md">
    <td>Pt heptamer island</td>
    <td data-field="label">eOn (r2205) · eon-md</td>
    <td data-field="family">Single-ended saddle</td>
-   <td data-field="family_rank">4</td>
+   <td data-field="family_rank">5</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">1.47817e+06</td>
    <td data-field="median_calls"></td>
    <td data-field="mean_calls">1.47817e+06</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">0</td>
    </tr>
    <tr data-problem="saddle-search/pt-island" data-label="eOn (r2213) · eon-dimer-lbfgs-5-rotations">
    <td>Pt heptamer island</td>
    <td data-field="label">eOn (r2213) · eon-dimer-lbfgs-5-rotations</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">9</td>
+   <td data-field="family_rank">10</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">1.68444e+06</td>
    <td data-field="median_calls"></td>
    <td data-field="mean_calls">1.68444e+06</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">0</td>
    </tr>
    <tr data-problem="saddle-search/pt-island" data-label="eOn (r2213) · eon-dimer-lbfgs-20-rotations-20-bowl_breakout">
    <td>Pt heptamer island</td>
    <td data-field="label">eOn (r2213) · eon-dimer-lbfgs-20-rotations-20-bowl_breakout</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">10</td>
+   <td data-field="family_rank">11</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">2.73231e+06</td>
    <td data-field="median_calls"></td>
    <td data-field="mean_calls">2.73231e+06</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">0</td>
    </tr>
    <tr data-problem="saddle-search/pt-island" data-label="eOn (r2213) · eon-dimer-lbfgs-20-rotations">
    <td>Pt heptamer island</td>
    <td data-field="label">eOn (r2213) · eon-dimer-lbfgs-20-rotations</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">11</td>
+   <td data-field="family_rank">12</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">3.34149e+06</td>
    <td data-field="median_calls"></td>
    <td data-field="mean_calls">3.34149e+06</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">0</td>
    </tr>
    <tr data-problem="saddle-search/pt-island" data-label="eOn (r2213) · eon-dimer-cg-5-rotations-20-bowl_breakout">
    <td>Pt heptamer island</td>
    <td data-field="label">eOn (r2213) · eon-dimer-cg-5-rotations-20-bowl_breakout</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">12</td>
+   <td data-field="family_rank">13</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">3.4637e+06</td>
    <td data-field="median_calls"></td>
    <td data-field="mean_calls">3.4637e+06</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">0</td>
    </tr>
    <tr data-problem="saddle-search/pt-island" data-label="eOn (r2205) · eon-dimer">
    <td>Pt heptamer island</td>
    <td data-field="label">eOn (r2205) · eon-dimer</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">13</td>
+   <td data-field="family_rank">14</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">3.77888e+06</td>
    <td data-field="median_calls"></td>
    <td data-field="mean_calls">3.77888e+06</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">0</td>
    </tr>
    <tr data-problem="saddle-search/pt-island" data-label="eOn (r2213) · eon-dimer-cg-20-rotations-20-bowl_breakout">
    <td>Pt heptamer island</td>
    <td data-field="label">eOn (r2213) · eon-dimer-cg-20-rotations-20-bowl_breakout</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">14</td>
+   <td data-field="family_rank">15</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">7.17421e+06</td>
    <td data-field="median_calls"></td>
    <td data-field="mean_calls">7.17421e+06</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">0</td>
    </tr>
    <tr data-problem="saddle-search/pt-island" data-label="eOn (r2213) · eon-dimer-cg-20-rotations">
    <td>Pt heptamer island</td>
    <td data-field="label">eOn (r2213) · eon-dimer-cg-20-rotations</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">15</td>
+   <td data-field="family_rank">16</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">7.94707e+06</td>
    <td data-field="median_calls"></td>
    <td data-field="mean_calls">7.94707e+06</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">0</td>
    </tr>
-   <tr data-problem="saddle-search/pt-island" data-label="eOn (3.6.0) · Lanczos">
+   <tr data-problem="saddle-search/pt-island" data-label="eOn (develop 7095b23a) · Lanczos">
    <td>Pt heptamer island</td>
-   <td data-field="label">eOn (3.6.0) · Lanczos</td>
+   <td data-field="label">eOn (develop 7095b23a) · Lanczos</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">16</td>
+   <td data-field="family_rank">17</td>
    <td data-field="par2_mean">2e+08</td>
    <td data-field="published"></td>
-   <td data-field="median_calls">3.98507e+06</td>
-   <td data-field="mean_calls">3.98507e+06</td>
+   <td data-field="median_calls">1e+08</td>
+   <td data-field="mean_calls">9.99904e+07</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 0</td>
-   <td data-field="n">2</td>
+   <td data-field="failures">crash 0, divergence 0, cap 20000, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">20000</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-label="eOn (r2156) · eon-lanczos-improved">
    <td>LJ38</td>
@@ -1168,7 +1490,7 @@
    <td data-field="mean_calls">237</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-label="eOn (3.5.0) · Lanczos improved L-BFGS">
@@ -1182,7 +1504,7 @@
    <td data-field="mean_calls">280.33</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-label="eOn (3.5.0) · Lanczos L-BFGS">
@@ -1196,7 +1518,7 @@
    <td data-field="mean_calls">311.19</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-label="eOn (r2156) · eon-lanczos">
@@ -1210,7 +1532,7 @@
    <td data-field="mean_calls">321</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-label="eOn (r2156) · eon-dimer">
@@ -1224,49 +1546,63 @@
    <td data-field="mean_calls">528</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-label="eOn (3.5.0) · Dimer L-BFGS">
    <td>LJ38</td>
    <td data-field="label">eOn (3.5.0) · Dimer L-BFGS</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">9</td>
+   <td data-field="family_rank">10</td>
    <td data-field="par2_mean">2102.72</td>
    <td data-field="published"></td>
    <td data-field="median_calls">411</td>
    <td data-field="mean_calls">810.06</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 15, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 15, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
-   <tr data-problem="tsopt/LJ38" data-label="eOn (3.6.0) · LBFGS">
+   <tr data-problem="tsopt/LJ38" data-label="eOn (develop 7095b23a) · LBFGS">
    <td>LJ38</td>
-   <td data-field="label">eOn (3.6.0) · LBFGS</td>
+   <td data-field="label">eOn (develop 7095b23a) · LBFGS</td>
    <td data-field="family">Single-ended saddle</td>
-   <td data-field="family_rank">3</td>
+   <td data-field="family_rank">7</td>
    <td data-field="par2_mean">2159.53</td>
    <td data-field="published"></td>
    <td data-field="median_calls">411</td>
    <td data-field="mean_calls">790.055</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 16, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 16, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
-   <tr data-problem="tsopt/LJ38" data-label="eOn (3.6.0) · Lanczos">
+   <tr data-problem="tsopt/LJ38" data-label="eOn (develop 7095b23a) · Lanczos">
    <td>LJ38</td>
-   <td data-field="label">eOn (3.6.0) · Lanczos</td>
+   <td data-field="label">eOn (develop 7095b23a) · Lanczos</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">10</td>
+   <td data-field="family_rank">13</td>
    <td data-field="par2_mean">3144.55</td>
    <td data-field="published"></td>
    <td data-field="median_calls">454.5</td>
    <td data-field="mean_calls">874.33</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 27, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 27, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/LJ38" data-label="eOn (develop 7095b23a) · LBFGS">
+   <td>LJ38</td>
+   <td data-field="label">eOn (develop 7095b23a) · LBFGS</td>
+   <td data-field="family">Single-ended saddle</td>
+   <td data-field="family_rank">8</td>
+   <td data-field="par2_mean">4805.81</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1136.5</td>
+   <td data-field="mean_calls">5082.1</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 2, cap 28, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="tsopt/pt-island" data-label="eOn (r2156) · eon-lanczos-improved">
@@ -1280,7 +1616,7 @@
    <td data-field="mean_calls">106</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>
    <tr data-problem="tsopt/pt-island" data-label="eOn (3.5.0) · Lanczos improved L-BFGS">
@@ -1294,7 +1630,7 @@
    <td data-field="mean_calls">108.796</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>
    <tr data-problem="tsopt/pt-island" data-label="eOn (r2156) · eon-dimer">
@@ -1308,7 +1644,7 @@
    <td data-field="mean_calls">116</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>
    <tr data-problem="tsopt/pt-island" data-label="eOn (3.5.0) · Dimer L-BFGS">
@@ -1322,21 +1658,21 @@
    <td data-field="mean_calls">133.898</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>
-   <tr data-problem="tsopt/pt-island" data-label="eOn (3.6.0) · LBFGS">
+   <tr data-problem="tsopt/pt-island" data-label="eOn (develop 7095b23a) · LBFGS">
    <td>pt-island</td>
-   <td data-field="label">eOn (3.6.0) · LBFGS</td>
+   <td data-field="label">eOn (develop 7095b23a) · LBFGS</td>
    <td data-field="family">Single-ended saddle</td>
-   <td data-field="family_rank">3</td>
+   <td data-field="family_rank">4</td>
    <td data-field="par2_mean">135.408</td>
    <td data-field="published"></td>
    <td data-field="median_calls">133</td>
    <td data-field="mean_calls">135.408</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>
    <tr data-problem="tsopt/pt-island" data-label="eOn (r2156) · eon-lanczos">
@@ -1350,7 +1686,7 @@
    <td data-field="mean_calls">143</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>
    <tr data-problem="tsopt/pt-island" data-label="eOn (3.5.0) · Lanczos L-BFGS">
@@ -1364,21 +1700,35 @@
    <td data-field="mean_calls">155.571</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>
-   <tr data-problem="tsopt/pt-island" data-label="eOn (3.6.0) · Lanczos">
+   <tr data-problem="tsopt/pt-island" data-label="eOn (develop 7095b23a) · Lanczos">
    <td>pt-island</td>
-   <td data-field="label">eOn (3.6.0) · Lanczos</td>
+   <td data-field="label">eOn (develop 7095b23a) · Lanczos</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">11</td>
+   <td data-field="family_rank">12</td>
    <td data-field="par2_mean">238.837</td>
    <td data-field="published"></td>
    <td data-field="median_calls">173</td>
    <td data-field="mean_calls">238.837</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">49</td>
+   </tr>
+   <tr data-problem="tsopt/pt-island" data-label="eOn (develop 7095b23a) · LBFGS">
+   <td>pt-island</td>
+   <td data-field="label">eOn (develop 7095b23a) · LBFGS</td>
+   <td data-field="family">Single-ended saddle</td>
+   <td data-field="family_rank">11</td>
+   <td data-field="par2_mean">1657.88</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">575</td>
+   <td data-field="mean_calls">1657.88</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>
    </tbody></table></div>

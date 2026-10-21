@@ -1,0 +1,373 @@
+--- a/potential.F90
++++ b/potential.F90
+@@ -78,6 +78,7 @@
+ ! gq208> end
+ ! pp555> XTB, ORCA, DFTBP, CASTEP ! vc381> PSI4
+       USE INTERFACES_EXPORT
++      USE HARNESS_POT, ONLY : HARNESS_ACTIVE, HARNESS_POTENTIAL
+ #endif /* BIOVIA */
+ 
+       IMPLICIT NONE
+@@ -337,6 +338,11 @@
+          ENDIF
+          CLOSE(15)
+       ENDIF
++
++      IF (HARNESS_ACTIVE()) THEN
++         CALL HARNESS_POTENTIAL(NATOMS,COORDS,ENERGY,VNEW,GTEST,SSTEST)
++         GOTO 9876
++      ENDIF
+ !
+ ! Spherical container
+ !
+@@ -5172,6 +5178,7 @@
+       ENDIF 
+ #endif /* BIOVIA */
+ 
++9876  CONTINUE
+ ! 
+ ! Gradient is in rigid body coordinates here, so we can't reference frozen atom positions
+ ! in Cartesians.
+--- a/NEB/output.F90
++++ b/NEB/output.F90
+@@ -40,6 +40,7 @@
+           USE CHARUTILS, ONLY: INTSTR
+           USE MODEFOL, ONLY: EFOL
+           USE COMMONS, ONLY : NINTS, NOPT, REDOPATH, REDOPATHNEB
++          USE HARNESS_POT, ONLY : HARNESS_DUMP_TS
+           USE MYLBFGS_MOD, ONLY: MYLBFGS
+ 
+           IMPLICIT NONE
+@@ -389,6 +390,7 @@
+                    ENDIF
+                 ENDIF
+                 CALL MYCPU_TIME(TIME,.FALSE.)
++                CALL HARNESS_DUMP_TS(NOPT, XYZ(NOPT*(TSPOS(J)-1)+1:NOPT*TSPOS(J)))
+ 
+                 IF (TSCONVERGED) THEN
+                    NTSFOUND=NTSFOUND+1
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -261,6 +261,7 @@
+ 
+ # Make an optim library
+ add_library(optimlib ${OPTIM_LIB_SOURCES})
++target_sources(optimlib PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/harness_socket.c)
+ set_module_dir(optimlib)
+ set_module_depends(optimlib extralib)
+ set_target_properties(optimlib PROPERTIES LINKER_LANGUAGE "Fortran")
+--- a/version.sh
++++ b/version.sh
+@@ -38,5 +38,9 @@
+ fi
+ # Remove the temporary file
+ rm $tmpfile
++# A public tarball has neither an svn revision nor a git description.
++if [ ! -s "$outfile" ]; then
++  echo "02aaf452" > "$outfile"
++fi
+ # Return the version from the VERSION file
+ cat $outfile
+--- /dev/null
++++ b/harness_pot.f90
+@@ -0,0 +1,105 @@
++! OptBench socket potential for OPTIM.
++!
++! OPTBENCH_POTSERVER selects this potential. One call is one calculate.
++! Status 2 is the force-call cap. The Cartesian gradient is dE/dx, the
++! same convention as OPTIM's VNEW.
++
++MODULE HARNESS_POT
++      USE ISO_C_BINDING, ONLY: C_INT, C_DOUBLE
++      USE MODHESS, ONLY: HESS
++      IMPLICIT NONE
++      LOGICAL, SAVE :: CHECKED = .FALSE.
++      LOGICAL, SAVE :: ACTIVE = .FALSE.
++
++      INTERFACE
++         FUNCTION HARNESS_EVAL(NATOMS, COORDS, ENERGY, GRAD) BIND(C, NAME="harness_eval")
++            USE ISO_C_BINDING, ONLY: C_INT, C_DOUBLE
++            INTEGER(C_INT), VALUE :: NATOMS
++            REAL(C_DOUBLE), INTENT(IN) :: COORDS(*)
++            REAL(C_DOUBLE), INTENT(OUT) :: ENERGY
++            REAL(C_DOUBLE), INTENT(OUT) :: GRAD(*)
++            INTEGER(C_INT) :: HARNESS_EVAL
++         END FUNCTION HARNESS_EVAL
++      END INTERFACE
++
++CONTAINS
++
++      LOGICAL FUNCTION HARNESS_ACTIVE()
++         CHARACTER(LEN=256) :: VALUE
++         INTEGER :: LENGTH, STATUS
++         IF (.NOT. CHECKED) THEN
++            CALL GET_ENVIRONMENT_VARIABLE('OPTBENCH_POTSERVER', VALUE, LENGTH, STATUS)
++            ACTIVE = STATUS .EQ. 0 .AND. LENGTH .GT. 0
++            CHECKED = .TRUE.
++         ENDIF
++         HARNESS_ACTIVE = ACTIVE
++      END FUNCTION HARNESS_ACTIVE
++
++      SUBROUTINE HARNESS_STOP(FILENAME)
++         CHARACTER(LEN=*), INTENT(IN) :: FILENAME
++         INTEGER :: UNIT
++         OPEN(NEWUNIT=UNIT, FILE=FILENAME, STATUS='REPLACE')
++         WRITE(UNIT, '(A)') TRIM(FILENAME)
++         CLOSE(UNIT)
++         STOP
++      END SUBROUTINE HARNESS_STOP
++
++      SUBROUTINE HARNESS_POTENTIAL(NATOMS, COORDS, ENERGY, VNEW, GTEST, SSTEST)
++         INTEGER, INTENT(IN) :: NATOMS
++         DOUBLE PRECISION, INTENT(INOUT) :: COORDS(3*NATOMS)
++         DOUBLE PRECISION, INTENT(OUT) :: ENERGY
++         DOUBLE PRECISION, INTENT(OUT) :: VNEW(3*NATOMS)
++         LOGICAL, INTENT(IN) :: GTEST, SSTEST
++         INTEGER :: STATUS, J1, J2
++         DOUBLE PRECISION :: DELTA, SAVED
++         DOUBLE PRECISION, ALLOCATABLE :: PLUS(:), MINUS(:)
++
++         STATUS = HARNESS_EVAL(NATOMS, COORDS, ENERGY, VNEW)
++         IF (STATUS .EQ. 2) CALL HARNESS_STOP('optbench.cap')
++         IF (STATUS .NE. 0) CALL HARNESS_STOP('optbench.crash')
++         IF (.NOT. GTEST) VNEW(1:3*NATOMS) = 0.0D0
++         IF (.NOT. SSTEST) RETURN
++         IF (.NOT. ALLOCATED(HESS)) ALLOCATE(HESS(3*NATOMS, 3*NATOMS))
++         ALLOCATE(PLUS(3*NATOMS), MINUS(3*NATOMS))
++         DELTA = 1.0D-5
++         DO J1 = 1, 3*NATOMS
++            SAVED = COORDS(J1)
++            COORDS(J1) = SAVED + DELTA
++            STATUS = HARNESS_EVAL(NATOMS, COORDS, ENERGY, PLUS)
++            IF (STATUS .EQ. 2) CALL HARNESS_STOP('optbench.cap')
++            IF (STATUS .NE. 0) CALL HARNESS_STOP('optbench.crash')
++            COORDS(J1) = SAVED - DELTA
++            STATUS = HARNESS_EVAL(NATOMS, COORDS, ENERGY, MINUS)
++            IF (STATUS .EQ. 2) CALL HARNESS_STOP('optbench.cap')
++            IF (STATUS .NE. 0) CALL HARNESS_STOP('optbench.crash')
++            COORDS(J1) = SAVED
++            DO J2 = 1, 3*NATOMS
++               HESS(J2, J1) = (PLUS(J2) - MINUS(J2)) / (2.0D0 * DELTA)
++            ENDDO
++         ENDDO
++         DO J1 = 1, 3*NATOMS
++            DO J2 = 1, J1 - 1
++               DELTA = 0.5D0 * (HESS(J1, J2) + HESS(J2, J1))
++               HESS(J1, J2) = DELTA
++               HESS(J2, J1) = DELTA
++            ENDDO
++         ENDDO
++         STATUS = HARNESS_EVAL(NATOMS, COORDS, ENERGY, VNEW)
++         IF (STATUS .EQ. 2) CALL HARNESS_STOP('optbench.cap')
++         IF (STATUS .NE. 0) CALL HARNESS_STOP('optbench.crash')
++         IF (.NOT. GTEST) VNEW(1:3*NATOMS) = 0.0D0
++      END SUBROUTINE HARNESS_POTENTIAL
++
++      SUBROUTINE HARNESS_DUMP_TS(NOPT, COORDS)
++         INTEGER, INTENT(IN) :: NOPT
++         DOUBLE PRECISION, INTENT(IN) :: COORDS(NOPT)
++         INTEGER :: UNIT, J1
++         IF (.NOT. HARNESS_ACTIVE()) RETURN
++         IF (NOPT .LT. 1) RETURN
++         OPEN(NEWUNIT=UNIT, FILE='optbench.ts', STATUS='UNKNOWN', POSITION='APPEND')
++         WRITE(UNIT, '(I8)') NOPT
++         WRITE(UNIT, '(3ES24.16)') (COORDS(J1), J1=1, NOPT)
++         CLOSE(UNIT)
++      END SUBROUTINE HARNESS_DUMP_TS
++
++END MODULE HARNESS_POT
+--- /dev/null
++++ b/harness_socket.c
+@@ -0,0 +1,192 @@
++/* OptBench potential client for OPTIM.
++
++   One POTENTIAL entry is one TCP calculate. The server counts that
++   request. A ForceCallCap reply is status 2. Any other failure is
++   status 1. Status 0 fills energy and the Cartesian gradient.
++*/
++#include <arpa/inet.h>
++#include <ctype.h>
++#include <errno.h>
++#include <netdb.h>
++#include <netinet/in.h>
++#include <netinet/tcp.h>
++#include <stdio.h>
++#include <stdlib.h>
++#include <string.h>
++#include <sys/socket.h>
++#include <unistd.h>
++
++static int read_line(int fd, char *buf, int buflen) {
++    int used = 0;
++    while (used + 1 < buflen) {
++        char byte = 0;
++        ssize_t got = recv(fd, &byte, 1, 0);
++        if (got == 0) {
++            buf[used] = '\0';
++            return used == 0 ? -1 : 0;
++        }
++        if (got < 0) {
++            if (errno == EINTR) {
++                continue;
++            }
++            return -1;
++        }
++        if (byte == '\n') {
++            buf[used] = '\0';
++            return 0;
++        }
++        if (byte != '\r') {
++            buf[used++] = byte;
++        }
++    }
++    buf[buflen - 1] = '\0';
++    return -1;
++}
++
++static int connect_endpoint(const char *endpoint) {
++    char host[256];
++    char *colon;
++    char *end = NULL;
++    long port;
++    int fd;
++    struct sockaddr_in address;
++    int flag = 1;
++
++    if (strlen(endpoint) >= sizeof(host)) {
++        return -1;
++    }
++    memcpy(host, endpoint, strlen(endpoint) + 1);
++    colon = strrchr(host, ':');
++    if (colon == NULL || colon == host) {
++        return -1;
++    }
++    *colon = '\0';
++    port = strtol(colon + 1, &end, 10);
++    if (end == colon + 1 || *end != '\0' || port < 1 || port > 65535) {
++        return -1;
++    }
++    fd = socket(AF_INET, SOCK_STREAM, 0);
++    if (fd < 0) {
++        return -1;
++    }
++    setsockopt(fd, IPPROTO_TCP, TCP_NODELAY, &flag, sizeof(flag));
++    memset(&address, 0, sizeof(address));
++    address.sin_family = AF_INET;
++    address.sin_port = htons((unsigned short)port);
++    if (inet_pton(AF_INET, host, &address.sin_addr) != 1) {
++        struct addrinfo hints;
++        struct addrinfo *found = NULL;
++        char port_text[16];
++        memset(&hints, 0, sizeof(hints));
++        hints.ai_family = AF_INET;
++        hints.ai_socktype = SOCK_STREAM;
++        snprintf(port_text, sizeof(port_text), "%ld", port);
++        if (getaddrinfo(host, port_text, &hints, &found) != 0 || found == NULL) {
++            close(fd);
++            return -1;
++        }
++        if (connect(fd, found->ai_addr, found->ai_addrlen) != 0) {
++            freeaddrinfo(found);
++            close(fd);
++            return -1;
++        }
++        freeaddrinfo(found);
++        return fd;
++    }
++    if (connect(fd, (struct sockaddr *)&address, sizeof(address)) != 0) {
++        close(fd);
++        return -1;
++    }
++    return fd;
++}
++
++int harness_eval(int natoms, const double *coords, double *energy, double *grad) {
++    const char *endpoint = getenv("OPTBENCH_POTSERVER");
++    int fd;
++    int atom;
++    char line[512];
++    char *cursor;
++    int status;
++
++    if (endpoint == NULL || endpoint[0] == '\0' || natoms < 1 || coords == NULL || energy == NULL || grad == NULL) {
++        return 1;
++    }
++    fd = connect_endpoint(endpoint);
++    if (fd < 0) {
++        return 1;
++    }
++    if (send(fd, "calculate\n", 10, MSG_NOSIGNAL) != 10) {
++        close(fd);
++        return 1;
++    }
++    snprintf(line, sizeof(line), "%d\n", natoms);
++    if (send(fd, line, strlen(line), MSG_NOSIGNAL) < 0) {
++        close(fd);
++        return 1;
++    }
++    if (send(fd, "0 0 0 0 0 0 0 0 0\n", 18, MSG_NOSIGNAL) != 18) {
++        close(fd);
++        return 1;
++    }
++    for (atom = 0; atom < natoms; atom++) {
++        int wrote = snprintf(
++            line,
++            sizeof(line),
++            "1 %.17g %.17g %.17g\n",
++            coords[3 * atom],
++            coords[3 * atom + 1],
++            coords[3 * atom + 2]
++        );
++        if (wrote < 0 || wrote >= (int)sizeof(line) || send(fd, line, (size_t)wrote, MSG_NOSIGNAL) != wrote) {
++            close(fd);
++            return 1;
++        }
++    }
++    if (read_line(fd, line, sizeof(line)) != 0) {
++        close(fd);
++        return 1;
++    }
++    if (strcmp(line, "ok") != 0) {
++        status = 1;
++        if (strstr(line, "ForceCallCap") != NULL) {
++            status = 2;
++        } else if (strcmp(line, "error") == 0 && read_line(fd, line, sizeof(line)) == 0 && strstr(line, "ForceCallCap") != NULL) {
++            status = 2;
++        }
++        close(fd);
++        return status;
++    }
++    if (read_line(fd, line, sizeof(line)) != 0 || read_line(fd, line, sizeof(line)) != 0 || read_line(fd, line, sizeof(line)) != 0) {
++        close(fd);
++        return 1;
++    }
++    *energy = strtod(line, &cursor);
++    if (cursor == line) {
++        close(fd);
++        return 1;
++    }
++    for (atom = 0; atom < natoms; atom++) {
++        char *next = NULL;
++        if (read_line(fd, line, sizeof(line)) != 0) {
++            close(fd);
++            return 1;
++        }
++        grad[3 * atom] = strtod(line, &next);
++        if (next == line) {
++            close(fd);
++            return 1;
++        }
++        grad[3 * atom + 1] = strtod(next, &cursor);
++        if (cursor == next) {
++            close(fd);
++            return 1;
++        }
++        grad[3 * atom + 2] = strtod(cursor, &next);
++        if (next == cursor) {
++            close(fd);
++            return 1;
++        }
++    }
++    close(fd);
++    return 0;
++}

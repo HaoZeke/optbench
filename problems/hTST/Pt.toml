@@ -4,7 +4,7 @@ suite = "hTST"
 problem = "Pt"
 contract = "shared"
 entry_count = 11
-remark = "A start is one barrier window. The window closes when each reference barrier below 1.3 eV has been matched once from the processtable. Force calls are sad-fcs. The stop is the maximum force on any atom. The potential is morse_pt."
+remark = "A start is one barrier window. The window closes when each reference barrier below 1.3 eV has been matched once from the processtable. Force calls are sad-fcs. The rate sum uses the search row's harmonic prefactor when the row carries one, and 1.2e12 otherwise. The stop is the maximum force on any atom. The potential is morse_pt."
 
 [potential]
 evaluator = "morse_pt"
@@ -48,6 +48,7 @@ par_factor = 2
 bootstrap_resamples = 2000
 bootstrap_seed = 20261015
 counter = "harness"
+cost = "one barrier window: sad-fcs summed until every reference barrier has been seen once"
 required = [
   "schema",
   "counter",
@@ -70,5 +71,6 @@ required = [
   "n_cap",
   "n_wrong_stationary",
   "n_divergence",
+  "n_not_converged",
   "n_crash",
 ]

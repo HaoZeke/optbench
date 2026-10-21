@@ -1,0 +1,13 @@
+# KLIFF is not a conda-forge package. This file does not select a
+# build string. The import the benchmarks use is the source build
+# pinned in codes/registry.toml under id kliff:
+#   ref = main
+#   commit = df2d4de2d8c0b3d4ba81cb9aa1834b52de299aa5
+#   version string 1.0.1
+# asv has one environment_type, so this yml cannot be bound to one
+# class. Those classes call the KLIFF neural-network trainer.
+name: kliff
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12

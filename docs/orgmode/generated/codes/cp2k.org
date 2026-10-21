@@ -1,0 +1,178 @@
+#+TITLE: CP2K
+#+OPTIONS: toc:nil num:nil author:nil
+
+#+begin_export rst
+.. raw:: html
+
+   <section class="bench" id="code-cp2k">
+   <h2>CP2K</h2>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>band and transition-state search</td>
+   <td>v2026.2</td>
+   <td>67b5da876dd6</td>
+   <td><a href="https://github.com/cp2k/cp2k">https://github.com/cp2k/cp2k</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-rows">
+   <caption>Every ranked row for this code.</caption>
+   <thead><tr><th>Problem</th><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="double-ended-saddle-search/lj38" data-label="CP2K (2026.2) · CI-NEB">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="label">CP2K (2026.2) · CI-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">19</td>
+   <td data-field="par2_mean">4655.5</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">2500</td>
+   <td data-field="mean_calls">2455.5</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 44, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38" data-label="CP2K (2026.2) · IT-NEB">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="label">CP2K (2026.2) · IT-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">23</td>
+   <td data-field="par2_mean">5000</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">2500</td>
+   <td data-field="mean_calls">2500</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 50, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38" data-label="CP2K (2026.2) · SM">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="label">CP2K (2026.2) · SM</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">13</td>
+   <td data-field="par2_mean">5000</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">2500</td>
+   <td data-field="mean_calls">2500</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 50, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-label="CP2K (2026.2) · CI-NEB">
+   <td>pt-island</td>
+   <td data-field="label">CP2K (2026.2) · CI-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">21</td>
+   <td data-field="par2_mean">5296.1</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">3000</td>
+   <td data-field="mean_calls">2906.27</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 47, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-label="CP2K (2026.2) · IT-NEB">
+   <td>pt-island</td>
+   <td data-field="label">CP2K (2026.2) · IT-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">22</td>
+   <td data-field="par2_mean">6000</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">3000</td>
+   <td data-field="mean_calls">2945.17</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 51, not_converged 8, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-label="CP2K (2026.2) · SM">
+   <td>pt-island</td>
+   <td data-field="label">CP2K (2026.2) · SM</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">12</td>
+   <td data-field="par2_mean">6000</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">3000</td>
+   <td data-field="mean_calls">3000</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 59, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-label="CP2K (2026.2) · CI-NEB">
+   <td>Pt-heptamer</td>
+   <td data-field="label">CP2K (2026.2) · CI-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">14</td>
+   <td data-field="par2_mean">4518.46</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">4260</td>
+   <td data-field="mean_calls">4518.46</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-label="CP2K (2026.2) · IT-NEB">
+   <td>Pt-heptamer</td>
+   <td data-field="label">CP2K (2026.2) · IT-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">15</td>
+   <td data-field="par2_mean">20000</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="mean_calls">8315.38</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 8, not_converged 5, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-label="CP2K (2026.2) · SM">
+   <td>Pt-heptamer</td>
+   <td data-field="label">CP2K (2026.2) · SM</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">24</td>
+   <td data-field="par2_mean">20000</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="mean_calls">10000</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 13, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="tsopt/LJ38" data-label="CP2K (2026.2) · Dimer CG">
+   <td>LJ38</td>
+   <td data-field="label">CP2K (2026.2) · Dimer CG</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">19</td>
+   <td data-field="par2_mean">20000</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">740.5</td>
+   <td data-field="mean_calls">676.475</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 200, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/pt-island" data-label="CP2K (2026.2) · Dimer CG">
+   <td>pt-island</td>
+   <td data-field="label">CP2K (2026.2) · Dimer CG</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">21</td>
+   <td data-field="par2_mean">20000</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">524</td>
+   <td data-field="mean_calls">542.408</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 49, wrong_stationary 0</td>
+   <td data-field="n">49</td>
+   </tr>
+   </tbody></table></div>
+   </section>
+#+end_export

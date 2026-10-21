@@ -7,12 +7,12 @@ commit = "4d8b34baf1ba8d2d980df29838bac1f969d1662c"
 algorithm = "Lanczos improved L-BFGS"
 method = "Lanczos improved"
 reducer = "harness"
-failure_cap = 10000
+failure_cap = 250000
 kind = "de-2ts-mode"
 kernel = "lj40"
 asv_class = "EonClientDe2tsLanczosImproved"
 note = '''
-No 2014 eon config is in the archive for this problem. The band uses the LJ38 climbing-image settings and the problem cap of 10000 force calls, five interior images, and converged_force 0.001. Lanczos max_iterations 20, tolerance 0.05, quit_early true. The harness kernel is unshifted lj/cut with epsilon 1, sigma 1, and cutoff 40.
+No 2014 eon config is in the archive for this problem. The band uses the LJ38 climbing-image settings and the problem cap of 250000 force calls, five interior images, and converged_force 0.001. Lanczos max_iterations 20, tolerance 0.05, quit_early true. The harness kernel is unshifted lj/cut with epsilon 1, sigma 1, and cutoff 40.
 '''
 seeds = [1]
 asv_timeout = 1200

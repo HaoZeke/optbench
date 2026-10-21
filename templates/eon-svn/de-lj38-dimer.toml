@@ -11,7 +11,7 @@ kind = "de-lj38-mode"
 kernel = "lj40"
 asv_class = "EonSvnDeLj38Dimer"
 note = '''
-Min-mode dimer from the interpolated end points of the 50 LJ38 pairs. pos.con is the reactant. displacement.con is the reactant plus half the minimum-image product difference. direction.dat is that difference, normalized. max_energy 1e9. Dimer converged_angle 5, rotations_max 10, improved true. LBFGS max_iterations 1000, converged_force 0.001. The harness kernel is unshifted lj/cut with epsilon 1, sigma 1, and cutoff 40.
+Min-mode dimer from the interpolated end points of the 50 LJ38 pairs. pos.con is the reactant. displacement.con is the reactant plus half the minimum-image product difference. direction.dat is that difference, normalized. max_energy 1e9. Dimer converged_angle 5, rotations_max 10. The 2014 ini leaves improved unset, and this template does too. LBFGS max_iterations 1000, converged_force 0.001. The harness kernel is unshifted lj/cut with epsilon 1, sigma 1, and cutoff 40.
 '''
 seeds = [1]
 asv_timeout = 900
@@ -46,7 +46,6 @@ max_energy = 1000000000
 
 [ini.Dimer]
 opt_method = "cg"
-improved = true
 converged_angle = 5
 rotations_max = 10
 rotations_min = 1

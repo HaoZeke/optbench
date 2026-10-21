@@ -1,0 +1,12 @@
+# Latest GMIN on the archived TIP4P20 linear temperature basin-paving problem.
+id = "gmin/tip4p20-tbp"
+engine = "gmin"
+problem = "globalopt/tip4p20"
+code = "GMIN"
+code_version = "df8da5992675"
+commit = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
+algorithm = "linear temperature basin-paving"
+tuning = "stock"
+note = """
+Latest Wales svn.tar.bz2 (sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31), GMIN SVNREV df8da599267534fbe43a250e578f7396a7946311. Unmodified source, stock CMake Release build, gfortran 13. The 100 archived angle-axis starts and the archived convergence are unchanged: NTIP 4, CENTRE, EDIFF 1e-3, SLOPPYCONV 1e-3, TIGHTCONV 1e-3, FIXBOTH, RANSEED 100, RADIUS 10, MAXBFGS 0.2, MAXERISE 1e-4, TARGET -872.9887, TBP -873.0 2.0 100 0.003 0.001 20, STEP 0 0 1.49, TEMPERATURE 0.60. This reader rejects 1.D4 and 2.D7 in READI, so MAXIT and STEPS are the same integers 10000 and 20000000. A start succeeds when gsaveit writes Target hit after. The score is that line's NPCALL, awk field 7. The archive mean stays the archived number.
+"""

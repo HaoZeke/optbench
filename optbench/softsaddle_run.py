@@ -21,6 +21,8 @@ from pathlib import Path
 
 import numpy as np
 
+from .connection import ProcessCatalog, connected_endpoints, link_tolerance, per_atom_max
+from .endpoints import EndpointArchive, align_resume, stamp_endpoint, stored_cell
 from .failures import classify_failure
 from .rgsaddle_minmode import (
     HarnessSurface,
@@ -690,8 +692,6 @@ def _judge_saddle(payload: dict, climbed: dict, potential: HarnessSurface, calls
     force_tol = float(payload["force_tol"])
     minimum = np.asarray(payload["minimum"], dtype=np.float64)
     min_energy = float(payload["min_energy"])
-    connect = float(payload["connect_rmsd"])
-    barrier_max = float(payload["barrier_max"])
     search_cap = int(payload["search_cap"])
     reasons = ["force_norm"]
     record = {
@@ -728,25 +728,29 @@ def _judge_saddle(payload: dict, climbed: dict, potential: HarnessSurface, calls
             axis = _unit(np.asarray(mode, dtype=np.float64))
             plus, _plus_ok = _lbfgs_minimize(potential, point + 0.1 * axis, force_tol, _SADDLE_ENDPOINT_BUDGET)
             minus, _minus_ok = _lbfgs_minimize(potential, point - 0.1 * axis, force_tol, _SADDLE_ENDPOINT_BUDGET)
-            plus_rmsd = _cartesian_rmsd(plus.reshape(-1, 3), minimum.reshape(-1, 3))
-            minus_rmsd = _cartesian_rmsd(minus.reshape(-1, 3), minimum.reshape(-1, 3))
-            links = (plus_rmsd <= connect) ^ (minus_rmsd <= connect)
+            tolerance = float(payload.get("link_tolerance", 0.1))
+            cell = payload.get("cell")
+            links, plus_span, minus_span = _endpoint_link(plus, minus, minimum, cell, tolerance)
+            plus_rows = plus.reshape(-1, 3)
+            minus_rows = minus.reshape(-1, 3)
+            reactant_rows = minimum.reshape(-1, 3)
             barrier = float(climbed["energy"] - min_energy)
             record["barrier"] = barrier
-            record["rmsd_plus"] = plus_rmsd
-            record["rmsd_minus"] = minus_rmsd
+            record["rmsd_plus"] = _cartesian_rmsd(plus_rows, reactant_rows)
+            record["rmsd_minus"] = _cartesian_rmsd(minus_rows, reactant_rows)
+            record["per_atom_max_plus"] = plus_span
+            record["per_atom_max_minus"] = minus_span
             record["saddle_distance"] = _norm(point - minimum)
             record["saddle_x"] = point.copy()
+            record["endpoint_plus"] = np.asarray(plus, dtype=np.float64).reshape(-1).copy()
+            record["endpoint_minus"] = np.asarray(minus, dtype=np.float64).reshape(-1).copy()
+            record["links"] = links
             record["novel_candidate"] = True
             if climbed["x_lambda"] is not None:
                 distance = _norm(np.asarray(climbed["x_lambda"], dtype=np.float64) - minimum)
                 if distance > 0.0:
                     record["lambda_distance"] = distance
             reasons = []
-            if not links:
-                reasons.append("not_connected")
-            if barrier >= barrier_max:
-                reasons.append("barrier")
         else:
             reasons = ["hessian_index"] if index != 1 else ["force_norm"]
     elif not finite:
@@ -798,31 +802,62 @@ def _saddle_worker(payload: dict) -> dict:
     return judged
 
 
-def _apply_novelty(judged: dict, found: list[np.ndarray], connect: float) -> dict:
-    reasons = list(judged["reasons"])
-    success = bool(judged["success"])
-    point = judged.get("saddle_x")
-    if judged.get("novel_candidate") and point is not None:
-        saddle = np.asarray(point, dtype=np.float64)
-        novel = all(_cartesian_rmsd(saddle.reshape(-1, 3), old.reshape(-1, 3)) > connect for old in found)
-        if novel:
-            found.append(saddle)
-            judged["accepted_novel"] = True
-        else:
-            if "duplicate" not in reasons:
-                reasons.append("duplicate")
-            success = False
-        if success and reasons:
-            success = False
+def _endpoint_link(plus, minus, minimum, cell, tolerance: float) -> tuple[bool, float, float]:
+    """eOn r2205 link: exactly one endpoint is the reactant by per-atom distance."""
+    plus_rows = np.asarray(plus, dtype=np.float64).reshape(-1, 3)
+    minus_rows = np.asarray(minus, dtype=np.float64).reshape(-1, 3)
+    reactant_rows = np.asarray(minimum, dtype=np.float64).reshape(-1, 3)
+    return (
+        connected_endpoints(reactant_rows, plus_rows, minus_rows, cell, tolerance),
+        per_atom_max(plus_rows, reactant_rows, cell),
+        per_atom_max(minus_rows, reactant_rows, cell),
+    )
+
+
+def _apply_identity(judged: dict, catalog: ProcessCatalog) -> dict:
+    """Uniqueness is ``AKMCState.find_repeat`` on the saddle, not Cartesian RMSD."""
+    judged = dict(judged)
+    ready = bool(judged.get("novel_candidate") and judged.get("saddle_x") is not None and not judged.get("failure"))
+    if ready:
+        saddle = np.asarray(judged["saddle_x"], dtype=np.float64)
+        decision = catalog.observe(
+            judged=True,
+            linked=bool(judged.get("links")),
+            structure=saddle.reshape(-1, 3),
+            barrier=judged.get("barrier"),
+        )
+        reasons = list(decision["reasons"])
+        success = bool(decision["success"])
+        judged["accepted_novel"] = bool(decision["good"])
+        judged["observed"] = True
+    else:
+        catalog.observe(judged=False)
+        reasons = list(judged.get("reasons") or [])
+        success = bool(judged.get("success")) and not reasons
     failure = None if success and not reasons else classify_failure(reasons or ["divergence"])
     if success:
         failure = None
         reasons = []
-    judged = dict(judged)
     judged["reasons"] = reasons
     judged["success"] = bool(success and failure is None)
     judged["failure"] = failure
     return judged
+
+
+def _restore_catalog(saved: list[dict], cell, tolerance: float, barrier_max: float) -> ProcessCatalog:
+    catalog = ProcessCatalog(cell, tolerance=tolerance, barrier_max=barrier_max)
+    for row in saved:
+        point = row.get("saddle_stored")
+        if point is None:
+            catalog.observe(judged=False)
+            continue
+        catalog.observe(
+            judged=True,
+            linked=bool(row.get("linked")),
+            structure=np.asarray(point, dtype=np.float64),
+            barrier=row.get("barrier"),
+        )
+    return catalog
 
 
 def _radius_update(radius: float, batch: list[dict], lam: list[float], sad: list[float], settings: dict) -> float:
@@ -864,6 +899,15 @@ def hypersphere() -> tuple[np.ndarray, np.ndarray]:
         raise FileNotFoundError(str(path))
     packed = np.load(path)
     return np.asarray(packed["V"], dtype=np.float64), np.asarray(packed["order"], dtype=np.int64)
+
+
+def _finite_endpoint(value) -> np.ndarray | None:
+    if value is None:
+        return None
+    row = np.asarray(value, dtype=np.float64).reshape(-1)
+    if row.size == 0 or not np.isfinite(row).all():
+        return None
+    return row
 
 
 def _displace(minimum: np.ndarray, direction: np.ndarray, radius: float, atoms: int) -> np.ndarray:
@@ -915,7 +959,7 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
     positions, fixed, cell = load_con(_stored(root, con_path))
     goal = int((problem.get("goal") or {}).get("connected_saddles", 27))
     barrier_max = float((problem.get("goal") or {}).get("barrier_below_eV", 1.5))
-    connect = 0.5
+    tolerance = link_tolerance(problem)
     climb_budget = int(settings["cg_iter_max"])
     search_cap = climb_budget + _SADDLE_CLIMB_OVERSHOOT + 2 * _SADDLE_ENDPOINT_BUDGET
     vectors, order = hypersphere()
@@ -923,8 +967,11 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
     raw = potential_from_problem(problem)
     header_path, partial_path = _checkpoint_paths(output)
     header = json.loads(header_path.read_text(encoding="utf-8")) if header_path.is_file() else None
-    saved = _load_partial(partial_path) if header and header.get("template") == template["id"] else []
-    if header and header.get("template") == template["id"]:
+    resume = bool(
+        header and header.get("template") == template["id"] and header.get("identity") == "find_repeat"
+    )
+    saved = _load_partial(partial_path) if resume else []
+    if resume:
         minimum = np.asarray(header["minimum"], dtype=np.float64)
         min_energy = float(header["min_energy"])
         minimize_calls = int(header["minimize_calls"])
@@ -941,6 +988,7 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
             json.dumps(
                 {
                     "template": template["id"],
+                    "identity": "find_repeat",
                     "minimum": minimum.tolist(),
                     "min_energy": min_energy,
                     "minimize_calls": minimize_calls,
@@ -950,15 +998,15 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
             encoding="utf-8",
         )
     radius, _lam, _sad = _replay_radius(saved, settings)
-    found = []
-    connected = 0
-    for row in saved:
-        if row.get("saddle_stored") is not None:
-            found.append(np.asarray(row["saddle_stored"], dtype=np.float64))
-        if row.get("success"):
-            connected += 1
+    catalog = _restore_catalog(saved, cell, tolerance, barrier_max)
+    n_free = int(np.asarray(minimum).size // 3)
+    archive = EndpointArchive(output.with_name(output.stem + ".endpoints.npz"), n_free)
+    if resume and saved:
+        align_resume(archive, len(saved))
+    else:
+        archive.reset(stored_cell(cell), np.flatnonzero(~fixed))
     print(
-        f"{template['id']} resume searches {len(saved)} connected {connected} radius {radius:.4f}",
+        f"{template['id']} resume searches {catalog.searches} connected {catalog.qualifying} radius {radius:.4f}",
         flush=True,
     )
     batch = int(settings["batch"])
@@ -982,7 +1030,7 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
                     "min_energy": min_energy,
                     "settings": settings,
                     "force_tol": force_tol,
-                    "connect_rmsd": connect,
+                    "link_tolerance": tolerance,
                     "barrier_max": barrier_max,
                     "search_cap": search_cap,
                     "climb_budget": climb_budget,
@@ -999,7 +1047,7 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
 
         pool = ProcessPoolExecutor(max_workers=workers, mp_context=mp.get_context("spawn"))
     try:
-        while connected < goal and len(saved) < max_searches:
+        while catalog.qualifying < goal and len(saved) < max_searches:
             start = len(saved)
             stop = min(start + batch, max_searches)
             payloads = _batch(start, stop, radius)
@@ -1009,12 +1057,16 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
                 judged_rows = list(pool.map(_saddle_worker, payloads))
             judged_rows.sort(key=lambda row: int(row["index"]))
             for judged in judged_rows:
-                applied = _apply_novelty(judged, found, connect)
-                if applied["success"]:
-                    connected += 1
+                applied = _apply_identity(judged, catalog)
+                plus_ep = _finite_endpoint(applied.pop("endpoint_plus", None))
+                minus_ep = _finite_endpoint(applied.pop("endpoint_minus", None))
+                if plus_ep is None or minus_ep is None:
+                    plus_ep = None
+                    minus_ep = None
+                status = archive.add(minimum, plus_ep, minus_ep)
                 stored_point = None
-                if applied.get("accepted_novel") and applied.get("saddle_x") is not None:
-                    stored_point = list(applied["saddle_x"])
+                if applied.get("observed") and applied.get("saddle_x") is not None:
+                    stored_point = [float(value) for value in np.asarray(applied["saddle_x"], dtype=np.float64).reshape(-1)]
                 public = _public(
                     applied["name"],
                     applied["force_calls"],
@@ -1028,6 +1080,8 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
                     barrier=applied.get("barrier"),
                     rmsd_plus=applied.get("rmsd_plus"),
                     rmsd_minus=applied.get("rmsd_minus"),
+                    per_atom_max_plus=applied.get("per_atom_max_plus"),
+                    per_atom_max_minus=applied.get("per_atom_max_minus"),
                     curvature=applied.get("curvature"),
                     converged=bool(applied.get("converged")),
                     lambda_distance=applied.get("lambda_distance"),
@@ -1036,15 +1090,18 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
                     solver=settings["solver"],
                     radius=radius,
                     error=applied.get("error"),
+                    linked=bool(applied.get("links")),
                 )
+                stamp_endpoint(public, archive.name, archive.count - 1, status)
                 partial = dict(public)
                 partial["saddle_stored"] = stored_point
                 saved.append(partial)
                 _append_partial(partial_path, partial)
-            if len(saved) % batch == 0 or len(saved) >= max_searches or connected >= goal:
+            if len(saved) % batch == 0 or len(saved) >= max_searches or catalog.qualifying >= goal:
                 radius, _lam, _sad = _replay_radius(saved, settings)
             print(
-                f"{template['id']} searches {len(saved)} connected {connected} radius {radius:.4f} "
+                f"{template['id']} searches {len(saved)} connected {catalog.qualifying} "
+                f"unique {catalog.unique} radius {radius:.4f} "
                 f"last {saved[-1]['force_calls']} {saved[-1]['failure']}",
                 flush=True,
             )
@@ -1055,8 +1112,9 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
     for row in saved:
         public = {key: value for key, value in row.items() if key != "saddle_stored"}
         records.append(public)
-    fraction = connected / len(records) if records else 0.0
-    unique = len(found)
+    fraction = catalog.fraction_connected
+    unique = catalog.unique
+    connected = catalog.qualifying
     comments = (
         f"# rep 1 force_calls {sum(int(row['force_calls']) for row in records)} "
         f"unique_saddles {unique} fraction_connected {fraction} total_searches {len(records)} "
@@ -1108,8 +1166,11 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
             f"v2_nfailed {metrics['nfailed']}\n"
         )
     output.parent.mkdir(parents=True, exist_ok=True)
+    archive.save()
     output.write_text(text, encoding="utf-8")
     write_starts(output.with_suffix(".starts.jsonl"), records)
+    if finished:
+        archive.drop_log()
     if metrics is not None:
         provenance = collect_provenance(
             code=str(template.get("code", "softsaddle")),

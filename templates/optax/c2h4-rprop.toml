@@ -1,0 +1,26 @@
+id = "optax/c2h4-rprop"
+engine = "optax"
+problem = "mlopt/C2H4"
+code = "Optax"
+code_version = "0.2.8"
+commit = "107e9ad20ca62bcbee1a8c016daab71c690a678c"
+algorithm = "Rprop"
+tuning = "default"
+failure_cap = 10000
+note = "Default row. Rprop starts at step 0.01, decreases by 0.5, and increases by 1.2. Steps stay inside 1e-6 and 50. Energy coefficient 1 and force coefficient 0. The gradient tolerance is 0.02 and the cap is 10000 calls. The network is the PyAMFF 10-7 tanh model on the Behler-Parrinello fingerprints of the C2H4 trajectory. The loss is the PyAMFF squared error. A start stops when every parameter gradient component is below the tolerance, or when the energy RMSE is below 0.0001 and the force RMSE is below 0.01. One harness call is one evaluation of that loss and its gradient. Initial weights are uniform[-1, 1) from jax.random.key(20261018 + start). A start that first meets the stop on the call at the cap is a cap failure."
+
+[optax]
+method = "rprop"
+learning_rate = 0.01
+hidden_layers = [10, 7]
+activation = "tanh"
+seed = 20261018
+neighbor_cutoff = 6.0
+fingerprints = "archive/entries/mlopt/C2H4/pyamff-adam10-7-fcoeff0/fpParas.dat"
+energy_coefficient = 1.0
+force_coefficient = 0.0
+grad_tol = 0.02
+energy_rmse_tol = 0.0001
+force_rmse_tol = 0.01
+memory_size = 10
+max_linesearch_steps = 20

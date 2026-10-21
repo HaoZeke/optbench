@@ -1,0 +1,12 @@
+# CP2K 2026.2 is not a conda-forge package. This file does not select
+# a Python build of CP2K. The binary the benchmarks run is the source
+# build pinned in codes/registry.toml under id cp2k:
+#   ref = 2026.2
+#   commit = 702cc3d81422b92864ecdd7f544c21c56c04adca
+# Set CP2K_BIN to that unmodified binary. asv has one environment_type,
+# so this yml cannot be bound to one class.
+name: cp2k-2026.2
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12

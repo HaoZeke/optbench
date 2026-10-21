@@ -33,7 +33,7 @@ import numpy as np
 
 from .campaign import geometry_archive, load_template, resolve_problem
 from .counter import HarnessCounter
-from .failures import classify_failure
+from .failures import classify_outcome
 from .pes import (
     energy_weighted_springs,
     evaluate,
@@ -1027,11 +1027,13 @@ def _run_band_search(
         index, candidate = 1, "highest"
         point = positions[index]
         if counter.calls >= cap or surface.hit_cap:
-            energy = float("nan")
-            grad = np.full(point.shape, np.nan)
+            # The cap refused another evaluation. A placeholder NaN is not a blow-up.
+            energy = None
+            grad = None
         else:
             energy, grad = rgpot.calculate(point, None, box_flat)
             grad = np.asarray(grad, dtype=np.float64)
+            energy = float(energy)
     else:
         index, candidate = _candidate(positions, band_energies, report)
         point = positions[index]
@@ -1057,20 +1059,21 @@ def _run_band_search(
             energy = surface.last_energy
             grad = surface.last_grad if surface.last_grad is not None else grad
         elif counter.calls >= cap or surface.hit_cap:
-            energy = float("nan")
-            grad = np.full(point.shape, np.nan)
+            energy = None
+            grad = None
         else:
             energy, grad = rgpot.calculate(point, None, box_flat)
             grad = np.asarray(grad, dtype=np.float64)
+            energy = float(energy)
         candidate = "min-mode"
         refined = True
-    force = float(np.linalg.norm(grad))
+    force = None if grad is None else float(np.linalg.norm(grad))
     reasons: list[str] = []
     if surface.crashed:
         reasons.append("crash")
     if counter.calls >= cap or surface.hit_cap:
         reasons.append("cap")
-    if not np.isfinite(force) or force > force_norm:
+    if force is None or not np.isfinite(force) or force > force_norm:
         reasons.append("force_norm")
     hessian_index = None
     if "crash" not in reasons and "cap" not in reasons and "force_norm" not in reasons:
@@ -1088,7 +1091,17 @@ def _run_band_search(
         if hessian_index != 1:
             reasons.append("hessian_index")
     converged = (report is not None and int(report.status) == _STATUS_CONVERGED) or early or minmode_converged
-    failure = classify_failure(reasons)
+    failure = classify_outcome(
+        energy=None if energy is None else float(energy),
+        geometry=point,
+        force=force,
+        calls=float(cap) if surface.hit_cap else int(counter.calls),
+        cap=cap,
+        force_tol=force_norm,
+        process_failed=bool(surface.crashed) and int(counter.calls) < cap and not surface.hit_cap,
+        hessian_index=hessian_index,
+        expected_index=1 if hessian_index is not None else None,
+    )
     return {
         "schema": "optbench.start/v2",
         "start": name,
@@ -1099,7 +1112,7 @@ def _run_band_search(
         "success": failure is None,
         "failure": failure,
         "reasons": reasons,
-        "energy": float(energy),
+        "energy": None if energy is None else float(energy),
         "force_norm": force,
         "hessian_index": hessian_index,
         "converged": bool(converged),

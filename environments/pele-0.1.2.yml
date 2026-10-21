@@ -1,0 +1,11 @@
+# pele is built from the commit in codes/registry.toml. This file does
+# not select a conda package. The band campaigns use that source build:
+#   id = pele
+#   ref = 0.1.2
+#   commit = b7081b932a060be11342fbe8287ac35da8ada879
+# The build turns the GUI and LAMMPS off and leaves CVODE on.
+name: pele-0.1.2
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12

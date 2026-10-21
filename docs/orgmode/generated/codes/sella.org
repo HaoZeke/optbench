@@ -29,14 +29,14 @@
    <td>LJ38 double-ended saddle</td>
    <td data-field="label">Sella (2.6.0) · Sella+NEB</td>
    <td data-field="family">Band / NEB</td>
-   <td data-field="family_rank">8</td>
+   <td data-field="family_rank">9</td>
    <td data-field="par2_mean">2055.3</td>
    <td data-field="published"></td>
    <td data-field="median_calls">2047.5</td>
    <td data-field="mean_calls">2055.3</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="Sella (2.6.0) · Sella+NEB">
@@ -50,7 +50,7 @@
    <td data-field="mean_calls">31447.3</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-label="Sella (2.6.0) · Sella+NEB">
@@ -64,7 +64,7 @@
    <td data-field="mean_calls">921.847</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
    <tr data-problem="lowest-eigenvector/lj38" data-label="Sella (0.1.1) · lowest eigenvector">
@@ -78,7 +78,7 @@
    <td data-field="mean_calls">17.8</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="lowest-eigenvector/lj38" data-label="Sella (0.1.1) · sella">
@@ -92,64 +92,106 @@
    <td data-field="mean_calls">17.8</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="Sella (2.6.0) · Sella">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">Sella (2.6.0) · Sella</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">38</td>
+   <td data-field="family_rank">48</td>
    <td data-field="par2_mean">710.089</td>
    <td data-field="published"></td>
    <td data-field="median_calls">692.5</td>
    <td data-field="mean_calls">710.089</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38-noise" data-label="Sella (2.6.0) · Sella">
    <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
    <td data-field="label">Sella (2.6.0) · Sella</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">14</td>
+   <td data-field="family_rank">53</td>
    <td data-field="par2_mean">729.433</td>
    <td data-field="published"></td>
    <td data-field="median_calls">691.5</td>
    <td data-field="mean_calls">710.211</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 1</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 1</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="Sella (2.6.0) · Sella">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">Sella (2.6.0) · Sella</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">81</td>
+   <td data-field="par2_mean">2123.79</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">787</td>
+   <td data-field="mean_calls">796.943</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 67, wrong_stationary 2</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="Sella (2.6.0) · Sella">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">Sella (2.6.0) · Sella</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">86</td>
+   <td data-field="par2_mean">2224.76</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1038.5</td>
+   <td data-field="mean_calls">1050.02</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 53, wrong_stationary 9</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="Sella (2.6.0) · Sella">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">Sella (2.6.0) · Sella</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">106</td>
+   <td data-field="par2_mean">3738.96</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1037</td>
+   <td data-field="mean_calls">1075.38</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 32, wrong_stationary 108</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="Sella (2.6.0) · Sella">
    <td>Morse bulk</td>
    <td data-field="label">Sella (2.6.0) · Sella</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">8</td>
+   <td data-field="family_rank">13</td>
    <td data-field="par2_mean">28.89</td>
    <td data-field="published"></td>
    <td data-field="median_calls">28</td>
    <td data-field="mean_calls">28.89</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="saddle-search/pt-island" data-label="Sella (2.6.0) · Sella">
    <td>Pt heptamer island</td>
    <td data-field="label">Sella (2.6.0) · Sella</td>
    <td data-field="family">Single-ended saddle</td>
-   <td data-field="family_rank">1</td>
-   <td data-field="par2_mean">5201.62</td>
+   <td data-field="family_rank">3</td>
+   <td data-field="par2_mean">19988.2</td>
    <td data-field="published"></td>
-   <td data-field="median_calls">225</td>
-   <td data-field="mean_calls">247.812</td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="mean_calls">9992.2</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 4</td>
-   <td data-field="n">16</td>
+   <td data-field="failures">crash 0, divergence 0, cap 19984, not_converged 0, wrong_stationary 4</td>
+   <td data-field="n">20000</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-label="Sella (2.6.0) · Sella">
    <td>LJ38</td>
@@ -162,7 +204,7 @@
    <td data-field="mean_calls">68.74</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-label="Sella (0.1.1) · sella">
@@ -176,7 +218,7 @@
    <td data-field="mean_calls">69.55</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="tsopt/pt-island" data-label="Sella (0.1.1) · sella">
@@ -190,7 +232,7 @@
    <td data-field="mean_calls">53</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>
    <tr data-problem="tsopt/pt-island" data-label="Sella (2.6.0) · Sella">
@@ -204,7 +246,7 @@
    <td data-field="mean_calls">74.2857</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>
    </tbody></table></div>

@@ -29,322 +29,532 @@
    <td>LJ38 double-ended saddle</td>
    <td data-field="label">LAMMPS (30 Sep 2026) · CI-NEB-fire</td>
    <td data-field="family">Band / NEB</td>
-   <td data-field="family_rank">16</td>
+   <td data-field="family_rank">18</td>
    <td data-field="par2_mean">4526.2</td>
    <td data-field="published"></td>
    <td data-field="median_calls">2065</td>
    <td data-field="mean_calls">2055.2</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 40, cap 0, wrong_stationary 2</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 40, wrong_stationary 2</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38" data-label="LAMMPS (30 Sep 2026) · CI-NEB-quickmin">
    <td>LJ38 double-ended saddle</td>
    <td data-field="label">LAMMPS (30 Sep 2026) · CI-NEB-quickmin</td>
    <td data-field="family">Band / NEB</td>
-   <td data-field="family_rank">19</td>
+   <td data-field="family_rank">22</td>
    <td data-field="par2_mean">4949.7</td>
    <td data-field="published"></td>
    <td data-field="median_calls">2485</td>
    <td data-field="mean_calls">2485</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 48, cap 0, wrong_stationary 1</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 48, wrong_stationary 1</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="LAMMPS (30 Sep 2026) · CI-NEB-quickmin">
    <td>lj38_2ts_separation</td>
    <td data-field="label">LAMMPS (30 Sep 2026) · CI-NEB-quickmin</td>
    <td data-field="family">Band / NEB</td>
-   <td data-field="family_rank">20</td>
+   <td data-field="family_rank">21</td>
    <td data-field="par2_mean">451959</td>
    <td data-field="published"></td>
    <td data-field="median_calls">9982</td>
    <td data-field="mean_calls">9982</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 45, cap 0, wrong_stationary 1</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 45, wrong_stationary 1</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="LAMMPS (30 Sep 2026) · CI-NEB-fire">
    <td>lj38_2ts_separation</td>
    <td data-field="label">LAMMPS (30 Sep 2026) · CI-NEB-fire</td>
    <td data-field="family">Band / NEB</td>
-   <td data-field="family_rank">21</td>
+   <td data-field="family_rank">22</td>
    <td data-field="par2_mean">500000</td>
    <td data-field="published"></td>
    <td data-field="median_calls">8120</td>
    <td data-field="mean_calls">8114.78</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 36, cap 0, wrong_stationary 15</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 36, wrong_stationary 15</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-label="LAMMPS (30 Sep 2026) · CI-NEB-fire">
    <td>pt-island</td>
    <td data-field="label">LAMMPS (30 Sep 2026) · CI-NEB-fire</td>
    <td data-field="family">Band / NEB</td>
-   <td data-field="family_rank">18</td>
+   <td data-field="family_rank">19</td>
    <td data-field="par2_mean">2668.64</td>
    <td data-field="published"></td>
    <td data-field="median_calls">1405</td>
    <td data-field="mean_calls">1471.69</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 6, cap 0, wrong_stationary 9</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 6, wrong_stationary 9</td>
    <td data-field="n">59</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-label="LAMMPS (30 Sep 2026) · CI-NEB-quickmin">
    <td>pt-island</td>
    <td data-field="label">LAMMPS (30 Sep 2026) · CI-NEB-quickmin</td>
    <td data-field="family">Band / NEB</td>
-   <td data-field="family_rank">19</td>
+   <td data-field="family_rank">20</td>
    <td data-field="par2_mean">4566.78</td>
    <td data-field="published"></td>
    <td data-field="median_calls">2760</td>
    <td data-field="mean_calls">2508.98</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 26, cap 0, wrong_stationary 9</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 26, wrong_stationary 9</td>
    <td data-field="n">59</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="LAMMPS (30 Sep 2026) · Hessian-free truncated Newton">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">LAMMPS (30 Sep 2026) · Hessian-free truncated Newton</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">46</td>
+   <td data-field="family_rank">57</td>
    <td data-field="par2_mean">1123.81</td>
    <td data-field="published"></td>
    <td data-field="median_calls">974</td>
    <td data-field="mean_calls">1066.61</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 3</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="LAMMPS (30 Sep 2026) · Quickmin">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">LAMMPS (30 Sep 2026) · Quickmin</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">57</td>
+   <td data-field="family_rank">69</td>
    <td data-field="par2_mean">3138.21</td>
    <td data-field="published"></td>
    <td data-field="median_calls">2545</td>
    <td data-field="mean_calls">3020.94</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 5, cap 0, wrong_stationary 4</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 5, wrong_stationary 4</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="LAMMPS (30 Sep 2026) · conjugate gradient">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">LAMMPS (30 Sep 2026) · conjugate gradient</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">59</td>
+   <td data-field="family_rank">71</td>
    <td data-field="par2_mean">4361.3</td>
    <td data-field="published"></td>
    <td data-field="median_calls">1550.5</td>
    <td data-field="mean_calls">2810.32</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 1, cap 148, wrong_stationary 3</td>
+   <td data-field="failures">crash 0, divergence 0, cap 148, not_converged 1, wrong_stationary 3</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="LAMMPS (30 Sep 2026) · FIRE">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">LAMMPS (30 Sep 2026) · FIRE</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">61</td>
+   <td data-field="family_rank">73</td>
    <td data-field="par2_mean">5844.9</td>
    <td data-field="published"></td>
    <td data-field="median_calls">413</td>
    <td data-field="mean_calls">421.053</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 224, cap 0, wrong_stationary 49</td>
+   <td data-field="failures">crash 0, divergence 224, cap 0, not_converged 0, wrong_stationary 49</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="LAMMPS (30 Sep 2026) · steepest descent">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">LAMMPS (30 Sep 2026) · steepest descent</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">65</td>
+   <td data-field="family_rank">78</td>
    <td data-field="par2_mean">14468.2</td>
    <td data-field="published"></td>
    <td data-field="median_calls">10000</td>
    <td data-field="mean_calls">8298.19</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 617, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 617, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38-noise" data-label="LAMMPS (30 Sep 2026) · Hessian-free truncated Newton">
    <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
    <td data-field="label">LAMMPS (30 Sep 2026) · Hessian-free truncated Newton</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">17</td>
+   <td data-field="family_rank">61</td>
    <td data-field="par2_mean">1123.81</td>
    <td data-field="published"></td>
    <td data-field="median_calls">974</td>
    <td data-field="mean_calls">1066.61</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 3</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38-noise" data-label="LAMMPS (30 Sep 2026) · conjugate gradient">
    <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
    <td data-field="label">LAMMPS (30 Sep 2026) · conjugate gradient</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">19</td>
+   <td data-field="family_rank">78</td>
    <td data-field="par2_mean">2046.69</td>
    <td data-field="published"></td>
    <td data-field="median_calls">1776.5</td>
    <td data-field="mean_calls">1993.39</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 3, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 3, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38-noise" data-label="LAMMPS (30 Sep 2026) · Quickmin">
    <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
    <td data-field="label">LAMMPS (30 Sep 2026) · Quickmin</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">22</td>
+   <td data-field="family_rank">99</td>
    <td data-field="par2_mean">3138.21</td>
    <td data-field="published"></td>
    <td data-field="median_calls">2545</td>
    <td data-field="mean_calls">3020.94</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 5, cap 0, wrong_stationary 4</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 5, wrong_stationary 4</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="LAMMPS (30 Sep 2026) · Quickmin">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">LAMMPS (30 Sep 2026) · Quickmin</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">101</td>
+   <td data-field="par2_mean">3203.6</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">2481</td>
+   <td data-field="mean_calls">3005.93</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 13, wrong_stationary 4</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="LAMMPS (30 Sep 2026) · conjugate gradient">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">LAMMPS (30 Sep 2026) · conjugate gradient</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">107</td>
+   <td data-field="par2_mean">3816.63</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1305.5</td>
+   <td data-field="mean_calls">1465.43</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 88, wrong_stationary 38</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="LAMMPS (30 Sep 2026) · conjugate gradient">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">LAMMPS (30 Sep 2026) · conjugate gradient</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">110</td>
+   <td data-field="par2_mean">4361.3</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1550.5</td>
+   <td data-field="mean_calls">2810.32</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 148, not_converged 1, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="LAMMPS (30 Sep 2026) · conjugate gradient">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">LAMMPS (30 Sep 2026) · conjugate gradient</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">113</td>
+   <td data-field="par2_mean">4861.91</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">2778</td>
+   <td data-field="mean_calls">3790.78</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 100, not_converged 3, wrong_stationary 1</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38-noise" data-label="LAMMPS (30 Sep 2026) · FIRE">
    <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
    <td data-field="label">LAMMPS (30 Sep 2026) · FIRE</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">23</td>
+   <td data-field="family_rank">114</td>
    <td data-field="par2_mean">5802.74</td>
    <td data-field="published"></td>
    <td data-field="median_calls">411.5</td>
    <td data-field="mean_calls">417.719</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 224, cap 0, wrong_stationary 47</td>
+   <td data-field="failures">crash 0, divergence 224, cap 0, not_converged 0, wrong_stationary 47</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="LAMMPS (30 Sep 2026) · FIRE">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">LAMMPS (30 Sep 2026) · FIRE</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">115</td>
+   <td data-field="par2_mean">5844.9</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">413</td>
+   <td data-field="mean_calls">421.053</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 224, cap 0, not_converged 0, wrong_stationary 49</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="LAMMPS (30 Sep 2026) · FIRE">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">LAMMPS (30 Sep 2026) · FIRE</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">116</td>
+   <td data-field="par2_mean">6216.36</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">381</td>
+   <td data-field="mean_calls">375.583</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 224, cap 0, not_converged 0, wrong_stationary 70</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="LAMMPS (30 Sep 2026) · FIRE">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">LAMMPS (30 Sep 2026) · FIRE</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">120</td>
+   <td data-field="par2_mean">8919.53</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">292</td>
+   <td data-field="mean_calls">274.512</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 224, cap 0, not_converged 0, wrong_stationary 212</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="LAMMPS (30 Sep 2026) · Quickmin">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">LAMMPS (30 Sep 2026) · Quickmin</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">121</td>
+   <td data-field="par2_mean">9329.46</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">6436.5</td>
+   <td data-field="mean_calls">6643.68</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 9, not_converged 231, wrong_stationary 19</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38-noise" data-label="LAMMPS (30 Sep 2026) · steepest descent">
    <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
    <td data-field="label">LAMMPS (30 Sep 2026) · steepest descent</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">24</td>
+   <td data-field="family_rank">122</td>
    <td data-field="par2_mean">10074.7</td>
    <td data-field="published"></td>
    <td data-field="median_calls">6420.5</td>
    <td data-field="mean_calls">6693.33</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 227, wrong_stationary 75</td>
+   <td data-field="failures">crash 0, divergence 0, cap 227, not_converged 0, wrong_stationary 75</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="LAMMPS (30 Sep 2026) · steepest descent">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">LAMMPS (30 Sep 2026) · steepest descent</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">123</td>
+   <td data-field="par2_mean">10468.3</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">7537.5</td>
+   <td data-field="mean_calls">7297.4</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 313, not_converged 0, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="LAMMPS (30 Sep 2026) · Quickmin">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">LAMMPS (30 Sep 2026) · Quickmin</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">124</td>
+   <td data-field="par2_mean">11237.8</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">5716.5</td>
+   <td data-field="mean_calls">6069.49</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 10, not_converged 248, wrong_stationary 166</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="LAMMPS (30 Sep 2026) · Hessian-free truncated Newton">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">LAMMPS (30 Sep 2026) · Hessian-free truncated Newton</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">125</td>
+   <td data-field="par2_mean">11504</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">6229.5</td>
+   <td data-field="mean_calls">6270.59</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 243, wrong_stationary 170</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="LAMMPS (30 Sep 2026) · steepest descent">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">LAMMPS (30 Sep 2026) · steepest descent</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">127</td>
+   <td data-field="par2_mean">14468.2</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="mean_calls">8298.19</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 617, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="LAMMPS (30 Sep 2026) · Hessian-free truncated Newton">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">LAMMPS (30 Sep 2026) · Hessian-free truncated Newton</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">128</td>
+   <td data-field="par2_mean">16244.5</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">8986</td>
+   <td data-field="mean_calls">8348.24</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 713, wrong_stationary 4</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="LAMMPS (30 Sep 2026) · Hessian-free truncated Newton">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">LAMMPS (30 Sep 2026) · Hessian-free truncated Newton</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">129</td>
+   <td data-field="par2_mean">17071.9</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">9256</td>
+   <td data-field="mean_calls">8785.81</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 776, wrong_stationary 0</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="LAMMPS (30 Sep 2026) · steepest descent">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">LAMMPS (30 Sep 2026) · steepest descent</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">130</td>
+   <td data-field="par2_mean">19840</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="mean_calls">9959.99</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 988, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="LAMMPS (30 Sep 2026) · FIRE">
    <td>Morse bulk</td>
    <td data-field="label">LAMMPS (30 Sep 2026) · FIRE</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">62</td>
+   <td data-field="family_rank">77</td>
    <td data-field="par2_mean">17656.7</td>
    <td data-field="published"></td>
    <td data-field="median_calls">478</td>
    <td data-field="mean_calls">473.48</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 88</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 88</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="LAMMPS (30 Sep 2026) · conjugate gradient">
    <td>Morse bulk</td>
    <td data-field="label">LAMMPS (30 Sep 2026) · conjugate gradient</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">63</td>
+   <td data-field="family_rank">78</td>
    <td data-field="par2_mean">19004.7</td>
    <td data-field="published"></td>
    <td data-field="median_calls">95.5</td>
    <td data-field="mean_calls">100.24</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 95</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 95</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="LAMMPS (30 Sep 2026) · Quickmin">
    <td>Morse bulk</td>
    <td data-field="label">LAMMPS (30 Sep 2026) · Quickmin</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">64</td>
+   <td data-field="family_rank">79</td>
    <td data-field="par2_mean">19150.8</td>
    <td data-field="published"></td>
    <td data-field="median_calls">1695.5</td>
    <td data-field="mean_calls">2050.36</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 95</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 95</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="LAMMPS (30 Sep 2026) · steepest descent">
    <td>Morse bulk</td>
    <td data-field="label">LAMMPS (30 Sep 2026) · steepest descent</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">65</td>
+   <td data-field="family_rank">80</td>
    <td data-field="par2_mean">19211.2</td>
    <td data-field="published"></td>
    <td data-field="median_calls">258.5</td>
    <td data-field="mean_calls">262.2</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 96</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 96</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="LAMMPS (30 Sep 2026) · Hessian-free truncated Newton">
    <td>Morse bulk</td>
    <td data-field="label">LAMMPS (30 Sep 2026) · Hessian-free truncated Newton</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">66</td>
+   <td data-field="family_rank">81</td>
    <td data-field="par2_mean">19415</td>
    <td data-field="published"></td>
    <td data-field="median_calls">480</td>
    <td data-field="mean_calls">512.54</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 97</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 97</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="neb/Pt-heptamer" data-label="LAMMPS (30 Sep 2026) · CI-NEB-fire">
    <td>Pt-heptamer</td>
    <td data-field="label">LAMMPS (30 Sep 2026) · CI-NEB-fire</td>
    <td data-field="family">Band / NEB</td>
-   <td data-field="family_rank">10</td>
+   <td data-field="family_rank">11</td>
    <td data-field="par2_mean">1398.46</td>
    <td data-field="published"></td>
    <td data-field="median_calls">1400</td>
    <td data-field="mean_calls">1398.46</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
    <tr data-problem="neb/Pt-heptamer" data-label="LAMMPS (30 Sep 2026) · CI-NEB-quickmin">
    <td>Pt-heptamer</td>
    <td data-field="label">LAMMPS (30 Sep 2026) · CI-NEB-quickmin</td>
    <td data-field="family">Band / NEB</td>
-   <td data-field="family_rank">12</td>
+   <td data-field="family_rank">13</td>
    <td data-field="par2_mean">3417.69</td>
    <td data-field="published"></td>
    <td data-field="median_calls">4020</td>
    <td data-field="mean_calls">3417.69</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
    </tbody></table></div>

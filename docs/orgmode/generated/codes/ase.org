@@ -23,28 +23,28 @@
    <td>LJ38 double-ended saddle</td>
    <td data-field="label">ASE (3.29.0) · NEB-FIRE</td>
    <td data-field="family">Band / NEB</td>
-   <td data-field="family_rank">18</td>
+   <td data-field="family_rank">21</td>
    <td data-field="par2_mean">4912.84</td>
    <td data-field="published"></td>
    <td data-field="median_calls">2501</td>
    <td data-field="mean_calls">2463.82</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 49, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 49, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="ASE (3.29.0) · NEB-FIRE">
    <td>lj38_2ts_separation</td>
    <td data-field="label">ASE (3.29.0) · NEB-FIRE</td>
    <td data-field="family">Band / NEB</td>
-   <td data-field="family_rank">18</td>
+   <td data-field="family_rank">19</td>
    <td data-field="par2_mean">444244</td>
    <td data-field="published"></td>
    <td data-field="median_calls">40001</td>
    <td data-field="mean_calls">38362.8</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 45, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 45, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-label="ASE (3.29.0) · NEB-FIRE">
@@ -58,7 +58,7 @@
    <td data-field="mean_calls">875.712</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
    <tr data-problem="globalopt/lj75" data-label="ASE (3.29.0) · BasinHopping">
@@ -72,301 +72,427 @@
    <td data-field="mean_calls">1e+06</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 200, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="ASE (3.6.1) · L-BFGS M=5 maxstep=0.2">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">ASE (3.6.1) · L-BFGS M=5 maxstep=0.2</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">20</td>
+   <td data-field="family_rank">28</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">355</td>
    <td data-field="median_calls"></td>
    <td data-field="mean_calls">355</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="ASE (3.6.0) · L-BFGS Line Search M=5 maxstep=0.2">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">ASE (3.6.0) · L-BFGS Line Search M=5 maxstep=0.2</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">21</td>
+   <td data-field="family_rank">29</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">417</td>
    <td data-field="median_calls"></td>
    <td data-field="mean_calls">417</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="ASE (3.29.0) · LBFGS">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">ASE (3.29.0) · LBFGS</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">24</td>
+   <td data-field="family_rank">34</td>
    <td data-field="par2_mean">532.882</td>
    <td data-field="published"></td>
    <td data-field="median_calls">257</td>
    <td data-field="mean_calls">344.881</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 7, wrong_stationary 6</td>
+   <td data-field="failures">crash 0, divergence 0, cap 7, not_converged 0, wrong_stationary 6</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="ASE (3.29.0) · BFGSLineSearch">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">ASE (3.29.0) · BFGSLineSearch</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">26</td>
+   <td data-field="family_rank">36</td>
    <td data-field="par2_mean">561.466</td>
    <td data-field="published"></td>
    <td data-field="median_calls">551</td>
    <td data-field="mean_calls">561.466</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="ASE (3.6.0) · FIRE">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">ASE (3.6.0) · FIRE</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">31</td>
+   <td data-field="family_rank">41</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">656</td>
    <td data-field="median_calls"></td>
    <td data-field="mean_calls">656</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="ASE (3.29.0) · PreconLBFGS">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">ASE (3.29.0) · PreconLBFGS</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">34</td>
+   <td data-field="family_rank">44</td>
    <td data-field="par2_mean">690.119</td>
    <td data-field="published"></td>
    <td data-field="median_calls">652.5</td>
    <td data-field="mean_calls">690.119</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="ASE (3.29.0) · FIRE">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">ASE (3.29.0) · FIRE</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">35</td>
+   <td data-field="family_rank">45</td>
    <td data-field="par2_mean">706.005</td>
    <td data-field="published"></td>
    <td data-field="median_calls">604</td>
    <td data-field="mean_calls">706.005</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="ASE (3.29.0) · BFGS">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">ASE (3.29.0) · BFGS</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">36</td>
+   <td data-field="family_rank">46</td>
    <td data-field="par2_mean">706.622</td>
    <td data-field="published"></td>
    <td data-field="median_calls">414.5</td>
    <td data-field="mean_calls">489.938</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 3, wrong_stationary 11</td>
+   <td data-field="failures">crash 0, divergence 0, cap 3, not_converged 0, wrong_stationary 11</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="ASE (3.29.0) · PreconFIRE">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">ASE (3.29.0) · PreconFIRE</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">47</td>
+   <td data-field="family_rank">58</td>
    <td data-field="par2_mean">1816.59</td>
    <td data-field="published"></td>
    <td data-field="median_calls">1562</td>
    <td data-field="mean_calls">1816.59</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38-noise" data-label="ASE (3.29.0) · LBFGS">
    <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
    <td data-field="label">ASE (3.29.0) · LBFGS</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">9</td>
+   <td data-field="family_rank">24</td>
    <td data-field="par2_mean">396.55</td>
    <td data-field="published"></td>
    <td data-field="median_calls">256.5</td>
    <td data-field="mean_calls">326.761</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 5, wrong_stationary 1</td>
+   <td data-field="failures">crash 0, divergence 0, cap 5, not_converged 0, wrong_stationary 1</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="ASE (3.29.0) · LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">ASE (3.29.0) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">37</td>
+   <td data-field="par2_mean">528.525</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">252</td>
+   <td data-field="mean_calls">301.39</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, not_converged 4, wrong_stationary 7</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38-noise" data-label="ASE (3.29.0) · BFGS">
    <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
    <td data-field="label">ASE (3.29.0) · BFGS</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">10</td>
+   <td data-field="family_rank">40</td>
    <td data-field="par2_mean">555.614</td>
    <td data-field="published"></td>
    <td data-field="median_calls">417</td>
    <td data-field="mean_calls">496.044</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 4, wrong_stationary 1</td>
+   <td data-field="failures">crash 0, divergence 0, cap 4, not_converged 0, wrong_stationary 1</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="ASE (3.29.0) · LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">ASE (3.29.0) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">41</td>
+   <td data-field="par2_mean">566.396</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">255</td>
+   <td data-field="mean_calls">319.274</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 3, not_converged 4, wrong_stationary 7</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38-noise" data-label="ASE (3.29.0) · FIRE">
    <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
    <td data-field="label">ASE (3.29.0) · FIRE</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">16</td>
+   <td data-field="family_rank">56</td>
    <td data-field="par2_mean">802.384</td>
    <td data-field="published"></td>
    <td data-field="median_calls">604</td>
    <td data-field="mean_calls">706.021</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 5</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="ASE (3.29.0) · BFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">ASE (3.29.0) · BFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">57</td>
+   <td data-field="par2_mean">811.801</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">421</td>
+   <td data-field="mean_calls">519.909</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 6, not_converged 11, wrong_stationary 1</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="ASE (3.29.0) · BFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">ASE (3.29.0) · BFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">59</td>
+   <td data-field="par2_mean">927.435</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">472</td>
+   <td data-field="mean_calls">629.55</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 9, not_converged 11, wrong_stationary 0</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="ASE (3.29.0) · FIRE">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">ASE (3.29.0) · FIRE</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">62</td>
+   <td data-field="par2_mean">1141.24</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">540</td>
+   <td data-field="mean_calls">618.853</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 15, wrong_stationary 12</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="ASE (3.29.0) · FIRE">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">ASE (3.29.0) · FIRE</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">69</td>
+   <td data-field="par2_mean">1441.64</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">607</td>
+   <td data-field="mean_calls">708.554</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 34, wrong_stationary 4</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="ASE (3.29.0) · LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">ASE (3.29.0) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">72</td>
+   <td data-field="par2_mean">1849.5</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">226</td>
+   <td data-field="mean_calls">257.545</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, not_converged 4, wrong_stationary 76</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="ASE (3.29.0) · BFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">ASE (3.29.0) · BFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">76</td>
+   <td data-field="par2_mean">1976.41</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">659.5</td>
+   <td data-field="mean_calls">822.937</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 2, not_converged 49, wrong_stationary 11</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="ASE (3.29.0) · FIRE">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">ASE (3.29.0) · FIRE</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">112</td>
+   <td data-field="par2_mean">4609.9</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">331</td>
+   <td data-field="mean_calls">359.78</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 14, wrong_stationary 202</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="ASE (3.29.0) · BFGSLineSearch">
    <td>Morse bulk</td>
    <td data-field="label">ASE (3.29.0) · BFGSLineSearch</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">9</td>
+   <td data-field="family_rank">14</td>
    <td data-field="par2_mean">28.91</td>
    <td data-field="published"></td>
    <td data-field="median_calls">28</td>
    <td data-field="mean_calls">28.91</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="ASE (3.29.0) · PreconODE12r">
    <td>Morse bulk</td>
    <td data-field="label">ASE (3.29.0) · PreconODE12r</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">15</td>
+   <td data-field="family_rank">21</td>
    <td data-field="par2_mean">41.78</td>
    <td data-field="published"></td>
    <td data-field="median_calls">44</td>
    <td data-field="mean_calls">41.78</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="ASE (3.29.0) · BFGS">
    <td>Morse bulk</td>
    <td data-field="label">ASE (3.29.0) · BFGS</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">22</td>
+   <td data-field="family_rank">31</td>
    <td data-field="par2_mean">53.36</td>
    <td data-field="published"></td>
    <td data-field="median_calls">54</td>
    <td data-field="mean_calls">53.36</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="ASE (3.29.0) · LBFGS">
    <td>Morse bulk</td>
    <td data-field="label">ASE (3.29.0) · LBFGS</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">23</td>
+   <td data-field="family_rank">32</td>
    <td data-field="par2_mean">53.36</td>
    <td data-field="published"></td>
    <td data-field="median_calls">54</td>
    <td data-field="mean_calls">53.36</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="ASE (3.6.0) · ase-lbfgs">
    <td>Morse bulk</td>
    <td data-field="label">ASE (3.6.0) · ase-lbfgs</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">24</td>
+   <td data-field="family_rank">33</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">53.8</td>
    <td data-field="median_calls"></td>
    <td data-field="mean_calls">53.8</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="ASE (3.29.0) · PreconLBFGS">
    <td>Morse bulk</td>
    <td data-field="label">ASE (3.29.0) · PreconLBFGS</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">30</td>
+   <td data-field="family_rank">40</td>
    <td data-field="par2_mean">59.83</td>
    <td data-field="published"></td>
    <td data-field="median_calls">44</td>
    <td data-field="mean_calls">59.83</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="ASE (3.29.0) · FIRE">
    <td>Morse bulk</td>
    <td data-field="label">ASE (3.29.0) · FIRE</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">41</td>
+   <td data-field="family_rank">51</td>
    <td data-field="par2_mean">113.36</td>
    <td data-field="published"></td>
    <td data-field="median_calls">112</td>
    <td data-field="mean_calls">113.36</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="ASE (3.6.0) · ase-fire">
    <td>Morse bulk</td>
    <td data-field="label">ASE (3.6.0) · ase-fire</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">46</td>
+   <td data-field="family_rank">58</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">147.47</td>
    <td data-field="median_calls"></td>
    <td data-field="mean_calls">147.47</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="ASE (3.29.0) · PreconFIRE">
    <td>Morse bulk</td>
    <td data-field="label">ASE (3.29.0) · PreconFIRE</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">52</td>
+   <td data-field="family_rank">65</td>
    <td data-field="par2_mean">363.32</td>
    <td data-field="published"></td>
    <td data-field="median_calls">371</td>
    <td data-field="mean_calls">363.32</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="neb/Pt-heptamer" data-label="ASE (3.29.0) · NEB-FIRE">
@@ -380,7 +506,7 @@
    <td data-field="mean_calls">606.923</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
    </tbody></table></div>

@@ -1,0 +1,192 @@
+"""pele band templates and a capped search on one LJ38 pair."""
+
+import tomllib
+from contextlib import nullcontext
+from pathlib import Path
+
+import numpy as np
+import pytest
+
+from optbench.campaign import _check_stop, list_templates, load_template, resolve_problem
+from optbench.pele_band import _crash_record, _execute, _job, _judge, _registry, _settings, cached_pairs
+
+ROOT = Path(__file__).resolve().parents[1]
+PROBLEMS = (
+    "double-ended-saddle-search/lj38",
+    "double-ended-saddle-search/lj38_2ts_separation",
+    "double-ended-saddle-search/pt-island",
+    "neb/Pt-heptamer",
+)
+
+
+def test_pele_templates_match_the_registry_and_the_problem_stop():
+    pin = _registry(ROOT)
+    found = []
+    for template in list_templates(ROOT):
+        if template.get("engine") != "pele-band":
+            continue
+        found.append(template["id"])
+        assert template["engine"] == "pele-band"
+        assert template["code"] == "pele"
+        assert template["code_version"] == "0.1.2"
+        assert template["commit"] == pin["commit"]
+        _check_stop(resolve_problem(ROOT, "minimization/lj38"), template)
+    assert found == [
+        "pele/connect",
+        "pele/dneb",
+        "pele/neb",
+    ]
+    record = tomllib.loads((ROOT / "codes" / "registry.toml").read_text(encoding="utf-8"))
+    pele = [row for row in record["code"] if row["id"] == "pele"]
+    assert len(pele) == 1
+    assert pele[0]["commit"] == "b7081b932a060be11342fbe8287ac35da8ada879"
+
+
+def test_pele_settings_follow_each_problem():
+    pin = _registry(ROOT)["commit"]
+    expected = {
+        "double-ended-saddle-search/lj38": (2500, 5, 0.001, "lj"),
+        "double-ended-saddle-search/lj38_2ts_separation": (250000, 5, 0.001, "lj"),
+        "double-ended-saddle-search/pt-island": (3000, 3, 0.001, "morse_pt"),
+        "neb/Pt-heptamer": (10000, 8, 0.01, "morse_pt"),
+    }
+    for name, (cap, images, force, potential) in expected.items():
+        template = load_template(ROOT, "pele/connect")
+        settings = _settings(template, resolve_problem(ROOT, name), pin)
+        assert settings["cap"] == cap
+        assert settings["n_interior"] == images
+        assert settings["force_norm"] == force
+        assert settings["potential"] == potential
+        assert settings["kind"] == "connect"
+        assert settings["dneb"] is True
+        neb = _settings(load_template(ROOT, "pele/neb"), resolve_problem(ROOT, name), pin)
+        assert neb["kind"] == "neb"
+        assert neb["dneb"] is False
+        dneb = _settings(load_template(ROOT, "pele/dneb"), resolve_problem(ROOT, name), pin)
+        assert dneb["dneb"] is True
+        assert neb["climbing"] is False
+        assert neb["stop"] == "residual"
+
+
+def test_capped_pele_neb_stops_inside_the_budget():
+    pytest.importorskip("pele")
+    problem = resolve_problem(ROOT, "double-ended-saddle-search/lj38")
+    template = load_template(ROOT, "pele/neb")
+    settings = _settings(template, problem, _registry(ROOT)["commit"])
+    settings["cap"] = 30
+    pair = next(iter(cached_pairs(ROOT, problem, settings).values()))
+    record = _execute(_job(pair, settings))
+    assert record["schema"] == "optbench.start/v2"
+    assert record["counter"] == "harness"
+    assert record["force_calls"] <= 30
+    assert record["force_calls"] > 0
+    assert record["success"] is False
+    assert record["failure"] == "cap"
+    assert record["geometry"] is None or len(record["geometry"]) == 38
+    assert "force" in record
+
+
+def test_band_stores_the_final_geometry_and_force():
+    pytest.importorskip("pele")
+    problem = resolve_problem(ROOT, "double-ended-saddle-search/lj38")
+    template = load_template(ROOT, "pele/neb")
+    settings = _settings(template, problem, _registry(ROOT)["commit"])
+    settings["cap"] = 40
+    pair = next(iter(cached_pairs(ROOT, problem, settings).values()))
+    record = _execute(_job(pair, settings))
+    assert record["force_calls"] <= 40
+    assert record["force_calls"] > 0
+    assert len(record["geometry"]) == pair.reactant.shape[0]
+    assert len(record["geometry"][0]) == 3
+    assert record["energy"] is None or isinstance(record["energy"], float)
+    if record["force"] is not None:
+        assert len(record["force"]) == len(record["geometry"])
+        assert record["force_norm"] is not None
+
+
+class _Recall:
+    def __init__(self, energy: float, gradient: list[float], template):
+        self.energy = energy
+        self.gradient = gradient
+        self.template = template
+        self.free = [True] * len(template)
+
+    def recall(self, coords):
+        return self.energy, self.gradient
+
+
+class _Calls:
+    def __init__(self, calls: int):
+        self.calls = calls
+        self.verify_calls = 0
+
+    def verification(self):
+        return nullcontext()
+
+
+def _judged(calls: int, cap: int, energy: float, gradient: list[float]):
+    template = [[0.0, 0.0, 0.0]]
+    return _judge(
+        name="pair",
+        seed="0",
+        coords=np.zeros(3),
+        candidate="highest",
+        converged=False,
+        connected=False,
+        counter=_Calls(calls),
+        spec=_Recall(energy, gradient, template),
+        force_norm=0.001,
+        cap=cap,
+        project_rigid=False,
+        crash=None,
+    )
+
+
+def test_a_finished_band_above_the_stop_is_not_converged():
+    record = _judged(12, 2500, -1.0, [0.0, 0.0, 0.01])
+    assert record["force_calls"] == 12
+    assert record["success"] is False
+    assert record["failure"] == "not_converged"
+    assert record["energy"] == -1.0
+    assert record["force_norm"] > 0.001
+
+
+def test_a_cap_requires_the_harness_call_count():
+    above = [0.0, 0.0, 0.01]
+    assert _judged(2499, 2500, -1.0, above)["failure"] == "not_converged"
+    assert _judged(2500, 2500, -1.0, above)["failure"] == "cap"
+    assert _crash_record("pair", 2499, 0, "ForceCallCap", "0", 2500)["failure"] == "crash"
+    capped = _crash_record("pair", 2500, 0, None, "0", 2500)
+    assert capped["failure"] == "cap"
+    assert capped["success"] is False
+    assert "crash" not in capped
+
+
+def test_the_wrong_hessian_index_at_the_stop_is_wrong_stationary(monkeypatch):
+    monkeypatch.setattr("optbench.pele_band.numerical_hessian", lambda *_args, **_kwargs: [[1.0]])
+    monkeypatch.setattr("optbench.pele_band.vibrational_index", lambda *_args, **_kwargs: 0)
+    record = _judged(12, 2500, -1.0, [0.0, 0.0, 0.0001])
+    assert record["force_norm"] <= 0.001
+    assert record["hessian_index"] == 0
+    assert record["expected_index"] == 1
+    assert record["failure"] == "wrong_stationary"
+    assert record["success"] is False
+
+
+def test_pele_benchmarks_name_the_four_problems():
+    import benchmarks.bench_pele as bench
+
+    assert bench.Lj38DePeleNeb.problem_name == "double-ended-saddle-search/lj38"
+    assert bench.Lj38DePeleNeb.template_name == "pele/neb"
+    assert bench.Lj38DePeleNeb.cap == 2500
+    assert bench.Lj38TwoTsPeleDneb.cap == 250000
+    assert bench.PtIslandPeleConnect.problem_name == "double-ended-saddle-search/pt-island"
+    assert bench.PtIslandPeleConnect.template_name == "pele/connect"
+    assert bench.PtIslandPeleConnect.cap == 3000
+    assert bench.HeptamerPeleDneb.problem_name == "neb/Pt-heptamer"
+    assert bench.HeptamerPeleDneb.cap == 10000
+    assert bench.Lj38DePeleNeb.param_names == ["seed", "start"]
+    assert len(bench.CLASS_TEMPLATE) == 12
+    assert "Lj38DePeleNebTuned" not in bench.CLASS_TEMPLATE
+    assert "HeptamerPeleDnebTuned" not in bench.CLASS_TEMPLATE
+    assert set(bench.CLASS_PROBLEM.values()) == set(PROBLEMS)

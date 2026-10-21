@@ -1,0 +1,192 @@
+#+TITLE: Optax
+#+OPTIONS: toc:nil num:nil author:nil
+
+#+begin_export rst
+.. raw:: html
+
+   <section class="bench" id="code-optax">
+   <h2>Optax</h2>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>machine-learning optimization</td>
+   <td>v0.2.8</td>
+   <td>107e9ad20ca6</td>
+   <td><a href="https://github.com/google-deepmind/optax">https://github.com/google-deepmind/optax</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-rows">
+   <caption>Every ranked row for this code.</caption>
+   <thead><tr><th>Problem</th><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="mlopt/C2H4" data-label="Optax (0.2.8) · LBFGS">
+   <td>C2H4</td>
+   <td data-field="label">Optax (0.2.8) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">3</td>
+   <td data-field="par2_mean">336.84</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">327</td>
+   <td data-field="mean_calls">336.84</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="mlopt/C2H4" data-label="Optax (0.2.8) · Rprop">
+   <td>C2H4</td>
+   <td data-field="label">Optax (0.2.8) · Rprop</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">4</td>
+   <td data-field="par2_mean">346.18</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">325</td>
+   <td data-field="mean_calls">346.18</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="mlopt/C2H4" data-label="Optax (0.2.8) · LBFGS">
+   <td>C2H4</td>
+   <td data-field="label">Optax (0.2.8) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">7</td>
+   <td data-field="par2_mean">4475.38</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">2954.5</td>
+   <td data-field="mean_calls">4475.38</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="mlopt/C2H4" data-label="Optax (0.2.8) · Adam">
+   <td>C2H4</td>
+   <td data-field="label">Optax (0.2.8) · Adam</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">9</td>
+   <td data-field="par2_mean">5531.22</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">5717.5</td>
+   <td data-field="mean_calls">5531.22</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="mlopt/C2H4" data-label="Optax (0.2.8) · Adam">
+   <td>C2H4</td>
+   <td data-field="label">Optax (0.2.8) · Adam</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">10</td>
+   <td data-field="par2_mean">5699.44</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">5532.5</td>
+   <td data-field="mean_calls">5699.44</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="mlopt/C2H4" data-label="Optax (0.2.8) · Rprop">
+   <td>C2H4</td>
+   <td data-field="label">Optax (0.2.8) · Rprop</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">11</td>
+   <td data-field="par2_mean">7905.42</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">7380.5</td>
+   <td data-field="mean_calls">7905.42</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="mlopt/emt-pt38" data-label="Optax (0.2.8) · LBFGS">
+   <td>EMT Pt 38 nanoparticle</td>
+   <td data-field="label">Optax (0.2.8) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">3</td>
+   <td data-field="par2_mean">54.98</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">52.5</td>
+   <td data-field="mean_calls">54.98</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="mlopt/emt-pt38" data-label="Optax (0.2.8) · Rprop">
+   <td>EMT Pt 38 nanoparticle</td>
+   <td data-field="label">Optax (0.2.8) · Rprop</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">6</td>
+   <td data-field="par2_mean">210.66</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">198.5</td>
+   <td data-field="mean_calls">210.66</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="mlopt/emt-pt38" data-label="Optax (0.2.8) · LBFGS">
+   <td>EMT Pt 38 nanoparticle</td>
+   <td data-field="label">Optax (0.2.8) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">7</td>
+   <td data-field="par2_mean">475.26</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">473</td>
+   <td data-field="mean_calls">475.26</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="mlopt/emt-pt38" data-label="Optax (0.2.8) · Adam">
+   <td>EMT Pt 38 nanoparticle</td>
+   <td data-field="label">Optax (0.2.8) · Adam</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">13</td>
+   <td data-field="par2_mean">1394.66</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1056.5</td>
+   <td data-field="mean_calls">1394.66</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="mlopt/emt-pt38" data-label="Optax (0.2.8) · Adam">
+   <td>EMT Pt 38 nanoparticle</td>
+   <td data-field="label">Optax (0.2.8) · Adam</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">16</td>
+   <td data-field="par2_mean">1900.68</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1795</td>
+   <td data-field="mean_calls">1900.68</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="mlopt/emt-pt38" data-label="Optax (0.2.8) · Rprop">
+   <td>EMT Pt 38 nanoparticle</td>
+   <td data-field="label">Optax (0.2.8) · Rprop</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">18</td>
+   <td data-field="par2_mean">2413.5</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">2371.5</td>
+   <td data-field="mean_calls">2413.5</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   </tbody></table></div>
+   </section>
+#+end_export

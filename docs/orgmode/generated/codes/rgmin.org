@@ -30,12 +30,12 @@
    <td data-field="mean_calls">81.881</td>
    <td data-field="hessian_calls">80.881</td>
    <td data-field="fd_calls">9220.43</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/lj38" data-label="rgmin (0.4.1) · DOGLEG">
+   <tr data-problem="minimization/lj38" data-label="rgmin (f15726f1) · DOGLEG">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="label">rgmin (0.4.1) · DOGLEG</td>
+   <td data-field="label">rgmin (f15726f1) · DOGLEG</td>
    <td data-field="family">Minimizers</td>
    <td data-field="family_rank">3</td>
    <td data-field="par2_mean">81.881</td>
@@ -44,7 +44,7 @@
    <td data-field="mean_calls">81.881</td>
    <td data-field="hessian_calls">80.881</td>
    <td data-field="fd_calls">9220.43</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="rgmin (0.4.0) · NEWTON">
@@ -58,12 +58,12 @@
    <td data-field="mean_calls">66.649</td>
    <td data-field="hessian_calls">65.649</td>
    <td data-field="fd_calls">7483.99</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 5</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/lj38" data-label="rgmin (0.4.1) · NEWTON">
+   <tr data-problem="minimization/lj38" data-label="rgmin (f15726f1) · NEWTON">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="label">rgmin (0.4.1) · NEWTON</td>
+   <td data-field="label">rgmin (f15726f1) · NEWTON</td>
    <td data-field="family">Minimizers</td>
    <td data-field="family_rank">6</td>
    <td data-field="par2_mean">166.337</td>
@@ -72,7 +72,7 @@
    <td data-field="mean_calls">66.649</td>
    <td data-field="hessian_calls">65.649</td>
    <td data-field="fd_calls">7483.99</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 5</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="rgmin (0.4.0) · LBFGS">
@@ -86,12 +86,12 @@
    <td data-field="mean_calls">177.367</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 1</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 1</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/lj38" data-label="rgmin (0.4.1) · LBFGS">
+   <tr data-problem="minimization/lj38" data-label="rgmin (f15726f1) · LBFGS">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="label">rgmin (0.4.1) · LBFGS</td>
+   <td data-field="label">rgmin (f15726f1) · LBFGS</td>
    <td data-field="family">Minimizers</td>
    <td data-field="family_rank">12</td>
    <td data-field="par2_mean">197.228</td>
@@ -100,320 +100,376 @@
    <td data-field="mean_calls">177.367</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 1</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 1</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38" data-label="rgmin (0.4.0) · LBFGS">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="label">rgmin (0.4.0) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">20</td>
+   <td data-field="par2_mean">282.64</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">192</td>
+   <td data-field="mean_calls">203.366</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 4</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38" data-label="rgmin (f15726f1) · LBFGS">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="label">rgmin (f15726f1) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">21</td>
+   <td data-field="par2_mean">282.64</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">192</td>
+   <td data-field="mean_calls">203.366</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 4</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38" data-label="rgmin (0.4.0) · LBFGS">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="label">rgmin (0.4.0) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">24</td>
+   <td data-field="par2_mean">294.105</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">206</td>
+   <td data-field="mean_calls">214.951</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 4</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38" data-label="rgmin (f15726f1) · LBFGS">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="label">rgmin (f15726f1) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">25</td>
+   <td data-field="par2_mean">294.105</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">206</td>
+   <td data-field="mean_calls">214.951</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 4</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="rgmin (0.4.0) · BB">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">rgmin (0.4.0) · BB</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">29</td>
+   <td data-field="family_rank">39</td>
    <td data-field="par2_mean">639.474</td>
    <td data-field="published"></td>
    <td data-field="median_calls">471.5</td>
    <td data-field="mean_calls">521.461</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 6</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 6</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/lj38" data-label="rgmin (0.4.1) · BB">
+   <tr data-problem="minimization/lj38" data-label="rgmin (f15726f1) · BB">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="label">rgmin (0.4.1) · BB</td>
+   <td data-field="label">rgmin (f15726f1) · BB</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">30</td>
+   <td data-field="family_rank">40</td>
    <td data-field="par2_mean">639.474</td>
    <td data-field="published"></td>
    <td data-field="median_calls">471.5</td>
    <td data-field="mean_calls">521.461</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 6</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 6</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="rgmin (0.4.0) · CG">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">rgmin (0.4.0) · CG</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">32</td>
+   <td data-field="family_rank">42</td>
    <td data-field="par2_mean">669.237</td>
    <td data-field="published"></td>
    <td data-field="median_calls">538</td>
    <td data-field="mean_calls">591.346</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 4</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 4</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/lj38" data-label="rgmin (0.4.1) · CG">
+   <tr data-problem="minimization/lj38" data-label="rgmin (f15726f1) · CG">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="label">rgmin (0.4.1) · CG</td>
+   <td data-field="label">rgmin (f15726f1) · CG</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">33</td>
+   <td data-field="family_rank">43</td>
    <td data-field="par2_mean">669.237</td>
    <td data-field="published"></td>
    <td data-field="median_calls">538</td>
    <td data-field="mean_calls">591.346</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 4</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 4</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="rgmin (0.4.0) · FIRE">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">rgmin (0.4.0) · FIRE</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">40</td>
+   <td data-field="family_rank">50</td>
    <td data-field="par2_mean">769.36</td>
    <td data-field="published"></td>
    <td data-field="median_calls">625.5</td>
    <td data-field="mean_calls">711.609</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 3</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/lj38" data-label="rgmin (0.4.1) · FIRE">
+   <tr data-problem="minimization/lj38" data-label="rgmin (f15726f1) · FIRE">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="label">rgmin (0.4.1) · FIRE</td>
+   <td data-field="label">rgmin (f15726f1) · FIRE</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">41</td>
+   <td data-field="family_rank">51</td>
    <td data-field="par2_mean">769.36</td>
    <td data-field="published"></td>
    <td data-field="median_calls">625.5</td>
    <td data-field="mean_calls">711.609</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 3</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="rgmin (0.4.0) · FIRE2">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">rgmin (0.4.0) · FIRE2</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">42</td>
+   <td data-field="family_rank">53</td>
    <td data-field="par2_mean">845.947</td>
    <td data-field="published"></td>
    <td data-field="median_calls">639.5</td>
    <td data-field="mean_calls">730.952</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 6</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 6</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/lj38" data-label="rgmin (0.4.1) · FIRE2">
+   <tr data-problem="minimization/lj38" data-label="rgmin (f15726f1) · FIRE2">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="label">rgmin (0.4.1) · FIRE2</td>
+   <td data-field="label">rgmin (f15726f1) · FIRE2</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">43</td>
+   <td data-field="family_rank">54</td>
    <td data-field="par2_mean">845.947</td>
    <td data-field="published"></td>
    <td data-field="median_calls">639.5</td>
    <td data-field="mean_calls">730.952</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 6</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 6</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="rgmin (0.4.0) · BFGS">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">rgmin (0.4.0) · BFGS</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">44</td>
+   <td data-field="family_rank">55</td>
    <td data-field="par2_mean">1010.45</td>
    <td data-field="published"></td>
    <td data-field="median_calls">970</td>
    <td data-field="mean_calls">1010.45</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/lj38" data-label="rgmin (0.4.1) · BFGS">
+   <tr data-problem="minimization/lj38" data-label="rgmin (f15726f1) · BFGS">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="label">rgmin (0.4.1) · BFGS</td>
+   <td data-field="label">rgmin (f15726f1) · BFGS</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">45</td>
+   <td data-field="family_rank">56</td>
    <td data-field="par2_mean">1010.45</td>
    <td data-field="published"></td>
    <td data-field="median_calls">970</td>
    <td data-field="mean_calls">1010.45</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="rgmin (0.4.0) · QUICKMIN">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">rgmin (0.4.0) · QUICKMIN</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">48</td>
+   <td data-field="family_rank">59</td>
    <td data-field="par2_mean">1933</td>
    <td data-field="published"></td>
    <td data-field="median_calls">1598</td>
    <td data-field="mean_calls">1897.22</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 2</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 2</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/lj38" data-label="rgmin (0.4.1) · QUICKMIN">
+   <tr data-problem="minimization/lj38" data-label="rgmin (f15726f1) · QUICKMIN">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="label">rgmin (0.4.1) · QUICKMIN</td>
+   <td data-field="label">rgmin (f15726f1) · QUICKMIN</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">49</td>
+   <td data-field="family_rank">60</td>
    <td data-field="par2_mean">1933</td>
    <td data-field="published"></td>
    <td data-field="median_calls">1598</td>
    <td data-field="mean_calls">1897.22</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 2</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 2</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/lj38" data-label="rgmin (0.4.1) · DIIS">
+   <tr data-problem="minimization/lj38" data-label="rgmin (f15726f1) · DIIS">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="label">rgmin (0.4.1) · DIIS</td>
+   <td data-field="label">rgmin (f15726f1) · DIIS</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">50</td>
+   <td data-field="family_rank">61</td>
    <td data-field="par2_mean">1967.42</td>
    <td data-field="published"></td>
    <td data-field="median_calls">1652</td>
    <td data-field="mean_calls">1930.92</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 2</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 2</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/lj38" data-label="rgmin (0.4.1) · SR1">
+   <tr data-problem="minimization/lj38" data-label="rgmin (f15726f1) · SR1">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="label">rgmin (0.4.1) · SR1</td>
+   <td data-field="label">rgmin (f15726f1) · SR1</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">52</td>
+   <td data-field="family_rank">63</td>
    <td data-field="par2_mean">2185.66</td>
    <td data-field="published"></td>
    <td data-field="median_calls">1728</td>
    <td data-field="mean_calls">2093.01</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 4</td>
+   <td data-field="failures">crash 0, divergence 0, cap 2, not_converged 0, wrong_stationary 4</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/lj38" data-label="rgmin (0.4.1) · SR2">
+   <tr data-problem="minimization/lj38" data-label="rgmin (f15726f1) · SR2">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="label">rgmin (0.4.1) · SR2</td>
+   <td data-field="label">rgmin (f15726f1) · SR2</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">53</td>
+   <td data-field="family_rank">64</td>
    <td data-field="par2_mean">2298.44</td>
    <td data-field="published"></td>
    <td data-field="median_calls">1837.5</td>
    <td data-field="mean_calls">2230.07</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 5, wrong_stationary 1</td>
+   <td data-field="failures">crash 0, divergence 0, cap 5, not_converged 0, wrong_stationary 1</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="rgmin (0.4.0) · SD">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">rgmin (0.4.0) · SD</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">62</td>
+   <td data-field="family_rank">75</td>
    <td data-field="par2_mean">8392.75</td>
    <td data-field="published"></td>
    <td data-field="median_calls">6099</td>
    <td data-field="mean_calls">6350.19</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 3</td>
+   <td data-field="failures">crash 0, divergence 0, cap 200, not_converged 0, wrong_stationary 3</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/lj38" data-label="rgmin (0.4.1) · SD">
+   <tr data-problem="minimization/lj38" data-label="rgmin (f15726f1) · SD">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="label">rgmin (0.4.1) · SD</td>
+   <td data-field="label">rgmin (f15726f1) · SD</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">63</td>
+   <td data-field="family_rank">76</td>
    <td data-field="par2_mean">8392.75</td>
    <td data-field="published"></td>
    <td data-field="median_calls">6099</td>
    <td data-field="mean_calls">6350.19</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 3</td>
+   <td data-field="failures">crash 0, divergence 0, cap 200, not_converged 0, wrong_stationary 3</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/lj38" data-label="rgmin (0.4.1) · ADAM">
+   <tr data-problem="minimization/lj38" data-label="rgmin (f15726f1) · ADAM">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="label">rgmin (0.4.1) · ADAM</td>
+   <td data-field="label">rgmin (f15726f1) · ADAM</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">64</td>
+   <td data-field="family_rank">77</td>
    <td data-field="par2_mean">13835.7</td>
    <td data-field="published"></td>
    <td data-field="median_calls">10000</td>
    <td data-field="mean_calls">8365.68</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 547, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 547, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="rgmin (0.4.0) · ADAM">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">rgmin (0.4.0) · ADAM</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">68</td>
+   <td data-field="family_rank">81</td>
    <td data-field="par2_mean">16420.2</td>
    <td data-field="published"></td>
    <td data-field="median_calls">10000</td>
    <td data-field="mean_calls">9110.16</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 731, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 731, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="rgmin (0.4.0) · SR1">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">rgmin (0.4.0) · SR1</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">69</td>
+   <td data-field="family_rank">82</td>
    <td data-field="par2_mean">19908.9</td>
    <td data-field="published"></td>
    <td data-field="median_calls">10000</td>
    <td data-field="mean_calls">8133.1</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 196, cap 799, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 799, not_converged 196, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="rgmin (0.4.0) · DIIS">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">rgmin (0.4.0) · DIIS</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">70</td>
+   <td data-field="family_rank">83</td>
    <td data-field="par2_mean">19945</td>
    <td data-field="published"></td>
    <td data-field="median_calls">10000</td>
    <td data-field="mean_calls">9836.21</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 964, wrong_stationary 32</td>
+   <td data-field="failures">crash 0, divergence 0, cap 964, not_converged 0, wrong_stationary 32</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="rgmin (0.4.0) · SR2">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">rgmin (0.4.0) · SR2</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">74</td>
+   <td data-field="family_rank">89</td>
    <td data-field="par2_mean">20000</td>
    <td data-field="published"></td>
    <td data-field="median_calls">10000</td>
    <td data-field="mean_calls">9990.45</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 1, cap 999, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 999, not_converged 1, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/lj38-noise" data-label="rgmin (0.4.1) · DOGLEG">
+   <tr data-problem="minimization/lj38-noise" data-label="rgmin (9a2e7ff1) · DOGLEG">
    <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
-   <td data-field="label">rgmin (0.4.1) · DOGLEG</td>
+   <td data-field="label">rgmin (9a2e7ff1) · DOGLEG</td>
    <td data-field="family">Minimizers</td>
    <td data-field="family_rank">1</td>
    <td data-field="par2_mean">81.881</td>
@@ -422,12 +478,12 @@
    <td data-field="mean_calls">81.881</td>
    <td data-field="hessian_calls">80.881</td>
    <td data-field="fd_calls">9220.43</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/lj38-noise" data-label="rgmin (0.4.1) · NEWTON">
+   <tr data-problem="minimization/lj38-noise" data-label="rgmin (9a2e7ff1) · NEWTON">
    <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
-   <td data-field="label">rgmin (0.4.1) · NEWTON</td>
+   <td data-field="label">rgmin (9a2e7ff1) · NEWTON</td>
    <td data-field="family">Minimizers</td>
    <td data-field="family_rank">2</td>
    <td data-field="par2_mean">166.337</td>
@@ -436,12 +492,12 @@
    <td data-field="mean_calls">66.649</td>
    <td data-field="hessian_calls">65.649</td>
    <td data-field="fd_calls">7483.99</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 5</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/lj38-noise" data-label="rgmin (0.4.1) · LBFGS">
+   <tr data-problem="minimization/lj38-noise" data-label="rgmin (9a2e7ff1) · LBFGS">
    <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
-   <td data-field="label">rgmin (0.4.1) · LBFGS</td>
+   <td data-field="label">rgmin (9a2e7ff1) · LBFGS</td>
    <td data-field="family">Minimizers</td>
    <td data-field="family_rank">3</td>
    <td data-field="par2_mean">197.228</td>
@@ -450,40 +506,278 @@
    <td data-field="mean_calls">177.367</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 1</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 1</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/lj38-noise" data-label="rgmin (0.4.1) · CG">
+   <tr data-problem="minimization/lj38-noise" data-label="rgmin (9a2e7ff1) · LBFGS">
    <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
-   <td data-field="label">rgmin (0.4.1) · CG</td>
+   <td data-field="label">rgmin (9a2e7ff1) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">8</td>
+   <td data-field="par2_mean">277.049</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">171</td>
+   <td data-field="mean_calls">177.965</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 5, wrong_stationary 0</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="rgmin (9a2e7ff1) · LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">rgmin (9a2e7ff1) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">12</td>
+   <td data-field="par2_mean">292.128</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">166</td>
+   <td data-field="mean_calls">173.122</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 6</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="rgmin (9a2e7ff1) · LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">rgmin (9a2e7ff1) · LBFGS</td>
    <td data-field="family">Minimizers</td>
    <td data-field="family_rank">13</td>
+   <td data-field="par2_mean">294.105</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">206</td>
+   <td data-field="mean_calls">214.951</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 4</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="rgmin (f15726f1) · LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">rgmin (f15726f1) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">14</td>
+   <td data-field="par2_mean">294.105</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">206</td>
+   <td data-field="mean_calls">214.951</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 4</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="rgmin (f15726f1) · LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">rgmin (f15726f1) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">19</td>
+   <td data-field="par2_mean">333.896</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">205</td>
+   <td data-field="mean_calls">215.117</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 6</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="rgmin (f15726f1) · LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">rgmin (f15726f1) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">27</td>
+   <td data-field="par2_mean">422.091</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">195</td>
+   <td data-field="mean_calls">204.159</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 11</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="rgmin (9a2e7ff1) · LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">rgmin (9a2e7ff1) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">31</td>
+   <td data-field="par2_mean">451.846</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">206</td>
+   <td data-field="mean_calls">215.272</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 8, wrong_stationary 4</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="rgmin (9a2e7ff1) · LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">rgmin (9a2e7ff1) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">33</td>
+   <td data-field="par2_mean">483.98</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">195</td>
+   <td data-field="mean_calls">206.848</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 3, wrong_stationary 11</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="rgmin (9a2e7ff1) · CG">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">rgmin (9a2e7ff1) · CG</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">50</td>
    <td data-field="par2_mean">669.237</td>
    <td data-field="published"></td>
    <td data-field="median_calls">538</td>
    <td data-field="mean_calls">591.346</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 4</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 4</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/lj38-noise" data-label="rgmin (0.4.1) · FIRE">
+   <tr data-problem="minimization/lj38-noise" data-label="rgmin (9a2e7ff1) · FIRE">
    <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
-   <td data-field="label">rgmin (0.4.1) · FIRE</td>
+   <td data-field="label">rgmin (9a2e7ff1) · FIRE</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">15</td>
+   <td data-field="family_rank">54</td>
    <td data-field="par2_mean">769.36</td>
    <td data-field="published"></td>
    <td data-field="median_calls">625.5</td>
    <td data-field="mean_calls">711.609</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 3</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 3</td>
    <td data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.1) · NEWTON">
+   <tr data-problem="minimization/lj38-noise" data-label="rgmin (9a2e7ff1) · CG">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">rgmin (9a2e7ff1) · CG</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">60</td>
+   <td data-field="par2_mean">1112.75</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">546.5</td>
+   <td data-field="mean_calls">609.453</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 21, wrong_stationary 5</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="rgmin (9a2e7ff1) · CG">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">rgmin (9a2e7ff1) · CG</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">63</td>
+   <td data-field="par2_mean">1196.78</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">520</td>
+   <td data-field="mean_calls">593.681</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 14, wrong_stationary 17</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="rgmin (9a2e7ff1) · FIRE">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">rgmin (9a2e7ff1) · FIRE</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">64</td>
+   <td data-field="par2_mean">1227.11</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">547</td>
+   <td data-field="mean_calls">625.932</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 17, wrong_stationary 14</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="rgmin (9a2e7ff1) · FIRE">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">rgmin (9a2e7ff1) · FIRE</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">67</td>
+   <td data-field="par2_mean">1405.62</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">623</td>
+   <td data-field="mean_calls">712.947</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 33, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="rgmin (9a2e7ff1) · LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">rgmin (9a2e7ff1) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">75</td>
+   <td data-field="par2_mean">1920.54</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">147.5</td>
+   <td data-field="mean_calls">153.401</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 4, wrong_stationary 85</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="rgmin (9a2e7ff1) · LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">rgmin (9a2e7ff1) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">80</td>
+   <td data-field="par2_mean">2073.77</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">160</td>
+   <td data-field="mean_calls">168.359</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 5, wrong_stationary 91</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="rgmin (f15726f1) · LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">rgmin (f15726f1) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">88</td>
+   <td data-field="par2_mean">2470.66</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">161</td>
+   <td data-field="mean_calls">168.558</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 116</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="rgmin (9a2e7ff1) · CG">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">rgmin (9a2e7ff1) · CG</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">105</td>
+   <td data-field="par2_mean">3676.6</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">339</td>
+   <td data-field="mean_calls">373.035</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 15, wrong_stationary 153</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="rgmin (9a2e7ff1) · FIRE">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">rgmin (9a2e7ff1) · FIRE</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">108</td>
+   <td data-field="par2_mean">4085.19</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">341</td>
+   <td data-field="mean_calls">375.664</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 16, wrong_stationary 173</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-label="rgmin (f15726f1) · NEWTON">
    <td>Morse bulk</td>
-   <td data-field="label">rgmin (0.4.1) · NEWTON</td>
+   <td data-field="label">rgmin (f15726f1) · NEWTON</td>
    <td data-field="family">Minimizers</td>
    <td data-field="family_rank">1</td>
    <td data-field="par2_mean">8.35</td>
@@ -492,7 +786,7 @@
    <td data-field="mean_calls">8.35</td>
    <td data-field="hessian_calls">7.35</td>
    <td data-field="fd_calls"></td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.0) · DOGLEG">
@@ -506,12 +800,12 @@
    <td data-field="mean_calls">10.11</td>
    <td data-field="hessian_calls">9.11</td>
    <td data-field="fd_calls"></td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
-   <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.1) · DOGLEG">
+   <tr data-problem="minimization/morse-bulk" data-label="rgmin (f15726f1) · DOGLEG">
    <td>Morse bulk</td>
-   <td data-field="label">rgmin (0.4.1) · DOGLEG</td>
+   <td data-field="label">rgmin (f15726f1) · DOGLEG</td>
    <td data-field="family">Minimizers</td>
    <td data-field="family_rank">3</td>
    <td data-field="par2_mean">10.11</td>
@@ -520,12 +814,12 @@
    <td data-field="mean_calls">10.11</td>
    <td data-field="hessian_calls">9.11</td>
    <td data-field="fd_calls"></td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
-   <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.1) · LBFGS">
+   <tr data-problem="minimization/morse-bulk" data-label="rgmin (f15726f1) · LBFGS">
    <td>Morse bulk</td>
-   <td data-field="label">rgmin (0.4.1) · LBFGS</td>
+   <td data-field="label">rgmin (f15726f1) · LBFGS</td>
    <td data-field="family">Minimizers</td>
    <td data-field="family_rank">5</td>
    <td data-field="par2_mean">26.87</td>
@@ -534,343 +828,399 @@
    <td data-field="mean_calls">26.87</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-label="rgmin (f15726f1) · LBFGS">
+   <td>Morse bulk</td>
+   <td data-field="label">rgmin (f15726f1) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">6</td>
+   <td data-field="par2_mean">26.91</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">27</td>
+   <td data-field="mean_calls">26.91</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-label="rgmin (f15726f1) · LBFGS">
+   <td>Morse bulk</td>
+   <td data-field="label">rgmin (f15726f1) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">7</td>
+   <td data-field="par2_mean">26.93</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">27</td>
+   <td data-field="mean_calls">26.93</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.0) · LBFGS">
    <td>Morse bulk</td>
    <td data-field="label">rgmin (0.4.0) · LBFGS</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">6</td>
+   <td data-field="family_rank">8</td>
    <td data-field="par2_mean">27.05</td>
    <td data-field="published"></td>
    <td data-field="median_calls">27</td>
    <td data-field="mean_calls">27.05</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
-   <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.1) · DIIS">
+   <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.0) · LBFGS">
    <td>Morse bulk</td>
-   <td data-field="label">rgmin (0.4.1) · DIIS</td>
+   <td data-field="label">rgmin (0.4.0) · LBFGS</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">7</td>
+   <td data-field="family_rank">9</td>
+   <td data-field="par2_mean">27.12</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">27</td>
+   <td data-field="mean_calls">27.12</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.0) · LBFGS">
+   <td>Morse bulk</td>
+   <td data-field="label">rgmin (0.4.0) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">10</td>
+   <td data-field="par2_mean">27.18</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">27.5</td>
+   <td data-field="mean_calls">27.18</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-label="rgmin (f15726f1) · DIIS">
+   <td>Morse bulk</td>
+   <td data-field="label">rgmin (f15726f1) · DIIS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">12</td>
    <td data-field="par2_mean">27.44</td>
    <td data-field="published"></td>
    <td data-field="median_calls">28</td>
    <td data-field="mean_calls">27.44</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
-   <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.1) · BB">
+   <tr data-problem="minimization/morse-bulk" data-label="rgmin (f15726f1) · BB">
    <td>Morse bulk</td>
-   <td data-field="label">rgmin (0.4.1) · BB</td>
+   <td data-field="label">rgmin (f15726f1) · BB</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">10</td>
+   <td data-field="family_rank">16</td>
    <td data-field="par2_mean">33.22</td>
    <td data-field="published"></td>
    <td data-field="median_calls">34</td>
    <td data-field="mean_calls">33.22</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
-   <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.1) · CG">
+   <tr data-problem="minimization/morse-bulk" data-label="rgmin (f15726f1) · CG">
    <td>Morse bulk</td>
-   <td data-field="label">rgmin (0.4.1) · CG</td>
+   <td data-field="label">rgmin (f15726f1) · CG</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">19</td>
+   <td data-field="family_rank">28</td>
    <td data-field="par2_mean">50.49</td>
    <td data-field="published"></td>
    <td data-field="median_calls">50</td>
    <td data-field="mean_calls">50.49</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.0) · BFGS">
    <td>Morse bulk</td>
    <td data-field="label">rgmin (0.4.0) · BFGS</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">25</td>
+   <td data-field="family_rank">34</td>
    <td data-field="par2_mean">54.04</td>
    <td data-field="published"></td>
    <td data-field="median_calls">50</td>
    <td data-field="mean_calls">54.04</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
-   <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.1) · BFGS">
+   <tr data-problem="minimization/morse-bulk" data-label="rgmin (f15726f1) · BFGS">
    <td>Morse bulk</td>
-   <td data-field="label">rgmin (0.4.1) · BFGS</td>
+   <td data-field="label">rgmin (f15726f1) · BFGS</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">26</td>
+   <td data-field="family_rank">35</td>
    <td data-field="par2_mean">54.04</td>
    <td data-field="published"></td>
    <td data-field="median_calls">50</td>
    <td data-field="mean_calls">54.04</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.0) · CG">
    <td>Morse bulk</td>
    <td data-field="label">rgmin (0.4.0) · CG</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">28</td>
+   <td data-field="family_rank">38</td>
    <td data-field="par2_mean">54.72</td>
    <td data-field="published"></td>
    <td data-field="median_calls">54</td>
    <td data-field="mean_calls">54.72</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
-   <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.1) · SR2">
+   <tr data-problem="minimization/morse-bulk" data-label="rgmin (f15726f1) · SR2">
    <td>Morse bulk</td>
-   <td data-field="label">rgmin (0.4.1) · SR2</td>
+   <td data-field="label">rgmin (f15726f1) · SR2</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">29</td>
+   <td data-field="family_rank">39</td>
    <td data-field="par2_mean">59.53</td>
    <td data-field="published"></td>
    <td data-field="median_calls">61</td>
    <td data-field="mean_calls">59.53</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
-   <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.1) · SR1">
+   <tr data-problem="minimization/morse-bulk" data-label="rgmin (f15726f1) · SR1">
    <td>Morse bulk</td>
-   <td data-field="label">rgmin (0.4.1) · SR1</td>
+   <td data-field="label">rgmin (f15726f1) · SR1</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">31</td>
+   <td data-field="family_rank">41</td>
    <td data-field="par2_mean">61.53</td>
    <td data-field="published"></td>
    <td data-field="median_calls">65.5</td>
    <td data-field="mean_calls">61.53</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
-   <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.1) · QUICKMIN">
+   <tr data-problem="minimization/morse-bulk" data-label="rgmin (f15726f1) · QUICKMIN">
    <td>Morse bulk</td>
-   <td data-field="label">rgmin (0.4.1) · QUICKMIN</td>
+   <td data-field="label">rgmin (f15726f1) · QUICKMIN</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">32</td>
+   <td data-field="family_rank">42</td>
    <td data-field="par2_mean">61.75</td>
    <td data-field="published"></td>
    <td data-field="median_calls">61</td>
    <td data-field="mean_calls">61.75</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.0) · QUICKMIN">
    <td>Morse bulk</td>
    <td data-field="label">rgmin (0.4.0) · QUICKMIN</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">33</td>
+   <td data-field="family_rank">43</td>
    <td data-field="par2_mean">62.03</td>
    <td data-field="published"></td>
    <td data-field="median_calls">62</td>
    <td data-field="mean_calls">62.03</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
-   <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.1) · SD">
+   <tr data-problem="minimization/morse-bulk" data-label="rgmin (f15726f1) · SD">
    <td>Morse bulk</td>
-   <td data-field="label">rgmin (0.4.1) · SD</td>
+   <td data-field="label">rgmin (f15726f1) · SD</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">35</td>
+   <td data-field="family_rank">45</td>
    <td data-field="par2_mean">90.48</td>
    <td data-field="published"></td>
    <td data-field="median_calls">89</td>
    <td data-field="mean_calls">90.48</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.0) · SD">
    <td>Morse bulk</td>
    <td data-field="label">rgmin (0.4.0) · SD</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">38</td>
+   <td data-field="family_rank">48</td>
    <td data-field="par2_mean">96.59</td>
    <td data-field="published"></td>
    <td data-field="median_calls">97</td>
    <td data-field="mean_calls">96.59</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
-   <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.1) · FIRE">
+   <tr data-problem="minimization/morse-bulk" data-label="rgmin (f15726f1) · FIRE">
    <td>Morse bulk</td>
-   <td data-field="label">rgmin (0.4.1) · FIRE</td>
+   <td data-field="label">rgmin (f15726f1) · FIRE</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">40</td>
+   <td data-field="family_rank">50</td>
    <td data-field="par2_mean">113.19</td>
    <td data-field="published"></td>
    <td data-field="median_calls">113</td>
    <td data-field="mean_calls">113.19</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.0) · FIRE">
    <td>Morse bulk</td>
    <td data-field="label">rgmin (0.4.0) · FIRE</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">42</td>
+   <td data-field="family_rank">53</td>
    <td data-field="par2_mean">116.19</td>
    <td data-field="published"></td>
    <td data-field="median_calls">119</td>
    <td data-field="mean_calls">116.19</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.0) · FIRE2">
    <td>Morse bulk</td>
    <td data-field="label">rgmin (0.4.0) · FIRE2</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">44</td>
+   <td data-field="family_rank">56</td>
    <td data-field="par2_mean">121.85</td>
    <td data-field="published"></td>
    <td data-field="median_calls">124</td>
    <td data-field="mean_calls">121.85</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
-   <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.1) · FIRE2">
+   <tr data-problem="minimization/morse-bulk" data-label="rgmin (f15726f1) · FIRE2">
    <td>Morse bulk</td>
-   <td data-field="label">rgmin (0.4.1) · FIRE2</td>
+   <td data-field="label">rgmin (f15726f1) · FIRE2</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">45</td>
+   <td data-field="family_rank">57</td>
    <td data-field="par2_mean">121.85</td>
    <td data-field="published"></td>
    <td data-field="median_calls">124</td>
    <td data-field="mean_calls">121.85</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
-   <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.1) · ADAM">
+   <tr data-problem="minimization/morse-bulk" data-label="rgmin (f15726f1) · ADAM">
    <td>Morse bulk</td>
-   <td data-field="label">rgmin (0.4.1) · ADAM</td>
+   <td data-field="label">rgmin (f15726f1) · ADAM</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">49</td>
+   <td data-field="family_rank">62</td>
    <td data-field="par2_mean">219.34</td>
    <td data-field="published"></td>
    <td data-field="median_calls">222</td>
    <td data-field="mean_calls">219.34</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.0) · ADAM">
    <td>Morse bulk</td>
    <td data-field="label">rgmin (0.4.0) · ADAM</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">50</td>
+   <td data-field="family_rank">63</td>
    <td data-field="par2_mean">285.73</td>
    <td data-field="published"></td>
    <td data-field="median_calls">285</td>
    <td data-field="mean_calls">285.73</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.0) · SR2">
    <td>Morse bulk</td>
    <td data-field="label">rgmin (0.4.0) · SR2</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">51</td>
+   <td data-field="family_rank">64</td>
    <td data-field="par2_mean">341.13</td>
    <td data-field="published"></td>
    <td data-field="median_calls">334</td>
    <td data-field="mean_calls">341.13</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.0) · NEWTON">
    <td>Morse bulk</td>
    <td data-field="label">rgmin (0.4.0) · NEWTON</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">53</td>
+   <td data-field="family_rank">66</td>
    <td data-field="par2_mean">396.69</td>
    <td data-field="published"></td>
    <td data-field="median_calls">8</td>
    <td data-field="mean_calls">296.69</td>
    <td data-field="hessian_calls">295.69</td>
    <td data-field="fd_calls"></td>
-   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.0) · SR1">
    <td>Morse bulk</td>
    <td data-field="label">rgmin (0.4.0) · SR1</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">54</td>
+   <td data-field="family_rank">68</td>
    <td data-field="par2_mean">566.31</td>
    <td data-field="published"></td>
    <td data-field="median_calls">137</td>
    <td data-field="mean_calls">366.31</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 2, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.0) · BB">
    <td>Morse bulk</td>
    <td data-field="label">rgmin (0.4.0) · BB</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">56</td>
+   <td data-field="family_rank">71</td>
    <td data-field="par2_mean">15606.6</td>
    <td data-field="published"></td>
    <td data-field="median_calls">10000</td>
    <td data-field="mean_calls">7806.64</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 78, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 78, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="rgmin (0.4.0) · DIIS">
    <td>Morse bulk</td>
    <td data-field="label">rgmin (0.4.0) · DIIS</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">57</td>
+   <td data-field="family_rank">72</td>
    <td data-field="par2_mean">16153.4</td>
    <td data-field="published"></td>
    <td data-field="median_calls">10000</td>
    <td data-field="mean_calls">8153.43</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 80, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 80, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>

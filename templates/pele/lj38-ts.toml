@@ -1,0 +1,27 @@
+id = "pele/lj38-ts"
+engine = "pele"
+code = "pele"
+code_version = "0.1.2"
+commit = "b7081b932a060be11342fbe8287ac35da8ada879"
+algorithm = "hybrid eigenvector following"
+problem = "tsopt/LJ38"
+task = "transition-state"
+tuning = "default"
+note = "Library FindTransitionState. The RMS tolerance is the problem Euclidean force norm divided by sqrt(dof). index_seed is 0. The initial eigenvector is the library random vector after numpy seed 0. A converged candidate also pays for the transverse mode screen."
+
+[stop]
+force_norm = 0.001
+max_force_calls = 10000
+
+[hef]
+nsteps = 100
+nfail_max = 200
+nsteps_tangent1 = 10
+nsteps_tangent2 = 100
+max_uphill_step = 0.5
+max_uphill_step_initial = 0.2
+demand_initial_negative_vec = false
+check_negative = true
+index_seed = 0
+orthog = "translations-rotations"
+eigenvec0 = "random"

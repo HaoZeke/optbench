@@ -23,6 +23,8 @@ Archived rows use the same key and appear on that code page.
    <li><a href="generated/codes/gmin.html">GMIN</a></li>
    <li><a href="generated/codes/pele.html">pele</a></li>
    <li><a href="generated/codes/optking.html">OptKing</a></li>
+   <li><a href="generated/codes/optim.html">OPTIM</a></li>
+   <li><a href="generated/codes/geometryoptimization-jl.html">GeometryOptimization.jl</a></li>
    <li><a href="generated/codes/partn.html">pARTn</a></li>
    <li><a href="generated/codes/tsase.html">TSASE</a></li>
    <li><a href="generated/codes/pykmc.html">pyKMC</a></li>
@@ -30,11 +32,18 @@ Archived rows use the same key and appear on that code page.
    <li><a href="generated/codes/dl-find.html">DL-FIND</a></li>
    <li><a href="generated/codes/compass.html">COMPASS</a></li>
    <li><a href="generated/codes/pysisyphus.html">pysisyphus</a></li>
-   <li><a href="generated/codes/optim.html">OPTIM</a></li>
+   <li><a href="generated/codes/saddlesearch-jl.html">SaddleSearch.jl</a></li>
    <li><a href="generated/codes/n2p2.html">n2p2</a></li>
    <li><a href="generated/codes/airss.html">AIRSS</a></li>
    <li><a href="generated/codes/vc-sqnm.html">vc-SQNM</a></li>
    <li><a href="generated/codes/softsaddle.html">SoftSaddle</a></li>
+   <li><a href="generated/codes/torchsim.html">TorchSim</a></li>
+   <li><a href="generated/codes/geometric.html">geomeTRIC</a></li>
+   <li><a href="generated/codes/cp2k.html">CP2K</a></li>
+   <li><a href="generated/codes/optax.html">Optax</a></li>
+   <li><a href="generated/codes/panna.html">PANNA</a></li>
+   <li><a href="generated/codes/jaxmd.html">jaxmd</a></li>
+   <li><a href="generated/codes/kliff.html">KLIFF</a></li>
    <li><a href="generated/codes/eon--svn-r2549.html">EON (SVN r2549)</a></li>
    <li><a href="generated/codes/eon--develop-500350d9.html">eOn (develop 500350d9)</a></li>
    <li><a href="generated/codes/eon-r2006.html">Eon r2006</a></li>
@@ -57,6 +66,8 @@ Archived rows use the same key and appear on that code page.
    generated/codes/gmin
    generated/codes/pele
    generated/codes/optking
+   generated/codes/optim
+   generated/codes/geometryoptimization-jl
    generated/codes/partn
    generated/codes/tsase
    generated/codes/pykmc
@@ -64,11 +75,18 @@ Archived rows use the same key and appear on that code page.
    generated/codes/dl-find
    generated/codes/compass
    generated/codes/pysisyphus
-   generated/codes/optim
+   generated/codes/saddlesearch-jl
    generated/codes/n2p2
    generated/codes/airss
    generated/codes/vc-sqnm
    generated/codes/softsaddle
+   generated/codes/torchsim
+   generated/codes/geometric
+   generated/codes/cp2k
+   generated/codes/optax
+   generated/codes/panna
+   generated/codes/jaxmd
+   generated/codes/kliff
    generated/codes/eon--svn-r2549
    generated/codes/eon--develop-500350d9
    generated/codes/eon-r2006

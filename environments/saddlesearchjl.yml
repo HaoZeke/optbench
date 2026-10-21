@@ -1,0 +1,14 @@
+# SaddleSearch.jl is not a conda-forge package. This file does not
+# select a Julia build string and it does not invent a package pin.
+# The source the benchmarks run is the checkout pinned in
+# codes/registry.toml under id saddlesearchjl:
+#   ref = master
+#   commit = 47b4f35953bb3fc0f0726c171adca8f5b628af5e
+#   version 0.0.2
+# Julia on the campaign host is 1.10.10. The package compat bound is
+# 1.9 and 1.10.
+name: saddlesearchjl
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12

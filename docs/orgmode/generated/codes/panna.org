@@ -1,0 +1,136 @@
+#+TITLE: PANNA
+#+OPTIONS: toc:nil num:nil author:nil
+
+#+begin_export rst
+.. raw:: html
+
+   <section class="bench" id="code-panna">
+   <h2>PANNA</h2>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>machine-learning training</td>
+   <td>master</td>
+   <td>132a2df66259</td>
+   <td><a href="https://gitlab.com/PANNAdevs/panna">https://gitlab.com/PANNAdevs/panna</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-rows">
+   <caption>Every ranked row for this code.</caption>
+   <thead><tr><th>Problem</th><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="mlopt/C2H4" data-label="PANNA (2.1.0) · Adam">
+   <td>C2H4</td>
+   <td data-field="label">PANNA (2.1.0) · Adam</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">13</td>
+   <td data-field="par2_mean">11485.1</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">9081.5</td>
+   <td data-field="mean_calls">7685.14</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 19, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="mlopt/C2H4" data-label="PANNA (2.1.0) · Adam">
+   <td>C2H4</td>
+   <td data-field="label">PANNA (2.1.0) · Adam</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">14</td>
+   <td data-field="par2_mean">12401.3</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">9437.5</td>
+   <td data-field="mean_calls">7801.32</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 23, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="mlopt/C2H4" data-label="PANNA (2.1.0) · Adam">
+   <td>C2H4</td>
+   <td data-field="label">PANNA (2.1.0) · Adam</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">20</td>
+   <td data-field="par2_mean">58803.4</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">30000</td>
+   <td data-field="mean_calls">29403.4</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 49, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="mlopt/C2H4" data-label="PANNA (2.1.0) · Adam">
+   <td>C2H4</td>
+   <td data-field="label">PANNA (2.1.0) · Adam</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">21</td>
+   <td data-field="par2_mean">58803.4</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">30000</td>
+   <td data-field="mean_calls">29403.4</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 49, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="mlopt/emt-pt38" data-label="PANNA (2.1.0) · Adam">
+   <td>EMT Pt 38 nanoparticle</td>
+   <td data-field="label">PANNA (2.1.0) · Adam</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">9</td>
+   <td data-field="par2_mean">900.64</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">266.5</td>
+   <td data-field="mean_calls">900.64</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="mlopt/emt-pt38" data-label="PANNA (2.1.0) · Adam">
+   <td>EMT Pt 38 nanoparticle</td>
+   <td data-field="label">PANNA (2.1.0) · Adam</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">10</td>
+   <td data-field="par2_mean">901.04</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">266.5</td>
+   <td data-field="mean_calls">901.04</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="mlopt/emt-pt38" data-label="PANNA (2.1.0) · Adam">
+   <td>EMT Pt 38 nanoparticle</td>
+   <td data-field="label">PANNA (2.1.0) · Adam</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">22</td>
+   <td data-field="par2_mean">50527.3</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">30000</td>
+   <td data-field="mean_calls">26527.3</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 40, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="mlopt/emt-pt38" data-label="PANNA (2.1.0) · Adam">
+   <td>EMT Pt 38 nanoparticle</td>
+   <td data-field="label">PANNA (2.1.0) · Adam</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">23</td>
+   <td data-field="par2_mean">50668.3</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">30000</td>
+   <td data-field="mean_calls">26668.3</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 40, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   </tbody></table></div>
+   </section>
+#+end_export

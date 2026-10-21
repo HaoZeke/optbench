@@ -1,0 +1,24 @@
+force_calls 9583
+force_calls_min 9511
+force_calls_median 9583.0
+force_calls_max 9655
+nfailed 47
+par2_mean 19574.8163265306
+successes 2
+wilson_low 0.0112656334
+wilson_high 0.1371303231
+par2_median 20000.0000000000
+n_cap 47
+n_wrong_stationary 0
+n_divergence 0
+n_crash 0
+counter harness
+code saddlesearchjl
+code_version 0.0.2
+commit 47b4f35953bb3fc0f0726c171adca8f5b628af5e
+algorithm Static dimer
+tuning default
+template saddlesearchjl/pt-static
+problem tsopt/pt-island
+n 49
+cap 10000

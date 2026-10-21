@@ -236,6 +236,40 @@ def penalised_cost(force_calls: float, success: bool, cap: int | None, factor: i
     return float(force_calls)
 
 
+def finite_difference_equivalent(hessian_calls: float, coordinates: int) -> float:
+    """Force calls one analytic Hessian stands in for.
+
+    The Hessian count itself stays one evaluation per full Hessian. This
+    equivalent is one force call for each coordinate, ``3N`` or the free
+    coordinates. It is not added to the ranked force-call total.
+    """
+    if isinstance(coordinates, bool) or not isinstance(coordinates, int) or coordinates < 1:
+        raise ValueError("coordinates must be a positive integer")
+    count = float(hessian_calls)
+    if not math.isfinite(count) or count < 0:
+        raise ValueError("hessian calls must be zero or positive")
+    return count * coordinates
+
+
+def eon_search_calls(saddle_calls: int, minimization_calls: int) -> int:
+    """Sum of one eOn search's saddle calls and minimisation calls.
+
+    ``HarnessCounter`` counts the same evaluations when the client reaches
+    the potential through ``ext_pot`` and the prefactor is a constant.
+    Prefactor calls stay out of the sum. The two arguments are the
+    ``sad-fcs`` and ``mins-fcs`` fields of one ``search_results.txt`` line.
+    """
+    return _force_count(saddle_calls) + _force_count(minimization_calls)
+
+
+def _force_count(value: int) -> int:
+    if isinstance(value, bool) or not isinstance(value, int):
+        raise ValueError("a force-call count is an integer")
+    if value < 0:
+        raise ValueError("a force-call count is zero or positive")
+    return value
+
+
 def quantile(values: list[float], fraction: float) -> float:
     """Linear quantile, the same ranks as ``sample_stats``."""
     if not values:

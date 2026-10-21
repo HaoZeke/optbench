@@ -8,7 +8,7 @@ Problem statements are TOML under `problems/`. JSON schemas are under `contract/
 
 ## Force calls
 
-`CountedPotential` wraps `evaluate(coords) -> (energy, gradient)`. One entry is one force call. The same coordinates a second time return the cached energy and forces and do not add a call. `attach_ase_counter` counts ASE `calculate` entries, which is the same rule, because ASE does not enter `calculate` again when the geometry is unchanged. `PeleCounter` counts `getEnergyGradient`, and `getEnergy` goes through that method so it is one call.
+`CountedPotential` wraps `evaluate(coords) -> (energy, gradient)`. One entry is one force call. The same coordinates a second time return the cached energy and forces and do not add a call. `attach_ase_counter` counts ASE `calculate` entries, which is the same rule, because ASE does not enter `calculate` again when the geometry is unchanged. `PeleCounter` counts `getEnergyGradient`, and `getEnergy` goes through that method so it is one call. Transition-state rows call `findTransitionState` or `findLowestEigenVector` on the problem potential. `getEnergy` and `getEnergyGradient` on that wrapper share one `HarnessCounter` that caches one geometry, so the energy and the gradient at the same coordinates are one force call.
 
 Verification of the Hessian uses `CountedPotential.verification`. Those calls increment `verify_calls` and are not the search cost.
 

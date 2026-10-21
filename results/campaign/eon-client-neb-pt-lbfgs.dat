@@ -11,6 +11,6 @@ algorithm LBFGS
 template eon-client/neb-pt-lbfgs
 problem neb/Pt-heptamer
 reducer harness
-counter client
-count_keys total_force_calls
+counter harness
+count_keys HarnessCounter
 potential morse/smooth/linear (periodic in x and y, cutoff 9.5)

@@ -4,7 +4,7 @@ suite = "hTST"
 problem = "Al"
 contract = "shared"
 entry_count = 2
-remark = "A start is one barrier window. The window closes when each reference barrier below 0.4 eV has been matched once from the processtable. The ranked cost counts every force evaluation: dimer images, minimizations, and prefactor calls. The stop is the maximum force on any atom. The potential is eam_al."
+remark = "A start is one barrier window. The window closes when each reference barrier below 0.4 eV has been matched once from the processtable. The ranked cost counts every force evaluation: dimer images, minimizations, and prefactor calls. The rate sum uses the search row's harmonic prefactor when the row carries one, and 1.2e12 otherwise. The stop is the maximum force on any atom. The potential is eam_al."
 
 [potential]
 evaluator = "eam_al"
@@ -44,6 +44,7 @@ par_factor = 2
 bootstrap_resamples = 2000
 bootstrap_seed = 20261015
 counter = "harness"
+cost = "one barrier window: sad-fcs summed until every reference barrier has been seen once"
 required = [
   "schema",
   "counter",
@@ -66,5 +67,6 @@ required = [
   "n_cap",
   "n_wrong_stationary",
   "n_divergence",
+  "n_not_converged",
   "n_crash",
 ]

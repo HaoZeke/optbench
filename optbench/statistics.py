@@ -171,7 +171,12 @@ def failure_start(kind: str) -> tuple[dict, int]:
             energy, gradient = potential.energy_forces(point)
             point = [value + 0.05 * component for value, component in zip(point, gradient, strict=True)]
         size = math.sqrt(sum(value * value for value in gradient))
-        return {"converged": False, "diverged": True, "energy": energy, "x": point, "force_norm": size}
+        return {
+            "converged": False,
+            "energy": float("nan"),
+            "x": [float("nan"), float("nan")],
+            "force_norm": float("nan"),
+        }
 
     if kind == "cap":
         return (

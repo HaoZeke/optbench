@@ -1,0 +1,17 @@
+id = "jaxmd/noise-fire-s1em2"
+engine = "jaxmd"
+problem = "minimization/lj38-noise"
+code = "jaxmd"
+code_version = "0.2.29"
+commit = "84ab10407420fd91ad1c25be4ecd16ce1f54a75c"
+algorithm = "FIRE"
+tuning = "default"
+note = "JAX MD 0.2.29 fire_descent at the library defaults: dt_start 0.1, dt_max 0.4, n_min 5, f_inc 1.1, f_dec 0.5, alpha_start 0.1, f_alpha 0.99. The shift scales a trial so the largest per-atom move is 0.2, the ASE FIRE constructor maxstep. The potential is the harness potential for this problem. The stop is the problem force norm and the budget is the force-call cap. Gaussian force noise uses the problem seed, kappa, and clean-energy window. The Hessian is the clean force."
+
+[jaxmd]
+method = "fire"
+maxstep = 0.2
+
+[noise]
+sigma = 0.01
+seed = 20261016

@@ -1,0 +1,27 @@
+id = "saddlesearchjl/mode-bb"
+engine = "saddlesearchjl"
+problem = "lowest-eigenvector/lj38"
+code = "saddlesearchjl"
+code_version = "0.0.2"
+commit = "47b4f35953bb3fc0f0726c171adca8f5b628af5e"
+algorithm = "BB dimer rotation"
+tuning = "default"
+
+[ini.Main]
+job = "lowest_eigenvector"
+
+[ini.Optimizer]
+opt_method = "bb"
+convergence_metric = "norm"
+max_iterations = 10000
+
+[search]
+
+method = "bb"
+a0_trans = 0.001
+a0_rot = 0.001
+
+len = 0.001
+tol_rot = 0.01
+mode_seed = "gradient"
+task = "mode"

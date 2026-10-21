@@ -96,6 +96,34 @@ def version_text(code_version: str, commit: str = "") -> str:
     return commit[:12]
 
 
+def display_version(code: str, code_version: str, commit: str = "") -> str:
+    """Version cell. Distinct pins of one version string stay distinct.
+
+    The v3.6.0 release stays ``3.6.0``. A develop build at ``7095b23a``
+    is ``develop 7095b23a``. A develop build at ``500350d9`` is
+    ``develop 500350d9``. EON SVN is ``SVN r2549``. OPTIM and GMIN rows
+    from the Wales tarball use ``df8da599``. ``rgmin`` 0.4.1 names the
+    commit, because that version is not a crates.io release.
+    """
+    folded = str(code or "").strip().casefold()
+    version = str(code_version or "").strip()
+    commit = str(commit or "").strip()
+    if code == "EON (SVN r2549)" or folded == "eon svn" or (version == "r2549" and folded.startswith("eon")):
+        return "SVN r2549"
+    if commit.startswith("500350d9") or "500350d9" in version:
+        return "develop 500350d9"
+    if folded == "eon" and (commit.startswith("7095b23") or "7095b23" in version):
+        return "develop 7095b23a"
+    wales = commit.startswith(("02aaf45245af", "df8da599")) or version.startswith(
+        ("svn-snapshot", "02aaf452", "df8da599")
+    )
+    if wales and folded in {"optim", "gmin"}:
+        return "df8da599"
+    if folded == "rgmin" and version == "0.4.1" and commit:
+        return commit[:8]
+    return version_text(version, commit)
+
+
 def display_code(code: str, registry: list[dict] | None = None) -> str:
     text = str(code or "").strip()
     if not text or not registry:

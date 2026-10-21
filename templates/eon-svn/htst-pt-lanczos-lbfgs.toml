@@ -11,14 +11,14 @@ kind = "htst"
 kernel = "morse_shift"
 asv_class = "EonSvnHtstPtLanczosLbfgs"
 note = '''
-Bounded AKMC with Lanczos on the Pt hTST reactant. Tolerance 0.05, max_iterations 10. The displacement and confidence settings match the dimer-lbfgs template. The row is partial. The harness kernel is r2549 Morse::force: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. D 0.7102, alpha 1.6047, r0 2.897.
+Bounded AKMC with Lanczos on the Pt hTST reactant. Tolerance 0.05, max_iterations 10. The displacement and confidence settings match the dimer-lbfgs template. The row is short. The harness kernel is r2549 Morse::force: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. D 0.7102, alpha 1.6047, r0 2.897.
 '''
 seeds = [42]
 starts = ["pt"]
 geometry = "website/hTST/Pt/eon-lanczos-lbfgs/states/0/reactant.con"
 pass_limit = 1
 workers = 1
-declare_partial = true
+declare_short = true
 asv_full = false
 asv_timeout = 3600
 budget_seconds = 2400

@@ -178,7 +178,7 @@ def test_failure_classes_stay_in_the_par2_mean():
     assert classify_failure(["hessian_index", "rmsd"]) == "wrong_stationary"
     assert classify_failure(["divergence", "force_norm"]) == "divergence"
     assert classify_failure(["crash"]) == "crash"
-    assert failure_of({"force_calls": 40, "success": False}, 100) == "divergence"
+    assert failure_of({"force_calls": 40, "success": False}, 100) == "not_converged"
     assert failure_of({"force_calls": 100, "success": False}, 100) == "cap"
 
     def crash(potential):

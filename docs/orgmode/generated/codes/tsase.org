@@ -23,84 +23,84 @@
    <td>LJ38 double-ended saddle</td>
    <td data-field="label">TSASE (1.0) · CI-NEB</td>
    <td data-field="family">Band / NEB</td>
-   <td data-field="family_rank">15</td>
+   <td data-field="family_rank">16</td>
    <td data-field="par2_mean">3119.56</td>
    <td data-field="published"></td>
    <td data-field="median_calls">1833</td>
    <td data-field="mean_calls">1726.98</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 7, cap 17, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 17, not_converged 7, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38" data-label="TSASE (1.0) · NEB">
    <td>LJ38 double-ended saddle</td>
    <td data-field="label">TSASE (1.0) · NEB</td>
    <td data-field="family">Band / NEB</td>
-   <td data-field="family_rank">20</td>
+   <td data-field="family_rank">24</td>
    <td data-field="par2_mean">5000</td>
    <td data-field="published"></td>
    <td data-field="median_calls">1633</td>
    <td data-field="mean_calls">1652.86</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 36, cap 14, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 14, not_converged 36, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="TSASE (1.0) · CI-NEB">
    <td>lj38_2ts_separation</td>
    <td data-field="label">TSASE (1.0) · CI-NEB</td>
    <td data-field="family">Band / NEB</td>
-   <td data-field="family_rank">19</td>
+   <td data-field="family_rank">20</td>
    <td data-field="par2_mean">451753</td>
    <td data-field="published"></td>
    <td data-field="median_calls">10000</td>
    <td data-field="mean_calls">9690.35</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 1, cap 43, wrong_stationary 2</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 44, wrong_stationary 2</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="TSASE (1.0) · NEB">
    <td>lj38_2ts_separation</td>
    <td data-field="label">TSASE (1.0) · NEB</td>
    <td data-field="family">Band / NEB</td>
-   <td data-field="family_rank">22</td>
+   <td data-field="family_rank">23</td>
    <td data-field="par2_mean">500000</td>
    <td data-field="published"></td>
    <td data-field="median_calls">10000</td>
    <td data-field="mean_calls">9720.22</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 3, cap 44, wrong_stationary 4</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 47, wrong_stationary 4</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-label="TSASE (1.0) · CI-NEB">
    <td>pt-island</td>
    <td data-field="label">TSASE (1.0) · CI-NEB</td>
    <td data-field="family">Band / NEB</td>
-   <td data-field="family_rank">17</td>
+   <td data-field="family_rank">18</td>
    <td data-field="par2_mean">2524.53</td>
    <td data-field="published"></td>
    <td data-field="median_calls">564</td>
    <td data-field="mean_calls">639.61</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 20, cap 1, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, not_converged 20, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-label="TSASE (1.0) · NEB">
    <td>pt-island</td>
    <td data-field="label">TSASE (1.0) · NEB</td>
    <td data-field="family">Band / NEB</td>
-   <td data-field="family_rank">20</td>
+   <td data-field="family_rank">23</td>
    <td data-field="par2_mean">6000</td>
    <td data-field="published"></td>
    <td data-field="median_calls">543</td>
    <td data-field="mean_calls">788.746</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 56, cap 3, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 3, not_converged 56, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
    <tr data-problem="hTST/Pt" data-label="TSASE · quenchDimer+neb-QM">
@@ -114,7 +114,7 @@
    <td data-field="mean_calls">293200</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
    <tr data-problem="hTST/Pt" data-label="TSASE · Dimer-QM rotation: max=50, tol=5">
@@ -128,7 +128,7 @@
    <td data-field="mean_calls">3.239e+06</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
    <tr data-problem="hTST/Pt" data-label="TSASE · alphaDimer-QM">
@@ -142,7 +142,7 @@
    <td data-field="mean_calls">1.908e+07</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
    <tr data-problem="lowest-eigenvector/lj38" data-label="TSASE (410) · tsase-lanczos">
@@ -156,147 +156,147 @@
    <td data-field="mean_calls">25</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="lowest-eigenvector/lj38" data-label="TSASE (408) · tsase-dimer-bfgs">
    <td>lj38</td>
    <td data-field="label">TSASE (408) · tsase-dimer-bfgs</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">7</td>
+   <td data-field="family_rank">8</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">27</td>
    <td data-field="median_calls"></td>
    <td data-field="mean_calls">27</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="lowest-eigenvector/lj38" data-label="TSASE (408) · tsase-dimer-cg">
    <td>lj38</td>
    <td data-field="label">TSASE (408) · tsase-dimer-cg</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">12</td>
+   <td data-field="family_rank">13</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">29</td>
    <td data-field="median_calls"></td>
    <td data-field="mean_calls">29</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="lowest-eigenvector/lj38" data-label="TSASE (1.0) · SSDimer">
    <td>lj38</td>
    <td data-field="label">TSASE (1.0) · SSDimer</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">18</td>
+   <td data-field="family_rank">25</td>
    <td data-field="par2_mean">2420.61</td>
    <td data-field="published"></td>
    <td data-field="median_calls">233</td>
    <td data-field="mean_calls">267.945</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 22, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 22, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="TSASE (1.0) · SDLBFGS">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">TSASE (1.0) · SDLBFGS</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">15</td>
+   <td data-field="family_rank">16</td>
    <td data-field="par2_mean">257.2</td>
    <td data-field="published"></td>
    <td data-field="median_calls">169</td>
    <td data-field="mean_calls">177.96</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 4</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 4</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="TSASE (1.0) · MDMin">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">TSASE (1.0) · MDMin</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">71</td>
+   <td data-field="family_rank">85</td>
    <td data-field="par2_mean">20000</td>
    <td data-field="published"></td>
    <td data-field="median_calls">10000</td>
    <td data-field="mean_calls">10000</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 1000, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1000, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/morse-bulk" data-label="TSASE (1.0) · SDLBFGS">
    <td>Morse bulk</td>
    <td data-field="label">TSASE (1.0) · SDLBFGS</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">61</td>
+   <td data-field="family_rank">76</td>
    <td data-field="par2_mean">17606.4</td>
    <td data-field="published"></td>
    <td data-field="median_calls">50</td>
    <td data-field="mean_calls">50.37</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 88</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 88</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="neb/Pt-heptamer" data-label="TSASE (1.0) · CI-NEB">
    <td>Pt-heptamer</td>
    <td data-field="label">TSASE (1.0) · CI-NEB</td>
    <td data-field="family">Band / NEB</td>
-   <td data-field="family_rank">11</td>
+   <td data-field="family_rank">12</td>
    <td data-field="par2_mean">1521.15</td>
    <td data-field="published"></td>
    <td data-field="median_calls">1427</td>
    <td data-field="mean_calls">1521.15</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
    <tr data-problem="neb/Pt-heptamer" data-label="TSASE (1.0) · NEB">
    <td>Pt-heptamer</td>
    <td data-field="label">TSASE (1.0) · NEB</td>
    <td data-field="family">Band / NEB</td>
-   <td data-field="family_rank">13</td>
+   <td data-field="family_rank">16</td>
    <td data-field="par2_mean">20000</td>
    <td data-field="published"></td>
    <td data-field="median_calls">1459</td>
    <td data-field="mean_calls">1521.77</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 13, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 13, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-label="TSASE (1.0) · SSDimer">
    <td>LJ38</td>
    <td data-field="label">TSASE (1.0) · SSDimer</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">14</td>
+   <td data-field="family_rank">20</td>
    <td data-field="par2_mean">20000</td>
    <td data-field="published"></td>
    <td data-field="median_calls">10000</td>
    <td data-field="mean_calls">10000</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 200, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="tsopt/pt-island" data-label="TSASE (1.0) · SSDimer">
    <td>pt-island</td>
    <td data-field="label">TSASE (1.0) · SSDimer</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">12</td>
+   <td data-field="family_rank">15</td>
    <td data-field="par2_mean">1144.31</td>
    <td data-field="published"></td>
    <td data-field="median_calls">892</td>
    <td data-field="mean_calls">1144.31</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>
    </tbody></table></div>

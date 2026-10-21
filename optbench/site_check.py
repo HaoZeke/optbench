@@ -58,24 +58,36 @@ def _code_name(row: dict, registry: list[dict]) -> str:
 
 def _check_code_rows(label: str, table: dict, document: dict) -> list[str]:
     errors: list[str] = []
+    pools: dict[tuple[str, str], list[dict]] = {}
     for row in table["rows"]:
         problem_id = row["attrs"].get("data-problem", "")
         shown = row["attrs"].get("data-label", "")
         if not problem_id:
             continue
-        problem = (document.get("problems") or {}).get(problem_id)
-        ranked = list(problem.get("ranked") or []) if problem else []
-        board_row = next((item for item in ranked if str(item.get("label") or "") == shown), None)
+        key = (problem_id, shown)
+        if key not in pools:
+            problem = (document.get("problems") or {}).get(problem_id)
+            ranked = list(problem.get("ranked") or []) if problem else []
+            pools[key] = [item for item in ranked if str(item.get("label") or "") == shown]
         got = _cell_map(row)
-        if board_row is None:
-            errors.append(f"{label} {problem_id} code row {shown!r} is not a ranked board row")
+        match = None
+        for index, board_row in enumerate(pools[key]):
+            expected = dict(ranked_cells(board_row, False))
+            if all(got.get(field) == value for field, value in expected.items()):
+                match = index
+                break
+        if match is None:
+            if not pools[key]:
+                errors.append(f"{label} {problem_id} code row {shown!r} is not a ranked board row")
+                continue
+            expected = dict(ranked_cells(pools[key][0], False))
+            for field, value in expected.items():
+                if got.get(field) != value:
+                    errors.append(
+                        f"{label} {problem_id} {shown} {field} is {got.get(field)!r}, board has {value!r}"
+                    )
             continue
-        expected = dict(ranked_cells(board_row, False))
-        for field, value in expected.items():
-            if got.get(field) != value:
-                errors.append(
-                    f"{label} {problem_id} {shown} {field} is {got.get(field)!r}, board has {value!r}"
-                )
+        del pools[key][match]
     return errors
 
 

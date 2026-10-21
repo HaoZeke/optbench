@@ -1,0 +1,192 @@
+#+TITLE: TorchSim
+#+OPTIONS: toc:nil num:nil author:nil
+
+#+begin_export rst
+.. raw:: html
+
+   <section class="bench" id="code-torchsim">
+   <h2>TorchSim</h2>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization</td>
+   <td>v0.6.2</td>
+   <td>5540d893a849</td>
+   <td><a href="https://github.com/TorchSim/torch-sim">https://github.com/TorchSim/torch-sim</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-rows">
+   <caption>Every ranked row for this code.</caption>
+   <thead><tr><th>Problem</th><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="minimization/lj38" data-label="TorchSim (0.6.2) · FIRE">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="label">TorchSim (0.6.2) · FIRE</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">52</td>
+   <td data-field="par2_mean">835.693</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">610.5</td>
+   <td data-field="mean_calls">719.902</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 6</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38" data-label="TorchSim (0.6.2) · GD">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="label">TorchSim (0.6.2) · GD</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">86</td>
+   <td data-field="par2_mean">20000</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">2</td>
+   <td data-field="mean_calls">10.874</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 991, wrong_stationary 9</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="TorchSim (0.6.2) · FIRE">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">TorchSim (0.6.2) · FIRE</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">58</td>
+   <td data-field="par2_mean">835.693</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">610.5</td>
+   <td data-field="mean_calls">719.902</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 6</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="TorchSim (0.6.2) · FIRE">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">TorchSim (0.6.2) · FIRE</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">65</td>
+   <td data-field="par2_mean">1264.52</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">548</td>
+   <td data-field="mean_calls">625.942</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 16, wrong_stationary 17</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="TorchSim (0.6.2) · FIRE">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">TorchSim (0.6.2) · FIRE</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">68</td>
+   <td data-field="par2_mean">1414.45</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">608.5</td>
+   <td data-field="mean_calls">721.04</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 30, wrong_stationary 6</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="TorchSim (0.6.2) · FIRE">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">TorchSim (0.6.2) · FIRE</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">109</td>
+   <td data-field="par2_mean">4237.57</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">329</td>
+   <td data-field="mean_calls">360.453</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 9, wrong_stationary 188</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="TorchSim (0.6.2) · GD">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">TorchSim (0.6.2) · GD</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">136</td>
+   <td data-field="par2_mean">20000</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">2</td>
+   <td data-field="mean_calls">10.874</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 991, wrong_stationary 9</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="TorchSim (0.6.2) · GD">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">TorchSim (0.6.2) · GD</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">137</td>
+   <td data-field="par2_mean">20000</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">6</td>
+   <td data-field="mean_calls">6.116</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 997, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="TorchSim (0.6.2) · GD">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">TorchSim (0.6.2) · GD</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">138</td>
+   <td data-field="par2_mean">20000</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">6</td>
+   <td data-field="mean_calls">9.67</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 997, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="TorchSim (0.6.2) · GD">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">TorchSim (0.6.2) · GD</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">139</td>
+   <td data-field="par2_mean">20000</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">6</td>
+   <td data-field="mean_calls">14.844</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 992, wrong_stationary 8</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-label="TorchSim (0.6.2) · FIRE">
+   <td>Morse bulk</td>
+   <td data-field="label">TorchSim (0.6.2) · FIRE</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">52</td>
+   <td data-field="par2_mean">113.81</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">112</td>
+   <td data-field="mean_calls">113.81</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-label="TorchSim (0.6.2) · GD">
+   <td>Morse bulk</td>
+   <td data-field="label">TorchSim (0.6.2) · GD</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">67</td>
+   <td data-field="par2_mean">488.62</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">492</td>
+   <td data-field="mean_calls">488.62</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table></div>
+   </section>
+#+end_export

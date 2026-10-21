@@ -1,0 +1,32 @@
+force_calls 111
+force_calls_min 64
+force_calls_median 109
+force_calls_max 154
+nfailed 0
+starts 49
+n 49
+par2_mean 111.2653061224
+successes 49
+wilson_low 0.9273021808
+wilson_high 1.0000000000
+par2_median 109.0000000000
+median 109.0000000000
+median_low 98.0000000000
+median_high 117.0000000000
+n_cap 0
+n_wrong_stationary 0
+n_divergence 0
+n_crash 0
+counter harness
+cap 10000
+code pele
+code_version 0.1.2
+commit b7081b932a060be11342fbe8287ac35da8ada879
+algorithm hybrid eigenvector following
+tuning tuned
+template pele/pt-island-ts-ffd
+problem tsopt/pt-island
+note Quench controls from bin/js850/tsopt_morse.py in the 2014 optbench tree at 0f26b796. The Rayleigh-Ritz step is forward difference, memory 10, maxstep 3, tol 0.02, 20 steps. Tangent memory is 10 and maxstep is 2. Outer steps are 10, tangent steps 11 and 30, and the uphill step is 1.1. orthogZeroEigs is unset. The initial eigenvector is the free displacement from the reactant. The potential is this problem's morse/smooth/linear kernel. A converged candidate also pays for the transverse mode screen.
+contributor Rohit Goswami
+date 2026-10-19
+host cursor

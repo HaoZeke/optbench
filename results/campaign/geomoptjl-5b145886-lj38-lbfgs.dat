@@ -1,0 +1,30 @@
+# counter harness. One force call is one RgpotCounter.calculate entry.
+# GeometryOptimization LBFGS, CG, and GradientDescent call the spec potential.
+# The callback stops at the problem Euclidean force norm, or the noise-aware rule.
+# v2 success is under the cap, at that stop, and Hessian index 0.
+# LJ38 index removes the six rigid modes. A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6).
+# GeometryOptimization 0.1.6 OptimLBFGS uses the Hager-Zhang initial step. BackTracking linesearch of order 2 and maxstep 0.8 bohr. The iteration ceiling is the force-call cap. The potential is the harness callback. The callback stops at the Euclidean force norm 0.01. Positions are labeled bohr and the energy is labeled hartree, so austrip leaves the spec numbers unchanged.
+force_calls 392
+force_calls_min 197
+force_calls_max 993
+nfailed 0
+median 372
+code GeometryOptimization.jl
+code_version 0.1.6
+commit 5b145886c19042f2ef13e21627f28d86027f719c
+algorithm LBFGS
+template geomoptjl/lj38-lbfgs
+tuning default
+counter harness
+problem minimization/lj38
+par2_mean 450.659
+wilson_low 0.991216985946
+wilson_high 0.998979216119
+par2_median 372.5
+par2_median_low 363
+par2_median_high 383
+v2_nfailed 3
+v2_successes 997
+n 1000
+energy_min -172.877735906
+energy_max -151.705779019

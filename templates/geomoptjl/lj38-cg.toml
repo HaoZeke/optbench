@@ -1,0 +1,16 @@
+id = "geomoptjl/lj38-cg"
+engine = "geomoptjl"
+problem = "minimization/lj38"
+code = "GeometryOptimization.jl"
+code_version = "0.1.6"
+commit = "5b145886c19042f2ef13e21627f28d86027f719c"
+algorithm = "CG"
+tuning = "default"
+note = "GeometryOptimization 0.1.6 OptimCG keeps the package conjugate-gradient defaults. BackTracking linesearch of order 2 and maxstep 0.8 bohr. The iteration ceiling is the force-call cap. The potential is the harness callback. The callback stops at the Euclidean force norm 0.01. Positions are labeled bohr and the energy is labeled hartree, so austrip leaves the spec numbers unchanged."
+
+[geomoptjl]
+method = "cg"
+
+[ini.Optimizer]
+converged_force = 0.01
+max_iterations = 10000

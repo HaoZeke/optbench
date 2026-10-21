@@ -1,0 +1,24 @@
+force_calls 3216
+force_calls_min 389
+force_calls_median 2797
+force_calls_max 9879
+nfailed 9
+par2_mean 3971.3250000000
+successes 191
+wilson_low 0.9167032960
+wilson_high 0.9761474570
+par2_median 2892.0000000000
+n_cap 9
+n_wrong_stationary 0
+n_divergence 0
+n_crash 0
+counter harness
+code saddlesearchjl
+code_version 0.0.2
+commit 47b4f35953bb3fc0f0726c171adca8f5b628af5e
+algorithm Static dimer
+tuning default
+template saddlesearchjl/lj38-static
+problem tsopt/LJ38
+n 200
+cap 10000

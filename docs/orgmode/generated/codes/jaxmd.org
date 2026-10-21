@@ -1,0 +1,360 @@
+#+TITLE: jaxmd
+#+OPTIONS: toc:nil num:nil author:nil
+
+#+begin_export rst
+.. raw:: html
+
+   <section class="bench" id="code-jaxmd">
+   <h2>jaxmd</h2>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization</td>
+   <td>jax-md-v0.2.29</td>
+   <td>84ab10407420</td>
+   <td><a href="https://github.com/jax-md/jax-md">https://github.com/jax-md/jax-md</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-rows">
+   <caption>Every ranked row for this code.</caption>
+   <thead><tr><th>Problem</th><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="minimization/lj38" data-label="jaxmd (0.2.29) · Optax LBFGS">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="label">jaxmd (0.2.29) · Optax LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">19</td>
+   <td data-field="par2_mean">278.365</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">206.5</td>
+   <td data-field="mean_calls">218.798</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38" data-label="jaxmd (0.2.29) · LBFGS">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="label">jaxmd (0.2.29) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">27</td>
+   <td data-field="par2_mean">314.755</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">202.5</td>
+   <td data-field="mean_calls">265.134</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, not_converged 0, wrong_stationary 2</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38" data-label="jaxmd (0.2.29) · FIRE">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="label">jaxmd (0.2.29) · FIRE</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">65</td>
+   <td data-field="par2_mean">2660.62</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1087.5</td>
+   <td data-field="mean_calls">2001.46</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 53, not_converged 0, wrong_stationary 7</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38" data-label="jaxmd (0.2.29) · gradient descent">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="label">jaxmd (0.2.29) · gradient descent</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">74</td>
+   <td data-field="par2_mean">6383.66</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">4830</td>
+   <td data-field="mean_calls">5390.93</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 96, not_converged 0, wrong_stationary 2</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="jaxmd (0.2.29) · Optax LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">jaxmd (0.2.29) · Optax LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">9</td>
+   <td data-field="par2_mean">278.365</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">206.5</td>
+   <td data-field="mean_calls">218.798</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="jaxmd (0.2.29) · LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">jaxmd (0.2.29) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">18</td>
+   <td data-field="par2_mean">314.755</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">202.5</td>
+   <td data-field="mean_calls">265.134</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, not_converged 0, wrong_stationary 2</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="jaxmd (0.2.29) · Optax LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">jaxmd (0.2.29) · Optax LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">21</td>
+   <td data-field="par2_mean">376.272</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">205</td>
+   <td data-field="mean_calls">217.856</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 5, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="jaxmd (0.2.29) · LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">jaxmd (0.2.29) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">22</td>
+   <td data-field="par2_mean">384.644</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">193</td>
+   <td data-field="mean_calls">206.363</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 2, wrong_stationary 7</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="jaxmd (0.2.29) · LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">jaxmd (0.2.29) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">28</td>
+   <td data-field="par2_mean">434.501</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">202.5</td>
+   <td data-field="mean_calls">216.853</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 7, wrong_stationary 4</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="jaxmd (0.2.29) · Optax LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">jaxmd (0.2.29) · Optax LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">29</td>
+   <td data-field="par2_mean">446.043</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">198.5</td>
+   <td data-field="mean_calls">208.703</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 1, wrong_stationary 11</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="jaxmd (0.2.29) · FIRE">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">jaxmd (0.2.29) · FIRE</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">66</td>
+   <td data-field="par2_mean">1369.64</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">831.5</td>
+   <td data-field="mean_calls">1071.37</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 3, not_converged 3, wrong_stationary 11</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="jaxmd (0.2.29) · LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">jaxmd (0.2.29) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">71</td>
+   <td data-field="par2_mean">1837.12</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">161</td>
+   <td data-field="mean_calls">170.563</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 5, wrong_stationary 79</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="jaxmd (0.2.29) · Optax LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">jaxmd (0.2.29) · Optax LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">77</td>
+   <td data-field="par2_mean">1994.34</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">159</td>
+   <td data-field="mean_calls">168.112</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 3, wrong_stationary 89</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="jaxmd (0.2.29) · FIRE">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">jaxmd (0.2.29) · FIRE</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">90</td>
+   <td data-field="par2_mean">2660.62</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1087.5</td>
+   <td data-field="mean_calls">2001.46</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 53, not_converged 0, wrong_stationary 7</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="jaxmd (0.2.29) · FIRE">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">jaxmd (0.2.29) · FIRE</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">100</td>
+   <td data-field="par2_mean">3189.72</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1098</td>
+   <td data-field="mean_calls">2106.9</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 62, not_converged 18, wrong_stationary 7</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="jaxmd (0.2.29) · FIRE">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">jaxmd (0.2.29) · FIRE</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">102</td>
+   <td data-field="par2_mean">3207.13</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">486</td>
+   <td data-field="mean_calls">540.028</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 5, wrong_stationary 132</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="jaxmd (0.2.29) · gradient descent">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">jaxmd (0.2.29) · gradient descent</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">117</td>
+   <td data-field="par2_mean">6383.66</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">4830</td>
+   <td data-field="mean_calls">5390.93</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 96, not_converged 0, wrong_stationary 2</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="jaxmd (0.2.29) · gradient descent">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">jaxmd (0.2.29) · gradient descent</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">118</td>
+   <td data-field="par2_mean">7806.52</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">2297</td>
+   <td data-field="mean_calls">2561.35</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 182, wrong_stationary 118</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="jaxmd (0.2.29) · gradient descent">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">jaxmd (0.2.29) · gradient descent</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">119</td>
+   <td data-field="par2_mean">8425.89</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">4139</td>
+   <td data-field="mean_calls">4740.34</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 55, not_converged 192, wrong_stationary 10</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="jaxmd (0.2.29) · gradient descent">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">jaxmd (0.2.29) · gradient descent</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">126</td>
+   <td data-field="par2_mean">13555.8</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">4826.5</td>
+   <td data-field="mean_calls">5385.53</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 96, not_converged 481, wrong_stationary 2</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-label="jaxmd (0.2.29) · Optax LBFGS">
+   <td>Morse bulk</td>
+   <td data-field="label">jaxmd (0.2.29) · Optax LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">11</td>
+   <td data-field="par2_mean">27.35</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">28</td>
+   <td data-field="mean_calls">27.35</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-label="jaxmd (0.2.29) · LBFGS">
+   <td>Morse bulk</td>
+   <td data-field="label">jaxmd (0.2.29) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">15</td>
+   <td data-field="par2_mean">33.13</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">33.5</td>
+   <td data-field="mean_calls">33.13</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-label="jaxmd (0.2.29) · FIRE">
+   <td>Morse bulk</td>
+   <td data-field="label">jaxmd (0.2.29) · FIRE</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">55</td>
+   <td data-field="par2_mean">119.86</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">120</td>
+   <td data-field="mean_calls">119.86</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-label="jaxmd (0.2.29) · gradient descent">
+   <td>Morse bulk</td>
+   <td data-field="label">jaxmd (0.2.29) · gradient descent</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">69</td>
+   <td data-field="par2_mean">4902.98</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">4937.5</td>
+   <td data-field="mean_calls">4902.98</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table></div>
+   </section>
+#+end_export

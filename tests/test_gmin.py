@@ -23,8 +23,19 @@ def test_registry_pins_the_tarball_revision():
     assert "mymylbfgs" in pinned["note"]
 
 
+def test_lbfgs_asv_specs_skip_basin_hopping_records():
+    import benchmarks.bench_gmin as bench
+
+    ids = {spec["template_id"] for spec in bench._specs()}
+    assert ids == {"gmin/lj38-lbfgs", "gmin/morse-lbfgs"}
+
+
 def test_templates_use_the_keyword_defaults():
-    found = [row for row in list_templates(ROOT) if row.get("engine") == "gmin"]
+    found = [
+        row
+        for row in list_templates(ROOT)
+        if row.get("engine") == "gmin" and row.get("algorithm") == "LBFGS"
+    ]
     assert {row["id"] for row in found} == {"gmin/lj38-lbfgs", "gmin/morse-lbfgs"}
     for template in found:
         assert template["code"] == "GMIN"

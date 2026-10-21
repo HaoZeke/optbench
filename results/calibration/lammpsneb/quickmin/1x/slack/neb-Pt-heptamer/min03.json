@@ -1,0 +1,1 @@
+{"cap": 10000, "failure": null, "force_calls": 2230, "hessian_index": 1, "lammps_stop": "force tolerance", "min_style": "quickmin", "n1": 497, "n2": 498, "n_images": 10, "policy": "slack", "problem": "neb/Pt-heptamer", "reasons": [], "returncode": 0, "source": "campaign", "start": "min03", "success": true, "timestep": 0.001, "timestep_scale": 1.0}

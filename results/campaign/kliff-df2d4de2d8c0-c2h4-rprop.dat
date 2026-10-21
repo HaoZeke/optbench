@@ -1,0 +1,36 @@
+# counter harness. One force call is one loss and parameter-gradient evaluation.
+# The loss is the pyamff squared-error sum on Behler-Parrinello fingerprints.
+# The network is 10-7 tanh, one net per element, uniform[-1, 1) at the start seed.
+# Success is a finite loss and a parameter-gradient infinity norm at or below the stop, with the call count under the cap.
+# force_norm on a start is that infinity norm. wrong_stationary is unused.
+# A force coefficient of 0 reports force_rmse -1 and leaves forces out of the graph.
+# KLIFF Rprop trains the 10-7 tanh network on the C2H4 trajectory. The loss trains energies. The force coefficient is 0, and the reported force RMSE is -1. The PyTorch Rprop constructor learning rate is 0.01, which is also the archived pyamff learning rate. The stop is a parameter-gradient infinity norm at or below 0.02. The harness budget is 10000 loss and gradient evaluations. A start seed is 20261015 plus the start index. Weights and biases are drawn from uniform[-1, 1).
+force_calls 4806.26
+force_calls_min 37
+force_calls_max 10000
+nfailed 20
+median 3047.5
+code KLIFF
+code_version 1.0.1
+commit df2d4de2d8c0b3d4ba81cb9aa1834b52de299aa5
+algorithm Rprop
+template kliff/c2h4-rprop
+problem mlopt/C2H4
+tuning default
+counter harness
+cap 10000
+par2_mean 8960.1
+wilson_low 0.4618143774758936
+wilson_high 0.7239161026974346
+par2_median 3047.5
+par2_median_low 1638
+par2_median_high 20000
+v2_nfailed 20
+v2_successes 30
+n 50
+n_cap 2
+n_divergence 18
+n_crash 0
+n_wrong_stationary 0
+grad_norm 0.02
+force_coefficient 0

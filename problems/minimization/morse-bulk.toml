@@ -10,6 +10,14 @@ force_norm = 1.0e-3
 force_unit = "eV/Ang"
 max_force_calls = 10000
 
+[bound]
+kind = "cluster"
+scale = 1.0
+length = "bond"
+bond = 2.897
+periodic = true
+atoms = 256
+
 [input]
 archive_path = "website/minimization/morse-bulk/morse-bulk.tgz"
 
@@ -31,6 +39,7 @@ par_factor = 2
 bootstrap_resamples = 2000
 bootstrap_seed = 20261015
 counter = "harness"
+success = "harness force calls under the cap, the force norm at the stop, Hessian index 0 on the full Hessian, and one connected cluster. Neighbours lie within the Morse bond length 2.897 under the orthorhombic minimum image. A dissociated cell is divergence. Energy and Kabsch RMSD are not applied: this file has no per-start reference."
 required = [
   "schema",
   "counter",
@@ -53,5 +62,6 @@ required = [
   "n_cap",
   "n_wrong_stationary",
   "n_divergence",
+  "n_not_converged",
   "n_crash",
 ]

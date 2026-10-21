@@ -10,7 +10,7 @@ profile = "adjusted"
 reducer = "capped"
 ranked = true
 parameter_source = "repaired"
-note = "The problem run limit is 250000. The harness stop is that same limit. Campaign rows are scored at the problem cap. This asv class uses the harness stop. The previous ASE campaign failed all 51 pairs at 2500. Interpolation is IDPP. LBFGS maxstep is 0.01 and damping is 0.2. Climb stays off until the maximum residual is at or below 0.4. Five images and spring 5 are unchanged."
+note = "The problem run limit is 250000. The harness stop is that same limit. archive/entries/double-ended-saddle-search/lj38_2ts_separation/pele/benchmark.dat records median 20638 and maximum 114490. Campaign rows and this asv class share the problem cap. The previous ASE campaign failed all 51 pairs at 2500. Interpolation is IDPP. LBFGS maxstep is 0.01 and damping is 0.2. Climb stays off until the maximum residual is at or below 0.4. Five images and spring 5 are unchanged."
 
 [optimizer]
 name = "LBFGS"

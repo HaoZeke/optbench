@@ -1,0 +1,1 @@
+{"cap": 2500, "failure": null, "force_calls": 2485, "hessian_index": 1, "lammps_stop": "max iterations", "min_style": "quickmin", "n1": 176, "n2": 177, "n_images": 7, "policy": "slack", "problem": "double-ended-saddle-search/lj38", "reasons": [], "returncode": 0, "source": "campaign", "start": "pair_04", "success": true, "timestep": 0.005, "timestep_scale": 1.0}

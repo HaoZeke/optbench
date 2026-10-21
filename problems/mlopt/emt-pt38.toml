@@ -4,6 +4,7 @@ suite = "mlopt"
 problem = "emt-pt38"
 contract = "stated"
 entry_count = 6
+remark = "The ranked Optax force rows are the finite-difference fingerprint derivative. The neighbor list is held fixed and the cutoff is the value in fpParas.dat. PyAMFF python loop_FPs at 8037eb98 sorts neighbor indices and leaves the periodic offsets unsorted, then drops a cross derivative whose offset fails noffset.all() == 0. On this trajectory every offset passes that test, so the python force loss and the ranked force loss agree. The archived configs leave fp_engine unset and use the Fortran default. That Fortran derivative was not executed. There is no second force row from the archived script. templates/optax/README.md has the comparison."
 
 [sample]
 initializations = 50
@@ -12,6 +13,8 @@ structure_source = "EMT molecular dynamics at 300 K"
 
 [convergence]
 max_epochs = 10000
+force_training_max_epochs = 30000
+force_max_epochs = 30000
 energy_only_grad_norm = 0.02
 force_training_grad_norm = 0.1
 
@@ -58,5 +61,6 @@ required = [
   "n_cap",
   "n_wrong_stationary",
   "n_divergence",
+  "n_not_converged",
   "n_crash",
 ]

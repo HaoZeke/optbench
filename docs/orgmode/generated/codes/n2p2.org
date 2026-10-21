@@ -23,56 +23,56 @@
    <td>C2H4</td>
    <td data-field="label">n2p2 (2.3.0) · Kalman energy</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">6</td>
+   <td data-field="family_rank">17</td>
    <td data-field="par2_mean">17397.1</td>
    <td data-field="published"></td>
    <td data-field="median_calls">10000</td>
    <td data-field="mean_calls">9397.12</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 40, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 40, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="mlopt/C2H4" data-label="n2p2 (2.3.0) · Kalman force">
    <td>C2H4</td>
    <td data-field="label">n2p2 (2.3.0) · Kalman force</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">8</td>
+   <td data-field="family_rank">24</td>
    <td data-field="par2_mean">60000</td>
    <td data-field="published"></td>
    <td data-field="median_calls">30000</td>
    <td data-field="mean_calls">30000</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 50, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 50, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="mlopt/emt-pt38" data-label="n2p2 (2.3.0) · Kalman energy">
    <td>EMT Pt 38 nanoparticle</td>
    <td data-field="label">n2p2 (2.3.0) · Kalman energy</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">1</td>
+   <td data-field="family_rank">2</td>
    <td data-field="par2_mean">25.02</td>
    <td data-field="published"></td>
    <td data-field="median_calls">14</td>
    <td data-field="mean_calls">25.02</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="mlopt/emt-pt38" data-label="n2p2 (2.3.0) · Kalman force">
    <td>EMT Pt 38 nanoparticle</td>
    <td data-field="label">n2p2 (2.3.0) · Kalman force</td>
    <td data-field="family">Minimizers</td>
-   <td data-field="family_rank">8</td>
+   <td data-field="family_rank">24</td>
    <td data-field="par2_mean">60000</td>
    <td data-field="published"></td>
    <td data-field="median_calls">30000</td>
    <td data-field="mean_calls">30000</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 50, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 50, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    </tbody></table></div>

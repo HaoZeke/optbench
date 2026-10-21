@@ -4,7 +4,7 @@ suite = "globalopt"
 problem = "lj98"
 contract = "shared"
 entry_count = 2
-remark = "Success is an energy at or below the Cambridge Cluster Database N=98 minimum plus 0.001. The start set is the 100 numbered coordinate files. The cap is this file's convergence.max_force_calls, 1000000000."
+remark = "Success is an energy at or below the Cambridge Cluster Database N=98 minimum plus 0.001. The start set is the 100 numbered coordinate files. The cap is this file's convergence.max_force_calls, 1000000000. That cap is above the archived nosym energy-call mean 5.98857238e+07 plus ten times its standard deviation 6.21561817e+07."
 
 [potential]
 kind = "lennard-jones"
@@ -63,5 +63,6 @@ required = [
   "n_cap",
   "n_wrong_stationary",
   "n_divergence",
+  "n_not_converged",
   "n_crash",
 ]

@@ -1,6 +1,26 @@
 from optbench.counter import CountedPotential, ForceCallCap, HarnessCounter, PeleCounter, attach_ase_counter
 
 
+def test_cache_hit_is_only_the_last_geometry():
+    counter = HarnessCounter(cache=True)
+    fresh, _cached = counter.charge((1.0, 0.0))
+    assert fresh is True
+    counter.remember((1.0, 0.0), (0.0, (0.0, 0.0)))
+    fresh, cached = counter.charge((1.0, 0.0))
+    assert fresh is False
+    assert cached == (0.0, (0.0, 0.0))
+    fresh, _cached = counter.charge((2.0, 0.0))
+    assert fresh is True
+    counter.remember((2.0, 0.0), (1.0, (0.0, 0.0)))
+    fresh, _cached = counter.charge((1.0, 0.0))
+    assert fresh is True
+    assert counter.calls == 3
+    assert counter.hits == 1
+    counter.reset()
+    assert counter.hits == 0
+    assert counter.calls == 0
+
+
 def test_repeated_coordinates_are_one_force_call():
     seen = []
 
@@ -100,3 +120,23 @@ def test_pele_energy_is_one_gradient_entry():
     wrapped.getEnergyGradient([0.1, 0.0, 0.0])
     assert wrapped.calls == 2
     assert wrapped._inner.entries == 2
+
+
+def test_pele_cap_refuses_the_search_call_and_verification_does_not():
+    class Inner:
+        def getEnergyGradient(self, coords):
+            return 1.0, [0.0]
+
+    wrapped = PeleCounter(Inner(), cap=1)
+    wrapped.getEnergyGradient([0.0])
+    try:
+        wrapped.getEnergyGradient([1.0])
+    except ForceCallCap as exc:
+        assert "1" in str(exc)
+    else:
+        raise AssertionError("cap was not enforced")
+    assert wrapped.calls == 1
+    with wrapped.verification():
+        wrapped.getEnergyGradient([2.0])
+    assert wrapped.calls == 1
+    assert wrapped.verify_calls == 1

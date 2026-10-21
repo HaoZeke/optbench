@@ -6,7 +6,9 @@ the archived start. The default grid is one seed and the first geometry.
 
 ``time_search`` is the timed search. It writes a sidecar. The ``track_*``
 methods read that sidecar, so a full ``asv run`` records force calls,
-success, the four failure classes, and wall time from the same search.
+success, the failure classes, and wall time from the same search. The
+class is :func:`optbench.failures.failure_of`. An N1/N2 stop under the
+harness cap is ``not_converged``.
 ``setup`` does not search. A track whose sidecar is missing searches, so
 a track-only run is a real number.
 
@@ -17,6 +19,7 @@ store. The published numbers are the asv result file.
 
 from __future__ import annotations
 
+import ast
 import itertools
 import json
 import os
@@ -49,9 +52,8 @@ TRACKS = (
     "track_failure_wrong_stationary",
     "track_failure_divergence",
     "track_failure_crash",
+    "track_failure_not_converged",
 )
-
-_FAILURES = ("cap", "wrong_stationary", "divergence", "crash")
 CLASS_PROBLEM: dict[str, str] = {}
 CLASS_TEMPLATE: dict[str, str] = {}
 CLASS_CAP: dict[str, int] = {}
@@ -101,23 +103,31 @@ def _write_sidecar(problem_name: str, template_name: str, seed: str, start: str,
     path.write_text(json.dumps(record, sort_keys=True) + "\n", encoding="utf-8")
 
 
-def _failure_of(record: dict) -> str | None:
-    if record.get("success"):
-        return None
-    label = record.get("failure")
-    if label in _FAILURES:
-        return str(label)
-    from optbench.failures import classify_failure
+def _scored(record: dict, cap: int) -> dict:
+    """Copy one start with the central failure class.
 
-    return classify_failure([str(reason) for reason in record.get("reasons") or []]) or "crash"
+    A stored ``cap`` from an N1/N2 stop stays a failure and becomes
+    ``not_converged`` when the pair-compute count is under the harness
+    cap. A stored success stays a success.
+    """
+    from optbench.failures import failure_of
+
+    out = dict(record)
+    if out.get("success"):
+        out["failure"] = None
+        return out
+    out["failure"] = failure_of(out, cap)
+    out["success"] = False
+    return out
 
 
-def _expected_track(record: dict, method: str) -> float:
+def _expected_track(record: dict, method: str, cap: int) -> float:
+    scored = _scored(record, cap)
     if method == "track_force_calls":
-        return float(record["force_calls"])
+        return float(scored["force_calls"])
     if method == "track_success":
-        return 1.0 if record["success"] else 0.0
-    failure = _failure_of(record)
+        return 1.0 if scored["success"] else 0.0
+    failure = scored.get("failure")
     name = method.removeprefix("track_failure_")
     return 1.0 if failure == name else 0.0
 
@@ -137,7 +147,10 @@ def _bind(class_name: str, problem: str, template: str, starts: list[str], cap: 
                 raise NotImplementedError("the LAMMPS binary is not available")
             path = sidecar_path(self.problem_name, self.template_name, str(seed), str(start))
             if path.is_file():
-                self.record = json.loads(path.read_text(encoding="utf-8"))
+                self.record = _scored(
+                    json.loads(path.read_text(encoding="utf-8")),
+                    int(self.cap),
+                )
             else:
                 self.record = None
 
@@ -163,10 +176,8 @@ def _bind(class_name: str, problem: str, template: str, starts: list[str], cap: 
                     "template": self.template_name,
                 }
             record["force_calls"] = float(record["force_calls"])
+            record = _scored(record, int(self.cap))
             record["success"] = bool(record["success"])
-            record["failure"] = _failure_of(record)
-            if record["success"]:
-                record["failure"] = None
             return record
 
         def time_search(self, seed, start):
@@ -213,6 +224,9 @@ def _bind(class_name: str, problem: str, template: str, starts: list[str], cap: 
         def track_failure_crash(self, seed, start) -> float:
             return 1.0 if self._ready(seed, start)["failure"] == "crash" else 0.0
 
+        def track_failure_not_converged(self, seed, start) -> float:
+            return 1.0 if self._ready(seed, start)["failure"] == "not_converged" else 0.0
+
     _Benchmark.cap = cap
     _Benchmark.track_force_calls.unit = "force calls"
     _Benchmark.track_success.unit = "fraction"
@@ -220,6 +234,7 @@ def _bind(class_name: str, problem: str, template: str, starts: list[str], cap: 
     _Benchmark.track_failure_wrong_stationary.unit = "count"
     _Benchmark.track_failure_divergence.unit = "count"
     _Benchmark.track_failure_crash.unit = "count"
+    _Benchmark.track_failure_not_converged.unit = "count"
     _Benchmark.__name__ = class_name
     _Benchmark.__qualname__ = class_name
     _Benchmark.__module__ = __name__
@@ -254,12 +269,18 @@ def verify_asv_tracks(document: dict) -> None:
             raise ValueError(f"{name} has {len(values)} results for {len(pairs)} parameters")
         template_name = CLASS_TEMPLATE[class_name]
         for (seed, start), value in zip(pairs, values, strict=True):
+            if isinstance(seed, str):
+                seed = ast.literal_eval(seed)
+            if isinstance(start, str):
+                start = ast.literal_eval(start)
             if value is None or value != value:
                 raise ValueError(f"{name}({seed}, {start}) has no result")
             record = json.loads(
-                sidecar_path(CLASS_PROBLEM[class_name], template_name, seed, start).read_text(encoding="utf-8")
+                sidecar_path(CLASS_PROBLEM[class_name], template_name, str(seed), str(start)).read_text(
+                    encoding="utf-8"
+                )
             )
-            expected = _expected_track(record, method)
+            expected = _expected_track(record, method, CLASS_CAP[class_name])
             if float(value) != expected:
                 raise ValueError(f"{name}({seed}, {start}) is {value}, the sidecar has {expected}")
 

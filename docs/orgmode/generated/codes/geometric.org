@@ -1,0 +1,80 @@
+#+TITLE: geomeTRIC
+#+OPTIONS: toc:nil num:nil author:nil
+
+#+begin_export rst
+.. raw:: html
+
+   <section class="bench" id="code-geometric">
+   <h2>geomeTRIC</h2>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>transition-state optimization</td>
+   <td>1.1.1</td>
+   <td>f657e69bae9c</td>
+   <td><a href="https://github.com/leeping/geomeTRIC">https://github.com/leeping/geomeTRIC</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-rows">
+   <caption>Every ranked row for this code.</caption>
+   <thead><tr><th>Problem</th><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="tsopt/LJ38" data-label="geomeTRIC (1.1.1) · geomeTRIC">
+   <td>LJ38</td>
+   <td data-field="label">geomeTRIC (1.1.1) · geomeTRIC</td>
+   <td data-field="family">Single-ended saddle</td>
+   <td data-field="family_rank">4</td>
+   <td data-field="par2_mean">661.295</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">246.5</td>
+   <td data-field="mean_calls">363.915</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 2, not_converged 0, wrong_stationary 2</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/LJ38" data-label="geomeTRIC (1.1.1) · geomeTRIC">
+   <td>LJ38</td>
+   <td data-field="label">geomeTRIC (1.1.1) · geomeTRIC</td>
+   <td data-field="family">Single-ended saddle</td>
+   <td data-field="family_rank">5</td>
+   <td data-field="par2_mean">760.675</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">246</td>
+   <td data-field="mean_calls">378.79</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 2, not_converged 0, wrong_stationary 3</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/pt-island" data-label="geomeTRIC (1.1.1) · geomeTRIC">
+   <td>pt-island</td>
+   <td data-field="label">geomeTRIC (1.1.1) · geomeTRIC</td>
+   <td data-field="family">Single-ended saddle</td>
+   <td data-field="family_rank">9</td>
+   <td data-field="par2_mean">1061.12</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1059</td>
+   <td data-field="mean_calls">1061.12</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">49</td>
+   </tr>
+   <tr data-problem="tsopt/pt-island" data-label="geomeTRIC (1.1.1) · geomeTRIC">
+   <td>pt-island</td>
+   <td data-field="label">geomeTRIC (1.1.1) · geomeTRIC</td>
+   <td data-field="family">Single-ended saddle</td>
+   <td data-field="family_rank">10</td>
+   <td data-field="par2_mean">1061.12</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1059</td>
+   <td data-field="mean_calls">1061.12</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">49</td>
+   </tr>
+   </tbody></table></div>
+   </section>
+#+end_export

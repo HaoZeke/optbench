@@ -1,0 +1,18 @@
+# OPTIM is not a conda-forge package. This file does not select a
+# build string. The binary the benchmarks run is the source build
+# pinned in codes/registry.toml under id optim:
+#   repository = https://www-wales.ch.cam.ac.uk/svn.tar.bz2
+#   ref = svn.tar.bz2
+#   commit = 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f
+#   SVNREV = df8da599267534fbe43a250e578f7396a7946311
+#   banner OPTIM version 02aaf452
+# asv has one environment_type, so this yml cannot be bound to one
+# class. Transition-state classes call OPTIM_BIN, default /tmp/optimbld/OPTIM.
+# The connect classes call OPTIM. The source patch is
+# codes/optim/optim-harness.patch, applied in OPTIM/source.
+# ALIGN is off. OpenMP is off. BLAS and LAPACK are the system libraries.
+name: optim
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12

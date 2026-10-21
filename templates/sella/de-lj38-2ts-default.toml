@@ -10,7 +10,7 @@ profile = "default"
 reducer = "capped"
 ranked = true
 parameter_source = "default"
-note = "Sella 2.6.0 order 1 defaults refine the highest-energy image after the ASE default band (FIRE, spring 0.1, climb off, linear interpolation). The band stops at 80 percent of the call cap and both stages share one harness counter. v0 is unset: a free cluster drops rigid modes, so a full Cartesian mode has the wrong length. ASE NEB defaults on the same pairs: spring 0.1, climb off, FIRE. The harness stop is 250000, the same as the adjusted row. Campaign rows use the problem cap. This asv class uses the harness stop."
+note = "Sella 2.6.0 order 1 defaults refine the highest-energy image after the ASE default band (FIRE, spring 0.1, climb off, linear interpolation). The band stops at 80 percent of the call cap and both stages share one harness counter. v0 is unset: a free cluster drops rigid modes, so a full Cartesian mode has the wrong length. ASE NEB defaults on the same pairs: spring 0.1, climb off, FIRE. The harness stop is 250000, the problem run limit. Campaign rows and this asv class share that cap."
 
 [optimizer]
 name = "Sella"

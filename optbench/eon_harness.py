@@ -43,6 +43,7 @@ from pathlib import Path
 import numpy as np
 
 from .asv_tracks import TrackedSearch
+from .failures import classify_outcome
 from .campaign import (
     benchmark_text,
     format_ini,
@@ -330,7 +331,8 @@ def classify_client(*, calls, reason, cap, overlap_ok=None, crashed=False) -> di
     if crashed or reason in (None, ""):
         return {"force_calls": float(count), "success": False, "failure": "crash"}
     if str(reason) != "0":
-        return {"force_calls": float(count), "success": False, "failure": "divergence"}
+        failure = classify_outcome(calls=float(count), cap=cap, unmet=True)
+        return {"force_calls": float(count), "success": False, "failure": failure}
     return {"force_calls": float(count), "success": True, "failure": None}
 
 
@@ -385,6 +387,11 @@ def _client(family: str) -> str:
 
 
 def _family_of(template: dict) -> str:
+    explicit = str(template.get("harness_family") or "")
+    if explicit:
+        if explicit not in FAMILIES:
+            raise ValueError(f"{template.get('id')} harness_family {explicit} is unknown")
+        return explicit
     ident = str(template["id"])
     for name, spec in FAMILIES.items():
         if ident.startswith(spec["prefix"]) and template.get("kind"):
@@ -723,8 +730,13 @@ def run_case(
     *,
     passes: int | None = None,
     budget: int | None = None,
+    client: str | None = None,
 ) -> dict:
-    """One seed and one start. The dict is what the tracks report."""
+    """One seed and one start. The dict is what the tracks report.
+
+    ``client`` selects the eonclient binary. The default is the family
+    pin (r2549 or 3.5.0).
+    """
     from .eon_akmc import _one_repetition
     from .potserver import PotServer, remote_count
 
@@ -749,7 +761,7 @@ def run_case(
     work = Path(tempfile.mkdtemp(prefix="optbench-eon-"))
     server = None
     try:
-        client = _client(family)
+        client = client or _client(family)
         evaluate = kernel_for(str(template["kernel"]))
         server = PotServer(evaluate, cap=cap).start()
         os.environ["OPTBENCH_POTSERVER"] = server.endpoint()
@@ -851,12 +863,16 @@ def run_case(
                             record["force_norm"] = checked["force_norm"]
                             record["hessian_index"] = checked["hessian_index"]
                             stop = float(template["ini"]["Optimizer"]["converged_force"])
-                            if checked["force_norm"] > stop:
-                                record["success"] = False
-                                record["failure"] = "divergence"
-                            elif checked["hessian_index"] != 1:
-                                record["success"] = False
-                                record["failure"] = "wrong_stationary"
+                            failure = classify_outcome(
+                                force=checked["force_norm"],
+                                calls=record["force_calls"],
+                                cap=cap,
+                                force_tol=stop,
+                                hessian_index=checked["hessian_index"],
+                                expected_index=1,
+                            )
+                            record["success"] = failure is None
+                            record["failure"] = failure
                 raw_text = fields.get("total_force_calls") or fields.get("force_calls_neb")
                 record["client_calls"] = int(float(raw_text)) if raw_text is not None else None
                 record["client_reason"] = fields.get("termination_reason")
@@ -957,7 +973,7 @@ def write_campaign(template: dict, rows: list[tuple[int, str, dict]], output: Pa
         return None
     problem = resolve_problem(ROOT, template["problem"])
     full_n = stated_full_n(ROOT, problem)
-    partial = bool(template.get("declare_partial")) or full_n is None or len(kept) < int(full_n or 0)
+    partial = bool(template.get("declare_short") or template.get("declare_partial")) or full_n is None or len(kept) < int(full_n or 0)
     successes = [row for _seed, _start, row in kept if row.get("success")]
     summary = {
         "nfailed": len(kept) - len(successes),

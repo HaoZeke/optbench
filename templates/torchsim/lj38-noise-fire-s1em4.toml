@@ -1,0 +1,30 @@
+id = "torchsim/lj38-noise-fire-s1em4"
+engine = "torchsim"
+problem = "minimization/lj38-noise"
+code = "TorchSim"
+code_version = "0.6.2"
+commit = "5540d893a849db9772081229a86d5f68537ad037"
+algorithm = "FIRE"
+tuning = "default"
+note = "Default profile. FIRE uses the ASE flavor at the constructor defaults: dt_start 0.1, alpha_start 0.1, dt_max 1, n_min 5, f_inc 1.1, f_dec 0.5, f_alpha 0.99, max_step 0.2. SpecPotentialModel evaluates the problem potential. Gaussian force noise uses the problem seed, kappa, and window. The stop is the noise-aware force norm and, at positive sigma, the clean-energy window. The index is the clean Hessian with the rigid-mode rule."
+
+[torchsim]
+method = "fire"
+fire_flavor = "ase_fire"
+dt_start = 0.1
+alpha_start = 0.1
+dt_max = 1.0
+n_min = 5
+f_inc = 1.1
+f_dec = 0.5
+f_alpha = 0.99
+max_step = 0.2
+
+[stop]
+norm = "l2"
+force_norm = 0.01
+max_force_calls = 10000
+
+[noise]
+sigma = 0.0001
+seed = 20261016

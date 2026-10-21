@@ -18,11 +18,14 @@ from optbench.surfaces import lennard_jones, morse_smooth_linear, read_con
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_island_saddle_success_is_a_cartesian_connection():
+def test_island_saddle_success_uses_the_eon_per_atom_maximum():
     problem = resolve_problem(ROOT, "saddle-search/pt-island")
     success = problem["scoring"]["v2"]["success"]
-    assert "Cartesian RMSD" in success
+    assert "perAtomNorm" in success
+    assert "0.1" in success
+    assert "find_repeat" in success
     assert "Kabsch" not in success
+    assert problem["connection"]["distance_difference"] == 0.1
     assert "max_force_calls" not in (problem.get("convergence") or {})
 
 
@@ -163,7 +166,7 @@ def test_rgsaddle_templates_match_their_problem_stop():
         assert template["commit"] == "c0db2b8d333c557251635cb8bb7b3d81f0088a71"
         assert template["engine"] == "rgsaddle"
     assert "rgsaddle/dimer-lbfgs" in found
-    assert "rgsaddle/prfo-tuned" in found
+    assert "rgsaddle/prfo" in found
     assert "rgsaddle/mode-lanczos" in found
     assert "rgsaddle/saddle-dimer-lbfgs" in found
     assert "rgsaddle/pt-dimer-lbfgs" in found
