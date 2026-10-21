@@ -11,7 +11,6 @@ algorithm CG
 template eon-client/neb-pt-cg
 problem neb/Pt-heptamer
 reducer harness
-counter harness
-count_keys HarnessCounter
-ranked false
+counter client
+count_keys total_force_calls
 potential morse/smooth/linear (periodic in x and y, cutoff 9.5)
