@@ -1067,7 +1067,4 @@ The number is written only after the run finishes under the problem rule.
    </tr>
    </tbody></table></div>
    <p>No full ranked run.</p>
-   <p>No full ranked run</p><ul>
-   <li>LJ38 double-ended saddle: partial.</li>
-   </ul>
    </section>

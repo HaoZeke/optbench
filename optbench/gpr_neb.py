@@ -13,12 +13,13 @@ The problem file supplies the image count, the harness force-call cap,
 the success force norm, and the maximum move. The optimizer stops on
 the template force residual, or on the library step limit, or on the
 cap. ``classify_outcome`` is the class. A finite stop above the force
-tolerance is ``not_converged``. ``cap`` is only the harness force-call
-cap. ``SEARCH_TIME_LIMIT`` is one infrastructure slice. Crossing it
-writes a resume checkpoint and is not a score. The same pair continues
-on the next slice until the force-call cap or convergence. The measured
-duration is ``search_seconds``, which the benchmark writes as
-``time_search``.
+tolerance is ``not_converged``. That class is a finished failure and
+costs twice the force-call cap, the same as every other failure.
+``cap`` is only the harness force-call cap. ``SEARCH_TIME_LIMIT`` is
+one infrastructure slice. Crossing it writes a resume checkpoint and
+is not a score. Only that slice continues. A method stop does not.
+The measured duration is ``search_seconds``, which the benchmark
+writes as ``time_search``.
 
 Section 6 of Onyango, Kang, and Zhu, Comput. Phys. Commun. 316 (2025)
 109781, arXiv:2504.07319, writes one numerical set because those
