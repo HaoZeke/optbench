@@ -93,7 +93,7 @@ It does not run a campaign.
    <td data-code="eOn" data-template="eon/develop-saddle-pt-lanczos" data-par2="2e+08"><span class="bench-score">2e+08</span><a href="generated/suites/saddle-search.html#pt-island-templates">eon/develop-saddle-pt-lanczos</a></td>
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
-   <td data-code="rgsaddle" data-template="rgsaddle/saddle-dimer-rotskip-tuned" data-par2="10127.1"><span class="bench-score">10127.1</span><a href="generated/suites/saddle-search.html#pt-island-templates">rgsaddle/saddle-dimer-rotskip-tuned</a></td>
+   <td data-code="rgsaddle" data-template="rgsaddle/saddle-dimer-rotskip" data-par2="10121.8"><span class="bench-score">10121.8</span><a href="generated/suites/saddle-search.html#pt-island-templates">rgsaddle/saddle-dimer-rotskip</a></td>
    <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella" data-template="sella/pt-island-search-default" data-par2="5201.62"><span class="bench-score">5201.62</span><a href="generated/suites/saddle-search.html#pt-island-templates">sella/pt-island-search-default</a></td>
@@ -109,7 +109,7 @@ It does not run a campaign.
    <td data-code="lammps">—</td>
    <td data-code="optim">—</td>
    <td data-code="optking">—</td>
-   <td data-code="softsaddle" data-template="softsaddle/saddle-lanczos-sm0" data-par2="10124.2"><span class="bench-score">10124.2</span><a href="generated/suites/saddle-search.html#pt-island-templates">softsaddle/saddle-lanczos-sm0</a></td>
+   <td data-code="softsaddle">—</td>
    <td data-code="tsase">—</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38">

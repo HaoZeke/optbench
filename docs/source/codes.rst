@@ -388,6 +388,12 @@ The number is written only after the run finishes under the problem rule.
    <td>c0db2b8d333c</td>
    <td><a href="https://github.com/OmniPotentRPC/rgsaddle">https://github.com/OmniPotentRPC/rgsaddle</a></td>
    </tr>
+   <tr>
+   <td>saddle search</td>
+   <td>main</td>
+   <td>df8ec2f8deba</td>
+   <td><a href="https://github.com/OmniPotentRPC/rgsaddle">https://github.com/OmniPotentRPC/rgsaddle</a></td>
+   </tr>
    </tbody></table></div>
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
@@ -447,15 +453,15 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
-   <tr data-problem="saddle-search/pt-island" data-template="rgsaddle/saddle-dimer-rotskip-tuned">
+   <tr data-problem="saddle-search/pt-island" data-template="rgsaddle/saddle-dimer-rotskip">
    <td>Pt heptamer island</td>
-   <td data-field="template">rgsaddle/saddle-dimer-rotskip-tuned</td>
+   <td data-field="template">rgsaddle/saddle-dimer-rotskip</td>
    <td data-field="version">rgsaddle 0.2.2</td>
-   <td data-field="commit">c0db2b8d333c</td>
-   <td data-field="par2_mean">10127.1</td>
-   <td data-field="mean_calls">619.017</td>
-   <td data-field="median_calls">550</td>
-   <td data-field="failures">crash 0, divergence 17717, cap 2246, wrong_stationary 35</td>
+   <td data-field="commit">df8ec2f8deba</td>
+   <td data-field="par2_mean">10121.8</td>
+   <td data-field="mean_calls">479.948</td>
+   <td data-field="median_calls">441</td>
+   <td data-field="failures">crash 0, divergence 19700, cap 267, wrong_stationary 20</td>
    <td data-field="n">20000</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-template="rgsaddle/prfo-tuned">
@@ -481,6 +487,9 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">49</td>
    </tr>
    </tbody></table></div>
+   <p>No full ranked run</p><ul>
+   <li>Pt heptamer island: partial.</li>
+   </ul>
    <h3>geodesic</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
@@ -1467,16 +1476,8 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
-   <tr data-problem="saddle-search/pt-island" data-template="softsaddle/saddle-lanczos-sm0">
-   <td>Pt heptamer island</td>
-   <td data-field="template">softsaddle/saddle-lanczos-sm0</td>
-   <td data-field="version">softsaddle 2019.04</td>
-   <td data-field="commit">5a00aeede06f</td>
-   <td data-field="par2_mean">10124.2</td>
-   <td data-field="mean_calls">431.839</td>
-   <td data-field="median_calls">389</td>
-   <td data-field="failures">crash 0, divergence 4884, cap 108, wrong_stationary 6</td>
-   <td data-field="n">5000</td>
-   </tr>
    </tbody></table></div>
+   <p>No full ranked run</p><ul>
+   <li>Pt heptamer island: partial.</li>
+   </ul>
    </section>
