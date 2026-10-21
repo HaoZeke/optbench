@@ -8,9 +8,7 @@
     "area_log10": {
       "airss/lj38 0.9.4 default campaign 5593cc4": 1.1062852340651308,
       "eon-client/bh-lj38 3.5.0 campaign 4d8b34b": 0.5252973424336471,
-      "eon-svn/bh-lj38 r2549 campaign r2549": 0.4786376931057301,
-      "scgo/lj38-bh 0.9.1 default campaign, asv 2338742": 0.0,
-      "scgo/lj38-bh-tuned 0.9.1 tuned campaign 2338742": 0.0
+      "eon-svn/bh-lj38 r2549 campaign r2549": 0.4786376931057301
     },
     "rho": {
       "airss/lj38 0.9.4 default campaign 5593cc4": [
@@ -33,28 +31,12 @@
         0.38,
         0.57,
         0.74
-      ],
-      "scgo/lj38-bh 0.9.1 default campaign, asv 2338742": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "scgo/lj38-bh-tuned 0.9.1 tuned campaign 2338742": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
       ]
     },
     "solved": {
       "airss/lj38 0.9.4 default campaign 5593cc4": 1.0,
       "eon-client/bh-lj38 3.5.0 campaign 4d8b34b": 1.0,
-      "eon-svn/bh-lj38 r2549 campaign r2549": 0.98,
-      "scgo/lj38-bh 0.9.1 default campaign, asv 2338742": 0.0,
-      "scgo/lj38-bh-tuned 0.9.1 tuned campaign 2338742": 0.0
+      "eon-svn/bh-lj38 r2549 campaign r2549": 0.98
     },
     "taus": [
       1.0,
@@ -65,51 +47,6 @@
     ]
   },
   "ranked": [
-    {
-      "asv_commit": "eb7fee56203c0f8ab26e642d07962e4e5f9b7247",
-      "call_unit": "total",
-      "cap": 30888,
-      "code": "SCGO",
-      "code_version": "0.9.1",
-      "commit": "2338742a434a920ed82e52a72dc1338cf06647c1",
-      "comparable": true,
-      "counter": "harness",
-      "current": true,
-      "entry": "scgo-2338742a-lj38-bh",
-      "failures": {
-        "cap": 0,
-        "crash": 0,
-        "divergence": 0,
-        "wrong_stationary": 100
-      },
-      "full_n": 100,
-      "history": false,
-      "max_calls": 13732.0,
-      "mean_calls": 11847.87,
-      "mean_per_image": null,
-      "median": 61776.0,
-      "median_calls": 11832.5,
-      "median_high": 61776.0,
-      "median_low": 61776.0,
-      "median_per_image": null,
-      "min_calls": 10392.0,
-      "n": 100,
-      "nfailed": 100,
-      "note": "starts.jsonl",
-      "par2_mean": 61776.0,
-      "partial": false,
-      "partial_reason": "",
-      "path": "results/campaign/scgo-2338742a-lj38-bh.dat; results/asv/eb7fee56203c0f8ab26e642d07962e4e5f9b7247",
-      "problem": "globalopt/lj38",
-      "registry_match": true,
-      "scored": true,
-      "source": "campaign, asv",
-      "success_rate": 0.0,
-      "template": "scgo/lj38-bh",
-      "tuning": "default",
-      "wilson_high": 0.03699349820698568,
-      "wilson_low": 0.0
-    },
     {
       "asv_commit": "",
       "call_unit": "total",
@@ -244,51 +181,6 @@
       "tuning": "",
       "wilson_high": 0.9944980324498376,
       "wilson_low": 0.929988209271456
-    },
-    {
-      "asv_commit": "",
-      "call_unit": "total",
-      "cap": 955658,
-      "code": "SCGO",
-      "code_version": "0.9.1",
-      "commit": "2338742a434a920ed82e52a72dc1338cf06647c1",
-      "comparable": true,
-      "counter": "harness",
-      "current": true,
-      "entry": "scgo-2338742a-lj38-bh-tuned",
-      "failures": {
-        "cap": 100,
-        "crash": 0,
-        "divergence": 0,
-        "wrong_stationary": 0
-      },
-      "full_n": 100,
-      "history": false,
-      "max_calls": 955658.0,
-      "mean_calls": 955658.0,
-      "mean_per_image": null,
-      "median": 1911316.0,
-      "median_calls": 955658.0,
-      "median_high": 1911316.0,
-      "median_low": 1911316.0,
-      "median_per_image": null,
-      "min_calls": 955658.0,
-      "n": 100,
-      "nfailed": 100,
-      "note": "starts.jsonl",
-      "par2_mean": 1911316.0,
-      "partial": false,
-      "partial_reason": "",
-      "path": "results/campaign/scgo-2338742a-lj38-bh-tuned.dat",
-      "problem": "globalopt/lj38",
-      "registry_match": true,
-      "scored": true,
-      "source": "campaign",
-      "success_rate": 0.0,
-      "template": "scgo/lj38-bh-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.03699349820698568,
-      "wilson_low": 0.0
     }
   ],
   "title": "Lennard-Jones 38 global minimum"

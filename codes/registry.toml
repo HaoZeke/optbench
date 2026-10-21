@@ -211,7 +211,7 @@ repository = "https://github.com/rlaplaza-lab/scgo"
 ref = "main"
 commit = "2338742a434a920ed82e52a72dc1338cf06647c1"
 committed = "2026-10-01"
-note = "SCGO 0.9.1 at main 2338742a. Basin hopping starts from each archived geometry. The potential is optbench.potentials.lennard_jones. The atom symbol is carbon so the library distance floor stays under the Lennard-Jones contact distance. Force calls are harness calculator evaluations."
+note = "SCGO 0.9.1 at main 2338742a. Basin hopping starts from each archived geometry on lj38, lj75, lj98, and lj150. dr 0.2 and temperature 1.0 stay at the get_default_params preset. Local FIRE length stays the automatic size for the atom count. The hop count and the force-call cap are the problem max_force_calls, 2000000. The potential is optbench.potentials.lennard_jones. The atom symbol is carbon so the library distance floor stays under the Lennard-Jones contact distance. Force calls are harness calculator evaluations. One stock row is kept for each problem. PAR-2 uses that problem cap."
 
 [[template]]
 id = "ase-globalopt/lj75-basinhopping"

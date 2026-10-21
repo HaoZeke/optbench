@@ -575,17 +575,6 @@
    <td data-field="failures">crash 0, divergence 0, cap 5, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
-   <tr data-problem="globalopt/lj75" data-template="ase-globalopt/lj75-basinhopping">
-   <td>lj75</td>
-   <td data-field="template">ase-globalopt/lj75-basinhopping</td>
-   <td data-field="version">ASE 3.29.0</td>
-   <td data-field="commit">f27c0005ae6a</td>
-   <td data-field="par2_mean">2e+06</td>
-   <td data-field="mean_calls">1e+06</td>
-   <td data-field="median_calls">1e+06</td>
-   <td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td>
-   <td data-field="n">200</td>
-   </tr>
    <tr data-problem="minimization/lj38" data-template="ase/lj38-lbfgs-tuned">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="template">ase/lj38-lbfgs-tuned</td>
@@ -1375,32 +1364,7 @@
    <td><a href="https://github.com/rlaplaza-lab/scgo">https://github.com/rlaplaza-lab/scgo</a></td>
    </tr>
    </tbody></table></div>
-   <div class="bench-scroll"><table data-board-table="code-best">
-   <caption>Best full harness run on each problem.</caption>
-   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="globalopt/lj38" data-template="scgo/lj38-bh">
-   <td>Lennard-Jones 38 global minimum</td>
-   <td data-field="template">scgo/lj38-bh</td>
-   <td data-field="version">SCGO 0.9.1</td>
-   <td data-field="commit">2338742a434a</td>
-   <td data-field="par2_mean">61776</td>
-   <td data-field="mean_calls">11847.9</td>
-   <td data-field="median_calls">11832.5</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 100</td>
-   <td data-field="n">100</td>
-   </tr>
-   <tr data-problem="globalopt/lj75" data-template="scgo/lj75-bh">
-   <td>lj75</td>
-   <td data-field="template">scgo/lj75-bh</td>
-   <td data-field="version">SCGO 0.9.1</td>
-   <td data-field="commit">2338742a434a</td>
-   <td data-field="par2_mean">2e+06</td>
-   <td data-field="mean_calls">785057</td>
-   <td data-field="median_calls">1e+06</td>
-   <td data-field="failures">crash 0, divergence 0, cap 157, wrong_stationary 43</td>
-   <td data-field="n">200</td>
-   </tr>
-   </tbody></table></div>
+   <p>No full ranked run.</p>
    <h3>AIRSS</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>

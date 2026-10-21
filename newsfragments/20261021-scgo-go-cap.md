@@ -1,0 +1,1 @@
+SCGO stock basin hopping on lj38, lj75, lj98, and lj150 uses the problem force-call cap of 2000000. The hop count equals that cap and the local FIRE length stays the automatic size. dr and temperature stay at the library preset. One stock row is kept for each problem. The ASE lj75 basin-hopping stop on this branch follows that same problem cap.

@@ -11,18 +11,16 @@ Basin hopping is ``scgo.algorithms.basinhopping_go.bh_go``. For a
 archived start. Each file in the problem archive is one start.
 
 The library budget for 38 atoms is 131 hops and 233 FIRE steps. A
-start ends early when the harness energy lies within
-``energy_above_minimum`` of ``reference.energy``. The force-call cap is
-the most evaluations that budget can spend. A search that uses the cap
-is a cap failure. An energy outside the window, with calls still under
-the cap, is ``wrong_stationary``.
+problem that states ``max_force_calls`` uses that number as the
+force-call cap. The hop count is at least that cap, and the local FIRE
+length stays the automatic size for the atom count. A start ends early
+when the harness energy lies within ``energy_above_minimum`` of
+``reference.energy``. A search that uses the cap is a cap failure. An
+energy outside the window, with calls still under the cap, is
+``wrong_stationary``.
 
-The tuned template keeps that FIRE length, step size, and Metropolis
-scale. Its hop count is the AIRSS Lennard-Jones 38 call ceiling, so a
-start ends on the Cambridge window or on that harness count. A problem
-that states ``max_force_calls`` uses that cap the same way. The atom
-symbol is a distance-floor label. ``harness_lj`` is the only energy
-and force evaluation.
+The atom symbol is a distance-floor label. ``harness_lj`` is the only
+energy and force evaluation.
 """
 
 from __future__ import annotations

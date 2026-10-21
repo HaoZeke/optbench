@@ -50,8 +50,9 @@ def _specs() -> list[dict]:
     found = []
     for template_id, class_name in (
         ("scgo/lj38-bh", "ScgoLj38Bh"),
-        ("scgo/lj38-bh-tuned", "ScgoLj38BhTuned"),
         ("scgo/lj75-bh", "ScgoLj75Bh"),
+        ("scgo/lj98-bh", "ScgoLj98Bh"),
+        ("scgo/lj150-bh", "ScgoLj150Bh"),
     ):
         template = load_template(ROOT, template_id)
         problem = resolve_problem(ROOT, str(template["problem"]))

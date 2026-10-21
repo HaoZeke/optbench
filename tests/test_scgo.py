@@ -5,7 +5,6 @@ import pytest
 
 from optbench.campaign import _check_stop, list_templates, load_template, resolve_problem, run
 from optbench.runners.scgo_go import (
-    AIRSS_LJ38_CALL_CEILING,
     PINNED_COMMIT,
     LJ38_MINIMUM_COORDS,
     SearchStop,
@@ -35,7 +34,7 @@ def test_search_stop_is_not_a_runtime_error():
     assert stop.kind == "target"
 
 
-def test_lj38_template_uses_the_budget_cap():
+def test_lj38_template_uses_the_problem_cap():
     template = load_template(ROOT, "scgo/lj38-bh")
     problem = resolve_problem(ROOT, "globalopt/lj38")
     assert template["engine"] == "scgo"
@@ -45,35 +44,44 @@ def test_lj38_template_uses_the_budget_cap():
     assert template["scgo"]["algorithm"] == "bh"
     assert template["scgo"]["symbol"] == "C"
     assert int(template["scgo"]["seed"]) == 314159
-    assert _check_stop(problem, template) == 30888
+    assert template["failure_cap"] == 2000000
+    assert int(template["scgo"]["niter"]) == 2000000
+    assert _check_stop(problem, template) == 2000000
     assert [row["id"] for row in list_templates(ROOT) if str(row["id"]).startswith("scgo/")] == [
-        "scgo/lj38-bh-tuned",
+        "scgo/lj150-bh",
         "scgo/lj38-bh",
         "scgo/lj75-bh",
+        "scgo/lj98-bh",
     ]
-
-
-def test_tuned_template_uses_the_airss_call_ceiling():
-    template = load_template(ROOT, "scgo/lj38-bh-tuned")
-    problem = resolve_problem(ROOT, "globalopt/lj38")
-    assert template["tuning"] == "tuned"
-    assert template["failure_cap"] == AIRSS_LJ38_CALL_CEILING == 955658
-    assert template["scgo"]["dr"] == pytest.approx(0.2)
-    assert template["scgo"]["temperature"] == pytest.approx(1.0)
-    assert int(template["scgo"]["niter"]) == AIRSS_LJ38_CALL_CEILING
-    assert _check_stop(problem, template) == AIRSS_LJ38_CALL_CEILING
 
 
 def test_lj75_template_uses_the_problem_window():
     template = load_template(ROOT, "scgo/lj75-bh")
     problem = resolve_problem(ROOT, "globalopt/lj75")
-    assert template["failure_cap"] == 1000000
-    assert int(template["scgo"]["niter"]) == 1000000
+    assert template["failure_cap"] == 2000000
+    assert int(template["scgo"]["niter"]) == 2000000
     assert template["scgo"]["dr"] == pytest.approx(0.2)
     assert template["scgo"]["temperature"] == pytest.approx(1.0)
-    assert _check_stop(problem, template) == 1000000
+    assert _check_stop(problem, template) == 2000000
     assert problem["reference"]["energy"] == pytest.approx(-397.492331)
     assert problem["convergence"]["energy_above_minimum"] == pytest.approx(0.001)
+
+
+def test_larger_templates_use_the_same_stock_cap():
+    expected = {
+        "lj98": (-543.665361, 100),
+        "lj150": (-893.310258, 100),
+    }
+    for slug, (energy, starts) in expected.items():
+        template = load_template(ROOT, f"scgo/{slug}-bh")
+        problem = resolve_problem(ROOT, f"globalopt/{slug}")
+        assert template["failure_cap"] == 2000000
+        assert int(template["scgo"]["niter"]) == 2000000
+        assert template["scgo"]["dr"] == pytest.approx(0.2)
+        assert template["scgo"]["temperature"] == pytest.approx(1.0)
+        assert _check_stop(problem, template) == 2000000
+        assert problem["reference"]["energy"] == pytest.approx(energy)
+        assert int(problem["sample"]["starts"]) == starts
 
 
 def test_harness_potential_has_no_atom_symbol():
@@ -127,18 +135,22 @@ def test_asv_grid_is_one_start_until_full(monkeypatch):
     assert bench.ScgoLj38Bh.param_names == ["seed", "start"]
     assert bench.ScgoLj38Bh.params[0] == ["314159"]
     assert bench.ScgoLj38Bh.params[1] == ["0"]
-    assert bench.ScgoLj38Bh.cap == 30888
+    assert bench.ScgoLj38Bh.cap == 2000000
     assert bench.ScgoLj38Bh.template_id == "scgo/lj38-bh"
     assert bench.ScgoLj38Bh.problem_id == "globalopt/lj38"
     assert bench.ScgoLj38Bh.repeat == 1
     assert bench.ScgoLj38Bh.track_force_calls.unit == "force calls"
-    assert bench.ScgoLj38BhTuned.cap == AIRSS_LJ38_CALL_CEILING
-    assert bench.ScgoLj38BhTuned.template_id == "scgo/lj38-bh-tuned"
-    assert bench.ScgoLj38BhTuned.params[1] == ["0"]
-    assert bench.ScgoLj75Bh.cap == 1000000
+    assert not hasattr(bench, "ScgoLj38BhTuned")
+    assert bench.ScgoLj75Bh.cap == 2000000
     assert bench.ScgoLj75Bh.template_id == "scgo/lj75-bh"
     assert bench.ScgoLj75Bh.problem_id == "globalopt/lj75"
     assert bench.ScgoLj75Bh.params[1] == ["0"]
+    assert bench.ScgoLj98Bh.cap == 2000000
+    assert bench.ScgoLj98Bh.template_id == "scgo/lj98-bh"
+    assert bench.ScgoLj98Bh.problem_id == "globalopt/lj98"
+    assert bench.ScgoLj150Bh.cap == 2000000
+    assert bench.ScgoLj150Bh.template_id == "scgo/lj150-bh"
+    assert bench.ScgoLj150Bh.problem_id == "globalopt/lj150"
     monkeypatch.setenv("OPTBENCH_ASV_FULL", "1")
     reloaded = importlib.reload(bench)
     assert reloaded.ScgoLj38Bh.params[1] == [str(index) for index in range(100)]
@@ -187,36 +199,37 @@ def test_installed_library_budget_matches_the_template():
     template = load_template(ROOT, "scgo/lj38-bh")
     problem = resolve_problem(ROOT, "globalopt/lj38")
     settings = bh_settings(problem, template, 38)
-    assert settings["niter"] == 131
+    assert settings["niter"] == 2000000
     assert settings["niter_local_relaxation"] == 233
-    assert settings["cap"] == 30888
+    assert settings["cap"] == 2000000
     assert settings["optimizer"] == "FIRE"
     assert settings["fmax"] == pytest.approx(0.05)
     assert settings["dr"] == pytest.approx(0.2)
+    assert settings["temperature"] == pytest.approx(1.0)
     assert settings["symbol"] == "C"
     assert settings["reference_energy"] == pytest.approx(-173.928427)
     assert settings["threshold"] == pytest.approx(-173.927427)
     assert settings["judge"] == "globalopt"
     assert settings["stop_on_energy"] is True
-    tuned = load_template(ROOT, "scgo/lj38-bh-tuned")
-    tuned_settings = bh_settings(problem, tuned, 38)
-    assert tuned_settings["dr"] == pytest.approx(0.2)
-    assert tuned_settings["temperature"] == pytest.approx(1.0)
-    assert tuned_settings["niter_local_relaxation"] == 233
-    assert tuned_settings["niter"] == AIRSS_LJ38_CALL_CEILING
-    assert tuned_settings["cap"] == AIRSS_LJ38_CALL_CEILING
-    assert tuned_settings["reference_energy"] == pytest.approx(-173.928427)
-    assert tuned_settings["judge"] == "globalopt"
-    assert tuned_settings["stop_on_energy"] is True
     lj75 = load_template(ROOT, "scgo/lj75-bh")
     lj75_problem = resolve_problem(ROOT, "globalopt/lj75")
     lj75_settings = bh_settings(lj75_problem, lj75, 75)
     assert lj75_settings["dr"] == pytest.approx(0.2)
     assert lj75_settings["temperature"] == pytest.approx(1.0)
     assert lj75_settings["niter_local_relaxation"] == 266
-    assert lj75_settings["niter"] == 1000000
-    assert lj75_settings["cap"] == 1000000
+    assert lj75_settings["niter"] == 2000000
+    assert lj75_settings["cap"] == 2000000
     assert lj75_settings["reference_energy"] == pytest.approx(-397.492331)
     assert lj75_settings["threshold"] == pytest.approx(-397.491331)
     assert lj75_settings["judge"] == "globalopt"
     assert lj75_settings["stop_on_energy"] is True
+    lj98 = load_template(ROOT, "scgo/lj98-bh")
+    lj98_settings = bh_settings(resolve_problem(ROOT, "globalopt/lj98"), lj98, 98)
+    assert lj98_settings["niter_local_relaxation"] == 279
+    assert lj98_settings["niter"] == 2000000
+    assert lj98_settings["cap"] == 2000000
+    lj150 = load_template(ROOT, "scgo/lj150-bh")
+    lj150_settings = bh_settings(resolve_problem(ROOT, "globalopt/lj150"), lj150, 150)
+    assert lj150_settings["niter_local_relaxation"] == 300
+    assert lj150_settings["niter"] == 2000000
+    assert lj150_settings["cap"] == 2000000
