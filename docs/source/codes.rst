@@ -31,9 +31,12 @@ Archived rows use the same key and appear on that code page.
    <li><a href="generated/codes/compass.html">COMPASS</a></li>
    <li><a href="generated/codes/pysisyphus.html">pysisyphus</a></li>
    <li><a href="generated/codes/optim.html">OPTIM</a></li>
+   <li><a href="generated/codes/n2p2.html">n2p2</a></li>
    <li><a href="generated/codes/airss.html">AIRSS</a></li>
    <li><a href="generated/codes/vc-sqnm.html">vc-SQNM</a></li>
    <li><a href="generated/codes/softsaddle.html">SoftSaddle</a></li>
+   <li><a href="generated/codes/eon--svn-r2549.html">EON (SVN r2549)</a></li>
+   <li><a href="generated/codes/eon--develop-500350d9.html">eOn (develop 500350d9)</a></li>
    <li><a href="generated/codes/eon-r2006.html">Eon r2006</a></li>
    <li><a href="generated/codes/unknown.html">unknown</a></li>
    <li><a href="generated/codes/pyamff.html">Pyamff</a></li>
@@ -62,9 +65,12 @@ Archived rows use the same key and appear on that code page.
    generated/codes/compass
    generated/codes/pysisyphus
    generated/codes/optim
+   generated/codes/n2p2
    generated/codes/airss
    generated/codes/vc-sqnm
    generated/codes/softsaddle
+   generated/codes/eon--svn-r2549
+   generated/codes/eon--develop-500350d9
    generated/codes/eon-r2006
    generated/codes/unknown
    generated/codes/pyamff

@@ -1,7 +1,5 @@
 {
-  "full_n": 49,
-  "id": "tsopt/pt-island",
-  "not_comparable": [
+  "client_counter": [
     {
       "asv_commit": "",
       "call_unit": "total",
@@ -9,7 +7,6 @@
       "code": "eOn",
       "code_version": "3.6.0",
       "commit": "1d71c944501832bfafb955ffe13b9aae50c8efd4",
-      "comparable": false,
       "counter": "",
       "entry": "eon-main-ts-pt-dimer-m100",
       "failures": {
@@ -60,7 +57,6 @@
       "code": "eOn",
       "code_version": "3.6.0",
       "commit": "1d71c944501832bfafb955ffe13b9aae50c8efd4",
-      "comparable": false,
       "counter": "",
       "entry": "eon-main-ts-pt-dimer",
       "failures": {
@@ -105,6 +101,8 @@
       "tuning": ""
     }
   ],
+  "full_n": 49,
+  "id": "tsopt/pt-island",
   "profile": {
     "area_log10": {
       "Eon svn (r2549) \u00b7 Dimer L-BFGS": 1.0474615155246694,
@@ -281,7 +279,6 @@
       "code": "Sella",
       "code_version": "0.1.1",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "sella",
       "failures": {},
@@ -327,7 +324,6 @@
       "code": "OPTIM",
       "code_version": "",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "optim_ffd",
       "failures": {},
@@ -373,7 +369,6 @@
       "code": "Sella",
       "code_version": "2.6.0",
       "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
-      "comparable": true,
       "counter": "harness",
       "entry": "sella-2.6.0-pt-island-ts-default",
       "failures": {
@@ -424,7 +419,6 @@
       "code": "pele",
       "code_version": "",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "pele",
       "failures": {},
@@ -470,7 +464,6 @@
       "code": "Eon",
       "code_version": "r2156",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "eon-lanczos-improved",
       "failures": {},
@@ -516,7 +509,6 @@
       "code": "Eon svn",
       "code_version": "r2549",
       "commit": "r2549",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-svn-ts-pt-lanczos-improved",
       "failures": {
@@ -567,7 +559,6 @@
       "code": "eOn",
       "code_version": "3.5.0",
       "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-client-ts-pt-lanczos-improved",
       "failures": {
@@ -618,7 +609,6 @@
       "code": "Eon svn",
       "code_version": "r2549",
       "commit": "r2549",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-svn-ts-pt-dimer-smooth",
       "failures": {
@@ -669,7 +659,6 @@
       "code": "Eon",
       "code_version": "r2156",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "eon-dimer",
       "failures": {},
@@ -715,7 +704,6 @@
       "code": "eOn",
       "code_version": "3.5.0",
       "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-client-ts-pt-dimer",
       "failures": {
@@ -766,7 +754,6 @@
       "code": "eOn",
       "code_version": "3.6.0",
       "commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_eon_develop.EonDevelopTsPtDimerMatched",
       "failures": {
@@ -817,7 +804,6 @@
       "code": "Eon",
       "code_version": "r2156",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "eon-lanczos",
       "failures": {},
@@ -863,7 +849,6 @@
       "code": "Eon svn",
       "code_version": "r2549",
       "commit": "r2549",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-svn-ts-pt-lanczos-smooth",
       "failures": {
@@ -914,7 +899,6 @@
       "code": "eOn",
       "code_version": "3.5.0",
       "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-client-ts-pt-lanczos",
       "failures": {
@@ -965,7 +949,6 @@
       "code": "rgsaddle",
       "code_version": "0.2.2",
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgsaddle-0.2.2-pt-dimer-rotskip-ts-pt",
       "failures": {
@@ -1016,7 +999,6 @@
       "code": "eOn",
       "code_version": "3.6.0",
       "commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_eon_develop.EonDevelopTsPtLanczos",
       "failures": {
@@ -1067,7 +1049,6 @@
       "code": "optking",
       "code_version": "0.5.1.dev2+g767e2c0c1",
       "commit": "767e2c0c13ff2b851ac82101ccd5aab9a558a4f1",
-      "comparable": true,
       "counter": "harness",
       "entry": "optking-767e2c0c-pt-rs-irfo",
       "failures": {
@@ -1118,7 +1099,6 @@
       "code": "optking",
       "code_version": "0.5.1.dev2+g767e2c0c1",
       "commit": "767e2c0c13ff2b851ac82101ccd5aab9a558a4f1",
-      "comparable": true,
       "counter": "harness",
       "entry": "optking-767e2c0c-pt-p-rfo",
       "failures": {
@@ -1169,7 +1149,6 @@
       "code": "tsase",
       "code_version": "1.0",
       "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
-      "comparable": true,
       "counter": "harness",
       "entry": "tsase-1.0-tsopt-pt-island--tsase-dimer-pt",
       "failures": {
@@ -1220,7 +1199,6 @@
       "code": "artn",
       "code_version": "1.1.0",
       "commit": "9b753517c6c0eccae51425b83eb4e04ef554550b",
-      "comparable": true,
       "counter": "harness",
       "entry": "artn-1.1.0-tsopt-pt-island--partn-ts-pt",
       "failures": {
@@ -1271,7 +1249,6 @@
       "code": "rgsaddle",
       "code_version": "0.2.2",
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgsaddle-0.2.2-pt-dimer-fire-ts-pt",
       "failures": {
@@ -1322,7 +1299,6 @@
       "code": "rgsaddle",
       "code_version": "0.2.2",
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgsaddle-0.2.2-pt-lanczos-ts-pt",
       "failures": {
@@ -1373,7 +1349,6 @@
       "code": "rgsaddle",
       "code_version": "0.2.2",
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgsaddle-0.2.2-pt-dimer-lbfgs-ts-pt",
       "failures": {
@@ -1426,7 +1401,6 @@
       "code": "Eon svn",
       "code_version": "r2549",
       "commit": "r2549",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-svn-r2549-ts-pt-dimer",
       "failures": {
@@ -1477,7 +1451,6 @@
       "code": "Eon svn",
       "code_version": "r2549",
       "commit": "r2549",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-svn-r2549-ts-pt-lanczos",
       "failures": {
@@ -1528,7 +1501,6 @@
       "code": "eOn",
       "code_version": "3.6.0",
       "commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_eon_develop.EonDevelopTsPtDimer",
       "failures": {
@@ -1566,7 +1538,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 49 starts",
+      "short_reason": "scored 1 of 49 starts",
       "source": "asv",
       "success_rate": 0.0,
       "template": "eon/develop-ts-pt-dimer-accept-energy",
@@ -1579,7 +1551,6 @@
       "code": "eOn",
       "code_version": "3.6.0",
       "commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_eon_develop.EonDevelopTsPtLanczos",
       "failures": {
@@ -1617,7 +1588,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 49 starts",
+      "short_reason": "scored 1 of 49 starts",
       "source": "asv",
       "success_rate": 0.0,
       "template": "eon/develop-ts-pt-lanczos",
@@ -1630,7 +1601,6 @@
       "code": "optking",
       "code_version": "0.5.1.dev2+g767e2c0c1",
       "commit": "767e2c0c13ff2b851ac82101ccd5aab9a558a4f1",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_optking.OptkingPtPRfo",
       "failures": {
@@ -1668,7 +1638,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 49 starts",
+      "short_reason": "scored 1 of 49 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "optking/pt-p-rfo",
@@ -1681,7 +1651,6 @@
       "code": "optking",
       "code_version": "0.5.1.dev2+g767e2c0c1",
       "commit": "767e2c0c13ff2b851ac82101ccd5aab9a558a4f1",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_optking.OptkingPtRsIrfo",
       "failures": {
@@ -1719,7 +1688,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 49 starts",
+      "short_reason": "scored 1 of 49 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "optking/pt-rs-irfo",
@@ -1732,7 +1701,6 @@
       "code": "Sella",
       "code_version": "2.6.0",
       "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.SellaPtIslandTsDefault",
       "failures": {
@@ -1770,7 +1738,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 49 starts",
+      "short_reason": "scored 1 of 49 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "sella/pt-island-ts-default",
@@ -1783,7 +1751,6 @@
       "code": "Sella",
       "code_version": "2.6.0",
       "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.SellaPtIslandTsTuned",
       "failures": {
@@ -1821,7 +1788,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 49 starts",
+      "short_reason": "scored 1 of 49 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "sella/pt-island-ts-tuned",
@@ -1837,7 +1804,6 @@
       "code": "rgsaddle",
       "code_version": "0.2.2",
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgsaddle-0.2.2-pt-dimer-fire-tuned-ts-pt",
       "failures": {
@@ -1888,7 +1854,6 @@
       "code": "rgsaddle",
       "code_version": "0.2.2",
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgsaddle-0.2.2-pt-dimer-lbfgs-tuned-ts-pt",
       "failures": {
@@ -1939,7 +1904,6 @@
       "code": "rgsaddle",
       "code_version": "0.2.2",
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgsaddle-0.2.2-pt-dimer-rotskip-tuned-ts-pt",
       "failures": {
@@ -1990,7 +1954,6 @@
       "code": "rgsaddle",
       "code_version": "0.2.2",
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgsaddle-0.2.2-pt-lanczos-tuned-ts-pt",
       "failures": {
@@ -2041,7 +2004,6 @@
       "code": "Sella",
       "code_version": "2.6.0",
       "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
-      "comparable": true,
       "counter": "harness",
       "entry": "sella-2.6.0-pt-island-ts-tuned",
       "failures": {

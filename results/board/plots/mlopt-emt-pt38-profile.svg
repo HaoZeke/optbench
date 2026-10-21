@@ -216,39 +216,39 @@ L 507.6 26.16
    </g>
    <g id="legend_1">
     <g id="patch_7">
-     <path d="M 271.852031 257.1 
+     <path d="M 377.476562 257.1 
 L 502.7 257.1 
 Q 504.1 257.1 504.1 255.7 
 L 504.1 235.398906 
 Q 504.1 233.998906 502.7 233.998906 
-L 271.852031 233.998906 
-Q 270.452031 233.998906 270.452031 235.398906 
-L 270.452031 255.7 
-Q 270.452031 257.1 271.852031 257.1 
+L 377.476562 233.998906 
+Q 376.076562 233.998906 376.076562 235.398906 
+L 376.076562 255.7 
+Q 376.076562 257.1 377.476562 257.1 
 z
 " style="fill: #ffffff; opacity: 0.8; stroke: #cccccc; stroke-linejoin: miter"/>
     </g>
     <g id="line2d_14">
-     <path d="M 273.252031 239.667813 
-L 280.252031 239.667813 
-L 280.252031 239.667813 
-L 287.252031 239.667813 
-L 287.252031 239.667813 
+     <path d="M 378.876562 239.667813 
+L 385.876562 239.667813 
+L 385.876562 239.667813 
+L 392.876562 239.667813 
+L 392.876562 239.667813 
 " style="fill: none; stroke: #1f77b4; stroke-width: 1.5; stroke-linecap: square"/>
     </g>
     <g id="text_15">
-     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="292.852031" y="242.117813" transform="rotate(-0 292.852031 242.117813)">n2p2/emt-pt38-kalman 2.3.0 default campaign 29b9c9f</text>
+     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="398.476562" y="242.117813" transform="rotate(-0 398.476562 242.117813)">n2p2 (2.3.0) · Kalman energy</text>
     </g>
     <g id="line2d_15">
-     <path d="M 273.252031 250.168359 
-L 280.252031 250.168359 
-L 280.252031 250.168359 
-L 287.252031 250.168359 
-L 287.252031 250.168359 
+     <path d="M 378.876562 250.168359 
+L 385.876562 250.168359 
+L 385.876562 250.168359 
+L 392.876562 250.168359 
+L 392.876562 250.168359 
 " style="fill: none; stroke: #ff7f0e; stroke-width: 1.5; stroke-linecap: square"/>
     </g>
     <g id="text_16">
-     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="292.852031" y="252.618359" transform="rotate(-0 292.852031 252.618359)">n2p2/emt-pt38-kalman-force 2.3.0 force campaign 29b9c9f</text>
+     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="398.476562" y="252.618359" transform="rotate(-0 398.476562 252.618359)">n2p2 (2.3.0) · Kalman force</text>
     </g>
    </g>
   </g>

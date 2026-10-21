@@ -274,7 +274,7 @@ def _minimization_specs() -> list[dict]:
                 if (
                     problem == "minimization/lj38"
                     and name == "PreconLBFGS"
-                    and profile == "tuned"
+                    and profile == "adjusted"
                 ):
                     row_stop = {**stop, "norm": "fmax"}
                 specs.append(

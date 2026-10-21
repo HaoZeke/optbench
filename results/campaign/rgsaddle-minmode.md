@@ -59,7 +59,7 @@ PAR-2 median is the bootstrap median of the penalised costs (2000 resamples, see
 
 ## Recorded Sella and eOn rows
 
-These are files already in the tree. They are not reruns from this session.
+These files were already in the tree before this session.
 
 | row | success mean | median | min | max | nfailed | file |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -80,9 +80,9 @@ On lowest-eigenvector/lj38 every row succeeds. Lanczos default is 26. Archive Se
 
 ## Not in this asv suite
 
-Pt P-RFO (`rgsaddle/pt-prfo`, `rgsaddle/pt-prfo-tuned`) was not run. A finished score would be a 525-degree Hessian on every force-converged start, and no asv track was saved.
+Pt P-RFO (`rgsaddle/pt-prfo`, `rgsaddle/pt-prfo-tuned`) has no campaign file. A finished score would be a 525-degree Hessian on every force-converged start, and no asv track was saved.
 
-saddle-search/pt-island was not run. The templates exist. The archived eOn dimer campaign is millions of Morse calls per repetition (`archive/entries/saddle-search/pt-island/eon-dimer/benchmark.dat`, `force_calls 3.77888e+06`), and this session did not execute that loop.
+saddle-search/pt-island has no campaign file from this session. The templates exist. The archived eOn dimer campaign is millions of Morse calls per repetition (`archive/entries/saddle-search/pt-island/eon-dimer/benchmark.dat`, `force_calls 3.77888e+06`), and this session did not execute that loop.
 
 ## What the library did on these starts
 

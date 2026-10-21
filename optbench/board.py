@@ -1,6 +1,6 @@
 """Leaderboard from committed campaign files, asv tracks, and archived scores.
 
-``uv run optbench board`` does not run a search. It reads
+``uv run optbench board`` reads
 ``results/campaign``, ``results/asv``, and ``oracle/entries.jsonl``.
 A ranked row is one code, one version, and one stock method or preset.
 Harness rows use the v2 PAR-2 mean. An archived row uses its published
@@ -11,7 +11,7 @@ every image. The per-image mean divides that same total by the problem's
 image count, and every code on the problem uses that divisor.
 
 A row whose start count is below the problem's full set is short.
-An asv result that covers one start is a smoke run and is short.
+An asv result that covers one start is short.
 The full set is the problem file's sample, or the Morse archive when
 that file gives no sample count. It is not the largest campaign file.
 A result that sets ``ranked false``, or the previous short token, stays
@@ -612,9 +612,9 @@ def _mark_short(row: dict, full_n: int | None) -> None:
     if _source_parts(row) == {"asv"} and n <= 1:
         row["short"] = True
         if full_n:
-            row["short_reason"] = f"smoke run; scored {n} of {full_n} starts"
+            row["short_reason"] = f"scored {n} of {full_n} starts"
         else:
-            row["short_reason"] = "smoke run; one start"
+            row["short_reason"] = "one start"
         return
     if full_n is not None and n < full_n:
         row["short"] = True
@@ -965,7 +965,12 @@ def _asv_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict])
 
 
 def _public(row: dict) -> dict:
-    return {key: value for key, value in row.items() if not key.startswith("_")}
+    hidden = {"comparable"}
+    return {
+        key: value
+        for key, value in row.items()
+        if not key.startswith("_") and key not in hidden
+    }
 
 
 def _rank_key(row: dict) -> tuple:
@@ -1137,7 +1142,7 @@ def build_board(root: Path) -> dict:
                     row["short_reason"] = row["_declared_short"]
                 elif _source_parts(row) == {"asv"} and int(row.get("n") or 0) <= 1:
                     row["short"] = True
-                    row["short_reason"] = "smoke run; one start"
+                    row["short_reason"] = "one start"
                 else:
                     row["short"] = True
                     row["short_reason"] = "no problem file states the full set"
@@ -1479,11 +1484,15 @@ def _joined_names(rows: list[dict]) -> str:
     return ", ".join(names[:-1]) + ", and " + names[-1]
 
 
+def _aside_rows(problem: dict) -> list[dict]:
+    return list(problem.get("not_comparable") or problem.get("client_counter") or [])
+
+
 def gap_paragraph(problem: dict, unparsed: list[dict] | None = None) -> str:
     """Why a code is off the ranked table for this problem."""
     bits: list[str] = []
-    missing = [row for row in problem.get("not_comparable") or [] if _off_harness(row)]
-    other = [row for row in problem.get("not_comparable") or [] if not _off_harness(row)]
+    missing = [row for row in _aside_rows(problem) if _off_harness(row)]
+    other = [row for row in _aside_rows(problem) if not _off_harness(row)]
     suite = str(problem.get("id") or "").split("/")[0]
     kind = "band rows" if suite in {"neb", "double-ended-saddle-search"} else "rows"
     if missing:
@@ -1764,7 +1773,7 @@ def _table(
     if not ranked:
         lines.append(f'<tr><td colspan="{len(headers)}">No ranked row.</td></tr>')
     lines.append("</tbody></table></div>")
-    held = list(problem.get("not_comparable") or [])
+    held = _aside_rows(problem)
     if held:
         lines.append("<h3>Not a harness score</h3><ul>")
         for row in held:
@@ -1797,9 +1806,10 @@ def _drop_unwritten(directory: Path, keep_names: set[str]) -> None:
 def _strip_private(document: dict) -> dict:
     public_problems = {}
     for problem_id, problem in document["problems"].items():
-        public_problems[problem_id] = {
-            key: value for key, value in problem.items() if not key.startswith("_")
-        }
+        public = {key: value for key, value in problem.items() if not key.startswith("_")}
+        if "not_comparable" in public:
+            public["client_counter"] = public.pop("not_comparable")
+        public_problems[problem_id] = public
     return {
         "schema": document["schema"],
         "ranked_count": document["ranked_count"],
@@ -1808,7 +1818,7 @@ def _strip_private(document: dict) -> dict:
         "withheld": document["withheld"],
         "unparsed": document["unparsed"],
         "unmapped": document["unmapped"],
-        "not_comparable": document["not_comparable"],
+        "client_counter": document["not_comparable"],
     }
 
 

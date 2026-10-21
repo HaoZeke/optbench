@@ -29,7 +29,7 @@
    </tr>
    <tr>
    <td>minimization and saddle search</td>
-   <td>fix/develop-regressions-vs-350</td>
+   <td>develop</td>
    <td>500350d9fae8</td>
    <td><a href="https://github.com/TheochemUI/eon">https://github.com/TheochemUI/eon</a></td>
    </tr>
@@ -191,18 +191,18 @@
    <td data-field="failures">crash 0, divergence 0, cap 3, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/lj38" data-label="eOn (3.5.0) · Doubly nudged CI-NEB">
+   <tr data-problem="double-ended-saddle-search/lj38" data-label="eOn ((develop 500350d9) · Doubly nudged CI-NEB) · Doubly nudged CI-NEB">
    <td>LJ38 double-ended saddle</td>
-   <td data-field="label">eOn (3.5.0) · Doubly nudged CI-NEB</td>
+   <td data-field="label">eOn ((develop 500350d9) · Doubly nudged CI-NEB) · Doubly nudged CI-NEB</td>
    <td data-field="family">Band / NEB</td>
-   <td data-field="family_rank">5</td>
-   <td data-field="par2_mean">1160.5</td>
+   <td data-field="family_rank">6</td>
+   <td data-field="par2_mean">1228.96</td>
    <td data-field="published"></td>
-   <td data-field="median_calls">687</td>
-   <td data-field="mean_calls">910.5</td>
+   <td data-field="median_calls">664.5</td>
+   <td data-field="mean_calls">928.96</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 5, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 6, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38" data-label="eOn (3.5.0) · Dimer L-BFGS">
@@ -545,7 +545,7 @@
    <td>Lennard-Jones 38 global minimum</td>
    <td data-field="label">eOn (3.5.0) · Basin hopping</td>
    <td data-field="family">Basin hopping / global</td>
-   <td data-field="family_rank">4</td>
+   <td data-field="family_rank">6</td>
    <td data-field="par2_mean">503146</td>
    <td data-field="published"></td>
    <td data-field="median_calls">369028</td>
@@ -559,7 +559,7 @@
    <td>Lennard-Jones 38 global minimum</td>
    <td data-field="label">eOn (r2156) · eon-basinhopping</td>
    <td data-field="family">Basin hopping / global</td>
-   <td data-field="family_rank">5</td>
+   <td data-field="family_rank">7</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">508011</td>
    <td data-field="median_calls"></td>
@@ -581,7 +581,7 @@
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-   <td data-field="n">0</td>
+   <td data-field="n">639</td>
    </tr>
    <tr data-problem="hTST/Al" data-label="eOn (r2006) · Dimer-CG rotation: max=50 tol=1">
    <td>Al</td>
@@ -595,13 +595,13 @@
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-   <td data-field="n">0</td>
+   <td data-field="n">639</td>
    </tr>
    <tr data-problem="lowest-eigenvector/lj38" data-label="eOn (3.5.0) · Lanczos CG">
    <td>lj38</td>
    <td data-field="label">eOn (3.5.0) · Lanczos CG</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">4</td>
+   <td data-field="family_rank">5</td>
    <td data-field="par2_mean">26.385</td>
    <td data-field="published"></td>
    <td data-field="median_calls">25</td>
@@ -615,7 +615,7 @@
    <td>lj38</td>
    <td data-field="label">eOn (3.6.0) · Lanczos</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">5</td>
+   <td data-field="family_rank">6</td>
    <td data-field="par2_mean">26.385</td>
    <td data-field="published"></td>
    <td data-field="median_calls">25</td>
@@ -629,7 +629,7 @@
    <td>lj38</td>
    <td data-field="label">eOn (r2156) · eon-dimer-lbfgs</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">7</td>
+   <td data-field="family_rank">8</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">28</td>
    <td data-field="median_calls"></td>
@@ -643,7 +643,7 @@
    <td>lj38</td>
    <td data-field="label">eOn (r2156) · eon-lanczos</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">8</td>
+   <td data-field="family_rank">9</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">28</td>
    <td data-field="median_calls"></td>
@@ -657,7 +657,7 @@
    <td>lj38</td>
    <td data-field="label">eOn (3.5.0) · Dimer L-BFGS</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">10</td>
+   <td data-field="family_rank">11</td>
    <td data-field="par2_mean">28.33</td>
    <td data-field="published"></td>
    <td data-field="median_calls">27</td>
@@ -671,7 +671,7 @@
    <td>lj38</td>
    <td data-field="label">eOn (r2156) · eon-dimer-cg</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">12</td>
+   <td data-field="family_rank">13</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">30</td>
    <td data-field="median_calls"></td>
@@ -685,7 +685,7 @@
    <td>lj38</td>
    <td data-field="label">eOn (3.5.0) · Dimer CG</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">14</td>
+   <td data-field="family_rank">15</td>
    <td data-field="par2_mean">30.355</td>
    <td data-field="published"></td>
    <td data-field="median_calls">29</td>
@@ -699,7 +699,7 @@
    <td>lj38</td>
    <td data-field="label">eOn (3.6.0) · Dimer</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">15</td>
+   <td data-field="family_rank">16</td>
    <td data-field="par2_mean">30.355</td>
    <td data-field="published"></td>
    <td data-field="median_calls">29</td>
@@ -947,11 +947,67 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
+   <tr data-problem="neb/Pt-heptamer" data-label="eOn ((develop 500350d9) · LBFGS) · LBFGS">
+   <td>Pt-heptamer</td>
+   <td data-field="label">eOn ((develop 500350d9) · LBFGS) · LBFGS</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">6</td>
+   <td data-field="par2_mean">319.538</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">330</td>
+   <td data-field="mean_calls">319.538</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-label="eOn ((develop 500350d9) · FIRE) · FIRE">
+   <td>Pt-heptamer</td>
+   <td data-field="label">eOn ((develop 500350d9) · FIRE) · FIRE</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">10</td>
+   <td data-field="par2_mean">678.923</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">666</td>
+   <td data-field="mean_calls">678.923</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-label="eOn ((develop 500350d9) · CG) · CG">
+   <td>Pt-heptamer</td>
+   <td data-field="label">eOn ((develop 500350d9) · CG) · CG</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">12</td>
+   <td data-field="par2_mean">1141.08</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">778</td>
+   <td data-field="mean_calls">1141.08</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-label="eOn ((develop 500350d9) · QuickMin) · QuickMin">
+   <td>Pt-heptamer</td>
+   <td data-field="label">eOn ((develop 500350d9) · QuickMin) · QuickMin</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">14</td>
+   <td data-field="par2_mean">1322</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1242</td>
+   <td data-field="mean_calls">1322</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
    <tr data-problem="neb/Pt-heptamer" data-label="eOn (3.6.0) · LBFGS">
    <td>Pt-heptamer</td>
    <td data-field="label">eOn (3.6.0) · LBFGS</td>
    <td data-field="family">Connect / double-ended</td>
-   <td data-field="family_rank">11</td>
+   <td data-field="family_rank">15</td>
    <td data-field="par2_mean">3517.69</td>
    <td data-field="published"></td>
    <td data-field="median_calls">3738</td>

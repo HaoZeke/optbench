@@ -185,7 +185,7 @@ def main() -> None:
     }
     text = json.dumps(report, indent=2, sort_keys=True)
     print(text)
-    out = Path(__file__).resolve().parent / "dimer-count-repro.json"
+    out = Path(__file__).resolve().parent / "dimer-count.json"
     out.write_text(text + "\n", encoding="utf-8")
 
 

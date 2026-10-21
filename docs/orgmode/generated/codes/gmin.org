@@ -15,6 +15,12 @@
    <td>df8da5992675</td>
    <td><a href="https://www-wales.ch.cam.ac.uk/svn.tar.bz2">https://www-wales.ch.cam.ac.uk/svn.tar.bz2</a></td>
    </tr>
+   <tr>
+   <td>global optimization</td>
+   <td>02aaf45245af</td>
+   <td>02aaf45245af</td>
+   <td><a href="https://www-wales.ch.cam.ac.uk/svn.tar.bz2">https://www-wales.ch.cam.ac.uk/svn.tar.bz2</a></td>
+   </tr>
    </tbody></table></div>
    <div class="bench-scroll"><table data-board-table="code-rows">
    <caption>Every ranked row for this code.</caption>
@@ -45,7 +51,7 @@
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-   <td data-field="n">0</td>
+   <td data-field="n">100</td>
    </tr>
    <tr data-problem="globalopt/lj150" data-label="GMIN · no symmetrisation">
    <td>lj150</td>
@@ -59,13 +65,55 @@
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-   <td data-field="n">0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="globalopt/lj150" data-label="GMIN (df8da599) · basin-hopping">
+   <td>lj150</td>
+   <td data-field="label">GMIN (df8da599) · basin-hopping</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">3</td>
+   <td data-field="par2_mean">1.75804e+06</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1.14412e+06</td>
+   <td data-field="mean_calls">1.65804e+06</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="globalopt/lj150" data-label="GMIN (df8da599) · parallel tempering basin-hopping">
+   <td>lj150</td>
+   <td data-field="label">GMIN (df8da599) · parallel tempering basin-hopping</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">4</td>
+   <td data-field="par2_mean">2.77178e+06</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">2.05174e+06</td>
+   <td data-field="mean_calls">2.67178e+06</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="globalopt/lj38" data-label="GMIN (df8da599) · basin-hopping with continuous symmetry measures">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="label">GMIN (df8da599) · basin-hopping with continuous symmetry measures</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">1</td>
+   <td data-field="par2_mean">5883.83</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">3980.5</td>
+   <td data-field="mean_calls">5883.83</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
    </tr>
    <tr data-problem="globalopt/lj38" data-label="GMIN · basin-hopping with symmetrise csm moves">
    <td>Lennard-Jones 38 global minimum</td>
    <td data-field="label">GMIN · basin-hopping with symmetrise csm moves</td>
    <td data-field="family">Basin hopping / global</td>
-   <td data-field="family_rank">1</td>
+   <td data-field="family_rank">2</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">6421</td>
    <td data-field="median_calls">4771</td>
@@ -79,7 +127,7 @@
    <td>Lennard-Jones 38 global minimum</td>
    <td data-field="label">GMIN · basin-hopping with symmetrise moves</td>
    <td data-field="family">Basin hopping / global</td>
-   <td data-field="family_rank">2</td>
+   <td data-field="family_rank">3</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">22711</td>
    <td data-field="median_calls">15998</td>
@@ -93,7 +141,7 @@
    <td>Lennard-Jones 38 global minimum</td>
    <td data-field="label">GMIN · basin-hopping</td>
    <td data-field="family">Basin hopping / global</td>
-   <td data-field="family_rank">3</td>
+   <td data-field="family_rank">4</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">265951</td>
    <td data-field="median_calls">202167</td>
@@ -101,6 +149,34 @@
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="globalopt/lj38" data-label="GMIN (df8da599) · basin-hopping">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="label">GMIN (df8da599) · basin-hopping</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">5</td>
+   <td data-field="par2_mean">432092</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">301962</td>
+   <td data-field="mean_calls">412092</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="globalopt/lj38" data-label="GMIN (df8da599) · parallel tempering basin-hopping">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="label">GMIN (df8da599) · parallel tempering basin-hopping</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">9</td>
+   <td data-field="par2_mean">674789</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">307290</td>
+   <td data-field="mean_calls">554789</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 6, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="globalopt/lj75" data-label="GMIN · basin-hopping with symmetrise csm moves">
@@ -115,7 +191,35 @@
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-   <td data-field="n">0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="globalopt/lj75" data-label="GMIN (df8da599) · parallel tempering basin-hopping">
+   <td>lj75</td>
+   <td data-field="label">GMIN (df8da599) · parallel tempering basin-hopping</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">2</td>
+   <td data-field="par2_mean">1.96655e+06</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1e+06</td>
+   <td data-field="mean_calls">986545</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 196, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="globalopt/lj75" data-label="GMIN (df8da599) · basin-hopping">
+   <td>lj75</td>
+   <td data-field="label">GMIN (df8da599) · basin-hopping</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">3</td>
+   <td data-field="par2_mean">1.99209e+06</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1e+06</td>
+   <td data-field="mean_calls">997087</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 199, wrong_stationary 0</td>
+   <td data-field="n">200</td>
    </tr>
    <tr data-problem="globalopt/lj98" data-label="GMIN · core orbits symmetrisation scheme">
    <td>lj98</td>
@@ -129,7 +233,7 @@
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-   <td data-field="n">0</td>
+   <td data-field="n">100</td>
    </tr>
    <tr data-problem="globalopt/lj98" data-label="GMIN · no symmetrisation">
    <td>lj98</td>
@@ -143,7 +247,35 @@
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-   <td data-field="n">0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="globalopt/lj98" data-label="GMIN (df8da599) · basin-hopping with core-orbit symmetrisation">
+   <td>lj98</td>
+   <td data-field="label">GMIN (df8da599) · basin-hopping with core-orbit symmetrisation</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">3</td>
+   <td data-field="par2_mean">282815</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">173058</td>
+   <td data-field="mean_calls">282815</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="globalopt/lj98" data-label="GMIN (df8da599) · parallel tempering basin-hopping with core-orbit symmetrisation">
+   <td>lj98</td>
+   <td data-field="label">GMIN (df8da599) · parallel tempering basin-hopping with core-orbit symmetrisation</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">4</td>
+   <td data-field="par2_mean">523212</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">403002</td>
+   <td data-field="mean_calls">523212</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
    </tr>
    <tr data-problem="globalopt/tip4p10" data-label="GMIN · linear temperature basin-paving">
    <td>tip4p10</td>
@@ -157,7 +289,7 @@
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-   <td data-field="n">0</td>
+   <td data-field="n">10000</td>
    </tr>
    <tr data-problem="globalopt/tip4p10" data-label="GMIN · basin-hopping">
    <td>tip4p10</td>
@@ -171,7 +303,7 @@
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-   <td data-field="n">0</td>
+   <td data-field="n">10000</td>
    </tr>
    <tr data-problem="globalopt/tip4p15" data-label="GMIN · linear temperature basin-paving">
    <td>tip4p15</td>
@@ -185,7 +317,7 @@
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-   <td data-field="n">0</td>
+   <td data-field="n">500</td>
    </tr>
    <tr data-problem="globalopt/tip4p15" data-label="GMIN · basin-hopping">
    <td>tip4p15</td>
@@ -199,7 +331,7 @@
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-   <td data-field="n">0</td>
+   <td data-field="n">500</td>
    </tr>
    <tr data-problem="globalopt/tip4p20" data-label="GMIN · linear temperature basin-paving">
    <td>tip4p20</td>
@@ -213,7 +345,7 @@
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-   <td data-field="n">0</td>
+   <td data-field="n">100</td>
    </tr>
    <tr data-problem="globalopt/tip4p20" data-label="GMIN · basin-hopping">
    <td>tip4p20</td>
@@ -227,7 +359,7 @@
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-   <td data-field="n">0</td>
+   <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="GMIN (df8da5992675) · LBFGS">
    <td>Lennard-Jones 38 clusters</td>

@@ -25,7 +25,7 @@ from optbench.problems import load_all, load_problem
 from optbench.profile import performance_profile, profile_cost
 from optbench.score import score_v2
 from optbench.seeds import descend, dimer_search, displace, random_orientation, run_seeded
-from optbench.smoke import ENERGY_TOL, FORCE_NORM, REFERENCE_MINIMUM, REFERENCE_SADDLE, RMSD_TOL, bowl, saddle
+from optbench.quadratic import ENERGY_TOL, FORCE_NORM, REFERENCE_MINIMUM, REFERENCE_SADDLE, RMSD_TOL, bowl, saddle
 from optbench.statistics import build_statistics
 from optbench.v2 import V2_KEYS, record_start
 
@@ -331,8 +331,8 @@ def test_committed_statistics_match_a_fresh_run():
         assert left["start"]["success"] == right["start"]["success"]
         assert left["start"]["failure"] == right["start"]["failure"]
         assert left["start"]["hessian_index"] == 0
-    assert stored["status"] == "smoke"
-    assert stored["problem"] == "smoke/quadratic"
+    assert stored["status"] == "quadratic"
+    assert stored["problem"] == "quadratic/bowl"
 
 
 def test_committed_counter_matches_eonclient_results():

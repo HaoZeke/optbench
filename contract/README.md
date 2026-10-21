@@ -13,4 +13,4 @@ The JSON schemas live in this directory. Problem statements are TOML files under
 
 `optbench.result/v1` stays the schema of the files in `results/*.json`. A v2 result is a different document. The 2014 archive rows are not rewritten to match it.
 
-The scoring rule is `docs/design/decision.md`. The counter, the seed sample, the failure classes, and the noise rule are `docs/v2.md`. The in-process wrapper and the smoke command are `docs/harness.md`. `failure` on a start is optional in the schema so a record written before that field still validates.
+The scoring rule is `docs/design/decision.md`. The counter, the seed sample, the failure classes, and the noise rule are `docs/v2.md`. The in-process wrapper and the quadratic command are `docs/harness.md`. `failure` on a start is optional in the schema so a record written before that field still validates.

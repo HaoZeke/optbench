@@ -1,9 +1,9 @@
-"""Archive numbers stay the paper rows. A later file is a finding, not a gate."""
+"""Archive numbers stay the archived rows. A later file is a finding, not a gate."""
 
 import json
 from pathlib import Path
 
-from optbench.check import held_back_errors, load_oracle
+from optbench.check import banned_word_errors, held_back_errors, load_oracle
 from optbench.findings import campaign_mismatch, findings_errors, load_ledger, row_id
 from optbench.problems import load_problem
 from optbench.site import problem_html
@@ -77,6 +77,18 @@ def test_a_campaign_file_that_disagrees_is_reported(tmp_path: Path):
     errors = campaign_mismatch(tmp_path)
     assert errors
     assert any("force_calls" in line and "1000" in line for line in errors)
+
+
+def test_banned_words_are_rejected(tmp_path: Path):
+    docs = tmp_path / "docs"
+    docs.mkdir()
+    (docs / "note.md").write_text("This is a smoke run.\n", encoding="utf-8")
+    errors = banned_word_errors(tmp_path)
+    assert any("smoke" in line for line in errors)
+    (docs / "note.md").write_text("The archived rows stay in the table.\n", encoding="utf-8")
+    assert banned_word_errors(tmp_path) == []
+    (tmp_path / "repro-notes").mkdir()
+    assert any("repro" in line for line in banned_word_errors(tmp_path))
 
 
 def test_archive_rows_stay_on_the_archive_table():

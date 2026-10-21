@@ -294,14 +294,6 @@ ranked = true
 # generated ASE and Sella templates
 
 [[template]]
-id = "ase-globalopt/lj75-basinhopping"
-code = "ase"
-problem = "globalopt/lj75"
-profile = "default"
-task = "basin-hopping"
-ranked = true
-
-[[template]]
 id = "ase/lj38-bfgs-default"
 code = "ase"
 problem = "minimization/lj38"
@@ -377,7 +369,7 @@ ranked = true
 id = "ase/lj38-lbfgslinesearch-tuned"
 code = "ase"
 problem = "minimization/lj38"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -537,7 +529,7 @@ ranked = true
 id = "ase/morse-lbfgslinesearch-tuned"
 code = "ase"
 problem = "minimization/morse-bulk"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 

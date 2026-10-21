@@ -1,7 +1,7 @@
 {
+  "client_counter": [],
   "full_n": 100,
   "id": "minimization/morse-bulk",
-  "not_comparable": [],
   "profile": {
     "area_log10": {
       "ASE (3.29.0) \u00b7 BFGS": 0.3702668946666969,
@@ -529,7 +529,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-newton",
       "failures": {
@@ -580,7 +579,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-dogleg",
       "failures": {
@@ -631,7 +629,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-dogleg",
       "failures": {
@@ -682,7 +679,6 @@
       "code": "",
       "code_version": "",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "tsase-sdlbfgs",
       "failures": {},
@@ -728,7 +724,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-lbfgs-m20",
       "failures": {
@@ -779,7 +774,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-lbfgs-m20",
       "failures": {
@@ -830,7 +824,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-diis",
       "failures": {
@@ -881,7 +874,6 @@
       "code": "Sella",
       "code_version": "2.6.0",
       "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
-      "comparable": true,
       "counter": "harness",
       "entry": "sella-2.6.0-morse-min-default",
       "failures": {
@@ -932,7 +924,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "ase-3.29.0-morse-bfgslinesearch-default",
       "failures": {
@@ -983,7 +974,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-bb",
       "failures": {
@@ -1034,7 +1024,6 @@
       "code": "",
       "code_version": "",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "ase-preconLBFGS",
       "failures": {},
@@ -1080,7 +1069,6 @@
       "code": "GMIN",
       "code_version": "df8da5992675",
       "commit": "df8da599267534fbe43a250e578f7396a7946311",
-      "comparable": true,
       "counter": "harness",
       "entry": "gmin-df8da5992675-morse-lbfgs",
       "failures": {
@@ -1131,7 +1119,6 @@
       "code": "vc-SQNM",
       "code_version": "1.3",
       "commit": "4241692173cccb42a9ae05974bfd62285ec2cd7b",
-      "comparable": true,
       "counter": "harness",
       "entry": "vcsqnm-42416921-morse-ase",
       "failures": {
@@ -1182,7 +1169,6 @@
       "code": "vc-SQNM",
       "code_version": "1.3",
       "commit": "4241692173cccb42a9ae05974bfd62285ec2cd7b",
-      "comparable": true,
       "counter": "harness",
       "entry": "vcsqnm-42416921-morse-sqnm",
       "failures": {
@@ -1233,7 +1219,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "ase-3.29.0-morse-preconode12r-default",
       "failures": {
@@ -1284,7 +1269,6 @@
       "code": "OPTIM",
       "code_version": "",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "optim",
       "failures": {},
@@ -1330,7 +1314,6 @@
       "code": "vc-SQNM",
       "code_version": "1.3",
       "commit": "4241692173cccb42a9ae05974bfd62285ec2cd7b",
-      "comparable": true,
       "counter": "harness",
       "entry": "vcsqnm-42416921-morse-vc",
       "failures": {
@@ -1381,7 +1364,6 @@
       "code": "vc-SQNM",
       "code_version": "1.3",
       "commit": "4241692173cccb42a9ae05974bfd62285ec2cd7b",
-      "comparable": true,
       "counter": "harness",
       "entry": "vcsqnm-42416921-morse-ase-vc",
       "failures": {
@@ -1432,7 +1414,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-cg",
       "failures": {
@@ -1483,7 +1464,6 @@
       "code": "",
       "code_version": "",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "pele-lbfgs",
       "failures": {},
@@ -1529,7 +1509,6 @@
       "code": "Eon",
       "code_version": "r2030",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "eon-lbfgs",
       "failures": {},
@@ -1575,7 +1554,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "ase-3.29.0-morse-bfgs-default",
       "failures": {
@@ -1626,7 +1604,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "ase-3.29.0-morse-lbfgs-default",
       "failures": {
@@ -1677,7 +1654,6 @@
       "code": "ASE",
       "code_version": "3.6.0",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "ase-lbfgs",
       "failures": {},
@@ -1723,7 +1699,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-bfgs",
       "failures": {
@@ -1774,7 +1749,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-bfgs",
       "failures": {
@@ -1825,7 +1799,6 @@
       "code": "eOn",
       "code_version": "3.6.0",
       "commit": "1d71c944501832bfafb955ffe13b9aae50c8efd4",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-main-morse-lbfgs-m100",
       "failures": {
@@ -1876,7 +1849,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-cg",
       "failures": {
@@ -1927,7 +1899,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-sr2",
       "failures": {
@@ -1978,7 +1949,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "ase-3.29.0-morse-preconlbfgs-default",
       "failures": {
@@ -2029,7 +1999,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-sr1",
       "failures": {
@@ -2080,7 +2049,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-quickmin",
       "failures": {
@@ -2131,7 +2099,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-quickmin",
       "failures": {
@@ -2182,7 +2149,6 @@
       "code": "Eon",
       "code_version": "r2030",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "eon-sd-twopoint",
       "failures": {},
@@ -2228,7 +2194,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-sd",
       "failures": {
@@ -2279,7 +2244,6 @@
       "code": "pele",
       "code_version": "0.1.2",
       "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
-      "comparable": true,
       "counter": "harness",
       "entry": "pele-b7081b93-morse-lbfgs",
       "failures": {
@@ -2330,7 +2294,6 @@
       "code": "pele",
       "code_version": "0.1.2",
       "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
-      "comparable": true,
       "counter": "harness",
       "entry": "pele-b7081b93-morse-mylbfgs",
       "failures": {
@@ -2381,7 +2344,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-sd",
       "failures": {
@@ -2432,7 +2394,6 @@
       "code": "Eon",
       "code_version": "r2030",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "eon-cg",
       "failures": {},
@@ -2478,7 +2439,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-fire",
       "failures": {
@@ -2529,7 +2489,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "ase-3.29.0-morse-fire-default",
       "failures": {
@@ -2580,7 +2539,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-fire",
       "failures": {
@@ -2631,7 +2589,6 @@
       "code": "pele",
       "code_version": "0.1.2",
       "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
-      "comparable": true,
       "counter": "harness",
       "entry": "pele-b7081b93-morse-fire",
       "failures": {
@@ -2682,7 +2639,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-fire2",
       "failures": {
@@ -2733,7 +2689,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-fire2",
       "failures": {
@@ -2784,7 +2739,6 @@
       "code": "ASE",
       "code_version": "3.6.0",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "ase-fire",
       "failures": {},
@@ -2830,7 +2784,6 @@
       "code": "Eon",
       "code_version": "r2030",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "eon-fire",
       "failures": {},
@@ -2876,7 +2829,6 @@
       "code": "Eon",
       "code_version": "r2030",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "eon-sd",
       "failures": {},
@@ -2922,7 +2874,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-adam",
       "failures": {
@@ -2973,7 +2924,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-adam",
       "failures": {
@@ -3024,7 +2974,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-sr2",
       "failures": {
@@ -3075,7 +3024,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "ase-3.29.0-morse-preconfire-default",
       "failures": {
@@ -3126,7 +3074,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-newton",
       "failures": {
@@ -3177,7 +3124,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-sr1",
       "failures": {
@@ -3228,7 +3174,6 @@
       "code": "dlfind",
       "code_version": "0.0.3",
       "commit": "4167998d16d8dac4a484ba9305f27d6325a7a28d",
-      "comparable": true,
       "counter": "harness",
       "entry": "dlfind-0.0.3-minimization-morse-bulk--dlfind-lbfgs-morse",
       "failures": {
@@ -3279,7 +3224,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-bb",
       "failures": {
@@ -3330,7 +3274,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-diis",
       "failures": {
@@ -3381,7 +3324,6 @@
       "code": "dlfind",
       "code_version": "0.0.3",
       "commit": "4167998d16d8dac4a484ba9305f27d6325a7a28d",
-      "comparable": true,
       "counter": "harness",
       "entry": "dlfind-0.0.3-minimization-morse-bulk--dlfind-cg-morse",
       "failures": {
@@ -3432,7 +3374,6 @@
       "code": "optim",
       "code_version": "svn-snapshot",
       "commit": "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f",
-      "comparable": true,
       "counter": "harness",
       "entry": "optim-svn-snapshot-minimization-morse-bulk--optim-lbfgs-morse",
       "failures": {
@@ -3483,7 +3424,6 @@
       "code": "dlfind",
       "code_version": "0.0.3",
       "commit": "4167998d16d8dac4a484ba9305f27d6325a7a28d",
-      "comparable": true,
       "counter": "harness",
       "entry": "dlfind-0.0.3-minimization-morse-bulk--dlfind-sd-morse",
       "failures": {
@@ -3534,7 +3474,6 @@
       "code": "tsase",
       "code_version": "1.0",
       "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
-      "comparable": true,
       "counter": "harness",
       "entry": "tsase-1.0-minimization-morse-bulk--tsase-lbfgs-morse",
       "failures": {
@@ -3585,7 +3524,6 @@
       "code": "lammps",
       "code_version": "30 Sep 2026",
       "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
-      "comparable": true,
       "counter": "harness",
       "entry": "lammps-30Sep2026-minimization-morse-bulk--lammps-fire-morse",
       "failures": {
@@ -3636,7 +3574,6 @@
       "code": "lammps",
       "code_version": "30 Sep 2026",
       "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
-      "comparable": true,
       "counter": "harness",
       "entry": "lammps-30Sep2026-minimization-morse-bulk--lammps-cg-morse",
       "failures": {
@@ -3687,7 +3624,6 @@
       "code": "lammps",
       "code_version": "30 Sep 2026",
       "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
-      "comparable": true,
       "counter": "harness",
       "entry": "lammps-30Sep2026-minimization-morse-bulk--lammps-quickmin-morse",
       "failures": {
@@ -3738,7 +3674,6 @@
       "code": "lammps",
       "code_version": "30 Sep 2026",
       "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
-      "comparable": true,
       "counter": "harness",
       "entry": "lammps-30Sep2026-minimization-morse-bulk--lammps-sd-morse",
       "failures": {
@@ -3789,7 +3724,6 @@
       "code": "lammps",
       "code_version": "30 Sep 2026",
       "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
-      "comparable": true,
       "counter": "harness",
       "entry": "lammps-30Sep2026-minimization-morse-bulk--lammps-hftn-morse",
       "failures": {
@@ -3840,7 +3774,6 @@
       "code": "pele",
       "code_version": "0.1.2",
       "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
-      "comparable": true,
       "counter": "harness",
       "entry": "pele-b7081b93-morse-sd",
       "failures": {
@@ -3893,7 +3826,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseMorsePreconode12rTuned",
       "failures": {
@@ -3931,7 +3863,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 100 starts",
+      "short_reason": "scored 1 of 100 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/morse-preconode12r-tuned",
@@ -3944,7 +3876,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseMorseBfgsDefault",
       "failures": {
@@ -3982,7 +3913,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 100 starts",
+      "short_reason": "scored 1 of 100 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/morse-bfgs-default",
@@ -3995,7 +3926,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseMorseBfgslinesearchDefault",
       "failures": {
@@ -4033,7 +3963,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 100 starts",
+      "short_reason": "scored 1 of 100 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/morse-bfgslinesearch-default",
@@ -4046,7 +3976,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseMorseBfgslinesearchTuned",
       "failures": {
@@ -4084,7 +4013,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 100 starts",
+      "short_reason": "scored 1 of 100 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/morse-bfgslinesearch-tuned",
@@ -4097,7 +4026,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseMorseFireTuned",
       "failures": {
@@ -4135,7 +4063,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 100 starts",
+      "short_reason": "scored 1 of 100 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/morse-fire-tuned",
@@ -4148,7 +4076,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseMorsePreconfireDefault",
       "failures": {
@@ -4186,7 +4113,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 100 starts",
+      "short_reason": "scored 1 of 100 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/morse-preconfire-default",
@@ -4199,7 +4126,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseMorseBfgsTuned",
       "failures": {
@@ -4237,7 +4163,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 100 starts",
+      "short_reason": "scored 1 of 100 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/morse-bfgs-tuned",
@@ -4250,7 +4176,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseMorseFireDefault",
       "failures": {
@@ -4288,7 +4213,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 100 starts",
+      "short_reason": "scored 1 of 100 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/morse-fire-default",
@@ -4301,7 +4226,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseMorseLbfgsDefault",
       "failures": {
@@ -4339,7 +4263,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 100 starts",
+      "short_reason": "scored 1 of 100 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/morse-lbfgs-default",
@@ -4352,7 +4276,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseMorsePreconlbfgsDefault",
       "failures": {
@@ -4390,7 +4313,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 100 starts",
+      "short_reason": "scored 1 of 100 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/morse-preconlbfgs-default",
@@ -4403,7 +4326,6 @@
       "code": "Sella",
       "code_version": "2.6.0",
       "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.SellaMorseMinTuned",
       "failures": {
@@ -4441,7 +4363,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 100 starts",
+      "short_reason": "scored 1 of 100 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "sella/morse-min-tuned",
@@ -4454,7 +4376,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseMorsePreconode12rDefault",
       "failures": {
@@ -4492,7 +4413,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 100 starts",
+      "short_reason": "scored 1 of 100 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/morse-preconode12r-default",
@@ -4505,7 +4426,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseMorsePreconfireTuned",
       "failures": {
@@ -4543,7 +4463,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 100 starts",
+      "short_reason": "scored 1 of 100 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/morse-preconfire-tuned",
@@ -4556,7 +4476,6 @@
       "code": "Sella",
       "code_version": "2.6.0",
       "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.SellaMorseMinDefault",
       "failures": {
@@ -4594,7 +4513,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 100 starts",
+      "short_reason": "scored 1 of 100 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "sella/morse-min-default",
@@ -4607,7 +4526,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseMorseLbfgsTuned",
       "failures": {
@@ -4645,7 +4563,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 100 starts",
+      "short_reason": "scored 1 of 100 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/morse-lbfgs-tuned",
@@ -4658,7 +4576,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseMorsePreconlbfgsTuned",
       "failures": {
@@ -4696,7 +4613,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 100 starts",
+      "short_reason": "scored 1 of 100 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/morse-preconlbfgs-tuned",
@@ -4712,7 +4629,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "ase-3.29.0-morse-bfgs-tuned",
       "failures": {
@@ -4763,7 +4679,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "ase-3.29.0-morse-bfgslinesearch-tuned",
       "failures": {
@@ -4814,7 +4729,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "ase-3.29.0-morse-fire-tuned",
       "failures": {
@@ -4865,7 +4779,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "ase-3.29.0-morse-lbfgs-tuned",
       "failures": {
@@ -4916,7 +4829,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "ase-3.29.0-morse-preconfire-tuned",
       "failures": {
@@ -4967,7 +4879,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "ase-3.29.0-morse-preconlbfgs-tuned",
       "failures": {
@@ -5018,7 +4929,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "ase-3.29.0-morse-preconode12r-tuned",
       "failures": {
@@ -5069,7 +4979,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-morse-adam-tuned",
       "failures": {
@@ -5120,7 +5029,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-morse-bb-tuned",
       "failures": {
@@ -5171,7 +5079,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-morse-bfgs-tuned",
       "failures": {
@@ -5222,7 +5129,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-morse-cg-tuned",
       "failures": {
@@ -5273,7 +5179,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-morse-diis-tuned",
       "failures": {
@@ -5324,7 +5229,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-morse-dogleg-tuned",
       "failures": {
@@ -5375,7 +5279,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-morse-fire-tuned",
       "failures": {
@@ -5426,7 +5329,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-morse-fire2-tuned",
       "failures": {
@@ -5477,7 +5379,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-morse-lbfgs-m100-tuned",
       "failures": {
@@ -5528,7 +5429,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-morse-lbfgs-m20-tuned",
       "failures": {
@@ -5579,7 +5479,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-morse-lbfgs-tuned",
       "failures": {
@@ -5630,7 +5529,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-morse-newton-tuned",
       "failures": {
@@ -5681,7 +5579,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-morse-quickmin-tuned",
       "failures": {
@@ -5732,7 +5629,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-morse-sd-tuned",
       "failures": {
@@ -5783,7 +5679,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-morse-sr1-tuned",
       "failures": {
@@ -5834,7 +5729,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-morse-sr2-tuned",
       "failures": {
@@ -5885,7 +5779,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-adam-tuned",
       "failures": {
@@ -5936,7 +5829,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-bb-tuned",
       "failures": {
@@ -5987,7 +5879,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-bfgs-tuned",
       "failures": {
@@ -6038,7 +5929,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-cg-tuned",
       "failures": {
@@ -6089,7 +5979,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-diis-tuned",
       "failures": {
@@ -6140,7 +6029,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-dogleg-tuned",
       "failures": {
@@ -6191,7 +6079,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-fire-tuned",
       "failures": {
@@ -6242,7 +6129,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-fire2-tuned",
       "failures": {
@@ -6293,7 +6179,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-lbfgs-m100-tuned",
       "failures": {
@@ -6344,7 +6229,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-lbfgs-m20-tuned",
       "failures": {
@@ -6395,7 +6279,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-lbfgs-tuned",
       "failures": {
@@ -6446,7 +6329,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-newton-tuned",
       "failures": {
@@ -6497,7 +6379,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-quickmin-tuned",
       "failures": {
@@ -6548,7 +6429,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-sd-tuned",
       "failures": {
@@ -6599,7 +6479,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-sr1-tuned",
       "failures": {
@@ -6650,7 +6529,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-morse-sr2-tuned",
       "failures": {
@@ -6701,7 +6579,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-adam-tuned",
       "failures": {
@@ -6752,7 +6629,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-bb-tuned",
       "failures": {
@@ -6803,7 +6679,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-bfgs-tuned",
       "failures": {
@@ -6854,7 +6729,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-cg-tuned",
       "failures": {
@@ -6905,7 +6779,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-diis-tuned",
       "failures": {
@@ -6956,7 +6829,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-dogleg-tuned",
       "failures": {
@@ -7007,7 +6879,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-fire-tuned",
       "failures": {
@@ -7058,7 +6929,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-fire2-tuned",
       "failures": {
@@ -7109,7 +6979,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-lbfgs-m100-tuned",
       "failures": {
@@ -7160,7 +7029,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-lbfgs-m20-tuned",
       "failures": {
@@ -7211,7 +7079,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-lbfgs-tuned",
       "failures": {
@@ -7262,7 +7129,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-newton-tuned",
       "failures": {
@@ -7313,7 +7179,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-quickmin-tuned",
       "failures": {
@@ -7364,7 +7229,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-sd-tuned",
       "failures": {
@@ -7415,7 +7279,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-sr1-tuned",
       "failures": {
@@ -7466,7 +7329,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-morse-sr2-tuned",
       "failures": {
@@ -7517,7 +7379,6 @@
       "code": "Sella",
       "code_version": "2.6.0",
       "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
-      "comparable": true,
       "counter": "harness",
       "entry": "sella-2.6.0-morse-min-tuned",
       "failures": {
@@ -7568,7 +7429,6 @@
       "code": "vc-SQNM",
       "code_version": "1.3",
       "commit": "4241692173cccb42a9ae05974bfd62285ec2cd7b",
-      "comparable": true,
       "counter": "harness",
       "entry": "vcsqnm-42416921-morse-ase-tuned",
       "failures": {
@@ -7619,7 +7479,6 @@
       "code": "vc-SQNM",
       "code_version": "1.3",
       "commit": "4241692173cccb42a9ae05974bfd62285ec2cd7b",
-      "comparable": true,
       "counter": "harness",
       "entry": "vcsqnm-42416921-morse-ase-vc-tuned",
       "failures": {
@@ -7670,7 +7529,6 @@
       "code": "vc-SQNM",
       "code_version": "1.3",
       "commit": "4241692173cccb42a9ae05974bfd62285ec2cd7b",
-      "comparable": true,
       "counter": "harness",
       "entry": "vcsqnm-42416921-morse-sqnm-tuned",
       "failures": {
@@ -7721,7 +7579,6 @@
       "code": "vc-SQNM",
       "code_version": "1.3",
       "commit": "4241692173cccb42a9ae05974bfd62285ec2cd7b",
-      "comparable": true,
       "counter": "harness",
       "entry": "vcsqnm-42416921-morse-vc-tuned",
       "failures": {
