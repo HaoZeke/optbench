@@ -1,15 +1,15 @@
 id = "eon-develop-500350d9/bh-lj100-binary"
 engine = "eon"
 problem = "globalopt/lj100-binary"
-code = "eOn (develop 8468a7cd)"
+code = "eOn (develop b0bd4d5a)"
 code_version = "3.6.0"
-commit = "8468a7cded5a40de7c7423ad4dc78f19b8205763"
+commit = "b0bd4d5a5e0f4011831e45f4de389a4efa348e83"
 algorithm = "Basin hopping"
 reducer = "harness"
 tuning = "default"
 failure_cap = 2000000
 note = '''
-Stock eOn built from origin/develop 8468a7cd. git merge-base --is-ancestor confirms 500350d9 is contained in that commit. The client version string is 3.6.0. The force-call cap is 2000000. That number is sample.max_evaluations in problems/globalopt/lj100-binary.toml and the archive report.sh window ($2 <= 2e6). A start that reaches the cap is charged 4000000. The ini is the archive config.ini: temperature 14000, 60000 basin-hopping steps, displacement 0.3 (the archive names this max_displacement; the client reads displacement), gaussian draws, significant_structure, swap_probability 0, L-BFGS, converged_force 0.001, max_iterations 10000. random_seed is 1. The harness counts every ext_pot force call and stops at the cap. The potential matches the archive in.lammps binary Lennard-Jones.
+Stock eOn built from origin/develop b0bd4d5a, the merge of pull request 784. That commit contains 8468a7cd and 500350d9. Starts from any other binary are not part of this row. The client version string is 3.6.0. The force-call cap is 2000000. That number is sample.max_evaluations in problems/globalopt/lj100-binary.toml and the archive report.sh window ($2 <= 2e6). A start that reaches the cap is charged 4000000. The ini is the archive config.ini: temperature 14000, 60000 basin-hopping steps, displacement 0.3 (the archive names this max_displacement; the client reads displacement), gaussian draws, significant_structure, swap_probability 0, L-BFGS, converged_force 0.001, max_iterations 10000. random_seed is 1. The harness counts every ext_pot force call and stops at the cap. The potential matches the archive in.lammps binary Lennard-Jones.
 '''
 
 [ini.Main]

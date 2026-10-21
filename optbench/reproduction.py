@@ -214,15 +214,9 @@ MATCHES: list[dict] = [
                 "par2_mean": 4000000.0,
             },
             "eon_develop": {
-                "label": "eOn (develop 8468a7cd)",
+                "label": "eOn (develop b0bd4d5a)",
                 "template": "eon-develop-500350d9/bh-lj100-binary",
                 "path": "results/campaign/eon-develop-500350d9-bh-lj100-binary.dat",
-                "avg_energy": -529.995,
-                "min_energy": -542.571,
-                "max_energy": -511.999,
-                "par2_mean": 4000000.0,
-                "successes": 0,
-                "n": 32,
             },
         },
         "rank_only": True,
@@ -320,9 +314,9 @@ CAUSE_TEXT = {
         "The Wilson interval on 0 failures out of 1000 is about 0 to 3.83."
     ),
     "stock_binary_lj": (
-        "EON (SVN r2549) and eOn (develop 8468a7cd) are different codes. "
-        "origin/develop 8468a7cd contains 500350d9. "
-        "Both use the archived binary LJ100 starts, seed 1, and the archive config.ini: "
+        "EON (SVN r2549) and eOn (develop b0bd4d5a) are different codes. "
+        "origin/develop b0bd4d5a is the merge of pull request 784 and contains 8468a7cd and 500350d9. "
+        "EON (SVN r2549) ran the archived binary LJ100 starts, seed 1, with the archive config.ini: "
         "temperature 14000, 60000 basin-hopping steps, displacement 0.3, gaussian draws, "
         "L-BFGS, converged_force 0.001, and max_iterations 10000. "
         "The force-call cap is 2000000, from sample.max_evaluations and from archive report.sh. "
@@ -330,9 +324,7 @@ CAUSE_TEXT = {
         "EON (SVN r2549) has 100 starts. Hits 0. PAR-2 mean 4000000. "
         "Mean and median force calls are 2000000. "
         "Mean final energy is -530.059, against the archive -584.579. "
-        "Min and max are -550.76 and -512. Mean quenches per start are 312.41. "
-        "eOn (develop 8468a7cd) has 32 starts recorded on this tip, every one capped, "
-        "with mean final energy -529.995."
+        "Min and max are -550.76 and -512. Mean quenches per start are 312.41."
     ),
     "akmc_vs_langevin": (
         "The archive rows are Langevin parallel replica. The harness rows are AKMC. "

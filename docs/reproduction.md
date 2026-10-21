@@ -265,7 +265,7 @@ archive run.sh divides coordinates by r0 = 2.897 and scales rho and rcut into th
 
 ### stock_binary_lj
 
-EON (SVN r2549) and eOn (develop 8468a7cd) are different codes. origin/develop 8468a7cd contains 500350d9. Both use the archived binary LJ100 starts, seed 1, and the archive config.ini: temperature 14000, 60000 basin-hopping steps, displacement 0.3, gaussian draws, L-BFGS, converged_force 0.001, and max_iterations 10000. The force-call cap is 2000000, from sample.max_evaluations and from archive report.sh. A start that reaches the cap is charged 4000000. EON (SVN r2549) has 100 starts. Hits 0. PAR-2 mean 4000000. Mean and median force calls are 2000000. Mean final energy is -530.059, against the archive -584.579. Min and max are -550.76 and -512. Mean quenches per start are 312.41. eOn (develop 8468a7cd) has 32 starts recorded on this tip, every one capped, with mean final energy -529.995.
+EON (SVN r2549) and eOn (develop b0bd4d5a) are different codes. origin/develop b0bd4d5a is the merge of pull request 784 and contains 8468a7cd and 500350d9. EON (SVN r2549) ran the archived binary LJ100 starts, seed 1, with the archive config.ini: temperature 14000, 60000 basin-hopping steps, displacement 0.3, gaussian draws, L-BFGS, converged_force 0.001, and max_iterations 10000. The force-call cap is 2000000, from sample.max_evaluations and from archive report.sh. A start that reaches the cap is charged 4000000. EON (SVN r2549) has 100 starts. Hits 0. PAR-2 mean 4000000. Mean and median force calls are 2000000. Mean final energy is -530.059, against the archive -584.579. Min and max are -550.76 and -512. Mean quenches per start are 312.41.
 
 - globalopt/lj100-binary/eon-basinhopping
 

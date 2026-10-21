@@ -8,10 +8,4 @@ call_mean 2000000
 call_median 2000000
 quench_mean 312.41
 code EON (SVN r2549)
-develop_code eOn (develop 8468a7cd)
-develop_n 32
-develop_avg_energy -529.995
-develop_min_energy -542.571
-develop_max_energy -511.999
-develop_hits 0
-develop_par2_mean 4000000
+develop_code eOn (develop b0bd4d5a)
