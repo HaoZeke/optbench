@@ -499,8 +499,8 @@ def _blank_row(**values) -> dict:
         "full_n": None,
         "par2_mean": None,
         "success_rate": None,
-        "wilson_low": None,
-        "wilson_high": None,
+        "rate_low": None,
+        "rate_high": None,
         "median": None,
         "median_low": None,
         "median_high": None,
@@ -550,8 +550,8 @@ def _apply_summary(row: dict, summary: dict, records: list[dict]) -> None:
     row["n"] = int(summary["n"])
     row["par2_mean"] = summary["par2_mean"]
     row["success_rate"] = summary["success_rate"]
-    row["wilson_low"] = summary["wilson_low"]
-    row["wilson_high"] = summary["wilson_high"]
+    row["rate_low"] = summary["rate_low"]
+    row["rate_high"] = summary["rate_high"]
     row["median"] = summary["median"]
     row["median_low"] = summary["median_low"]
     row["median_high"] = summary["median_high"]
@@ -1311,7 +1311,7 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
         ("success_rate", _format_number(row.get("success_rate"))),
         (
             "wilson",
-            f"{_format_number(row.get('wilson_low'))}–{_format_number(row.get('wilson_high'))}",
+            f"{_format_number(row.get('rate_low'))}–{_format_number(row.get('rate_high'))}",
         ),
         ("median_calls", _format_number(row.get("median_calls"))),
         ("mean_calls", _format_number(row.get("mean_calls"))),
