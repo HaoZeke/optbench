@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>TSASE</th><th>pysisyphus</th><th>EON (SVN r2549)</th><th>eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>TSASE</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="globalopt/lj100-binary">
    <th scope="row"><a href="#lj100-binary">Binary Lennard-Jones 100</a></th>
    <td data-code="eOn">—</td>
@@ -18,8 +18,6 @@
    <td data-code="Sella">—</td>
    <td data-code="TSASE">—</td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="EON (SVN r2549)">—</td>
-   <td data-code="eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -37,8 +35,6 @@
    <td data-code="Sella">—</td>
    <td data-code="TSASE">—</td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="EON (SVN r2549)">—</td>
-   <td data-code="eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -56,8 +52,6 @@
    <td data-code="Sella">—</td>
    <td data-code="TSASE">—</td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="EON (SVN r2549)">—</td>
-   <td data-code="eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -75,8 +69,6 @@
    <td data-code="Sella">—</td>
    <td data-code="TSASE">—</td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="EON (SVN r2549)">—</td>
-   <td data-code="eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -94,8 +86,6 @@
    <td data-code="Sella">—</td>
    <td data-code="TSASE">—</td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="EON (SVN r2549)">—</td>
-   <td data-code="eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -113,8 +103,6 @@
    <td data-code="Sella">—</td>
    <td data-code="TSASE">—</td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="EON (SVN r2549)">—</td>
-   <td data-code="eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -132,8 +120,6 @@
    <td data-code="Sella">—</td>
    <td data-code="TSASE">—</td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="EON (SVN r2549)">—</td>
-   <td data-code="eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -151,8 +137,6 @@
    <td data-code="Sella">—</td>
    <td data-code="TSASE">—</td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="EON (SVN r2549)">—</td>
-   <td data-code="eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
