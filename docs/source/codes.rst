@@ -185,7 +185,6 @@ The number is written only after the run finishes under the problem rule.
    <li>eon-qm: no per-start record.</li>
    <li>eon-client/cg: no per-start record.</li>
    <li>eon-client/fire: no per-start record.</li>
-   <li>eon-client/lbfgs-m100: no per-start record.</li>
    <li>eon-client/lbfgs-m20: no per-start record.</li>
    <li>eon-client/morse-cg: no per-start record.</li>
    <li>eon-client/morse-fire: no per-start record.</li>
@@ -392,37 +391,37 @@ The number is written only after the run finishes under the problem rule.
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="double-ended-saddle-search/lj38" data-template="rgsaddle/ew-ci-neb-lbfgs">
+   <tr data-problem="double-ended-saddle-search/lj38" data-template="rgsaddle/ew-ci-neb">
    <td>LJ38 double-ended saddle</td>
-   <td data-field="template">rgsaddle/ew-ci-neb-lbfgs</td>
+   <td data-field="template">rgsaddle/ew-ci-neb</td>
    <td data-field="version">rgsaddle 0.2.2</td>
    <td data-field="commit">c0db2b8d333c</td>
-   <td data-field="par2_mean">853.56</td>
-   <td data-field="mean_calls">673.94</td>
-   <td data-field="median_calls">529</td>
-   <td data-field="failures">crash 0, divergence 1, cap 2, wrong_stationary 0</td>
+   <td data-field="par2_mean">2145.72</td>
+   <td data-field="mean_calls">1595.72</td>
+   <td data-field="median_calls">1461.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 11, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="rgsaddle/ew-ci-neb-lbfgs">
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="rgsaddle/ew-ci-neb">
    <td>lj38_2ts_separation</td>
-   <td data-field="template">rgsaddle/ew-ci-neb-lbfgs</td>
+   <td data-field="template">rgsaddle/ew-ci-neb</td>
    <td data-field="version">rgsaddle 0.2.2</td>
    <td data-field="commit">c0db2b8d333c</td>
-   <td data-field="par2_mean">8024.43</td>
-   <td data-field="mean_calls">4639.8</td>
-   <td data-field="median_calls">2414</td>
-   <td data-field="failures">crash 0, divergence 0, cap 16, wrong_stationary 1</td>
+   <td data-field="par2_mean">12098.1</td>
+   <td data-field="mean_calls">6803.94</td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="failures">crash 0, divergence 0, cap 27, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/pt-island" data-template="rgsaddle/ew-ci-neb-lbfgs">
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="rgsaddle/ew-ci-neb">
    <td>pt-island</td>
-   <td data-field="template">rgsaddle/ew-ci-neb-lbfgs</td>
+   <td data-field="template">rgsaddle/ew-ci-neb</td>
    <td data-field="version">rgsaddle 0.2.2</td>
    <td data-field="commit">c0db2b8d333c</td>
-   <td data-field="par2_mean">422.136</td>
-   <td data-field="mean_calls">224.017</td>
-   <td data-field="median_calls">226</td>
-   <td data-field="failures">crash 0, divergence 2, cap 0, wrong_stationary 0</td>
+   <td data-field="par2_mean">938.102</td>
+   <td data-field="mean_calls">561.644</td>
+   <td data-field="median_calls">478</td>
+   <td data-field="failures">crash 0, divergence 2, cap 0, wrong_stationary 2</td>
    <td data-field="n">59</td>
    </tr>
    <tr data-problem="lowest-eigenvector/lj38" data-template="rgsaddle/mode-lanczos">
@@ -436,14 +435,14 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
-   <tr data-problem="neb/Pt-heptamer" data-template="rgsaddle/idpp-ci-neb-lbfgs">
+   <tr data-problem="neb/Pt-heptamer" data-template="rgsaddle/sidpp-ci-neb">
    <td>Pt-heptamer</td>
-   <td data-field="template">rgsaddle/idpp-ci-neb-lbfgs</td>
+   <td data-field="template">rgsaddle/sidpp-ci-neb</td>
    <td data-field="version">rgsaddle 0.2.2</td>
    <td data-field="commit">c0db2b8d333c</td>
-   <td data-field="par2_mean">318.308</td>
-   <td data-field="mean_calls">318.308</td>
-   <td data-field="median_calls">314</td>
+   <td data-field="par2_mean">732.462</td>
+   <td data-field="mean_calls">732.462</td>
+   <td data-field="median_calls">682</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
@@ -828,14 +827,14 @@ The number is written only after the run finishes under the problem rule.
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="minimization/lj38" data-template="pele/lj38-lbfgs-m100">
+   <tr data-problem="minimization/lj38" data-template="pele/lj38-mylbfgs">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="template">pele/lj38-lbfgs-m100</td>
+   <td data-field="template">pele/lj38-mylbfgs</td>
    <td data-field="version">pele 0.1.2</td>
    <td data-field="commit">b7081b932a06</td>
-   <td data-field="par2_mean">197.936</td>
-   <td data-field="mean_calls">178.096</td>
-   <td data-field="median_calls">167</td>
+   <td data-field="par2_mean">268.036</td>
+   <td data-field="mean_calls">248.224</td>
+   <td data-field="median_calls">235</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 1</td>
    <td data-field="n">1000</td>
    </tr>

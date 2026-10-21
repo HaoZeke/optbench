@@ -18,7 +18,7 @@
    <td data-code="ASE" data-template="ase/lj38-lbfgs-default" data-par2="532.882"><span class="bench-score">532.882</span><a href="#lj38-templates">ase/lj38-lbfgs-default</a></td>
    <td data-code="Sella" data-template="sella/lj38-min-default" data-par2="710.089"><span class="bench-score">710.089</span><a href="#lj38-templates">sella/lj38-min-default</a></td>
    <td data-code="GMIN" data-template="gmin/lj38-lbfgs" data-par2="301.399"><span class="bench-score">301.399</span><a href="#lj38-templates">gmin/lj38-lbfgs</a></td>
-   <td data-code="pele" data-template="pele/lj38-lbfgs-m100" data-par2="197.936"><span class="bench-score">197.936</span><a href="#lj38-templates">pele/lj38-lbfgs-m100</a></td>
+   <td data-code="pele" data-template="pele/lj38-mylbfgs" data-par2="268.036"><span class="bench-score">268.036</span><a href="#lj38-templates">pele/lj38-mylbfgs</a></td>
    <td data-code="LAMMPS">—</td>
    <td data-code="pysisyphus" data-template="pysisyphus/cg-lj38" data-par2="15124.7"><span class="bench-score">15124.7</span><a href="#lj38-templates">pysisyphus/cg-lj38</a></td>
    <td data-code="AIRSS">—</td>
@@ -95,7 +95,7 @@
    <figure class="bench-plot"><a href="../../_static/board/minimization-lj38-profile.svg"><picture><source srcset="../../_static/board/minimization-lj38-profile.webp" type="image/webp"><img src="../../_static/board/minimization-lj38-profile.png" alt="Dolan-More profile for minimization/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/minimization-lj38-cost.svg"><picture><source srcset="../../_static/board/minimization-lj38-cost.webp" type="image/webp"><img src="../../_static/board/minimization-lj38-cost.png" alt="Cost versus success for minimization/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="lj38-templates">
-   <summary>All templates (69 ranked)</summary>
+   <summary>All templates (68 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="minimization/lj38">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
@@ -107,7 +107,6 @@
    <tr><td data-field="template">eon/lj38-lbfgs-m100</td><td data-field="version">eOn 3.6.0</td><td data-field="commit">1d71c9445018</td><td data-field="source">campaign</td><td data-field="par2_mean">180.137</td><td data-field="success_rate">1</td><td data-field="wilson">0.996173–1</td><td data-field="median_calls">171</td><td data-field="mean_calls">180.137</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">rgmin/lj38-lbfgs-m100</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">197.228</td><td data-field="success_rate">0.999</td><td data-field="wilson">0.994357–0.999823</td><td data-field="median_calls">170</td><td data-field="mean_calls">177.367</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 1</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">rgmin/lj38-lbfgs-m100</td><td data-field="version">rgmin 0.4.1</td><td data-field="commit">f15726f1c798</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">197.228</td><td data-field="success_rate">0.999</td><td data-field="wilson">0.994357–0.999823</td><td data-field="median_calls">170</td><td data-field="mean_calls">177.367</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 1</td><td data-field="n">1000</td></tr>
-   <tr><td data-field="template">pele/lj38-lbfgs-m100</td><td data-field="version">pele 0.1.2</td><td data-field="commit">b7081b932a06</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">197.936</td><td data-field="success_rate">0.999</td><td data-field="wilson">0.994357–0.999823</td><td data-field="median_calls">167</td><td data-field="mean_calls">178.096</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 1</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">eon/lj38-lbfgs</td><td data-field="version">eOn 3.6.0</td><td data-field="commit">1d71c9445018</td><td data-field="source">campaign</td><td data-field="par2_mean">203.898</td><td data-field="success_rate">1</td><td data-field="wilson">0.996173–1</td><td data-field="median_calls">190</td><td data-field="mean_calls">203.898</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">dlfind/lbfgs-lj38</td><td data-field="version">dlfind 0.0.3</td><td data-field="commit">4167998d16d8</td><td data-field="source">campaign</td><td data-field="par2_mean">231.908</td><td data-field="success_rate">0.998</td><td data-field="wilson">0.992737–0.999451</td><td data-field="median_calls">184</td><td data-field="mean_calls">202.105</td><td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 1</td><td data-field="n">1000</td></tr>
    <tr><td data-field="template">tsase/lbfgs-lj38</td><td data-field="version">tsase 1.0</td><td data-field="commit">98aac60b5d99</td><td data-field="source">campaign</td><td data-field="par2_mean">257.2</td><td data-field="success_rate">0.996</td><td data-field="wilson">0.98976–0.998443</td><td data-field="median_calls">169</td><td data-field="mean_calls">177.96</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 4</td><td data-field="n">1000</td></tr>
@@ -202,7 +201,6 @@
    <h3>Not scored</h3><ul>
    <li>eon-client/cg: no per-start record</li>
    <li>eon-client/fire: no per-start record</li>
-   <li>eon-client/lbfgs-m100: no per-start record</li>
    <li>eon-client/lbfgs-m20: no per-start record</li>
    <li>eon-client/qm: no per-start record</li>
    <li>eon-client/sd-twopoint: no per-start record</li>
