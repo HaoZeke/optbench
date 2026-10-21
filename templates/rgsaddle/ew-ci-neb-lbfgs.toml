@@ -5,7 +5,7 @@ code = "rgsaddle"
 code_version = "0.2.2"
 commit = "c0db2b8d333c557251635cb8bb7b3d81f0088a71"
 algorithm = "CI-NEB energy-weighted"
-tuning = "tuned"
+tuning = "adjusted"
 
 [ini]
 
