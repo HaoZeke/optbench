@@ -136,16 +136,16 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
-   <tr data-problem="saddle-search/pt-island" data-template="eon/develop-saddle-pt-lanczos">
+   <tr data-problem="saddle-search/pt-island" data-template="eon/develop-b0bd4d5a-saddle-pt-dimer">
    <td>Pt heptamer island</td>
-   <td data-field="template">eon/develop-saddle-pt-lanczos</td>
-   <td data-field="version">eOn 3.6.0</td>
-   <td data-field="commit">7095b23ac17d</td>
+   <td data-field="template">eon/develop-b0bd4d5a-saddle-pt-dimer</td>
+   <td data-field="version">eOn (develop b0bd4d5a)</td>
+   <td data-field="commit">b0bd4d5a5e0f</td>
    <td data-field="par2_mean">2e+08</td>
-   <td data-field="mean_calls">3.98507e+06</td>
-   <td data-field="median_calls">3.98507e+06</td>
-   <td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 0</td>
-   <td data-field="n">2</td>
+   <td data-field="mean_calls">2.4304e+06</td>
+   <td data-field="median_calls">2.4304e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
+   <td data-field="n">1</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-template="eon/develop-b0bd4d5a-ts-lj38-lanczos-improved">
    <td>LJ38</td>
