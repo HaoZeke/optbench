@@ -16,10 +16,15 @@ def test_a_tuned_name_or_tuned_true_is_rejected_anywhere(tmp_path: Path, capsys)
     _write(
         tmp_path,
         "templates/ase/lj38-lbfgs.toml",
-        'id = "ase/lj38-lbfgs"\nengine = "ase"\ntuning = "tuned"\n',
+        'id = "ase/lj38-lbfgs"\nengine = "ase"\ntuning = "default"\n',
     )
     assert tuned_template_errors(tmp_path) == []
 
+    _write(
+        tmp_path,
+        "templates/ase/lj38-lbfgs.toml",
+        'id = "ase/lj38-lbfgs"\nengine = "ase"\ntuning = "tuned"\n',
+    )
     _write(
         tmp_path,
         "templates/ase/lj38-lbfgs-tuned.toml",
@@ -37,6 +42,7 @@ def test_a_tuned_name_or_tuned_true_is_rejected_anywhere(tmp_path: Path, capsys)
     )
     assert tuned_template_errors(tmp_path) == [
         "tuned template templates/ase/lj38-lbfgs-tuned.toml",
+        "tuned template templates/ase/lj38-lbfgs.toml",
         "tuned template templates/kept/flag.toml",
         "tuned template templates/kept/stock.toml",
     ]
@@ -63,7 +69,10 @@ def test_tuned_rows_fail_on_every_list_and_a_retired_track_is_omitted():
         },
         "partial": [],
         "history": [],
-        "not_comparable": [{"template": "sella/lj38-min", "tuned": True}],
+        "not_comparable": [
+            {"template": "sella/lj38-min", "tuned": True},
+            {"template": "eon-client/lbfgs-m100", "tuning": "tuned"},
+        ],
         "unparsed": [],
         "unmapped": [{"entry": "bench_rgmin.RgminLj38LbfgsTuned", "template": ""}],
     }
@@ -71,6 +80,7 @@ def test_tuned_rows_fail_on_every_list_and_a_retired_track_is_omitted():
         "tuned row minimization/lj38 partial ase/lj38-lbfgs-tuned",
         "tuned row minimization/lj38 history rgmin/lj38-bfgs-tuned",
         "tuned row not_comparable sella/lj38-min",
+        "tuned row not_comparable eon-client/lbfgs-m100",
     ]
     assert omit_retired_tuned_track("RgminLj38LbfgsTuned", {}) is True
     assert omit_retired_tuned_track(
@@ -78,3 +88,10 @@ def test_tuned_rows_fail_on_every_list_and_a_retired_track_is_omitted():
         {"template": "rgmin/lj38-lbfgs-tuned", "problem": "minimization/lj38"},
     ) is False
     assert omit_retired_tuned_track("RgminLj38Lbfgs", {}) is False
+    assert omit_retired_tuned_track("Lj38EonLbfgsM100", {}) is True
+    assert omit_retired_tuned_track("HeptamerRgsaddleCiNebLbfgs", {}) is True
+    assert omit_retired_tuned_track(
+        "RgsaddleLj38DimerLbfgs",
+        {"template": "rgsaddle/dimer-lbfgs"},
+    ) is False
+    assert omit_retired_tuned_track("Lj38EonLbfgsM20", {}) is False

@@ -840,11 +840,17 @@ def omit_retired_tuned_track(class_name: str, described: dict) -> bool:
     """A tuned benchmark class that is no longer registered is not a row.
 
     The measurements can stay in the asv store. Without a template they are
-    not a ranked row and not an unranked row.
+    not a ranked row and not an unranked row. ``*Tuned`` is the old suffix.
+    ``*LbfgsM100`` is the eOn and pele memory-100 class. An unregistered
+    rgsaddle class ending in ``Lbfgs`` is a band stepper the library does
+    not ship.
     """
     if described.get("template") or described.get("problem"):
         return False
-    return str(class_name).endswith("Tuned")
+    name = str(class_name)
+    if name.endswith("Tuned") or name.endswith("LbfgsM100"):
+        return True
+    return "Rgsaddle" in name and name.endswith("Lbfgs")
 
 
 def _asv_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict]) -> tuple[list[dict], list[dict], list[dict]]:

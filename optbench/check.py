@@ -59,11 +59,22 @@ def _sets_tuned_true(value: object) -> bool:
     return False
 
 
-def tuned_template_errors(root: Path) -> list[str]:
-    """Templates named ``*-tuned`` or setting ``tuned = true``, anywhere.
+def _sets_tuning_tuned(value: object) -> bool:
+    """True when a template document sets ``tuning = "tuned"``."""
+    if isinstance(value, dict):
+        if value.get("tuning") == "tuned":
+            return True
+        return any(_sets_tuning_tuned(item) for item in value.values())
+    if isinstance(value, list):
+        return any(_sets_tuning_tuned(item) for item in value)
+    return False
 
-    The name is the file stem or the template id. ``tuning = "tuned"`` on a
-    stock id is a different knob and is not this rejection.
+
+def tuned_template_errors(root: Path) -> list[str]:
+    """Templates named ``*-tuned``, setting ``tuned = true``, or ``tuning = "tuned"``.
+
+    The name is the file stem or the template id. The label is rejected on
+    every id, not only on a ranked row.
     """
     directory = Path(root) / "templates"
     if not directory.is_dir():
@@ -78,7 +89,12 @@ def tuned_template_errors(root: Path) -> list[str]:
                 errors.append(f"tuned template {rel} unreadable {exc}")
             continue
         ident = str(data.get("id") or "")
-        if path.stem.endswith("-tuned") or ident.endswith("-tuned") or _sets_tuned_true(data):
+        if (
+            path.stem.endswith("-tuned")
+            or ident.endswith("-tuned")
+            or _sets_tuned_true(data)
+            or _sets_tuning_tuned(data)
+        ):
             errors.append(f"tuned template {rel}")
     return errors
 
@@ -91,7 +107,7 @@ def tuned_row_errors(document: dict) -> list[str]:
         if not isinstance(row, dict):
             return
         template = str(row.get("template") or "")
-        if template.endswith("-tuned") or row.get("tuned") is True:
+        if template.endswith("-tuned") or row.get("tuned") is True or row.get("tuning") == "tuned":
             errors.append(f"tuned row {where} {template or where}")
 
     for problem_id, problem in (document.get("problems") or {}).items():
