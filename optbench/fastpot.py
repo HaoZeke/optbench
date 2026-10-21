@@ -89,9 +89,31 @@ def _compile_many(dest: Path, units: list[tuple[Path, list[str]]], link: list[st
 
 
 def _compile(source: Path, dest: Path, extra: list[str]) -> bool:
-    if not source.is_file():
+    """Link one translation unit into an executable.
+
+    Shared libraries use :func:`_compile_many`. The ext_pot bridge is a
+    program; ``-shared`` leaves its entry point at zero and it segfaults.
+    """
+    gcc = shutil.which("gcc")
+    if gcc is None or not source.is_file():
         return False
-    return _compile_many(dest, [(source, extra)], [])
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    temporary = dest.with_suffix(dest.suffix + ".tmp")
+    result = subprocess.run(
+        [gcc, *_CFLAGS, *extra, "-o", str(temporary), str(source), "-lm"],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    log = dest.with_suffix(dest.suffix + ".log")
+    if result.returncode != 0:
+        log.write_text(result.stderr, encoding="utf-8")
+        temporary.unlink(missing_ok=True)
+        return False
+    log.unlink(missing_ok=True)
+    temporary.replace(dest)
+    dest.chmod(dest.stat().st_mode | 0o755)
+    return True
 
 
 def _lj_units(include: Path | None = None) -> list[tuple[Path, list[str]]]:
