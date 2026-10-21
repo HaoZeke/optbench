@@ -1,0 +1,11 @@
+# exact archive data file, serial GMIN, internal potential
+# entry globalopt/lj98/gmin-nosym
+# ncalls is the Target hit after function-call field
+nfailed 0
+n 100
+energy_calls_mean 6.79167560e+06
+energy_calls_stddev 6.26903785e+06
+basin_hopping_steps_mean 4.965787e+04
+basin_hopping_steps_stddev 4.592175e+04
+cpu_time_mean 2.80214e+02
+cpu_time_stddev 2.6540e+02
