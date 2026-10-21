@@ -1,14 +1,19 @@
-"""PyAMFF stops on the largest absolute parameter gradient."""
+"""PyAMFF templates stay on the two machine-learning problems."""
 
 import shutil
+import tomllib
 from pathlib import Path
 
 import numpy as np
 import pytest
 
-from optbench.runners.pyamff_ml import classify_stop, max_abs_converged
+from optbench.board import stated_full_n
+from optbench.campaign import list_templates, resolve_problem
+from optbench.runners.pyamff_ml import OPTIMIZERS, _section, _stop, classify_stop, max_abs_converged
 
 ROOT = Path(__file__).resolve().parents[1]
+COMMIT = "240f51d01ca22969369f9bc21760c61cbb3b6665"
+PROBLEMS = ("mlopt/emt-pt38", "mlopt/C2H4")
 
 
 def test_stop_classes():
@@ -24,6 +29,46 @@ def test_max_abs_stop_is_strict():
     assert max_abs_converged(0.099999, 0.1) is True
     assert max_abs_converged(0.1, 0.1) is False
     assert max_abs_converged(0.02, 0.02) is False
+
+
+def test_pyamff_templates_cover_the_archive_cells():
+    registry = tomllib.loads((ROOT / "codes" / "registry.toml").read_text(encoding="utf-8"))
+    pinned = next(row for row in registry["code"] if row["id"] == "pyamff")
+    assert pinned["commit"] == COMMIT
+    assert not any(row["id"] == "pyamff-8037eb98" for row in registry["code"])
+    found = [row for row in list_templates(ROOT) if row.get("engine") == "pyamff"]
+    assert len(found) == 12
+    seen = set()
+    for template in found:
+        assert template["commit"] == COMMIT
+        assert template["code_version"] in {"0.1.0-beta", "240f51d0", "240f51d"}
+        assert template["code"] == "PyAMFF"
+        assert template["tuning"] in {"default", "stock", "archive"}
+        assert template.get("ranked") is not False
+        assert "8037eb98" not in template["id"]
+        assert template["problem"] in PROBLEMS
+        problem = resolve_problem(ROOT, template["problem"])
+        assert stated_full_n(ROOT, problem) == 50
+        cap, tol, coeff = _stop(problem, template)
+        section = template.get("pyamff") or {}
+        optimizer = _section(template)["optimizer"]
+        assert optimizer in OPTIMIZERS
+        assert "seed_base" not in section
+        if "init_model_parameters" in section:
+            assert section["init_model_parameters"] is True
+        if template["id"].endswith("-force") or template["id"].endswith("fcoeff0_1"):
+            assert coeff == 0.1
+            assert cap == 30000
+            assert tol == 0.1
+        else:
+            assert coeff == 0.0
+            assert cap == 10000
+            assert tol == 0.02
+        seen.add((template["problem"], optimizer, coeff))
+    for problem in PROBLEMS:
+        for name in OPTIMIZERS:
+            assert (problem, name, 0.0) in seen
+            assert (problem, name, 0.1) in seen
 
 
 # The Optax derivative note uses this periodic four-atom cell.
