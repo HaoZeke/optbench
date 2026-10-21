@@ -3,8 +3,8 @@
 # develop benchmarks run is the source build pinned in
 # codes/registry.toml under id eon-develop:
 #   ref = develop
-#   commit = 7095b23ac17d49f434a5e08ccb072897ceca698e
-#   version string 3.6.0 (7095b23a)
+#   commit = 8f3119a22a7120814c54a5811c7a3aa59be0fd4e
+#   version string 3.6.0 (8f3119a2)
 # asv has one environment_type, so this yml cannot be bound to one
 # class. Those classes call EONCLIENT. environments/eon-3.5.0.yml
 # remains the conda-forge 3.5.0 pin.

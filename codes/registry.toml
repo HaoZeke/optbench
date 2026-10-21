@@ -30,9 +30,9 @@ name = "eOn"
 role = "minimization and saddle search"
 repository = "https://github.com/TheochemUI/eon"
 ref = "develop"
-commit = "7095b23ac17d49f434a5e08ccb072897ceca698e"
-committed = "2026-10-16"
-note = "develop HEAD built from source. The version string is 3.6.0 (7095b23a). GPR-dimer is absent: TheochemUI/gpr_optim is private and eonclient reports GPRD disabled. This pin is not the conda-forge 3.5.0 binary."
+commit = "8f3119a22a7120814c54a5811c7a3aa59be0fd4e"
+committed = "2026-10-21"
+note = "develop at 8f3119a22a7120814c54a5811c7a3aa59be0fd4e, the merge of pull request 788. The version string is 3.6.0 (8f3119a2). Min-mode rows use this binary. Rows that do not call a min-mode translation stay on 7095b23ac17d49f434a5e08ccb072897ceca698e. GPR-dimer is absent: TheochemUI/gpr_optim is private and eonclient reports GPRD disabled. This pin is not the conda-forge 3.5.0 binary."
 
 [[code]]
 id = "eon-svn"
