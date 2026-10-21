@@ -1,5 +1,5 @@
 {
-  "full_n": null,
+  "full_n": 200,
   "history": [],
   "id": "globalopt/lj75",
   "not_comparable": [],
@@ -21,7 +21,7 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": null,
+      "full_n": 200,
       "history": false,
       "max_calls": 25281.0,
       "mean_calls": 17134.035,
