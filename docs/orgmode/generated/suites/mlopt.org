@@ -7,12 +7,13 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>EON (SVN r2549)</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>EON (SVN r2549)</th><th>eOn (develop b0bd4d5a)</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="mlopt/C2H4">
    <th scope="row"><a href="#C2H4">C2H4</a></th>
    <td data-code="eOn">—</td>
    <td data-code="Eon svn">—</td>
    <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="eOn (develop b0bd4d5a)">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
@@ -30,6 +31,7 @@
    <td data-code="eOn">—</td>
    <td data-code="Eon svn">—</td>
    <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="eOn (develop b0bd4d5a)">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>

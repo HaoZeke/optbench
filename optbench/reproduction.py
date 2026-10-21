@@ -217,6 +217,10 @@ MATCHES: list[dict] = [
                 "label": "eOn (develop b0bd4d5a)",
                 "template": "eon-develop-500350d9/bh-lj100-binary",
                 "path": "results/campaign/eon-develop-500350d9-bh-lj100-binary.dat",
+                "avg_energy": -530.059,
+                "min_energy": -550.764,
+                "max_energy": -511.999,
+                "par2_mean": 4000000.0,
             },
         },
         "rank_only": True,
@@ -324,7 +328,11 @@ CAUSE_TEXT = {
         "EON (SVN r2549) has 100 starts. Hits 0. PAR-2 mean 4000000. "
         "Mean and median force calls are 2000000. "
         "Mean final energy is -530.059, against the archive -584.579. "
-        "Min and max are -550.76 and -512. Mean quenches per start are 312.41."
+        "Min and max are -550.76 and -512. Mean quenches per start are 312.41. "
+        "eOn (develop b0bd4d5a) 3.6.0 has 100 starts. Hits 0. "
+        "PAR-2 mean 4000000. Mean and median force calls are 2000000. "
+        "Mean final energy is -530.059. Median final energy is -530.220. "
+        "Min and max are -550.764 and -511.999. Quenches per start are 200."
     ),
     "akmc_vs_langevin": (
         "The archive rows are Langevin parallel replica. The harness rows are AKMC. "

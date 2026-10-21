@@ -1008,7 +1008,7 @@
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/lj100-binary">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">eon-svn-r2549/bh-lj100-binary</td><td data-field="version">EON (SVN r2549) r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">4e+06</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0369935</td><td data-field="median_calls">2e+06</td><td data-field="mean_calls">2e+06</td><td data-field="failures">crash 0, divergence 0, cap 100, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">eon-develop-500350d9/bh-lj100-binary</td><td data-field="version">eOn (develop b0bd4d5a) 3.6.0</td><td data-field="commit">b0bd4d5a5e0f</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">4e+06</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0369935</td><td data-field="median_calls">2e+06</td><td data-field="mean_calls">2e+06</td><td data-field="failures">crash 0, divergence 0, cap 100, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    <p><a href="generated/suites/globalopt.html#lj100-binary">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="lj100-binary-legacy">

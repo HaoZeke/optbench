@@ -7,12 +7,13 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>EON (SVN r2549)</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>EON (SVN r2549)</th><th>eOn (develop b0bd4d5a)</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="globalopt/lj100-binary">
    <th scope="row"><a href="#lj100-binary">Binary Lennard-Jones 100</a></th>
    <td data-code="eOn">—</td>
    <td data-code="Eon svn">—</td>
    <td data-code="EON (SVN r2549)" data-template="eon-svn-r2549/bh-lj100-binary" data-par2="4e+06"><span class="bench-score">4e+06</span><a href="#lj100-binary-templates">eon-svn-r2549/bh-lj100-binary</a></td>
+   <td data-code="eOn (develop b0bd4d5a)" data-template="eon-develop-500350d9/bh-lj100-binary" data-par2="4e+06"><span class="bench-score">4e+06</span><a href="#lj100-binary-templates">eon-develop-500350d9/bh-lj100-binary</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
@@ -30,6 +31,7 @@
    <td data-code="eOn">—</td>
    <td data-code="Eon svn">—</td>
    <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="eOn (develop b0bd4d5a)">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
@@ -47,6 +49,7 @@
    <td data-code="eOn">—</td>
    <td data-code="Eon svn">—</td>
    <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="eOn (develop b0bd4d5a)">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
@@ -64,6 +67,7 @@
    <td data-code="eOn">—</td>
    <td data-code="Eon svn">—</td>
    <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="eOn (develop b0bd4d5a)">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
@@ -81,6 +85,7 @@
    <td data-code="eOn">—</td>
    <td data-code="Eon svn">—</td>
    <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="eOn (develop b0bd4d5a)">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
@@ -98,6 +103,7 @@
    <td data-code="eOn">—</td>
    <td data-code="Eon svn">—</td>
    <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="eOn (develop b0bd4d5a)">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
@@ -115,6 +121,7 @@
    <td data-code="eOn">—</td>
    <td data-code="Eon svn">—</td>
    <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="eOn (develop b0bd4d5a)">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
@@ -132,6 +139,7 @@
    <td data-code="eOn">—</td>
    <td data-code="Eon svn">—</td>
    <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="eOn (develop b0bd4d5a)">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="ASE">—</td>
@@ -155,11 +163,12 @@
    <figure class="bench-plot"><a href="../../_static/board/globalopt-lj100-binary-cost.svg"><picture><source srcset="../../_static/board/globalopt-lj100-binary-cost.webp" type="image/webp"><img src="../../_static/board/globalopt-lj100-binary-cost.png" alt="Cost versus success for globalopt/lj100-binary" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <p class="bench-gaps">No performance profile. One start has no finite cost.</p>
    <details class="bench-details" id="lj100-binary-templates">
-   <summary>All templates (1 ranked)</summary>
+   <summary>All templates (2 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="globalopt/lj100-binary">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td data-field="template">eon-develop-500350d9/bh-lj100-binary</td><td data-field="version">eOn (develop b0bd4d5a) 3.6.0</td><td data-field="commit">b0bd4d5a5e0f</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">4e+06</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0369935</td><td data-field="median_calls">2e+06</td><td data-field="mean_calls">2e+06</td><td data-field="failures">crash 0, divergence 0, cap 100, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">eon-svn-r2549/bh-lj100-binary</td><td data-field="version">EON (SVN r2549) r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">4e+06</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0369935</td><td data-field="median_calls">2e+06</td><td data-field="mean_calls">2e+06</td><td data-field="failures">crash 0, divergence 0, cap 100, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    </details>

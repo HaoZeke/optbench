@@ -314,7 +314,21 @@ The number is written only after the run finishes under the problem rule.
    <td><a href="https://github.com/TheochemUI/eon">https://github.com/TheochemUI/eon</a></td>
    </tr>
    </tbody></table></div>
-   <p>No full ranked run.</p>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="globalopt/lj100-binary" data-template="eon-develop-500350d9/bh-lj100-binary">
+   <td>Binary Lennard-Jones 100</td>
+   <td data-field="template">eon-develop-500350d9/bh-lj100-binary</td>
+   <td data-field="version">eOn (develop b0bd4d5a) 3.6.0</td>
+   <td data-field="commit">b0bd4d5a5e0f</td>
+   <td data-field="par2_mean">4e+06</td>
+   <td data-field="mean_calls">2e+06</td>
+   <td data-field="median_calls">2e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 100, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table></div>
    <h3>rgmin</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
