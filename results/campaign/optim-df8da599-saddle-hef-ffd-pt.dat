@@ -1,7 +1,7 @@
-# rep 1 force_calls 19029940 unique_saddles 1 fraction_connected 0.0 total_searches 20000 connected 0 minimize_calls 16 minimum_converged 1 seed 20261016
-force_calls 19029940.0
-force_calls_min 19029940
-force_calls_max 19029940
+# rep 1 force_calls 19030508 unique_saddles 3 fraction_connected 0.00015 total_searches 20000 connected 3 minimize_calls 16 minimum_converged 1 seed 20261016
+force_calls 19030508.0
+force_calls_min 19030508
+force_calls_max 19030508
 code optim
 code_version df8da599
 commit df8da599267534fbe43a250e578f7396a7946311
@@ -15,5 +15,5 @@ nfailed 1
 goal 27
 cap 5064
 n 20000
-par2_mean 10128.0
-v2_nfailed 20000
+par2_mean 10126.62625
+v2_nfailed 19997
