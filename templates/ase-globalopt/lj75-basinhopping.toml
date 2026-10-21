@@ -8,7 +8,7 @@ problem = "globalopt/lj75"
 task = "basin-hopping"
 profile = "default"
 reducer = "par2"
-ranked = true
+ranked = false
 parameter_source = "stated"
 note = "ASE 3.29.0 BasinHopping. The local minimiser is FIRE with maxstep 0.1 and fmax 0.01, and each quench stops after 4000 steps. The next displacement starts from the quenched coordinates. kT is 0.8 in the Lennard-Jones energy unit and the displacement width is 0.5. The seed is 314159 plus the coordinate index. The energy stop and the force-call cap are the problem file."
 

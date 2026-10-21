@@ -249,7 +249,7 @@ code = "ase"
 problem = "globalopt/lj75"
 profile = "default"
 task = "basin-hopping"
-ranked = true
+ranked = false
 
 [[template]]
 id = "ase-globalopt/lj38-basin"
