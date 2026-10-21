@@ -32,9 +32,9 @@ geometries = [
 [metrics]
 required = ["force_calls", "force_calls_mean_error", "fraction_connected", "total_searches", "unique_saddles"]
 
-[scoring.legacy]
-label = "legacy"
-rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row stays labelled legacy."
+[scoring.half_even]
+label = "half-even"
+rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row keeps that mean as its published number."
 
 [scoring.v2]
 version = "par2-bootstrap"

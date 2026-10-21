@@ -35,9 +35,9 @@ force_calls = "mean of total_force_calls on the other runs, rounded with awk pri
 [scoring.run]
 failure = "force norm above force_norm, or total_force_calls >= max_force_calls"
 
-[scoring.legacy]
-label = "legacy"
-rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row stays labelled legacy."
+[scoring.half_even]
+label = "half-even"
+rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row keeps that mean as its published number."
 
 [scoring.v2]
 version = "par2-bootstrap"
