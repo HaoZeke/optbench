@@ -345,3 +345,35 @@ def test_buildcell_returns_38_atoms_for_a_fixed_seed():
     assert np.all(pos < 100.0)
     again = build_positions(binary, text, 38)
     assert again == pytest.approx(pos)
+
+
+def test_a_raised_start_is_a_failed_start(tmp_path, monkeypatch):
+    import json
+
+    import optbench.runners.airss_go as airss
+    from optbench.campaign import load_template, resolve_problem
+
+    def boom(_job):
+        raise RuntimeError("socket")
+
+    monkeypatch.setattr(airss, "search_start", boom)
+    monkeypatch.setenv("AIRSS_BUILDCELL", "/bin/true")
+    output = tmp_path / "lj38.dat"
+    summary = airss.run_template(
+        ROOT,
+        resolve_problem(ROOT, "globalopt/lj38"),
+        load_template(ROOT, "airss/lj38"),
+        geometries=None,
+        output=output,
+        workers=1,
+        work=tmp_path / "work",
+        index_stop=1,
+    )
+    assert summary["starts"] == 1
+    assert summary["nfailed"] == 1
+    assert summary["par2_mean"] == 4000000
+    row = json.loads(output.with_suffix(".starts.jsonl").read_text(encoding="utf-8").strip())
+    assert row["success"] is False
+    assert row["failure"] == "crash"
+    assert row["force_calls"] == 0
+    assert "cap 2000000" in output.read_text(encoding="utf-8")

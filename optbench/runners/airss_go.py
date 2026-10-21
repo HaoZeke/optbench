@@ -11,7 +11,8 @@ One archived start name is one independent search. The search stops
 when the harness energy is at or below the Cambridge Cluster Database
 minimum plus the problem tolerance. A problem force-call cap, or the
 template ``failure_cap`` when the problem leaves the number out, also
-stops the search.
+stops the search. A start that raises is stored as a failed start and
+stays in the PAR-2 mean.
 """
 
 from __future__ import annotations
@@ -507,6 +508,16 @@ def _job(
     if config.get("budget_structures"):
         job["budget"] = int(config["budget_structures"])
     return job
+
+
+def _start_or_failure(job: dict, future=None) -> dict:
+    """One start. An exception is a failed start, not an aborted run."""
+    try:
+        if future is None:
+            return search_start(job)
+        return future.result()
+    except Exception as exc:
+        return _crash(job, 0, None, 0, f"{type(exc).__name__}: {exc}")
 
 
 def _crash(job: dict, calls: int, energy: float | None, structures: int, error: str) -> dict:
@@ -1073,8 +1084,6 @@ def run_template(
     index_start: int = 0,
     index_stop: int | None = None,
 ) -> dict:
-    from optbench.campaign import write_starts
-
     stated = template.get("problem")
     if stated and stated != problem["id"]:
         raise ValueError(f"{template['id']} belongs to {stated}")
@@ -1149,7 +1158,7 @@ def run_template(
         elif workers <= 1:
             done = total - len(pending)
             for job in pending:
-                record = search_start(job)
+                record = _start_or_failure(job)
                 _store(record)
                 done += 1
                 print(
@@ -1162,10 +1171,10 @@ def run_template(
 
             context = mp.get_context("spawn")
             with ProcessPoolExecutor(max_workers=workers, mp_context=context) as pool:
-                futures = [pool.submit(search_start, job) for job in pending]
+                futures = {pool.submit(search_start, job): job for job in pending}
                 done = total - len(pending)
                 for future in as_completed(futures):
-                    record = future.result()
+                    record = _start_or_failure(futures[future], future)
                     _store(record)
                     done += 1
                     print(
@@ -1177,13 +1186,6 @@ def run_template(
         progress_file.close()
     records = [saved[job["index"]] for job in jobs]
     budget_only = reference is None and cap is None
-    crashes = [row for row in records if row.get("failure") == "crash"]
-    if crashes:
-        partial_path = output.with_suffix(".partial.jsonl")
-        for row in records:
-            row.pop("index", None)
-        write_starts(partial_path, records)
-        raise RuntimeError(f"{len(crashes)} of {len(records)} starts crashed; wrote {partial_path}")
     progress_path.unlink(missing_ok=True)
     if checkpoint_dir.is_dir():
         shutil.rmtree(checkpoint_dir)
