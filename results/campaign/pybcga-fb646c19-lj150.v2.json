@@ -1,0 +1,6271 @@
+{
+  "bootstrap_resamples": 2000,
+  "bootstrap_seed": 20261015,
+  "note": "Library default. Population 10, 10 generations, 8 offspring, mutation probability 0.1, tournament size 3, duplicates kept. The first member of the initial population is the archived geometry. The other members use numpy seed 20261015 plus the start index. The local quench stops at Euclidean force 0.001 or 1000 evaluations. The force cap is one quench budget for the initial population and, in each generation, the offspring plus one mutant of every member of that expanded population. Success is the Cambridge N=150 minimum plus 0.001. The search stops at that budget, or earlier at the problem force-call cap of 2000000.",
+  "par_factor": 2,
+  "problem": "globalopt/lj150",
+  "reference_energy": -893.310258,
+  "runs": [
+    {
+      "algorithm": "BCGA",
+      "cap": 2000000,
+      "code": "PyBCGA",
+      "code_version": "0",
+      "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+      "entry": "pybcga-fb646c19-lj150",
+      "legacy": {
+        "force_calls": null,
+        "force_calls_max": null,
+        "force_calls_min": null,
+        "median": null,
+        "nfailed": 100
+      },
+      "metrics": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 2000000,
+        "includes_failures": true,
+        "iqr": 0.0,
+        "iqr_high": 0.0,
+        "iqr_low": 0.0,
+        "mean": 4000000.0,
+        "median": 4000000.0,
+        "median_high": 4000000.0,
+        "median_low": 4000000.0,
+        "n": 100,
+        "n_cap": 0,
+        "n_crash": 0,
+        "n_divergence": 0,
+        "n_wrong_stationary": 100,
+        "nfailed": 100,
+        "par2_mean": 4000000.0,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 4000000.0,
+        "q75": 4000000.0,
+        "scoring": "par2-wilson-bootstrap",
+        "success_only_mean": null,
+        "success_rate": 0.0,
+        "successes": 0,
+        "wilson_high": 0.03699349820698568,
+        "wilson_low": 0.0
+      },
+      "parameters": {
+        "mass_extinction": false,
+        "max_generation": 10,
+        "method": "pybcga",
+        "mutant_rate": 0.1,
+        "offspring": 8,
+        "pop_size": 10,
+        "quench_force": 0.001,
+        "quench_maxfun": 1000,
+        "remove_duplicates": false,
+        "seed": 20261015,
+        "tournament": 3
+      },
+      "present_source": true,
+      "provenance": {
+        "code": "PyBCGA",
+        "code_version": "0",
+        "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+        "machine": {
+          "machine": "x86_64",
+          "node": "cursor",
+          "python": "3.12.3",
+          "system": "Linux"
+        },
+        "parameters": {
+          "mass_extinction": false,
+          "max_generation": 10,
+          "method": "pybcga",
+          "mutant_rate": 0.1,
+          "offspring": 8,
+          "pop_size": 10,
+          "quench_force": 0.001,
+          "quench_maxfun": 1000,
+          "remove_duplicates": false,
+          "seed": 20261015,
+          "tournament": 3
+        }
+      },
+      "starts": [
+        {
+          "calls_to_best": 36027,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -869.2835926903522,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 44157,
+          "force_norm": 0.0007485450699998763,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 68.11065613799929,
+          "start": "coords.1",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              479,
+              -836.6234414754457
+            ],
+            [
+              4375,
+              -838.4807506419386
+            ],
+            [
+              6647,
+              -841.2728237572595
+            ],
+            [
+              8004,
+              -845.9632366986016
+            ],
+            [
+              11475,
+              -848.2875926521488
+            ],
+            [
+              17280,
+              -854.7145129359665
+            ],
+            [
+              25800,
+              -854.7145129428409
+            ],
+            [
+              33433,
+              -869.2387800535071
+            ],
+            [
+              36027,
+              -869.2835926903522
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 34611,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -869.7684129252856,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 43464,
+          "force_norm": 0.0009328265798782774,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 67.98293196899976,
+          "start": "coords.2",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              458,
+              -844.3830900272859
+            ],
+            [
+              3647,
+              -848.3998111546782
+            ],
+            [
+              7632,
+              -854.7898048013293
+            ],
+            [
+              13002,
+              -862.0163937739696
+            ],
+            [
+              21793,
+              -867.8334666588328
+            ],
+            [
+              34611,
+              -869.7684129252855
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 39350,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -869.7819976338443,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 44898,
+          "force_norm": 0.0009770266665087106,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 72.5361254039999,
+          "start": "coords.3",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              580,
+              -834.3343048164226
+            ],
+            [
+              1178,
+              -836.4217813285063
+            ],
+            [
+              3473,
+              -842.3072658872927
+            ],
+            [
+              5675,
+              -849.5548174660807
+            ],
+            [
+              8729,
+              -851.2857244314883
+            ],
+            [
+              11587,
+              -857.9715742106712
+            ],
+            [
+              13975,
+              -862.3704166566403
+            ],
+            [
+              24881,
+              -864.2255581517203
+            ],
+            [
+              25072,
+              -867.5981092873794
+            ],
+            [
+              37289,
+              -868.0733403585731
+            ],
+            [
+              38053,
+              -868.1812646697908
+            ],
+            [
+              39350,
+              -869.7819976338443
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 31992,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -867.6176835786889,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 47138,
+          "force_norm": 0.0008871504624774077,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 76.90689625400046,
+          "start": "coords.4",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              426,
+              -843.1039508382046
+            ],
+            [
+              11140,
+              -844.127612511634
+            ],
+            [
+              11985,
+              -860.176240810546
+            ],
+            [
+              16911,
+              -860.3262707630281
+            ],
+            [
+              18982,
+              -862.1184588756491
+            ],
+            [
+              28702,
+              -865.891946391502
+            ],
+            [
+              31992,
+              -867.6176835786888
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 30000,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -872.73086288559,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 47957,
+          "force_norm": 0.000951322454313023,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 79.4109091979999,
+          "start": "coords.5",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              673,
+              -842.6521388611393
+            ],
+            [
+              7802,
+              -846.8571989083064
+            ],
+            [
+              9192,
+              -850.0908907038012
+            ],
+            [
+              10639,
+              -852.0372181246514
+            ],
+            [
+              14261,
+              -860.814278320096
+            ],
+            [
+              24672,
+              -862.014345265902
+            ],
+            [
+              25057,
+              -863.910555176833
+            ],
+            [
+              30000,
+              -872.73086288559
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 33574,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -873.8268741803565,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 46059,
+          "force_norm": 0.000649935965278,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 75.56551424400004,
+          "start": "coords.6",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              733,
+              -857.9635434752919
+            ],
+            [
+              13883,
+              -861.5393525575079
+            ],
+            [
+              27082,
+              -864.06365307506
+            ],
+            [
+              27450,
+              -867.8896500180094
+            ],
+            [
+              30027,
+              -868.1235354277765
+            ],
+            [
+              30435,
+              -870.7020190412878
+            ],
+            [
+              33574,
+              -873.8268741803565
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 32996,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -867.1942987724907,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 38191,
+          "force_norm": 0.0009635361622894848,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 62.14938985200024,
+          "start": "coords.7",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              589,
+              -845.1506115011537
+            ],
+            [
+              2448,
+              -850.62129627897
+            ],
+            [
+              13039,
+              -853.2407191593529
+            ],
+            [
+              15830,
+              -855.6712664655972
+            ],
+            [
+              15967,
+              -856.19792115046
+            ],
+            [
+              20060,
+              -862.2144627352573
+            ],
+            [
+              22285,
+              -863.1654667008568
+            ],
+            [
+              26853,
+              -863.2014199751436
+            ],
+            [
+              29797,
+              -863.201419977164
+            ],
+            [
+              32996,
+              -867.1942987724906
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 48370,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -865.4162201323857,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 50258,
+          "force_norm": 0.0007009993209364002,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 82.18972588500037,
+          "start": "coords.8",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              984,
+              -837.4808301105194
+            ],
+            [
+              4015,
+              -846.8441855938372
+            ],
+            [
+              7503,
+              -853.6681442377376
+            ],
+            [
+              15867,
+              -858.3762012874358
+            ],
+            [
+              27281,
+              -861.4330561129591
+            ],
+            [
+              48370,
+              -865.4162201323857
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 34049,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -868.3876447624493,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 43597,
+          "force_norm": 0.000932322130975491,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 71.09093982200011,
+          "start": "coords.9",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              459,
+              -830.9149249358759
+            ],
+            [
+              2311,
+              -839.2693239757693
+            ],
+            [
+              4369,
+              -840.3715123245175
+            ],
+            [
+              7451,
+              -843.6705951527542
+            ],
+            [
+              8454,
+              -848.0621824825664
+            ],
+            [
+              17786,
+              -848.1650936605402
+            ],
+            [
+              19034,
+              -849.7904154436579
+            ],
+            [
+              20341,
+              -852.1195244979559
+            ],
+            [
+              22063,
+              -857.0646252755017
+            ],
+            [
+              22283,
+              -861.9510721411943
+            ],
+            [
+              29148,
+              -862.3976815650731
+            ],
+            [
+              32386,
+              -863.5392046815953
+            ],
+            [
+              34049,
+              -868.3876447624494
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 35717,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -870.0385963750448,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 45449,
+          "force_norm": 0.0009186698620511854,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 74.18316338000022,
+          "start": "coords.10",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              493,
+              -842.8637237112064
+            ],
+            [
+              6972,
+              -846.1140875580934
+            ],
+            [
+              10356,
+              -848.0866764964525
+            ],
+            [
+              13158,
+              -852.1881325983863
+            ],
+            [
+              13429,
+              -853.1116994534444
+            ],
+            [
+              14292,
+              -857.5066328411515
+            ],
+            [
+              17074,
+              -862.9954420418867
+            ],
+            [
+              25604,
+              -864.76810583646
+            ],
+            [
+              26980,
+              -867.2157747572298
+            ],
+            [
+              30418,
+              -869.9221132266293
+            ],
+            [
+              32155,
+              -869.9832935809623
+            ],
+            [
+              35717,
+              -870.0385963750448
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 40819,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -868.5153907518794,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 46249,
+          "force_norm": 0.00086034443105657,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 71.82739983800002,
+          "start": "coords.11",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              333,
+              -844.9107860196552
+            ],
+            [
+              1830,
+              -846.56631278751
+            ],
+            [
+              10494,
+              -846.6107447599213
+            ],
+            [
+              11729,
+              -851.3288110716907
+            ],
+            [
+              19593,
+              -853.8535768116635
+            ],
+            [
+              26267,
+              -864.2815856975379
+            ],
+            [
+              31361,
+              -864.6643983134068
+            ],
+            [
+              35805,
+              -868.3631044095479
+            ],
+            [
+              40819,
+              -868.5153907518793
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 35781,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -881.2210170914127,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 47523,
+          "force_norm": 0.0007000781619653843,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 76.93001234799976,
+          "start": "coords.12",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              505,
+              -840.5896887969295
+            ],
+            [
+              6686,
+              -842.9321611427595
+            ],
+            [
+              9563,
+              -844.5295703859673
+            ],
+            [
+              13509,
+              -846.9248378301895
+            ],
+            [
+              15720,
+              -848.2064954616811
+            ],
+            [
+              16047,
+              -850.2042715017158
+            ],
+            [
+              21074,
+              -850.4516924594103
+            ],
+            [
+              25678,
+              -852.2394302597202
+            ],
+            [
+              27902,
+              -872.7156706779913
+            ],
+            [
+              30939,
+              -873.2302545965831
+            ],
+            [
+              35204,
+              -873.6880517698465
+            ],
+            [
+              35781,
+              -881.2210170914127
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 35065,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -871.263186619557,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 37186,
+          "force_norm": 0.0007918512550683706,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 56.808635805999984,
+          "start": "coords.13",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              577,
+              -845.853855497954
+            ],
+            [
+              6787,
+              -862.1318352308024
+            ],
+            [
+              24145,
+              -863.4936931105129
+            ],
+            [
+              26119,
+              -867.0312967866989
+            ],
+            [
+              27229,
+              -870.1305924447585
+            ],
+            [
+              35065,
+              -871.263186619557
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 31255,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -874.0406870849883,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 42851,
+          "force_norm": 0.0008459785172039387,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 67.06366932800029,
+          "start": "coords.14",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              438,
+              -838.330497839956
+            ],
+            [
+              1380,
+              -839.5697284334531
+            ],
+            [
+              3271,
+              -841.1553557775292
+            ],
+            [
+              7267,
+              -847.9626609729739
+            ],
+            [
+              8282,
+              -848.4321203567982
+            ],
+            [
+              9568,
+              -854.8793046338466
+            ],
+            [
+              11527,
+              -872.5294793568186
+            ],
+            [
+              31255,
+              -874.0406870849882
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 41349,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -866.8629457157006,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 47159,
+          "force_norm": 0.0006453744494348896,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 73.19203244799974,
+          "start": "coords.15",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              465,
+              -844.4663737924978
+            ],
+            [
+              1710,
+              -845.2721890609574
+            ],
+            [
+              6317,
+              -846.4937455679565
+            ],
+            [
+              8339,
+              -848.7839217675286
+            ],
+            [
+              11433,
+              -850.641524534924
+            ],
+            [
+              20149,
+              -852.1978543047773
+            ],
+            [
+              21793,
+              -853.3193419452086
+            ],
+            [
+              28912,
+              -854.4468939561323
+            ],
+            [
+              29562,
+              -857.6600149444093
+            ],
+            [
+              31718,
+              -865.2010375941647
+            ],
+            [
+              41349,
+              -866.8629457157006
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 38115,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -867.9937397009819,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 40285,
+          "force_norm": 0.0007762568297722634,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 61.76085120099924,
+          "start": "coords.16",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              338,
+              -839.9466594722134
+            ],
+            [
+              6711,
+              -845.0099525002488
+            ],
+            [
+              7705,
+              -848.1226920433804
+            ],
+            [
+              13819,
+              -849.0307348294077
+            ],
+            [
+              14123,
+              -852.183905943127
+            ],
+            [
+              18496,
+              -852.8976941297301
+            ],
+            [
+              18712,
+              -855.1789613494977
+            ],
+            [
+              19042,
+              -860.5869415304336
+            ],
+            [
+              24227,
+              -864.9237315881577
+            ],
+            [
+              26849,
+              -867.753424032398
+            ],
+            [
+              38115,
+              -867.9937397009819
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 19664,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -867.3055107938376,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 41481,
+          "force_norm": 0.0008562822281447132,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 66.41882767199968,
+          "start": "coords.17",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              545,
+              -842.2755862791098
+            ],
+            [
+              1296,
+              -846.293350035197
+            ],
+            [
+              7630,
+              -846.8581147651629
+            ],
+            [
+              9285,
+              -859.1022389081832
+            ],
+            [
+              11115,
+              -866.9845300029838
+            ],
+            [
+              15512,
+              -867.2689810183733
+            ],
+            [
+              19664,
+              -867.3055107938376
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 5970,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -870.415062023767,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 42409,
+          "force_norm": 0.0008324555749247622,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 66.72898566999993,
+          "start": "coords.18",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              373,
+              -840.1804071918862
+            ],
+            [
+              2239,
+              -854.2689805121008
+            ],
+            [
+              5970,
+              -870.415062023767
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 34808,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -869.6386484221059,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 36513,
+          "force_norm": 0.0009283830414296389,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 58.61349784899994,
+          "start": "coords.19",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              618,
+              -849.7282905777382
+            ],
+            [
+              7417,
+              -850.0521870291333
+            ],
+            [
+              8134,
+              -852.9454750001942
+            ],
+            [
+              10922,
+              -860.8747178511929
+            ],
+            [
+              12512,
+              -864.7840823238
+            ],
+            [
+              22220,
+              -866.3886570757284
+            ],
+            [
+              25730,
+              -867.8241857131416
+            ],
+            [
+              34808,
+              -869.6386484221059
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 41687,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -865.0060556658959,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 43007,
+          "force_norm": 0.0009372207046689034,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 69.09691106800074,
+          "start": "coords.20",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              558,
+              -837.0863390335294
+            ],
+            [
+              3705,
+              -840.3033293738054
+            ],
+            [
+              5530,
+              -846.5566833601977
+            ],
+            [
+              11326,
+              -855.865007324575
+            ],
+            [
+              25740,
+              -864.7744009362582
+            ],
+            [
+              41687,
+              -865.0060556658959
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 32403,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -863.0769127522328,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 40220,
+          "force_norm": 0.0008462745043477239,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 62.596131305999734,
+          "start": "coords.21",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              454,
+              -845.573099405057
+            ],
+            [
+              1080,
+              -854.5990662275815
+            ],
+            [
+              2444,
+              -857.2542694505532
+            ],
+            [
+              8797,
+              -860.1520392085354
+            ],
+            [
+              21581,
+              -860.2753580043872
+            ],
+            [
+              32403,
+              -863.0769127522328
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 52811,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -867.3156780013202,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 55283,
+          "force_norm": 0.0008457410665163226,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 87.86551177000001,
+          "start": "coords.22",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              694,
+              -842.5994042850439
+            ],
+            [
+              7195,
+              -845.6996146668804
+            ],
+            [
+              13962,
+              -846.4146268430447
+            ],
+            [
+              22653,
+              -847.7404951878513
+            ],
+            [
+              23501,
+              -854.8393620057552
+            ],
+            [
+              41671,
+              -857.0774953654559
+            ],
+            [
+              42876,
+              -865.1274642473404
+            ],
+            [
+              52811,
+              -867.3156780013202
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 587,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -873.9345341709829,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 42254,
+          "force_norm": 0.000987005414332925,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 64.03549361200021,
+          "start": "coords.23",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              587,
+              -873.9345341709832
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 40868,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -870.7110023592533,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 46850,
+          "force_norm": 0.0008469835629223209,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 72.33470014500017,
+          "start": "coords.24",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              559,
+              -844.0148632635978
+            ],
+            [
+              8121,
+              -844.5159102354926
+            ],
+            [
+              10831,
+              -844.7872372325226
+            ],
+            [
+              11318,
+              -844.9096505731585
+            ],
+            [
+              16971,
+              -849.7712039374187
+            ],
+            [
+              22147,
+              -851.8962573153293
+            ],
+            [
+              23557,
+              -855.8654333546923
+            ],
+            [
+              24886,
+              -869.7181696948288
+            ],
+            [
+              40868,
+              -870.7110023592531
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 25305,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -872.4348077091487,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 44348,
+          "force_norm": 0.0005644910041802063,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 67.0527384220004,
+          "start": "coords.25",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              378,
+              -843.0872654481952
+            ],
+            [
+              4009,
+              -846.3903929377685
+            ],
+            [
+              7755,
+              -851.8409709785999
+            ],
+            [
+              15125,
+              -852.030513162033
+            ],
+            [
+              16813,
+              -853.1508378500505
+            ],
+            [
+              17438,
+              -868.1229706033989
+            ],
+            [
+              25305,
+              -872.4348077091486
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 42926,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -874.5892237259982,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 49054,
+          "force_norm": 0.0005696056462423997,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 80.35387688999981,
+          "start": "coords.26",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              380,
+              -840.6552187582472
+            ],
+            [
+              7017,
+              -843.2027449345223
+            ],
+            [
+              10448,
+              -861.6398333831112
+            ],
+            [
+              15246,
+              -865.8549571291769
+            ],
+            [
+              25529,
+              -872.6418467538144
+            ],
+            [
+              39125,
+              -873.8618872381751
+            ],
+            [
+              42926,
+              -874.5892237259982
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 30792,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -865.4821277462329,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 41487,
+          "force_norm": 0.0005879080925199639,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 64.44745718899958,
+          "start": "coords.27",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              363,
+              -846.1084749477128
+            ],
+            [
+              3409,
+              -849.0293924575028
+            ],
+            [
+              8281,
+              -851.7800814668161
+            ],
+            [
+              13880,
+              -851.8637994938956
+            ],
+            [
+              18025,
+              -852.0565897220914
+            ],
+            [
+              19064,
+              -855.4096661525641
+            ],
+            [
+              22340,
+              -860.126023506273
+            ],
+            [
+              24919,
+              -864.8725199529556
+            ],
+            [
+              27901,
+              -865.480402541295
+            ],
+            [
+              30792,
+              -865.4821277462329
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 39361,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -873.0945121504878,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 42654,
+          "force_norm": 0.000998900848145671,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 68.11758972000007,
+          "start": "coords.28",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              390,
+              -853.6314590573197
+            ],
+            [
+              10839,
+              -861.0977422811892
+            ],
+            [
+              13379,
+              -862.6340313921457
+            ],
+            [
+              14058,
+              -863.7840306591606
+            ],
+            [
+              22708,
+              -864.0002076112835
+            ],
+            [
+              30078,
+              -864.1819237081392
+            ],
+            [
+              30663,
+              -864.3061665640978
+            ],
+            [
+              31142,
+              -864.4682205335082
+            ],
+            [
+              34827,
+              -865.4540328339915
+            ],
+            [
+              37764,
+              -868.704730088139
+            ],
+            [
+              39361,
+              -873.0945121504877
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 35829,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -865.5673960793479,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 43301,
+          "force_norm": 0.0008613935755302048,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 71.88244637599928,
+          "start": "coords.29",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              621,
+              -843.2940329599337
+            ],
+            [
+              8844,
+              -845.0894024763211
+            ],
+            [
+              9580,
+              -858.6213130616234
+            ],
+            [
+              14978,
+              -860.6513667214024
+            ],
+            [
+              21544,
+              -861.5348249306055
+            ],
+            [
+              29725,
+              -864.338064166782
+            ],
+            [
+              35829,
+              -865.5673960793479
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 26616,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -868.4848455794067,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 39304,
+          "force_norm": 0.0005954072675121444,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 64.66010625699982,
+          "start": "coords.30",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              425,
+              -846.5907828048266
+            ],
+            [
+              5951,
+              -853.2444491990325
+            ],
+            [
+              14042,
+              -853.8277036484506
+            ],
+            [
+              18302,
+              -861.3335149965885
+            ],
+            [
+              18539,
+              -865.9698469692398
+            ],
+            [
+              21717,
+              -867.1470130956808
+            ],
+            [
+              26616,
+              -868.4848455794069
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 46620,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -868.8453874112109,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 48661,
+          "force_norm": 0.0007879847740047984,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 80.0803607099997,
+          "start": "coords.31",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              306,
+              -839.1644910343418
+            ],
+            [
+              1307,
+              -843.9214832945511
+            ],
+            [
+              9704,
+              -846.6464842123376
+            ],
+            [
+              13573,
+              -858.2117397186241
+            ],
+            [
+              18016,
+              -861.1882716969034
+            ],
+            [
+              23166,
+              -866.759580692158
+            ],
+            [
+              39875,
+              -868.567668469844
+            ],
+            [
+              46620,
+              -868.8453874112109
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 41727,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -871.8298093504407,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 44274,
+          "force_norm": 0.0007694341375726263,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 73.28008166099971,
+          "start": "coords.32",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              310,
+              -840.0532432748255
+            ],
+            [
+              6791,
+              -842.6667555486872
+            ],
+            [
+              7443,
+              -847.9443638804598
+            ],
+            [
+              13052,
+              -850.0582106086572
+            ],
+            [
+              17670,
+              -852.0447454584245
+            ],
+            [
+              23095,
+              -852.4407309427323
+            ],
+            [
+              24641,
+              -859.0632075259391
+            ],
+            [
+              26987,
+              -861.410862529331
+            ],
+            [
+              27349,
+              -867.2048337314096
+            ],
+            [
+              38754,
+              -868.1961046304073
+            ],
+            [
+              38905,
+              -869.1684537475796
+            ],
+            [
+              41727,
+              -871.8298093504407
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 45551,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -865.888154205511,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 45889,
+          "force_norm": 0.0009119144604664746,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 76.64719729099943,
+          "start": "coords.33",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              472,
+              -842.7630784438095
+            ],
+            [
+              4833,
+              -842.9362981994449
+            ],
+            [
+              7462,
+              -845.8427691803618
+            ],
+            [
+              9158,
+              -847.0628180428057
+            ],
+            [
+              12257,
+              -849.026979131608
+            ],
+            [
+              18147,
+              -849.8004196783243
+            ],
+            [
+              20889,
+              -850.7226239080223
+            ],
+            [
+              24502,
+              -852.0010879845242
+            ],
+            [
+              33376,
+              -854.1766187368476
+            ],
+            [
+              33565,
+              -855.7715412360376
+            ],
+            [
+              37169,
+              -858.5521070062412
+            ],
+            [
+              38749,
+              -859.0298165829224
+            ],
+            [
+              41250,
+              -859.0298165892059
+            ],
+            [
+              41984,
+              -859.3440498397334
+            ],
+            [
+              45373,
+              -864.9398457251532
+            ],
+            [
+              45551,
+              -865.888154205511
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 22178,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -871.8970092775663,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 36906,
+          "force_norm": 0.0008405025401944068,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 61.50805239500005,
+          "start": "coords.34",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              387,
+              -843.9156011759937
+            ],
+            [
+              7175,
+              -845.2711304842281
+            ],
+            [
+              8077,
+              -847.4445385690171
+            ],
+            [
+              8453,
+              -847.7962018204602
+            ],
+            [
+              9133,
+              -865.2855345462268
+            ],
+            [
+              22178,
+              -871.8970092775662
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 33115,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -863.1662382421262,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 39737,
+          "force_norm": 0.0007299730979044308,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 66.32860218699989,
+          "start": "coords.35",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              535,
+              -841.1784363389218
+            ],
+            [
+              1565,
+              -844.4160704690378
+            ],
+            [
+              6016,
+              -844.7893997558323
+            ],
+            [
+              7655,
+              -845.7374087423959
+            ],
+            [
+              8656,
+              -847.4808904544293
+            ],
+            [
+              9791,
+              -849.2531162071247
+            ],
+            [
+              10371,
+              -855.9330251240847
+            ],
+            [
+              11963,
+              -857.7383503184975
+            ],
+            [
+              17002,
+              -860.3913256306832
+            ],
+            [
+              27186,
+              -862.9708882008289
+            ],
+            [
+              33115,
+              -863.1662382421264
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 17168,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -869.7332317084932,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 40830,
+          "force_norm": 0.000651214780931028,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 67.09653556300054,
+          "start": "coords.36",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              389,
+              -841.1838355279251
+            ],
+            [
+              7793,
+              -841.9655597806862
+            ],
+            [
+              8584,
+              -845.2218488273226
+            ],
+            [
+              10323,
+              -847.0335008116456
+            ],
+            [
+              14388,
+              -859.1632696101766
+            ],
+            [
+              17168,
+              -869.7332317084932
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 37826,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -865.5604761208323,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 41788,
+          "force_norm": 0.0007194299799754239,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 70.55843306600036,
+          "start": "coords.37",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              561,
+              -841.7823728038339
+            ],
+            [
+              1787,
+              -850.138667088367
+            ],
+            [
+              12856,
+              -856.0876920915199
+            ],
+            [
+              20065,
+              -856.0984318922458
+            ],
+            [
+              20350,
+              -863.7058779615954
+            ],
+            [
+              26880,
+              -864.6468746227746
+            ],
+            [
+              37826,
+              -865.5604761208323
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 31213,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -870.9379735320218,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 39429,
+          "force_norm": 0.0008283811098663192,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 66.94861885199953,
+          "start": "coords.38",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              375,
+              -841.9667908414376
+            ],
+            [
+              1376,
+              -843.2691345674715
+            ],
+            [
+              2781,
+              -845.5193341387247
+            ],
+            [
+              7503,
+              -852.4408582703285
+            ],
+            [
+              7837,
+              -855.4852534689174
+            ],
+            [
+              8276,
+              -863.4024223208554
+            ],
+            [
+              12943,
+              -868.3984125468429
+            ],
+            [
+              24560,
+              -868.5576183589037
+            ],
+            [
+              27902,
+              -869.6820101423061
+            ],
+            [
+              31213,
+              -870.9379735320219
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 29224,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -873.9909317460833,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 42593,
+          "force_norm": 0.0008700144710426574,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 73.00686386500001,
+          "start": "coords.39",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              312,
+              -841.0270969409868
+            ],
+            [
+              1304,
+              -843.3049792449615
+            ],
+            [
+              2489,
+              -844.7110893290617
+            ],
+            [
+              7742,
+              -847.7179643414254
+            ],
+            [
+              8445,
+              -848.8256400688069
+            ],
+            [
+              11565,
+              -852.3871453013473
+            ],
+            [
+              19074,
+              -852.7201919677375
+            ],
+            [
+              25450,
+              -853.432987861097
+            ],
+            [
+              26231,
+              -868.2713622680325
+            ],
+            [
+              29224,
+              -873.9909317460833
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 41775,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -876.7557257363105,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 50988,
+          "force_norm": 0.0008465380339535343,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 87.35863454500031,
+          "start": "coords.40",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              475,
+              -847.7675697431433
+            ],
+            [
+              17014,
+              -851.2092574004897
+            ],
+            [
+              23528,
+              -858.9725622563142
+            ],
+            [
+              38528,
+              -873.3616117361686
+            ],
+            [
+              41775,
+              -876.7557257363105
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 51313,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -854.5946036431509,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 54604,
+          "force_norm": 0.0009431732454076663,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 92.7191862159998,
+          "start": "coords.41",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              732,
+              -842.1019680838896
+            ],
+            [
+              10638,
+              -843.7465728870379
+            ],
+            [
+              12557,
+              -844.9853758376971
+            ],
+            [
+              14740,
+              -846.1306919902892
+            ],
+            [
+              19155,
+              -847.8183115039124
+            ],
+            [
+              31119,
+              -849.1922853393714
+            ],
+            [
+              31476,
+              -850.9382898904935
+            ],
+            [
+              33858,
+              -851.7216153908364
+            ],
+            [
+              35453,
+              -853.245433680406
+            ],
+            [
+              41106,
+              -854.1878216120688
+            ],
+            [
+              51313,
+              -854.5946036431509
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 35483,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -864.9614727028224,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 46145,
+          "force_norm": 0.0006018182183998233,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 77.39623157999995,
+          "start": "coords.42",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              501,
+              -843.6755761459572
+            ],
+            [
+              6991,
+              -845.1655769212233
+            ],
+            [
+              9409,
+              -845.8178044715647
+            ],
+            [
+              11743,
+              -849.1748226649903
+            ],
+            [
+              21127,
+              -850.172811195748
+            ],
+            [
+              22761,
+              -850.3299543365426
+            ],
+            [
+              24034,
+              -850.3395378239964
+            ],
+            [
+              27024,
+              -858.1682118233306
+            ],
+            [
+              35483,
+              -864.9614727028222
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 46467,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -875.0773110767385,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 46752,
+          "force_norm": 0.0007302689806167034,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 79.06367012099963,
+          "start": "coords.43",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              430,
+              -841.8471004671017
+            ],
+            [
+              1962,
+              -842.9537437674298
+            ],
+            [
+              6664,
+              -844.4357494689814
+            ],
+            [
+              7083,
+              -847.48950933631
+            ],
+            [
+              7589,
+              -853.1165220029262
+            ],
+            [
+              12185,
+              -853.9711882371599
+            ],
+            [
+              15768,
+              -855.1663758816416
+            ],
+            [
+              26205,
+              -864.4849224691468
+            ],
+            [
+              36245,
+              -868.9086893573249
+            ],
+            [
+              39384,
+              -870.6715016136407
+            ],
+            [
+              46467,
+              -875.0773110767385
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 40691,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -874.3860527924912,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 42505,
+          "force_norm": 0.0008845357086901097,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 71.50271810499999,
+          "start": "coords.44",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              872,
+              -858.1676250724183
+            ],
+            [
+              9560,
+              -860.0675987047796
+            ],
+            [
+              12239,
+              -862.4846428731149
+            ],
+            [
+              17390,
+              -869.5236130917657
+            ],
+            [
+              34367,
+              -872.0535078324565
+            ],
+            [
+              40352,
+              -873.9806384399943
+            ],
+            [
+              40691,
+              -874.3860527924912
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 32685,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -866.2653205798796,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 40028,
+          "force_norm": 0.0007845308320504638,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 68.09273106399996,
+          "start": "coords.45",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              311,
+              -837.7196052734977
+            ],
+            [
+              1937,
+              -849.9657297022353
+            ],
+            [
+              8227,
+              -855.2030238314493
+            ],
+            [
+              11904,
+              -862.1643913317727
+            ],
+            [
+              25320,
+              -864.7378136553405
+            ],
+            [
+              32685,
+              -866.2653205798795
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 45430,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -870.2766796353592,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 51385,
+          "force_norm": 0.0008448130740318385,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 86.10177897499943,
+          "start": "coords.46",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              412,
+              -836.944035928982
+            ],
+            [
+              1923,
+              -843.0617929385131
+            ],
+            [
+              7818,
+              -847.2853657916928
+            ],
+            [
+              19015,
+              -848.7821060224712
+            ],
+            [
+              20096,
+              -851.8731213214656
+            ],
+            [
+              22440,
+              -852.814096938552
+            ],
+            [
+              27149,
+              -853.3533180307481
+            ],
+            [
+              30536,
+              -868.4864194542481
+            ],
+            [
+              45430,
+              -870.2766796353593
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 43236,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -868.2425138386471,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 46699,
+          "force_norm": 0.0008295719077069263,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 79.38916705300016,
+          "start": "coords.47",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              470,
+              -840.758588085413
+            ],
+            [
+              3727,
+              -844.1036844438847
+            ],
+            [
+              14399,
+              -845.8205446156952
+            ],
+            [
+              16654,
+              -846.2535130258335
+            ],
+            [
+              18249,
+              -850.0957681039838
+            ],
+            [
+              21384,
+              -854.1379143918715
+            ],
+            [
+              27045,
+              -867.6437782818789
+            ],
+            [
+              43236,
+              -868.2425138386471
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 47506,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -869.2272281872473,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 50576,
+          "force_norm": 0.000949140224624027,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 85.33408493599927,
+          "start": "coords.48",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              481,
+              -846.4954172078565
+            ],
+            [
+              12858,
+              -851.9926491936202
+            ],
+            [
+              18199,
+              -854.8638293189723
+            ],
+            [
+              25918,
+              -869.0835473225976
+            ],
+            [
+              47506,
+              -869.2272281872473
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 34393,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -869.7529095466955,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 40019,
+          "force_norm": 0.0009057849693660063,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 67.33030428300026,
+          "start": "coords.49",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              669,
+              -851.9581309018595
+            ],
+            [
+              11081,
+              -857.1491883571615
+            ],
+            [
+              21744,
+              -863.1663635935324
+            ],
+            [
+              26527,
+              -867.4079582974377
+            ],
+            [
+              34393,
+              -869.7529095466956
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 9499,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -877.5463782121259,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 37972,
+          "force_norm": 0.0009631684671990216,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 64.04202058499959,
+          "start": "coords.50",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              423,
+              -836.7404755547558
+            ],
+            [
+              1750,
+              -842.6474692513469
+            ],
+            [
+              4468,
+              -850.4329050204711
+            ],
+            [
+              5999,
+              -851.7149182850384
+            ],
+            [
+              6635,
+              -854.3749437966256
+            ],
+            [
+              7534,
+              -862.8136859605465
+            ],
+            [
+              9499,
+              -877.5463782121259
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 52998,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -859.8478825691898,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 53524,
+          "force_norm": 0.0009378564873119781,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 90.52410059199974,
+          "start": "coords.51",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              645,
+              -841.9668360557624
+            ],
+            [
+              3353,
+              -843.5316649513452
+            ],
+            [
+              6343,
+              -845.2582889618038
+            ],
+            [
+              14125,
+              -846.6662648004284
+            ],
+            [
+              17209,
+              -848.2725080045268
+            ],
+            [
+              17761,
+              -849.6232743696561
+            ],
+            [
+              19146,
+              -852.3330856861999
+            ],
+            [
+              22361,
+              -858.4170153106807
+            ],
+            [
+              30423,
+              -859.0597706639536
+            ],
+            [
+              46361,
+              -859.4675630123238
+            ],
+            [
+              52998,
+              -859.8478825691898
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 31423,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -856.7408892805627,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 46403,
+          "force_norm": 0.0008244193168551156,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 78.42943935600033,
+          "start": "coords.52",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              561,
+              -848.507111317789
+            ],
+            [
+              7402,
+              -849.3975745947722
+            ],
+            [
+              12336,
+              -849.5514006775418
+            ],
+            [
+              17803,
+              -850.3919566754589
+            ],
+            [
+              20879,
+              -855.0381908596185
+            ],
+            [
+              27567,
+              -855.1198383270495
+            ],
+            [
+              29812,
+              -856.0363625447395
+            ],
+            [
+              31423,
+              -856.7408892805627
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 28597,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -868.3983428926181,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 41972,
+          "force_norm": 0.0006571228085009724,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 71.92146937500002,
+          "start": "coords.53",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              502,
+              -837.3991109191606
+            ],
+            [
+              6095,
+              -842.5507318578842
+            ],
+            [
+              6447,
+              -845.4487120121192
+            ],
+            [
+              13376,
+              -847.6596292687086
+            ],
+            [
+              14793,
+              -849.610000308654
+            ],
+            [
+              15669,
+              -866.4491515201626
+            ],
+            [
+              28597,
+              -868.3983428926181
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 40359,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -869.3053783633684,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 46809,
+          "force_norm": 0.0006187022593193109,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 79.5379937380003,
+          "start": "coords.54",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              393,
+              -838.6281527674187
+            ],
+            [
+              2621,
+              -843.1426351271401
+            ],
+            [
+              9342,
+              -846.7481130859497
+            ],
+            [
+              11196,
+              -847.7294479306671
+            ],
+            [
+              12819,
+              -848.6041442949846
+            ],
+            [
+              18632,
+              -860.0187957798263
+            ],
+            [
+              21577,
+              -863.1975561566326
+            ],
+            [
+              21990,
+              -866.1408625181729
+            ],
+            [
+              40359,
+              -869.3053783633684
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 39234,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -863.7925828277134,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 42189,
+          "force_norm": 0.0006999528913297627,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 73.32855687399933,
+          "start": "coords.55",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              602,
+              -843.3246063551312
+            ],
+            [
+              7473,
+              -844.788714320652
+            ],
+            [
+              8734,
+              -852.6401970255088
+            ],
+            [
+              15765,
+              -857.080129218383
+            ],
+            [
+              18894,
+              -859.6237035392642
+            ],
+            [
+              29644,
+              -863.2817854302511
+            ],
+            [
+              34353,
+              -863.6404057271502
+            ],
+            [
+              39234,
+              -863.7925828277137
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 39695,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -873.8797532064319,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 42587,
+          "force_norm": 0.0008543309439600518,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 72.05815810100012,
+          "start": "coords.56",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              377,
+              -839.3432858067215
+            ],
+            [
+              9054,
+              -840.5721077388505
+            ],
+            [
+              9878,
+              -843.8232801280042
+            ],
+            [
+              11389,
+              -845.6372864541673
+            ],
+            [
+              12019,
+              -846.4881770454919
+            ],
+            [
+              14523,
+              -848.5267426253884
+            ],
+            [
+              18155,
+              -850.9426740752724
+            ],
+            [
+              19236,
+              -852.7034508089398
+            ],
+            [
+              22203,
+              -854.1304168241156
+            ],
+            [
+              26844,
+              -858.964933878041
+            ],
+            [
+              28325,
+              -859.3207144894584
+            ],
+            [
+              29680,
+              -870.4432165572287
+            ],
+            [
+              36585,
+              -871.0515972361808
+            ],
+            [
+              39695,
+              -873.8797532064319
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 35397,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -874.2627017196224,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 38786,
+          "force_norm": 0.0009116405417222102,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 66.56476043500061,
+          "start": "coords.57",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              552,
+              -841.5412296041318
+            ],
+            [
+              4764,
+              -841.9388778278378
+            ],
+            [
+              6428,
+              -845.4862219050331
+            ],
+            [
+              8307,
+              -855.733609219764
+            ],
+            [
+              8629,
+              -858.65551402641
+            ],
+            [
+              17520,
+              -859.2963623149383
+            ],
+            [
+              20344,
+              -859.5942308724149
+            ],
+            [
+              22993,
+              -861.2614399300603
+            ],
+            [
+              24427,
+              -866.1866377100321
+            ],
+            [
+              25764,
+              -873.4913610266884
+            ],
+            [
+              35397,
+              -874.2627017196224
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 29057,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -876.2940471899315,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 42509,
+          "force_norm": 0.0007148972915811595,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 72.093743636,
+          "start": "coords.58",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              618,
+              -843.9727690094517
+            ],
+            [
+              3864,
+              -847.8181803072173
+            ],
+            [
+              14754,
+              -848.537510995401
+            ],
+            [
+              15419,
+              -854.5494119936509
+            ],
+            [
+              18127,
+              -856.6919870884333
+            ],
+            [
+              25296,
+              -857.655135477575
+            ],
+            [
+              26895,
+              -860.9044210075015
+            ],
+            [
+              29057,
+              -876.2940471899315
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 37315,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -870.6382435045019,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 37939,
+          "force_norm": 0.0008866037943845265,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 64.78674300700004,
+          "start": "coords.59",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              480,
+              -841.1678208514508
+            ],
+            [
+              1555,
+              -852.8695575092246
+            ],
+            [
+              6881,
+              -853.3847388030122
+            ],
+            [
+              8221,
+              -869.2195818218008
+            ],
+            [
+              13684,
+              -870.3487083628893
+            ],
+            [
+              37315,
+              -870.6382435045019
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 36725,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -864.7273911300276,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 49045,
+          "force_norm": 0.0008588756427230102,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 83.56429070499871,
+          "start": "coords.60",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              644,
+              -841.7252028160872
+            ],
+            [
+              1289,
+              -853.4487011737416
+            ],
+            [
+              19476,
+              -861.0325944532005
+            ],
+            [
+              36725,
+              -864.7273911300276
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 25610,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -870.911286622999,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 41693,
+          "force_norm": 0.0007759576355025445,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 70.73419518099945,
+          "start": "coords.61",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              594,
+              -846.4754726692438
+            ],
+            [
+              7581,
+              -855.5424834759601
+            ],
+            [
+              12912,
+              -856.9525930058401
+            ],
+            [
+              13270,
+              -859.7601687987545
+            ],
+            [
+              16500,
+              -866.8542543126243
+            ],
+            [
+              25610,
+              -870.9112866229991
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 44848,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -871.8942872938483,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 46790,
+          "force_norm": 0.0008161804193825997,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 78.9130547650002,
+          "start": "coords.62",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              520,
+              -839.8285930296631
+            ],
+            [
+              1704,
+              -842.5271427655242
+            ],
+            [
+              3242,
+              -845.6540994966052
+            ],
+            [
+              6875,
+              -850.0802727133489
+            ],
+            [
+              11640,
+              -850.2307176150395
+            ],
+            [
+              12186,
+              -856.7224110829183
+            ],
+            [
+              19800,
+              -860.2678669027015
+            ],
+            [
+              26208,
+              -863.0980555097677
+            ],
+            [
+              29456,
+              -864.6791137535622
+            ],
+            [
+              37094,
+              -866.418373985741
+            ],
+            [
+              44078,
+              -868.0740174837222
+            ],
+            [
+              44848,
+              -871.8942872938483
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 34267,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -869.5255605463136,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 39259,
+          "force_norm": 0.000904668978701415,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 67.10707078000087,
+          "start": "coords.63",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              436,
+              -846.7897881260674
+            ],
+            [
+              10984,
+              -853.9099115469476
+            ],
+            [
+              11401,
+              -867.4623818016032
+            ],
+            [
+              17609,
+              -868.5918189340578
+            ],
+            [
+              28686,
+              -869.3434777742298
+            ],
+            [
+              34267,
+              -869.5255605463136
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 26433,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -870.1510460055501,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 39132,
+          "force_norm": 0.0007089339949440532,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 65.55423194300056,
+          "start": "coords.64",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              426,
+              -836.9898184841139
+            ],
+            [
+              2158,
+              -837.6683855495959
+            ],
+            [
+              5477,
+              -838.1656739823034
+            ],
+            [
+              6153,
+              -838.2775877977798
+            ],
+            [
+              6452,
+              -841.9777950620702
+            ],
+            [
+              6781,
+              -842.2363360441517
+            ],
+            [
+              8926,
+              -846.4858322839536
+            ],
+            [
+              12260,
+              -868.7784583309053
+            ],
+            [
+              26433,
+              -870.1510460055501
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 40513,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -869.1464334485121,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 51629,
+          "force_norm": 0.0008419928790482372,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 87.29808806099936,
+          "start": "coords.65",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              539,
+              -845.1196227473783
+            ],
+            [
+              3150,
+              -845.1488106888671
+            ],
+            [
+              11944,
+              -853.6249438562298
+            ],
+            [
+              30125,
+              -867.0083458816437
+            ],
+            [
+              34267,
+              -869.054313014002
+            ],
+            [
+              40513,
+              -869.1464334485122
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 39165,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -874.0845014542178,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 48234,
+          "force_norm": 0.0007755856962948177,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 82.03847296300046,
+          "start": "coords.66",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              292,
+              -834.5532356093075
+            ],
+            [
+              3323,
+              -842.4068778437074
+            ],
+            [
+              7866,
+              -863.4743908763897
+            ],
+            [
+              24642,
+              -868.6384882050305
+            ],
+            [
+              26116,
+              -869.033314363398
+            ],
+            [
+              29155,
+              -869.3254938569991
+            ],
+            [
+              35839,
+              -871.4495091733552
+            ],
+            [
+              39165,
+              -874.0845014542178
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 39158,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -866.3950819221773,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 49541,
+          "force_norm": 0.0006890398472246762,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 84.33472996700038,
+          "start": "coords.67",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              582,
+              -844.8057410082638
+            ],
+            [
+              6020,
+              -846.420047585961
+            ],
+            [
+              6619,
+              -849.043696330249
+            ],
+            [
+              9822,
+              -853.7155298581699
+            ],
+            [
+              15299,
+              -855.1978687472335
+            ],
+            [
+              21038,
+              -858.4849194710296
+            ],
+            [
+              25038,
+              -858.7581550557726
+            ],
+            [
+              29792,
+              -860.8608627647982
+            ],
+            [
+              38857,
+              -865.7026981559917
+            ],
+            [
+              39158,
+              -866.3950819221773
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 42659,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -870.2629391719696,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 48374,
+          "force_norm": 0.0008013132823836313,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 81.8725914810002,
+          "start": "coords.68",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              678,
+              -849.4330831427435
+            ],
+            [
+              9292,
+              -856.7953272166767
+            ],
+            [
+              22580,
+              -860.8256630602925
+            ],
+            [
+              28334,
+              -862.628109944829
+            ],
+            [
+              28682,
+              -868.3462376627921
+            ],
+            [
+              35230,
+              -868.614693437925
+            ],
+            [
+              42659,
+              -870.2629391719696
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 30138,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -869.9607260169694,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 53038,
+          "force_norm": 0.0009497380953761547,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 89.75684399199963,
+          "start": "coords.69",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              369,
+              -831.2084499794003
+            ],
+            [
+              1946,
+              -847.4274849716888
+            ],
+            [
+              4689,
+              -848.0669500991357
+            ],
+            [
+              7975,
+              -849.7623707705018
+            ],
+            [
+              12500,
+              -850.2554184173546
+            ],
+            [
+              16737,
+              -858.9295008014235
+            ],
+            [
+              30138,
+              -869.9607260169694
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 44463,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -874.7649600373977,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 47889,
+          "force_norm": 0.0008408084029644153,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 81.08858466399943,
+          "start": "coords.70",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              661,
+              -842.0248087179242
+            ],
+            [
+              7613,
+              -843.5577865585165
+            ],
+            [
+              8435,
+              -843.7865862759826
+            ],
+            [
+              11249,
+              -858.0945053957291
+            ],
+            [
+              17588,
+              -858.4602135714654
+            ],
+            [
+              23210,
+              -859.288358699914
+            ],
+            [
+              27288,
+              -865.1362137288422
+            ],
+            [
+              30881,
+              -867.1399113515679
+            ],
+            [
+              35433,
+              -870.3237586946291
+            ],
+            [
+              40570,
+              -871.3573291302121
+            ],
+            [
+              44463,
+              -874.7649600373977
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 43057,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -875.4742512499087,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 45809,
+          "force_norm": 0.0009347856095438036,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 77.7885572060004,
+          "start": "coords.71",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              541,
+              -842.3299558018125
+            ],
+            [
+              1286,
+              -844.1013961107476
+            ],
+            [
+              6644,
+              -845.4228810892184
+            ],
+            [
+              9350,
+              -847.7625964934894
+            ],
+            [
+              10460,
+              -849.242229514107
+            ],
+            [
+              12353,
+              -865.0211334459681
+            ],
+            [
+              24078,
+              -868.9811558136929
+            ],
+            [
+              30615,
+              -869.2956408180949
+            ],
+            [
+              31272,
+              -871.0400091949189
+            ],
+            [
+              42919,
+              -872.2948434357425
+            ],
+            [
+              43057,
+              -875.4742512499087
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 39102,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -872.2521699333222,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 41867,
+          "force_norm": 0.0008215003361045243,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 70.66386530400086,
+          "start": "coords.72",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              328,
+              -843.7373244033405
+            ],
+            [
+              2448,
+              -844.7457355905303
+            ],
+            [
+              9497,
+              -848.7624747995078
+            ],
+            [
+              13581,
+              -866.812930238424
+            ],
+            [
+              20359,
+              -871.9540342566504
+            ],
+            [
+              39102,
+              -872.2521699333222
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 38865,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -867.4694213840066,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 42402,
+          "force_norm": 0.0008156895634495838,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 70.95221178799875,
+          "start": "coords.73",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              321,
+              -837.7240868617619
+            ],
+            [
+              6522,
+              -843.4498773051876
+            ],
+            [
+              7441,
+              -847.3435637134311
+            ],
+            [
+              13073,
+              -848.249760111713
+            ],
+            [
+              13996,
+              -854.7215301655253
+            ],
+            [
+              21625,
+              -862.6585939502368
+            ],
+            [
+              31705,
+              -866.5441747669793
+            ],
+            [
+              35556,
+              -866.8749476287625
+            ],
+            [
+              38865,
+              -867.4694213840066
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 36735,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -867.7527350445855,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 41093,
+          "force_norm": 0.0008902583624761192,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 67.87738580900077,
+          "start": "coords.74",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              490,
+              -839.1313644993697
+            ],
+            [
+              4231,
+              -842.8525440215694
+            ],
+            [
+              5953,
+              -847.9594711744815
+            ],
+            [
+              12375,
+              -859.1483137005746
+            ],
+            [
+              19588,
+              -861.4470870075413
+            ],
+            [
+              25414,
+              -867.3593152815921
+            ],
+            [
+              30923,
+              -867.6971334044606
+            ],
+            [
+              36735,
+              -867.7527350445854
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 25681,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -876.8649265044955,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 48444,
+          "force_norm": 0.0007924731113171114,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 79.12385042599999,
+          "start": "coords.75",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              667,
+              -843.0376692595016
+            ],
+            [
+              8402,
+              -846.3178584298174
+            ],
+            [
+              13097,
+              -848.9189698739667
+            ],
+            [
+              13559,
+              -850.770702909122
+            ],
+            [
+              16024,
+              -874.1483845776321
+            ],
+            [
+              25681,
+              -876.8649265044955
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 32634,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -874.4677938396287,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 41760,
+          "force_norm": 0.0008519922210257815,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 68.54986196100072,
+          "start": "coords.76",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              674,
+              -841.7082937478428
+            ],
+            [
+              3370,
+              -844.1756064068679
+            ],
+            [
+              7955,
+              -853.3047318186726
+            ],
+            [
+              9138,
+              -856.065175085648
+            ],
+            [
+              19971,
+              -864.1774630775116
+            ],
+            [
+              21794,
+              -869.3837916567265
+            ],
+            [
+              23662,
+              -870.8695488224955
+            ],
+            [
+              32634,
+              -874.4677938396287
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 33808,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -872.906131671715,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 44236,
+          "force_norm": 0.0006950298548760316,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 72.52567073299906,
+          "start": "coords.77",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              627,
+              -848.4106907872447
+            ],
+            [
+              11649,
+              -852.8904062739317
+            ],
+            [
+              16235,
+              -862.4005825519498
+            ],
+            [
+              26434,
+              -864.0652724061356
+            ],
+            [
+              29335,
+              -872.9061316702497
+            ],
+            [
+              33808,
+              -872.9061316717149
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 34442,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -874.5096749856486,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 44976,
+          "force_norm": 0.0008573746963650838,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 73.73184083399974,
+          "start": "coords.78",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              437,
+              -838.2041782375156
+            ],
+            [
+              2049,
+              -840.4953260069262
+            ],
+            [
+              2698,
+              -859.6834914837797
+            ],
+            [
+              14731,
+              -868.5597947051917
+            ],
+            [
+              28425,
+              -869.7747978011927
+            ],
+            [
+              34442,
+              -874.5096749856485
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 25837,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -871.4075796488613,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 42885,
+          "force_norm": 0.0008713791257303011,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 72.15098263399886,
+          "start": "coords.79",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              370,
+              -843.3000292337426
+            ],
+            [
+              7783,
+              -847.2168931011265
+            ],
+            [
+              9571,
+              -847.9297963547999
+            ],
+            [
+              9895,
+              -853.1538377113998
+            ],
+            [
+              17622,
+              -855.7506196744058
+            ],
+            [
+              18297,
+              -858.0276925346213
+            ],
+            [
+              23566,
+              -861.5025324208759
+            ],
+            [
+              25837,
+              -871.4075796488614
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 31222,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -867.4627522318933,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 42580,
+          "force_norm": 0.0009913234974307649,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 71.80733136199888,
+          "start": "coords.80",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              477,
+              -841.7386783158522
+            ],
+            [
+              6934,
+              -844.1440548905204
+            ],
+            [
+              8176,
+              -848.5904180963364
+            ],
+            [
+              8934,
+              -854.7118796925232
+            ],
+            [
+              15538,
+              -857.5216006060667
+            ],
+            [
+              20217,
+              -860.9760569460452
+            ],
+            [
+              24686,
+              -865.5998683035592
+            ],
+            [
+              31222,
+              -867.4627522318933
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 39318,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -870.3063818846178,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 44358,
+          "force_norm": 0.0009277601912444595,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 75.27103585700024,
+          "start": "coords.81",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              444,
+              -847.6337782089083
+            ],
+            [
+              9600,
+              -859.9680492558396
+            ],
+            [
+              19744,
+              -865.472793410913
+            ],
+            [
+              20605,
+              -866.2768126304155
+            ],
+            [
+              22473,
+              -869.3603712447687
+            ],
+            [
+              39318,
+              -870.3063818846178
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 30347,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -872.3378068345367,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 53528,
+          "force_norm": 0.0005833757901828434,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 91.29772843699902,
+          "start": "coords.82",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              499,
+              -841.4756673207498
+            ],
+            [
+              8007,
+              -843.0922464479027
+            ],
+            [
+              11295,
+              -851.4838560095147
+            ],
+            [
+              20248,
+              -871.8639384222685
+            ],
+            [
+              30347,
+              -872.3378068345365
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 35485,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -869.700648029595,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 35876,
+          "force_norm": 0.0007878080812015096,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 61.55494431899933,
+          "start": "coords.83",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              476,
+              -844.9696559325935
+            ],
+            [
+              6569,
+              -849.8219314531029
+            ],
+            [
+              6930,
+              -867.2275890384782
+            ],
+            [
+              30063,
+              -868.9745206393839
+            ],
+            [
+              35485,
+              -869.700648029595
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 36168,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -866.7531742988613,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 40257,
+          "force_norm": 0.0008363433495224775,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 68.89057671800037,
+          "start": "coords.84",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              480,
+              -841.4587491036626
+            ],
+            [
+              4349,
+              -852.9850395604999
+            ],
+            [
+              5906,
+              -855.989716087921
+            ],
+            [
+              8635,
+              -858.7476617379539
+            ],
+            [
+              12392,
+              -860.8378397729331
+            ],
+            [
+              14755,
+              -864.228021188647
+            ],
+            [
+              24681,
+              -865.4534607904818
+            ],
+            [
+              36168,
+              -866.7531742988613
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 44019,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -866.7013508411816,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 49570,
+          "force_norm": 0.0007515023316410435,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 84.43737285099996,
+          "start": "coords.85",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              544,
+              -843.076853240177
+            ],
+            [
+              7378,
+              -846.4023196751482
+            ],
+            [
+              9787,
+              -846.8192844024848
+            ],
+            [
+              12263,
+              -848.8034711640046
+            ],
+            [
+              14841,
+              -850.6443334035031
+            ],
+            [
+              15148,
+              -861.2788454655499
+            ],
+            [
+              20755,
+              -863.6355849892116
+            ],
+            [
+              29338,
+              -864.9942752416158
+            ],
+            [
+              44019,
+              -866.7013508411816
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 33450,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -863.0405539740973,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 37651,
+          "force_norm": 0.0007323336730781838,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 63.5514616090004,
+          "start": "coords.86",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              586,
+              -844.7890363573756
+            ],
+            [
+              2910,
+              -846.8557852867235
+            ],
+            [
+              7435,
+              -852.037332695138
+            ],
+            [
+              8180,
+              -855.3478233569963
+            ],
+            [
+              10914,
+              -856.2480066661935
+            ],
+            [
+              15614,
+              -859.7112936419485
+            ],
+            [
+              18364,
+              -861.7422378854561
+            ],
+            [
+              25518,
+              -862.5163612862785
+            ],
+            [
+              33450,
+              -863.0405539740973
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 43014,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -871.0314648262424,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 44565,
+          "force_norm": 0.0009185485989523434,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 75.95491037899956,
+          "start": "coords.87",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              559,
+              -839.7577495417913
+            ],
+            [
+              6839,
+              -840.1057460467077
+            ],
+            [
+              8057,
+              -841.9518805541159
+            ],
+            [
+              11435,
+              -845.6546312433311
+            ],
+            [
+              13171,
+              -850.9406863525431
+            ],
+            [
+              17689,
+              -852.2614814137964
+            ],
+            [
+              18717,
+              -857.3444073116926
+            ],
+            [
+              19201,
+              -869.0933535746507
+            ],
+            [
+              37984,
+              -869.246071855157
+            ],
+            [
+              43014,
+              -871.0314648262424
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 38550,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -873.5538867737149,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 40482,
+          "force_norm": 0.0005635751687930332,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 69.19589854600054,
+          "start": "coords.88",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              449,
+              -835.4391035242036
+            ],
+            [
+              4695,
+              -842.2315429890923
+            ],
+            [
+              7446,
+              -848.2855319166467
+            ],
+            [
+              8436,
+              -853.215827328167
+            ],
+            [
+              11309,
+              -858.3444039312963
+            ],
+            [
+              12073,
+              -869.0332632369854
+            ],
+            [
+              16820,
+              -870.6356716460106
+            ],
+            [
+              21798,
+              -871.2800464974855
+            ],
+            [
+              28106,
+              -872.6877923222644
+            ],
+            [
+              38550,
+              -873.5538867737149
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 35744,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -869.6776323996103,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 41073,
+          "force_norm": 0.0009482549023765572,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 69.92531156299992,
+          "start": "coords.89",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              379,
+              -842.0175716523806
+            ],
+            [
+              5555,
+              -853.5597149050446
+            ],
+            [
+              12300,
+              -859.6282100499689
+            ],
+            [
+              16735,
+              -862.6296807334771
+            ],
+            [
+              21086,
+              -867.2015782073121
+            ],
+            [
+              31374,
+              -868.271601506696
+            ],
+            [
+              35744,
+              -869.6776323996103
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 33531,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -863.4258343799368,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 39035,
+          "force_norm": 0.0009012649748794026,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 66.45442458199977,
+          "start": "coords.90",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              417,
+              -838.7292558365037
+            ],
+            [
+              2256,
+              -843.4159458658671
+            ],
+            [
+              7283,
+              -848.8845624843782
+            ],
+            [
+              15840,
+              -850.7604801930238
+            ],
+            [
+              17627,
+              -855.2358857731602
+            ],
+            [
+              21012,
+              -857.1904837748298
+            ],
+            [
+              24475,
+              -862.2148432825433
+            ],
+            [
+              33531,
+              -863.4258343799368
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 34393,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -870.9793746136564,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 42635,
+          "force_norm": 0.0007097748113091355,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 72.35537294700043,
+          "start": "coords.91",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              582,
+              -842.7547453082458
+            ],
+            [
+              7224,
+              -843.7332210395285
+            ],
+            [
+              8426,
+              -845.9432493882885
+            ],
+            [
+              10102,
+              -850.0906554945675
+            ],
+            [
+              12695,
+              -850.8719593246028
+            ],
+            [
+              14639,
+              -851.6169530287432
+            ],
+            [
+              16389,
+              -864.3789254516571
+            ],
+            [
+              18947,
+              -868.3517812648624
+            ],
+            [
+              34393,
+              -870.9793746136563
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 35370,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -868.5509819530298,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 39158,
+          "force_norm": 0.0007981047332286557,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 66.02217614099936,
+          "start": "coords.92",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              485,
+              -852.8517491621708
+            ],
+            [
+              10461,
+              -861.9714237220371
+            ],
+            [
+              16502,
+              -862.5704641916462
+            ],
+            [
+              17776,
+              -863.523539336272
+            ],
+            [
+              22649,
+              -866.2607418708817
+            ],
+            [
+              35370,
+              -868.5509819530298
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 43719,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -869.3046801788255,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 43796,
+          "force_norm": 0.0006905729889587534,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 74.32916959400063,
+          "start": "coords.93",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              395,
+              -839.653308210086
+            ],
+            [
+              8098,
+              -844.0743371649128
+            ],
+            [
+              8922,
+              -851.903807876892
+            ],
+            [
+              18135,
+              -857.8713238679413
+            ],
+            [
+              21146,
+              -862.4082761610484
+            ],
+            [
+              25046,
+              -864.9809147261759
+            ],
+            [
+              29832,
+              -865.4730885999036
+            ],
+            [
+              33096,
+              -866.2237120035044
+            ],
+            [
+              36492,
+              -866.429026867077
+            ],
+            [
+              39794,
+              -868.4825084427202
+            ],
+            [
+              43719,
+              -869.3046801788255
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 30862,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -869.3571227108765,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 47380,
+          "force_norm": 0.0006189466597580023,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 80.52507780999986,
+          "start": "coords.94",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              529,
+              -844.259208578979
+            ],
+            [
+              7967,
+              -852.7868914392519
+            ],
+            [
+              17542,
+              -856.78129985843
+            ],
+            [
+              21599,
+              -865.1122864431567
+            ],
+            [
+              29382,
+              -867.8505047995567
+            ],
+            [
+              30862,
+              -869.3571227108766
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 41153,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -872.5222007678294,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 41913,
+          "force_norm": 0.0009645930574605326,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 72.30148258300142,
+          "start": "coords.95",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              865,
+              -846.8360574809382
+            ],
+            [
+              12936,
+              -849.8997960023446
+            ],
+            [
+              14460,
+              -850.1084704061645
+            ],
+            [
+              17112,
+              -852.1697027849202
+            ],
+            [
+              17903,
+              -852.6697265811598
+            ],
+            [
+              20539,
+              -859.8965328543222
+            ],
+            [
+              26965,
+              -865.7490532239759
+            ],
+            [
+              30595,
+              -871.1237546175687
+            ],
+            [
+              34020,
+              -871.1237546230226
+            ],
+            [
+              41153,
+              -872.5222007678294
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 27732,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -871.2488684818254,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 46625,
+          "force_norm": 0.0006609310115575026,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 80.59901709699989,
+          "start": "coords.96",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              395,
+              -838.7282157435135
+            ],
+            [
+              3170,
+              -843.745406156383
+            ],
+            [
+              10099,
+              -859.0296733662553
+            ],
+            [
+              14294,
+              -865.679046617425
+            ],
+            [
+              27732,
+              -871.2488684818254
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 33161,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -872.9719112642287,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 40977,
+          "force_norm": 0.0009521224854212022,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 69.92491663699911,
+          "start": "coords.97",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              370,
+              -841.3899913172688
+            ],
+            [
+              7653,
+              -849.9199731008662
+            ],
+            [
+              11553,
+              -853.1671390143828
+            ],
+            [
+              16194,
+              -853.6800956041236
+            ],
+            [
+              19459,
+              -854.5249432025895
+            ],
+            [
+              21154,
+              -855.1128778366026
+            ],
+            [
+              27683,
+              -857.5716252508505
+            ],
+            [
+              27991,
+              -861.0456161000625
+            ],
+            [
+              30330,
+              -870.9860850212169
+            ],
+            [
+              33161,
+              -872.9719112642285
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 33451,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -871.102902623129,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 35098,
+          "force_norm": 0.0008748696368734435,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 59.372884129999875,
+          "start": "coords.98",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              597,
+              -841.5622714474999
+            ],
+            [
+              3307,
+              -842.7182795530377
+            ],
+            [
+              7215,
+              -845.7151465168565
+            ],
+            [
+              7868,
+              -846.6953195854601
+            ],
+            [
+              8144,
+              -862.2369172938263
+            ],
+            [
+              14573,
+              -867.404923694711
+            ],
+            [
+              25953,
+              -868.4317064968125
+            ],
+            [
+              33451,
+              -871.102902623129
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 40106,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -869.1505594254033,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 45569,
+          "force_norm": 0.00042799681970564693,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 77.90167559600013,
+          "start": "coords.99",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              439,
+              -839.6015731484389
+            ],
+            [
+              7200,
+              -839.7803540473797
+            ],
+            [
+              8426,
+              -847.014779272339
+            ],
+            [
+              9004,
+              -849.6173396183225
+            ],
+            [
+              19563,
+              -853.5476287588904
+            ],
+            [
+              23452,
+              -863.0802045926985
+            ],
+            [
+              27583,
+              -864.9862707531495
+            ],
+            [
+              34367,
+              -867.3884458176234
+            ],
+            [
+              37025,
+              -868.424873135952
+            ],
+            [
+              40106,
+              -869.1505594254035
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        },
+        {
+          "calls_to_best": 20238,
+          "cap": 270000,
+          "code": "PyBCGA",
+          "code_version": "0",
+          "commit": "fb646c19b1829656bf16cc72ca318bef2d37bfeb",
+          "comparable": true,
+          "counter": "harness",
+          "energy": -874.3302048201907,
+          "error": "",
+          "failure": "wrong_stationary",
+          "force_calls": 44468,
+          "force_norm": 0.0007222801346846637,
+          "problem": "globalopt/lj150",
+          "reasons": [
+            "energy"
+          ],
+          "reference_energy": -893.310258,
+          "schema": "optbench.start/v2",
+          "seconds": 74.85960459299895,
+          "start": "coords.100",
+          "success": false,
+          "target": -893.309258,
+          "template": "bpga/lj150-pybcga",
+          "trace": [
+            [
+              362,
+              -843.462524109849
+            ],
+            [
+              8223,
+              -846.3008718070887
+            ],
+            [
+              9824,
+              -847.2656500079083
+            ],
+            [
+              14012,
+              -847.5090665059166
+            ],
+            [
+              14379,
+              -848.9420285733829
+            ],
+            [
+              14844,
+              -854.7093889277924
+            ],
+            [
+              16681,
+              -866.0479434668788
+            ],
+            [
+              19766,
+              -870.0069684551313
+            ],
+            [
+              20238,
+              -874.3302048201906
+            ]
+          ],
+          "tuning": "default",
+          "verify_calls": 1
+        }
+      ],
+      "tuning": "default"
+    }
+  ],
+  "schema": "optbench.result/v2",
+  "scoring": "par2-wilson-bootstrap",
+  "status": "sota"
+}

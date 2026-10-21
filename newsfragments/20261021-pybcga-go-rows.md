@@ -1,0 +1,1 @@
+PyBCGA stock searches on lj38, lj75, lj98, and lj150 are scored at the problem force-call cap of 2000000. The population, generation count, and quench budget stay at the library preset. PAR-2 uses that problem cap.
