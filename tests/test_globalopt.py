@@ -196,6 +196,91 @@ def test_judge_globalopt_is_one_sided_and_orders_the_classes():
     assert missing["failure"] == "divergence"
 
 
+def test_basin_hopping_displaces_the_quenched_geometry():
+    pytest.importorskip("ase")
+    from ase import Atoms
+    from ase.calculators.calculator import Calculator, all_changes
+    from ase.optimize import FIRE
+
+    from optbench.runners.ase_basinhopping import quenched_basin_hopping
+
+    class Harmonic(Calculator):
+        implemented_properties = ["energy", "forces"]
+
+        def calculate(self, atoms=None, properties=("energy", "forces"), system_changes=all_changes):
+            super().calculate(atoms, properties, system_changes)
+            pos = np.asarray(self.atoms.get_positions(), dtype=float)
+            self.results["energy"] = float(np.sum(pos * pos))
+            self.results["forces"] = -2.0 * pos
+
+    origins = []
+    hopper_type = quenched_basin_hopping()
+
+    class Recording(hopper_type):
+        def move(self, ro):
+            origins.append(np.array(ro, dtype=float, copy=True))
+            return super().move(ro)
+
+    atoms = Atoms("H", positions=[[1.5, -0.4, 0.2]])
+    atoms.calc = Harmonic()
+    np.random.seed(7)
+    hopper = Recording(
+        atoms,
+        temperature=0.8,
+        optimizer=FIRE,
+        fmax=1e-6,
+        dr=0.4,
+        logfile=None,
+        trajectory=None,
+        optimizer_logfile=None,
+        local_minima_trajectory=None,
+        adjust_cm=False,
+    )
+    hopper.run(4)
+    assert len(origins) == 4
+    assert max(float(np.max(np.abs(origin))) for origin in origins) < 1e-3
+
+
+def test_campaign_file_names_keep_the_ase_version(tmp_path: Path):
+    from optbench.runners.ase_basinhopping import write_campaign
+
+    record = {
+        "schema": "optbench.start/v2",
+        "counter": "harness",
+        "comparable": True,
+        "success": False,
+        "failure": "cap",
+        "reasons": ["energy", "cap"],
+        "force_calls": 10,
+        "energy": -1.0,
+        "start": "coords.1",
+    }
+    dat, jsonl = write_campaign(tmp_path, [record], partial=True, cap=10)
+    assert dat.name == "ase-3.29.0-lj75-basinhopping.dat"
+    assert jsonl.name == "ase-3.29.0-lj75-basinhopping.starts.jsonl"
+    assert dat.read_text(encoding="utf-8").splitlines()[0].startswith("# ASE 3.29.0")
+
+
+def test_resume_skips_starts_already_in_the_jsonl(tmp_path: Path):
+    from optbench.runners.ase_basinhopping import load_campaign_records, write_campaign
+
+    kept = {
+        "schema": "optbench.start/v2",
+        "counter": "harness",
+        "comparable": True,
+        "success": False,
+        "failure": "cap",
+        "reasons": ["energy", "cap"],
+        "force_calls": 10,
+        "energy": -2.0,
+        "start": "coords.4",
+    }
+    _dat, jsonl = write_campaign(tmp_path, [kept], partial=True, cap=10)
+    loaded = load_campaign_records(jsonl)
+    assert [record["start"] for record in loaded] == ["coords.4"]
+    assert load_campaign_records(tmp_path / "missing.jsonl") == []
+
+
 def test_scored_globalopt_records_keep_every_failure_in_par2():
     cap = 50
     records = [
