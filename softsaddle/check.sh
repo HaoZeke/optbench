@@ -37,7 +37,7 @@ compile_lib "$upstream/libraries/lanczos_lib/to_compile" liblanczos.so
     g++ -O3 -shared -fPIC -std=c++14 -o "$libdir/libmorse.so" ./*.cpp -lgsl -lgslcblas
 )
 
-cp "$upstream/test_run/paper-result-reproduce/adaptive_HSphere-lbfgs-davidson-sm50/iniConfig.m" "$work/iniConfig.m"
+cp "$upstream/test_run/recorded/adaptive_HSphere-lbfgs-davidson-sm50/iniConfig.m" "$work/iniConfig.m"
 cp "$upstream/source_code/displace_bech.mat" "$work/displace_bech.mat"
 cp "$upstream/source_code/matlab.h" "$work/matlab.h"
 cp "$upstream/source_code/morse.h" "$work/morse.h"
