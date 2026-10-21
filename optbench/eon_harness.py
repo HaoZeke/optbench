@@ -24,9 +24,10 @@ ini written for a C++ job sets it false. The Python AKMC server rejects
 the key, so those inis leave it unset. One server still receives every
 ``force()`` the clients open.
 
-The develop family is eOn at ``500350d9``, not a build of EON SVN r2549.
+The develop family is eOn at ``b0bd4d5a``, not a build of EON SVN r2549.
 ``EON_DEVELOP_CLIENT`` points at that ``eonclient``. Its ``--version``
-line contains ``500350d9``.
+line contains ``b0bd4d5a``. Templates that name commit ``500350d9`` stay
+in the tree. A develop-family run uses this binary.
 """
 
 from __future__ import annotations
@@ -91,8 +92,8 @@ FAMILIES = {
         "env": "EON_DEVELOP_CLIENT",
         "default": Path.home() / "opt" / "eon-develop" / "bin" / "eonclient",
         "flag": "--version",
-        "token": "500350d9",
-        "cache": "500350d9",
+        "token": "b0bd4d5a",
+        "cache": "b0bd4d5a",
     },
 }
 
@@ -969,7 +970,14 @@ def write_campaign(template: dict, rows: list[tuple[int, str, dict]], output: Pa
         return None
     problem = resolve_problem(ROOT, template["problem"])
     full_n = stated_full_n(ROOT, problem)
-    partial = bool(template.get("declare_partial")) or full_n is None or len(kept) < int(full_n or 0)
+    # A saddle template that states max_searches is complete at one
+    # repetition. The problem file does not list a start count.
+    bounded = int(template.get("max_searches") or 0) > 0
+    partial = bool(template.get("declare_partial"))
+    if full_n is not None and len(kept) < int(full_n):
+        partial = True
+    elif full_n is None and not bounded:
+        partial = True
     successes = [row for _seed, _start, row in kept if row.get("success")]
     summary = {
         "nfailed": len(kept) - len(successes),

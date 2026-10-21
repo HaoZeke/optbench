@@ -26,7 +26,7 @@ stored beside the harness count and is not the track. The two AKMC
 classes use the develop source build named by ``EONCLIENT``
 (commit 7095b23ac17d49f434a5e08ccb072897ceca698e). The stock rows
 installed from ``optbench.eon_harness`` use ``EON_DEVELOP_CLIENT``
-(commit 500350d9fae881f06c7ef194e5868da079c4be5a). The conda-forge 3.5.0
+(commit b0bd4d5a5e0f4011831e45f4de389a4efa348e83). The conda-forge 3.5.0
 pin is a different environment. EON SVN r2549 is a different code.
 
 The default grid is one seed and the first start. ``OPTBENCH_ASV_FULL=1``

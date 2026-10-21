@@ -134,6 +134,57 @@ def test_develop_lanczos_stops_follow_the_archive_protocol():
     assert "max_energy" not in low_dimer["ini"]["Saddle Search"]
 
 
+def test_b0bd4d5a_rows_are_separate_stock_methods():
+    from optbench.campaign import load_template
+
+    commit = "b0bd4d5a5e0f4011831e45f4de389a4efa348e83"
+    expected = {
+        "eon/develop-b0bd4d5a-de-2ts-dimer": (250000, "Dimer L-BFGS", "de-2ts-mode"),
+        "eon/develop-b0bd4d5a-de-2ts-lanczos": (250000, "Lanczos L-BFGS", "de-2ts-mode"),
+        "eon/develop-b0bd4d5a-de-2ts-lanczos-improved": (250000, "Lanczos improved L-BFGS", "de-2ts-mode"),
+        "eon/develop-b0bd4d5a-ts-lj38-dimer": (10000, "Dimer L-BFGS", "ts-lj38"),
+        "eon/develop-b0bd4d5a-ts-lj38-lanczos": (10000, "Lanczos L-BFGS", "ts-lj38"),
+        "eon/develop-b0bd4d5a-ts-lj38-lanczos-improved": (10000, "Lanczos improved L-BFGS", "ts-lj38"),
+        "eon/develop-b0bd4d5a-ts-pt-dimer": (10000, "Dimer L-BFGS", "ts-pt"),
+        "eon/develop-b0bd4d5a-ts-pt-lanczos": (10000, "Lanczos L-BFGS", "ts-pt"),
+        "eon/develop-b0bd4d5a-ts-pt-lanczos-improved": (10000, "Lanczos improved L-BFGS", "ts-pt"),
+        "eon/develop-b0bd4d5a-de-lj38-dimer": (2500, "Dimer L-BFGS", "de-lj38-mode"),
+        "eon/develop-b0bd4d5a-de-lj38-lanczos": (2500, "Lanczos L-BFGS", "de-lj38-mode"),
+        "eon/develop-b0bd4d5a-de-lj38-lanczos-improved": (2500, "Lanczos improved L-BFGS", "de-lj38-mode"),
+        "eon/develop-b0bd4d5a-saddle-pt-dimer": (100000000, "Dimer", "akmc"),
+        "eon/develop-b0bd4d5a-saddle-pt-lanczos": (100000000, "Lanczos", "akmc"),
+    }
+    for name, (cap, algorithm, kind) in expected.items():
+        template = load_template(ROOT, name)
+        problem = resolve_problem(ROOT, template["problem"])
+        assert template["code"] == "eOn"
+        assert template["code_version"] == "(develop b0bd4d5a)"
+        assert template["commit"] == commit
+        assert template["failure_cap"] == cap
+        assert template["algorithm"] == algorithm
+        assert template["kind"] == kind
+        assert template["asv_class"]
+        assert "tuning" not in template
+        stated = (problem.get("convergence") or {}).get("max_force_calls")
+        if stated not in (None, ""):
+            assert cap == int(stated)
+        if kind == "akmc":
+            assert int(template["max_searches"]) == 5000
+    two = load_template(ROOT, "eon/develop-b0bd4d5a-de-2ts-lanczos")
+    assert two["ini"]["Lanczos"]["quit_early"] is False
+    improved = load_template(ROOT, "eon/develop-b0bd4d5a-de-2ts-lanczos-improved")
+    assert improved["ini"]["Lanczos"]["quit_early"] is True
+
+
+def test_b0bd4d5a_label_is_code_plus_version():
+    from optbench.board import ranked_cells
+    from optbench.campaign import load_template
+
+    template = load_template(ROOT, "eon/develop-b0bd4d5a-de-2ts-dimer")
+    cells = dict(ranked_cells({"code": template["code"], "code_version": template["code_version"]}, False))
+    assert cells["version"] == "eOn (develop b0bd4d5a)"
+
+
 def test_run_writes_one_benchmark_dat(tmp_path: Path):
     geometries = tmp_path / "geometries"
     geometries.mkdir()

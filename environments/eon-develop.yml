@@ -5,6 +5,10 @@
 #   ref = fix/develop-regressions-vs-350
 #   commit = 500350d9fae881f06c7ef194e5868da079c4be5a
 #   version label eOn (develop 500350d9)
+# New develop rows use develop at
+#   commit = b0bd4d5a5e0f4011831e45f4de389a4efa348e83
+#   version label eOn (develop b0bd4d5a)
+#   registry id eon-develop-b0bd4d5a
 # asv has one environment_type, so this yml cannot be bound to one
 # class. Those classes call EONCLIENT. environments/eon-3.5.0.yml
 # remains the conda-forge 3.5.0 pin.

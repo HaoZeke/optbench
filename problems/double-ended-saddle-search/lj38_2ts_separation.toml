@@ -6,11 +6,12 @@ contract = "partial"
 entry_count = 2
 
 # The archive does not state an image count or a force cap. Five interior
-# images is the LJ38 double-ended band. The cap is the run limit used here.
+# images is the LJ38 double-ended band. The cap used here is 250000
+# force calls.
 [convergence]
 norm = "l2"
 force_norm = 0.001
-max_force_calls = 10000
+max_force_calls = 250000
 
 [band]
 interior_images = 5
