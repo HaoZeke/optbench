@@ -354,7 +354,7 @@ It does not run a campaign.
    </tr>
    <tr data-problem="neb/Pt-heptamer">
    <th scope="row"><a href="generated/suites/neb.html#Pt-heptamer">Pt-heptamer</a></th>
-   <td data-code="eOn" data-template="eon/neb-pt-lbfgs-m100" data-par2="3523.85"><span class="bench-score">3523.85</span><a href="generated/suites/neb.html#Pt-heptamer-templates">eon/neb-pt-lbfgs-m100</a></td>
+   <td data-code="eOn" data-template="eon/500350d9-neb-pt-lbfgs" data-par2="319.538"><span class="bench-score">319.538</span><a href="generated/suites/neb.html#Pt-heptamer-templates">eon/500350d9-neb-pt-lbfgs</a></td>
    <td data-code="Eon svn" data-template="eon-svn/neb-pt-ci" data-par2="336.769"><span class="bench-score">336.769</span><a href="generated/suites/neb.html#Pt-heptamer-templates">eon-svn/neb-pt-ci</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/idpp-ci-neb-lbfgs" data-par2="318.308"><span class="bench-score">318.308</span><a href="generated/suites/neb.html#Pt-heptamer-templates">rgsaddle/idpp-ci-neb-lbfgs</a></td>

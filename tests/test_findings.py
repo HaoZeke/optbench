@@ -3,8 +3,8 @@
 import json
 from pathlib import Path
 
-from optbench.check import load_oracle
-from optbench.findings import campaign_mismatch, findings_errors, holdback, load_ledger, row_id
+from optbench.check import held_back_errors, load_oracle
+from optbench.findings import campaign_mismatch, findings_errors, load_ledger, row_id
 from optbench.problems import load_problem
 from optbench.site import problem_html
 
@@ -36,10 +36,24 @@ def test_pele_archive_stop_stays_beside_the_harness_stop():
     assert central["beside"]["harness_stop_mean"] == 335.06
     assert island["beside"]["stop2014_calls"] == 88.551
     assert "starting set" in forward["finding"]
-    held = holdback(ROOT)
-    assert ("tsopt/LJ38", "sella/lj38-ts-tuned") not in held.templates
-    assert ("double-ended-saddle-search/lj38", "eon-client/de-lj38-ci-swdneb") in held.templates
-    assert "results/campaign/eon-3.5.0-saddle-pt-classic.dat" not in held.paths
+    assert held_back_errors(ROOT) == []
+
+
+def test_a_list_that_keeps_templates_off_the_table_is_rejected(tmp_path: Path):
+    optbench = tmp_path / "optbench"
+    optbench.mkdir()
+    (optbench / "board.py").write_text("def holdback(root):\n    return None\n", encoding="utf-8")
+    (optbench / "findings.py").write_text('ROWS = [{"hold": ["eon/neb-pt-lbfgs"]}]\n', encoding="utf-8")
+    oracle = tmp_path / "oracle"
+    oracle.mkdir()
+    (oracle / "findings.jsonl").write_text(
+        json.dumps({"beside": {"omitted": ["eon-client/neb-pt-lbfgs"]}}) + "\n",
+        encoding="utf-8",
+    )
+    errors = held_back_errors(tmp_path)
+    assert any(line.startswith("optbench/board.py") for line in errors)
+    assert any(line.startswith("optbench/findings.py") for line in errors)
+    assert any("oracle/findings.jsonl" in line for line in errors)
 
 
 def test_a_campaign_file_that_disagrees_is_reported(tmp_path: Path):

@@ -976,31 +976,6 @@ def _rank_key(row: dict) -> tuple:
     )
 
 
-def _matches_hold(row: dict, held) -> bool:
-    problem = str(row.get("problem") or "")
-    template = str(row.get("template") or "")
-    if template and (problem, template) in held.templates:
-        return True
-    paths = [part.strip() for part in str(row.get("path") or "").split(";") if part.strip()]
-    return any(path in held.paths for path in paths)
-
-
-def _apply_omitted(row: dict, held) -> None:
-    """Keep a different counter off the ranked table. A numeric gap stays ranked."""
-    if not _matches_hold(row, held) or row.get("_declared_partial"):
-        return
-    n = int(row.get("n") or 0)
-    if _source_parts(row) == {"asv"} and n <= 1:
-        return
-    reason = "different counter from the archive row"
-    if not row.get("scored"):
-        note = str(row.get("note") or "")
-        if reason not in note:
-            row["note"] = f"{note}; {reason}" if note else reason
-        return
-    row["_declared_partial"] = reason
-
-
 def build_board(root: Path) -> dict:
     """Score every committed campaign file and asv track under ``root``."""
     root = Path(root)
@@ -1011,13 +986,6 @@ def build_board(root: Path) -> dict:
     asv_rows, asv_unparsed, unmapped = _asv_rows(root, problems, templates)
     unparsed.extend(asv_unparsed)
     rows = _dedup(campaign + asv_rows)
-    from .findings import holdback
-
-    held = holdback(root)
-    for row in rows:
-        _apply_omitted(row, held)
-    for row in unparsed:
-        _apply_omitted(row, held)
     full_n: dict[str, int | None] = {}
     for problem_id, problem in problems.items():
         full_n[problem_id] = stated_full_n(root, problem)

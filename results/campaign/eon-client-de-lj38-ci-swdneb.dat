@@ -11,5 +11,5 @@ algorithm Doubly nudged CI-NEB
 template eon-client/de-lj38-ci-swdneb
 problem double-ended-saddle-search/lj38
 reducer harness
-counter harness
-count_keys HarnessCounter
+counter client
+count_keys total_force_calls

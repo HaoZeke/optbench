@@ -171,7 +171,7 @@ MATCHES: list[dict] = [
     {"key": "tsopt/pt-island/optim_ffd", "template": "optim/hef-ffd-ts-pt", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-df8da599-hef-ffd-ts-pt.dat", "cause": "optim_pt_units"},
     # double-ended
     {"key": "double-ended-saddle-search/lj38/eon-ci-neb", "template": "eon-svn/de-lj38-ci-neb", "branch": "main", "path": "results/campaign/eon-svn-de-lj38-ci-neb.dat"},
-    {"key": "double-ended-saddle-search/lj38/eon-ci-swdneb", "template": "eon-3.5.0/de-lj38-ci-swdneb", "branch": "main", "path": "results/campaign/eon-3.5.0-de-lj38-ci-swdneb.dat", "cause": "de_exclusion", "hold": ["eon-client/de-lj38-ci-swdneb"]},
+    {"key": "double-ended-saddle-search/lj38/eon-ci-swdneb", "template": "eon-3.5.0/de-lj38-ci-swdneb", "branch": "main", "path": "results/campaign/eon-3.5.0-de-lj38-ci-swdneb.dat", "cause": "de_exclusion"},
     {"key": "double-ended-saddle-search/lj38/eon-dimer", "template": "eon-svn/de-lj38-dimer", "branch": "main", "path": "results/campaign/eon-svn-de-lj38-dimer.dat", "cause": "improved_unset"},
     {"key": "double-ended-saddle-search/lj38/eon-lanczos", "template": "eon-client/de-lj38-lanczos", "branch": "main", "path": "results/campaign/eon-client-de-lj38-lanczos.dat"},
     {"key": "double-ended-saddle-search/lj38/eon-lanczos-improved", "template": "eon-client/de-lj38-lanczos-improved", "branch": "main", "path": "results/campaign/eon-client-de-lj38-lanczos-improved.dat"},
@@ -184,10 +184,10 @@ MATCHES: list[dict] = [
     {"key": "double-ended-saddle-search/pt-island/eon-lanczos-improved", "template": "eon-svn/de-pt-lanczos-improved", "branch": "main", "path": "results/campaign/eon-svn-de-pt-lanczos-improved.dat", "cause": "pt_lanczos"},
     {"key": "double-ended-saddle-search/pt-island/optim", "template": "optim/de-pt", "branch": "cells/optim/saddle-pt", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-pt-island--optim-de-pt.dat", "cause": "optim_pt_units"},
     # neb per-image means already stored in the 3.5.0 files
-    {"key": "neb/Pt-heptamer/eon-lbfgs", "template": "eon-lbfgs", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-lbfgs.dat", "hold": ["eon-client/neb-pt-lbfgs", "eon/neb-pt-lbfgs"]},
-    {"key": "neb/Pt-heptamer/eon-cg", "template": "eon-cg", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-cg.dat", "cause": "heptamer_cg", "hold": ["eon-client/neb-pt-cg"]},
-    {"key": "neb/Pt-heptamer/eon-fire", "template": "eon-fire", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-fire.dat", "hold": ["eon-client/neb-pt-fire"]},
-    {"key": "neb/Pt-heptamer/eon-qm", "template": "eon-qm", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-qm.dat", "hold": ["eon-client/neb-pt-qm"]},
+    {"key": "neb/Pt-heptamer/eon-lbfgs", "template": "eon-lbfgs", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-lbfgs.dat"},
+    {"key": "neb/Pt-heptamer/eon-cg", "template": "eon-cg", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-cg.dat", "cause": "heptamer_cg"},
+    {"key": "neb/Pt-heptamer/eon-fire", "template": "eon-fire", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-fire.dat"},
+    {"key": "neb/Pt-heptamer/eon-qm", "template": "eon-qm", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-qm.dat"},
     # saddle search
     {"key": "saddle-search/pt-island/eon-dimer", "template": "eon-svn/saddle-pt-dimer", "branch": "main", "path": "results/campaign/eon-3.5.0-saddle-pt-classic.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "cause": "eon_saddle_count"},
     {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-davidson-sm50", "template": "softsaddle/saddle-davidson-sm50", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-davidson-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
@@ -464,28 +464,6 @@ def load_ledger(path: Path) -> list[dict]:
     return rows
 
 
-class Hold:
-    """Templates kept off the ranked table because they are a different counter."""
-
-    def __init__(self) -> None:
-        self.templates: set[tuple[str, str]] = set()
-        self.paths: set[str] = set()
-
-    def __bool__(self) -> bool:
-        return bool(self.templates or self.paths)
-
-
-def holdback(root: Path) -> Hold:
-    """Explicit omitted templates. A numeric gap does not remove a row."""
-    found = Hold()
-    for row in load_ledger(root / FINDINGS_PATH):
-        beside = row.get("beside") or {}
-        problem = f"{row['suite']}/{row['problem']}"
-        for extra in beside.get("omitted") or []:
-            found.templates.add((problem, str(extra)))
-    return found
-
-
 def _local_fields(root: Path, beside: dict) -> dict[str, str] | None:
     path = root / str(beside.get("path") or "")
     branch = str(beside.get("branch") or "")
@@ -582,7 +560,7 @@ def findings_errors(root: Path) -> list[str]:
     ledger_path = root / FINDINGS_PATH
     if not ledger_path.is_file():
         return [f"{FINDINGS_PATH} is missing"]
-    from .check import load_oracle
+    from .check import held_back_errors, load_oracle
 
     oracle = load_oracle(root / "oracle" / "entries.jsonl")
     stored = load_ledger(ledger_path)
@@ -597,6 +575,7 @@ def findings_errors(root: Path) -> list[str]:
             errors.append(f"{row_id(left)} stored finding does not match the campaign files")
             break
     errors.extend(campaign_mismatch(root))
+    errors.extend(held_back_errors(root))
     blob = ledger_path.read_text(encoding="utf-8")
     for phrase in _forbidden(blob):
         errors.append(f"findings contain {phrase}")
@@ -734,9 +713,6 @@ def build_rows(root: Path) -> list[dict]:
             beside["stop2014_calls"] = _float(campaign_fields.get("force_calls"))
             beside["harness_stop_mean"] = _float(campaign_fields.get("harness_stop_mean"))
             beside["metric"] = "stop2014_calls"
-        omitted = match.get("hold") or []
-        if omitted:
-            beside["omitted"] = list(omitted)
         if match.get("extra"):
             beside.update(match["extra"])
         ranked_path = match.get("ranked_path")
