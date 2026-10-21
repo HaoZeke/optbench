@@ -174,6 +174,54 @@
    <td data-code="softsaddle">—</td>
    <td data-code="tsase" data-template="tsase/ci-neb" data-par2="2524.53"><span class="bench-score">2524.53</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">tsase/ci-neb</a></td>
    </tr>
+   <tr data-problem="globalopt/lj100-binary">
+   <th scope="row"><a href="generated/suites/globalopt.html#lj100-binary">Binary Lennard-Jones 100</a></th>
+   <td data-code="eOn">—</td>
+   <td data-code="Eon svn">—</td>
+   <td data-code="rgmin">—</td>
+   <td data-code="rgsaddle">—</td>
+   <td data-code="geodesic">—</td>
+   <td data-code="ASE">—</td>
+   <td data-code="Sella">—</td>
+   <td data-code="GMIN">—</td>
+   <td data-code="pele">—</td>
+   <td data-code="LAMMPS">—</td>
+   <td data-code="pysisyphus">—</td>
+   <td data-code="AIRSS" data-template="airss/lj100-binary" data-par2="4e+06"><span class="bench-score">4e+06</span><a href="generated/suites/globalopt.html#lj100-binary-templates">airss/lj100-binary</a></td>
+   <td data-code="vc-SQNM">—</td>
+   <td data-code="artn">—</td>
+   <td data-code="compass">—</td>
+   <td data-code="dlfind">—</td>
+   <td data-code="lammps">—</td>
+   <td data-code="optim">—</td>
+   <td data-code="optking">—</td>
+   <td data-code="softsaddle">—</td>
+   <td data-code="tsase">—</td>
+   </tr>
+   <tr data-problem="globalopt/lj150">
+   <th scope="row"><a href="generated/suites/globalopt.html#lj150">lj150</a></th>
+   <td data-code="eOn">—</td>
+   <td data-code="Eon svn">—</td>
+   <td data-code="rgmin">—</td>
+   <td data-code="rgsaddle">—</td>
+   <td data-code="geodesic">—</td>
+   <td data-code="ASE">—</td>
+   <td data-code="Sella">—</td>
+   <td data-code="GMIN">—</td>
+   <td data-code="pele">—</td>
+   <td data-code="LAMMPS">—</td>
+   <td data-code="pysisyphus">—</td>
+   <td data-code="AIRSS" data-template="airss/lj150" data-par2="2e+07"><span class="bench-score">2e+07</span><a href="generated/suites/globalopt.html#lj150-templates">airss/lj150</a></td>
+   <td data-code="vc-SQNM">—</td>
+   <td data-code="artn">—</td>
+   <td data-code="compass">—</td>
+   <td data-code="dlfind">—</td>
+   <td data-code="lammps">—</td>
+   <td data-code="optim">—</td>
+   <td data-code="optking">—</td>
+   <td data-code="softsaddle">—</td>
+   <td data-code="tsase">—</td>
+   </tr>
    <tr data-problem="globalopt/lj38">
    <th scope="row"><a href="generated/suites/globalopt.html#lj38">Lennard-Jones 38 global minimum</a></th>
    <td data-code="eOn" data-template="eon-client/bh-lj38" data-par2="503146"><span class="bench-score">503146</span><a href="generated/suites/globalopt.html#lj38-templates">eon-client/bh-lj38</a></td>
@@ -205,13 +253,13 @@
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="geodesic">—</td>
-   <td data-code="ASE">—</td>
+   <td data-code="ASE" data-template="ase-globalopt/lj75-basinhopping" data-par2="2e+06"><span class="bench-score">2e+06</span><a href="generated/suites/globalopt.html#lj75-templates">ase-globalopt/lj75-basinhopping</a></td>
    <td data-code="Sella">—</td>
    <td data-code="GMIN">—</td>
    <td data-code="pele">—</td>
    <td data-code="LAMMPS">—</td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="AIRSS">—</td>
+   <td data-code="AIRSS" data-template="airss/lj75" data-par2="1.99333e+06"><span class="bench-score">1.99333e+06</span><a href="generated/suites/globalopt.html#lj75-templates">airss/lj75</a></td>
    <td data-code="vc-SQNM">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>

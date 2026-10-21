@@ -1008,9 +1008,8 @@
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/lj100-binary">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="11">No full harness row.</td></tr>
+   <tr><td data-field="template">airss/lj100-binary</td><td data-field="version">AIRSS 0.9.4</td><td data-field="commit">5593cc4ee360</td><td data-field="source">campaign</td><td data-field="par2_mean">4e+06</td><td data-field="success_rate">0</td><td data-field="wilson">0–0.0369935</td><td data-field="median_calls">2.00072e+06</td><td data-field="mean_calls">2.00073e+06</td><td data-field="failures">crash 0, divergence 0, cap 100, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">No committed harness run.</p>
    <p><a href="generated/suites/globalopt.html#lj100-binary">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="lj100-binary-legacy">
    <h3>Legacy 2014 archive</h3>
@@ -1141,9 +1140,8 @@
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/lj150">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="11">No full harness row.</td></tr>
+   <tr><td data-field="template">airss/lj150</td><td data-field="version">AIRSS 0.9.4</td><td data-field="commit">5593cc4ee360</td><td data-field="source">campaign</td><td data-field="par2_mean">2e+07</td><td data-field="success_rate">0</td><td data-field="wilson">0–0.0369935</td><td data-field="median_calls">1.00007e+07</td><td data-field="mean_calls">1.00008e+07</td><td data-field="failures">crash 0, divergence 0, cap 100, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">No committed harness run.</p>
    <p><a href="generated/suites/globalopt.html#lj150">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="lj150-legacy">
    <h3>Legacy 2014 archive</h3>
@@ -1202,9 +1200,8 @@
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/lj75">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="11">No full harness row.</td></tr>
+   <tr><td data-field="template">airss/lj75</td><td data-field="version">AIRSS 0.9.4</td><td data-field="commit">5593cc4ee360</td><td data-field="source">campaign</td><td data-field="par2_mean">1.99333e+06</td><td data-field="success_rate">0.005</td><td data-field="wilson">0.000883169–0.0277737</td><td data-field="median_calls">1.00047e+06</td><td data-field="mean_calls">998908</td><td data-field="failures">crash 0, divergence 0, cap 199, wrong_stationary 0</td><td data-field="n">200</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/globalopt.html#lj75">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="lj75-legacy">
    <h3>Legacy 2014 archive</h3>

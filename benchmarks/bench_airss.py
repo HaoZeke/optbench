@@ -49,7 +49,14 @@ def _compute(seed: str, start: str) -> dict:
     if str(seed) != SEED:
         raise ValueError(f"seed {seed} is not the archived-start seed {SEED}")
     from optbench.campaign import load_template, resolve_problem
-    from optbench.runners.airss_go import _job, _load_start_names, find_buildcell, reference_energy, search_start
+    from optbench.runners.airss_go import (
+        _job,
+        _load_start_names,
+        find_buildcell,
+        reference_energy,
+        search_cap,
+        search_start,
+    )
 
     template = load_template(ROOT, "airss/lj38")
     problem = resolve_problem(ROOT, str(template["problem"]))
@@ -65,7 +72,7 @@ def _compute(seed: str, start: str) -> dict:
         find_buildcell(),
         reference_energy(),
         tolerance,
-        problem_cap(),
+        search_cap(problem, template),
     )
     record = search_start(job)
     record["seed"] = SEED
@@ -93,7 +100,7 @@ class AirssLj38(TrackedSearch):
     timeout = 3600
     template_id = "airss/lj38"
     problem_id = "globalopt/lj38"
-    cap = problem_cap()
+    cap = 2000000
 
     def setup(self, seed, start):
         from optbench.runners.airss_go import find_buildcell

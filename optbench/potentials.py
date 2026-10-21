@@ -7,10 +7,13 @@ states matches ``morse_pt``: D0 0.7102, alpha 1.6047, r0 2.897, cutoff 7,
 energy shifted to zero at the cutoff, orthorhombic minimum image.
 
 The gradient is dE/dx. Its Euclidean norm is the force norm.
+Binary Lennard-Jones uses an arithmetic sigma for the unlike pair and the
+per-pair epsilons the caller passes. A missing cutoff sums every pair.
 """
 
 from __future__ import annotations
 
+import math
 from collections.abc import Sequence
 
 import numpy as np
@@ -72,6 +75,68 @@ def lennard_jones(coords: Sequence[float] | np.ndarray) -> tuple[float, np.ndarr
     energy = 4.0 * LJ_EPSILON * np.sum(sr12 - sr6)
     # (1/r) dV/dr = 24 eps (sr6 - 2 sr12) / r^2
     slope = 24.0 * LJ_EPSILON * (sr6 - 2.0 * sr12) * inv_r2
+    grad = _accumulate(pos.shape[0], iu, ju, diff, slope)
+    return float(energy), grad.reshape(-1)
+
+
+def _species_index(species: Sequence[int] | Sequence[str] | np.ndarray, count: int) -> np.ndarray:
+    labels = np.asarray(species)
+    if labels.shape != (count,):
+        raise ValueError("species must name one label per atom")
+    if labels.dtype.kind in {"U", "S", "O"}:
+        mapped = []
+        for label in labels.tolist():
+            text = str(label).upper()
+            if text in {"A", "LA", "0"}:
+                mapped.append(0)
+            elif text in {"B", "LB", "1"}:
+                mapped.append(1)
+            else:
+                raise ValueError(f"unknown species {label}")
+        return np.asarray(mapped, dtype=np.int64)
+    values = labels.astype(np.int64)
+    if np.any((values != 0) & (values != 1)):
+        raise ValueError("species integers are 0 for A and 1 for B")
+    return values
+
+
+def binary_lennard_jones(
+    coords: Sequence[float] | np.ndarray,
+    species: Sequence[int] | Sequence[str] | np.ndarray,
+    *,
+    sigma_aa: float = 1.0,
+    sigma_bb: float = 1.3,
+    epsilon_aa: float = 1.0,
+    epsilon_bb: float = 1.0,
+    epsilon_ab: float = 1.0,
+    cutoff: float | None = None,
+) -> tuple[float, np.ndarray]:
+    """Binary 12-6 Lennard-Jones. Unlike sigma is the arithmetic mean.
+
+    Species 0 is A and species 1 is B. ``epsilon_ab`` is the unlike well
+    depth. AA and BB pairs use their own epsilon. ``cutoff`` None keeps
+    every pair. There is no shift and no periodic image.
+    """
+    pos = _as_positions(coords)
+    labels = _species_index(species, pos.shape[0])
+    limit = math.inf if cutoff is None else float(cutoff)
+    iu, ju, diff, r2 = _pairs(pos, limit, None)
+    if iu.size == 0:
+        return 0.0, np.zeros(pos.size, dtype=np.float64)
+    sigma = np.where(labels == 0, float(sigma_aa), float(sigma_bb))
+    sigma_ij = 0.5 * (sigma[iu] + sigma[ju])
+    same = labels[iu] == labels[ju]
+    epsilon_ij = np.where(
+        same,
+        np.where(labels[iu] == 0, float(epsilon_aa), float(epsilon_bb)),
+        float(epsilon_ab),
+    )
+    inv_r2 = 1.0 / r2
+    sr2 = (sigma_ij * sigma_ij) * inv_r2
+    sr6 = sr2 * sr2 * sr2
+    sr12 = sr6 * sr6
+    energy = 4.0 * np.sum(epsilon_ij * (sr12 - sr6))
+    slope = 24.0 * epsilon_ij * (sr6 - 2.0 * sr12) * inv_r2
     grad = _accumulate(pos.shape[0], iu, ju, diff, slope)
     return float(energy), grad.reshape(-1)
 

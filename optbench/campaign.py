@@ -265,6 +265,8 @@ def run(
     work: Path | None = None,
     limit: int = 0,
     resume: bool = False,
+    index_start: int = 0,
+    index_stop: int | None = None,
 ) -> dict:
     template = load_template(root, template_name)
     if template["engine"] == "noise":
@@ -342,6 +344,18 @@ def run(
         stated = template.get("problem")
         if stated and stated != problem["id"]:
             raise ValueError(f"{template_name} belongs to {stated}")
+        if index_start or index_stop is not None:
+            return run_template(
+                root,
+                problem,
+                template,
+                geometries=geometries,
+                output=output,
+                workers=workers,
+                work=work,
+                index_start=index_start,
+                index_stop=index_stop,
+            )
         return run_template(
             root,
             problem,
@@ -351,6 +365,8 @@ def run(
             workers=workers,
             work=work,
         )
+    if index_start or index_stop is not None:
+        raise ValueError(f"{template_name} does not take an index range")
     if template["engine"] == "rgmin":
         from .runners.rgmin_min import run_template
 
