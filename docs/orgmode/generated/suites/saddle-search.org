@@ -29,7 +29,7 @@
    <td data-code="lammps">—</td>
    <td data-code="optim">—</td>
    <td data-code="optking">—</td>
-   <td data-code="softsaddle" data-template="softsaddle/saddle-lanczos-sm0" data-par2="10124.2"><span class="bench-score">10124.2</span><a href="#pt-island-templates">softsaddle/saddle-lanczos-sm0</a></td>
+   <td data-code="softsaddle">—</td>
    <td data-code="tsase">—</td>
    </tr>
    </tbody></table></div></section><section class="bench" id="pt-island" data-problem="saddle-search/pt-island">

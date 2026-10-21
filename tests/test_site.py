@@ -128,6 +128,7 @@ def test_rendered_pages_use_the_board_rank():
     assert "1d71c9445018" in codes
     assert "f15726f1c798" in codes
     assert "c0db2b8d333c" in codes
+    assert "df8ec2f8deba" in codes
     assert 'data-board-table="code-best"' in codes
     assert not (ROOT / "docs" / "include" / "featured.org").exists()
     assert not (ROOT / "docs" / "include" / "terra-pass.org").exists()
