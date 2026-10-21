@@ -330,7 +330,7 @@ def board(
     document = write_board(root, destination)
     print(
         f"wrote {destination} problems={len(document['problems'])} "
-        f"ranked={document['ranked_count']} partial={len(document['partial'])} "
+        f"ranked={document['ranked_count']} short={len(document['short'])} "
         f"unparsed={len(document['unparsed'])} unmapped={len(document['unmapped'])}"
     )
     for problem in document["problems"].values():
