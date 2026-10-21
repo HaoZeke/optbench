@@ -631,7 +631,9 @@ def run_template(
         names = [f"{label}.{index}" for index in range(1, int(config["starts"]) + 1)]
     else:
         names = _load_start_names(root, problem, geometries, work, output)
-    if raw_tolerance is None:
+    # A structure budget is the stop for that template. A problem energy
+    # window belongs to searches that run until the Cambridge minimum.
+    if config.get("budget_structures"):
         reference = None
         tolerance = None
     else:

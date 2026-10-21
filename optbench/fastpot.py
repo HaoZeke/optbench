@@ -19,6 +19,8 @@ from pathlib import Path
 
 NATIVE = Path(__file__).resolve().parent / "native"
 _KERNEL_SRC = NATIVE / "kernels.c"
+_AVX_SRC = NATIVE / "lj_avx.c"
+_QUENCH_SRC = NATIVE / "lj_quench.c"
 _BRIDGE_SRC = NATIVE / "extpot_bridge.c"
 _CFLAGS = [
     "-std=c11",
@@ -46,14 +48,31 @@ def _build_dir() -> Path:
     return root
 
 
-def _compile(source: Path, dest: Path, extra: list[str]) -> bool:
+def _compile_many(dest: Path, units: list[tuple[Path, list[str]]], link: list[str]) -> bool:
+    """Compile each unit with its own flags and link one shared library."""
     gcc = shutil.which("gcc")
-    if gcc is None or not source.is_file():
+    if gcc is None:
         return False
     dest.parent.mkdir(parents=True, exist_ok=True)
+    objects: list[str] = []
+    for source, flags in units:
+        if not source.is_file():
+            return False
+        obj = dest.with_name(dest.name + f".{source.stem}.o")
+        compiled = subprocess.run(
+            [gcc, *_CFLAGS, "-fPIC", *flags, "-c", "-o", str(obj), str(source)],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        log = dest.with_suffix(dest.suffix + ".log")
+        if compiled.returncode != 0:
+            log.write_text(compiled.stderr, encoding="utf-8")
+            return False
+        objects.append(str(obj))
     temporary = dest.with_suffix(dest.suffix + ".tmp")
     result = subprocess.run(
-        [gcc, * _CFLAGS, *extra, "-o", str(temporary), str(source), "-lm"],
+        [gcc, "-shared", "-o", str(temporary), *objects, *link, "-lm"],
         check=False,
         capture_output=True,
         text=True,
@@ -69,6 +88,29 @@ def _compile(source: Path, dest: Path, extra: list[str]) -> bool:
     return True
 
 
+def _compile(source: Path, dest: Path, extra: list[str]) -> bool:
+    if not source.is_file():
+        return False
+    return _compile_many(dest, [(source, extra)], [])
+
+
+def _lj_units(include: Path | None = None) -> list[tuple[Path, list[str]]]:
+    quench_flags = [f"-I{include}"] if include is not None else []
+    return [
+        (_KERNEL_SRC, []),
+        (_AVX_SRC, ["-mavx512f", "-mfma"]),
+        (_QUENCH_SRC, quench_flags),
+    ]
+
+
+def _source_stamp(*sources: Path) -> str:
+    digest = hashlib.sha256()
+    for source in sources:
+        digest.update(source.read_bytes())
+        digest.update(b"\0")
+    return digest.hexdigest()[:16]
+
+
 _KERNELS: ctypes.CDLL | None | bool = None
 
 
@@ -81,8 +123,12 @@ def kernels() -> ctypes.CDLL | None:
         return None
     if isinstance(_KERNELS, ctypes.CDLL):
         return _KERNELS
-    dest = _build_dir() / f"kernels-{_stamp(_KERNEL_SRC)}.so"
-    if not dest.is_file() and not _compile(_KERNEL_SRC, dest, ["-fPIC", "-shared"]):
+    dest = _build_dir() / f"kernels-{_source_stamp(_KERNEL_SRC, _AVX_SRC)}.so"
+    if not dest.is_file() and not _compile_many(
+        dest,
+        [(_KERNEL_SRC, []), (_AVX_SRC, ["-mavx512f", "-mfma"])],
+        [],
+    ):
         _KERNELS = False
         return None
     lib = ctypes.CDLL(str(dest))
@@ -121,6 +167,15 @@ def kernels() -> ctypes.CDLL | None:
         pointer,
     ]
     lib.optbench_lj_cut.restype = ctypes.c_int
+    lib.optbench_lj_gradient.argtypes = [
+        pointer,
+        ctypes.c_int,
+        ctypes.c_double,
+        pointer,
+        pointer,
+        pointer,
+    ]
+    lib.optbench_lj_gradient.restype = ctypes.c_int
     _KERNELS = lib
     return lib
 
@@ -228,3 +283,155 @@ def lj_cut_forces(positions, epsilon: float, sigma: float, cutoff: float):
     if code != 0:
         return None
     return float(energy.value), tuple(out)
+
+
+def lj_gradient(coords, cutoff: float = 40.0):
+    """Energy, gradient, and minimum pair distance for cutoff 12-6.
+
+    Returns ``None`` when the native kernel is unavailable. The gradient
+    is ``dE/dx``. A coincident pair has energy +infinity and a zero
+    gradient. An AVX-512 build uses the same potential; its energy can
+    differ from the scalar sum by about 1e-13.
+    """
+    import numpy as np
+
+    lib = kernels()
+    if lib is None:
+        return None
+    pos = np.ascontiguousarray(coords, dtype=np.float64).reshape(-1)
+    if pos.size % 3 != 0:
+        raise ValueError("positions must be x, y, z triples")
+    atoms = pos.size // 3
+    grad = np.zeros(pos.size, dtype=np.float64)
+    energy = ctypes.c_double()
+    minimum = ctypes.c_double()
+    pointer = ctypes.POINTER(ctypes.c_double)
+    code = lib.optbench_lj_gradient(
+        pos.ctypes.data_as(pointer) if atoms else None,
+        atoms,
+        float(cutoff),
+        ctypes.byref(energy),
+        grad.ctypes.data_as(pointer) if atoms else None,
+        ctypes.byref(minimum),
+    )
+    if code != 0:
+        return None
+    return float(energy.value), grad, float(minimum.value)
+
+
+class _QuenchOut(ctypes.Structure):
+    _fields_ = [
+        ("energy", ctypes.c_double),
+        ("min_distance", ctypes.c_double),
+        ("calls", ctypes.c_int),
+        ("code", ctypes.c_int),
+        ("capped", ctypes.c_int),
+    ]
+
+
+_QUENCH: ctypes.CDLL | None | bool = None
+
+
+def _nlopt_dirs() -> tuple[Path, Path] | None:
+    """Include and lib directories for the installed NLopt C library."""
+    import importlib.util
+
+    spec = importlib.util.find_spec("_nlopt")
+    if spec is None or not spec.origin:
+        return None
+    library = Path(spec.origin).resolve().parents[2]
+    include = library.parent / "include"
+    if not (include / "nlopt.h").is_file():
+        return None
+    if not any(library.glob("libnlopt.so*")):
+        return None
+    return include, library
+
+
+def quench_library() -> ctypes.CDLL | None:
+    """NLopt LD_LBFGS quench linked against the cutoff kernel, or ``None``."""
+    global _QUENCH
+    if not enabled():
+        return None
+    if _QUENCH is False:
+        return None
+    if isinstance(_QUENCH, ctypes.CDLL):
+        return _QUENCH
+    dirs = _nlopt_dirs()
+    if dirs is None or not _QUENCH_SRC.is_file() or not _KERNEL_SRC.is_file() or not _AVX_SRC.is_file():
+        _QUENCH = False
+        return None
+    include, library = dirs
+    dest = _build_dir() / f"lj-quench-{_source_stamp(_KERNEL_SRC, _AVX_SRC, _QUENCH_SRC)}.so"
+    if not dest.is_file() and not _compile_many(
+        dest,
+        _lj_units(include),
+        [f"-L{library}", "-lnlopt", f"-Wl,-rpath,{library}"],
+    ):
+        _QUENCH = False
+        return None
+    lib = ctypes.CDLL(str(dest))
+    lib.optbench_lj_quench.argtypes = [
+        ctypes.POINTER(ctypes.c_double),
+        ctypes.c_int,
+        ctypes.c_int,
+        ctypes.c_int,
+        ctypes.c_double,
+        ctypes.c_double,
+        ctypes.c_double,
+        ctypes.c_int,
+        ctypes.POINTER(_QuenchOut),
+    ]
+    lib.optbench_lj_quench.restype = ctypes.c_int
+    _QUENCH = lib
+    return lib
+
+
+def lj_lbfgs_quench(
+    origin,
+    *,
+    cap: int,
+    local_max: int,
+    converged_force: float,
+    max_move: float,
+    max_iterations: int,
+    cutoff: float = 40.0,
+):
+    """One LD_LBFGS quench bounded by eOn's per-step ``max_move``.
+
+    Returns ``(point, energy, min_distance, calls, code, capped)``, or
+    ``None`` when the native quench is unavailable. ``calls`` counts fresh
+    geometries only. ``capped`` means the next geometry was refused.
+    ``converged_force`` is the Euclidean force norm.
+    """
+    import numpy as np
+
+    lib = quench_library()
+    if lib is None:
+        return None
+    point = np.array(origin, dtype=np.float64, copy=True).reshape(-1)
+    if point.size % 3 != 0:
+        raise ValueError("positions must be x, y, z triples")
+    out = _QuenchOut()
+    pointer = ctypes.POINTER(ctypes.c_double)
+    code = lib.optbench_lj_quench(
+        point.ctypes.data_as(pointer),
+        int(point.size),
+        int(cap),
+        int(local_max),
+        float(converged_force),
+        float(cutoff),
+        float(max_move),
+        int(max_iterations),
+        ctypes.byref(out),
+    )
+    if code != 0:
+        return None
+    return (
+        point,
+        float(out.energy),
+        float(out.min_distance),
+        int(out.calls),
+        int(out.code),
+        bool(out.capped),
+    )

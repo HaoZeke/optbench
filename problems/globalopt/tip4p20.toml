@@ -4,10 +4,26 @@ suite = "globalopt"
 problem = "tip4p20"
 contract = "partial"
 entry_count = 2
-remark = "The 2014 archive states no force-call cap. archive/entries/globalopt/tip4p20/gmin/benchmark.dat records an observed force_calls_max of 1.4191e+08 and gmin-tbp/benchmark.dat records 1.4340e+08. Those are observed maxima, not caps. The declared cap is 2000000, the cap recorded for ranked rows eon-client-bh-lj38 and eon-svn-bh-lj38 in results/board/problems/globalopt-lj38.json."
+remark = "Success is an energy at or below the Cambridge Cluster Database TIP4P N=20 minimum plus 0.001. The declared force-call cap is 2000000."
+
+[potential]
+kind = "tip4p"
+rigid = true
+
+[reference]
+energy = -872.9887544952
+page = "http://www-wales.ch.cam.ac.uk/~wales/CCD/TIP4P-water.html"
+points = "https://www-wales.ch.cam.ac.uk/~wales/CCD/TIP4P/xyz/TIP4P-20.xyz"
+
+[sample]
+starts = 100
 
 [convergence]
+energy_above_minimum = 0.001
 max_force_calls = 2000000
+
+[input]
+archive_path = "website/globalopt/tip4p20/100_tip4p20.tar.gz"
 
 [metrics]
 required = ["force_calls", "force_calls_max", "force_calls_median", "force_calls_min", "nfailed"]

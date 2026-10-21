@@ -1,3 +1,5 @@
+import math
+
 import pytest
 
 np = pytest.importorskip("numpy")
@@ -43,6 +45,13 @@ def test_lj_dimer_sits_at_the_well():
     assert np.linalg.norm(grad) == pytest.approx(0.0, abs=1e-10)
     index = negative_index(np.linalg.eigvalsh(lennard_jones_hessian(x)).tolist())
     assert index == 0
+
+
+def test_a_coincident_lennard_jones_pair_is_the_true_singularity():
+    energy, grad = lennard_jones(np.zeros(6))
+    assert math.isinf(energy) and energy > 0.0
+    assert np.all(grad == 0.0)
+    assert float(np.linalg.norm(grad)) == pytest.approx(0.0)
 
 
 def test_lj_gradient_and_hessian_match_finite_differences():

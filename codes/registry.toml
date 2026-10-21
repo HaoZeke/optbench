@@ -203,6 +203,14 @@ ref = "svn-snapshot"
 commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
 note = "No public git commit. The pin is the sha256 of the Wales svn.tar.bz2 snapshot, 122743078 bytes. Minimization L-BFGS calls the ASE socket and pes.evaluate. OPTIM's own call counter is not a score. Saddle search, NEB, noise, and PATHSAMPLE are not scored."
 
+[[template]]
+id = "ase-globalopt/lj75-basinhopping"
+code = "ase"
+problem = "globalopt/lj75"
+profile = "default"
+task = "basin-hopping"
+ranked = true
+
 [[code]]
 id = "airss"
 name = "AIRSS"
@@ -242,6 +250,80 @@ ref = "stable_30Sep2026"
 commit = "8de817dd79bfe4525d5d39246a212d833e6dee07"
 committed = "2026-09-30"
 note = "LAMMPS 30 Sep 2026, tag stable_30Sep2026. Band rows use fix neb with a climbing stage and min_style quickmin or fire. The pair style is the spec potential: lj/cut 40 with no shift, and morse 9.5 with pair_modify shift yes. Kspring is 1.0 with the default parallel neigh spring. The timestep is the unit default. Force calls are pair computes summed across replicas. The FIRE row leaves one fifth of the cap unused so a velocity-reset evaluation stays inside the cap."
+
+[[code]]
+id = "nloptglobal"
+name = "NLopt"
+role = "global optimization"
+repository = "https://github.com/stevengj/nlopt"
+ref = "v2.11.0"
+commit = "88c424d4f458412787df96fcc95218acbca224fd"
+committed = "2026-06-05"
+note = "NLopt 2.11.0 at 88c424d4. Templates are LD_LBFGS basin hopping, GN_MLSL with LD_LBFGS, GN_CRS2_LM, GN_ISRES, and GD_STOGO. The potential is the harness Lennard-Jones cluster, epsilon 1, sigma 1, cutoff 40, no shift. Force calls are harness evaluations. Each start is one archived geometry. Cube searches use a half-width of 6 centered on that geometry. Basin hopping uses displacement 0.5 and kT 0.8, and each L-BFGS trial step is capped at 0.2. A success is at or below the Cambridge Cluster Database minimum plus 0.001. The force-call cap is the one on the template."
+
+[[template]]
+id = "nloptglobal/lj38-mlsl-lbfgs"
+code = "nloptglobal"
+problem = "globalopt/lj38"
+profile = "default"
+task = "global-minimize"
+ranked = true
+
+[[template]]
+id = "nloptglobal/lj38-crs2"
+code = "nloptglobal"
+problem = "globalopt/lj38"
+profile = "default"
+task = "global-minimize"
+ranked = true
+
+[[template]]
+id = "nloptglobal/lj38-isres"
+code = "nloptglobal"
+problem = "globalopt/lj38"
+profile = "default"
+task = "global-minimize"
+ranked = true
+
+[[template]]
+id = "nloptglobal/lj38-stogo"
+code = "nloptglobal"
+problem = "globalopt/lj38"
+profile = "default"
+task = "global-minimize"
+ranked = true
+
+[[template]]
+id = "nloptglobal/lj38-lbfgs-bh"
+code = "nloptglobal"
+problem = "globalopt/lj38"
+profile = "default"
+task = "global-minimize"
+ranked = true
+
+[[template]]
+id = "nloptglobal/lj75-lbfgs-bh"
+code = "nloptglobal"
+problem = "globalopt/lj75"
+profile = "default"
+task = "global-minimize"
+ranked = true
+
+[[template]]
+id = "nloptglobal/lj98-lbfgs-bh"
+code = "nloptglobal"
+problem = "globalopt/lj98"
+profile = "default"
+task = "global-minimize"
+ranked = true
+
+[[template]]
+id = "nloptglobal/lj150-lbfgs-bh"
+code = "nloptglobal"
+problem = "globalopt/lj150"
+profile = "default"
+task = "global-minimize"
+ranked = true
 
 # generated ASE and Sella templates
 

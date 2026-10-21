@@ -1,0 +1,29 @@
+# counter harness. One force call is one HarnessCounter entry.
+# The potential is Lennard-Jones, epsilon 1, sigma 1, cutoff 40, no shift.
+# A success is under the cap and at or below the Cambridge minimum plus 0.001.
+# GD_STOGO, the deterministic branch-and-bound search. The random StoGO variant is a different algorithm. The NLopt seed is the start index. A coincident pair is a large finite energy in the harness potential. The recorded point is the point NLopt returned.
+nfailed 100
+code NLopt
+code_version 2.11.0
+commit 88c424d4f458412787df96fcc95218acbca224fd
+algorithm StoGO
+template nloptglobal/lj38-stogo
+problem globalopt/lj38
+tuning default
+counter harness
+cap 1000000
+par2_mean 2000000
+wilson_low 0
+wilson_high 0.036993498207
+par2_median 2000000
+par2_median_low 2000000
+par2_median_high 2000000
+v2_nfailed 100
+v2_successes 0
+n 100
+n_cap 0
+n_wrong_stationary 100
+n_divergence 0
+n_crash 0
+energy_min -167.806823274
+energy_max 527999932.281
