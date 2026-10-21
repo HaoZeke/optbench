@@ -580,7 +580,7 @@
    <td data-field="template">ase-globalopt/lj75-basinhopping</td>
    <td data-field="version">ASE 3.29.0</td>
    <td data-field="commit">f27c0005ae6a</td>
-   <td data-field="par2_mean">2e+06</td>
+   <td data-field="par2_mean">4e+06</td>
    <td data-field="mean_calls">1e+06</td>
    <td data-field="median_calls">1e+06</td>
    <td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td>
@@ -1394,7 +1394,7 @@
    <td data-field="template">airss/lj150</td>
    <td data-field="version">AIRSS 0.9.4</td>
    <td data-field="commit">5593cc4ee360</td>
-   <td data-field="par2_mean">2e+07</td>
+   <td data-field="par2_mean">4e+06</td>
    <td data-field="mean_calls">1.00008e+07</td>
    <td data-field="median_calls">1.00007e+07</td>
    <td data-field="failures">crash 0, divergence 0, cap 100, wrong_stationary 0</td>
@@ -1416,7 +1416,7 @@
    <td data-field="template">airss/lj75</td>
    <td data-field="version">AIRSS 0.9.4</td>
    <td data-field="commit">5593cc4ee360</td>
-   <td data-field="par2_mean">1.99333e+06</td>
+   <td data-field="par2_mean">3.98333e+06</td>
    <td data-field="mean_calls">998908</td>
    <td data-field="median_calls">1.00047e+06</td>
    <td data-field="failures">crash 0, divergence 0, cap 199, wrong_stationary 0</td>
