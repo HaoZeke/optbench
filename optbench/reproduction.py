@@ -214,14 +214,15 @@ MATCHES: list[dict] = [
                 "par2_mean": 4000000.0,
             },
             "eon_develop": {
-                "label": "eOn (develop 500350d9)",
+                "label": "eOn (develop 8468a7cd)",
                 "template": "eon-develop-500350d9/bh-lj100-binary",
                 "path": "results/campaign/eon-develop-500350d9-bh-lj100-binary.dat",
-                "avg_energy": -530.059,
-                "min_energy": -550.764,
+                "avg_energy": -529.995,
+                "min_energy": -542.571,
                 "max_energy": -511.999,
                 "par2_mean": 4000000.0,
                 "successes": 0,
+                "n": 32,
             },
         },
         "rank_only": True,
@@ -319,19 +320,19 @@ CAUSE_TEXT = {
         "The Wilson interval on 0 failures out of 1000 is about 0 to 3.83."
     ),
     "stock_binary_lj": (
-        "EON (SVN r2549) and eOn (develop 500350d9) are different codes. "
-        "Both ran on the archived binary LJ100 starts, seed 1, with the archive force tolerance 0.001. "
+        "EON (SVN r2549) and eOn (develop 8468a7cd) are different codes. "
+        "origin/develop 8468a7cd contains 500350d9. "
+        "Both use the archived binary LJ100 starts, seed 1, and the archive config.ini: "
+        "temperature 14000, 60000 basin-hopping steps, displacement 0.3, gaussian draws, "
+        "L-BFGS, converged_force 0.001, and max_iterations 10000. "
         "The force-call cap is 2000000, from sample.max_evaluations and from archive report.sh. "
-        "Archive config.ini asks for 60000 basin-hopping steps and an inner L-BFGS limit of 10000 iterations. "
-        "The ranked runs keep each code's own step count of 10000 and its conjugate-gradient inner limit of 1000. "
-        "The cap stops every start at 2000000 calls. eOn records 1000 quenches there. "
-        "Both harness PAR-2 means are 4000000 and both success counts are 0. "
-        "EON (SVN r2549) avg/min/max energy is -530.059, -550.76, and -512. "
-        "eOn (develop 500350d9) is -530.059, -550.764, and -511.999. "
-        "The archive file is -584.579, -596.13, and -574.14. "
-        "The two codes agree to the EON bh.dat precision. "
-        "The maximum is 62.14 above the archive maximum. "
-        "Both full harness runs are ranked beside the archived row."
+        "A start that reaches the cap is charged 4000000. "
+        "EON (SVN r2549) has 100 starts. Hits 0. PAR-2 mean 4000000. "
+        "Mean and median force calls are 2000000. "
+        "Mean final energy is -530.059, against the archive -584.579. "
+        "Min and max are -550.76 and -512. Mean quenches per start are 312.41. "
+        "eOn (develop 8468a7cd) has 32 starts recorded on this tip, every one capped, "
+        "with mean final energy -529.995."
     ),
     "akmc_vs_langevin": (
         "The archive rows are Langevin parallel replica. The harness rows are AKMC. "
