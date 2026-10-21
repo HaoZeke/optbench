@@ -621,7 +621,34 @@ def _partial_reason(problem: dict, records: list[dict], scored: bool, full: int 
     return "; ".join(parts)
 
 
-def _dat(summary: dict, template: dict, metrics: dict, commit: str, version: str, *, partial: bool, reason: str) -> str:
+def _repeated_energy(records: list[dict]) -> str:
+    """A repeated energy that is not the lowest, so a full row can still show it."""
+    energies = [
+        float(record["energy"])
+        for record in records
+        if record.get("energy") is not None and math.isfinite(float(record["energy"]))
+    ]
+    if len(energies) < 2:
+        return ""
+    labels = [f"{energy:.8f}" for energy in energies]
+    printed = f"{min(energies):.8f}"
+    modal, modal_n = Counter(labels).most_common(1)[0]
+    if modal == printed or modal_n < 2:
+        return ""
+    return f"{modal_n} of {len(records)} starts at {modal}; lowest energy {printed}"
+
+
+def _dat(
+    summary: dict,
+    template: dict,
+    metrics: dict,
+    commit: str,
+    version: str,
+    *,
+    partial: bool,
+    reason: str,
+    finding: str = "",
+) -> str:
     rows = {
         "force_calls": summary.get("force_calls"),
         "force_calls_min": summary.get("force_calls_min"),
@@ -659,6 +686,9 @@ def _dat(summary: dict, template: dict, metrics: dict, commit: str, version: str
         rows["partial"] = "true"
         rows["partial_reason"] = reason
         lines.append("# partial. " + reason)
+    if finding:
+        rows["finding"] = finding
+        lines.append("# finding. " + finding)
     note = str(template.get("note") or "").strip()
     if note:
         lines.append("# " + note.replace("\n", " "))
@@ -700,6 +730,7 @@ def _write_outputs(output: Path, records: list[dict], template: dict, problem: d
     full_n = None if full in (None, "") else int(full)
     partial = (not scored) or (full_n is not None and len(ordered) < full_n)
     reason = _partial_reason(problem, ordered, scored, full_n) if partial else ""
+    finding = "" if partial else _repeated_energy(ordered)
     public = []
     for record in ordered:
         row = dict(record)
@@ -708,7 +739,7 @@ def _write_outputs(output: Path, records: list[dict], template: dict, problem: d
     version = str(template.get("code_version") or CODE_VERSION)
     commit = str(template.get("commit") or COMMIT)
     output.parent.mkdir(parents=True, exist_ok=True)
-    dat_text = _dat(summary, template, metrics, commit, version, partial=partial, reason=reason)
+    dat_text = _dat(summary, template, metrics, commit, version, partial=partial, reason=reason, finding=finding)
     temporary = output.with_suffix(".dat.tmp")
     temporary.write_text(dat_text, encoding="utf-8")
     temporary.replace(output)

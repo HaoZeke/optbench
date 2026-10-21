@@ -760,6 +760,9 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
             cap=cap,
             note=parse_note or record_source,
         )
+        finding = str(fields.get("finding") or "").strip()
+        if finding:
+            row["finding"] = finding
         named = str(fields.get("potential") or "").strip()
         if str(fields.get("ranked") or "").lower() == "false":
             reason = "result file sets ranked false"
@@ -1599,6 +1602,17 @@ def _table(
     if not ranked:
         lines.append(f'<tr><td colspan="{len(headers)}">No full harness row.</td></tr>')
     lines.append("</tbody></table></div>")
+    findings = [row for row in ranked if str(row.get("finding") or "").strip()]
+    if findings:
+        lines.append("<h3>Findings</h3><ul>")
+        for row in findings:
+            lines.append(
+                "<li>"
+                f"{_cell(row['template'] or row['entry'])} {_cell(row.get('code') or '')}: "
+                f"{_cell(row['finding'])}."
+                "</li>"
+            )
+        lines.append("</ul>")
     if problem.get("history"):
         lines.append("<h3>History</h3><ul>")
         for row in problem["history"]:
