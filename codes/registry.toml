@@ -102,7 +102,17 @@ repository = "https://www-wales.ch.cam.ac.uk/svn.tar.bz2"
 ref = "svn.tar.bz2"
 commit = "df8da599267534fbe43a250e578f7396a7946311"
 committed = "2026-10-18"
-note = "Wales group GMIN. Tarball sha256 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f. SVNREV df8da599267534fbe43a250e578f7396a7946311, fetched 2026-10-18. The quench is source/mymylbfgs.F90. Keyword defaults are MUPDATE 4, DGUESS 0.1, MAXBFGS 0.4, and MAXERISE 1e-10. The RMS tolerance is the Euclidean force norm divided by sqrt(3N). The potential is the harness Lennard-Jones or Morse through POTENTIAL. Force calls are HarnessCounter entries."
+note = "Wales group GMIN. Tarball sha256 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f. SVNREV df8da599267534fbe43a250e578f7396a7946311, fetched 2026-10-18. The quench is source/mymylbfgs.F90. Keyword defaults are MUPDATE 4, DGUESS 0.1, MAXBFGS 0.4, and MAXERISE 1e-10. The RMS tolerance is the Euclidean force norm divided by sqrt(3N). The potential is the harness Lennard-Jones or Morse through POTENTIAL. Force calls are HarnessCounter entries. Basin-hopping rows use the same tarball and are pinned as gmin-bh."
+
+[[code]]
+id = "gmin-bh"
+name = "GMIN"
+role = "global optimization"
+repository = "https://www-wales.ch.cam.ac.uk/svn.tar.bz2"
+ref = "02aaf45245af"
+commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+committed = "2026-10-18"
+note = "Same Wales tarball as gmin, sha256 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f, SVNREV df8da599267534fbe43a250e578f7396a7946311. Basin-hopping and parallel tempering call the harness Lennard-Jones through codes/gmin/optbench_pot.F90. codes/gmin/build-bh.sh builds the MPI binary."
 
 [[code]]
 id = "pele"

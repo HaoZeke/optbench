@@ -142,6 +142,7 @@ def test_pending_grid_is_every_problem_and_code():
         "ase",
         "sella",
         "gmin",
+        "gmin-bh",
         "pele",
         "optking",
         "artn",
