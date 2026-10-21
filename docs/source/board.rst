@@ -114,7 +114,7 @@ It does not run a campaign.
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38">
    <th scope="row"><a href="generated/suites/double-ended-saddle-search.html#lj38">LJ38 double-ended saddle</a></th>
-   <td data-code="eOn" data-template="eon-client/de-lj38-lanczos-improved" data-par2="259.46"><span class="bench-score">259.46</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">eon-client/de-lj38-lanczos-improved</a></td>
+   <td data-code="eOn" data-template="eon/develop-b0bd4d5a-de-lj38-lanczos-improved" data-par2="230.72"><span class="bench-score">230.72</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">eon/develop-b0bd4d5a-de-lj38-lanczos-improved</a></td>
    <td data-code="Eon svn" data-template="eon-svn/de-lj38-lanczos-improved" data-par2="235.2"><span class="bench-score">235.2</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">eon-svn/de-lj38-lanczos-improved</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="853.56"><span class="bench-score">853.56</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>

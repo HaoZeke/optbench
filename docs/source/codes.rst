@@ -48,14 +48,14 @@ The number is written only after the run finishes under the problem rule.
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="double-ended-saddle-search/lj38" data-template="eon-client/de-lj38-lanczos-improved">
+   <tr data-problem="double-ended-saddle-search/lj38" data-template="eon/develop-b0bd4d5a-de-lj38-lanczos-improved">
    <td>LJ38 double-ended saddle</td>
-   <td data-field="template">eon-client/de-lj38-lanczos-improved</td>
-   <td data-field="version">eOn 3.5.0</td>
-   <td data-field="commit">4d8b34baf1ba</td>
-   <td data-field="par2_mean">259.46</td>
-   <td data-field="mean_calls">259.46</td>
-   <td data-field="median_calls">212</td>
+   <td data-field="template">eon/develop-b0bd4d5a-de-lj38-lanczos-improved</td>
+   <td data-field="version">eOn (develop b0bd4d5a)</td>
+   <td data-field="commit">b0bd4d5a5e0f</td>
+   <td data-field="par2_mean">230.72</td>
+   <td data-field="mean_calls">230.72</td>
+   <td data-field="median_calls">197</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
