@@ -25,7 +25,7 @@ softsaddle/saddle-lanczos-sm0            archive         1003433.0         41702
 softsaddle/saddle-lanczos-sm0            harness         1607254.4      715505.2108 0.5355695377       3052.1            165.2
 softsaddle/saddle-lanczos-sm50           archive          814519.3         314659.7          0.9       3072.5            142.6
                                          sha256   f0dade76cc3029f82e2878bf9874138ef8c203f81cf5f771997b4acdb4e54dcb
-softsaddle/saddle-lanczos-sm50           harness           pending
+softsaddle/saddle-lanczos-sm50           harness         1614543.6      534117.9626 0.5051311711       3785.5            179.9
 
 Per repetition. unique_sp is the linked novel count, including barriers
 at or above 1.5 eV. connected is the count below 1.5 eV.
@@ -57,3 +57,16 @@ softsaddle/saddle-lanczos-sm0
    8      2289632        198         27       4321         0.960426
    9       437665        107         27        904         0.911504
   10      1942552        155         27       3936         0.967480
+
+softsaddle/saddle-lanczos-sm50
+ rep  force_calls  unique_sp  connected   searches  matlab_fraction
+   1       800046        141         27       1890         0.939683
+   2      2189099        211         26       5000         0.963000
+   3      2182024        210         26       5000         0.963200
+   4      1043087        171         27       2397         0.939925
+   5      1004169        173         27       2303         0.936604
+   6      1573289        178         27       3629         0.958391
+   7      1874514        202         27       4281         0.959122
+   8      2167828        203         26       5000         0.964600
+   9      1950705        169         27       4787         0.970336
+  10      1360675        141         27       3568         0.968049
