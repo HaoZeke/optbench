@@ -86,7 +86,7 @@ def test_quadratic_smoke_counts_and_rejects_a_false_saddle():
     assert default["metrics"]["par2_mean"] == 139
     assert default["tuning"] == "default"
     assert runs["gd-step-0.01"]["starts"][0]["force_calls"] == 720
-    assert runs["gd-step-0.01"]["tuning"] == "tuned"
+    assert runs["gd-step-0.01"]["tuning"] == "adjusted"
     failed = runs["gd-step-0.001-cap-200"]
     assert failed["starts"][0]["force_calls"] == 200
     assert failed["metrics"]["par2_mean"] == 400

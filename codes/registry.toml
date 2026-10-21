@@ -257,7 +257,7 @@ ranked = true
 id = "ase/lj38-bfgs-tuned"
 code = "ase"
 problem = "minimization/lj38"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -273,7 +273,7 @@ ranked = true
 id = "ase/lj38-lbfgs-tuned"
 code = "ase"
 problem = "minimization/lj38"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -289,7 +289,7 @@ ranked = true
 id = "ase/lj38-fire-tuned"
 code = "ase"
 problem = "minimization/lj38"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -305,7 +305,7 @@ ranked = true
 id = "ase/lj38-bfgslinesearch-tuned"
 code = "ase"
 problem = "minimization/lj38"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -321,7 +321,7 @@ ranked = true
 id = "ase/lj38-gpmin-tuned"
 code = "ase"
 problem = "minimization/lj38"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -337,7 +337,7 @@ ranked = true
 id = "ase/lj38-preconlbfgs-tuned"
 code = "ase"
 problem = "minimization/lj38"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -353,7 +353,7 @@ ranked = true
 id = "ase/lj38-preconfire-tuned"
 code = "ase"
 problem = "minimization/lj38"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -369,7 +369,7 @@ ranked = true
 id = "ase/lj38-preconode12r-tuned"
 code = "ase"
 problem = "minimization/lj38"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -385,7 +385,7 @@ ranked = true
 id = "sella/lj38-min-tuned"
 code = "sella"
 problem = "minimization/lj38"
-profile = "tuned"
+profile = "adjusted"
 task = "sella"
 ranked = true
 
@@ -401,7 +401,7 @@ ranked = true
 id = "ase/morse-bfgs-tuned"
 code = "ase"
 problem = "minimization/morse-bulk"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -417,7 +417,7 @@ ranked = true
 id = "ase/morse-lbfgs-tuned"
 code = "ase"
 problem = "minimization/morse-bulk"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -433,7 +433,7 @@ ranked = true
 id = "ase/morse-fire-tuned"
 code = "ase"
 problem = "minimization/morse-bulk"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -449,7 +449,7 @@ ranked = true
 id = "ase/morse-bfgslinesearch-tuned"
 code = "ase"
 problem = "minimization/morse-bulk"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -465,7 +465,7 @@ ranked = true
 id = "ase/morse-gpmin-tuned"
 code = "ase"
 problem = "minimization/morse-bulk"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -481,7 +481,7 @@ ranked = true
 id = "ase/morse-preconlbfgs-tuned"
 code = "ase"
 problem = "minimization/morse-bulk"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -497,7 +497,7 @@ ranked = true
 id = "ase/morse-preconfire-tuned"
 code = "ase"
 problem = "minimization/morse-bulk"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -513,7 +513,7 @@ ranked = true
 id = "ase/morse-preconode12r-tuned"
 code = "ase"
 problem = "minimization/morse-bulk"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -529,7 +529,7 @@ ranked = true
 id = "sella/morse-min-tuned"
 code = "sella"
 problem = "minimization/morse-bulk"
-profile = "tuned"
+profile = "adjusted"
 task = "sella"
 ranked = true
 
@@ -545,7 +545,7 @@ ranked = true
 id = "sella/lj38-ts-tuned"
 code = "sella"
 problem = "tsopt/LJ38"
-profile = "tuned"
+profile = "adjusted"
 task = "sella"
 ranked = true
 
@@ -561,7 +561,7 @@ ranked = true
 id = "sella/pt-island-ts-tuned"
 code = "sella"
 problem = "tsopt/pt-island"
-profile = "tuned"
+profile = "adjusted"
 task = "sella"
 ranked = true
 
@@ -577,7 +577,7 @@ ranked = true
 id = "ase/neb-pt-heptamer-tuned"
 code = "ase"
 problem = "neb/Pt-heptamer"
-profile = "tuned"
+profile = "adjusted"
 task = "neb"
 ranked = true
 
@@ -593,7 +593,7 @@ ranked = true
 id = "ase/de-lj38-tuned"
 code = "ase"
 problem = "double-ended-saddle-search/lj38"
-profile = "tuned"
+profile = "adjusted"
 task = "neb"
 ranked = true
 
@@ -609,7 +609,7 @@ ranked = true
 id = "ase/de-pt-island-tuned"
 code = "ase"
 problem = "double-ended-saddle-search/pt-island"
-profile = "tuned"
+profile = "adjusted"
 task = "neb"
 ranked = true
 
@@ -625,7 +625,7 @@ ranked = true
 id = "ase/de-lj38-2ts-tuned"
 code = "ase"
 problem = "double-ended-saddle-search/lj38_2ts_separation"
-profile = "tuned"
+profile = "adjusted"
 task = "neb"
 ranked = true
 
@@ -641,7 +641,7 @@ ranked = true
 id = "sella/de-lj38-tuned"
 code = "sella"
 problem = "double-ended-saddle-search/lj38"
-profile = "tuned"
+profile = "adjusted"
 task = "sella-neb"
 ranked = true
 
@@ -657,7 +657,7 @@ ranked = true
 id = "sella/de-pt-island-tuned"
 code = "sella"
 problem = "double-ended-saddle-search/pt-island"
-profile = "tuned"
+profile = "adjusted"
 task = "sella-neb"
 ranked = true
 
@@ -673,7 +673,7 @@ ranked = true
 id = "sella/de-lj38-2ts-tuned"
 code = "sella"
 problem = "double-ended-saddle-search/lj38_2ts_separation"
-profile = "tuned"
+profile = "adjusted"
 task = "sella-neb"
 ranked = true
 
@@ -689,7 +689,7 @@ ranked = false
 id = "ase/dimer-pt-island-tuned"
 code = "ase"
 problem = "saddle-search/pt-island"
-profile = "tuned"
+profile = "adjusted"
 task = "dimer"
 ranked = false
 
@@ -705,6 +705,6 @@ ranked = false
 id = "sella/pt-island-search-tuned"
 code = "sella"
 problem = "saddle-search/pt-island"
-profile = "tuned"
+profile = "adjusted"
 task = "sella-search"
 ranked = false

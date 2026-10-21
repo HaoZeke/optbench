@@ -257,19 +257,21 @@ def tuning_from_template(root: Path, template_id: str) -> str:
         return ""
     data = tomllib.loads(path.read_text(encoding="utf-8"))
     value = str(data.get("tuning", ""))
-    if value in ("default", "tuned"):
+    if value in ("default", "tuned", "adjusted"):
         return value
     return ""
 
 
 def tuning_label(run: dict) -> str:
-    """``default`` or ``tuned`` when the record or the eOn memory says so.
+    """``default`` or ``adjusted`` when the record or the eOn memory says so.
+
+    ``tuned`` is the previous token for the same class and is still accepted.
 
     eOn 3.5.0 ships L-BFGS memory 20. Memory 100 is the archived setting.
     Anything else stays unlabelled.
     """
     named = str(run.get("tuning") or "")
-    if named in ("default", "tuned"):
+    if named in ("default", "tuned", "adjusted"):
         return named
     method = run.get("method") or {}
     code = str(run.get("code") or "")
@@ -278,7 +280,7 @@ def tuning_label(run: dict) -> str:
         if memory == 20:
             return "default"
         if memory == 100:
-            return "tuned"
+            return "adjusted"
     return "unlabelled"
 
 
