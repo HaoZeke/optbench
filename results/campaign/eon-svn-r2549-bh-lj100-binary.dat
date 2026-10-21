@@ -1,12 +1,12 @@
-avg_energy -530.059
-min_energy -550.76
-max_energy -512
-n 100
+avg_energy -581.387
+min_energy -595.22
+max_energy -574.24
+n 12
 hits 0
 par2_mean 4e+06
 call_mean 2e+06
 call_median 2e+06
-quench_mean 312.41
+quench_mean 9830.17
 code EON (SVN r2549)
 code_version r2549
 commit r2549
