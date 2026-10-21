@@ -1,0 +1,1 @@
+The binary LJ ext_pot bridge returned the gradient. Basin hopping then kept the unrelaxed start energy. The force is now the LAMMPS lj/cut force, `F = -dE/dx`. `tests/test_blj_bridge.py` checks that sign on one pair and on geometry 0.
