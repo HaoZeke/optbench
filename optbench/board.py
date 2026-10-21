@@ -805,9 +805,17 @@ def _benchmark_index() -> dict[str, dict]:
         "benchmarks.bench_rgmin",
         "benchmarks.bench_ase_sella",
         "benchmarks.bench_rgsaddle",
+        "benchmarks.bench_geodesic",
+        "benchmarks.bench_airss",
+        "benchmarks.bench_softsaddle",
+        "benchmarks.bench_lammpsneb",
         "benchmarks.bench_noise",
         "benchmarks.bench_agox",
         "benchmarks.bench_globalopt",
+        "benchmarks.bench_gmin",
+        "benchmarks.bench_vcsqnm",
+        "benchmarks.bench_pele",
+        "benchmarks.bench_optking",
         "benchmarks.quadratic",
     )
     for module_name in modules:
@@ -1273,16 +1281,18 @@ def _show_per_image(problem: dict) -> bool:
 
 
 def _headers(problem: dict) -> list[str]:
+    # The ranked table and the headline table list the current version only.
+    # Older versions stay in the history list, so a Current column is yes on
+    # every ranked row. The Wilson interval is one cell, low then high.
+    # Two separate columns push the minimization page over the DOM budget.
     headers = [
         "Template",
         "Version",
         "Commit",
         "Source",
-        "Current",
         "PAR-2",
         "Success",
-        "Wilson low",
-        "Wilson high",
+        "Wilson",
         "Median calls",
         "Mean calls",
     ]
@@ -1296,17 +1306,21 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
     """Visible ranked-table cells, in column order.
 
     The site check compares these strings with the rendered table.
+    The current flag stays on the board document. Every ranked row is
+    the newest full version of its template, and the paragraph above
+    the table already says so.
     """
     cells = [
         ("template", str(row.get("template") or row.get("entry") or "")),
         ("version", f"{row.get('code') or ''} {row.get('code_version') or ''}"),
         ("commit", str(row.get("commit") or "")[:12]),
         ("source", str(row.get("source") or "")),
-        ("current", "yes" if row.get("current") else "no"),
         ("par2_mean", _format_number(row.get("par2_mean"))),
         ("success_rate", _format_number(row.get("success_rate"))),
-        ("wilson_low", _format_number(row.get("wilson_low"))),
-        ("wilson_high", _format_number(row.get("wilson_high"))),
+        (
+            "wilson",
+            f"{_format_number(row.get('wilson_low'))}–{_format_number(row.get('wilson_high'))}",
+        ),
         ("median_calls", _format_number(row.get("median_calls"))),
         ("mean_calls", _format_number(row.get("mean_calls"))),
     ]
