@@ -109,6 +109,8 @@
    <tr><td data-field="template">tsase/neb</td><td data-field="version">tsase 1.0</td><td data-field="commit">98aac60b5d99</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">5000</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0713476</td><td data-field="median_calls">1633</td><td data-field="mean_calls">1652.86</td><td data-field="mean_per_image">330.572</td><td data-field="failures">crash 0, divergence 0, cap 14, not_converged 36, wrong_stationary 0</td><td data-field="n">50</td></tr>
    </tbody></table></div>
    <h3>Partial</h3><ul>
+   <li>gprcalc/gp-ci-neb GPR calculator campaign n=50, result file sets ranked false.</li>
+   <li>gprcalc/gp-neb GPR calculator campaign n=50, result file sets ranked false.</li>
    <li>eon/develop-de-lj38-cap eOn asv n=1, smoke run; scored 1 of 50 starts.</li>
    <li>eon/develop-de-lj38-ew eOn asv n=1, smoke run; scored 1 of 50 starts.</li>
    <li>eon/develop-de-lj38-oci eOn asv n=1, smoke run; scored 1 of 50 starts.</li>

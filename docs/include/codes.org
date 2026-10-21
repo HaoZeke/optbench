@@ -1054,20 +1054,9 @@
    <td><a href="https://github.com/MaterSim/GPR_calculator">https://github.com/MaterSim/GPR_calculator</a></td>
    </tr>
    </tbody></table></div>
-   <div class="bench-scroll"><table data-board-table="code-best">
-   <caption>Best full harness run on each problem.</caption>
-   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="double-ended-saddle-search/lj38" data-template="gprcalc/gp-ci-neb">
-   <td>LJ38 double-ended saddle</td>
-   <td data-field="template">gprcalc/gp-ci-neb</td>
-   <td data-field="version">GPR calculator 0.0.4</td>
-   <td data-field="commit">c4d63271a6e8</td>
-   <td data-field="par2_mean">5000</td>
-   <td data-field="mean_calls">32.3</td>
-   <td data-field="median_calls">34</td>
-   <td data-field="failures">crash 0, divergence 1, cap 49, wrong_stationary 0</td>
-   <td data-field="n">50</td>
-   </tr>
-   </tbody></table></div>
+   <p>No full ranked run.</p>
+   <p>No full ranked run</p><ul>
+   <li>LJ38 double-ended saddle: partial.</li>
+   </ul>
    </section>
 #+end_export

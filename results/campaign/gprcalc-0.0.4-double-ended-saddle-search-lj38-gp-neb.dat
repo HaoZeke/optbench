@@ -2,6 +2,8 @@
 # surrogate predictions are not force calls
 # force_calls are the band total and are not divided by the image count
 # the mean is round-half-even over successes; cap, force, or Hessian index other than 1 is a failure
+# The recorded stop is the 617.575 s wall clock. It is not a force-call outcome, so the file stays off the ranked table.
+ranked false
 successes 0
 nfailed 50
 n 50
