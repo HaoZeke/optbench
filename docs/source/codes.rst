@@ -1353,10 +1353,10 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">optim/saddle-hef-ffd-pt</td>
    <td data-field="version">optim df8da599</td>
    <td data-field="commit">df8da5992675</td>
-   <td data-field="par2_mean">10128</td>
-   <td data-field="mean_calls">951.497</td>
+   <td data-field="par2_mean">10126.6</td>
+   <td data-field="mean_calls">951.525</td>
    <td data-field="median_calls">959</td>
-   <td data-field="failures">crash 0, divergence 18988, cap 1012, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 18985, cap 1012, wrong_stationary 0</td>
    <td data-field="n">20000</td>
    </tr>
    </tbody></table></div>

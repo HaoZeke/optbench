@@ -107,7 +107,7 @@ It does not run a campaign.
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
-   <td data-code="optim" data-template="optim/saddle-hef-ffd-pt" data-par2="10128"><span class="bench-score">10128</span><a href="generated/suites/saddle-search.html#pt-island-templates">optim/saddle-hef-ffd-pt</a></td>
+   <td data-code="optim" data-template="optim/saddle-hef-ffd-pt" data-par2="10126.6"><span class="bench-score">10126.6</span><a href="generated/suites/saddle-search.html#pt-island-templates">optim/saddle-hef-ffd-pt</a></td>
    <td data-code="optking">—</td>
    <td data-code="softsaddle">—</td>
    <td data-code="tsase">—</td>
