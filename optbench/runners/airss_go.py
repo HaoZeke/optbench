@@ -588,7 +588,9 @@ def run_template(
         names = [f"{label}.{index}" for index in range(1, int(config["starts"]) + 1)]
     else:
         names = _load_start_names(root, problem, geometries, work, output)
-    if raw_tolerance is None:
+    if config.get("budget_structures") or raw_tolerance is None:
+        # A structure budget is the stop. The Wales minimum is the LJ38 file
+        # and is not applied to a larger cluster.
         reference = None
         tolerance = None
     else:
