@@ -1,0 +1,23 @@
+id = "agox/lj75-bh"
+engine = "agox"
+problem = "globalopt/lj75"
+code = "AGOX"
+code_version = "3.11.2.dev2+g22d94a6fa"
+commit = "22d94a6fae8cf2d08d51ecc8b9291a47667aa95c"
+algorithm = "basin hopping"
+tuning = "default"
+note = "Basin hopping uses the same sampler, rattle, local optimizer, and seed rule as agox/lj38-bh. The confinement cube is 36 Å inside a 48 Å cell. The potential is the harness Lennard-Jones potential, cutoff 40, epsilon 1, sigma 1, no shift. Geometries come from the problem archive. Several of those geometries overlap, and an uncapped L-BFGS-B step puts them on the confinement wall. While the peak atomic force is above 1000, and for at most 40 steps, a local step moves at most 0.2 along that force. The local stop reads the harness force. The box constraint removes the outward part, and a dissociated cluster on the wall would otherwise meet the force tolerance. If L-BFGS-B returns before that stop, at most 25 steps of size min(0.05, 5/peak) follow while the peak force is above 30, and L-BFGS-B starts again, at most four times. A success is an energy at or below the problem reference -397.492331 plus 0.001. The force-call cap is 2000000."
+
+[agox]
+method = "basin_hopping"
+temperature = 0.25
+rattle_amplitude = 3.0
+rattle_fraction = 0.25
+fmax = 0.05
+max_steps = 500
+seed_base = 314159
+cell = 48.0
+confinement = 36.0
+
+[stop]
+max_force_calls = 2000000

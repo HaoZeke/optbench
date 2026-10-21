@@ -204,6 +204,24 @@ commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
 note = "No public git commit. The pin is the sha256 of the Wales svn.tar.bz2 snapshot, 122743078 bytes. Minimization L-BFGS calls the ASE socket and pes.evaluate. OPTIM's own call counter is not a score. Saddle search, NEB, noise, and PATHSAMPLE are not scored."
 
 [[code]]
+id = "agox"
+name = "AGOX"
+role = "global optimization"
+repository = "https://gitlab.com/agox/agox"
+ref = "v3.11.1-2-g22d94a6"
+commit = "22d94a6fae8cf2d08d51ecc8b9291a47667aa95c"
+committed = "2026-05-05"
+note = "AGOX dev, two commits after tag v3.11.1. The version string is 3.11.2.dev2+g22d94a6fa. Tag v3.11.1 imports IndexedConstraint from ase.constraints. ASE 3.29.0 keeps that name in ase.constraints.constraint, so that tag does not import. This commit is the import fix. Basin hopping, random structure search, the genetic algorithm, and GOFEE. The potential is the harness cutoff-40 Lennard-Jones with no shift. Force calls are harness calculator evaluations. Local steps are SciPy L-BFGS-B."
+
+[[template]]
+id = "ase-globalopt/lj75-basinhopping"
+code = "ase"
+problem = "globalopt/lj75"
+profile = "default"
+task = "basin-hopping"
+ranked = true
+
+[[code]]
 id = "airss"
 name = "AIRSS"
 role = "random structure search"

@@ -283,6 +283,15 @@ def _commit_divides_band(root: Path, commit: str) -> bool:
 
 
 def _cap_of(problem: dict | None, template: dict | None, fields: dict[str, str]) -> int | None:
+    """Cap used to score one row.
+
+    The cap written on the result is the budget that search ran. A
+    problem cap fills in when the result does not record one, then the
+    template stop.
+    """
+    raw_field = _float_field(fields, "cap")
+    if raw_field is not None:
+        return int(raw_field)
     if problem is not None:
         stated = (problem.get("convergence") or {}).get("max_force_calls")
         if stated not in (None, ""):
@@ -294,9 +303,6 @@ def _cap_of(problem: dict | None, template: dict | None, fields: dict[str, str])
         raw = stop.get("max_force_calls", stop.get("max_steps"))
         if raw not in (None, ""):
             return int(raw)
-    raw_field = _float_field(fields, "cap")
-    if raw_field is not None:
-        return int(raw_field)
     return None
 
 
@@ -804,6 +810,8 @@ def _benchmark_index() -> dict[str, dict]:
         "benchmarks.bench_softsaddle",
         "benchmarks.bench_lammpsneb",
         "benchmarks.bench_noise",
+        "benchmarks.bench_agox",
+        "benchmarks.bench_globalopt",
         "benchmarks.bench_gmin",
         "benchmarks.bench_vcsqnm",
         "benchmarks.bench_pele",

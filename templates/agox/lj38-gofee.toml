@@ -1,0 +1,26 @@
+id = "agox/lj38-gofee"
+engine = "agox"
+problem = "globalopt/lj38"
+code = "AGOX"
+code_version = "3.11.2.dev2+g22d94a6fa"
+commit = "22d94a6fae8cf2d08d51ecc8b9291a47667aa95c"
+algorithm = "GOFEE"
+tuning = "default"
+note = "GOFEE follows the AGOX cluster script: a fingerprint GPR, a repulsive prior, a KMeans sample of 10, LCB with kappa 2, and the script candidate counts. The GPR constructor starts Ray before it reads use_ray. This run gives that constructor an in-process stand-in, and use_ray is false. The marginal likelihood comes back as a length-1 array on this NumPy, and the runner reduces it to a scalar before the hyperparameter step. The collector is StandardCollector. Surrogate relaxations use the script's 5 L-BFGS-B steps and are not harness calls. The real-potential evaluator quenches to force 0.05 for at most 500 steps. The script takes one real-potential step, which does not resolve the 0.001 window. Local optimization, seed, potential, success window, and cap are the same as agox/lj38-bh."
+
+[agox]
+method = "gofee"
+temperature = 0.25
+rattle_amplitude = 3.0
+rattle_fraction = 0.25
+fmax = 0.05
+max_steps = 500
+seed_base = 314159
+surrogate_steps = 5
+surrogate_start = 8
+sample_size = 10
+cell = 40.0
+confinement = 24.0
+
+[stop]
+max_force_calls = 2000000

@@ -1,0 +1,13 @@
+# AGOX is not a conda-forge package. This file does not select a
+# conda build. The benchmarks run the source checkout pinned in
+# codes/registry.toml under id agox:
+#   ref = v3.11.1-2-g22d94a6
+#   commit = 22d94a6fae8cf2d08d51ecc8b9291a47667aa95c
+#   version string 3.11.2.dev2+g22d94a6fa
+# Tag v3.11.1 does not import on ASE 3.29.0. asv has one
+# environment_type, so this yml cannot be bound to one class.
+name: agox
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
