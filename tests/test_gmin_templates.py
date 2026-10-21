@@ -14,6 +14,7 @@ PROBLEMS = (
     "globalopt/lj75",
     "globalopt/lj98",
     "globalopt/lj150",
+    "globalopt/lj100-binary",
 )
 
 
@@ -30,7 +31,7 @@ def test_registry_pins_the_tarball():
     assert "gmin-bh" in quench["note"]
 
 
-def test_bh_bhpt_and_csm_templates():
+def test_bh_and_bhpt_templates_on_every_problem():
     found = [item for item in list_templates(ROOT) if item.get("engine") == "gmin-bh"]
     ids = sorted(item["id"] for item in found)
     expected = [
@@ -38,7 +39,6 @@ def test_bh_bhpt_and_csm_templates():
         for problem in PROBLEMS
         for method in ("bh", "bhpt")
     ]
-    expected.append("gmin/lj38-csm")
     assert ids == sorted(expected)
     for template in found:
         assert template["code"] == "GMIN"
@@ -119,109 +119,20 @@ def test_bhpt_keyword_order_and_repeated_coords():
     assert len(coords.splitlines()) == 8
 
 
-def test_lj98_cap_is_the_problem_cap_and_the_data_file_uses_it():
-    problem = resolve_problem(ROOT, "globalopt/lj98")
-    cap = int(problem["convergence"]["max_force_calls"])
-    assert cap == 1_000_000_000
-    for name in ("gmin/lj98-bh", "gmin/lj98-bhpt"):
-        template = next(item for item in list_templates(ROOT) if item["id"] == name)
-        assert int(template["failure_cap"]) == cap
-        section = template["gmin"]
-        assert int(section["steps"]) == 100_000
-        assert section["symmetrise"] == "1 0.01 0.05 0.3 0.1 0.6 3 0.3 2.1"
-        text = _data_text(
-            {
-                "replicas": int(section["replicas"]),
-                "pttmin": float(section["pttmin"]),
-                "pttmax": float(section["pttmax"]),
-                "exchprob": float(section["exchprob"]),
-                "sloppyconv": float(section["sloppyconv"]),
-                "tightconv": float(section["tightconv"]),
-                "ediff": float(section["ediff"]),
-                "maxit": int(section["maxit"]),
-                "maxit2": int(section["maxit2"]),
-                "radius": float(section["radius"]),
-                "temperature": float(section["temperature"]),
-                "step": float(section["step"]),
-                "astep": float(section["astep"]),
-                "steps": int(section["steps"]),
-                "seed": int(section["seed"]),
-                "reference": -543.665361,
-                "cap": cap,
-                "fixboth": section["fixboth"],
-                "permdist": section["permdist"],
-                "newrestart": section["newrestart"],
-                "sort": section["sort"],
-                "symmetrise": section["symmetrise"],
-                "save": int(section["save"]),
-                "tfac": float(section["tfac"]),
-                "emit_seed": bool(section["emit_seed"]),
-            }
-        )
-        assert f"MAX_NPCALL {cap}" in text
-        assert "SYMMETRISE 1 0.01 0.05 0.3 0.1 0.6 3 0.3 2.1" in text
-        assert "STEPS 100000 1.0" in text
-        assert "RADIUS" not in text
-        assert "RANSEED" not in text
-        assert "MAX_NPCALL 1000000000" in text
-        assert section["center"] is False
-        if section["method"] == "bh":
-            assert "BHPT" not in text
-            assert "TEMPERATURE 1.30000000" in text
-        else:
-            assert text.startswith("MPI\nBHPT 0.10000000 1.30000000 0.10000000\n")
-
-
-def test_lj38_csm_uses_the_archive_deck_on_df8da599():
-    problem = resolve_problem(ROOT, "globalopt/lj38")
-    assert problem["convergence"].get("max_force_calls") is None
-    template = next(item for item in list_templates(ROOT) if item["id"] == "gmin/lj38-csm")
-    assert template["code_version"] == "df8da599"
-    assert int(template["failure_cap"]) == 2_000_000
-    section = template["gmin"]
-    text = _data_text(
-        {
-            "replicas": int(section["replicas"]),
-            "pttmin": float(section["pttmin"]),
-            "pttmax": float(section["pttmax"]),
-            "exchprob": float(section["exchprob"]),
-            "sloppyconv": float(section["sloppyconv"]),
-            "tightconv": float(section["tightconv"]),
-            "ediff": float(section["ediff"]),
-            "maxit": int(section["maxit"]),
-            "maxit2": int(section["maxit2"]),
-            "radius": float(section["radius"]),
-            "temperature": float(section["temperature"]),
-            "step": float(section["step"]),
-            "astep": float(section["astep"]),
-            "steps": int(section["steps"]),
-            "seed": int(section["seed"]),
-            "reference": -173.928426511789,
-            "cap": int(template["failure_cap"]),
-            "fixboth": section["fixboth"],
-            "permdist": section["permdist"],
-            "newrestart": section["newrestart"],
-            "sort": section["sort"],
-            "save": int(section["save"]),
-            "tfac": float(section["tfac"]),
-            "emit_seed": bool(section["emit_seed"]),
-            "avoid": section["avoid"],
-            "symmetrisecsm": section["symmetrisecsm"],
-        }
-    )
-    assert "SYMMETRISECSM 1 CI 1.0D-6 30 1 50" in text
-    assert "AVOID 1.25 18" in text
-    assert "TEMPERATURE 3.00000000" in text
-    assert "NEWRESTART 30" in text
-    assert "PERMDIST 0.00500000" in text
-    assert "STEPS 90000000 1.0" in text
-    assert "MAX_NPCALL 2000000" in text
-    assert "EDIFF 0.00100000" in text
-    assert "RANSEED" not in text
-    assert "RADIUS" not in text
-    assert "BHPT" not in text
-    assert "wales-27058" in template["note"]
-    assert "not published" in template["note"]
+def test_every_template_runs_the_stock_deck_at_the_problem_cap():
+    found = [item for item in list_templates(ROOT) if item.get("engine") == "gmin-bh"]
+    decks = {}
+    for template in found:
+        problem = resolve_problem(ROOT, template["problem"])
+        assert int(template["failure_cap"]) == int(problem["convergence"]["max_force_calls"]) == 2_000_000
+        section = dict(template["gmin"])
+        method = section.pop("method")
+        decks.setdefault(method, []).append(section)
+        assert "symmetrise" not in section and "symmetrisecsm" not in section
+    assert sorted(decks) == ["bh", "bhpt"]
+    for sections in decks.values():
+        assert all(section == sections[0] for section in sections)
+        assert len(sections) == len(PROBLEMS)
 
 
 def test_asv_classes_import_with_one_start():
@@ -232,7 +143,7 @@ def test_asv_classes_import_with_one_start():
         for value in vars(bench).values()
         if isinstance(value, type) and getattr(value, "param_names", None) == ["seed", "start"]
     ]
-    assert len(classes) == 9
+    assert len(classes) == 2 * len(PROBLEMS)
     caps = {
         item["id"]: int(item["failure_cap"])
         for item in list_templates(ROOT)
