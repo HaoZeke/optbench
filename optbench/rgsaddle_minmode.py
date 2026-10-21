@@ -28,8 +28,13 @@ from pathlib import Path
 
 import numpy as np
 
-from .connection import ProcessTable, per_atom_max, periodic_lengths, tolerances
-from .connection import connected as endpoints_connected
+from .connection import (
+    ENERGY_DIFFERENCE,
+    connected_endpoints,
+    link_tolerance,
+    per_atom_max,
+    same_process,
+)
 from .counter import HarnessCounter
 from .failures import classify_failure
 from .potserver import RgpotCounter
@@ -186,6 +191,46 @@ def _load():
 
 def _section(template: dict, name: str) -> dict:
     return ((template.get("ini") or {}).get(name) or {})
+
+
+def _connection_thresholds(problem: dict | None) -> tuple[float, float]:
+    """``distance_difference`` and ``energy_difference`` from ``[connection]``."""
+    block = {} if not problem else (problem.get("connection") or {})
+    energy = float(block["energy_difference"]) if "energy_difference" in block else float(ENERGY_DIFFERENCE)
+    return link_tolerance(problem), energy
+
+
+class _RegisteredSaddles:
+    """Saddles kept by ``same_process``, in the order they were found."""
+
+    def __init__(self, cell, tolerance: float, energy_difference: float):
+        self.cell = cell
+        self.tolerance = float(tolerance)
+        self.energy_difference = float(energy_difference)
+        self._saddles: list[tuple[np.ndarray, float]] = []
+
+    def __len__(self) -> int:
+        return len(self._saddles)
+
+    def repeat(self, saddle, barrier: float) -> bool:
+        point = np.asarray(saddle, dtype=np.float64)
+        return any(
+            same_process(
+                point,
+                other,
+                self.cell,
+                barrier,
+                other_barrier,
+                self.tolerance,
+                self.energy_difference,
+            )
+            for other, other_barrier in self._saddles
+        )
+
+    def add(self, saddle, barrier: float) -> None:
+        self._saddles.append(
+            (np.array(np.asarray(saddle, dtype=np.float64).reshape(-1, 3), copy=True), float(barrier))
+        )
 
 
 def _stored(root: Path, archive_path: str) -> Path:
@@ -1149,8 +1194,9 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
     Each search has its own harness count: the min-mode calls plus the
     two endpoint minimizations. The repetition total also includes the
     initial minimization. Hessian calls stay in ``verify_calls``.
-    The link and the novelty test are ``optbench.connection``: per-atom
-    minimum-image distance on the free atoms, as eOn compares structures.
+    The link and the novelty test are ``optbench.connection``: the
+    per-atom maximum after ``Matter::pbc``, exactly one endpoint equal
+    to the reactant, and ``same_process`` for a repeat.
     Only a connected saddle enters the process table.
     ``work`` is unused; the searches do not extract an archive.
     """
@@ -1166,8 +1212,7 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
     repetitions = int(search.get("repetitions", 1))
     listed = [int(part) for part in str(search.get("displace_atoms", "0,1,2,3,4,5,6")).split(",") if part.strip()]
     magnitude = float(search.get("displace_magnitude", 0.1))
-    distance_difference, energy_difference = tolerances(problem)
-    lengths = periodic_lengths(cell, (problem.get("potential") or {}).get("pbc"))
+    distance_difference, energy_difference = _connection_thresholds(problem)
     max_searches = int(search.get("max_searches", 20000))
     free = np.flatnonzero(~fixed)
     raw = potential_from_problem(problem)
@@ -1186,7 +1231,7 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
             min_ok = bool(header["min_ok"])
             resumed_outer = minimize_calls + sum(int(row.get("endpoint_calls") or 0) for row in saved)
             search_calls = sum(int(row.get("climb_calls") or 0) for row in saved)
-            found = ProcessTable(lengths, distance_difference, energy_difference)
+            found = _RegisteredSaddles(cell, distance_difference, energy_difference)
             for row in saved:
                 if row.get("saddle_x") is not None:
                     found.add(row["saddle_x"], float(row["barrier"]))
@@ -1207,7 +1252,7 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
             minimize_calls = int(potential.calls)
             resumed_outer = 0
             rng = np.random.default_rng(20261015 + rep)
-            found = ProcessTable(lengths, distance_difference, energy_difference)
+            found = _RegisteredSaddles(cell, distance_difference, energy_difference)
             connected = 0
             searches = 0
             search_calls = 0
@@ -1303,12 +1348,12 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
                     minus, _minus_ok = _lbfgs_minimize(
                         potential, saddle_x - 0.1 * axis, force_tol, _SADDLE_ENDPOINT_BUDGET
                     )
-                    links = endpoints_connected(minimum, plus, minus, lengths, distance_difference)
+                    links = connected_endpoints(minimum, plus, minus, cell, distance_difference)
                     barrier = float(outcome["energy"] - min_energy)
                     novel = links and not found.repeat(saddle_x, barrier)
                     record["barrier"] = barrier
-                    record["per_atom_max_plus"] = per_atom_max(plus, minimum, lengths)
-                    record["per_atom_max_minus"] = per_atom_max(minus, minimum, lengths)
+                    record["per_atom_max_plus"] = per_atom_max(plus, minimum, cell)
+                    record["per_atom_max_minus"] = per_atom_max(minus, minimum, cell)
                     record["reasons"] = []
                     if novel:
                         found.add(saddle_x, barrier)

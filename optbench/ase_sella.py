@@ -1160,8 +1160,7 @@ def _judge_sella_link(row: dict, atoms, payload: dict, bucket: CallCounter) -> N
     """Per-atom link against the minimized reactant. A miss is not a success."""
     import numpy as np
 
-    from .connection import per_atom_max, periodic_lengths
-    from .connection import connected as endpoints_connected
+    from .connection import connected_endpoints, per_atom_max
 
     mode = _sella_mode(atoms)
     reactant = np.asarray(payload["link_reactant"], dtype=float)
@@ -1188,15 +1187,15 @@ def _judge_sella_link(row: dict, atoms, payload: dict, bucket: CallCounter) -> N
         row["link_reasons"] = ["force_norm"]
         row["failed"] = True
         return
-    lengths = periodic_lengths(atoms.cell, atoms.pbc)
+    box = np.asarray(atoms.cell, dtype=float)
     tolerance = float(payload.get("distance_difference", 0.1))
-    links = endpoints_connected(reactant, plus, minus, lengths, tolerance)
+    links = connected_endpoints(reactant, plus, minus, box, tolerance)
     barrier = None
     if row.get("energy") is not None and payload.get("link_energy") is not None:
         barrier = float(row["energy"]) - float(payload["link_energy"])
     row["barrier"] = barrier
-    row["per_atom_max_plus"] = per_atom_max(plus, reactant, lengths)
-    row["per_atom_max_minus"] = per_atom_max(minus, reactant, lengths)
+    row["per_atom_max_plus"] = per_atom_max(plus, reactant, box)
+    row["per_atom_max_minus"] = per_atom_max(minus, reactant, box)
     row["saddle_positions"] = np.asarray(atoms.positions, dtype=float).reshape(-1).tolist()
     reasons = []
     if not links:
@@ -1611,17 +1610,19 @@ def _link_fields(problem: dict, geometry: Path, potential: dict, tol: float) -> 
     """Per-atom link inputs for a Pt-island Sella search. Empty for every other task."""
     if problem.get("id") != "saddle-search/pt-island":
         return {}
-    from .connection import periodic_lengths, tolerances
+    import numpy as np
+
+    from .rgsaddle_minmode import _connection_thresholds
 
     positions, energy, atoms = _minimized_reactant(geometry, potential, tol)
-    distance_difference, energy_difference = tolerances(problem)
+    distance_difference, energy_difference = _connection_thresholds(problem)
     return {
         "link_reactant": positions.reshape(-1).tolist(),
         "link_energy": energy,
         "distance_difference": distance_difference,
         "energy_difference": energy_difference,
         "barrier_max": float((problem.get("goal") or {}).get("barrier_below_eV", 1.5)),
-        "link_lengths": periodic_lengths(atoms.cell, atoms.pbc).tolist(),
+        "link_cell": np.asarray(atoms.cell, dtype=float).reshape(-1).tolist(),
     }
 
 
@@ -1631,11 +1632,11 @@ def _apply_saddle_novelty(rows: list[dict], link: dict) -> None:
         return
     import numpy as np
 
-    from .connection import ProcessTable
     from .failures import classify_failure
+    from .rgsaddle_minmode import _RegisteredSaddles
 
-    lengths = np.asarray(link["link_lengths"], dtype=float)
-    found = ProcessTable(lengths, float(link["distance_difference"]), float(link["energy_difference"]))
+    box = np.asarray(link["link_cell"], dtype=float)
+    found = _RegisteredSaddles(box, float(link["distance_difference"]), float(link["energy_difference"]))
     for row in rows:
         reasons = [str(item) for item in row.get("reasons") or []]
         if row.get("hessian_index") != 1 or row.get("saddle_positions") is None or row.get("barrier") is None:

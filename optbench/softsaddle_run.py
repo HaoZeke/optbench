@@ -21,14 +21,15 @@ from pathlib import Path
 
 import numpy as np
 
-from .connection import ProcessTable, per_atom_max, periodic_lengths, tolerances
-from .connection import connected as endpoints_connected
+from .connection import connected_endpoints, per_atom_max
 from .failures import classify_failure
 from .rgsaddle_minmode import (
     HarnessSurface,
+    _RegisteredSaddles,
     _SADDLE_CLIMB_OVERSHOOT,
     _SADDLE_ENDPOINT_BUDGET,
     _bind,
+    _connection_thresholds,
     _finite_point,
     _geometries,
     _hessian_spectrum,
@@ -692,7 +693,7 @@ def _judge_saddle(payload: dict, climbed: dict, potential: HarnessSurface, calls
     minimum = np.asarray(payload["minimum"], dtype=np.float64)
     min_energy = float(payload["min_energy"])
     distance_difference = float(payload["distance_difference"])
-    lengths = np.asarray(payload["lengths"], dtype=np.float64)
+    box = np.asarray(payload["cell"], dtype=np.float64)
     barrier_max = float(payload["barrier_max"])
     search_cap = int(payload["search_cap"])
     reasons = ["force_norm"]
@@ -730,11 +731,11 @@ def _judge_saddle(payload: dict, climbed: dict, potential: HarnessSurface, calls
             axis = _unit(np.asarray(mode, dtype=np.float64))
             plus, _plus_ok = _lbfgs_minimize(potential, point + 0.1 * axis, force_tol, _SADDLE_ENDPOINT_BUDGET)
             minus, _minus_ok = _lbfgs_minimize(potential, point - 0.1 * axis, force_tol, _SADDLE_ENDPOINT_BUDGET)
-            links = endpoints_connected(minimum, plus, minus, lengths, distance_difference)
+            links = connected_endpoints(minimum, plus, minus, box, distance_difference)
             barrier = float(climbed["energy"] - min_energy)
             record["barrier"] = barrier
-            record["per_atom_max_plus"] = per_atom_max(plus, minimum, lengths)
-            record["per_atom_max_minus"] = per_atom_max(minus, minimum, lengths)
+            record["per_atom_max_plus"] = per_atom_max(plus, minimum, box)
+            record["per_atom_max_minus"] = per_atom_max(minus, minimum, box)
             record["saddle_distance"] = _norm(point - minimum)
             record["saddle_x"] = point.copy()
             record["novel_candidate"] = bool(links)
@@ -798,7 +799,7 @@ def _saddle_worker(payload: dict) -> dict:
     return judged
 
 
-def _apply_novelty(judged: dict, found: ProcessTable) -> dict:
+def _apply_novelty(judged: dict, found: _RegisteredSaddles) -> dict:
     reasons = list(judged["reasons"])
     success = bool(judged["success"])
     point = judged.get("saddle_x")
@@ -913,10 +914,9 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
     from .rgsaddle_minmode import _stored
 
     positions, fixed, cell = load_con(_stored(root, con_path))
-    lengths = periodic_lengths(cell, (problem.get("potential") or {}).get("pbc"))
     goal = int((problem.get("goal") or {}).get("connected_saddles", 27))
     barrier_max = float((problem.get("goal") or {}).get("barrier_below_eV", 1.5))
-    distance_difference, energy_difference = tolerances(problem)
+    distance_difference, energy_difference = _connection_thresholds(problem)
     climb_budget = int(settings["cg_iter_max"])
     search_cap = climb_budget + _SADDLE_CLIMB_OVERSHOOT + 2 * _SADDLE_ENDPOINT_BUDGET
     vectors, order = hypersphere()
@@ -951,7 +951,7 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
             encoding="utf-8",
         )
     radius, _lam, _sad = _replay_radius(saved, settings)
-    found = ProcessTable(lengths, distance_difference, energy_difference)
+    found = _RegisteredSaddles(cell, distance_difference, energy_difference)
     connected = 0
     for row in saved:
         if row.get("saddle_stored") is not None:
@@ -984,7 +984,6 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
                     "settings": settings,
                     "force_tol": force_tol,
                     "distance_difference": distance_difference,
-                    "lengths": lengths,
                     "barrier_max": barrier_max,
                     "search_cap": search_cap,
                     "climb_budget": climb_budget,

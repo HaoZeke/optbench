@@ -23,14 +23,20 @@ from pathlib import Path
 import numpy as np
 
 from .campaign import format_ini, write_starts
-from .connection import ProcessTable, per_atom_max, periodic_lengths, tolerances
-from .connection import connected as endpoints_connected
+from .connection import connected_endpoints, per_atom_max
 from .eon_akmc import prepare_client_env
 from .eon_harness import bridge_binary, kernel_for
 from .eon_jobs import _client_env, _read_dat
 from .failures import classify_failure
 from .potserver import PotServer, remote_count, remote_reset
-from .rgsaddle_minmode import HarnessSurface, _bind, _hessian_spectrum, _stored
+from .rgsaddle_minmode import (
+    HarnessSurface,
+    _RegisteredSaddles,
+    _bind,
+    _connection_thresholds,
+    _hessian_spectrum,
+    _stored,
+)
 from .score import score_v2
 from .stationary import negative_index
 from .surfaces import load_con, potential_from_problem
@@ -251,16 +257,16 @@ def _run_search(payload: dict) -> dict:
                 reasons = ["divergence"]
             else:
                 reactant_pos = np.asarray(payload["reactant_pos"], dtype=np.float64)
-                lengths = np.asarray(payload["lengths"], dtype=np.float64)
+                box = np.asarray(payload["cell"], dtype=np.float64)
                 plus = _con_positions(plus_con)
                 minus = _con_positions(minus_con)
-                links = endpoints_connected(
-                    reactant_pos, plus, minus, lengths, float(payload["distance_difference"])
+                links = connected_endpoints(
+                    reactant_pos, plus, minus, box, float(payload["distance_difference"])
                 )
                 saddle_energy = fields.get("potential_energy_saddle", fields.get("potential_energy"))
                 barrier = float(saddle_energy) - float(payload["min_energy"]) if saddle_energy is not None else None
-                per_plus = per_atom_max(plus, reactant_pos, lengths)
-                per_minus = per_atom_max(minus, reactant_pos, lengths)
+                per_plus = per_atom_max(plus, reactant_pos, box)
+                per_minus = per_atom_max(minus, reactant_pos, box)
                 saddle_pos = _con_positions(saddle_path)
                 positions = np.asarray(payload["positions"], dtype=np.float64).reshape(-1, 3)
                 fixed = np.asarray(payload["fixed"], dtype=bool)
@@ -307,7 +313,7 @@ def _run_search(payload: dict) -> dict:
         server.stop()
 
 
-def _judge_search(result: dict, found: ProcessTable) -> tuple[dict, dict, bool]:
+def _judge_search(result: dict, found: _RegisteredSaddles) -> tuple[dict, dict, bool]:
     """Apply the process table in order and build the stored row."""
     reasons = list(result["reasons"])
     saved_point = None
@@ -383,8 +389,7 @@ def run_template(
     paths = (problem.get("input") or {}).get("geometries") or []
     con_path = next(path for path in paths if str(path).endswith(".con"))
     positions, fixed, cell = load_con(_stored(root, con_path))
-    distance_difference, energy_difference = tolerances(problem)
-    lengths = periodic_lengths(cell, (problem.get("potential") or {}).get("pbc"))
+    distance_difference, energy_difference = _connection_thresholds(problem)
     goal = int((problem.get("goal") or {}).get("connected_saddles", 27))
     barrier_max = float((problem.get("goal") or {}).get("barrier_below_eV", 1.5))
     force_tol = float((problem.get("convergence") or {}).get("force_norm", 1.0e-3))
@@ -461,7 +466,7 @@ def run_template(
         finally:
             os.chdir(previous)
         reactant_pos = _con_positions(reactant_con)
-        found = ProcessTable(lengths, distance_difference, energy_difference)
+        found = _RegisteredSaddles(cell, distance_difference, energy_difference)
         connected = 0
         records = []
         for row in saved:
@@ -511,7 +516,6 @@ def run_template(
                 "offset": offset,
                 "timeout": 600,
                 "reactant_pos": reactant_flat,
-                "lengths": lengths.tolist(),
                 "distance_difference": distance_difference,
                 "min_energy": min_energy,
                 "barrier_max": barrier_max,

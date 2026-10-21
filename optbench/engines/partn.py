@@ -502,8 +502,8 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
     del workers
     import statistics
 
-    from optbench.connection import ProcessTable, per_atom_max, periodic_lengths, tolerances
-    from optbench.connection import connected as endpoints_connected
+    from optbench.connection import connected_endpoints, per_atom_max
+    from optbench.rgsaddle_minmode import _RegisteredSaddles, _connection_thresholds
     from optbench.failures import classify_failure
     from optbench.v2 import write_starts
 
@@ -513,7 +513,7 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
     search = dict(template.get("search") or {})
     repetitions = int(search.get("repetitions", 1))
     magnitude = float(search.get("displace_magnitude", 0.1))
-    distance_difference, energy_difference = tolerances(problem)
+    distance_difference, energy_difference = _connection_thresholds(problem)
     max_searches = int(search.get("max_searches", 20000))
     budget = int(search.get("search_budget", 10000))
     listed = [int(part) for part in str(search.get("displace_atoms", "0,1,2,3,4,5,6")).split(",") if part.strip()]
@@ -522,7 +522,6 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
     positions = np.asarray(base["positions"], dtype=np.float64)
     free = np.asarray([not bool(flag) for flag in base["fixed"]], dtype=bool)
     box = None if base["box"] is None else np.asarray(base["box"], dtype=np.float64)
-    lengths = periodic_lengths(box, (problem.get("potential") or {}).get("pbc"))
     comments = []
     records = []
     failed_reps = 0
@@ -531,7 +530,7 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
             settings["potential"], positions, free, box, settings["force_norm"], 5000
         )
         rng = np.random.default_rng(20261015 + rep)
-        found = ProcessTable(lengths, distance_difference, energy_difference)
+        found = _RegisteredSaddles(box, distance_difference, energy_difference)
         connected = 0
         searches = 0
         search_calls = 0
@@ -587,12 +586,12 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
                     settings["force_norm"],
                     2000,
                 )
-                links = endpoints_connected(minimum[free], plus[free], minus[free], lengths, distance_difference)
+                links = connected_endpoints(minimum[free], plus[free], minus[free], box, distance_difference)
                 barrier = float(record["energy"] - min_energy)
                 novel = links and not found.repeat(saddle[free], barrier)
                 record["barrier"] = barrier
-                record["per_atom_max_plus"] = per_atom_max(plus[free], minimum[free], lengths)
-                record["per_atom_max_minus"] = per_atom_max(minus[free], minimum[free], lengths)
+                record["per_atom_max_plus"] = per_atom_max(plus[free], minimum[free], box)
+                record["per_atom_max_minus"] = per_atom_max(minus[free], minimum[free], box)
                 record["endpoint_calls"] = int(plus_calls + minus_calls)
                 record["force_calls"] = climb + int(plus_calls + minus_calls)
                 record["reasons"] = []
