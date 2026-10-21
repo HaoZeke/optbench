@@ -7,7 +7,6 @@ code_version = "1.0"
 commit = "98aac60b5d9905e81ee4e6b8c385f169258d0218"
 algorithm = "quenchDimer+neb-QM"
 reducer = "harness"
-failure_cap = 2000000
 kind = "htst"
 kernel = "morse_shift"
 tuning = "stock"
