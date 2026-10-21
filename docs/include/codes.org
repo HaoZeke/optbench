@@ -931,7 +931,21 @@
    <td><a href="https://github.com/rlaplaza-lab/scgo">https://github.com/rlaplaza-lab/scgo</a></td>
    </tr>
    </tbody></table>
-   <p>No full ranked run.</p>
+   <table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="globalopt/lj38" data-template="scgo/bh-lj38">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="template">scgo/bh-lj38</td>
+   <td data-field="version">scgo 0.9.1</td>
+   <td data-field="commit">2338742a434a</td>
+   <td data-field="par2_mean">1.84182e+06</td>
+   <td data-field="mean_calls">921821</td>
+   <td data-field="median_calls">1e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 92, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table>
    <h3>TorchSim</h3>
    <table>
    <caption>Registry pins.</caption>
