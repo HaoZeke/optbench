@@ -1,0 +1,24 @@
+barrier_jobs 1980
+barrier_force_calls 8.188e+06
+barrier_windows 4
+rate_jobs 91
+rate_force_calls  3.741e+05
+rate_windows 60
+searches 7924
+missed_barriers 0
+unexpected_barriers 0
+reference_processes 15
+code tsase
+code_version 1.0
+commit 98aac60b5d9905e81ee4e6b8c385f169258d0218
+counter harness
+reducer harness-htst
+contributor Rohit Goswami
+random_seed 42
+communicator_jobs 7
+passes 1133
+seconds 29739
+algorithm Dimer-QM rotation: max=50, tol=5
+template eon/htst-pt-tsase-dimer-qm
+problem hTST/Pt
+count_keys sad-fcs

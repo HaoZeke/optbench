@@ -1,0 +1,57 @@
+id = "eon/htst-pt-tsase-dimer-qm"
+engine = "eon"
+problem = "hTST/Pt"
+code = "tsase"
+code_version = "1.0"
+commit = "98aac60b5d9905e81ee4e6b8c385f169258d0218"
+algorithm = "Dimer-QM rotation: max=50, tol=5"
+reducer = "harness-htst"
+kind = "htst"
+asv_full = false
+pass_limit = 8000
+workers = 7
+geometry = "website/hTST/Pt/tsase-dimer-qm/states/0/reactant.con"
+note = '''
+TSASE 1.0 SSDimer at 98aac60, stock constructor (dR 0.001, maxStep 0.2, ss false, rotation CG, rigid modes projected). The archive convergence criterion is rotationMax 50, phi_tol 5, and minimum atom force 1e-4. The AKMC server is the archived displacement (least-coordinated weight 1, radius 3.3, magnitude 0.3, seed 42, temperature 700). FIRE relaxes both ends (dt 0.2, maxstep 0.2, dtmax 0.2, fmax 1e-4, 5000 steps). Connectivity is Euclidean distance 0.3. The score is the harness ASE calculate count during the dimer, reduced with the 2014 window sample.
+'''
+
+[ini.Main]
+job = "akmc"
+temperature = 700
+random_seed = 42
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Prefactor]
+default_value = "1e12"
+
+[ini.Optimizer]
+converged_force = 0.001
+max_iterations = 5000
+opt_method = "qm"
+time_step = 0.3
+
+[ini.AKMC]
+confidence = 1.1
+
+[ini."Process Search"]
+minimize_first = false
+
+[ini.Communicator]
+type = "local"
+client_path = "dimer_ase.py"
+number_of_CPUs = 2
+num_jobs = 6
+jobs_per_bundle = 1
+
+[ini."Saddle Search"]
+displace_least_coordinated_weight = 1.0
+displace_radius = 3.3
+displace_magnitude = 0.3
+min_mode_method = "dimer"
+max_energy = 10.0
+
+[ini.Dimer]
+rotations_max = 100
+converged_angle = 5.0

@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+46 reproduced, 30 not reproduced, 75 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -86,7 +86,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | Pt/eon-lanczos-lbfgs | — | — | not rerun |
 | Pt/eon-lanczos-lbfgs2 | — | — | not rerun |
 | Pt/quench_dimer-qm | — | — | not rerun |
-| Pt/tsase-dimer-qm | — | — | not rerun |
+| Pt/tsase-dimer-qm | barrier_force_calls 3.239e+06, barrier_jobs 1170, rate_force_calls 262700, rate_jobs 95 | 8.188e+06, 1980, 374100, 91 | not reproduced; tsase_stock_dimer |
 
 ## lowest-eigenvector
 
@@ -274,6 +274,12 @@ The archived driver is the dangling path bin/js850/globalopt.py. The harness use
 The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) misses barrier_force_calls and rate_force_calls by about 30 percent. Pt dimer CG with max 10 reproduces all four hTST counts.
 
 - hTST/Al/eon-dimer-cg
+
+### tsase_stock_dimer
+
+TSASE 1.0 SSDimer at 98aac60, stock constructor: dR 0.001, maxStep 0.2, ss false, conjugate-gradient rotation, rigid translation and rotation projected out. The search stops at rotationMax 50, phi_tol 5, and maximum atom force 1e-4. Displacement, seed 42, temperature 700, and FIRE endpoints (dt 0.2, maxstep 0.2, dtmax 0.2, fmax 1e-4, 5000 steps) follow the archived AKMC setup. The harness counts ASE calculate calls during the dimer. The quoted means are the first 4 barrier windows and the first 60 rate windows. Barrier windows are 2349, 2446, 1299, and 1829 searches: mean 1980 jobs and 8.188e6 force calls, against the archived 1170 jobs and 3.239e6 force calls. The first 60 rate windows average 91 jobs and 3.741e5 force calls, against 95 and 2.627e5. Some searches run to the 100000-call stop, which raises the force-call mean.
+
+- hTST/Pt/tsase-dimer-qm
 
 ### optim_rr_defaults
 
