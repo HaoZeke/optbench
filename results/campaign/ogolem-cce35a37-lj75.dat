@@ -2,12 +2,12 @@
 # A repeated geometry is one call. The call that would pass the cap is not counted.
 # The potential is epsilon 1, sigma 1, cutoff 40, no shift.
 # One reduced sigma is the Ar sigma 6.434516991 bohr. The socket divides by it.
-# partial. scored 121 of 200 starts; lowest energy -397.49134614; 111 of 121 starts at -396.28224883; mean calls 986183.3; median calls 1000000.0
+# partial. scored 148 of 200 starts; lowest energy -397.49134614; 136 of 148 starts at -396.28224883; mean calls 988703.9; median calls 1000000.0
 # Same genetic algorithm as ogolem/lj38. The archive is website/globalopt/lj75/lj75_clusters.tgz, 200 coords files. Success is the Cambridge N=75 minimum -397.492331 plus energy_above_minimum 0.001. The force cap is the problem max_force_calls, 1000000. The generation budget stays 19900. A start that exhausts the force cap is cap. A start that ends under the cap above the window is wrong_stationary.
 force_calls 442726
 force_calls_min 381964
 force_calls_max 544484
-nfailed 118
+nfailed 145
 median 401730
 code ogolem
 code_version 2016.CURRENT
@@ -18,16 +18,16 @@ problem globalopt/lj75
 tuning default
 counter harness
 cap 1000000
-par2_mean 1987970.94215
-wilson_low 0.00146037338542
-wilson_high 0.0453306436042
+par2_mean 1990165.43243
+wilson_low 0.00119373089041
+wilson_high 0.0372770455765
 par2_median 2000000
 par2_median_low 2000000
 par2_median_high 2000000
-v2_nfailed 120
+v2_nfailed 147
 v2_successes 1
-n 121
+n 148
 energy_min -397.491346143
 energy_max -392.6594686
 partial true
-partial_reason scored 121 of 200 starts; lowest energy -397.49134614; 111 of 121 starts at -396.28224883; mean calls 986183.3; median calls 1000000.0
+partial_reason scored 148 of 200 starts; lowest energy -397.49134614; 136 of 148 starts at -396.28224883; mean calls 988703.9; median calls 1000000.0
