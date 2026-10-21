@@ -1,9 +1,9 @@
 barrier_jobs 1980
 barrier_force_calls 8.188e+06
 barrier_windows 4
-rate_jobs 91
-rate_force_calls  3.741e+05
-rate_windows 60
+rate_jobs 94
+rate_force_calls  3.929e+05
+rate_windows 81
 searches 7924
 missed_barriers 0
 unexpected_barriers 0

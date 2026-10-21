@@ -12,7 +12,7 @@ pass_limit = 8000
 workers = 7
 geometry = "website/hTST/Pt/tsase-dimer-qm/states/0/reactant.con"
 note = '''
-TSASE 1.0 SSDimer at 98aac60, stock constructor (dR 0.001, maxStep 0.2, ss false, rotation CG, rigid modes projected). The archive convergence criterion is rotationMax 50, phi_tol 5, and minimum atom force 1e-4. The AKMC server is the archived displacement (least-coordinated weight 1, radius 3.3, magnitude 0.3, seed 42, temperature 700). FIRE relaxes both ends (dt 0.2, maxstep 0.2, dtmax 0.2, fmax 1e-4, 5000 steps). Connectivity is Euclidean distance 0.3. The score is the harness ASE calculate count during the dimer, reduced with the 2014 window sample.
+TSASE 1.0 SSDimer at 98aac60. Stock arguments are dR 0.001, maxStep 0.2, ss false, rotation CG, and rigid modes projected out. The client sets rotationMax 50, phi_tol 5, and minimum atom force 1e-4. The AKMC server uses least-coordinated weight 1, radius 3.3, magnitude 0.3, seed 42, and temperature 700. FIRE relaxes both ends (dt 0.2, maxstep 0.2, dtmax 0.2, fmax 1e-4, 5000 steps). Connectivity is Euclidean distance 0.3. The score is the harness ASE calculate count during the dimer. The means are every closed window in the search log.
 '''
 
 [ini.Main]

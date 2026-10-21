@@ -2,9 +2,10 @@
 
 The server is eOn's Python AKMC. The client is TSASE 1.0 SSDimer.
 One run stays on ``states/0``. Force calls are ``sad-fcs`` through
-:mod:`optbench.htst`. The published sample is 4 barrier windows and
-60 rate windows. A pass that has already reached both counts does not
-register another batch.
+:mod:`optbench.htst`. The quoted means are every closed window in the
+search log. Registration stops once 4 barrier windows and 60 rate
+windows have both closed. Rate windows can pass 60 while a barrier
+window is still open, and those later windows stay in the mean.
 """
 
 from __future__ import annotations
@@ -139,27 +140,6 @@ def _campaign_text(
     return "\n".join(lines) + "\n"
 
 
-def _archive_sample(reduction: HtstReduction) -> HtstReduction:
-    """Keep the archive's sample: the first 4 barrier windows and 60 rate windows.
-
-    Later windows stay in the search log. They are not part of the quoted mean.
-    """
-    return HtstReduction(
-        processes=reduction.processes,
-        reference_ids=reduction.reference_ids,
-        missed_barriers=reduction.missed_barriers,
-        unexpected_barriers=reduction.unexpected_barriers,
-        last_barrier=reduction.last_barrier,
-        last_rate=reduction.last_rate,
-        processtable_rate_sum=reduction.processtable_rate_sum,
-        barrier_jobs=list(reduction.barrier_jobs[:BARRIER_WINDOWS]),
-        barrier_force_calls=list(reduction.barrier_force_calls[:BARRIER_WINDOWS]),
-        rate_jobs=list(reduction.rate_jobs[:RATE_WINDOWS]),
-        rate_force_calls=list(reduction.rate_force_calls[:RATE_WINDOWS]),
-        searches=reduction.searches,
-    )
-
-
 def _write_campaign(
     template: dict,
     reduction: HtstReduction,
@@ -172,7 +152,6 @@ def _write_campaign(
     error: str,
     left_state0: bool,
 ) -> dict:
-    reduction = _archive_sample(reduction)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(
         _campaign_text(
