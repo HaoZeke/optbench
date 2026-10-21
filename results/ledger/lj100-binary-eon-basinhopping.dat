@@ -1,20 +1,20 @@
-avg_energy -530.059
-min_energy -550.76
-max_energy -512
+avg_energy -584.669
+min_energy -597.26
+max_energy -574.24
 n 100
 hits 0
 par2_mean 4000000
 call_mean 2000000
 call_median 2000000
-quench_mean 312.41
+quench_mean 9954.63
 code EON (SVN r2549)
 develop_code eOn (develop b0bd4d5a)
-develop_avg_energy -530.059
-develop_min_energy -550.764
-develop_max_energy -511.999
+develop_avg_energy -584.399
+develop_min_energy -596.34
+develop_max_energy -573.937
 develop_n 100
 develop_hits 0
 develop_par2_mean 4000000
 develop_call_mean 2000000
 develop_call_median 2000000
-develop_quench_mean 200
+develop_quench_mean 9927.24

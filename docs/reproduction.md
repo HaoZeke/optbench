@@ -51,7 +51,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 
 | Row | Archive | Rerun | Status |
 | --- | --- | --- | --- |
-| lj100-binary/eon-basinhopping | avg_energy -584.579, min_energy -596.13, max_energy -574.14 | -530.059, -550.76, -512 | ranked; stock_binary_lj |
+| lj100-binary/eon-basinhopping | avg_energy -584.579, min_energy -596.13, max_energy -574.14 | -584.669, -597.26, -574.24 | ranked; stock_binary_lj |
 | lj100-binary/gmin | — | — | not rerun |
 | lj150/gmin-nosym | — | — | not rerun |
 | lj150/gmin-symmetrise | — | — | not rerun |
@@ -265,7 +265,7 @@ archive run.sh divides coordinates by r0 = 2.897 and scales rho and rcut into th
 
 ### stock_binary_lj
 
-EON (SVN r2549) and eOn (develop b0bd4d5a) are different codes. origin/develop b0bd4d5a is the merge of pull request 784 and contains 8468a7cd and 500350d9. EON (SVN r2549) ran the archived binary LJ100 starts, seed 1, with the archive config.ini: temperature 14000, 60000 basin-hopping steps, displacement 0.3, gaussian draws, L-BFGS, converged_force 0.001, and max_iterations 10000. The force-call cap is 2000000, from sample.max_evaluations and from archive report.sh. A start that reaches the cap is charged 4000000. EON (SVN r2549) has 100 starts. Hits 0. PAR-2 mean 4000000. Mean and median force calls are 2000000. Mean final energy is -530.059, against the archive -584.579. Min and max are -550.76 and -512. Mean quenches per start are 312.41. eOn (develop b0bd4d5a) 3.6.0 has 100 starts. Hits 0. PAR-2 mean 4000000. Mean and median force calls are 2000000. Mean final energy is -530.059. Median final energy is -530.220. Min and max are -550.764 and -511.999. Quenches per start are 200.
+EON (SVN r2549) and eOn (develop b0bd4d5a) are different codes. origin/develop b0bd4d5a is the merge of pull request 784 and contains 8468a7cd and 500350d9. Both ran the archived binary LJ100 starts, seed 1, with the archive config.ini: temperature 14000, 60000 basin-hopping steps, displacement 0.3, gaussian draws, L-BFGS, converged_force 0.001, and max_iterations 10000. The archive names the step max_displacement. Both clients read displacement, whose default is 0.5, so the run sets displacement to 0.3. random_structure is not a key either client reads. The initial-structure probability stays 0. adjust_displacement stays at the default true. The potential is the archive in.lammps lj/cut: cutoff 20, epsilon 1, sigma 1.3 and 1.0, cross 1.15, unshifted, metal units. The ext_pot force is the LAMMPS force. The force-call cap is 2000000, from sample.max_evaluations and from archive report.sh. A start that reaches the cap is charged 4000000. The scored energy is the lowest accepted energy at a force-call count of 2000000 or less. EON (SVN r2549) has 100 starts. Hits 0. PAR-2 mean 4000000. Mean and median force calls are 2000000. Mean final energy is -584.669, against the archive -584.579. Median final energy is -583.755. Min and max are -597.26 and -574.24. Mean quenches per start are 9954.63. eOn (develop b0bd4d5a) 3.6.0 has 100 starts. Hits 0. PAR-2 mean 4000000. Mean and median force calls are 2000000. Mean final energy is -584.399. Median final energy is -584.171. Min and max are -596.34 and -573.937. Mean quenches per start are 9927.24.
 
 - globalopt/lj100-binary/eon-basinhopping
 

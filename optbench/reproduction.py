@@ -111,7 +111,7 @@ SHA = {
     "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
     "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
     "cells/fill-not-rerun": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
-    "repro/globalopt-lj100-binary-eon-basinhopping": "68db78cd74ab5d3bef463cc4994917eaea368c0a",
+    "cells/eon/lj100-binary-basinhopping": "794c63bdea6da6be7d4c1e55dcdefc88e082ed17",
 }
 
 # Exact-setup campaigns. kind is dat, screen, or htst.
@@ -200,7 +200,7 @@ MATCHES: list[dict] = [
     {
         "key": "globalopt/lj100-binary/eon-basinhopping",
         "template": "stock/lj100-binary-eon",
-        "branch": "repro/globalopt-lj100-binary-eon-basinhopping",
+        "branch": "cells/eon/lj100-binary-basinhopping",
         "path": "results/ledger/lj100-binary-eon-basinhopping.dat",
         "cause": "stock_binary_lj",
         "extra": {
@@ -208,18 +208,18 @@ MATCHES: list[dict] = [
                 "label": "EON (SVN r2549)",
                 "template": "eon-svn-r2549/bh-lj100-binary",
                 "path": "results/campaign/eon-svn-r2549-bh-lj100-binary.dat",
-                "avg_energy": -530.059,
-                "min_energy": -550.76,
-                "max_energy": -512.0,
+                "avg_energy": -584.669,
+                "min_energy": -597.26,
+                "max_energy": -574.24,
                 "par2_mean": 4000000.0,
             },
             "eon_develop": {
                 "label": "eOn (develop b0bd4d5a)",
                 "template": "eon-develop-500350d9/bh-lj100-binary",
                 "path": "results/campaign/eon-develop-500350d9-bh-lj100-binary.dat",
-                "avg_energy": -530.059,
-                "min_energy": -550.764,
-                "max_energy": -511.999,
+                "avg_energy": -584.399,
+                "min_energy": -596.34,
+                "max_energy": -573.937,
                 "par2_mean": 4000000.0,
             },
         },
@@ -320,19 +320,26 @@ CAUSE_TEXT = {
     "stock_binary_lj": (
         "EON (SVN r2549) and eOn (develop b0bd4d5a) are different codes. "
         "origin/develop b0bd4d5a is the merge of pull request 784 and contains 8468a7cd and 500350d9. "
-        "EON (SVN r2549) ran the archived binary LJ100 starts, seed 1, with the archive config.ini: "
+        "Both ran the archived binary LJ100 starts, seed 1, with the archive config.ini: "
         "temperature 14000, 60000 basin-hopping steps, displacement 0.3, gaussian draws, "
         "L-BFGS, converged_force 0.001, and max_iterations 10000. "
+        "The archive names the step max_displacement. Both clients read displacement, whose default is 0.5, so the run sets displacement to 0.3. "
+        "random_structure is not a key either client reads. The initial-structure probability stays 0. "
+        "adjust_displacement stays at the default true. "
+        "The potential is the archive in.lammps lj/cut: cutoff 20, epsilon 1, sigma 1.3 and 1.0, cross 1.15, unshifted, metal units. "
+        "The ext_pot force is the LAMMPS force. "
         "The force-call cap is 2000000, from sample.max_evaluations and from archive report.sh. "
         "A start that reaches the cap is charged 4000000. "
+        "The scored energy is the lowest accepted energy at a force-call count of 2000000 or less. "
         "EON (SVN r2549) has 100 starts. Hits 0. PAR-2 mean 4000000. "
         "Mean and median force calls are 2000000. "
-        "Mean final energy is -530.059, against the archive -584.579. "
-        "Min and max are -550.76 and -512. Mean quenches per start are 312.41. "
+        "Mean final energy is -584.669, against the archive -584.579. "
+        "Median final energy is -583.755. "
+        "Min and max are -597.26 and -574.24. Mean quenches per start are 9954.63. "
         "eOn (develop b0bd4d5a) 3.6.0 has 100 starts. Hits 0. "
         "PAR-2 mean 4000000. Mean and median force calls are 2000000. "
-        "Mean final energy is -530.059. Median final energy is -530.220. "
-        "Min and max are -550.764 and -511.999. Quenches per start are 200."
+        "Mean final energy is -584.399. Median final energy is -584.171. "
+        "Min and max are -596.34 and -573.937. Mean quenches per start are 9927.24."
     ),
     "akmc_vs_langevin": (
         "The archive rows are Langevin parallel replica. The harness rows are AKMC. "
