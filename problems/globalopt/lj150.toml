@@ -4,7 +4,7 @@ suite = "globalopt"
 problem = "lj150"
 contract = "partial"
 entry_count = 2
-remark = "Success is an energy at or below the Cambridge Cluster Database N=150 minimum plus 0.001. The start set is the 100 numbered coordinate files. The force-call cap is 2000000.9596491e+05 plus ten times its standard deviation 5.8454129e+05."
+remark = "Success is an energy at or below the Cambridge Cluster Database N=150 minimum plus 0.001. The start set is the 100 numbered coordinate files. The force-call cap is 2000000."
 
 [potential]
 kind = "lennard-jones"
