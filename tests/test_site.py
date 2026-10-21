@@ -108,6 +108,7 @@ def test_rendered_pages_use_the_board_rank():
     assert "sella/pt-island-search-tuned" not in saddle
     assert "10127.1" not in saddle
     assert 'data-field="template">rgsaddle/saddle-dimer-rotskip</td>' in saddle
+    assert 'data-field="par2_mean">10121.8<' in saddle
     assert 'data-field="template">optim/saddle-hef-ffd-pt</td>' in saddle
     assert 'data-field="par2_mean">10128</td><td data-field="success_rate">0</td>' in saddle
     assert "No full harness row." not in saddle
@@ -126,6 +127,7 @@ def test_rendered_pages_use_the_board_rank():
     assert "1d71c9445018" in codes
     assert "f15726f1c798" in codes
     assert "c0db2b8d333c" in codes
+    assert "df8ec2f8deba" in codes
     assert 'data-board-table="code-best"' in codes
     assert not (ROOT / "docs" / "include" / "featured.org").exists()
     assert not (ROOT / "docs" / "include" / "terra-pass.org").exists()
