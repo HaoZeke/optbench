@@ -235,4 +235,4 @@ pixi run -e docs html
 
 Open `docs/build/index.html`.
 
-The hosted test run is `uv run pytest` and `uv run optbench check`. It does not run a campaign. A published score uses every start in the problem. SoftSaddle is a MATLAB smoke in `.github/workflows/softsaddle-smoke.yml`: it builds `libmorse`, `libdavidson`, and `liblanczos`, then runs two searches with a 600 second cap. That smoke does not replace the April 2019 score of 423491.1 force calls in `softsaddle/entry.toml`.
+The hosted test run is `uv run pytest` and `uv run optbench check`. A published score uses every start in the problem. SoftSaddle is a MATLAB batch in `.github/workflows/softsaddle-check.yml`: it builds `libmorse`, `libdavidson`, and `liblanczos`, then runs two searches with a 600 second cap. That batch leaves the April 2019 score of 423491.1 force calls in `softsaddle/entry.toml` as the archived number.

@@ -1,14 +1,14 @@
-name: softsaddle smoke
+name: softsaddle check
 
 on:
   workflow_dispatch:
   push:
     paths:
       - "softsaddle/**"
-      - ".github/workflows/softsaddle-smoke.yml"
+      - ".github/workflows/softsaddle-check.yml"
 
 jobs:
-  smoke:
+  batch:
     name: one SoftSaddle batch
     runs-on: ubuntu-latest
     timeout-minutes: 45
@@ -24,7 +24,7 @@ jobs:
             libgsl-dev libboost-dev libblitz-dev
 
       - name: Build the Morse, Davidson, and Lanczos libraries
-        run: sh softsaddle/smoke.sh
+        run: sh softsaddle/check.sh
 
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v3
@@ -38,5 +38,5 @@ jobs:
         env:
           LD_LIBRARY_PATH: ${{ github.workspace }}/softsaddle/lib
         with:
-          command: smoke_entry
+          command: check_entry
           startup-options: -sd ${{ github.workspace }}/softsaddle
