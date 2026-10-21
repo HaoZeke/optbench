@@ -56,9 +56,10 @@ the shifted cutoff-15 kernel. They are different methods.
 ## Hessian columns
 
 `Hessians` is the mean analytic Hessian count on the recorded starts.
-`FD calls` is that count times two force evaluations per coordinate, the
-central-difference equivalent. A method that calls no analytic Hessian
-shows 0 and 0. The coordinate count is the problem's Cartesian size
-(`optbench.families.COORDINATES`, or `atoms` / `mobile_atoms` on the
-problem). When the size is unknown and the count is positive, `FD calls`
-is left blank.
+No problem file defines a finite-difference multiplier. `FD calls` is
+that count times the coordinate count: one force call per coordinate,
+the forward-difference equivalent, so one full Hessian is 3N calls.
+A method that calls no analytic Hessian shows 0 and 0. The coordinate
+count is the problem's Cartesian size (`optbench.families.COORDINATES`,
+or `atoms` / `mobile_atoms` on the problem). When the size is unknown
+and the count is positive, `FD calls` is left blank.

@@ -1684,7 +1684,8 @@ def _caption(per_image: bool) -> str:
         "A row is one code, one version, and one stock method. Lower cost is better. "
         "PAR-2 is the harness total. An archived row uses its published primary number. "
         "Hessians is the mean analytic Hessian count. "
-        "FD calls is that count times two force evaluations per coordinate."
+        "FD calls is that count times one force call per coordinate. "
+        "No problem file states another multiplier."
     )
     if per_image:
         caption += " Per-image mean divides the harness total by the problem's moving images."

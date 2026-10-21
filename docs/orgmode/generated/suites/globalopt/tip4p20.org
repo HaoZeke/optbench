@@ -16,7 +16,7 @@
    <h3>Basin hopping / global</h3>
    <div class="bench-scroll">
    <table data-board-table="family" data-family="global" data-problem="globalopt/tip4p20">
-   <caption>Basin hopping / global. A row is one code, one version, and one stock method. Lower cost is better. PAR-2 is the harness total. An archived row uses its published primary number. Hessians is the mean analytic Hessian count. FD calls is that count times two force evaluations per coordinate.</caption>
+   <caption>Basin hopping / global. A row is one code, one version, and one stock method. Lower cost is better. PAR-2 is the harness total. An archived row uses its published primary number. Hessians is the mean analytic Hessian count. FD calls is that count times one force call per coordinate. No problem file states another multiplier.</caption>
    <thead><tr><th>Rank</th><th>Row</th><th>Cost</th><th>Hessians</th><th>FD calls</th><th>n</th></tr></thead><tbody>
    <tr><td data-field="family_rank">1</td><td data-field="label">GMIN · linear temperature basin-paving</td><td data-field="rank_cost">2.55667e+07</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="n">0</td></tr>
    <tr><td data-field="family_rank">2</td><td data-field="label">GMIN · basin-hopping</td><td data-field="rank_cost">2.85967e+07</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="n">0</td></tr>
@@ -24,7 +24,7 @@
    <h3>Overall</h3>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="globalopt/tip4p20">
-   <caption>A row is one code, one version, and one stock method. Lower cost is better. PAR-2 is the harness total. An archived row uses its published primary number. Hessians is the mean analytic Hessian count. FD calls is that count times two force evaluations per coordinate.</caption>
+   <caption>A row is one code, one version, and one stock method. Lower cost is better. PAR-2 is the harness total. An archived row uses its published primary number. Hessians is the mean analytic Hessian count. FD calls is that count times one force call per coordinate. No problem file states another multiplier.</caption>
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td data-field="label">GMIN · linear temperature basin-paving</td><td data-field="family">Basin hopping / global</td><td data-field="family_rank">1</td><td data-field="par2_mean"></td><td data-field="published">2.55667e+07</td><td data-field="median_calls">1.81821e+07</td><td data-field="mean_calls">2.55667e+07</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">0</td></tr>
    <tr><td data-field="label">GMIN · basin-hopping</td><td data-field="family">Basin hopping / global</td><td data-field="family_rank">2</td><td data-field="par2_mean"></td><td data-field="published">2.85967e+07</td><td data-field="median_calls">1.94671e+07</td><td data-field="mean_calls">2.85967e+07</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">0</td></tr>

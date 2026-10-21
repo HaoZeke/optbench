@@ -29,7 +29,7 @@
    <td data-field="median_calls">555</td>
    <td data-field="mean_calls">1494.34</td>
    <td data-field="hessian_calls">1</td>
-   <td data-field="fd_calls">228</td>
+   <td data-field="fd_calls">114</td>
    <td data-field="failures">crash 0, divergence 0, cap 3, wrong_stationary 64</td>
    <td data-field="n">200</td>
    </tr>
@@ -43,7 +43,7 @@
    <td data-field="median_calls">332.5</td>
    <td data-field="mean_calls">353.535</td>
    <td data-field="hessian_calls">1</td>
-   <td data-field="fd_calls">228</td>
+   <td data-field="fd_calls">114</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 75</td>
    <td data-field="n">200</td>
    </tr>
@@ -57,7 +57,7 @@
    <td data-field="median_calls">1060</td>
    <td data-field="mean_calls">1059.98</td>
    <td data-field="hessian_calls">1</td>
-   <td data-field="fd_calls">2058</td>
+   <td data-field="fd_calls">1029</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>
@@ -71,7 +71,7 @@
    <td data-field="median_calls">1059</td>
    <td data-field="mean_calls">1060.63</td>
    <td data-field="hessian_calls">1</td>
-   <td data-field="fd_calls">2058</td>
+   <td data-field="fd_calls">1029</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>

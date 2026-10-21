@@ -18,7 +18,7 @@ FAMILIES: tuple[tuple[str, str], ...] = (
 FAMILY_TITLE = dict(FAMILIES)
 
 # Cartesian coordinates for the finite-difference Hessian equivalent.
-# Central differences call the force twice per coordinate.
+# One forward difference calls the force once per coordinate.
 COORDINATES: dict[str, int] = {
     "minimization/lj38": 114,
     "minimization/lj38-noise": 114,
@@ -68,14 +68,18 @@ def coordinate_count(problem: dict | None) -> int | None:
 
 
 def finite_difference_calls(hessian_calls: float | None, coordinates: int | None) -> float | None:
-    """Force calls a central-difference Hessian would spend for this analytic count."""
+    """Force calls for one forward difference per coordinate.
+
+    No problem file states another multiplier. One analytic Hessian stands
+    for ``coordinates`` force calls, which is 3N for a full Cartesian Hessian.
+    """
     if hessian_calls is None:
         return None
     if hessian_calls == 0:
         return 0.0
     if coordinates is None:
         return None
-    return float(hessian_calls) * 2.0 * int(coordinates)
+    return float(hessian_calls) * int(coordinates)
 
 
 def version_text(code_version: str, commit: str = "") -> str:

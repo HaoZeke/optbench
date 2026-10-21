@@ -19,7 +19,7 @@
    <h3>Band / NEB</h3>
    <div class="bench-scroll">
    <table data-board-table="family" data-family="band" data-problem="double-ended-saddle-search/lj38">
-   <caption>Band / NEB. A row is one code, one version, and one stock method. Lower cost is better. PAR-2 is the harness total. An archived row uses its published primary number. Hessians is the mean analytic Hessian count. FD calls is that count times two force evaluations per coordinate.</caption>
+   <caption>Band / NEB. A row is one code, one version, and one stock method. Lower cost is better. PAR-2 is the harness total. An archived row uses its published primary number. Hessians is the mean analytic Hessian count. FD calls is that count times one force call per coordinate. No problem file states another multiplier.</caption>
    <thead><tr><th>Rank</th><th>Row</th><th>Cost</th><th>Hessians</th><th>FD calls</th><th>n</th></tr></thead><tbody>
    <tr><td data-field="family_rank">1</td><td data-field="label">eOn (r2156) · eon-ci-neb</td><td data-field="rank_cost">827</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="n">50</td></tr>
    <tr><td data-field="family_rank">2</td><td data-field="label">eOn (r2156) · eon-ci-swdneb</td><td data-field="rank_cost">861</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="n">50</td></tr>
@@ -46,7 +46,7 @@
    <h3>Minimum mode</h3>
    <div class="bench-scroll">
    <table data-board-table="family" data-family="min-mode" data-problem="double-ended-saddle-search/lj38">
-   <caption>Minimum mode. A row is one code, one version, and one stock method. Lower cost is better. PAR-2 is the harness total. An archived row uses its published primary number. Hessians is the mean analytic Hessian count. FD calls is that count times two force evaluations per coordinate.</caption>
+   <caption>Minimum mode. A row is one code, one version, and one stock method. Lower cost is better. PAR-2 is the harness total. An archived row uses its published primary number. Hessians is the mean analytic Hessian count. FD calls is that count times one force call per coordinate. No problem file states another multiplier.</caption>
    <thead><tr><th>Rank</th><th>Row</th><th>Cost</th><th>Hessians</th><th>FD calls</th><th>n</th></tr></thead><tbody>
    <tr><td data-field="family_rank">1</td><td data-field="label">Eon svn (r2549) · Lanczos improved L-BFGS</td><td data-field="rank_cost">235.2</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="n">50</td></tr>
    <tr><td data-field="family_rank">2</td><td data-field="label">eOn (3.5.0) · Lanczos improved L-BFGS</td><td data-field="rank_cost">259.46</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="n">50</td></tr>
@@ -61,7 +61,7 @@
    <h3>Connect / double-ended</h3>
    <div class="bench-scroll">
    <table data-board-table="family" data-family="connect" data-problem="double-ended-saddle-search/lj38">
-   <caption>Connect / double-ended. A row is one code, one version, and one stock method. Lower cost is better. PAR-2 is the harness total. An archived row uses its published primary number. Hessians is the mean analytic Hessian count. FD calls is that count times two force evaluations per coordinate.</caption>
+   <caption>Connect / double-ended. A row is one code, one version, and one stock method. Lower cost is better. PAR-2 is the harness total. An archived row uses its published primary number. Hessians is the mean analytic Hessian count. FD calls is that count times one force call per coordinate. No problem file states another multiplier.</caption>
    <thead><tr><th>Rank</th><th>Row</th><th>Cost</th><th>Hessians</th><th>FD calls</th><th>n</th></tr></thead><tbody>
    <tr><td data-field="family_rank">1</td><td data-field="label">OPTIM · DNEB + hybrid eigenvector following</td><td data-field="rank_cost">131</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="n">50</td></tr>
    <tr><td data-field="family_rank">2</td><td data-field="label">pele · hybrid eigenvector following</td><td data-field="rank_cost">293</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="n">50</td></tr>
@@ -73,7 +73,7 @@
    <h3>Overall</h3>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="double-ended-saddle-search/lj38">
-   <caption>A row is one code, one version, and one stock method. Lower cost is better. PAR-2 is the harness total. An archived row uses its published primary number. Hessians is the mean analytic Hessian count. FD calls is that count times two force evaluations per coordinate. Per-image mean divides the harness total by the problem&#x27;s moving images.</caption>
+   <caption>A row is one code, one version, and one stock method. Lower cost is better. PAR-2 is the harness total. An archived row uses its published primary number. Hessians is the mean analytic Hessian count. FD calls is that count times one force call per coordinate. No problem file states another multiplier. Per-image mean divides the harness total by the problem&#x27;s moving images.</caption>
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Per-image mean</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td data-field="label">OPTIM · DNEB + hybrid eigenvector following</td><td data-field="family">Connect / double-ended</td><td data-field="family_rank">1</td><td data-field="par2_mean"></td><td data-field="published">131</td><td data-field="median_calls">120</td><td data-field="mean_calls">131</td><td data-field="mean_per_image"></td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
    <tr><td data-field="label">Eon svn (r2549) · Lanczos improved L-BFGS</td><td data-field="family">Minimum mode</td><td data-field="family_rank">1</td><td data-field="par2_mean">235.2</td><td data-field="published"></td><td data-field="median_calls">197</td><td data-field="mean_calls">235.2</td><td data-field="mean_per_image">47.04</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">50</td></tr>

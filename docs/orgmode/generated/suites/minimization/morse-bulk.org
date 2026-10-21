@@ -18,7 +18,7 @@
    <h3>Minimizers</h3>
    <div class="bench-scroll">
    <table data-board-table="family" data-family="minimize" data-problem="minimization/morse-bulk">
-   <caption>Minimizers. A row is one code, one version, and one stock method. Lower cost is better. PAR-2 is the harness total. An archived row uses its published primary number. Hessians is the mean analytic Hessian count. FD calls is that count times two force evaluations per coordinate.</caption>
+   <caption>Minimizers. A row is one code, one version, and one stock method. Lower cost is better. PAR-2 is the harness total. An archived row uses its published primary number. Hessians is the mean analytic Hessian count. FD calls is that count times one force call per coordinate. No problem file states another multiplier.</caption>
    <thead><tr><th>Rank</th><th>Row</th><th>Cost</th><th>Hessians</th><th>FD calls</th><th>n</th></tr></thead><tbody>
    <tr><td data-field="family_rank">1</td><td data-field="label">rgmin (0.4.1) · NEWTON</td><td data-field="rank_cost">8.35</td><td data-field="hessian_calls">7.35</td><td data-field="fd_calls"></td><td data-field="n">100</td></tr>
    <tr><td data-field="family_rank">2</td><td data-field="label">rgmin (0.4.0) · DOGLEG</td><td data-field="rank_cost">10.11</td><td data-field="hessian_calls">9.11</td><td data-field="fd_calls"></td><td data-field="n">100</td></tr>
@@ -91,7 +91,7 @@
    <h3>Overall</h3>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="minimization/morse-bulk">
-   <caption>A row is one code, one version, and one stock method. Lower cost is better. PAR-2 is the harness total. An archived row uses its published primary number. Hessians is the mean analytic Hessian count. FD calls is that count times two force evaluations per coordinate.</caption>
+   <caption>A row is one code, one version, and one stock method. Lower cost is better. PAR-2 is the harness total. An archived row uses its published primary number. Hessians is the mean analytic Hessian count. FD calls is that count times one force call per coordinate. No problem file states another multiplier.</caption>
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td data-field="label">rgmin (0.4.1) · NEWTON</td><td data-field="family">Minimizers</td><td data-field="family_rank">1</td><td data-field="par2_mean">8.35</td><td data-field="published"></td><td data-field="median_calls">9</td><td data-field="mean_calls">8.35</td><td data-field="hessian_calls">7.35</td><td data-field="fd_calls"></td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="label">rgmin (0.4.0) · DOGLEG</td><td data-field="family">Minimizers</td><td data-field="family_rank">2</td><td data-field="par2_mean">10.11</td><td data-field="published"></td><td data-field="median_calls">10</td><td data-field="mean_calls">10.11</td><td data-field="hessian_calls">9.11</td><td data-field="fd_calls"></td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>

@@ -29,7 +29,7 @@
    <td data-field="median_calls">79</td>
    <td data-field="mean_calls">81.881</td>
    <td data-field="hessian_calls">80.881</td>
-   <td data-field="fd_calls">18440.9</td>
+   <td data-field="fd_calls">9220.43</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
@@ -43,7 +43,7 @@
    <td data-field="median_calls">79</td>
    <td data-field="mean_calls">81.881</td>
    <td data-field="hessian_calls">80.881</td>
-   <td data-field="fd_calls">18440.9</td>
+   <td data-field="fd_calls">9220.43</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
@@ -57,7 +57,7 @@
    <td data-field="median_calls">64</td>
    <td data-field="mean_calls">66.649</td>
    <td data-field="hessian_calls">65.649</td>
-   <td data-field="fd_calls">14968</td>
+   <td data-field="fd_calls">7483.99</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 5</td>
    <td data-field="n">1000</td>
    </tr>
@@ -71,7 +71,7 @@
    <td data-field="median_calls">64</td>
    <td data-field="mean_calls">66.649</td>
    <td data-field="hessian_calls">65.649</td>
-   <td data-field="fd_calls">14968</td>
+   <td data-field="fd_calls">7483.99</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 5</td>
    <td data-field="n">1000</td>
    </tr>
@@ -421,7 +421,7 @@
    <td data-field="median_calls">79</td>
    <td data-field="mean_calls">81.881</td>
    <td data-field="hessian_calls">80.881</td>
-   <td data-field="fd_calls">18440.9</td>
+   <td data-field="fd_calls">9220.43</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
@@ -435,7 +435,7 @@
    <td data-field="median_calls">64</td>
    <td data-field="mean_calls">66.649</td>
    <td data-field="hessian_calls">65.649</td>
-   <td data-field="fd_calls">14968</td>
+   <td data-field="fd_calls">7483.99</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 5</td>
    <td data-field="n">1000</td>
    </tr>
