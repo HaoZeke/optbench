@@ -805,7 +805,36 @@ def _format_field(value: object) -> str:
     return str(value)
 
 
-def _dat(summary: dict, template: dict, metrics: dict, *, partial: bool, note: str) -> str:
+_CHECKPOINT_DIR = Path("/tmp/optbench-agox/checkpoints")
+
+
+def _checkpoint_jsonl(output: Path) -> Path:
+    """Resume file for one campaign dat, kept outside the board directory.
+
+    The name includes the dat's parent so two tests can share a stem.
+    """
+    if output.name.endswith(".starts.jsonl"):
+        stem = output.name[: -len(".starts.jsonl")]
+        identity = output.parent / f"{stem}.dat"
+    else:
+        stem = output.stem
+        identity = output
+    token = identity.resolve().parent.name
+    return _CHECKPOINT_DIR / f"{stem}-{token}.starts.jsonl"
+
+
+def _stated_starts(problem: dict) -> int | None:
+    raw = (problem.get("sample") or {}).get("starts")
+    if raw in (None, ""):
+        return None
+    return int(raw)
+
+
+def _campaign_paths(output: Path) -> tuple[Path, Path, Path]:
+    return (output, output.with_suffix(".starts.jsonl"), output.with_suffix(".v2.json"))
+
+
+def _dat(summary: dict, template: dict, metrics: dict, *, note: str) -> str:
     rows = {
         "force_calls": summary.get("force_calls"),
         "force_calls_min": summary.get("force_calls_min"),
@@ -845,9 +874,6 @@ def _dat(summary: dict, template: dict, metrics: dict, *, partial: bool, note: s
         "# Local steps are SciPy L-BFGS-B stopped on the ASE maximum atomic force.",
         "# " + note.replace("\n", " "),
     ]
-    if partial:
-        lines.append("# partial true. The row is not a full ranked score.")
-        rows["partial"] = "true"
     for key, value in rows.items():
         if value is None or value == "":
             continue
@@ -865,7 +891,7 @@ def _publish(
     version: str,
     commit: str,
     parameters: dict,
-    partial: bool,
+    finished: bool,
     reference: float | None,
     target: float | None,
     reference_source: str,
@@ -921,9 +947,11 @@ def _publish(
         commit=commit,
         parameters=parameters,
     )
+    stated = _stated_starts(problem)
+    ready = bool(finished and target is not None and stated is not None and len(published) >= stated)
     document = {
         "schema": "optbench.result/v2",
-        "status": "partial" if partial else "archive",
+        "status": "archive",
         "problem": problem["id"],
         "scoring": "par2-wilson-bootstrap",
         "par_factor": 2,
@@ -956,11 +984,20 @@ def _publish(
     }
     output.parent.mkdir(parents=True, exist_ok=True)
     if published:
-        output.write_text(_dat(summary, template, metrics, partial=partial, note=note), encoding="utf-8")
+        write_starts(_checkpoint_jsonl(output), published)
+    # A campaign file is a board row. Write it only when every start has
+    # finished under this cap. Until then the checkpoint alone is enough
+    # for a later resume, and a stale campaign file is removed.
+    if ready and published:
+        output.write_text(_dat(summary, template, metrics, note=note), encoding="utf-8")
         write_starts(output.with_suffix(".starts.jsonl"), published)
         output.with_suffix(".v2.json").write_text(
             json.dumps(document, indent=2, sort_keys=True) + "\n", encoding="utf-8"
         )
+    else:
+        for path in _campaign_paths(output):
+            if path.is_file():
+                path.unlink()
     summary["starts"] = len(published)
     summary["template"] = template["id"]
     summary["problem"] = problem["id"]
@@ -970,15 +1007,27 @@ def _publish(
     return summary
 
 
-def _load_resume(path: Path) -> list[dict]:
-    if not path.is_file():
-        return []
+def _read_jsonl(path: Path) -> list[dict]:
     rows = []
     for line in path.read_text(encoding="utf-8").splitlines():
         if not line.strip():
             continue
         rows.append(json.loads(line))
     return rows
+
+
+def _load_resume(path: Path) -> list[dict]:
+    """Load finished starts from the campaign file, or from the checkpoint.
+
+    The campaign file is the row on the board. While a search is still
+    short of the full start set, that file is absent and the checkpoint
+    holds the starts that already finished.
+    """
+    checkpoint = _checkpoint_jsonl(path)
+    for candidate in (path, checkpoint):
+        if candidate.is_file() and candidate.stat().st_size > 0:
+            return _read_jsonl(candidate)
+    return []
 
 
 def _rows_for_cap(rows: list[dict], cap: int) -> list[dict]:
@@ -1091,8 +1140,6 @@ def run_template(
         parameters["use_ray"] = False
 
     def publish(finished: bool) -> dict:
-        stated_n = (problem.get("sample") or {}).get("starts")
-        short = stated_n is not None and len(records) < int(stated_n)
         return _publish(
             output,
             records,
@@ -1102,13 +1149,14 @@ def run_template(
             version=version,
             commit=commit,
             parameters=parameters,
-            partial=bool(short or target is None or not finished),
+            finished=finished,
             reference=reference,
             target=target,
             reference_source=reference_source,
         )
 
     if jobs:
+        publish(False)
         if workers <= 1:
             for job in jobs:
                 record = search_job(job)

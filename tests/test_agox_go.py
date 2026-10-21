@@ -136,8 +136,11 @@ def test_overlapped_lj75_start_stays_inside_the_confinement(tmp_path: Path):
 
 def test_basin_hopping_stops_at_the_cap(tmp_path: Path):
     pytest.importorskip("agox")
+    import copy
+    import json
+
     from optbench.campaign import load_template
-    from optbench.runners.agox_go import run_template
+    from optbench.runners.agox_go import _checkpoint_jsonl, run_template
 
     template = load_template(ROOT, "agox/lj38-bh")
     template["stop"] = {"max_force_calls": 60}
@@ -155,19 +158,47 @@ def test_basin_hopping_stops_at_the_cap(tmp_path: Path):
     )
     assert summary["starts"] == 1
     assert summary["cap"] == 60
-    text = output.read_text(encoding="utf-8")
-    assert "counter harness" in text
-    assert "partial true" in text
-    starts = output.with_suffix(".starts.jsonl").read_text(encoding="utf-8").strip().splitlines()
+    assert not output.exists()
+    assert not output.with_suffix(".starts.jsonl").exists()
+    checkpoint = _checkpoint_jsonl(output)
+    text = checkpoint.read_text(encoding="utf-8")
+    assert "partial" not in text.lower()
+    starts = text.strip().splitlines()
     assert len(starts) == 1
-    import json
-
     record = json.loads(starts[0])
     assert record["counter"] == "harness"
     assert record["success"] is False
     assert record["failure"] == "cap"
     assert record["force_calls"] == 60
     assert record["lowest_energy"] < -100
+
+    from optbench.runners.agox_go import _publish
+
+    problem = copy.deepcopy(resolve_problem(ROOT, "globalopt/lj38"))
+    problem["sample"]["starts"] = 1
+    full = tmp_path / "full.dat"
+    full_summary = _publish(
+        full,
+        [record],
+        problem=problem,
+        template=template,
+        cap=60,
+        version=str(template["code_version"]),
+        commit=str(template["commit"]),
+        parameters={"method": "basin_hopping"},
+        finished=True,
+        reference=-173.928427,
+        target=-173.927427,
+        reference_source="problem",
+    )
+    assert full_summary["starts"] == 1
+    assert full_summary["cap"] == 60
+    written = full.read_text(encoding="utf-8")
+    assert "counter harness" in written
+    assert "cap 60" in written
+    assert "\nn 1\n" in written
+    assert "partial" not in written.lower()
+    assert "partial" not in full.with_suffix(".v2.json").read_text(encoding="utf-8").lower()
 
 
 def test_resume_repeats_a_start_that_stopped_under_the_cap():
