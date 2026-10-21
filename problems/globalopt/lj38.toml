@@ -9,6 +9,11 @@ remark = "The 2014 eOn config at archive/entries/globalopt/lj38/eon-basinhopping
 [sample]
 starts = 100
 
+[reference]
+energy = -173.928427
+symmetry = "Oh"
+page = "https://www-wales.ch.cam.ac.uk/~jon/structures/LJ/tables.150.html"
+
 [convergence]
 energy_above_minimum = 0.001
 max_force_calls = 2000000
