@@ -191,6 +191,7 @@ Basin hopping and minima hopping on `globalopt/*` share
 `max_force_calls` 2000000. The runner reads that field on every
 Cartesian problem, including lj38. `sample.max_evaluations` on
 `lj100-binary` is the same number. Campaign files record that cap.
+A template that sets ranked false stays off the ranked table.
 AMD-SVM on `accelerated-md/aladatom` is not scored. The problem has no
 force-call protocol and the harness has no EAM potential. hTST
 prefactors are not scored for the same reason.
