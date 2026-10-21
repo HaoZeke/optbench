@@ -107,12 +107,12 @@ note = "Wales group GMIN. Tarball sha256 02aaf45245af7b521b5792fa77ffa364f67d756
 [[code]]
 id = "pele"
 name = "pele"
-role = "minimization"
+role = "minimization and global optimization"
 repository = "https://github.com/pele-python/pele"
 ref = "main"
 commit = "b7081b932a060be11342fbe8287ac35da8ada879"
 committed = "2026-10-12"
-note = "0.1.2 at main b7081b93, built from source. LBFGS and FIRE are the Python classes. MYLBFGS is the Fortran step update on that LBFGS. Steepest descent is the update in pele.optimize.steepest_descent. Campaigns call the harness Lennard-Jones or Morse potential. Force calls are harness entries to getEnergyGradient. The 2014 rows counted nfev on pele's own potential and stay on the archive table."
+note = "0.1.2 at main b7081b93, built from source. LBFGS and FIRE are the Python classes. MYLBFGS is the Fortran step update on that LBFGS. Steepest descent is the update in pele.optimize.steepest_descent. Minimization calls the harness Lennard-Jones or Morse potential. Basin hopping calls the same Lennard-Jones kernel through BasinHopping and lbfgs_cpp, temperature 1.0, stepsize 0.6. The globalopt force-call cap is 2000000. Force calls are harness entries to getEnergyGradient."
 
 [[code]]
 id = "optking"

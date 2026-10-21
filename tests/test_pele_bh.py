@@ -34,10 +34,10 @@ def test_pele_templates_match_the_registry_pin():
         assert template["pele"]["stepsize"] == 0.6
         problem = resolve_problem(ROOT, template["problem"])
         expected_cap = {
-            "globalopt/lj38": 3_000_000,
-            "globalopt/lj75": 1_000_000,
-            "globalopt/lj98": 1_000_000_000,
-            "globalopt/lj150": 10_000_000,
+            "globalopt/lj38": 2_000_000,
+            "globalopt/lj75": 2_000_000,
+            "globalopt/lj98": 2_000_000,
+            "globalopt/lj150": 2_000_000,
         }[template["problem"]]
         assert int(template["stop"]["max_force_calls"]) == expected_cap
         assert _check_stop(problem, template) == expected_cap

@@ -6,7 +6,7 @@ code_version = "0.1.2"
 commit = "b7081b932a060be11342fbe8287ac35da8ada879"
 algorithm = "basin hopping"
 tuning = "default"
-note = "Basin hopping with pele.optimize.lbfgs_cpp and pele.basinhopping.BasinHopping. Temperature is 1.0 and the initial step size is 0.6, the LJCluster defaults, inside AdaptiveStepsizeTemperature. The potential is the harness Lennard-Jones kernel, epsilon 1, sigma 1, cutoff 40, no shift. Success is the Cambridge pair-well depth -893.310258 within 0.001. The bare coords file duplicates coords.100 and is dropped. The problem states 100 starts and a force-call cap of 10000000. The seed is the integer in the start name."
+note = "Basin hopping with pele.optimize.lbfgs_cpp and pele.basinhopping.BasinHopping. Temperature is 1.0 and the initial step size is 0.6, the LJCluster defaults, inside AdaptiveStepsizeTemperature. The potential is the harness Lennard-Jones kernel, epsilon 1, sigma 1, cutoff 40, no shift. Success is the Cambridge pair-well depth -893.310258 within 0.001. The bare coords file duplicates coords.100 and is dropped. The problem states 100 starts and a force-call cap of 2000000. The seed is the integer in the start name."
 
 [pele]
 temperature = 1.0
@@ -29,7 +29,7 @@ energy_above_minimum = 0.001
 source = "Cambridge cluster database, pair well depth"
 
 [stop]
-max_force_calls = 10000000
+max_force_calls = 2000000
 
 [input]
 archive_path = "website/globalopt/lj150/lj150_clusters.tgz"
