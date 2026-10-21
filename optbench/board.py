@@ -982,7 +982,11 @@ def _apply_reproduction_hold(row: dict, held) -> None:
     n = int(row.get("n") or 0)
     if _source_parts(row) == {"asv"} and n <= 1:
         return
-    reason = "does not reproduce the 2014 archive"
+    paths = [part.strip() for part in str(row.get("path") or "").split(";") if part.strip()]
+    if "results/campaign/eon-3.5.0-saddle-pt-classic.dat" in paths:
+        reason = "measured gap against the archived EON r2205 reference"
+    else:
+        reason = "does not reproduce the 2014 archive"
     if not row.get("scored"):
         note = str(row.get("note") or "")
         if reason not in note:

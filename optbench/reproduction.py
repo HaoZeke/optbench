@@ -255,11 +255,14 @@ CAUSE_TEXT = {
     "heptamer_cg": "The 3.5.0 file already stores the per-image mean, 142 against the archive 120. L-BFGS, FIRE, and QM on the same 8-image spring-5 climb reproduce, so the image count is not the split.",
     "de_exclusion": "The 3.5.0 doubly-nudged file is the per-band mean under the 2500-call exclusion (708, 5 failures). The archive mean is 861. The client total is a different counter and is also outside 10 percent.",
     "eon_saddle_count": (
-        "The classic dimer campaign (improved false, the 2014 key) has fraction_connected 0.692 against 0.746, inside 10 percent, "
-        "but force calls 6.97e6 against 3.78e6 and unique saddles 91.7 against 109.2. "
+        "The archived EON r2205 reference is the eon-dimer row from 15 Jul 2014: "
+        "3.77888e6 force calls, 109.222 unique saddles, fraction connected 0.746017. "
+        "Its status is a measured gap. "
+        "The classic dimer campaign, with improved left false, measures fraction connected 0.692, "
+        "force calls 6.97e6, and unique saddles 91.7. "
         "The archive standard error on the force calls is 5.27e5. "
-        "This eOn AKMC counter is not the harness RMSD link test. "
-        "The archived number stays this paper row. "
+        "Fraction connected is the r2205 done.py ratio. The client marks Not Connected with Matter::compare, "
+        "a per-atom maximum strictly below 0.1 angstrom, and exactly one endpoint the same as the reactant. "
         "EON (SVN r2549) and eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) are different codes. "
         "Each was run stock, with its own defaults left unset, on the same Pt island, seeds 1000-1009, and the 27-saddle stop. "
         "EON (SVN r2549) harness mean force calls are 5.29672e6, unique saddles 116.8, fraction_connected 0.75405, "
@@ -388,6 +391,20 @@ def metrics_for(fields: dict[str, str], kind: str, explicit: list[str] | None) -
     if "barrier_force_calls" in fields:
         return ["barrier_force_calls", "barrier_jobs", "rate_force_calls", "rate_jobs"]
     return ["force_calls"]
+
+
+R2205_REFERENCE = "saddle-search/pt-island/eon-dimer"
+
+
+def published_status(ident: str, judged: str) -> str:
+    """Status stored for one archive row.
+
+    The saddle-search Pt-island eon-dimer row is the archived EON r2205
+    reference. A miss on that row is a measured gap.
+    """
+    if ident == R2205_REFERENCE and judged == "not_reproduced":
+        return "measured gap"
+    return judged
 
 
 def judge_checks(checks: list[dict], failure: dict | None) -> str:
@@ -523,7 +540,7 @@ def holdback(root: Path) -> Hold:
         rerun = row.get("rerun") or {}
         problem = f"{row['suite']}/{row['problem']}"
         template = str(rerun.get("template") or "")
-        if row.get("status") == "not_reproduced":
+        if row.get("status") in {"not_reproduced", "measured gap"}:
             if template:
                 found.templates.add((problem, template))
             rel = str(rerun.get("path") or "")
@@ -673,6 +690,7 @@ def reproduction_errors(root: Path) -> list[str]:
         status = judge_checks(row.get("checks") or [], row.get("failure_check") if row.get("rerun") else None)
         if row.get("rerun") is None:
             status = "not_rerun"
+        status = published_status(row_id(row), status)
         if status != row.get("status"):
             errors.append(f"{row_id(row)} stored {row.get('status')} and the checks say {status}")
         if row.get("rerun", {}) and row["rerun"].get("paper_baseline") and row.get("status") != "reproduced":
@@ -760,13 +778,14 @@ def build_rows(root: Path) -> list[dict]:
                 "high": high,
                 "ok": failure_inside(archive_failures, rerun_failures, sample),
             }
-        status = judge_checks(checks, failure)
+        judged = judge_checks(checks, failure)
+        status = published_status(ident, judged)
         named = match.get("cause", "")
-        cause = named if status == "not_reproduced" else ""
+        cause = named if judged == "not_reproduced" else ""
         record["checks"] = checks
         record["failure_check"] = failure
         record["status"] = status
-        record["gap"] = _gap(checks, failure) if status == "not_reproduced" else ""
+        record["gap"] = _gap(checks, failure) if judged == "not_reproduced" else ""
         record["cause"] = cause
         record["cause_detail"] = CAUSE_TEXT.get(cause, "") if cause else ""
         record["note"] = CAUSE_TEXT.get(named, "") if status == "reproduced" and named else ""
@@ -804,7 +823,7 @@ def _fmt(value: float) -> str:
 
 
 def render_markdown(rows: list[dict]) -> str:
-    counts = {"reproduced": 0, "not_reproduced": 0, "not_rerun": 0}
+    counts = {"reproduced": 0, "not_reproduced": 0, "not_rerun": 0, "measured gap": 0}
     for row in rows:
         counts[row["status"]] = counts.get(row["status"], 0) + 1
     lines = [
@@ -812,7 +831,7 @@ def render_markdown(rows: list[dict]) -> str:
         "",
         "Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.",
         "",
-        f"{counts['reproduced']} reproduced, {counts['not_reproduced']} not reproduced, {counts['not_rerun']} not rerun. {len(rows)} archive rows.",
+        f"{counts['reproduced']} reproduced, {counts['not_reproduced']} not reproduced, {counts['measured gap']} measured gap, {counts['not_rerun']} not rerun. {len(rows)} archive rows.",
         "",
         "The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.",
         "",

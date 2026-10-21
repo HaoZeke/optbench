@@ -10,6 +10,7 @@ from optbench.reproduction import (
     holdback,
     judge_checks,
     load_ledger,
+    published_status,
     reproduction_errors,
     row_id,
 )
@@ -23,19 +24,23 @@ def test_the_ledger_covers_the_oracle_in_order():
     ledger = load_ledger(ROOT / "oracle" / "reproduction.jsonl")
     assert len(ledger) == len(oracle) == 151
     assert [row_id(row) for row in ledger] == [row_id(row) for row in oracle]
-    counts = {"reproduced": 0, "not_reproduced": 0, "not_rerun": 0}
+    counts = {"reproduced": 0, "not_reproduced": 0, "not_rerun": 0, "measured gap": 0}
     for row in ledger:
         failure = row.get("failure_check") if row.get("rerun") else None
         status = judge_checks(row.get("checks") or [], failure)
         if row.get("rerun") is None:
             status = "not_rerun"
+        status = published_status(row_id(row), status)
         assert row["status"] == status
         counts[status] += 1
-        if status == "not_reproduced":
+        if status in {"not_reproduced", "measured gap"}:
             assert row["cause"]
         if (row.get("rerun") or {}).get("paper_baseline"):
             assert status == "reproduced"
-    assert counts == {"reproduced": 46, "not_reproduced": 29, "not_rerun": 76}
+    assert counts == {"reproduced": 46, "not_reproduced": 28, "measured gap": 1, "not_rerun": 76}
+    reference = next(row for row in ledger if row_id(row) == "saddle-search/pt-island/eon-dimer")
+    assert reference["status"] == "measured gap"
+    assert "archived EON r2205 reference" in reference["cause_detail"]
     assert reproduction_errors(ROOT) == []
 
 
@@ -89,3 +94,29 @@ def test_legacy_rows_that_miss_are_marked_in_place():
     assert "pele-fire · not reproduced" in html
     assert "outside the archive tolerance" in html
     assert "eon-cg · not reproduced" not in html
+
+
+def test_the_r2205_reference_is_labelled_on_the_archive_table():
+    problem = load_problem(ROOT / "problems" / "saddle-search" / "pt-island.toml")
+    oracle = load_oracle(ROOT / "oracle" / "entries.jsonl")
+    html = problem_html(problem, oracle)
+    assert "archived EON r2205 reference · measured gap" in html
+    assert "eon-dimer · not reproduced" not in html
+    assert "A row marked measured gap is the archived EON r2205 reference." in html
+    assert "paper row" not in html
+
+
+def test_the_classic_dimer_hold_names_the_r2205_reference():
+    from optbench.board import _apply_reproduction_hold
+
+    held = holdback(ROOT)
+    row = {
+        "problem": "saddle-search/pt-island",
+        "template": "eon-svn/saddle-pt-dimer",
+        "path": "results/campaign/eon-3.5.0-saddle-pt-classic.dat",
+        "n": 10,
+        "scored": True,
+        "source": "campaign",
+    }
+    _apply_reproduction_hold(row, held)
+    assert row["_declared_partial"] == "measured gap against the archived EON r2205 reference"

@@ -2,7 +2,7 @@
 
 Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.
 
-46 reproduced, 29 not reproduced, 76 not rerun. 151 archive rows.
+46 reproduced, 28 not reproduced, 1 measured gap, 76 not rerun. 151 archive rows.
 
 The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.
 
@@ -185,7 +185,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | pt-island/adaptive_HSphere-lbfgs-davidson-sm50 | force_calls 423491, unique_saddles 114.9, fraction_connected 0.8 | 5.2987e+06, 0, 1 | not reproduced; saddle_novelty |
 | pt-island/adaptive_HSphere-lbfgs-lanczos-sm0 | force_calls 1.00343e+06, unique_saddles 130.4, fraction_connected 0.9 | 1.92665e+06, 0.5, 0.9682 | not reproduced; saddle_novelty |
 | pt-island/adaptive_HSphere-lbfgs-lanczos-sm50 | force_calls 814519, unique_saddles 142.6, fraction_connected 0.9 | 1.58264e+06, 0.7, 0.93584 | not reproduced; saddle_novelty |
-| pt-island/eon-dimer | force_calls 3.77888e+06, unique_saddles 109.222, fraction_connected 0.746017 | 6.97488e+06, 91.7, 0.691952 | not reproduced; eon_saddle_count |
+| pt-island/eon-dimer | force_calls 3.77888e+06, unique_saddles 109.222, fraction_connected 0.746017 | 6.97488e+06, 91.7, 0.691952 | measured gap; eon_saddle_count |
 | pt-island/eon-dimer-cg-20-rotations | — | — | not rerun |
 | pt-island/eon-dimer-cg-20-rotations-20-bowl_breakout | — | — | not rerun |
 | pt-island/eon-dimer-cg-5-rotations-20-bowl_breakout | — | — | not rerun |
@@ -341,7 +341,7 @@ The harness link and novelty test uses Cartesian RMSD 0.5 over the full island. 
 
 ### eon_saddle_count
 
-The classic dimer campaign (improved false, the 2014 key) has fraction_connected 0.692 against 0.746, inside 10 percent, but force calls 6.97e6 against 3.78e6 and unique saddles 91.7 against 109.2. The archive standard error on the force calls is 5.27e5. This eOn AKMC counter is not the harness RMSD link test. The archived number stays this paper row. EON (SVN r2549) and eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) are different codes. Each was run stock, with its own defaults left unset, on the same Pt island, seeds 1000-1009, and the 27-saddle stop. EON (SVN r2549) harness mean force calls are 5.29672e6, unique saddles 116.8, fraction_connected 0.75405, with one seed short of 27 saddles and PAR-2 2.43552e7. eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) harness mean force calls are 4.7715e6, unique saddles 74.2, fraction_connected 0.751779, with one seed short of 27 saddles and PAR-2 2.40642e7. Those gaps stay as measured.
+The archived EON r2205 reference is the eon-dimer row from 15 Jul 2014: 3.77888e6 force calls, 109.222 unique saddles, fraction connected 0.746017. Its status is a measured gap. The classic dimer campaign, with improved left false, measures fraction connected 0.692, force calls 6.97e6, and unique saddles 91.7. The archive standard error on the force calls is 5.27e5. Fraction connected is the r2205 done.py ratio. The client marks Not Connected with Matter::compare, a per-atom maximum strictly below 0.1 angstrom, and exactly one endpoint the same as the reactant. EON (SVN r2549) and eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) are different codes. Each was run stock, with its own defaults left unset, on the same Pt island, seeds 1000-1009, and the 27-saddle stop. EON (SVN r2549) harness mean force calls are 5.29672e6, unique saddles 116.8, fraction_connected 0.75405, with one seed short of 27 saddles and PAR-2 2.43552e7. eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) harness mean force calls are 4.7715e6, unique saddles 74.2, fraction_connected 0.751779, with one seed short of 27 saddles and PAR-2 2.40642e7. Those gaps stay as measured.
 
 - saddle-search/pt-island/eon-dimer
 

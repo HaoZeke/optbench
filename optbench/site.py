@@ -223,15 +223,18 @@ def campaign_problem(stem: str) -> str | None:
     return None
 
 
-def _not_reproduced() -> set[str]:
-    """Archive rows whose exact-setup rerun missed the tolerance."""
+def _archive_marks() -> dict[str, str]:
+    """Visible mark for an archive row that sits off the ranked table."""
     from .reproduction import load_ledger
 
     path = Path(__file__).resolve().parents[1] / "oracle" / "reproduction.jsonl"
-    found: set[str] = set()
+    found: dict[str, str] = {}
     for row in load_ledger(path):
-        if row.get("status") == "not_reproduced":
-            found.add(f"{row['suite']}/{row['problem']}/{row['entry']}")
+        status = row.get("status")
+        if status == "not_reproduced":
+            found[f"{row['suite']}/{row['problem']}/{row['entry']}"] = "not reproduced"
+        elif status == "measured gap":
+            found[f"{row['suite']}/{row['problem']}/{row['entry']}"] = "measured gap"
     return found
 
 
@@ -278,21 +281,25 @@ def problem_html(
     lines.append('<details class="bench-details">')
     lines.append("<summary>Legacy 2014 archive</summary>")
 
-    misses = _not_reproduced()
+    marks = _archive_marks()
     prepared = []
     any_miss = False
+    any_gap = False
     for rank, (row, fields) in enumerate(canonical_rows, 1):
         value = _float(fields.get(primary, "")) if primary else None
         held = _held(fields)
         code = _code_label(fields)
         row_id = _slug(f"{problem['id']}-{row['entry']}")
-        missed = f"{problem['id']}/{row['entry']}" in misses
-        any_miss = any_miss or missed
+        mark = marks.get(f"{problem['id']}/{row['entry']}")
+        any_miss = any_miss or mark == "not reproduced"
+        any_gap = any_gap or mark == "measured gap"
         label = row["entry"]
         if held:
             label = f"{label} (held out of the original table)"
-        if missed:
-            label = f"{label} · not reproduced"
+        if mark == "measured gap":
+            label = "archived EON r2205 reference · measured gap"
+        elif mark:
+            label = f"{label} · {mark}"
         prepared.append(
             {
                 "id": row_id,
@@ -313,6 +320,8 @@ def problem_html(
     )
     if any_miss:
         legacy += " A row marked not reproduced has a harness rerun outside the archive tolerance."
+    if any_gap:
+        legacy += " A row marked measured gap is the archived EON r2205 reference."
     lines.append(f'<p class="bench-legacy">{legacy}</p>')
     lines.append('<div class="bench-table"><table class="bench-legacy">')
     lines.append(f"<caption>{html.escape(_caption(primary))}</caption>")
