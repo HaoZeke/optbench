@@ -263,12 +263,12 @@ CAUSE_TEXT = {
         "The archive standard error on the force calls is 5.27e5. "
         "Fraction connected is the r2205 done.py ratio. The client marks Not Connected with Matter::compare, "
         "a per-atom maximum strictly below 0.1 angstrom, and exactly one endpoint the same as the reactant. "
-        "EON (SVN r2549) and eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) are different codes. "
+        "EON (SVN r2549) and eOn (develop 4c1b814f62f1dcf5fcd0cf18ba0b6df3bcff7a28) are different codes. "
         "Each was run stock, with its own defaults left unset, on the same Pt island, seeds 1000-1009, and the 27-saddle stop. "
         "EON (SVN r2549) harness mean force calls are 5.29672e6, unique saddles 116.8, fraction_connected 0.75405, "
         "with one seed short of 27 saddles and PAR-2 2.43552e7. "
-        "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30) harness mean force calls are 4.7715e6, unique saddles 74.2, "
-        "fraction_connected 0.751779, with one seed short of 27 saddles and PAR-2 2.40642e7. "
+        "eOn (develop 4c1b814f62f1dcf5fcd0cf18ba0b6df3bcff7a28) harness mean force calls are 4.93049e6, unique saddles 97.2, "
+        "fraction_connected 0.768101, with one seed short of 27 saddles and PAR-2 2.39880e7. "
         "Those gaps stay as measured."
     ),
     "saddle_novelty": (

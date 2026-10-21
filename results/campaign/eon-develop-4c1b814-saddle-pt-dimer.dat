@@ -1,0 +1,22 @@
+# eOn (develop 4c1b814f62f1dcf5fcd0cf18ba0b6df3bcff7a28). One ext_pot entry, one count. Kernel morse/smooth/linear.
+counter harness
+code eOn (develop 4c1b814f62f1dcf5fcd0cf18ba0b6df3bcff7a28)
+code_version 4c1b814f62f1dcf5fcd0cf18ba0b6df3bcff7a28
+commit 4c1b814f62f1dcf5fcd0cf18ba0b6df3bcff7a28
+algorithm Dimer
+tuning default
+template eon-develop-stock/saddle-pt-dimer
+problem saddle-search/pt-island
+reducer harness
+cap 100000000
+n 10
+par2_mean 23987974.5
+nfailed 1
+mean_calls 4930488.5
+median_calls 4902962.0
+min_calls 1447482.0
+max_calls 9425140.0
+n_crash 0
+n_divergence 0
+n_cap 1
+n_wrong_stationary 0

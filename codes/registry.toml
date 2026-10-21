@@ -56,13 +56,13 @@ note = "EON, the SVN code, at r2549. Not eOn. Tag v1.1.2549 of the henkelmangrou
 
 [[code]]
 id = "eon-develop-current"
-name = "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)"
+name = "eOn (develop 4c1b814f62f1dcf5fcd0cf18ba0b6df3bcff7a28)"
 role = "saddle search"
 repository = "https://github.com/TheochemUI/eon"
 ref = "develop"
-commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
-committed = "2026-10-18"
-note = "eOn, the TheochemUI code, at develop. Not EON. eonclient prints 3.6.0 (a7aa5747). The Pt-island score is templates/eon-develop-stock/saddle-pt-dimer.toml. The eon-develop pin stays at 7095b23."
+commit = "4c1b814f62f1dcf5fcd0cf18ba0b6df3bcff7a28"
+committed = "2026-10-21"
+note = "eOn, the TheochemUI code, at develop. Not EON. eonclient prints 3.6.0 (4c1b814f). The client was built with meson 1.12.1 and g++, because pixi 0.82.1 rejects the manifest. The Pt-island score is templates/eon-develop-stock/saddle-pt-dimer.toml. The eon-develop pin stays at 7095b23."
 
 [[code]]
 id = "rgmin"
