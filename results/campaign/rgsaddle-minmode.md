@@ -13,7 +13,7 @@ Templates with `min_mode_method = "lanczos"`:
 - `rgsaddle/pt-lanczos` and `rgsaddle/pt-lanczos-tuned` on tsopt/pt-island
 - `rgsaddle/saddle-lanczos` and `rgsaddle/saddle-lanczos-tuned` on saddle-search/pt-island
 
-`rgsaddle/oci-neb-lbfgs` sets `refine = "lanczos"` and uses the same push. Those band files are a separate record. `rgsaddle/oci-neb` refines with the dimer and was not rerun. `rgsaddle/prfo-tuned` and `rgsaddle/pt-prfo-tuned` set `expand = "lanczos"` for the eigenvector expansion. That is not this push, and those rows were not rerun.
+`rgsaddle/oci-neb-lbfgs` sets `refine = "lanczos"` and uses the same push. Its four problems are scored in the next section. `rgsaddle/oci-neb` refines with the dimer and was not rerun. `rgsaddle/prfo-tuned` and `rgsaddle/pt-prfo-tuned` set `expand = "lanczos"` for the eigenvector expansion. That is not this push, and those rows were not rerun.
 
 The two saddle-search grids were started and not finished. A full cell is 20000 searches. No partial file is committed. The c0db2b8 saddle cells remain the recorded scores.
 
@@ -44,6 +44,26 @@ uv run optbench run tsopt/pt-island rgsaddle/pt-lanczos-tuned --workers 6 --outp
 ```
 
 The grid script pinned `--workers 6` on the last five commands. The default mode-lanczos file was produced by the same `optbench run` form.
+
+## OCI-NEB L-BFGS at 2db34b42
+
+`rgsaddle/oci-neb-lbfgs` refines the climbing image with Lanczos. The band harness reads `RGSADDLE_LIBRARY`, set to the same `librgsaddle.so`. All four problems used `--workers 6`. Pull request 23 did not publish these rows. The c0db2b8 cells are the previous board numbers. The commit range from c0db2b8 to 2db34b42 contains more than the residual fold, so the drop is not that one change.
+
+| problem | legacy mean | min | median | max | successes | nfailed | par2 mean | failure class |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| neb/Pt-heptamer | 121 | 90 | 126 | 139 | 13 | 0 | 121.3076923076923 |  |
+| double-ended-saddle-search/lj38 | 182 | 97 | 135 | 1693 | 50 | 0 | 182.16 |  |
+| double-ended-saddle-search/pt-island | 120 | 73 | 115 | 271 | 59 | 0 | 119.72881355932203 |  |
+| double-ended-saddle-search/lj38_2ts_separation | 586 | 118 | 327 | 5162 | 49 | 2 | 1347.3529411764705 | divergence 2 |
+
+On lj38_2ts_separation the two failures are divergence, not the cap. PAR-2 still charges each one `2 * 10000`.
+
+```
+uv run optbench run neb/Pt-heptamer rgsaddle/oci-neb-lbfgs --workers 6 --output results/campaign/rgsaddle-2db34b42-neb-Pt-heptamer--rgsaddle-oci-neb-lbfgs.dat
+uv run optbench run double-ended-saddle-search/lj38 rgsaddle/oci-neb-lbfgs --workers 6 --output results/campaign/rgsaddle-2db34b42-double-ended-saddle-search-lj38--rgsaddle-oci-neb-lbfgs.dat
+uv run optbench run double-ended-saddle-search/pt-island rgsaddle/oci-neb-lbfgs --workers 6 --output results/campaign/rgsaddle-2db34b42-double-ended-saddle-search-pt-island--rgsaddle-oci-neb-lbfgs.dat
+uv run optbench run double-ended-saddle-search/lj38_2ts_separation rgsaddle/oci-neb-lbfgs --workers 6 --output results/campaign/rgsaddle-2db34b42-double-ended-saddle-search-lj38_2ts_separation--rgsaddle-oci-neb-lbfgs.dat
+```
 
 ## c0db2b8 board
 
