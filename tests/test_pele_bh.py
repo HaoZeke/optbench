@@ -20,6 +20,17 @@ def _pele_templates() -> list[dict]:
     ]
 
 
+def test_asv_specs_stay_on_minimizers():
+    import benchmarks.bench_pele as bench
+
+    specs = bench._specs()
+    ids = [spec["template_id"] for spec in specs]
+    assert ids
+    assert "pele/lj38-lbfgs" in ids
+    assert all(item.startswith("pele/") for item in ids)
+    assert all("basinhopping" not in item for item in ids)
+
+
 def test_basin_hopping_dispatches_to_the_basin_hopper(monkeypatch, tmp_path: Path):
     called = {}
 

@@ -6,6 +6,9 @@ archived geometry. The pele minimizers take no seed.
 The default grid is that seed and start ``0``. ``OPTBENCH_ASV_FULL=1``
 selects every archived start. It is read at import.
 
+Basin hopping templates are not in this list. They have no minimizer
+method, and the minimizer section would reject them.
+
 ``time_search`` is the minimization. Track methods read the record that
 call wrote. The force count is one harness entry to ``getEnergyGradient``.
 ``setup`` raises ``NotImplementedError`` when pele is not installed.
@@ -80,6 +83,8 @@ def _specs() -> list[dict]:
         if template.get("engine") != "pele":
             continue
         problem_id = str(template["problem"])
+        if not problem_id.startswith("minimization/"):
+            continue
         if problem_id not in counts:
             counts[problem_id] = _archive_count(problem_id) if os.environ.get("OPTBENCH_ASV_FULL") == "1" else 1
         problem = resolve_problem(ROOT, problem_id)
