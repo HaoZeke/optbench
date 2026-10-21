@@ -82,13 +82,13 @@ FAMILIES = {
         "token": "4d8b34ba",
         "cache": "4d8b34ba",
     },
-    "develop-current": {
-        "prefix": "eon-develop-current/",
+    "develop-500350d9": {
+        "prefix": "eon-develop-500350d9/",
         "env": "EON_DEVELOP_CLIENT",
-        "default": Path.home() / "opt" / "eon-develop-current" / "bin" / "eonclient",
+        "default": Path.home() / "opt" / "eon-develop-500350d9" / "bin" / "eonclient",
         "flag": "--version",
-        "token": "a7aa574",
-        "cache": "a7aa574",
+        "token": "500350d9",
+        "cache": "500350d9",
     },
 }
 

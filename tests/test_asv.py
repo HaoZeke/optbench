@@ -129,7 +129,7 @@ def test_pending_grid_is_every_problem_and_code():
         "optim",
         "sella-0.1.1",
         "eon-svn-r2549",
-        "eon-develop-a7aa574",
+        "eon-develop-500350d9",
     ]
     assert Pending.params[1] == code_ids()
     assert Pending.track_force_calls.unit == "force calls"
