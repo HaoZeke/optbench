@@ -61,6 +61,7 @@ z
      <use xlink:href="#m2d8934182f" x="73.04346" y="39.416149" style="fill: #1f77b4"/>
      <use xlink:href="#m2d8934182f" x="68.547273" y="36.816364" style="fill: #1f77b4"/>
      <use xlink:href="#m2d8934182f" x="68.547273" y="36.816364" style="fill: #1f77b4"/>
+     <use xlink:href="#m2d8934182f" x="68.547273" y="36.816364" style="fill: #1f77b4"/>
     </g>
    </g>
    <g id="matplotlib.axis_1">
@@ -274,6 +275,9 @@ L 507.6 26.16
     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="71.547273" y="33.816364" transform="rotate(-0 71.547273 33.816364)">9</text>
    </g>
    <g id="text_27">
+    <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="71.547273" y="33.816364" transform="rotate(-0 71.547273 33.816364)">10</text>
+   </g>
+   <g id="text_28">
     <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="277.62" y="20.16" transform="rotate(-0 277.62 20.16)">Cost and success: globalopt/lj38</text>
    </g>
   </g>

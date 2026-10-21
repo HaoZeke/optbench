@@ -1,0 +1,1880 @@
+{
+  "bootstrap_resamples": 2000,
+  "bootstrap_seed": 20261015,
+  "note": "Harness counter. One fresh coordinate is one force call.",
+  "par_factor": 2,
+  "problem": "globalopt/lj38",
+  "runs": [
+    {
+      "algorithm": "dual_annealing",
+      "cap": 1000000,
+      "code": "scipy",
+      "code_version": "1.18.1",
+      "commit": "e4e854eaa8f18d807cd3496028e257e36caa93cc",
+      "entry": "scipy-1.18.1-da-lj38",
+      "legacy": {
+        "force_calls": null,
+        "force_calls_max": null,
+        "force_calls_min": null,
+        "median": null,
+        "nfailed": 100
+      },
+      "metrics": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 1000000,
+        "includes_failures": true,
+        "iqr": 0.0,
+        "iqr_high": 0.0,
+        "iqr_low": 0.0,
+        "mean": 2000000.0,
+        "median": 2000000.0,
+        "median_high": 2000000.0,
+        "median_low": 2000000.0,
+        "n": 100,
+        "n_cap": 100,
+        "n_crash": 0,
+        "n_divergence": 0,
+        "n_wrong_stationary": 0,
+        "nfailed": 100,
+        "par2_mean": 2000000.0,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 2000000.0,
+        "q75": 2000000.0,
+        "scoring": "par2-wilson-bootstrap",
+        "success_only_mean": null,
+        "success_rate": 0.0,
+        "successes": 0,
+        "wilson_high": 0.03699349820698568,
+        "wilson_low": 0.0
+      },
+      "parameters": {
+        "family": "globalopt",
+        "method": "scipy-da"
+      },
+      "present_source": true,
+      "provenance": {
+        "code": "scipy",
+        "code_version": "1.18.1",
+        "commit": "e4e854eaa8f18d807cd3496028e257e36caa93cc",
+        "machine": {
+          "machine": "x86_64",
+          "node": "cursor",
+          "python": "3.12.3",
+          "system": "Linux"
+        },
+        "parameters": {
+          "family": "globalopt",
+          "method": "scipy-da"
+        }
+      },
+      "starts": [
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -2.223328104430625,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 118.5954903822404,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "0",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -39.390864476499104,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.6992171370886491,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "1",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -9.89515741485144,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 11.82526613051746,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "10",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -3.195350306593066,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 5.336481394747635,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "11",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -0.005379181445479093,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.014964853803245559,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "12",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -53.95480968143691,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 2.6412011110464038,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "13",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -8.414647637882341e-05,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0001012699813993404,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "14",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": 4405.642802765016,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 129430.73634723376,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "15",
+          "success": false,
+          "verify_calls": 0
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -154.3065399655075,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0016261387863852944,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "16",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -139.35945676667978,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0014672925090073322,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "17",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -157.45292325702502,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0014662800841704834,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "18",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -145.75803484218292,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0009513089734270163,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "19",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -146.69935005296105,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.001561281035965638,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "2",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -147.95569424371536,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0016278386861857258,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "20",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -160.83525008971534,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0015417115558856414,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "21",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -165.0661761183738,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.001626352166149628,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "22",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -166.48638916457915,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.001741114917874372,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "23",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -154.8807376434549,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0012761455857234285,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "24",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -164.73862925573366,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0011825414585947941,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "25",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -156.66212697938013,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0012891156827381698,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "26",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -160.52119703190067,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.001840676285795075,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "27",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -165.43482464122408,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0013541409493477421,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "28",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -161.906285145489,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.001555426369816424,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "29",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -155.7813431922628,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0018064531126263119,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "3",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -152.5184494890179,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0012971948189777203,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "30",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -164.84880369241228,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0010827107583882502,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "31",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -160.85284042531202,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.001882236442352047,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "32",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -147.1826343876523,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0011959700396173456,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "33",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -161.10869231128265,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0018159248036503206,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "34",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -165.46352566292535,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0015107355821218718,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "35",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -159.52792223697162,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0015014952199554695,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "36",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -161.19036841893586,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.001992300271722606,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "37",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -151.79490413097346,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0013488295476001622,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "38",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -161.17418050248057,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.00128280022238719,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "39",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -152.436530629956,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0013317588370788864,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "4",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -153.39799052750996,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0015376659063948063,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "40",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -152.89598361467128,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0013968805188078073,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "41",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -163.09243386495496,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0018487869082834429,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "42",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -147.20866939094557,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0009788395985520326,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "43",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -161.7715784035208,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0015518583443794947,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "44",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -152.39838470100608,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0018304119922861746,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "45",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -142.7078346317002,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0014267434051656624,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "46",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -148.50155221706052,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0012355392048998713,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "47",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -151.8750967049387,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0019503098865469005,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "48",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -165.23011963376507,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0017830535959964223,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "49",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -159.19166003056333,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0012166591387665737,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "5",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -161.3570440640152,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.002285179720220329,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "50",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -164.21790220031102,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0012571253694794392,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "51",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -161.30188444204288,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0013133746515133092,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "52",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -153.57368691827395,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0014560505175392415,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "53",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -152.02396533647573,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.001368070071325646,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "54",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -155.59822098718547,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.001214353475111313,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "55",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -167.32867003716112,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0013456890125904534,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "56",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -156.8604728211837,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0010528161719391838,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "57",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -164.38021827409614,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0012253900848546455,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "58",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -157.8443020124759,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.00117459600446277,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "59",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -158.1755997361246,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0013825776002986347,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "6",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -160.74830618540454,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.001240383837930569,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "60",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -150.7063971672726,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0015119164498892054,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "61",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -156.9380797792717,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0017321448930765165,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "62",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -163.57165564306007,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0016644092978989852,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "63",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -158.44647439868552,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.001315081356831689,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "64",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -163.72998531266876,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0015402460136031701,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "65",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -167.17505576602497,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.00090973299560364,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "66",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -159.81670246652246,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0019148215753193685,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "67",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -147.19912707395736,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0013733656930156437,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "68",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -143.95959629112372,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0012186281003603923,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "69",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -153.1309994676578,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0021873021280083846,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "7",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -151.72646296351502,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0013217519567377681,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "70",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -163.6013449354492,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0014237403834703667,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "71",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -167.64645065961957,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0016651586400806139,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "72",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -156.17127984074904,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0017453703447421283,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "73",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -162.6847970469698,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0011828699322801815,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "74",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -162.19969135942762,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0013598636116977903,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "75",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -153.0149235935792,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0015058537533992546,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "76",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -152.91165310594056,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0013426683025773382,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "77",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -161.0313748438446,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0011600041292804861,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "78",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -157.8326550466624,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0016040492149636267,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "79",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -155.10780098499797,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0017651280015545492,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "8",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -157.89844243375612,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0017793538639806698,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "80",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -153.96715275181913,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0009228295950996837,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "81",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -167.80682329130445,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.001988706234593807,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "82",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -162.51135331508397,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0018319552777549691,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "83",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -151.57974227167813,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0016117987121135524,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "84",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -159.5187812767444,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0018482801413714817,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "85",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -158.92890710662522,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0015070785368812881,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "86",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -140.24226778202518,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.001253362140315958,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "87",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -156.81608109473473,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0016276714467122167,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "88",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -158.49009315513342,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0011032934168713675,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "89",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -157.24950941198003,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0012226865169435322,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "9",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -153.66059762201584,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0013281771580164318,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "90",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -166.6470470327627,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.001773953928680751,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "91",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -164.38427016700055,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0013059341415085405,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "92",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -159.9059301859065,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0017144816543715516,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "93",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -160.87788690801943,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0020927200512889242,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "94",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -166.3586013317641,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0012349888567645812,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "95",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -153.48284410116753,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0012763593576455977,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "96",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -163.4107087383975,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0012807767753289059,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "97",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -140.8884439240276,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.00169348006123501,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "98",
+          "success": false,
+          "verify_calls": 1
+        },
+        {
+          "comparable": true,
+          "converged": false,
+          "counter": "harness",
+          "energy": -148.03891867443733,
+          "error": "ForceCallCap: force-call cap 1000000",
+          "failure": "cap",
+          "force_calls": 1000000,
+          "force_norm": 0.0013513497160950194,
+          "hessian_index": null,
+          "reasons": [
+            "cap"
+          ],
+          "schema": "optbench.start/v2",
+          "start": "99",
+          "success": false,
+          "verify_calls": 1
+        }
+      ],
+      "tuning": "default"
+    }
+  ],
+  "schema": "optbench.result/v2",
+  "scoring": "par2-wilson-bootstrap",
+  "status": "archive"
+}
