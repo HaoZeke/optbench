@@ -382,6 +382,27 @@ def run(
             workers=workers,
             work=work,
         )
+    # Saddle and minimization templates use engine tsase as well. Those
+    # go to the engine plugin. This runner is basin hopping and minima hopping.
+    tsase_method = str((template.get("tsase") or {}).get("method") or "")
+    if template["engine"] == "tsase" and tsase_method in {"basin_hopping", "minima_hopping"}:
+        from .runners.tsase_global import run_template
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_template(
+            root,
+            problem,
+            template,
+            geometries=geometries,
+            output=output,
+            workers=workers,
+            work=work,
+            limit=limit,
+            resume=resume,
+        )
     if template["engine"] == "rgsaddle":
         from .rgsaddle_minmode import run_template
 

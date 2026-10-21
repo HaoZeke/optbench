@@ -92,7 +92,7 @@ repository = "https://github.com/zadorlab/sella"
 ref = "2.6.0"
 commit = "6cfb60cdb100a146c3c6f0587d5308b247aa8010"
 committed = "2026-10-15"
-note = "Sella 2.6.0. Order 1 is a saddle and order 0 is a minimum. The Sella 0.1.1 rows on the 2014 tables are legacy and are not this pin. Force calls are harness calculator evaluations."
+note = "Sella 2.6.0. Order 1 is a saddle and order 0 is a minimum. The Sella 0.1.1 rows on the 2014 tables are not this pin. Force calls are harness calculator evaluations."
 
 [[code]]
 id = "gmin"
@@ -137,12 +137,12 @@ note = "pARTn 1.1.0 at DEVEL 9b753517. The standalone search and the engine plug
 [[code]]
 id = "tsase"
 name = "TSASE"
-role = "saddle search"
+role = "global optimization, minimization, and saddle search"
 repository = "https://github.com/henkelmangroup/tsase"
 ref = "master"
 commit = "98aac60b5d9905e81ee4e6b8c385f169258d0218"
 committed = "2025-09-26"
-note = "setup.py version string 1.0. The pin is commit 98aac60, xyz working again. The checkout has no LICENSE file. Fortran calculators use numpy.distutils and are not built. The harness loads neb/ssneb.py and neb/fire_ssneb.py without tsase/__init__.py and counts ASE calculate."
+note = "setup.py version string 1.0. The pin is commit 98aac60, xyz working again. The checkout has no LICENSE file. Saddle and minimization runs load neb/ssneb.py and neb/fire_ssneb.py without tsase/__init__.py and count ASE calculate. Basin hopping and minima hopping call the harness Lennard-Jones potential, cutoff 40, no shift, and do not call the Fortran Lennard-Jones extension."
 
 [[code]]
 id = "pykmc"
@@ -242,6 +242,14 @@ ref = "stable_30Sep2026"
 commit = "8de817dd79bfe4525d5d39246a212d833e6dee07"
 committed = "2026-09-30"
 note = "LAMMPS 30 Sep 2026, tag stable_30Sep2026. Band rows use fix neb with a climbing stage and min_style quickmin or fire. The pair style is the spec potential: lj/cut 40 with no shift, and morse 9.5 with pair_modify shift yes. Kspring is 1.0 with the default parallel neigh spring. The timestep is the unit default. Force calls are pair computes summed across replicas. The FIRE row leaves one fifth of the cap unused so a velocity-reset evaluation stays inside the cap."
+
+[[template]]
+id = "ase-globalopt/lj75-basinhopping"
+code = "ase"
+problem = "globalopt/lj75"
+profile = "default"
+task = "basin-hopping"
+ranked = true
 
 # generated ASE and Sella templates
 

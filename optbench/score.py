@@ -4,7 +4,7 @@ The archive mean is awk ``printf "%.0f"``. On halves that rounds to even,
 which is what Python ``round`` does for these ties.
 
 The v2 cost is the PAR-2 mean. A failure is charged ``2 * cap`` instead
-of being dropped. The Wilson interval and the bootstrap median sit
+of being dropped. The 95% score interval and the bootstrap median sit
 beside that mean. See ``docs/design/decision.md``.
 """
 
@@ -203,7 +203,7 @@ def summarize_capped(counts: list[int], cap: int) -> dict[str, int | None]:
 
 
 def wilson_interval(successes: int, starts: int, z: float = WILSON_Z) -> tuple[float, float]:
-    """Wilson score interval for ``successes / starts``.
+    """Score interval for ``successes / starts``.
 
     ``z`` is the standard-normal quantile. The default is the 95% value.
     """
@@ -325,7 +325,7 @@ def score_v2(
     resamples: int = BOOTSTRAP_RESAMPLES,
     seed: int = BOOTSTRAP_SEED,
 ) -> dict:
-    """PAR-2 mean, Wilson success interval, and bootstrap median of one run.
+    """PAR-2 mean, 95% success interval, and bootstrap median of one run.
 
     Each record has ``force_calls`` and ``success``. When ``cap`` is
     ``None`` every record must be a success, and ``par_applied`` is false.

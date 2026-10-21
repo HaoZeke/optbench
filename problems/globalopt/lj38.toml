@@ -13,6 +13,12 @@ starts = 100
 energy_above_minimum = 0.001
 max_force_calls = 2000000
 
+[reference]
+energy = -173.928427
+symmetry = "Oh"
+page = "https://www-wales.ch.cam.ac.uk/~jon/structures/LJ/tables.150.html"
+points = "https://www-wales.ch.cam.ac.uk/~jon/structures/LJ/points/38"
+
 [input]
 archive_path = "website/globalopt/lj38/100_lj38.tar.gz"
 
@@ -21,7 +27,7 @@ required = ["force_calls", "force_calls_min", "force_calls_max", "nfailed"]
 
 [scoring.legacy]
 label = "legacy"
-rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row stays labelled legacy."
+rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean."
 
 [scoring.v2]
 version = "par2-wilson-bootstrap"

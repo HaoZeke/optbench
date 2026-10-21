@@ -5,7 +5,7 @@ v2 board
 
 Each column is one code.
 The cell is that code's best full harness run, ranked by the v2 PAR-2 mean.
-The problem page lists every template, including history and partial rows.
+The problem page lists every template, including history and rows short of the start count.
 ``uv run optbench board`` writes this page from the committed results.
 It does not run a campaign.
 
@@ -206,7 +206,7 @@ It does not run a campaign.
    <td data-code="optim">—</td>
    <td data-code="optking">—</td>
    <td data-code="softsaddle">—</td>
-   <td data-code="tsase">—</td>
+   <td data-code="tsase" data-template="tsase/lj38-minimahopping" data-par2="2.29692e+06"><span class="bench-score">2.29692e+06</span><a href="generated/suites/globalopt.html#lj38-templates">tsase/lj38-minimahopping</a></td>
    </tr>
    <tr data-problem="globalopt/lj75">
    <th scope="row"><a href="generated/suites/globalopt.html#lj75">lj75</a></th>
@@ -215,7 +215,7 @@ It does not run a campaign.
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="geodesic">—</td>
-   <td data-code="ASE">—</td>
+   <td data-code="ASE" data-template="ase-globalopt/lj75-basinhopping" data-par2="2e+06"><span class="bench-score">2e+06</span><a href="generated/suites/globalopt.html#lj75-templates">ase-globalopt/lj75-basinhopping</a></td>
    <td data-code="Sella">—</td>
    <td data-code="GMIN">—</td>
    <td data-code="pele">—</td>
@@ -230,7 +230,7 @@ It does not run a campaign.
    <td data-code="optim">—</td>
    <td data-code="optking">—</td>
    <td data-code="softsaddle">—</td>
-   <td data-code="tsase">—</td>
+   <td data-code="tsase" data-template="tsase/lj75-basinhopping" data-par2="2e+06"><span class="bench-score">2e+06</span><a href="generated/suites/globalopt.html#lj75-templates">tsase/lj75-basinhopping</a></td>
    </tr>
    <tr data-problem="lowest-eigenvector/lj38">
    <th scope="row"><a href="generated/suites/lowest-eigenvector.html#lj38">lj38</a></th>

@@ -178,6 +178,7 @@ def test_failure_classes_stay_in_the_par2_mean():
     assert classify_failure(["hessian_index", "rmsd"]) == "wrong_stationary"
     assert classify_failure(["divergence", "force_norm"]) == "divergence"
     assert classify_failure(["crash"]) == "crash"
+    assert classify_failure(["stalled", "energy"]) == "stalled"
     assert failure_of({"force_calls": 40, "success": False}, 100) == "divergence"
     assert failure_of({"force_calls": 100, "success": False}, 100) == "cap"
 
@@ -296,8 +297,10 @@ def test_every_problem_carries_legacy_and_the_v2_keys():
     assert noise["noise"]["window"] == WINDOW
     assert noise["noise"]["seed"] == 20261016
     text = (ROOT / "docs" / "v2.md").read_text(encoding="utf-8")
-    for phrase in ("HarnessCounter", "Dolan", "PAR-2", "Wilson", "wrong_stationary", "legacy"):
+    for phrase in ("HarnessCounter", "Dolan", "PAR-2", "95% score interval", "wrong_stationary"):
         assert phrase in text
+    for banned in ("Wilson interval", "labelled legacy", "current/legacy", "10% band", "reproduced"):
+        assert banned not in text
 
 
 def test_committed_statistics_match_a_fresh_run():
