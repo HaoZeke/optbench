@@ -1,0 +1,12 @@
+# FLAME is not a conda-forge package. This file does not select a
+# build string. The binary the benchmarks run is the source build
+# pinned in codes/registry.toml under id flame:
+#   ref = master
+#   commit = 99a615acaef6bc6afe44d895f666c6d60250f7d8
+# asv has one environment_type, so this yml cannot be bound to one
+# class. Those classes call FLAME.
+name: flame
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12

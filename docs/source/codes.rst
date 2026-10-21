@@ -11,6 +11,22 @@ The Sella 0.1.1 rows stay on the 2014 tables and are labelled legacy.
 A new score is entered by Rohit Goswami.
 The number is written only after the run finishes under the problem rule.
 
+FLAME minhocao uses one Lennard-Jones setting block on every LJ problem.
+The values are the published inputs in FLAME ``tests/minhopp_LJ`` and ``tests/minhocao_blj_mhm``.
+``tests/minhopp_LJ`` sets ediff 1.1, ekin 0.09, and dt 0.01, with nsoften 20, mdmin 3, etoler 1.E-3, and fmaxtol 1.E-3.
+That task keeps atomic mass 1 unless amass.dat is present.
+ediff and etoler are divided by ``Ha_eV`` 27.21138386, so minhocao receives 4.0424257938e-2 Ha and 3.6749325398e-5 Ha.
+ekin 0.09 is the kinetic energy per remaining degree of freedom.
+The temperature that puts the same energy in ``1.5*N*k_B*T`` is ``T = 0.18*(N-1)/N/k_B``, where ``k_B = 3.1668154197285284e-6*27.21138386`` eV/K, and the temperature cap stays 1e5 K.
+symbol2znucl gives carbon a mass of 12.011 u.
+minhocao multiplies by ``amu_emass`` 1822.888484264545, which is 21894.71 electron masses.
+The unit-mass step 0.01 is then ``0.01*sqrt(21894.71*27.21138386)/0.52917720859 = 14.586`` atomic units.
+That step crosses the repulsive wall at 1e5 K, so the timestep is MDDTINIT 2, the value in ``tests/minhocao_blj_mhm``.
+GEOFIREDTINIT is 1.d-9 and GEOFIREDTMIN is 1.d-12.
+lj38, lj75, lj98, and lj150 use this block.
+The initial temperatures are 2033.84 K for N=38, 2060.96 K for N=75, 2067.50 K for N=98, and 2074.89 K for N=150.
+The lj38 campaign counts are the ``params_new`` default search and are scored at cap 2000000.
+
 .. raw:: html
 
    <section class="bench" id="current-codes">
@@ -586,6 +602,17 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="median_calls">374</td>
    <td data-field="failures">crash 0, divergence 0, cap 5, wrong_stationary 0</td>
    <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="globalopt/lj75" data-template="ase-globalopt/lj75-basinhopping">
+   <td>lj75</td>
+   <td data-field="template">ase-globalopt/lj75-basinhopping</td>
+   <td data-field="version">ASE 3.29.0</td>
+   <td data-field="commit">f27c0005ae6a</td>
+   <td data-field="par2_mean">2e+06</td>
+   <td data-field="mean_calls">1e+06</td>
+   <td data-field="median_calls">1e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td>
+   <td data-field="n">200</td>
    </tr>
    <tr data-problem="minimization/lj38" data-template="ase/lj38-lbfgs-tuned">
    <td>Lennard-Jones 38 clusters</td>
@@ -1479,4 +1506,47 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">5000</td>
    </tr>
    </tbody></table></div>
+   <h3>FLAME</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>global optimization</td>
+   <td>master</td>
+   <td>99a615acaef6</td>
+   <td><a href="https://github.com/flame-code/FLAME">https://github.com/flame-code/FLAME</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="globalopt/lj38" data-template="flame/lj38-minhocao">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="template">flame/lj38-minhocao</td>
+   <td data-field="version">FLAME 1.0</td>
+   <td data-field="commit">99a615acaef6</td>
+   <td data-field="par2_mean">861682</td>
+   <td data-field="mean_calls">886934</td>
+   <td data-field="median_calls">522630</td>
+   <td data-field="failures">crash 0, divergence 0, cap 9, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="globalopt/lj75" data-template="flame/lj75-minhocao">
+   <td>lj75</td>
+   <td data-field="template">flame/lj75-minhocao</td>
+   <td data-field="version">FLAME 1.0</td>
+   <td data-field="commit">99a615acaef6</td>
+   <td data-field="par2_mean">2e+06</td>
+   <td data-field="mean_calls">1e+06</td>
+   <td data-field="median_calls">1e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   </tbody></table></div>
+   <p>No full ranked run</p><ul>
+   <li>lj150: partial.</li>
+   <li>Lennard-Jones 38 global minimum: partial.</li>
+   <li>lj75: partial.</li>
+   <li>lj98: partial.</li>
+   </ul>
    </section>

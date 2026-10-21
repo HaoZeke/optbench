@@ -334,17 +334,25 @@ def score_v2(
     if not records:
         raise ValueError("records is empty")
     successes = 0
+    bound = 0
     costs: list[float] = []
     for record in records:
         success = bool(record["success"])
         if success:
             successes += 1
+        # A reference bound is an unranked observation. It is not a success
+        # and it is not one of the four failure classes, so PAR-2 keeps the
+        # raw call count instead of charging the cap.
+        if record.get("reference_bound") and not success:
+            bound += 1
+            costs.append(float(record["force_calls"]))
+            continue
         costs.append(penalised_cost(float(record["force_calls"]), success, cap, factor))
     starts = len(records)
     low, high = wilson_interval(successes, starts)
     summary = distribution_summary(costs, resamples=resamples, seed=seed)
     tally = failure_tally(records, cap)
-    failed = starts - successes
+    failed = starts - successes - bound
     if sum(tally.values()) != failed:
         raise RuntimeError("failure classes dropped a start")
     finished = [float(record["force_calls"]) for record in records if record["success"]]

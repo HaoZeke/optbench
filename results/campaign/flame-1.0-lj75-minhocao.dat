@@ -1,0 +1,36 @@
+# counter harness. One force call is one minhocao POSDATA evaluated by lennard_jones.
+# Positions cross the socket in Bohr and return as Hartree and Ha/Bohr with FLAME Bohr_Ang and Ha_eV.
+# The cluster is translated to the centre of a 1e7 Angstrom cell. The potential has no periodic images.
+# ioput is 4.0424257938d-2 2.0609600894d3 1.d5. earr tolerances are 3.6749325398E-05   1.000000E-01.
+# Local optimisation is the code default FIRE tolerance 2.d-4 Ha/Bohr unless GEOTOLMXF is set.
+# cap is 1000000. The harness stops at this value and PAR-2 charges 2*cap for every failure class. nfailed counts only starts whose call count reached cap. v2_nfailed counts every failure class.
+# GEOFIREDTINIT 1.d-9 and GEOFIREDTMIN 1.d-12 replace the code defaults 10 and 1. Pairs in this archive sit near 0.02 sigma, and the default first step moves those atoms by more than the cell.
+# Success is a relaxed enthalpy at or below -397.491331, the reference plus energy_above_minimum. The count stops before the next hop is charged.
+# minhocao on the lj75 coordinate archive. ediff 1.1, ekin 0.09, nsoften 20, mdmin 3, etoler 1e-3 and fmaxtol 1e-3 are the published values in tests/minhopp_LJ. ediff and etoler are divided by Ha_eV 27.21138386. ekin 0.09 per degree of freedom is 2060.96 K for N=75, and the temperature cap stays 1e5 K. The published timestep 0.01 at unit mass is 14.59 atomic units with the carbon mass 12.011, and that step still crosses the repulsive wall at 1e5 K. MDDTINIT is 2, the timestep in tests/minhocao_blj_mhm, which keeps a compact cluster at that temperature. GEOFIREDTINIT is 1.d-9 and GEOFIREDTMIN is 1.d-12 because archive pairs sit near 0.02 sigma. failure_cap is the problem max_force_calls 1000000.
+nfailed 200
+median 1000000
+code FLAME
+code_version 1.0
+commit 99a615acaef6bc6afe44d895f666c6d60250f7d8
+algorithm minhocao
+template flame/lj75-minhocao
+problem globalopt/lj75
+tuning published
+counter harness
+par2_mean 2000000
+wilson_low 0
+wilson_high 0.0188453263773
+par2_median 2000000
+par2_median_low 2000000
+par2_median_high 2000000
+v2_nfailed 200
+v2_successes 0
+n 200
+energy_min -395.334078864
+energy_max -375.125111307
+calls_to_best_mean 632021.855
+cap 1000000
+n_cap 200
+n_divergence 0
+n_crash 0
+n_wrong_stationary 0

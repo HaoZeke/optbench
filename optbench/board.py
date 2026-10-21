@@ -346,6 +346,9 @@ def _record_from_raw(raw: dict, cap: int | None, force_tol: float | None) -> dic
         record["call_unit"] = str(raw["call_unit"])
     if success:
         return record
+    if raw.get("reference_bound") and not (cap is not None and calls >= cap):
+        record["reference_bound"] = True
+        return record
     if failure in FAILURES:
         record["failure"] = failure
         return record
@@ -808,6 +811,8 @@ def _benchmark_index() -> dict[str, dict]:
         "benchmarks.bench_vcsqnm",
         "benchmarks.bench_pele",
         "benchmarks.bench_optking",
+        "benchmarks.bench_flame",
+        "benchmarks.bench_globalopt",
         "benchmarks.quadratic",
     )
     for module_name in modules:
