@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>AGOX</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="globalopt/lj100-binary">
    <th scope="row"><a href="#lj100-binary">Binary Lennard-Jones 100</a></th>
    <td data-code="eOn">—</td>
@@ -17,6 +17,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="AGOX">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -33,6 +34,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="AGOX">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -49,6 +51,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="AGOX" data-template="agox/lj38-bh" data-par2="959505"><span class="bench-score">959505</span><a href="#lj38-templates">agox/lj38-bh</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -65,6 +68,7 @@
    <td data-code="ASE" data-template="ase-globalopt/lj75-basinhopping" data-par2="2e+06"><span class="bench-score">2e+06</span><a href="#lj75-templates">ase-globalopt/lj75-basinhopping</a></td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="AGOX" data-template="agox/lj75-bh" data-par2="2e+06"><span class="bench-score">2e+06</span><a href="#lj75-templates">agox/lj75-bh</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -81,6 +85,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="AGOX">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -97,6 +102,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="AGOX">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -113,6 +119,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="AGOX">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -129,6 +136,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
+   <td data-code="AGOX">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -278,13 +286,17 @@
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
+   <figure class="bench-plot"><a href="../../_static/board/globalopt-lj38-cost.svg"><picture><source srcset="../../_static/board/globalopt-lj38-cost.webp" type="image/webp"><img src="../../_static/board/globalopt-lj38-cost.png" alt="Cost versus success for globalopt/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
+   <p class="bench-gaps">No performance profile. One start has no finite cost.</p>
    <details class="bench-details" id="lj38-templates">
-   <summary>All templates (0 ranked)</summary>
+   <summary>All templates (3 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="globalopt/lj38">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="13">No full harness row.</td></tr>
+   <tr><td data-field="template">agox/lj38-bh</td><td data-field="version">AGOX 3.11.2.dev2+g22d94a6fa</td><td data-field="commit">22d94a6fae8c</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">959505</td><td data-field="success_rate">0.05</td><td data-field="wilson_low">0.0215437</td><td data-field="wilson_high">0.11175</td><td data-field="median_calls">500000</td><td data-field="mean_calls">484505</td><td data-field="failures">crash 0, divergence 0, cap 95, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">agox/lj38-ga</td><td data-field="version">AGOX 3.11.2.dev2+g22d94a6fa</td><td data-field="commit">22d94a6fae8c</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">992540</td><td data-field="success_rate">0.01</td><td data-field="wilson_low">0.00176743</td><td data-field="wilson_high">0.0544862</td><td data-field="median_calls">500000</td><td data-field="mean_calls">497540</td><td data-field="failures">crash 0, divergence 0, cap 99, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">agox/lj38-rss</td><td data-field="version">AGOX 3.11.2.dev2+g22d94a6fa</td><td data-field="commit">22d94a6fae8c</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">1e+06</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0369935</td><td data-field="median_calls">500000</td><td data-field="mean_calls">500000</td><td data-field="failures">crash 0, divergence 0, cap 100, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    <h3>Partial</h3><ul>
    <li>eon-svn/bh-lj38 Eon svn campaign n=73, result file sets partial true; potential unshifted lj/cut, epsilon 1, sigma 1, cutoff 40.</li>
@@ -377,16 +389,22 @@
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
+   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <figure class="bench-plot"><a href="../../_static/board/globalopt-lj75-cost.svg"><picture><source srcset="../../_static/board/globalopt-lj75-cost.webp" type="image/webp"><img src="../../_static/board/globalopt-lj75-cost.png" alt="Cost versus success for globalopt/lj75" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <p class="bench-gaps">No performance profile. One start has no finite cost.</p>
    <details class="bench-details" id="lj75-templates">
-   <summary>All templates (1 ranked)</summary>
+   <summary>All templates (3 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="globalopt/lj75">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td data-field="template">agox/lj75-bh</td><td data-field="version">AGOX 3.11.2.dev2+g22d94a6fa</td><td data-field="commit">22d94a6fae8c</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">2e+06</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0188453</td><td data-field="median_calls">1e+06</td><td data-field="mean_calls">1e+06</td><td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td><td data-field="n">200</td></tr>
+   <tr><td data-field="template">agox/lj75-rss</td><td data-field="version">AGOX 3.11.2.dev2+g22d94a6fa</td><td data-field="commit">22d94a6fae8c</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">2e+06</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0188453</td><td data-field="median_calls">1e+06</td><td data-field="mean_calls">1e+06</td><td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td><td data-field="n">200</td></tr>
    <tr><td data-field="template">ase-globalopt/lj75-basinhopping</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">campaign</td><td data-field="current">yes</td><td data-field="par2_mean">2e+06</td><td data-field="success_rate">0</td><td data-field="wilson_low">0</td><td data-field="wilson_high">0.0188453</td><td data-field="median_calls">1e+06</td><td data-field="mean_calls">1e+06</td><td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td><td data-field="n">200</td></tr>
    </tbody></table></div>
+   <h3>Partial</h3><ul>
+   <li>agox/lj75-ga AGOX campaign n=15, result file sets partial true.</li>
+   </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="lj75-legacy">
    <h3>Legacy 2014 archive</h3>
