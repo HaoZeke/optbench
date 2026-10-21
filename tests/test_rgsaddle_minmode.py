@@ -166,6 +166,8 @@ def test_rgsaddle_templates_match_their_problem_stop():
     assert "rgsaddle/prfo" in found
     assert "rgsaddle/prfo-tuned" not in found
     assert "rgsaddle/mode-lanczos" in found
+    assert "rgsaddle/mode-dimer-tuned" not in found
+    assert "rgsaddle/mode-lanczos-tuned" not in found
     assert "rgsaddle/saddle-dimer-lbfgs" in found
     assert "rgsaddle/pt-dimer-lbfgs" in found
 
