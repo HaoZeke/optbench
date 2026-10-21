@@ -54,9 +54,9 @@ The grid script pinned `--workers 6` on the last five commands. The default mode
 | neb/Pt-heptamer | 121 | 90 | 126 | 139 | 13 | 0 | 121.3076923076923 |  |
 | double-ended-saddle-search/lj38 | 182 | 97 | 135 | 1693 | 50 | 0 | 182.16 |  |
 | double-ended-saddle-search/pt-island | 120 | 73 | 115 | 271 | 59 | 0 | 119.72881355932203 |  |
-| double-ended-saddle-search/lj38_2ts_separation | 586 | 118 | 327 | 5162 | 49 | 2 | 1347.3529411764705 | divergence 2 |
+| double-ended-saddle-search/lj38_2ts_separation | 586 | 118 | 327 | 5162 | 49 | 2 | 1347.3529411764705 | wrong_stationary 2 |
 
-On lj38_2ts_separation the two failures are divergence, not the cap. PAR-2 still charges each one `2 * 10000`.
+On lj38_2ts_separation the two start records are `wrong_stationary` (Hessian index 2 and 3, 167 and 124 force calls). PAR-2 still charges each one `2 * 10000`. The `.v2.json` tally says `n_divergence` 2 because the band writer scores `force_calls` and `success` only, and that tally has no Hessian class. The board follows the start records.
 
 ```
 uv run optbench run neb/Pt-heptamer rgsaddle/oci-neb-lbfgs --workers 6 --output results/campaign/rgsaddle-2db34b42-neb-Pt-heptamer--rgsaddle-oci-neb-lbfgs.dat
