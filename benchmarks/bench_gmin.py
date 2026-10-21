@@ -81,7 +81,9 @@ def _specs() -> list[dict]:
     found = []
     counts: dict[str, int] = {}
     for template in list_templates(ROOT):
-        if template.get("engine") != "gmin":
+        # Basin-hopping campaign records share this engine name. The harness
+        # classes are the LBFGS quenches.
+        if template.get("engine") != "gmin" or template.get("algorithm") != "LBFGS":
             continue
         problem_id = str(template["problem"])
         if problem_id not in counts:

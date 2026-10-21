@@ -1475,6 +1475,37 @@ def _headers(problem: dict) -> list[str]:
     return headers
 
 
+def version_label(row: dict) -> str:
+    """Ranked version cell.
+
+    EON SVN is ``EON (SVN r2549)``. eOn 3.6.0 stays ``eOn 3.6.0``.
+    A develop build at ``500350d9`` is ``eOn (develop 500350d9)`` and
+    is its own template, so the 3.6.0 row stays ranked beside it.
+    OPTIM and GMIN rows from the Wales tarball whose ``SVNREV`` is
+    ``df8da599`` use that eight-character revision. ``rgmin`` 0.4.1 is
+    not a crates.io release (the newest published crate is 0.3.0), so
+    the cell names the commit.
+    """
+    code = str(row.get("code") or "").strip()
+    version = str(row.get("code_version") or "").strip()
+    commit = str(row.get("commit") or "").strip()
+    folded = code.casefold()
+    if code == "EON (SVN r2549)" or folded == "eon svn" or (version == "r2549" and folded.startswith("eon")):
+        return "EON (SVN r2549)"
+    if commit.startswith("500350d9") or "500350d9" in version:
+        return "eOn (develop 500350d9)"
+    wales = commit.startswith(("02aaf45245af", "df8da599")) or version.startswith(
+        ("svn-snapshot", "02aaf452", "df8da599")
+    )
+    if wales and (folded == "optim" or code == "OPTIM"):
+        return "OPTIM df8da599"
+    if wales and (folded == "gmin" or code == "GMIN"):
+        return "GMIN df8da599"
+    if folded == "rgmin" and version == "0.4.1" and commit:
+        return f"rgmin {commit[:8]}"
+    return f"{code} {version}".strip()
+
+
 def ranked_cells(row: dict, per_image: bool, fd: bool = False) -> list[tuple[str, str]]:
     """Visible ranked-table cells, in column order.
 
@@ -1485,7 +1516,7 @@ def ranked_cells(row: dict, per_image: bool, fd: bool = False) -> list[tuple[str
     """
     cells = [
         ("template", str(row.get("template") or row.get("entry") or "")),
-        ("version", f"{row.get('code') or ''} {row.get('code_version') or ''}"),
+        ("version", version_label(row)),
         ("commit", str(row.get("commit") or "")[:12]),
         ("source", str(row.get("source") or "")),
         ("par2_mean", _format_number(row.get("par2_mean"))),
@@ -1868,7 +1899,7 @@ def _table(
             _note_block(
                 "History",
                 [
-                    f"{_cell(row['template'] or row['entry'])} {_cell(row['code'])} {_cell(row['code_version'])} "
+                    f"{_cell(row['template'] or row['entry'])} {_cell(version_label(row))} "
                     f"{_cell(row['source'])} n={row['n']} PAR-2={_format_number(row['par2_mean'])} "
                     f"mean={_format_number(row['mean_calls'])}."
                     for row in problem["history"]

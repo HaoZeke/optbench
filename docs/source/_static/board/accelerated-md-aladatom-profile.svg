@@ -179,6 +179,18 @@ L 486.707379 37.32381
 L 486.707379 37.32381 
 " clip-path="url(#p4e380cea4b)" style="fill: none; stroke: #1f77b4; stroke-width: 1.5; stroke-linecap: square"/>
    </g>
+   <g id="line2d_13">
+    <path d="M 68.854964 260.6 
+L 173.318068 260.6 
+L 173.318068 37.32381 
+L 277.781172 37.32381 
+L 277.781172 37.32381 
+L 382.244276 37.32381 
+L 382.244276 37.32381 
+L 486.707379 37.32381 
+L 486.707379 37.32381 
+" clip-path="url(#p4e380cea4b)" style="fill: none; stroke: #ff7f0e; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
    <g id="patch_3">
     <path d="M 47.962344 260.6 
 L 47.962344 26.16 
@@ -204,28 +216,39 @@ L 507.6 26.16
    </g>
    <g id="legend_1">
     <g id="patch_7">
-     <path d="M 320.714219 257.1 
+     <path d="M 236.34125 257.1 
 L 502.7 257.1 
 Q 504.1 257.1 504.1 255.7 
-L 504.1 245.899453 
-Q 504.1 244.499453 502.7 244.499453 
-L 320.714219 244.499453 
-Q 319.314219 244.499453 319.314219 245.899453 
-L 319.314219 255.7 
-Q 319.314219 257.1 320.714219 257.1 
+L 504.1 235.398906 
+Q 504.1 233.998906 502.7 233.998906 
+L 236.34125 233.998906 
+Q 234.94125 233.998906 234.94125 235.398906 
+L 234.94125 255.7 
+Q 234.94125 257.1 236.34125 257.1 
 z
 " style="fill: #ffffff; opacity: 0.8; stroke: #cccccc; stroke-linejoin: miter"/>
     </g>
-    <g id="line2d_13">
-     <path d="M 322.114219 250.168359 
-L 329.114219 250.168359 
-L 329.114219 250.168359 
-L 336.114219 250.168359 
-L 336.114219 250.168359 
+    <g id="line2d_14">
+     <path d="M 237.74125 239.667813 
+L 244.74125 239.667813 
+L 244.74125 239.667813 
+L 251.74125 239.667813 
+L 251.74125 239.667813 
 " style="fill: none; stroke: #1f77b4; stroke-width: 1.5; stroke-linecap: square"/>
     </g>
     <g id="text_15">
-     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="341.714219" y="252.618359" transform="rotate(-0 341.714219 252.618359)">eon/aladatom-akmc 3.6.0 campaign 1d71c94</text>
+     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="257.34125" y="242.117813" transform="rotate(-0 257.34125 242.117813)">eon/aladatom-akmc 3.6.0 campaign 1d71c94</text>
+    </g>
+    <g id="line2d_15">
+     <path d="M 237.74125 250.168359 
+L 244.74125 250.168359 
+L 244.74125 250.168359 
+L 251.74125 250.168359 
+L 251.74125 250.168359 
+" style="fill: none; stroke: #ff7f0e; stroke-width: 1.5; stroke-linecap: square"/>
+    </g>
+    <g id="text_16">
+     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="257.34125" y="252.618359" transform="rotate(-0 257.34125 252.618359)">eon-develop/aladatom-akmc (develop 500350d9) campaign 500350d</text>
     </g>
    </g>
   </g>

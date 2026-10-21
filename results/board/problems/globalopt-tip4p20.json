@@ -1,0 +1,139 @@
+{
+  "full_n": 100,
+  "history": [],
+  "id": "globalopt/tip4p20",
+  "not_comparable": [],
+  "partial": [],
+  "profile": {
+    "area_log10": {
+      "gmin/tip4p20-bh df8da599267534fbe43a250e578f7396a7946311 default campaign 738fafe": 0.0,
+      "gmin/tip4p20-tbp df8da5992675 stock campaign 738fafe": 1.2041199826559248
+    },
+    "rho": {
+      "gmin/tip4p20-bh df8da599267534fbe43a250e578f7396a7946311 default campaign 738fafe": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gmin/tip4p20-tbp df8da5992675 stock campaign 738fafe": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "solved": {
+      "gmin/tip4p20-bh df8da599267534fbe43a250e578f7396a7946311 default campaign 738fafe": 0.0,
+      "gmin/tip4p20-tbp df8da5992675 stock campaign 738fafe": 1.0
+    },
+    "taus": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ]
+  },
+  "ranked": [
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 200000000,
+      "code": "GMIN",
+      "code_version": "df8da5992675",
+      "commit": "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31",
+      "comparable": true,
+      "counter": "harness",
+      "entry": "gmin-df8da5992675-tip4p20-tbp",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 100,
+      "history": false,
+      "max_calls": 86542275.0,
+      "mean_calls": 25772143.42,
+      "mean_fd_equivalent": null,
+      "mean_hessian_evals": null,
+      "mean_per_image": null,
+      "median": 19653576.5,
+      "median_calls": 19653576.5,
+      "median_high": 24758915.69999998,
+      "median_low": 13958088.5375,
+      "median_per_image": null,
+      "min_calls": 181428.0,
+      "n": 100,
+      "newest": true,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 25772143.42,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/gmin-df8da5992675-tip4p20-tbp.dat",
+      "problem": "globalopt/tip4p20",
+      "registry_match": false,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "gmin/tip4p20-tbp",
+      "tuning": "stock",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9630065017930143
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 200000000,
+      "code": "GMIN",
+      "code_version": "df8da599267534fbe43a250e578f7396a7946311",
+      "commit": "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31",
+      "comparable": true,
+      "counter": "harness",
+      "entry": "gmin-df8da599-tip4p20-bh",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 100
+      },
+      "full_n": 100,
+      "history": false,
+      "max_calls": 620767.0,
+      "mean_calls": 420296.92,
+      "mean_fd_equivalent": null,
+      "mean_hessian_evals": null,
+      "mean_per_image": null,
+      "median": 400000000.0,
+      "median_calls": 425755.0,
+      "median_high": 400000000.0,
+      "median_low": 400000000.0,
+      "median_per_image": null,
+      "min_calls": 219024.0,
+      "n": 100,
+      "newest": true,
+      "nfailed": 100,
+      "note": "starts.jsonl",
+      "par2_mean": 400000000.0,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/gmin-df8da599-tip4p20-bh.dat",
+      "problem": "globalopt/tip4p20",
+      "registry_match": false,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 0.0,
+      "template": "gmin/tip4p20-bh",
+      "tuning": "default",
+      "wilson_high": 0.03699349820698568,
+      "wilson_low": 0.0
+    }
+  ],
+  "title": "tip4p20"
+}

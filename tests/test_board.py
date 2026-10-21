@@ -11,6 +11,7 @@ from optbench.board import (
     coordinate_count,
     render_problem_section,
     uses_analytic_hessian,
+    version_label,
     write_board,
 )
 from optbench.score import wilson_interval
@@ -934,3 +935,43 @@ def test_the_current_ase_benchmark_records_the_band_total():
         text=True,
     )
     assert 'float(record["force_calls"]) / images' in old
+
+
+def test_ranked_version_labels_keep_eon_3_6_0_beside_develop():
+    assert version_label({"code": "Eon svn", "code_version": "r2549", "commit": "r2549"}) == "EON (SVN r2549)"
+    assert version_label({"code": "EON (SVN r2549)", "code_version": "r2549"}) == "EON (SVN r2549)"
+    assert (
+        version_label(
+            {
+                "code": "eOn",
+                "code_version": "3.6.0",
+                "commit": "1d71c944501832bfafb955ffe13b9aae50c8efd4",
+            }
+        )
+        == "eOn 3.6.0"
+    )
+    assert (
+        version_label(
+            {
+                "code": "eOn",
+                "code_version": "(develop 500350d9)",
+                "commit": "500350d9fae881f06c7ef194e5868da079c4be5a",
+            }
+        )
+        == "eOn (develop 500350d9)"
+    )
+    assert version_label({"code": "eOn", "code_version": "3.5.0", "commit": "4d8b34baf1ba"}) == "eOn 3.5.0"
+    assert version_label({"code": "OPTIM", "code_version": "svn-snapshot", "commit": "02aaf45245af"}) == "OPTIM df8da599"
+    assert version_label({"code": "optim", "code_version": "02aaf45245af"}) == "OPTIM df8da599"
+    assert version_label({"code": "GMIN", "code_version": "02aaf45245af"}) == "GMIN df8da599"
+    assert version_label({"code": "GMIN", "code_version": "df8da5992675", "commit": "738fafe3"}) == "GMIN df8da599"
+    assert (
+        version_label(
+            {
+                "code": "rgmin",
+                "code_version": "0.4.1",
+                "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
+            }
+        )
+        == "rgmin 9a2e7ff1"
+    )

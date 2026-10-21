@@ -1,0 +1,18 @@
+force_calls 1.63760e+04
+force_calls_median 1.15440e+04
+force_calls_min 1.2700e+02
+force_calls_max 1.6530e+05
+nfailed 0
+starts 10000
+code GMIN
+code_version df8da599267534fbe43a250e578f7396a7946311
+commit 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31
+algorithm basin-hopping
+template gmin/tip4p10-stock
+problem globalopt/tip4p10
+counter harness
+tuning stock
+call_unit total
+cap 1000000
+note Latest unmodified GMIN df8da599267534fbe43a250e578f7396a7946311, tarball sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. The deck is the archive: temperature 6.65, STEP 0 0 1.64, NTIP 4, EDIFF 1e-3, SLOPPYCONV 1e-3, TIGHTCONV 1e-3, MAXIT 10000, TARGET -391.0233, RANSEED 100. STEPS is 2000000, the integer form of the archive 2.D6. MAX_NPCALL is 1000000. All 10000 starts hit the target. force_calls is the success-only NPCALL mean. The harness score is NPCALL on every start.
+par2_mean 16375.9

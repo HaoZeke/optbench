@@ -119,14 +119,14 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">639</td>
    </tr>
-   <tr data-problem="hTST/Pt" data-template="eon/htst-pt-dimer">
+   <tr data-problem="hTST/Pt" data-template="eon-develop/htst-pt-dimer">
    <td>Pt</td>
-   <td data-field="template">eon/htst-pt-dimer</td>
-   <td data-field="version">eOn 3.6.0</td>
-   <td data-field="commit">1d71c9445018</td>
+   <td data-field="template">eon-develop/htst-pt-dimer</td>
+   <td data-field="version">eOn (develop 500350d9)</td>
+   <td data-field="commit">500350d9fae8</td>
    <td data-field="par2_mean"></td>
-   <td data-field="mean_calls">423080</td>
-   <td data-field="median_calls">343695</td>
+   <td data-field="mean_calls">422877</td>
+   <td data-field="median_calls">337651</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
@@ -255,7 +255,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="double-ended-saddle-search/lj38" data-template="eon-svn/de-lj38-lanczos-improved">
    <td>LJ38 double-ended saddle</td>
    <td data-field="template">eon-svn/de-lj38-lanczos-improved</td>
-   <td data-field="version">Eon svn r2549</td>
+   <td data-field="version">EON (SVN r2549)</td>
    <td data-field="commit">r2549</td>
    <td data-field="par2_mean">235.2</td>
    <td data-field="mean_calls">235.2</td>
@@ -266,7 +266,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="eon-svn/de-2ts-lanczos-improved">
    <td>lj38_2ts_separation</td>
    <td data-field="template">eon-svn/de-2ts-lanczos-improved</td>
-   <td data-field="version">Eon svn r2549</td>
+   <td data-field="version">EON (SVN r2549)</td>
    <td data-field="commit">r2549</td>
    <td data-field="par2_mean">502.784</td>
    <td data-field="mean_calls">502.784</td>
@@ -277,7 +277,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="double-ended-saddle-search/pt-island" data-template="eon-svn/de-pt-lanczos-improved">
    <td>pt-island</td>
    <td data-field="template">eon-svn/de-pt-lanczos-improved</td>
-   <td data-field="version">Eon svn r2549</td>
+   <td data-field="version">EON (SVN r2549)</td>
    <td data-field="commit">r2549</td>
    <td data-field="par2_mean">180.644</td>
    <td data-field="mean_calls">180.644</td>
@@ -288,7 +288,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="globalopt/lj38" data-template="eon-svn/bh-lj38">
    <td>Lennard-Jones 38 global minimum</td>
    <td data-field="template">eon-svn/bh-lj38</td>
-   <td data-field="version">Eon svn r2549</td>
+   <td data-field="version">EON (SVN r2549)</td>
    <td data-field="commit">r2549</td>
    <td data-field="par2_mean">598530</td>
    <td data-field="mean_calls">558530</td>
@@ -299,7 +299,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="hTST/Al" data-template="eon-svn/htst-al-dimer">
    <td>Al</td>
    <td data-field="template">eon-svn/htst-al-dimer</td>
-   <td data-field="version">Eon svn r2549</td>
+   <td data-field="version">EON (SVN r2549)</td>
    <td data-field="commit">r2549</td>
    <td data-field="par2_mean"></td>
    <td data-field="mean_calls">19656.7</td>
@@ -310,7 +310,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="hTST/Pt" data-template="eon-svn/htst-pt-dimer">
    <td>Pt</td>
    <td data-field="template">eon-svn/htst-pt-dimer</td>
-   <td data-field="version">Eon svn r2549</td>
+   <td data-field="version">EON (SVN r2549)</td>
    <td data-field="commit">r2549</td>
    <td data-field="par2_mean"></td>
    <td data-field="mean_calls">506026</td>
@@ -321,7 +321,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="lowest-eigenvector/lj38" data-template="eon-svn/low-lj38-lanczos">
    <td>lj38</td>
    <td data-field="template">eon-svn/low-lj38-lanczos</td>
-   <td data-field="version">Eon svn r2549</td>
+   <td data-field="version">EON (SVN r2549)</td>
    <td data-field="commit">r2549</td>
    <td data-field="par2_mean">26.385</td>
    <td data-field="mean_calls">26.385</td>
@@ -332,7 +332,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="minimization/lj38-noise" data-template="eon-svn/lj38-noise-0">
    <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
    <td data-field="template">eon-svn/lj38-noise-0</td>
-   <td data-field="version">Eon svn r2549</td>
+   <td data-field="version">EON (SVN r2549)</td>
    <td data-field="commit">r2549</td>
    <td data-field="par2_mean">300.052</td>
    <td data-field="mean_calls">200.9</td>
@@ -343,7 +343,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="neb/Pt-heptamer" data-template="eon-svn/neb-pt-ci">
    <td>Pt-heptamer</td>
    <td data-field="template">eon-svn/neb-pt-ci</td>
-   <td data-field="version">Eon svn r2549</td>
+   <td data-field="version">EON (SVN r2549)</td>
    <td data-field="commit">r2549</td>
    <td data-field="par2_mean">336.769</td>
    <td data-field="mean_calls">336.769</td>
@@ -354,7 +354,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="tsopt/LJ38" data-template="eon-svn/ts-lj38-lanczos-improved">
    <td>LJ38</td>
    <td data-field="template">eon-svn/ts-lj38-lanczos-improved</td>
-   <td data-field="version">Eon svn r2549</td>
+   <td data-field="version">EON (SVN r2549)</td>
    <td data-field="commit">r2549</td>
    <td data-field="par2_mean">270.85</td>
    <td data-field="mean_calls">270.85</td>
@@ -365,7 +365,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="tsopt/pt-island" data-template="eon-svn/ts-pt-lanczos-improved">
    <td>pt-island</td>
    <td data-field="template">eon-svn/ts-pt-lanczos-improved</td>
-   <td data-field="version">Eon svn r2549</td>
+   <td data-field="version">EON (SVN r2549)</td>
    <td data-field="commit">r2549</td>
    <td data-field="par2_mean">106.388</td>
    <td data-field="mean_calls">106.388</td>
@@ -408,7 +408,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="minimization/lj38" data-template="rgmin/lj38-dogleg">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="template">rgmin/lj38-dogleg</td>
-   <td data-field="version">rgmin 0.4.1</td>
+   <td data-field="version">rgmin 9a2e7ff1</td>
    <td data-field="commit">9a2e7ff11fa6</td>
    <td data-field="par2_mean">81.881</td>
    <td data-field="mean_calls">81.881</td>
@@ -419,7 +419,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="minimization/lj38-noise" data-template="noise/rgmin-dogleg-s0">
    <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
    <td data-field="template">noise/rgmin-dogleg-s0</td>
-   <td data-field="version">rgmin 0.4.1</td>
+   <td data-field="version">rgmin 9a2e7ff1</td>
    <td data-field="commit">9a2e7ff11fa6</td>
    <td data-field="par2_mean">81.881</td>
    <td data-field="mean_calls">81.881</td>
@@ -430,7 +430,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="minimization/morse-bulk" data-template="rgmin/morse-newton">
    <td>Morse bulk</td>
    <td data-field="template">rgmin/morse-newton</td>
-   <td data-field="version">rgmin 0.4.1</td>
+   <td data-field="version">rgmin 9a2e7ff1</td>
    <td data-field="commit">9a2e7ff11fa6</td>
    <td data-field="par2_mean">8.35</td>
    <td data-field="mean_calls">8.35</td>
@@ -858,10 +858,21 @@ The number is written only after the run finishes under the problem rule.
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="globalopt/lj100-binary" data-template="gmin/lj100-binary-bh-stock">
+   <td>Binary Lennard-Jones 100</td>
+   <td data-field="template">gmin/lj100-binary-bh-stock</td>
+   <td data-field="version">GMIN df8da599</td>
+   <td data-field="commit">738fafe3df5a</td>
+   <td data-field="par2_mean">4e+06</td>
+   <td data-field="mean_calls">2.00048e+06</td>
+   <td data-field="median_calls">2.00048e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 100, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
    <tr data-problem="globalopt/lj150" data-template="gmin/lj150-bh">
    <td>lj150</td>
    <td data-field="template">gmin/lj150-bh</td>
-   <td data-field="version">GMIN 02aaf45245af</td>
+   <td data-field="version">GMIN df8da599</td>
    <td data-field="commit">02aaf45245af</td>
    <td data-field="par2_mean">1.75804e+06</td>
    <td data-field="mean_calls">1.65804e+06</td>
@@ -872,7 +883,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="globalopt/lj38" data-template="gmin/lj38-bh">
    <td>Lennard-Jones 38 global minimum</td>
    <td data-field="template">gmin/lj38-bh</td>
-   <td data-field="version">GMIN 02aaf45245af</td>
+   <td data-field="version">GMIN df8da599</td>
    <td data-field="commit">02aaf45245af</td>
    <td data-field="par2_mean">432092</td>
    <td data-field="mean_calls">412092</td>
@@ -883,7 +894,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="globalopt/lj75" data-template="gmin/lj75-bhpt">
    <td>lj75</td>
    <td data-field="template">gmin/lj75-bhpt</td>
-   <td data-field="version">GMIN 02aaf45245af</td>
+   <td data-field="version">GMIN df8da599</td>
    <td data-field="commit">02aaf45245af</td>
    <td data-field="par2_mean">1.96655e+06</td>
    <td data-field="mean_calls">986545</td>
@@ -891,10 +902,43 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 196, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
+   <tr data-problem="globalopt/tip4p10" data-template="gmin/tip4p10-stock">
+   <td>tip4p10</td>
+   <td data-field="template">gmin/tip4p10-stock</td>
+   <td data-field="version">GMIN df8da599</td>
+   <td data-field="commit">738fafe3df5a</td>
+   <td data-field="par2_mean">16375.9</td>
+   <td data-field="mean_calls">16375.9</td>
+   <td data-field="median_calls">11544.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">10000</td>
+   </tr>
+   <tr data-problem="globalopt/tip4p15" data-template="gmin/tip4p15-latest">
+   <td>tip4p15</td>
+   <td data-field="template">gmin/tip4p15-latest</td>
+   <td data-field="version">GMIN df8da599</td>
+   <td data-field="commit">738fafe3df5a</td>
+   <td data-field="par2_mean">633150</td>
+   <td data-field="mean_calls">633150</td>
+   <td data-field="median_calls">433634</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">500</td>
+   </tr>
+   <tr data-problem="globalopt/tip4p20" data-template="gmin/tip4p20-tbp">
+   <td>tip4p20</td>
+   <td data-field="template">gmin/tip4p20-tbp</td>
+   <td data-field="version">GMIN df8da599</td>
+   <td data-field="commit">738fafe3df5a</td>
+   <td data-field="par2_mean">2.57721e+07</td>
+   <td data-field="mean_calls">2.57721e+07</td>
+   <td data-field="median_calls">1.96536e+07</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
    <tr data-problem="minimization/lj38" data-template="gmin/lj38-lbfgs">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="template">gmin/lj38-lbfgs</td>
-   <td data-field="version">GMIN df8da5992675</td>
+   <td data-field="version">GMIN df8da599</td>
    <td data-field="commit">df8da5992675</td>
    <td data-field="par2_mean">301.399</td>
    <td data-field="mean_calls">242.093</td>
@@ -905,7 +949,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="minimization/lj38-noise" data-template="noise/gmin-lbfgs-s0">
    <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
    <td data-field="template">noise/gmin-lbfgs-s0</td>
-   <td data-field="version">GMIN df8da5992675</td>
+   <td data-field="version">GMIN df8da599</td>
    <td data-field="commit">df8da5992675</td>
    <td data-field="par2_mean">301.399</td>
    <td data-field="mean_calls">242.093</td>
@@ -916,7 +960,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="minimization/morse-bulk" data-template="gmin/morse-lbfgs">
    <td>Morse bulk</td>
    <td data-field="template">gmin/morse-lbfgs</td>
-   <td data-field="version">GMIN df8da5992675</td>
+   <td data-field="version">GMIN df8da599</td>
    <td data-field="commit">df8da5992675</td>
    <td data-field="par2_mean">34.4</td>
    <td data-field="mean_calls">34.4</td>
@@ -1127,7 +1171,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="double-ended-saddle-search/lj38" data-template="optim/de-lj38">
    <td>LJ38 double-ended saddle</td>
    <td data-field="template">optim/de-lj38</td>
-   <td data-field="version">optim svn-snapshot</td>
+   <td data-field="version">OPTIM df8da599</td>
    <td data-field="commit">02aaf45245af</td>
    <td data-field="par2_mean">146.82</td>
    <td data-field="mean_calls">146.82</td>
@@ -1138,7 +1182,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="optim/de-2ts">
    <td>lj38_2ts_separation</td>
    <td data-field="template">optim/de-2ts</td>
-   <td data-field="version">optim svn-snapshot</td>
+   <td data-field="version">OPTIM df8da599</td>
    <td data-field="commit">02aaf45245af</td>
    <td data-field="par2_mean">5725.16</td>
    <td data-field="mean_calls">4352.61</td>
@@ -1149,7 +1193,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="double-ended-saddle-search/pt-island" data-template="optim/de-pt">
    <td>pt-island</td>
    <td data-field="template">optim/de-pt</td>
-   <td data-field="version">optim svn-snapshot</td>
+   <td data-field="version">OPTIM df8da599</td>
    <td data-field="commit">02aaf45245af</td>
    <td data-field="par2_mean">138</td>
    <td data-field="mean_calls">138</td>
@@ -1160,7 +1204,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="lowest-eigenvector/lj38" data-template="optim/rr-loweig">
    <td>lj38</td>
    <td data-field="template">optim/rr-loweig</td>
-   <td data-field="version">optim df8da599</td>
+   <td data-field="version">OPTIM df8da599</td>
    <td data-field="commit">df8da5992675</td>
    <td data-field="par2_mean">60.97</td>
    <td data-field="mean_calls">60.97</td>
@@ -1171,7 +1215,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="minimization/lj38" data-template="optim/lbfgs-lj38">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="template">optim/lbfgs-lj38</td>
-   <td data-field="version">optim svn-snapshot</td>
+   <td data-field="version">OPTIM df8da599</td>
    <td data-field="commit">02aaf45245af</td>
    <td data-field="par2_mean">270.341</td>
    <td data-field="mean_calls">230.724</td>
@@ -1182,7 +1226,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="minimization/lj38-noise" data-template="optim/noise-lbfgs-s0">
    <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
    <td data-field="template">optim/noise-lbfgs-s0</td>
-   <td data-field="version">optim 02aaf45245af</td>
+   <td data-field="version">OPTIM df8da599</td>
    <td data-field="commit">02aaf45245af</td>
    <td data-field="par2_mean">290.805</td>
    <td data-field="mean_calls">231.531</td>
@@ -1193,7 +1237,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="minimization/morse-bulk" data-template="optim/morse-lbfgs">
    <td>Morse bulk</td>
    <td data-field="template">optim/morse-lbfgs</td>
-   <td data-field="version">optim 02aaf45245af</td>
+   <td data-field="version">OPTIM df8da599</td>
    <td data-field="commit">02aaf45245af</td>
    <td data-field="par2_mean">45.7</td>
    <td data-field="mean_calls">45.7</td>
@@ -1204,7 +1248,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="neb/Pt-heptamer" data-template="optim/dneb-hef">
    <td>Pt-heptamer</td>
    <td data-field="template">optim/dneb-hef</td>
-   <td data-field="version">optim 02aaf452</td>
+   <td data-field="version">OPTIM df8da599</td>
    <td data-field="commit">02aaf45245af</td>
    <td data-field="par2_mean">913.538</td>
    <td data-field="mean_calls">913.538</td>
@@ -1215,7 +1259,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="tsopt/LJ38" data-template="optim/hef-ffd-ts-lj38">
    <td>LJ38</td>
    <td data-field="template">optim/hef-ffd-ts-lj38</td>
-   <td data-field="version">optim df8da599</td>
+   <td data-field="version">OPTIM df8da599</td>
    <td data-field="commit">df8da5992675</td>
    <td data-field="par2_mean">488.835</td>
    <td data-field="mean_calls">488.835</td>
@@ -1226,7 +1270,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="tsopt/pt-island" data-template="optim/hef-ffd-ts-pt">
    <td>pt-island</td>
    <td data-field="template">optim/hef-ffd-ts-pt</td>
-   <td data-field="version">optim df8da599</td>
+   <td data-field="version">OPTIM df8da599</td>
    <td data-field="commit">df8da5992675</td>
    <td data-field="par2_mean">170.122</td>
    <td data-field="mean_calls">170.122</td>
@@ -1787,6 +1831,17 @@ The number is written only after the run finishes under the problem rule.
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="globalopt/lj100-binary" data-template="airss/lj100-binary">
+   <td>Binary Lennard-Jones 100</td>
+   <td data-field="template">airss/lj100-binary</td>
+   <td data-field="version">AIRSS 0.9.4</td>
+   <td data-field="commit">5593cc4ee360</td>
+   <td data-field="par2_mean">4e+06</td>
+   <td data-field="mean_calls">2.00073e+06</td>
+   <td data-field="median_calls">2.00072e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 100, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
    <tr data-problem="globalopt/lj38" data-template="airss/lj38">
    <td>Lennard-Jones 38 global minimum</td>
    <td data-field="template">airss/lj38</td>
@@ -1880,11 +1935,11 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">softsaddle/saddle-lanczos-sm0</td>
    <td data-field="version">softsaddle 2019.04</td>
    <td data-field="commit">5a00aeede06f</td>
-   <td data-field="par2_mean">10124.2</td>
-   <td data-field="mean_calls">431.839</td>
-   <td data-field="median_calls">389</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 790, wrong_stationary 4208</td>
-   <td data-field="n">5000</td>
+   <td data-field="par2_mean">10046.8</td>
+   <td data-field="mean_calls">526.824</td>
+   <td data-field="median_calls">488</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 111, wrong_stationary 3087</td>
+   <td data-field="n">3225</td>
    </tr>
    </tbody></table></div>
    <h3>TorchSim</h3>

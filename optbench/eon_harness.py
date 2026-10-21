@@ -387,6 +387,11 @@ def _client(family: str) -> str:
 
 
 def _family_of(template: dict) -> str:
+    explicit = str(template.get("harness_family") or "")
+    if explicit:
+        if explicit not in FAMILIES:
+            raise ValueError(f"{template.get('id')} harness_family {explicit} is unknown")
+        return explicit
     ident = str(template["id"])
     for name, spec in FAMILIES.items():
         if ident.startswith(spec["prefix"]) and template.get("kind"):
@@ -725,8 +730,13 @@ def run_case(
     *,
     passes: int | None = None,
     budget: int | None = None,
+    client: str | None = None,
 ) -> dict:
-    """One seed and one start. The dict is what the tracks report."""
+    """One seed and one start. The dict is what the tracks report.
+
+    ``client`` selects the eonclient binary. The default is the family
+    pin (r2549 or 3.5.0).
+    """
     from .eon_akmc import _one_repetition
     from .potserver import PotServer, remote_count
 
@@ -751,7 +761,7 @@ def run_case(
     work = Path(tempfile.mkdtemp(prefix="optbench-eon-"))
     server = None
     try:
-        client = _client(family)
+        client = client or _client(family)
         evaluate = kernel_for(str(template["kernel"]))
         server = PotServer(evaluate, cap=cap).start()
         os.environ["OPTBENCH_POTSERVER"] = server.endpoint()

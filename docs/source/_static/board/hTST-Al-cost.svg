@@ -53,6 +53,7 @@ z
     </defs>
     <g clip-path="url(#pf6c1fff105)">
      <use xlink:href="#m2d8934182f" x="286.061172" y="249.943636" style="fill: #1f77b4"/>
+     <use xlink:href="#m2d8934182f" x="286.061172" y="61.278023" style="fill: #1f77b4"/>
      <use xlink:href="#m2d8934182f" x="286.061172" y="36.816364" style="fill: #1f77b4"/>
     </g>
    </g>
@@ -220,9 +221,12 @@ L 507.6 26.16
     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="289.061172" y="246.943636" transform="rotate(-0 289.061172 246.943636)">1</text>
    </g>
    <g id="text_16">
-    <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="289.061172" y="33.816364" transform="rotate(-0 289.061172 33.816364)">2</text>
+    <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="289.061172" y="58.278023" transform="rotate(-0 289.061172 58.278023)">2</text>
    </g>
    <g id="text_17">
+    <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="289.061172" y="33.816364" transform="rotate(-0 289.061172 33.816364)">3</text>
+   </g>
+   <g id="text_18">
     <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="286.061172" y="20.16" transform="rotate(-0 286.061172 20.16)">Cost and success: hTST/Al</text>
    </g>
   </g>

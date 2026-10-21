@@ -1,0 +1,12 @@
+id = "gmin/tip4p10-stock"
+engine = "gmin"
+problem = "globalopt/tip4p10"
+code = "GMIN"
+code_version = "df8da599267534fbe43a250e578f7396a7946311"
+commit = "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31"
+algorithm = "basin-hopping"
+tuning = "stock"
+failure_cap = 1000000
+note = """
+Latest unmodified Wales GMIN, source revision df8da599267534fbe43a250e578f7396a7946311, from svn.tar.bz2 sha256 738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31. Serial gfortran, stock cmake flags, no source edits. The input is the archive deck: temperature 6.65, STEP 0 0 1.64, NTIP 4, EDIFF 1e-3, SLOPPYCONV 1e-3, TIGHTCONV 1e-3, MAXIT 10000, TARGET -391.0233, RANSEED 100. STEPS is 2000000, the integer form of the archive 2.D6. MAX_NPCALL is the problem cap of 1000000. Starts are the 10000 archived angle-axis files. force_calls is NPCALL. A target hit under the cap is a success. A run that reaches MAX_NPCALL is a cap failure. The ranked score is that native count on the harness counter.
+"""

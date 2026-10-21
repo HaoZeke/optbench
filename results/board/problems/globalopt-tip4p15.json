@@ -1,0 +1,139 @@
+{
+  "full_n": 500,
+  "history": [],
+  "id": "globalopt/tip4p15",
+  "not_comparable": [],
+  "partial": [],
+  "profile": {
+    "area_log10": {
+      "gmin/tip4p15-latest df8da599267534fbe43a250e578f7396a7946311 archive campaign 738fafe": 0.9395146164672854,
+      "gmin/tip4p15-tbp df8da5992675 default campaign df8da59": 0.9572753862114602
+    },
+    "rho": {
+      "gmin/tip4p15-latest df8da599267534fbe43a250e578f7396a7946311 archive campaign 738fafe": [
+        0.498,
+        0.68,
+        0.812,
+        0.904,
+        0.952
+      ],
+      "gmin/tip4p15-tbp df8da5992675 default campaign df8da59": [
+        0.502,
+        0.704,
+        0.838,
+        0.904,
+        0.966
+      ]
+    },
+    "solved": {
+      "gmin/tip4p15-latest df8da599267534fbe43a250e578f7396a7946311 archive campaign 738fafe": 1.0,
+      "gmin/tip4p15-tbp df8da5992675 default campaign df8da59": 1.0
+    },
+    "taus": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ]
+  },
+  "ranked": [
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000000,
+      "code": "GMIN",
+      "code_version": "df8da599267534fbe43a250e578f7396a7946311",
+      "commit": "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31",
+      "comparable": true,
+      "counter": "harness",
+      "entry": "gmin-df8da599-tip4p15-bh",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 500,
+      "history": false,
+      "max_calls": 4189427.0,
+      "mean_calls": 633149.84,
+      "mean_fd_equivalent": null,
+      "mean_hessian_evals": null,
+      "mean_per_image": null,
+      "median": 433634.0,
+      "median_calls": 433634.0,
+      "median_high": 490354.2625,
+      "median_low": 387190.5,
+      "median_per_image": null,
+      "min_calls": 4352.0,
+      "n": 500,
+      "newest": true,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 633149.84,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/gmin-df8da599-tip4p15-bh.dat",
+      "problem": "globalopt/tip4p15",
+      "registry_match": false,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "gmin/tip4p15-latest",
+      "tuning": "archive",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9923756595384479
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000000,
+      "code": "GMIN",
+      "code_version": "df8da5992675",
+      "commit": "df8da599267534fbe43a250e578f7396a7946311",
+      "comparable": true,
+      "counter": "harness",
+      "entry": "gmin-df8da5992675-tip4p15-tbp",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 500,
+      "history": false,
+      "max_calls": 4735292.0,
+      "mean_calls": 638316.47,
+      "mean_fd_equivalent": null,
+      "mean_hessian_evals": null,
+      "mean_per_image": null,
+      "median": 438941.0,
+      "median_calls": 438941.0,
+      "median_high": 490347.5,
+      "median_low": 381774.0,
+      "median_per_image": null,
+      "min_calls": 12334.0,
+      "n": 500,
+      "newest": true,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 638316.47,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/gmin-df8da5992675-tip4p15-tbp.dat",
+      "problem": "globalopt/tip4p15",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "gmin/tip4p15-tbp",
+      "tuning": "default",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9923756595384479
+    }
+  ],
+  "title": "tip4p15"
+}

@@ -156,7 +156,13 @@ def test_rendered_pages_use_the_board_rank():
     assert 'data-board-table="ranked" data-problem="saddle-search/pt-island"' in saddle
     assert "rgsaddle/saddle-dimer-rotskip" in saddle
     assert "rgsaddle/saddle-dimer-rotskip-tuned" not in saddle
-    assert 'data-field="par2_mean">10128<' in saddle
+    soft = next(
+        row
+        for row in document["problems"]["saddle-search/pt-island"]["ranked"]
+        if str(row.get("template") or "").startswith("softsaddle/")
+    )
+    soft_par2 = dict(ranked_cells(soft, False))["par2_mean"]
+    assert f'data-field="par2_mean">{soft_par2}<' in saddle
     assert "No full harness row." not in saddle
     assert "eon-3.5.0-saddle-pt-dimer" in saddle
     assert "not yet on the harness counter" in saddle

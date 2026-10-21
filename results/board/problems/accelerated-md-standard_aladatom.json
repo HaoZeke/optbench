@@ -6,9 +6,17 @@
   "partial": [],
   "profile": {
     "area_log10": {
+      "eon-develop/standard-aladatom-akmc (develop 500350d9) campaign 500350d": 1.0536049848239342,
       "eon/standard-aladatom-akmc 3.6.0 campaign 1d71c94": 1.2041199826559248
     },
     "rho": {
+      "eon-develop/standard-aladatom-akmc (develop 500350d9) campaign 500350d": [
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
       "eon/standard-aladatom-akmc 3.6.0 campaign 1d71c94": [
         1.0,
         1.0,
@@ -18,6 +26,7 @@
       ]
     },
     "solved": {
+      "eon-develop/standard-aladatom-akmc (develop 500350d9) campaign 500350d": 1.0,
       "eon/standard-aladatom-akmc 3.6.0 campaign 1d71c94": 1.0
     },
     "taus": [
@@ -73,6 +82,54 @@
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon/standard-aladatom-akmc",
+      "tuning": "",
+      "wilson_high": 1.0,
+      "wilson_low": 0.4385029682449546
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 1000000000,
+      "code": "eOn",
+      "code_version": "(develop 500350d9)",
+      "commit": "500350d9fae881f06c7ef194e5868da079c4be5a",
+      "comparable": true,
+      "counter": "harness",
+      "entry": "eon-develop-500350d9-standard-aladatom-akmc",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 3,
+      "history": false,
+      "max_calls": 3614953.0,
+      "mean_calls": 2876506.0,
+      "mean_fd_equivalent": null,
+      "mean_hessian_evals": null,
+      "mean_per_image": null,
+      "median": 3092343.0,
+      "median_calls": 3092343.0,
+      "median_high": 3614953.0,
+      "median_low": 1922222.0,
+      "median_per_image": null,
+      "min_calls": 1922222.0,
+      "n": 3,
+      "newest": true,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 2876506.0,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/eon-develop-500350d9-standard-aladatom-akmc.dat",
+      "problem": "accelerated-md/standard_aladatom",
+      "registry_match": false,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "eon-develop/standard-aladatom-akmc",
       "tuning": "",
       "wilson_high": 1.0,
       "wilson_low": 0.4385029682449546

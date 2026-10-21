@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>GeometryOptimization.jl</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>TorchSim</th><th>geomeTRIC</th><th>CP2K</th><th>n2p2</th><th>Optax</th><th>PANNA</th><th>jaxmd</th><th>KLIFF</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>saddlesearchjl</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>GeometryOptimization.jl</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>TorchSim</th><th>geomeTRIC</th><th>CP2K</th><th>n2p2</th><th>Optax</th><th>PANNA</th><th>jaxmd</th><th>KLIFF</th><th>EON (SVN r2549)</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>saddlesearchjl</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="globalopt/lj100-binary">
    <th scope="row"><a href="#lj100-binary">Binary Lennard-Jones 100</a></th>
    <td data-code="eOn">—</td>
@@ -17,12 +17,12 @@
    <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
-   <td data-code="GMIN">—</td>
+   <td class="bench-score" data-code="GMIN" data-template="gmin/lj100-binary-bh-stock" data-par2="4e+06">4e+06<a href="#lj100-binary-templates">gmin/lj100-binary-bh-stock</a></td>
    <td data-code="pele">—</td>
    <td data-code="GeometryOptimization.jl">—</td>
    <td data-code="LAMMPS">—</td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="AIRSS">—</td>
+   <td class="bench-score" data-code="AIRSS" data-template="airss/lj100-binary" data-par2="4e+06">4e+06<a href="#lj100-binary-templates">airss/lj100-binary</a></td>
    <td data-code="vc-SQNM">—</td>
    <td data-code="TorchSim">—</td>
    <td data-code="geomeTRIC">—</td>
@@ -32,6 +32,7 @@
    <td data-code="PANNA">—</td>
    <td data-code="jaxmd">—</td>
    <td data-code="KLIFF">—</td>
+   <td class="bench-score" data-code="EON (SVN r2549)" data-template="eon-svn-r2549/bh-lj100-binary" data-par2="4e+06">4e+06<a href="#lj100-binary-templates">eon-svn-r2549/bh-lj100-binary</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -66,6 +67,7 @@
    <td data-code="PANNA">—</td>
    <td data-code="jaxmd">—</td>
    <td data-code="KLIFF">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -100,6 +102,7 @@
    <td data-code="PANNA">—</td>
    <td data-code="jaxmd">—</td>
    <td data-code="KLIFF">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -134,6 +137,7 @@
    <td data-code="PANNA">—</td>
    <td data-code="jaxmd">—</td>
    <td data-code="KLIFF">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -168,6 +172,7 @@
    <td data-code="PANNA">—</td>
    <td data-code="jaxmd">—</td>
    <td data-code="KLIFF">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -187,7 +192,7 @@
    <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
-   <td data-code="GMIN">—</td>
+   <td class="bench-score" data-code="GMIN" data-template="gmin/tip4p10-stock" data-par2="16375.9">16375.9<a href="#tip4p10-templates">gmin/tip4p10-stock</a></td>
    <td data-code="pele">—</td>
    <td data-code="GeometryOptimization.jl">—</td>
    <td data-code="LAMMPS">—</td>
@@ -202,6 +207,7 @@
    <td data-code="PANNA">—</td>
    <td data-code="jaxmd">—</td>
    <td data-code="KLIFF">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -221,7 +227,7 @@
    <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
-   <td data-code="GMIN">—</td>
+   <td class="bench-score" data-code="GMIN" data-template="gmin/tip4p15-latest" data-par2="633150">633150<a href="#tip4p15-templates">gmin/tip4p15-latest</a></td>
    <td data-code="pele">—</td>
    <td data-code="GeometryOptimization.jl">—</td>
    <td data-code="LAMMPS">—</td>
@@ -236,6 +242,7 @@
    <td data-code="PANNA">—</td>
    <td data-code="jaxmd">—</td>
    <td data-code="KLIFF">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -255,7 +262,7 @@
    <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
-   <td data-code="GMIN">—</td>
+   <td class="bench-score" data-code="GMIN" data-template="gmin/tip4p20-tbp" data-par2="2.57721e+07">2.57721e+07<a href="#tip4p20-templates">gmin/tip4p20-tbp</a></td>
    <td data-code="pele">—</td>
    <td data-code="GeometryOptimization.jl">—</td>
    <td data-code="LAMMPS">—</td>
@@ -270,6 +277,7 @@
    <td data-code="PANNA">—</td>
    <td data-code="jaxmd">—</td>
    <td data-code="KLIFF">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -291,14 +299,17 @@
    <dt>Note</dt><dd>The archived files record energies. They do not record force calls. Success is an energy at or below the improved Cambridge minimum plus 0.001. The cap is the archived evaluation budget of 2000000.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">No committed harness run.</p>
+   <figure class="bench-plot"><a href="../../_static/board/globalopt-lj100-binary-cost.svg"><picture><source srcset="../../_static/board/globalopt-lj100-binary-cost.webp" type="image/webp"><img src="../../_static/board/globalopt-lj100-binary-cost.png" alt="Cost versus success for globalopt/lj100-binary" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
+   <p class="bench-gaps">No performance profile. One start has no finite cost.</p>
    <details class="bench-details" id="lj100-binary-templates">
-   <summary>All templates (0 ranked)</summary>
+   <summary>All templates (3 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="globalopt/lj100-binary">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. The Wilson column is the 95% success-rate bound, low then high.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="11">No full harness row.</td></tr>
+   <tr><td data-field="template">airss/lj100-binary</td><td data-field="version">AIRSS 0.9.4</td><td data-field="commit">5593cc4ee360</td><td data-field="source">campaign</td><td data-field="par2_mean">4e+06</td><td data-field="success_rate">0</td><td data-field="wilson">0–0.0369935</td><td data-field="median_calls">2.00072e+06</td><td data-field="mean_calls">2.00073e+06</td><td data-field="failures">crash 0, divergence 0, cap 100, not_converged 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">eon-svn-r2549/bh-lj100-binary</td><td data-field="version">EON (SVN r2549)</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">4e+06</td><td data-field="success_rate">0</td><td data-field="wilson">0–0.0369935</td><td data-field="median_calls">2e+06</td><td data-field="mean_calls">2e+06</td><td data-field="failures">crash 0, divergence 0, cap 100, not_converged 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">gmin/lj100-binary-bh-stock</td><td data-field="version">GMIN df8da599</td><td data-field="commit">738fafe3df5a</td><td data-field="source">campaign</td><td data-field="par2_mean">4e+06</td><td data-field="success_rate">0</td><td data-field="wilson">0–0.0369935</td><td data-field="median_calls">2.00048e+06</td><td data-field="mean_calls">2.00048e+06</td><td data-field="failures">crash 0, divergence 0, cap 100, not_converged 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    </details>
    </section><section class="bench bench-archive-section" id="lj100-binary-archive">
@@ -361,8 +372,8 @@
    <table data-board-table="ranked" data-problem="globalopt/lj150">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. The Wilson column is the 95% success-rate bound, low then high.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">gmin/lj150-bh</td><td data-field="version">GMIN 02aaf45245af</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="par2_mean">1.75804e+06</td><td data-field="success_rate">0.99</td><td data-field="wilson">0.945514–0.998233</td><td data-field="median_calls">1.14412e+06</td><td data-field="mean_calls">1.65804e+06</td><td data-field="failures">crash 0, divergence 0, cap 1, not_converged 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
-   <tr><td data-field="template">gmin/lj150-bhpt</td><td data-field="version">GMIN 02aaf45245af</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="par2_mean">2.77178e+06</td><td data-field="success_rate">0.99</td><td data-field="wilson">0.945514–0.998233</td><td data-field="median_calls">2.05174e+06</td><td data-field="mean_calls">2.67178e+06</td><td data-field="failures">crash 0, divergence 0, cap 1, not_converged 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">gmin/lj150-bh</td><td data-field="version">GMIN df8da599</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="par2_mean">1.75804e+06</td><td data-field="success_rate">0.99</td><td data-field="wilson">0.945514–0.998233</td><td data-field="median_calls">1.14412e+06</td><td data-field="mean_calls">1.65804e+06</td><td data-field="failures">crash 0, divergence 0, cap 1, not_converged 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">gmin/lj150-bhpt</td><td data-field="version">GMIN df8da599</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="par2_mean">2.77178e+06</td><td data-field="success_rate">0.99</td><td data-field="wilson">0.945514–0.998233</td><td data-field="median_calls">2.05174e+06</td><td data-field="mean_calls">2.67178e+06</td><td data-field="failures">crash 0, divergence 0, cap 1, not_converged 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    </details>
    </section><section class="bench bench-archive-section" id="lj150-archive">
@@ -434,10 +445,10 @@
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. The Wilson column is the 95% success-rate bound, low then high.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td data-field="template">airss/lj38</td><td data-field="version">AIRSS 0.9.4</td><td data-field="commit">5593cc4ee360</td><td data-field="source">campaign</td><td data-field="par2_mean"></td><td data-field="success_rate">1</td><td data-field="wilson">0.963007–1</td><td data-field="median_calls">70635.5</td><td data-field="mean_calls">112134</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
-   <tr><td data-field="template">gmin/lj38-bh</td><td data-field="version">GMIN 02aaf45245af</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="par2_mean">432092</td><td data-field="success_rate">0.99</td><td data-field="wilson">0.945514–0.998233</td><td data-field="median_calls">301962</td><td data-field="mean_calls">412092</td><td data-field="failures">crash 0, divergence 0, cap 1, not_converged 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">gmin/lj38-bh</td><td data-field="version">GMIN df8da599</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="par2_mean">432092</td><td data-field="success_rate">0.99</td><td data-field="wilson">0.945514–0.998233</td><td data-field="median_calls">301962</td><td data-field="mean_calls">412092</td><td data-field="failures">crash 0, divergence 0, cap 1, not_converged 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">eon-client/bh-lj38</td><td data-field="version">eOn 3.5.0</td><td data-field="commit">4d8b34baf1ba</td><td data-field="source">campaign</td><td data-field="par2_mean">503146</td><td data-field="success_rate">1</td><td data-field="wilson">0.963007–1</td><td data-field="median_calls">369028</td><td data-field="mean_calls">503146</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
-   <tr><td data-field="template">eon-svn/bh-lj38</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">598530</td><td data-field="success_rate">0.98</td><td data-field="wilson">0.929988–0.994498</td><td data-field="median_calls">423226</td><td data-field="mean_calls">558530</td><td data-field="failures">crash 0, divergence 0, cap 2, not_converged 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
-   <tr><td data-field="template">gmin/lj38-bhpt</td><td data-field="version">GMIN 02aaf45245af</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="par2_mean">674789</td><td data-field="success_rate">0.94</td><td data-field="wilson">0.875232–0.972214</td><td data-field="median_calls">307290</td><td data-field="mean_calls">554789</td><td data-field="failures">crash 0, divergence 0, cap 6, not_converged 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">eon-svn/bh-lj38</td><td data-field="version">EON (SVN r2549)</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">598530</td><td data-field="success_rate">0.98</td><td data-field="wilson">0.929988–0.994498</td><td data-field="median_calls">423226</td><td data-field="mean_calls">558530</td><td data-field="failures">crash 0, divergence 0, cap 2, not_converged 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">gmin/lj38-bhpt</td><td data-field="version">GMIN df8da599</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="par2_mean">674789</td><td data-field="success_rate">0.94</td><td data-field="wilson">0.875232–0.972214</td><td data-field="median_calls">307290</td><td data-field="mean_calls">554789</td><td data-field="failures">crash 0, divergence 0, cap 6, not_converged 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    </details>
    </section><section class="bench bench-archive-section" id="lj38-archive">
@@ -537,8 +548,8 @@
    <table data-board-table="ranked" data-problem="globalopt/lj75">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. The Wilson column is the 95% success-rate bound, low then high.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">gmin/lj75-bhpt</td><td data-field="version">GMIN 02aaf45245af</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="par2_mean">1.96655e+06</td><td data-field="success_rate">0.02</td><td data-field="wilson">0.00780443–0.0502871</td><td data-field="median_calls">1e+06</td><td data-field="mean_calls">986545</td><td data-field="failures">crash 0, divergence 0, cap 196, not_converged 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
-   <tr><td data-field="template">gmin/lj75-bh</td><td data-field="version">GMIN 02aaf45245af</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="par2_mean">1.99209e+06</td><td data-field="success_rate">0.005</td><td data-field="wilson">0.000883169–0.0277737</td><td data-field="median_calls">1e+06</td><td data-field="mean_calls">997087</td><td data-field="failures">crash 0, divergence 0, cap 199, not_converged 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
+   <tr><td data-field="template">gmin/lj75-bhpt</td><td data-field="version">GMIN df8da599</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="par2_mean">1.96655e+06</td><td data-field="success_rate">0.02</td><td data-field="wilson">0.00780443–0.0502871</td><td data-field="median_calls">1e+06</td><td data-field="mean_calls">986545</td><td data-field="failures">crash 0, divergence 0, cap 196, not_converged 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
+   <tr><td data-field="template">gmin/lj75-bh</td><td data-field="version">GMIN df8da599</td><td data-field="commit">02aaf45245af</td><td data-field="source">campaign</td><td data-field="par2_mean">1.99209e+06</td><td data-field="success_rate">0.005</td><td data-field="wilson">0.000883169–0.0277737</td><td data-field="median_calls">1e+06</td><td data-field="mean_calls">997087</td><td data-field="failures">crash 0, divergence 0, cap 199, not_converged 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
    <tr><td data-field="template">ase-globalopt/lj75-basinhopping</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">campaign</td><td data-field="par2_mean">2e+06</td><td data-field="success_rate">0</td><td data-field="wilson">0–0.0188453</td><td data-field="median_calls">1e+06</td><td data-field="mean_calls">1e+06</td><td data-field="failures">crash 0, divergence 0, cap 200, not_converged 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
    </tbody></table></div>
    <h3>Partial</h3>
@@ -664,14 +675,15 @@
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">No committed harness run.</p>
+   <figure class="bench-plot"><a href="../../_static/board/globalopt-tip4p10-profile.svg"><picture><source srcset="../../_static/board/globalopt-tip4p10-profile.webp" type="image/webp"><img src="../../_static/board/globalopt-tip4p10-profile.png" alt="Dolan-More profile for globalopt/tip4p10" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="../../_static/board/globalopt-tip4p10-cost.svg"><picture><source srcset="../../_static/board/globalopt-tip4p10-cost.webp" type="image/webp"><img src="../../_static/board/globalopt-tip4p10-cost.png" alt="Cost versus success for globalopt/tip4p10" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="tip4p10-templates">
-   <summary>All templates (0 ranked)</summary>
+   <summary>All templates (1 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="globalopt/tip4p10">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. The Wilson column is the 95% success-rate bound, low then high.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="11">No full harness row.</td></tr>
+   <tr><td data-field="template">gmin/tip4p10-stock</td><td data-field="version">GMIN df8da599</td><td data-field="commit">738fafe3df5a</td><td data-field="source">campaign</td><td data-field="par2_mean">16375.9</td><td data-field="success_rate">1</td><td data-field="wilson">0.999616–1</td><td data-field="median_calls">11544.5</td><td data-field="mean_calls">16375.9</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">10000</td></tr>
    </tbody></table></div>
    </details>
    </section><section class="bench bench-archive-section" id="tip4p10-archive">
@@ -732,14 +744,16 @@
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">No committed harness run.</p>
+   <figure class="bench-plot"><a href="../../_static/board/globalopt-tip4p15-profile.svg"><picture><source srcset="../../_static/board/globalopt-tip4p15-profile.webp" type="image/webp"><img src="../../_static/board/globalopt-tip4p15-profile.png" alt="Dolan-More profile for globalopt/tip4p15" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="../../_static/board/globalopt-tip4p15-cost.svg"><picture><source srcset="../../_static/board/globalopt-tip4p15-cost.webp" type="image/webp"><img src="../../_static/board/globalopt-tip4p15-cost.png" alt="Cost versus success for globalopt/tip4p15" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="tip4p15-templates">
-   <summary>All templates (0 ranked)</summary>
+   <summary>All templates (2 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="globalopt/tip4p15">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. The Wilson column is the 95% success-rate bound, low then high.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="11">No full harness row.</td></tr>
+   <tr><td data-field="template">gmin/tip4p15-latest</td><td data-field="version">GMIN df8da599</td><td data-field="commit">738fafe3df5a</td><td data-field="source">campaign</td><td data-field="par2_mean">633150</td><td data-field="success_rate">1</td><td data-field="wilson">0.992376–1</td><td data-field="median_calls">433634</td><td data-field="mean_calls">633150</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">500</td></tr>
+   <tr><td data-field="template">gmin/tip4p15-tbp</td><td data-field="version">GMIN df8da599</td><td data-field="commit">df8da5992675</td><td data-field="source">campaign</td><td data-field="par2_mean">638316</td><td data-field="success_rate">1</td><td data-field="wilson">0.992376–1</td><td data-field="median_calls">438941</td><td data-field="mean_calls">638316</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">500</td></tr>
    </tbody></table></div>
    </details>
    </section><section class="bench bench-archive-section" id="tip4p15-archive">
@@ -800,14 +814,16 @@
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">No committed harness run.</p>
+   <figure class="bench-plot"><a href="../../_static/board/globalopt-tip4p20-profile.svg"><picture><source srcset="../../_static/board/globalopt-tip4p20-profile.webp" type="image/webp"><img src="../../_static/board/globalopt-tip4p20-profile.png" alt="Dolan-More profile for globalopt/tip4p20" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
+   <figure class="bench-plot"><a href="../../_static/board/globalopt-tip4p20-cost.svg"><picture><source srcset="../../_static/board/globalopt-tip4p20-cost.webp" type="image/webp"><img src="../../_static/board/globalopt-tip4p20-cost.png" alt="Cost versus success for globalopt/tip4p20" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="tip4p20-templates">
-   <summary>All templates (0 ranked)</summary>
+   <summary>All templates (2 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="globalopt/tip4p20">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. The Wilson column is the 95% success-rate bound, low then high.</caption>
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="11">No full harness row.</td></tr>
+   <tr><td data-field="template">gmin/tip4p20-tbp</td><td data-field="version">GMIN df8da599</td><td data-field="commit">738fafe3df5a</td><td data-field="source">campaign</td><td data-field="par2_mean">2.57721e+07</td><td data-field="success_rate">1</td><td data-field="wilson">0.963007–1</td><td data-field="median_calls">1.96536e+07</td><td data-field="mean_calls">2.57721e+07</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">gmin/tip4p20-bh</td><td data-field="version">GMIN df8da599</td><td data-field="commit">738fafe3df5a</td><td data-field="source">campaign</td><td data-field="par2_mean">4e+08</td><td data-field="success_rate">0</td><td data-field="wilson">0–0.0369935</td><td data-field="median_calls">425755</td><td data-field="mean_calls">420297</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 100</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    </details>
    </section><section class="bench bench-archive-section" id="tip4p20-archive">

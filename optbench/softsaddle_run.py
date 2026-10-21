@@ -22,6 +22,7 @@ from pathlib import Path
 import numpy as np
 
 from .connection import ProcessCatalog, connected_endpoints, link_tolerance, per_atom_max
+from .endpoints import EndpointArchive, align_resume, stamp_endpoint, stored_cell
 from .failures import classify_failure
 from .rgsaddle_minmode import (
     HarnessSurface,
@@ -741,6 +742,8 @@ def _judge_saddle(payload: dict, climbed: dict, potential: HarnessSurface, calls
             record["per_atom_max_minus"] = minus_span
             record["saddle_distance"] = _norm(point - minimum)
             record["saddle_x"] = point.copy()
+            record["endpoint_plus"] = np.asarray(plus, dtype=np.float64).reshape(-1).copy()
+            record["endpoint_minus"] = np.asarray(minus, dtype=np.float64).reshape(-1).copy()
             record["links"] = links
             record["novel_candidate"] = True
             if climbed["x_lambda"] is not None:
@@ -898,6 +901,15 @@ def hypersphere() -> tuple[np.ndarray, np.ndarray]:
     return np.asarray(packed["V"], dtype=np.float64), np.asarray(packed["order"], dtype=np.int64)
 
 
+def _finite_endpoint(value) -> np.ndarray | None:
+    if value is None:
+        return None
+    row = np.asarray(value, dtype=np.float64).reshape(-1)
+    if row.size == 0 or not np.isfinite(row).all():
+        return None
+    return row
+
+
 def _displace(minimum: np.ndarray, direction: np.ndarray, radius: float, atoms: int) -> np.ndarray:
     width = 3 * int(atoms)
     x0 = np.array(minimum, dtype=np.float64, copy=True)
@@ -987,6 +999,12 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
         )
     radius, _lam, _sad = _replay_radius(saved, settings)
     catalog = _restore_catalog(saved, cell, tolerance, barrier_max)
+    n_free = int(np.asarray(minimum).size // 3)
+    archive = EndpointArchive(output.with_name(output.stem + ".endpoints.npz"), n_free)
+    if resume and saved:
+        align_resume(archive, len(saved))
+    else:
+        archive.reset(stored_cell(cell), np.flatnonzero(~fixed))
     print(
         f"{template['id']} resume searches {catalog.searches} connected {catalog.qualifying} radius {radius:.4f}",
         flush=True,
@@ -1040,6 +1058,12 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
             judged_rows.sort(key=lambda row: int(row["index"]))
             for judged in judged_rows:
                 applied = _apply_identity(judged, catalog)
+                plus_ep = _finite_endpoint(applied.pop("endpoint_plus", None))
+                minus_ep = _finite_endpoint(applied.pop("endpoint_minus", None))
+                if plus_ep is None or minus_ep is None:
+                    plus_ep = None
+                    minus_ep = None
+                status = archive.add(minimum, plus_ep, minus_ep)
                 stored_point = None
                 if applied.get("observed") and applied.get("saddle_x") is not None:
                     stored_point = [float(value) for value in np.asarray(applied["saddle_x"], dtype=np.float64).reshape(-1)]
@@ -1068,6 +1092,7 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
                     error=applied.get("error"),
                     linked=bool(applied.get("links")),
                 )
+                stamp_endpoint(public, archive.name, archive.count - 1, status)
                 partial = dict(public)
                 partial["saddle_stored"] = stored_point
                 saved.append(partial)
@@ -1141,8 +1166,11 @@ def _run_saddle(root: Path, problem: dict, template: dict, *, output: Path, forc
             f"v2_nfailed {metrics['nfailed']}\n"
         )
     output.parent.mkdir(parents=True, exist_ok=True)
+    archive.save()
     output.write_text(text, encoding="utf-8")
     write_starts(output.with_suffix(".starts.jsonl"), records)
+    if finished:
+        archive.drop_log()
     if metrics is not None:
         provenance = collect_provenance(
             code=str(template.get("code", "softsaddle")),

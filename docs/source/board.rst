@@ -15,7 +15,7 @@ It does not run a campaign.
    <div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>GeometryOptimization.jl</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>TorchSim</th><th>geomeTRIC</th><th>CP2K</th><th>n2p2</th><th>Optax</th><th>PANNA</th><th>jaxmd</th><th>KLIFF</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>saddlesearchjl</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>GeometryOptimization.jl</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>TorchSim</th><th>geomeTRIC</th><th>CP2K</th><th>n2p2</th><th>Optax</th><th>PANNA</th><th>jaxmd</th><th>KLIFF</th><th>EON (SVN r2549)</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>saddlesearchjl</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="minimization/lj38">
    <th scope="row"><a href="generated/suites/minimization.html#lj38">Lennard-Jones 38 clusters</a></th>
    <td class="bench-score" data-code="eOn" data-template="eon/lj38-lbfgs-m100" data-par2="180.137">180.137<a href="generated/suites/minimization.html#lj38-templates">eon/lj38-lbfgs-m100</a></td>
@@ -40,6 +40,7 @@ It does not run a campaign.
    <td data-code="PANNA">—</td>
    <td class="bench-score" data-code="jaxmd" data-template="jaxmd/lj38-optax-lbfgs" data-par2="278.365">278.365<a href="generated/suites/minimization.html#lj38-templates">jaxmd/lj38-optax-lbfgs</a></td>
    <td data-code="KLIFF">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td class="bench-score" data-code="dlfind" data-template="dlfind/lbfgs-lj38" data-par2="231.908">231.908<a href="generated/suites/minimization.html#lj38-templates">dlfind/lbfgs-lj38</a></td>
@@ -74,6 +75,7 @@ It does not run a campaign.
    <td data-code="PANNA">—</td>
    <td class="bench-score" data-code="jaxmd" data-template="jaxmd/noise-optax-lbfgs-s0" data-par2="278.365">278.365<a href="generated/suites/minimization-lj38-noise.html#lj38-noise-templates">jaxmd/noise-optax-lbfgs-s0</a></td>
    <td data-code="KLIFF">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td class="bench-score" data-code="dlfind" data-template="dlfind/lbfgs-lj38-noise-s0" data-par2="231.908">231.908<a href="generated/suites/minimization-lj38-noise.html#lj38-noise-templates">dlfind/lbfgs-lj38-noise-s0</a></td>
@@ -108,6 +110,7 @@ It does not run a campaign.
    <td data-code="PANNA">—</td>
    <td class="bench-score" data-code="jaxmd" data-template="jaxmd/morse-optax-lbfgs" data-par2="27.35">27.35<a href="generated/suites/minimization.html#morse-bulk-templates">jaxmd/morse-optax-lbfgs</a></td>
    <td data-code="KLIFF">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td class="bench-score" data-code="dlfind" data-template="dlfind/lbfgs-morse" data-par2="13626.5">13626.5<a href="generated/suites/minimization.html#morse-bulk-templates">dlfind/lbfgs-morse</a></td>
@@ -142,6 +145,7 @@ It does not run a campaign.
    <td data-code="PANNA">—</td>
    <td data-code="jaxmd">—</td>
    <td data-code="KLIFF">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td class="bench-score" data-code="artn" data-template="partn/saddle-pt" data-par2="10980.2">10980.2<a href="generated/suites/saddle-search.html#pt-island-templates">partn/saddle-pt</a></td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -149,7 +153,7 @@ It does not run a campaign.
    <td data-code="optim">—</td>
    <td data-code="optking">—</td>
    <td data-code="saddlesearchjl">—</td>
-   <td class="bench-score" data-code="softsaddle" data-template="softsaddle/saddle-lanczos-sm0" data-par2="10124.2">10124.2<a href="generated/suites/saddle-search.html#pt-island-templates">softsaddle/saddle-lanczos-sm0</a></td>
+   <td class="bench-score" data-code="softsaddle" data-template="softsaddle/saddle-lanczos-sm0" data-par2="10046.8">10046.8<a href="generated/suites/saddle-search.html#pt-island-templates">softsaddle/saddle-lanczos-sm0</a></td>
    <td data-code="tsase">—</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38">
@@ -176,6 +180,7 @@ It does not run a campaign.
    <td data-code="PANNA">—</td>
    <td data-code="jaxmd">—</td>
    <td data-code="KLIFF">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td data-code="artn">—</td>
    <td class="bench-score" data-code="compass" data-template="compass/sqnm" data-par2="1517.3">1517.3<a href="generated/suites/double-ended-saddle-search.html#lj38-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
@@ -210,6 +215,7 @@ It does not run a campaign.
    <td data-code="PANNA">—</td>
    <td data-code="jaxmd">—</td>
    <td data-code="KLIFF">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td data-code="artn">—</td>
    <td class="bench-score" data-code="compass" data-template="compass/sqnm" data-par2="6713.37">6713.37<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
@@ -244,6 +250,7 @@ It does not run a campaign.
    <td data-code="PANNA">—</td>
    <td data-code="jaxmd">—</td>
    <td data-code="KLIFF">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td data-code="artn">—</td>
    <td class="bench-score" data-code="compass" data-template="compass/sqnm" data-par2="1078.12">1078.12<a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
@@ -253,6 +260,41 @@ It does not run a campaign.
    <td data-code="saddlesearchjl">—</td>
    <td data-code="softsaddle">—</td>
    <td class="bench-score" data-code="tsase" data-template="tsase/ci-neb" data-par2="2524.53">2524.53<a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">tsase/ci-neb</a></td>
+   </tr>
+   <tr data-problem="globalopt/lj100-binary">
+   <th scope="row"><a href="generated/suites/globalopt.html#lj100-binary">Binary Lennard-Jones 100</a></th>
+   <td data-code="eOn">—</td>
+   <td data-code="Eon svn">—</td>
+   <td data-code="rgmin">—</td>
+   <td data-code="rgsaddle">—</td>
+   <td data-code="geodesic">—</td>
+   <td data-code="ASE">—</td>
+   <td data-code="Sella">—</td>
+   <td class="bench-score" data-code="GMIN" data-template="gmin/lj100-binary-bh-stock" data-par2="4e+06">4e+06<a href="generated/suites/globalopt.html#lj100-binary-templates">gmin/lj100-binary-bh-stock</a></td>
+   <td data-code="pele">—</td>
+   <td data-code="GeometryOptimization.jl">—</td>
+   <td data-code="LAMMPS">—</td>
+   <td data-code="pysisyphus">—</td>
+   <td class="bench-score" data-code="AIRSS" data-template="airss/lj100-binary" data-par2="4e+06">4e+06<a href="generated/suites/globalopt.html#lj100-binary-templates">airss/lj100-binary</a></td>
+   <td data-code="vc-SQNM">—</td>
+   <td data-code="TorchSim">—</td>
+   <td data-code="geomeTRIC">—</td>
+   <td data-code="CP2K">—</td>
+   <td data-code="n2p2">—</td>
+   <td data-code="Optax">—</td>
+   <td data-code="PANNA">—</td>
+   <td data-code="jaxmd">—</td>
+   <td data-code="KLIFF">—</td>
+   <td class="bench-score" data-code="EON (SVN r2549)" data-template="eon-svn-r2549/bh-lj100-binary" data-par2="4e+06">4e+06<a href="generated/suites/globalopt.html#lj100-binary-templates">eon-svn-r2549/bh-lj100-binary</a></td>
+   <td data-code="artn">—</td>
+   <td data-code="compass">—</td>
+   <td data-code="dlfind">—</td>
+   <td data-code="lammps">—</td>
+   <td data-code="optim">—</td>
+   <td data-code="optking">—</td>
+   <td data-code="saddlesearchjl">—</td>
+   <td data-code="softsaddle">—</td>
+   <td data-code="tsase">—</td>
    </tr>
    <tr data-problem="globalopt/lj150">
    <th scope="row"><a href="generated/suites/globalopt.html#lj150">lj150</a></th>
@@ -278,6 +320,7 @@ It does not run a campaign.
    <td data-code="PANNA">—</td>
    <td data-code="jaxmd">—</td>
    <td data-code="KLIFF">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -312,6 +355,7 @@ It does not run a campaign.
    <td data-code="PANNA">—</td>
    <td data-code="jaxmd">—</td>
    <td data-code="KLIFF">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -346,6 +390,112 @@ It does not run a campaign.
    <td data-code="PANNA">—</td>
    <td data-code="jaxmd">—</td>
    <td data-code="KLIFF">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="artn">—</td>
+   <td data-code="compass">—</td>
+   <td data-code="dlfind">—</td>
+   <td data-code="lammps">—</td>
+   <td data-code="optim">—</td>
+   <td data-code="optking">—</td>
+   <td data-code="saddlesearchjl">—</td>
+   <td data-code="softsaddle">—</td>
+   <td data-code="tsase">—</td>
+   </tr>
+   <tr data-problem="globalopt/tip4p10">
+   <th scope="row"><a href="generated/suites/globalopt.html#tip4p10">tip4p10</a></th>
+   <td data-code="eOn">—</td>
+   <td data-code="Eon svn">—</td>
+   <td data-code="rgmin">—</td>
+   <td data-code="rgsaddle">—</td>
+   <td data-code="geodesic">—</td>
+   <td data-code="ASE">—</td>
+   <td data-code="Sella">—</td>
+   <td class="bench-score" data-code="GMIN" data-template="gmin/tip4p10-stock" data-par2="16375.9">16375.9<a href="generated/suites/globalopt.html#tip4p10-templates">gmin/tip4p10-stock</a></td>
+   <td data-code="pele">—</td>
+   <td data-code="GeometryOptimization.jl">—</td>
+   <td data-code="LAMMPS">—</td>
+   <td data-code="pysisyphus">—</td>
+   <td data-code="AIRSS">—</td>
+   <td data-code="vc-SQNM">—</td>
+   <td data-code="TorchSim">—</td>
+   <td data-code="geomeTRIC">—</td>
+   <td data-code="CP2K">—</td>
+   <td data-code="n2p2">—</td>
+   <td data-code="Optax">—</td>
+   <td data-code="PANNA">—</td>
+   <td data-code="jaxmd">—</td>
+   <td data-code="KLIFF">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="artn">—</td>
+   <td data-code="compass">—</td>
+   <td data-code="dlfind">—</td>
+   <td data-code="lammps">—</td>
+   <td data-code="optim">—</td>
+   <td data-code="optking">—</td>
+   <td data-code="saddlesearchjl">—</td>
+   <td data-code="softsaddle">—</td>
+   <td data-code="tsase">—</td>
+   </tr>
+   <tr data-problem="globalopt/tip4p15">
+   <th scope="row"><a href="generated/suites/globalopt.html#tip4p15">tip4p15</a></th>
+   <td data-code="eOn">—</td>
+   <td data-code="Eon svn">—</td>
+   <td data-code="rgmin">—</td>
+   <td data-code="rgsaddle">—</td>
+   <td data-code="geodesic">—</td>
+   <td data-code="ASE">—</td>
+   <td data-code="Sella">—</td>
+   <td class="bench-score" data-code="GMIN" data-template="gmin/tip4p15-latest" data-par2="633150">633150<a href="generated/suites/globalopt.html#tip4p15-templates">gmin/tip4p15-latest</a></td>
+   <td data-code="pele">—</td>
+   <td data-code="GeometryOptimization.jl">—</td>
+   <td data-code="LAMMPS">—</td>
+   <td data-code="pysisyphus">—</td>
+   <td data-code="AIRSS">—</td>
+   <td data-code="vc-SQNM">—</td>
+   <td data-code="TorchSim">—</td>
+   <td data-code="geomeTRIC">—</td>
+   <td data-code="CP2K">—</td>
+   <td data-code="n2p2">—</td>
+   <td data-code="Optax">—</td>
+   <td data-code="PANNA">—</td>
+   <td data-code="jaxmd">—</td>
+   <td data-code="KLIFF">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
+   <td data-code="artn">—</td>
+   <td data-code="compass">—</td>
+   <td data-code="dlfind">—</td>
+   <td data-code="lammps">—</td>
+   <td data-code="optim">—</td>
+   <td data-code="optking">—</td>
+   <td data-code="saddlesearchjl">—</td>
+   <td data-code="softsaddle">—</td>
+   <td data-code="tsase">—</td>
+   </tr>
+   <tr data-problem="globalopt/tip4p20">
+   <th scope="row"><a href="generated/suites/globalopt.html#tip4p20">tip4p20</a></th>
+   <td data-code="eOn">—</td>
+   <td data-code="Eon svn">—</td>
+   <td data-code="rgmin">—</td>
+   <td data-code="rgsaddle">—</td>
+   <td data-code="geodesic">—</td>
+   <td data-code="ASE">—</td>
+   <td data-code="Sella">—</td>
+   <td class="bench-score" data-code="GMIN" data-template="gmin/tip4p20-tbp" data-par2="2.57721e+07">2.57721e+07<a href="generated/suites/globalopt.html#tip4p20-templates">gmin/tip4p20-tbp</a></td>
+   <td data-code="pele">—</td>
+   <td data-code="GeometryOptimization.jl">—</td>
+   <td data-code="LAMMPS">—</td>
+   <td data-code="pysisyphus">—</td>
+   <td data-code="AIRSS">—</td>
+   <td data-code="vc-SQNM">—</td>
+   <td data-code="TorchSim">—</td>
+   <td data-code="geomeTRIC">—</td>
+   <td data-code="CP2K">—</td>
+   <td data-code="n2p2">—</td>
+   <td data-code="Optax">—</td>
+   <td data-code="PANNA">—</td>
+   <td data-code="jaxmd">—</td>
+   <td data-code="KLIFF">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -380,6 +530,7 @@ It does not run a campaign.
    <td data-code="PANNA">—</td>
    <td data-code="jaxmd">—</td>
    <td data-code="KLIFF">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td class="bench-score" data-code="artn" data-template="partn/mode-lj38" data-par2="2619.84">2619.84<a href="generated/suites/lowest-eigenvector.html#lj38-templates">partn/mode-lj38</a></td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -414,6 +565,7 @@ It does not run a campaign.
    <td data-code="PANNA">—</td>
    <td data-code="jaxmd">—</td>
    <td data-code="KLIFF">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td class="bench-score" data-code="artn" data-template="partn/ts-lj38" data-par2="5514.77">5514.77<a href="generated/suites/tsopt.html#LJ38-templates">partn/ts-lj38</a></td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -448,6 +600,7 @@ It does not run a campaign.
    <td data-code="PANNA">—</td>
    <td data-code="jaxmd">—</td>
    <td data-code="KLIFF">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td class="bench-score" data-code="artn" data-template="partn/ts-pt" data-par2="452.735">452.735<a href="generated/suites/tsopt.html#pt-island-templates">partn/ts-pt</a></td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -482,6 +635,7 @@ It does not run a campaign.
    <td class="bench-score" data-code="PANNA" data-template="panna/c2h4-tf-adam-energy" data-par2="11485.1">11485.1<a href="generated/suites/mlopt.html#C2H4-templates">panna/c2h4-tf-adam-energy</a></td>
    <td data-code="jaxmd">—</td>
    <td class="bench-score" data-code="KLIFF" data-template="kliff/c2h4-lbfgs" data-par2="269.36">269.36<a href="generated/suites/mlopt.html#C2H4-templates">kliff/c2h4-lbfgs</a></td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -516,6 +670,7 @@ It does not run a campaign.
    <td class="bench-score" data-code="PANNA" data-template="panna/emt-pt38-tf-adam-energy" data-par2="900.64">900.64<a href="generated/suites/mlopt.html#emt-pt38-templates">panna/emt-pt38-tf-adam-energy</a></td>
    <td data-code="jaxmd">—</td>
    <td class="bench-score" data-code="KLIFF" data-template="kliff/emt-pt38-lbfgs" data-par2="24.16">24.16<a href="generated/suites/mlopt.html#emt-pt38-templates">kliff/emt-pt38-lbfgs</a></td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -550,6 +705,7 @@ It does not run a campaign.
    <td data-code="PANNA">—</td>
    <td data-code="jaxmd">—</td>
    <td data-code="KLIFF">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td data-code="artn">—</td>
    <td class="bench-score" data-code="compass" data-template="compass/sqnm" data-par2="561.462">561.462<a href="generated/suites/neb.html#Pt-heptamer-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
@@ -584,6 +740,7 @@ It does not run a campaign.
    <td data-code="PANNA">—</td>
    <td data-code="jaxmd">—</td>
    <td data-code="KLIFF">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -596,7 +753,7 @@ It does not run a campaign.
    </tr>
    <tr data-problem="hTST/Pt">
    <th scope="row"><a href="generated/suites/hTST.html#Pt">Pt</a></th>
-   <td class="bench-score" data-code="eOn" data-template="eon/htst-pt-dimer" data-par2=""><a href="generated/suites/hTST.html#Pt-templates">eon/htst-pt-dimer</a></td>
+   <td class="bench-score" data-code="eOn" data-template="eon-develop/htst-pt-dimer" data-par2=""><a href="generated/suites/hTST.html#Pt-templates">eon-develop/htst-pt-dimer</a></td>
    <td class="bench-score" data-code="Eon svn" data-template="eon-svn/htst-pt-dimer" data-par2=""><a href="generated/suites/hTST.html#Pt-templates">eon-svn/htst-pt-dimer</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
@@ -618,6 +775,7 @@ It does not run a campaign.
    <td data-code="PANNA">—</td>
    <td data-code="jaxmd">—</td>
    <td data-code="KLIFF">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -652,6 +810,7 @@ It does not run a campaign.
    <td data-code="PANNA">—</td>
    <td data-code="jaxmd">—</td>
    <td data-code="KLIFF">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
@@ -686,6 +845,7 @@ It does not run a campaign.
    <td data-code="PANNA">—</td>
    <td data-code="jaxmd">—</td>
    <td data-code="KLIFF">—</td>
+   <td data-code="EON (SVN r2549)">—</td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>

@@ -1,8 +1,8 @@
-# rep 1 force_calls 2159194 unique_saddles 103 fraction_connected 0.0004 total_searches 5000 connected 2 minimize_calls 14 minimum_converged 1 seed 20261016 hypersphere eb78f6d9cde1e9aae308e3f8ecec777fdb655e3432e356c9da339b950bd3267a
-force_calls 682
-force_calls_min 529
-force_calls_median 682.5
-force_calls_max 836
+# rep 1 force_calls 1699007 unique_saddles 149 fraction_connected 0.5376744186046511 total_searches 3225 connected 27 minimize_calls 1 minimum_converged 1 seed 20261016 hypersphere eb78f6d9cde1e9aae308e3f8ecec777fdb655e3432e356c9da339b950bd3267a
+force_calls 425
+force_calls_min 310
+force_calls_median 406.0
+force_calls_max 659
 code softsaddle
 code_version 2019.04
 commit 5a00aeede06fd822ef302624ec4c9bc7889d21fc0b5804b701a5785695c68d16
@@ -12,17 +12,17 @@ template softsaddle/saddle-lanczos-sm0
 problem saddle-search/pt-island
 counter harness
 repetitions 1
-nfailed 1
+nfailed 0
 goal 27
 cap 5064
-n 5000
-par2_mean 10124.2218
-successes 2
-wilson_low 0.00010970128207763504
-wilson_high 0.0014573865014234437
+n 3225
+par2_mean 10046.763100775193
+successes 27
+wilson_low 0.005760238282359306
+wilson_high 0.012153759527189452
 par2_median 10128.0
-n_cap 108
-n_wrong_stationary 6
-n_divergence 4884
+n_cap 53
+n_wrong_stationary 3087
+n_divergence 0
 n_crash 0
-v2_nfailed 4998
+v2_nfailed 3198

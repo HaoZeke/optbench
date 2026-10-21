@@ -1,0 +1,82 @@
+{
+  "full_n": 10000,
+  "history": [],
+  "id": "globalopt/tip4p10",
+  "not_comparable": [],
+  "partial": [],
+  "profile": {
+    "area_log10": {
+      "gmin/tip4p10-stock df8da599267534fbe43a250e578f7396a7946311 stock campaign 738fafe": 1.2041199826559248
+    },
+    "rho": {
+      "gmin/tip4p10-stock df8da599267534fbe43a250e578f7396a7946311 stock campaign 738fafe": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "solved": {
+      "gmin/tip4p10-stock df8da599267534fbe43a250e578f7396a7946311 stock campaign 738fafe": 1.0
+    },
+    "taus": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ]
+  },
+  "ranked": [
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 1000000,
+      "code": "GMIN",
+      "code_version": "df8da599267534fbe43a250e578f7396a7946311",
+      "commit": "738fafe3df5ad73100b7e7d7bbbc407ee8cd5d969c2c0a58f2c109167f463d31",
+      "comparable": true,
+      "counter": "harness",
+      "entry": "gmin-df8da599-tip4p10-stock",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "not_converged": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 10000,
+      "history": false,
+      "max_calls": 165297.0,
+      "mean_calls": 16375.8634,
+      "mean_fd_equivalent": null,
+      "mean_hessian_evals": null,
+      "mean_per_image": null,
+      "median": 11544.5,
+      "median_calls": 11544.5,
+      "median_high": 11826.0,
+      "median_low": 11335.95,
+      "median_per_image": null,
+      "min_calls": 127.0,
+      "n": 10000,
+      "newest": true,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 16375.8634,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/gmin-df8da599-tip4p10-stock.dat",
+      "problem": "globalopt/tip4p10",
+      "registry_match": false,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "gmin/tip4p10-stock",
+      "tuning": "stock",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9996160016293234
+    }
+  ],
+  "title": "tip4p10"
+}
