@@ -71,7 +71,7 @@
    <td data-code="pele">—</td>
    <td data-code="LAMMPS">—</td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="AGOX">—</td>
+   <td data-code="AGOX" data-template="agox/lj38-bh" data-par2="3.53735e+06"><span class="bench-score">3.53735e+06</span><a href="#lj38-templates">agox/lj38-bh</a></td>
    <td data-code="AIRSS" data-template="airss/lj38" data-par2=""><span class="bench-score"></span><a href="#lj38-templates">airss/lj38</a></td>
    <td data-code="vc-SQNM">—</td>
    <td data-code="artn">—</td>
@@ -354,7 +354,7 @@
    <figure class="bench-plot"><a href="../../_static/board/globalopt-lj38-profile.svg"><picture><source srcset="../../_static/board/globalopt-lj38-profile.webp" type="image/webp"><img src="../../_static/board/globalopt-lj38-profile.png" alt="Dolan-More profile for globalopt/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/globalopt-lj38-cost.svg"><picture><source srcset="../../_static/board/globalopt-lj38-cost.webp" type="image/webp"><img src="../../_static/board/globalopt-lj38-cost.png" alt="Cost versus success for globalopt/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="lj38-templates">
-   <summary>All templates (3 ranked)</summary>
+   <summary>All templates (4 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="globalopt/lj38">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
@@ -362,6 +362,7 @@
    <tr><td data-field="template">airss/lj38</td><td data-field="version">AIRSS 0.9.4</td><td data-field="commit">5593cc4ee360</td><td data-field="source">campaign</td><td data-field="par2_mean"></td><td data-field="success_rate">1</td><td data-field="wilson">0.963007–1</td><td data-field="median_calls">70635.5</td><td data-field="mean_calls">112134</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">eon-client/bh-lj38</td><td data-field="version">eOn 3.5.0</td><td data-field="commit">4d8b34baf1ba</td><td data-field="source">campaign</td><td data-field="par2_mean">503146</td><td data-field="success_rate">1</td><td data-field="wilson">0.963007–1</td><td data-field="median_calls">369028</td><td data-field="mean_calls">503146</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">eon-svn/bh-lj38</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">598530</td><td data-field="success_rate">0.98</td><td data-field="wilson">0.929988–0.994498</td><td data-field="median_calls">423226</td><td data-field="mean_calls">558530</td><td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">agox/lj38-bh</td><td data-field="version">AGOX 3.11.2.dev2+g22d94a6fa</td><td data-field="commit">22d94a6fae8c</td><td data-field="source">campaign</td><td data-field="par2_mean">3.53735e+06</td><td data-field="success_rate">0.15</td><td data-field="wilson">0.0930599–0.232836</td><td data-field="median_calls">2e+06</td><td data-field="mean_calls">1.83735e+06</td><td data-field="failures">crash 0, divergence 0, cap 85, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    </details>
    </section><section class="bench bench-legacy-section" id="lj38-legacy">

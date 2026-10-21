@@ -1390,6 +1390,17 @@ The number is written only after the run finishes under the problem rule.
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="globalopt/lj38" data-template="agox/lj38-bh">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="template">agox/lj38-bh</td>
+   <td data-field="version">AGOX 3.11.2.dev2+g22d94a6fa</td>
+   <td data-field="commit">22d94a6fae8c</td>
+   <td data-field="par2_mean">3.53735e+06</td>
+   <td data-field="mean_calls">1.83735e+06</td>
+   <td data-field="median_calls">2e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 85, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
    <tr data-problem="globalopt/lj75" data-template="agox/lj75-bh">
    <td>lj75</td>
    <td data-field="template">agox/lj75-bh</td>

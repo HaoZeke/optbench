@@ -204,7 +204,7 @@ It does not run a campaign.
    <td data-code="pele">—</td>
    <td data-code="LAMMPS">—</td>
    <td data-code="pysisyphus">—</td>
-   <td data-code="AGOX">—</td>
+   <td data-code="AGOX" data-template="agox/lj38-bh" data-par2="3.53735e+06"><span class="bench-score">3.53735e+06</span><a href="generated/suites/globalopt.html#lj38-templates">agox/lj38-bh</a></td>
    <td data-code="AIRSS" data-template="airss/lj38" data-par2=""><span class="bench-score"></span><a href="generated/suites/globalopt.html#lj38-templates">airss/lj38</a></td>
    <td data-code="vc-SQNM">—</td>
    <td data-code="artn">—</td>
