@@ -22,12 +22,12 @@ The ranked cell is the v2 PAR-2 mean of harness force calls. For a band method t
 Per-image mean divides that same total by the problem's `band.interior_images`. Every code on the problem uses that divisor.
 Only the newest full version of a template is ranked. Older full versions are history.
 A campaign file and an asv track with the same score are one row. Source stays on the row.
-An asv result with one start is a smoke run and is not in a ranked mean.
+An asv result with one start is one start and stays out of a ranked mean.
 The Pt-island saddle problem states no full set, so the 16-start ASE dimer files stay off the ranked table because those result files set `ranked false`.
 `entries/ase-sella-full` and `entries/eon-develop-full` were not on origin when this board was scored.
 Pages were not deployed.
 
-Ranked 178. History 12. Partial 79. Unparsed 44. Unmapped 14. Not a harness score 12.
+Ranked 178. History 12. Short 79. Unparsed 44. Unmapped 14. Not a harness score 12.
 
 ## Corrected leaderboard
 
