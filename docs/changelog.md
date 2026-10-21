@@ -35,3 +35,5 @@ n2p2 2.3.0 Kalman energy: `mlopt/C2H4` PAR-2 17397.12 (40/50 failures), `mlopt/e
 n2p2 2.3.0 Kalman force: `mlopt/C2H4` and `mlopt/emt-pt38` are 0/50 at PAR-2 60000.0.
 
 hTST Al dimer, 639 windows, 0 failures. PAR-2 is unset. The mean of the recorded window costs is 45626.85758998435 for EON SVN r2549 and 48128.758998435056 for eOn develop `500350d9`.
+
+The asv-perch job was failing every pull request after a clean comparison table. asv-spyglass exits 1 at its default factor of 1.1, and the action does not ignore that status. The workflow now passes `--factor 10`, the same ratio as `regression-threshold`, so only a slowdown past 10x fails the job.
