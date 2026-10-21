@@ -211,8 +211,12 @@ def test_choose_job_finishes_the_shorter_basin_row_first():
     queues[("globalopt/lj38", "basin")] = deque()
     queues[("globalopt/lj100-binary", "basin")] = deque()
     queues[("globalopt/lj150", "basin")] = deque()
-    queues[("globalopt/lj98", "basin")] = deque()
     assert choose_job(queues, inflight, done, caps) == ("globalopt/lj75", "minima")
+    queues[("globalopt/lj75", "minima")] = deque()
+    queues[("globalopt/lj38", "minima")] = deque()
+    queues[("globalopt/lj100-binary", "minima")] = deque()
+    queues[("globalopt/lj150", "minima")] = deque()
+    assert choose_job(queues, inflight, done, caps) == ("globalopt/lj98", "basin")
 
 
 def test_stock_basin_hopping_accepts_the_displaced_point():

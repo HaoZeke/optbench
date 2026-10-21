@@ -792,7 +792,9 @@ def write_campaign(root: Path, records: list[dict], *, spec: dict, partial: bool
 def _job_priority(key: tuple[str, str], caps: dict[tuple[str, str], int]) -> tuple:
     method_rank = 0 if key[1] == "basin" else 1
     problem_rank = CARTESIAN.index(key[0])
-    return (method_rank, caps[key], problem_rank)
+    # lj98's cap is 1e9. Finish every smaller basin and minima row first.
+    deferred = 1 if caps[key] >= 1_000_000_000 else 0
+    return (deferred, method_rank, caps[key], problem_rank)
 
 
 def choose_job(
@@ -804,7 +806,8 @@ def choose_job(
     """Finish one full template before opening the next.
 
     Basin hopping runs before minima hopping. Within a method the smallest
-    force-call cap runs first. ``done`` stays in the signature for callers.
+    force-call cap runs first. A cap of 1e9 waits until those rows are done.
+    ``done`` stays in the signature for callers.
     """
     del done
     open_keys = [key for key in queues if queues[key] or inflight[key]]
