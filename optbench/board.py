@@ -1524,6 +1524,10 @@ def headline_table(problem: dict) -> str:
     else:
         lines.append(f'<tr><td colspan="{len(headers)}">No full harness row.</td></tr>')
     lines.append("</tbody></table></div>")
+    finding = str(ranked[0].get("finding") or "").strip() if ranked else ""
+    if finding:
+        label = ranked[0].get("template") or ranked[0].get("entry") or ""
+        lines.append(f'<p class="bench-finding">{_cell(label)}: {_cell(finding)}.</p>')
     return "\n".join(lines)
 
 

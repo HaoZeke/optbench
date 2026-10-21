@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from optbench.board import MissingAsvCommit, build_board, render_problem_section, write_board
+from optbench.board import MissingAsvCommit, build_board, headline_table, render_problem_section, write_board
 from optbench.score import wilson_interval
 
 PIN = "a" * 40
@@ -176,6 +176,9 @@ def test_a_full_row_shows_a_repeated_energy_without_leaving_the_table(tmp_path: 
     html = render_problem_section(problem, set())
     assert "<h3>Findings</h3>" in html
     assert "1 of 2 starts at -1.00000000; lowest energy -2.00000000" in html
+    headline = headline_table(problem)
+    assert 'data-board-table="headline"' in headline
+    assert "1 of 2 starts at -1.00000000; lowest energy -2.00000000" in headline
 
 
 def test_short_grid_stays_off_the_ranked_table(tmp_path: Path):
