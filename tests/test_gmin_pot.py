@@ -100,3 +100,23 @@ def test_compiled_lennard_jones_matches_the_harness():
     scale = max(1.0, abs(expected_energy))
     assert abs(energy - expected_energy) / scale < 1e-12
     assert np.max(np.abs(grad - expected_grad)) / max(1.0, np.max(np.abs(expected_grad))) < 1e-12
+
+
+def test_first_evaluation_inside_the_target_records_the_count():
+    root = Path(__file__).resolve().parents[1]
+    pos = np.loadtxt(root / "codes" / "gmin" / "reference" / "lj38.points")
+    energy, _grad = lennard_jones(pos)
+    far = pos * 1.05
+    counter = HarnessCounter(cache=False, cap=10)
+    server = GminServer(lennard_jones, counter, sloppy_rms=5.0e-3, target=energy + 1.0e-3)
+    server.start()
+    try:
+        _exchange(server.port, far.reshape(-1))
+        _exchange(server.port, pos.reshape(-1))
+        _exchange(server.port, pos.reshape(-1))
+    finally:
+        server.stop()
+    snap = server.snapshot()
+    assert snap["calls"] == 3
+    assert snap["hit_calls"] == 2
+    assert snap["hit_energy"] == pytest.approx(energy)

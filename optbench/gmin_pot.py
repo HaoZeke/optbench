@@ -63,6 +63,10 @@ class GminServer:
     in atom-major order. A converged quench is an evaluation whose RMS
     gradient, ``sqrt(sum(g^2)/(3N))``, is at or below ``sloppy_rms``.
     The tracked quench energy is the lowest such value.
+
+    ``target`` is the problem reference energy plus its tolerance. The
+    first evaluation at or below it records the call count and energy.
+    That is the success count, the same stop the anneal runner uses.
     """
 
     def __init__(
@@ -71,8 +75,12 @@ class GminServer:
         counter: HarnessCounter,
         *,
         sloppy_rms: float,
+        target: float | None = None,
     ):
         self._evaluate = evaluate
+        self._target = None if target is None else float(target)
+        self._hit_calls: int | None = None
+        self._hit_energy: float | None = None
         self._counter = counter
         self._sloppy = float(sloppy_rms)
         self._lock = threading.Lock()
@@ -121,6 +129,8 @@ class GminServer:
                 "quench_rms": self._quench_rms,
                 "quench_calls": self._quench_calls,
                 "lowest_energy": self._lowest,
+                "hit_calls": self._hit_calls,
+                "hit_energy": self._hit_energy,
             }
 
     def _accept(self) -> None:
@@ -182,6 +192,14 @@ class GminServer:
         with self._lock:
             if math.isfinite(energy) and (self._lowest is None or energy < self._lowest):
                 self._lowest = energy
+            if (
+                self._target is not None
+                and self._hit_calls is None
+                and math.isfinite(energy)
+                and energy <= self._target
+            ):
+                self._hit_calls = int(self._counter.calls)
+                self._hit_energy = energy
             if math.isfinite(energy) and math.isfinite(rms) and rms <= self._sloppy:
                 if self._quench is None or energy < self._quench:
                     self._quench = energy

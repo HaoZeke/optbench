@@ -2,19 +2,20 @@
 
 GMIN's own Lennard-Jones stays in the binary for an unset
 ``OPTBENCH_POTPORT``. A scored run sets the port. ``LJ`` then returns the
-energy and gradient from ``optbench.potentials.lennard_jones`` and each
-request is one harness call. The server is the call count. GMIN's NPCALL
-is not the score.
+energy and gradient of the problem potential and each request is one
+harness call. The server is the call count. GMIN's NPCALL is not the
+score. The problem ``[potential]`` picks the kernel: ``lennard-jones``
+is the compiled harness LJ, and ``binary-lennard-jones`` is
+``optbench.potentials.binary_lennard_jones`` with the first ``n_A``
+atoms of each start as species A and the rest as species B.
 
-The quench RMS is ``sqrt(sum(g^2)/(3N))``, the same reduction as GMIN.
-A quench at or below the template ``sloppyconv`` can update the lowest
-energy. ``failure_cap`` matches ``max_force_calls`` when the problem
-states one. lj38 does not, and its template cap is 2000000.
-
-A start succeeds when the lowest quench energy is within
-``energy_above_minimum`` of the harness energy of the Cambridge points
-and the call count is under the cap. The harness energy is
-``lennard_jones`` on ``codes/gmin/reference/lj<N>.points``.
+``failure_cap`` is the problem ``max_force_calls`` and TARGET is the
+problem reference energy. A start succeeds when a harness evaluation is
+at or below the reference energy plus ``energy_above_minimum`` with a
+call count under the cap. The count at that first evaluation is the
+start's force calls, the same rule as ``optbench.runners.anneal_go``.
+The Cambridge points are checked to be a minimum of the harness kernel
+inside that window before any start runs.
 """
 
 from __future__ import annotations
@@ -22,6 +23,7 @@ from __future__ import annotations
 import json
 import math
 import os
+import functools
 import shutil
 import subprocess
 import tarfile
@@ -32,8 +34,9 @@ import numpy as np
 
 from optbench.counter import HarnessCounter
 from optbench.failures import classify_failure
+from optbench.globalopt import energy_tolerance, force_cap, judge_globalopt, reference_energy
 from optbench.gmin_pot import lennard_jones_compiled
-from optbench.potentials import lennard_jones, read_con
+from optbench.potentials import binary_lennard_jones, lennard_jones, read_con
 from optbench.score import score_v2, summarize_capped
 from optbench.v2 import collect_provenance, write_starts
 
@@ -51,15 +54,69 @@ def gmin_binary() -> Path:
     return path
 
 
-def reference_evaluation(root: Path, natoms: int) -> tuple[float, float]:
-    """Harness energy and RMS of the Cambridge point file for this size."""
-    path = root / "codes" / "gmin" / "reference" / f"lj{natoms}.points"
-    if not path.is_file():
-        raise FileNotFoundError(f"no reference points for {natoms} atoms")
-    pos = np.loadtxt(path)
-    if pos.shape != (natoms, 3):
-        raise ValueError(f"{path} has shape {pos.shape}")
-    energy, grad = lennard_jones(pos)
+def potential_spec(problem: dict) -> dict:
+    """The harness kernel named by the problem ``[potential]`` table."""
+    section = problem.get("potential") or {}
+    kind = str(section.get("kind") or "lennard-jones")
+    if kind == "lennard-jones":
+        return {"kind": kind, "epsilon": 1.0, "sigma": 1.0, "cutoff": 40.0}
+    if kind == "binary-lennard-jones":
+        return {
+            "kind": kind,
+            "n_A": int(section["n_A"]),
+            "n_B": int(section["n_B"]),
+            "epsilon_AA": float(section["epsilon_AA"]),
+            "epsilon_AB": float(section["epsilon_AB"]),
+            "epsilon_BB": float(section["epsilon_BB"]),
+            "sigma_AA": float(section["sigma_AA"]),
+            "sigma_BB": float(section["sigma_BB"]),
+            "sigma_AB": "arithmetic mean",
+            "cutoff": None,
+        }
+    raise ValueError(f"{problem['id']} potential {kind} has no GMIN harness kernel")
+
+
+def _binary(coords: np.ndarray, *, spec: dict, species: np.ndarray) -> tuple[float, np.ndarray]:
+    return binary_lennard_jones(
+        coords,
+        species,
+        sigma_aa=spec["sigma_AA"],
+        sigma_bb=spec["sigma_BB"],
+        epsilon_aa=spec["epsilon_AA"],
+        epsilon_bb=spec["epsilon_BB"],
+        epsilon_ab=spec["epsilon_AB"],
+    )
+
+
+def evaluator(spec: dict):
+    """``coords -> (energy, gradient)`` for one potential spec."""
+    if spec["kind"] == "lennard-jones":
+        return lennard_jones_compiled
+    species = np.asarray([0] * int(spec["n_A"]) + [1] * int(spec["n_B"]), dtype=np.int64)
+    return functools.partial(_binary, spec=spec, species=species)
+
+
+def reference_evaluation(root: Path, natoms: int, spec: dict | None = None) -> tuple[float, float]:
+    """Harness energy and RMS of the Cambridge points for this problem."""
+    spec = spec or {"kind": "lennard-jones"}
+    if spec["kind"] == "binary-lennard-jones":
+        from optbench.ccd import binary_minimum
+
+        record = binary_minimum()
+        pos = np.asarray(record["positions"], dtype=np.float64)
+        expected = np.asarray([0] * int(spec["n_A"]) + [1] * int(spec["n_B"]), dtype=np.int64)
+        if not np.array_equal(np.asarray(record["species"]), expected):
+            raise ValueError("Cambridge binary points do not list the A atoms first")
+        energy, grad = evaluator(spec)(pos)
+    else:
+        path = root / "codes" / "gmin" / "reference" / f"lj{natoms}.points"
+        if not path.is_file():
+            raise FileNotFoundError(f"no reference points for {natoms} atoms")
+        pos = np.loadtxt(path)
+        if pos.shape != (natoms, 3):
+            raise ValueError(f"{path} has shape {pos.shape}")
+        energy, grad = lennard_jones(pos)
+    grad = np.asarray(grad, dtype=np.float64).reshape(-1)
     rms = float(np.sqrt(float(np.dot(grad, grad)) / grad.size))
     return float(energy), rms
 
@@ -69,11 +126,13 @@ def _center(pos: np.ndarray) -> np.ndarray:
 
 
 def _read_geometry(path: Path) -> np.ndarray:
-    if path.suffix == ".con":
-        pos, _box = read_con(path.read_text(encoding="utf-8", errors="replace"))
+    text = path.read_text(encoding="utf-8", errors="replace")
+    # The lj100-binary starts are .con files named coords.N.
+    if path.suffix == ".con" or "Coordinates of Component" in text:
+        pos, _box = read_con(text)
         return pos
     rows = []
-    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+    for line in text.splitlines():
         parts = line.split()
         if len(parts) < 3:
             continue
@@ -259,41 +318,54 @@ def _command(binary: str, replicas: int) -> list[str]:
 
 
 def _classify(job: dict, snapshot: dict, returncode: int | None, error: str) -> dict:
+    """Judge one start with ``judge_globalopt``.
+
+    A timeout, an exception, a signal, or a nonzero exit before the cap is
+    a crash, also after a hit. The hook halts GMIN with exit 2 at the cap.
+    """
     calls = int(snapshot.get("calls") or 0)
     cap = int(job["cap"])
     cap_hit = bool(snapshot.get("cap_hit")) or calls >= cap
-    energy = snapshot.get("quench_energy")
-    finite = energy is not None and math.isfinite(float(energy))
-    signaled = returncode is not None and returncode < 0
-    reasons: list[str] = []
-    if error and not cap_hit:
-        reasons.append("crash")
-    elif signaled and not cap_hit:
-        reasons.append("crash")
-    elif not finite:
-        reasons.append("cap" if cap_hit else "divergence")
-    elif cap_hit:
-        reasons.append("cap")
-    elif float(energy) > float(job["reference"]) + float(job["tolerance"]):
-        reasons.append("energy")
-    failure = classify_failure(reasons)
+    hit_calls = snapshot.get("hit_calls")
+    if hit_calls is not None:
+        energy = snapshot.get("hit_energy")
+        counted = int(hit_calls)
+    else:
+        energy = snapshot.get("lowest_energy")
+        counted = calls
+    judged = judge_globalopt(
+        energy,
+        counted,
+        reference=float(job["reference"]),
+        tolerance=float(job["tolerance"]),
+        cap=cap,
+    )
+    failed_run = bool(error) or (returncode is not None and returncode != 0)
+    reasons = list(judged["reasons"])
+    failure = judged["failure"]
+    if failed_run and not cap_hit:
+        reasons = ["crash"]
+        failure = classify_failure(reasons)
+    success = failure is None
     record = {
         "schema": "optbench.start/v2",
         "start": job["start"],
         "index": job["index"],
-        "force_calls": calls,
+        "force_calls": counted if success else calls,
         "counter": "harness",
         "comparable": True,
-        "success": failure is None,
+        "success": success,
         "failure": failure,
         "reasons": reasons,
-        "energy": None if not finite else float(energy),
+        "energy": judged["energy"],
         "lowest_energy": snapshot.get("lowest_energy"),
+        "hit_calls": hit_calls,
+        "total_calls": calls,
+        "quench_energy": snapshot.get("quench_energy"),
         "quench_rms": snapshot.get("quench_rms"),
         "quench_calls": snapshot.get("quench_calls"),
         "reference_energy": float(job["reference"]),
         "tolerance": float(job["tolerance"]),
-        "rule_stated": bool(job["rule_stated"]),
         "cap_hit": cap_hit,
         "returncode": returncode,
         "replicas": int(job["replicas"]),
@@ -317,7 +389,12 @@ def run_one(job: dict) -> dict:
     coords = job["coords"]
     (work / "coords").write_text(_coords_text(coords, int(job["replicas"])), encoding="utf-8")
     counter = HarnessCounter(cache=False, cap=int(job["cap"]))
-    server = GminServer(lennard_jones_compiled, counter, sloppy_rms=float(job["sloppyconv"]))
+    server = GminServer(
+        evaluator(job["potential"]),
+        counter,
+        sloppy_rms=float(job["sloppyconv"]),
+        target=float(job["reference"]) + float(job["tolerance"]),
+    )
     server.start()
     env = os.environ.copy()
     env["OPTBENCH_POTHOST"] = "127.0.0.1"
@@ -440,13 +517,12 @@ def _write_result(output: Path, problem: dict, template: dict, records: list[dic
         parameters=passed,
     )
     rule = (
-        "The problem energy_above_minimum is the success window around the harness energy of the Cambridge points."
-        if passed["rule_stated"]
-        else "The problem file states no success rule. Success on this partial row uses the template EDIFF around the harness energy of the Cambridge points."
+        "A start succeeds at the first harness evaluation at or below the problem reference energy "
+        "plus energy_above_minimum, under the problem max_force_calls."
     )
     document = {
         "schema": "optbench.result/v2",
-        "status": "partial" if partial else "archive",
+        "status": "partial" if partial else "measured",
         "problem": problem["id"],
         "scoring": "par2-rate-bootstrap",
         "par_factor": 2,
@@ -504,32 +580,29 @@ def run_template(
     if stated and stated != problem["id"]:
         raise ValueError(f"{template['id']} is for {stated}, not {problem['id']}")
     section = _section(template)
-    convergence = problem.get("convergence") or {}
-    stated_tol = convergence.get("energy_above_minimum")
+    reference = reference_energy(problem)
+    tolerance = energy_tolerance(problem)
+    cap = force_cap(problem)
     ediff = float(section["ediff"])
-    if stated_tol is not None and abs(float(stated_tol) - ediff) > 1e-12:
+    if abs(tolerance - ediff) > 1e-12:
         raise ValueError("template ediff is not the problem energy_above_minimum")
-    cap = template.get("failure_cap")
-    if cap is None:
-        raise ValueError(f"{template['id']} needs failure_cap")
-    cap = int(cap)
-    stated_cap = convergence.get("max_force_calls")
-    if stated_cap is not None and int(stated_cap) != cap:
+    if template.get("failure_cap") is None or int(template["failure_cap"]) != cap:
         raise ValueError("template failure_cap is not the problem max_force_calls")
+    spec = potential_spec(problem)
     binary = gmin_binary()
     scratch = work or output.parent / "work" / template["id"].replace("/", "-")
     loaded = load_geometries(root, problem, scratch, center=bool(section.get("center", True)))
     if limit > 0:
         loaded = loaded[: int(limit)]
     natoms = int(loaded[0][1].shape[0])
-    reference, reference_rms = reference_evaluation(root, natoms)
+    if spec["kind"] == "binary-lennard-jones" and natoms != spec["n_A"] + spec["n_B"]:
+        raise ValueError(f"{problem['id']} starts have {natoms} atoms, not n_A + n_B")
+    points_energy, reference_rms = reference_evaluation(root, natoms, spec)
     sloppy = float(section["sloppyconv"])
     if reference_rms > sloppy:
-        raise RuntimeError(
-            f"reference LJ{natoms} RMS {reference_rms} is above sloppyconv {sloppy}"
-        )
-    tolerance = float(stated_tol) if stated_tol is not None else ediff
-    rule_stated = stated_tol is not None
+        raise RuntimeError(f"reference {problem['id']} RMS {reference_rms} is above sloppyconv {sloppy}")
+    if points_energy > reference + tolerance:
+        raise RuntimeError(f"reference {problem['id']} harness energy {points_energy} is outside the window")
     replicas = int(section["replicas"])
     timeout = float(section.get("timeout") or (cap * 0.005 + 900))
     passed = {
@@ -551,13 +624,10 @@ def run_template(
         "seed_base": int(section["seed"]),
         "cap": cap,
         "reference_energy": reference,
+        "points_energy": points_energy,
         "reference_rms": reference_rms,
         "tolerance": tolerance,
-        "rule_stated": rule_stated,
-        "potential": "lennard_jones",
-        "epsilon": 1.0,
-        "sigma": 1.0,
-        "cutoff": 40.0,
+        "potential": spec,
         "fixboth": bool(section.get("fixboth", False)),
         "permdist": section.get("permdist"),
         "newrestart": section.get("newrestart"),
@@ -586,7 +656,7 @@ def run_template(
                 "sloppyconv": sloppy,
                 "reference": reference,
                 "tolerance": tolerance,
-                "rule_stated": rule_stated,
+                "potential": spec,
                 "resume": bool(resume),
                 "timeout": timeout,
                 "pttmin": passed["pttmin"],
@@ -632,8 +702,7 @@ def run_template(
                 print(f"{template['id']} {done}/{total}", flush=True)
     stated_n = (problem.get("sample") or {}).get("starts")
     complete = (
-        rule_stated
-        and stated_n is not None
+        stated_n is not None
         and len(records) == int(stated_n)
         and int(limit) <= 0
     )
