@@ -14,8 +14,6 @@ tuning default
 counter harness
 problem minimization/morse-bulk
 par2_mean 20000
-wilson_low 0
-wilson_high 0.036993498207
 par2_median 20000
 par2_median_low 20000
 par2_median_high 20000

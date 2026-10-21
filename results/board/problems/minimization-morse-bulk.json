@@ -41,10 +41,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-newton-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -86,10 +85,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-dogleg",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -131,10 +129,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-lbfgs-m20-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -176,10 +173,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-lbfgs-m100-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -221,10 +217,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-lbfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -266,10 +261,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-lbfgs-m20",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -311,10 +305,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-lbfgs-m100",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -356,10 +349,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-lbfgs",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -401,10 +393,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-dogleg-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -446,10 +437,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-bb-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -491,10 +481,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-cg-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -536,10 +525,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-bfgs",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -581,10 +569,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-cg",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -626,10 +613,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-quickmin-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -671,10 +657,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-quickmin",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -716,10 +701,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-bfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -761,10 +745,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-sd-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -806,10 +789,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-sd",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -851,10 +833,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-fire-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -896,10 +877,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-fire",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -941,10 +921,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-fire2",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -986,10 +965,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-fire2-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1031,10 +1009,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-adam",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1076,10 +1053,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-adam-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1121,10 +1097,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-sr2",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1166,10 +1141,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.99,
+      "successes": 99,
       "template": "rgmin/morse-newton",
-      "tuning": "default",
-      "wilson_high": 0.9982325679358593,
-      "wilson_low": 0.9455138038212946
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1211,10 +1185,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.98,
+      "successes": 98,
       "template": "rgmin/morse-sr1",
-      "tuning": "default",
-      "wilson_high": 0.9944980324498376,
-      "wilson_low": 0.929988209271456
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1256,10 +1229,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.96,
+      "successes": 96,
       "template": "rgmin/morse-sr1-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9843366960084523,
-      "wilson_low": 0.9016292856411208
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1301,10 +1273,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.96,
+      "successes": 96,
       "template": "rgmin/morse-sr2-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9843366960084523,
-      "wilson_low": 0.9016292856411208
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1346,10 +1317,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.22,
+      "successes": 22,
       "template": "rgmin/morse-bb",
-      "tuning": "default",
-      "wilson_high": 0.31070353514985793,
-      "wilson_low": 0.150012823846054
+      "tuning": "default"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1391,10 +1361,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.22,
+      "successes": 22,
       "template": "rgmin/morse-diis-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.31070353514985793,
-      "wilson_low": 0.150012823846054
+      "tuning": "tuned"
     },
     {
       "asv_commit": "9ab5db8c4bcd83bcb85d69fdc54d58fa5644ac4f",
@@ -1436,10 +1405,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.2,
+      "successes": 20,
       "template": "rgmin/morse-diis",
-      "tuning": "default",
-      "wilson_high": 0.2888291655931589,
-      "wilson_low": 0.1333669333310325
+      "tuning": "default"
     }
   ],
   "id": "minimization/morse-bulk",
@@ -1485,10 +1453,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "ase/morse-preconode12r-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "tuned"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1530,10 +1497,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "ase/morse-bfgs-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1575,10 +1541,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "ase/morse-bfgslinesearch-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1620,10 +1585,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "ase/morse-bfgslinesearch-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "tuned"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1665,10 +1629,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "ase/morse-fire-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "tuned"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1710,10 +1673,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "ase/morse-preconfire-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1755,10 +1717,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "ase/morse-bfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "tuned"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1800,10 +1761,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "ase/morse-fire-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1845,10 +1805,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "ase/morse-lbfgs-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1890,10 +1849,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "ase/morse-preconlbfgs-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1935,10 +1893,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "sella/morse-min-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "tuned"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -1980,10 +1937,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "ase/morse-preconode12r-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -2025,10 +1981,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "ase/morse-preconfire-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "tuned"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -2070,10 +2025,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "sella/morse-min-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -2115,10 +2069,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "ase/morse-lbfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "tuned"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -2160,10 +2113,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "ase/morse-preconlbfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "tuned"
     }
   ],
   "profile": {
@@ -3167,10 +3119,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-newton",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -3212,10 +3163,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-newton",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -3257,10 +3207,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-newton-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -3302,10 +3251,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-newton-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -3347,10 +3295,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-dogleg",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -3392,10 +3339,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-lbfgs-m20",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -3437,10 +3383,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-lbfgs-m20",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -3482,10 +3427,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-lbfgs-m20-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -3527,10 +3471,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-lbfgs-m20-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -3572,10 +3515,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-lbfgs-m100",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -3617,10 +3559,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-lbfgs-m100",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -3662,10 +3603,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-lbfgs-m100-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -3707,10 +3647,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-lbfgs-m100-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -3752,10 +3691,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-lbfgs",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -3797,10 +3735,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-lbfgs",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -3842,10 +3779,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-lbfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -3887,10 +3823,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-lbfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -3932,10 +3867,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-diis",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -3977,10 +3911,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-diis",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -4022,10 +3955,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-diis-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -4067,10 +3999,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-diis-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -4112,10 +4043,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "sella/morse-min-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -4157,10 +4087,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "ase/morse-bfgslinesearch-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -4202,10 +4131,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "ase/morse-preconlbfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -4247,10 +4175,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-dogleg",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -4292,10 +4219,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-dogleg-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -4337,10 +4263,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-dogleg-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -4382,10 +4307,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "ase/morse-lbfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -4427,10 +4351,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-bb",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -4472,10 +4395,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-bb",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -4517,10 +4439,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-bb-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -4562,10 +4483,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-bb-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "1999eab667e0b9e0e4108c2d59c0fb9d9a6fadec",
@@ -4607,10 +4527,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "gmin/morse-lbfgs",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "739fce9b10553193c9e8d49c56a7226020617bf5",
@@ -4652,10 +4571,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "vcsqnm/morse-ase",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "739fce9b10553193c9e8d49c56a7226020617bf5",
@@ -4697,10 +4615,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "vcsqnm/morse-sqnm",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -4742,10 +4659,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "ase/morse-preconode12r-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -4787,10 +4703,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "ase/morse-preconode12r-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "739fce9b10553193c9e8d49c56a7226020617bf5",
@@ -4832,10 +4747,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "vcsqnm/morse-ase-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "739fce9b10553193c9e8d49c56a7226020617bf5",
@@ -4877,10 +4791,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "vcsqnm/morse-sqnm-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "739fce9b10553193c9e8d49c56a7226020617bf5",
@@ -4922,10 +4835,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "vcsqnm/morse-vc",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "739fce9b10553193c9e8d49c56a7226020617bf5",
@@ -4967,10 +4879,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "vcsqnm/morse-ase-vc-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "739fce9b10553193c9e8d49c56a7226020617bf5",
@@ -5012,10 +4923,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "vcsqnm/morse-ase-vc",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "739fce9b10553193c9e8d49c56a7226020617bf5",
@@ -5057,10 +4967,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "vcsqnm/morse-vc-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -5102,10 +5011,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-cg",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -5147,10 +5055,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-cg",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -5192,10 +5099,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-cg-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -5237,10 +5143,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-cg-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -5282,10 +5187,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "ase/morse-bfgs-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -5327,10 +5231,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "ase/morse-lbfgs-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -5372,10 +5275,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-bfgs",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -5417,10 +5319,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "eon/morse-lbfgs-m100",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -5462,10 +5363,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "eon/morse-lbfgs",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": ""
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -5507,10 +5407,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "ase/morse-bfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -5552,10 +5451,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-sr2",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -5597,10 +5495,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-sr2",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -5642,10 +5539,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-sr2-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -5687,10 +5583,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-sr2-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -5732,10 +5627,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "ase/morse-preconlbfgs-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -5777,10 +5671,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-sr1",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -5822,10 +5715,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-sr1",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -5867,10 +5759,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-sr1-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -5912,10 +5803,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-sr1-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -5957,10 +5847,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-quickmin",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -6002,10 +5891,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-quickmin",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -6047,10 +5935,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-quickmin-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -6092,10 +5979,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-quickmin-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -6137,10 +6023,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-bfgs",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -6182,10 +6067,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-bfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -6227,10 +6111,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-bfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -6272,10 +6155,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "sella/morse-min-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -6317,10 +6199,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-sd",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -6362,10 +6243,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-sd",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -6407,10 +6287,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-sd-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -6452,10 +6331,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-sd-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
@@ -6497,10 +6375,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "pele/morse-lbfgs",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
@@ -6542,10 +6419,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "pele/morse-mylbfgs",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -6587,10 +6463,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "ase/morse-bfgslinesearch-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -6632,10 +6507,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-fire",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -6677,10 +6551,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-fire",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -6722,10 +6595,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-fire-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -6767,10 +6639,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-fire-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -6812,10 +6683,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "ase/morse-fire-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -6857,10 +6727,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "ase/morse-fire-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
@@ -6902,10 +6771,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "pele/morse-fire",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -6947,10 +6815,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-fire2",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -6992,10 +6859,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-fire2",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -7037,10 +6903,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-fire2-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -7082,10 +6947,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-fire2-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -7127,10 +6991,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-adam",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -7172,10 +7035,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-adam",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "de7ce86bde4d39bd5c2bb0c21579cae1ace33f5f",
@@ -7217,10 +7079,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-adam-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "076234c0a46310ccd6d15d60aac0543aaee9198e",
@@ -7262,10 +7123,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "rgmin/morse-adam-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -7307,10 +7167,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "ase/morse-preconfire-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -7352,10 +7211,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "ase/morse-preconfire-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -7397,10 +7255,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.32,
+      "successes": 32,
       "template": "dlfind/lbfgs-morse",
-      "tuning": "default",
-      "wilson_high": 0.41662618610452384,
-      "wilson_low": 0.23669147324999093
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -7442,10 +7299,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.18,
+      "successes": 18,
       "template": "dlfind/cg-morse",
-      "tuning": "default",
-      "wilson_high": 0.2666735838630073,
-      "wilson_low": 0.1170022549894635
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -7487,10 +7343,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.13,
+      "successes": 13,
       "template": "optim/lbfgs-morse",
-      "tuning": "default",
-      "wilson_high": 0.20980351440076428,
-      "wilson_low": 0.07757167427240512
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -7532,10 +7387,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.13,
+      "successes": 13,
       "template": "dlfind/sd-morse",
-      "tuning": "default",
-      "wilson_high": 0.20980351440076428,
-      "wilson_low": 0.07757167427240512
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -7577,10 +7431,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.12,
+      "successes": 12,
       "template": "tsase/lbfgs-morse",
-      "tuning": "default",
-      "wilson_high": 0.19812099426711421,
-      "wilson_low": 0.06999406437019488
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -7622,10 +7475,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.12,
+      "successes": 12,
       "template": "lammps/fire-morse",
-      "tuning": "default",
-      "wilson_high": 0.19812099426711421,
-      "wilson_low": 0.06999406437019488
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -7667,10 +7519,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.05,
+      "successes": 5,
       "template": "lammps/cg-morse",
-      "tuning": "default",
-      "wilson_high": 0.11175046923191913,
-      "wilson_low": 0.02154367915436796
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -7712,10 +7563,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.05,
+      "successes": 5,
       "template": "lammps/quickmin-morse",
-      "tuning": "default",
-      "wilson_high": 0.11175046923191913,
-      "wilson_low": 0.02154367915436796
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -7757,10 +7607,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.04,
+      "successes": 4,
       "template": "lammps/sd-morse",
-      "tuning": "default",
-      "wilson_high": 0.0983707143588792,
-      "wilson_low": 0.01566330399154762
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -7802,10 +7651,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.03,
+      "successes": 3,
       "template": "lammps/hftn-morse",
-      "tuning": "default",
-      "wilson_high": 0.0845193642905276,
-      "wilson_low": 0.010254524024038925
+      "tuning": "default"
     },
     {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
@@ -7847,10 +7695,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "pele/morse-sd",
-      "tuning": "default",
-      "wilson_high": 0.03699349820698568,
-      "wilson_low": 0.0
+      "tuning": "default"
     }
   ],
   "title": "Morse bulk"

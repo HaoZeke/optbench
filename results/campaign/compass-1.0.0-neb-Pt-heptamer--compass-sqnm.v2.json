@@ -55,12 +55,10 @@
     "par_factor": 2,
     "q25": 514.0,
     "q75": 633.0,
-    "scoring": "par2-wilson-bootstrap",
+    "scoring": "par2-bootstrap",
     "success_only_mean": 561.4615384615385,
     "success_rate": 1.0,
-    "successes": 13,
-    "wilson_high": 1.0,
-    "wilson_low": 0.7719046276458016
+    "successes": 13
   },
   "template": "compass/sqnm"
 }

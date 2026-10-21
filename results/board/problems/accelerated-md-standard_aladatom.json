@@ -43,10 +43,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "eon/standard-aladatom-akmc",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": ""
     }
   ],
   "partial": [],

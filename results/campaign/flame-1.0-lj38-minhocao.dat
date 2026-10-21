@@ -20,8 +20,6 @@ problem globalopt/lj38
 tuning default
 counter harness
 par2_mean 861682.31
-wilson_low 0.837737871473
-wilson_high 0.951927459997
 par2_median 522629.5
 par2_median_low 337726.5
 par2_median_high 676075

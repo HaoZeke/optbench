@@ -43,10 +43,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 49,
       "template": "eon/ts-pt-dimer-m100",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9273021807795035
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -88,10 +87,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 49,
       "template": "eon/ts-pt-dimer",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9273021807795035
+      "tuning": ""
     }
   ],
   "partial": [
@@ -135,10 +133,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 49,
       "template": "eon-svn/ts-pt-dimer",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9273021807795035
+      "tuning": "default"
     },
     {
       "asv_commit": "c1ecf607a10f7ab78d1615e4cbf9af030bebcdbf",
@@ -180,10 +177,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 49,
       "template": "eon-svn/ts-pt-lanczos",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9273021807795035
+      "tuning": "default"
     },
     {
       "asv_commit": "773f8e16a8c96df68d7a05af605491f9b7272596",
@@ -225,10 +221,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "eon/develop-ts-pt-dimer-accept-energy",
-      "tuning": "accept-energy",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": "accept-energy"
     },
     {
       "asv_commit": "773f8e16a8c96df68d7a05af605491f9b7272596",
@@ -270,10 +265,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "eon/develop-ts-pt-lanczos",
-      "tuning": "",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": ""
     },
     {
       "asv_commit": "4508ee7a30cda80878a93b507f3b81d50fa1d450",
@@ -315,10 +309,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "optking/pt-p-rfo",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "4508ee7a30cda80878a93b507f3b81d50fa1d450",
@@ -360,10 +353,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "optking/pt-rs-irfo",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -405,10 +397,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "sella/pt-island-ts-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -450,10 +441,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "sella/pt-island-ts-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "tuned"
     }
   ],
   "profile": {
@@ -719,10 +709,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 49,
       "template": "sella/pt-island-ts-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9273021807795035
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -764,10 +753,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 49,
       "template": "sella/pt-island-ts-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9273021807795035
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -809,10 +797,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 49,
       "template": "eon-svn/ts-pt-lanczos-improved",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9273021807795035
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -854,10 +841,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 49,
       "template": "eon-client/ts-pt-lanczos-improved",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9273021807795035
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -899,10 +885,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 49,
       "template": "eon-svn/ts-pt-dimer-smooth",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9273021807795035
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -944,10 +929,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 49,
       "template": "eon-client/ts-pt-dimer",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9273021807795035
+      "tuning": ""
     },
     {
       "asv_commit": "45cc69fbe2b24cd5927e6d4df2b13831e19ff8d1",
@@ -989,10 +973,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 49,
       "template": "eon/develop-ts-pt-dimer",
-      "tuning": "r2549-ini",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9273021807795035
+      "tuning": "r2549-ini"
     },
     {
       "asv_commit": "",
@@ -1034,10 +1017,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 49,
       "template": "eon-svn/ts-pt-lanczos-smooth",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9273021807795035
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -1079,10 +1061,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 49,
       "template": "eon-client/ts-pt-lanczos",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9273021807795035
+      "tuning": ""
     },
     {
       "asv_commit": "a914203cbb891442232aea2c92f960df9a48dc1d",
@@ -1124,10 +1105,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 49,
       "template": "rgsaddle/pt-dimer-rotskip",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9273021807795035
+      "tuning": "default"
     },
     {
       "asv_commit": "06efc6dd8ad69a707789c55bfe2f012e8503f05c",
@@ -1169,10 +1149,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 49,
       "template": "eon/develop-ts-pt-lanczos",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9273021807795035
+      "tuning": ""
     },
     {
       "asv_commit": "a914203cbb891442232aea2c92f960df9a48dc1d",
@@ -1214,10 +1193,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 49,
       "template": "rgsaddle/pt-dimer-rotskip-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9273021807795035
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -1259,10 +1237,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 49,
       "template": "optking/pt-rs-irfo",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9273021807795035
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -1304,10 +1281,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 49,
       "template": "optking/pt-p-rfo",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9273021807795035
+      "tuning": "default"
     },
     {
       "asv_commit": "a914203cbb891442232aea2c92f960df9a48dc1d",
@@ -1349,10 +1325,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 49,
       "template": "rgsaddle/pt-dimer-fire-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9273021807795035
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -1394,10 +1369,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 49,
       "template": "tsase/dimer-pt",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9273021807795035
+      "tuning": "default"
     },
     {
       "asv_commit": "06efc6dd8ad69a707789c55bfe2f012e8503f05c",
@@ -1439,10 +1413,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 49,
       "template": "eon/develop-ts-pt-dimer-accept-energy",
-      "tuning": "accept-energy",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9273021807795035
+      "tuning": "accept-energy"
     },
     {
       "asv_commit": "",
@@ -1484,10 +1457,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.9183673469387755,
+      "successes": 45,
       "template": "partn/ts-pt",
-      "tuning": "default",
-      "wilson_high": 0.9677971823322362,
-      "wilson_low": 0.808108724034287
+      "tuning": "default"
     },
     {
       "asv_commit": "a914203cbb891442232aea2c92f960df9a48dc1d",
@@ -1529,10 +1501,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.9795918367346939,
+      "successes": 48,
       "template": "rgsaddle/pt-dimer-fire",
-      "tuning": "default",
-      "wilson_high": 0.9963883274101746,
-      "wilson_low": 0.8930647847660838
+      "tuning": "default"
     },
     {
       "asv_commit": "a914203cbb891442232aea2c92f960df9a48dc1d",
@@ -1574,10 +1545,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.6326530612244898,
+      "successes": 31,
       "template": "rgsaddle/pt-dimer-lbfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.7533482703131686,
-      "wilson_low": 0.49267067560792427
+      "tuning": "tuned"
     },
     {
       "asv_commit": "a914203cbb891442232aea2c92f960df9a48dc1d",
@@ -1619,10 +1589,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.5306122448979592,
+      "successes": 26,
       "template": "rgsaddle/pt-lanczos",
-      "tuning": "default",
-      "wilson_high": 0.6629649630682484,
-      "wilson_low": 0.39380863983661896
+      "tuning": "default"
     },
     {
       "asv_commit": "a914203cbb891442232aea2c92f960df9a48dc1d",
@@ -1664,10 +1633,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.5102040816326531,
+      "successes": 25,
       "template": "rgsaddle/pt-lanczos-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.6442488968969421,
-      "wilson_low": 0.37467563740468035
+      "tuning": "tuned"
     },
     {
       "asv_commit": "a914203cbb891442232aea2c92f960df9a48dc1d",
@@ -1709,10 +1677,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.42857142857142855,
+      "successes": 21,
       "template": "rgsaddle/pt-dimer-lbfgs",
-      "tuning": "default",
-      "wilson_high": 0.5672950690998263,
-      "wilson_low": 0.30023319078881594
+      "tuning": "default"
     }
   ],
   "title": "pt-island"

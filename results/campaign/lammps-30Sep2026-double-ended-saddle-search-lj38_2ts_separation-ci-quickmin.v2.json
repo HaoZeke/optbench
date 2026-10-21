@@ -68,12 +68,10 @@
     "par_factor": 2,
     "q25": 20000.0,
     "q75": 20000.0,
-    "scoring": "par2-wilson-bootstrap",
+    "scoring": "par2-bootstrap",
     "success_only_mean": 9982.0,
     "success_rate": 0.09803921568627451,
-    "successes": 5,
-    "wilson_high": 0.20978234681080865,
-    "wilson_low": 0.04260807310761862
+    "successes": 5
   },
   "template": "lammpsneb/ci-quickmin"
 }

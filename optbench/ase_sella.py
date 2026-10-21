@@ -1444,8 +1444,6 @@ def _write_dat(
                 ("par2_median_high", scored.get("median_high")),
                 ("par2_iqr", scored.get("iqr")),
                 ("success_rate", scored.get("success_rate")),
-                ("wilson_low", scored.get("wilson_low")),
-                ("wilson_high", scored.get("wilson_high")),
                 ("par_applied", scored.get("par_applied")),
                 ("par_factor", scored.get("par_factor")),
                 ("bootstrap_resamples", scored.get("bootstrap_resamples")),

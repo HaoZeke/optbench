@@ -17,8 +17,6 @@ template rgmin/morse-fire-tuned
 tuning tuned
 counter harness
 par2_mean 113.19
-wilson_low 0.963006501793
-wilson_high 1
 par2_median 113
 par2_median_low 112
 par2_median_high 115

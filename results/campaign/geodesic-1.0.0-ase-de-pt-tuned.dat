@@ -19,15 +19,13 @@ note Initialiser ablation of ase/de-pt-island-tuned. The path is geodesic-interp
 host cursor
 date 2026-10-18
 contributor Rohit Goswami
-scoring par2-wilson-bootstrap
+scoring par2-bootstrap
 par2_mean 595.9830508
 par2_median 347
 par2_median_low 335
 par2_median_high 392
 par2_iqr 91.5
 success_rate 0.9661016949
-wilson_low 0.8845642925
-wilson_high 0.9906540909
 par_applied true
 par_factor 2
 bootstrap_resamples 2000

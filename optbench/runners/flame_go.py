@@ -681,8 +681,6 @@ def _dat(
         "tuning": template.get("tuning", ""),
         "counter": "harness",
         "par2_mean": metrics.get("par2_mean"),
-        "wilson_low": metrics.get("wilson_low"),
-        "wilson_high": metrics.get("wilson_high"),
         "par2_median": metrics.get("median"),
         "par2_median_low": metrics.get("median_low"),
         "par2_median_high": metrics.get("median_high"),
@@ -807,11 +805,13 @@ def _publish(output: Path, records: list[dict], problem: dict, template: dict, *
             "geofiredtmin": (template.get("flame") or {}).get("geofiredtmin"),
         },
     )
+    published_metrics = dict(metrics)
+    published_metrics["scoring"] = "par2-bootstrap"
     document = {
         "schema": "optbench.result/v2",
         "status": "partial" if partial else "archive",
         "problem": problem["id"],
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-bootstrap",
         "par_factor": 2,
         "bootstrap_resamples": 2000,
         "bootstrap_seed": 20261015,
@@ -827,7 +827,7 @@ def _publish(output: Path, records: list[dict], problem: dict, template: dict, *
                 "present_source": True,
                 "cap": cap,
                 "provenance": provenance,
-                "metrics": metrics,
+                "metrics": published_metrics,
                 "starts": public,
             }
         ],

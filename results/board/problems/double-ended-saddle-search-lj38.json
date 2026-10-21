@@ -43,10 +43,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.14,
+      "successes": 7,
       "template": "eon/de-lj38-lbfgs-m100",
-      "tuning": "",
-      "wilson_high": 0.2618619371058554,
-      "wilson_low": 0.06950833427016294
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -88,10 +87,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.12,
+      "successes": 6,
       "template": "eon/de-lj38-lbfgs",
-      "tuning": "",
-      "wilson_high": 0.23804817383202992,
-      "wilson_low": 0.05617600150932274
+      "tuning": ""
     }
   ],
   "partial": [
@@ -135,10 +133,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "eon/develop-de-lj38-cap-accept-energy",
-      "tuning": "accept-energy",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": "accept-energy"
     },
     {
       "asv_commit": "e172a4b674067643a20f44d30d9ca4a93025acac",
@@ -180,10 +177,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "eon/develop-de-lj38-ew",
-      "tuning": "",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": ""
     },
     {
       "asv_commit": "e172a4b674067643a20f44d30d9ca4a93025acac",
@@ -225,10 +221,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "eon/develop-de-lj38-oci",
-      "tuning": "",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": ""
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -270,10 +265,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "ase/de-lj38-default",
-      "tuning": "default",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -315,10 +309,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "sella/de-lj38-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -360,10 +353,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "sella/de-lj38-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "tuned"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -405,10 +397,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "ase/de-lj38-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "tuned"
     },
     {
       "asv_commit": "773f8e16a8c96df68d7a05af605491f9b7272596",
@@ -450,10 +441,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "eon/develop-de-lj38-cap-accept-energy",
-      "tuning": "accept-energy",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": "accept-energy"
     },
     {
       "asv_commit": "773f8e16a8c96df68d7a05af605491f9b7272596",
@@ -495,10 +485,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "eon/develop-de-lj38-ew",
-      "tuning": "",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": ""
     },
     {
       "asv_commit": "773f8e16a8c96df68d7a05af605491f9b7272596",
@@ -540,10 +529,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "eon/develop-de-lj38-oci",
-      "tuning": "",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": ""
     }
   ],
   "profile": {
@@ -989,10 +977,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 50,
       "template": "eon-svn/de-lj38-lanczos-improved",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9286524008666414
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -1034,10 +1021,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 50,
       "template": "eon-client/de-lj38-lanczos-improved",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9286524008666414
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -1079,10 +1065,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 50,
       "template": "eon-svn/de-lj38-lanczos",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9286524008666414
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -1124,10 +1109,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 50,
       "template": "eon-client/de-lj38-lanczos",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9286524008666414
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -1169,10 +1153,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.98,
+      "successes": 49,
       "template": "eon-svn/de-lj38-dimer",
-      "tuning": "",
-      "wilson_high": 0.9964607407283539,
-      "wilson_low": 0.8950455641036219
+      "tuning": ""
     },
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",
@@ -1214,10 +1197,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.94,
+      "successes": 47,
       "template": "rgsaddle/ew-ci-neb-lbfgs",
-      "tuning": "tuned",
-      "wilson_high": 0.979385029651026,
-      "wilson_low": 0.8378290831116182
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -1259,10 +1241,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.94,
+      "successes": 47,
       "template": "eon-client/de-lj38-ci-neb",
-      "tuning": "",
-      "wilson_high": 0.979385029651026,
-      "wilson_low": 0.8378290831116182
+      "tuning": ""
     },
     {
       "asv_commit": "45cc69fbe2b24cd5927e6d4df2b13831e19ff8d1",
@@ -1304,10 +1285,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 0.94,
+      "successes": 47,
       "template": "eon/develop-de-lj38-cap",
-      "tuning": "r2549-ini",
-      "wilson_high": 0.979385029651026,
-      "wilson_low": 0.8378290831116182
+      "tuning": "r2549-ini"
     },
     {
       "asv_commit": "",
@@ -1349,10 +1329,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.92,
+      "successes": 46,
       "template": "eon-svn/de-lj38-ci-neb",
-      "tuning": "",
-      "wilson_high": 0.968450485911407,
-      "wilson_low": 0.8116175308165717
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -1394,10 +1373,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.9,
+      "successes": 45,
       "template": "eon-client/de-lj38-ci-swdneb",
-      "tuning": "",
-      "wilson_high": 0.9565242350681096,
-      "wilson_low": 0.7863976856252035
+      "tuning": ""
     },
     {
       "asv_commit": "c1ecf607a10f7ab78d1615e4cbf9af030bebcdbf",
@@ -1439,10 +1417,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.9,
+      "successes": 45,
       "template": "eon-svn/de-lj38-ci",
-      "tuning": "default",
-      "wilson_high": 0.9565242350681096,
-      "wilson_low": 0.7863976856252035
+      "tuning": "default"
     },
     {
       "asv_commit": "21ca7a8cdb95342b07929c946488380ef3d90bfb",
@@ -1484,10 +1461,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.86,
+      "successes": 43,
       "template": "geodesic/ci-neb-lbfgs",
-      "tuning": "ablation",
-      "wilson_high": 0.9304916657298371,
-      "wilson_low": 0.7381380628941446
+      "tuning": "ablation"
     },
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",
@@ -1529,10 +1505,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.86,
+      "successes": 43,
       "template": "rgsaddle/ci-neb-lbfgs",
-      "tuning": "tuned",
-      "wilson_high": 0.9304916657298371,
-      "wilson_low": 0.7381380628941446
+      "tuning": "tuned"
     },
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",
@@ -1574,10 +1549,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.86,
+      "successes": 43,
       "template": "rgsaddle/oci-neb-lbfgs",
-      "tuning": "tuned",
-      "wilson_high": 0.9304916657298371,
-      "wilson_low": 0.7381380628941446
+      "tuning": "tuned"
     },
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",
@@ -1619,10 +1593,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.86,
+      "successes": 43,
       "template": "rgsaddle/idpp-ci-neb-lbfgs",
-      "tuning": "tuned",
-      "wilson_high": 0.9304916657298371,
-      "wilson_low": 0.7381380628941446
+      "tuning": "tuned"
     },
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",
@@ -1664,10 +1637,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.84,
+      "successes": 42,
       "template": "rgsaddle/sidpp-ci-neb-lbfgs",
-      "tuning": "tuned",
-      "wilson_high": 0.916625793219666,
-      "wilson_low": 0.7148578393696501
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -1709,10 +1681,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.88,
+      "successes": 44,
       "template": "eon-svn/de-lj38-ci-swdneb",
-      "tuning": "",
-      "wilson_high": 0.9438239984906773,
-      "wilson_low": 0.7619518261679701
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -1754,10 +1725,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.94,
+      "successes": 47,
       "template": "compass/sqnm",
-      "tuning": "default",
-      "wilson_high": 0.979385029651026,
-      "wilson_low": 0.8378290831116182
+      "tuning": "default"
     },
     {
       "asv_commit": "c1ecf607a10f7ab78d1615e4cbf9af030bebcdbf",
@@ -1799,10 +1769,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.82,
+      "successes": 41,
       "template": "eon-svn/de-lj38-neb",
-      "tuning": "default",
-      "wilson_high": 0.9022980732976582,
-      "wilson_low": 0.6920394632569922
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -1844,10 +1813,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 50,
       "template": "sella/de-lj38-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9286524008666414
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -1889,10 +1857,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.66,
+      "successes": 33,
       "template": "eon-client/de-lj38-dimer",
-      "tuning": "",
-      "wilson_high": 0.7756305077749992,
-      "wilson_low": 0.521538260502326
+      "tuning": ""
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -1934,10 +1901,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 50,
       "template": "sella/de-lj38-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9286524008666414
+      "tuning": "default"
     },
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",
@@ -1979,10 +1945,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.78,
+      "successes": 39,
       "template": "rgsaddle/ew-ci-neb",
-      "tuning": "default",
-      "wilson_high": 0.8724608402978559,
-      "wilson_low": 0.6475845041874634
+      "tuning": "default"
     },
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",
@@ -2024,10 +1989,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.74,
+      "successes": 37,
       "template": "rgsaddle/ci-neb",
-      "tuning": "default",
-      "wilson_high": 0.8412847250644762,
-      "wilson_low": 0.6044684273515117
+      "tuning": "default"
     },
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",
@@ -2069,10 +2033,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.74,
+      "successes": 37,
       "template": "rgsaddle/oci-neb",
-      "tuning": "default",
-      "wilson_high": 0.8412847250644762,
-      "wilson_low": 0.6044684273515117
+      "tuning": "default"
     },
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",
@@ -2114,10 +2077,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.72,
+      "successes": 36,
       "template": "rgsaddle/idpp-ci-neb",
-      "tuning": "default",
-      "wilson_high": 0.8252582933408878,
-      "wilson_low": 0.5833487630404344
+      "tuning": "default"
     },
     {
       "asv_commit": "21ca7a8cdb95342b07929c946488380ef3d90bfb",
@@ -2159,10 +2121,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.68,
+      "successes": 34,
       "template": "geodesic/ci-neb",
-      "tuning": "ablation",
-      "wilson_high": 0.7924178373934316,
-      "wilson_low": 0.5418970269185592
+      "tuning": "ablation"
     },
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",
@@ -2204,10 +2165,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.68,
+      "successes": 34,
       "template": "rgsaddle/sidpp-ci-neb",
-      "tuning": "default",
-      "wilson_high": 0.7924178373934316,
-      "wilson_low": 0.5418970269185592
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -2249,10 +2209,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.52,
+      "successes": 26,
       "template": "tsase/ci-neb",
-      "tuning": "default",
-      "wilson_high": 0.6520286471342196,
-      "wilson_low": 0.38511744890044614
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -2294,10 +2253,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 0.42,
+      "successes": 21,
       "template": "ase/de-lj38-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.5576655823142176,
-      "wilson_low": 0.2937500335471198
+      "tuning": "tuned"
     },
     {
       "asv_commit": "21ca7a8cdb95342b07929c946488380ef3d90bfb",
@@ -2339,10 +2297,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.36,
+      "successes": 18,
       "template": "geodesic/ase-de-lj38-tuned",
-      "tuning": "ablation",
-      "wilson_high": 0.49858983123887307,
-      "wilson_low": 0.24138749651846741
+      "tuning": "ablation"
     },
     {
       "asv_commit": "de7400eba879167cc6caa0b22c8c8a4313e04981",
@@ -2384,10 +2341,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.16,
+      "successes": 8,
       "template": "lammpsneb/ci-fire",
-      "tuning": "default",
-      "wilson_high": 0.2851421606303499,
-      "wilson_low": 0.08337420678033404
+      "tuning": "default"
     },
     {
       "asv_commit": "06efc6dd8ad69a707789c55bfe2f012e8503f05c",
@@ -2429,10 +2385,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 0.12,
+      "successes": 6,
       "template": "eon/develop-de-lj38-oci",
-      "tuning": "",
-      "wilson_high": 0.23804817383202992,
-      "wilson_low": 0.05617600150932274
+      "tuning": ""
     },
     {
       "asv_commit": "06efc6dd8ad69a707789c55bfe2f012e8503f05c",
@@ -2474,10 +2429,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 0.12,
+      "successes": 6,
       "template": "eon/develop-de-lj38-cap-accept-energy",
-      "tuning": "accept-energy",
-      "wilson_high": 0.23804817383202992,
-      "wilson_low": 0.05617600150932274
+      "tuning": "accept-energy"
     },
     {
       "asv_commit": "21ca7a8cdb95342b07929c946488380ef3d90bfb",
@@ -2519,10 +2473,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.04,
+      "successes": 2,
       "template": "geodesic/ase-de-lj38-default",
-      "tuning": "ablation",
-      "wilson_high": 0.1346009068750702,
-      "wilson_low": 0.011038884327619805
+      "tuning": "ablation"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -2564,10 +2517,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 0.02,
+      "successes": 1,
       "template": "ase/de-lj38-default",
-      "tuning": "default",
-      "wilson_high": 0.10495443589637815,
-      "wilson_low": 0.003539259271646236
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -2609,10 +2561,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.02,
+      "successes": 1,
       "template": "ase/de-lj38-default",
-      "tuning": "default",
-      "wilson_high": 0.10495443589637815,
-      "wilson_low": 0.003539259271646236
+      "tuning": "default"
     },
     {
       "asv_commit": "de7400eba879167cc6caa0b22c8c8a4313e04981",
@@ -2654,10 +2605,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.02,
+      "successes": 1,
       "template": "lammpsneb/ci-quickmin",
-      "tuning": "default",
-      "wilson_high": 0.10495443589637815,
-      "wilson_low": 0.003539259271646236
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -2699,10 +2649,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "ase/de-lj38-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.07134759913335872,
-      "wilson_low": 0.0
+      "tuning": "tuned"
     },
     {
       "asv_commit": "06efc6dd8ad69a707789c55bfe2f012e8503f05c",
@@ -2744,10 +2693,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "eon/develop-de-lj38-ew",
-      "tuning": "",
-      "wilson_high": 0.07134759913335872,
-      "wilson_low": 0.0
+      "tuning": ""
     },
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",
@@ -2789,10 +2737,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "rgsaddle/neb",
-      "tuning": "default",
-      "wilson_high": 0.07134759913335872,
-      "wilson_low": 0.0
+      "tuning": "default"
     },
     {
       "asv_commit": "19e5e5f275cc59e67893ae3e761f1fb0097841f2",
@@ -2834,10 +2781,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "rgsaddle/neb-lbfgs",
-      "tuning": "tuned",
-      "wilson_high": 0.07134759913335872,
-      "wilson_low": 0.0
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -2879,10 +2825,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "tsase/neb",
-      "tuning": "default",
-      "wilson_high": 0.07134759913335872,
-      "wilson_low": 0.0
+      "tuning": "default"
     }
   ],
   "title": "LJ38 double-ended saddle"

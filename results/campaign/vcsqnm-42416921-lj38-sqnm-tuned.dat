@@ -19,8 +19,6 @@ template vcsqnm/lj38-sqnm-tuned
 tuning tuned
 counter harness
 par2_mean 482.515
-wilson_low 0.988349044627
-wilson_high 0.997862464473
 par2_median 369
 par2_median_low 362
 par2_median_high 374

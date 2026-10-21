@@ -53,12 +53,10 @@
     "par_factor": 2,
     "q25": 319.0,
     "q75": 20000.0,
-    "scoring": "par2-wilson-bootstrap",
+    "scoring": "par2-bootstrap",
     "success_only_mean": 353.77659574468083,
     "success_rate": 0.564,
-    "successes": 564,
-    "wilson_high": 0.5944320364705682,
-    "wilson_low": 0.5330781384432806
+    "successes": 564
   },
   "template": "lammps/fire-lj38-noise-s1em2"
 }

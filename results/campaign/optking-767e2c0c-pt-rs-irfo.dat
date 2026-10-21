@@ -24,8 +24,6 @@ problem tsopt/pt-island
 tuning default
 counter harness
 par2_mean 1059.97959184
-wilson_low 0.92730218078
-wilson_high 1
 par2_median 1060
 par2_median_low 1057
 par2_median_high 1060

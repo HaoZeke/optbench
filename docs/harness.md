@@ -43,7 +43,7 @@ One point uses the Cartesian distance, because centering a single point would re
 
 `score_v2` reduces the starts.
 
-- Successes `k` out of `n` carry a Wilson 95% interval with `z = 1.959963984540054`.
+- Successes `k` out of `n` are the success count on the board.
 - A failure costs `2 * cap`. The ranking number is the mean of the penalised costs.
 - The median and the interquartile range are taken on those same penalised costs. A percentile bootstrap of 2000 resamples, seed `20261015`, gives the 95% interval.
 

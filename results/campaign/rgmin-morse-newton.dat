@@ -17,8 +17,6 @@ template rgmin/morse-newton
 tuning default
 counter harness
 par2_mean 396.69
-wilson_low 0.945513803821
-wilson_high 0.998232567936
 par2_median 8
 par2_median_low 7
 par2_median_high 8

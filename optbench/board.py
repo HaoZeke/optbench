@@ -502,8 +502,7 @@ def _blank_row(**values) -> dict:
         "full_n": None,
         "par2_mean": None,
         "success_rate": None,
-        "wilson_low": None,
-        "wilson_high": None,
+        "successes": None,
         "median": None,
         "median_low": None,
         "median_high": None,
@@ -553,8 +552,7 @@ def _apply_summary(row: dict, summary: dict, records: list[dict]) -> None:
     row["n"] = int(summary["n"])
     row["par2_mean"] = summary["par2_mean"]
     row["success_rate"] = summary["success_rate"]
-    row["wilson_low"] = summary["wilson_low"]
-    row["wilson_high"] = summary["wilson_high"]
+    row["successes"] = summary["successes"]
     row["median"] = summary["median"]
     row["median_low"] = summary["median_low"]
     row["median_high"] = summary["median_high"]
@@ -1280,16 +1278,14 @@ def _show_per_image(problem: dict) -> bool:
 def _headers(problem: dict) -> list[str]:
     # The ranked table and the headline table list the current version only.
     # Older versions stay in the history list, so a Current column is yes on
-    # every ranked row. The Wilson interval is one cell, low then high.
-    # Two separate columns push the minimization page over the DOM budget.
+    # every ranked row. Successes is the count of starts that met the rule.
     headers = [
         "Template",
         "Version",
         "Commit",
         "Source",
         "PAR-2",
-        "Success",
-        "Wilson",
+        "Successes",
         "Median calls",
         "Mean calls",
     ]
@@ -1313,11 +1309,7 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
         ("commit", str(row.get("commit") or "")[:12]),
         ("source", str(row.get("source") or "")),
         ("par2_mean", _format_number(row.get("par2_mean"))),
-        ("success_rate", _format_number(row.get("success_rate"))),
-        (
-            "wilson",
-            f"{_format_number(row.get('wilson_low'))}–{_format_number(row.get('wilson_high'))}",
-        ),
+        ("successes", _format_number(row.get("successes"))),
         ("median_calls", _format_number(row.get("median_calls"))),
         ("mean_calls", _format_number(row.get("mean_calls"))),
     ]
@@ -1563,7 +1555,7 @@ def _table(
     headers = _headers(problem)
     caption = (
         "Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. "
-        "Wilson bounds are the 95% interval on the success rate."
+        "Successes is the number of starts that met the rule."
     )
     if per_image:
         caption += " Per-image mean divides that total by the problem's moving images, the same way for every code."

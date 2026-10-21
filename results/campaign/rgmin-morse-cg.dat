@@ -17,8 +17,6 @@ template rgmin/morse-cg
 tuning default
 counter harness
 par2_mean 54.72
-wilson_low 0.963006501793
-wilson_high 1
 par2_median 54
 par2_median_low 52
 par2_median_high 56

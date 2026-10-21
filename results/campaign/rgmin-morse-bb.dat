@@ -17,8 +17,6 @@ template rgmin/morse-bb
 tuning default
 counter harness
 par2_mean 15606.64
-wilson_low 0.150012823846
-wilson_high 0.31070353515
 par2_median 20000
 par2_median_low 20000
 par2_median_high 20000

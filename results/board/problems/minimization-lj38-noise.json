@@ -1014,10 +1014,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 1000,
       "template": "noise/rgmin-dogleg-s0",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.996173241514445
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -1059,10 +1058,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.995,
+      "successes": 995,
       "template": "noise/rgmin-newton-s0",
-      "tuning": "default",
-      "wilson_high": 0.9978624644726756,
-      "wilson_low": 0.9883490446266249
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -1104,10 +1102,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.999,
+      "successes": 999,
       "template": "noise/rgmin-lbfgs-m100-s0",
-      "tuning": "default",
-      "wilson_high": 0.9998234536293739,
-      "wilson_low": 0.9943574414020421
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -1149,10 +1146,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.998,
+      "successes": 998,
       "template": "dlfind/lbfgs-lj38-noise-s0",
-      "tuning": "default",
-      "wilson_high": 0.9994513564118793,
-      "wilson_low": 0.9927371921365079
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -1194,10 +1190,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.998,
+      "successes": 998,
       "template": "dlfind/lbfgs-lj38-noise-s1em4",
-      "tuning": "default",
-      "wilson_high": 0.9994513564118793,
-      "wilson_low": 0.9927371921365079
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -1239,10 +1234,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.999,
+      "successes": 999,
       "template": "dlfind/lbfgs-lj38-noise-s1em3",
-      "tuning": "default",
-      "wilson_high": 0.9998234536293739,
-      "wilson_low": 0.9943574414020421
+      "tuning": "default"
     },
     {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
@@ -1284,10 +1278,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.999,
+      "successes": 999,
       "template": "noise/pele-mylbfgs-s0",
-      "tuning": "default",
-      "wilson_high": 0.9998234536293739,
-      "wilson_low": 0.9943574414020421
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -1329,10 +1322,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.995,
+      "successes": 995,
       "template": "noise/rgmin-lbfgs-m100-s1em4",
-      "tuning": "default",
-      "wilson_high": 0.9978624644726756,
-      "wilson_low": 0.9883490446266249
+      "tuning": "default"
     },
     {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
@@ -1374,10 +1366,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.998,
+      "successes": 998,
       "template": "noise/pele-lbfgs-s0",
-      "tuning": "default",
-      "wilson_high": 0.9994513564118793,
-      "wilson_low": 0.9927371921365079
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -1419,10 +1410,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.994,
+      "successes": 994,
       "template": "noise/rgmin-lbfgs-m100-s1em3",
-      "tuning": "default",
-      "wilson_high": 0.9972473308581237,
-      "wilson_low": 0.9869718317581478
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -1464,10 +1454,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.996,
+      "successes": 996,
       "template": "noise/rgmin-lbfgs-s0",
-      "tuning": "default",
-      "wilson_high": 0.9984434118595916,
-      "wilson_low": 0.9897604437227377
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -1509,10 +1498,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.996,
+      "successes": 996,
       "template": "rgmin/lj38-noise-lbfgs-s0",
-      "tuning": "default",
-      "wilson_high": 0.9984434118595916,
-      "wilson_low": 0.9897604437227377
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -1554,10 +1542,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.996,
+      "successes": 996,
       "template": "rgmin/lj38-noise-lbfgs-s0-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9984434118595916,
-      "wilson_low": 0.9897604437227377
+      "tuning": "tuned"
     },
     {
       "asv_commit": "c1ecf607a10f7ab78d1615e4cbf9af030bebcdbf",
@@ -1599,10 +1586,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.995,
+      "successes": 995,
       "template": "eon-svn/lj38-noise-0",
-      "tuning": "default",
-      "wilson_high": 0.9978624644726756,
-      "wilson_low": 0.9883490446266249
+      "tuning": "default"
     },
     {
       "asv_commit": "c1ecf607a10f7ab78d1615e4cbf9af030bebcdbf",
@@ -1644,10 +1630,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.995,
+      "successes": 995,
       "template": "eon-svn/lj38-noise-1e-4",
-      "tuning": "default",
-      "wilson_high": 0.9978624644726756,
-      "wilson_low": 0.9883490446266249
+      "tuning": "default"
     },
     {
       "asv_commit": "1999eab667e0b9e0e4108c2d59c0fb9d9a6fadec",
@@ -1689,10 +1674,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.997,
+      "successes": 997,
       "template": "noise/gmin-lbfgs-s0",
-      "tuning": "default",
-      "wilson_high": 0.9989792161188614,
-      "wilson_low": 0.9912169859464969
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -1734,10 +1718,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.994,
+      "successes": 994,
       "template": "rgmin/lj38-noise-lbfgs-s1em4",
-      "tuning": "default",
-      "wilson_high": 0.9972473308581237,
-      "wilson_low": 0.9869718317581478
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -1779,10 +1762,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.994,
+      "successes": 994,
       "template": "rgmin/lj38-noise-lbfgs-s1em4-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9972473308581237,
-      "wilson_low": 0.9869718317581478
+      "tuning": "tuned"
     },
     {
       "asv_commit": "c1ecf607a10f7ab78d1615e4cbf9af030bebcdbf",
@@ -1824,10 +1806,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.991,
+      "successes": 991,
       "template": "eon-svn/lj38-noise-1e-3",
-      "tuning": "default",
-      "wilson_high": 0.9952579393325229,
-      "wilson_low": 0.982984183834662
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -1869,10 +1850,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.994,
+      "successes": 994,
       "template": "noise/ase-lbfgs-s0",
-      "tuning": "default",
-      "wilson_high": 0.9972473308581237,
-      "wilson_low": 0.9869718317581478
+      "tuning": "default"
     },
     {
       "asv_commit": "1999eab667e0b9e0e4108c2d59c0fb9d9a6fadec",
@@ -1914,10 +1894,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.991,
+      "successes": 991,
       "template": "noise/gmin-lbfgs-s1em3",
-      "tuning": "default",
-      "wilson_high": 0.9952579393325229,
-      "wilson_low": 0.982984183834662
+      "tuning": "default"
     },
     {
       "asv_commit": "1999eab667e0b9e0e4108c2d59c0fb9d9a6fadec",
@@ -1959,10 +1938,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.991,
+      "successes": 991,
       "template": "noise/gmin-lbfgs-s1em4",
-      "tuning": "default",
-      "wilson_high": 0.9952579393325229,
-      "wilson_low": 0.982984183834662
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -2004,10 +1982,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.989,
+      "successes": 989,
       "template": "rgmin/lj38-noise-lbfgs-s1em3",
-      "tuning": "default",
-      "wilson_high": 0.9938468259019134,
-      "wilson_low": 0.9804106042992137
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -2049,10 +2026,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.989,
+      "successes": 989,
       "template": "rgmin/lj38-noise-lbfgs-s1em3-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9938468259019134,
-      "wilson_low": 0.9804106042992137
+      "tuning": "tuned"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -2094,10 +2070,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.988,
+      "successes": 988,
       "template": "noise/rgmin-lbfgs-s1em4",
-      "tuning": "default",
-      "wilson_high": 0.9931223521935965,
-      "wilson_low": 0.9791427315245017
+      "tuning": "default"
     },
     {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
@@ -2139,10 +2114,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.989,
+      "successes": 989,
       "template": "noise/pele-mylbfgs-s1em4",
-      "tuning": "default",
-      "wilson_high": 0.9938468259019134,
-      "wilson_low": 0.9804106042992137
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -2184,10 +2158,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.986,
+      "successes": 986,
       "template": "noise/rgmin-lbfgs-s1em3",
-      "tuning": "default",
-      "wilson_high": 0.9916424248695761,
-      "wilson_low": 0.9766379658824644
+      "tuning": "default"
     },
     {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
@@ -2229,10 +2202,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.986,
+      "successes": 986,
       "template": "noise/pele-mylbfgs-s1em3",
-      "tuning": "default",
-      "wilson_high": 0.9916424248695761,
-      "wilson_low": 0.9766379658824644
+      "tuning": "default"
     },
     {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
@@ -2274,10 +2246,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.986,
+      "successes": 986,
       "template": "noise/pele-lbfgs-s1em3",
-      "tuning": "default",
-      "wilson_high": 0.9916424248695761,
-      "wilson_low": 0.9766379658824644
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -2319,10 +2290,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.988,
+      "successes": 988,
       "template": "noise/ase-lbfgs-s1em3",
-      "tuning": "default",
-      "wilson_high": 0.9931223521935965,
-      "wilson_low": 0.9791427315245017
+      "tuning": "default"
     },
     {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
@@ -2364,10 +2334,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.985,
+      "successes": 985,
       "template": "noise/pele-lbfgs-s1em4",
-      "tuning": "default",
-      "wilson_high": 0.9908890211959184,
-      "wilson_low": 0.9753990230730932
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -2409,10 +2378,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.995,
+      "successes": 995,
       "template": "noise/ase-bfgs-s0",
-      "tuning": "default",
-      "wilson_high": 0.9978624644726756,
-      "wilson_low": 0.9883490446266249
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -2454,10 +2422,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.986,
+      "successes": 986,
       "template": "noise/ase-lbfgs-s1em4",
-      "tuning": "default",
-      "wilson_high": 0.9916424248695761,
-      "wilson_low": 0.9766379658824644
+      "tuning": "default"
     },
     {
       "asv_commit": "739fce9b10553193c9e8d49c56a7226020617bf5",
@@ -2499,10 +2466,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.989,
+      "successes": 989,
       "template": "noise/vcsqnm-ase-s0",
-      "tuning": "default",
-      "wilson_high": 0.9938468259019134,
-      "wilson_low": 0.9804106042992137
+      "tuning": "default"
     },
     {
       "asv_commit": "739fce9b10553193c9e8d49c56a7226020617bf5",
@@ -2544,10 +2510,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.989,
+      "successes": 989,
       "template": "noise/vcsqnm-sqnm-s0",
-      "tuning": "default",
-      "wilson_high": 0.9938468259019134,
-      "wilson_low": 0.9804106042992137
+      "tuning": "default"
     },
     {
       "asv_commit": "739fce9b10553193c9e8d49c56a7226020617bf5",
@@ -2589,10 +2554,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.989,
+      "successes": 989,
       "template": "noise/vcsqnm-ase-s1em4",
-      "tuning": "default",
-      "wilson_high": 0.9938468259019134,
-      "wilson_low": 0.9804106042992137
+      "tuning": "default"
     },
     {
       "asv_commit": "739fce9b10553193c9e8d49c56a7226020617bf5",
@@ -2634,10 +2598,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.989,
+      "successes": 989,
       "template": "noise/vcsqnm-sqnm-s1em4",
-      "tuning": "default",
-      "wilson_high": 0.9938468259019134,
-      "wilson_low": 0.9804106042992137
+      "tuning": "default"
     },
     {
       "asv_commit": "739fce9b10553193c9e8d49c56a7226020617bf5",
@@ -2679,10 +2642,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.987,
+      "successes": 987,
       "template": "noise/vcsqnm-ase-s1em3",
-      "tuning": "default",
-      "wilson_high": 0.9923871796106489,
-      "wilson_low": 0.9778855576244203
+      "tuning": "default"
     },
     {
       "asv_commit": "739fce9b10553193c9e8d49c56a7226020617bf5",
@@ -2724,10 +2686,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.987,
+      "successes": 987,
       "template": "noise/vcsqnm-sqnm-s1em3",
-      "tuning": "default",
-      "wilson_high": 0.9923871796106489,
-      "wilson_low": 0.9778855576244203
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -2769,10 +2730,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.996,
+      "successes": 996,
       "template": "noise/rgmin-cg-s0",
-      "tuning": "default",
-      "wilson_high": 0.9984434118595916,
-      "wilson_low": 0.9897604437227377
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -2814,10 +2774,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.974,
+      "successes": 974,
       "template": "dlfind/lbfgs-lj38-noise-s1em2",
-      "tuning": "default",
-      "wilson_high": 0.9821960617983837,
-      "wilson_low": 0.9621761711573101
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -2859,10 +2818,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.999,
+      "successes": 999,
       "template": "noise/sella-min-s0",
-      "tuning": "default",
-      "wilson_high": 0.9998234536293739,
-      "wilson_low": 0.9943574414020421
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -2904,10 +2862,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.997,
+      "successes": 997,
       "template": "noise/rgmin-fire-s0",
-      "tuning": "default",
-      "wilson_high": 0.9989792161188614,
-      "wilson_low": 0.9912169859464969
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -2949,10 +2906,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.995,
+      "successes": 995,
       "template": "noise/ase-fire-s0",
-      "tuning": "default",
-      "wilson_high": 0.9978624644726756,
-      "wilson_low": 0.9883490446266249
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -2994,10 +2950,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.982,
+      "successes": 982,
       "template": "noise/ase-bfgs-s1em4",
-      "tuning": "default",
-      "wilson_high": 0.9885842599904322,
-      "wilson_low": 0.9717267448294926
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -3039,10 +2994,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.98,
+      "successes": 980,
       "template": "noise/ase-bfgs-s1em3",
-      "tuning": "default",
-      "wilson_high": 0.987016317083585,
-      "wilson_low": 0.9693099947702822
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -3084,10 +3038,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.974,
+      "successes": 974,
       "template": "noise/rgmin-cg-s1em4",
-      "tuning": "default",
-      "wilson_high": 0.9821960617983837,
-      "wilson_low": 0.9621761711573101
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -3129,10 +3082,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.997,
+      "successes": 997,
       "template": "lammps/hftn-lj38-noise-s0",
-      "tuning": "default",
-      "wilson_high": 0.9989792161188614,
-      "wilson_low": 0.9912169859464969
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -3174,10 +3126,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.973,
+      "successes": 973,
       "template": "noise/ase-fire-s1em3",
-      "tuning": "default",
-      "wilson_high": 0.9813786172257051,
-      "wilson_low": 0.9610012692469598
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -3219,10 +3170,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.969,
+      "successes": 969,
       "template": "noise/rgmin-cg-s1em3",
-      "tuning": "default",
-      "wilson_high": 0.9780759965528414,
-      "wilson_low": 0.9563345039877078
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -3264,10 +3214,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.969,
+      "successes": 969,
       "template": "noise/rgmin-fire-s1em3",
-      "tuning": "default",
-      "wilson_high": 0.9780759965528414,
-      "wilson_low": 0.9563345039877078
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -3309,10 +3258,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.964,
+      "successes": 964,
       "template": "noise/rgmin-fire-s1em4",
-      "tuning": "default",
-      "wilson_high": 0.9738844285926127,
-      "wilson_low": 0.9505643395327921
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -3354,10 +3302,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.962,
+      "successes": 962,
       "template": "noise/ase-fire-s1em4",
-      "tuning": "default",
-      "wilson_high": 0.9721909954906974,
-      "wilson_low": 0.9482730796686497
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -3399,10 +3346,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.919,
+      "successes": 919,
       "template": "noise/ase-lbfgs-s1em2",
-      "tuning": "default",
-      "wilson_high": 0.9343503784587998,
-      "wilson_low": 0.9004427979303052
+      "tuning": "default"
     },
     {
       "asv_commit": "c1ecf607a10f7ab78d1615e4cbf9af030bebcdbf",
@@ -3444,10 +3390,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.912,
+      "successes": 912,
       "template": "eon-svn/lj38-noise-1e-2",
-      "tuning": "default",
-      "wilson_high": 0.9280190020576792,
-      "wilson_low": 0.8928277489502235
+      "tuning": "default"
     },
     {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
@@ -3489,10 +3434,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.941,
+      "successes": 941,
       "template": "noise/pele-fire-s1em3",
-      "tuning": "default",
-      "wilson_high": 0.9539857017871995,
-      "wilson_low": 0.9246390972285408
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -3534,10 +3478,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.911,
+      "successes": 911,
       "template": "noise/rgmin-lbfgs-m100-s1em2",
-      "tuning": "default",
-      "wilson_high": 0.9271117560869926,
-      "wilson_low": 0.8917426484378812
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -3579,10 +3522,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.938,
+      "successes": 938,
       "template": "noise/ase-bfgs-s1em2",
-      "tuning": "default",
-      "wilson_high": 0.9513358198800193,
-      "wilson_low": 0.9213119396866343
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -3624,10 +3566,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.997,
+      "successes": 997,
       "template": "lammps/cg-lj38-noise-s1em3",
-      "tuning": "default",
-      "wilson_high": 0.9989792161188614,
-      "wilson_low": 0.9912169859464969
+      "tuning": "default"
     },
     {
       "asv_commit": "1999eab667e0b9e0e4108c2d59c0fb9d9a6fadec",
@@ -3669,10 +3610,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.905,
+      "successes": 905,
       "template": "noise/gmin-lbfgs-s1em2",
-      "tuning": "default",
-      "wilson_high": 0.9216547654209526,
-      "wilson_low": 0.8852455602057479
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -3714,10 +3654,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.904,
+      "successes": 904,
       "template": "noise/rgmin-lbfgs-s1em2",
-      "tuning": "default",
-      "wilson_high": 0.9207430999016033,
-      "wilson_low": 0.8841648792420682
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -3759,10 +3698,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.931,
+      "successes": 931,
       "template": "noise/sella-min-s1em4",
-      "tuning": "default",
-      "wilson_high": 0.9451160544140889,
-      "wilson_low": 0.9135852797713628
+      "tuning": "default"
     },
     {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
@@ -3804,10 +3742,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.902,
+      "successes": 902,
       "template": "noise/pele-mylbfgs-s1em2",
-      "tuning": "default",
-      "wilson_high": 0.9189179884766496,
-      "wilson_low": 0.882005297700964
+      "tuning": "default"
     },
     {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
@@ -3849,10 +3786,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.952,
+      "successes": 952,
       "template": "noise/pele-fire-s0",
-      "tuning": "default",
-      "wilson_high": 0.963606698979192,
-      "wilson_low": 0.936933911349866
+      "tuning": "default"
     },
     {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
@@ -3894,10 +3830,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.9,
+      "successes": 900,
       "template": "noise/pele-lbfgs-s1em2",
-      "tuning": "default",
-      "wilson_high": 0.9170905564069044,
-      "wilson_low": 0.8798480368046516
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -3939,10 +3874,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.938,
+      "successes": 938,
       "template": "noise/sella-min-s1em3",
-      "tuning": "default",
-      "wilson_high": 0.9513358198800193,
-      "wilson_low": 0.9213119396866343
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -3984,10 +3918,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.884,
+      "successes": 884,
       "template": "rgmin/lj38-noise-lbfgs-s1em2",
-      "tuning": "default",
-      "wilson_high": 0.9023943229603661,
-      "wilson_low": 0.8626667265227275
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -4029,10 +3962,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.884,
+      "successes": 884,
       "template": "rgmin/lj38-noise-lbfgs-s1em2-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.9023943229603661,
-      "wilson_low": 0.8626667265227275
+      "tuning": "tuned"
     },
     {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
@@ -4074,10 +4006,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.927,
+      "successes": 927,
       "template": "noise/pele-fire-s1em4",
-      "tuning": "default",
-      "wilson_high": 0.9415409737875866,
-      "wilson_low": 0.9091909744657494
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -4119,10 +4050,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.956,
+      "successes": 956,
       "template": "dlfind/cg-lj38-noise-s1em2",
-      "tuning": "default",
-      "wilson_high": 0.9670617854115815,
-      "wilson_low": 0.9414482108495923
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -4164,10 +4094,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.995,
+      "successes": 995,
       "template": "dlfind/cg-lj38-noise-s1em3",
-      "tuning": "default",
-      "wilson_high": 0.9978624644726756,
-      "wilson_low": 0.9883490446266249
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -4209,10 +4138,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.996,
+      "successes": 996,
       "template": "dlfind/sd-lj38-noise-s1em3",
-      "tuning": "default",
-      "wilson_high": 0.9984434118595916,
-      "wilson_low": 0.9897604437227377
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -4254,10 +4182,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.955,
+      "successes": 955,
       "template": "dlfind/sd-lj38-noise-s1em2",
-      "tuning": "default",
-      "wilson_high": 0.9662004877143683,
-      "wilson_low": 0.9403171620637766
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -4299,10 +4226,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.993,
+      "successes": 993,
       "template": "dlfind/cg-lj38-noise-s1em4",
-      "tuning": "default",
-      "wilson_high": 0.9966051315990092,
-      "wilson_low": 0.9856216845342334
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -4344,10 +4270,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.991,
+      "successes": 991,
       "template": "dlfind/cg-lj38-noise-s0",
-      "tuning": "default",
-      "wilson_high": 0.9952579393325229,
-      "wilson_low": 0.982984183834662
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -4389,10 +4314,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.991,
+      "successes": 991,
       "template": "dlfind/sd-lj38-noise-s1em4",
-      "tuning": "default",
-      "wilson_high": 0.9952579393325229,
-      "wilson_low": 0.982984183834662
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -4434,10 +4358,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.99,
+      "successes": 990,
       "template": "dlfind/sd-lj38-noise-s0",
-      "tuning": "default",
-      "wilson_high": 0.9945592455544707,
-      "wilson_low": 0.9816905311296853
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -4479,10 +4402,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.991,
+      "successes": 991,
       "template": "lammps/quickmin-lj38-noise-s0",
-      "tuning": "default",
-      "wilson_high": 0.9952579393325229,
-      "wilson_low": 0.982984183834662
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -4524,10 +4446,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.983,
+      "successes": 983,
       "template": "lammps/quickmin-lj38-noise-s1em4",
-      "tuning": "default",
-      "wilson_high": 0.9893593101431837,
-      "wilson_low": 0.9729440411597701
+      "tuning": "default"
     },
     {
       "asv_commit": "739fce9b10553193c9e8d49c56a7226020617bf5",
@@ -4569,10 +4490,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.847,
+      "successes": 847,
       "template": "noise/vcsqnm-ase-s1em2",
-      "tuning": "default",
-      "wilson_high": 0.8679807843756888,
-      "wilson_low": 0.823363445235336
+      "tuning": "default"
     },
     {
       "asv_commit": "739fce9b10553193c9e8d49c56a7226020617bf5",
@@ -4614,10 +4534,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.847,
+      "successes": 847,
       "template": "noise/vcsqnm-sqnm-s1em2",
-      "tuning": "default",
-      "wilson_high": 0.8679807843756888,
-      "wilson_low": 0.823363445235336
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -4659,10 +4578,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.832,
+      "successes": 832,
       "template": "noise/rgmin-cg-s1em2",
-      "tuning": "default",
-      "wilson_high": 0.8538920532460522,
-      "wilson_low": 0.8075669791195391
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -4704,10 +4622,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.86,
+      "successes": 860,
       "template": "noise/sella-min-s1em2",
-      "tuning": "default",
-      "wilson_high": 0.8801314253740229,
-      "wilson_low": 0.8371133085163773
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -4749,10 +4666,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.874,
+      "successes": 874,
       "template": "lammps/cg-lj38-noise-s1em2",
-      "tuning": "default",
-      "wilson_high": 0.8931470893129909,
-      "wilson_low": 0.8519904953398139
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -4794,10 +4710,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.811,
+      "successes": 811,
       "template": "noise/rgmin-fire-s1em2",
-      "tuning": "default",
-      "wilson_high": 0.8340581379252162,
-      "wilson_low": 0.7855616182967687
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -4839,10 +4754,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.848,
+      "successes": 848,
       "template": "lammps/cg-lj38-noise-s0",
-      "tuning": "default",
-      "wilson_high": 0.868917497437021,
-      "wilson_low": 0.8244190786570326
+      "tuning": "default"
     },
     {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
@@ -4884,10 +4798,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.786,
+      "successes": 786,
       "template": "noise/pele-fire-s1em2",
-      "tuning": "default",
-      "wilson_high": 0.8102999147855483,
-      "wilson_low": 0.7595111793607143
+      "tuning": "default"
     },
     {
       "asv_commit": "4a7894fd6e77fd6a5a7153c63fa2bf27210674e8",
@@ -4929,10 +4842,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.784,
+      "successes": 784,
       "template": "noise/ase-fire-s1em2",
-      "tuning": "default",
-      "wilson_high": 0.8083929910510775,
-      "wilson_low": 0.7574334101291272
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -4974,10 +4886,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.896,
+      "successes": 896,
       "template": "lammps/cg-lj38-noise-s1em4",
-      "tuning": "default",
-      "wilson_high": 0.9134289719017319,
-      "wilson_low": 0.8755402353777084
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -5019,10 +4930,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.729,
+      "successes": 729,
       "template": "lammps/fire-lj38-noise-s1em4",
-      "tuning": "default",
-      "wilson_high": 0.7556332802624592,
-      "wilson_low": 0.7006140643511565
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -5064,10 +4974,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.727,
+      "successes": 727,
       "template": "lammps/fire-lj38-noise-s0",
-      "tuning": "default",
-      "wilson_high": 0.7537040510828288,
-      "wilson_low": 0.6985586005647291
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -5109,10 +5018,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.706,
+      "successes": 706,
       "template": "lammps/fire-lj38-noise-s1em3",
-      "tuning": "default",
-      "wilson_high": 0.7334059909796873,
-      "wilson_low": 0.677017384524264
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -5154,10 +5062,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.564,
+      "successes": 564,
       "template": "lammps/fire-lj38-noise-s1em2",
-      "tuning": "default",
-      "wilson_high": 0.5944320364705682,
-      "wilson_low": 0.5330781384432806
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -5199,10 +5106,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.741,
+      "successes": 741,
       "template": "lammps/quickmin-lj38-noise-s1em3",
-      "tuning": "default",
-      "wilson_high": 0.7671937650091739,
-      "wilson_low": 0.7129617374007885
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -5244,10 +5150,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.698,
+      "successes": 698,
       "template": "lammps/sd-lj38-noise-s1em2",
-      "tuning": "default",
-      "wilson_high": 0.7256542621227547,
-      "wilson_low": 0.6688303415169653
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -5289,10 +5194,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.684,
+      "successes": 684,
       "template": "lammps/sd-lj38-noise-s1em3",
-      "tuning": "default",
-      "wilson_high": 0.7120643778958327,
-      "wilson_low": 0.6545273749814833
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -5334,10 +5238,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.576,
+      "successes": 576,
       "template": "lammps/quickmin-lj38-noise-s1em2",
-      "tuning": "default",
-      "wilson_high": 0.6062815533830225,
-      "wilson_low": 0.545136779327173
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -5379,10 +5282,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.587,
+      "successes": 587,
       "template": "lammps/hftn-lj38-noise-s1em2",
-      "tuning": "default",
-      "wilson_high": 0.6171274680606752,
-      "wilson_low": 0.5562066759628382
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -5424,10 +5326,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.383,
+      "successes": 383,
       "template": "lammps/sd-lj38-noise-s0",
-      "tuning": "default",
-      "wilson_high": 0.41352273011601154,
-      "wilson_low": 0.3533727313696084
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -5469,10 +5370,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.283,
+      "successes": 283,
       "template": "lammps/hftn-lj38-noise-s1em3",
-      "tuning": "default",
-      "wilson_high": 0.3117083721944983,
-      "wilson_low": 0.25595244098823255
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -5514,10 +5414,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.224,
+      "successes": 224,
       "template": "lammps/hftn-lj38-noise-s1em4",
-      "tuning": "default",
-      "wilson_high": 0.2508689340230394,
-      "wilson_low": 0.1992434366609871
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -5559,10 +5458,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.012,
+      "successes": 12,
       "template": "lammps/sd-lj38-noise-s1em4",
-      "tuning": "default",
-      "wilson_high": 0.02085726847549828,
-      "wilson_low": 0.006877647806403522
+      "tuning": "default"
     },
     {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
@@ -5604,10 +5502,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.002,
+      "successes": 2,
       "template": "noise/pele-sd-s1em2",
-      "tuning": "default",
-      "wilson_high": 0.007262807863492177,
-      "wilson_low": 0.000548643588120728
+      "tuning": "default"
     },
     {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
@@ -5649,10 +5546,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "noise/pele-sd-s0",
-      "tuning": "default",
-      "wilson_high": 0.0038267584855551234,
-      "wilson_low": 0.0
+      "tuning": "default"
     },
     {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
@@ -5694,10 +5590,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "noise/pele-sd-s1em3",
-      "tuning": "default",
-      "wilson_high": 0.0038267584855551234,
-      "wilson_low": 0.0
+      "tuning": "default"
     },
     {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
@@ -5739,10 +5634,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "noise/pele-sd-s1em4",
-      "tuning": "default",
-      "wilson_high": 0.0038267584855551234,
-      "wilson_low": 0.0
+      "tuning": "default"
     }
   ],
   "title": "Lennard-Jones 38 clusters with Gaussian force noise"

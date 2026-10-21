@@ -19,8 +19,6 @@ template vcsqnm/morse-ase-vc
 tuning default
 counter harness
 par2_mean 49.37
-wilson_low 0.963006501793
-wilson_high 1
 par2_median 40
 par2_median_low 39
 par2_median_high 42.5

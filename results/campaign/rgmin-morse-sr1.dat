@@ -17,8 +17,6 @@ template rgmin/morse-sr1
 tuning default
 counter harness
 par2_mean 566.31
-wilson_low 0.929988209271
-wilson_high 0.99449803245
 par2_median 137
 par2_median_low 126
 par2_median_high 145.5

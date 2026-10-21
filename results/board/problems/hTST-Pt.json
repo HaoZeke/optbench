@@ -44,10 +44,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "eon-client/htst-pt-dimer-lbfgs",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -89,10 +88,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "eon-client/htst-pt-lanczos-lbfgs",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -134,10 +132,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "eon-svn/htst-pt-dimer-lbfgs",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -179,10 +176,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "eon-svn/htst-pt-lanczos-lbfgs",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": ""
     }
   ],
   "ranked": [],

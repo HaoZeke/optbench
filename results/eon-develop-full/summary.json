@@ -1,62 +1,1048 @@
 {
-  "eon_commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
   "asv_commit": "06efc6dd8ad69a707789c55bfe2f012e8503f05c",
-  "grid_commits": {
-    "EonDevelopDe2ts": [
-      "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
-    ],
-    "EonDevelopDe2tsEw": [
-      "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
-    ],
-    "EonDevelopDe2tsOci": [
-      "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
-    ],
-    "EonDevelopDeLj38Cap": [
-      "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
-    ],
-    "EonDevelopDeLj38Ew": [
-      "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
-    ],
-    "EonDevelopDeLj38Oci": [
-      "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
-    ],
-    "EonDevelopDePtEw": [
-      "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
-    ],
-    "EonDevelopDePtOci": [
-      "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
-    ],
-    "EonDevelopLowLj38Dimer": [
-      "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
-    ],
-    "EonDevelopLowLj38Lanczos": [
-      "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
-    ],
-    "EonDevelopTsLj38Dimer": [
-      "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
-    ],
-    "EonDevelopTsLj38Lanczos": [
-      "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
-    ],
-    "EonDevelopTsPtDimer": [
-      "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
-    ],
-    "EonDevelopTsPtLanczos": [
-      "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
-    ],
-    "EonDevelopSaddlePtLanczos": [
-      "7e58986ea7a975b0f70e17294067de84e8db803d"
-    ],
-    "EonDevelopNebPtLbfgs": [
-      "b242f2385b227838da8c9dfe0a738b13bacdcebd"
-    ],
-    "EonDevelopNebPtLbfgsM100": [
-      "b242f2385b227838da8c9dfe0a738b13bacdcebd"
-    ],
-    "EonDevelopSaddlePtDimer": [
-      "7e58986ea7a975b0f70e17294067de84e8db803d"
-    ]
-  },
+  "classes": [
+    {
+      "cap": 10000,
+      "class": "EonDevelopTsLj38Lanczos",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 27,
+        "wrong_stationary": 0
+      },
+      "finished": 200,
+      "force_calls_success": {
+        "max": 2892.0,
+        "mean": 513.9364161849711,
+        "median": 361.0,
+        "min": 110.0,
+        "n": 173
+      },
+      "harness_failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 27,
+        "wrong_stationary": 0
+      },
+      "harness_successes": 173,
+      "kind": "ts-lj38",
+      "missing": [],
+      "n": 200,
+      "ran": true,
+      "score_v2": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 10000,
+        "includes_failures": true,
+        "iqr": 715.0,
+        "iqr_high": 1044.75625,
+        "iqr_low": 466.99375000000003,
+        "mean": 3144.555,
+        "median": 454.5,
+        "median_high": 531.0,
+        "median_low": 358.0,
+        "n": 200,
+        "n_cap": 0,
+        "n_crash": 0,
+        "n_divergence": 27,
+        "n_wrong_stationary": 0,
+        "nfailed": 27,
+        "par2_mean": 3144.555,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 226.75,
+        "q75": 941.75,
+        "scoring": "par2-bootstrap",
+        "success_only_mean": 513.9364161849711,
+        "success_rate": 0.865,
+        "successes": 173
+      },
+      "successes": 173,
+      "template": "eon/develop-ts-lj38-lanczos"
+    },
+    {
+      "cap": 10000,
+      "class": "EonDevelopTsLj38Dimer",
+      "failures": {
+        "cap": 28,
+        "crash": 0,
+        "divergence": 2,
+        "wrong_stationary": 0
+      },
+      "finished": 200,
+      "force_calls_success": {
+        "max": 9858.0,
+        "mean": 2124.4823529411765,
+        "median": 747.5,
+        "min": 151.0,
+        "n": 170
+      },
+      "harness_failures": {
+        "cap": 28,
+        "crash": 0,
+        "divergence": 2,
+        "wrong_stationary": 0
+      },
+      "harness_successes": 170,
+      "kind": "ts-lj38",
+      "missing": [],
+      "n": 200,
+      "ran": true,
+      "score_v2": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 10000,
+        "includes_failures": true,
+        "iqr": 5373.5,
+        "iqr_high": 7675.0999999999985,
+        "iqr_low": 3646.1875,
+        "mean": 4805.81,
+        "median": 1136.5,
+        "median_high": 1680.0,
+        "median_low": 783.0,
+        "n": 200,
+        "n_cap": 28,
+        "n_crash": 0,
+        "n_divergence": 2,
+        "n_wrong_stationary": 0,
+        "nfailed": 30,
+        "par2_mean": 4805.81,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 414.0,
+        "q75": 5787.5,
+        "scoring": "par2-bootstrap",
+        "success_only_mean": 2124.4823529411765,
+        "success_rate": 0.85,
+        "successes": 170
+      },
+      "successes": 170,
+      "template": "eon/develop-ts-lj38-dimer"
+    },
+    {
+      "cap": 10000,
+      "class": "EonDevelopTsPtLanczos",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "finished": 49,
+      "force_calls_success": {
+        "max": 1115.0,
+        "mean": 238.83673469387756,
+        "median": 173.0,
+        "min": 103.0,
+        "n": 49
+      },
+      "harness_failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "harness_successes": 49,
+      "kind": "ts-pt",
+      "missing": [],
+      "n": 49,
+      "ran": true,
+      "score_v2": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 10000,
+        "includes_failures": true,
+        "iqr": 131.0,
+        "iqr_high": 177.24999999999864,
+        "iqr_low": 33.95,
+        "mean": 238.83673469387756,
+        "median": 173.0,
+        "median_high": 189.0,
+        "median_low": 166.0,
+        "n": 49,
+        "n_cap": 0,
+        "n_crash": 0,
+        "n_divergence": 0,
+        "n_wrong_stationary": 0,
+        "nfailed": 0,
+        "par2_mean": 238.83673469387756,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 148.0,
+        "q75": 279.0,
+        "scoring": "par2-bootstrap",
+        "success_only_mean": 238.83673469387756,
+        "success_rate": 1.0,
+        "successes": 49
+      },
+      "successes": 49,
+      "template": "eon/develop-ts-pt-lanczos"
+    },
+    {
+      "cap": 10000,
+      "class": "EonDevelopTsPtDimer",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "finished": 49,
+      "force_calls_success": {
+        "max": 5900.0,
+        "mean": 1657.8775510204082,
+        "median": 575.0,
+        "min": 100.0,
+        "n": 49
+      },
+      "harness_failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "harness_successes": 49,
+      "kind": "ts-pt",
+      "missing": [],
+      "n": 49,
+      "ran": true,
+      "score_v2": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 10000,
+        "includes_failures": true,
+        "iqr": 2093.0,
+        "iqr_high": 3622.0,
+        "iqr_low": 269.0,
+        "mean": 1657.8775510204082,
+        "median": 575.0,
+        "median_high": 845.0,
+        "median_low": 478.0,
+        "n": 49,
+        "n_cap": 0,
+        "n_crash": 0,
+        "n_divergence": 0,
+        "n_wrong_stationary": 0,
+        "nfailed": 0,
+        "par2_mean": 1657.8775510204082,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 403.0,
+        "q75": 2496.0,
+        "scoring": "par2-bootstrap",
+        "success_only_mean": 1657.8775510204082,
+        "success_rate": 1.0,
+        "successes": 49
+      },
+      "successes": 49,
+      "template": "eon/develop-ts-pt-dimer"
+    },
+    {
+      "cap": 10000,
+      "class": "EonDevelopNebPtLbfgs",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "finished": 13,
+      "force_calls_success": {
+        "max": 6410.0,
+        "mean": 3517.6923076923076,
+        "median": 3738.0,
+        "min": 258.0,
+        "n": 13
+      },
+      "harness_failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "harness_successes": 13,
+      "kind": "neb-pt",
+      "missing": [],
+      "n": 13,
+      "ran": true,
+      "score_v2": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 10000,
+        "includes_failures": true,
+        "iqr": 2592.0,
+        "iqr_high": 4416.0,
+        "iqr_low": 312.0,
+        "mean": 3517.6923076923076,
+        "median": 3738.0,
+        "median_high": 4674.0,
+        "median_low": 2082.0,
+        "n": 13,
+        "n_cap": 0,
+        "n_crash": 0,
+        "n_divergence": 0,
+        "n_wrong_stationary": 0,
+        "nfailed": 0,
+        "par2_mean": 3517.6923076923076,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 2082.0,
+        "q75": 4674.0,
+        "scoring": "par2-bootstrap",
+        "success_only_mean": 3517.6923076923076,
+        "success_rate": 1.0,
+        "successes": 13
+      },
+      "successes": 13,
+      "template": "eon/neb-pt-lbfgs"
+    },
+    {
+      "cap": 10000,
+      "class": "EonDevelopNebPtLbfgsM100",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "finished": 13,
+      "force_calls_success": {
+        "max": 6410.0,
+        "mean": 3523.846153846154,
+        "median": 3714.0,
+        "min": 258.0,
+        "n": 13
+      },
+      "harness_failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "harness_successes": 13,
+      "kind": "neb-pt",
+      "missing": [],
+      "n": 13,
+      "ran": true,
+      "score_v2": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 10000,
+        "includes_failures": true,
+        "iqr": 2592.0,
+        "iqr_high": 4416.0,
+        "iqr_low": 208.0,
+        "mean": 3523.846153846154,
+        "median": 3714.0,
+        "median_high": 4674.0,
+        "median_low": 2082.0,
+        "n": 13,
+        "n_cap": 0,
+        "n_crash": 0,
+        "n_divergence": 0,
+        "n_wrong_stationary": 0,
+        "nfailed": 0,
+        "par2_mean": 3523.846153846154,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 2082.0,
+        "q75": 4674.0,
+        "scoring": "par2-bootstrap",
+        "success_only_mean": 3523.846153846154,
+        "success_rate": 1.0,
+        "successes": 13
+      },
+      "successes": 13,
+      "template": "eon/neb-pt-lbfgs-m100"
+    },
+    {
+      "cap": 2500,
+      "class": "EonDevelopDeLj38Ew",
+      "failures": {
+        "cap": 50,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "finished": 50,
+      "force_calls_success": {
+        "max": null,
+        "mean": null,
+        "median": null,
+        "min": null,
+        "n": 0
+      },
+      "harness_failures": {
+        "cap": 50,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "harness_successes": 0,
+      "kind": "de-lj38",
+      "missing": [],
+      "n": 50,
+      "ran": true,
+      "score_v2": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 2500,
+        "includes_failures": true,
+        "iqr": 0.0,
+        "iqr_high": 0.0,
+        "iqr_low": 0.0,
+        "mean": 5000.0,
+        "median": 5000.0,
+        "median_high": 5000.0,
+        "median_low": 5000.0,
+        "n": 50,
+        "n_cap": 50,
+        "n_crash": 0,
+        "n_divergence": 0,
+        "n_wrong_stationary": 0,
+        "nfailed": 50,
+        "par2_mean": 5000.0,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 5000.0,
+        "q75": 5000.0,
+        "scoring": "par2-bootstrap",
+        "success_only_mean": null,
+        "success_rate": 0.0,
+        "successes": 0
+      },
+      "successes": 0,
+      "template": "eon/develop-de-lj38-ew"
+    },
+    {
+      "cap": 2500,
+      "class": "EonDevelopDeLj38Oci",
+      "failures": {
+        "cap": 44,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "finished": 50,
+      "force_calls_success": {
+        "max": 1667.0,
+        "mean": 1245.6666666666667,
+        "median": 1286.5,
+        "min": 565.0,
+        "n": 6
+      },
+      "harness_failures": {
+        "cap": 44,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "harness_successes": 6,
+      "kind": "de-lj38",
+      "missing": [],
+      "n": 50,
+      "ran": true,
+      "score_v2": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 2500,
+        "includes_failures": true,
+        "iqr": 0.0,
+        "iqr_high": 0.0,
+        "iqr_low": 0.0,
+        "mean": 4549.48,
+        "median": 5000.0,
+        "median_high": 5000.0,
+        "median_low": 5000.0,
+        "n": 50,
+        "n_cap": 44,
+        "n_crash": 0,
+        "n_divergence": 0,
+        "n_wrong_stationary": 0,
+        "nfailed": 44,
+        "par2_mean": 4549.48,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 5000.0,
+        "q75": 5000.0,
+        "scoring": "par2-bootstrap",
+        "success_only_mean": 1245.6666666666667,
+        "success_rate": 0.12,
+        "successes": 6
+      },
+      "successes": 6,
+      "template": "eon/develop-de-lj38-oci"
+    },
+    {
+      "cap": 2500,
+      "class": "EonDevelopDeLj38Cap",
+      "failures": {
+        "cap": 43,
+        "crash": 0,
+        "divergence": 1,
+        "wrong_stationary": 0
+      },
+      "finished": 50,
+      "force_calls_success": {
+        "max": 1867.0,
+        "mean": 1401.1666666666667,
+        "median": 1359.5,
+        "min": 1062.0,
+        "n": 6
+      },
+      "harness_failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 1,
+        "wrong_stationary": 0
+      },
+      "harness_successes": 49,
+      "kind": "de-lj38",
+      "missing": [],
+      "n": 50,
+      "ran": true,
+      "score_v2": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 2500,
+        "includes_failures": true,
+        "iqr": 0.0,
+        "iqr_high": 0.0,
+        "iqr_low": 0.0,
+        "mean": 4568.14,
+        "median": 5000.0,
+        "median_high": 5000.0,
+        "median_low": 5000.0,
+        "n": 50,
+        "n_cap": 43,
+        "n_crash": 0,
+        "n_divergence": 1,
+        "n_wrong_stationary": 0,
+        "nfailed": 44,
+        "par2_mean": 4568.14,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 5000.0,
+        "q75": 5000.0,
+        "scoring": "par2-bootstrap",
+        "success_only_mean": 1401.1666666666667,
+        "success_rate": 0.12,
+        "successes": 6
+      },
+      "successes": 6,
+      "template": "eon/develop-de-lj38-cap"
+    },
+    {
+      "cap": 3000,
+      "class": "EonDevelopDePtEw",
+      "failures": {
+        "cap": 24,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "finished": 59,
+      "force_calls_success": {
+        "max": 2711.0,
+        "mean": 1291.4,
+        "median": 1220.0,
+        "min": 125.0,
+        "n": 35
+      },
+      "harness_failures": {
+        "cap": 24,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "harness_successes": 35,
+      "kind": "de-pt",
+      "missing": [],
+      "n": 59,
+      "ran": true,
+      "score_v2": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 3000,
+        "includes_failures": true,
+        "iqr": 4991.5,
+        "iqr_high": 5128.0,
+        "iqr_low": 4505.462500000001,
+        "mean": 3206.762711864407,
+        "median": 1967.0,
+        "median_high": 6000.0,
+        "median_low": 1334.0,
+        "n": 59,
+        "n_cap": 24,
+        "n_crash": 0,
+        "n_divergence": 0,
+        "n_wrong_stationary": 0,
+        "nfailed": 24,
+        "par2_mean": 3206.762711864407,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 1008.5,
+        "q75": 6000.0,
+        "scoring": "par2-bootstrap",
+        "success_only_mean": 1291.4,
+        "success_rate": 0.5932203389830508,
+        "successes": 35
+      },
+      "successes": 35,
+      "template": "eon/develop-de-pt-ew"
+    },
+    {
+      "cap": 3000,
+      "class": "EonDevelopDePtOci",
+      "failures": {
+        "cap": 21,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "finished": 59,
+      "force_calls_success": {
+        "max": 2914.0,
+        "mean": 1466.6052631578948,
+        "median": 1284.5,
+        "min": 313.0,
+        "n": 38
+      },
+      "harness_failures": {
+        "cap": 21,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "harness_successes": 38,
+      "kind": "de-pt",
+      "missing": [],
+      "n": 59,
+      "ran": true,
+      "score_v2": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 3000,
+        "includes_failures": true,
+        "iqr": 4963.0,
+        "iqr_high": 5191.637499999999,
+        "iqr_low": 1916.925,
+        "mean": 3080.186440677966,
+        "median": 2260.0,
+        "median_high": 2846.724999999991,
+        "median_low": 1446.0,
+        "n": 59,
+        "n_cap": 21,
+        "n_crash": 0,
+        "n_divergence": 0,
+        "n_wrong_stationary": 0,
+        "nfailed": 21,
+        "par2_mean": 3080.186440677966,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 1037.0,
+        "q75": 6000.0,
+        "scoring": "par2-bootstrap",
+        "success_only_mean": 1466.6052631578948,
+        "success_rate": 0.6440677966101694,
+        "successes": 38
+      },
+      "successes": 38,
+      "template": "eon/develop-de-pt-oci"
+    },
+    {
+      "cap": 10000,
+      "class": "EonDevelopDe2ts",
+      "failures": {
+        "cap": 9,
+        "crash": 0,
+        "divergence": 42,
+        "wrong_stationary": 0
+      },
+      "finished": 51,
+      "force_calls_success": {
+        "max": null,
+        "mean": null,
+        "median": null,
+        "min": null,
+        "n": 0
+      },
+      "harness_failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 42,
+        "wrong_stationary": 0
+      },
+      "harness_successes": 9,
+      "kind": "de-2ts",
+      "missing": [],
+      "n": 51,
+      "ran": true,
+      "score_v2": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 10000,
+        "includes_failures": true,
+        "iqr": 0.0,
+        "iqr_high": 0.0,
+        "iqr_low": 0.0,
+        "mean": 20000.0,
+        "median": 20000.0,
+        "median_high": 20000.0,
+        "median_low": 20000.0,
+        "n": 51,
+        "n_cap": 9,
+        "n_crash": 0,
+        "n_divergence": 42,
+        "n_wrong_stationary": 0,
+        "nfailed": 51,
+        "par2_mean": 20000.0,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 20000.0,
+        "q75": 20000.0,
+        "scoring": "par2-bootstrap",
+        "success_only_mean": null,
+        "success_rate": 0.0,
+        "successes": 0
+      },
+      "successes": 0,
+      "template": "eon/develop-de-2ts"
+    },
+    {
+      "cap": 10000,
+      "class": "EonDevelopDe2tsOci",
+      "failures": {
+        "cap": 9,
+        "crash": 0,
+        "divergence": 42,
+        "wrong_stationary": 0
+      },
+      "finished": 51,
+      "force_calls_success": {
+        "max": null,
+        "mean": null,
+        "median": null,
+        "min": null,
+        "n": 0
+      },
+      "harness_failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 42,
+        "wrong_stationary": 0
+      },
+      "harness_successes": 9,
+      "kind": "de-2ts",
+      "missing": [],
+      "n": 51,
+      "ran": true,
+      "score_v2": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 10000,
+        "includes_failures": true,
+        "iqr": 0.0,
+        "iqr_high": 0.0,
+        "iqr_low": 0.0,
+        "mean": 20000.0,
+        "median": 20000.0,
+        "median_high": 20000.0,
+        "median_low": 20000.0,
+        "n": 51,
+        "n_cap": 9,
+        "n_crash": 0,
+        "n_divergence": 42,
+        "n_wrong_stationary": 0,
+        "nfailed": 51,
+        "par2_mean": 20000.0,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 20000.0,
+        "q75": 20000.0,
+        "scoring": "par2-bootstrap",
+        "success_only_mean": null,
+        "success_rate": 0.0,
+        "successes": 0
+      },
+      "successes": 0,
+      "template": "eon/develop-de-2ts-oci"
+    },
+    {
+      "cap": 10000,
+      "class": "EonDevelopDe2tsEw",
+      "failures": {
+        "cap": 16,
+        "crash": 0,
+        "divergence": 34,
+        "wrong_stationary": 0
+      },
+      "finished": 51,
+      "force_calls_success": {
+        "max": 5997.0,
+        "mean": 5997.0,
+        "median": 5997.0,
+        "min": 5997.0,
+        "n": 1
+      },
+      "harness_failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 34,
+        "wrong_stationary": 0
+      },
+      "harness_successes": 17,
+      "kind": "de-2ts",
+      "missing": [],
+      "n": 51,
+      "ran": true,
+      "score_v2": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 10000,
+        "includes_failures": true,
+        "iqr": 0.0,
+        "iqr_high": 0.0,
+        "iqr_low": 0.0,
+        "mean": 19725.43137254902,
+        "median": 20000.0,
+        "median_high": 20000.0,
+        "median_low": 20000.0,
+        "n": 51,
+        "n_cap": 16,
+        "n_crash": 0,
+        "n_divergence": 34,
+        "n_wrong_stationary": 0,
+        "nfailed": 50,
+        "par2_mean": 19725.43137254902,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 20000.0,
+        "q75": 20000.0,
+        "scoring": "par2-bootstrap",
+        "success_only_mean": 5997.0,
+        "success_rate": 0.0196078431372549,
+        "successes": 1
+      },
+      "successes": 1,
+      "template": "eon/develop-de-2ts-ew"
+    },
+    {
+      "cap": 10000,
+      "class": "EonDevelopLowLj38Dimer",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "finished": 200,
+      "force_calls_success": {
+        "max": 81.0,
+        "mean": 30.355,
+        "median": 29.0,
+        "min": 14.0,
+        "n": 200
+      },
+      "harness_failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "harness_successes": 200,
+      "kind": "lowest",
+      "missing": [],
+      "n": 200,
+      "ran": true,
+      "score_v2": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 10000,
+        "includes_failures": true,
+        "iqr": 9.0,
+        "iqr_high": 10.0,
+        "iqr_low": 7.0,
+        "mean": 30.355,
+        "median": 29.0,
+        "median_high": 30.0,
+        "median_low": 28.0,
+        "n": 200,
+        "n_cap": 0,
+        "n_crash": 0,
+        "n_divergence": 0,
+        "n_wrong_stationary": 0,
+        "nfailed": 0,
+        "par2_mean": 30.355,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 25.0,
+        "q75": 34.0,
+        "scoring": "par2-bootstrap",
+        "success_only_mean": 30.355,
+        "success_rate": 1.0,
+        "successes": 200
+      },
+      "successes": 200,
+      "template": "eon/develop-low-lj38-dimer"
+    },
+    {
+      "cap": 10000,
+      "class": "EonDevelopLowLj38Lanczos",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "finished": 200,
+      "force_calls_success": {
+        "max": 63.0,
+        "mean": 26.385,
+        "median": 25.0,
+        "min": 13.0,
+        "n": 200
+      },
+      "harness_failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "harness_successes": 200,
+      "kind": "lowest",
+      "missing": [],
+      "n": 200,
+      "ran": true,
+      "score_v2": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 10000,
+        "includes_failures": true,
+        "iqr": 7.0,
+        "iqr_high": 10.0,
+        "iqr_low": 6.0,
+        "mean": 26.385,
+        "median": 25.0,
+        "median_high": 26.0,
+        "median_low": 24.0,
+        "n": 200,
+        "n_cap": 0,
+        "n_crash": 0,
+        "n_divergence": 0,
+        "n_wrong_stationary": 0,
+        "nfailed": 0,
+        "par2_mean": 26.385,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 22.0,
+        "q75": 29.0,
+        "scoring": "par2-bootstrap",
+        "success_only_mean": 26.385,
+        "success_rate": 1.0,
+        "successes": 200
+      },
+      "successes": 200,
+      "template": "eon/develop-low-lj38-lanczos"
+    },
+    {
+      "cap": 100000000,
+      "class": "EonDevelopSaddlePtDimer",
+      "failures": {
+        "cap": 1,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "finished": 9,
+      "force_calls_success": {
+        "max": 6213909.0,
+        "mean": 4643204.625,
+        "median": 4967742.0,
+        "min": 2880783.0,
+        "n": 8
+      },
+      "harness_failures": {
+        "cap": 1,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "harness_successes": 8,
+      "kind": "akmc",
+      "missing": [
+        [
+          "1009",
+          "pt-island"
+        ]
+      ],
+      "n": 10,
+      "ran": false,
+      "successes": 8,
+      "template": "eon/develop-saddle-pt-dimer"
+    },
+    {
+      "cap": 100000000,
+      "class": "EonDevelopSaddlePtLanczos",
+      "failures": {
+        "cap": 2,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "finished": 2,
+      "force_calls_success": {
+        "max": null,
+        "mean": null,
+        "median": null,
+        "min": null,
+        "n": 0
+      },
+      "harness_failures": {
+        "cap": 2,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "harness_successes": 0,
+      "kind": "akmc",
+      "missing": [],
+      "n": 2,
+      "ran": true,
+      "score_v2": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 100000000,
+        "includes_failures": true,
+        "iqr": 0.0,
+        "iqr_high": 0.0,
+        "iqr_low": 0.0,
+        "mean": 200000000.0,
+        "median": 200000000.0,
+        "median_high": 200000000.0,
+        "median_low": 200000000.0,
+        "n": 2,
+        "n_cap": 2,
+        "n_crash": 0,
+        "n_divergence": 0,
+        "n_wrong_stationary": 0,
+        "nfailed": 2,
+        "par2_mean": 200000000.0,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 200000000.0,
+        "q75": 200000000.0,
+        "scoring": "par2-bootstrap",
+        "success_only_mean": null,
+        "success_rate": 0.0,
+        "successes": 0
+      },
+      "successes": 0,
+      "template": "eon/develop-saddle-pt-lanczos"
+    }
+  ],
+  "counter": "harness",
+  "eon_commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
   "filled_from_cache": {
     "EonDevelopSaddlePtDimer": [
       [
@@ -97,1080 +1083,60 @@
       ]
     ]
   },
-  "counter": "harness",
-  "classes": [
-    {
-      "class": "EonDevelopTsLj38Lanczos",
-      "template": "eon/develop-ts-lj38-lanczos",
-      "kind": "ts-lj38",
-      "cap": 10000,
-      "n": 200,
-      "finished": 200,
-      "missing": [],
-      "successes": 173,
-      "failures": {
-        "cap": 0,
-        "divergence": 27,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "harness_successes": 173,
-      "harness_failures": {
-        "cap": 0,
-        "divergence": 27,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "force_calls_success": {
-        "n": 173,
-        "mean": 513.9364161849711,
-        "median": 361.0,
-        "min": 110.0,
-        "max": 2892.0
-      },
-      "ran": true,
-      "score_v2": {
-        "n": 200,
-        "mean": 3144.555,
-        "median": 454.5,
-        "median_low": 358.0,
-        "median_high": 531.0,
-        "q25": 226.75,
-        "q75": 941.75,
-        "iqr": 715.0,
-        "iqr_low": 466.99375000000003,
-        "iqr_high": 1044.75625,
-        "bootstrap_resamples": 2000,
-        "bootstrap_seed": 20261015,
-        "scoring": "par2-wilson-bootstrap",
-        "successes": 173,
-        "nfailed": 27,
-        "success_rate": 0.865,
-        "wilson_low": 0.8107086162924745,
-        "wilson_high": 0.9055342954521209,
-        "par_factor": 2,
-        "cap": 10000,
-        "par_applied": true,
-        "par2_mean": 3144.555,
-        "includes_failures": true,
-        "success_only_mean": 513.9364161849711,
-        "n_crash": 0,
-        "n_divergence": 27,
-        "n_cap": 0,
-        "n_wrong_stationary": 0
-      }
-    },
-    {
-      "class": "EonDevelopTsLj38Dimer",
-      "template": "eon/develop-ts-lj38-dimer",
-      "kind": "ts-lj38",
-      "cap": 10000,
-      "n": 200,
-      "finished": 200,
-      "missing": [],
-      "successes": 170,
-      "failures": {
-        "cap": 28,
-        "divergence": 2,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "harness_successes": 170,
-      "harness_failures": {
-        "cap": 28,
-        "divergence": 2,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "force_calls_success": {
-        "n": 170,
-        "mean": 2124.4823529411765,
-        "median": 747.5,
-        "min": 151.0,
-        "max": 9858.0
-      },
-      "ran": true,
-      "score_v2": {
-        "n": 200,
-        "mean": 4805.81,
-        "median": 1136.5,
-        "median_low": 783.0,
-        "median_high": 1680.0,
-        "q25": 414.0,
-        "q75": 5787.5,
-        "iqr": 5373.5,
-        "iqr_low": 3646.1875,
-        "iqr_high": 7675.0999999999985,
-        "bootstrap_resamples": 2000,
-        "bootstrap_seed": 20261015,
-        "scoring": "par2-wilson-bootstrap",
-        "successes": 170,
-        "nfailed": 30,
-        "success_rate": 0.85,
-        "wilson_low": 0.7939442071583334,
-        "wilson_high": 0.89286406437758,
-        "par_factor": 2,
-        "cap": 10000,
-        "par_applied": true,
-        "par2_mean": 4805.81,
-        "includes_failures": true,
-        "success_only_mean": 2124.4823529411765,
-        "n_crash": 0,
-        "n_divergence": 2,
-        "n_cap": 28,
-        "n_wrong_stationary": 0
-      }
-    },
-    {
-      "class": "EonDevelopTsPtLanczos",
-      "template": "eon/develop-ts-pt-lanczos",
-      "kind": "ts-pt",
-      "cap": 10000,
-      "n": 49,
-      "finished": 49,
-      "missing": [],
-      "successes": 49,
-      "failures": {
-        "cap": 0,
-        "divergence": 0,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "harness_successes": 49,
-      "harness_failures": {
-        "cap": 0,
-        "divergence": 0,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "force_calls_success": {
-        "n": 49,
-        "mean": 238.83673469387756,
-        "median": 173.0,
-        "min": 103.0,
-        "max": 1115.0
-      },
-      "ran": true,
-      "score_v2": {
-        "n": 49,
-        "mean": 238.83673469387756,
-        "median": 173.0,
-        "median_low": 166.0,
-        "median_high": 189.0,
-        "q25": 148.0,
-        "q75": 279.0,
-        "iqr": 131.0,
-        "iqr_low": 33.95,
-        "iqr_high": 177.24999999999864,
-        "bootstrap_resamples": 2000,
-        "bootstrap_seed": 20261015,
-        "scoring": "par2-wilson-bootstrap",
-        "successes": 49,
-        "nfailed": 0,
-        "success_rate": 1.0,
-        "wilson_low": 0.9273021807795035,
-        "wilson_high": 1.0,
-        "par_factor": 2,
-        "cap": 10000,
-        "par_applied": true,
-        "par2_mean": 238.83673469387756,
-        "includes_failures": true,
-        "success_only_mean": 238.83673469387756,
-        "n_crash": 0,
-        "n_divergence": 0,
-        "n_cap": 0,
-        "n_wrong_stationary": 0
-      }
-    },
-    {
-      "class": "EonDevelopTsPtDimer",
-      "template": "eon/develop-ts-pt-dimer",
-      "kind": "ts-pt",
-      "cap": 10000,
-      "n": 49,
-      "finished": 49,
-      "missing": [],
-      "successes": 49,
-      "failures": {
-        "cap": 0,
-        "divergence": 0,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "harness_successes": 49,
-      "harness_failures": {
-        "cap": 0,
-        "divergence": 0,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "force_calls_success": {
-        "n": 49,
-        "mean": 1657.8775510204082,
-        "median": 575.0,
-        "min": 100.0,
-        "max": 5900.0
-      },
-      "ran": true,
-      "score_v2": {
-        "n": 49,
-        "mean": 1657.8775510204082,
-        "median": 575.0,
-        "median_low": 478.0,
-        "median_high": 845.0,
-        "q25": 403.0,
-        "q75": 2496.0,
-        "iqr": 2093.0,
-        "iqr_low": 269.0,
-        "iqr_high": 3622.0,
-        "bootstrap_resamples": 2000,
-        "bootstrap_seed": 20261015,
-        "scoring": "par2-wilson-bootstrap",
-        "successes": 49,
-        "nfailed": 0,
-        "success_rate": 1.0,
-        "wilson_low": 0.9273021807795035,
-        "wilson_high": 1.0,
-        "par_factor": 2,
-        "cap": 10000,
-        "par_applied": true,
-        "par2_mean": 1657.8775510204082,
-        "includes_failures": true,
-        "success_only_mean": 1657.8775510204082,
-        "n_crash": 0,
-        "n_divergence": 0,
-        "n_cap": 0,
-        "n_wrong_stationary": 0
-      }
-    },
-    {
-      "class": "EonDevelopNebPtLbfgs",
-      "template": "eon/neb-pt-lbfgs",
-      "kind": "neb-pt",
-      "cap": 10000,
-      "n": 13,
-      "finished": 13,
-      "missing": [],
-      "successes": 13,
-      "failures": {
-        "cap": 0,
-        "divergence": 0,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "harness_successes": 13,
-      "harness_failures": {
-        "cap": 0,
-        "divergence": 0,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "force_calls_success": {
-        "n": 13,
-        "mean": 3517.6923076923076,
-        "median": 3738.0,
-        "min": 258.0,
-        "max": 6410.0
-      },
-      "ran": true,
-      "score_v2": {
-        "n": 13,
-        "mean": 3517.6923076923076,
-        "median": 3738.0,
-        "median_low": 2082.0,
-        "median_high": 4674.0,
-        "q25": 2082.0,
-        "q75": 4674.0,
-        "iqr": 2592.0,
-        "iqr_low": 312.0,
-        "iqr_high": 4416.0,
-        "bootstrap_resamples": 2000,
-        "bootstrap_seed": 20261015,
-        "scoring": "par2-wilson-bootstrap",
-        "successes": 13,
-        "nfailed": 0,
-        "success_rate": 1.0,
-        "wilson_low": 0.7719046276458016,
-        "wilson_high": 1.0,
-        "par_factor": 2,
-        "cap": 10000,
-        "par_applied": true,
-        "par2_mean": 3517.6923076923076,
-        "includes_failures": true,
-        "success_only_mean": 3517.6923076923076,
-        "n_crash": 0,
-        "n_divergence": 0,
-        "n_cap": 0,
-        "n_wrong_stationary": 0
-      }
-    },
-    {
-      "class": "EonDevelopNebPtLbfgsM100",
-      "template": "eon/neb-pt-lbfgs-m100",
-      "kind": "neb-pt",
-      "cap": 10000,
-      "n": 13,
-      "finished": 13,
-      "missing": [],
-      "successes": 13,
-      "failures": {
-        "cap": 0,
-        "divergence": 0,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "harness_successes": 13,
-      "harness_failures": {
-        "cap": 0,
-        "divergence": 0,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "force_calls_success": {
-        "n": 13,
-        "mean": 3523.846153846154,
-        "median": 3714.0,
-        "min": 258.0,
-        "max": 6410.0
-      },
-      "ran": true,
-      "score_v2": {
-        "n": 13,
-        "mean": 3523.846153846154,
-        "median": 3714.0,
-        "median_low": 2082.0,
-        "median_high": 4674.0,
-        "q25": 2082.0,
-        "q75": 4674.0,
-        "iqr": 2592.0,
-        "iqr_low": 208.0,
-        "iqr_high": 4416.0,
-        "bootstrap_resamples": 2000,
-        "bootstrap_seed": 20261015,
-        "scoring": "par2-wilson-bootstrap",
-        "successes": 13,
-        "nfailed": 0,
-        "success_rate": 1.0,
-        "wilson_low": 0.7719046276458016,
-        "wilson_high": 1.0,
-        "par_factor": 2,
-        "cap": 10000,
-        "par_applied": true,
-        "par2_mean": 3523.846153846154,
-        "includes_failures": true,
-        "success_only_mean": 3523.846153846154,
-        "n_crash": 0,
-        "n_divergence": 0,
-        "n_cap": 0,
-        "n_wrong_stationary": 0
-      }
-    },
-    {
-      "class": "EonDevelopDeLj38Ew",
-      "template": "eon/develop-de-lj38-ew",
-      "kind": "de-lj38",
-      "cap": 2500,
-      "n": 50,
-      "finished": 50,
-      "missing": [],
-      "successes": 0,
-      "failures": {
-        "cap": 50,
-        "divergence": 0,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "harness_successes": 0,
-      "harness_failures": {
-        "cap": 50,
-        "divergence": 0,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "force_calls_success": {
-        "n": 0,
-        "mean": null,
-        "median": null,
-        "min": null,
-        "max": null
-      },
-      "ran": true,
-      "score_v2": {
-        "n": 50,
-        "mean": 5000.0,
-        "median": 5000.0,
-        "median_low": 5000.0,
-        "median_high": 5000.0,
-        "q25": 5000.0,
-        "q75": 5000.0,
-        "iqr": 0.0,
-        "iqr_low": 0.0,
-        "iqr_high": 0.0,
-        "bootstrap_resamples": 2000,
-        "bootstrap_seed": 20261015,
-        "scoring": "par2-wilson-bootstrap",
-        "successes": 0,
-        "nfailed": 50,
-        "success_rate": 0.0,
-        "wilson_low": 0.0,
-        "wilson_high": 0.07134759913335872,
-        "par_factor": 2,
-        "cap": 2500,
-        "par_applied": true,
-        "par2_mean": 5000.0,
-        "includes_failures": true,
-        "success_only_mean": null,
-        "n_crash": 0,
-        "n_divergence": 0,
-        "n_cap": 50,
-        "n_wrong_stationary": 0
-      }
-    },
-    {
-      "class": "EonDevelopDeLj38Oci",
-      "template": "eon/develop-de-lj38-oci",
-      "kind": "de-lj38",
-      "cap": 2500,
-      "n": 50,
-      "finished": 50,
-      "missing": [],
-      "successes": 6,
-      "failures": {
-        "cap": 44,
-        "divergence": 0,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "harness_successes": 6,
-      "harness_failures": {
-        "cap": 44,
-        "divergence": 0,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "force_calls_success": {
-        "n": 6,
-        "mean": 1245.6666666666667,
-        "median": 1286.5,
-        "min": 565.0,
-        "max": 1667.0
-      },
-      "ran": true,
-      "score_v2": {
-        "n": 50,
-        "mean": 4549.48,
-        "median": 5000.0,
-        "median_low": 5000.0,
-        "median_high": 5000.0,
-        "q25": 5000.0,
-        "q75": 5000.0,
-        "iqr": 0.0,
-        "iqr_low": 0.0,
-        "iqr_high": 0.0,
-        "bootstrap_resamples": 2000,
-        "bootstrap_seed": 20261015,
-        "scoring": "par2-wilson-bootstrap",
-        "successes": 6,
-        "nfailed": 44,
-        "success_rate": 0.12,
-        "wilson_low": 0.05617600150932274,
-        "wilson_high": 0.23804817383202992,
-        "par_factor": 2,
-        "cap": 2500,
-        "par_applied": true,
-        "par2_mean": 4549.48,
-        "includes_failures": true,
-        "success_only_mean": 1245.6666666666667,
-        "n_crash": 0,
-        "n_divergence": 0,
-        "n_cap": 44,
-        "n_wrong_stationary": 0
-      }
-    },
-    {
-      "class": "EonDevelopDeLj38Cap",
-      "template": "eon/develop-de-lj38-cap",
-      "kind": "de-lj38",
-      "cap": 2500,
-      "n": 50,
-      "finished": 50,
-      "missing": [],
-      "successes": 6,
-      "failures": {
-        "cap": 43,
-        "divergence": 1,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "harness_successes": 49,
-      "harness_failures": {
-        "cap": 0,
-        "divergence": 1,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "force_calls_success": {
-        "n": 6,
-        "mean": 1401.1666666666667,
-        "median": 1359.5,
-        "min": 1062.0,
-        "max": 1867.0
-      },
-      "ran": true,
-      "score_v2": {
-        "n": 50,
-        "mean": 4568.14,
-        "median": 5000.0,
-        "median_low": 5000.0,
-        "median_high": 5000.0,
-        "q25": 5000.0,
-        "q75": 5000.0,
-        "iqr": 0.0,
-        "iqr_low": 0.0,
-        "iqr_high": 0.0,
-        "bootstrap_resamples": 2000,
-        "bootstrap_seed": 20261015,
-        "scoring": "par2-wilson-bootstrap",
-        "successes": 6,
-        "nfailed": 44,
-        "success_rate": 0.12,
-        "wilson_low": 0.05617600150932274,
-        "wilson_high": 0.23804817383202992,
-        "par_factor": 2,
-        "cap": 2500,
-        "par_applied": true,
-        "par2_mean": 4568.14,
-        "includes_failures": true,
-        "success_only_mean": 1401.1666666666667,
-        "n_crash": 0,
-        "n_divergence": 1,
-        "n_cap": 43,
-        "n_wrong_stationary": 0
-      }
-    },
-    {
-      "class": "EonDevelopDePtEw",
-      "template": "eon/develop-de-pt-ew",
-      "kind": "de-pt",
-      "cap": 3000,
-      "n": 59,
-      "finished": 59,
-      "missing": [],
-      "successes": 35,
-      "failures": {
-        "cap": 24,
-        "divergence": 0,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "harness_successes": 35,
-      "harness_failures": {
-        "cap": 24,
-        "divergence": 0,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "force_calls_success": {
-        "n": 35,
-        "mean": 1291.4,
-        "median": 1220.0,
-        "min": 125.0,
-        "max": 2711.0
-      },
-      "ran": true,
-      "score_v2": {
-        "n": 59,
-        "mean": 3206.762711864407,
-        "median": 1967.0,
-        "median_low": 1334.0,
-        "median_high": 6000.0,
-        "q25": 1008.5,
-        "q75": 6000.0,
-        "iqr": 4991.5,
-        "iqr_low": 4505.462500000001,
-        "iqr_high": 5128.0,
-        "bootstrap_resamples": 2000,
-        "bootstrap_seed": 20261015,
-        "scoring": "par2-wilson-bootstrap",
-        "successes": 35,
-        "nfailed": 24,
-        "success_rate": 0.5932203389830508,
-        "wilson_low": 0.4659340125533739,
-        "wilson_high": 0.7091096641280723,
-        "par_factor": 2,
-        "cap": 3000,
-        "par_applied": true,
-        "par2_mean": 3206.762711864407,
-        "includes_failures": true,
-        "success_only_mean": 1291.4,
-        "n_crash": 0,
-        "n_divergence": 0,
-        "n_cap": 24,
-        "n_wrong_stationary": 0
-      }
-    },
-    {
-      "class": "EonDevelopDePtOci",
-      "template": "eon/develop-de-pt-oci",
-      "kind": "de-pt",
-      "cap": 3000,
-      "n": 59,
-      "finished": 59,
-      "missing": [],
-      "successes": 38,
-      "failures": {
-        "cap": 21,
-        "divergence": 0,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "harness_successes": 38,
-      "harness_failures": {
-        "cap": 21,
-        "divergence": 0,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "force_calls_success": {
-        "n": 38,
-        "mean": 1466.6052631578948,
-        "median": 1284.5,
-        "min": 313.0,
-        "max": 2914.0
-      },
-      "ran": true,
-      "score_v2": {
-        "n": 59,
-        "mean": 3080.186440677966,
-        "median": 2260.0,
-        "median_low": 1446.0,
-        "median_high": 2846.724999999991,
-        "q25": 1037.0,
-        "q75": 6000.0,
-        "iqr": 4963.0,
-        "iqr_low": 1916.925,
-        "iqr_high": 5191.637499999999,
-        "bootstrap_resamples": 2000,
-        "bootstrap_seed": 20261015,
-        "scoring": "par2-wilson-bootstrap",
-        "successes": 38,
-        "nfailed": 21,
-        "success_rate": 0.6440677966101694,
-        "wilson_low": 0.5165549598185499,
-        "wilson_high": 0.7539670859618668,
-        "par_factor": 2,
-        "cap": 3000,
-        "par_applied": true,
-        "par2_mean": 3080.186440677966,
-        "includes_failures": true,
-        "success_only_mean": 1466.6052631578948,
-        "n_crash": 0,
-        "n_divergence": 0,
-        "n_cap": 21,
-        "n_wrong_stationary": 0
-      }
-    },
-    {
-      "class": "EonDevelopDe2ts",
-      "template": "eon/develop-de-2ts",
-      "kind": "de-2ts",
-      "cap": 10000,
-      "n": 51,
-      "finished": 51,
-      "missing": [],
-      "successes": 0,
-      "failures": {
-        "cap": 9,
-        "divergence": 42,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "harness_successes": 9,
-      "harness_failures": {
-        "cap": 0,
-        "divergence": 42,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "force_calls_success": {
-        "n": 0,
-        "mean": null,
-        "median": null,
-        "min": null,
-        "max": null
-      },
-      "ran": true,
-      "score_v2": {
-        "n": 51,
-        "mean": 20000.0,
-        "median": 20000.0,
-        "median_low": 20000.0,
-        "median_high": 20000.0,
-        "q25": 20000.0,
-        "q75": 20000.0,
-        "iqr": 0.0,
-        "iqr_low": 0.0,
-        "iqr_high": 0.0,
-        "bootstrap_resamples": 2000,
-        "bootstrap_seed": 20261015,
-        "scoring": "par2-wilson-bootstrap",
-        "successes": 0,
-        "nfailed": 51,
-        "success_rate": 0.0,
-        "wilson_low": 0.0,
-        "wilson_high": 0.07004661989853143,
-        "par_factor": 2,
-        "cap": 10000,
-        "par_applied": true,
-        "par2_mean": 20000.0,
-        "includes_failures": true,
-        "success_only_mean": null,
-        "n_crash": 0,
-        "n_divergence": 42,
-        "n_cap": 9,
-        "n_wrong_stationary": 0
-      }
-    },
-    {
-      "class": "EonDevelopDe2tsOci",
-      "template": "eon/develop-de-2ts-oci",
-      "kind": "de-2ts",
-      "cap": 10000,
-      "n": 51,
-      "finished": 51,
-      "missing": [],
-      "successes": 0,
-      "failures": {
-        "cap": 9,
-        "divergence": 42,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "harness_successes": 9,
-      "harness_failures": {
-        "cap": 0,
-        "divergence": 42,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "force_calls_success": {
-        "n": 0,
-        "mean": null,
-        "median": null,
-        "min": null,
-        "max": null
-      },
-      "ran": true,
-      "score_v2": {
-        "n": 51,
-        "mean": 20000.0,
-        "median": 20000.0,
-        "median_low": 20000.0,
-        "median_high": 20000.0,
-        "q25": 20000.0,
-        "q75": 20000.0,
-        "iqr": 0.0,
-        "iqr_low": 0.0,
-        "iqr_high": 0.0,
-        "bootstrap_resamples": 2000,
-        "bootstrap_seed": 20261015,
-        "scoring": "par2-wilson-bootstrap",
-        "successes": 0,
-        "nfailed": 51,
-        "success_rate": 0.0,
-        "wilson_low": 0.0,
-        "wilson_high": 0.07004661989853143,
-        "par_factor": 2,
-        "cap": 10000,
-        "par_applied": true,
-        "par2_mean": 20000.0,
-        "includes_failures": true,
-        "success_only_mean": null,
-        "n_crash": 0,
-        "n_divergence": 42,
-        "n_cap": 9,
-        "n_wrong_stationary": 0
-      }
-    },
-    {
-      "class": "EonDevelopDe2tsEw",
-      "template": "eon/develop-de-2ts-ew",
-      "kind": "de-2ts",
-      "cap": 10000,
-      "n": 51,
-      "finished": 51,
-      "missing": [],
-      "successes": 1,
-      "failures": {
-        "cap": 16,
-        "divergence": 34,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "harness_successes": 17,
-      "harness_failures": {
-        "cap": 0,
-        "divergence": 34,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "force_calls_success": {
-        "n": 1,
-        "mean": 5997.0,
-        "median": 5997.0,
-        "min": 5997.0,
-        "max": 5997.0
-      },
-      "ran": true,
-      "score_v2": {
-        "n": 51,
-        "mean": 19725.43137254902,
-        "median": 20000.0,
-        "median_low": 20000.0,
-        "median_high": 20000.0,
-        "q25": 20000.0,
-        "q75": 20000.0,
-        "iqr": 0.0,
-        "iqr_low": 0.0,
-        "iqr_high": 0.0,
-        "bootstrap_resamples": 2000,
-        "bootstrap_seed": 20261015,
-        "scoring": "par2-wilson-bootstrap",
-        "successes": 1,
-        "nfailed": 50,
-        "success_rate": 0.0196078431372549,
-        "wilson_low": 0.0034696926410608536,
-        "wilson_high": 0.10304568726144975,
-        "par_factor": 2,
-        "cap": 10000,
-        "par_applied": true,
-        "par2_mean": 19725.43137254902,
-        "includes_failures": true,
-        "success_only_mean": 5997.0,
-        "n_crash": 0,
-        "n_divergence": 34,
-        "n_cap": 16,
-        "n_wrong_stationary": 0
-      }
-    },
-    {
-      "class": "EonDevelopLowLj38Dimer",
-      "template": "eon/develop-low-lj38-dimer",
-      "kind": "lowest",
-      "cap": 10000,
-      "n": 200,
-      "finished": 200,
-      "missing": [],
-      "successes": 200,
-      "failures": {
-        "cap": 0,
-        "divergence": 0,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "harness_successes": 200,
-      "harness_failures": {
-        "cap": 0,
-        "divergence": 0,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "force_calls_success": {
-        "n": 200,
-        "mean": 30.355,
-        "median": 29.0,
-        "min": 14.0,
-        "max": 81.0
-      },
-      "ran": true,
-      "score_v2": {
-        "n": 200,
-        "mean": 30.355,
-        "median": 29.0,
-        "median_low": 28.0,
-        "median_high": 30.0,
-        "q25": 25.0,
-        "q75": 34.0,
-        "iqr": 9.0,
-        "iqr_low": 7.0,
-        "iqr_high": 10.0,
-        "bootstrap_resamples": 2000,
-        "bootstrap_seed": 20261015,
-        "scoring": "par2-wilson-bootstrap",
-        "successes": 200,
-        "nfailed": 0,
-        "success_rate": 1.0,
-        "wilson_low": 0.9811546736227335,
-        "wilson_high": 1.0,
-        "par_factor": 2,
-        "cap": 10000,
-        "par_applied": true,
-        "par2_mean": 30.355,
-        "includes_failures": true,
-        "success_only_mean": 30.355,
-        "n_crash": 0,
-        "n_divergence": 0,
-        "n_cap": 0,
-        "n_wrong_stationary": 0
-      }
-    },
-    {
-      "class": "EonDevelopLowLj38Lanczos",
-      "template": "eon/develop-low-lj38-lanczos",
-      "kind": "lowest",
-      "cap": 10000,
-      "n": 200,
-      "finished": 200,
-      "missing": [],
-      "successes": 200,
-      "failures": {
-        "cap": 0,
-        "divergence": 0,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "harness_successes": 200,
-      "harness_failures": {
-        "cap": 0,
-        "divergence": 0,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "force_calls_success": {
-        "n": 200,
-        "mean": 26.385,
-        "median": 25.0,
-        "min": 13.0,
-        "max": 63.0
-      },
-      "ran": true,
-      "score_v2": {
-        "n": 200,
-        "mean": 26.385,
-        "median": 25.0,
-        "median_low": 24.0,
-        "median_high": 26.0,
-        "q25": 22.0,
-        "q75": 29.0,
-        "iqr": 7.0,
-        "iqr_low": 6.0,
-        "iqr_high": 10.0,
-        "bootstrap_resamples": 2000,
-        "bootstrap_seed": 20261015,
-        "scoring": "par2-wilson-bootstrap",
-        "successes": 200,
-        "nfailed": 0,
-        "success_rate": 1.0,
-        "wilson_low": 0.9811546736227335,
-        "wilson_high": 1.0,
-        "par_factor": 2,
-        "cap": 10000,
-        "par_applied": true,
-        "par2_mean": 26.385,
-        "includes_failures": true,
-        "success_only_mean": 26.385,
-        "n_crash": 0,
-        "n_divergence": 0,
-        "n_cap": 0,
-        "n_wrong_stationary": 0
-      }
-    },
-    {
-      "class": "EonDevelopSaddlePtDimer",
-      "template": "eon/develop-saddle-pt-dimer",
-      "kind": "akmc",
-      "cap": 100000000,
-      "n": 10,
-      "finished": 9,
-      "missing": [
-        [
-          "1009",
-          "pt-island"
-        ]
-      ],
-      "successes": 8,
-      "failures": {
-        "cap": 1,
-        "divergence": 0,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "harness_successes": 8,
-      "harness_failures": {
-        "cap": 1,
-        "divergence": 0,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "force_calls_success": {
-        "n": 8,
-        "mean": 4643204.625,
-        "median": 4967742.0,
-        "min": 2880783.0,
-        "max": 6213909.0
-      },
-      "ran": false
-    },
-    {
-      "class": "EonDevelopSaddlePtLanczos",
-      "template": "eon/develop-saddle-pt-lanczos",
-      "kind": "akmc",
-      "cap": 100000000,
-      "n": 2,
-      "finished": 2,
-      "missing": [],
-      "successes": 0,
-      "failures": {
-        "cap": 2,
-        "divergence": 0,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "harness_successes": 0,
-      "harness_failures": {
-        "cap": 2,
-        "divergence": 0,
-        "crash": 0,
-        "wrong_stationary": 0
-      },
-      "force_calls_success": {
-        "n": 0,
-        "mean": null,
-        "median": null,
-        "min": null,
-        "max": null
-      },
-      "ran": true,
-      "score_v2": {
-        "n": 2,
-        "mean": 200000000.0,
-        "median": 200000000.0,
-        "median_low": 200000000.0,
-        "median_high": 200000000.0,
-        "q25": 200000000.0,
-        "q75": 200000000.0,
-        "iqr": 0.0,
-        "iqr_low": 0.0,
-        "iqr_high": 0.0,
-        "bootstrap_resamples": 2000,
-        "bootstrap_seed": 20261015,
-        "scoring": "par2-wilson-bootstrap",
-        "successes": 0,
-        "nfailed": 2,
-        "success_rate": 0.0,
-        "wilson_low": 0.0,
-        "wilson_high": 0.6576197724933469,
-        "par_factor": 2,
-        "cap": 100000000,
-        "par_applied": true,
-        "par2_mean": 200000000.0,
-        "includes_failures": true,
-        "success_only_mean": null,
-        "n_crash": 0,
-        "n_divergence": 0,
-        "n_cap": 2,
-        "n_wrong_stationary": 0
-      }
-    }
-  ]
+  "grid_commits": {
+    "EonDevelopDe2ts": [
+      "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
+    ],
+    "EonDevelopDe2tsEw": [
+      "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
+    ],
+    "EonDevelopDe2tsOci": [
+      "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
+    ],
+    "EonDevelopDeLj38Cap": [
+      "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
+    ],
+    "EonDevelopDeLj38Ew": [
+      "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
+    ],
+    "EonDevelopDeLj38Oci": [
+      "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
+    ],
+    "EonDevelopDePtEw": [
+      "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
+    ],
+    "EonDevelopDePtOci": [
+      "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
+    ],
+    "EonDevelopLowLj38Dimer": [
+      "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
+    ],
+    "EonDevelopLowLj38Lanczos": [
+      "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
+    ],
+    "EonDevelopNebPtLbfgs": [
+      "b242f2385b227838da8c9dfe0a738b13bacdcebd"
+    ],
+    "EonDevelopNebPtLbfgsM100": [
+      "b242f2385b227838da8c9dfe0a738b13bacdcebd"
+    ],
+    "EonDevelopSaddlePtDimer": [
+      "7e58986ea7a975b0f70e17294067de84e8db803d"
+    ],
+    "EonDevelopSaddlePtLanczos": [
+      "7e58986ea7a975b0f70e17294067de84e8db803d"
+    ],
+    "EonDevelopTsLj38Dimer": [
+      "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
+    ],
+    "EonDevelopTsLj38Lanczos": [
+      "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
+    ],
+    "EonDevelopTsPtDimer": [
+      "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
+    ],
+    "EonDevelopTsPtLanczos": [
+      "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
+    ]
+  }
 }

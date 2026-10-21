@@ -53,12 +53,10 @@
     "par_factor": 2,
     "q25": 1735.25,
     "q75": 3767.25,
-    "scoring": "par2-wilson-bootstrap",
+    "scoring": "par2-bootstrap",
     "success_only_mean": 2913.12004069176,
     "success_rate": 0.983,
-    "successes": 983,
-    "wilson_high": 0.9893593101431837,
-    "wilson_low": 0.9729440411597701
+    "successes": 983
   },
   "template": "lammps/quickmin-lj38-noise-s1em4"
 }

@@ -53,12 +53,10 @@
     "par_factor": 2,
     "q25": 6296.75,
     "q75": 20000.0,
-    "scoring": "par2-wilson-bootstrap",
+    "scoring": "par2-bootstrap",
     "success_only_mean": 5556.624020887729,
     "success_rate": 0.383,
-    "successes": 383,
-    "wilson_high": 0.41352273011601154,
-    "wilson_low": 0.3533727313696084
+    "successes": 383
   },
   "template": "lammps/sd-lj38"
 }

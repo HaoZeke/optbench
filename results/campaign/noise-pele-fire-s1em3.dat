@@ -19,8 +19,6 @@ counter harness
 problem minimization/lj38-noise
 sigma 0.001
 par2_mean 1909.561
-wilson_low 0.924639097229
-wilson_high 0.953985701787
 par2_median 640
 par2_median_low 614
 par2_median_high 672.5

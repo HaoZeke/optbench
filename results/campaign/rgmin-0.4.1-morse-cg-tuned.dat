@@ -17,8 +17,6 @@ template rgmin/morse-cg-tuned
 tuning tuned
 counter harness
 par2_mean 50.49
-wilson_low 0.963006501793
-wilson_high 1
 par2_median 50
 par2_median_low 49
 par2_median_high 52

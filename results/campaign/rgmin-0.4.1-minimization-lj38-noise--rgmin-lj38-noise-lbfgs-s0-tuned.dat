@@ -19,8 +19,6 @@ template rgmin/lj38-noise-lbfgs-s0-tuned
 tuning tuned
 counter harness
 par2_mean 294.105
-wilson_low 0.989760443723
-wilson_high 0.99844341186
 par2_median 206
 par2_median_low 201
 par2_median_high 210

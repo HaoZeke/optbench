@@ -18,8 +18,6 @@ problem globalopt/lj75
 tuning published
 counter harness
 par2_mean 2000000
-wilson_low 0
-wilson_high 0.0188453263773
 par2_median 2000000
 par2_median_low 2000000
 par2_median_high 2000000

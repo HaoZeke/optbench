@@ -35,8 +35,6 @@ V2_KEYS = (
     "median",
     "median_low",
     "median_high",
-    "wilson_low",
-    "wilson_high",
     "n",
     "nfailed",
     "n_cap",

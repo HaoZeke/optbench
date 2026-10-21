@@ -53,12 +53,10 @@
     "par_factor": 2,
     "q25": 1804.25,
     "q75": 3686.0,
-    "scoring": "par2-wilson-bootstrap",
+    "scoring": "par2-bootstrap",
     "success_only_mean": 2922.967676767677,
     "success_rate": 0.99,
-    "successes": 990,
-    "wilson_high": 0.9945592455544707,
-    "wilson_low": 0.9816905311296853
+    "successes": 990
   },
   "template": "dlfind/sd-lj38-noise-s0"
 }

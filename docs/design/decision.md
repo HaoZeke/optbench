@@ -4,7 +4,7 @@ Three designs are written next to this note.
 
 - `par2.md` charges a failure `2 * cap` and ranks by the mean of the penalised costs.
 - `performance-profile.md` leaves failures censored and compares distribution functions.
-- `conditional-median.md` ranks by the Wilson lower bound and breaks ties with the median of the successes.
+- `conditional-median.md` ranks by the success-rate lower bound and breaks ties with the median of the successes.
 
 The implemented score is alternative A.
 
@@ -12,7 +12,7 @@ The site needs one cost that can sit in a table the way the 2014 force-call mean
 
 These pieces are shared with the designs that were not selected, and they are part of the implementation:
 
-- Wilson 95% interval for the success rate, `z = 1.959963984540054`
+- the success count, `k` out of `n`
 - median and interquartile range of the penalised costs, with a percentile bootstrap of 2000 resamples, seed `20261015`
 - Hessian index 1 for a saddle and index 0 for a minimum, plus an energy tolerance and a Kabsch RMSD tolerance
 - Pt-island cost in force calls per search

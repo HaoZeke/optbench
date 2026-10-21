@@ -44,10 +44,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "flame/lj38-minhocao",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     }
   ],
   "profile": {
@@ -142,10 +141,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "airss/lj38",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -187,10 +185,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 100,
       "template": "eon-client/bh-lj38",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.9630065017930143
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -232,10 +229,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.98,
+      "successes": 98,
       "template": "eon-svn/bh-lj38",
-      "tuning": "",
-      "wilson_high": 0.9944980324498376,
-      "wilson_low": 0.929988209271456
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -277,10 +273,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.91,
+      "successes": 91,
       "template": "flame/lj38-minhocao",
-      "tuning": "default",
-      "wilson_high": 0.9519274599974348,
-      "wilson_low": 0.837737871472837
+      "tuning": "default"
     }
   ],
   "title": "Lennard-Jones 38 global minimum"

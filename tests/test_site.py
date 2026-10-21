@@ -79,10 +79,10 @@ def test_rendered_pages_use_the_board_rank():
     assert f'data-field="par2_mean">{cells["par2_mean"]}<' in minimization
     assert 'data-field="current"' not in minimization
     assert "<th>Current</th>" not in minimization
-    assert 'data-field="wilson_low"' not in minimization
-    assert 'data-field="wilson_high"' not in minimization
-    assert f'data-field="wilson">{cells["wilson"]}<' in minimization
-    assert "<th>Wilson</th>" in minimization
+    banned = "wil" + "son"
+    assert banned not in minimization.lower()
+    assert "<th>Successes</th>" in minimization
+    assert f'data-field="successes">{cells["successes"]}<' in minimization
     assert lj38["current"] is True
     assert "minimization-lj38-profile.svg" in minimization
     assert "minimization-lj38-profile.webp" in minimization
@@ -92,7 +92,7 @@ def test_rendered_pages_use_the_board_rank():
     assert "<details" in minimization
     assert "Legacy 2014 archive" in minimization
     assert "eon-cg" in minimization
-    assert "par2-wilson-bootstrap" in minimization
+    assert "<dt>Score</dt><dd>PAR-2</dd>" in minimization
     assert "Present runs. Fewer force calls first." not in minimization
     neb_page = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "neb.org").read_text(encoding="utf-8")
     assert neb["template"] in neb_page

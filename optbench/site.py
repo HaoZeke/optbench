@@ -122,8 +122,8 @@ def _bits(problem: dict) -> list[tuple[str, str]]:
     if archive.get("failure"):
         bits.append(("Archived rule", str(archive["failure"])))
     version2 = scoring.get("v2") or {}
-    if version2.get("version"):
-        bits.append(("v2", str(version2["version"])))
+    if version2.get("version") or version2.get("par_factor"):
+        bits.append(("Score", "PAR-2"))
     if version2.get("cost"):
         bits.append(("v2 cost", str(version2["cost"])))
     if problem.get("remark"):

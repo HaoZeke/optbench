@@ -53,12 +53,10 @@
     "par_factor": 2,
     "q25": 155.0,
     "q75": 219.0,
-    "scoring": "par2-wilson-bootstrap",
+    "scoring": "par2-bootstrap",
     "success_only_mean": 192.35170340681364,
     "success_rate": 0.998,
-    "successes": 998,
-    "wilson_high": 0.9994513564118793,
-    "wilson_low": 0.9927371921365079
+    "successes": 998
   },
   "template": "dlfind/lbfgs-lj38-noise-s1em4"
 }

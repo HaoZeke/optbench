@@ -18,8 +18,6 @@ template rgmin/lj38-sr1
 tuning default
 counter harness
 par2_mean 19908.901
-wilson_low 0.00213753552732
-wilson_high 0.0116509553734
 par2_median 20000
 par2_median_low 20000
 par2_median_high 20000

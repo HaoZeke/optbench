@@ -5,8 +5,6 @@ force_calls_max 6482
 nfailed 193
 par2_mean 19418.8200000000
 successes 7
-wilson_low 0.0170555420
-wilson_high 0.0704706115
 par2_median 20000.0000000000
 n_cap 193
 n_wrong_stationary 0

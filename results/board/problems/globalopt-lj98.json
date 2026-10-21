@@ -44,10 +44,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "flame/lj98-minhocao",
-      "tuning": "dtinit",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": "dtinit"
     }
   ],
   "ranked": [],

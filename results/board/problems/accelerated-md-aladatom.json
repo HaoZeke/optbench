@@ -43,10 +43,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "eon/aladatom-akmc",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": ""
     }
   ],
   "partial": [
@@ -90,10 +89,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "eon-client/amd-hyper",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -135,10 +133,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "eon-client/amd-prd",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -180,10 +177,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "eon-svn/amd-hyper",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -225,10 +221,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "eon-svn/amd-prd",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": ""
     }
   ],
   "ranked": [],

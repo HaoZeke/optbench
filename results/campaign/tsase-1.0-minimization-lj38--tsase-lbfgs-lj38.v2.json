@@ -56,12 +56,10 @@
     "par_factor": 2,
     "q25": 140.0,
     "q75": 207.0,
-    "scoring": "par2-wilson-bootstrap",
+    "scoring": "par2-bootstrap",
     "success_only_mean": 177.91164658634537,
     "success_rate": 0.996,
-    "successes": 996,
-    "wilson_high": 0.9984434118595916,
-    "wilson_low": 0.9897604437227377
+    "successes": 996
   },
   "template": "tsase/lbfgs-lj38"
 }

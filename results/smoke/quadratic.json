@@ -30,11 +30,9 @@
         "par_factor": 2,
         "q25": 139.0,
         "q75": 139.0,
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-bootstrap",
         "success_rate": 1.0,
-        "successes": 2,
-        "wilson_high": 1.0,
-        "wilson_low": 0.34238022750665303
+        "successes": 2
       },
       "parameters": {
         "cap": 5000,
@@ -121,11 +119,9 @@
         "par_factor": 2,
         "q25": 720.0,
         "q75": 720.0,
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-bootstrap",
         "success_rate": 1.0,
-        "successes": 1,
-        "wilson_high": 1.0,
-        "wilson_low": 0.20654931437723745
+        "successes": 1
       },
       "parameters": {
         "cap": 20000,
@@ -196,11 +192,9 @@
         "par_factor": 2,
         "q25": 400.0,
         "q75": 400.0,
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-bootstrap",
         "success_rate": 0.0,
-        "successes": 0,
-        "wilson_high": 0.7934506856227626,
-        "wilson_low": 0.0
+        "successes": 0
       },
       "parameters": {
         "cap": 200,
@@ -276,11 +270,9 @@
         "par_factor": 2,
         "q25": 2.0,
         "q75": 2.0,
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-bootstrap",
         "success_rate": 1.0,
-        "successes": 1,
-        "wilson_high": 1.0,
-        "wilson_low": 0.20654931437723745
+        "successes": 1
       },
       "parameters": {
         "cap": 100,
@@ -351,11 +343,9 @@
         "par_factor": 2,
         "q25": 10000.0,
         "q75": 10000.0,
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-bootstrap",
         "success_rate": 0.0,
-        "successes": 0,
-        "wilson_high": 0.7934506856227626,
-        "wilson_low": 0.0
+        "successes": 0
       },
       "parameters": {
         "cap": 5000,
@@ -406,6 +396,6 @@
     }
   ],
   "schema": "optbench.result/v2",
-  "scoring": "par2-wilson-bootstrap",
+  "scoring": "par2-bootstrap",
   "status": "smoke"
 }

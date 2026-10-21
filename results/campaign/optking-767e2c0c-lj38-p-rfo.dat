@@ -24,8 +24,6 @@ problem tsopt/LJ38
 tuning default
 counter harness
 par2_mean 7030.36
-wilson_low 0.59702191208
-wilson_high 0.726759130216
 par2_median 566.5
 par2_median_low 420
 par2_median_high 859.5

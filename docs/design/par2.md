@@ -31,11 +31,9 @@ The penalised cost of a success is its harness force-call count. The penalised c
 
 Beside that mean the record carries:
 
-- successes `k` out of `n`, and the Wilson 95% interval for `k/n`
+- successes `k` out of `n`
 - the median and the interquartile range of the same penalised costs
 - a percentile bootstrap 95% interval for the median and for the interquartile range, with 2000 resamples and seed `20261015`
-
-The Wilson interval uses `z = 1.959963984540054`. For the published 1000/1000 successes the interval is 0.996173 to 1. For the published 975/1000 successes it is 0.963355 to 0.983010. For 904/1000 it is 0.884165 to 0.920743. Those three intervals use only `k` and `n` from `results/sota-lj38.json`. They do not need the per-start vector.
 
 ## Pt islands
 

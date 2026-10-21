@@ -73,12 +73,10 @@
     "par_factor": 2,
     "q25": 171.5,
     "q75": 273.5,
-    "scoring": "par2-wilson-bootstrap",
+    "scoring": "par2-bootstrap",
     "success_only_mean": 236.0,
     "success_rate": 0.847457627118644,
-    "successes": 50,
-    "wilson_high": 0.9176153600140352,
-    "wilson_low": 0.7348201621622644
+    "successes": 50
   },
   "template": "geodesic/ci-neb-lbfgs"
 }

@@ -19,15 +19,13 @@ note Initialiser ablation of ase/de-pt-island-default. The path is geodesic-inte
 host cursor
 date 2026-10-18
 contributor Rohit Goswami
-scoring par2-wilson-bootstrap
+scoring par2-bootstrap
 par2_mean 824.1186441
 par2_median 716
 par2_median_low 605
 par2_median_high 734
 par2_iqr 477
 success_rate 0.9830508475
-wilson_low 0.9100427404
-wilson_high 0.9970017661
 par_applied true
 par_factor 2
 bootstrap_resamples 2000

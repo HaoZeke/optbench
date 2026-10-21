@@ -54,12 +54,10 @@
     "par_factor": 2,
     "q25": 20000.0,
     "q75": 20000.0,
-    "scoring": "par2-wilson-bootstrap",
+    "scoring": "par2-bootstrap",
     "success_only_mean": 67.61538461538461,
     "success_rate": 0.13,
-    "successes": 13,
-    "wilson_high": 0.20980351440076428,
-    "wilson_low": 0.07757167427240512
+    "successes": 13
   },
   "template": "optim/lbfgs-morse"
 }

@@ -43,10 +43,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 10,
       "template": "",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7224672001371107
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -88,10 +87,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
+      "successes": 10,
       "template": "",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7224672001371107
+      "tuning": ""
     }
   ],
   "partial": [
@@ -135,10 +133,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 16,
       "template": "ase/dimer-pt-island-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.8063923194655637
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -180,10 +177,9 @@
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
+      "successes": 16,
       "template": "ase/dimer-pt-island-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.8063923194655637
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -225,10 +221,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "eon-client/saddle-pt-dimer",
-      "tuning": "",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -270,10 +265,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "eon-client/saddle-pt-lanczos",
-      "tuning": "",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -315,10 +309,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "eon-client/saddle-pt-md",
-      "tuning": "",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -360,10 +353,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "eon-svn/saddle-pt-dimer-bounded",
-      "tuning": "",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -405,10 +397,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "eon-svn/saddle-pt-lanczos-bounded",
-      "tuning": "",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -450,10 +441,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "eon-svn/saddle-pt-md",
-      "tuning": "",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": ""
     },
     {
       "asv_commit": "ba1ac41f2075b1a1ef890b096a0d55c09c6390d4",
@@ -495,10 +485,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "eon/develop-saddle-pt-dimer",
-      "tuning": "",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": ""
     },
     {
       "asv_commit": "ba1ac41f2075b1a1ef890b096a0d55c09c6390d4",
@@ -540,10 +529,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "eon/develop-saddle-pt-lanczos",
-      "tuning": "",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": ""
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -585,10 +573,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "ase/dimer-pt-island-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -630,10 +617,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "sella/pt-island-search-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": "tuned"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -675,10 +661,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
+      "successes": 1,
       "template": "ase/dimer-pt-island-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "tuned"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -720,10 +705,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "sella/pt-island-search-default",
-      "tuning": "default",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": "default"
     }
   ],
   "profile_gap": "No performance profile. The ranked rows do not share one start set.",
@@ -768,10 +752,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 0.75,
+      "successes": 12,
       "template": "sella/pt-island-search-default",
-      "tuning": "default",
-      "wilson_high": 0.8981793250878696,
-      "wilson_low": 0.5050168346449122
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -813,10 +796,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 0.6875,
+      "successes": 11,
       "template": "sella/pt-island-search-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.8583535614521796,
-      "wilson_low": 0.44404355834740666
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -858,10 +840,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0004,
+      "successes": 2,
       "template": "softsaddle/saddle-lanczos-sm0",
-      "tuning": "sm0",
-      "wilson_high": 0.0014573865014234437,
-      "wilson_low": 0.00010970128207763504
+      "tuning": "sm0"
     },
     {
       "asv_commit": "",
@@ -903,10 +884,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0001,
+      "successes": 2,
       "template": "rgsaddle/saddle-dimer-rotskip-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.0003645736136206778,
-      "wilson_low": 2.7424035272726838e-05
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -948,10 +928,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "rgsaddle/saddle-dimer-fire",
-      "tuning": "default",
-      "wilson_high": 0.00019203605610462553,
-      "wilson_low": 0.0
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -993,10 +972,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "rgsaddle/saddle-dimer-fire-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.00019203605610462553,
-      "wilson_low": 0.0
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -1038,10 +1016,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "rgsaddle/saddle-dimer-lbfgs",
-      "tuning": "default",
-      "wilson_high": 0.00019203605610462553,
-      "wilson_low": 0.0
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -1083,10 +1060,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "rgsaddle/saddle-dimer-lbfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.00019203605610462553,
-      "wilson_low": 0.0
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -1128,10 +1104,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "rgsaddle/saddle-dimer-rotskip",
-      "tuning": "default",
-      "wilson_high": 0.00019203605610462553,
-      "wilson_low": 0.0
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -1173,10 +1148,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "rgsaddle/saddle-lanczos",
-      "tuning": "default",
-      "wilson_high": 0.00019203605610462553,
-      "wilson_low": 0.0
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -1218,10 +1192,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "rgsaddle/saddle-lanczos-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.00019203605610462553,
-      "wilson_low": 0.0
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -1263,10 +1236,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "softsaddle/saddle-davidson-sm50",
-      "tuning": "default",
-      "wilson_high": 0.0007677019450571244,
-      "wilson_low": 0.0
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -1308,10 +1280,9 @@
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "softsaddle/saddle-lanczos-sm50",
-      "tuning": "sm50",
-      "wilson_high": 0.0007677019450571244,
-      "wilson_low": 0.0
+      "tuning": "sm50"
     },
     {
       "asv_commit": "7e58986ea7a975b0f70e17294067de84e8db803d",
@@ -1353,10 +1324,9 @@
       "scored": true,
       "source": "asv",
       "success_rate": 0.0,
+      "successes": 0,
       "template": "eon/develop-saddle-pt-lanczos",
-      "tuning": "",
-      "wilson_high": 0.6576197724933469,
-      "wilson_low": 0.0
+      "tuning": ""
     }
   ],
   "title": "Pt heptamer island"

@@ -53,12 +53,10 @@
     "par_factor": 2,
     "q25": 20000.0,
     "q75": 20000.0,
-    "scoring": "par2-wilson-bootstrap",
+    "scoring": "par2-bootstrap",
     "success_only_mean": 279.25,
     "success_rate": 0.04,
-    "successes": 4,
-    "wilson_high": 0.0983707143588792,
-    "wilson_low": 0.01566330399154762
+    "successes": 4
   },
   "template": "lammps/sd-morse"
 }

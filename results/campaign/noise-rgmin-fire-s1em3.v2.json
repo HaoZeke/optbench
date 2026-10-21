@@ -42,12 +42,10 @@
         "par_factor": 2,
         "q25": 413.75,
         "q75": 802.75,
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-bootstrap",
         "success_only_mean": 626.5356037151703,
         "success_rate": 0.969,
-        "successes": 969,
-        "wilson_high": 0.9780759965528414,
-        "wilson_low": 0.9563345039877078
+        "successes": 969
       },
       "parameters": {
         "cap": 10000,
@@ -31145,6 +31143,6 @@
     }
   ],
   "schema": "optbench.result/v2",
-  "scoring": "par2-wilson-bootstrap",
+  "scoring": "par2-bootstrap",
   "status": "archive"
 }

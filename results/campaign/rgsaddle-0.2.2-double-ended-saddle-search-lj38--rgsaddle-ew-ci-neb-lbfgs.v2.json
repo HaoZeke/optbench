@@ -73,12 +73,10 @@
     "par_factor": 2,
     "q25": 444.0,
     "q75": 659.0,
-    "scoring": "par2-wilson-bootstrap",
+    "scoring": "par2-bootstrap",
     "success_only_mean": 588.8936170212766,
     "success_rate": 0.94,
-    "successes": 47,
-    "wilson_high": 0.979385029651026,
-    "wilson_low": 0.8378290831116182
+    "successes": 47
   },
   "template": "rgsaddle/ew-ci-neb-lbfgs"
 }

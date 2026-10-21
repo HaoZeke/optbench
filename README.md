@@ -204,7 +204,7 @@ The 2014 mean leaves out failures. The comparable score does not. It is specifie
 
 A force call is one entry to `HarnessCounter`. ASE, pele, and Sella are charged through that counter. A compiled client reaches the same counter: eonclient through the `ext_pot` bridge in `optbench.extpot`, and an rgpot client through `RgpotCounter.calculate`. `uv run optbench run` still writes the legacy `benchmark.dat` from the client's own counter, and the per-start file next to it is marked `counter` `client`. That file is not a v2 score. `uv run optbench validate-counter` is the subset check that the server count matches eonclient. A subset is not a published mean.
 
-A v2 success is under the cap, at the force stop, and, when a reference is supplied, at Hessian index 0 for a minimum or index 1 for a saddle, with the energy and Kabsch RMSD inside the tolerances. A failure costs `2` times the cap. The table shows that PAR-2 mean, the Wilson 95% interval on the success rate, and the median and interquartile range with a bootstrap of 2000 resamples seeded by `20261015`.
+A v2 success is under the cap, at the force stop, and, when a reference is supplied, at Hessian index 0 for a minimum or index 1 for a saddle, with the energy and Kabsch RMSD inside the tolerances. A failure costs `2` times the cap. The table shows that PAR-2 mean and the success count. The median uses a bootstrap of 2000 resamples seeded by `20261015`.
 
 Pt-island cost is force calls in a repetition divided by the searches in that repetition. `eon-client/lbfgs-m20` is `tuning` `default`. `eon-client/lbfgs-m100` is `tuning` `tuned`.
 
