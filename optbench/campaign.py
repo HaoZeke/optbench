@@ -302,12 +302,29 @@ def run(
             limit=limit,
         )
     if template["engine"] == "pele":
-        from .runners.pele_min import run_template
-
         problem = resolve_problem(root, problem_name)
         stated = template.get("problem")
         if stated and stated != problem["id"]:
             raise ValueError(f"{template_name} belongs to {stated}")
+        basin = template.get("algorithm") == "basin hopping" or str(template.get("problem", "")).startswith(
+            "globalopt/"
+        )
+        if basin:
+            from .runners.pele_bh import run_template
+
+            return run_template(
+                root,
+                problem,
+                template,
+                geometries=geometries,
+                output=output,
+                workers=workers,
+                work=work,
+                limit=limit,
+                resume=resume,
+            )
+        from .runners.pele_min import run_template
+
         return run_template(
             root,
             problem,
@@ -427,24 +444,6 @@ def run(
             template_name,
             output=output,
             workers=workers,
-            limit=limit,
-            resume=resume,
-        )
-    if template["engine"] == "pele":
-        from .runners.pele_bh import run_template
-
-        problem = resolve_problem(root, problem_name)
-        stated = template.get("problem")
-        if stated and stated != problem["id"]:
-            raise ValueError(f"{template_name} belongs to {stated}")
-        return run_template(
-            root,
-            problem,
-            template,
-            geometries=geometries,
-            output=output,
-            workers=workers,
-            work=work,
             limit=limit,
             resume=resume,
         )

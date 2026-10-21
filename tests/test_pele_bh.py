@@ -13,7 +13,45 @@ PROBLEMS = ("globalopt/lj38", "globalopt/lj75", "globalopt/lj98", "globalopt/lj1
 
 
 def _pele_templates() -> list[dict]:
-    return [row for row in list_templates(ROOT) if str(row["id"]).startswith("pele/")]
+    return [
+        row
+        for row in list_templates(ROOT)
+        if str(row["id"]).startswith("pele/") and row.get("algorithm") == "basin hopping"
+    ]
+
+
+def test_basin_hopping_dispatches_to_the_basin_hopper(monkeypatch, tmp_path: Path):
+    called = {}
+
+    def fake(root, problem, template, **kwargs):
+        called["problem"] = problem["id"]
+        called["template"] = template["id"]
+        called["limit"] = kwargs.get("limit")
+        return {"status": "measured"}
+
+    monkeypatch.setattr("optbench.runners.pele_bh.run_template", fake)
+    from optbench.campaign import run
+
+    run(ROOT, "globalopt/lj38", "pele/lj38-basinhopping", output=tmp_path / "out.dat", limit=1)
+    assert called == {
+        "problem": "globalopt/lj38",
+        "template": "pele/lj38-basinhopping",
+        "limit": 1,
+    }
+
+
+def test_minimizer_dispatches_to_the_minimizer(monkeypatch, tmp_path: Path):
+    called = {}
+
+    def fake(root, problem, template, **kwargs):
+        called["problem"] = problem["id"]
+        called["template"] = template["id"]
+        return {"status": "measured"}
+
+    monkeypatch.setattr("optbench.runners.pele_min.run_template", fake)
+    summary = run(ROOT, "minimization/lj38", "pele/lj38-lbfgs", output=tmp_path / "out.dat", limit=1)
+    assert called == {"problem": "minimization/lj38", "template": "pele/lj38-lbfgs"}
+    assert summary == {"status": "measured"}
 
 
 def test_pele_templates_match_the_registry_pin():
@@ -143,6 +181,8 @@ def test_cap_stops_one_lj38_start(tmp_path: Path):
     template["stop"] = dict(template.get("stop") or {})
     template["stop"]["max_force_calls"] = 200
     problem = resolve_problem(ROOT, "globalopt/lj38")
+    problem["convergence"] = dict(problem["convergence"])
+    problem["convergence"]["max_force_calls"] = 200
     output = tmp_path / "pele.dat"
     summary = run_template(
         ROOT,
