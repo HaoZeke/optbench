@@ -2,8 +2,11 @@
 
 from __future__ import annotations
 
+import shutil
 import tomllib
 from pathlib import Path
+
+import pytest
 
 from optbench.campaign import _check_stop, list_templates, resolve_problem
 from optbench.runners.gmin_go import CODE_VERSION, PIN_REF, TARBALL_SHA256, _coords_text, _data_text
@@ -109,13 +112,15 @@ def test_bhpt_keyword_order_and_repeated_coords():
     serial_text = _data_text(serial)
     assert serial_text.startswith("MPI\n")
     assert "BHPT" not in serial_text
+    coords = _coords_text([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0]], 4)
+    assert len(coords.splitlines()) == 8
+    if shutil.which("mpirun") is None:
+        pytest.skip("mpirun is not on PATH")
     from optbench.runners.gmin_go import _command
 
     command = _command("/tmp/gmin-build/GMIN", 4)
     assert command[command.index("-np") + 1] == "4"
     assert "mpi_yield_when_idle" in command
-    coords = _coords_text([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0]], 4)
-    assert len(coords.splitlines()) == 8
 
 
 def test_lj98_cap_is_the_problem_cap_and_the_data_file_uses_it():
