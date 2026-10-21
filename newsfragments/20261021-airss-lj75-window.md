@@ -1,0 +1,1 @@
+AIRSS on `globalopt/lj75` scores against the energy window stated on the problem, -397.492331 plus 0.001, at force-call cap 2000000. The vendored Wales coordinate file remains the reference only for the 38-atom search.
