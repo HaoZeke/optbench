@@ -256,7 +256,9 @@ def _write_saddle(template: dict, rows: list[dict], output: Path, workers: int) 
             f"reached {int(row['reached'])}"
         )
     lines.append(f"code {template.get('code', 'eOn')}")
-    lines.append(f"code_version {template.get('code_version', '')}")
+    version = str(template.get("code_version") or "").strip()
+    if version:
+        lines.append(f"code_version {version}")
     lines.append(f"commit {template.get('commit', '')}")
     lines.append("counter client-search-results")
     lines.append("count_keys sad-fcs+mins-fcs")

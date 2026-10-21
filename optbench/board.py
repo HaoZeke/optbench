@@ -453,6 +453,9 @@ def _comparable(fields: dict[str, str], raw_rows: list[dict]) -> bool:
         return False
     if counter == "harness" or reducer.startswith("harness"):
         return True
+    # Archive campaign unit: sad-fcs + mins-fcs through the qualifying saddle.
+    if counter == "client-search-results":
+        return True
     for raw in raw_rows:
         if str(raw.get("counter") or "").lower() == "harness":
             return True
@@ -1325,7 +1328,7 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
     """
     cells = [
         ("template", str(row.get("template") or row.get("entry") or "")),
-        ("version", f"{row.get('code') or ''} {row.get('code_version') or ''}"),
+        ("version", f"{row.get('code') or ''} {row.get('code_version') or ''}".strip()),
         ("commit", str(row.get("commit") or "")[:12]),
         ("source", str(row.get("source") or "")),
         ("current", "yes" if row.get("current") else "no"),
