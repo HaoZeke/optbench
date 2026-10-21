@@ -4,9 +4,10 @@
 # Comput. Phys. Commun. 316 (2025) 109781. examples/H2S/gp_neb.py at
 # c4d63271 climbs, uses FIRE for 100 steps, and repeats the pass up to
 # three times. Energy noise uses the Pd4 floor: max(0.0002, 0.05/n_atoms).
-# The mean is zero. RBF bounds are the library bounds. sparsify() is not
-# called. FIRE maxstep is the problem max_move. wall_seconds is 617.575,
-# the same ceiling as gprcalc/gp-neb, and a breach is a cap failure.
+# The mean is zero. RBF bounds are the library bounds in eV and at a
+# 5.0 Å cutoff. sparsify() is not called. FIRE maxstep is the problem
+# max_move. GPR.calculate keeps the library force-uncertainty gate.
+# The harness converts the eV/Å numbers into the potential's units.
 id = "gprcalc/gp-ci-neb"
 engine = "gprcalc"
 code = "GPR calculator"
@@ -35,4 +36,10 @@ nmax = 3
 rcut = 5.0
 freq = 10
 neb_method = "improvedtangent"
-wall_seconds = 617.575
+sigma0 = 1.0
+length0 = 0.1
+sigma_min = 1e-2
+sigma_max = 50.0
+length_min = 1e-1
+length_max = 10.0
+energy_uncertainty = false

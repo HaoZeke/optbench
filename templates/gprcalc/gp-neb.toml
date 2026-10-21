@@ -7,14 +7,12 @@
 # update_gpr on image len-2, FIRE, 50 steps, climb false, and a second pass
 # if the first does not converge. Spring k is the neb_calc default 0.1.
 # set_GPR leaves base_potential unset (zero mean). RBF_mb bounds stay
-# sigma [1e-2, 50] and length [1e-1, 10], initial (1.0, 0.1). sparsify()
-# is not called. FIRE maxstep is the problem max_move; the library call
-# sets none. The harness still judges the problem force norm.
-# wall_seconds is the per-start ceiling. Crossing it is a cap failure.
-# 617.575 s is the logged search time of LJ38 pair_00 FIRE step 5 with these
-# settings, when fmax rose from 2.133422 to 42.266805 after the surrogate
-# was accepted. examples/emt-serial.py's first GPR NEB converged on this
-# machine in 26.818827 s, inside this ceiling.
+# sigma [1e-2, 50] eV and length [1e-1, 10] at a 5.0 Å cutoff, initial
+# (1.0, 0.1). sparsify() is not called. GPR.calculate keeps the library
+# force-uncertainty gate (ignore_E_std true: section 3.3 uses only σ_F).
+# FIRE maxstep is the problem max_move. The harness judges the problem
+# force norm with classify_outcome. These numbers are eV and Å. The
+# harness divides them by the potential's unit scales.
 id = "gprcalc/gp-neb"
 engine = "gprcalc"
 code = "GPR calculator"
@@ -43,4 +41,10 @@ nmax = 3
 rcut = 5.0
 freq = 10
 neb_method = "improvedtangent"
-wall_seconds = 617.575
+sigma0 = 1.0
+length0 = 0.1
+sigma_min = 1e-2
+sigma_max = 50.0
+length_min = 1e-1
+length_max = 10.0
+energy_uncertainty = false

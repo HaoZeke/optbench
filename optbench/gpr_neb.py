@@ -3,21 +3,27 @@
 The search follows ``gpr_calc.NEB.neb_calc`` and the cluster scripts in
 ``examples/Pd4/gp_neb.py`` and ``examples/H2S/gp_neb.py`` at commit
 c4d63271: one shared zero-mean GP, an IDPP initial path, ASE NEB, and
-FIRE. The base calculator is called only when the GP uncertainty gate
-asks for one. ``HarnessCounter`` sits on that base calculator. A
-surrogate prediction does not enter the potential, so it is not a force
-call. Hessian finite differences use ``verification`` and the spec
-potential, and they are not search cost.
+FIRE. ``GPR.calculate`` keeps the library uncertainty gate. The base
+calculator is called when that gate asks for one. ``HarnessCounter``
+sits on that base calculator. A surrogate prediction does not enter the
+potential, so it is not a force call. Hessian finite differences use
+``verification`` and the spec potential, and they are not search cost.
 
-The problem file supplies the image count, the cap, the success force
-norm, and the maximum move. The optimizer stops on the template force
-residual (the paper's 0.075 eV/Å), or on the library step limit, or on
-the cap, or on the template wall clock. A wall-clock breach is a cap
-failure. Success is a true free-atom gradient at the problem force norm
-whose Hessian index is 1, with the call count strictly under the cap.
+The problem file supplies the image count, the harness force-call cap,
+the success force norm, and the maximum move. The optimizer stops on
+the template force residual, or on the library step limit, or on the
+cap. ``classify_outcome`` is the class. A finite stop above the force
+tolerance is ``not_converged``. ``cap`` is only the harness force-call
+cap. ``SEARCH_TIME_LIMIT`` is one infrastructure slice. Crossing it
+writes a resume checkpoint and is not a score. The same pair continues
+on the next slice until the force-call cap or convergence. The measured
+duration is ``search_seconds``, which the benchmark writes as
+``time_search``.
 
-Onyango, Kang, and Zhu, Comput. Phys. Commun. 316 (2025) 109781,
-arXiv:2504.07319, section 6.
+Section 6 of Onyango, Kang, and Zhu, Comput. Phys. Commun. 316 (2025)
+109781, arXiv:2504.07319, writes one numerical set because those
+examples are in eV and Å. The template keeps that set. ``_unit_scales``
+converts it into the potential's units.
 """
 
 from __future__ import annotations
@@ -42,7 +48,7 @@ import numpy as np
 
 from .campaign import geometry_archive, load_template, resolve_problem, write_starts
 from .counter import ForceCallCap, HarnessCounter, attach_ase_counter
-from .failures import classify_failure
+from .failures import classify_outcome
 from .pes import evaluate, load_pairs
 from .rgsaddle_band import vibrational_index
 from .score import score_v2
@@ -55,10 +61,21 @@ CODE_ID = "gprcalc"
 CODE_NAME = "GPR calculator"
 _FD_STEP = 1e-5
 _SYMBOL = {"lj": "Ar", "morse_pt": "Pt"}
+# Morse platinum in ``pes.py`` is the board's eV/Å metal potential.
+# LJ is matched to it at the pair minimum: ε ↔ D0 and 2**(1/6) σ ↔ r0.
+_MORSE_D0 = 0.7102
+_MORSE_R0 = 2.897
+_LJ_REQ_OVER_SIGMA = 2.0 ** (1.0 / 6.0)
+# One infrastructure slice. An LJ38 initial fit at the scaled cutoff is
+# about two seconds, and one GPR NEB in examples/emt-serial.py finished
+# on this machine in 26.818827 s. Six hours lets a slice take many GPR
+# steps. Crossing it writes ``resume/`` and is not a scored pair. The
+# next slice continues from that band and that training set.
+SEARCH_TIME_LIMIT = 6 * 60 * 60
 
 
-class WallClockCap(Exception):
-    """The template ``wall_seconds`` elapsed before the search returned."""
+class _SearchTime(Exception):
+    """The infrastructure clock elapsed. The class is decided afterwards."""
 
 
 def _threads_one() -> None:
@@ -74,6 +91,26 @@ def _registry(root: Path) -> dict:
     raise ValueError("codes/registry.toml has no gprcalc entry")
 
 
+def _unit_scales(kind: str) -> dict[str, float]:
+    """eV per energy unit and Å per length unit.
+
+    Section 6 uses one set of numbers for every example because those
+    calculators are in eV and Å. Morse platinum on this board is already
+    those units, so both factors are 1. Lennard-Jones is ε = σ = 1.
+    The bridge is the pair minimum of Morse platinum: one ε is one D0
+    (0.7102 eV) and one σ is r0 / 2**(1/6) (2.897 Å / 2**(1/6)). A paper
+    value with dimensions energy^a * length^b is divided by
+    ``energy**a * length**b``. The kernel length is the descriptor length
+    the library uses at a 5.0 Å cutoff, so it is divided by the length
+    factor along with the cutoff.
+    """
+    if kind == "morse_pt":
+        return {"energy": 1.0, "length": 1.0}
+    if kind == "lj":
+        return {"energy": _MORSE_D0, "length": _MORSE_R0 / _LJ_REQ_OVER_SIGMA}
+    raise ValueError(f"no GPR unit scale for potential {kind}")
+
+
 def _settings(template: dict, problem: dict, commit: str) -> dict:
     if template.get("commit") != commit:
         raise ValueError(f"{template['id']} commit does not match the gprcalc registry")
@@ -82,8 +119,12 @@ def _settings(template: dict, problem: dict, commit: str) -> dict:
     band = template["band"]
     problem_band = problem["band"]
     convergence = problem["convergence"]
+    kind = str(problem_band["potential"])
+    scales = _unit_scales(kind)
+    energy = float(scales["energy"])
+    length = float(scales["length"])
     return {
-        "potential": str(problem_band["potential"]),
+        "potential": kind,
         "n_interior": int(problem_band["interior_images"]),
         "max_move": float(problem_band["max_move"]),
         "force_norm": float(convergence["force_norm"]),
@@ -97,26 +138,34 @@ def _settings(template: dict, problem: dict, commit: str) -> dict:
         "passes": int(band["passes"]),
         "kernel": str(band["kernel"]),
         "zeta": float(band["zeta"]),
-        "noise_e_structure": float(band["noise_e_structure"]),
-        "noise_f": float(band["noise_f"]),
-        "noise_e_floor": float(band["noise_e_floor"]),
-        "optimizer_fmax": float(band["optimizer_fmax"]),
+        "noise_e_structure": float(band["noise_e_structure"]) / energy,
+        "noise_f": float(band["noise_f"]) * length / energy,
+        "noise_e_floor": float(band["noise_e_floor"]) / energy,
+        "optimizer_fmax": float(band["optimizer_fmax"]) * length / energy,
         "initial_path": str(band["initial_path"]),
         "lmax": int(band["lmax"]),
         "nmax": int(band["nmax"]),
-        "rcut": float(band["rcut"]),
+        "rcut": float(band["rcut"]) / length,
         "freq": int(band["freq"]),
         "neb_method": str(band["neb_method"]),
-        "wall_seconds": float(band["wall_seconds"]),
+        "sigma0": float(band["sigma0"]) / energy,
+        "length0": float(band["length0"]) / length,
+        "sigma_min": float(band["sigma_min"]) / energy,
+        "sigma_max": float(band["sigma_max"]) / energy,
+        "length_min": float(band["length_min"]) / length,
+        "length_max": float(band["length_max"]) / length,
+        "energy_uncertainty": bool(band.get("energy_uncertainty", False)),
+        "energy_unit_eV": energy,
+        "length_unit_Ang": length,
+        "time_limit_seconds": SEARCH_TIME_LIMIT,
     }
 
 
 def _noise(settings: dict, n_atoms: int) -> tuple[float, float]:
-    """Per-atom energy noise and force noise.
+    """Per-atom energy noise and force noise, already in problem units.
 
-    Section 6 of Onyango, Kang, and Zhu uses 0.05 eV/structure and
-    0.075 eV/Å. ``examples/Pd4/gp_neb.py`` divides the structure energy
-    noise by the atom count and applies ``noise_e_min``.
+    ``examples/Pd4/gp_neb.py`` divides the structure energy noise by the
+    atom count and applies ``noise_e_min``.
     """
     structure = float(settings["noise_e_structure"])
     floor = float(settings["noise_e_floor"])
@@ -213,8 +262,10 @@ def _blank(name: str, calls: int, verify: int) -> dict:
         "kernel_sigma": None,
         "kernel_length": None,
         "optimizer_fmax": None,
-        "wall_seconds": None,
+        "force_tol": None,
         "search_seconds": 0.0,
+        "time_limited": False,
+        "incomplete": False,
     }
 
 
@@ -339,23 +390,25 @@ def _judge(
     record["candidate"] = candidate
     record["ci_index"] = index if climbing else None
     record["converged"] = bool(optimizer_converged)
+    record["force_tol"] = float(force_norm)
     energy, gradient = _true_gradient(image, base, counter)
     record["force_calls"] = int(counter.calls)
     record["verify_calls"] = int(counter.verify_calls)
     reasons: list[str] = []
+    hessian_index = None
+    force = None
     if counter.calls >= cap:
         reasons.append("cap")
     if gradient is None:
-        reasons.append("force_norm")
         force = None
     else:
         free_grad = np.asarray(gradient, dtype=np.float64)[np.asarray(free, dtype=bool)]
         force = float(np.linalg.norm(free_grad))
-        record["energy"] = _finite(energy)
-        record["force_norm"] = _finite(force)
+        record["energy"] = None if energy is None or not math.isfinite(float(energy)) else float(energy)
+        record["force_norm"] = None if not math.isfinite(force) else float(force)
         if not math.isfinite(force) or force > force_norm:
             reasons.append("force_norm")
-    if not reasons:
+    if "cap" not in reasons and "force_norm" not in reasons and gradient is not None and math.isfinite(force):
         coords = np.array(image.positions, dtype=np.float64, copy=True)
         mask = np.asarray(free, dtype=bool)
         point = coords[mask].reshape(-1)
@@ -377,16 +430,28 @@ def _judge(
         )
         record["hessian_index"] = int(hessian_index)
         record["verify_calls"] = int(counter.verify_calls)
+        record["force_calls"] = int(counter.calls)
         if hessian_index != 1:
             reasons.append("hessian_index")
-    failure = classify_failure(reasons)
+    unmet = gradient is None and counter.calls < cap
+    failure = classify_outcome(
+        energy=None if record["energy"] is None else float(record["energy"]),
+        force=None if force is None else float(force),
+        calls=float(counter.calls),
+        cap=int(cap),
+        force_tol=float(force_norm),
+        hessian_index=None if hessian_index is None else int(hessian_index),
+        expected_index=1,
+        stationary_rejected=hessian_index is not None and int(hessian_index) != 1,
+        unmet=unmet,
+    )
     record["reasons"] = reasons
     record["failure"] = failure
     record["success"] = failure is None
     return record
 
 
-def _stats(gp, noise_e: float, noise_f: float, nsteps: int, optimizer_fmax: float, wall_seconds: float) -> dict:
+def _stats(gp, noise_e: float, noise_f: float, nsteps: int, optimizer_fmax: float) -> dict:
     kernel = getattr(gp, "kernel", None)
     sigma = getattr(kernel, "sigma", None) if kernel is not None else None
     length = getattr(kernel, "l", None) if kernel is not None else None
@@ -402,8 +467,95 @@ def _stats(gp, noise_e: float, noise_f: float, nsteps: int, optimizer_fmax: floa
         "kernel_sigma": None if sigma is None else float(sigma),
         "kernel_length": None if length is None else float(length),
         "optimizer_fmax": float(optimizer_fmax),
-        "wall_seconds": float(wall_seconds),
     }
+
+
+def _resume_dir(scratch: Path) -> Path:
+    return Path(scratch) / "resume"
+
+
+def _has_resume(scratch: Path | None) -> bool:
+    return scratch is not None and (_resume_dir(scratch) / "state.json").is_file()
+
+
+def _scored(row: dict) -> bool:
+    """A wall-clock slice is a checkpoint. It is not a finished pair."""
+    return not bool(row.get("incomplete")) and not bool(row.get("time_limited"))
+
+
+def _unscored_slice(name: str, calls: int, verify: int, seconds: float) -> dict:
+    record = _blank(name, calls, verify)
+    record["incomplete"] = True
+    record["time_limited"] = True
+    record["failure"] = None
+    record["success"] = False
+    record["search_seconds"] = float(seconds)
+    return record
+
+
+def _discard_resume(scratch: Path) -> None:
+    dest = _resume_dir(scratch)
+    if not dest.is_dir():
+        return
+    for path in dest.iterdir():
+        if path.is_file():
+            path.unlink()
+    dest.rmdir()
+
+
+def _save_resume(
+    scratch: Path,
+    images,
+    gp,
+    counter: HarnessCounter,
+    *,
+    pass_index: int,
+    steps_in_pass: int,
+    optimizer_steps: int,
+    search_seconds: float,
+) -> None:
+    """Write the band and the library model. ``state.json`` is last."""
+    dest = _resume_dir(scratch)
+    dest.mkdir(parents=True, exist_ok=True)
+    positions = np.asarray([np.asarray(image.positions, dtype=np.float64) for image in images])
+    np.save(dest / "positions.npy", positions)
+    gp.save(str(dest / "model.json"), str(dest / "train.db"), verbose=False)
+    payload = {
+        "fits": int(getattr(gp, "fits", 0) or 0),
+        "force_calls": int(counter.calls),
+        "optimizer_steps": int(optimizer_steps),
+        "pass_index": int(pass_index),
+        "search_seconds": float(search_seconds),
+        "steps_in_pass": int(steps_in_pass),
+        "use_base": int(getattr(gp, "use_base", 0) or 0),
+        "use_surrogate": int(getattr(gp, "use_surrogate", 0) or 0),
+        "verify_calls": int(counter.verify_calls),
+    }
+    text = json.dumps(payload, sort_keys=True) + "\n"
+    temporary = dest / "state.json.tmp"
+    temporary.write_text(text, encoding="utf-8")
+    temporary.replace(dest / "state.json")
+
+
+def _load_resume(scratch: Path, images, counter: HarnessCounter):
+    """Restore the band and rebuild the kernel weights without a new fit."""
+    dest = _resume_dir(scratch)
+    payload = json.loads((dest / "state.json").read_text(encoding="utf-8"))
+    positions = np.load(dest / "positions.npy")
+    if len(positions) != len(images):
+        raise RuntimeError("resume band does not match the image count")
+    for image, pos in zip(images, positions):
+        image.positions[:] = np.asarray(pos, dtype=np.float64)
+    from gpr_calc.gaussianprocess import GP
+
+    gp = GP.load(str(dest / "model.json"))
+    gp.fit(opt=False, show=False)
+    gp.fits = int(payload["fits"])
+    gp.use_base = int(payload["use_base"])
+    gp.use_surrogate = int(payload["use_surrogate"])
+    counter.calls = int(payload["force_calls"])
+    counter.verify_calls = int(payload["verify_calls"])
+    return gp, payload
 
 
 def run_gp_neb(
@@ -429,43 +581,23 @@ def run_gp_neb(
             scratch=scratch,
             state=state,
         )
-    except WallClockCap:
-        counter = state["counter"]
-        calls = 0 if counter is None else int(counter.calls)
-        verify = 0 if counter is None else int(counter.verify_calls)
-        record = _blank(name, calls, verify)
-        record["reasons"] = ["cap"]
-        record["failure"] = "cap"
-        record["success"] = False
-        record["wall_seconds"] = state.get("wall_seconds")
-        if state.get("started") is not None:
-            import time
-
-            record["search_seconds"] = time.perf_counter() - float(state["started"])
-        gp = state["gp"]
-        if gp is not None and state["noise_e"] is not None:
-            record.update(
-                _stats(
-                    gp,
-                    state["noise_e"],
-                    state["noise_f"],
-                    state["nsteps"],
-                    float(state["optimizer_fmax"]),
-                    float(state["wall_seconds"]),
-                )
-            )
-            record["failure"] = "cap"
-            record["reasons"] = ["cap"]
-            record["success"] = False
-        return record
     except (Exception, SystemExit) as exc:
         counter = state["counter"]
         calls = 0 if counter is None else int(counter.calls)
         verify = 0 if counter is None else int(counter.verify_calls)
         if _cap_error(exc):
             record = _blank(name, calls, verify)
-            record["reasons"] = ["cap", "force_norm"]
-            record["failure"] = classify_failure(record["reasons"])
+            record["force_tol"] = float(settings["force_norm"])
+            record["force_calls"] = calls
+            failure = classify_outcome(
+                calls=float(calls),
+                cap=int(settings["cap"]),
+                force_tol=float(settings["force_norm"]),
+                unmet=calls < int(settings["cap"]),
+            )
+            record["reasons"] = ["cap"] if failure == "cap" else ["solver"]
+            record["failure"] = failure
+            record["success"] = False
             gp = state["gp"]
             if gp is not None and state["noise_e"] is not None:
                 record.update(
@@ -475,7 +607,6 @@ def run_gp_neb(
                         state["noise_f"],
                         state["nsteps"],
                         float(state["optimizer_fmax"]),
-                        float(state["wall_seconds"]),
                     )
                 )
             return record
@@ -489,7 +620,6 @@ def run_gp_neb(
                     state["noise_f"],
                     state["nsteps"],
                     float(state["optimizer_fmax"]),
-                    float(state["wall_seconds"]),
                 )
             )
             record["failure"] = "crash"
@@ -534,6 +664,39 @@ def _run_gp_neb(
             os.chdir(previous)
 
 
+def _new_gp(images, base, settings: dict, noise_e: float, noise_f: float):
+    """One zero-mean RBF model. Bounds are set before the first fit."""
+    from gpr_calc.SO3 import SO3
+    from gpr_calc.gaussianprocess import GP
+    from gpr_calc.kernels.RBF_mb import RBF_mb
+
+    if str(settings["kernel"]) != "RBF":
+        raise ValueError(f"unknown kernel {settings['kernel']}")
+    if "sigma0" in settings:
+        kernel = RBF_mb(
+            para=[float(settings["sigma0"]), float(settings["length0"])],
+            bounds=[
+                [float(settings["sigma_min"]), float(settings["sigma_max"])],
+                [float(settings["length_min"]), float(settings["length_max"])],
+            ],
+            zeta=float(settings["zeta"]),
+        )
+    else:
+        kernel = RBF_mb(para=[1.0, 0.1], zeta=float(settings["zeta"]))
+    gp = GP(
+        kernel=kernel,
+        descriptor=SO3(
+            nmax=int(settings["nmax"]),
+            lmax=int(settings["lmax"]),
+            rcut=float(settings["rcut"]),
+        ),
+        noise_e=float(noise_e),
+        noise_f=float(noise_f),
+    )
+    gp.train_images(images, base)
+    return gp
+
+
 def _search_gp_neb(
     *,
     name: str,
@@ -551,11 +714,13 @@ def _search_gp_neb(
     from ase.optimize import BFGS, FIRE
 
     state["started"] = time.perf_counter()
-    state["wall_seconds"] = float(settings["wall_seconds"])
+    limit = float(settings.get("time_limit_seconds", SEARCH_TIME_LIMIT))
+    state["time_limit"] = limit
     state["optimizer_fmax"] = float(settings["optimizer_fmax"])
-    if time.perf_counter() - float(state["started"]) >= float(state["wall_seconds"]):
-        raise WallClockCap()
-    GP, GPR = _gpr()
+
+    def _over() -> bool:
+        return time.perf_counter() - float(state["started"]) >= float(state["time_limit"])
+
     kind = settings["potential"]
     symbol = _SYMBOL.get(kind)
     if symbol is None:
@@ -565,11 +730,14 @@ def _search_gp_neb(
     product = np.asarray(product, dtype=np.float64)
     n_free = int(np.count_nonzero(free))
     project_rigid = bool(np.all(free) and n_free >= 2 and kind == "lj")
+    cap = int(settings["cap"])
+    force_norm = float(settings["force_norm"])
+    if _over() and not _has_resume(scratch):
+        return _unscored_slice(name, 0, 0, 0.0)
+    _gp_mod, GPR = _gpr()
     noise_e, noise_f = _noise(settings, len(reactant))
     state["noise_e"] = noise_e
     state["noise_f"] = noise_f
-    cap = int(settings["cap"])
-    force_norm = float(settings["force_norm"])
     images = _images(
         reactant,
         product,
@@ -585,80 +753,127 @@ def _search_gp_neb(
     state["counter"] = counter
     base = spec_calculator(kind, box)
     attach_ase_counter(base, cap=cap, counter=counter)
-    gp = GP.set_GPR(
-        images,
-        base,
-        kernel=str(settings["kernel"]),
-        zeta=float(settings["zeta"]),
-        noise_e=noise_e,
-        noise_f=noise_f,
-        lmax=int(settings["lmax"]),
-        nmax=int(settings["nmax"]),
-        rcut=float(settings["rcut"]),
-    )
+    carried_seconds = 0.0
+    start_pass = 0
+    resume_steps_in_pass = 0
+    total_steps = 0
+    if _has_resume(scratch):
+        gp, meta = _load_resume(scratch, images, counter)
+        carried_seconds = float(meta["search_seconds"])
+        start_pass = int(meta["pass_index"])
+        resume_steps_in_pass = int(meta["steps_in_pass"])
+        total_steps = int(meta["optimizer_steps"])
+    else:
+        gp = _new_gp(images, base, settings, noise_e, noise_f)
     state["gp"] = gp
+    state["nsteps"] = total_steps
     calc = GPR(base=base, ff=gp, save=False, freq=int(settings["freq"]))
+    # Section 3.3 uses only the force uncertainty. ``ignore_E_std`` is the
+    # library switch for the energy gate: true skips it. A template sets
+    # ``energy_uncertainty`` to turn that gate on.
+    calc.ignore_E_std = not bool(settings.get("energy_uncertainty", False))
     train_index = len(images) - 2
     for index, image in enumerate(images):
         image.calc = copy(calc)
         image.calc.update_gpr = index == train_index
+        image.calc.ignore_E_std = calc.ignore_E_std
     algo = str(settings["algo"])
     logfile = None if scratch is None else str(Path(scratch) / "optimizer.log")
     optimizer_fmax = float(settings["optimizer_fmax"])
-    total_steps = 0
     optimizer_converged = False
+    time_limited = False
+    pass_index = start_pass
+    steps_before_pass = max(0, total_steps - resume_steps_in_pass)
+    steps_in_pass = resume_steps_in_pass
 
-    def _over_wall() -> bool:
-        return time.perf_counter() - float(state["started"]) >= float(state["wall_seconds"])
+    def _elapsed() -> float:
+        return carried_seconds + (time.perf_counter() - float(state["started"]))
 
-    if _over_wall():
-        raise WallClockCap()
-    for _pass in range(int(settings["passes"])):
-        if _over_wall():
-            raise WallClockCap()
-        neb = NEB(
-            images,
-            k=float(settings["spring_k"]),
-            parallel=False,
-            method=str(settings["neb_method"]),
-        )
-        neb.climb = bool(settings["climbing"])
-        if algo == "BFGS":
-            opt = BFGS(neb, logfile=logfile, maxstep=float(settings["max_move"]))
-        elif algo == "FIRE":
-            opt = FIRE(neb, logfile=logfile, maxstep=float(settings["max_move"]))
-        else:
-            raise ValueError(f"unknown NEB algorithm {algo}")
+    try:
+        for pass_index in range(start_pass, int(settings["passes"])):
+            already = resume_steps_in_pass if pass_index == start_pass else 0
+            steps_before_pass = total_steps - already
+            steps_in_pass = already
+            if _over():
+                time_limited = True
+                break
+            remaining = int(settings["steps"]) - already
+            if remaining <= 0:
+                continue
+            neb = NEB(
+                images,
+                k=float(settings["spring_k"]),
+                parallel=False,
+                method=str(settings["neb_method"]),
+            )
+            neb.climb = bool(settings["climbing"])
+            if algo == "BFGS":
+                opt = BFGS(neb, logfile=logfile, maxstep=float(settings["max_move"]))
+            elif algo == "FIRE":
+                opt = FIRE(neb, logfile=logfile, maxstep=float(settings["max_move"]))
+            else:
+                raise ValueError(f"unknown NEB algorithm {algo}")
 
-        def _observe(opt=opt, offset=total_steps):
-            state["nsteps"] = offset + int(opt.nsteps)
-            if scratch is not None:
-                line = (
-                    f"step {state['nsteps']} calls {counter.calls} base {gp.use_base} "
-                    f"surrogate {gp.use_surrogate} energy {gp.N_energy} forces {gp.N_forces} "
-                    f"fits {gp.fits} sigma {gp.kernel.sigma:.6f} length {gp.kernel.l:.6f} "
-                    f"elapsed {time.perf_counter() - float(state['started']):.3f}\n"
-                )
-                with (Path(scratch) / "steps.log").open("a", encoding="utf-8") as handle:
-                    handle.write(line)
-            if time.perf_counter() - float(state["started"]) >= float(state["wall_seconds"]):
-                raise WallClockCap()
+            def _observe(opt=opt, neb=neb, offset=steps_before_pass + already):
+                state["nsteps"] = offset + int(opt.nsteps)
+                if scratch is not None:
+                    residual = getattr(neb, "residuals", None)
+                    fmax = ""
+                    if residual is not None and len(residual) > 0:
+                        fmax = f" fmax {float(np.max(residual)):.6f}"
+                    line = (
+                        f"step {state['nsteps']} calls {counter.calls} base {gp.use_base} "
+                        f"surrogate {gp.use_surrogate} energy {gp.N_energy} forces {gp.N_forces} "
+                        f"fits {gp.fits} sigma {gp.kernel.sigma:.6f} length {gp.kernel.l:.6f}"
+                        f"{fmax} "
+                        f"elapsed {time.perf_counter() - float(state['started']):.3f}\n"
+                    )
+                    with (Path(scratch) / "steps.log").open("a", encoding="utf-8") as handle:
+                        handle.write(line)
+                if _over():
+                    raise _SearchTime()
 
-        opt.attach(_observe)
-        opt.run(fmax=optimizer_fmax, steps=int(settings["steps"]))
-        total_steps += int(opt.nsteps)
-        state["nsteps"] = total_steps
-        try:
-            optimizer_converged = bool(opt.converged())
-        except Exception:
-            optimizer_converged = False
-        if optimizer_converged or _over_wall():
-            break
-    if _over_wall():
-        raise WallClockCap()
+            opt.attach(_observe)
+            opt.run(fmax=optimizer_fmax, steps=remaining)
+            total_steps = steps_before_pass + already + int(opt.nsteps)
+            steps_in_pass = already + int(opt.nsteps)
+            state["nsteps"] = total_steps
+            try:
+                optimizer_converged = bool(opt.converged())
+            except Exception:
+                optimizer_converged = False
+            if optimizer_converged:
+                break
+    except _SearchTime:
+        time_limited = True
+        # The observer counted the in-progress pass. ``total_steps`` does
+        # not include it until ``opt.run`` returns.
+        if state.get("nsteps"):
+            total_steps = int(state["nsteps"])
+        steps_in_pass = total_steps - steps_before_pass
+    if time_limited:
+        if scratch is not None:
+            _save_resume(
+                scratch,
+                images,
+                gp,
+                counter,
+                pass_index=pass_index,
+                steps_in_pass=steps_in_pass,
+                optimizer_steps=total_steps,
+                search_seconds=_elapsed(),
+            )
+        record = _unscored_slice(name, counter.calls, counter.verify_calls, _elapsed())
+        record.update(_stats(gp, noise_e, noise_f, total_steps, optimizer_fmax))
+        record["force_calls"] = int(counter.calls)
+        record["incomplete"] = True
+        record["time_limited"] = True
+        record["failure"] = None
+        record["success"] = False
+        return record
     energies = _band_energies(images, gp)
     index, candidate = _candidate_index(energies, bool(settings["climbing"]))
-    return _judge(
+    record = _judge(
         name,
         counter=counter,
         image=images[index],
@@ -673,15 +888,11 @@ def _search_gp_neb(
         index=index,
         climbing=bool(settings["climbing"]),
         optimizer_converged=optimizer_converged,
-        stats=_stats(
-            gp,
-            noise_e,
-            noise_f,
-            total_steps,
-            optimizer_fmax,
-            float(settings["wall_seconds"]),
-        ),
+        stats=_stats(gp, noise_e, noise_f, total_steps, optimizer_fmax),
     )
+    record["time_limited"] = False
+    record["search_seconds"] = _elapsed()
+    return record
 
 
 def _job(pair, settings: dict, scratch: str) -> dict:
@@ -697,30 +908,40 @@ def _job(pair, settings: dict, scratch: str) -> dict:
 
 
 def _execute(job: dict) -> dict:
-    import time
-
     _threads_one()
     scratch = Path(job["scratch"])
     scratch.mkdir(parents=True, exist_ok=True)
+    stale = scratch / "steps.log"
+    # A resume keeps the log of the slices already run. A fresh pair
+    # does not inherit a log from an earlier campaign in this directory.
+    if stale.exists() and not _has_resume(scratch):
+        stale.unlink()
     previous = Path.cwd()
-    handle = (scratch / "run.log").open("w", encoding="utf-8", buffering=1)
+    handle = (scratch / "run.log").open("a" if _has_resume(scratch) else "w", encoding="utf-8", buffering=1)
     old_out, old_err = sys.stdout, sys.stderr
     sys.stdout = handle
     sys.stderr = handle
-    began = time.perf_counter()
     try:
         os.chdir(scratch)
-        record = run_gp_neb(
-            name=job["name"],
-            reactant=job["reactant"],
-            product=job["product"],
-            free=job["free"],
-            box=job["box"],
-            settings=job["settings"],
-            scratch=scratch,
-        )
-        record["search_seconds"] = time.perf_counter() - began
-        return record
+        previous_signature = None
+        while True:
+            record = run_gp_neb(
+                name=job["name"],
+                reactant=job["reactant"],
+                product=job["product"],
+                free=job["free"],
+                box=job["box"],
+                settings=job["settings"],
+                scratch=scratch,
+            )
+            if _scored(record):
+                return record
+            # The slice made no further calls or steps, so another
+            # immediate slice would repeat it. Leave the checkpoint.
+            signature = (int(record.get("force_calls") or 0), int(record.get("optimizer_steps") or 0))
+            if signature == previous_signature:
+                return record
+            previous_signature = signature
     finally:
         os.chdir(previous)
         sys.stdout = old_out
@@ -908,9 +1129,9 @@ def run(
     work.mkdir(parents=True, exist_ok=True)
     scratch_starts = work / "starts.jsonl"
     if resume and scratch_starts.is_file():
-        done = {row["start"]: row for row in _read_starts(scratch_starts)}
+        done = {row["start"]: row for row in _read_starts(scratch_starts) if _scored(row)}
     elif resume:
-        done = {row["start"]: row for row in _read_starts(output.with_suffix(".starts.jsonl"))}
+        done = {row["start"]: row for row in _read_starts(output.with_suffix(".starts.jsonl")) if _scored(row)}
     else:
         done = {}
     pending = [pair for pair in pairs if pair.name not in done]
@@ -945,19 +1166,44 @@ def run(
             file=sys.stderr,
             flush=True,
         )
+        _discard_resume(work / record["start"])
         return summary
+
+    def _checkpoint(record: dict) -> dict:
+        ordered = [records_by_name[pair.name] for pair in pairs if pair.name in records_by_name]
+        print(
+            f"{record['start']} checkpoint calls={record.get('force_calls')} "
+            f"steps={record.get('optimizer_steps')} scored=False",
+            file=sys.stderr,
+            flush=True,
+        )
+        return {
+            "problem": problem["id"],
+            "template": template["id"],
+            "force_calls": None,
+            "nfailed": sum(1 for row in ordered if not row["success"]),
+            "starts": len(ordered),
+            "successes": sum(1 for row in ordered if row["success"]),
+            "output": "",
+            "published": False,
+        }
+
+    def _accept(record: dict) -> dict:
+        if not _scored(record):
+            return _checkpoint(record)
+        return _store(record)
 
     summary = None
     if workers <= 1:
         for job in jobs:
-            summary = _store(_execute(job))
+            summary = _accept(_execute(job))
     else:
         import multiprocessing
 
         with ProcessPoolExecutor(max_workers=workers, mp_context=multiprocessing.get_context("spawn")) as pool:
             futures = {pool.submit(_execute, job): job["name"] for job in jobs}
             for future in as_completed(futures):
-                summary = _store(future.result())
+                summary = _accept(future.result())
     if summary is None:
         ordered = [records_by_name[pair.name] for pair in pairs if pair.name in records_by_name]
         if not ordered:

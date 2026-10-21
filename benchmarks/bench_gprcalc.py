@@ -6,7 +6,8 @@ the archived start. The default grid is one seed and the first geometry.
 
 ``time_search`` is the timed search. It writes a sidecar. The ``track_*``
 methods read that sidecar, so a full ``asv run`` records force calls,
-success, the four failure classes, and wall time from the same search.
+success, the failure classes, and wall time from the same search.
+``time_search`` is the only wall-time track.
 A missing ``gpr_calc`` install raises ``NotImplementedError`` in
 ``setup``. The seed is ``"0"``. The search does not draw random numbers.
 """
@@ -48,10 +49,11 @@ TRACKS = (
     "track_failure_cap",
     "track_failure_wrong_stationary",
     "track_failure_divergence",
+    "track_failure_not_converged",
     "track_failure_crash",
 )
 
-_FAILURES = ("cap", "wrong_stationary", "divergence", "crash")
+_FAILURES = ("cap", "wrong_stationary", "divergence", "not_converged", "crash")
 CLASS_PROBLEM: dict[str, str] = {}
 CLASS_TEMPLATE: dict[str, str] = {}
 CLASS_CAP: dict[str, int] = {}
@@ -204,6 +206,9 @@ def _bind(class_name: str, problem: str, template: str, starts: list[str], cap: 
         def track_failure_divergence(self, seed, start) -> float:
             return 1.0 if self._ready(seed, start)["failure"] == "divergence" else 0.0
 
+        def track_failure_not_converged(self, seed, start) -> float:
+            return 1.0 if self._ready(seed, start)["failure"] == "not_converged" else 0.0
+
         def track_failure_crash(self, seed, start) -> float:
             return 1.0 if self._ready(seed, start)["failure"] == "crash" else 0.0
 
@@ -213,6 +218,7 @@ def _bind(class_name: str, problem: str, template: str, starts: list[str], cap: 
     _Benchmark.track_failure_cap.unit = "count"
     _Benchmark.track_failure_wrong_stationary.unit = "count"
     _Benchmark.track_failure_divergence.unit = "count"
+    _Benchmark.track_failure_not_converged.unit = "count"
     _Benchmark.track_failure_crash.unit = "count"
     _Benchmark.__name__ = class_name
     _Benchmark.__qualname__ = class_name

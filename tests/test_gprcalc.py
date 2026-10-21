@@ -7,7 +7,7 @@ import pytest
 
 from optbench.campaign import _check_stop, list_templates, load_template, resolve_problem
 from optbench.failures import FAILURES
-from optbench.gpr_neb import CODE_NAME, GPR_COMMIT, GPR_VERSION, _noise, _registry, _settings
+from optbench.gpr_neb import CODE_NAME, GPR_COMMIT, GPR_VERSION, _noise, _registry, _settings, _unit_scales
 
 ROOT = Path(__file__).resolve().parents[1]
 PROBLEMS = (
@@ -49,27 +49,43 @@ def test_default_problem_stop_accepts_the_templates():
         _check_stop(resolve_problem(ROOT, "minimization/lj38"), template)
 
 
-def test_paper_noise_and_the_wall_clock_are_declared():
-    problem = resolve_problem(ROOT, "double-ended-saddle-search/lj38")
+def test_paper_numbers_are_scaled_into_the_potential_units():
+    lj = resolve_problem(ROOT, "double-ended-saddle-search/lj38")
+    morse = resolve_problem(ROOT, "double-ended-saddle-search/pt-island")
     loaded = [load_template(ROOT, name) for name in ("gprcalc/gp-neb", "gprcalc/gp-ci-neb")]
-    walls = []
+    lj_scale = _unit_scales("lj")
+    assert lj_scale["energy"] == 0.7102
+    assert lj_scale["length"] == 2.897 / 2.0 ** (1.0 / 6.0)
+    assert _unit_scales("morse_pt") == {"energy": 1.0, "length": 1.0}
     for template in loaded:
-        settings = _settings(template, problem, GPR_COMMIT)
-        noise_e, noise_f = _noise(settings, 38)
-        assert noise_f == 0.075
-        assert noise_e == 0.05 / 38
-        assert settings["algo"] == "FIRE"
-        assert settings["initial_path"] == "idpp"
-        assert settings["optimizer_fmax"] == 0.075
-        assert settings["kernel"] == "RBF"
-        assert settings["rcut"] == 5.0
-        assert settings["lmax"] == 4
-        assert settings["nmax"] == 3
-        assert settings["wall_seconds"] == 617.575
-        walls.append(settings["wall_seconds"])
-    assert walls[0] == walls[1]
-    plain = _settings(loaded[0], problem, GPR_COMMIT)
-    climbed = _settings(loaded[1], problem, GPR_COMMIT)
+        band = template["band"]
+        assert band["noise_f"] == 0.075
+        assert band["noise_e_structure"] == 0.05
+        assert band["rcut"] == 5.0
+        assert band["sigma_max"] == 50.0
+        assert band["length_min"] == 0.1
+        assert "wall_seconds" not in band
+        lj_settings = _settings(template, lj, GPR_COMMIT)
+        morse_settings = _settings(template, morse, GPR_COMMIT)
+        assert morse_settings["noise_f"] == 0.075
+        assert morse_settings["rcut"] == 5.0
+        assert morse_settings["sigma_max"] == 50.0
+        assert morse_settings["optimizer_fmax"] == 0.075
+        noise_e, noise_f = _noise(lj_settings, 38)
+        assert noise_f == pytest.approx(0.075 * lj_scale["length"] / lj_scale["energy"])
+        assert noise_e == pytest.approx(max(0.0002 / lj_scale["energy"], 0.05 / lj_scale["energy"] / 38))
+        assert lj_settings["rcut"] == pytest.approx(5.0 / lj_scale["length"])
+        assert lj_settings["sigma_max"] == pytest.approx(50.0 / lj_scale["energy"])
+        assert lj_settings["length_min"] == pytest.approx(0.1 / lj_scale["length"])
+        assert lj_settings["sigma_max"] > lj_settings["sigma0"] > lj_settings["sigma_min"]
+        assert lj_settings["algo"] == "FIRE"
+        assert lj_settings["initial_path"] == "idpp"
+        assert lj_settings["kernel"] == "RBF"
+        assert lj_settings["lmax"] == 4
+        assert lj_settings["nmax"] == 3
+        assert lj_settings["energy_uncertainty"] is False
+    plain = _settings(loaded[0], lj, GPR_COMMIT)
+    climbed = _settings(loaded[1], lj, GPR_COMMIT)
     assert plain["climbing"] is False
     assert plain["steps"] == 50
     assert plain["passes"] == 2
@@ -154,7 +170,7 @@ def test_one_band_step_counts_only_the_base_calculator(tmp_path: Path):
         "rcut": 3.0,
         "freq": 10,
         "neb_method": "improvedtangent",
-        "wall_seconds": 3600.0,
+        "time_limit_seconds": 3600.0,
     }
     record = run_gp_neb(
         name="tiny",
@@ -186,11 +202,10 @@ def test_one_band_step_counts_only_the_base_calculator(tmp_path: Path):
     assert record["force_calls"] < trained + record["base_calls"] + record["surrogate_calls"]
 
 
-def test_wall_clock_ceiling_is_a_cap(tmp_path: Path):
+def test_wall_clock_slice_is_not_a_scored_miss(tmp_path: Path):
     import numpy as np
 
-    from optbench.gpr_neb import run_gp_neb
-    from optbench.score import score_v2
+    from optbench.gpr_neb import _scored, run_gp_neb
 
     reactant = np.array([[0.0, 0.0, 0.0], [1.2, 0.0, 0.0], [0.6, 1.0, 0.0]], dtype=np.float64)
     product = reactant + np.array([[0.15, 0.02, 0.0], [-0.08, 0.12, 0.0], [0.0, -0.1, 0.0]])
@@ -217,7 +232,7 @@ def test_wall_clock_ceiling_is_a_cap(tmp_path: Path):
         "rcut": 5.0,
         "freq": 10,
         "neb_method": "improvedtangent",
-        "wall_seconds": 0.0,
+        "time_limit_seconds": 0.0,
     }
     record = run_gp_neb(
         name="ceiling",
@@ -228,15 +243,85 @@ def test_wall_clock_ceiling_is_a_cap(tmp_path: Path):
         settings=settings,
         scratch=tmp_path,
     )
-    assert record["failure"] == "cap"
+    assert record["incomplete"] is True
+    assert record["time_limited"] is True
+    assert record["failure"] is None
     assert record["success"] is False
-    assert record["reasons"] == ["cap"]
     assert record["force_calls"] == 0
     assert record["counter"] == "harness"
-    scored = score_v2([record], settings["cap"])
-    assert scored["n_cap"] == 1
-    assert scored["nfailed"] == 1
-    assert scored["par2_mean"] == 2 * settings["cap"]
+    assert _scored(record) is False
+    assert _scored({"failure": "not_converged", "time_limited": True, "incomplete": False}) is False
+    assert _scored({"failure": "not_converged", "time_limited": False, "incomplete": False}) is True
+    assert not (tmp_path / "resume" / "state.json").exists()
+
+
+def test_resume_continues_a_wall_clock_slice(tmp_path: Path):
+    import numpy as np
+
+    from optbench.gpr_neb import _scored, run_gp_neb
+
+    reactant = np.array([[0.0, 0.0, 0.0], [1.2, 0.0, 0.0], [0.6, 1.0, 0.0]], dtype=np.float64)
+    product = reactant + np.array([[0.15, 0.02, 0.0], [-0.08, 0.12, 0.0], [0.0, -0.1, 0.0]])
+    free = np.ones(3, dtype=bool)
+    settings = {
+        "potential": "lj",
+        "n_interior": 1,
+        "max_move": 0.05,
+        "force_norm": 0.05,
+        "cap": 40,
+        "climbing": False,
+        "algo": "FIRE",
+        "spring_k": 0.1,
+        "steps": 5,
+        "passes": 1,
+        "kernel": "RBF",
+        "zeta": 2.0,
+        "noise_e_structure": 0.006,
+        "noise_f": 0.1,
+        "noise_e_floor": 0.0002,
+        "optimizer_fmax": 0.05,
+        "initial_path": "idpp",
+        "lmax": 2,
+        "nmax": 2,
+        "rcut": 3.0,
+        "freq": 10,
+        "neb_method": "improvedtangent",
+        "time_limit_seconds": 0.05,
+    }
+    first = run_gp_neb(
+        name="slice",
+        reactant=reactant,
+        product=product,
+        free=free,
+        box=None,
+        settings=settings,
+        scratch=tmp_path,
+    )
+    if not first["incomplete"]:
+        assert _scored(first)
+        assert first["time_limited"] is False
+        return
+    assert first["failure"] is None
+    assert first["force_calls"] >= 3
+    assert (tmp_path / "resume" / "state.json").is_file()
+    assert (tmp_path / "resume" / "model.json").is_file()
+    settings = dict(settings)
+    settings["time_limit_seconds"] = 3600.0
+    settings["steps"] = 1
+    second = run_gp_neb(
+        name="slice",
+        reactant=reactant,
+        product=product,
+        free=free,
+        box=None,
+        settings=settings,
+        scratch=tmp_path,
+    )
+    assert _scored(second)
+    assert second["time_limited"] is False
+    assert second["force_calls"] >= first["force_calls"]
+    assert second["failure"] in {None, "not_converged", "wrong_stationary", "divergence"}
+    json.dumps(second, allow_nan=False)
 
 
 def test_benchmark_classes_name_the_four_problems():
