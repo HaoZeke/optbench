@@ -189,6 +189,7 @@ median is 53.5.
 
 Basin hopping and minima hopping on `globalopt/*` share
 `max_force_calls` 2000000. Every globalopt problem states that cap.
+A template that sets ranked false stays off the ranked table.
 AMD-SVM on `accelerated-md/aladatom` is not
 scored. The problem has no force-call protocol and the harness has no EAM
 potential. hTST prefactors are not scored for the same reason.

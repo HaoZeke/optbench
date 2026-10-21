@@ -311,6 +311,20 @@ def test_ranked_false_stays_off_the_table(tmp_path: Path):
     )
 
 
+def test_template_ranked_false_stays_off_the_table(tmp_path: Path):
+    _problem(tmp_path, starts=2, cap=10)
+    _template(tmp_path)
+    path = tmp_path / "templates" / "toy" / "fast.toml"
+    path.write_text(path.read_text(encoding="utf-8") + "ranked = false\n", encoding="utf-8")
+    _registry(tmp_path)
+    _dat(tmp_path, "toy-fast", PIN)
+    _starts(tmp_path, "toy-fast", [_row(3, True, "0"), _row(4, True, "1")])
+
+    problem = build_board(tmp_path)["problems"]["minimization/toy"]
+    assert problem["ranked"] == []
+    assert problem["partial"][0]["partial_reason"] == "template sets ranked false"
+
+
 def test_per_image_band_uses_the_image_cost(tmp_path: Path):
     _problem(tmp_path, starts=2, cap=100)
     _template(tmp_path, images=2)
