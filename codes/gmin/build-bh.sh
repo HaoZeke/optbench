@@ -1,13 +1,13 @@
 #!/bin/bash
 # Build GMIN from the Wales svn.tar.bz2 and the OptBench LJ hook.
-# The pin is the tarball sha256. The tree is not a git revision.
+# The pin is the tarball sha256 of the 2026-10-21 fetch. Its SVNREV is df8da599.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 TARBALL="${1:-/tmp/wales-src/svn.tar.bz2}"
 DEST="${2:-/tmp/wales-src}"
 BUILD="${3:-/tmp/gmin-build}"
-EXPECTED="02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+EXPECTED="0e4a022bcdd43cef9dfdda9dad7fab69e1f6211b8917d96b360d6ce3862d0d9c"
 
 if [[ ! -f "$TARBALL" ]]; then
   echo "missing tarball $TARBALL" >&2

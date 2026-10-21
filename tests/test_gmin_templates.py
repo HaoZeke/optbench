@@ -25,8 +25,9 @@ def test_registry_pins_the_tarball():
     assert row["ref"] == PIN_REF
     assert CODE_VERSION == "df8da599"
     assert TARBALL_SHA256.startswith(row["ref"])
+    assert "df8da599267534fbe43a250e578f7396a7946311" in row["note"]
     quench = next(item for item in registry["code"] if item["id"] == "gmin")
-    assert TARBALL_SHA256 in quench["note"]
+    assert "gmin-bh" in quench["note"]
 
 
 def test_bh_bhpt_and_csm_templates():

@@ -40,8 +40,8 @@ from optbench.potentials import binary_lennard_jones, lennard_jones, read_con
 from optbench.score import score_v2, summarize_capped
 from optbench.v2 import collect_provenance, write_starts
 
-TARBALL_SHA256 = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
-PIN_REF = "02aaf45245af"
+TARBALL_SHA256 = "0e4a022bcdd43cef9dfdda9dad7fab69e1f6211b8917d96b360d6ce3862d0d9c"
+PIN_REF = "0e4a022bcdd4"
 CODE_VERSION = "df8da599"
 CODE_NAME = "GMIN"
 
