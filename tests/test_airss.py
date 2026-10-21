@@ -135,7 +135,7 @@ def test_template_pins_the_tarball_and_the_asv_grid_is_one_start(monkeypatch, tm
         AirssLj38().setup("0", "0")
 
 
-def test_lj75_budget_writes_partial_rows(tmp_path, monkeypatch):
+def test_lj75_budget_uses_the_stated_energy_window(tmp_path, monkeypatch):
     import json
 
     import optbench.runners.airss_go as airss
@@ -156,7 +156,8 @@ def test_lj75_budget_writes_partial_rows(tmp_path, monkeypatch):
         work=tmp_path / "work",
     )
     text = output.read_text(encoding="utf-8")
-    assert "partial true" in text
+    assert summary["partial"] is False
+    assert "# The problem force-call cap is 2000000." in text
     assert "cap 2000000" in text
     assert "n 200" in text
     assert summary["starts"] == 200
@@ -169,6 +170,7 @@ def test_lj75_budget_writes_partial_rows(tmp_path, monkeypatch):
     assert [row["start"] for row in rows[:2]] == ["coords.1", "coords.2"]
     assert rows[-1]["start"] == "coords.200"
     assert rows[0]["energy"] == -300.0
+    assert rows[0]["reference_energy"] == -397.492331
     assert rows[-1]["energy"] == -499.0
     assert all(row["success"] is False and row["failure"] == "cap" and row["counter"] == "harness" for row in rows)
 
