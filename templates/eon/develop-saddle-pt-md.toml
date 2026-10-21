@@ -6,11 +6,11 @@ code_version = "500350d9"
 commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
 algorithm = "Dynamics"
 reducer = "harness"
-failure_cap = 20000000
+failure_cap = 120000000
 kernel = "morse_shift"
 tuning = "default"
 note = '''
-eOn (develop 500350d9), commit 500350d9fae881f06c7ef194e5868da079c4be5a on branch fix/develop-regressions-vs-350 of https://github.com/TheochemUI/eon. Same Pt-island dynamics ini as eon-svn/saddle-pt-md. confidence 1.1 with confidence_scheme dynamics, so the KMC step never fires and state 0 keeps searching. Dynamics temperature 2800, Langevin friction 0.004, time_step 2, time 10000, state check 600, record interval 40, linear interpolation, dephase_time 0. NEB is 3 images, spring 5, climbing image, 100 iterations, converged force 0.1. Optimizer is L-BFGS, max_move 0.2, max_iterations 1000, converged_force 0.001. Dimer rotations_max 20 and converged_angle 5 stay at the archive values; improved stays at the client default. The client potential is morse_pt, swapped to ext_pot on r2549 Morse::force for the run. num_jobs is 8 and number_of_CPUs is 4. Seeds 1000 through 1008. A repetition stops at 27 good saddles below 1.5 eV. The score is the report.sh mean of those nine runs: sad-fcs plus mins-fcs, failures left out.
+eOn (develop 500350d9), commit 500350d9fae881f06c7ef194e5868da079c4be5a on branch fix/develop-regressions-vs-350 of https://github.com/TheochemUI/eon. Same Pt-island dynamics ini as eon-svn/saddle-pt-md. confidence 1.1 with confidence_scheme dynamics, so the KMC step never fires and state 0 keeps searching. Dynamics temperature 2800, Langevin friction 0.004, time_step 2, time 10000, state check 600, record interval 40, linear interpolation, dephase_time 0. NEB is 3 images, spring 5, climbing image, 100 iterations, converged force 0.1. Optimizer is L-BFGS, max_move 0.2, max_iterations 1000, converged_force 0.001. Dimer rotations_max 20 and converged_angle 5 stay at the archive values; improved stays at the client default. The client potential is morse_pt, swapped to ext_pot on r2549 Morse::force for the run. num_jobs is 8 and number_of_CPUs is 4. Seeds 1000 through 1008. A repetition stops at 27 good saddles below 1.5 eV. The force server allows 120 million calls so that stop is what ends a repetition. The score is the report.sh mean of those nine runs: sad-fcs plus mins-fcs, failures left out.
 '''
 seeds = [1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008]
 starts = ["pt-island"]
