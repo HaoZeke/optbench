@@ -39,6 +39,15 @@ _OPT_SLUG = {
     "PreconODE12r": "preconode12r",
 }
 
+# Problems whose catalog is stock templates only. A later family adds itself here.
+_STOCK_ONLY = frozenset({"minimization/lj38"})
+
+
+def _profiles(problem: str) -> tuple[str, ...]:
+    if problem in _STOCK_ONLY:
+        return ("default",)
+    return ("default", "tuned")
+
 LJ = {
     "kind": "lennard-jones",
     "epsilon": 1.0,
@@ -229,7 +238,7 @@ def _minimization_specs() -> list[dict]:
     specs = []
     for slug, problem, archive, potential, stop, select in problems:
         for name in OPTIMIZERS:
-            for profile in ("default", "tuned"):
+            for profile in _profiles(problem):
                 if profile == "default":
                     params = {}
                     source = "default"
@@ -266,7 +275,7 @@ def _minimization_specs() -> list[dict]:
                     }
                 )
         # Sella can minimize with order 0.
-        for profile in ("default", "tuned"):
+        for profile in _profiles(problem):
             if profile == "default":
                 params = {"order": 0}
                 source = "default"
