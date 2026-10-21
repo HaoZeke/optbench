@@ -444,6 +444,26 @@ def run(
             output=output,
             workers=workers,
         )
+    search = template.get("search") or {}
+    if template["engine"] == "eon" and search.get("per_search_cap") not in (None, ""):
+        from .eon_search import run_template as run_eon_search
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        if client is None:
+            raise ValueError("eon run needs a client")
+        return run_eon_search(
+            root,
+            problem,
+            template,
+            output=output,
+            client=client,
+            work=work,
+            workers=workers,
+            limit=limit,
+        )
     if template["engine"] not in _EON_ENGINES:
         raise ValueError(f"unknown engine {template['engine']}")
     if client is None:

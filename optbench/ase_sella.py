@@ -1097,6 +1097,117 @@ def _run_sella_neb(payload: dict, bucket: CallCounter) -> dict:
     return band_row
 
 
+def _sella_mode(atoms, tol: float = 1e-6):
+    """Most negative free-atom mode. Calls are verification."""
+    import numpy as np
+
+    positions = np.array(atoms.get_positions(), dtype=float, copy=True)
+    free = np.asarray(_free_mask(atoms), dtype=bool)
+    free_index = np.flatnonzero(free)
+    dimension = 3 * len(free_index)
+    hessian = np.zeros((dimension, dimension))
+    state = getattr(getattr(atoms, "calc", None), "optbench_counter", None)
+    previous = False
+    if state is not None:
+        previous = bool(state.get("verifying", False))
+        state["verifying"] = True
+    try:
+        for local, atom in enumerate(free_index):
+            for axis in range(3):
+                column = 3 * local + axis
+                for sign in (1.0, -1.0):
+                    trial = positions.copy()
+                    trial[atom, axis] += sign * 1e-4
+                    atoms.set_positions(trial)
+                    forces = np.asarray(atoms.get_forces(), dtype=float)[free].ravel()
+                    hessian[:, column] += -sign * forces / (2.0 * 1e-4)
+        hessian = 0.5 * (hessian + hessian.T)
+        if bool(free.all()):
+            rotations = 0 if np.any(atoms.pbc) else 3
+            hessian = _project_rigid(hessian, positions, rotations)
+        values, vectors = np.linalg.eigh(hessian)
+        mode = np.zeros_like(positions)
+        vector = np.asarray(vectors[:, 0], dtype=float)
+        scale = float(np.linalg.norm(vector))
+        if scale == 0.0 or not (values[0] < -float(tol)):
+            return None
+        mode[free] = (vector / scale).reshape(-1, 3)
+        return mode
+    finally:
+        atoms.set_positions(positions)
+        if state is not None:
+            state["verifying"] = previous
+        try:
+            atoms.get_forces()
+        except Exception:
+            pass
+
+
+def _minimize_endpoint(atoms, mode, sign: float, payload: dict, bucket: CallCounter):
+    """LBFGS from the saddle, along ``sign * mode``. Calls stay on ``bucket``."""
+    import numpy as np
+    from ase.optimize import LBFGS
+
+    trial = atoms.copy()
+    trial.set_positions(np.asarray(atoms.positions, dtype=float) + float(sign) * 0.1 * np.asarray(mode, dtype=float))
+    _attach(trial, payload["potential"], bucket)
+    opt = LBFGS(trial, logfile=None, maxstep=0.2)
+    failed, _norm = _drive_l2(opt, trial.calc, bucket, payload["tol"], 2000, trial)
+    return np.array(trial.get_positions(), dtype=float, copy=True), (not failed) and bucket[0] < bucket[1]
+
+
+def _judge_sella_link(row: dict, atoms, payload: dict, bucket: CallCounter) -> None:
+    """Per-atom link against the minimized reactant. A miss is not a success."""
+    import numpy as np
+
+    from .connection import per_atom_max, periodic_lengths
+    from .connection import connected as endpoints_connected
+
+    mode = _sella_mode(atoms)
+    reactant = np.asarray(payload["link_reactant"], dtype=float)
+    if mode is None:
+        row["link_reasons"] = ["hessian_index"]
+        row["failed"] = True
+        return
+    try:
+        plus, plus_ok = _minimize_endpoint(atoms, mode, 1.0, payload, bucket)
+        minus, minus_ok = _minimize_endpoint(atoms, mode, -1.0, payload, bucket)
+    except Exception as exc:
+        if _cap_error(exc):
+            row["error"] = "force-call cap"
+            row["failed"] = True
+            return
+        row["error"] = f"{type(exc).__name__}: {exc}"[:500]
+        row["failed"] = True
+        return
+    if bucket[0] >= bucket[1]:
+        row["error"] = "force-call cap"
+        row["failed"] = True
+        return
+    if not plus_ok or not minus_ok:
+        row["link_reasons"] = ["force_norm"]
+        row["failed"] = True
+        return
+    lengths = periodic_lengths(atoms.cell, atoms.pbc)
+    tolerance = float(payload.get("distance_difference", 0.1))
+    links = endpoints_connected(reactant, plus, minus, lengths, tolerance)
+    barrier = None
+    if row.get("energy") is not None and payload.get("link_energy") is not None:
+        barrier = float(row["energy"]) - float(payload["link_energy"])
+    row["barrier"] = barrier
+    row["per_atom_max_plus"] = per_atom_max(plus, reactant, lengths)
+    row["per_atom_max_minus"] = per_atom_max(minus, reactant, lengths)
+    row["saddle_positions"] = np.asarray(atoms.positions, dtype=float).reshape(-1).tolist()
+    reasons = []
+    if not links:
+        reasons.append("not_connected")
+    if barrier is None or barrier >= float(payload.get("barrier_max", 1.5)):
+        reasons.append("barrier")
+    row["link_reasons"] = reasons
+    if reasons:
+        row["failed"] = True
+
+
 def _run_sella_search(payload: dict, bucket: CallCounter) -> dict:
     """One Sella order-1 search from a Gaussian kick of the free atoms."""
     spec = payload.get("sella_search") or {}
@@ -1131,6 +1242,8 @@ def _run_sella_search(payload: dict, bucket: CallCounter) -> dict:
     row["energy"] = _safe_energy(atoms)
     if not failed and bucket[0] < bucket[1]:
         _attach_index(row, atoms, order)
+        if payload.get("link_reactant") is not None and not row.get("failed") and row.get("hessian_index") == order:
+            _judge_sella_link(row, atoms, payload, bucket)
     return row
 
 
@@ -1191,6 +1304,9 @@ def _reason_list(row: dict, cap: int, tol: float) -> list[str]:
     reasons: list[str] = []
     if int(row.get("force_calls") or 0) >= cap or row.get("error") == "force-call cap":
         reasons.append("cap")
+    for extra in row.get("link_reasons") or []:
+        if extra not in reasons:
+            reasons.append(str(extra))
     error = row.get("error")
     if error and error != "force-call cap":
         reasons.append("error")
@@ -1392,7 +1508,14 @@ def _write_dat(
         "stop": template.get("stop") or {},
     }
     note = template.get("note", "")
-    if template["task"] in {"minimize", "sella", "sella-search", "dimer"}:
+    if template["task"] == "sella-search":
+        note = (
+            note
+            + " v2 success is the harness cap, the stop norm, Hessian index 1, "
+            + "a barrier below 1.5 eV, and the per-atom link against the minimized reactant. "
+            + "A later saddle within 0.01 eV that passes the same per-atom test is a repeat."
+        ).strip()
+    elif template["task"] in {"minimize", "sella", "dimer"}:
         note = (
             note
             + " v2 success is the harness cap, the stop norm, and the Hessian index"
@@ -1469,6 +1592,68 @@ def _write_dat(
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
+def _minimized_reactant(path: Path, potential: dict, tol: float):
+    """Minimize one geometry. The calls stay off the per-search counters."""
+    import numpy as np
+    from ase.optimize import LBFGS
+
+    atoms = _read_atoms(path)
+    bucket = CallCounter(5000)
+    _attach(atoms, potential, bucket)
+    opt = LBFGS(atoms, logfile=None, maxstep=0.2)
+    failed, _norm = _drive_l2(opt, atoms.calc, bucket, tol, 5000, atoms)
+    if failed or bucket[0] >= bucket[1]:
+        raise RuntimeError(f"reactant minimization did not stop at {path}")
+    return np.array(atoms.get_positions(), dtype=float, copy=True), float(atoms.get_potential_energy()), atoms
+
+
+def _link_fields(problem: dict, geometry: Path, potential: dict, tol: float) -> dict:
+    """Per-atom link inputs for a Pt-island Sella search. Empty for every other task."""
+    if problem.get("id") != "saddle-search/pt-island":
+        return {}
+    from .connection import periodic_lengths, tolerances
+
+    positions, energy, atoms = _minimized_reactant(geometry, potential, tol)
+    distance_difference, energy_difference = tolerances(problem)
+    return {
+        "link_reactant": positions.reshape(-1).tolist(),
+        "link_energy": energy,
+        "distance_difference": distance_difference,
+        "energy_difference": energy_difference,
+        "barrier_max": float((problem.get("goal") or {}).get("barrier_below_eV", 1.5)),
+        "link_lengths": periodic_lengths(atoms.cell, atoms.pbc).tolist(),
+    }
+
+
+def _apply_saddle_novelty(rows: list[dict], link: dict) -> None:
+    """A repeat of an earlier connected saddle is a failure. Order is the search order."""
+    if not link:
+        return
+    import numpy as np
+
+    from .connection import ProcessTable
+    from .failures import classify_failure
+
+    lengths = np.asarray(link["link_lengths"], dtype=float)
+    found = ProcessTable(lengths, float(link["distance_difference"]), float(link["energy_difference"]))
+    for row in rows:
+        reasons = [str(item) for item in row.get("reasons") or []]
+        if row.get("hessian_index") != 1 or row.get("saddle_positions") is None or row.get("barrier") is None:
+            continue
+        if any(name in reasons for name in ("not_connected", "cap", "error", "crash", "force_norm")):
+            continue
+        barrier = float(row["barrier"])
+        if found.repeat(row["saddle_positions"], barrier):
+            if "duplicate" not in reasons:
+                reasons.append("duplicate")
+            row["reasons"] = reasons
+            row["success"] = False
+            row["failed"] = True
+            row["failure"] = classify_failure(reasons)
+            continue
+        found.add(row["saddle_positions"], barrier)
+
+
 def run_template(
     root: Path,
     template_name: str,
@@ -1502,6 +1687,9 @@ def run_template(
         done = {}
     cap = raw_cap(template)
     tol = float(template["stop"].get("force_norm", template["stop"].get("gradient_norm")))
+    link = {}
+    if template["task"] == "sella-search":
+        link = _link_fields(problem, jobs[0][1][0], template["potential"], tol)
     payloads = []
     for name, paths, seed in jobs:
         if name in done:
@@ -1522,6 +1710,7 @@ def run_template(
                 "max_steps": int(template["stop"]["max_steps"]),
                 "raw_cap": cap,
                 "snapshot": False,
+                **link,
             }
         )
     if payloads:
@@ -1557,6 +1746,8 @@ def run_template(
     for row in fresh:
         by_start[row["start"]] = row
     ordered = [by_start[name] for name, _paths, _seed in jobs]
+    if template["task"] == "sella-search":
+        _apply_saddle_novelty(ordered, link)
     starts_path.write_text(
         "".join(json.dumps(_jsonable(row), sort_keys=True) + "\n" for row in ordered),
         encoding="utf-8",
@@ -1623,6 +1814,9 @@ def run_point(root: Path, template_name: str, start: str, seed: int, *, cache: P
         reactant = next(path for path in material.rglob("reactant.con") if path.is_file())
         reactant_positions = _read_positions(reactant)
     tol = float(template["stop"].get("force_norm", template["stop"].get("gradient_norm")))
+    link = {}
+    if template["task"] == "sella-search":
+        link = _link_fields(problem, paths[0], template["potential"], tol)
     payload = {
         "start": name,
         "task": template["task"],
@@ -1638,6 +1832,7 @@ def run_point(root: Path, template_name: str, start: str, seed: int, *, cache: P
         "max_steps": int(template["stop"]["max_steps"]),
         "raw_cap": raw_cap(template),
         "snapshot": True,
+        **link,
     }
     started = time.perf_counter()
     row = _run_start(payload)

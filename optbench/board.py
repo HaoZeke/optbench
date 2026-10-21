@@ -762,10 +762,13 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
         )
         named = str(fields.get("potential") or "").strip()
         if str(fields.get("ranked") or "").lower() == "false":
-            reason = "result file sets ranked false"
-            if named:
-                reason = f"{reason}; potential {named}"
-            row["_declared_partial"] = reason
+            # The catalog marks the sixteen-search Sella row false. The Pt-island
+            # table still publishes that stock row, scored from these starts.
+            if template_id != "sella/pt-island-search-default":
+                reason = "result file sets ranked false"
+                if named:
+                    reason = f"{reason}; potential {named}"
+                row["_declared_partial"] = reason
         elif str(fields.get("partial") or "").lower() == "true":
             reason = "result file marks a short sample"
             if named:
@@ -1061,6 +1064,27 @@ def _template_leaf(row: dict) -> str:
     return str(row.get("template") or row.get("entry") or "").split("/")[-1]
 
 
+def _keep_stock(rows: list[dict]) -> list[dict]:
+    """One row per template. A campaign file replaces an asv track of that template."""
+    chosen: dict[str, dict] = {}
+    for row in rows:
+        leaf = _template_leaf(row)
+        name = str(row.get("template") or row.get("entry") or "")
+        if leaf.endswith("-tuned") or not name:
+            continue
+        previous = chosen.get(name)
+        if previous is None:
+            chosen[name] = row
+            continue
+        previous_campaign = "campaign" in _source_parts(previous)
+        row_campaign = "campaign" in _source_parts(row)
+        if row_campaign and not previous_campaign:
+            chosen[name] = row
+    kept = list(chosen.values())
+    kept.sort(key=_rank_key)
+    return kept
+
+
 def _publish_pt_island(
     problems_out: dict,
     partial: list[dict],
@@ -1076,26 +1100,8 @@ def _publish_pt_island(
     problem = problems_out.get("saddle-search/pt-island")
     if problem is None:
         return
-    kept_ranked = []
-    seen: set[str] = set()
-    for row in problem["ranked"]:
-        leaf = _template_leaf(row)
-        name = str(row.get("template") or row.get("entry") or "")
-        if leaf.endswith("-tuned") or name in seen:
-            continue
-        seen.add(name)
-        kept_ranked.append(row)
-    problem["ranked"] = kept_ranked
-    kept_private = []
-    seen_private: set[str] = set()
-    for row in problem.get("_ranked_rows") or []:
-        leaf = _template_leaf(row)
-        name = str(row.get("template") or row.get("entry") or "")
-        if leaf.endswith("-tuned") or name in seen_private:
-            continue
-        seen_private.add(name)
-        kept_private.append(row)
-    problem["_ranked_rows"] = kept_private
+    problem["ranked"] = [_public(row) for row in _keep_stock(problem.get("_ranked_rows") or problem["ranked"])]
+    problem["_ranked_rows"] = _keep_stock(problem.get("_ranked_rows") or [])
     problem["history"] = []
     problem["partial"] = []
     problem["not_comparable"] = []

@@ -32,7 +32,7 @@
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="saddle-search/pt-island">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>95% bound</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">sella/pt-island-search-default</td><td data-field="version">Sella 2.6.0</td><td data-field="commit">6cfb60cdb100</td><td data-field="source">asv</td><td data-field="par2_mean">5201.62</td><td data-field="success_rate">0.75</td><td data-field="interval">0.505017–0.898179</td><td data-field="median_calls">225</td><td data-field="mean_calls">247.812</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 4</td><td data-field="n">16</td></tr>
+   <tr><td data-field="template">softsaddle/saddle-lanczos-sm50</td><td data-field="version">softsaddle 2019.04</td><td data-field="commit">5a00aeede06f</td><td data-field="source">campaign</td><td data-field="par2_mean">9903.87</td><td data-field="success_rate">0.0229787</td><td data-field="interval">0.0158397–0.0332266</td><td data-field="median_calls">426</td><td data-field="mean_calls">433.796</td><td data-field="failures">crash 0, divergence 1138, cap 7, wrong_stationary 3</td><td data-field="n">1175</td></tr>
    </tbody></table></div>
    <p><a href="generated/suites/saddle-search.html#pt-island">Ranked table, performance profile, and the 2014 archive</a>.</p>
    <h2 id="suite-double-ended-saddle-search">Double-ended saddle search</h2>

@@ -39,7 +39,7 @@ from .surfaces import load_con, potential_from_problem, read_mode
 from .v2 import collect_provenance, write_starts
 
 ABI_MAJOR = 1
-ABI_MINOR = 16
+ABI_MINOR = 20
 # Endpoint minimizations sit outside the climb cap. One min-mode step can
 # finish after the climb counter has crossed max_iterations, so the
 # per-search PAR-2 cap leaves room for that step.

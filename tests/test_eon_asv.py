@@ -20,7 +20,6 @@ from benchmarks.bench_eon_develop import (
     EonDevelopTsPtDimer,
     EonDevelopTsPtDimerMatched,
     EonDevelopSaddlePtDimer,
-    EonDevelopSaddlePtLanczos,
     EonDevelopTsLj38Lanczos,
     _akmc_server_ini,
     _ini,
@@ -67,8 +66,6 @@ def test_default_grid_is_one_real_start():
     assert EonDevelopSaddlePtDimer.params == [["1000"], ["pt-island"]]
     assert EonDevelopSaddlePtDimer.passes == 1
     assert EonDevelopSaddlePtDimer.potential == "morse_pt"
-    assert EonDevelopSaddlePtLanczos.campaign_seeds == ["1000", "1001"]
-    assert EonDevelopSaddlePtLanczos.params[0] == ["1000"]
     assert EonDevelopSaddlePtDimer.track_total_searches.unit == "searches"
     assert os.environ.get("OPTBENCH_ASV_FULL") != "1"
     assert selected(["0000", "0001"]) == ["0000"]

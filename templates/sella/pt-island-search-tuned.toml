@@ -10,7 +10,7 @@ profile = "tuned"
 reducer = "capped"
 ranked = false
 parameter_source = "transferred"
-note = "Archived Sella trust region: eta 1e-6, gamma 0.4, delta0 1.3e-3, rho_inc 1.035, rho_dec 5, sigma_inc 1.15, sigma_dec 0.65. Sixteen searches, each a Gaussian displacement of standard deviation 0.1 on the free atoms, then Sella order 1 with v0 unset. One search is not the saddle catalog, so this row is not ranked and fraction_connected is not reported. The cost is the per-search harness count."
+note = "Archived Sella trust region: eta 1e-6, gamma 0.4, delta0 1.3e-3, rho_inc 1.035, rho_dec 5, sigma_inc 1.15, sigma_dec 0.65. Sixteen searches, each a Gaussian displacement of standard deviation 0.1 on the free atoms, then Sella order 1 with v0 unset. The harness cap is 10000. A success is index 1 at the force stop, a barrier below 1.5 eV, and exactly one minimized endpoint within 0.1 angstrom per atom of the minimized reactant."
 
 [optimizer]
 name = "Sella"

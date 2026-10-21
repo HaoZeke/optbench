@@ -36,7 +36,6 @@ STEMS = {
     "EonDevelopLowLj38Dimer": "eon-develop-low-lj38-dimer",
     "EonDevelopLowLj38Lanczos": "eon-develop-low-lj38-lanczos",
     "EonDevelopSaddlePtDimer": "eon-develop-saddle-pt-dimer",
-    "EonDevelopSaddlePtLanczos": "eon-develop-saddle-pt-lanczos",
 }
 
 

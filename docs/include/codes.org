@@ -29,6 +29,12 @@
    <tr>
    <td>minimization and saddle search</td>
    <td>develop</td>
+   <td>97f593363171</td>
+   <td><a href="https://github.com/TheochemUI/eon">https://github.com/TheochemUI/eon</a></td>
+   </tr>
+   <tr>
+   <td>minimization and saddle search</td>
+   <td>develop</td>
    <td>500350d9fae8</td>
    <td><a href="https://github.com/TheochemUI/eon">https://github.com/TheochemUI/eon</a></td>
    </tr>
@@ -128,12 +134,12 @@
    <td>Pt heptamer island</td>
    <td data-field="template">eon/develop-saddle-pt-lanczos</td>
    <td data-field="version">eOn 3.6.0</td>
-   <td data-field="commit">7095b23ac17d</td>
-   <td data-field="par2_mean">2e+08</td>
-   <td data-field="mean_calls">3.98507e+06</td>
-   <td data-field="median_calls">3.98507e+06</td>
-   <td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 0</td>
-   <td data-field="n">2</td>
+   <td data-field="commit">97f593363171</td>
+   <td data-field="par2_mean">10119.1</td>
+   <td data-field="mean_calls">495.307</td>
+   <td data-field="median_calls">468</td>
+   <td data-field="failures">crash 0, divergence 19973, cap 8, wrong_stationary 0</td>
+   <td data-field="n">20000</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-template="eon-client/ts-lj38-lanczos-improved">
    <td>LJ38</td>
@@ -395,7 +401,7 @@
    <tr>
    <td>saddle search</td>
    <td>main</td>
-   <td>df8ec2f8deba</td>
+   <td>37eeb62ce5f5</td>
    <td><a href="https://github.com/OmniPotentRPC/rgsaddle">https://github.com/OmniPotentRPC/rgsaddle</a></td>
    </tr>
    </tbody></table></div>
@@ -457,15 +463,15 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
-   <tr data-problem="saddle-search/pt-island" data-template="rgsaddle/saddle-dimer-fire">
+   <tr data-problem="saddle-search/pt-island" data-template="rgsaddle/saddle-dimer-rotskip">
    <td>Pt heptamer island</td>
-   <td data-field="template">rgsaddle/saddle-dimer-fire</td>
+   <td data-field="template">rgsaddle/saddle-dimer-rotskip</td>
    <td data-field="version">rgsaddle 0.2.2</td>
-   <td data-field="commit">c0db2b8d333c</td>
-   <td data-field="par2_mean">10128</td>
-   <td data-field="mean_calls">1011.03</td>
-   <td data-field="median_calls">1013</td>
-   <td data-field="failures">crash 0, divergence 1, cap 19999, wrong_stationary 0</td>
+   <td data-field="commit">37eeb62ce5f5</td>
+   <td data-field="par2_mean">10121.8</td>
+   <td data-field="mean_calls">479.948</td>
+   <td data-field="median_calls">441</td>
+   <td data-field="failures">crash 0, divergence 19700, cap 267, wrong_stationary 20</td>
    <td data-field="n">20000</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-template="rgsaddle/prfo-tuned">
@@ -491,9 +497,6 @@
    <td data-field="n">49</td>
    </tr>
    </tbody></table></div>
-   <p>No full ranked run</p><ul>
-   <li>Pt heptamer island: partial.</li>
-   </ul>
    <h3>geodesic</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
@@ -738,10 +741,10 @@
    <td data-field="template">sella/pt-island-search-default</td>
    <td data-field="version">Sella 2.6.0</td>
    <td data-field="commit">6cfb60cdb100</td>
-   <td data-field="par2_mean">5201.62</td>
-   <td data-field="mean_calls">247.812</td>
-   <td data-field="median_calls">225</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 4</td>
+   <td data-field="par2_mean">18775.6</td>
+   <td data-field="mean_calls">496.375</td>
+   <td data-field="median_calls">518</td>
+   <td data-field="failures">crash 0, divergence 11, cap 0, wrong_stationary 4</td>
    <td data-field="n">16</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-template="sella/lj38-ts-default">
@@ -1478,9 +1481,17 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
+   <tr data-problem="saddle-search/pt-island" data-template="softsaddle/saddle-lanczos-sm50">
+   <td>Pt heptamer island</td>
+   <td data-field="template">softsaddle/saddle-lanczos-sm50</td>
+   <td data-field="version">softsaddle 2019.04</td>
+   <td data-field="commit">5a00aeede06f</td>
+   <td data-field="par2_mean">9903.87</td>
+   <td data-field="mean_calls">433.796</td>
+   <td data-field="median_calls">426</td>
+   <td data-field="failures">crash 0, divergence 1138, cap 7, wrong_stationary 3</td>
+   <td data-field="n">1175</td>
+   </tr>
    </tbody></table></div>
-   <p>No full ranked run</p><ul>
-   <li>Pt heptamer island: partial.</li>
-   </ul>
    </section>
 #+end_export

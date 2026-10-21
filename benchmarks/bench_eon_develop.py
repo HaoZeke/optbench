@@ -865,14 +865,6 @@ def _specs() -> list[dict]:
             ["pt-island"],
             21600,
         ),
-        (
-            "EonDevelopSaddlePtLanczos",
-            "eon/develop-saddle-pt-lanczos",
-            "akmc",
-            ["1000", "1001"],
-            ["pt-island"],
-            21600,
-        ),
     ]
     specs = []
     for cls, template_name, kind, seeds, starts, timeout in rows:

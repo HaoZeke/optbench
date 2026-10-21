@@ -4,7 +4,7 @@ force_calls_min 9598966
 force_calls_max 9598966
 code rgsaddle
 code_version 0.2.2
-commit df8ec2f8debaf22326e8f7ba1859ae277840e20a
+commit 37eeb62ce5f59fa25fa695e43691b7b344b38e43
 algorithm Dimer rotation-skip L-BFGS
 tuning default
 template rgsaddle/saddle-dimer-rotskip

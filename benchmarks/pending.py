@@ -32,7 +32,7 @@ def problem_ids() -> list[str]:
 
 
 # Scored by a harness campaign, outside this skipped grid.
-_CAMPAIGN_ONLY = {"EON", "eon-develop-500350d9"}
+_CAMPAIGN_ONLY = {"EON", "eon-develop-500350d9", "eon-develop-97f59336"}
 
 
 def code_ids() -> list[str]:

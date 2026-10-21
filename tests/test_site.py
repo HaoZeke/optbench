@@ -111,7 +111,7 @@ def test_rendered_pages_use_the_board_rank():
     assert "sella/pt-island-search-default" in saddle
     assert 'data-field="par2_mean">10128<' in saddle
     assert "10127.1" not in saddle
-    assert 'data-par2="2e+08"' in saddle
+    assert 'data-par2="10119.1"' in saddle
     assert "No full harness row." not in saddle
     assert "eon-3.5.0-saddle-pt-dimer" not in saddle
     assert "not yet on the harness counter" not in saddle
@@ -128,7 +128,7 @@ def test_rendered_pages_use_the_board_rank():
     assert "1d71c9445018" in codes
     assert "f15726f1c798" in codes
     assert "c0db2b8d333c" in codes
-    assert "df8ec2f8deba" in codes
+    assert "37eeb62ce5f5" in codes
     assert 'data-board-table="code-best"' in codes
     assert not (ROOT / "docs" / "include" / "featured.org").exists()
     assert not (ROOT / "docs" / "include" / "terra-pass.org").exists()

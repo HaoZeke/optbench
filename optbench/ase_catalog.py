@@ -647,8 +647,9 @@ def _sella_search_specs() -> list[dict]:
                     note
                     + "Sixteen searches, each a Gaussian displacement of standard deviation 0.1 "
                     + "on the free atoms, then Sella order 1 with v0 unset. "
-                    + "One search is not the saddle catalog, so this row is not ranked and "
-                    + "fraction_connected is not reported. The cost is the per-search harness count."
+                    + "The harness cap is 10000. A success is index 1 at the force stop, "
+                    + "a barrier below 1.5 eV, and exactly one minimized endpoint within "
+                    + "0.1 angstrom per atom of the minimized reactant."
                 ),
                 "optimizer": {"name": "Sella", "parameters": params},
                 "potential": MORSE_SLAB,
