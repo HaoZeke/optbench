@@ -119,7 +119,7 @@
    <td class="bench-score" data-code="rgsaddle" data-template="rgsaddle/saddle-dimer-fire" data-par2="10128">10128<a href="generated/suites/saddle-search.html#pt-island-templates">rgsaddle/saddle-dimer-fire</a></td>
    <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
-   <td class="bench-score" data-code="Sella" data-template="sella/pt-island-search-default" data-par2="5201.62">5201.62<a href="generated/suites/saddle-search.html#pt-island-templates">sella/pt-island-search-default</a></td>
+   <td class="bench-score" data-code="Sella" data-template="sella/pt-island-search-default" data-par2="19988.2">19988.2<a href="generated/suites/saddle-search.html#pt-island-templates">sella/pt-island-search-default</a></td>
    <td data-code="GMIN">—</td>
    <td data-code="pele">—</td>
    <td data-code="GeometryOptimization.jl">—</td>
@@ -186,14 +186,14 @@
    <td class="bench-score" data-code="eOn" data-template="eon-client/de-2ts-lanczos-improved" data-par2="520.333">520.333<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">eon-client/de-2ts-lanczos-improved</a></td>
    <td class="bench-score" data-code="Eon svn" data-template="eon-svn/de-2ts-lanczos-improved" data-par2="502.784">502.784<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">eon-svn/de-2ts-lanczos-improved</a></td>
    <td data-code="rgmin">—</td>
-   <td class="bench-score" data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="8024.43">8024.43<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
-   <td class="bench-score" data-code="geodesic" data-template="geodesic/ci-neb-lbfgs" data-par2="16807.4">16807.4<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">geodesic/ci-neb-lbfgs</a></td>
-   <td class="bench-score" data-code="ASE" data-template="ase/de-lj38-2ts-default" data-par2="20000">20000<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">ase/de-lj38-2ts-default</a></td>
+   <td class="bench-score" data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="168024">168024<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
+   <td class="bench-score" data-code="geodesic" data-template="geodesic/ci-neb-lbfgs" data-par2="412102">412102<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">geodesic/ci-neb-lbfgs</a></td>
+   <td class="bench-score" data-code="ASE" data-template="ase/de-lj38-2ts-default" data-par2="500000">500000<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">ase/de-lj38-2ts-default</a></td>
    <td class="bench-score" data-code="Sella" data-template="sella/de-lj38-2ts-default" data-par2="31447.3">31447.3<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">sella/de-lj38-2ts-default</a></td>
    <td data-code="GMIN">—</td>
-   <td class="bench-score" data-code="pele" data-template="pele/connect" data-par2="4267.51">4267.51<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">pele/connect</a></td>
+   <td class="bench-score" data-code="pele" data-template="pele/connect" data-par2="51326.3">51326.3<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">pele/connect</a></td>
    <td data-code="GeometryOptimization.jl">—</td>
-   <td class="bench-score" data-code="LAMMPS" data-template="lammpsneb/ci-quickmin" data-par2="19017.8">19017.8<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">lammpsneb/ci-quickmin</a></td>
+   <td class="bench-score" data-code="LAMMPS" data-template="lammpsneb/ci-quickmin" data-par2="451959">451959<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">lammpsneb/ci-quickmin</a></td>
    <td data-code="pysisyphus">—</td>
    <td data-code="AIRSS">—</td>
    <td data-code="vc-SQNM">—</td>
@@ -207,14 +207,14 @@
    <td data-code="KLIFF">—</td>
    <td data-code="EON (SVN r2549)">—</td>
    <td data-code="artn">—</td>
-   <td class="bench-score" data-code="compass" data-template="compass/sqnm" data-par2="6713.37">6713.37<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">compass/sqnm</a></td>
+   <td class="bench-score" data-code="compass" data-template="compass/sqnm" data-par2="100831">100831<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">compass/sqnm</a></td>
    <td data-code="dlfind">—</td>
    <td data-code="lammps">—</td>
-   <td class="bench-score" data-code="optim" data-template="optim/de-2ts" data-par2="5725.16">5725.16<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">optim/de-2ts</a></td>
+   <td class="bench-score" data-code="optim" data-template="optim/de-2ts" data-par2="71607.5">71607.5<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">optim/de-2ts</a></td>
    <td data-code="optking">—</td>
    <td data-code="saddlesearchjl">—</td>
    <td data-code="softsaddle">—</td>
-   <td class="bench-score" data-code="tsase" data-template="tsase/ci-neb" data-par2="18812.1">18812.1<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">tsase/ci-neb</a></td>
+   <td class="bench-score" data-code="tsase" data-template="tsase/ci-neb" data-par2="451753">451753<a href="generated/suites/double-ended-saddle-search.html#lj38_2ts_separation-templates">tsase/ci-neb</a></td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island">
    <th scope="row"><a href="generated/suites/double-ended-saddle-search.html#pt-island">pt-island</a></th>
@@ -335,7 +335,7 @@
    <td data-code="GeometryOptimization.jl">—</td>
    <td data-code="LAMMPS">—</td>
    <td data-code="pysisyphus">—</td>
-   <td class="bench-score" data-code="AIRSS" data-template="airss/lj38" data-par2=""><a href="generated/suites/globalopt.html#lj38-templates">airss/lj38</a></td>
+   <td class="bench-score" data-code="AIRSS" data-template="airss/lj38" data-par2="112134">112134<a href="generated/suites/globalopt.html#lj38-templates">airss/lj38</a></td>
    <td data-code="vc-SQNM">—</td>
    <td data-code="TorchSim">—</td>
    <td data-code="geomeTRIC">—</td>

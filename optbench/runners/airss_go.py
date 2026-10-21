@@ -8,7 +8,8 @@ potential and the harness counter.
 
 One archived start index is one independent search. The search stops
 when the harness energy is at or below the Wales minimum plus the
-problem tolerance. The problem states no force-call cap.
+problem tolerance. The problem states no force-call cap. A template
+failure_cap is the PAR-2 cap when the problem states none.
 """
 
 from __future__ import annotations
@@ -542,11 +543,17 @@ def _dat(summary: dict, template: dict, metrics: dict) -> str:
             "# force_calls is the half-even mean of those counts. energy_min and energy_max are the best energies.",
         ]
     else:
+        if template.get("failure_cap") not in (None, ""):
+            cap_line = "# The problem states no force-call cap. PAR-2 uses the template failure cap."
+        else:
+            cap_line = (
+                "# The problem states no force-call cap, so par2_mean is unset and the median is the call median."
+            )
         lines = [
             "# counter harness. One force call is one Lennard-Jones evaluation inside the two-point step.",
             "# buildcell draws the cell. The archived .con files name the starts.",
             "# A start succeeds when the harness energy is at or below the Wales minimum plus energy_above_minimum.",
-            "# The problem states no force-call cap, so par2_mean is unset and the median is the call median.",
+            cap_line,
         ]
     note = str(template.get("note") or "").strip()
     if note:
@@ -647,7 +654,13 @@ def run_template(
     calls = [int(row["force_calls"]) for row in records]
     energies = [float(row["energy"]) for row in records if row.get("energy") is not None]
     structures = [int(row["structures"]) for row in records]
-    cap = max(calls) if budget_only else None
+    raw_cap = template.get("failure_cap")
+    if raw_cap not in (None, ""):
+        cap = int(raw_cap)
+    elif budget_only:
+        cap = max(calls)
+    else:
+        cap = None
     summary = {
         "force_calls": half_even(sum(calls) / len(calls)),
         "force_calls_min": min(calls),
@@ -690,7 +703,11 @@ def run_template(
             + (
                 "The problem states no energy window, so each start stops at the structure budget."
                 if budget_only
-                else "The problem states no force-call cap."
+                else (
+                    "PAR-2 uses the template failure cap."
+                    if cap is not None
+                    else "The problem states no force-call cap."
+                )
             )
         ),
         "runs": [

@@ -614,6 +614,49 @@ def _blank_row(**values) -> dict:
     return row
 
 
+_SADDLE_SHORT_COUNTS = frozenset({2, 16})
+_SADDLE_PROBLEM = "saddle-search/pt-island"
+
+
+def _charge_omitted_saddle_starts(
+    records: list[dict],
+    problem: dict | None,
+    cap: int | None,
+    *,
+    skip: bool,
+) -> list[dict]:
+    """Charge omitted Pt-island searches on a short ranked row.
+
+    ``sample.searches`` is the catalog size. A ranked row of 2 or 16
+    searches pays the PAR-2 failure cost for every search it left out,
+    at that row's own cap. ``stated_full_n`` does not read ``searches``,
+    so a finished protocol with another count stays as recorded. A row
+    the result file already marks partial is left alone, and so is an
+    asv track of that same template.
+    """
+    if skip or problem is None or cap is None:
+        return records
+    if problem.get("id") != _SADDLE_PROBLEM:
+        return records
+    full = (problem.get("sample") or {}).get("searches")
+    if full in (None, ""):
+        return records
+    full_n = int(full)
+    count = len(records)
+    if count not in _SADDLE_SHORT_COUNTS or count >= full_n:
+        return records
+    omitted = [
+        {
+            "force_calls": float(cap),
+            "success": False,
+            "failure": "cap",
+            "start": f"omitted-{index}",
+        }
+        for index in range(full_n - count)
+    ]
+    return [*records, *omitted]
+
+
 def _score_records(records: list[dict], cap: int | None) -> dict:
     summary = score_v2(records, cap)
     calls = [float(record["force_calls"]) for record in records]
@@ -702,6 +745,29 @@ def _version_key(text: str) -> tuple[int, ...]:
     return tuple(parts)
 
 
+# 9a2e7ff (optbench/rgmin-0.4.1) is the parent of f15726f1
+# (fix/default-cap-per-method). The child is the single ranked ref.
+_RGMIN_CONTAINED_BY = {"9a2e7ff1": "f15726f1"}
+
+
+def _collapse_contained_rgmin(group: list[dict]) -> None:
+    """One ranked rgmin 0.4.1 row when a later commit contains an earlier one."""
+    newest = [row for row in group if row.get("newest")]
+    by_prefix: dict[str, list[dict]] = defaultdict(list)
+    for row in newest:
+        if str(row.get("code") or "").casefold() != "rgmin":
+            continue
+        if str(row.get("code_version") or "") != "0.4.1":
+            continue
+        by_prefix[str(row.get("commit") or "")[:8]].append(row)
+    for contained, container in _RGMIN_CONTAINED_BY.items():
+        if contained not in by_prefix or container not in by_prefix:
+            continue
+        for row in by_prefix[contained]:
+            row["newest"] = False
+            row["history"] = True
+
+
 def _mark_versions(rows: list[dict]) -> None:
     """The newest full version of a template is ranked. Older full versions are history."""
     groups: dict[tuple, list[dict]] = defaultdict(list)
@@ -726,6 +792,7 @@ def _mark_versions(rows: list[dict]) -> None:
             else:
                 row["newest"] = False
                 row["history"] = False
+        _collapse_contained_rgmin(group)
 
 
 def _dedup_key(row: dict) -> tuple:
@@ -836,9 +903,12 @@ def _merge_same_code(rows: list[dict]) -> list[dict]:
     return merged
 
 
-def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict]) -> tuple[list[dict], list[dict]]:
+def _campaign_rows(
+    root: Path, problems: dict[str, dict], templates: dict[str, dict]
+) -> tuple[list[dict], list[dict], set[str]]:
     rows: list[dict] = []
     unparsed: list[dict] = []
+    declared_partial: set[str] = set()
     for stem, group in _campaign_groups(root / "results" / "campaign").items():
         path = group.get("dat") or group.get("v2") or group.get("starts_jsonl") or group.get("starts")
         fields: dict[str, str] = {}
@@ -929,10 +999,18 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
             if named:
                 reason = f"{reason}; potential {named}"
             row["_declared_partial"] = reason
+        if row.get("_declared_partial") and template_id:
+            declared_partial.add(template_id)
         if not records:
             row["note"] = "no per-start record"
             unparsed.append(row)
             continue
+        records = _charge_omitted_saddle_starts(
+            records,
+            problem,
+            cap,
+            skip=bool(row.get("_declared_partial")),
+        )
         try:
             summary = _score_records(records, cap)
         except (ValueError, RuntimeError) as exc:
@@ -941,7 +1019,7 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
             continue
         _apply_summary(row, summary, records)
         rows.append(row)
-    return rows, unparsed
+    return rows, unparsed, declared_partial
 
 
 def _benchmark_index() -> dict[str, dict]:
@@ -1008,7 +1086,12 @@ def _benchmark_index() -> dict[str, dict]:
     return index
 
 
-def _asv_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict]) -> tuple[list[dict], list[dict], list[dict]]:
+def _asv_rows(
+    root: Path,
+    problems: dict[str, dict],
+    templates: dict[str, dict],
+    declared_partial: set[str] | None = None,
+) -> tuple[list[dict], list[dict], list[dict]]:
     results_dir = root / "results" / "asv"
     if not results_dir.is_dir():
         return [], [], []
@@ -1119,6 +1202,12 @@ def _asv_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict])
                 row["note"] = "asv track has no starts"
                 unparsed.append(row)
                 continue
+            records = _charge_omitted_saddle_starts(
+                records,
+                problem,
+                cap,
+                skip=template_id in (declared_partial or set()),
+            )
             try:
                 summary = _score_records(records, cap)
             except (ValueError, RuntimeError) as exc:
@@ -1150,8 +1239,10 @@ def build_board(root: Path) -> dict:
     problems = load_all(root / "problems") if (root / "problems").is_dir() else {}
     templates = {item["id"]: item for item in list_templates(root)} if (root / "templates").is_dir() else {}
     registry = _registry(root)
-    campaign, unparsed = _campaign_rows(root, problems, templates)
-    asv_rows, asv_unparsed, unmapped = _asv_rows(root, problems, templates)
+    campaign, unparsed, declared_partial = _campaign_rows(root, problems, templates)
+    asv_rows, asv_unparsed, unmapped = _asv_rows(
+        root, problems, templates, declared_partial
+    )
     unparsed.extend(asv_unparsed)
     rows = _merge_same_code(_dedup(campaign + asv_rows))
     full_n: dict[str, int | None] = {}
@@ -1478,9 +1569,11 @@ def _headers(problem: dict) -> list[str]:
 def version_label(row: dict) -> str:
     """Ranked version cell.
 
-    EON SVN is ``EON (SVN r2549)``. eOn 3.6.0 stays ``eOn 3.6.0``.
-    A develop build at ``500350d9`` is ``eOn (develop 500350d9)`` and
-    is its own template, so the 3.6.0 row stays ranked beside it.
+    EON SVN is ``EON (SVN r2549)``. eOn 3.6.0 stays ``eOn 3.6.0``
+    when the commit is the v3.6.0 release. A develop build at
+    ``7095b23a`` is ``eOn (develop 7095b23a)``. A develop build at
+    ``500350d9`` is ``eOn (develop 500350d9)``. Each develop pin is
+    its own template, so the release row stays ranked beside it.
     OPTIM and GMIN rows from the Wales tarball whose ``SVNREV`` is
     ``df8da599`` use that eight-character revision. ``rgmin`` 0.4.1 is
     not a crates.io release (the newest published crate is 0.3.0), so
@@ -1494,6 +1587,8 @@ def version_label(row: dict) -> str:
         return "EON (SVN r2549)"
     if commit.startswith("500350d9") or "500350d9" in version:
         return "eOn (develop 500350d9)"
+    if folded == "eon" and (commit.startswith("7095b23") or "7095b23" in version):
+        return "eOn (develop 7095b23a)"
     wales = commit.startswith(("02aaf45245af", "df8da599")) or version.startswith(
         ("svn-snapshot", "02aaf452", "df8da599")
     )

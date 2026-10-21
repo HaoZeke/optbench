@@ -89,7 +89,7 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="double-ended-saddle-search/pt-island" data-template="eon/develop-de-pt-oci">
    <td>pt-island</td>
    <td data-field="template">eon/develop-de-pt-oci</td>
-   <td data-field="version">eOn 3.6.0</td>
+   <td data-field="version">eOn (develop 7095b23a)</td>
    <td data-field="commit">7095b23ac17d</td>
    <td data-field="par2_mean">3080.19</td>
    <td data-field="mean_calls">3220.9</td>
@@ -177,13 +177,13 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="saddle-search/pt-island" data-template="eon/develop-saddle-pt-lanczos">
    <td>Pt heptamer island</td>
    <td data-field="template">eon/develop-saddle-pt-lanczos</td>
-   <td data-field="version">eOn 3.6.0</td>
+   <td data-field="version">eOn (develop 7095b23a)</td>
    <td data-field="commit">7095b23ac17d</td>
    <td data-field="par2_mean">2e+08</td>
-   <td data-field="mean_calls">3.98507e+06</td>
-   <td data-field="median_calls">3.98507e+06</td>
-   <td data-field="failures">crash 0, divergence 0, cap 2, not_converged 0, wrong_stationary 0</td>
-   <td data-field="n">2</td>
+   <td data-field="mean_calls">9.99904e+07</td>
+   <td data-field="median_calls">1e+08</td>
+   <td data-field="failures">crash 0, divergence 0, cap 20000, not_converged 0, wrong_stationary 0</td>
+   <td data-field="n">20000</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-template="eon-client/ts-lj38-lanczos-improved">
    <td>LJ38</td>
@@ -408,8 +408,8 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="minimization/lj38" data-template="rgmin/lj38-dogleg">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="template">rgmin/lj38-dogleg</td>
-   <td data-field="version">rgmin 9a2e7ff1</td>
-   <td data-field="commit">9a2e7ff11fa6</td>
+   <td data-field="version">rgmin f15726f1</td>
+   <td data-field="commit">f15726f1c798</td>
    <td data-field="par2_mean">81.881</td>
    <td data-field="mean_calls">81.881</td>
    <td data-field="median_calls">79</td>
@@ -430,8 +430,8 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="minimization/morse-bulk" data-template="rgmin/morse-newton">
    <td>Morse bulk</td>
    <td data-field="template">rgmin/morse-newton</td>
-   <td data-field="version">rgmin 9a2e7ff1</td>
-   <td data-field="commit">9a2e7ff11fa6</td>
+   <td data-field="version">rgmin f15726f1</td>
+   <td data-field="commit">f15726f1c798</td>
    <td data-field="par2_mean">8.35</td>
    <td data-field="mean_calls">8.35</td>
    <td data-field="median_calls">9</td>
@@ -469,10 +469,10 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">rgsaddle/ew-ci-neb-lbfgs</td>
    <td data-field="version">rgsaddle 0.2.2</td>
    <td data-field="commit">c0db2b8d333c</td>
-   <td data-field="par2_mean">8024.43</td>
+   <td data-field="par2_mean">168024</td>
    <td data-field="mean_calls">4639.8</td>
    <td data-field="median_calls">2414</td>
-   <td data-field="failures">crash 0, divergence 0, cap 16, not_converged 0, wrong_stationary 1</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 16, wrong_stationary 1</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-template="rgsaddle/ew-ci-neb-lbfgs">
@@ -572,10 +572,10 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">geodesic/ci-neb-lbfgs</td>
    <td data-field="version">geodesic 1.0.0</td>
    <td data-field="commit">476aa041f562</td>
-   <td data-field="par2_mean">16807.4</td>
+   <td data-field="par2_mean">412102</td>
    <td data-field="mean_calls">8401.49</td>
    <td data-field="median_calls">10000</td>
-   <td data-field="failures">crash 0, divergence 0, cap 38, not_converged 0, wrong_stationary 4</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 38, wrong_stationary 4</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-template="geodesic/ase-de-pt-default">
@@ -631,7 +631,7 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">ase/de-lj38-2ts-default</td>
    <td data-field="version">ASE 3.29.0</td>
    <td data-field="commit">f27c0005ae6a</td>
-   <td data-field="par2_mean">20000</td>
+   <td data-field="par2_mean">500000</td>
    <td data-field="mean_calls">2500</td>
    <td data-field="median_calls">2500</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 51, wrong_stationary 0</td>
@@ -798,11 +798,11 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">sella/pt-island-search-default</td>
    <td data-field="version">Sella 2.6.0</td>
    <td data-field="commit">6cfb60cdb100</td>
-   <td data-field="par2_mean">5201.62</td>
-   <td data-field="mean_calls">247.812</td>
-   <td data-field="median_calls">225</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 4</td>
-   <td data-field="n">16</td>
+   <td data-field="par2_mean">19988.2</td>
+   <td data-field="mean_calls">9992.2</td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="failures">crash 0, divergence 0, cap 19984, not_converged 0, wrong_stationary 4</td>
+   <td data-field="n">20000</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-template="sella/lj38-ts-default">
    <td>LJ38</td>
@@ -999,10 +999,10 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">pele/connect</td>
    <td data-field="version">pele 0.1.2</td>
    <td data-field="commit">b7081b932a06</td>
-   <td data-field="par2_mean">4267.51</td>
+   <td data-field="par2_mean">51326.3</td>
    <td data-field="mean_calls">3248.25</td>
    <td data-field="median_calls">2292</td>
-   <td data-field="failures">crash 0, divergence 0, cap 4, not_converged 1, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 5, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-template="pele/connect">
@@ -1184,10 +1184,10 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">optim/de-2ts</td>
    <td data-field="version">OPTIM df8da599</td>
    <td data-field="commit">02aaf45245af</td>
-   <td data-field="par2_mean">5725.16</td>
+   <td data-field="par2_mean">71607.5</td>
    <td data-field="mean_calls">4352.61</td>
    <td data-field="median_calls">3268</td>
-   <td data-field="failures">crash 0, divergence 0, cap 7, not_converged 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 7, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-template="optim/de-pt">
@@ -1426,10 +1426,10 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">tsase/ci-neb</td>
    <td data-field="version">tsase 1.0</td>
    <td data-field="commit">98aac60b5d99</td>
-   <td data-field="par2_mean">18812.1</td>
+   <td data-field="par2_mean">451753</td>
    <td data-field="mean_calls">9690.35</td>
    <td data-field="median_calls">10000</td>
-   <td data-field="failures">crash 0, divergence 0, cap 43, not_converged 1, wrong_stationary 2</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 44, wrong_stationary 2</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-template="tsase/ci-neb">
@@ -1558,7 +1558,7 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">lammpsneb/ci-quickmin</td>
    <td data-field="version">LAMMPS 30 Sep 2026</td>
    <td data-field="commit">8de817dd79bf</td>
-   <td data-field="par2_mean">19017.8</td>
+   <td data-field="par2_mean">451959</td>
    <td data-field="mean_calls">9982</td>
    <td data-field="median_calls">9982</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 45, wrong_stationary 1</td>
@@ -1698,10 +1698,10 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">compass/sqnm</td>
    <td data-field="version">compass 1.0.0</td>
    <td data-field="commit">22da7bd5f69c</td>
-   <td data-field="par2_mean">6713.37</td>
+   <td data-field="par2_mean">100831</td>
    <td data-field="mean_calls">4586.12</td>
    <td data-field="median_calls">4031</td>
-   <td data-field="failures">crash 0, divergence 0, cap 9, not_converged 0, wrong_stationary 1</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 9, wrong_stationary 1</td>
    <td data-field="n">51</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-template="compass/sqnm">
@@ -1847,7 +1847,7 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">airss/lj38</td>
    <td data-field="version">AIRSS 0.9.4</td>
    <td data-field="commit">5593cc4ee360</td>
-   <td data-field="par2_mean"></td>
+   <td data-field="par2_mean">112134</td>
    <td data-field="mean_calls">112134</td>
    <td data-field="median_calls">70635.5</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>

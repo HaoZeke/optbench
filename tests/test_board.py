@@ -7,6 +7,8 @@ import pytest
 
 from optbench.board import (
     MissingAsvCommit,
+    _charge_omitted_saddle_starts,
+    _mark_versions,
     build_board,
     coordinate_count,
     render_problem_section,
@@ -954,6 +956,16 @@ def test_ranked_version_labels_keep_eon_3_6_0_beside_develop():
         version_label(
             {
                 "code": "eOn",
+                "code_version": "3.6.0",
+                "commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+            }
+        )
+        == "eOn (develop 7095b23a)"
+    )
+    assert (
+        version_label(
+            {
+                "code": "eOn",
                 "code_version": "(develop 500350d9)",
                 "commit": "500350d9fae881f06c7ef194e5868da079c4be5a",
             }
@@ -975,3 +987,110 @@ def test_ranked_version_labels_keep_eon_3_6_0_beside_develop():
         )
         == "rgmin 9a2e7ff1"
     )
+
+
+def test_a_contained_rgmin_commit_leaves_the_ranked_table():
+    def row(commit: str, template: str = "rgmin/morse-dogleg") -> dict:
+        return {
+            "problem": "minimization/morse-bulk",
+            "template": template,
+            "code": "rgmin",
+            "code_version": "0.4.1",
+            "commit": commit,
+            "comparable": True,
+            "partial": False,
+        }
+
+    contained = row("9a2e7ff11fa65826f9e847856bee10d3d70b7156")
+    container = row("f15726f1c7983b3656c5dbc2f812e2394e144500")
+    only = row("9a2e7ff11fa65826f9e847856bee10d3d70b7156", "rgmin/lj38-noise-dogleg")
+    _mark_versions([contained, container, only])
+    assert container["newest"] is True
+    assert container["history"] is False
+    assert contained["newest"] is False
+    assert contained["history"] is True
+    assert only["newest"] is True
+    assert only["history"] is False
+
+
+def test_pt_island_catalog_charges_only_the_short_ranked_rows():
+    import tomllib
+
+    root = Path(__file__).resolve().parents[1]
+    problem = tomllib.loads((root / "problems" / "saddle-search" / "pt-island.toml").read_text(encoding="utf-8"))
+    assert problem["sample"]["searches"] == 20000
+    short = [{"force_calls": 4.0, "success": True, "start": str(index)} for index in range(16)]
+    padded = _charge_omitted_saddle_starts(short, problem, 10000, skip=False)
+    assert len(padded) == 20000
+    assert padded[16]["success"] is False
+    assert padded[16]["failure"] == "cap"
+    assert padded[16]["force_calls"] == 10000.0
+    catalog = [{"force_calls": 1.0, "success": True, "start": str(index)} for index in range(200)]
+    assert _charge_omitted_saddle_starts(catalog, problem, 6000, skip=False) is catalog
+    assert _charge_omitted_saddle_starts(short, problem, 10000, skip=True) is short
+    other = {"id": "minimization/lj38", "sample": {"searches": 20000}}
+    assert _charge_omitted_saddle_starts(short, other, 10000, skip=False) is short
+
+
+def test_a_declared_partial_saddle_row_is_not_padded(tmp_path: Path):
+    path = tmp_path / "problems" / "saddle-search" / "pt-island.toml"
+    path.parent.mkdir(parents=True)
+    path.write_text(
+        "\n".join(
+            [
+                'id = "saddle-search/pt-island"',
+                'title = "Island"',
+                'suite = "saddle-search"',
+                'problem = "pt-island"',
+                'contract = "stated"',
+                "",
+                "[sample]",
+                "searches = 20",
+                "",
+                "[convergence]",
+                "force_norm = 0.001",
+                "max_force_calls = 10",
+                "",
+                "[metrics]",
+                'required = ["force_calls"]',
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    for template_id in ("toy/sixteen", "toy/held", "toy/wide"):
+        template = tmp_path / "templates" / f"{template_id}.toml"
+        template.parent.mkdir(parents=True, exist_ok=True)
+        template.write_text(
+            "\n".join(
+                [
+                    f'id = "{template_id}"',
+                    'engine = "toy"',
+                    'problem = "saddle-search/pt-island"',
+                    'code = "toy"',
+                    'code_version = "1.0"',
+                    f'commit = "{PIN}"',
+                    "",
+                ]
+            ),
+            encoding="utf-8",
+        )
+    _registry(tmp_path)
+    _dat(tmp_path, "sixteen", PIN, template="toy/sixteen", problem="saddle-search/pt-island")
+    _starts(tmp_path, "sixteen", [_row(1, True, str(index)) for index in range(16)])
+    held = _dat(tmp_path, "held", PIN, template="toy/held", problem="saddle-search/pt-island")
+    held.write_text(held.read_text(encoding="utf-8") + "ranked false\n", encoding="utf-8")
+    _starts(tmp_path, "held", [_row(1, True, str(index)) for index in range(16)])
+    _dat(tmp_path, "wide", PIN, template="toy/wide", problem="saddle-search/pt-island")
+    _starts(tmp_path, "wide", [_row(2, True, str(index)) for index in range(4)])
+
+    problem = build_board(tmp_path)["problems"]["saddle-search/pt-island"]
+    assert problem["full_n"] is None
+    by_template = {row["template"]: row for row in problem["ranked"]}
+    assert by_template["toy/sixteen"]["n"] == 20
+    assert by_template["toy/sixteen"]["nfailed"] == 4
+    assert by_template["toy/sixteen"]["par2_mean"] == (16 * 1 + 4 * 20) / 20
+    assert by_template["toy/wide"]["n"] == 4
+    assert by_template["toy/wide"]["par2_mean"] == 2
+    assert [row["template"] for row in problem["partial"]] == ["toy/held"]
+    assert problem["partial"][0]["n"] == 16

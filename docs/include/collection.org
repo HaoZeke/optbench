@@ -8,7 +8,7 @@
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="minimization/lj38">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>FD equivalent</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">rgmin/lj38-dogleg</td><td data-field="version">rgmin 9a2e7ff1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">81.881</td><td data-field="success_rate">1</td><td data-field="wilson">0.996173–1</td><td data-field="median_calls">79</td><td data-field="mean_calls">81.881</td><td data-field="fd_equivalent">9220.43</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">1000</td></tr>
+   <tr><td data-field="template">rgmin/lj38-dogleg</td><td data-field="version">rgmin f15726f1</td><td data-field="commit">f15726f1c798</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">81.881</td><td data-field="success_rate">1</td><td data-field="wilson">0.996173–1</td><td data-field="median_calls">79</td><td data-field="mean_calls">81.881</td><td data-field="fd_equivalent">9220.43</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">1000</td></tr>
    </tbody></table></div>
    <p class="bench-gaps">Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
    <p><a href="generated/suites/minimization.html#lj38">Full ranked table and performance profile</a>.</p>
@@ -332,7 +332,7 @@
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="minimization/morse-bulk">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>FD equivalent</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">rgmin/morse-newton</td><td data-field="version">rgmin 9a2e7ff1</td><td data-field="commit">9a2e7ff11fa6</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">8.35</td><td data-field="success_rate">1</td><td data-field="wilson">0.963007–1</td><td data-field="median_calls">9</td><td data-field="mean_calls">8.35</td><td data-field="fd_equivalent">5644.8</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">rgmin/morse-newton</td><td data-field="version">rgmin f15726f1</td><td data-field="commit">f15726f1c798</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">8.35</td><td data-field="success_rate">1</td><td data-field="wilson">0.963007–1</td><td data-field="median_calls">9</td><td data-field="mean_calls">8.35</td><td data-field="fd_equivalent">5644.8</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    <p class="bench-gaps">Partial rows stay off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
    <p><a href="generated/suites/minimization.html#morse-bulk">Full ranked table and performance profile</a>.</p>
@@ -484,7 +484,7 @@
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="saddle-search/pt-island">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">sella/pt-island-search-default</td><td data-field="version">Sella 2.6.0</td><td data-field="commit">6cfb60cdb100</td><td data-field="source">asv</td><td data-field="par2_mean">5201.62</td><td data-field="success_rate">0.75</td><td data-field="wilson">0.505017–0.898179</td><td data-field="median_calls">225</td><td data-field="mean_calls">247.812</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 4</td><td data-field="n">16</td></tr>
+   <tr><td data-field="template">softsaddle/saddle-lanczos-sm0</td><td data-field="version">softsaddle 2019.04</td><td data-field="commit">5a00aeede06f</td><td data-field="source">campaign</td><td data-field="par2_mean">10046.8</td><td data-field="success_rate">0.00837209</td><td data-field="wilson">0.00576024–0.0121538</td><td data-field="median_calls">488</td><td data-field="mean_calls">526.824</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 111, wrong_stationary 3087</td><td data-field="n">3225</td></tr>
    </tbody></table></div>
    <p class="bench-gaps">Eon rows are not yet on the harness counter. Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/saddle-search.html#pt-island">Full ranked table and performance profile</a>.</p>
@@ -1057,7 +1057,7 @@
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/lj38">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">airss/lj38</td><td data-field="version">AIRSS 0.9.4</td><td data-field="commit">5593cc4ee360</td><td data-field="source">campaign</td><td data-field="par2_mean"></td><td data-field="success_rate">1</td><td data-field="wilson">0.963007–1</td><td data-field="median_calls">70635.5</td><td data-field="mean_calls">112134</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">airss/lj38</td><td data-field="version">AIRSS 0.9.4</td><td data-field="commit">5593cc4ee360</td><td data-field="source">campaign</td><td data-field="par2_mean">112134</td><td data-field="success_rate">1</td><td data-field="wilson">0.963007–1</td><td data-field="median_calls">70635.5</td><td data-field="mean_calls">112134</td><td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    <p><a href="generated/suites/globalopt.html#lj38">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-archive-section" id="lj38-archive">

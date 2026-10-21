@@ -46,7 +46,7 @@ def test_pele_settings_follow_each_problem():
     pin = _registry(ROOT)["commit"]
     expected = {
         "double-ended-saddle-search/lj38": (2500, 5, 0.001, "lj"),
-        "double-ended-saddle-search/lj38_2ts_separation": (10000, 5, 0.001, "lj"),
+        "double-ended-saddle-search/lj38_2ts_separation": (250000, 5, 0.001, "lj"),
         "double-ended-saddle-search/pt-island": (3000, 3, 0.001, "morse_pt"),
         "neb/Pt-heptamer": (10000, 8, 0.01, "morse_pt"),
     }
@@ -179,7 +179,7 @@ def test_pele_benchmarks_name_the_four_problems():
     assert bench.Lj38DePeleNeb.problem_name == "double-ended-saddle-search/lj38"
     assert bench.Lj38DePeleNeb.template_name == "pele/neb"
     assert bench.Lj38DePeleNeb.cap == 2500
-    assert bench.Lj38TwoTsPeleDneb.cap == 10000
+    assert bench.Lj38TwoTsPeleDneb.cap == 250000
     assert bench.PtIslandPeleConnect.problem_name == "double-ended-saddle-search/pt-island"
     assert bench.PtIslandPeleConnect.template_name == "pele/connect"
     assert bench.PtIslandPeleConnect.cap == 3000

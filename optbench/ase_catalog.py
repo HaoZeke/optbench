@@ -483,8 +483,8 @@ def _neb_specs() -> list[dict]:
             "stop": {
                 "norm": "fmax",
                 "force_norm": 0.001,
-                "max_force_calls": 40000,
-                "max_steps": 40000,
+                "max_force_calls": 250000,
+                "max_steps": 250000,
             },
             "tuned_optimizer": "LBFGS",
             "tuned_parameters": {"maxstep": 0.01, "damping": 0.2},
@@ -494,11 +494,10 @@ def _neb_specs() -> list[dict]:
             "tuned_climb_after": 0.4,
             "tuned_source": "repaired",
             "tuned_note": (
-                "The problem run limit is 10000. "
+                "The problem run limit is 250000. The harness stop is that same limit. "
                 "archive/entries/double-ended-saddle-search/lj38_2ts_separation/pele/benchmark.dat "
-                "records median 20638 and maximum 114490, so this row's harness stop stays 40000 "
-                "instead of that problem cap and instead of the LJ38 eOn exclusion of 2500. "
-                "Campaign rows are scored at the problem cap. This asv class uses the harness stop. "
+                "records median 20638 and maximum 114490. "
+                "Campaign rows and this asv class share the problem cap. "
                 "The previous ASE tuned campaign failed all 51 pairs at 2500. "
                 "Interpolation is IDPP. LBFGS maxstep is 0.01 and damping is 0.2. "
                 "Climb stays off until the maximum residual is at or below 0.4. "
@@ -506,9 +505,8 @@ def _neb_specs() -> list[dict]:
             ),
             "default_note": (
                 "ASE NEB defaults on the same pairs: spring 0.1, climb off, FIRE. "
-                "The harness stop is 40000, the same as the tuned row. "
-                "The problem run limit is 10000. Campaign rows use that cap. "
-                "This asv class uses the harness stop."
+                "The harness stop is 250000, the problem run limit. "
+                "Campaign rows and this asv class share that cap."
             ),
         },
     )

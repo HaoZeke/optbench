@@ -1,7 +1,7 @@
 # counter harness. One force call is one Lennard-Jones evaluation inside the two-point step.
 # buildcell draws the cell. The archived .con files name the starts.
 # A start succeeds when the harness energy is at or below the Wales minimum plus energy_above_minimum.
-# The problem states no force-call cap, so par2_mean is unset and the median is the call median.
+# The problem states no force-call cap. PAR-2 uses the template failure cap.
 # AIRSS 0.9.4 example 1.4 scaled from sigma 2 to sigma 1. buildcell draws each cell with POSAMP 1.875, MINSEP 0.75, SYMMOPS 2-5, NFORM 1 and a cubic box of side 100. The seed is eight integers from the archived start index and the structure index. Relaxation is the pp3 two-point step, two passes, energy tolerance 1e-10, at most 9999 steps a pass, on optbench.potentials.lennard_jones. A start stops when that energy is at or below the harness energy of the Wales LJ38 coordinates plus 0.001.
 force_calls 112134
 force_calls_min 1672
@@ -15,6 +15,8 @@ template airss/lj38
 problem globalopt/lj38
 tuning default
 counter harness
+par2_mean 112134.16
+cap 2000000
 wilson_low 0.963006501793
 wilson_high 1
 par2_median 70635.5

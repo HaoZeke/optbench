@@ -10,7 +10,7 @@ profile = "default"
 reducer = "capped"
 ranked = true
 parameter_source = "default"
-note = "ASE NEB defaults on the same pairs: spring 0.1, climb off, FIRE. The harness stop is 40000, the same as the tuned row. The problem run limit is 10000. Campaign rows use that cap. This asv class uses the harness stop."
+note = "ASE NEB defaults on the same pairs: spring 0.1, climb off, FIRE. The harness stop is 250000, the problem run limit. Campaign rows and this asv class share that cap."
 
 [optimizer]
 name = "FIRE"
@@ -27,8 +27,8 @@ pbc = [false, false, false]
 [stop]
 norm = "fmax"
 force_norm = 0.001
-max_force_calls = 40000
-max_steps = 40000
+max_force_calls = 250000
+max_steps = 250000
 
 [input]
 archive_path = "website/double-ended-saddle-search/lj38_2ts_separation/coords.tgz"

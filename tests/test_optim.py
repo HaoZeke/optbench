@@ -142,7 +142,7 @@ def test_asv_classes_use_one_start_unless_the_full_grid_is_requested():
         "double-ended-saddle-search/lj38",
         "double-ended-saddle-search/lj38_2ts_separation",
     ]
-    assert [row.cap for row in classes] == [10000, 3000, 2500, 10000]
+    assert [row.cap for row in classes] == [10000, 3000, 2500, 250000]
     for row in classes:
         assert row.template_id == "optim/dneb-hef"
         assert row.params[0] == ["0"]

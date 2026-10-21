@@ -18,6 +18,11 @@ pbc = [true, true, false]
 connected_saddles = 27
 barrier_below_eV = 1.5
 
+# Catalog size for a ranked saddle row. A row of 2 or 16 searches is scored
+# with each omitted search charged as a cap failure. Other counts stay as recorded.
+[sample]
+searches = 20000
+
 [convergence]
 norm = "l2"
 force_norm = 1.0e-3
