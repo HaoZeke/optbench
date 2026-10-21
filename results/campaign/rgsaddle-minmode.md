@@ -1,11 +1,35 @@
 # rgsaddle 0.2.2 min-mode
 
+## main 38c3137f
+
+rgsaddle `38c3137f62ce1436d662bb37188a8d7cd2d789b8` (0.2.2), the merge of pull request 21. The min-mode translator keeps its step memory inside the mode cone. `benchmark.dat` copies the template commit, so these files name that tree.
+
+The rows are the default tsopt templates the board ranks: Pt-island Lanczos, dimer L-BFGS, dimer FIRE, and dimer rotation-skip, plus LJ38 P-RFO, dimer L-BFGS, dimer FIRE, dimer rotation-skip, and Lanczos. Tuned templates stay on their c0db2b8 files. The c0db2b8 table below is the reference for that commit. Both commits are version 0.2.2, so each file is its own ranked row.
+
+Cost is harness force calls. A finite-difference Hessian check is `verify_calls` and stays out of `force_calls`. The grid is every start: 200 on LJ38, 49 on the Pt island. `par2_mean` charges a failure `2 * 10000`. The success mean is the half-even mean of the successes, the `force_calls` line in the dat file.
+
+| problem | template | n | success mean | median | min | max | par2 mean | successes | nfailed | cap | wrong stationary | divergence | crash | file |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| tsopt/pt-island | rgsaddle/pt-lanczos | 49 | 210 | 192 | 123 | 426 | 209.9795918367 | 49 | 0 | 0 | 0 | 0 | 0 | results/campaign/rgsaddle-38c3137-pt-lanczos-ts-pt.dat |
+| tsopt/pt-island | rgsaddle/pt-dimer-lbfgs | 49 | 148 | 145 | 99 | 194 | 147.8775510204 | 49 | 0 | 0 | 0 | 0 | 0 | results/campaign/rgsaddle-38c3137-pt-dimer-lbfgs-ts-pt.dat |
+| tsopt/pt-island | rgsaddle/pt-dimer-fire | 49 | 483 | 375 | 299 | 1254 | 483.1428571429 | 49 | 0 | 0 | 0 | 0 | 0 | results/campaign/rgsaddle-38c3137-pt-dimer-fire-ts-pt.dat |
+| tsopt/pt-island | rgsaddle/pt-dimer-rotskip | 49 | 153 | 145 | 99 | 336 | 153.1632653061 | 49 | 0 | 0 | 0 | 0 | 0 | results/campaign/rgsaddle-38c3137-pt-dimer-rotskip-ts-pt.dat |
+| tsopt/LJ38 | rgsaddle/prfo | 200 | 68 | 59.0 | 25 | 283 | 68.4700000000 | 200 | 0 | 0 | 0 | 0 | 0 | results/campaign/rgsaddle-38c3137-prfo-ts-lj38.dat |
+| tsopt/LJ38 | rgsaddle/dimer-lbfgs | 200 | 455 | 256 | 75 | 6782 | 552.7800000000 | 199 | 1 | 1 | 0 | 0 | 0 | results/campaign/rgsaddle-38c3137-dimer-lbfgs-ts-lj38.dat |
+| tsopt/LJ38 | rgsaddle/dimer-fire | 200 | 1414 | 1166.0 | 448 | 5332 | 1785.4550000000 | 196 | 4 | 4 | 0 | 0 | 0 | results/campaign/rgsaddle-38c3137-dimer-fire-ts-lj38.dat |
+| tsopt/LJ38 | rgsaddle/dimer-rotskip | 200 | 312 | 208.0 | 71 | 8680 | 3265.1300000000 | 170 | 30 | 12 | 18 | 0 | 0 | results/campaign/rgsaddle-38c3137-dimer-rotskip-ts-lj38.dat |
+| tsopt/LJ38 | rgsaddle/lanczos | 200 | 597 | 355 | 75 | 6544 | 694.1000000000 | 199 | 1 | 1 | 0 | 0 | 0 | results/campaign/rgsaddle-38c3137-lanczos-ts-lj38.dat |
+
+PAR-2 median in each dat file is the bootstrap median of the penalised costs (2000 resamples, seed 20261015): 192, 145, 375, and 145 on the Pt island, in the table order, and 59, 256, 1169.5, 220.5, and 359.5 on LJ38.
+
+## c0db2b8d
+
 asv result `results/asv/cursor/a914203c-uv-pip-py3.12.json`, optbench commit `a914203cbb891442232aea2c92f960df9a48dc1d`.
 rgsaddle `c0db2b8d333c557251635cb8bb7b3d81f0088a71` (0.2.2).
 Cost is `RgpotCounter.calculate` on `HarnessCounter(cache=True)`. Hessian checks are `verify_calls` and are not in `force_calls`.
-Seed is `0`. The grid is every start: 200 on LJ38, 49 on the Pt island. The legacy mean is half-even over successes. `par2_mean` charges a failure `2 * 10000`.
+Seed is `0`. The grid is every start: 200 on LJ38, 49 on the Pt island. The 2014 mean is half-even over successes. `par2_mean` charges a failure `2 * 10000`.
 
-| problem | template | tuning | n | legacy mean | legacy median | min | max | par2 mean | nfailed | cap | wrong stationary | divergence | crash |
+| problem | template | tuning | n | 2014 mean | 2014 median | min | max | par2 mean | nfailed | cap | wrong stationary | divergence | crash |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | tsopt/LJ38 | rgsaddle/dimer-lbfgs | default | 200 |  |  |  |  | 20000.0000 | 200 | 199 | 1 | 0 | 0 |
 | tsopt/LJ38 | rgsaddle/dimer-lbfgs-tuned | tuned | 200 | 4953 | 4953 | 4953 | 4953 | 19924.7650 | 199 | 199 | 0 | 0 | 0 |
@@ -30,7 +54,7 @@ Seed is `0`. The grid is every start: 200 on LJ38, 49 on the Pt island. The lega
 | lowest-eigenvector/lj38 | rgsaddle/mode-lanczos | default | 200 | 26 | 26 | 14 | 98 | 26.1200 | 0 | 0 | 0 | 0 | 0 |
 | lowest-eigenvector/lj38 | rgsaddle/mode-lanczos-tuned | tuned | 200 | 37 | 34 | 18 | 130 | 36.5600 | 0 | 0 | 0 | 0 | 0 |
 
-PAR-2 median is the bootstrap median of the penalised costs (2000 resamples, seed 20261015), not the legacy median of successes.
+PAR-2 median is the bootstrap median of the penalised costs (2000 resamples, seed 20261015). It is the median of the penalised costs, and the 2014 median above is the median of the successes.
 
 | template | par2 median | median low | median high | wilson low | wilson high | rotation steps | library evaluations | harness calls | mean wall s |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -59,9 +83,9 @@ PAR-2 median is the bootstrap median of the penalised costs (2000 resamples, see
 
 ## Recorded Sella and eOn rows
 
-These are files already in the tree. They are not reruns from this session.
+These files were already in the tree with the c0db2b8 scores.
 
-| row | legacy mean | median | min | max | nfailed | file |
+| row | 2014 mean | median | min | max | nfailed | file |
 | --- | --- | --- | --- | --- | --- | --- |
 | Sella 2.6.0 tsopt/LJ38 | 93 | 68.0 | 34 | 1846 | 2 | results/campaign/sella-2.6.0-ts-lj38.dat |
 | Sella 0.1.1 tsopt/LJ38 | 69.55 | 64.0 | 24 | 158 | 0 | archive/entries/tsopt/LJ38/sella/benchmark.dat |
@@ -72,17 +96,17 @@ These are files already in the tree. They are not reruns from this session.
 
 Sella 2.6.0 on LJ38 is mean 93 with 2 failures (`results/campaign/sella-2.6.0-ts-lj38.dat`). Archive Sella 0.1.1 is 69.55 with 0 failures.
 
-The best rgsaddle LJ38 legacy mean is tuned P-RFO, 193 with 0 failures and PAR-2 192.6000. That is above both Sella rows. Default P-RFO's legacy mean on its 50 successes is 588, with 147 wrong-stationary failures. The best dimer row is rotation-skip, legacy 640 with 74 failures. Default dimer L-BFGS has no success (199 cap, 1 wrong stationary): 1813890 rotation steps against 1998288 harness calls.
+The best rgsaddle LJ38 2014 mean at c0db2b8 is tuned P-RFO, 193 with 0 failures and PAR-2 192.6000. That is above both Sella rows. Default P-RFO's 2014 mean on its 50 successes is 588, with 147 wrong-stationary failures. The best dimer row is rotation-skip, 2014 mean 640 with 74 failures. Default dimer L-BFGS has no success (199 cap, 1 wrong stationary): 1813890 rotation steps against 1998288 harness calls.
 
-On the Pt island the best row is dimer rotation-skip, legacy 224 with 0 failures. Archive Sella 0.1.1 is 53 and archive eOn r2156 dimer is 116.
+On the Pt island the best c0db2b8 row is dimer rotation-skip, 2014 mean 224 with 0 failures. Archive Sella 0.1.1 is 53 and archive eOn r2156 dimer is 116.
 
 On lowest-eigenvector/lj38 every row succeeds. Lanczos default is 26. Archive Sella 0.1.1 is 17.8.
 
 ## Not in this asv suite
 
-Pt P-RFO (`rgsaddle/pt-prfo`, `rgsaddle/pt-prfo-tuned`) was not run. A finished score would be a 525-degree Hessian on every force-converged start, and no asv track was saved.
+Pt P-RFO (`rgsaddle/pt-prfo`, `rgsaddle/pt-prfo-tuned`) has no score in this file. A finished score would be a 525-degree Hessian on every force-converged start, and no asv track was saved.
 
-saddle-search/pt-island was not run. The templates exist. The archived eOn dimer campaign is millions of Morse calls per repetition (`archive/entries/saddle-search/pt-island/eon-dimer/benchmark.dat`, `force_calls 3.77888e+06`), and this session did not execute that loop.
+saddle-search/pt-island has no score in this file. The templates exist. The archived eOn dimer campaign is millions of Morse calls per repetition (`archive/entries/saddle-search/pt-island/eon-dimer/benchmark.dat`, `force_calls 3.77888e+06`).
 
 ## What the library did on these starts
 
