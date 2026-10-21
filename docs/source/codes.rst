@@ -1384,7 +1384,7 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">airss/lj38</td>
    <td data-field="version">AIRSS 0.9.4</td>
    <td data-field="commit">5593cc4ee360</td>
-   <td data-field="par2_mean"></td>
+   <td data-field="par2_mean">112134</td>
    <td data-field="mean_calls">112134</td>
    <td data-field="median_calls">70635.5</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
@@ -1477,6 +1477,43 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="median_calls">389</td>
    <td data-field="failures">crash 0, divergence 4884, cap 108, wrong_stationary 6</td>
    <td data-field="n">5000</td>
+   </tr>
+   </tbody></table></div>
+   <h3>anneal</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>global optimization</td>
+   <td>0.11.1</td>
+   <td>db22b99d09a0</td>
+   <td><a href="https://github.com/HaoZeke/anneal">https://github.com/HaoZeke/anneal</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="globalopt/lj38" data-template="anneal/lj38-communicating">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="template">anneal/lj38-communicating</td>
+   <td data-field="version">anneal 0.11.1 (communicating)</td>
+   <td data-field="commit">db22b99d09a0</td>
+   <td data-field="par2_mean">6294.4</td>
+   <td data-field="mean_calls">6294.4</td>
+   <td data-field="median_calls">4894.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="globalopt/lj75" data-template="anneal/lj75-communicating">
+   <td>lj75</td>
+   <td data-field="template">anneal/lj75-communicating</td>
+   <td data-field="version">anneal 0.11.1 (communicating)</td>
+   <td data-field="commit">db22b99d09a0</td>
+   <td data-field="par2_mean">84362.7</td>
+   <td data-field="mean_calls">79362.7</td>
+   <td data-field="median_calls">44549.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
+   <td data-field="n">200</td>
    </tr>
    </tbody></table></div>
    </section>
