@@ -7,50 +7,50 @@
   "runs": [
     {
       "algorithm": "basin hopping",
-      "cap": 3000000,
+      "cap": 2000000,
       "code": "pele",
       "code_version": "0.1.2",
       "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
       "entry": "pele-b7081b93-lj38-basinhopping",
       "legacy": {
-        "force_calls": 688720,
-        "force_calls_max": 2645819,
+        "force_calls": 624351,
+        "force_calls_max": 1865432,
         "force_calls_min": 20714,
-        "median": 476708,
-        "nfailed": 1
+        "median": 457153,
+        "nfailed": 5
       },
       "metrics": {
         "bootstrap_resamples": 2000,
         "bootstrap_seed": 20261015,
-        "cap": 3000000,
+        "cap": 2000000,
         "includes_failures": true,
         "iqr": 694472.75,
         "iqr_high": 991090.5749999998,
         "iqr_low": 450148.25625,
-        "mean": 741832.86,
+        "mean": 793133.16,
         "median": 477810.5,
         "median_high": 600154.0,
         "median_low": 407402.5,
         "n": 100,
-        "n_cap": 1,
+        "n_cap": 5,
         "n_crash": 0,
         "n_divergence": 0,
         "n_wrong_stationary": 0,
-        "nfailed": 1,
-        "par2_mean": 741832.86,
+        "nfailed": 5,
+        "par2_mean": 793133.16,
         "par_applied": true,
         "par_factor": 2,
         "q25": 280153.25,
         "q75": 974626.0,
         "scoring": "par2-wilson-bootstrap",
-        "success_only_mean": 688720.0606060605,
-        "success_rate": 0.99,
-        "successes": 99,
-        "wilson_high": 0.9982325679358593,
-        "wilson_low": 0.9455138038212946
+        "success_only_mean": 624350.6947368421,
+        "success_rate": 0.95,
+        "successes": 95,
+        "wilson_high": 0.9784563208456319,
+        "wilson_low": 0.8882495307680808
       },
       "parameters": {
-        "cap": 3000000,
+        "cap": 2000000,
         "ediff": 0.001,
         "energy_minimum": -173.928427,
         "energy_tolerance": 0.001,
@@ -79,7 +79,7 @@
           "system": "Linux"
         },
         "parameters": {
-          "cap": 3000000,
+          "cap": 2000000,
           "ediff": 0.001,
           "energy_minimum": -173.928427,
           "energy_tolerance": 0.001,
@@ -99,6 +99,7 @@
       "starts": [
         {
           "bh_steps": 3325,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -126,6 +127,7 @@
         },
         {
           "bh_steps": 3518,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -153,6 +155,7 @@
         },
         {
           "bh_steps": 73,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -180,6 +183,7 @@
         },
         {
           "bh_steps": 837,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -207,6 +211,7 @@
         },
         {
           "bh_steps": 1927,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -234,6 +239,7 @@
         },
         {
           "bh_steps": 627,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -261,6 +267,7 @@
         },
         {
           "bh_steps": 1076,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -288,6 +295,7 @@
         },
         {
           "bh_steps": 4865,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -315,6 +323,7 @@
         },
         {
           "bh_steps": 1161,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -342,6 +351,7 @@
         },
         {
           "bh_steps": 2438,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -369,6 +379,7 @@
         },
         {
           "bh_steps": 1200,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -396,6 +407,7 @@
         },
         {
           "bh_steps": 700,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -423,6 +435,7 @@
         },
         {
           "bh_steps": 588,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -450,6 +463,7 @@
         },
         {
           "bh_steps": 3488,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -477,6 +491,7 @@
         },
         {
           "bh_steps": 2256,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -504,6 +519,7 @@
         },
         {
           "bh_steps": 6101,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -531,6 +547,7 @@
         },
         {
           "bh_steps": 3452,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -558,6 +575,7 @@
         },
         {
           "bh_steps": 467,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -585,6 +603,7 @@
         },
         {
           "bh_steps": 8359,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -611,34 +630,39 @@
           "verify_calls": 0
         },
         {
-          "bh_steps": 12133,
+          "bh_steps": 9124,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
           "comparable": true,
           "counter": "harness",
-          "energy": -173.92842659057078,
+          "energy": -173.25237841562034,
           "energy_minimum": -173.928427,
           "energy_tolerance": 0.001,
           "error": "",
-          "failure": null,
-          "force_calls": 2645819,
-          "force_norm": 9.08020469410001e-06,
+          "failure": "cap",
+          "force_calls": 2000000,
+          "force_norm": 5.868769051548461e-06,
           "index": 19,
-          "lowest_energy": -173.92842659057078,
+          "lowest_energy": -173.25237841562034,
           "problem": "globalopt/lj38",
           "quench_converged": true,
-          "reasons": [],
+          "reasons": [
+            "energy",
+            "cap"
+          ],
           "schema": "optbench.start/v2",
           "seed": 19,
           "start": "19",
-          "success": true,
+          "success": false,
           "template": "pele/lj38-basinhopping",
           "tuning": "default",
           "verify_calls": 0
         },
         {
           "bh_steps": 8479,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -666,6 +690,7 @@
         },
         {
           "bh_steps": 2317,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -693,6 +718,7 @@
         },
         {
           "bh_steps": 1744,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -720,6 +746,7 @@
         },
         {
           "bh_steps": 1907,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -747,6 +774,7 @@
         },
         {
           "bh_steps": 4098,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -774,6 +802,7 @@
         },
         {
           "bh_steps": 1204,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -801,6 +830,7 @@
         },
         {
           "bh_steps": 1742,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -828,6 +858,7 @@
         },
         {
           "bh_steps": 1807,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -854,7 +885,8 @@
           "verify_calls": 0
         },
         {
-          "bh_steps": 13914,
+          "bh_steps": 9234,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -865,13 +897,14 @@
           "energy_tolerance": 0.001,
           "error": "",
           "failure": "cap",
-          "force_calls": 3000000,
+          "force_calls": 2000000,
           "force_norm": 3.8893480433773185e-06,
           "index": 28,
           "lowest_energy": -173.2523784156395,
           "problem": "globalopt/lj38",
           "quench_converged": true,
           "reasons": [
+            "energy",
             "cap"
           ],
           "schema": "optbench.start/v2",
@@ -884,6 +917,7 @@
         },
         {
           "bh_steps": 2806,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -911,6 +945,7 @@
         },
         {
           "bh_steps": 1603,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -938,6 +973,7 @@
         },
         {
           "bh_steps": 3472,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -965,6 +1001,7 @@
         },
         {
           "bh_steps": 1804,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -991,34 +1028,39 @@
           "verify_calls": 0
         },
         {
-          "bh_steps": 9533,
+          "bh_steps": 9278,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
           "comparable": true,
           "counter": "harness",
-          "energy": -173.92842659059312,
+          "energy": -173.25237841563245,
           "energy_minimum": -173.928427,
           "energy_tolerance": 0.001,
           "error": "",
-          "failure": null,
-          "force_calls": 2056265,
-          "force_norm": 4.319363829800818e-06,
+          "failure": "cap",
+          "force_calls": 2000000,
+          "force_norm": 4.880696889670216e-06,
           "index": 33,
-          "lowest_energy": -173.92842659059312,
+          "lowest_energy": -173.25237841563245,
           "problem": "globalopt/lj38",
           "quench_converged": true,
-          "reasons": [],
+          "reasons": [
+            "energy",
+            "cap"
+          ],
           "schema": "optbench.start/v2",
           "seed": 33,
           "start": "33",
-          "success": true,
+          "success": false,
           "template": "pele/lj38-basinhopping",
           "tuning": "default",
           "verify_calls": 0
         },
         {
           "bh_steps": 4088,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1046,6 +1088,7 @@
         },
         {
           "bh_steps": 575,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1073,6 +1116,7 @@
         },
         {
           "bh_steps": 3152,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1100,6 +1144,7 @@
         },
         {
           "bh_steps": 262,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1127,6 +1172,7 @@
         },
         {
           "bh_steps": 602,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1154,6 +1200,7 @@
         },
         {
           "bh_steps": 2420,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1181,6 +1228,7 @@
         },
         {
           "bh_steps": 597,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1208,6 +1256,7 @@
         },
         {
           "bh_steps": 3323,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1235,6 +1284,7 @@
         },
         {
           "bh_steps": 2652,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1262,6 +1312,7 @@
         },
         {
           "bh_steps": 1213,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1289,6 +1340,7 @@
         },
         {
           "bh_steps": 7427,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1316,6 +1368,7 @@
         },
         {
           "bh_steps": 4437,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1343,6 +1396,7 @@
         },
         {
           "bh_steps": 724,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1370,6 +1424,7 @@
         },
         {
           "bh_steps": 622,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1397,6 +1452,7 @@
         },
         {
           "bh_steps": 1820,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1424,6 +1480,7 @@
         },
         {
           "bh_steps": 6005,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1451,6 +1508,7 @@
         },
         {
           "bh_steps": 6409,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1478,6 +1536,7 @@
         },
         {
           "bh_steps": 4494,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1505,6 +1564,7 @@
         },
         {
           "bh_steps": 2104,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1532,6 +1592,7 @@
         },
         {
           "bh_steps": 2302,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1559,6 +1620,7 @@
         },
         {
           "bh_steps": 5829,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1585,34 +1647,39 @@
           "verify_calls": 0
         },
         {
-          "bh_steps": 9574,
+          "bh_steps": 9406,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
           "comparable": true,
           "counter": "harness",
-          "energy": -173.92842659054534,
+          "energy": -173.25237841563313,
           "energy_minimum": -173.928427,
           "energy_tolerance": 0.001,
           "error": "",
-          "failure": null,
-          "force_calls": 2035132,
-          "force_norm": 9.775913504596034e-06,
+          "failure": "cap",
+          "force_calls": 2000000,
+          "force_norm": 5.1070599311604715e-06,
           "index": 55,
-          "lowest_energy": -173.92842659054534,
+          "lowest_energy": -173.25237841563313,
           "problem": "globalopt/lj38",
           "quench_converged": true,
-          "reasons": [],
+          "reasons": [
+            "energy",
+            "cap"
+          ],
           "schema": "optbench.start/v2",
           "seed": 55,
           "start": "55",
-          "success": true,
+          "success": false,
           "template": "pele/lj38-basinhopping",
           "tuning": "default",
           "verify_calls": 0
         },
         {
           "bh_steps": 994,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1640,6 +1707,7 @@
         },
         {
           "bh_steps": 5525,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1667,6 +1735,7 @@
         },
         {
           "bh_steps": 1549,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1694,6 +1763,7 @@
         },
         {
           "bh_steps": 259,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1721,6 +1791,7 @@
         },
         {
           "bh_steps": 4488,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1748,6 +1819,7 @@
         },
         {
           "bh_steps": 910,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1775,6 +1847,7 @@
         },
         {
           "bh_steps": 2640,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1802,6 +1875,7 @@
         },
         {
           "bh_steps": 7832,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1829,6 +1903,7 @@
         },
         {
           "bh_steps": 4852,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1856,6 +1931,7 @@
         },
         {
           "bh_steps": 866,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1883,6 +1959,7 @@
         },
         {
           "bh_steps": 1581,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1910,6 +1987,7 @@
         },
         {
           "bh_steps": 4870,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1937,6 +2015,7 @@
         },
         {
           "bh_steps": 6271,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1964,6 +2043,7 @@
         },
         {
           "bh_steps": 1407,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -1991,6 +2071,7 @@
         },
         {
           "bh_steps": 8557,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -2018,6 +2099,7 @@
         },
         {
           "bh_steps": 861,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -2045,6 +2127,7 @@
         },
         {
           "bh_steps": 2088,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -2072,6 +2155,7 @@
         },
         {
           "bh_steps": 885,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -2099,6 +2183,7 @@
         },
         {
           "bh_steps": 1497,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -2126,6 +2211,7 @@
         },
         {
           "bh_steps": 1484,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -2153,6 +2239,7 @@
         },
         {
           "bh_steps": 2021,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -2180,6 +2267,7 @@
         },
         {
           "bh_steps": 4225,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -2207,6 +2295,7 @@
         },
         {
           "bh_steps": 8061,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -2234,6 +2323,7 @@
         },
         {
           "bh_steps": 6557,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -2261,6 +2351,7 @@
         },
         {
           "bh_steps": 1422,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -2288,6 +2379,7 @@
         },
         {
           "bh_steps": 2410,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -2315,6 +2407,7 @@
         },
         {
           "bh_steps": 1451,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -2342,6 +2435,7 @@
         },
         {
           "bh_steps": 974,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -2368,34 +2462,39 @@
           "verify_calls": 0
         },
         {
-          "bh_steps": 9699,
+          "bh_steps": 9087,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
           "comparable": true,
           "counter": "harness",
-          "energy": -173.92842659051593,
+          "energy": -173.25237841563876,
           "energy_minimum": -173.928427,
           "energy_tolerance": 0.001,
           "error": "",
-          "failure": null,
-          "force_calls": 2132754,
-          "force_norm": 8.938023790935869e-06,
+          "failure": "cap",
+          "force_calls": 2000000,
+          "force_norm": 3.8106392389083486e-06,
           "index": 84,
-          "lowest_energy": -173.92842659051593,
+          "lowest_energy": -173.25237841563876,
           "problem": "globalopt/lj38",
           "quench_converged": true,
-          "reasons": [],
+          "reasons": [
+            "energy",
+            "cap"
+          ],
           "schema": "optbench.start/v2",
           "seed": 84,
           "start": "84",
-          "success": true,
+          "success": false,
           "template": "pele/lj38-basinhopping",
           "tuning": "default",
           "verify_calls": 0
         },
         {
           "bh_steps": 6440,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -2423,6 +2522,7 @@
         },
         {
           "bh_steps": 7752,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -2450,6 +2550,7 @@
         },
         {
           "bh_steps": 710,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -2477,6 +2578,7 @@
         },
         {
           "bh_steps": 3110,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -2504,6 +2606,7 @@
         },
         {
           "bh_steps": 2797,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -2531,6 +2634,7 @@
         },
         {
           "bh_steps": 1791,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -2558,6 +2662,7 @@
         },
         {
           "bh_steps": 2509,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -2585,6 +2690,7 @@
         },
         {
           "bh_steps": 905,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -2612,6 +2718,7 @@
         },
         {
           "bh_steps": 2063,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -2639,6 +2746,7 @@
         },
         {
           "bh_steps": 1909,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -2666,6 +2774,7 @@
         },
         {
           "bh_steps": 1374,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -2693,6 +2802,7 @@
         },
         {
           "bh_steps": 1470,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -2720,6 +2830,7 @@
         },
         {
           "bh_steps": 1350,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -2747,6 +2858,7 @@
         },
         {
           "bh_steps": 319,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
@@ -2774,6 +2886,7 @@
         },
         {
           "bh_steps": 3981,
+          "cap": 2000000,
           "code": "pele",
           "code_version": "0.1.2",
           "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
