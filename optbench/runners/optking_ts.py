@@ -9,7 +9,7 @@ displaced evaluation is a force call. Later steps use the Bofill update
 and cost one gradient. A repeated geometry is one call. The Hessian
 index is an analytic matrix and is not a search call.
 
-A legacy success is under the cap and at the problem force stop. A v2
+A success-only tally is under the cap and at the problem force stop. A v2
 success also has Hessian index 1. LJ38 removes rigid modes. The Pt
 island leaves fixed atoms out of the matrix and does not project rigid
 modes. Curvature counts only below ``-curvature_tolerance`` of the
@@ -643,8 +643,8 @@ def _dat(summary: dict, template: dict, metrics: dict, commit: str, version: str
         "tuning": template.get("tuning", ""),
         "counter": "harness",
         "par2_mean": metrics.get("par2_mean"),
-        "wilson_low": metrics.get("wilson_low"),
-        "wilson_high": metrics.get("wilson_high"),
+        "rate_low": metrics.get("rate_low"),
+        "rate_high": metrics.get("rate_high"),
         "par2_median": metrics.get("median"),
         "par2_median_low": metrics.get("median_low"),
         "par2_median_high": metrics.get("median_high"),
@@ -661,7 +661,7 @@ def _dat(summary: dict, template: dict, metrics: dict, commit: str, version: str
         "# The initial Hessian is a central difference of the harness gradient on the free atoms.",
         "# Each displaced gradient is a force call. Later steps use the Bofill update and cost one gradient.",
         "# The Hessian index is analytic and is not a search call.",
-        "# The legacy mean is the half-even mean of starts at the force stop and under the cap.",
+        "# The success-only mean is the half-even mean of starts at the force stop and under the cap.",
         "# v2 success also requires Hessian index 1.",
         "# A curvature is negative only below -max(force_norm, 1e-8*||H||_F, 1e-6).",
         "# LJ38 removes rigid modes. The Pt island keeps fixed atoms out of the matrix and does not project rigid modes.",
@@ -690,8 +690,8 @@ def _publish(output: Path, records: list[dict], template: dict, problem: dict, *
         if row.get("error") is None:
             row.pop("error", None)
         public.append(row)
-    legacy_counts = [cap if not record["converged"] else int(record["force_calls"]) for record in public]
-    summary = summarize_capped(legacy_counts, cap) if public else {
+    capped_counts = [cap if not record["converged"] else int(record["force_calls"]) for record in public]
+    summary = summarize_capped(capped_counts, cap) if public else {
         "force_calls": None,
         "force_calls_min": None,
         "force_calls_max": None,
@@ -734,7 +734,7 @@ def _publish(output: Path, records: list[dict], template: dict, problem: dict, *
         "schema": "optbench.result/v2",
         "status": "partial" if partial else "archive",
         "problem": problem["id"],
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-rate-bootstrap",
         "par_factor": 2,
         "bootstrap_resamples": 2000,
         "bootstrap_seed": 20261015,
@@ -755,7 +755,7 @@ def _publish(output: Path, records: list[dict], template: dict, problem: dict, *
                 "parameters": passed,
                 "provenance": provenance,
                 "metrics": metrics,
-                "legacy": {
+                "success_mean": {
                     "force_calls": summary.get("force_calls"),
                     "force_calls_min": summary.get("force_calls_min"),
                     "force_calls_max": summary.get("force_calls_max"),

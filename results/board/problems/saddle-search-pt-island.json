@@ -12,7 +12,6 @@
       "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
       "comparable": false,
       "counter": "",
-      "current": false,
       "entry": "eon-3.5.0-saddle-pt-classic",
       "failures": {
         "cap": 0,
@@ -32,6 +31,7 @@
       "median_per_image": null,
       "min_calls": 467.89298766560074,
       "n": 10,
+      "newest": false,
       "nfailed": 0,
       "note": "repetitions",
       "par2_mean": null,
@@ -39,14 +39,14 @@
       "partial_reason": "",
       "path": "results/campaign/eon-3.5.0-saddle-pt-classic.dat",
       "problem": "saddle-search/pt-island",
+      "rate_high": 1.0,
+      "rate_low": 0.7224672001371107,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7224672001371107
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -57,7 +57,6 @@
       "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
       "comparable": false,
       "counter": "",
-      "current": false,
       "entry": "eon-3.5.0-saddle-pt-dimer",
       "failures": {
         "cap": 0,
@@ -77,6 +76,7 @@
       "median_per_image": null,
       "min_calls": 260.8129343019583,
       "n": 10,
+      "newest": false,
       "nfailed": 0,
       "note": "repetitions",
       "par2_mean": null,
@@ -84,14 +84,14 @@
       "partial_reason": "",
       "path": "results/campaign/eon-3.5.0-saddle-pt-dimer.dat",
       "problem": "saddle-search/pt-island",
+      "rate_high": 1.0,
+      "rate_low": 0.7224672001371107,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.7224672001371107
+      "tuning": ""
     }
   ],
   "partial": [
@@ -104,7 +104,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "ase-3.29.0-dimer-pt-island-default",
       "failures": {
         "cap": 0,
@@ -124,6 +123,7 @@
       "median_per_image": null,
       "min_calls": 609.0,
       "n": 16,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 1118.0625,
@@ -131,14 +131,14 @@
       "partial_reason": "result file sets ranked false",
       "path": "results/campaign/ase-3.29.0-dimer-pt-island-default.dat; results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "saddle-search/pt-island",
+      "rate_high": 1.0,
+      "rate_low": 0.8063923194655637,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "ase/dimer-pt-island-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.8063923194655637
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -149,7 +149,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "ase-3.29.0-dimer-pt-island-tuned",
       "failures": {
         "cap": 0,
@@ -169,6 +168,7 @@
       "median_per_image": null,
       "min_calls": 564.0,
       "n": 16,
+      "newest": false,
       "nfailed": 0,
       "note": "starts.jsonl",
       "par2_mean": 915.4375,
@@ -176,14 +176,14 @@
       "partial_reason": "result file sets ranked false",
       "path": "results/campaign/ase-3.29.0-dimer-pt-island-tuned.dat; results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "saddle-search/pt-island",
+      "rate_high": 1.0,
+      "rate_low": 0.8063923194655637,
       "registry_match": true,
       "scored": true,
       "source": "campaign, asv",
       "success_rate": 1.0,
       "template": "ase/dimer-pt-island-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.8063923194655637
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -194,7 +194,6 @@
       "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "eon-client-saddle-pt-dimer",
       "failures": {
         "cap": 1,
@@ -214,6 +213,7 @@
       "median_per_image": null,
       "min_calls": 5507.0,
       "n": 1,
+      "newest": false,
       "nfailed": 1,
       "note": "starts",
       "par2_mean": 40000000.0,
@@ -221,14 +221,14 @@
       "partial_reason": "result file sets partial true",
       "path": "results/campaign/eon-client-saddle-pt-dimer.dat",
       "problem": "saddle-search/pt-island",
+      "rate_high": 0.7934506856227626,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
       "template": "eon-client/saddle-pt-dimer",
-      "tuning": "",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -239,7 +239,6 @@
       "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "eon-client-saddle-pt-lanczos",
       "failures": {
         "cap": 1,
@@ -259,6 +258,7 @@
       "median_per_image": null,
       "min_calls": 16021.0,
       "n": 1,
+      "newest": false,
       "nfailed": 1,
       "note": "starts",
       "par2_mean": 40000000.0,
@@ -266,14 +266,14 @@
       "partial_reason": "result file sets partial true",
       "path": "results/campaign/eon-client-saddle-pt-lanczos.dat",
       "problem": "saddle-search/pt-island",
+      "rate_high": 0.7934506856227626,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
       "template": "eon-client/saddle-pt-lanczos",
-      "tuning": "",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -284,7 +284,6 @@
       "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "eon-client-saddle-pt-md",
       "failures": {
         "cap": 1,
@@ -304,6 +303,7 @@
       "median_per_image": null,
       "min_calls": 2018.0,
       "n": 1,
+      "newest": false,
       "nfailed": 1,
       "note": "starts",
       "par2_mean": 40000000.0,
@@ -311,14 +311,14 @@
       "partial_reason": "result file sets partial true",
       "path": "results/campaign/eon-client-saddle-pt-md.dat",
       "problem": "saddle-search/pt-island",
+      "rate_high": 0.7934506856227626,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
       "template": "eon-client/saddle-pt-md",
-      "tuning": "",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -329,7 +329,6 @@
       "commit": "r2549",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "eon-svn-saddle-pt-dimer-bounded",
       "failures": {
         "cap": 1,
@@ -349,6 +348,7 @@
       "median_per_image": null,
       "min_calls": 10416.0,
       "n": 1,
+      "newest": false,
       "nfailed": 1,
       "note": "starts",
       "par2_mean": 40000000.0,
@@ -356,14 +356,14 @@
       "partial_reason": "result file sets partial true",
       "path": "results/campaign/eon-svn-saddle-pt-dimer-bounded.dat",
       "problem": "saddle-search/pt-island",
+      "rate_high": 0.7934506856227626,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
       "template": "eon-svn/saddle-pt-dimer-bounded",
-      "tuning": "",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -374,7 +374,6 @@
       "commit": "r2549",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "eon-svn-saddle-pt-lanczos-bounded",
       "failures": {
         "cap": 1,
@@ -394,6 +393,7 @@
       "median_per_image": null,
       "min_calls": 15989.0,
       "n": 1,
+      "newest": false,
       "nfailed": 1,
       "note": "starts",
       "par2_mean": 40000000.0,
@@ -401,14 +401,14 @@
       "partial_reason": "result file sets partial true",
       "path": "results/campaign/eon-svn-saddle-pt-lanczos-bounded.dat",
       "problem": "saddle-search/pt-island",
+      "rate_high": 0.7934506856227626,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
       "template": "eon-svn/saddle-pt-lanczos-bounded",
-      "tuning": "",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -419,7 +419,6 @@
       "commit": "r2549",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "eon-svn-saddle-pt-md",
       "failures": {
         "cap": 1,
@@ -439,6 +438,7 @@
       "median_per_image": null,
       "min_calls": 1974.0,
       "n": 1,
+      "newest": false,
       "nfailed": 1,
       "note": "starts",
       "par2_mean": 40000000.0,
@@ -446,14 +446,14 @@
       "partial_reason": "result file sets partial true",
       "path": "results/campaign/eon-svn-saddle-pt-md.dat",
       "problem": "saddle-search/pt-island",
+      "rate_high": 0.7934506856227626,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
       "template": "eon-svn/saddle-pt-md",
-      "tuning": "",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": ""
     },
     {
       "asv_commit": "ba1ac41f2075b1a1ef890b096a0d55c09c6390d4",
@@ -464,7 +464,6 @@
       "commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_eon_develop.EonDevelopSaddlePtDimer",
       "failures": {
         "cap": 1,
@@ -484,6 +483,7 @@
       "median_per_image": null,
       "min_calls": 32934.0,
       "n": 1,
+      "newest": false,
       "nfailed": 1,
       "note": "asv track_force_calls",
       "par2_mean": 200000000.0,
@@ -491,14 +491,14 @@
       "partial_reason": "smoke run; one start",
       "path": "results/asv/ba1ac41f2075b1a1ef890b096a0d55c09c6390d4; results/asv/e172a4b674067643a20f44d30d9ca4a93025acac",
       "problem": "saddle-search/pt-island",
+      "rate_high": 0.7934506856227626,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 0.0,
       "template": "eon/develop-saddle-pt-dimer",
-      "tuning": "",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": ""
     },
     {
       "asv_commit": "ba1ac41f2075b1a1ef890b096a0d55c09c6390d4",
@@ -509,7 +509,6 @@
       "commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_eon_develop.EonDevelopSaddlePtLanczos",
       "failures": {
         "cap": 1,
@@ -529,6 +528,7 @@
       "median_per_image": null,
       "min_calls": 32998.0,
       "n": 1,
+      "newest": false,
       "nfailed": 1,
       "note": "asv track_force_calls",
       "par2_mean": 200000000.0,
@@ -536,14 +536,14 @@
       "partial_reason": "smoke run; one start",
       "path": "results/asv/ba1ac41f2075b1a1ef890b096a0d55c09c6390d4; results/asv/e172a4b674067643a20f44d30d9ca4a93025acac",
       "problem": "saddle-search/pt-island",
+      "rate_high": 0.7934506856227626,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 0.0,
       "template": "eon/develop-saddle-pt-lanczos",
-      "tuning": "",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": ""
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -554,7 +554,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseDimerPtIslandDefault",
       "failures": {
         "cap": 0,
@@ -574,6 +573,7 @@
       "median_per_image": null,
       "min_calls": 699.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 699.0,
@@ -581,14 +581,14 @@
       "partial_reason": "smoke run; one start",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "saddle-search/pt-island",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/dimer-pt-island-default",
-      "tuning": "default",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "default"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -599,7 +599,6 @@
       "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.SellaPtIslandSearchTuned",
       "failures": {
         "cap": 0,
@@ -619,6 +618,7 @@
       "median_per_image": null,
       "min_calls": 695.0,
       "n": 1,
+      "newest": false,
       "nfailed": 1,
       "note": "asv track_force_calls",
       "par2_mean": 20000.0,
@@ -626,14 +626,14 @@
       "partial_reason": "smoke run; one start",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "saddle-search/pt-island",
+      "rate_high": 0.7934506856227626,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 0.0,
       "template": "sella/pt-island-search-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": "tuned"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -644,7 +644,6 @@
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.AseDimerPtIslandTuned",
       "failures": {
         "cap": 0,
@@ -664,6 +663,7 @@
       "median_per_image": null,
       "min_calls": 564.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "asv track_force_calls",
       "par2_mean": 564.0,
@@ -671,14 +671,14 @@
       "partial_reason": "smoke run; one start",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "saddle-search/pt-island",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/dimer-pt-island-tuned",
-      "tuning": "tuned",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": "tuned"
     },
     {
       "asv_commit": "806ecaca75a456ba67e7f95621c51ab84e94adaf",
@@ -689,7 +689,6 @@
       "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "bench_ase_sella.SellaPtIslandSearchDefault",
       "failures": {
         "cap": 0,
@@ -709,6 +708,7 @@
       "median_per_image": null,
       "min_calls": 170.0,
       "n": 1,
+      "newest": false,
       "nfailed": 1,
       "note": "asv track_force_calls",
       "par2_mean": 20000.0,
@@ -716,14 +716,14 @@
       "partial_reason": "smoke run; one start",
       "path": "results/asv/806ecaca75a456ba67e7f95621c51ab84e94adaf",
       "problem": "saddle-search/pt-island",
+      "rate_high": 0.7934506856227626,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 0.0,
       "template": "sella/pt-island-search-default",
-      "tuning": "default",
-      "wilson_high": 0.7934506856227626,
-      "wilson_low": 0.0
+      "tuning": "default"
     }
   ],
   "profile_gap": "No performance profile. The ranked rows do not share one start set.",
@@ -737,7 +737,6 @@
       "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "bench_ase_sella.SellaPtIslandSearchDefault",
       "failures": {
         "cap": 0,
@@ -757,6 +756,7 @@
       "median_per_image": null,
       "min_calls": 145.0,
       "n": 16,
+      "newest": true,
       "nfailed": 4,
       "note": "asv track_force_calls",
       "par2_mean": 5201.625,
@@ -764,14 +764,14 @@
       "partial_reason": "",
       "path": "results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "saddle-search/pt-island",
+      "rate_high": 0.8981793250878696,
+      "rate_low": 0.5050168346449122,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 0.75,
       "template": "sella/pt-island-search-default",
-      "tuning": "default",
-      "wilson_high": 0.8981793250878696,
-      "wilson_low": 0.5050168346449122
+      "tuning": "default"
     },
     {
       "asv_commit": "ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
@@ -782,7 +782,6 @@
       "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "bench_ase_sella.SellaPtIslandSearchTuned",
       "failures": {
         "cap": 0,
@@ -802,6 +801,7 @@
       "median_per_image": null,
       "min_calls": 158.0,
       "n": 16,
+      "newest": true,
       "nfailed": 5,
       "note": "asv track_force_calls",
       "par2_mean": 6420.125,
@@ -809,14 +809,14 @@
       "partial_reason": "",
       "path": "results/asv/ade7c5132e47bb4008b9d4c8ddb26492e9e7287d",
       "problem": "saddle-search/pt-island",
+      "rate_high": 0.8583535614521796,
+      "rate_low": 0.44404355834740666,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 0.6875,
       "template": "sella/pt-island-search-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.8583535614521796,
-      "wilson_low": 0.44404355834740666
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -827,7 +827,6 @@
       "commit": "5a00aeede06fd822ef302624ec4c9bc7889d21fc0b5804b701a5785695c68d16",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "softsaddle-2019.04-saddle-lanczos-sm0",
       "failures": {
         "cap": 108,
@@ -847,6 +846,7 @@
       "median_per_image": null,
       "min_calls": 5.0,
       "n": 5000,
+      "newest": true,
       "nfailed": 4998,
       "note": "starts.jsonl",
       "par2_mean": 10124.2218,
@@ -854,14 +854,14 @@
       "partial_reason": "",
       "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm0.dat",
       "problem": "saddle-search/pt-island",
+      "rate_high": 0.0014573865014234437,
+      "rate_low": 0.00010970128207763504,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0004,
       "template": "softsaddle/saddle-lanczos-sm0",
-      "tuning": "sm0",
-      "wilson_high": 0.0014573865014234437,
-      "wilson_low": 0.00010970128207763504
+      "tuning": "sm0"
     },
     {
       "asv_commit": "",
@@ -872,7 +872,6 @@
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgsaddle-0.2.2-saddle-dimer-rotskip-tuned",
       "failures": {
         "cap": 2246,
@@ -892,6 +891,7 @@
       "median_per_image": null,
       "min_calls": 172.0,
       "n": 20000,
+      "newest": true,
       "nfailed": 19998,
       "note": "starts.jsonl",
       "par2_mean": 10127.05255,
@@ -899,14 +899,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgsaddle-0.2.2-saddle-dimer-rotskip-tuned.dat",
       "problem": "saddle-search/pt-island",
+      "rate_high": 0.0003645736136206778,
+      "rate_low": 2.7424035272726838e-05,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0001,
       "template": "rgsaddle/saddle-dimer-rotskip-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.0003645736136206778,
-      "wilson_low": 2.7424035272726838e-05
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -917,7 +917,6 @@
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgsaddle-0.2.2-saddle-dimer-fire",
       "failures": {
         "cap": 19999,
@@ -937,6 +936,7 @@
       "median_per_image": null,
       "min_calls": 936.0,
       "n": 20000,
+      "newest": true,
       "nfailed": 20000,
       "note": "starts.jsonl",
       "par2_mean": 10128.0,
@@ -944,14 +944,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgsaddle-0.2.2-saddle-dimer-fire.dat",
       "problem": "saddle-search/pt-island",
+      "rate_high": 0.00019203605610462553,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
       "template": "rgsaddle/saddle-dimer-fire",
-      "tuning": "default",
-      "wilson_high": 0.00019203605610462553,
-      "wilson_low": 0.0
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -962,7 +962,6 @@
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgsaddle-0.2.2-saddle-dimer-fire-tuned",
       "failures": {
         "cap": 19991,
@@ -982,6 +981,7 @@
       "median_per_image": null,
       "min_calls": 1000.0,
       "n": 20000,
+      "newest": true,
       "nfailed": 20000,
       "note": "starts.jsonl",
       "par2_mean": 10128.0,
@@ -989,14 +989,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgsaddle-0.2.2-saddle-dimer-fire-tuned.dat",
       "problem": "saddle-search/pt-island",
+      "rate_high": 0.00019203605610462553,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
       "template": "rgsaddle/saddle-dimer-fire-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.00019203605610462553,
-      "wilson_low": 0.0
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -1007,7 +1007,6 @@
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgsaddle-0.2.2-saddle-dimer-lbfgs",
       "failures": {
         "cap": 20000,
@@ -1027,6 +1026,7 @@
       "median_per_image": null,
       "min_calls": 1000.0,
       "n": 20000,
+      "newest": true,
       "nfailed": 20000,
       "note": "starts.jsonl",
       "par2_mean": 10128.0,
@@ -1034,14 +1034,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgsaddle-0.2.2-saddle-dimer-lbfgs.dat",
       "problem": "saddle-search/pt-island",
+      "rate_high": 0.00019203605610462553,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
       "template": "rgsaddle/saddle-dimer-lbfgs",
-      "tuning": "default",
-      "wilson_high": 0.00019203605610462553,
-      "wilson_low": 0.0
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -1052,7 +1052,6 @@
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgsaddle-0.2.2-saddle-dimer-lbfgs-tuned",
       "failures": {
         "cap": 43,
@@ -1072,6 +1071,7 @@
       "median_per_image": null,
       "min_calls": 572.0,
       "n": 20000,
+      "newest": true,
       "nfailed": 20000,
       "note": "starts.jsonl",
       "par2_mean": 10128.0,
@@ -1079,14 +1079,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgsaddle-0.2.2-saddle-dimer-lbfgs-tuned.dat",
       "problem": "saddle-search/pt-island",
+      "rate_high": 0.00019203605610462553,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
       "template": "rgsaddle/saddle-dimer-lbfgs-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.00019203605610462553,
-      "wilson_low": 0.0
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -1097,7 +1097,6 @@
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgsaddle-0.2.2-saddle-dimer-rotskip",
       "failures": {
         "cap": 262,
@@ -1117,6 +1116,7 @@
       "median_per_image": null,
       "min_calls": 180.0,
       "n": 20000,
+      "newest": true,
       "nfailed": 20000,
       "note": "starts.jsonl",
       "par2_mean": 10128.0,
@@ -1124,14 +1124,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgsaddle-0.2.2-saddle-dimer-rotskip.dat",
       "problem": "saddle-search/pt-island",
+      "rate_high": 0.00019203605610462553,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
       "template": "rgsaddle/saddle-dimer-rotskip",
-      "tuning": "default",
-      "wilson_high": 0.00019203605610462553,
-      "wilson_low": 0.0
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -1142,7 +1142,6 @@
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgsaddle-0.2.2-saddle-lanczos",
       "failures": {
         "cap": 15932,
@@ -1162,6 +1161,7 @@
       "median_per_image": null,
       "min_calls": 722.0,
       "n": 20000,
+      "newest": true,
       "nfailed": 20000,
       "note": "starts.jsonl",
       "par2_mean": 10128.0,
@@ -1169,14 +1169,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgsaddle-0.2.2-saddle-lanczos.dat",
       "problem": "saddle-search/pt-island",
+      "rate_high": 0.00019203605610462553,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
       "template": "rgsaddle/saddle-lanczos",
-      "tuning": "default",
-      "wilson_high": 0.00019203605610462553,
-      "wilson_low": 0.0
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -1187,7 +1187,6 @@
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "rgsaddle-0.2.2-saddle-lanczos-tuned",
       "failures": {
         "cap": 6257,
@@ -1207,6 +1206,7 @@
       "median_per_image": null,
       "min_calls": 485.0,
       "n": 20000,
+      "newest": true,
       "nfailed": 20000,
       "note": "starts.jsonl",
       "par2_mean": 10128.0,
@@ -1214,14 +1214,14 @@
       "partial_reason": "",
       "path": "results/campaign/rgsaddle-0.2.2-saddle-lanczos-tuned.dat",
       "problem": "saddle-search/pt-island",
+      "rate_high": 0.00019203605610462553,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
       "template": "rgsaddle/saddle-lanczos-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.00019203605610462553,
-      "wilson_low": 0.0
+      "tuning": "tuned"
     },
     {
       "asv_commit": "",
@@ -1232,7 +1232,6 @@
       "commit": "5a00aeede06fd822ef302624ec4c9bc7889d21fc0b5804b701a5785695c68d16",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "softsaddle-2019.04-saddle-davidson-sm50",
       "failures": {
         "cap": 5000,
@@ -1252,6 +1251,7 @@
       "median_per_image": null,
       "min_calls": 1054.0,
       "n": 5000,
+      "newest": true,
       "nfailed": 5000,
       "note": "starts.jsonl",
       "par2_mean": 10128.0,
@@ -1259,14 +1259,14 @@
       "partial_reason": "",
       "path": "results/campaign/softsaddle-2019.04-saddle-davidson-sm50.dat",
       "problem": "saddle-search/pt-island",
+      "rate_high": 0.0007677019450571244,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
       "template": "softsaddle/saddle-davidson-sm50",
-      "tuning": "default",
-      "wilson_high": 0.0007677019450571244,
-      "wilson_low": 0.0
+      "tuning": "default"
     },
     {
       "asv_commit": "",
@@ -1277,7 +1277,6 @@
       "commit": "5a00aeede06fd822ef302624ec4c9bc7889d21fc0b5804b701a5785695c68d16",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "softsaddle-2019.04-saddle-lanczos-sm50",
       "failures": {
         "cap": 0,
@@ -1297,6 +1296,7 @@
       "median_per_image": null,
       "min_calls": 196.0,
       "n": 5000,
+      "newest": true,
       "nfailed": 5000,
       "note": "starts.jsonl",
       "par2_mean": 10128.0,
@@ -1304,14 +1304,14 @@
       "partial_reason": "",
       "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm50.dat",
       "problem": "saddle-search/pt-island",
+      "rate_high": 0.0007677019450571244,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 0.0,
       "template": "softsaddle/saddle-lanczos-sm50",
-      "tuning": "sm50",
-      "wilson_high": 0.0007677019450571244,
-      "wilson_low": 0.0
+      "tuning": "sm50"
     },
     {
       "asv_commit": "7e58986ea7a975b0f70e17294067de84e8db803d",
@@ -1322,7 +1322,6 @@
       "commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
       "comparable": true,
       "counter": "harness",
-      "current": true,
       "entry": "bench_eon_develop.EonDevelopSaddlePtLanczos",
       "failures": {
         "cap": 2,
@@ -1342,6 +1341,7 @@
       "median_per_image": null,
       "min_calls": 3969854.0,
       "n": 2,
+      "newest": true,
       "nfailed": 2,
       "note": "asv track_force_calls",
       "par2_mean": 200000000.0,
@@ -1349,14 +1349,14 @@
       "partial_reason": "",
       "path": "results/asv/7e58986ea7a975b0f70e17294067de84e8db803d",
       "problem": "saddle-search/pt-island",
+      "rate_high": 0.6576197724933469,
+      "rate_low": 0.0,
       "registry_match": true,
       "scored": true,
       "source": "asv",
       "success_rate": 0.0,
       "template": "eon/develop-saddle-pt-lanczos",
-      "tuning": "",
-      "wilson_high": 0.6576197724933469,
-      "wilson_low": 0.0
+      "tuning": ""
     }
   ],
   "title": "Pt heptamer island"

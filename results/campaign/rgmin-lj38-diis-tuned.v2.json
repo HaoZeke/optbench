@@ -12,7 +12,7 @@
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
       "entry": "rgmin-lj38-diis-tuned",
-      "legacy": {
+      "success_mean": {
         "force_calls": 5450,
         "force_calls_max": 9525,
         "force_calls_min": 1690,
@@ -42,12 +42,12 @@
         "par_factor": 2,
         "q25": 20000.0,
         "q75": 20000.0,
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-rate-bootstrap",
         "success_only_mean": 6257.5,
         "success_rate": 0.004,
         "successes": 4,
-        "wilson_high": 0.010239556277262253,
-        "wilson_low": 0.0015565881404084308
+        "rate_high": 0.010239556277262253,
+        "rate_low": 0.0015565881404084308
       },
       "parameters": {
         "gtol": 0.01,
@@ -31071,6 +31071,6 @@
     }
   ],
   "schema": "optbench.result/v2",
-  "scoring": "par2-wilson-bootstrap",
+  "scoring": "par2-rate-bootstrap",
   "status": "archive"
 }

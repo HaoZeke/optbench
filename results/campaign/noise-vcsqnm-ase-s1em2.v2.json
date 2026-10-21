@@ -12,7 +12,7 @@
       "code_version": "1.3",
       "commit": "4241692173cccb42a9ae05974bfd62285ec2cd7b",
       "entry": "noise-vcsqnm-ase-s1em2",
-      "legacy": {
+      "success_mean": {
         "force_calls": 325,
         "force_calls_max": 570,
         "force_calls_min": 228,
@@ -42,12 +42,12 @@
         "par_factor": 2,
         "q25": 293.0,
         "q75": 394.0,
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-rate-bootstrap",
         "success_only_mean": 327.5879574970484,
         "success_rate": 0.847,
         "successes": 847,
-        "wilson_high": 0.8679807843756888,
-        "wilson_low": 0.823363445235336
+        "rate_high": 0.8679807843756888,
+        "rate_low": 0.823363445235336
       },
       "parameters": {
         "alpha_min": 0.001,
@@ -31397,6 +31397,6 @@
     }
   ],
   "schema": "optbench.result/v2",
-  "scoring": "par2-wilson-bootstrap",
+  "scoring": "par2-rate-bootstrap",
   "status": "archive"
 }

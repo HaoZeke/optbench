@@ -19,8 +19,8 @@ template vcsqnm/lj38-ase
 tuning default
 counter harness
 par2_mean 598.05
-wilson_low 0.980410604299
-wilson_high 0.993846825902
+rate_low 0.980410604299
+rate_high 0.993846825902
 par2_median 366
 par2_median_low 362
 par2_median_high 372.5

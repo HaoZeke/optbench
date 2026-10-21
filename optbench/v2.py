@@ -1,6 +1,6 @@
 """Build a v2 start record and read the Pt-island repetition lines.
 
-The legacy ``benchmark.dat`` mean is a different record. A start is
+The 2014 ``benchmark.dat`` mean is a different record. A start is
 comparable only when ``counter`` is ``harness``.
 """
 
@@ -35,8 +35,8 @@ V2_KEYS = (
     "median",
     "median_low",
     "median_high",
-    "wilson_low",
-    "wilson_high",
+    "rate_low",
+    "rate_high",
     "n",
     "nfailed",
     "n_cap",

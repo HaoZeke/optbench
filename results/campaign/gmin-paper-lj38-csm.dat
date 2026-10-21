@@ -1,0 +1,11 @@
+# exact archive data file, serial GMIN, internal potential
+# entry globalopt/lj38/gmin-csm
+# ncalls is the Target hit after function-call field
+nfailed 0
+n 100
+force_calls 4.97800e+03
+force_calls_median 3.36800e+03
+force_calls_min 7.8000e+01
+force_calls_max 4.5039e+04
+cpu_time_mean 5.26000e-02
+cpu_time_stddev 5.8666e-02

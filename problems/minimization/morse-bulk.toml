@@ -21,12 +21,12 @@ path = "archive/entries/minimization/morse-bulk/eon-cg"
 potential = "morse_pt"
 report_cap = 10000
 
-[scoring.legacy]
-label = "legacy"
-rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row stays labelled legacy."
+[scoring.archive]
+label = "archive"
+rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row stays on the archive table."
 
 [scoring.v2]
-version = "par2-wilson-bootstrap"
+version = "par2-rate-bootstrap"
 par_factor = 2
 bootstrap_resamples = 2000
 bootstrap_seed = 20261015
@@ -46,8 +46,8 @@ required = [
   "median",
   "median_low",
   "median_high",
-  "wilson_low",
-  "wilson_high",
+  "rate_low",
+  "rate_high",
   "n",
   "nfailed",
   "n_cap",

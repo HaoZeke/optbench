@@ -13,7 +13,6 @@
       "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "eon-client-htst-pt-dimer-lbfgs",
       "failures": {
         "cap": 0,
@@ -33,6 +32,7 @@
       "median_per_image": null,
       "min_calls": 1469.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "starts",
       "par2_mean": 1469.0,
@@ -40,14 +40,14 @@
       "partial_reason": "result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5)",
       "path": "results/campaign/eon-client-htst-pt-dimer-lbfgs.dat",
       "problem": "hTST/Pt",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon-client/htst-pt-dimer-lbfgs",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -58,7 +58,6 @@
       "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "eon-client-htst-pt-lanczos-lbfgs",
       "failures": {
         "cap": 0,
@@ -78,6 +77,7 @@
       "median_per_image": null,
       "min_calls": 1696.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "starts",
       "par2_mean": 1696.0,
@@ -85,14 +85,14 @@
       "partial_reason": "result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5)",
       "path": "results/campaign/eon-client-htst-pt-lanczos-lbfgs.dat",
       "problem": "hTST/Pt",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon-client/htst-pt-lanczos-lbfgs",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -103,7 +103,6 @@
       "commit": "r2549",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "eon-svn-htst-pt-dimer-lbfgs",
       "failures": {
         "cap": 0,
@@ -123,6 +122,7 @@
       "median_per_image": null,
       "min_calls": 1044.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "starts",
       "par2_mean": 1044.0,
@@ -130,14 +130,14 @@
       "partial_reason": "result file sets partial true",
       "path": "results/campaign/eon-svn-htst-pt-dimer-lbfgs.dat",
       "problem": "hTST/Pt",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon-svn/htst-pt-dimer-lbfgs",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": ""
     },
     {
       "asv_commit": "",
@@ -148,7 +148,6 @@
       "commit": "r2549",
       "comparable": true,
       "counter": "harness",
-      "current": false,
       "entry": "eon-svn-htst-pt-lanczos-lbfgs",
       "failures": {
         "cap": 0,
@@ -168,6 +167,7 @@
       "median_per_image": null,
       "min_calls": 717.0,
       "n": 1,
+      "newest": false,
       "nfailed": 0,
       "note": "starts",
       "par2_mean": 717.0,
@@ -175,14 +175,14 @@
       "partial_reason": "result file sets partial true",
       "path": "results/campaign/eon-svn-htst-pt-lanczos-lbfgs.dat",
       "problem": "hTST/Pt",
+      "rate_high": 1.0,
+      "rate_low": 0.20654931437723745,
       "registry_match": true,
       "scored": true,
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon-svn/htst-pt-lanczos-lbfgs",
-      "tuning": "",
-      "wilson_high": 1.0,
-      "wilson_low": 0.20654931437723745
+      "tuning": ""
     }
   ],
   "ranked": [],

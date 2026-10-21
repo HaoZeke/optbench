@@ -1,6 +1,6 @@
 {
   "counter": "harness",
-  "legacy": {
+  "success_mean": {
     "force_calls": 2000,
     "force_calls_max": 7631,
     "force_calls_median": 1778,
@@ -53,12 +53,12 @@
     "par_factor": 2,
     "q25": 1230.0,
     "q75": 2650.25,
-    "scoring": "par2-wilson-bootstrap",
+    "scoring": "par2-rate-bootstrap",
     "success_only_mean": 2000.0596858638744,
     "success_rate": 0.955,
     "successes": 955,
-    "wilson_high": 0.9662004877143683,
-    "wilson_low": 0.9403171620637766
+    "rate_high": 0.9662004877143683,
+    "rate_low": 0.9403171620637766
   },
   "template": "dlfind/sd-lj38-noise-s1em2"
 }

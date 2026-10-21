@@ -1257,7 +1257,7 @@ def _dat(records: list[dict], template: dict, settings: dict) -> str:
     return "\n".join(lines) + "\n"
 
 
-def _legacy(records: list[dict]) -> dict:
+def _success_mean(records: list[dict]) -> dict:
     successes = [int(row["force_calls"]) for row in records if row["success"]]
     summary = {
         "successes": len(successes),
@@ -1353,20 +1353,20 @@ def write_outputs(
             [{"force_calls": row["force_calls"], "success": row["success"]} for row in records],
             settings["cap"],
         ),
-        "legacy": _legacy(records),
+        "success_mean": _success_mean(records),
     }
     output.with_suffix(".v2.json").write_text(
         json.dumps(document, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
     )
-    legacy = document["legacy"]
+    success_only = document["success_mean"]
     return {
         "problem": problem["id"],
         "template": template["id"],
-        "force_calls": legacy.get("force_calls"),
-        "nfailed": legacy["nfailed"],
-        "starts": legacy["n"],
-        "successes": legacy["successes"],
+        "force_calls": success_only.get("force_calls"),
+        "nfailed": success_only["nfailed"],
+        "starts": success_only["n"],
+        "successes": success_only["successes"],
         "output": str(output),
     }
 

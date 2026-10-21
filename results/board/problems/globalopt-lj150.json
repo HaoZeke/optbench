@@ -1,0 +1,133 @@
+{
+  "full_n": 100,
+  "history": [],
+  "id": "globalopt/lj150",
+  "not_comparable": [],
+  "partial": [],
+  "profile": {
+    "area_log10": {
+      "gmin/lj150-bh df8da599 default campaign 02aaf45": 1.1077903840434509,
+      "gmin/lj150-bhpt df8da599 default campaign 02aaf45": 0.8368633879458678
+    },
+    "rho": {
+      "gmin/lj150-bh df8da599 default campaign 02aaf45": [
+        0.77,
+        0.86,
+        0.95,
+        0.99,
+        0.99
+      ],
+      "gmin/lj150-bhpt df8da599 default campaign 02aaf45": [
+        0.23,
+        0.53,
+        0.76,
+        0.9,
+        0.95
+      ]
+    },
+    "solved": {
+      "gmin/lj150-bh df8da599 default campaign 02aaf45": 0.99,
+      "gmin/lj150-bhpt df8da599 default campaign 02aaf45": 0.99
+    },
+    "taus": [
+      1.0,
+      2.0,
+      4.0,
+      8.0,
+      16.0
+    ]
+  },
+  "ranked": [
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000000,
+      "code": "GMIN",
+      "code_version": "df8da599",
+      "commit": "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f",
+      "comparable": true,
+      "counter": "harness",
+      "entry": "gmin-02aaf45245af-lj150-bh",
+      "failures": {
+        "cap": 1,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 100,
+      "history": false,
+      "max_calls": 10000000.0,
+      "mean_calls": 1658040.62,
+      "mean_per_image": null,
+      "median": 1144120.0,
+      "median_calls": 1144120.0,
+      "median_high": 1368741.5,
+      "median_low": 958282.0,
+      "median_per_image": null,
+      "min_calls": 83295.0,
+      "n": 100,
+      "newest": true,
+      "nfailed": 1,
+      "note": "starts.jsonl",
+      "par2_mean": 1758040.62,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/gmin-02aaf45245af-lj150-bh.dat",
+      "problem": "globalopt/lj150",
+      "rate_high": 0.9982325679358593,
+      "rate_low": 0.9455138038212946,
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 0.99,
+      "template": "gmin/lj150-bh",
+      "tuning": "default"
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 10000000,
+      "code": "GMIN",
+      "code_version": "df8da599",
+      "commit": "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f",
+      "comparable": true,
+      "counter": "harness",
+      "entry": "gmin-02aaf45245af-lj150-bhpt",
+      "failures": {
+        "cap": 1,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 100,
+      "history": false,
+      "max_calls": 10000000.0,
+      "mean_calls": 2671775.22,
+      "mean_per_image": null,
+      "median": 2051743.0,
+      "median_calls": 2051743.0,
+      "median_high": 2405236.0,
+      "median_low": 1773233.0,
+      "median_per_image": null,
+      "min_calls": 222151.0,
+      "n": 100,
+      "newest": true,
+      "nfailed": 1,
+      "note": "starts.jsonl",
+      "par2_mean": 2771775.22,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/gmin-02aaf45245af-lj150-bhpt.dat",
+      "problem": "globalopt/lj150",
+      "rate_high": 0.9982325679358593,
+      "rate_low": 0.9455138038212946,
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 0.99,
+      "template": "gmin/lj150-bhpt",
+      "tuning": "default"
+    }
+  ],
+  "title": "lj150"
+}

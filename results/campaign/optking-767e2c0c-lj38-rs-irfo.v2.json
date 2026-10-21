@@ -12,7 +12,7 @@
       "code_version": "0.5.1.dev2+g767e2c0c1",
       "commit": "767e2c0c13ff2b851ac82101ccd5aab9a558a4f1",
       "entry": "optking-767e2c0c-lj38-rs-irfo",
-      "legacy": {
+      "success_mean": {
         "force_calls": 354,
         "force_calls_max": 986,
         "force_calls_median": 332.5,
@@ -43,12 +43,12 @@
         "par_factor": 2,
         "q25": 281.75,
         "q75": 20000.0,
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-rate-bootstrap",
         "success_only_mean": 315.872,
         "success_rate": 0.625,
         "successes": 125,
-        "wilson_high": 0.6891456314159018,
-        "wilson_low": 0.5561430369897816
+        "rate_high": 0.6891456314159018,
+        "rate_low": 0.5561430369897816
       },
       "parameters": {
         "fd_step": 1e-05,
@@ -4036,6 +4036,6 @@
     }
   ],
   "schema": "optbench.result/v2",
-  "scoring": "par2-wilson-bootstrap",
+  "scoring": "par2-rate-bootstrap",
   "status": "archive"
 }

@@ -12,7 +12,7 @@
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "entry": "rgmin-f15726f1-morse-lbfgs",
-      "legacy": {
+      "success_mean": {
         "force_calls": 27,
         "force_calls_max": 31,
         "force_calls_min": 22,
@@ -42,12 +42,12 @@
         "par_factor": 2,
         "q25": 25.0,
         "q75": 29.0,
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-rate-bootstrap",
         "success_only_mean": 26.93,
         "success_rate": 1.0,
         "successes": 100,
-        "wilson_high": 1.0,
-        "wilson_low": 0.9630065017930143
+        "rate_high": 1.0,
+        "rate_low": 0.9630065017930143
       },
       "parameters": {
         "gtol": 0.001,
@@ -2977,6 +2977,6 @@
     }
   ],
   "schema": "optbench.result/v2",
-  "scoring": "par2-wilson-bootstrap",
+  "scoring": "par2-rate-bootstrap",
   "status": "archive"
 }

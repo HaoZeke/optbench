@@ -12,7 +12,7 @@
       "code_version": "df8da5992675",
       "commit": "df8da599267534fbe43a250e578f7396a7946311",
       "entry": "gmin-df8da5992675-lj38-lbfgs",
-      "legacy": {
+      "success_mean": {
         "force_calls": 242,
         "force_calls_max": 593,
         "force_calls_min": 100,
@@ -42,12 +42,12 @@
         "par_factor": 2,
         "q25": 184.75,
         "q75": 285.0,
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-rate-bootstrap",
         "success_only_mean": 242.12537612838514,
         "success_rate": 0.997,
         "successes": 997,
-        "wilson_high": 0.9989792161188614,
-        "wilson_low": 0.9912169859464969
+        "rate_high": 0.9989792161188614,
+        "rate_low": 0.9912169859464969
       },
       "parameters": {
         "dguess": 0.1,
@@ -30091,6 +30091,6 @@
     }
   ],
   "schema": "optbench.result/v2",
-  "scoring": "par2-wilson-bootstrap",
+  "scoring": "par2-rate-bootstrap",
   "status": "archive"
 }

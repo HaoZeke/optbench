@@ -1,6 +1,6 @@
 {
   "counter": "harness",
-  "legacy": {
+  "success_mean": {
     "force_calls": 1144,
     "force_calls_max": 3455,
     "force_calls_median": 892,
@@ -59,12 +59,12 @@
     "par_factor": 2,
     "q25": 740.0,
     "q75": 1260.0,
-    "scoring": "par2-wilson-bootstrap",
+    "scoring": "par2-rate-bootstrap",
     "success_only_mean": 1144.3061224489795,
     "success_rate": 1.0,
     "successes": 49,
-    "wilson_high": 1.0,
-    "wilson_low": 0.9273021807795035
+    "rate_high": 1.0,
+    "rate_low": 0.9273021807795035
   },
   "template": "tsase/dimer-pt"
 }

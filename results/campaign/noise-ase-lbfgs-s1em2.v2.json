@@ -12,7 +12,7 @@
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
       "entry": "noise-ase-lbfgs-s1em2",
-      "legacy": {
+      "success_mean": {
         "force_calls": 248,
         "force_calls_max": 5779,
         "force_calls_min": 139,
@@ -42,12 +42,12 @@
         "par_factor": 2,
         "q25": 196.0,
         "q75": 280.0,
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-rate-bootstrap",
         "success_only_mean": 249.72578890097932,
         "success_rate": 0.919,
         "successes": 919,
-        "wilson_high": 0.9343503784587998,
-        "wilson_low": 0.9004427979303052
+        "rate_high": 0.9343503784587998,
+        "rate_low": 0.9004427979303052
       },
       "parameters": {
         "cap": 10000,
@@ -31245,6 +31245,6 @@
     }
   ],
   "schema": "optbench.result/v2",
-  "scoring": "par2-wilson-bootstrap",
+  "scoring": "par2-rate-bootstrap",
   "status": "archive"
 }

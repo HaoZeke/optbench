@@ -12,7 +12,7 @@
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
       "entry": "rgmin-f15726f1-morse-sr1-tuned",
-      "legacy": {
+      "success_mean": {
         "force_calls": 62,
         "force_calls_max": 87,
         "force_calls_min": 30,
@@ -42,12 +42,12 @@
         "par_factor": 2,
         "q25": 43.5,
         "q75": 76.25,
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-rate-bootstrap",
         "success_only_mean": 61.53,
         "success_rate": 1.0,
         "successes": 100,
-        "wilson_high": 1.0,
-        "wilson_low": 0.9630065017930143
+        "rate_high": 1.0,
+        "rate_low": 0.9630065017930143
       },
       "parameters": {
         "gtol": 0.001,
@@ -2979,6 +2979,6 @@
     }
   ],
   "schema": "optbench.result/v2",
-  "scoring": "par2-wilson-bootstrap",
+  "scoring": "par2-rate-bootstrap",
   "status": "archive"
 }

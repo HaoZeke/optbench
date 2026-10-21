@@ -12,7 +12,7 @@
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
       "entry": "rgmin-0.4.1-morse-quickmin-tuned",
-      "legacy": {
+      "success_mean": {
         "force_calls": 62,
         "force_calls_max": 76,
         "force_calls_min": 45,
@@ -42,12 +42,12 @@
         "par_factor": 2,
         "q25": 58.0,
         "q75": 66.0,
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-rate-bootstrap",
         "success_only_mean": 61.75,
         "success_rate": 1.0,
         "successes": 100,
-        "wilson_high": 1.0,
-        "wilson_low": 0.9630065017930143
+        "rate_high": 1.0,
+        "rate_low": 0.9630065017930143
       },
       "parameters": {
         "gtol": 0.001,
@@ -2979,6 +2979,6 @@
     }
   ],
   "schema": "optbench.result/v2",
-  "scoring": "par2-wilson-bootstrap",
+  "scoring": "par2-rate-bootstrap",
   "status": "archive"
 }

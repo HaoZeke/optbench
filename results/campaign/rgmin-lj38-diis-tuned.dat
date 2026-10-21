@@ -18,8 +18,8 @@ template rgmin/lj38-diis-tuned
 tuning tuned
 counter harness
 par2_mean 19945.03
-wilson_low 0.00155658814041
-wilson_high 0.0102395562773
+rate_low 0.00155658814041
+rate_high 0.0102395562773
 par2_median 20000
 par2_median_low 20000
 par2_median_high 20000

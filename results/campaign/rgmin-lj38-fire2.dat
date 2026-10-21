@@ -18,8 +18,8 @@ template rgmin/lj38-fire2
 tuning default
 counter harness
 par2_mean 845.947
-wilson_low 0.986971831758
-wilson_high 0.997247330858
+rate_low 0.986971831758
+rate_high 0.997247330858
 par2_median 640
 par2_median_low 621
 par2_median_high 668.5
