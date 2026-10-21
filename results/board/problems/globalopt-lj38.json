@@ -6,37 +6,46 @@
   "partial": [],
   "profile": {
     "area_log10": {
-      "airss/lj38 0.9.4 default campaign 5593cc4": 1.1062852340651308,
-      "eon-client/bh-lj38 3.5.0 campaign 4d8b34b": 0.5252973424336471,
-      "eon-svn/bh-lj38 r2549 campaign r2549": 0.4786376931057301
+      "airss/lj38 0.9.4 default campaign 5593cc4": 1.103274934108491,
+      "eon-client/bh-lj38 3.5.0 campaign 4d8b34b": 0.5207818924986876,
+      "eon-svn/bh-lj38 r2549 campaign r2549": 0.47562739314909036,
+      "ogolem/lj38 2016.CURRENT default campaign cce35a3": 0.25286519635774424
     },
     "rho": {
       "airss/lj38 0.9.4 default campaign 5593cc4": [
-        0.77,
+        0.75,
         0.9,
         0.92,
         0.98,
         0.98
       ],
       "eon-client/bh-lj38 3.5.0 campaign 4d8b34b": [
-        0.13,
+        0.12,
         0.27,
         0.43,
-        0.6,
+        0.59,
         0.76
       ],
       "eon-svn/bh-lj38 r2549 campaign r2549": [
         0.1,
         0.22,
         0.38,
-        0.57,
+        0.56,
         0.74
+      ],
+      "ogolem/lj38 2016.CURRENT default campaign cce35a3": [
+        0.03,
+        0.07,
+        0.18,
+        0.34,
+        0.47
       ]
     },
     "solved": {
       "airss/lj38 0.9.4 default campaign 5593cc4": 1.0,
       "eon-client/bh-lj38 3.5.0 campaign 4d8b34b": 1.0,
-      "eon-svn/bh-lj38 r2549 campaign r2549": 0.98
+      "eon-svn/bh-lj38 r2549 campaign r2549": 0.98,
+      "ogolem/lj38 2016.CURRENT default campaign cce35a3": 1.0
     },
     "taus": [
       1.0,
@@ -181,6 +190,51 @@
       "tuning": "",
       "wilson_high": 0.9944980324498376,
       "wilson_low": 0.929988209271456
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 5000000,
+      "code": "ogolem",
+      "code_version": "2016.CURRENT",
+      "commit": "cce35a376d929852ab1e80e98105c0d13d784b8d",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "ogolem-cce35a37-lj38",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 100,
+      "history": false,
+      "max_calls": 4926401.0,
+      "mean_calls": 1261457.19,
+      "mean_per_image": null,
+      "median": 1098157.5,
+      "median_calls": 1098157.5,
+      "median_high": 1341466.5,
+      "median_low": 779742.45,
+      "median_per_image": null,
+      "min_calls": 1742.0,
+      "n": 100,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "par2_mean": 1261457.19,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/ogolem-cce35a37-lj38.dat",
+      "problem": "globalopt/lj38",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "ogolem/lj38",
+      "tuning": "default",
+      "wilson_high": 1.0,
+      "wilson_low": 0.9630065017930143
     }
   ],
   "title": "Lennard-Jones 38 global minimum"

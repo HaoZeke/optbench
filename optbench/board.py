@@ -767,8 +767,8 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
                 reason = f"{reason}; potential {named}"
             row["_declared_partial"] = reason
         elif str(fields.get("partial") or "").lower() == "true":
-            reason = "result file sets partial true"
-            if named:
+            reason = str(fields.get("partial_reason") or "").strip() or "result file sets partial true"
+            if named and named not in reason:
                 reason = f"{reason}; potential {named}"
             row["_declared_partial"] = reason
         if not records:
@@ -797,6 +797,7 @@ def _benchmark_index() -> dict[str, dict]:
         "benchmarks.bench_eon_lane",
         "benchmarks.bench_eon_client",
         "benchmarks.bench_rgmin",
+        "benchmarks.bench_ogolem",
         "benchmarks.bench_ase_sella",
         "benchmarks.bench_rgsaddle",
         "benchmarks.bench_geodesic",
@@ -804,6 +805,7 @@ def _benchmark_index() -> dict[str, dict]:
         "benchmarks.bench_softsaddle",
         "benchmarks.bench_lammpsneb",
         "benchmarks.bench_noise",
+        "benchmarks.bench_globalopt",
         "benchmarks.bench_gmin",
         "benchmarks.bench_vcsqnm",
         "benchmarks.bench_pele",

@@ -1,0 +1,30 @@
+# counter harness. One force call is one lennard_jones evaluation through the OGOLEM socket.
+# A repeated geometry is one call. The call that would pass the cap is not counted.
+# The potential is epsilon 1, sigma 1, cutoff 40, no shift.
+# One reduced sigma is the Ar sigma 6.434516991 bohr. The socket divides by it.
+# Genetic algorithm from examples/clusteropt/ar38/ar38_sweden.ogo at this commit. PoolSize is 100 and NumberOfGlobIterations is 19900. Crossover is 75 percent Sweden cutstyle 2 and 25 percent Sweden cutstyle 1. Mutation is 75 percent Monte Carlo some and 25 percent Monte Carlo one. Local optimization is LBFGS at the OGOLEM defaults: 2000 iterations, gradient threshold 1e-8, maximum step 1 bohr. The harness potential is lennard_jones with epsilon 1, sigma 1, cutoff 40, and no shift. It is not LennardJonesFF. Collision radii are bohr and Ar is 1.85, sized for the Ar Lennard-Jones sigma 6.434516991 bohr. Archived coordinates are reduced units. The xyz seed is scaled by that sigma over Constants.ANGTOBOHR, and the socket divides by the sigma. CellSize is 60 bohr, the example cell. setRandomCOM draws the other pool members about the origin, so the archived geometry is centered there and written as one xyz seed. The RNG is javarng with seed start_index+1. One JVM and one thread per start. The force-call cap is 5000000, above the 2014 pele-basinhopping force_calls_max of 2.5339e6. Success is energy at or below the archived eon-basinhopping stop_energy -173.927427, reference_energy plus energy_above_minimum 0.001.
+force_calls 1261457
+force_calls_min 1742
+force_calls_max 4926401
+nfailed 0
+median 1098157.5
+code ogolem
+code_version 2016.CURRENT
+commit cce35a376d929852ab1e80e98105c0d13d784b8d
+algorithm genetic algorithm
+template ogolem/lj38
+problem globalopt/lj38
+tuning default
+counter harness
+cap 5000000
+par2_mean 1261457.19
+wilson_low 0.963006501793
+wilson_high 1
+par2_median 1098157.5
+par2_median_low 779742.45
+par2_median_high 1341466.5
+v2_nfailed 0
+v2_successes 100
+n 100
+energy_min -173.92803619
+energy_max -173.927430392
