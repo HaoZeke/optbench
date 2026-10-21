@@ -1,0 +1,18 @@
+# counter harness. fix external pf/callback writes the harness force. pair_style zero contributes nothing.
+# min_style is quickmin. A success is under the cap, at the Euclidean force stop, and Hessian index 0.
+force_calls 3016
+force_calls_min 620
+force_calls_max 4864
+force_calls_median 2820
+successes 5
+nfailed 95
+n 100
+transition_states 5
+code lammps
+code_version 30 Sep 2026
+commit 8de817dd79bfe4525d5d39246a212d833e6dee07
+algorithm Quickmin
+template lammps/quickmin-morse
+problem minimization/morse-bulk
+tuning default
+counter harness

@@ -1,0 +1,16 @@
+id = "pele/lj38-lbfgs"
+engine = "pele"
+problem = "minimization/lj38"
+code = "pele"
+code_version = "0.1.2"
+commit = "b7081b932a060be11342fbe8287ac35da8ada879"
+algorithm = "LBFGS"
+tuning = "default"
+note = "Default row. LBFGS memory is 4, maxstep is 0.1, maxErise is 1e-4, and H0 is 0.1, the constructor values at this commit. The stop is the Euclidean norm of the gradient at the problem force norm. The iteration budget is the force-call cap. The same values are used for every start."
+
+[pele]
+method = "lbfgs"
+
+[ini.Optimizer]
+converged_force = 0.01
+max_iterations = 10000

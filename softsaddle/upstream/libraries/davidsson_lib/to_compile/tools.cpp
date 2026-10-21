@@ -18,6 +18,7 @@
       */
       
 #include "tools.hpp"
+#include <ctime>
 #include <iostream>
 using namespace std;
 using namespace blitz;

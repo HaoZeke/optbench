@@ -41,6 +41,14 @@ def _ready(family: str) -> bool:
             import sella  # noqa: F401
         elif family == "geometric":
             import geometric  # noqa: F401
+        elif family == "gmin":
+            from optbench.gmin_lbfgs import available
+
+            return available()
+        elif family == "vcsqnm":
+            import sqnm.sqnm  # noqa: F401
+        elif family == "pele":
+            import pele  # noqa: F401
         else:
             return False
     except ImportError:

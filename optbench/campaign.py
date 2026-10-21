@@ -301,6 +301,73 @@ def run(
             work=work,
             limit=limit,
         )
+    if template["engine"] == "gmin":
+        from .runners.gmin_min import run_template
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_template(
+            root,
+            problem,
+            template,
+            geometries=geometries,
+            output=output,
+            workers=workers,
+            work=work,
+            limit=limit,
+        )
+    if template["engine"] == "pele":
+        from .runners.pele_min import run_template
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_template(
+            root,
+            problem,
+            template,
+            geometries=geometries,
+            output=output,
+            workers=workers,
+            work=work,
+            limit=limit,
+        )
+    if template["engine"] == "vcsqnm":
+        from .runners.vcsqnm_min import run_template
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_template(
+            root,
+            problem,
+            template,
+            geometries=geometries,
+            output=output,
+            workers=workers,
+            work=work,
+            limit=limit,
+        )
+    if template["engine"] == "airss":
+        from .runners.airss_go import run_template
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_template(
+            root,
+            problem,
+            template,
+            geometries=geometries,
+            output=output,
+            workers=workers,
+            work=work,
+        )
     if template["engine"] == "rgmin":
         from .runners.rgmin_min import run_template
 
@@ -313,6 +380,21 @@ def run(
             problem,
             template,
             geometries=geometries,
+            output=output,
+            workers=workers,
+            work=work,
+        )
+    if template["engine"] == "softsaddle":
+        from .softsaddle_run import run_template
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_template(
+            root,
+            problem,
+            template,
             output=output,
             workers=workers,
             work=work,
@@ -332,7 +414,27 @@ def run(
             workers=workers,
             work=work,
         )
-    if template["engine"] in {"ase", "sella"}:
+    if template["engine"] == "optking":
+        from .runners.optking_ts import run_template
+
+        problem = resolve_problem(root, problem_name)
+        stated = template.get("problem")
+        if stated and stated != problem["id"]:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return run_template(
+            root,
+            problem,
+            template,
+            geometries=geometries,
+            output=output,
+            workers=workers,
+            work=work,
+            limit=limit,
+            resume=resume,
+        )
+    if template["engine"] in {"ase", "sella"} or (
+        template["engine"] == "geodesic" and template.get("backend") == "ase"
+    ):
         from .ase_sella import run_template
 
         if template.get("problem") and template["problem"] != problem_name:
@@ -344,6 +446,20 @@ def run(
             workers=workers,
             limit=limit,
             resume=resume,
+        )
+    from .engines import find as find_engine
+
+    plugged = find_engine(str(template["engine"]))
+    if plugged is not None:
+        stated = template.get("problem")
+        if stated and stated != problem_name:
+            raise ValueError(f"{template_name} belongs to {stated}")
+        return plugged.run(
+            root,
+            problem_name,
+            template_name,
+            output=output,
+            workers=workers,
         )
     if template["engine"] not in _EON_ENGINES:
         raise ValueError(f"unknown engine {template['engine']}")
