@@ -54,7 +54,7 @@ If the problem states no cap and every record is a success, `par_applied` is fal
 ## Smoke
 
 ```bash
-uv run optbench smoke --output results/smoke/quadratic.json
+uv run optbench quadratic --output results/quadratic/quadratic.json
 ```
 
 The bowl is `(x - 1)^2 + 10 (y + 2)^2`. Gradient descent with step `0.05` from `(0, 0)` and from `(2, -1)` takes 139 harness calls and matches the minimum. Step `0.01` takes 720 calls. Step `0.001` with cap 200 stops at 200 calls and the PAR-2 cost is 400. A Newton step on `-x^2 + y^2` takes 2 calls and is index 1. The bowl minimum reported as a saddle takes 139 search calls and is charged 10000, because the cap is 5000 and the index is 0.
