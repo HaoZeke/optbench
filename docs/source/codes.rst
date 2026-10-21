@@ -15,7 +15,7 @@ The number is written only after the run finishes under the problem rule.
 
    <section class="bench" id="current-codes">
    <h2>Current codes</h2>
-   <p>The benchmark contributor is Rohit Goswami. A ranked row is a full harness run. The commit on that row is the commit that produced the score.</p>
+   <p>The benchmark contributor is Rohit Goswami. A ranked row is a full run. The commit on that row is the commit that produced the score.</p>
    <h3>eOn</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
@@ -1477,6 +1477,84 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="median_calls">389</td>
    <td data-field="failures">crash 0, divergence 4884, cap 108, wrong_stationary 6</td>
    <td data-field="n">5000</td>
+   </tr>
+   </tbody></table></div>
+   <h3>Archive Eon r2213</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>saddle search</td>
+   <td>r2213</td>
+   <td>r2213</td>
+   <td><a href="https://theory.cm.utexas.edu/svn/eon">https://theory.cm.utexas.edu/svn/eon</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="saddle-search/pt-island" data-template="archive-eon-r2213/saddle-pt-dimer-lbfgs-bowl">
+   <td>Pt heptamer island</td>
+   <td data-field="template">archive-eon-r2213/saddle-pt-dimer-lbfgs-bowl</td>
+   <td data-field="version">Archive Eon r2213</td>
+   <td data-field="commit">r2213</td>
+   <td data-field="par2_mean">2.73231e+06</td>
+   <td data-field="mean_calls">2.73231e+06</td>
+   <td data-field="median_calls">2.6311e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">9</td>
+   </tr>
+   </tbody></table></div>
+   <h3>EON (SVN r2549)</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>saddle search</td>
+   <td>r2549</td>
+   <td>r2549</td>
+   <td><a href="https://theory.cm.utexas.edu/svn/eon">https://theory.cm.utexas.edu/svn/eon</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="saddle-search/pt-island" data-template="eon-r2549/saddle-pt-dimer-lbfgs-bowl">
+   <td>Pt heptamer island</td>
+   <td data-field="template">eon-r2549/saddle-pt-dimer-lbfgs-bowl</td>
+   <td data-field="version">EON (SVN r2549)</td>
+   <td data-field="commit">r2549</td>
+   <td data-field="par2_mean">2.14926e+06</td>
+   <td data-field="mean_calls">2.14926e+06</td>
+   <td data-field="median_calls">1.9419e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">9</td>
+   </tr>
+   </tbody></table></div>
+   <h3>eOn (develop 500350d9)</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>saddle search</td>
+   <td>fix/develop-regressions-vs-350</td>
+   <td>500350d9fae8</td>
+   <td><a href="https://github.com/TheochemUI/eon">https://github.com/TheochemUI/eon</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="saddle-search/pt-island" data-template="eon-develop-500350d9/saddle-pt-dimer-lbfgs-bowl">
+   <td>Pt heptamer island</td>
+   <td data-field="template">eon-develop-500350d9/saddle-pt-dimer-lbfgs-bowl</td>
+   <td data-field="version">eOn (develop 500350d9)</td>
+   <td data-field="commit">500350d9fae8</td>
+   <td data-field="par2_mean">5.69903e+06</td>
+   <td data-field="mean_calls">5.69903e+06</td>
+   <td data-field="median_calls">5.98943e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">9</td>
    </tr>
    </tbody></table></div>
    </section>

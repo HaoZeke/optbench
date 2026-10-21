@@ -243,6 +243,36 @@ commit = "8de817dd79bfe4525d5d39246a212d833e6dee07"
 committed = "2026-09-30"
 note = "LAMMPS 30 Sep 2026, tag stable_30Sep2026. Band rows use fix neb with a climbing stage and min_style quickmin or fire. The pair style is the spec potential: lj/cut 40 with no shift, and morse 9.5 with pair_modify shift yes. Kspring is 1.0 with the default parallel neigh spring. The timestep is the unit default. Force calls are pair computes summed across replicas. The FIRE row leaves one fifth of the cap unused so a velocity-reset evaluation stays inside the cap."
 
+[[code]]
+id = "archive-eon-r2213"
+name = "Archive Eon r2213"
+role = "saddle search"
+repository = "https://theory.cm.utexas.edu/svn/eon"
+ref = "r2213"
+commit = "r2213"
+committed = "2014-06-13"
+note = "Eon r2213 as published on 13 Jun 2014 by Andreas Pedersen. The saddle row is the nine dimer L-BFGS bowl-breakout campaign totals. The counter is archive. Each total runs through the search that records the 27th good saddle below 1.5 eV."
+
+[[code]]
+id = "eon-svn-r2549"
+name = "EON (SVN r2549)"
+role = "saddle search"
+repository = "https://theory.cm.utexas.edu/svn/eon"
+ref = "r2549"
+commit = "r2549"
+committed = "2026-01-23"
+note = "EON is the SVN client, not a version of eOn. This pin is unpatched r2549 built with Fortran. eonclient -v prints r2549. The saddle row is nine AKMC campaigns: stock dimer and L-BFGS, bowl_breakout, rotations_max 20, converged_angle 5, confine_positive, and confine_positive_min_active 20. Run 2 uses 20 jobs and 10 clients. The other runs use 10 jobs and 2 clients."
+
+[[code]]
+id = "eon-develop-500350d9"
+name = "eOn (develop 500350d9)"
+role = "saddle search"
+repository = "https://github.com/TheochemUI/eon"
+ref = "fix/develop-regressions-vs-350"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
+committed = "2026-10-20"
+note = "eOn is the git client at eondocs.org, not a version of SVN EON. This pin is commit 500350d9 on fix/develop-regressions-vs-350, built with Fortran. It is not the 7095b23 develop pin. The saddle row is the same nine AKMC campaigns as EON (SVN r2549), with this tree's defaults for every key the published entry left unset."
+
 # generated ASE and Sella templates
 
 [[template]]

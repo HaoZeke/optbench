@@ -1,0 +1,20 @@
+code Archive Eon r2213
+commit r2213
+algorithm Dimer L-BFGS bowl breakout
+tuning default
+template archive-eon-r2213/saddle-pt-dimer-lbfgs-bowl
+problem saddle-search/pt-island
+counter archive
+reducer archive
+cap 100000000
+n 9
+nfailed 0
+goal 27
+kernel morse
+force_calls 2732309.111111111
+unique_saddles 101.33333333333333
+fraction_connected 0.7968642222222222
+total_searches 7772.222222222223
+force_calls_min 1307105
+force_calls_max 5325768
+par2_mean 2732309.111111111

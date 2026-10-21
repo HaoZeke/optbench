@@ -500,7 +500,7 @@ def _codes_html(root: Path, document: dict) -> str:
         '<section class="bench" id="current-codes">',
         "<h2>Current codes</h2>",
         f"<p>The benchmark contributor is {html.escape(contributor)}. "
-        "A ranked row is a full harness run. "
+        "A ranked row is a full run. "
         "The commit on that row is the commit that produced the score.</p>",
     ]
     score_fields = (
@@ -542,7 +542,9 @@ def _codes_html(root: Path, document: dict) -> str:
         best.sort(key=lambda item: item[0]["id"])
         if best:
             lines.append('<div class="bench-scroll"><table data-board-table="code-best">')
-            lines.append("<caption>Best full harness run on each problem.</caption>")
+            archive_only = all(str(row.get("counter") or "") == "archive" for _problem, row in best)
+            run_caption = "Best full run on each problem." if archive_only else "Best full harness run on each problem."
+            lines.append(f"<caption>{run_caption}</caption>")
             lines.append(
                 "<thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th>"
                 "<th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th>"

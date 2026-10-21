@@ -1,0 +1,57 @@
+id = "archive-eon-r2213/saddle-pt-dimer-lbfgs-bowl"
+engine = "archive"
+problem = "saddle-search/pt-island"
+code = "Archive Eon r2213"
+commit = "r2213"
+algorithm = "Dimer L-BFGS bowl breakout"
+reducer = "archive"
+tuning = "default"
+failure_cap = 100000000
+kernel = "morse"
+note = """Published Eon r2213 dimer L-BFGS bowl-breakout campaigns from 13 Jun 2014. The ranked unit is one campaign until 27 good saddles below 1.5 eV are recorded. Nine campaigns. The counter is archive, and the numbers are the published totals. Run 2 uses num_jobs 20 and number_of_cpus 10. The other eight use num_jobs 10 and number_of_cpus 2. Confidence 1.1 and thermally_accessible_window 99999 keep the walker in state 0. Dimer rotations_max 20, converged_angle 5, bowl_breakout, confine_positive, confine_positive_min_active 20. Optimizer L-BFGS, max_move 0.2, max_iterations 1000, converged_force 0.001. Displacement weight 1 on atoms 0-6, radius 3.3, magnitude 0.1. The client potential is morse_pt. The cap is 100000000. Keys this file leaves unset stay at the r2213 defaults, including dimer improved and the L-BFGS memory."""
+
+[ini.Main]
+job = "akmc"
+temperature = 700
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.AKMC]
+confidence = 1.1
+thermally_accessible_window = 99999
+
+[ini."Process Search"]
+minimize_first = true
+
+[ini.Communicator]
+type = "local"
+num_jobs = 10
+number_of_cpus = 2
+client_path = "eonclient"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+max_iterations = 1000
+max_move = 0.2
+converged_force = 0.001
+
+[ini."Saddle Search"]
+displace_listed_atom_weight = 1
+displace_all_listed = false
+displace_radius = 3.3
+displace_atom_list = "0,1,2,3,4,5,6"
+displace_magnitude = 0.1
+min_mode_method = "dimer"
+max_energy = 5.0
+max_iterations = 1000
+confine_positive = true
+bowl_breakout = true
+confine_positive_min_active = 20
+
+[ini.Dimer]
+rotations_max = 20
+converged_angle = 5.0
+
+[ini.Prefactor]
+default_value = 5e12

@@ -450,7 +450,7 @@ def _comparable(fields: dict[str, str], raw_rows: list[dict]) -> bool:
     reducer = str(fields.get("reducer") or "").lower()
     if counter == "client":
         return False
-    if counter == "harness" or reducer.startswith("harness"):
+    if counter in {"harness", "archive"} or reducer.startswith("harness"):
         return True
     for raw in raw_rows:
         if str(raw.get("counter") or "").lower() == "harness":
@@ -543,6 +543,23 @@ def _score_records(records: list[dict], cap: int | None) -> dict:
         summary["mean_per_image"] = sum(per_image) / len(per_image)
         summary["median_per_image"] = median_per
     return summary
+
+
+_CAMPAIGN_FIELDS = ("unique_saddles", "fraction_connected", "total_searches")
+
+
+def _copy_campaign_metrics(row: dict, fields: dict[str, str]) -> None:
+    """Campaign means travel with the row. They are not a pass or fail test."""
+    for name in _CAMPAIGN_FIELDS:
+        raw = str(fields.get(name) or "").strip()
+        if not raw:
+            continue
+        try:
+            value = float(raw)
+        except ValueError:
+            continue
+        if math.isfinite(value):
+            row[name] = value
 
 
 def _apply_summary(row: dict, summary: dict, records: list[dict]) -> None:
@@ -782,6 +799,7 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
             unparsed.append(row)
             continue
         _apply_summary(row, summary, records)
+        _copy_campaign_metrics(row, fields)
         rows.append(row)
     return rows, unparsed
 
@@ -1272,6 +1290,11 @@ def _show_per_image(problem: dict) -> bool:
     return any(row.get("mean_per_image") is not None for row in rows)
 
 
+def _show_campaign_metrics(problem: dict) -> bool:
+    rows = list(problem.get("ranked") or []) + list(problem.get("history") or [])
+    return any(row.get(name) is not None for row in rows for name in _CAMPAIGN_FIELDS)
+
+
 def _headers(problem: dict) -> list[str]:
     # The ranked table and the headline table list the current version only.
     # Older versions stay in the history list, so a Current column is yes on
@@ -1290,11 +1313,21 @@ def _headers(problem: dict) -> list[str]:
     ]
     if _show_per_image(problem):
         headers.append("Per-image mean")
+    if _show_campaign_metrics(problem):
+        headers.extend(["Unique saddles", "Fraction connected", "Total searches"])
     headers.extend(["Failures", "n"])
     return headers
 
 
-def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
+def _version_text(row: dict) -> str:
+    code = str(row.get("code") or "")
+    version = str(row.get("code_version") or "")
+    if version:
+        return f"{code} {version}"
+    return code
+
+
+def ranked_cells(row: dict, per_image: bool, campaign_metrics: bool = False) -> list[tuple[str, str]]:
     """Visible ranked-table cells, in column order.
 
     The site check compares these strings with the rendered table.
@@ -1304,7 +1337,7 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
     """
     cells = [
         ("template", str(row.get("template") or row.get("entry") or "")),
-        ("version", f"{row.get('code') or ''} {row.get('code_version') or ''}"),
+        ("version", _version_text(row)),
         ("commit", str(row.get("commit") or "")[:12]),
         ("source", str(row.get("source") or "")),
         ("par2_mean", _format_number(row.get("par2_mean"))),
@@ -1318,14 +1351,18 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
     ]
     if per_image:
         cells.append(("mean_per_image", _format_number(row.get("mean_per_image"))))
+    if campaign_metrics:
+        for name in _CAMPAIGN_FIELDS:
+            cells.append((name, _format_number(row.get(name))))
     cells.append(("failures", _failure_text(row.get("failures") or {})))
     cells.append(("n", str(row.get("n"))))
     return cells
 
 
-def _row_cells(row: dict, per_image: bool) -> str:
+def _row_cells(row: dict, per_image: bool, campaign_metrics: bool = False) -> str:
     return "".join(
-        f'<td data-field="{field}">{_cell(value)}</td>' for field, value in ranked_cells(row, per_image)
+        f'<td data-field="{field}">{_cell(value)}</td>'
+        for field, value in ranked_cells(row, per_image, campaign_metrics)
     )
 
 
@@ -1474,7 +1511,7 @@ def summary_table(problems: list[dict], codes: list[str], link) -> str:
     lines = [
         '<div class="bench-scroll">',
         '<table data-board-table="summary">',
-        "<caption>Best full harness run of each code. Lower PAR-2 is better. "
+        "<caption>Best full run of each code. Lower PAR-2 is better. "
         "The full template table is on the problem page.</caption>",
         "<thead><tr><th>Problem</th>"
         + "".join(f"<th>{_cell(code)}</th>" for code in codes)
@@ -1505,8 +1542,9 @@ def summary_table(problems: list[dict], codes: list[str], link) -> str:
 
 
 def headline_table(problem: dict) -> str:
-    """One ranked row: the best full harness run."""
+    """One ranked row: the best full run."""
     per_image = _show_per_image(problem)
+    campaign_metrics = _show_campaign_metrics(problem)
     headers = _headers(problem)
     lines = [
         '<div class="bench-scroll">',
@@ -1515,7 +1553,7 @@ def headline_table(problem: dict) -> str:
     ]
     ranked = list(problem.get("ranked") or [])
     if ranked:
-        lines.append(f"<tr>{_row_cells(ranked[0], per_image)}</tr>")
+        lines.append(f"<tr>{_row_cells(ranked[0], per_image, campaign_metrics)}</tr>")
     else:
         lines.append(f'<tr><td colspan="{len(headers)}">No full harness row.</td></tr>')
     lines.append("</tbody></table></div>")
@@ -1555,11 +1593,19 @@ def _table(
     heading: str = "h2",
 ) -> str:
     per_image = _show_per_image(problem)
+    campaign_metrics = _show_campaign_metrics(problem)
     headers = _headers(problem)
-    caption = (
-        "Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. "
-        "Wilson bounds are the 95% interval on the success rate."
-    )
+    if campaign_metrics:
+        caption = (
+            "Lower PAR-2 is better. PAR-2 and the call columns are force-call totals. "
+            "Wilson bounds are the 95% interval on the success rate. "
+            "Unique saddles, fraction connected, and total searches are campaign means."
+        )
+    else:
+        caption = (
+            "Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. "
+            "Wilson bounds are the 95% interval on the success rate."
+        )
     if per_image:
         caption += " Per-image mean divides that total by the problem's moving images, the same way for every code."
     ident = section_id or _slug(problem["id"])
@@ -1570,8 +1616,12 @@ def _table(
     ]
     if preamble:
         lines.append(preamble)
+    if campaign_metrics:
+        ranked_by = "Ranked by the v2 PAR-2 mean of force calls."
+    else:
+        ranked_by = "Ranked by the v2 PAR-2 mean of the harness total."
     lines.append(
-        "<p>Ranked by the v2 PAR-2 mean of the harness total. "
+        f"<p>{ranked_by} "
         "Only the newest full version of a template is in this table. "
         "A partial row, including a one-start asv smoke run, is not.</p>"
     )
@@ -1593,7 +1643,7 @@ def _table(
     lines.append(f"<caption>{caption}</caption>")
     lines.append("<thead><tr>" + "".join(f"<th>{_cell(header)}</th>" for header in headers) + "</tr></thead><tbody>")
     for row in ranked:
-        lines.append(f"<tr>{_row_cells(row, per_image)}</tr>")
+        lines.append(f"<tr>{_row_cells(row, per_image, campaign_metrics)}</tr>")
     if not ranked:
         lines.append(f'<tr><td colspan="{len(headers)}">No full harness row.</td></tr>')
     lines.append("</tbody></table></div>")

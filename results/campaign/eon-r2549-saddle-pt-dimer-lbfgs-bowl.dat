@@ -1,0 +1,30 @@
+code EON (SVN r2549)
+commit r2549
+algorithm Dimer L-BFGS bowl breakout
+tuning default
+template eon-r2549/saddle-pt-dimer-lbfgs-bowl
+problem saddle-search/pt-island
+counter harness
+reducer harness
+cap 100000000
+n 9
+nfailed 0
+goal 27
+kernel morse
+force_calls 2149263.888888889
+unique_saddles 93.11111111111111
+fraction_connected 0.8038872849661051
+total_searches 5751
+client_force_calls 2146965
+force_calls_min 728822
+force_calls_max 5125993
+par2_mean 2149263.888888889
+median 1941905
+median_low 1397748
+median_high 2391191
+wilson_low 0.7008549515804559
+wilson_high 1
+n_cap 0
+n_wrong_stationary 0
+n_divergence 0
+n_crash 0
