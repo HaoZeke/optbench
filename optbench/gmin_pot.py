@@ -249,3 +249,64 @@ def lennard_jones_compiled(coords: np.ndarray) -> tuple[float, np.ndarray]:
         grad.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
     )
     return float(energy.value), grad
+
+
+_BLJ = None
+
+
+def binary_lennard_jones_compiled(
+    coords: np.ndarray,
+    species: np.ndarray,
+    *,
+    sigma_aa: float,
+    sigma_bb: float,
+    epsilon_aa: float,
+    epsilon_bb: float,
+    epsilon_ab: float,
+) -> tuple[float, np.ndarray]:
+    """Compiled ``optbench.potentials.binary_lennard_jones`` with no cutoff.
+
+    Species 0 is A and 1 is B. The unlike sigma is the arithmetic mean.
+    """
+    global _BLJ
+    if _BLJ is None:
+        source = Path(__file__).resolve().parents[1] / "codes" / "gmin" / "blj.c"
+        library = Path(tempfile.gettempdir()) / "optbench-blj.so"
+        if not library.is_file() or library.stat().st_mtime < source.stat().st_mtime:
+            subprocess.check_call(
+                ["gcc", "-O3", "-shared", "-fPIC", str(source), "-o", str(library)],
+            )
+        loaded = ctypes.CDLL(str(library))
+        loaded.optbench_blj.argtypes = [
+            ctypes.c_int,
+            ctypes.POINTER(ctypes.c_double),
+            ctypes.POINTER(ctypes.c_int),
+            ctypes.c_double,
+            ctypes.c_double,
+            ctypes.c_double,
+            ctypes.c_double,
+            ctypes.c_double,
+            ctypes.POINTER(ctypes.c_double),
+            ctypes.POINTER(ctypes.c_double),
+        ]
+        _BLJ = loaded
+    pos = np.ascontiguousarray(coords, dtype=np.float64).reshape(-1, 3)
+    natoms = int(pos.shape[0])
+    labels = np.ascontiguousarray(species, dtype=np.int32)
+    if labels.shape != (natoms,):
+        raise ValueError("species must name one label per atom")
+    energy = ctypes.c_double()
+    grad = np.zeros(natoms * 3, dtype=np.float64)
+    _BLJ.optbench_blj(
+        natoms,
+        pos.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
+        labels.ctypes.data_as(ctypes.POINTER(ctypes.c_int)),
+        float(sigma_aa),
+        float(sigma_bb),
+        float(epsilon_aa),
+        float(epsilon_bb),
+        float(epsilon_ab),
+        ctypes.byref(energy),
+        grad.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
+    )
+    return float(energy.value), grad

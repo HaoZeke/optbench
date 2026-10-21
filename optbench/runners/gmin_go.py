@@ -6,7 +6,7 @@ energy and gradient of the problem potential and each request is one
 harness call. The server is the call count. GMIN's NPCALL is not the
 score. The problem ``[potential]`` picks the kernel: ``lennard-jones``
 is the compiled harness LJ, and ``binary-lennard-jones`` is
-``optbench.potentials.binary_lennard_jones`` with the first ``n_A``
+``optbench.potentials.binary_lennard_jones``, compiled as ``codes/gmin/blj.c``, with the first ``n_A``
 atoms of each start as species A and the rest as species B.
 
 ``failure_cap`` is the problem ``max_force_calls`` and TARGET is the
@@ -35,8 +35,8 @@ import numpy as np
 from optbench.counter import HarnessCounter
 from optbench.failures import classify_failure
 from optbench.globalopt import energy_tolerance, force_cap, judge_globalopt, reference_energy
-from optbench.gmin_pot import lennard_jones_compiled
-from optbench.potentials import binary_lennard_jones, lennard_jones, read_con
+from optbench.gmin_pot import binary_lennard_jones_compiled, lennard_jones_compiled
+from optbench.potentials import lennard_jones, read_con
 from optbench.score import score_v2, summarize_capped
 from optbench.v2 import collect_provenance, write_starts
 
@@ -77,7 +77,7 @@ def potential_spec(problem: dict) -> dict:
 
 
 def _binary(coords: np.ndarray, *, spec: dict, species: np.ndarray) -> tuple[float, np.ndarray]:
-    return binary_lennard_jones(
+    return binary_lennard_jones_compiled(
         coords,
         species,
         sigma_aa=spec["sigma_AA"],
@@ -640,7 +640,8 @@ def run_template(
         "emit_seed": bool(section.get("emit_seed", True)),
     }
     jobs = []
-    lennard_jones_compiled(np.zeros((1, 3)))
+    # Build the shared library once before the workers load it.
+    evaluator(spec)(np.zeros((natoms, 3)) + np.arange(natoms)[:, None])
     for index, (name, pos) in enumerate(loaded):
         if pos.shape != (natoms, 3):
             raise ValueError(f"{name} has {pos.shape[0]} atoms, not {natoms}")

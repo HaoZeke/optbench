@@ -120,3 +120,19 @@ def test_first_evaluation_inside_the_target_records_the_count():
     assert snap["calls"] == 3
     assert snap["hit_calls"] == 2
     assert snap["hit_energy"] == pytest.approx(energy)
+
+
+def test_compiled_binary_lennard_jones_matches_the_harness():
+    from optbench.gmin_pot import binary_lennard_jones_compiled
+    from optbench.potentials import binary_lennard_jones
+
+    rng = np.random.default_rng(20261021)
+    pos = rng.normal(scale=2.0, size=(100, 3))
+    species = np.asarray([0] * 42 + [1] * 58)
+    expected_energy, expected_grad = binary_lennard_jones(pos, species, sigma_bb=1.3)
+    energy, grad = binary_lennard_jones_compiled(
+        pos, species, sigma_aa=1.0, sigma_bb=1.3, epsilon_aa=1.0, epsilon_bb=1.0, epsilon_ab=1.0
+    )
+    scale = max(1.0, abs(expected_energy))
+    assert abs(energy - expected_energy) / scale < 1e-12
+    assert np.max(np.abs(grad - expected_grad)) / max(1.0, np.max(np.abs(expected_grad))) < 1e-12
