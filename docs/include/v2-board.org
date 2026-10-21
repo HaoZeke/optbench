@@ -272,7 +272,7 @@
    </tr>
    <tr data-problem="tsopt/pt-island">
    <th scope="row"><a href="generated/suites/tsopt.html#pt-island">pt-island</a></th>
-   <td data-code="eOn" data-template="eon-client/ts-pt-lanczos-improved" data-par2="108.796"><span class="bench-score">108.796</span><a href="generated/suites/tsopt.html#pt-island-templates">eon-client/ts-pt-lanczos-improved</a></td>
+   <td data-code="eOn" data-template="eon/develop-b0bd4d5a-ts-pt-lanczos-improved" data-par2="106.347"><span class="bench-score">106.347</span><a href="generated/suites/tsopt.html#pt-island-templates">eon/develop-b0bd4d5a-ts-pt-lanczos-improved</a></td>
    <td data-code="Eon svn" data-template="eon-svn/ts-pt-lanczos-improved" data-par2="106.388"><span class="bench-score">106.388</span><a href="generated/suites/tsopt.html#pt-island-templates">eon-svn/ts-pt-lanczos-improved</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/pt-dimer-rotskip" data-par2="223.898"><span class="bench-score">223.898</span><a href="generated/suites/tsopt.html#pt-island-templates">rgsaddle/pt-dimer-rotskip</a></td>

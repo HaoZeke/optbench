@@ -158,14 +158,14 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
-   <tr data-problem="tsopt/pt-island" data-template="eon-client/ts-pt-lanczos-improved">
+   <tr data-problem="tsopt/pt-island" data-template="eon/develop-b0bd4d5a-ts-pt-lanczos-improved">
    <td>pt-island</td>
-   <td data-field="template">eon-client/ts-pt-lanczos-improved</td>
-   <td data-field="version">eOn 3.5.0</td>
-   <td data-field="commit">4d8b34baf1ba</td>
-   <td data-field="par2_mean">108.796</td>
-   <td data-field="mean_calls">108.796</td>
-   <td data-field="median_calls">107</td>
+   <td data-field="template">eon/develop-b0bd4d5a-ts-pt-lanczos-improved</td>
+   <td data-field="version">eOn (develop b0bd4d5a)</td>
+   <td data-field="commit">b0bd4d5a5e0f</td>
+   <td data-field="par2_mean">106.347</td>
+   <td data-field="mean_calls">106.347</td>
+   <td data-field="median_calls">100</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>
