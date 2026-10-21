@@ -110,6 +110,15 @@ uv run optbench run minimization/lj38 pele/lj38-lbfgs \
   --output results/campaign/pele-lj38-lbfgs.dat
 ```
 
+Basin hopping on the globalopt Lennard-Jones sets uses the same pin. The driver is `pele.basinhopping.BasinHopping` and the quench is `pele.optimize.lbfgs_cpp`. Temperature is 1.0 and the initial step size is 0.6, the LJCluster defaults. The potential is the harness kernel, cutoff 40, not `pele.potentials.LJ`. Templates are `pele/lj38-basinhopping`, `pele/lj75-basinhopping`, `pele/lj98-basinhopping`, and `pele/lj150-basinhopping`. LJ38 keeps a budget of 3000000 because the problem states no force-call cap. LJ75, LJ98, and LJ150 use the problem caps, 1000000, 1000000000, and 10000000.
+
+```bash
+uv run optbench run globalopt/lj38 pele/lj38-basinhopping \
+  --workers 6 \
+  --resume \
+  --output results/campaign/pele-b7081b93-lj38-basinhopping.dat
+```
+
 Sella 2.6.0 needs `sella==2.6.0` and ASE. The stop is the Euclidean norm of the force at 0.001, or 1000 steps, on 200 geometries, with cutoff 40 and the archived trust-region numbers:
 
 ```bash

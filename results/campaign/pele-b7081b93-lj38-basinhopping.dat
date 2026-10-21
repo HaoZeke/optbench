@@ -1,0 +1,35 @@
+# counter harness. One force call is one HarnessCounter entry through getEnergyGradient.
+# The quench is pele.optimize.lbfgs_cpp. The driver is pele.basinhopping.BasinHopping.
+# A start succeeds when a converged quench is within energy_tolerance of energy_minimum and the call count is under the cap.
+# lowest_energy is the lowest converged quench on that start.
+# Basin hopping with pele.optimize.lbfgs_cpp and pele.basinhopping.BasinHopping. Temperature is 1.0 and the initial step size is 0.6, the LJCluster defaults, inside AdaptiveStepsizeTemperature. The potential is the harness Lennard-Jones kernel, epsilon 1, sigma 1, cutoff 40, no shift. The minimum is the Cambridge cluster database pair-well depth. The problem states no force-call cap, so the budget is 3000000. The seed is the integer in the start name.
+force_calls 688720
+force_calls_min 20714
+force_calls_max 2645819
+force_calls_median 476708
+nfailed 1
+median 476708
+code pele
+code_version 0.1.2
+commit b7081b932a060be11342fbe8287ac35da8ada879
+algorithm basin hopping
+template pele/lj38-basinhopping
+problem globalopt/lj38
+tuning default
+counter harness
+cap 3000000
+partial false
+energy_minimum -173.928427
+energy_tolerance 0.001
+par2_mean 741832.86
+wilson_low 0.945513803821
+wilson_high 0.998232567936
+par2_median 477810.5
+par2_median_low 407402.5
+par2_median_high 600154
+v2_nfailed 1
+v2_successes 99
+n 100
+lowest_energy -173.928426591
+energy_min -173.928426591
+energy_max -173.252378416
