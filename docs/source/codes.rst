@@ -447,26 +447,26 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
-   <tr data-problem="saddle-search/pt-island" data-template="rgsaddle/saddle-dimer-rotskip-tuned">
+   <tr data-problem="saddle-search/pt-island" data-template="rgsaddle/saddle-dimer-fire">
    <td>Pt heptamer island</td>
-   <td data-field="template">rgsaddle/saddle-dimer-rotskip-tuned</td>
+   <td data-field="template">rgsaddle/saddle-dimer-fire</td>
    <td data-field="version">rgsaddle 0.2.2</td>
    <td data-field="commit">c0db2b8d333c</td>
-   <td data-field="par2_mean">10127.1</td>
-   <td data-field="mean_calls">619.017</td>
-   <td data-field="median_calls">550</td>
-   <td data-field="failures">crash 0, divergence 17717, cap 2246, wrong_stationary 35</td>
+   <td data-field="par2_mean">10128</td>
+   <td data-field="mean_calls">1011.03</td>
+   <td data-field="median_calls">1013</td>
+   <td data-field="failures">crash 0, divergence 1, cap 19999, wrong_stationary 0</td>
    <td data-field="n">20000</td>
    </tr>
-   <tr data-problem="tsopt/LJ38" data-template="rgsaddle/prfo-tuned">
+   <tr data-problem="tsopt/LJ38" data-template="rgsaddle/dimer-rotskip">
    <td>LJ38</td>
-   <td data-field="template">rgsaddle/prfo-tuned</td>
+   <td data-field="template">rgsaddle/dimer-rotskip</td>
    <td data-field="version">rgsaddle 0.2.2</td>
    <td data-field="commit">c0db2b8d333c</td>
-   <td data-field="par2_mean">192.6</td>
-   <td data-field="mean_calls">192.6</td>
-   <td data-field="median_calls">173</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="par2_mean">7803.19</td>
+   <td data-field="mean_calls">2926.82</td>
+   <td data-field="median_calls">856.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 27, wrong_stationary 47</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="tsopt/pt-island" data-template="rgsaddle/pt-dimer-rotskip">
@@ -517,15 +517,15 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 38, wrong_stationary 4</td>
    <td data-field="n">51</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/pt-island" data-template="geodesic/ase-de-pt-tuned">
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="geodesic/ase-de-pt-default">
    <td>pt-island</td>
-   <td data-field="template">geodesic/ase-de-pt-tuned</td>
+   <td data-field="template">geodesic/ase-de-pt-default</td>
    <td data-field="version">geodesic 1.0.0</td>
    <td data-field="commit">476aa041f562</td>
-   <td data-field="par2_mean">595.983</td>
-   <td data-field="mean_calls">494.288</td>
-   <td data-field="median_calls">347</td>
-   <td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 0</td>
+   <td data-field="par2_mean">824.119</td>
+   <td data-field="mean_calls">773.271</td>
+   <td data-field="median_calls">716</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
    <tr data-problem="neb/Pt-heptamer" data-template="geodesic/ci-neb-lbfgs">
@@ -554,15 +554,15 @@ The number is written only after the run finishes under the problem rule.
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="double-ended-saddle-search/lj38" data-template="ase/de-lj38-tuned">
+   <tr data-problem="double-ended-saddle-search/lj38" data-template="ase/de-lj38-default">
    <td>LJ38 double-ended saddle</td>
-   <td data-field="template">ase/de-lj38-tuned</td>
+   <td data-field="template">ase/de-lj38-default</td>
    <td data-field="version">ASE 3.29.0</td>
    <td data-field="commit">f27c0005ae6a</td>
-   <td data-field="par2_mean">3463.64</td>
-   <td data-field="mean_calls">2014.22</td>
+   <td data-field="par2_mean">4912.84</td>
+   <td data-field="mean_calls">2463.82</td>
    <td data-field="median_calls">2501</td>
-   <td data-field="failures">crash 0, divergence 0, cap 29, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 49, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="ase/de-lj38-2ts-default">
@@ -576,26 +576,26 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 51, cap 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/pt-island" data-template="ase/de-pt-island-tuned">
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="ase/de-pt-island-default">
    <td>pt-island</td>
-   <td data-field="template">ase/de-pt-island-tuned</td>
+   <td data-field="template">ase/de-pt-island-default</td>
    <td data-field="version">ASE 3.29.0</td>
    <td data-field="commit">f27c0005ae6a</td>
-   <td data-field="par2_mean">847.678</td>
-   <td data-field="mean_calls">593.864</td>
-   <td data-field="median_calls">374</td>
-   <td data-field="failures">crash 0, divergence 0, cap 5, wrong_stationary 0</td>
+   <td data-field="par2_mean">926.475</td>
+   <td data-field="mean_calls">875.712</td>
+   <td data-field="median_calls">707</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
-   <tr data-problem="minimization/lj38" data-template="ase/lj38-lbfgs-tuned">
+   <tr data-problem="minimization/lj38" data-template="ase/lj38-lbfgs-default">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="template">ase/lj38-lbfgs-tuned</td>
+   <td data-field="template">ase/lj38-lbfgs-default</td>
    <td data-field="version">ASE 3.29.0</td>
    <td data-field="commit">f27c0005ae6a</td>
-   <td data-field="par2_mean">395.645</td>
-   <td data-field="mean_calls">375.645</td>
-   <td data-field="median_calls">319</td>
-   <td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 0</td>
+   <td data-field="par2_mean">532.882</td>
+   <td data-field="mean_calls">344.881</td>
+   <td data-field="median_calls">257</td>
+   <td data-field="failures">crash 0, divergence 0, cap 7, wrong_stationary 6</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38-noise" data-template="noise/ase-lbfgs-s0">
@@ -620,14 +620,14 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
-   <tr data-problem="neb/Pt-heptamer" data-template="ase/neb-pt-heptamer-tuned">
+   <tr data-problem="neb/Pt-heptamer" data-template="ase/neb-pt-heptamer-default">
    <td>Pt-heptamer</td>
-   <td data-field="template">ase/neb-pt-heptamer-tuned</td>
+   <td data-field="template">ase/neb-pt-heptamer-default</td>
    <td data-field="version">ASE 3.29.0</td>
    <td data-field="commit">f27c0005ae6a</td>
-   <td data-field="par2_mean">442.615</td>
-   <td data-field="mean_calls">442.615</td>
-   <td data-field="median_calls">450</td>
+   <td data-field="par2_mean">606.923</td>
+   <td data-field="mean_calls">606.923</td>
+   <td data-field="median_calls">618</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
@@ -655,47 +655,47 @@ The number is written only after the run finishes under the problem rule.
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="double-ended-saddle-search/lj38" data-template="sella/de-lj38-tuned">
+   <tr data-problem="double-ended-saddle-search/lj38" data-template="sella/de-lj38-default">
    <td>LJ38 double-ended saddle</td>
-   <td data-field="template">sella/de-lj38-tuned</td>
+   <td data-field="template">sella/de-lj38-default</td>
    <td data-field="version">Sella 2.6.0</td>
    <td data-field="commit">6cfb60cdb100</td>
-   <td data-field="par2_mean">1753.96</td>
-   <td data-field="mean_calls">1753.96</td>
-   <td data-field="median_calls">2051.5</td>
+   <td data-field="par2_mean">2055.3</td>
+   <td data-field="mean_calls">2055.3</td>
+   <td data-field="median_calls">2047.5</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="sella/de-lj38-2ts-tuned">
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="sella/de-lj38-2ts-default">
    <td>lj38_2ts_separation</td>
-   <td data-field="template">sella/de-lj38-2ts-tuned</td>
+   <td data-field="template">sella/de-lj38-2ts-default</td>
    <td data-field="version">Sella 2.6.0</td>
    <td data-field="commit">6cfb60cdb100</td>
-   <td data-field="par2_mean">30105.9</td>
-   <td data-field="mean_calls">30105.9</td>
-   <td data-field="median_calls">32141</td>
+   <td data-field="par2_mean">31447.3</td>
+   <td data-field="mean_calls">31447.3</td>
+   <td data-field="median_calls">32178</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/pt-island" data-template="sella/de-pt-island-tuned">
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="sella/de-pt-island-default">
    <td>pt-island</td>
-   <td data-field="template">sella/de-pt-island-tuned</td>
+   <td data-field="template">sella/de-pt-island-default</td>
    <td data-field="version">Sella 2.6.0</td>
    <td data-field="commit">6cfb60cdb100</td>
-   <td data-field="par2_mean">615.153</td>
-   <td data-field="mean_calls">615.153</td>
-   <td data-field="median_calls">374</td>
+   <td data-field="par2_mean">921.847</td>
+   <td data-field="mean_calls">921.847</td>
+   <td data-field="median_calls">756</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
-   <tr data-problem="minimization/lj38" data-template="sella/lj38-min-tuned">
+   <tr data-problem="minimization/lj38" data-template="sella/lj38-min-default">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="template">sella/lj38-min-tuned</td>
+   <td data-field="template">sella/lj38-min-default</td>
    <td data-field="version">Sella 2.6.0</td>
    <td data-field="commit">6cfb60cdb100</td>
-   <td data-field="par2_mean">253.921</td>
-   <td data-field="mean_calls">253.921</td>
-   <td data-field="median_calls">248</td>
+   <td data-field="par2_mean">710.089</td>
+   <td data-field="mean_calls">710.089</td>
+   <td data-field="median_calls">692.5</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">1000</td>
    </tr>
@@ -1408,15 +1408,15 @@ The number is written only after the run finishes under the problem rule.
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="minimization/lj38" data-template="vcsqnm/lj38-ase-tuned">
+   <tr data-problem="minimization/lj38" data-template="vcsqnm/lj38-ase">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="template">vcsqnm/lj38-ase-tuned</td>
+   <td data-field="template">vcsqnm/lj38-ase</td>
    <td data-field="version">vc-SQNM 1.3</td>
    <td data-field="commit">4241692173cc</td>
-   <td data-field="par2_mean">482.515</td>
-   <td data-field="mean_calls">384.513</td>
-   <td data-field="median_calls">369</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 5</td>
+   <td data-field="par2_mean">598.05</td>
+   <td data-field="mean_calls">382.068</td>
+   <td data-field="median_calls">365.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 11</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38-noise" data-template="noise/vcsqnm-ase-s0">
@@ -1456,15 +1456,15 @@ The number is written only after the run finishes under the problem rule.
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="lowest-eigenvector/lj38" data-template="softsaddle/mode-lanczos-tuned">
+   <tr data-problem="lowest-eigenvector/lj38" data-template="softsaddle/mode-lanczos">
    <td>lj38</td>
-   <td data-field="template">softsaddle/mode-lanczos-tuned</td>
+   <td data-field="template">softsaddle/mode-lanczos</td>
    <td data-field="version">softsaddle 2019.04</td>
    <td data-field="commit">5a00aeede06f</td>
-   <td data-field="par2_mean">34.73</td>
-   <td data-field="mean_calls">34.73</td>
-   <td data-field="median_calls">34</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="par2_mean">18700.6</td>
+   <td data-field="mean_calls">18.91</td>
+   <td data-field="median_calls">19</td>
+   <td data-field="failures">crash 0, divergence 187, cap 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="saddle-search/pt-island" data-template="softsaddle/saddle-lanczos-sm0">
