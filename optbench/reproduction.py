@@ -200,7 +200,7 @@ MATCHES: list[dict] = [
     {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "cells/pele/go", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
     {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn/htst-al-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
     {"key": "hTST/Pt/eon-dimer-cg", "template": "eon-svn/htst-pt-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-pt-dimer.dat", "kind": "htst"},
-    {"key": "hTST/Pt/tsase-dimer-qm", "template": "eon/htst-pt-tsase-dimer-qm", "branch": "cells/tsase/htst-pt-dimer", "path": "results/campaign/eon-htst-pt-tsase-dimer-qm.dat", "kind": "htst", "cause": "tsase_stock_dimer"},
+    {"key": "hTST/Pt/tsase-dimer-qm", "template": "eon/htst-pt-tsase-dimer-qm", "branch": "cells/tsase/htst-pt-dimer", "path": "results/campaign/eon-htst-pt-tsase-dimer-qm.dat", "kind": "htst", "cause": "tsase_stock_dimer", "extra": {"on_table": True}},
 ]
 
 
@@ -542,7 +542,7 @@ def holdback(root: Path) -> Hold:
         rerun = row.get("rerun") or {}
         problem = f"{row['suite']}/{row['problem']}"
         template = str(rerun.get("template") or "")
-        if row.get("status") == "not_reproduced":
+        if row.get("status") == "not_reproduced" and not rerun.get("on_table"):
             if template:
                 found.templates.add((problem, template))
             rel = str(rerun.get("path") or "")

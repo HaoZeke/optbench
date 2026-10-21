@@ -5362,51 +5362,6 @@
     {
       "asv_commit": "",
       "call_unit": "total",
-      "cap": null,
-      "code": "tsase",
-      "code_version": "1.0",
-      "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
-      "comparable": true,
-      "counter": "harness",
-      "current": false,
-      "entry": "eon-htst-pt-tsase-dimer-qm",
-      "failures": {
-        "cap": 0,
-        "crash": 0,
-        "divergence": 0,
-        "wrong_stationary": 0
-      },
-      "full_n": null,
-      "history": false,
-      "max_calls": 9997068.0,
-      "mean_calls": 8188475.75,
-      "mean_per_image": null,
-      "median": 8007307.5,
-      "median_calls": 8007307.5,
-      "median_high": 9997068.0,
-      "median_low": 6742220.0,
-      "median_per_image": null,
-      "min_calls": 6742220.0,
-      "n": 4,
-      "nfailed": 0,
-      "note": "starts.jsonl",
-      "par2_mean": null,
-      "partial": true,
-      "partial_reason": "does not reproduce the 2014 archive",
-      "path": "results/campaign/eon-htst-pt-tsase-dimer-qm.dat",
-      "problem": "hTST/Pt",
-      "registry_match": true,
-      "scored": true,
-      "source": "campaign",
-      "success_rate": 1.0,
-      "template": "eon/htst-pt-tsase-dimer-qm",
-      "tuning": "Dimer-QM rotation: max=50, tol=5",
-      "wilson_high": 1.0,
-      "wilson_low": 0.5101091635454027
-    },
-    {
-      "asv_commit": "",
-      "call_unit": "total",
       "cap": 2000000,
       "code": "Eon svn",
       "code_version": "r2549",
@@ -16217,51 +16172,6 @@
         {
           "asv_commit": "",
           "call_unit": "total",
-          "cap": null,
-          "code": "tsase",
-          "code_version": "1.0",
-          "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
-          "comparable": true,
-          "counter": "harness",
-          "current": false,
-          "entry": "eon-htst-pt-tsase-dimer-qm",
-          "failures": {
-            "cap": 0,
-            "crash": 0,
-            "divergence": 0,
-            "wrong_stationary": 0
-          },
-          "full_n": null,
-          "history": false,
-          "max_calls": 9997068.0,
-          "mean_calls": 8188475.75,
-          "mean_per_image": null,
-          "median": 8007307.5,
-          "median_calls": 8007307.5,
-          "median_high": 9997068.0,
-          "median_low": 6742220.0,
-          "median_per_image": null,
-          "min_calls": 6742220.0,
-          "n": 4,
-          "nfailed": 0,
-          "note": "starts.jsonl",
-          "par2_mean": null,
-          "partial": true,
-          "partial_reason": "does not reproduce the 2014 archive",
-          "path": "results/campaign/eon-htst-pt-tsase-dimer-qm.dat",
-          "problem": "hTST/Pt",
-          "registry_match": true,
-          "scored": true,
-          "source": "campaign",
-          "success_rate": 1.0,
-          "template": "eon/htst-pt-tsase-dimer-qm",
-          "tuning": "Dimer-QM rotation: max=50, tol=5",
-          "wilson_high": 1.0,
-          "wilson_low": 0.5101091635454027
-        },
-        {
-          "asv_commit": "",
-          "call_unit": "total",
           "cap": 2000000,
           "code": "Eon svn",
           "code_version": "r2549",
@@ -16350,7 +16260,77 @@
           "wilson_low": 0.20654931437723745
         }
       ],
-      "ranked": [],
+      "profile": {
+        "area_log10": {
+          "eon/htst-pt-tsase-dimer-qm 1.0 Dimer-QM rotation: max=50, tol=5 campaign 98aac60": 1.2041199826559248
+        },
+        "rho": {
+          "eon/htst-pt-tsase-dimer-qm 1.0 Dimer-QM rotation: max=50, tol=5 campaign 98aac60": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "solved": {
+          "eon/htst-pt-tsase-dimer-qm 1.0 Dimer-QM rotation: max=50, tol=5 campaign 98aac60": 1.0
+        },
+        "taus": [
+          1.0,
+          2.0,
+          4.0,
+          8.0,
+          16.0
+        ]
+      },
+      "ranked": [
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": null,
+          "code": "tsase",
+          "code_version": "1.0",
+          "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
+          "comparable": true,
+          "counter": "harness",
+          "current": true,
+          "entry": "eon-htst-pt-tsase-dimer-qm",
+          "failures": {
+            "cap": 0,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": null,
+          "history": false,
+          "max_calls": 9997068.0,
+          "mean_calls": 8188475.75,
+          "mean_per_image": null,
+          "median": 8007307.5,
+          "median_calls": 8007307.5,
+          "median_high": 9997068.0,
+          "median_low": 6742220.0,
+          "median_per_image": null,
+          "min_calls": 6742220.0,
+          "n": 4,
+          "nfailed": 0,
+          "note": "starts.jsonl",
+          "par2_mean": null,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/eon-htst-pt-tsase-dimer-qm.dat",
+          "problem": "hTST/Pt",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 1.0,
+          "template": "eon/htst-pt-tsase-dimer-qm",
+          "tuning": "Dimer-QM rotation: max=50, tol=5",
+          "wilson_high": 1.0,
+          "wilson_low": 0.5101091635454027
+        }
+      ],
       "title": "Pt"
     },
     "lowest-eigenvector/lj38": {
@@ -42212,7 +42192,7 @@
       "title": "pt-island"
     }
   },
-  "ranked_count": 439,
+  "ranked_count": 440,
   "schema": "optbench.board/v1",
   "unmapped": [
     {

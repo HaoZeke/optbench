@@ -754,6 +754,17 @@
    <td data-field="failures">crash 0, divergence 20, cap 1, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
+   <tr data-problem="hTST/Pt" data-template="eon/htst-pt-tsase-dimer-qm">
+   <td>Pt</td>
+   <td data-field="template">eon/htst-pt-tsase-dimer-qm</td>
+   <td data-field="version">tsase 1.0</td>
+   <td data-field="commit">98aac60b5d99</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="mean_calls">8.18848e+06</td>
+   <td data-field="median_calls">8.00731e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">4</td>
+   </tr>
    <tr data-problem="lowest-eigenvector/lj38" data-template="tsase/mode-lj38">
    <td>lj38</td>
    <td data-field="template">tsase/mode-lj38</td>
@@ -821,9 +832,6 @@
    <td data-field="n">49</td>
    </tr>
    </tbody></table></div>
-   <p>No full ranked run</p><ul>
-   <li>Pt: partial.</li>
-   </ul>
    <h3>pyKMC</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
