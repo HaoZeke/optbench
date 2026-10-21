@@ -79,11 +79,6 @@ MINIMA_NOTE = (
     "force-call cap. rng stays None, and the harness seeds numpy.random with 314159 plus the "
     "start index before thermalize_momenta reads it. The energy window is the problem file."
 )
-LJ38_CAP_NOTE = (
-    " globalopt/lj38 states no max_force_calls. templates/eon-svn/bh-lj38.toml sets failure_cap "
-    "2000000, above the 2014 eon maximum 1795901 in "
-    "archive/entries/globalopt/lj38/eon-basinhopping/benchmark.dat. This row uses that cap."
-)
 GEOMETRY_NOTE = (
     " Coords files carry positions only. Those atoms use symbol C, the symbol on the lj38 con "
     "geometries, and ASE's carbon mass. Binary con files keep the written symbol and mass. "
@@ -747,7 +742,7 @@ def write_campaign(root: Path, records: list[dict], *, spec: dict, partial: bool
     lines = [
         f"# ASE {CODE_VERSION} {title} on {spec['problem_id']}.",
         detail,
-        "# The energy stop and the force-call cap are the problem file, except lj38.",
+        "# The energy stop and the force-call cap are the problem file.",
         f"problem {spec['problem_id']}",
         f"template {spec['template_id']}",
         "code ASE",
