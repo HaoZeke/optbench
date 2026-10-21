@@ -9,7 +9,10 @@ potential and the harness counter.
 One archived start index is one independent search. The search stops
 when the harness energy is at or below the Wales minimum plus the
 problem tolerance, or when the harness count reaches the problem
-force-call cap.
+force-call cap. A template that sets ``airss.budget_structures`` stops
+after that many cells. The budget remains the stop when the problem
+also states an energy window, because the vendored Wales file is the
+LJ38 minimum.
 """
 
 from __future__ import annotations
@@ -631,7 +634,10 @@ def run_template(
         names = [f"{label}.{index}" for index in range(1, int(config["starts"]) + 1)]
     else:
         names = _load_start_names(root, problem, geometries, work, output)
-    if raw_tolerance is None:
+    # A structure budget is the stop for this template. The vendored
+    # Wales file is the LJ38 minimum, so an energy window on a larger
+    # cluster must not replace that budget.
+    if raw_tolerance is None or config.get("budget_structures"):
         reference = None
         tolerance = None
     else:
