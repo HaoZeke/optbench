@@ -621,8 +621,6 @@ def run_template(
     problem_cap = int(stated_cap) if stated_cap not in (None, "") else None
     config = _config(template)
     raw_tolerance = convergence.get("energy_above_minimum")
-    if config.get("budget_structures"):
-        raw_tolerance = None
     if raw_tolerance is None and not config.get("budget_structures"):
         raise ValueError(
             f"{problem['id']} has no energy_above_minimum and {template['id']} has no airss.budget_structures"
@@ -636,12 +634,21 @@ def run_template(
     if raw_tolerance is None:
         reference = None
         tolerance = None
+        used_wales = False
     else:
         tolerance = float(raw_tolerance)
-        coords = load_wales_coordinates()
-        if coords.shape[0] != config["natoms"]:
-            raise ValueError(f"Wales file has {coords.shape[0]} atoms, template has {config['natoms']}")
-        reference = reference_energy(coords)
+        stated_energy = (problem.get("reference") or {}).get("energy")
+        wales = load_wales_coordinates()
+        # The vendored coordinate file is the 38-atom minimum. A larger
+        # cluster uses the energy stated on the problem.
+        if wales.shape[0] == int(config["natoms"]):
+            reference = reference_energy(wales)
+            used_wales = True
+        elif stated_energy not in (None, ""):
+            reference = float(stated_energy)
+            used_wales = False
+        else:
+            raise ValueError(f"Wales file has {wales.shape[0]} atoms, template has {config['natoms']}")
     jobs = [
         _job(template, index, name, binary, reference, tolerance, problem_cap)
         for index, name in enumerate(names)
@@ -713,7 +720,8 @@ def run_template(
     if reference is not None:
         passed["reference_energy"] = reference
         passed["energy_above_minimum"] = tolerance
-        passed["wales"] = WALES_URL
+        if used_wales:
+            passed["wales"] = WALES_URL
     provenance = collect_provenance(
         code=str(template.get("code", "AIRSS")),
         code_version=str(template.get("code_version", "")),
