@@ -1,0 +1,40 @@
+id = "ase-globalopt/lj75-basinhopping"
+engine = "ase"
+code = "ASE"
+code_version = "3.29.0"
+commit = "f27c0005ae6a67ea419f996e728668865bfc1f86"
+algorithm = "BasinHopping"
+problem = "globalopt/lj75"
+task = "basin-hopping"
+profile = "default"
+reducer = "par2"
+ranked = true
+parameter_source = "stated"
+note = "ASE 3.29.0 BasinHopping. The local minimiser is FIRE with maxstep 0.1 and fmax 0.01, and each quench stops after 4000 steps. The next displacement starts from the quenched coordinates. kT is 0.8 in the Lennard-Jones energy unit and the displacement width is 0.5. The seed is 314159 plus the coordinate index. The energy stop and the force-call cap are the problem file."
+
+[optimizer]
+name = "BasinHopping"
+local = "FIRE"
+
+[optimizer.parameters]
+temperature = 0.8
+dr = 0.5
+fmax = 0.01
+local_steps = 4000
+maxstep = 0.1
+seed = 314159
+
+[potential]
+kind = "lennard-jones"
+epsilon = 1.0
+sigma = 1.0
+rc = 40.0
+pbc = [false, false, false]
+
+[stop]
+energy_above_minimum = 0.001
+max_force_calls = 2000000
+
+[input]
+archive_path = "website/globalopt/lj75/lj75_clusters.tgz"
+select = "coords"
