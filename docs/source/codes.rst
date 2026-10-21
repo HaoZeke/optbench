@@ -1479,4 +1479,55 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">5000</td>
    </tr>
    </tbody></table></div>
+   <h3>geomeTRIC</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization</td>
+   <td>1.1.1</td>
+   <td>f657e69bae9c</td>
+   <td><a href="https://github.com/leeping/geomeTRIC">https://github.com/leeping/geomeTRIC</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="minimization/lj38" data-template="geometric/lj38-cart">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="template">geometric/lj38-cart</td>
+   <td data-field="version">geomeTRIC 1.1.1</td>
+   <td data-field="commit">f657e69bae9c</td>
+   <td data-field="par2_mean">507.683</td>
+   <td data-field="mean_calls">389.74</td>
+   <td data-field="median_calls">329</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 6</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-template="noise/geometric-cart-s1em4">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="template">noise/geometric-cart-s1em4</td>
+   <td data-field="version">geomeTRIC 1.1.1</td>
+   <td data-field="commit">f657e69bae9c</td>
+   <td data-field="par2_mean">488.502</td>
+   <td data-field="mean_calls">390.099</td>
+   <td data-field="median_calls">330</td>
+   <td data-field="failures">crash 0, divergence 2, cap 0, wrong_stationary 3</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-template="geometric/morse-cart">
+   <td>Morse bulk</td>
+   <td data-field="template">geometric/morse-cart</td>
+   <td data-field="version">geomeTRIC 1.1.1</td>
+   <td data-field="commit">f657e69bae9c</td>
+   <td data-field="par2_mean">43.96</td>
+   <td data-field="mean_calls">43.96</td>
+   <td data-field="median_calls">45</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table></div>
+   <p>No full ranked run</p><ul>
+   <li>Morse bulk: partial.</li>
+   </ul>
    </section>
