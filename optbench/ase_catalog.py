@@ -23,6 +23,7 @@ OPTIMIZERS = (
     "LBFGS",
     "FIRE",
     "BFGSLineSearch",
+    "LBFGSLineSearch",
     "GPMin",
     "PreconLBFGS",
     "PreconFIRE",
@@ -34,6 +35,7 @@ _OPT_SLUG = {
     "LBFGS": "lbfgs",
     "FIRE": "fire",
     "BFGSLineSearch": "bfgslinesearch",
+    "LBFGSLineSearch": "lbfgslinesearch",
     "GPMin": "gpmin",
     "PreconLBFGS": "preconlbfgs",
     "PreconFIRE": "preconfire",
@@ -139,6 +141,15 @@ def _tuned_minimizer(problem: str, name: str) -> tuple[dict, str, str]:
                 "archive",
                 "Archive minimization/lj38/ase-bfgslinesearch sets maxstep 0.2 and alpha 1/0.003.",
             ),
+            "LBFGSLineSearch": (
+                {"maxstep": 0.2, "alpha": 1000.0, "memory": 100},
+                "archive",
+                "Archive run.sh calls opt.py: LBFGSLineSearch maxstep 0.2, alpha 1/0.001, memory 100. "
+                "benchmark.dat labels the row M=5. The script sets memory 100. "
+                "The stop is the Euclidean force norm 0.01. "
+                "The script uses a tsase LJ cutoff of 25. This row uses the harness cutoff 40, "
+                "the same potential as the LBFGS row, which matches its archive numbers.",
+            ),
             "GPMin": (
                 {"update_hyperparams": True},
                 "library",
@@ -181,6 +192,11 @@ def _tuned_minimizer(problem: str, name: str) -> tuple[dict, str, str]:
                 {"maxstep": 0.2, "alpha": 1.0 / 0.003},
                 "transferred",
                 "No archived Morse BFGSLineSearch script. Tuned uses the LJ38 archive maxstep 0.2 and alpha 1/0.003.",
+            ),
+            "LBFGSLineSearch": (
+                {"maxstep": 0.2, "alpha": 1000.0, "memory": 100},
+                "transferred",
+                "No archived Morse LBFGSLineSearch script. Tuned uses the LJ38 script maxstep 0.2, alpha 1000, and memory 100.",
             ),
             "GPMin": (
                 {"update_hyperparams": True},
