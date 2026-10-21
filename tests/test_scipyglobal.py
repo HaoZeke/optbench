@@ -41,7 +41,7 @@ def test_scipyglobal_templates_match_the_registry_pin():
     assert pinned["commit"] == COMMIT
     assert pinned["ref"] == "v1.18.1"
     found = _templates()
-    assert len(found) == 8
+    assert len(found) == 16
     eon_cap = int(load_template(ROOT, "eon-svn/bh-lj38")["failure_cap"])
     seen = set()
     for template in found:
@@ -50,10 +50,7 @@ def test_scipyglobal_templates_match_the_registry_pin():
         assert template["code_version"] == "1.18.1"
         assert template["commit"] == COMMIT
         method = template["scipy"]["method"]
-        if method == "shgo" and template["problem"] == "globalopt/lj38":
-            assert template["tuning"] == "sobol"
-        else:
-            assert template["tuning"] == "default"
+        assert template["tuning"] == "default"
         assert template["scipy"]["method"] in METHODS
         assert int(template["scipy"]["seed"]) == 314159
         problem = resolve_problem(ROOT, template["problem"])
@@ -69,7 +66,7 @@ def test_scipyglobal_templates_match_the_registry_pin():
             assert "bound" not in template["scipy"]
         _check_stop(problem, template)
         seen.add((template["problem"], method))
-    for problem in ("globalopt/lj38", "globalopt/lj75"):
+    for problem in ("globalopt/lj38", "globalopt/lj75", "globalopt/lj98", "globalopt/lj150"):
         for method in METHODS:
             assert (problem, method) in seen
 
@@ -87,7 +84,7 @@ def test_lj38_minimum_matches_the_quoted_wales_energy():
     lj75 = resolve_problem(ROOT, "globalopt/lj75")
     window = float(lj75["convergence"]["energy_above_minimum"])
     assert energy_target(lj75) == pytest.approx(float(lj75["reference"]["energy"]) + window)
-    assert int(lj75["convergence"]["max_force_calls"]) == 1000000
+    assert int(lj75["convergence"]["max_force_calls"]) == 2000000
 
 
 def test_lj_starts_are_centered_inside_the_bound(tmp_path: Path):

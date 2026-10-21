@@ -251,7 +251,7 @@ repository = "https://github.com/scipy/scipy"
 ref = "v1.18.1"
 commit = "e4e854eaa8f18d807cd3496028e257e36caa93cc"
 committed = "2026-08-21"
-note = "SciPy 1.18.1 built from commit e4e854eaa8f18d807cd3496028e257e36caa93cc. The globalopt rows call basinhopping, dual_annealing, differential_evolution, and shgo. Force calls are harness evaluations of optbench.potentials.lennard_jones."
+note = "SciPy 1.18.1 built from commit e4e854eaa8f18d807cd3496028e257e36caa93cc. The globalopt rows call basinhopping, dual_annealing, differential_evolution, and shgo. Force calls are harness evaluations of optbench.potentials.lennard_jones. The globalopt force-call cap is 2000000. shgo uses the constructor sampling on every Lennard-Jones size."
 
 [[template]]
 id = "ase-globalopt/lj75-basinhopping"
@@ -259,7 +259,7 @@ code = "ase"
 problem = "globalopt/lj75"
 profile = "default"
 task = "basin-hopping"
-ranked = true
+ranked = false
 
 # generated ASE and Sella templates
 

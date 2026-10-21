@@ -1,0 +1,1 @@
+SciPy basinhopping, differential_evolution, dual_annealing, and shgo on `globalopt/lj38`, `globalopt/lj75`, `globalopt/lj98`, and `globalopt/lj150` use the problem force-call cap, 2000000. shgo uses the constructor sampling on every size. The same constructor arguments are used for every Lennard-Jones size.

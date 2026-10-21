@@ -1,0 +1,18 @@
+id = "scipyglobal/lj150-differential-evolution"
+engine = "scipyglobal"
+problem = "globalopt/lj150"
+code = "SciPy"
+code_version = "1.18.1"
+commit = "e4e854eaa8f18d807cd3496028e257e36caa93cc"
+algorithm = "differential_evolution"
+tuning = "default"
+failure_cap = 2000000
+note = "SciPy 1.18.1 differential_evolution at the constructor defaults, with maxiter set to the force-call cap. strategy is best1bin, popsize is 15, tol is 0.01, mutation is (0.5, 1), recombination is 0.7, polish is true, init is latinhypercube, atol is 0, updating is immediate, and workers is 1. Each centered coordinate lies in [-6, 6]. The seed is 314159 plus the start index. The force-call cap is 2000000, the cap stated on globalopt/lj150."
+
+[scipy]
+method = "differential_evolution"
+seed = 314159
+bound = 6.0
+
+[stop]
+max_force_calls = 2000000
