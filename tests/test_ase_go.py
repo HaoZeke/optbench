@@ -1,4 +1,4 @@
-"""ASE global-optimisation settings are the documented example and the defaults."""
+"""ASE global-optimisation settings are the constructor defaults."""
 
 import inspect
 from collections import deque
@@ -33,10 +33,10 @@ from optbench.runners.ase_go import (
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_basin_example_is_the_documented_temperature_and_step():
+def test_basin_row_uses_the_constructor_defaults():
     pytest.importorskip("ase")
     from ase import units
-    from ase.optimize import FIRE, LBFGS
+    from ase.optimize import FIRE
     from ase.optimize.basin import BasinHopping
 
     params = inspect.signature(BasinHopping.__init__).parameters
@@ -45,12 +45,15 @@ def test_basin_example_is_the_documented_temperature_and_step():
     assert params["fmax"].default == 0.1
     assert params["optimizer"].default is FIRE
     settings = basin_settings()
-    assert settings["temperature"] == 100 * units.kB
-    assert settings["dr"] == 0.5
-    assert settings["fmax"] == 0.1
-    assert settings["optimizer"] is LBFGS
+    assert settings["temperature"] == params["temperature"].default
+    assert settings["dr"] == params["dr"].default == 0.1
+    assert settings["fmax"] == params["fmax"].default == 0.1
+    assert settings["optimizer"] is FIRE
     assert settings["seed"] == SEED
     assert settings["temperature"] != 0.8
+    assert "constructor defaults" in BASIN_NOTE
+    assert "dr = 0.5" in BASIN_NOTE
+    assert "unranked example" in BASIN_NOTE
 
 
 def test_minima_hopping_uses_the_class_defaults():
@@ -73,7 +76,7 @@ def test_minima_hopping_uses_the_class_defaults():
     assert settings["mdmin"] == 2
 
 
-def test_templates_repeat_the_documented_numbers():
+def test_templates_repeat_the_stock_numbers():
     pytest.importorskip("ase")
     for problem_id in CARTESIAN:
         for method in METHODS:
@@ -84,8 +87,9 @@ def test_templates_repeat_the_documented_numbers():
             note = template["note"]
             if method == "basin":
                 assert BASIN_NOTE in note
-                assert template["optimizer"]["local"] == "LBFGS"
-                assert template["optimizer"]["parameters"]["dr"] == 0.5
+                assert template["optimizer"]["local"] == "FIRE"
+                assert template["optimizer"]["parameters"]["dr"] == 0.1
+                assert template["ranked"] is True
             else:
                 assert MINIMA_NOTE in note
                 assert template["optimizer"]["local"] == "QuasiNewton"
@@ -164,7 +168,7 @@ def test_campaign_file_names_keep_the_ase_version(tmp_path: Path):
     assert load_campaign_records(tmp_path / "missing.jsonl") == []
 
 
-def test_choose_job_starts_every_method_before_filling_a_long_cap():
+def test_choose_job_finishes_the_shorter_basin_row_first():
     keys = [
         ("globalopt/lj75", "basin"),
         ("globalopt/lj75", "minima"),
@@ -190,6 +194,7 @@ def test_choose_job_starts_every_method_before_filling_a_long_cap():
         ("globalopt/lj98", "minima"): 1_000_000_000,
     }
     queues = {key: deque([1, 2]) for key in keys}
+    queues[("globalopt/lj75", "basin")] = deque(range(8))
     inflight = {key: 0 for key in keys}
     done = {key: 0 for key in keys}
     picked = []
@@ -198,13 +203,16 @@ def test_choose_job_starts_every_method_before_filling_a_long_cap():
         picked.append(key)
         queues[key].popleft()
         inflight[key] += 1
-    assert ("globalopt/lj98", "basin") not in picked
-    assert ("globalopt/lj98", "minima") not in picked
-    assert ("globalopt/lj75", "basin") in picked
-    assert ("globalopt/lj150", "basin") in picked
-    done[("globalopt/lj75", "basin")] = 1
+    assert picked == [("globalopt/lj75", "basin")] * 8
+    assert choose_job(queues, inflight, done, caps) is None
     inflight[("globalopt/lj75", "basin")] = 0
-    assert choose_job(queues, inflight, done, caps) == ("globalopt/lj98", "basin")
+    done[("globalopt/lj75", "basin")] = 8
+    assert choose_job(queues, inflight, done, caps) == ("globalopt/lj38", "basin")
+    queues[("globalopt/lj38", "basin")] = deque()
+    queues[("globalopt/lj100-binary", "basin")] = deque()
+    queues[("globalopt/lj150", "basin")] = deque()
+    queues[("globalopt/lj98", "basin")] = deque()
+    assert choose_job(queues, inflight, done, caps) == ("globalopt/lj75", "minima")
 
 
 def test_stock_basin_hopping_accepts_the_displaced_point():

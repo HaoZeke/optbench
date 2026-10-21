@@ -1,11 +1,10 @@
 """ASE basin hopping and minima hopping on the Cartesian globalopt starts.
 
-The basin-hopping parameters are the documentation example in
-``doc/ase/optimize.rst`` at ASE commit f27c0005ae6a67ea419f996e728668865bfc1f86:
-``temperature=100 * kB``, ``dr=0.5``, ``optimizer=LBFGS``, ``fmax=0.1``.
-``ase/test/test_basin.py`` at that commit uses the same temperature and ``dr``.
-The constructor defaults in ``ase/optimize/basin.py`` are
+Basin hopping uses the ``BasinHopping`` constructor defaults in
+``ase/optimize/basin.py`` at ASE commit f27c0005ae6a67ea419f996e728668865bfc1f86:
 ``temperature=100 * units.kB``, ``dr=0.1``, ``optimizer=FIRE``, and ``fmax=0.1``.
+``doc/ase/optimize.rst`` at that commit shows a different example
+(``dr=0.5``, ``optimizer=LBFGS``). That example is a note, not this row.
 
 Minima hopping is ``MinimaHopping(atoms)``. The same file lists the defaults,
 and ``ase/optimize/minimahopping.py`` stores them on ``_default_settings``.
@@ -44,7 +43,6 @@ from optbench.score import score_v2
 COMMIT = "f27c0005ae6a67ea419f996e728668865bfc1f86"
 CODE_VERSION = "3.29.0"
 SEED = 314159
-LONG_CAP = 10_000_000
 CARTESIAN = (
     "globalopt/lj38",
     "globalopt/lj75",
@@ -61,13 +59,14 @@ METHODS = ("basin", "minima")
 
 BASIN_NOTE = (
     "ASE 3.29.0 BasinHopping at commit f27c0005ae6a67ea419f996e728668865bfc1f86. "
-    "doc/ase/optimize.rst at that commit constructs BasinHopping with temperature = 100 * kB, "
-    "dr = 0.5, optimizer = LBFGS, and fmax = 0.1. ase/test/test_basin.py at that commit calls "
-    "BasinHopping with temperature = 100 * kB and dr = 0.5. The constructor in "
-    "ase/optimize/basin.py defaults to temperature = 100 * units.kB, dr = 0.1, optimizer = FIRE, "
-    "and fmax = 0.1. This row uses the documentation example. The harness seeds numpy.random with "
-    "314159 plus the start index, the seed integer in templates/eon-svn/bh-lj38.toml. "
-    "BasinHopping.initialize stores the quenched coordinates, and an accepted step stores the displaced coordinates from move. The energy window is the problem file."
+    "The constructor in ase/optimize/basin.py defaults to temperature = 100 * units.kB, "
+    "dr = 0.1, optimizer = FIRE, and fmax = 0.1. This row uses those constructor defaults. "
+    "doc/ase/optimize.rst at that commit shows an unranked example, BasinHopping with "
+    "temperature = 100 * kB, dr = 0.5, optimizer = LBFGS, and fmax = 0.1. "
+    "ase/test/test_basin.py at that commit calls BasinHopping with temperature = 100 * kB and "
+    "dr = 0.5. The harness seeds numpy.random with 314159 plus the start index, the seed integer "
+    "in templates/eon-svn/bh-lj38.toml. BasinHopping.initialize stores the quenched coordinates, "
+    "and an accepted step stores the displaced coordinates from move. The energy window is the problem file."
 )
 MINIMA_NOTE = (
     "ASE 3.29.0 MinimaHopping at commit f27c0005ae6a67ea419f996e728668865bfc1f86. "
@@ -111,15 +110,17 @@ def campaign_stem(problem_id: str, method: str) -> str:
 
 
 def basin_settings() -> dict:
-    """The documentation example in ``doc/ase/optimize.rst``."""
-    from ase import units
-    from ase.optimize import LBFGS
+    """Constructor defaults of ``ase.optimize.basin.BasinHopping``."""
+    import inspect
 
+    from ase.optimize.basin import BasinHopping
+
+    params = inspect.signature(BasinHopping.__init__).parameters
     return {
-        "temperature": 100 * units.kB,
-        "dr": 0.5,
-        "fmax": 0.1,
-        "optimizer": LBFGS,
+        "temperature": params["temperature"].default,
+        "dr": params["dr"].default,
+        "fmax": params["fmax"].default,
+        "optimizer": params["optimizer"].default,
         "seed": SEED,
     }
 
@@ -205,13 +206,14 @@ def _spec(root: Path, problem_id: str, method: str) -> dict:
         documented = basin_settings()
         parameters = template["optimizer"]["parameters"]
         if abs(float(parameters["temperature"]) - float(documented["temperature"])) > 0.0:
-            raise ValueError(f"{template['id']} temperature differs from 100 * kB")
-        if float(parameters["dr"]) != documented["dr"]:
-            raise ValueError(f"{template['id']} dr differs from the documentation example")
-        if float(parameters["fmax"]) != documented["fmax"]:
-            raise ValueError(f"{template['id']} fmax differs from the documentation example")
-        if str(template["optimizer"].get("local")) != "LBFGS":
-            raise ValueError(f"{template['id']} local optimizer differs from LBFGS")
+            raise ValueError(f"{template['id']} temperature differs from the BasinHopping constructor")
+        if float(parameters["dr"]) != float(documented["dr"]):
+            raise ValueError(f"{template['id']} dr differs from the BasinHopping constructor")
+        if float(parameters["fmax"]) != float(documented["fmax"]):
+            raise ValueError(f"{template['id']} fmax differs from the BasinHopping constructor")
+        local_name = documented["optimizer"].__name__
+        if str(template["optimizer"].get("local")) != local_name:
+            raise ValueError(f"{template['id']} local optimizer differs from {local_name}")
         if int(parameters["seed"]) != SEED:
             raise ValueError(f"{template['id']} seed differs from {SEED}")
         settings = documented
@@ -733,9 +735,10 @@ def write_campaign(root: Path, records: list[dict], *, spec: dict, partial: bool
         settings = spec["settings"]
         detail = (
             f"# temperature {settings['temperature']:.16g} (100 * kB), dr {settings['dr']}, "
-            f"LBFGS, fmax {settings['fmax']}. Seed {SEED} plus the start index."
+            f"{settings['optimizer'].__name__}, fmax {settings['fmax']}. "
+            f"Seed {SEED} plus the start index."
         )
-        title = "BasinHopping documentation example"
+        title = "BasinHopping constructor defaults"
     else:
         settings = spec["settings"]
         detail = (
@@ -786,11 +789,10 @@ def write_campaign(root: Path, records: list[dict], *, spec: dict, partial: bool
     return dat, jsonl
 
 
-def inflight_limit(cap: int, short_remaining: bool) -> int:
-    """Keep one worker on a long cap while a shorter problem still has starts."""
-    if short_remaining and cap >= LONG_CAP:
-        return 1
-    return 10**9
+def _job_priority(key: tuple[str, str], caps: dict[tuple[str, str], int]) -> tuple:
+    method_rank = 0 if key[1] == "basin" else 1
+    problem_rank = CARTESIAN.index(key[0])
+    return (method_rank, caps[key], problem_rank)
 
 
 def choose_job(
@@ -799,21 +801,19 @@ def choose_job(
     done: dict[tuple[str, str], int],
     caps: dict[tuple[str, str], int],
 ) -> tuple[str, str] | None:
-    short_remaining = any(
-        (queues[key] or inflight[key]) and caps[key] < LONG_CAP for key in queues
-    )
-    ranked = []
-    for key, queue in queues.items():
-        if not queue:
-            continue
-        if inflight[key] >= inflight_limit(caps[key], short_remaining):
-            continue
-        uncovered = inflight[key] == 0 and done[key] == 0
-        ranked.append((0 if uncovered else 1, inflight[key], caps[key], key))
-    if not ranked:
+    """Finish one full template before opening the next.
+
+    Basin hopping runs before minima hopping. Within a method the smallest
+    force-call cap runs first. ``done`` stays in the signature for callers.
+    """
+    del done
+    open_keys = [key for key in queues if queues[key] or inflight[key]]
+    if not open_keys:
         return None
-    ranked.sort()
-    return ranked[0][-1]
+    active = min(open_keys, key=lambda key: _job_priority(key, caps))
+    if not queues[active]:
+        return None
+    return active
 
 
 def _worker(payload: dict) -> dict:
@@ -974,9 +974,10 @@ def main(argv: list[str] | None = None) -> None:
         jobs = [(args.problem, args.method)]
     if args.dest is not None:
         args.dest.mkdir(parents=True, exist_ok=True)
-    temperature = basin_settings()["temperature"]
+    settings = basin_settings()
     print(
-        f"basin example temperature={temperature:.16g} dr=0.5 optimizer=LBFGS fmax=0.1",
+        f"basin defaults temperature={settings['temperature']:.16g} "
+        f"dr={settings['dr']} optimizer={settings['optimizer'].__name__} fmax={settings['fmax']}",
         flush=True,
     )
     print(
