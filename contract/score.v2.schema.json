@@ -20,7 +20,7 @@
     "algorithm": { "type": "string" },
     "code_version": { "type": "string" },
     "commit": { "type": "string" },
-    "tuning": { "enum": ["default", "tuned"] },
+    "tuning": { "enum": ["default", "adjusted", "tuned"] },
     "present_source": { "type": "boolean" },
     "cap": { "type": ["integer", "null"] },
     "parameters": { "type": "object" },

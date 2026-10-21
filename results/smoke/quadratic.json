@@ -169,7 +169,7 @@
           "verify_calls": 4
         }
       ],
-      "tuning": "tuned"
+      "tuning": "adjusted"
     },
     {
       "algorithm": "gradient descent",
@@ -249,7 +249,7 @@
           "verify_calls": 4
         }
       ],
-      "tuning": "tuned"
+      "tuning": "adjusted"
     },
     {
       "algorithm": "newton",
@@ -402,7 +402,7 @@
           "verify_calls": 4
         }
       ],
-      "tuning": "tuned"
+      "tuning": "adjusted"
     }
   ],
   "schema": "optbench.result/v2",
