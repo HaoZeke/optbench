@@ -221,6 +221,36 @@ def _template_at_commit(root: Path, commit: str, template_id: str) -> dict | Non
     return loaded
 
 
+def _class_template_at_commit(root: Path, commit: str, class_name: str) -> str:
+    """Template id a develop benchmark class named at ``commit``.
+
+    A later edit can point the same class at a new template path. The
+    result file still holds the tracks from the earlier path. When that
+    new path is absent at ``commit``, the earlier file is the pin.
+    """
+    cache = getattr(_class_template_at_commit, "_cache", None)
+    if cache is None:
+        cache = {}
+        setattr(_class_template_at_commit, "_cache", cache)
+    key = (str(root.resolve()), commit)
+    if key not in cache:
+        text = ""
+        if commit and _is_work_tree(root) and _commit_in_checkout(root, commit):
+            try:
+                text = subprocess.check_output(
+                    ["git", "-C", str(root), "show", f"{commit}:benchmarks/bench_eon_develop.py"],
+                    stderr=subprocess.DEVNULL,
+                    text=True,
+                )
+            except (subprocess.CalledProcessError, FileNotFoundError, OSError):
+                text = ""
+        cache[key] = text
+    match = re.search(rf'\("{re.escape(class_name)}",\s*"([^"]+)"', cache[key])
+    if match is None:
+        return ""
+    return match.group(1)
+
+
 def _geometry_key(start) -> str:
     """One token per geometry so campaign names and asv indexes line up.
 
@@ -864,6 +894,14 @@ def _asv_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict])
             template = templates.get(template_id)
             pinned = _template_at_commit(root, str(result.commit_hash), template_id) if template_id else None
             source_template = pinned or template
+            # The class may have been pointed at a new path after this
+            # result was recorded. The earlier path still holds the pin.
+            version_template = pinned
+            if version_template is None and template_id and module_name == "bench_eon_develop":
+                historical_id = _class_template_at_commit(root, str(result.commit_hash), class_name)
+                if historical_id and historical_id != template_id:
+                    version_template = _template_at_commit(root, str(result.commit_hash), historical_id)
+            version_source = version_template or source_template
             problem_id = (
                 described.get("problem")
                 or (source_template or {}).get("problem")
@@ -875,7 +913,7 @@ def _asv_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict])
             if cap is None:
                 cap = _cap_of(problem, source_template or template, {})
             pin_note = "asv track_force_calls"
-            if template_id and pinned is None:
+            if template_id and version_template is None:
                 pin_note = "asv track_force_calls; code pin is the working-tree template"
             try:
                 tracked = track_rows(result, class_name)
@@ -925,9 +963,9 @@ def _asv_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict])
             row = _blank_row(
                 problem=problem_id,
                 template=template_id,
-                code=str((source_template or {}).get("code") or ""),
-                code_version=str((source_template or {}).get("code_version") or ""),
-                commit=str((source_template or {}).get("commit") or ""),
+                code=str((version_source or {}).get("code") or ""),
+                code_version=str((version_source or {}).get("code_version") or ""),
+                commit=str((version_source or {}).get("commit") or ""),
                 tuning=str((source_template or {}).get("tuning") or (source_template or {}).get("profile") or ""),
                 entry=f"{module_name}.{class_name}",
                 source="asv",

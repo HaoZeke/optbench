@@ -794,3 +794,22 @@ def test_the_current_ase_benchmark_records_the_band_total():
         text=True,
     )
     assert 'float(record["force_calls"]) / images' in old
+
+
+def test_renamed_develop_class_keeps_the_recorded_pin():
+    from optbench.board import _class_template_at_commit, _template_at_commit
+
+    root = Path(__file__).resolve().parents[1]
+    commit = "06efc6dd8ad69a707789c55bfe2f012e8503f05c"
+    named = _class_template_at_commit(root, commit, "EonDevelopTsLj38Dimer")
+    assert named == "eon/develop-ts-lj38-dimer"
+    pinned = _template_at_commit(root, commit, named)
+    assert pinned is not None
+    assert pinned["code_version"] == "3.6.0"
+    assert str(pinned["commit"]).startswith("7095b23")
+    assert _template_at_commit(root, commit, "eon/develop-ts-lj38-dimer-accept-energy") is None
+    pt = _class_template_at_commit(root, commit, "EonDevelopTsPtDimer")
+    assert pt == "eon/develop-ts-pt-dimer"
+    pt_pin = _template_at_commit(root, commit, pt)
+    assert pt_pin is not None
+    assert pt_pin["code_version"] == "3.6.0"
