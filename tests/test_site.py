@@ -104,8 +104,12 @@ def test_rendered_pages_use_the_board_rank():
     assert "tsopt-LJ38-profile.svg" in tsopt
     saddle = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "saddle-search.org").read_text(encoding="utf-8")
     assert 'data-board-table="ranked" data-problem="saddle-search/pt-island"' in saddle
-    assert "rgsaddle/saddle-dimer-rotskip-tuned" in saddle
-    assert 'data-field="par2_mean">10127.1<' in saddle
+    assert "rgsaddle/saddle-dimer-rotskip-tuned" not in saddle
+    assert "sella/pt-island-search-tuned" not in saddle
+    assert "10127.1" not in saddle
+    assert 'data-field="template">rgsaddle/saddle-dimer-rotskip</td>' in saddle
+    assert 'data-field="template">optim/saddle-hef-ffd-pt</td>' in saddle
+    assert 'data-field="par2_mean">10128</td><td data-field="success_rate">0</td>' in saddle
     assert "No full harness row." not in saddle
     assert "eon-3.5.0-saddle-pt-dimer" in saddle
     assert "not yet on the harness counter" in saddle
