@@ -188,11 +188,11 @@ stop and the Hessian index is not 0 for 88 of 100 starts. The success
 median is 53.5.
 
 Basin hopping and minima hopping on `globalopt/*` share
-`max_force_calls` 2000000. `lj100-binary` takes that number from
-`max_evaluations` in its problem file. Every other globalopt problem states that same cap, the cap recorded
-for the ranked eOn LJ38 rows. AMD-SVM on `accelerated-md/aladatom` is not
-scored. The problem has no force-call protocol and the harness has no EAM
-potential. hTST prefactors are not scored for the same reason.
+`max_force_calls` 2000000. The harness reads that field. On
+`lj100-binary`, `sample.max_evaluations` is the same number.
+AMD-SVM on `accelerated-md/aladatom` is not scored. The problem has no
+force-call protocol and the harness has no EAM potential. hTST
+prefactors are not scored for the same reason.
 
 ## LAMMPS
 
