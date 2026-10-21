@@ -15,6 +15,7 @@ An asv result that covers one start is a smoke run and is partial.
 The full set is the problem file's sample, or the Morse archive when
 that file gives no sample count. It is not the largest campaign file.
 A result that sets ``ranked false`` stays off the ranked table.
+A template that sets ``ranked false`` stays off the ranked table.
 Partial rows stay in the output. A campaign file and an asv track for
 the same run are one row. Only the newest full version of a template
 is ranked. Older full versions stay in the history list.
@@ -766,6 +767,11 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
             if named:
                 reason = f"{reason}; potential {named}"
             row["_declared_partial"] = reason
+        elif template is not None and template.get("ranked") is False:
+            reason = "template sets ranked false"
+            if named:
+                reason = f"{reason}; potential {named}"
+            row["_declared_partial"] = reason
         elif str(fields.get("partial") or "").lower() == "true":
             reason = "result file sets partial true"
             if named:
@@ -955,6 +961,8 @@ def _asv_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict])
                 row["note"] = str(exc)
                 unparsed.append(row)
                 continue
+            if (template or {}).get("ranked") is False or (source_template or {}).get("ranked") is False:
+                row["_declared_partial"] = "template sets ranked false"
             _apply_summary(row, summary, records)
             rows.append(row)
     return rows, unparsed, unmapped
