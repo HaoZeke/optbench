@@ -8,4 +8,4 @@ algorithm = "cluster search"
 tuning = "default"
 preset = "recommended"
 failure_cap = 1000000000
-note = "Stock preset recommended. cluster_search calls Config.recommended and quenches through rgmin 0.2.0 at 20832fd169932a1cd0d47ac84dc77fa9b435f940, the crate anneal 0.11.1 links. The archived start is translated to the origin. The seed is 20261018 plus the start index. One harness call is one Lennard-Jones energy and gradient at the same coordinates. The search stops inside the problem energy window or at 1000000000 harness calls."
+note = "Stock preset recommended. cluster_search calls Config.recommended and quenches through rgmin 0.2.0 at 20832fd169932a1cd0d47ac84dc77fa9b435f940, the crate anneal 0.11.1 links. The archived start is translated to the origin. The seed is 20261018 plus the start index. One harness call is one Lennard-Jones energy and gradient at the same coordinates. The search stops at the energy bound or at 1000000000 harness calls."

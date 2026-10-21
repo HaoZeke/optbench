@@ -4,7 +4,7 @@
 the stock constructors ``Config.communicating`` and ``Config.recommended``.
 Quenches go through the rgmin build anneal links. Energy and gradient
 at the same coordinates are one harness call, the same counter a GMIN
-row uses. A start stops when the energy is inside the problem window
+row uses. A start stops when the energy is inside the problem bound
 or the harness count reaches the problem cap.
 """
 
@@ -407,7 +407,7 @@ def _dat(summary: dict, template: dict, metrics: dict) -> str:
     lines = [
         "# counter harness. One force call is one Lennard-Jones energy and gradient at the same coordinates.",
         "# cluster_search quenches through the rgmin build linked by anneal.",
-        "# A start succeeds inside the problem energy window and under the problem cap.",
+        "# A start succeeds inside the problem energy bound and under the problem cap.",
     ]
     note = str(template.get("note") or "").strip()
     if note:
@@ -482,7 +482,7 @@ def _write_result(output: Path, problem: dict, template: dict, records: list[dic
         "par_factor": 2,
         "bootstrap_resamples": 2000,
         "bootstrap_seed": 20261015,
-        "note": "The problem energy window is the success rule. The harness counter is the call count.",
+        "note": "The problem energy bound is the success rule. The harness counter is the call count.",
         "runs": [
             {
                 "problem": problem["id"],

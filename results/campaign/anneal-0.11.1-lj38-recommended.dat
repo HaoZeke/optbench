@@ -1,7 +1,7 @@
 # counter harness. One force call is one Lennard-Jones energy and gradient at the same coordinates.
 # cluster_search quenches through the rgmin build linked by anneal.
-# A start succeeds inside the problem energy window and under the problem cap.
-# Stock preset recommended. cluster_search calls Config.recommended and quenches through rgmin 0.2.0 at 20832fd169932a1cd0d47ac84dc77fa9b435f940, the crate anneal 0.11.1 links. The archived start is translated to the origin. The seed is 20261018 plus the start index. One harness call is one Lennard-Jones energy and gradient at the same coordinates. The search stops inside the problem energy window or at 2000000 harness calls.
+# A start succeeds inside the problem energy bound and under the problem cap.
+# Stock preset recommended. cluster_search calls Config.recommended and quenches through rgmin 0.2.0 at 20832fd169932a1cd0d47ac84dc77fa9b435f940, the crate anneal 0.11.1 links. The archived start is translated to the origin. The seed is 20261018 plus the start index. One harness call is one Lennard-Jones energy and gradient at the same coordinates. The search stops inside the problem energy bound or at 2000000 harness calls.
 force_calls 239814
 force_calls_min 5739
 force_calls_max 1263938

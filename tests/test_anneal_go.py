@@ -34,7 +34,7 @@ STARTS = {
 }
 
 
-def test_problem_caps_and_windows():
+def test_problem_caps_and_bounds():
     for problem_id, cap in CAPS.items():
         problem = load_problem(ROOT / "problems" / f"{problem_id}.toml")
         assert force_cap(problem) == cap
@@ -99,7 +99,7 @@ def test_energy_and_gradient_at_one_geometry_are_one_call():
     assert state["grad_calls"] == 1
 
 
-def test_window_stops_the_search():
+def test_bound_stops_the_search():
     rng = np.random.default_rng(1)
     point = rng.normal(size=(6, 3))
     potential, state, objective, gradient = bind_potential(50, 1.0e9)

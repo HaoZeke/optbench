@@ -6,7 +6,7 @@
   "par_factor": 2,
   "bootstrap_resamples": 2000,
   "bootstrap_seed": 20261015,
-  "note": "The problem energy window is the success rule. The harness counter is the call count.",
+  "note": "The problem energy bound is the success rule. The harness counter is the call count.",
   "runs": [
     {
       "problem": "globalopt/lj75",

@@ -1,4 +1,4 @@
-"""Energy window for one global-optimisation start.
+"""Energy bound for one global-optimisation start.
 
 The published minimum is the reference energy on the problem. A start
 succeeds when that energy is finite and at or below the minimum plus
