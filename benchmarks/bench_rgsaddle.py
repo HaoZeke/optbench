@@ -467,15 +467,10 @@ def _bind_minmode(class_name: str, template_id: str, problem_id: str, starts: li
 # (class, template, problem, starts, timeout seconds)
 _ROWS = [
     ("RgsaddleLj38DimerLbfgs", "rgsaddle/dimer-lbfgs", "tsopt/LJ38", selected_lj38(), 1800),
-    ("RgsaddleLj38DimerLbfgsTuned", "rgsaddle/dimer-lbfgs-tuned", "tsopt/LJ38", selected_lj38(), 1800),
     ("RgsaddleLj38DimerFire", "rgsaddle/dimer-fire", "tsopt/LJ38", selected_lj38(), 1800),
-    ("RgsaddleLj38DimerFireTuned", "rgsaddle/dimer-fire-tuned", "tsopt/LJ38", selected_lj38(), 1800),
     ("RgsaddleLj38Lanczos", "rgsaddle/lanczos", "tsopt/LJ38", selected_lj38(), 1800),
-    ("RgsaddleLj38LanczosTuned", "rgsaddle/lanczos-tuned", "tsopt/LJ38", selected_lj38(), 1800),
     ("RgsaddleLj38DimerRotskip", "rgsaddle/dimer-rotskip", "tsopt/LJ38", selected_lj38(), 1800),
-    ("RgsaddleLj38DimerRotskipTuned", "rgsaddle/dimer-rotskip-tuned", "tsopt/LJ38", selected_lj38(), 1800),
     ("RgsaddleLj38Prfo", "rgsaddle/prfo", "tsopt/LJ38", selected_lj38(), 7200),
-    ("RgsaddleLj38PrfoTuned", "rgsaddle/prfo-tuned", "tsopt/LJ38", selected_lj38(), 7200),
     ("RgsaddlePtDimerLbfgs", "rgsaddle/pt-dimer-lbfgs", "tsopt/pt-island", selected_pt(), 7200),
     ("RgsaddlePtDimerLbfgsTuned", "rgsaddle/pt-dimer-lbfgs-tuned", "tsopt/pt-island", selected_pt(), 7200),
     ("RgsaddlePtDimerFire", "rgsaddle/pt-dimer-fire", "tsopt/pt-island", selected_pt(), 7200),

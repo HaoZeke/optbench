@@ -221,7 +221,8 @@ def _ts_specs() -> list[dict]:
     )
     specs = []
     for row in rows:
-        for profile in ("default", "tuned"):
+        profiles = ("default",) if row["problem"] == "tsopt/LJ38" else ("default", "tuned")
+        for profile in profiles:
             if profile == "default":
                 params = {"order": 1}
                 source = "default"

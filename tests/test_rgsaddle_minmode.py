@@ -163,7 +163,8 @@ def test_rgsaddle_templates_match_their_problem_stop():
         assert template["commit"] == "c0db2b8d333c557251635cb8bb7b3d81f0088a71"
         assert template["engine"] == "rgsaddle"
     assert "rgsaddle/dimer-lbfgs" in found
-    assert "rgsaddle/prfo-tuned" in found
+    assert "rgsaddle/prfo" in found
+    assert "rgsaddle/prfo-tuned" not in found
     assert "rgsaddle/mode-lanczos" in found
     assert "rgsaddle/saddle-dimer-lbfgs" in found
     assert "rgsaddle/pt-dimer-lbfgs" in found
