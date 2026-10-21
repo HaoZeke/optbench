@@ -184,7 +184,7 @@ Endpoint minima are free-atom float32 deltas against the reactant, compressed. A
 | --- | --- | --- | --- |
 | pt-island/adaptive_HSphere-lbfgs-davidson-sm50 | force_calls 423491, unique_saddles 114.9, fraction_connected 0.8 | 5.2987e+06, 0, 1 | not reproduced; saddle_novelty |
 | pt-island/adaptive_HSphere-lbfgs-lanczos-sm0 | force_calls 1.00343e+06, unique_saddles 130.4, fraction_connected 0.9 | 1.92665e+06, 0.5, 0.9682 | not reproduced; saddle_novelty |
-| pt-island/adaptive_HSphere-lbfgs-lanczos-sm50 | force_calls 814519, unique_saddles 142.6, fraction_connected 0.9 | 1.58264e+06, 0.7, 0.93584 | not reproduced; saddle_novelty |
+| pt-island/adaptive_HSphere-lbfgs-lanczos-sm50 | force_calls 814519, unique_saddles 142.6, fraction_connected 0.9 | 957258, 169.7, 0.664682 | not reproduced; saddle_lanczos_sm50 |
 | pt-island/eon-dimer | force_calls 3.77888e+06, unique_saddles 109.222, fraction_connected 0.746017 | 6.97488e+06, 91.7, 0.691952 | not reproduced; eon_saddle_count |
 | pt-island/eon-dimer-cg-20-rotations | — | — | not rerun |
 | pt-island/eon-dimer-cg-20-rotations-20-bowl_breakout | — | — | not rerun |
@@ -333,10 +333,15 @@ The 3.5.0 file already stores the per-image mean, 142 against the archive 120. L
 
 ### saddle_novelty
 
-The harness link and novelty test uses Cartesian RMSD 0.5 over the full island. Distinct saddles collapse: benchmark_unique_saddles is 0, 0.7, and 0.5 against the archive 115, 143, and 130. benchmark_fraction_connected stays near 1 while the v2 connected fraction is about 0. The per-search cap of 5064 then puts every repetition on the PAR-2 cap.
+The harness link and novelty test uses Cartesian RMSD 0.5 over the full island. Distinct saddles collapse: benchmark_unique_saddles is 0 and 0.5 against the archive 115 and 130. benchmark_fraction_connected stays near 1 while the v2 connected fraction is about 0. The per-search cap of 5064 then puts every repetition on the PAR-2 cap.
 
 - saddle-search/pt-island/adaptive_HSphere-lbfgs-davidson-sm50
 - saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm0
+
+### saddle_lanczos_sm50
+
+The paper-ini adaptive hypersphere Lanczos run stops at 27 barriers at or below 1.5 eV or at 5000 searches. Force calls are 957258 against 814519, inside the archived standard error. benchmark_unique_saddles is 169.7 against 142.6 and benchmark_fraction_connected is 0.665 against 0.9.
+
 - saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm50
 
 ### eon_saddle_count

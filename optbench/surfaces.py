@@ -161,6 +161,7 @@ def _morse_numpy(
 
 _MORSE_LIB = None
 _MORSE_TRIED = False
+_MORSE_PATH: Path | None = None
 
 
 def _morse_library():
@@ -175,6 +176,8 @@ def _morse_library():
     flags = "-O3 -march=native -fPIC -shared"
     digest = hashlib.sha256(source.read_bytes() + flags.encode()).hexdigest()[:16]
     library = Path(tempfile.gettempdir()) / f"optbench-morse-{digest}.so"
+    global _MORSE_PATH
+    _MORSE_PATH = library
     if not library.is_file():
         try:
             subprocess.check_call(
@@ -215,6 +218,14 @@ def _morse_library():
     ]
     _MORSE_LIB = loaded
     return loaded
+
+
+def morse_library_file() -> Path:
+    """The compiled pair library ``morse_smooth_linear`` calls."""
+    library = _morse_library()
+    if library is None or _MORSE_PATH is None:
+        raise RuntimeError("the Morse pair library did not compile")
+    return _MORSE_PATH
 
 
 def morse_smooth_linear(

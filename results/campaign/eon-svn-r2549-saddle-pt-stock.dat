@@ -1,5 +1,8 @@
+force_calls 4472202.888888889
+force_calls_min 1142900
+force_calls_max 8398444
 call_unit total
-nfailed 1
+nfailed 0
 code EON (SVN r2549)
 code_version r2549
 commit r2549
@@ -7,7 +10,13 @@ algorithm Dimer
 template eon-r2549/saddle-pt-stock
 problem saddle-search/pt-island
 reducer harness
+force_calls_mean_error 641895.5531
+unique_saddles 113.7777778
+fraction_connected 0.7532897839
+total_searches 12136.33333
 counter harness
 count_keys HarnessCounter
 tuning stock
 potential morse/smooth/linear
+scored_runs 1-9
+launched_runs 1-10

@@ -296,21 +296,21 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="template">eon-r2549/saddle-pt-stock</td>
    <td data-field="version">EON (SVN r2549) r2549</td>
    <td data-field="commit">r2549</td>
-   <td data-field="par2_mean">2e+08</td>
-   <td data-field="mean_calls">3.04081e+06</td>
-   <td data-field="median_calls">3.04081e+06</td>
-   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
-   <td data-field="n">1</td>
+   <td data-field="par2_mean">4.4722e+06</td>
+   <td data-field="mean_calls">4.4722e+06</td>
+   <td data-field="median_calls">4.34911e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">9</td>
    </tr>
    </tbody></table></div>
-   <h3>eOn (develop a7aa574)</h3>
+   <h3>eOn (develop 500350d9)</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
    <td>saddle search</td>
-   <td>develop</td>
-   <td>a7aa57472fb7</td>
+   <td>fix/develop-regressions-vs-350</td>
+   <td>500350d9fae8</td>
    <td><a href="https://github.com/TheochemUI/eon">https://github.com/TheochemUI/eon</a></td>
    </tr>
    </tbody></table></div>
@@ -320,13 +320,13 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="saddle-search/pt-island" data-template="eon-develop/saddle-pt-stock">
    <td>Pt heptamer island</td>
    <td data-field="template">eon-develop/saddle-pt-stock</td>
-   <td data-field="version">eOn (develop a7aa574) a7aa574</td>
-   <td data-field="commit">a7aa57472fb7</td>
-   <td data-field="par2_mean">2e+08</td>
-   <td data-field="mean_calls">1.61823e+06</td>
-   <td data-field="median_calls">1.61823e+06</td>
-   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
-   <td data-field="n">1</td>
+   <td data-field="version">eOn (develop 500350d9) 500350d9</td>
+   <td data-field="commit">500350d9fae8</td>
+   <td data-field="par2_mean">5.1294e+06</td>
+   <td data-field="mean_calls">5.1294e+06</td>
+   <td data-field="median_calls">5.15872e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">9</td>
    </tr>
    </tbody></table></div>
    <h3>rgmin</h3>
@@ -1126,4 +1126,19 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
+   <h3>SoftSaddle</h3>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>saddle search</td>
+   <td>softsaddle/upstream</td>
+   <td>5a00aeede06f</td>
+   <td><a href="https://github.com/lode-org/optbench">https://github.com/lode-org/optbench</a></td>
+   </tr>
+   </tbody></table></div>
+   <p>No full ranked run.</p>
+   <p>No full ranked run</p><ul>
+   <li>Pt heptamer island: partial.</li>
+   </ul>
    </section>

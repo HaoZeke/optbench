@@ -192,7 +192,7 @@ MATCHES: list[dict] = [
     # saddle search
     {"key": "saddle-search/pt-island/eon-dimer", "template": "eon-svn/saddle-pt-dimer", "branch": "main", "path": "results/campaign/eon-3.5.0-saddle-pt-classic.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "cause": "eon_saddle_count"},
     {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-davidson-sm50", "template": "softsaddle/saddle-davidson-sm50", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-davidson-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
-    {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm50", "template": "softsaddle/saddle-lanczos-sm50", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
+    {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm50", "template": "softsaddle/saddle-lanczos-sm50", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_lanczos_sm50"},
     {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm0", "template": "softsaddle/saddle-lanczos-sm0", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm0.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
     # globalopt and htst and aladatom rates
     {"key": "globalopt/lj38/eon-basinhopping", "template": "eon-client/bh-lj38", "branch": "entries/eon-svn-lane-a", "path": "results/campaign/eon-client-bh-lj38.dat"},
@@ -262,9 +262,14 @@ CAUSE_TEXT = {
     ),
     "saddle_novelty": (
         "The harness link and novelty test uses Cartesian RMSD 0.5 over the full island. "
-        "Distinct saddles collapse: benchmark_unique_saddles is 0, 0.7, and 0.5 against the archive 115, 143, and 130. "
+        "Distinct saddles collapse: benchmark_unique_saddles is 0 and 0.5 against the archive 115 and 130. "
         "benchmark_fraction_connected stays near 1 while the v2 connected fraction is about 0. "
         "The per-search cap of 5064 then puts every repetition on the PAR-2 cap."
+    ),
+    "saddle_lanczos_sm50": (
+        "The paper-ini adaptive hypersphere Lanczos run stops at 27 barriers at or below 1.5 eV or at 5000 searches. "
+        "Force calls are 957258 against 814519, inside the archived standard error. "
+        "benchmark_unique_saddles is 169.7 against 142.6 and benchmark_fraction_connected is 0.665 against 0.9."
     ),
     "pele_bh_defaults": (
         "The archived driver is the dangling path bin/js850/globalopt.py. "

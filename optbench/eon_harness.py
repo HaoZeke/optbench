@@ -104,24 +104,64 @@ def _on_alarm(signum, frame):
     raise BudgetExceeded()
 
 
-def bridge_binary() -> Path:
-    """Compile the C ext_pot forwarder once per source hash."""
-    source = Path(__file__).with_name("extpot_bridge.c")
-    digest = hashlib.sha256(source.read_bytes()).hexdigest()[:16]
-    dest = Path("/tmp/optbench-extpot-bridge") / digest / "extpot-bridge"
+def _compile_cached(dest: Path, command: list[str]) -> Path:
+    """Compile ``dest`` once. Concurrent workers use distinct temporaries."""
     if dest.is_file():
         return dest
     dest.parent.mkdir(parents=True, exist_ok=True)
-    temporary = dest.with_suffix(".tmp")
+    temporary = dest.with_name(f".{dest.name}.{os.getpid()}.tmp")
     subprocess.run(
-        ["cc", "-O2", "-o", str(temporary), str(source)],
+        [*command, "-o", str(temporary)],
         check=True,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         text=True,
     )
-    temporary.replace(dest)
+    if dest.is_file():
+        temporary.unlink(missing_ok=True)
+        return dest
+    try:
+        temporary.replace(dest)
+    except FileNotFoundError:
+        if not dest.is_file():
+            raise
     return dest
+
+
+def bridge_binary() -> Path:
+    """Compile the C ext_pot forwarder once per source hash."""
+    source = Path(__file__).with_name("extpot_bridge.c")
+    digest = hashlib.sha256(source.read_bytes()).hexdigest()[:16]
+    dest = Path("/tmp/optbench-extpot-bridge") / digest / "extpot-bridge"
+    return _compile_cached(dest, ["cc", "-O2", str(source)])
+
+
+def fast_server_binary() -> Path:
+    """Compile the Morse harness server once per source hash.
+
+    The process dlopens the same pair library ``morse_smooth_linear``
+    loads and speaks the PotServer dialogue.
+    """
+    server = Path(__file__).with_name("extpot_server.c")
+    digest = hashlib.sha256(server.read_bytes()).hexdigest()[:16]
+    dest = Path("/tmp/optbench-extpot-server") / digest / "extpot-server"
+    return _compile_cached(dest, ["cc", "-O2", str(server), "-ldl"])
+
+
+def preload_library() -> Path:
+    """Compile the in-process ext_pot exchange once per source hash.
+
+    eonclient still calls ``system`` on the bridge path. ``LD_PRELOAD``
+    answers that call in-process, so the harness count and the reply file
+    stay on the same dialogue without a fork per force evaluation.
+    """
+    source = Path(__file__).with_name("extpot_preload.c")
+    digest = hashlib.sha256(source.read_bytes()).hexdigest()[:16]
+    dest = Path("/tmp/optbench-extpot-preload") / digest / "extpot_preload.so"
+    return _compile_cached(
+        dest,
+        ["cc", "-shared", "-fPIC", "-O2", str(source), "-ldl", "-pthread"],
+    )
 
 
 def _cell(box) -> np.ndarray:
