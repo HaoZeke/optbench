@@ -1303,7 +1303,8 @@ def _ezga(budget: Budget, x0: np.ndarray, job: dict) -> None:
     generation count are the force-call cap unless the job sets
     ezga_generations. The population is 16 copies of the start unless
     the job sets ezga_population. A quench is a point whose maximum
-    atomic force is inside fmax.
+    atomic force is inside fmax. The engine catches Exception, so a
+    hit and the force-call cap leave through BaseException.
     """
     from ase import Atoms
     from ase.calculators.calculator import Calculator
@@ -1320,18 +1321,27 @@ def _ezga(budget: Budget, x0: np.ndarray, job: dict) -> None:
     else:
         generations = int(job["ezga_generations"])
 
+    class _Halt(BaseException):
+        """Leave EZGA. Its engine catches Exception, including the cap."""
+
     class _Calc(Calculator):
         implemented_properties = ["energy", "forces"]
 
         def calculate(self, atoms=None, properties=None, system_changes=None):
             Calculator.calculate(self, atoms, properties, system_changes)
             point = np.asarray(atoms.positions, dtype=np.float64).reshape(-1)
-            energy, gradient = budget.fg(point)
+            try:
+                energy, gradient = budget.fg(point)
+            except ForceCallCap:
+                raise _Halt() from None
             forces = -np.asarray(gradient, dtype=np.float64).reshape(-1, 3)
             self.results["energy"] = float(energy)
             self.results["forces"] = forces
             atomic = float(np.linalg.norm(forces, axis=1).max()) if forces.size else 0.0
-            budget.note_quench(point, float(energy), gradient, converged=atomic < fmax)
+            try:
+                budget.note_quench(point, float(energy), gradient, converged=atomic < fmax)
+            except Hit:
+                raise _Halt() from None
 
     pos = np.asarray(x0, dtype=np.float64).reshape(-1, 3)
     frames = [
@@ -1370,7 +1380,10 @@ def _ezga(budget: Budget, x0: np.ndarray, job: dict) -> None:
                 "mutation_funcs": [mutation_rattle(std=0.2, seed=int(job["seed"]))],
                 "simulator": {"calculator": runner},
             }
-            build_default_engine(load_config(config)).run()
+            try:
+                build_default_engine(load_config(config)).run()
+            except _Halt:
+                return
         finally:
             os.chdir(cwd)
 
