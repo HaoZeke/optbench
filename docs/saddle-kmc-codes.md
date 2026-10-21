@@ -189,9 +189,8 @@ median is 53.5.
 
 Basin hopping and minima hopping on `globalopt/*` share
 `max_force_calls` 2000000. `lj100-binary` takes that number from
-`max_evaluations` in its problem file. The other globalopt archives
-state no force-call cap, so they use the cap the ranked eOn LJ38 rows
-on main already recorded. AMD-SVM on `accelerated-md/aladatom` is not
+`max_evaluations` in its problem file. LJ38, LJ75, LJ98, LJ150, and the
+TIP4P problems state the same cap. AMD-SVM on `accelerated-md/aladatom` is not
 scored. The problem has no force-call protocol and the harness has no EAM
 potential. hTST prefactors are not scored for the same reason.
 

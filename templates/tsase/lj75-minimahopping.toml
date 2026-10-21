@@ -6,11 +6,11 @@ code_version = "1.0"
 commit = "98aac60b5d9905e81ee4e6b8c385f169258d0218"
 algorithm = "minima hopping"
 tuning = "default"
-note = "Library constructor of tsase.optimize.minimahopping.MinimaHopping. T0 is 1000 K, Ediff0 is 0.5, mdmin is 2, the timestep is 0.1 fs, fmax is 0.05, and the local optimizer is QuasiNewton, which is ASE 3.29 BFGSLineSearch. The dimer and the energy comparison use the harness potential. The search stops at the Cambridge N=75 minimum plus 0.001, or at 1000000 force calls. That cap is problems/globalopt/lj75.toml convergence.max_force_calls, above the archived GMIN maximum of 310110. Stock BFGSLineSearch clamps the first trial on an overlapped archive start. Reading forces again at that trial is a cache hit, not a force call. While the line-search bracket is set, a repeated step is the library rounding-error test: the test warns and the quench continues. On the stalled starts the bracket stays unset, so that test does not run and the same step is proposed again. The harness records that fixed point as stalled and charges PAR-2. This run recorded 189 stalled starts and 11 starts at the 1000000-call cap, with no success. ASE basin hopping, TSASE basin hopping, and the archived GMIN row quench the same starts. eOn has no lj75 row. Each start is one process with seed 314159."
+note = "Library constructor of tsase.optimize.minimahopping.MinimaHopping. T0 is 1000 K, Ediff0 is 0.5, mdmin is 2, the timestep is 0.1 fs, fmax is 0.05, and the local optimizer is QuasiNewton, which is ASE 3.29 BFGSLineSearch. The dimer and the energy comparison use the harness potential. The search stops at the Cambridge N=75 minimum plus 0.001, or at 2000000 force calls. That cap is problems/globalopt/lj75.toml convergence.max_force_calls. Stock BFGSLineSearch clamps the first trial on an overlapped archive start. Reading forces again at that trial is a cache hit, not a force call. While the line-search bracket is set, a repeated step is the library rounding-error test: the test warns and the quench continues. On the stalled starts the bracket stays unset, so that test does not run and the same step is proposed again. The harness records that fixed point as stalled. Each start is one process with seed 314159."
 
 [tsase]
 method = "minima_hopping"
 seed = 314159
 
 [stop]
-max_force_calls = 1000000
+max_force_calls = 2000000

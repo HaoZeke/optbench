@@ -1,0 +1,1 @@
+TSASE basin hopping and minima hopping on LJ38 and LJ75 use the problem force-call cap of 2000000. Library settings are unchanged: basin hopping stays at temperature 100 kB, dr 0.1, fmax 0.1, and SDLBFGS maxstep 0.05. Minima hopping stays at T0 1000 K, Ediff0 0.5, mdmin 2, timestep 0.1 fs, fmax 0.05, and QuasiNewton.

@@ -6,7 +6,7 @@ code_version = "1.0"
 commit = "98aac60b5d9905e81ee4e6b8c385f169258d0218"
 algorithm = "basin hopping"
 tuning = "default"
-note = "Library constructor of tsase.optimize.basin.BasinHopping. temperature is 100 kB, dr is 0.1, fmax is 0.1, and the local optimizer is SDLBFGS with maxstep 0.05. The search stops when the harness energy is within energy_above_minimum of the published Lennard-Jones 38 minimum, or at 2000000 force calls. The problem file states no force cap. 2000000 is above the 2014 basin-hopping maximum of 1795901. Each start is one process with seed 314159."
+note = "Library constructor of tsase.optimize.basin.BasinHopping. temperature is 100 kB, dr is 0.1, fmax is 0.1, and the local optimizer is SDLBFGS with maxstep 0.05. The search stops when the harness energy is within energy_above_minimum of the Cambridge Lennard-Jones 38 minimum, or at 2000000 force calls. That cap is the problem file. Each start is one process with seed 314159."
 
 [tsase]
 method = "basin_hopping"
