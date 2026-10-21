@@ -251,13 +251,13 @@ def campaign_ase(
 
 
 @app.command
-def smoke(
-    output: Path = Path("results/smoke/quadratic.json"),
+def quadratic(
+    output: Path = Path("results/quadratic/quadratic.json"),
     root: Path = Path("."),
     commit: str = "",
 ) -> None:
-    """Run the quadratic v2 smoke. This is not a campaign."""
-    from optbench.smoke import write_smoke
+    """Run the quadratic v2 sample. This is not a campaign."""
+    from optbench.quadratic import write_smoke
 
     document = write_smoke(output, commit=commit or _head(root))
     print(f"wrote {output} runs={len(document['runs'])}")
@@ -290,7 +290,7 @@ def statistics(
     results: Path = Path("results/asv"),
     commit: str = "",
 ) -> None:
-    """Score the quadratic sample from saved asv tracks. This does not rerun it."""
+    """Score the quadratic sample from saved asv tracks."""
     from optbench.asv_score import write_statistics_from_asv
 
     document = write_statistics_from_asv(output, root=root, results_dir=root / results)
@@ -323,7 +323,7 @@ def board(
     root: Path = Path("."),
     output: Path = Path("results/board"),
 ) -> None:
-    """Score committed results and write the v2 leaderboard. This does not run a campaign."""
+    """Score committed results and write the v2 leaderboard."""
     from optbench.board import write_board
 
     destination = output if output.is_absolute() else root / output

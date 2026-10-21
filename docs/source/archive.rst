@@ -89,21 +89,21 @@ The full tables, including archived rows, are on the problem page.
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/lj38">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="label">GMIN · basin-hopping with symmetrise csm moves</td><td data-field="family">Basin hopping / global</td><td data-field="family_rank">1</td><td data-field="par2_mean"></td><td data-field="published">6421</td><td data-field="median_calls">4771</td><td data-field="mean_calls">6421</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="label">GMIN (df8da599) · basin-hopping with continuous symmetry measures</td><td data-field="family">Basin hopping / global</td><td data-field="family_rank">1</td><td data-field="par2_mean">5883.83</td><td data-field="published"></td><td data-field="median_calls">3980.5</td><td data-field="mean_calls">5883.83</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    <p><a href="generated/suites/globalopt/lj38.html">Family tables, overall table, and performance profile</a>.</p>
    <h3>lj150</h3>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/lj150">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="label">GMIN · core orbits symmetrisation scheme</td><td data-field="family">Basin hopping / global</td><td data-field="family_rank">1</td><td data-field="par2_mean"></td><td data-field="published">667.38</td><td data-field="median_calls"></td><td data-field="mean_calls">667.38</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">0</td></tr>
+   <tr><td data-field="label">GMIN · core orbits symmetrisation scheme</td><td data-field="family">Basin hopping / global</td><td data-field="family_rank">1</td><td data-field="par2_mean"></td><td data-field="published">667.38</td><td data-field="median_calls"></td><td data-field="mean_calls">667.38</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    <p><a href="generated/suites/globalopt/lj150.html">Family tables, overall table, and performance profile</a>.</p>
    <h3>lj75</h3>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/lj75">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="label">GMIN · basin-hopping with symmetrise csm moves</td><td data-field="family">Basin hopping / global</td><td data-field="family_rank">1</td><td data-field="par2_mean"></td><td data-field="published">60692</td><td data-field="median_calls">38118</td><td data-field="mean_calls">60692</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">0</td></tr>
+   <tr><td data-field="label">GMIN · basin-hopping with symmetrise csm moves</td><td data-field="family">Basin hopping / global</td><td data-field="family_rank">1</td><td data-field="par2_mean"></td><td data-field="published">60692</td><td data-field="median_calls">38118</td><td data-field="mean_calls">60692</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
    </tbody></table></div>
    <p class="bench-gaps">A run short of the full set, or a run that is not the stock method, stays off the ranked table.</p>
    <p><a href="generated/suites/globalopt/lj75.html">Family tables, overall table, and performance profile</a>.</p>
@@ -111,28 +111,28 @@ The full tables, including archived rows, are on the problem page.
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/lj98">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="label">GMIN · core orbits symmetrisation scheme</td><td data-field="family">Basin hopping / global</td><td data-field="family_rank">1</td><td data-field="par2_mean"></td><td data-field="published">1281.92</td><td data-field="median_calls"></td><td data-field="mean_calls">1281.92</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">0</td></tr>
+   <tr><td data-field="label">GMIN · core orbits symmetrisation scheme</td><td data-field="family">Basin hopping / global</td><td data-field="family_rank">1</td><td data-field="par2_mean"></td><td data-field="published">1281.92</td><td data-field="median_calls"></td><td data-field="mean_calls">1281.92</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    <p><a href="generated/suites/globalopt/lj98.html">Family tables, overall table, and performance profile</a>.</p>
    <h3>tip4p10</h3>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/tip4p10">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="label">GMIN · linear temperature basin-paving</td><td data-field="family">Basin hopping / global</td><td data-field="family_rank">1</td><td data-field="par2_mean"></td><td data-field="published">16099</td><td data-field="median_calls">11387</td><td data-field="mean_calls">16099</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">0</td></tr>
+   <tr><td data-field="label">GMIN · linear temperature basin-paving</td><td data-field="family">Basin hopping / global</td><td data-field="family_rank">1</td><td data-field="par2_mean"></td><td data-field="published">16099</td><td data-field="median_calls">11387</td><td data-field="mean_calls">16099</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">10000</td></tr>
    </tbody></table></div>
    <p><a href="generated/suites/globalopt/tip4p10.html">Family tables, overall table, and performance profile</a>.</p>
    <h3>tip4p15</h3>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/tip4p15">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="label">GMIN · linear temperature basin-paving</td><td data-field="family">Basin hopping / global</td><td data-field="family_rank">1</td><td data-field="par2_mean"></td><td data-field="published">625362</td><td data-field="median_calls">416929</td><td data-field="mean_calls">625362</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">0</td></tr>
+   <tr><td data-field="label">GMIN · linear temperature basin-paving</td><td data-field="family">Basin hopping / global</td><td data-field="family_rank">1</td><td data-field="par2_mean"></td><td data-field="published">625362</td><td data-field="median_calls">416929</td><td data-field="mean_calls">625362</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">500</td></tr>
    </tbody></table></div>
    <p><a href="generated/suites/globalopt/tip4p15.html">Family tables, overall table, and performance profile</a>.</p>
    <h3>tip4p20</h3>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/tip4p20">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="label">GMIN · linear temperature basin-paving</td><td data-field="family">Basin hopping / global</td><td data-field="family_rank">1</td><td data-field="par2_mean"></td><td data-field="published">2.55667e+07</td><td data-field="median_calls">1.81821e+07</td><td data-field="mean_calls">2.55667e+07</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">0</td></tr>
+   <tr><td data-field="label">GMIN · linear temperature basin-paving</td><td data-field="family">Basin hopping / global</td><td data-field="family_rank">1</td><td data-field="par2_mean"></td><td data-field="published">2.55667e+07</td><td data-field="median_calls">1.81821e+07</td><td data-field="mean_calls">2.55667e+07</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    <p><a href="generated/suites/globalopt/tip4p20.html">Family tables, overall table, and performance profile</a>.</p>
    <h2 id="suite-lowest-eigenvector">Lowest eigenvector</h2>
@@ -140,7 +140,7 @@ The full tables, including archived rows, are on the problem page.
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="lowest-eigenvector/lj38">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="label">Sella (0.1.1) · sella</td><td data-field="family">Single-ended saddle</td><td data-field="family_rank">1</td><td data-field="par2_mean"></td><td data-field="published">17.8</td><td data-field="median_calls"></td><td data-field="mean_calls">17.8</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
+   <tr><td data-field="label">Sella (0.1.1) · lowest eigenvector</td><td data-field="family">Minimum mode</td><td data-field="family_rank">1</td><td data-field="par2_mean">17.8</td><td data-field="published"></td><td data-field="median_calls">17</td><td data-field="mean_calls">17.8</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
    </tbody></table></div>
    <p class="bench-gaps">A run short of the full set, or a run that is not the stock method, stays off the ranked table.</p>
    <p><a href="generated/suites/lowest-eigenvector/lj38.html">Family tables, overall table, and performance profile</a>.</p>
@@ -173,7 +173,7 @@ The full tables, including archived rows, are on the problem page.
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="mlopt/emt-pt38">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="label">Pyamff (8037eb98) · pyamff-rprop10-7-fcoeff0</td><td data-field="family">Minimizers</td><td data-field="family_rank">1</td><td data-field="par2_mean"></td><td data-field="published">97.58</td><td data-field="median_calls"></td><td data-field="mean_calls">97.58</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">0</td></tr>
+   <tr><td data-field="label">n2p2 (2.3.0) · Kalman energy</td><td data-field="family">Minimizers</td><td data-field="family_rank">1</td><td data-field="par2_mean">25.02</td><td data-field="published"></td><td data-field="median_calls">14</td><td data-field="mean_calls">25.02</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">50</td></tr>
    </tbody></table></div>
    <p><a href="generated/suites/mlopt/emt-pt38.html">Family tables, overall table, and performance profile</a>.</p>
    <h2 id="suite-neb">Nudged elastic band</h2>
@@ -190,7 +190,7 @@ The full tables, including archived rows, are on the problem page.
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="hTST/Al">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="label">eOn (r2006) · Dimer-CG rotation: max=10 tol=1</td><td data-field="family">Minimum mode</td><td data-field="family_rank">1</td><td data-field="par2_mean"></td><td data-field="published">21070</td><td data-field="median_calls"></td><td data-field="mean_calls">21070</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">0</td></tr>
+   <tr><td data-field="label">eOn (r2006) · Dimer-CG rotation: max=10 tol=1</td><td data-field="family">Minimum mode</td><td data-field="family_rank">1</td><td data-field="par2_mean"></td><td data-field="published">21070</td><td data-field="median_calls"></td><td data-field="mean_calls">21070</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">639</td></tr>
    </tbody></table></div>
    <p class="bench-gaps">A run short of the full set, or a run that is not the stock method, stays off the ranked table.</p>
    <p><a href="generated/suites/hTST/Al.html">Family tables, overall table, and performance profile</a>.</p>
@@ -198,7 +198,7 @@ The full tables, including archived rows, are on the problem page.
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="hTST/Pt">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="label">TSASE · quenchDimer+neb-QM</td><td data-field="family">Band / NEB</td><td data-field="family_rank">1</td><td data-field="par2_mean"></td><td data-field="published">293200</td><td data-field="median_calls"></td><td data-field="mean_calls">293200</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">0</td></tr>
+   <tr><td data-field="label">TSASE · quenchDimer+neb-QM</td><td data-field="family">Band / NEB</td><td data-field="family_rank">1</td><td data-field="par2_mean"></td><td data-field="published">293200</td><td data-field="median_calls"></td><td data-field="mean_calls">293200</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">13</td></tr>
    </tbody></table></div>
    <p class="bench-gaps">A run short of the full set, or a run that is not the stock method, stays off the ranked table.</p>
    <p><a href="generated/suites/hTST/Pt.html">Family tables, overall table, and performance profile</a>.</p>

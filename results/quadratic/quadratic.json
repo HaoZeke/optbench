@@ -1,9 +1,9 @@
 {
   "bootstrap_resamples": 2000,
   "bootstrap_seed": 20261015,
-  "note": "Quadratic smoke of the harness counter and the v2 score. Not a Lennard-Jones campaign.",
+  "note": "Quadratic sample of the harness counter and the v2 score. Not a Lennard-Jones campaign.",
   "par_factor": 2,
-  "problem": "smoke/quadratic",
+  "problem": "quadratic/bowl",
   "runs": [
     {
       "algorithm": "gradient descent",
@@ -407,5 +407,5 @@
   ],
   "schema": "optbench.result/v2",
   "scoring": "par2-bootstrap",
-  "status": "smoke"
+  "status": "quadratic"
 }

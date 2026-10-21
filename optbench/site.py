@@ -153,7 +153,7 @@ def _slug(text: str) -> str:
 
 def _caption(primary: str | None) -> str:
     captions = {
-        "force_calls": "Fewest force calls first. Failures are left out of this mean.",
+        "force_calls": "Fewest force calls first. Failures are left out of this mean. The 2014 archive rows stay in this table.",
         "mean_epoch": "Fewest epochs first. Failures are left out of this mean.",
         "mean_epochs": "Fewest epochs first. Failures are left out of this mean.",
         "avg_energy": "Lowest energy first.",
@@ -274,7 +274,7 @@ def problem_html(
                 lines.append(f"<dt>{html.escape(label)}</dt><dd>{html.escape(text)}</dd>")
             lines.append("</dl>")
     if smoke_note:
-        lines.append(f'<p class="bench-smoke">{html.escape(smoke_note)}</p>')
+        lines.append(f'<p class="bench-aside">{html.escape(smoke_note)}</p>')
     lines.append('<div class="bench-archive">')
 
     prepared = []
@@ -369,7 +369,7 @@ def _rule_html(problem: dict, smoke_note: str = "") -> str:
             lines.append(f"<dt>{html.escape(label)}</dt><dd>{html.escape(text)}</dd>")
         lines.append("</dl>")
     if smoke_note:
-        lines.append(f'<p class="bench-smoke">{html.escape(smoke_note)}</p>')
+        lines.append(f'<p class="bench-aside">{html.escape(smoke_note)}</p>')
     return "\n".join(lines)
 
 
@@ -618,16 +618,16 @@ def _write_code_pages(root: Path, document: dict) -> None:
 
 
 def _smoke_note(root: Path) -> str:
-    smoke_path = root / "softsaddle" / "entry.toml"
-    if not smoke_path.is_file():
+    entry_path = root / "softsaddle" / "entry.toml"
+    if not entry_path.is_file():
         return ""
-    record = tomllib.loads(smoke_path.read_text(encoding="utf-8"))
+    record = tomllib.loads(entry_path.read_text(encoding="utf-8"))
     archived = record.get("archived") or {}
-    smoke_run = record.get("smoke") or {}
-    if not archived or not smoke_run:
+    short_run = record.get("check") or {}
+    if not archived or not short_run:
         return ""
     return (
-        f"A {smoke_run.get('searches')}-search SoftSaddle smoke is outside this rank. "
+        f"A {short_run.get('searches')}-search SoftSaddle batch stays off this rank. "
         f"The {archived.get('date')} {archived.get('entry')} entry records "
         f"{archived.get('force_calls')} force calls."
     )

@@ -1,7 +1,7 @@
 {
+  "client_counter": [],
   "full_n": 1000,
   "id": "minimization/lj38",
-  "not_comparable": [],
   "profile": {
     "area_log10": {
       "ASE (3.29.0) \u00b7 BFGS": 0.3740297696124967,
@@ -538,7 +538,6 @@
       "code": "",
       "code_version": "",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "newton-method",
       "failures": {},
@@ -584,7 +583,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-dogleg",
       "failures": {
@@ -635,7 +633,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-dogleg",
       "failures": {
@@ -686,7 +683,6 @@
       "code": "",
       "code_version": "",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "tsase-sdlbfgs",
       "failures": {},
@@ -732,7 +728,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-newton",
       "failures": {
@@ -783,7 +778,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-newton",
       "failures": {
@@ -834,7 +828,6 @@
       "code": "OPTIM",
       "code_version": "",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "optim",
       "failures": {},
@@ -880,7 +873,6 @@
       "code": "",
       "code_version": "",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "pele-lbfgs-M100-maxstep0.2",
       "failures": {},
@@ -926,7 +918,6 @@
       "code": "eOn",
       "code_version": "3.6.0",
       "commit": "1d71c944501832bfafb955ffe13b9aae50c8efd4",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-main-lj38-lbfgs-m100",
       "failures": {
@@ -977,7 +968,6 @@
       "code": "Eon",
       "code_version": "r2025",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "eon-lbfgs",
       "failures": {},
@@ -1023,7 +1013,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-lbfgs-m100",
       "failures": {
@@ -1074,7 +1063,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-lbfgs-m100",
       "failures": {
@@ -1125,7 +1113,6 @@
       "code": "pele",
       "code_version": "",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "scipy-lbfgs",
       "failures": {},
@@ -1171,7 +1158,6 @@
       "code": "dlfind",
       "code_version": "0.0.3",
       "commit": "4167998d16d8dac4a484ba9305f27d6325a7a28d",
-      "comparable": true,
       "counter": "harness",
       "entry": "dlfind-0.0.3-minimization-lj38--dlfind-lbfgs-lj38",
       "failures": {
@@ -1222,7 +1208,6 @@
       "code": "tsase",
       "code_version": "1.0",
       "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
-      "comparable": true,
       "counter": "harness",
       "entry": "tsase-1.0-minimization-lj38--tsase-lbfgs-lj38",
       "failures": {
@@ -1273,7 +1258,6 @@
       "code": "pele",
       "code_version": "0.1.2",
       "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
-      "comparable": true,
       "counter": "harness",
       "entry": "pele-b7081b93-lj38-mylbfgs",
       "failures": {
@@ -1324,7 +1308,6 @@
       "code": "optim",
       "code_version": "svn-snapshot",
       "commit": "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f",
-      "comparable": true,
       "counter": "harness",
       "entry": "optim-svn-snapshot-minimization-lj38--optim-lbfgs-lj38",
       "failures": {
@@ -1375,7 +1358,6 @@
       "code": "pele",
       "code_version": "0.1.2",
       "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
-      "comparable": true,
       "counter": "harness",
       "entry": "pele-b7081b93-lj38-lbfgs",
       "failures": {
@@ -1426,7 +1408,6 @@
       "code": "GMIN",
       "code_version": "df8da5992675",
       "commit": "df8da599267534fbe43a250e578f7396a7946311",
-      "comparable": true,
       "counter": "harness",
       "entry": "gmin-df8da5992675-lj38-lbfgs",
       "failures": {
@@ -1477,7 +1458,6 @@
       "code": "ASE",
       "code_version": "3.6.1",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "ase-lbfgs",
       "failures": {},
@@ -1523,7 +1503,6 @@
       "code": "ASE",
       "code_version": "3.6.0",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "ase-lbfgslinesearch",
       "failures": {},
@@ -1569,7 +1548,6 @@
       "code": "Eon",
       "code_version": "r2025",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "eon-cg",
       "failures": {},
@@ -1615,7 +1593,6 @@
       "code": "",
       "code_version": "",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "ase-BFGS",
       "failures": {},
@@ -1661,7 +1638,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseLj38LbfgsDefault",
       "failures": {
@@ -1712,7 +1688,6 @@
       "code": "Eon",
       "code_version": "r2025",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "eon-sd-twopoint",
       "failures": {},
@@ -1758,7 +1733,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "ase-3.29.0-lj38-bfgslinesearch-default",
       "failures": {
@@ -1809,7 +1783,6 @@
       "code": "vc-SQNM",
       "code_version": "1.3",
       "commit": "4241692173cccb42a9ae05974bfd62285ec2cd7b",
-      "comparable": true,
       "counter": "harness",
       "entry": "vcsqnm-42416921-lj38-ase",
       "failures": {
@@ -1860,7 +1833,6 @@
       "code": "vc-SQNM",
       "code_version": "1.3",
       "commit": "4241692173cccb42a9ae05974bfd62285ec2cd7b",
-      "comparable": true,
       "counter": "harness",
       "entry": "vcsqnm-42416921-lj38-sqnm",
       "failures": {
@@ -1911,7 +1883,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-bb",
       "failures": {
@@ -1962,7 +1933,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-bb",
       "failures": {
@@ -2013,7 +1983,6 @@
       "code": "ASE",
       "code_version": "3.6.0",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "ase-fire",
       "failures": {},
@@ -2059,7 +2028,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-cg",
       "failures": {
@@ -2110,7 +2078,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-cg",
       "failures": {
@@ -2161,7 +2128,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "ase-3.29.0-lj38-preconlbfgs-default",
       "failures": {
@@ -2212,7 +2178,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "ase-3.29.0-lj38-fire-default",
       "failures": {
@@ -2263,7 +2228,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseLj38BfgsDefault",
       "failures": {
@@ -2314,7 +2278,6 @@
       "code": "",
       "code_version": "",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "pele-fire",
       "failures": {},
@@ -2360,7 +2323,6 @@
       "code": "Sella",
       "code_version": "2.6.0",
       "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
-      "comparable": true,
       "counter": "harness",
       "entry": "sella-2.6.0-lj38-min-default",
       "failures": {
@@ -2411,7 +2373,6 @@
       "code": "Eon",
       "code_version": "r2025",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "eon-fire",
       "failures": {},
@@ -2457,7 +2418,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-fire",
       "failures": {
@@ -2508,7 +2468,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-fire",
       "failures": {
@@ -2559,7 +2518,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-fire2",
       "failures": {
@@ -2610,7 +2568,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-fire2",
       "failures": {
@@ -2661,7 +2618,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-bfgs",
       "failures": {
@@ -2712,7 +2668,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-bfgs",
       "failures": {
@@ -2763,7 +2718,6 @@
       "code": "lammps",
       "code_version": "30 Sep 2026",
       "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
-      "comparable": true,
       "counter": "harness",
       "entry": "lammps-30Sep2026-minimization-lj38--lammps-hftn-lj38",
       "failures": {
@@ -2814,7 +2768,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "ase-3.29.0-lj38-preconfire-default",
       "failures": {
@@ -2865,7 +2818,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-quickmin",
       "failures": {
@@ -2916,7 +2868,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-quickmin",
       "failures": {
@@ -2967,7 +2918,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-diis",
       "failures": {
@@ -3018,7 +2968,6 @@
       "code": "pele",
       "code_version": "0.1.2",
       "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
-      "comparable": true,
       "counter": "harness",
       "entry": "pele-b7081b93-lj38-fire",
       "failures": {
@@ -3069,7 +3018,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-sr1",
       "failures": {
@@ -3120,7 +3068,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-sr2",
       "failures": {
@@ -3171,7 +3118,6 @@
       "code": "",
       "code_version": "",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "ase-preconlbfgs",
       "failures": {},
@@ -3217,7 +3163,6 @@
       "code": "dlfind",
       "code_version": "0.0.3",
       "commit": "4167998d16d8dac4a484ba9305f27d6325a7a28d",
-      "comparable": true,
       "counter": "harness",
       "entry": "dlfind-0.0.3-minimization-lj38--dlfind-cg-lj38",
       "failures": {
@@ -3268,7 +3213,6 @@
       "code": "dlfind",
       "code_version": "0.0.3",
       "commit": "4167998d16d8dac4a484ba9305f27d6325a7a28d",
-      "comparable": true,
       "counter": "harness",
       "entry": "dlfind-0.0.3-minimization-lj38--dlfind-sd-lj38",
       "failures": {
@@ -3319,7 +3263,6 @@
       "code": "lammps",
       "code_version": "30 Sep 2026",
       "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
-      "comparable": true,
       "counter": "harness",
       "entry": "lammps-30Sep2026-minimization-lj38--lammps-quickmin-lj38",
       "failures": {
@@ -3370,7 +3313,6 @@
       "code": "Eon",
       "code_version": "r2025",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "eon-qm",
       "failures": {},
@@ -3416,7 +3358,6 @@
       "code": "lammps",
       "code_version": "30 Sep 2026",
       "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
-      "comparable": true,
       "counter": "harness",
       "entry": "lammps-30Sep2026-minimization-lj38--lammps-cg-lj38",
       "failures": {
@@ -3467,7 +3408,6 @@
       "code": "Eon",
       "code_version": "r2025",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "eon-sd",
       "failures": {},
@@ -3513,7 +3453,6 @@
       "code": "lammps",
       "code_version": "30 Sep 2026",
       "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
-      "comparable": true,
       "counter": "harness",
       "entry": "lammps-30Sep2026-minimization-lj38--lammps-fire-lj38",
       "failures": {
@@ -3564,7 +3503,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-sd",
       "failures": {
@@ -3615,7 +3553,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-sd",
       "failures": {
@@ -3666,7 +3603,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-adam",
       "failures": {
@@ -3717,7 +3653,6 @@
       "code": "lammps",
       "code_version": "30 Sep 2026",
       "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
-      "comparable": true,
       "counter": "harness",
       "entry": "lammps-30Sep2026-minimization-lj38--lammps-sd-lj38",
       "failures": {
@@ -3768,7 +3703,6 @@
       "code": "pysisyphus",
       "code_version": "0.1.dev1",
       "commit": "a4ce10dd6d7fdcb3d813f1c730eb365d29041999",
-      "comparable": true,
       "counter": "harness",
       "entry": "pysisyphus-0.1.dev1-minimization-lj38--pysisyphus-cg-lj38",
       "failures": {
@@ -3819,7 +3753,6 @@
       "code": "pysisyphus",
       "code_version": "0.1.dev1",
       "commit": "a4ce10dd6d7fdcb3d813f1c730eb365d29041999",
-      "comparable": true,
       "counter": "harness",
       "entry": "pysisyphus-0.1.dev1-minimization-lj38--pysisyphus-sd-lj38",
       "failures": {
@@ -3870,7 +3803,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-adam",
       "failures": {
@@ -3921,7 +3853,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-sr1",
       "failures": {
@@ -3972,7 +3903,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-diis",
       "failures": {
@@ -4023,7 +3953,6 @@
       "code": "tsase",
       "code_version": "1.0",
       "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
-      "comparable": true,
       "counter": "harness",
       "entry": "tsase-1.0-minimization-lj38--tsase-mdmin-lj38",
       "failures": {
@@ -4074,7 +4003,6 @@
       "code": "pele",
       "code_version": "0.1.2",
       "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
-      "comparable": true,
       "counter": "harness",
       "entry": "pele-b7081b93-lj38-sd",
       "failures": {
@@ -4125,7 +4053,6 @@
       "code": "pysisyphus",
       "code_version": "0.1.dev1",
       "commit": "a4ce10dd6d7fdcb3d813f1c730eb365d29041999",
-      "comparable": true,
       "counter": "harness",
       "entry": "pysisyphus-0.1.dev1-minimization-lj38--pysisyphus-lbfgs-lj38",
       "failures": {
@@ -4176,7 +4103,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-sr2",
       "failures": {
@@ -4229,7 +4155,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseLj38LbfgsDefault",
       "failures": {
@@ -4267,7 +4192,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 1000 starts",
+      "short_reason": "scored 1 of 1000 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/lj38-lbfgs-default",
@@ -4280,7 +4205,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseLj38GpminDefault",
       "failures": {
@@ -4318,7 +4242,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 1000 starts",
+      "short_reason": "scored 1 of 1000 starts",
       "source": "asv",
       "success_rate": 0.0,
       "template": "ase/lj38-gpmin-default",
@@ -4331,7 +4255,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseLj38BfgsDefault",
       "failures": {
@@ -4369,7 +4292,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 1000 starts",
+      "short_reason": "scored 1 of 1000 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/lj38-bfgs-default",
@@ -4382,7 +4305,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseLj38BfgslinesearchDefault",
       "failures": {
@@ -4420,7 +4342,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 1000 starts",
+      "short_reason": "scored 1 of 1000 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/lj38-bfgslinesearch-default",
@@ -4433,7 +4355,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseLj38FireDefault",
       "failures": {
@@ -4471,7 +4392,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 1000 starts",
+      "short_reason": "scored 1 of 1000 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/lj38-fire-default",
@@ -4484,7 +4405,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseLj38LbfgsTuned",
       "failures": {
@@ -4522,7 +4442,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 1000 starts",
+      "short_reason": "scored 1 of 1000 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/lj38-lbfgs-tuned",
@@ -4535,7 +4455,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseLj38PreconfireTuned",
       "failures": {
@@ -4573,7 +4492,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 1000 starts",
+      "short_reason": "scored 1 of 1000 starts",
       "source": "asv",
       "success_rate": 0.0,
       "template": "ase/lj38-preconfire-tuned",
@@ -4586,7 +4505,6 @@
       "code": "Sella",
       "code_version": "2.6.0",
       "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.SellaLj38MinDefault",
       "failures": {
@@ -4624,7 +4542,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 1000 starts",
+      "short_reason": "scored 1 of 1000 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "sella/lj38-min-default",
@@ -4637,7 +4555,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseLj38GpminTuned",
       "failures": {
@@ -4675,7 +4592,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 1000 starts",
+      "short_reason": "scored 1 of 1000 starts",
       "source": "asv",
       "success_rate": 0.0,
       "template": "ase/lj38-gpmin-tuned",
@@ -4688,7 +4605,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseLj38Preconode12rTuned",
       "failures": {
@@ -4726,7 +4642,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 1000 starts",
+      "short_reason": "scored 1 of 1000 starts",
       "source": "asv",
       "success_rate": 0.0,
       "template": "ase/lj38-preconode12r-tuned",
@@ -4739,7 +4655,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseLj38PreconlbfgsDefault",
       "failures": {
@@ -4777,7 +4692,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 1000 starts",
+      "short_reason": "scored 1 of 1000 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/lj38-preconlbfgs-default",
@@ -4790,7 +4705,6 @@
       "code": "Sella",
       "code_version": "2.6.0",
       "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.SellaLj38MinTuned",
       "failures": {
@@ -4828,7 +4742,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 1000 starts",
+      "short_reason": "scored 1 of 1000 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "sella/lj38-min-tuned",
@@ -4841,7 +4755,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseLj38Preconode12rDefault",
       "failures": {
@@ -4879,7 +4792,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 1000 starts",
+      "short_reason": "scored 1 of 1000 starts",
       "source": "asv",
       "success_rate": 0.0,
       "template": "ase/lj38-preconode12r-default",
@@ -4892,7 +4805,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseLj38BfgsTuned",
       "failures": {
@@ -4930,7 +4842,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 1000 starts",
+      "short_reason": "scored 1 of 1000 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/lj38-bfgs-tuned",
@@ -4943,7 +4855,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseLj38BfgslinesearchTuned",
       "failures": {
@@ -4981,7 +4892,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 1000 starts",
+      "short_reason": "scored 1 of 1000 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/lj38-bfgslinesearch-tuned",
@@ -4994,7 +4905,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseLj38FireTuned",
       "failures": {
@@ -5032,7 +4942,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 1000 starts",
+      "short_reason": "scored 1 of 1000 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/lj38-fire-tuned",
@@ -5045,7 +4955,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseLj38PreconfireDefault",
       "failures": {
@@ -5083,7 +4992,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 1000 starts",
+      "short_reason": "scored 1 of 1000 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/lj38-preconfire-default",
@@ -5096,7 +5005,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseLj38PreconlbfgsTuned",
       "failures": {
@@ -5134,7 +5042,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 1000 starts",
+      "short_reason": "scored 1 of 1000 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "ase/lj38-preconlbfgs-tuned",
@@ -5150,7 +5058,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "ase-3.29.0-lj38-bfgs-tuned",
       "failures": {
@@ -5201,7 +5108,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "ase-3.29.0-lj38-bfgslinesearch-tuned",
       "failures": {
@@ -5252,7 +5158,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "ase-3.29.0-lj38-fire-tuned",
       "failures": {
@@ -5303,7 +5208,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "ase-3.29.0-lj38-lbfgs-tuned",
       "failures": {
@@ -5348,13 +5252,112 @@
       "tuning": "adjusted"
     },
     {
+      "asv_commit": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "ASE",
+      "code_version": "3.29.0",
+      "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
+      "counter": "harness",
+      "entry": "ase-3.29.0-lj38-lbfgslinesearch-tuned",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 5,
+        "wrong_stationary": 2
+      },
+      "family": "minimize",
+      "family_rank": null,
+      "fd_calls": 0.0,
+      "full_n": 1000,
+      "hessian_calls": 0.0,
+      "kind": "",
+      "label": "ASE (3.29.0) \u00b7 LBFGSLineSearch",
+      "max_calls": 779.0,
+      "mean_calls": 409.974,
+      "mean_per_image": null,
+      "median": 395.0,
+      "median_calls": 394.0,
+      "median_high": 401.0,
+      "median_low": 389.0,
+      "median_per_image": null,
+      "method": "LBFGSLineSearch",
+      "min_calls": 230.0,
+      "n": 1000,
+      "nfailed": 7,
+      "note": "starts.jsonl",
+      "origin": "harness",
+      "par2_mean": 547.556,
+      "path": "results/campaign/ase-3.29.0-lj38-lbfgslinesearch-tuned.dat; results/asv/dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+      "problem": "minimization/lj38",
+      "published": null,
+      "rank_cost": 547.556,
+      "registry_match": true,
+      "scored": true,
+      "short": false,
+      "short_reason": "",
+      "source": "campaign, asv",
+      "success_rate": 0.993,
+      "template": "ase/lj38-lbfgslinesearch-tuned",
+      "tuning": "tuned"
+    },
+    {
+      "asv_commit": "dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+      "call_unit": "total",
+      "cap": 10000,
+      "code": "ASE",
+      "code_version": "3.29.0",
+      "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
+      "counter": "harness",
+      "entry": "ase-3.29.0-lj38-preconlbfgs-tuned",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 10
+      },
+      "family": "minimize",
+      "family_rank": null,
+      "fd_calls": 0.0,
+      "full_n": 1000,
+      "hessian_calls": 0.0,
+      "kind": "",
+      "label": "ASE (3.29.0) \u00b7 PreconLBFGS",
+      "max_calls": 8717.0,
+      "mean_calls": 2602.016,
+      "mean_per_image": null,
+      "median": 2413.5,
+      "median_calls": 2385.5,
+      "median_high": 2500.0,
+      "median_low": 2339.9874999999997,
+      "median_per_image": null,
+      "method": "PreconLBFGS",
+      "min_calls": 499.0,
+      "n": 1000,
+      "nfailed": 10,
+      "note": "starts.jsonl",
+      "origin": "harness",
+      "par2_mean": 2778.506,
+      "path": "results/campaign/ase-3.29.0-lj38-preconlbfgs-tuned.dat; results/asv/dba52b93e12e43df95a96bb24bf612f0c4522f9a",
+      "problem": "minimization/lj38",
+      "published": null,
+      "rank_cost": 2778.506,
+      "registry_match": true,
+      "scored": true,
+      "short": false,
+      "short_reason": "",
+      "source": "campaign, asv",
+      "success_rate": 0.99,
+      "template": "ase/lj38-preconlbfgs-tuned",
+      "tuning": "tuned"
+    },
+    {
       "asv_commit": "52ce661f309ef267b070534a1e52e4a15fed6d11",
       "call_unit": "total",
       "cap": 10000,
       "code": "pele",
       "code_version": "0.1.2",
       "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
-      "comparable": true,
       "counter": "harness",
       "entry": "pele-b7081b93-lj38-lbfgs-m100",
       "failures": {
@@ -5405,7 +5408,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-lj38-adam-tuned",
       "failures": {
@@ -5456,7 +5458,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-lj38-bb-tuned",
       "failures": {
@@ -5507,7 +5508,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-lj38-bfgs-tuned",
       "failures": {
@@ -5558,7 +5558,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-lj38-cg-tuned",
       "failures": {
@@ -5609,7 +5608,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-lj38-diis-tuned",
       "failures": {
@@ -5660,7 +5658,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-lj38-dogleg-tuned",
       "failures": {
@@ -5711,7 +5708,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-lj38-fire-tuned",
       "failures": {
@@ -5762,7 +5758,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-lj38-fire2-tuned",
       "failures": {
@@ -5813,7 +5808,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-lj38-lbfgs-m100-tuned",
       "failures": {
@@ -5864,7 +5858,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-lj38-lbfgs-m20-tuned",
       "failures": {
@@ -5915,7 +5908,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-lj38-lbfgs-tuned",
       "failures": {
@@ -5966,7 +5958,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-lj38-newton-tuned",
       "failures": {
@@ -6017,7 +6008,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-lj38-quickmin-tuned",
       "failures": {
@@ -6068,7 +6058,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-lj38-sd-tuned",
       "failures": {
@@ -6119,7 +6108,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-lj38-sr1-tuned",
       "failures": {
@@ -6170,7 +6158,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "9a2e7ff11fa65826f9e847856bee10d3d70b7156",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-0.4.1-lj38-sr2-tuned",
       "failures": {
@@ -6221,7 +6208,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-adam-tuned",
       "failures": {
@@ -6272,7 +6258,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-bb-tuned",
       "failures": {
@@ -6323,7 +6308,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-bfgs-tuned",
       "failures": {
@@ -6374,7 +6358,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-cg-tuned",
       "failures": {
@@ -6425,7 +6408,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-diis-tuned",
       "failures": {
@@ -6476,7 +6458,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-dogleg-tuned",
       "failures": {
@@ -6527,7 +6508,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-fire-tuned",
       "failures": {
@@ -6578,7 +6558,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-fire2-tuned",
       "failures": {
@@ -6629,7 +6608,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-lbfgs-m100-tuned",
       "failures": {
@@ -6680,7 +6658,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-lbfgs-m20-tuned",
       "failures": {
@@ -6731,7 +6708,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-lbfgs-tuned",
       "failures": {
@@ -6782,7 +6758,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-newton-tuned",
       "failures": {
@@ -6833,7 +6808,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-quickmin-tuned",
       "failures": {
@@ -6884,7 +6858,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-sd-tuned",
       "failures": {
@@ -6935,7 +6908,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-sr1-tuned",
       "failures": {
@@ -6986,7 +6958,6 @@
       "code": "rgmin",
       "code_version": "0.4.1",
       "commit": "f15726f1c7983b3656c5dbc2f812e2394e144500",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-f15726f1-lj38-sr2-tuned",
       "failures": {
@@ -7037,7 +7008,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-adam-tuned",
       "failures": {
@@ -7088,7 +7058,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-bb-tuned",
       "failures": {
@@ -7139,7 +7108,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-bfgs-tuned",
       "failures": {
@@ -7190,7 +7158,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-cg-tuned",
       "failures": {
@@ -7241,7 +7208,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-diis-tuned",
       "failures": {
@@ -7292,7 +7258,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-dogleg-tuned",
       "failures": {
@@ -7343,7 +7308,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-fire-tuned",
       "failures": {
@@ -7394,7 +7358,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-fire2-tuned",
       "failures": {
@@ -7445,7 +7408,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-lbfgs-m100-tuned",
       "failures": {
@@ -7496,7 +7458,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-lbfgs-m20-tuned",
       "failures": {
@@ -7547,7 +7508,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-lbfgs-tuned",
       "failures": {
@@ -7598,7 +7558,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-newton-tuned",
       "failures": {
@@ -7649,7 +7608,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-quickmin-tuned",
       "failures": {
@@ -7700,7 +7658,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-sd-tuned",
       "failures": {
@@ -7751,7 +7708,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-sr1-tuned",
       "failures": {
@@ -7802,7 +7758,6 @@
       "code": "rgmin",
       "code_version": "0.4.0",
       "commit": "24236559f3815847cac89ba0a7be634ce0beb4a9",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgmin-lj38-sr2-tuned",
       "failures": {
@@ -7853,7 +7808,6 @@
       "code": "Sella",
       "code_version": "2.6.0",
       "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
-      "comparable": true,
       "counter": "harness",
       "entry": "sella-2.6.0-lj38-min-tuned",
       "failures": {
@@ -7904,7 +7858,6 @@
       "code": "vc-SQNM",
       "code_version": "1.3",
       "commit": "4241692173cccb42a9ae05974bfd62285ec2cd7b",
-      "comparable": true,
       "counter": "harness",
       "entry": "vcsqnm-42416921-lj38-ase-tuned",
       "failures": {
@@ -7955,7 +7908,6 @@
       "code": "vc-SQNM",
       "code_version": "1.3",
       "commit": "4241692173cccb42a9ae05974bfd62285ec2cd7b",
-      "comparable": true,
       "counter": "harness",
       "entry": "vcsqnm-42416921-lj38-sqnm-tuned",
       "failures": {
@@ -8006,7 +7958,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseLj38LbfgsTuned",
       "failures": {
@@ -8057,7 +8008,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseLj38FireTuned",
       "failures": {
@@ -8108,7 +8058,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseLj38BfgslinesearchTuned",
       "failures": {
@@ -8159,7 +8108,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseLj38BfgsTuned",
       "failures": {

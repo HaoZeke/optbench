@@ -22,13 +22,13 @@ so a band never probes either. The first step keeps inverse curvature
 0.01. Later steps still use ``sy/yy`` on both binaries
 (``lbfgs.h0 = sy_yy``).
 
-The repro is those two predicates, on 7095b23, with nothing else edited.
+The check is those two predicates, on 7095b23, with nothing else edited.
 ``MinModeObjectiveFunction::knownCurvature`` returns nullopt, and
 ``NEBObjectiveFunction::supportsFiniteDifferenceCurvature`` returns true.
 Rebuild ``libeonclib.so``. The client binary's RPATH loads it. This
 script does not patch eOn and does not rerun the client. The numbers
 below were measured on that library and are stored in
-``h0-probe-repro.json``.
+``h0-probe.json``.
 
 Start 0132 is the short dimer case. Climb iteration 0 matches. Iteration
 1 has the same eigenvalue, torque, angle, and 20 rotations. The stock
@@ -59,7 +59,7 @@ from pathlib import Path
 
 
 def load() -> dict:
-    return json.loads((Path(__file__).resolve().parent / "h0-probe-repro.json").read_text())
+    return json.loads((Path(__file__).resolve().parent / "h0-probe.json").read_text())
 
 
 def main() -> None:

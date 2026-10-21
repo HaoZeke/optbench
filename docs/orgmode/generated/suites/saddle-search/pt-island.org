@@ -13,7 +13,7 @@
    <dt>v2</dt><dd>par2-bootstrap</dd>
    <dt>v2 cost</dt><dd>one displacement search: the climb plus the two endpoint minimizations</dd>
    </dl>
-   <p class="bench-smoke">A 2-search SoftSaddle smoke is outside this rank. The April 2019 adaptive_HSphere-lbfgs-davidson-sm50 entry records 423491.1 force calls.</p>
+   <p class="bench-aside">A 2-search SoftSaddle batch stays off this rank. The April 2019 adaptive_HSphere-lbfgs-davidson-sm50 entry records 423491.1 force calls.</p>
    <p>Rows are ranked by cost inside each method family and on one overall table. A run short of the full set, or a run that is not the stock method, stays off the table.</p>
    <p class="bench-gaps">Eon rows are not yet on the harness counter. A run short of the full set, or a run that is not the stock method, stays off the ranked table.</p>
    <figure class="bench-plot"><a href="../../../_static/board/saddle-search-pt-island-cost.svg"><picture><source srcset="../../../_static/board/saddle-search-pt-island-cost.webp" type="image/webp"><img src="../../../_static/board/saddle-search-pt-island-cost.png" alt="Cost versus success for saddle-search/pt-island" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>

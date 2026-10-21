@@ -1,6 +1,6 @@
 """Archive rows beside later campaign files.
 
-The archived numbers are the paper rows. A campaign file recorded next
+The archived numbers are the archived rows. A campaign file recorded next
 to a row is a finding: the same metric, both numbers, and the gap.
 There is no pass/fail window. ``oracle/findings.jsonl`` is that record.
 The 2014 pele transition-state stop is the first RMS crossing plus one
@@ -287,7 +287,7 @@ CAUSE_TEXT = {
     "htst_al": "The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) differs on barrier_force_calls and rate_force_calls by about 30 percent. Pt dimer CG with max 10 matches all four hTST counts.",
     "akmc_vs_langevin": (
         "The archive rows are Langevin parallel replica. The harness rows are AKMC. "
-        "On infra/aladatom-repro, eon/aladatom-akmc true_rate 3.597591452e9 is 14.1 times 2.542941e8, "
+        "On the aladatom campaign, eon/aladatom-akmc true_rate 3.597591452e9 is 14.1 times 2.542941e8, "
         "and eon/standard-aladatom-akmc true_rate 3.80613e7 is 45.5 times 8.359e5."
     ),
     "gmin_csm": (
@@ -760,7 +760,7 @@ def render_markdown(rows: list[dict]) -> str:
     lines = [
         "# Findings",
         "",
-        "Archive commit `0f26b796`. The archived numbers are the paper rows. A campaign file beside a row records both numbers and the gap. There is no pass/fail window.",
+        "Archive commit `0f26b796`. The archived numbers are the archived rows. A campaign file beside a row records both numbers and the gap. There is no pass/fail window.",
         "",
         f"{with_file} archive rows have a campaign file beside them. {without_file} archive rows have no campaign file. {len(rows)} archive rows.",
         "",

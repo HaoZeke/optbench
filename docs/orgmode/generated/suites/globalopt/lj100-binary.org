@@ -7,10 +7,12 @@
    <section class="bench" id="lj100-binary" data-problem="globalopt/lj100-binary">
    <h2>Binary Lennard-Jones 100</h2>
    <dl class="bench-rule">
+   <dt>Cap</dt><dd>2000000 force calls</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
    <dt>Starts</dt><dd>100</dd>
    <dt>Potential</dt><dd>binary-lennard-jones</dd>
    <dt>v2</dt><dd>par2-bootstrap</dd>
-   <dt>Note</dt><dd>The archived files record energies. They do not record force calls.</dd>
+   <dt>Note</dt><dd>The archived files record energies. They do not record force calls. Success is an energy at or below the improved Cambridge minimum plus 0.001. The cap is the archived evaluation budget of 2000000.</dd>
    </dl>
    <p>Rows are ranked by cost inside each method family and on one overall table. A run short of the full set, or a run that is not the stock method, stays off the table.</p>
    <figure class="bench-plot"><a href="../../../_static/board/globalopt-lj100-binary-cost.svg"><picture><source srcset="../../../_static/board/globalopt-lj100-binary-cost.webp" type="image/webp"><img src="../../../_static/board/globalopt-lj100-binary-cost.png" alt="Cost versus success for globalopt/lj100-binary" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>

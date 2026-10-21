@@ -12,4 +12,4 @@ needed = {"rate_low", "par2_mean", "median_low"}
 overlap = needed & set(stats)
 print(f"score keys present: {sorted(overlap) or 'none'}")
 if overlap:
-    raise SystemExit("compute_stats grew score keys; this reproducer is stale")
+    raise SystemExit("compute_stats grew score keys; this check is stale")

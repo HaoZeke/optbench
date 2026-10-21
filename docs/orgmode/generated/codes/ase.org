@@ -61,6 +61,20 @@
    <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
+   <tr data-problem="globalopt/lj75" data-label="ASE (3.29.0) · BasinHopping">
+   <td>lj75</td>
+   <td data-field="label">ASE (3.29.0) · BasinHopping</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">4</td>
+   <td data-field="par2_mean">2e+06</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1e+06</td>
+   <td data-field="mean_calls">1e+06</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
    <tr data-problem="minimization/lj38" data-label="ASE (3.6.1) · L-BFGS M=5 maxstep=0.2">
    <td>Lennard-Jones 38 clusters</td>
    <td data-field="label">ASE (3.6.1) · L-BFGS M=5 maxstep=0.2</td>

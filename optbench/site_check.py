@@ -140,11 +140,10 @@ def _check_ranked(label: str, table: dict, document: dict) -> list[str]:
     if len(body) != len(ranked):
         return [f"{label} {problem_id} ranked rows {len(body)} != board {len(ranked)}"]
     per_image = _show_per_image(problem) if problem else False
-    span = str(problem_id).startswith("globalopt/")
     errors: list[str] = []
     for index, (got_row, board_row) in enumerate(zip(body, ranked), start=1):
         got = _cell_map(got_row)
-        expected = dict(ranked_cells(board_row, per_image, span))
+        expected = dict(ranked_cells(board_row, per_image))
         for field, value in expected.items():
             if got.get(field) != value:
                 errors.append(
@@ -165,9 +164,8 @@ def _check_headline(label: str, table: dict, document: dict) -> list[str]:
     if len(body) != 1:
         return [f"{label} {problem_id} headline rows {len(body)} != 1"]
     per_image = _show_per_image(problem) if problem else False
-    span = str(problem_id).startswith("globalopt/")
     got = _cell_map(body[0])
-    expected = dict(ranked_cells(ranked[0], per_image, span))
+    expected = dict(ranked_cells(ranked[0], per_image))
     errors = []
     for field, value in expected.items():
         if got.get(field) != value:

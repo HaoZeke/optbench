@@ -1,7 +1,7 @@
 {
+  "client_counter": [],
   "full_n": 51,
   "id": "double-ended-saddle-search/lj38_2ts_separation",
-  "not_comparable": [],
   "profile": {
     "area_log10": {
       "ASE (3.29.0) \u00b7 NEB-FIRE": 0.0,
@@ -349,7 +349,6 @@
       "code": "Eon svn",
       "code_version": "r2549",
       "commit": "r2549",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-svn-de-2ts-lanczos-improved",
       "failures": {
@@ -400,7 +399,6 @@
       "code": "eOn",
       "code_version": "3.5.0",
       "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-client-de-2ts-lanczos-improved",
       "failures": {
@@ -451,7 +449,6 @@
       "code": "Eon svn",
       "code_version": "r2549",
       "commit": "r2549",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-svn-de-2ts-lanczos",
       "failures": {
@@ -502,7 +499,6 @@
       "code": "eOn",
       "code_version": "(develop 500350d9)",
       "commit": "500350d9fae881f06c7ef194e5868da079c4be5a",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-500350d9-de-2ts-lanczos-improved",
       "failures": {
@@ -553,7 +549,6 @@
       "code": "eOn",
       "code_version": "3.5.0",
       "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-client-de-2ts-lanczos",
       "failures": {
@@ -604,7 +599,6 @@
       "code": "eOn",
       "code_version": "(develop 500350d9)",
       "commit": "500350d9fae881f06c7ef194e5868da079c4be5a",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-500350d9-de-2ts-lanczos",
       "failures": {
@@ -655,7 +649,6 @@
       "code": "Eon svn",
       "code_version": "r2549",
       "commit": "r2549",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-svn-de-2ts-dimer",
       "failures": {
@@ -706,7 +699,6 @@
       "code": "OPTIM",
       "code_version": "",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "optim",
       "failures": {},
@@ -752,7 +744,6 @@
       "code": "eOn",
       "code_version": "(develop 500350d9)",
       "commit": "500350d9fae881f06c7ef194e5868da079c4be5a",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-500350d9-de-2ts-dimer",
       "failures": {
@@ -803,7 +794,6 @@
       "code": "Eon svn",
       "code_version": "r2549",
       "commit": "r2549",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_eon_svn.EonSvnDe2tsCi",
       "failures": {
@@ -854,7 +844,6 @@
       "code": "eOn",
       "code_version": "(develop 500350d9)",
       "commit": "500350d9fae881f06c7ef194e5868da079c4be5a",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-develop-de-2ts-ew",
       "failures": {
@@ -905,7 +894,6 @@
       "code": "pele",
       "code_version": "",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "pele",
       "failures": {},
@@ -951,7 +939,6 @@
       "code": "Sella",
       "code_version": "2.6.0",
       "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.SellaDeLj382tsDefault",
       "failures": {
@@ -1002,7 +989,6 @@
       "code": "eOn",
       "code_version": "(develop 500350d9)",
       "commit": "500350d9fae881f06c7ef194e5868da079c4be5a",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-500350d9-de-2ts-ci-neb",
       "failures": {
@@ -1053,7 +1039,6 @@
       "code": "eOn",
       "code_version": "(develop 500350d9)",
       "commit": "500350d9fae881f06c7ef194e5868da079c4be5a",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-develop-de-2ts",
       "failures": {
@@ -1104,7 +1089,6 @@
       "code": "eOn",
       "code_version": "(develop 500350d9)",
       "commit": "500350d9fae881f06c7ef194e5868da079c4be5a",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-500350d9-de-2ts-ci-swdneb",
       "failures": {
@@ -1155,7 +1139,6 @@
       "code": "eOn",
       "code_version": "(develop 500350d9)",
       "commit": "500350d9fae881f06c7ef194e5868da079c4be5a",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-develop-de-2ts-oci",
       "failures": {
@@ -1206,7 +1189,6 @@
       "code": "compass",
       "code_version": "1.0.0",
       "commit": "22da7bd5f69cbd64d59853c8f8d7f8d44c2d18df",
-      "comparable": true,
       "counter": "harness",
       "entry": "compass-1.0.0-double-ended-saddle-search-lj38_2ts_separation--compass-sqnm",
       "failures": {
@@ -1257,7 +1239,6 @@
       "code": "eOn",
       "code_version": "3.5.0",
       "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-client-de-2ts-dimer",
       "failures": {
@@ -1308,7 +1289,6 @@
       "code": "rgsaddle",
       "code_version": "0.2.2",
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgsaddle-0.2.2-double-ended-saddle-search-lj38_2ts_separation--rgsaddle-ew-ci-neb",
       "failures": {
@@ -1359,7 +1339,6 @@
       "code": "eOn",
       "code_version": "3.6.0",
       "commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_eon_develop.EonDevelopDe2tsEw",
       "failures": {
@@ -1410,7 +1389,6 @@
       "code": "eOn",
       "code_version": "3.5.0",
       "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-client-de-2ts-ci-swdneb",
       "failures": {
@@ -1461,7 +1439,6 @@
       "code": "Eon svn",
       "code_version": "r2549",
       "commit": "r2549",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-svn-de-2ts-ci-swdneb",
       "failures": {
@@ -1512,7 +1489,6 @@
       "code": "Eon svn",
       "code_version": "r2549",
       "commit": "r2549",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-svn-de-2ts-ci-neb",
       "failures": {
@@ -1563,7 +1539,6 @@
       "code": "eOn",
       "code_version": "3.5.0",
       "commit": "4d8b34baf1ba8d2d980df29838bac1f969d1662c",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-client-de-2ts-ci-neb",
       "failures": {
@@ -1614,7 +1589,6 @@
       "code": "rgsaddle",
       "code_version": "0.2.2",
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgsaddle-0.2.2-double-ended-saddle-search-lj38_2ts_separation--rgsaddle-ci-neb",
       "failures": {
@@ -1665,7 +1639,6 @@
       "code": "rgsaddle",
       "code_version": "0.2.2",
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgsaddle-0.2.2-double-ended-saddle-search-lj38_2ts_separation--rgsaddle-oci-neb",
       "failures": {
@@ -1716,7 +1689,6 @@
       "code": "geodesic",
       "code_version": "1.0.0",
       "commit": "476aa041f562d37d5fb4121b86817a52d75e4c5d",
-      "comparable": true,
       "counter": "harness",
       "entry": "geodesic-1.0.0-de-2ts-ci-neb-lbfgs",
       "failures": {
@@ -1767,7 +1739,6 @@
       "code": "geodesic",
       "code_version": "1.0.0",
       "commit": "476aa041f562d37d5fb4121b86817a52d75e4c5d",
-      "comparable": true,
       "counter": "harness",
       "entry": "geodesic-1.0.0-de-2ts-ci-neb",
       "failures": {
@@ -1818,7 +1789,6 @@
       "code": "rgsaddle",
       "code_version": "0.2.2",
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgsaddle-0.2.2-double-ended-saddle-search-lj38_2ts_separation--rgsaddle-idpp-ci-neb",
       "failures": {
@@ -1869,7 +1839,6 @@
       "code": "rgsaddle",
       "code_version": "0.2.2",
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgsaddle-0.2.2-double-ended-saddle-search-lj38_2ts_separation--rgsaddle-sidpp-ci-neb",
       "failures": {
@@ -1920,7 +1889,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseDeLj382tsDefault",
       "failures": {
@@ -1971,7 +1939,6 @@
       "code": "tsase",
       "code_version": "1.0",
       "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
-      "comparable": true,
       "counter": "harness",
       "entry": "tsase-1.0-double-ended-saddle-search-lj38_2ts_separation--tsase-ci-neb",
       "failures": {
@@ -2022,7 +1989,6 @@
       "code": "LAMMPS",
       "code_version": "30 Sep 2026",
       "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
-      "comparable": true,
       "counter": "harness",
       "entry": "lammps-30Sep2026-double-ended-saddle-search-lj38_2ts_separation-ci-quickmin",
       "failures": {
@@ -2073,7 +2039,6 @@
       "code": "LAMMPS",
       "code_version": "30 Sep 2026",
       "commit": "8de817dd79bfe4525d5d39246a212d833e6dee07",
-      "comparable": true,
       "counter": "harness",
       "entry": "lammps-30Sep2026-double-ended-saddle-search-lj38_2ts_separation-ci-fire",
       "failures": {
@@ -2124,7 +2089,6 @@
       "code": "tsase",
       "code_version": "1.0",
       "commit": "98aac60b5d9905e81ee4e6b8c385f169258d0218",
-      "comparable": true,
       "counter": "harness",
       "entry": "tsase-1.0-double-ended-saddle-search-lj38_2ts_separation--tsase-neb",
       "failures": {
@@ -2175,7 +2139,6 @@
       "code": "geodesic",
       "code_version": "1.0.0",
       "commit": "476aa041f562d37d5fb4121b86817a52d75e4c5d",
-      "comparable": true,
       "counter": "harness",
       "entry": "geodesic-1.0.0-ase-de-2ts-default",
       "failures": {
@@ -2226,7 +2189,6 @@
       "code": "rgsaddle",
       "code_version": "0.2.2",
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgsaddle-0.2.2-double-ended-saddle-search-lj38_2ts_separation--rgsaddle-neb",
       "failures": {
@@ -2279,7 +2241,6 @@
       "code": "Eon svn",
       "code_version": "r2549",
       "commit": "r2549",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-svn-r2549-de-2ts-ci",
       "failures": {
@@ -2330,7 +2291,6 @@
       "code": "Eon svn",
       "code_version": "r2549",
       "commit": "r2549",
-      "comparable": true,
       "counter": "harness",
       "entry": "eon-svn-r2549-de-2ts-neb",
       "failures": {
@@ -2381,7 +2341,6 @@
       "code": "eOn",
       "code_version": "3.6.0",
       "commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_eon_develop.EonDevelopDe2ts",
       "failures": {
@@ -2419,7 +2378,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 51 starts",
+      "short_reason": "scored 1 of 51 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "eon/develop-de-2ts-accept-energy",
@@ -2432,7 +2391,6 @@
       "code": "eOn",
       "code_version": "3.6.0",
       "commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_eon_develop.EonDevelopDe2tsEw",
       "failures": {
@@ -2470,7 +2428,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 51 starts",
+      "short_reason": "scored 1 of 51 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "eon/develop-de-2ts-ew",
@@ -2483,7 +2441,6 @@
       "code": "eOn",
       "code_version": "3.6.0",
       "commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_eon_develop.EonDevelopDe2tsOci",
       "failures": {
@@ -2521,7 +2478,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 51 starts",
+      "short_reason": "scored 1 of 51 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "eon/develop-de-2ts-oci",
@@ -2534,7 +2491,6 @@
       "code": "Sella",
       "code_version": "2.6.0",
       "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.SellaDeLj382tsDefault",
       "failures": {
@@ -2572,7 +2528,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 51 starts",
+      "short_reason": "scored 1 of 51 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "sella/de-lj38-2ts-default",
@@ -2585,7 +2541,6 @@
       "code": "Sella",
       "code_version": "2.6.0",
       "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.SellaDeLj382tsTuned",
       "failures": {
@@ -2623,7 +2578,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 51 starts",
+      "short_reason": "scored 1 of 51 starts",
       "source": "asv",
       "success_rate": 1.0,
       "template": "sella/de-lj38-2ts-tuned",
@@ -2636,7 +2591,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseDeLj382tsDefault",
       "failures": {
@@ -2674,7 +2628,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 51 starts",
+      "short_reason": "scored 1 of 51 starts",
       "source": "asv",
       "success_rate": 0.0,
       "template": "ase/de-lj38-2ts-default",
@@ -2687,7 +2641,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseDeLj382tsTuned",
       "failures": {
@@ -2725,7 +2678,7 @@
       "registry_match": true,
       "scored": true,
       "short": true,
-      "short_reason": "smoke run; scored 1 of 51 starts",
+      "short_reason": "scored 1 of 51 starts",
       "source": "asv",
       "success_rate": 0.0,
       "template": "ase/de-lj38-2ts-tuned",
@@ -2741,7 +2694,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "ase-3.29.0-de-lj38-2ts-tuned",
       "failures": {
@@ -2792,7 +2744,6 @@
       "code": "geodesic",
       "code_version": "1.0.0",
       "commit": "476aa041f562d37d5fb4121b86817a52d75e4c5d",
-      "comparable": true,
       "counter": "harness",
       "entry": "geodesic-1.0.0-ase-de-2ts-tuned",
       "failures": {
@@ -2843,7 +2794,6 @@
       "code": "rgsaddle",
       "code_version": "0.2.2",
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgsaddle-0.2.2-double-ended-saddle-search-lj38_2ts_separation--rgsaddle-ci-neb-lbfgs",
       "failures": {
@@ -2894,7 +2844,6 @@
       "code": "rgsaddle",
       "code_version": "0.2.2",
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgsaddle-0.2.2-double-ended-saddle-search-lj38_2ts_separation--rgsaddle-ew-ci-neb-lbfgs",
       "failures": {
@@ -2945,7 +2894,6 @@
       "code": "rgsaddle",
       "code_version": "0.2.2",
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgsaddle-0.2.2-double-ended-saddle-search-lj38_2ts_separation--rgsaddle-idpp-ci-neb-lbfgs",
       "failures": {
@@ -2996,7 +2944,6 @@
       "code": "rgsaddle",
       "code_version": "0.2.2",
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgsaddle-0.2.2-double-ended-saddle-search-lj38_2ts_separation--rgsaddle-neb-lbfgs",
       "failures": {
@@ -3047,7 +2994,6 @@
       "code": "rgsaddle",
       "code_version": "0.2.2",
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgsaddle-0.2.2-double-ended-saddle-search-lj38_2ts_separation--rgsaddle-oci-neb-lbfgs",
       "failures": {
@@ -3098,7 +3044,6 @@
       "code": "rgsaddle",
       "code_version": "0.2.2",
       "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
-      "comparable": true,
       "counter": "harness",
       "entry": "rgsaddle-0.2.2-double-ended-saddle-search-lj38_2ts_separation--rgsaddle-sidpp-ci-neb-lbfgs",
       "failures": {
@@ -3149,7 +3094,6 @@
       "code": "Sella",
       "code_version": "2.6.0",
       "commit": "6cfb60cdb100a146c3c6f0587d5308b247aa8010",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.SellaDeLj382tsTuned",
       "failures": {
@@ -3200,7 +3144,6 @@
       "code": "ASE",
       "code_version": "3.29.0",
       "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
       "counter": "harness",
       "entry": "bench_ase_sella.AseDeLj382tsTuned",
       "failures": {

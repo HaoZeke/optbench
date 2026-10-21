@@ -5,6 +5,6 @@ Each row is one code, one version, and one stock method.
 The first row on this page is the lowest cost for that problem.
 The problem page ranks the same rows inside each method family and on one overall table.
 =uv run optbench board= writes this page from the committed results.
-It does not run a campaign.
+It reads the committed results.
 
 #+INCLUDE: "../include/v2-board.org"

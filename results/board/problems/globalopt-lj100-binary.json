@@ -1,7 +1,7 @@
 {
+  "client_counter": [],
   "full_n": 100,
   "id": "globalopt/lj100-binary",
-  "not_comparable": [],
   "profile_gap": "No performance profile. The ranked rows have no per-start record.",
   "ranked": [
     {
@@ -11,7 +11,6 @@
       "code": "GMIN",
       "code_version": "",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "gmin",
       "failures": {},
@@ -57,7 +56,6 @@
       "code": "Eon",
       "code_version": "r2156",
       "commit": "",
-      "comparable": true,
       "counter": "archive",
       "entry": "eon-basinhopping",
       "failures": {},
