@@ -41,7 +41,7 @@ The number is written only after the run finishes under the problem rule.
    <tr>
    <td>harmonic transition state theory</td>
    <td>develop</td>
-   <td>500350d9fae8</td>
+   <td>b0bd4d5a5e0f</td>
    <td><a href="https://github.com/TheochemUI/eon">https://github.com/TheochemUI/eon</a></td>
    </tr>
    </tbody></table></div>

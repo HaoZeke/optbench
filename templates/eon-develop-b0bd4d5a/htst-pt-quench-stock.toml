@@ -1,17 +1,17 @@
-# eOn develop 500350d9 dimer on the Pt quench reactant.
-id = "eon-develop-500350d9/htst-pt-quench-stock"
+# eOn develop b0bd4d5a dimer on the Pt quench reactant.
+id = "eon-develop-b0bd4d5a/htst-pt-quench-stock"
 engine = "eon"
 problem = "hTST/Pt"
 code = "eOn"
-code_version = "(develop 500350d9)"
-commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
+code_version = "(develop b0bd4d5a)"
+commit = "b0bd4d5a5e0f4011831e45f4de389a4efa348e83"
 algorithm = "Dimer QM"
 reducer = "harness"
 kind = "htst"
 kernel = "morse_shift"
 tuning = "stock"
 note = '''
-Stock eOn develop 500350d9 dimer on the quench_dimer-qm reactant. Temperature 700, seed 42, confidence 1.1, prefactor 1.2e12, optimizer qm, converged_force 0.001, max_iterations 5000, time_step 0.3, minimize_first false, displace_least_coordinated_weight 1, radius 3.3, magnitude 0.3, max_energy 10, dimer rotations_max 100, converged_angle 5. The archive communicator buffer is 1000 jobs on 2 CPUs. This score used local batches of 4 and the seed-42 displacement sequence. The harness potential is morse_shift. The ranked cost is the PotServer total at the stop. Sad-fcs in per-batch job-id order are stored beside that total.
+Stock eOn develop b0bd4d5a dimer on the quench_dimer-qm reactant. Temperature 700, seed 42, confidence 1.1, prefactor 1.2e12, optimizer qm, converged_force 0.001, max_iterations 5000, time_step 0.3, minimize_first false, displace_least_coordinated_weight 1, radius 3.3, magnitude 0.3, max_energy 10, dimer rotations_max 100, converged_angle 5. The archive communicator buffer is 1000 jobs on 2 CPUs. Local batches of 4 use the seed-42 displacement sequence. The harness potential is morse_shift. The ranked cost is the PotServer total at the stop. Sad-fcs in per-batch job-id order are stored beside that total.
 '''
 seeds = [42]
 starts = ["pt"]

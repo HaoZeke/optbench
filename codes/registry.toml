@@ -184,14 +184,14 @@ committed = "2026-01-23"
 note = "EON, the Henkelman SVN client, is not the git code eOn. This pin is latest SVN r2549, built with Fortran and without NO_FORTRAN. QSC sources are not in the revision, so that potential is left out of the link. The dimer and the QM optimizer are the revision's own code. eonclient -v prints r2549MP because the build tree drops that missing potential. The name Eon svn remains the older registry pin used by the other r2549 rows."
 
 [[code]]
-id = "eon-develop-500350d9"
+id = "eon-develop-b0bd4d5a"
 name = "eOn"
 role = "harmonic transition state theory"
 repository = "https://github.com/TheochemUI/eon"
 ref = "develop"
-commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
-committed = "2026-10-20"
-note = "eOn develop 500350d9fae881f06c7ef194e5868da079c4be5a, built with Fortran. The pin eon-develop stays at 7095b23. eonclient --version prints 3.6.0 (500350d9). GPR-dimer is not linked."
+commit = "b0bd4d5a5e0f4011831e45f4de389a4efa348e83"
+committed = "2026-10-21"
+note = "eOn develop b0bd4d5a5e0f4011831e45f4de389a4efa348e83, built with Fortran. The pin eon-develop stays at 7095b23. eonclient --version prints 3.6.0 (b0bd4d5a). GPR-dimer is not linked."
 
 [[template]]
 id = "sella-0.1.1/lj38-loweig"
