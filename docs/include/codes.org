@@ -135,14 +135,14 @@
    <td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 0</td>
    <td data-field="n">2</td>
    </tr>
-   <tr data-problem="tsopt/LJ38" data-template="eon-client/ts-lj38-lanczos-improved">
+   <tr data-problem="tsopt/LJ38" data-template="eon/develop-b0bd4d5a-ts-lj38-lanczos-improved">
    <td>LJ38</td>
-   <td data-field="template">eon-client/ts-lj38-lanczos-improved</td>
-   <td data-field="version">eOn 3.5.0</td>
-   <td data-field="commit">4d8b34baf1ba</td>
-   <td data-field="par2_mean">280.33</td>
-   <td data-field="mean_calls">280.33</td>
-   <td data-field="median_calls">214</td>
+   <td data-field="template">eon/develop-b0bd4d5a-ts-lj38-lanczos-improved</td>
+   <td data-field="version">eOn (develop b0bd4d5a)</td>
+   <td data-field="commit">b0bd4d5a5e0f</td>
+   <td data-field="par2_mean">256.5</td>
+   <td data-field="mean_calls">256.5</td>
+   <td data-field="median_calls">180</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
