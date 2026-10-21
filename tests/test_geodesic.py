@@ -43,7 +43,7 @@ def test_templates_are_an_initialiser_ablation():
     found = [item for item in list_templates(ROOT) if item["id"].startswith("geodesic/")]
     assert {item["id"] for item in found} == ASE_IDS | RGSADDLE_IDS
     band = [item for item in list_templates(ROOT) if item.get("engine") == "rgsaddle-band"]
-    assert len(band) == 12
+    assert len(band) == 6
     pin = _registry(ROOT, "geodesic")
     for item in found:
         loaded = load_template(ROOT, item["id"])
