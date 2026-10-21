@@ -15,11 +15,11 @@ code_version 0.4.1
 commit f15726f1c7983b3656c5dbc2f812e2394e144500
 algorithm DOGLEG
 template rgmin/lj38-dogleg-tuned
-tuning tuned
+tuning adjusted
 counter harness
 par2_mean 81.881
-wilson_low 0.996173241514
-wilson_high 1
+rate_low 0.996173241514
+rate_high 1
 par2_median 79
 par2_median_low 77
 par2_median_high 80

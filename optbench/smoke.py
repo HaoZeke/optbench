@@ -106,7 +106,7 @@ def _run(entry, algorithm, tuning, step, cap, evaluate, optimize, names, kind, e
 
 
 def build_smoke(commit: str = "", machine: dict | str | None = None) -> dict:
-    """Four runs: a default minimizer, a tuned one, a capped failure, and two saddle checks."""
+    """Four runs: a default minimizer, an adjusted one, a capped failure, and two saddle checks."""
     origin = gradient_descent((0.0, 0.0), 0.05, 5000)
     other = gradient_descent((2.0, -1.0), 0.05, 5000)
     default = _run(
@@ -127,7 +127,7 @@ def build_smoke(commit: str = "", machine: dict | str | None = None) -> dict:
     tuned = _run(
         "gd-step-0.01",
         "gradient descent",
-        "tuned",
+        "adjusted",
         0.01,
         20000,
         bowl,
@@ -142,7 +142,7 @@ def build_smoke(commit: str = "", machine: dict | str | None = None) -> dict:
     failed = _run(
         "gd-step-0.001-cap-200",
         "gradient descent",
-        "tuned",
+        "adjusted",
         0.001,
         200,
         bowl,
@@ -172,7 +172,7 @@ def build_smoke(commit: str = "", machine: dict | str | None = None) -> dict:
     false_saddle = _run(
         "bowl-reported-as-saddle",
         "gradient descent",
-        "tuned",
+        "adjusted",
         0.05,
         5000,
         bowl,
@@ -188,7 +188,7 @@ def build_smoke(commit: str = "", machine: dict | str | None = None) -> dict:
         "schema": "optbench.result/v2",
         "status": "smoke",
         "problem": "smoke/quadratic",
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-bootstrap",
         "par_factor": 2,
         "bootstrap_resamples": 2000,
         "bootstrap_seed": 20261015,

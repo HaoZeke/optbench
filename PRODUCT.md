@@ -42,6 +42,6 @@ The name is OptBench. The citation is Chill, Stevenson, Ruehle, Shang, Xiao, Far
 
 The number on the page is a field from `benchmark.dat`.
 The stopping rule is visible on the same page as the rank.
-A partial contract says so.
+A shared contract says so.
 A smoke is not mixed into the archived rank.
 The old archive remains the provenance of the scores.

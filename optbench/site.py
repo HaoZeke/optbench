@@ -1,7 +1,7 @@
 """Render the public site from the v2 board.
 
-Prose stays in ``docs/orgmode``. This module writes the ranked tables,
-the code page, and the labelled 2014 archive those pages include.
+Prose stays in ``docs/orgmode``. This module writes the ranked tables
+and one page per code.
 """
 
 from __future__ import annotations
@@ -128,8 +128,8 @@ def _bits(problem: dict) -> list[tuple[str, str]]:
         bits.append(("v2 cost", str(version2["cost"])))
     if problem.get("remark"):
         bits.append(("Note", str(problem["remark"])))
-    if problem.get("contract") == "partial":
-        bits.append(("Contract", "Partly stated. The columns are the keys shared by every archived file."))
+    if problem.get("contract") in {"partial", "shared"}:
+        bits.append(("Contract", "The columns are the keys shared by every archived file."))
     return bits
 
 
@@ -160,8 +160,7 @@ def _caption(primary: str | None) -> str:
         "barrier_force_calls": "Fewest barrier force calls first.",
         "true_rate": "Lowest rate first.",
     }
-    detail = captions.get(primary or "", "The columns are the archived keys.")
-    return f"Legacy 2014 archive. {detail}"
+    return captions.get(primary or "", "The columns are the archived keys.")
 
 
 def _plot(points: list[dict], primary: str | None, caption: str | None = None) -> str:
@@ -205,13 +204,10 @@ def _plot(points: list[dict], primary: str | None, caption: str | None = None) -
 
 
 def _code_label(fields: dict[str, str]) -> str:
-    """Code column. Sella 0.1.1 stays on the 2014 table and is marked legacy."""
+    """Code and version, without a status word."""
     code = fields.get("code", "")
     version = fields.get("code_version", "")
-    label = f"{code} {version}".strip() if version else code
-    if code == "Sella" and version == "0.1.1":
-        label = f"{label} legacy"
-    return label
+    return f"{code} {version}".strip() if version else code
 
 
 def campaign_problem(stem: str) -> str | None:
@@ -250,7 +246,7 @@ def problem_html(
     heading_text: str | None = None,
     include_rule: bool = True,
 ) -> str:
-    """Legacy 2014 table for one problem. The v2 rank is a separate section."""
+    """Archived rows for one problem. The ranked tables are a separate section."""
     canonical_rows = []
     for row in _rows_for(problem, oracle):
         fields, _renamed = normalize(row["fields"])
@@ -268,7 +264,7 @@ def problem_html(
 
     ident = section_id or str(problem["problem"])
     title = heading_text or str(problem.get("title") or problem["problem"])
-    lines = [f'<section class="bench bench-legacy-section" id="{html.escape(ident)}">']
+    lines = [f'<section class="bench" id="{html.escape(ident)}">']
     lines.append(f"<{heading}>{html.escape(title)}</{heading}>")
     if include_rule:
         bits = _bits(problem)
@@ -279,8 +275,7 @@ def problem_html(
             lines.append("</dl>")
     if smoke_note:
         lines.append(f'<p class="bench-smoke">{html.escape(smoke_note)}</p>')
-    lines.append('<details class="bench-details">')
-    lines.append("<summary>Legacy 2014 archive</summary>")
+    lines.append('<div class="bench-archive">')
 
     prepared = []
     for rank, (row, fields) in enumerate(canonical_rows, 1):
@@ -299,14 +294,9 @@ def problem_html(
                 "value": value,
                 "best": best is not None and value == best,
                 "held": held,
-                "current": bool(row.get("current")),
             }
         )
-    lines.append(
-        '<p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. '
-        "They are not a v2 score.</p>"
-    )
-    lines.append('<div class="bench-table"><table class="bench-legacy">')
+    lines.append('<div class="bench-table"><table class="bench-archive">')
     lines.append(f"<caption>{html.escape(_caption(primary))}</caption>")
     headers = ["", "Entry", "Code", *metrics, "Contributor", "Date"]
     lines.append("<thead><tr>")
@@ -320,8 +310,6 @@ def problem_html(
             classes.append("best")
         if point["held"]:
             classes.append("held")
-        if point.get("current"):
-            classes.append("current")
         class_attr = f' class="{" ".join(classes)}"' if classes else ""
         cells = [str(point["rank"]), point["label"], point["code"]]
         for metric in metrics:
@@ -334,8 +322,8 @@ def problem_html(
             lines.append(f'<td class="{kind}">{html.escape(cell)}</td>')
         lines.append("</tr>")
     lines.append("</tbody></table></div>")
-    lines.append(_plot(prepared, primary, "Legacy 2014 scores"))
-    lines.append("</details>")
+    lines.append(_plot(prepared, primary, "Archived scores"))
+    lines.append("</div>")
     lines.append("</section>")
     return "\n".join(lines)
 
@@ -357,8 +345,8 @@ def _board_view(problem: dict, document: dict) -> dict:
         "id": problem["id"],
         "title": str(problem.get("title") or problem["problem"]),
         "ranked": [],
-        "history": [],
-        "partial": [],
+        "short": [],
+        "withheld": [],
         "not_comparable": [],
     }
 
@@ -385,17 +373,6 @@ def _rule_html(problem: dict, smoke_note: str = "") -> str:
     return "\n".join(lines)
 
 
-def _legacy_section(problem: dict, oracle: list[dict]) -> str:
-    return problem_html(
-        problem,
-        oracle,
-        section_id=f"{problem['problem']}-legacy",
-        heading="h3",
-        heading_text="Legacy 2014 archive",
-        include_rule=False,
-    )
-
-
 def _sorted_problems(group: list[dict]) -> list[dict]:
     return sorted(group, key=lambda item: str(item.get("title") or item["problem"]).lower())
 
@@ -410,9 +387,8 @@ def _headlines_html(
 
     lines = [
         '<section class="bench" id="headlines">',
-        "<p>The first row of each problem is the best full harness run, ranked by PAR-2. "
-        "The ranked table and the performance profile are on the problem page. "
-        "The 2014 archive is labelled legacy on that page.</p>",
+        "<p>The first row of each problem is the lowest cost. "
+        "The family tables, the overall table, and the performance profile are on the problem page.</p>",
     ]
     for suite in order:
         group = by_suite.get(suite)
@@ -422,14 +398,14 @@ def _headlines_html(
         for problem in _sorted_problems(group):
             view = _board_view(problem, document)
             title = str(problem.get("title") or problem["problem"])
-            href = f"generated/suites/{suite}.html#{problem['problem']}"
+            href = f"generated/suites/{suite}/{problem['problem']}.html"
             lines.append(f"<h3>{html.escape(title)}</h3>")
             lines.append(headline_table(view))
             lead = gap_paragraph(view, pending.get(problem["id"]))
             if lead:
                 lines.append(lead)
             lines.append(
-                f'<p><a href="{html.escape(href)}">Ranked table, performance profile, and the 2014 archive</a>.</p>'
+                f'<p><a href="{html.escape(href)}">Family tables, overall table, and performance profile</a>.</p>'
             )
     lines.append("</section>")
     return "\n".join(lines)
@@ -446,8 +422,8 @@ def _collection_html(
 
     lines = [
         '<section class="bench" id="collection">',
-        "<p>Each problem leads with the current v2 rank. "
-        "The 2014 rows follow, in the published order.</p>",
+        "<p>Each problem leads with its lowest-cost row. "
+        "The full tables are on the problem page. Archived rows sit in those tables.</p>",
     ]
     for suite in order:
         group = by_suite.get(suite)
@@ -457,14 +433,13 @@ def _collection_html(
         for problem in _sorted_problems(group):
             view = _board_view(problem, document)
             title = str(problem.get("title") or problem["problem"])
-            href = f"generated/suites/{suite}.html#{problem['problem']}"
+            href = f"generated/suites/{suite}/{problem['problem']}.html"
             lines.append(f"<h3>{html.escape(title)}</h3>")
             lines.append(headline_table(view))
             lead = gap_paragraph(view, pending.get(problem["id"]))
             if lead:
                 lines.append(lead)
-            lines.append(f'<p><a href="{html.escape(href)}">Full ranked table and performance profile</a>.</p>')
-            lines.append(_legacy_section(problem, oracle))
+            lines.append(f'<p><a href="{html.escape(href)}">Family tables, overall table, and performance profile</a>.</p>')
     lines.append("</section>")
     return "\n".join(lines)
 
@@ -479,115 +454,167 @@ def _code_keys(pins: list[dict]) -> set[str]:
 
 
 def _matches_code(row: dict, keys: set[str]) -> bool:
-    return str(row.get("code") or "").lower() in keys
+    code = str(row.get("code") or "").strip().lower()
+    if not code:
+        return "unknown" in keys
+    return code in keys
 
 
-def _codes_html(root: Path, document: dict) -> str:
-    from .board import ranked_cells
+def _page_keys(name: str, pins: list[dict]) -> set[str]:
+    keys = _code_keys(pins)
+    if keys:
+        return keys
+    return {name.strip().lower() or "unknown"}
 
+
+def _code_catalog(root: Path) -> tuple[str, list[str], dict[str, list[dict]]]:
     record = tomllib.loads((root / "codes" / "registry.toml").read_text(encoding="utf-8"))
     contributor = str(record.get("benchmark_contributor") or "")
-    pins = [code for code in record.get("code") or [] if isinstance(code, dict)]
     grouped: dict[str, list[dict]] = {}
     order: list[str] = []
-    for pin in pins:
+    for pin in record.get("code") or []:
+        if not isinstance(pin, dict):
+            continue
         name = str(pin.get("name") or pin.get("id") or "")
         if name not in grouped:
             grouped[name] = []
             order.append(name)
         grouped[name].append(pin)
+    return contributor, order, grouped
+
+
+def _code_page_html(name: str, pins: list[dict], document: dict) -> str:
+    from .board import _headers, ranked_cells
+
+    keys = _page_keys(name, pins)
     lines = [
-        '<section class="bench" id="current-codes">',
-        "<h2>Current codes</h2>",
-        f"<p>The benchmark contributor is {html.escape(contributor)}. "
-        "A ranked row is a full harness run. "
-        "The commit on that row is the commit that produced the score.</p>",
+        f'<section class="bench" id="code-{html.escape(_slug(name))}">',
+        f"<h2>{html.escape(name)}</h2>",
+        '<div class="bench-scroll"><table>',
+        "<caption>Registry pins.</caption>",
+        "<thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>",
     ]
-    score_fields = (
-        "template",
-        "version",
-        "commit",
-        "par2_mean",
-        "mean_calls",
-        "median_calls",
-        "failures",
-        "n",
-    )
-    for name in order:
-        group = grouped[name]
-        keys = _code_keys(group)
-        lines.append(f"<h3>{html.escape(name)}</h3>")
-        lines.append('<div class="bench-scroll"><table>')
-        lines.append("<caption>Registry pins.</caption>")
-        lines.append(
-            "<thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>"
+    for pin in pins:
+        commit = str(pin.get("commit") or "")
+        repo = str(pin.get("repository") or "")
+        lines.append("<tr>")
+        lines.append(f"<td>{html.escape(str(pin.get('role') or ''))}</td>")
+        lines.append(f"<td>{html.escape(str(pin.get('ref') or ''))}</td>")
+        lines.append(f"<td>{html.escape(commit[:12])}</td>")
+        lines.append(f'<td><a href="{html.escape(repo)}">{html.escape(repo)}</a></td>')
+        lines.append("</tr>")
+    lines.append("</tbody></table></div>")
+    found: list[tuple[dict, dict]] = []
+    for problem in (document.get("problems") or {}).values():
+        for row in problem.get("ranked") or []:
+            if _matches_code(row, keys):
+                found.append((problem, row))
+    found.sort(
+        key=lambda item: (
+            str(item[0].get("id") or ""),
+            item[1].get("rank_cost") is None,
+            float(item[1].get("rank_cost") or 0),
+            str(item[1].get("label") or ""),
         )
-        for pin in group:
-            commit = str(pin.get("commit") or "")
-            repo = str(pin.get("repository") or "")
-            lines.append("<tr>")
-            lines.append(f"<td>{html.escape(str(pin.get('role') or ''))}</td>")
-            lines.append(f"<td>{html.escape(str(pin.get('ref') or ''))}</td>")
-            lines.append(f"<td>{html.escape(commit[:12])}</td>")
-            lines.append(f'<td><a href="{html.escape(repo)}">{html.escape(repo)}</a></td>')
+    )
+    if found:
+        headers = _headers({"ranked": []})
+        lines.append('<div class="bench-scroll"><table data-board-table="code-rows">')
+        lines.append("<caption>Every ranked row for this code.</caption>")
+        lines.append(
+            "<thead><tr><th>Problem</th>"
+            + "".join(f"<th>{html.escape(header)}</th>" for header in headers)
+            + "</tr></thead><tbody>"
+        )
+        for problem, row in found:
+            cells = dict(ranked_cells(row, False))
+            lines.append(
+                "<tr "
+                f'data-problem="{html.escape(str(problem["id"]))}" '
+                f'data-label="{html.escape(str(row.get("label") or ""))}">'
+            )
+            lines.append(f"<td>{html.escape(str(problem.get('title') or problem['id']))}</td>")
+            for field, value in cells.items():
+                lines.append(f'<td data-field="{field}">{html.escape(value)}</td>')
             lines.append("</tr>")
         lines.append("</tbody></table></div>")
-        best: list[tuple[dict, dict]] = []
-        for problem in (document.get("problems") or {}).values():
-            matched = [row for row in problem.get("ranked") or [] if _matches_code(row, keys)]
-            if not matched:
-                continue
-            matched.sort(key=lambda row: (row.get("par2_mean") is None, float(row.get("par2_mean") or 0)))
-            best.append((problem, matched[0]))
-        best.sort(key=lambda item: item[0]["id"])
-        if best:
-            lines.append('<div class="bench-scroll"><table data-board-table="code-best">')
-            lines.append("<caption>Best full harness run on each problem.</caption>")
-            lines.append(
-                "<thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th>"
-                "<th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th>"
-                "</tr></thead><tbody>"
-            )
-            for problem, row in best:
-                cells = dict(ranked_cells(row, False))
-                template = str(row.get("template") or row.get("entry") or "")
-                lines.append(
-                    "<tr "
-                    f'data-problem="{html.escape(str(problem["id"]))}" '
-                    f'data-template="{html.escape(template)}">'
-                )
-                lines.append(f"<td>{html.escape(str(problem.get('title') or problem['id']))}</td>")
-                for field in score_fields:
-                    lines.append(f'<td data-field="{field}">{html.escape(cells[field])}</td>')
-                lines.append("</tr>")
-            lines.append("</tbody></table></div>")
-        else:
-            lines.append("<p>No full ranked run.</p>")
-        missing: list[str] = []
-        for problem in (document.get("problems") or {}).values():
-            partial = [row for row in problem.get("partial") or [] if _matches_code(row, keys)]
-            off = [row for row in problem.get("not_comparable") or [] if _matches_code(row, keys)]
-            if not partial and not off:
-                continue
-            reasons = []
-            if off:
-                reasons.append("not yet on the harness counter")
-            if partial:
-                reasons.append("partial")
-            title = str(problem.get("title") or problem["id"])
-            missing.append(f"<li>{html.escape(title)}: {html.escape(', '.join(reasons))}.</li>")
-        for row in document.get("unparsed") or []:
-            if not _matches_code(row, keys) or not row.get("problem"):
-                continue
-            label = str(row.get("template") or row.get("entry") or row.get("path") or "")
-            note = str(row.get("note") or "no per-start record")
-            missing.append(f"<li>{html.escape(label)}: {html.escape(note)}.</li>")
-        if missing:
-            lines.append("<p>No full ranked run</p><ul>")
-            lines.extend(missing)
-            lines.append("</ul>")
+    else:
+        lines.append("<p>No ranked row.</p>")
     lines.append("</section>")
     return "\n".join(lines)
+
+
+def _codes_index_html(contributor: str, order: list[str]) -> str:
+    lines = [
+        '<section class="bench" id="codes">',
+        "<h2>Codes</h2>",
+        f"<p>The benchmark contributor is {html.escape(contributor)}. "
+        "Each code page lists every ranked row for that code.</p>",
+        "<ul>",
+    ]
+    for name in order:
+        slug = _slug(name)
+        lines.append(f'<li><a href="generated/codes/{html.escape(slug)}.html">{html.escape(name)}</a></li>')
+    lines.append("</ul></section>")
+    return "\n".join(lines)
+
+
+def _write_code_pages(root: Path, document: dict) -> None:
+    contributor, order, grouped = _code_catalog(root)
+    known: set[str] = set()
+    for pins in grouped.values():
+        known |= _code_keys(pins)
+    for problem in (document.get("problems") or {}).values():
+        for row in problem.get("ranked") or []:
+            if _matches_code(row, known):
+                continue
+            name = str(row.get("code") or "").strip() or "unknown"
+            if name not in grouped:
+                grouped[name] = []
+                order.append(name)
+                known |= _code_keys([{"id": name, "name": name}])
+    code_dir = root / "docs" / "orgmode" / "generated" / "codes"
+    code_dir.mkdir(parents=True, exist_ok=True)
+    keep: set[str] = set()
+    toc: list[str] = []
+    for name in order:
+        slug = _slug(name)
+        keep.add(f"{slug}.org")
+        toc.append(f"   generated/codes/{slug}")
+        page = [
+            f"#+TITLE: {name}",
+            "#+OPTIONS: toc:nil num:nil author:nil",
+            "",
+            _raw(_code_page_html(name, grouped[name], document)).rstrip(),
+            "",
+        ]
+        (code_dir / f"{slug}.org").write_text("\n".join(page), encoding="utf-8")
+    for path in code_dir.glob("*.org"):
+        if path.name not in keep:
+            path.unlink()
+    include = root / "docs" / "include"
+    include.mkdir(parents=True, exist_ok=True)
+    (include / "codes.org").write_text(_raw(_codes_index_html(contributor, order)), encoding="utf-8")
+    body = [
+        "#+TITLE: Codes",
+        "#+OPTIONS: toc:nil num:nil author:nil",
+        "",
+        "Each code has its own page.",
+        "A ranked row is one version and one stock method.",
+        "Archived rows use the same key and appear on that code page.",
+        "",
+        '#+INCLUDE: "../include/codes.org"',
+        "",
+        "#+begin_export rst",
+        ".. toctree::",
+        "   :hidden:",
+        "   :maxdepth: 1",
+        "",
+        *toc,
+        "#+end_export",
+        "",
+    ]
+    (root / "docs" / "orgmode" / "codes.org").write_text("\n".join(body), encoding="utf-8")
 
 
 def _smoke_note(root: Path) -> str:
@@ -615,12 +642,11 @@ def _suite_problem_link(problem: dict, templates: bool = False) -> str:
 
 def render(root: Path) -> None:
     """Write the site tables from the v2 scorer."""
-    from .board import _registry, plot_names_for, render_problem_section, summary_codes, summary_table, write_board
+    from .board import plot_names_for, render_problem_section, write_board
 
     root = Path(root)
     document = write_board(root, root / "results" / "board")
     problems = load_all(root / "problems")
-    oracle = load_oracle(root / "oracle" / "entries.jsonl")
     smoke = _smoke_note(root)
     pending = _unparsed_by_problem(document)
     by_suite: dict[str, list[dict]] = {}
@@ -630,13 +656,13 @@ def render(root: Path) -> None:
 
     include = root / "docs" / "include"
     include.mkdir(parents=True, exist_ok=True)
-    (include / "codes.org").write_text(_raw(_codes_html(root, document)), encoding="utf-8")
+    _write_code_pages(root, document)
     (include / "sota.org").write_text(
         _raw(_headlines_html(order, by_suite, document, pending)),
         encoding="utf-8",
     )
     (include / "collection.org").write_text(
-        _raw(_collection_html(order, by_suite, document, pending, oracle)),
+        _raw(_collection_html(order, by_suite, document, pending, [])),
         encoding="utf-8",
     )
     for stale in ("featured.org", "terra-pass.org"):
@@ -646,35 +672,57 @@ def render(root: Path) -> None:
 
     suite_dir = root / "docs" / "orgmode" / "generated" / "suites"
     suite_dir.mkdir(parents=True, exist_ok=True)
-    codes = summary_codes(document, _registry(root))
     for suite in order:
         group = by_suite.get(suite)
         if not group:
             continue
-        sections: list[str] = []
-        views = [_board_view(problem, document) for problem in _sorted_problems(group)]
-        sections.append('<section class="bench" id="summary">')
-        sections.append(summary_table(views, codes, _suite_problem_link))
-        sections.append("</section>")
+        problem_dir = suite_dir / suite
+        problem_dir.mkdir(parents=True, exist_ok=True)
+        keep: set[str] = set()
+        toc: list[str] = []
+        links: list[str] = []
         for problem in sorted(group, key=lambda item: item["problem"].lower()):
+            name = str(problem["problem"])
+            keep.add(f"{name}.org")
+            toc.append(f"   {suite}/{name}")
+            title = str(problem.get("title") or name)
+            links.append(f'<li><a href="{suite}/{name}.html">{html.escape(title)}</a></li>')
             view = _board_view(problem, document)
             note = smoke if problem["id"] == "saddle-search/pt-island" else ""
-            sections.append(
-                render_problem_section(
-                    view,
-                    plot_names_for(view),
-                    asset_prefix="../../_static/board",
-                    preamble=_rule_html(problem, note),
-                    section_id=str(problem["problem"]),
-                    unparsed=pending.get(problem["id"]),
-                )
+            section = render_problem_section(
+                view,
+                plot_names_for(view),
+                asset_prefix="../../../_static/board",
+                preamble=_rule_html(problem, note),
+                section_id=name,
+                unparsed=pending.get(problem["id"]),
             )
-            sections.append(_legacy_section(problem, oracle))
+            page = [
+                f"#+TITLE: {title}",
+                "#+OPTIONS: toc:nil num:nil author:nil",
+                "",
+                _raw(section).rstrip(),
+                "",
+            ]
+            (problem_dir / f"{name}.org").write_text("\n".join(page), encoding="utf-8")
+        for path in problem_dir.glob("*.org"):
+            if path.name not in keep:
+                path.unlink()
         body = [
             f"#+TITLE: {suite_title(suite)}",
             "#+OPTIONS: toc:nil num:nil author:nil",
             "",
-            _raw("".join(sections)).rstrip(),
+            "Each problem is its own page.",
+            "",
+            _raw("<ul>\n" + "\n".join(links) + "\n</ul>"),
+            "",
+            "#+begin_export rst",
+            ".. toctree::",
+            "   :hidden:",
+            "   :maxdepth: 1",
+            "",
+            *toc,
+            "#+end_export",
             "",
         ]
         (suite_dir / f"{suite}.org").write_text("\n".join(body), encoding="utf-8")

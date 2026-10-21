@@ -8,7 +8,7 @@ code ASE
 code_version 3.29.0
 commit f27c0005ae6a67ea419f996e728668865bfc1f86
 algorithm BFGSLineSearch
-profile tuned
+profile adjusted
 template ase/morse-bfgslinesearch-tuned
 problem minimization/morse-bulk
 counter harness

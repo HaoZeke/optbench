@@ -1,0 +1,38 @@
+#+TITLE: AIRSS
+#+OPTIONS: toc:nil num:nil author:nil
+
+#+begin_export rst
+.. raw:: html
+
+   <section class="bench" id="code-airss">
+   <h2>AIRSS</h2>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>random structure search</td>
+   <td>0.9.4</td>
+   <td>5593cc4ee360</td>
+   <td><a href="https://www.mtg.msm.cam.ac.uk/Codes/AIRSS">https://www.mtg.msm.cam.ac.uk/Codes/AIRSS</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-rows">
+   <caption>Every ranked row for this code.</caption>
+   <thead><tr><th>Problem</th><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="globalopt/lj38" data-label="AIRSS (0.9.4) · random structure search">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="label">AIRSS (0.9.4) · random structure search</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">7</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">70635.5</td>
+   <td data-field="mean_calls">112134</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table></div>
+   </section>
+#+end_export

@@ -15,11 +15,11 @@ code_version 0.4.0
 commit 24236559f3815847cac89ba0a7be634ce0beb4a9
 algorithm QUICKMIN
 template rgmin/lj38-quickmin-tuned
-tuning tuned
+tuning adjusted
 counter harness
 par2_mean 1932.997
-wilson_low 0.992737192137
-wilson_high 0.999451356412
+rate_low 0.992737192137
+rate_high 0.999451356412
 par2_median 1601.5
 par2_median_low 1512.9625
 par2_median_high 1665.0125

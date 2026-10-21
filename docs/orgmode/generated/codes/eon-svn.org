@@ -1,0 +1,486 @@
+#+TITLE: Eon svn
+#+OPTIONS: toc:nil num:nil author:nil
+
+#+begin_export rst
+.. raw:: html
+
+   <section class="bench" id="code-eon-svn">
+   <h2>Eon svn</h2>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization and saddle search</td>
+   <td>r2549</td>
+   <td>r2549</td>
+   <td><a href="https://theory.cm.utexas.edu/svn/eon">https://theory.cm.utexas.edu/svn/eon</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-rows">
+   <caption>Every ranked row for this code.</caption>
+   <thead><tr><th>Problem</th><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="double-ended-saddle-search/lj38" data-label="Eon svn (r2549) · Lanczos improved L-BFGS">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="label">Eon svn (r2549) · Lanczos improved L-BFGS</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">1</td>
+   <td data-field="par2_mean">235.2</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">197</td>
+   <td data-field="mean_calls">235.2</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38" data-label="Eon svn (r2549) · Lanczos L-BFGS">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="label">Eon svn (r2549) · Lanczos L-BFGS</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">4</td>
+   <td data-field="par2_mean">299.82</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">243.5</td>
+   <td data-field="mean_calls">299.82</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38" data-label="Eon svn (r2549) · Dimer L-BFGS">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="label">Eon svn (r2549) · Dimer L-BFGS</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">8</td>
+   <td data-field="par2_mean">469.64</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">206.5</td>
+   <td data-field="mean_calls">419.64</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38" data-label="Eon svn (r2549) · CI-NEB">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="label">Eon svn (r2549) · CI-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">4</td>
+   <td data-field="par2_mean">1100.84</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">662</td>
+   <td data-field="mean_calls">900.84</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 4, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38" data-label="Eon svn (r2549) · LBFGS">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="label">Eon svn (r2549) · LBFGS</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">5</td>
+   <td data-field="par2_mean">1180.1</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">657</td>
+   <td data-field="mean_calls">930.1</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 5, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38" data-label="Eon svn (r2549) · Doubly nudged CI-NEB">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="label">Eon svn (r2549) · Doubly nudged CI-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">7</td>
+   <td data-field="par2_mean">1294.86</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">662</td>
+   <td data-field="mean_calls">994.86</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 6, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="Eon svn (r2549) · Lanczos improved L-BFGS">
+   <td>lj38_2ts_separation</td>
+   <td data-field="label">Eon svn (r2549) · Lanczos improved L-BFGS</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">1</td>
+   <td data-field="par2_mean">502.784</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">418</td>
+   <td data-field="mean_calls">502.784</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="Eon svn (r2549) · Lanczos L-BFGS">
+   <td>lj38_2ts_separation</td>
+   <td data-field="label">Eon svn (r2549) · Lanczos L-BFGS</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">3</td>
+   <td data-field="par2_mean">524.667</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">467</td>
+   <td data-field="mean_calls">524.667</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="Eon svn (r2549) · Dimer L-BFGS">
+   <td>lj38_2ts_separation</td>
+   <td data-field="label">Eon svn (r2549) · Dimer L-BFGS</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">7</td>
+   <td data-field="par2_mean">681.784</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">451</td>
+   <td data-field="mean_calls">681.784</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="Eon svn (r2549) · LBFGS">
+   <td>lj38_2ts_separation</td>
+   <td data-field="label">Eon svn (r2549) · LBFGS</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">2</td>
+   <td data-field="par2_mean">13384.9</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="mean_calls">7502.59</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 30, wrong_stationary 0</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="Eon svn (r2549) · Doubly nudged CI-NEB">
+   <td>lj38_2ts_separation</td>
+   <td data-field="label">Eon svn (r2549) · Doubly nudged CI-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">9</td>
+   <td data-field="par2_mean">373102</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">5007</td>
+   <td data-field="mean_calls">4283.76</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 38, cap 0, wrong_stationary 0</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="Eon svn (r2549) · CI-NEB">
+   <td>lj38_2ts_separation</td>
+   <td data-field="label">Eon svn (r2549) · CI-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">10</td>
+   <td data-field="par2_mean">402321</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">5007</td>
+   <td data-field="mean_calls">4385.63</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 41, cap 0, wrong_stationary 0</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-label="Eon svn (r2549) · Lanczos improved L-BFGS">
+   <td>pt-island</td>
+   <td data-field="label">Eon svn (r2549) · Lanczos improved L-BFGS</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">1</td>
+   <td data-field="par2_mean">180.644</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">161</td>
+   <td data-field="mean_calls">180.644</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-label="Eon svn (r2549) · Dimer L-BFGS">
+   <td>pt-island</td>
+   <td data-field="label">Eon svn (r2549) · Dimer L-BFGS</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">3</td>
+   <td data-field="par2_mean">192.051</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">188</td>
+   <td data-field="mean_calls">192.051</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-label="Eon svn (r2549) · Lanczos L-BFGS">
+   <td>pt-island</td>
+   <td data-field="label">Eon svn (r2549) · Lanczos L-BFGS</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">4</td>
+   <td data-field="par2_mean">221.525</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">208</td>
+   <td data-field="mean_calls">221.525</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-label="Eon svn (r2549) · CI-NEB">
+   <td>pt-island</td>
+   <td data-field="label">Eon svn (r2549) · CI-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">2</td>
+   <td data-field="par2_mean">225.881</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">188</td>
+   <td data-field="mean_calls">225.881</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-label="Eon svn (r2549) · LBFGS">
+   <td>pt-island</td>
+   <td data-field="label">Eon svn (r2549) · LBFGS</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">2</td>
+   <td data-field="par2_mean">225.881</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">188</td>
+   <td data-field="mean_calls">225.881</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-label="Eon svn (r2549) · Doubly nudged CI-NEB">
+   <td>pt-island</td>
+   <td data-field="label">Eon svn (r2549) · Doubly nudged CI-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">3</td>
+   <td data-field="par2_mean">246.271</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">218</td>
+   <td data-field="mean_calls">246.271</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="globalopt/lj38" data-label="Eon svn (r2549) · Basin hopping">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="label">Eon svn (r2549) · Basin hopping</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">6</td>
+   <td data-field="par2_mean">598530</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">423226</td>
+   <td data-field="mean_calls">558530</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="lowest-eigenvector/lj38" data-label="Eon svn (r2549) · Lanczos CG">
+   <td>lj38</td>
+   <td data-field="label">Eon svn (r2549) · Lanczos CG</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">3</td>
+   <td data-field="par2_mean">26.385</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">25</td>
+   <td data-field="mean_calls">26.385</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="lowest-eigenvector/lj38" data-label="Eon svn (r2549) · Dimer L-BFGS">
+   <td>lj38</td>
+   <td data-field="label">Eon svn (r2549) · Dimer L-BFGS</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">9</td>
+   <td data-field="par2_mean">28.33</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">27</td>
+   <td data-field="mean_calls">28.33</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="lowest-eigenvector/lj38" data-label="Eon svn (r2549) · Dimer CG">
+   <td>lj38</td>
+   <td data-field="label">Eon svn (r2549) · Dimer CG</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">13</td>
+   <td data-field="par2_mean">30.355</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">29</td>
+   <td data-field="mean_calls">30.355</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="Eon svn (r2549) · LBFGS">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">Eon svn (r2549) · LBFGS</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">7</td>
+   <td data-field="par2_mean">300.052</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">189</td>
+   <td data-field="mean_calls">200.9</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 5</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-label="Eon svn (r2549) · LBFGS">
+   <td>Pt-heptamer</td>
+   <td data-field="label">Eon svn (r2549) · LBFGS</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">6</td>
+   <td data-field="par2_mean">336.769</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">338</td>
+   <td data-field="mean_calls">336.769</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-label="Eon svn (r2549) · FIRE">
+   <td>Pt-heptamer</td>
+   <td data-field="label">Eon svn (r2549) · FIRE</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">8</td>
+   <td data-field="par2_mean">678.923</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">666</td>
+   <td data-field="mean_calls">678.923</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-label="Eon svn (r2549) · CG">
+   <td>Pt-heptamer</td>
+   <td data-field="label">Eon svn (r2549) · CG</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">9</td>
+   <td data-field="par2_mean">929.385</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">778</td>
+   <td data-field="mean_calls">929.385</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-label="Eon svn (r2549) · QuickMin">
+   <td>Pt-heptamer</td>
+   <td data-field="label">Eon svn (r2549) · QuickMin</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">10</td>
+   <td data-field="par2_mean">1322</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1242</td>
+   <td data-field="mean_calls">1322</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="tsopt/LJ38" data-label="Eon svn (r2549) · Lanczos improved L-BFGS">
+   <td>LJ38</td>
+   <td data-field="label">Eon svn (r2549) · Lanczos improved L-BFGS</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">2</td>
+   <td data-field="par2_mean">270.85</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">180</td>
+   <td data-field="mean_calls">270.85</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/LJ38" data-label="Eon svn (r2549) · Lanczos L-BFGS">
+   <td>LJ38</td>
+   <td data-field="label">Eon svn (r2549) · Lanczos L-BFGS</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">4</td>
+   <td data-field="par2_mean">292.78</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">219</td>
+   <td data-field="mean_calls">292.78</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/LJ38" data-label="Eon svn (r2549) · Dimer L-BFGS">
+   <td>LJ38</td>
+   <td data-field="label">Eon svn (r2549) · Dimer L-BFGS</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">8</td>
+   <td data-field="par2_mean">619.89</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">360.5</td>
+   <td data-field="mean_calls">536.585</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 1, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/pt-island" data-label="Eon svn (r2549) · Lanczos improved L-BFGS">
+   <td>pt-island</td>
+   <td data-field="label">Eon svn (r2549) · Lanczos improved L-BFGS</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">2</td>
+   <td data-field="par2_mean">106.388</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">100</td>
+   <td data-field="mean_calls">106.388</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">49</td>
+   </tr>
+   <tr data-problem="tsopt/pt-island" data-label="Eon svn (r2549) · Dimer L-BFGS">
+   <td>pt-island</td>
+   <td data-field="label">Eon svn (r2549) · Dimer L-BFGS</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">4</td>
+   <td data-field="par2_mean">114.959</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">112</td>
+   <td data-field="mean_calls">114.959</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">49</td>
+   </tr>
+   <tr data-problem="tsopt/pt-island" data-label="Eon svn (r2549) · Lanczos L-BFGS">
+   <td>pt-island</td>
+   <td data-field="label">Eon svn (r2549) · Lanczos L-BFGS</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">8</td>
+   <td data-field="par2_mean">146.163</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">140</td>
+   <td data-field="mean_calls">146.163</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">49</td>
+   </tr>
+   </tbody></table></div>
+   </section>
+#+end_export

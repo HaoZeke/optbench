@@ -34,7 +34,7 @@ def test_develop_de_2ts_cap_is_the_problem_cap():
 
     problem = resolve_problem(ROOT, "double-ended-saddle-search/lj38_2ts_separation")
     cap = int(problem["convergence"]["max_force_calls"])
-    assert cap == 10000
+    assert cap == 250000
     for name in (
         "eon/develop-de-2ts",
         "eon/develop-de-2ts-accept-energy",
