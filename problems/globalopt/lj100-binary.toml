@@ -4,7 +4,7 @@ suite = "globalopt"
 problem = "lj100-binary"
 contract = "stated"
 entry_count = 2
-remark = "The archived files record energies. They do not record force calls."
+remark = "The archived files record energies. They do not record force calls. The force-call cap is max_evaluations in this file, 2000000."
 
 [potential]
 kind = "binary-lennard-jones"
@@ -21,6 +21,9 @@ energy_minimum = -604.796307
 [sample]
 starts = 100
 max_evaluations = 2000000
+
+[convergence]
+max_force_calls = 2000000
 
 [input]
 archive_path = "website/globalopt/lj100-binary/lj100-binary-con.tgz"
