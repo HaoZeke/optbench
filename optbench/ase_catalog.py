@@ -158,7 +158,9 @@ def _tuned_minimizer(problem: str, name: str) -> tuple[dict, str, str]:
             "PreconLBFGS": (
                 {"maxstep": 0.1, **exp},
                 "archive",
-                "Archive minimization/lj38/ase-preconlbfgs sets Exp A 3 and maxstep 0.1.",
+                "Archive minimization/lj38/ase-preconlbfgs/opt.py builds Exp with A 3 and PreconLBFGS maxstep 0.1, "
+                "then stops on ASE fmax 0.01. The script uses a tsase LJ cutoff of 35. "
+                "This row uses the harness cutoff 40.",
             ),
             "PreconFIRE": (
                 {"maxstep": 0.2, **exp},
@@ -268,6 +270,13 @@ def _minimization_specs() -> list[dict]:
                         )
                 else:
                     params, source, note = _tuned_minimizer(problem, name)
+                row_stop = stop
+                if (
+                    problem == "minimization/lj38"
+                    and name == "PreconLBFGS"
+                    and profile == "adjusted"
+                ):
+                    row_stop = {**stop, "norm": "fmax"}
                 specs.append(
                     {
                         "id": f"ase/{slug}-{_opt_slug(name)}-{_id_suffix(profile)}",
@@ -285,7 +294,7 @@ def _minimization_specs() -> list[dict]:
                         "note": note,
                         "optimizer": {"name": name, "parameters": params},
                         "potential": potential,
-                        "stop": stop,
+                        "stop": row_stop,
                         "input": {"archive_path": archive, "select": select},
                     }
                 )
