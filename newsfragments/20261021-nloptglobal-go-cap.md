@@ -1,0 +1,1 @@
+NLopt basin hopping, MLSL, CRS2, ISRES, and StoGO on `globalopt/lj38`, `globalopt/lj75`, `globalopt/lj98`, and `globalopt/lj150` use the problem force-call cap, 2000000. Cube searches keep half-width 6. Basin hopping keeps displacement 0.5, kT 0.8, and the 0.2 move bound.

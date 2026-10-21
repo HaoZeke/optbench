@@ -154,6 +154,9 @@ def _settings(problem: dict, template: dict) -> dict:
     cap = int(stop["max_force_calls"])
     if cap <= 0:
         raise ValueError("max_force_calls must be positive")
+    stated_cap = convergence.get("max_force_calls")
+    if stated_cap not in (None, "") and int(stated_cap) != cap:
+        raise ValueError(f"{template['id']} cap {cap} is not the problem force-call cap {int(stated_cap)}")
     domain = template.get("domain") or {}
     section = _nlopt_section(template)
     if "displacement" in section:

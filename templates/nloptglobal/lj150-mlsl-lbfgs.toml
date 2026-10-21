@@ -1,0 +1,38 @@
+id = "nloptglobal/lj150-mlsl-lbfgs"
+engine = "nlopt"
+code = "NLopt"
+code_version = "2.11.0"
+commit = "88c424d4f458412787df96fcc95218acbca224fd"
+algorithm = "MLSL"
+problem = "globalopt/lj150"
+task = "global-minimize"
+profile = "default"
+tuning = "default"
+reducer = "capped"
+ranked = true
+note = "GN_MLSL with an LD_LBFGS local solver. Local ftol_rel 1e-15 and xtol_rel 1e-7 are the tolerances NLopt fills in when a local solver has none. Population stays at the library default of 4 samples per iteration. The NLopt seed is the start index."
+
+[nlopt]
+name = "GN_MLSL"
+local = "LD_LBFGS"
+local_ftol_rel = 1e-15
+local_xtol_rel = 1e-7
+
+[potential]
+kind = "lennard-jones"
+epsilon = 1.0
+sigma = 1.0
+rc = 40.0
+
+[domain]
+half_width = 6.0
+
+[classify]
+force_norm = 0.01
+
+[stop]
+energy_above_minimum = 0.001
+max_force_calls = 2000000
+
+[input]
+archive_path = "website/globalopt/lj150/lj150_clusters.tgz"

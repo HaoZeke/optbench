@@ -209,7 +209,7 @@ code = "ase"
 problem = "globalopt/lj75"
 profile = "default"
 task = "basin-hopping"
-ranked = true
+ranked = false
 
 [[code]]
 id = "airss"
@@ -259,7 +259,7 @@ repository = "https://github.com/stevengj/nlopt"
 ref = "v2.11.0"
 commit = "88c424d4f458412787df96fcc95218acbca224fd"
 committed = "2026-06-05"
-note = "NLopt 2.11.0 at 88c424d4. Templates are LD_LBFGS basin hopping, GN_MLSL with LD_LBFGS, GN_CRS2_LM, GN_ISRES, and GD_STOGO. The potential is the harness Lennard-Jones cluster, epsilon 1, sigma 1, cutoff 40, no shift. Force calls are harness evaluations. Each start is one archived geometry. Cube searches use a half-width of 6 centered on that geometry. Basin hopping uses displacement 0.5 and kT 0.8, and each L-BFGS trial step is capped at 0.2. A success is at or below the Cambridge Cluster Database minimum plus 0.001. The force-call cap is the one on the template."
+note = "NLopt 2.11.0 at 88c424d4. Templates are LD_LBFGS basin hopping, GN_MLSL with LD_LBFGS, GN_CRS2_LM, GN_ISRES, and GD_STOGO. The potential is the harness Lennard-Jones cluster, epsilon 1, sigma 1, cutoff 40, no shift. Force calls are harness evaluations. Each start is one archived geometry. Cube searches use a half-width of 6 centered on that geometry. Basin hopping uses displacement 0.5 and kT 0.8, and each L-BFGS trial step is capped at 0.2. A success is at or below the Cambridge Cluster Database minimum plus 0.001. The force-call cap is 2000000, the cap stated on the problem. The same algorithm arguments are used on LJ38, LJ75, LJ98, and LJ150."
 
 [[template]]
 id = "nloptglobal/lj38-mlsl-lbfgs"
@@ -325,6 +325,101 @@ profile = "default"
 task = "global-minimize"
 ranked = true
 
+[[template]]
+id = "nloptglobal/lj75-mlsl-lbfgs"
+code = "nloptglobal"
+problem = "globalopt/lj75"
+profile = "default"
+task = "global-minimize"
+ranked = true
+
+[[template]]
+id = "nloptglobal/lj75-crs2"
+code = "nloptglobal"
+problem = "globalopt/lj75"
+profile = "default"
+task = "global-minimize"
+ranked = true
+
+[[template]]
+id = "nloptglobal/lj75-isres"
+code = "nloptglobal"
+problem = "globalopt/lj75"
+profile = "default"
+task = "global-minimize"
+ranked = true
+
+[[template]]
+id = "nloptglobal/lj75-stogo"
+code = "nloptglobal"
+problem = "globalopt/lj75"
+profile = "default"
+task = "global-minimize"
+ranked = true
+
+[[template]]
+id = "nloptglobal/lj98-mlsl-lbfgs"
+code = "nloptglobal"
+problem = "globalopt/lj98"
+profile = "default"
+task = "global-minimize"
+ranked = true
+
+[[template]]
+id = "nloptglobal/lj98-crs2"
+code = "nloptglobal"
+problem = "globalopt/lj98"
+profile = "default"
+task = "global-minimize"
+ranked = true
+
+[[template]]
+id = "nloptglobal/lj98-isres"
+code = "nloptglobal"
+problem = "globalopt/lj98"
+profile = "default"
+task = "global-minimize"
+ranked = true
+
+[[template]]
+id = "nloptglobal/lj98-stogo"
+code = "nloptglobal"
+problem = "globalopt/lj98"
+profile = "default"
+task = "global-minimize"
+ranked = true
+
+[[template]]
+id = "nloptglobal/lj150-mlsl-lbfgs"
+code = "nloptglobal"
+problem = "globalopt/lj150"
+profile = "default"
+task = "global-minimize"
+ranked = true
+
+[[template]]
+id = "nloptglobal/lj150-crs2"
+code = "nloptglobal"
+problem = "globalopt/lj150"
+profile = "default"
+task = "global-minimize"
+ranked = true
+
+[[template]]
+id = "nloptglobal/lj150-isres"
+code = "nloptglobal"
+problem = "globalopt/lj150"
+profile = "default"
+task = "global-minimize"
+ranked = true
+
+[[template]]
+id = "nloptglobal/lj150-stogo"
+code = "nloptglobal"
+problem = "globalopt/lj150"
+profile = "default"
+task = "global-minimize"
+ranked = true
 # generated ASE and Sella templates
 
 [[template]]

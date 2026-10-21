@@ -21,17 +21,16 @@ from optbench.runners.nlopt_global import (
 
 ROOT = Path(__file__).resolve().parents[1]
 COMMIT = "88c424d4f458412787df96fcc95218acbca224fd"
-CUBE_TEMPLATES = (
-    "nloptglobal/lj38-mlsl-lbfgs",
-    "nloptglobal/lj38-crs2",
-    "nloptglobal/lj38-isres",
-    "nloptglobal/lj38-stogo",
+CUBE_TEMPLATES = tuple(
+    f"nloptglobal/{size}-{method}"
+    for size in ("lj38", "lj75", "lj98", "lj150")
+    for method in ("mlsl-lbfgs", "crs2", "isres", "stogo")
 )
 HOP_CAPS = {
-    "nloptglobal/lj38-lbfgs-bh": 1_000_000,
-    "nloptglobal/lj75-lbfgs-bh": 1_000_000,
-    "nloptglobal/lj98-lbfgs-bh": 1_000_000_000,
-    "nloptglobal/lj150-lbfgs-bh": 10_000_000,
+    "nloptglobal/lj38-lbfgs-bh": 2_000_000,
+    "nloptglobal/lj75-lbfgs-bh": 2_000_000,
+    "nloptglobal/lj98-lbfgs-bh": 2_000_000,
+    "nloptglobal/lj150-lbfgs-bh": 2_000_000,
 }
 
 
@@ -64,8 +63,9 @@ def test_templates_pin_the_registry_commit():
             assert "max_move" in template["note"]
             assert "1e-12" in template["note"]
         else:
-            assert template["problem"] == "globalopt/lj38"
-            assert int(template["stop"]["max_force_calls"]) == 1_000_000
+            size = name.split("/")[1].split("-", 1)[0]
+            assert template["problem"] == f"globalopt/{size}"
+            assert int(template["stop"]["max_force_calls"]) == 2_000_000
             assert float(template["domain"]["half_width"]) == 6.0
 
 
