@@ -10,7 +10,7 @@ profile = "tuned"
 reducer = "capped"
 ranked = false
 parameter_source = "transferred"
-note = "Archived Sella trust region: eta 1e-6, gamma 0.4, delta0 1.3e-3, rho_inc 1.035, rho_dec 5, sigma_inc 1.15, sigma_dec 0.65. Sixteen searches, each a Gaussian displacement of standard deviation 0.1 on the free atoms, then Sella order 1 with v0 unset. One search is not the saddle catalog, so this row is not ranked and fraction_connected is not reported. The cost is the per-search harness count. The potential is energy-shifted Morse at cutoff 9.5, the eOn Morse::force surface."
+note = "Archived Sella trust region: eta 1e-6, gamma 0.4, delta0 1.3e-3, rho_inc 1.035, rho_dec 5, sigma_inc 1.15, sigma_dec 0.65. This profile is off the ranked table. Sixteen searches. The reactant is minimized outside the count. Each search kicks every free atom with a Gaussian of standard deviation 0.1 and climbs with Sella order 1, v0 unset. The climb stops at 1064 harness calls. Both endpoints are minimized, 2000 calls each. The per-search cap is 5064. A success is index 1 at the force stop, barrier below 1.5 eV, exactly one minimized endpoint the same as the minimized reactant by the eOn r2205 per-atom test, and not a repeat under find_repeat. The potential is energy-shifted Morse at cutoff 9.5, the eOn Morse::force surface."
 
 [optimizer]
 name = "Sella"
@@ -37,7 +37,7 @@ pbc = [true, true, false]
 [stop]
 norm = "l2"
 force_norm = 0.001
-max_force_calls = 10000
+max_force_calls = 5064
 max_steps = 5000
 
 [input]

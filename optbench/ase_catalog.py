@@ -627,20 +627,39 @@ def _sella_neb_specs() -> list[dict]:
 
 
 def _sella_search_specs() -> list[dict]:
-    """Single-ended Sella samples on the Pt island. Not a ranked catalog score."""
+    """Single-ended Sella samples on the Pt island.
+
+    The default row is the ranked score. The cap is the problem cap:
+    climb budget 1000, 64 calls of overshoot, and two endpoint budgets
+    of 2000. The tuned profile stays off that table.
+    """
+    shared = (
+        "Sixteen searches. The reactant is minimized outside the count. "
+        "Each search kicks every free atom with a Gaussian of standard deviation 0.1 "
+        "and climbs with Sella order 1, v0 unset. The climb stops at 1064 harness calls. "
+        "Both endpoints are minimized, 2000 calls each. "
+        "The per-search cap is 5064. A success is index 1 at the force stop, "
+        "barrier below 1.5 eV, exactly one minimized endpoint the same as the minimized "
+        "reactant by the eOn r2205 per-atom test, and not a repeat under find_repeat. "
+        "The potential is energy-shifted Morse at cutoff 9.5, the eOn Morse::force surface."
+    )
     specs = []
-    for profile, params, source, note in (
+    for profile, params, source, note, ranked, cap in (
         (
             "default",
             {"order": 1},
             "default",
             f"Sella {SELLA_VERSION} saddle defaults, order 1. ",
+            True,
+            5064,
         ),
         (
             "tuned",
             {"order": 1, **SELLA_TUNED},
             "transferred",
-            SELLA_TUNED_NOTE + " ",
+            SELLA_TUNED_NOTE + " This profile is off the ranked table. ",
+            False,
+            5064,
         ),
     ):
         specs.append(
@@ -655,22 +674,15 @@ def _sella_search_specs() -> list[dict]:
                 "task": "sella-search",
                 "profile": profile,
                 "reducer": "capped",
-                "ranked": False,
+                "ranked": ranked,
                 "parameter_source": source,
-                "note": (
-                    note
-                    + "Sixteen searches, each a Gaussian displacement of standard deviation 0.1 "
-                    + "on the free atoms, then Sella order 1 with v0 unset. "
-                    + "One search is not the saddle catalog, so this row is not ranked and "
-                    + "fraction_connected is not reported. The cost is the per-search harness count. "
-                    + "The potential is energy-shifted Morse at cutoff 9.5, the eOn Morse::force surface."
-                ),
+                "note": note + shared,
                 "optimizer": {"name": "Sella", "parameters": params},
                 "potential": MORSE_EON,
                 "stop": {
                     "norm": "l2",
                     "force_norm": 0.001,
-                    "max_force_calls": 10000,
+                    "max_force_calls": cap,
                     "max_steps": 5000,
                 },
                 "input": {

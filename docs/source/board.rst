@@ -5,9 +5,8 @@ v2 board
 
 Each column is one code.
 The cell is that code's best full harness run, ranked by the v2 PAR-2 mean.
-The problem page lists every template, including history and partial rows.
+The problem page lists every template, including history and rows that are not the full set.
 ``uv run optbench board`` writes this page from the committed results.
-It does not run a campaign.
 
 .. raw:: html
 
@@ -71,7 +70,7 @@ It does not run a campaign.
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/saddle-dimer-rotskip-tuned" data-par2="10127.1"><span class="bench-score">10127.1</span><a href="generated/suites/saddle-search.html#pt-island-templates">rgsaddle/saddle-dimer-rotskip-tuned</a></td>
    <td data-code="ASE">—</td>
-   <td data-code="Sella" data-template="sella/pt-island-search-default" data-par2="5201.62"><span class="bench-score">5201.62</span><a href="generated/suites/saddle-search.html#pt-island-templates">sella/pt-island-search-default</a></td>
+   <td data-code="Sella" data-template="sella/pt-island-search-default" data-par2="9539.88"><span class="bench-score">9539.88</span><a href="generated/suites/saddle-search.html#pt-island-templates">sella/pt-island-search-default</a></td>
    <td data-code="pysisyphus">—</td>
    <td data-code="artn" data-template="partn/saddle-pt" data-par2="10980.2"><span class="bench-score">10980.2</span><a href="generated/suites/saddle-search.html#pt-island-templates">partn/saddle-pt</a></td>
    <td data-code="compass">—</td>

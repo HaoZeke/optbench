@@ -32,8 +32,8 @@
    <dt>v2</dt><dd>par2-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
-   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
+   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A one-start record is not.</p>
+   <p class="bench-gaps">Rows that are not the full set stay off the ranked table.</p>
    <figure class="bench-plot"><a href="../../_static/board/lowest-eigenvector-lj38-profile.svg"><picture><source srcset="../../_static/board/lowest-eigenvector-lj38-profile.webp" type="image/webp"><img src="../../_static/board/lowest-eigenvector-lj38-profile.png" alt="Dolan-More profile for lowest-eigenvector/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/lowest-eigenvector-lj38-cost.svg"><picture><source srcset="../../_static/board/lowest-eigenvector-lj38-cost.webp" type="image/webp"><img src="../../_static/board/lowest-eigenvector-lj38-cost.png" alt="Cost versus success for lowest-eigenvector/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="lj38-templates">
@@ -56,18 +56,18 @@
    <tr><td data-field="template">partn/mode-lj38</td><td data-field="version">artn 1.1.0</td><td data-field="commit">9b753517c6c0</td><td data-field="source">campaign</td><td data-field="par2_mean">2619.84</td><td data-field="success_rate">0.87</td><td data-field="median_calls">23</td><td data-field="mean_calls">23.99</td><td data-field="failures">crash 0, divergence 26, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
    <tr><td data-field="template">pysisyphus/lanczos-lj38</td><td data-field="version">pysisyphus 0.1.dev1</td><td data-field="commit">a4ce10dd6d7f</td><td data-field="source">campaign</td><td data-field="par2_mean">4017.14</td><td data-field="success_rate">0.8</td><td data-field="median_calls">22</td><td data-field="mean_calls">22.195</td><td data-field="failures">crash 0, divergence 40, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
    </tbody></table></div>
-   <h3>Partial</h3><ul>
+   <h3>Off this rank</h3><ul>
    <li>eon-svn/low-lj38-dimer Eon svn campaign, asv n=200, result file sets ranked false; potential ljcluster (shifted, cutoff 15).</li>
    <li>eon-svn/low-lj38-lanczos Eon svn campaign, asv n=200, result file sets ranked false; potential ljcluster (shifted, cutoff 15).</li>
-   <li>eon/develop-low-lj38-dimer eOn asv n=1, smoke run; scored 1 of 200 starts.</li>
-   <li>eon/develop-low-lj38-lanczos eOn asv n=1, smoke run; scored 1 of 200 starts.</li>
+   <li>eon/develop-low-lj38-dimer eOn asv n=1, scored 1 of 200 starts.</li>
+   <li>eon/develop-low-lj38-lanczos eOn asv n=1, scored 1 of 200 starts.</li>
    </ul>
    </details>
    </section><section class="bench bench-archive-section" id="lj38-archive">
    <h3>2014 archive</h3>
    <details class="bench-details">
    <summary>2014 archive</summary>
-   <p class="bench-archive">2014 archive. These rows stay in the published order, and each latest campaign sits beside its archive row. They are not a v2 score.</p>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-archive">
    <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
@@ -103,19 +103,8 @@
    <td class="text">Jacob Stevenson and Cheng Shang</td>
    <td class="text">06 Aug 2014</td>
    </tr>
-   <tr id="lowest-eigenvector-lj38-optim-first-order-optim-df8da599">
-   <td class="num">3</td>
-   <td class="text">optim df8da599</td>
-   <td class="text">optim df8da599</td>
-   <td class="num">61</td>
-   <td class="num"></td>
-   <td class="num"></td>
-   <td class="num"></td>
-   <td class="text"></td>
-   <td class="text"></td>
-   </tr>
    <tr id="lowest-eigenvector-lj38-pele-first-order">
-   <td class="num">4</td>
+   <td class="num">3</td>
    <td class="text">pele-first-order</td>
    <td class="text">pele</td>
    <td class="num">2.50000e+01</td>
@@ -125,19 +114,8 @@
    <td class="text">Jacob Stevenson</td>
    <td class="text">06 Aug 2014</td>
    </tr>
-   <tr id="lowest-eigenvector-lj38-pele-first-order-pele-0-1-2">
-   <td class="num">5</td>
-   <td class="text">pele 0.1.2</td>
-   <td class="text">pele 0.1.2</td>
-   <td class="num">25</td>
-   <td class="num"></td>
-   <td class="num"></td>
-   <td class="num"></td>
-   <td class="text"></td>
-   <td class="text"></td>
-   </tr>
    <tr id="lowest-eigenvector-lj38-tsase-lanczos">
-   <td class="num">6</td>
+   <td class="num">4</td>
    <td class="text">tsase-lanczos</td>
    <td class="text">TSASE 410</td>
    <td class="num">25</td>
@@ -148,7 +126,7 @@
    <td class="text">18 Jun 2014</td>
    </tr>
    <tr id="lowest-eigenvector-lj38-tsase-dimer-bfgs">
-   <td class="num">7</td>
+   <td class="num">5</td>
    <td class="text">tsase-dimer-bfgs</td>
    <td class="text">TSASE 408</td>
    <td class="num">27</td>
@@ -159,7 +137,7 @@
    <td class="text">18 Jun 2014</td>
    </tr>
    <tr id="lowest-eigenvector-lj38-eon-dimer-lbfgs">
-   <td class="num">8</td>
+   <td class="num">6</td>
    <td class="text">eon-dimer-lbfgs</td>
    <td class="text">Eon r2156</td>
    <td class="num">28</td>
@@ -169,19 +147,8 @@
    <td class="text">Sam Chill</td>
    <td class="text">17 Jun 2014</td>
    </tr>
-   <tr id="lowest-eigenvector-lj38-eon-dimer-lbfgs-eon-3-5-0">
-   <td class="num">9</td>
-   <td class="text">eOn 3.5.0</td>
-   <td class="text">eOn 3.5.0</td>
-   <td class="num">28</td>
-   <td class="num"></td>
-   <td class="num"></td>
-   <td class="num"></td>
-   <td class="text"></td>
-   <td class="text"></td>
-   </tr>
    <tr id="lowest-eigenvector-lj38-eon-lanczos">
-   <td class="num">10</td>
+   <td class="num">7</td>
    <td class="text">eon-lanczos</td>
    <td class="text">Eon r2156</td>
    <td class="num">28</td>
@@ -191,19 +158,8 @@
    <td class="text">Sam Chill</td>
    <td class="text">21 Aug 2013</td>
    </tr>
-   <tr id="lowest-eigenvector-lj38-eon-lanczos-eon-svn-r2549">
-   <td class="num">11</td>
-   <td class="text">Eon svn r2549</td>
-   <td class="text">Eon svn r2549</td>
-   <td class="num">26</td>
-   <td class="num"></td>
-   <td class="num"></td>
-   <td class="num"></td>
-   <td class="text"></td>
-   <td class="text"></td>
-   </tr>
    <tr id="lowest-eigenvector-lj38-tsase-dimer-cg">
-   <td class="num">12</td>
+   <td class="num">8</td>
    <td class="text">tsase-dimer-cg</td>
    <td class="text">TSASE 408</td>
    <td class="num">29</td>
@@ -214,7 +170,7 @@
    <td class="text">18 Jun 2014</td>
    </tr>
    <tr id="lowest-eigenvector-lj38-eon-dimer-cg">
-   <td class="num">13</td>
+   <td class="num">9</td>
    <td class="text">eon-dimer-cg</td>
    <td class="text">Eon r2156</td>
    <td class="num">30</td>
@@ -224,19 +180,8 @@
    <td class="text">Sam Chill</td>
    <td class="text">17 Jun 2014</td>
    </tr>
-   <tr id="lowest-eigenvector-lj38-eon-dimer-cg-eon-3-5-0">
-   <td class="num">14</td>
-   <td class="text">eOn 3.5.0</td>
-   <td class="text">eOn 3.5.0</td>
-   <td class="num">30</td>
-   <td class="num"></td>
-   <td class="num"></td>
-   <td class="num"></td>
-   <td class="text"></td>
-   <td class="text"></td>
-   </tr>
    <tr id="lowest-eigenvector-lj38-optim-second-order" class="held">
-   <td class="num">15</td>
+   <td class="num">10</td>
    <td class="text">optim-second-order (held out of the original table)</td>
    <td class="text">OPTIM</td>
    <td class="num">4.60000e+01</td>
@@ -247,7 +192,7 @@
    <td class="text">06 Aug 2014</td>
    </tr>
    <tr id="lowest-eigenvector-lj38-pele-second-order" class="held">
-   <td class="num">16</td>
+   <td class="num">11</td>
    <td class="text">pele-second-order (held out of the original table)</td>
    <td class="text">pele</td>
    <td class="num">4.70000e+01</td>
@@ -257,19 +202,8 @@
    <td class="text">Jacob Stevenson</td>
    <td class="text">06 Aug 2014</td>
    </tr>
-   <tr id="lowest-eigenvector-lj38-pele-second-order-pele-0-1-2">
-   <td class="num">17</td>
-   <td class="text">pele 0.1.2</td>
-   <td class="text">pele 0.1.2</td>
-   <td class="num">47</td>
-   <td class="num"></td>
-   <td class="num"></td>
-   <td class="num"></td>
-   <td class="text"></td>
-   <td class="text"></td>
-   </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>2014 archive. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:17"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "lowest-eigenvector-lj38-sella", "entry": "sella", "code": "Sella 0.1.1", "value": 17.8, "best": true, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-optim-first-order", "entry": "optim-first-order", "code": "OPTIM", "value": 25.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-optim-first-order-optim-df8da599", "entry": "optim df8da599", "code": "optim df8da599", "value": 61.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-pele-first-order", "entry": "pele-first-order", "code": "pele", "value": 25.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-pele-first-order-pele-0-1-2", "entry": "pele 0.1.2", "code": "pele 0.1.2", "value": 25.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-tsase-lanczos", "entry": "tsase-lanczos", "code": "TSASE 410", "value": 25.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-tsase-dimer-bfgs", "entry": "tsase-dimer-bfgs", "code": "TSASE 408", "value": 27.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-eon-dimer-lbfgs", "entry": "eon-dimer-lbfgs", "code": "Eon r2156", "value": 28.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-eon-dimer-lbfgs-eon-3-5-0", "entry": "eOn 3.5.0", "code": "eOn 3.5.0", "value": 28.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-eon-lanczos", "entry": "eon-lanczos", "code": "Eon r2156", "value": 28.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-eon-lanczos-eon-svn-r2549", "entry": "Eon svn r2549", "code": "Eon svn r2549", "value": 26.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-tsase-dimer-cg", "entry": "tsase-dimer-cg", "code": "TSASE 408", "value": 29.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-eon-dimer-cg", "entry": "eon-dimer-cg", "code": "Eon r2156", "value": 30.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-eon-dimer-cg-eon-3-5-0", "entry": "eOn 3.5.0", "code": "eOn 3.5.0", "value": 30.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-optim-second-order", "entry": "optim-second-order", "code": "OPTIM", "value": 46.0, "best": false, "held": true, "failed": false}, {"id": "lowest-eigenvector-lj38-pele-second-order", "entry": "pele-second-order", "code": "pele", "value": 47.0, "best": false, "held": true, "failed": false}, {"id": "lowest-eigenvector-lj38-pele-second-order-pele-0-1-2", "entry": "pele 0.1.2", "code": "pele 0.1.2", "value": 47.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 archive. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:11"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "lowest-eigenvector-lj38-sella", "entry": "sella", "code": "Sella 0.1.1", "value": 17.8, "best": true, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-optim-first-order", "entry": "optim-first-order", "code": "OPTIM", "value": 25.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-pele-first-order", "entry": "pele-first-order", "code": "pele", "value": 25.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-tsase-lanczos", "entry": "tsase-lanczos", "code": "TSASE 410", "value": 25.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-tsase-dimer-bfgs", "entry": "tsase-dimer-bfgs", "code": "TSASE 408", "value": 27.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-eon-dimer-lbfgs", "entry": "eon-dimer-lbfgs", "code": "Eon r2156", "value": 28.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-eon-lanczos", "entry": "eon-lanczos", "code": "Eon r2156", "value": 28.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-tsase-dimer-cg", "entry": "tsase-dimer-cg", "code": "TSASE 408", "value": 29.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-eon-dimer-cg", "entry": "eon-dimer-cg", "code": "Eon r2156", "value": 30.0, "best": false, "held": false, "failed": false}, {"id": "lowest-eigenvector-lj38-optim-second-order", "entry": "optim-second-order", "code": "OPTIM", "value": 46.0, "best": false, "held": true, "failed": false}, {"id": "lowest-eigenvector-lj38-pele-second-order", "entry": "pele-second-order", "code": "pele", "value": 47.0, "best": false, "held": true, "failed": false}]}</script></figure>
    </details>
    </section>
 #+end_export

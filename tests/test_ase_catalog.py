@@ -32,7 +32,9 @@ def test_catalog_covers_every_problem_and_both_profiles():
     lj = [spec for spec in specs if spec["problem"] == "minimization/lj38"]
     assert {spec["algorithm"] for spec in lj} == set(OPTIMIZERS) | {"Sella"}
     dimer = [spec for spec in specs if spec["problem"] == "saddle-search/pt-island"]
-    assert dimer and all(spec["ranked"] is False for spec in dimer)
+    ranked = [spec["id"] for spec in dimer if spec["ranked"]]
+    assert ranked == ["sella/pt-island-search-default"]
+    assert all(spec["ranked"] is False for spec in dimer if spec["id"] != "sella/pt-island-search-default")
 
 
 def test_templates_match_the_catalog_and_registry():
@@ -50,6 +52,11 @@ def test_templates_match_the_catalog_and_registry():
     tuned = load_template(ROOT, "ase/lj38-lbfgs-tuned")
     assert tuned["optimizer"]["parameters"]["memory"] == 100
     assert abs(float(tuned["optimizer"]["parameters"]["alpha"]) - 1000.0) < 1e-9
+    search = load_template(ROOT, "sella/pt-island-search-default")
+    assert search["ranked"] is True
+    assert search["stop"]["max_force_calls"] == 5064
+    tuned_search = load_template(ROOT, "sella/pt-island-search-tuned")
+    assert tuned_search["ranked"] is False
     sella = load_template(ROOT, "sella/lj38-ts-default")
     assert sella["optimizer"]["parameters"]["order"] == 1
     assert "delta0" not in sella["optimizer"]["parameters"]

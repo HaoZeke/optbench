@@ -1,8 +1,8 @@
 # Archive and latest runs
 
-Archive commit `0f26b796`. Each latest campaign is listed beside the published archive value. The ranked table uses the measured numbers.
+Archive commit `0f26b796`. Each measured campaign is listed with the published archive value. The ranked table uses the measured numbers.
 
-72 campaigns sit beside 151 archive rows.
+69 campaigns are recorded with 151 archive rows.
 
 Pt-island pele records the 2014 stop mean. The harness-stop means on the ranked table are a separate count.
 
@@ -174,9 +174,9 @@ Pt-island pele records the 2014 stop mean. The harness-stop means on the ranked 
 
 | Row | Archive | Latest |
 | --- | --- | --- |
-| pt-island/adaptive_HSphere-lbfgs-davidson-sm50 | force_calls 423491, unique_saddles 114.9, fraction_connected 0.8 | softsaddle 2019.04: 406030, 115.5, 0.815086 |
-| pt-island/adaptive_HSphere-lbfgs-lanczos-sm0 | force_calls 1.00343e+06, unique_saddles 130.4, fraction_connected 0.9 | softsaddle 2019.04: 1.50684e+06, 177.8, 0.675371 |
-| pt-island/adaptive_HSphere-lbfgs-lanczos-sm50 | force_calls 814519, unique_saddles 142.6, fraction_connected 0.9 | softsaddle 2019.04: 927874, 169.1, 0.679923 |
+| pt-island/adaptive_HSphere-lbfgs-davidson-sm50 | — | — |
+| pt-island/adaptive_HSphere-lbfgs-lanczos-sm0 | — | — |
+| pt-island/adaptive_HSphere-lbfgs-lanczos-sm50 | — | — |
 | pt-island/eon-dimer | force_calls 3.77888e+06, unique_saddles 109.222, fraction_connected 0.746017 | EON SVN r2549: 5.719e+06, 112.6, 0.701805; eOn (develop 500350d9): 6.3929e+06, 109.889, 0.694454 |
 | pt-island/eon-dimer-cg-20-rotations | — | — |
 | pt-island/eon-dimer-cg-20-rotations-20-bowl_breakout | — | — |

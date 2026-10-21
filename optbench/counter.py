@@ -24,7 +24,7 @@ def _key(coords: Sequence[float]) -> tuple[float, ...]:
 
 
 class ForceCallCap(RuntimeError):
-    """A search call at the budget. It is not counted and does not run."""
+    """A search call at the budget. The evaluation is refused and the call is not counted."""
 
 
 class HarnessCounter:

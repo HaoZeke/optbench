@@ -4,7 +4,7 @@ The harness is this repository. `uv run pytest` and `uv run optbench check` are 
 
 ## Where the files are
 
-Problem statements are TOML under `problems/`. JSON schemas are under `contract/`. `contract/README.md` is the list. `optbench.result/v1` is the earlier board. `optbench.result/v2` is the comparable score.
+Problem statements are TOML under `problems/`. JSON schemas are under `contract/`. `contract/README.md` is the list. `optbench.result/v1` is the earlier board. `optbench.result/v2` is the v2 score.
 
 ## Force calls
 
@@ -23,7 +23,7 @@ uv run optbench validate-counter --limit 3 --output results/validation/lj38-coun
 uv run optbench statistics --output results/validation/statistics.json
 ```
 
-`optbench statistics` reads asv tracks in `results/asv`. It does not rerun the sample. `docs/asv.md` is the run that produces those files.
+`optbench statistics` reads asv tracks in `results/asv`. It reads the stored sample. `docs/asv.md` is the run that produces those files.
 
 `validate-counter` needs `eonclient` on `PATH`. The output is a subset. A published Lennard-Jones 38 mean still uses all 1000 starts.
 
@@ -61,6 +61,6 @@ The bowl is `(x - 1)^2 + 10 (y + 2)^2`. Gradient descent with step `0.05` from `
 
 `uv run optbench score STARTS.jsonl --cap 5000 --output score.json` reduces a per-start file the same way.
 
-## What is not rerun here
+## Recorded counts
 
-The 1000 Lennard-Jones starts, the Pt-island repetitions, and the NEB bands stay as recorded. The site keeps those rows on the 2014 archive and adds the v2 tables from counts that are already in the files or from the quadratic smoke.
+The 1000 Lennard-Jones starts, the Pt-island repetitions, and the NEB bands stay as recorded. The site keeps those rows on the 2014 archive and adds the v2 tables from counts that are already in the files or from the quadratic check.

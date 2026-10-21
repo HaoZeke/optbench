@@ -46,8 +46,8 @@
    <dt>v2</dt><dd>par2-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
-   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
+   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A one-start record is not.</p>
+   <p class="bench-gaps">Rows that are not the full set stay off the ranked table.</p>
    <details class="bench-details" id="Al-templates">
    <summary>All templates (0 ranked)</summary>
    <div class="bench-scroll">
@@ -56,16 +56,16 @@
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="10">No full harness row.</td></tr>
    </tbody></table></div>
-   <h3>Partial</h3><ul>
-   <li>eon-client/htst-al-dimer-cg eOn campaign n=1, result file sets partial true.</li>
-   <li>eon-svn/htst-al-dimer-cg Eon svn campaign n=1, result file sets partial true.</li>
+   <h3>Off this rank</h3><ul>
+   <li>eon-client/htst-al-dimer-cg eOn campaign n=1, result file is not the full set.</li>
+   <li>eon-svn/htst-al-dimer-cg Eon svn campaign n=1, result file is not the full set.</li>
    </ul>
    </details>
    </section><section class="bench bench-archive-section" id="Al-archive">
    <h3>2014 archive</h3>
    <details class="bench-details">
    <summary>2014 archive</summary>
-   <p class="bench-archive">2014 archive. These rows stay in the published order, and each latest campaign sits beside its archive row. They are not a v2 score.</p>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-archive">
    <caption>2014 archive. Fewest barrier force calls first.</caption>
    <thead><tr>
@@ -79,7 +79,7 @@
    <th class="text" scope="col">Contributor</th>
    <th class="text" scope="col">Date</th>
    </tr></thead><tbody>
-   <tr id="htst-al-eon-dimer-cg2">
+   <tr id="htst-al-eon-dimer-cg2" class="best">
    <td class="num">1</td>
    <td class="text">eon-dimer-cg2</td>
    <td class="text">Eon r2006</td>
@@ -101,19 +101,8 @@
    <td class="text">Penghao Xiao</td>
    <td class="text">28 Jan 2013</td>
    </tr>
-   <tr id="htst-al-eon-dimer-cg-eon-svn-r2549" class="best">
-   <td class="num">3</td>
-   <td class="text">Eon svn r2549</td>
-   <td class="text">Eon svn r2549</td>
-   <td class="num">1.966e+04</td>
-   <td class="num">50</td>
-   <td class="num">6.206e+05</td>
-   <td class="num">1600</td>
-   <td class="text"></td>
-   <td class="text"></td>
-   </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>2014 archive. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:3"></div><script type="application/json" class="bench-plot-data">{"metric": "barrier_force_calls", "scale": "linear", "points": [{"id": "htst-al-eon-dimer-cg2", "entry": "eon-dimer-cg2", "code": "Eon r2006", "value": 21070.0, "best": false, "held": false, "failed": false}, {"id": "htst-al-eon-dimer-cg", "entry": "eon-dimer-cg", "code": "Eon r2006", "value": 28870.0, "best": false, "held": false, "failed": false}, {"id": "htst-al-eon-dimer-cg-eon-svn-r2549", "entry": "Eon svn r2549", "code": "Eon svn r2549", "value": 19660.0, "best": true, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 archive. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "barrier_force_calls", "scale": "linear", "points": [{"id": "htst-al-eon-dimer-cg2", "entry": "eon-dimer-cg2", "code": "Eon r2006", "value": 21070.0, "best": true, "held": false, "failed": false}, {"id": "htst-al-eon-dimer-cg", "entry": "eon-dimer-cg", "code": "Eon r2006", "value": 28870.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section><section class="bench" id="Pt" data-problem="hTST/Pt">
    <h2>Pt</h2>
@@ -121,8 +110,8 @@
    <dt>v2</dt><dd>par2-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
-   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
+   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A one-start record is not.</p>
+   <p class="bench-gaps">Rows that are not the full set stay off the ranked table.</p>
    <details class="bench-details" id="Pt-templates">
    <summary>All templates (0 ranked)</summary>
    <div class="bench-scroll">
@@ -131,18 +120,18 @@
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="10">No full harness row.</td></tr>
    </tbody></table></div>
-   <h3>Partial</h3><ul>
+   <h3>Off this rank</h3><ul>
    <li>eon-client/htst-pt-dimer-lbfgs eOn campaign n=1, result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5).</li>
    <li>eon-client/htst-pt-lanczos-lbfgs eOn campaign n=1, result file sets ranked false; potential morse/smooth/linear (periodic in x and y, cutoff 9.5).</li>
-   <li>eon-svn/htst-pt-dimer-lbfgs Eon svn campaign n=1, result file sets partial true.</li>
-   <li>eon-svn/htst-pt-lanczos-lbfgs Eon svn campaign n=1, result file sets partial true.</li>
+   <li>eon-svn/htst-pt-dimer-lbfgs Eon svn campaign n=1, result file is not the full set.</li>
+   <li>eon-svn/htst-pt-lanczos-lbfgs Eon svn campaign n=1, result file is not the full set.</li>
    </ul>
    </details>
    </section><section class="bench bench-archive-section" id="Pt-archive">
    <h3>2014 archive</h3>
    <details class="bench-details">
    <summary>2014 archive</summary>
-   <p class="bench-archive">2014 archive. These rows stay in the published order, and each latest campaign sits beside its archive row. They are not a v2 score.</p>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-archive">
    <caption>2014 archive. Fewest barrier force calls first.</caption>
    <thead><tr>
@@ -178,19 +167,8 @@
    <td class="text">Penghao Xiao</td>
    <td class="text">28 Jan 2013</td>
    </tr>
-   <tr id="htst-pt-eon-dimer-cg-eon-svn-r2549">
-   <td class="num">3</td>
-   <td class="text">Eon svn r2549</td>
-   <td class="text">Eon svn r2549</td>
-   <td class="num">5.060e+05</td>
-   <td class="num">1062</td>
-   <td class="num">2.716e+04</td>
-   <td class="num">57</td>
-   <td class="text"></td>
-   <td class="text"></td>
-   </tr>
    <tr id="htst-pt-eon-lanczos-cg2">
-   <td class="num">4</td>
+   <td class="num">3</td>
    <td class="text">eon-lanczos-cg2</td>
    <td class="text">Eon r2006</td>
    <td class="num">6.530e+05</td>
@@ -201,7 +179,7 @@
    <td class="text">29 Jan 2013</td>
    </tr>
    <tr id="htst-pt-eon-lanczos-cg">
-   <td class="num">5</td>
+   <td class="num">4</td>
    <td class="text">eon-lanczos-cg</td>
    <td class="text">Eon r2006</td>
    <td class="num">6.737e+05</td>
@@ -212,7 +190,7 @@
    <td class="text">28 Jan 2013</td>
    </tr>
    <tr id="htst-pt-eon-dimer-cg2">
-   <td class="num">6</td>
+   <td class="num">5</td>
    <td class="text">eon-dimer-cg2</td>
    <td class="text">Eon r2006</td>
    <td class="num">7.271e+05</td>
@@ -223,7 +201,7 @@
    <td class="text">29 Jan 2013</td>
    </tr>
    <tr id="htst-pt-eon-dimer-lbfgs">
-   <td class="num">7</td>
+   <td class="num">6</td>
    <td class="text">eon-dimer-lbfgs</td>
    <td class="text">Eon r2006</td>
    <td class="num">7.788e+05</td>
@@ -234,7 +212,7 @@
    <td class="text">28 Jan 2013</td>
    </tr>
    <tr id="htst-pt-eon-dimer-lbfgs2">
-   <td class="num">8</td>
+   <td class="num">7</td>
    <td class="text">eon-dimer-lbfgs2</td>
    <td class="text">Eon r2006</td>
    <td class="num">1.122e+06</td>
@@ -245,7 +223,7 @@
    <td class="text">29 Jan 2013</td>
    </tr>
    <tr id="htst-pt-eon-lanczos-lbfgs">
-   <td class="num">9</td>
+   <td class="num">8</td>
    <td class="text">eon-lanczos-lbfgs</td>
    <td class="text">Eon r2006</td>
    <td class="num">1.284e+06</td>
@@ -256,7 +234,7 @@
    <td class="text">29 Jan 2013</td>
    </tr>
    <tr id="htst-pt-eon-lanczos-lbfgs2">
-   <td class="num">10</td>
+   <td class="num">9</td>
    <td class="text">eon-lanczos-lbfgs2</td>
    <td class="text">Eon r2006</td>
    <td class="num">1.497e+06</td>
@@ -267,7 +245,7 @@
    <td class="text">29 Jan 2013</td>
    </tr>
    <tr id="htst-pt-tsase-dimer-qm">
-   <td class="num">11</td>
+   <td class="num">10</td>
    <td class="text">tsase-dimer-qm</td>
    <td class="text">TSASE</td>
    <td class="num">3.239e+06</td>
@@ -278,7 +256,7 @@
    <td class="text">28 Jan 2013</td>
    </tr>
    <tr id="htst-pt-alpha-dimer-qm">
-   <td class="num">12</td>
+   <td class="num">11</td>
    <td class="text">alpha_dimer-qm</td>
    <td class="text">TSASE</td>
    <td class="num">1.908e+07</td>
@@ -289,7 +267,7 @@
    <td class="text">28 Jan 2013</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>2014 archive. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:12"></div><script type="application/json" class="bench-plot-data">{"metric": "barrier_force_calls", "scale": "log", "points": [{"id": "htst-pt-quench-dimer-qm", "entry": "quench_dimer-qm", "code": "TSASE", "value": 293200.0, "best": true, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-cg", "entry": "eon-dimer-cg", "code": "Eon r2006", "value": 496000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-cg-eon-svn-r2549", "entry": "Eon svn r2549", "code": "Eon svn r2549", "value": 506000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-cg2", "entry": "eon-lanczos-cg2", "code": "Eon r2006", "value": 653000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-cg", "entry": "eon-lanczos-cg", "code": "Eon r2006", "value": 673700.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-cg2", "entry": "eon-dimer-cg2", "code": "Eon r2006", "value": 727100.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-lbfgs", "entry": "eon-dimer-lbfgs", "code": "Eon r2006", "value": 778800.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-lbfgs2", "entry": "eon-dimer-lbfgs2", "code": "Eon r2006", "value": 1122000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-lbfgs", "entry": "eon-lanczos-lbfgs", "code": "Eon r2006", "value": 1284000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-lbfgs2", "entry": "eon-lanczos-lbfgs2", "code": "Eon r2006", "value": 1497000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-tsase-dimer-qm", "entry": "tsase-dimer-qm", "code": "TSASE", "value": 3239000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-alpha-dimer-qm", "entry": "alpha_dimer-qm", "code": "TSASE", "value": 19080000.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 archive. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:11"></div><script type="application/json" class="bench-plot-data">{"metric": "barrier_force_calls", "scale": "log", "points": [{"id": "htst-pt-quench-dimer-qm", "entry": "quench_dimer-qm", "code": "TSASE", "value": 293200.0, "best": true, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-cg", "entry": "eon-dimer-cg", "code": "Eon r2006", "value": 496000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-cg2", "entry": "eon-lanczos-cg2", "code": "Eon r2006", "value": 653000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-cg", "entry": "eon-lanczos-cg", "code": "Eon r2006", "value": 673700.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-cg2", "entry": "eon-dimer-cg2", "code": "Eon r2006", "value": 727100.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-lbfgs", "entry": "eon-dimer-lbfgs", "code": "Eon r2006", "value": 778800.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-dimer-lbfgs2", "entry": "eon-dimer-lbfgs2", "code": "Eon r2006", "value": 1122000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-lbfgs", "entry": "eon-lanczos-lbfgs", "code": "Eon r2006", "value": 1284000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-eon-lanczos-lbfgs2", "entry": "eon-lanczos-lbfgs2", "code": "Eon r2006", "value": 1497000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-tsase-dimer-qm", "entry": "tsase-dimer-qm", "code": "TSASE", "value": 3239000.0, "best": false, "held": false, "failed": false}, {"id": "htst-pt-alpha-dimer-qm", "entry": "alpha_dimer-qm", "code": "TSASE", "value": 19080000.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section>
 #+end_export

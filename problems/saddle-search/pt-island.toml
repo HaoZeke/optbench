@@ -39,6 +39,7 @@ rule = "2014 half-even mean of the starts under the cap. Failures are left out o
 [connection]
 rule = "eon-r2205-per-atom-max"
 distance_difference = 0.1
+energy_difference = 0.01
 
 [scoring.v2]
 version = "par2-bootstrap"

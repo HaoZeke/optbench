@@ -402,8 +402,7 @@ def test_one_start_asv_grid_is_partial(tmp_path: Path):
     assert len(partial) == 1
     assert partial[0]["n"] == 1
     assert partial[0]["partial"] is True
-    assert "smoke" in partial[0]["partial_reason"]
-    assert "1 of 1000" in partial[0]["partial_reason"]
+    assert partial[0]["partial_reason"] == "scored 1 of 1000 starts"
     ranked = [
         row
         for problem_rows in document["problems"].values()
@@ -695,7 +694,7 @@ def test_a_one_start_asv_track_stays_out_of_the_ranked_mean(tmp_path: Path):
     assert smoke[0]["n"] == 1
     assert smoke[0]["mean_calls"] == 100
     assert smoke[0]["code_version"] == "0.4.1"
-    assert "smoke" in smoke[0]["partial_reason"]
+    assert smoke[0]["partial_reason"] == "scored 1 of 2 starts"
 
 
 def test_shipped_band_starts_share_one_call_unit():

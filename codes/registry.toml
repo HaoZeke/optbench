@@ -619,7 +619,7 @@ code = "sella"
 problem = "saddle-search/pt-island"
 profile = "default"
 task = "sella-search"
-ranked = false
+ranked = true
 
 [[template]]
 id = "sella/pt-island-search-tuned"

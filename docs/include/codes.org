@@ -109,17 +109,17 @@
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>aladatom: partial.</li>
-   <li>LJ38 double-ended saddle: not yet on the harness counter, partial.</li>
-   <li>lj38_2ts_separation: partial.</li>
-   <li>pt-island: not yet on the harness counter, partial.</li>
-   <li>Al: partial.</li>
-   <li>Pt: partial.</li>
-   <li>lj38: partial.</li>
-   <li>Pt-heptamer: not yet on the harness counter, partial.</li>
-   <li>Pt heptamer island: not yet on the harness counter, partial.</li>
-   <li>LJ38: not yet on the harness counter, partial.</li>
-   <li>pt-island: not yet on the harness counter, partial.</li>
+   <li>aladatom: off this rank.</li>
+   <li>LJ38 double-ended saddle: not yet on the harness counter, off this rank.</li>
+   <li>lj38_2ts_separation: off this rank.</li>
+   <li>pt-island: not yet on the harness counter, off this rank.</li>
+   <li>Al: off this rank.</li>
+   <li>Pt: off this rank.</li>
+   <li>lj38: off this rank.</li>
+   <li>Pt-heptamer: not yet on the harness counter, off this rank.</li>
+   <li>Pt heptamer island: not yet on the harness counter, off this rank.</li>
+   <li>LJ38: not yet on the harness counter, off this rank.</li>
+   <li>pt-island: not yet on the harness counter, off this rank.</li>
    <li>eon-ci-neb: no per-start record.</li>
    <li>eon-ci-swdneb: no per-start record.</li>
    <li>eon-cg: no per-start record.</li>
@@ -244,15 +244,15 @@
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>aladatom: partial.</li>
-   <li>lj38_2ts_separation: partial.</li>
-   <li>Lennard-Jones 38 global minimum: partial.</li>
-   <li>Al: partial.</li>
-   <li>Pt: partial.</li>
-   <li>lj38: partial.</li>
-   <li>Pt heptamer island: partial.</li>
-   <li>LJ38: partial.</li>
-   <li>pt-island: partial.</li>
+   <li>aladatom: off this rank.</li>
+   <li>lj38_2ts_separation: off this rank.</li>
+   <li>Lennard-Jones 38 global minimum: off this rank.</li>
+   <li>Al: off this rank.</li>
+   <li>Pt: off this rank.</li>
+   <li>lj38: off this rank.</li>
+   <li>Pt heptamer island: off this rank.</li>
+   <li>LJ38: off this rank.</li>
+   <li>pt-island: off this rank.</li>
    <li>eon-svn/cg: no per-start record.</li>
    <li>eon-svn/fire: no per-start record.</li>
    <li>eon-svn/lbfgs-m100: no per-start record.</li>
@@ -509,13 +509,13 @@
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>LJ38 double-ended saddle: partial.</li>
-   <li>lj38_2ts_separation: partial.</li>
-   <li>pt-island: partial.</li>
-   <li>Lennard-Jones 38 clusters: partial.</li>
-   <li>Morse bulk: partial.</li>
-   <li>Pt-heptamer: partial.</li>
-   <li>Pt heptamer island: partial.</li>
+   <li>LJ38 double-ended saddle: off this rank.</li>
+   <li>lj38_2ts_separation: off this rank.</li>
+   <li>pt-island: off this rank.</li>
+   <li>Lennard-Jones 38 clusters: off this rank.</li>
+   <li>Morse bulk: off this rank.</li>
+   <li>Pt-heptamer: off this rank.</li>
+   <li>Pt heptamer island: off this rank.</li>
    </ul>
    <h3>Sella</h3>
    <div class="bench-scroll"><table>
@@ -602,10 +602,10 @@
    <td data-field="template">sella/pt-island-search-default</td>
    <td data-field="version">Sella 2.6.0</td>
    <td data-field="commit">6cfb60cdb100</td>
-   <td data-field="par2_mean">5201.62</td>
-   <td data-field="mean_calls">247.812</td>
-   <td data-field="median_calls">225</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 4</td>
+   <td data-field="par2_mean">9539.88</td>
+   <td data-field="mean_calls">416.375</td>
+   <td data-field="median_calls">409</td>
+   <td data-field="failures">crash 0, divergence 12, cap 0, wrong_stationary 3</td>
    <td data-field="n">16</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-template="sella/lj38-ts-default">
@@ -632,14 +632,13 @@
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>LJ38 double-ended saddle: partial.</li>
-   <li>lj38_2ts_separation: partial.</li>
-   <li>pt-island: partial.</li>
-   <li>Lennard-Jones 38 clusters: partial.</li>
-   <li>Morse bulk: partial.</li>
-   <li>Pt heptamer island: partial.</li>
-   <li>LJ38: partial.</li>
-   <li>pt-island: partial.</li>
+   <li>LJ38 double-ended saddle: off this rank.</li>
+   <li>lj38_2ts_separation: off this rank.</li>
+   <li>pt-island: off this rank.</li>
+   <li>Lennard-Jones 38 clusters: off this rank.</li>
+   <li>Morse bulk: off this rank.</li>
+   <li>LJ38: off this rank.</li>
+   <li>pt-island: off this rank.</li>
    <li>sella-lj38: no per-start record.</li>
    </ul>
    <h3>pARTn</h3>

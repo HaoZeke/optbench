@@ -220,12 +220,6 @@ def campaign_problem(stem: str) -> str | None:
     return None
 
 
-def _measurements() -> dict[str, list[dict]]:
-    from .ledger import latest_for
-
-    return latest_for(Path(__file__).resolve().parents[1])
-
-
 def problem_html(
     problem: dict,
     oracle: list[dict],
@@ -237,7 +231,7 @@ def problem_html(
     heading_text: str | None = None,
     include_rule: bool = True,
 ) -> str:
-    """2014 table for one problem, with each latest campaign beside its archive row."""
+    """2014 table for one problem. Ranked scores stay on the v2 table."""
     canonical_rows = []
     for row in _rows_for(problem, oracle):
         fields, _renamed = normalize(row["fields"])
@@ -269,7 +263,6 @@ def problem_html(
     lines.append('<details class="bench-details">')
     lines.append("<summary>2014 archive</summary>")
 
-    measurements = _measurements()
     prepared = []
     for row, fields in canonical_rows:
         value = _float(fields.get(primary, "")) if primary else None
@@ -291,32 +284,13 @@ def problem_html(
                 "held": held,
             }
         )
-        for item in measurements.get(f"{problem['id']}/{row['entry']}", []):
-            by_name = {metric["metric"]: metric for metric in item.get("metrics") or []}
-            latest_fields = {
-                metric: (by_name.get(metric) or {}).get("latest_text", "")
-                for metric in metrics
-            }
-            latest_value = _float(latest_fields.get(primary, "")) if primary else None
-            prepared.append(
-                {
-                    "id": _slug(f"{problem['id']}-{row['entry']}-{item.get('label', '')}"),
-                    "entry": item.get("label") or row["entry"],
-                    "label": item.get("label") or row["entry"],
-                    "code": item.get("label") or code,
-                    "fields": latest_fields,
-                    "value": latest_value,
-                    "best": best is not None and latest_value == best,
-                    "held": False,
-                }
-            )
     numbers = [point["value"] for point in prepared if point["value"] is not None]
     best = min(numbers) if numbers else None
     for point in prepared:
         point["best"] = best is not None and point["value"] == best
     for rank, point in enumerate(prepared, 1):
         point["rank"] = rank
-    note = "2014 archive. These rows stay in the published order, and each latest campaign sits beside its archive row. They are not a v2 score."
+    note = "2014 archive. These rows stay in the published order. They are not a v2 score."
     lines.append(f'<p class="bench-archive">{note}</p>')
     lines.append('<div class="bench-table"><table class="bench-archive">')
     lines.append(f"<caption>{html.escape(_caption(primary))}</caption>")
@@ -422,7 +396,7 @@ def _headlines_html(
         '<section class="bench" id="headlines">',
         "<p>The first row of each problem is the best full harness run, ranked by PAR-2. "
         "The ranked table and the performance profile are on the problem page. "
-        "The 2014 archive is on that page, with each latest campaign beside its archive row.</p>",
+        "The 2014 archive is on that page.</p>",
     ]
     for suite in order:
         group = by_suite.get(suite)
@@ -457,7 +431,7 @@ def _collection_html(
     lines = [
         '<section class="bench" id="collection">',
         "<p>Each problem leads with the v2 rank. "
-        "The 2014 rows follow, in the published order, with each latest campaign beside its archive row.</p>",
+        "The 2014 rows follow, in the published order.</p>",
     ]
     for suite in order:
         group = by_suite.get(suite)
@@ -583,7 +557,7 @@ def _codes_html(root: Path, document: dict) -> str:
             if off:
                 reasons.append("not yet on the harness counter")
             if partial:
-                reasons.append("partial")
+                reasons.append("off this rank")
             title = str(problem.get("title") or problem["id"])
             missing.append(f"<li>{html.escape(title)}: {html.escape(', '.join(reasons))}.</li>")
         for row in document.get("unparsed") or []:
@@ -601,19 +575,9 @@ def _codes_html(root: Path, document: dict) -> str:
 
 
 def _smoke_note(root: Path) -> str:
-    smoke_path = root / "softsaddle" / "entry.toml"
-    if not smoke_path.is_file():
-        return ""
-    record = tomllib.loads(smoke_path.read_text(encoding="utf-8"))
-    archived = record.get("archived") or {}
-    smoke_run = record.get("smoke") or {}
-    if not archived or not smoke_run:
-        return ""
-    return (
-        f"A {smoke_run.get('searches')}-search SoftSaddle smoke is not part of this rank. "
-        f"The {archived.get('date')} {archived.get('entry')} entry records "
-        f"{archived.get('force_calls')} force calls."
-    )
+    """Kept so callers stay stable. The saddle page does not print this."""
+    del root
+    return ""
 
 
 def _suite_problem_link(problem: dict, templates: bool = False) -> str:

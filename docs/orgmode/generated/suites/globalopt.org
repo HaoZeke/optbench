@@ -143,7 +143,7 @@
    <dt>v2</dt><dd>par2-bootstrap</dd>
    <dt>Note</dt><dd>The archived files record energies. They do not record force calls.</dd>
    </dl>
-   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
+   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A one-start record is not.</p>
    <p class="bench-gaps">No committed harness run.</p>
    <details class="bench-details" id="lj100-binary-templates">
    <summary>All templates (0 ranked)</summary>
@@ -158,7 +158,7 @@
    <h3>2014 archive</h3>
    <details class="bench-details">
    <summary>2014 archive</summary>
-   <p class="bench-archive">2014 archive. These rows stay in the published order, and each latest campaign sits beside its archive row. They are not a v2 score.</p>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-archive">
    <caption>2014 archive. Lowest energy first.</caption>
    <thead><tr>
@@ -200,7 +200,7 @@
    <dt>v2</dt><dd>par2-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
-   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
+   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A one-start record is not.</p>
    <p class="bench-gaps">No committed harness run.</p>
    <details class="bench-details" id="lj150-templates">
    <summary>All templates (0 ranked)</summary>
@@ -215,7 +215,7 @@
    <h3>2014 archive</h3>
    <details class="bench-details">
    <summary>2014 archive</summary>
-   <p class="bench-archive">2014 archive. These rows stay in the published order, and each latest campaign sits beside its archive row. They are not a v2 score.</p>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-archive">
    <caption>2014 archive. The columns are the archived keys.</caption>
    <thead><tr>
@@ -270,8 +270,8 @@
    <dt>Starts</dt><dd>100</dd>
    <dt>v2</dt><dd>par2-bootstrap</dd>
    </dl>
-   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
+   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A one-start record is not.</p>
+   <p class="bench-gaps">Rows that are not the full set stay off the ranked table.</p>
    <details class="bench-details" id="lj38-templates">
    <summary>All templates (0 ranked)</summary>
    <div class="bench-scroll">
@@ -280,15 +280,15 @@
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td colspan="10">No full harness row.</td></tr>
    </tbody></table></div>
-   <h3>Partial</h3><ul>
-   <li>eon-svn/bh-lj38 Eon svn campaign n=73, result file sets partial true; potential unshifted lj/cut, epsilon 1, sigma 1, cutoff 40.</li>
+   <h3>Off this rank</h3><ul>
+   <li>eon-svn/bh-lj38 Eon svn campaign n=73, result file is not the full set; potential unshifted lj/cut, epsilon 1, sigma 1, cutoff 40.</li>
    </ul>
    </details>
    </section><section class="bench bench-archive-section" id="lj38-archive">
    <h3>2014 archive</h3>
    <details class="bench-details">
    <summary>2014 archive</summary>
-   <p class="bench-archive">2014 archive. These rows stay in the published order, and each latest campaign sits beside its archive row. They are not a v2 score.</p>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-archive">
    <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
@@ -346,19 +346,8 @@
    <td class="text">Sam Chill</td>
    <td class="text">20 Aug 2013</td>
    </tr>
-   <tr id="globalopt-lj38-eon-basinhopping-eon-3-5-0">
-   <td class="num">5</td>
-   <td class="text">eOn 3.5.0</td>
-   <td class="text">eOn 3.5.0</td>
-   <td class="num">503146</td>
-   <td class="num"></td>
-   <td class="num"></td>
-   <td class="num"></td>
-   <td class="text"></td>
-   <td class="text"></td>
-   </tr>
    <tr id="globalopt-lj38-pele-basinhopping">
-   <td class="num">6</td>
+   <td class="num">5</td>
    <td class="text">pele-basinhopping</td>
    <td class="text">pele</td>
    <td class="num">5.21595e+05</td>
@@ -368,19 +357,8 @@
    <td class="text">Jacob Stevenson</td>
    <td class="text">29 Aug 2013</td>
    </tr>
-   <tr id="globalopt-lj38-pele-basinhopping-pele-0-1-2">
-   <td class="num">7</td>
-   <td class="text">pele 0.1.2</td>
-   <td class="text">pele 0.1.2</td>
-   <td class="num">688720</td>
-   <td class="num"></td>
-   <td class="num"></td>
-   <td class="num"></td>
-   <td class="text"></td>
-   <td class="text"></td>
-   </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>2014 archive. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:7"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "globalopt-lj38-gmin-csm", "entry": "gmin-csm", "code": "GMIN", "value": 6421.0, "best": true, "held": false, "failed": false}, {"id": "globalopt-lj38-gmin-symmetrise", "entry": "gmin-symmetrise", "code": "GMIN", "value": 22711.0, "best": false, "held": false, "failed": false}, {"id": "globalopt-lj38-gmin-nosym", "entry": "gmin-nosym", "code": "GMIN", "value": 265951.0, "best": false, "held": false, "failed": false}, {"id": "globalopt-lj38-eon-basinhopping", "entry": "eon-basinhopping", "code": "Eon r2156", "value": 508011.0, "best": false, "held": false, "failed": false}, {"id": "globalopt-lj38-eon-basinhopping-eon-3-5-0", "entry": "eOn 3.5.0", "code": "eOn 3.5.0", "value": 503146.0, "best": false, "held": false, "failed": false}, {"id": "globalopt-lj38-pele-basinhopping", "entry": "pele-basinhopping", "code": "pele", "value": 521595.0, "best": false, "held": false, "failed": false}, {"id": "globalopt-lj38-pele-basinhopping-pele-0-1-2", "entry": "pele 0.1.2", "code": "pele 0.1.2", "value": 688720.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 archive. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:5"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "globalopt-lj38-gmin-csm", "entry": "gmin-csm", "code": "GMIN", "value": 6421.0, "best": true, "held": false, "failed": false}, {"id": "globalopt-lj38-gmin-symmetrise", "entry": "gmin-symmetrise", "code": "GMIN", "value": 22711.0, "best": false, "held": false, "failed": false}, {"id": "globalopt-lj38-gmin-nosym", "entry": "gmin-nosym", "code": "GMIN", "value": 265951.0, "best": false, "held": false, "failed": false}, {"id": "globalopt-lj38-eon-basinhopping", "entry": "eon-basinhopping", "code": "Eon r2156", "value": 508011.0, "best": false, "held": false, "failed": false}, {"id": "globalopt-lj38-pele-basinhopping", "entry": "pele-basinhopping", "code": "pele", "value": 521595.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section><section class="bench" id="lj75" data-problem="globalopt/lj75">
    <h2>lj75</h2>
@@ -388,7 +366,7 @@
    <dt>v2</dt><dd>par2-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
-   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
+   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A one-start record is not.</p>
    <p class="bench-gaps">No committed harness run.</p>
    <details class="bench-details" id="lj75-templates">
    <summary>All templates (0 ranked)</summary>
@@ -403,7 +381,7 @@
    <h3>2014 archive</h3>
    <details class="bench-details">
    <summary>2014 archive</summary>
-   <p class="bench-archive">2014 archive. These rows stay in the published order, and each latest campaign sits beside its archive row. They are not a v2 score.</p>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-archive">
    <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
@@ -439,7 +417,7 @@
    <dt>v2</dt><dd>par2-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
-   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
+   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A one-start record is not.</p>
    <p class="bench-gaps">No committed harness run.</p>
    <details class="bench-details" id="lj98-templates">
    <summary>All templates (0 ranked)</summary>
@@ -454,7 +432,7 @@
    <h3>2014 archive</h3>
    <details class="bench-details">
    <summary>2014 archive</summary>
-   <p class="bench-archive">2014 archive. These rows stay in the published order, and each latest campaign sits beside its archive row. They are not a v2 score.</p>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-archive">
    <caption>2014 archive. The columns are the archived keys.</caption>
    <thead><tr>
@@ -508,7 +486,7 @@
    <dt>v2</dt><dd>par2-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
-   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
+   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A one-start record is not.</p>
    <p class="bench-gaps">No committed harness run.</p>
    <details class="bench-details" id="tip4p10-templates">
    <summary>All templates (0 ranked)</summary>
@@ -523,7 +501,7 @@
    <h3>2014 archive</h3>
    <details class="bench-details">
    <summary>2014 archive</summary>
-   <p class="bench-archive">2014 archive. These rows stay in the published order, and each latest campaign sits beside its archive row. They are not a v2 score.</p>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-archive">
    <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
@@ -571,7 +549,7 @@
    <dt>v2</dt><dd>par2-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
-   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
+   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A one-start record is not.</p>
    <p class="bench-gaps">No committed harness run.</p>
    <details class="bench-details" id="tip4p15-templates">
    <summary>All templates (0 ranked)</summary>
@@ -586,7 +564,7 @@
    <h3>2014 archive</h3>
    <details class="bench-details">
    <summary>2014 archive</summary>
-   <p class="bench-archive">2014 archive. These rows stay in the published order, and each latest campaign sits beside its archive row. They are not a v2 score.</p>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-archive">
    <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
@@ -634,7 +612,7 @@
    <dt>v2</dt><dd>par2-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
-   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
+   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A one-start record is not.</p>
    <p class="bench-gaps">No committed harness run.</p>
    <details class="bench-details" id="tip4p20-templates">
    <summary>All templates (0 ranked)</summary>
@@ -649,7 +627,7 @@
    <h3>2014 archive</h3>
    <details class="bench-details">
    <summary>2014 archive</summary>
-   <p class="bench-archive">2014 archive. These rows stay in the published order, and each latest campaign sits beside its archive row. They are not a v2 score.</p>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-archive">
    <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>

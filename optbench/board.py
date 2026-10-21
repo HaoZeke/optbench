@@ -1,6 +1,6 @@
 """Leaderboard from committed campaign files and asv tracks.
 
-``uv run optbench board`` does not run a search. It reads
+``uv run optbench board`` reads
 ``results/campaign`` and ``results/asv``, scores each row with the v2
 PAR-2 reducer, and writes a best-per-code summary plus the Dolan-Moré
 profile and a cost-versus-success scatter. The full template table is
@@ -10,13 +10,13 @@ The ranked cost of a band method is the harness force-call total across
 every image. The per-image mean divides that same total by the problem's
 image count, and every code on the problem uses that divisor.
 
-A row whose start count is below the problem's full set is partial.
-An asv result that covers one start is a smoke run and is partial.
+A row whose start count is below the problem's full set stays off
+the ranked table. An asv result that covers one start stays off too.
 The full set is the problem file's sample, or the Morse archive when
 that file gives no sample count. It is not the largest campaign file.
 A result that sets ``ranked false`` stays off the ranked table.
 An alternate counter named by the ledger stays off the ranked table.
-Partial rows stay in the output. A campaign file and an asv track for
+Those rows stay in the output. A campaign file and an asv track for
 the same run are one row. Only the newest full version of a template
 is ranked. Older full versions stay in the history list.
 """
@@ -588,9 +588,9 @@ def _mark_partial(row: dict, full_n: int | None) -> None:
     if _source_parts(row) == {"asv"} and n <= 1:
         row["partial"] = True
         if full_n:
-            row["partial_reason"] = f"smoke run; scored {n} of {full_n} starts"
+            row["partial_reason"] = f"scored {n} of {full_n} starts"
         else:
-            row["partial_reason"] = "smoke run; one start"
+            row["partial_reason"] = "one start"
         return
     if full_n is not None and n < full_n:
         row["partial"] = True
@@ -774,7 +774,7 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
                 reason = f"{reason}; potential {named}"
             row["_declared_partial"] = reason
         elif str(fields.get("partial") or "").lower() == "true":
-            reason = "result file sets partial true"
+            reason = "result file is not the full set"
             if named:
                 reason = f"{reason}; potential {named}"
             row["_declared_partial"] = reason
@@ -1066,7 +1066,7 @@ def build_board(root: Path) -> dict:
                     row["partial_reason"] = row["_declared_partial"]
                 elif _source_parts(row) == {"asv"} and int(row.get("n") or 0) <= 1:
                     row["partial"] = True
-                    row["partial_reason"] = "smoke run; one start"
+                    row["partial_reason"] = "one start"
                 else:
                     row["partial"] = True
                     row["partial_reason"] = "no problem file states the full set"
@@ -1420,7 +1420,7 @@ def gap_paragraph(problem: dict, unparsed: list[dict] | None = None) -> str:
     if other:
         bits.append(f"{_joined_names(other)} {kind} are off the ranked table")
     if problem.get("partial"):
-        bits.append("Partial rows stay off the ranked table")
+        bits.append("Rows that are not the full set stay off the ranked table")
     if unparsed:
         bits.append("Files with no per-start harness record stay off the ranked table")
     if not bits and not problem.get("ranked"):
@@ -1432,7 +1432,7 @@ def gap_paragraph(problem: dict, unparsed: list[dict] | None = None) -> str:
 
 def _reason_text(row: dict) -> str:
     if row.get("partial"):
-        return str(row.get("partial_reason") or "partial")
+        return str(row.get("partial_reason") or "off this rank")
     if _off_harness(row):
         return "not yet on the harness counter"
     return f"counter {row.get('counter') or 'unset'}"
@@ -1630,7 +1630,7 @@ def _table(
     lines.append(
         "<p>Ranked by the v2 PAR-2 mean of the harness total. "
         "Only the newest full version of a template is in this table. "
-        "A partial row, including a one-start asv smoke run, is not.</p>"
+        "A one-start record is not.</p>"
     )
     lead = gap_paragraph(problem, unparsed)
     if lead:
@@ -1666,7 +1666,7 @@ def _table(
             )
         lines.append("</ul>")
     if problem.get("partial"):
-        lines.append("<h3>Partial</h3><ul>")
+        lines.append("<h3>Off this rank</h3><ul>")
         for row in problem["partial"]:
             lines.append(
                 "<li>"

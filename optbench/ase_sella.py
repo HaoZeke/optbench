@@ -22,10 +22,19 @@ os.environ["MKL_NUM_THREADS"] = "1"
 os.environ["NUMEXPR_NUM_THREADS"] = "1"
 
 from .campaign import load_template, resolve_problem
+from .connection import ProcessCatalog, connected_endpoints, per_atom_max
 from .counter import HarnessCounter, attach_ase_counter
+from .failures import classify_failure
 from .score import score_v2, summarize_all, summarize_capped, summarize_divided
 
 CONTRIBUTOR = "Rohit Goswami"
+# Pt-island saddle search. The reactant minimization is outside this count.
+# Climb budget 1000, 64 calls of overshoot, then 2000 calls for each endpoint.
+_SEARCH_CLIMB_BUDGET = 1000
+_SEARCH_CLIMB_OVERSHOOT = 64
+_SEARCH_ENDPOINT_BUDGET = 2000
+_SEARCH_REACTANT_BUDGET = 5000
+_SEARCH_PUSH = 0.1
 
 ASE_DEFAULTS = {
     "BFGS": {"maxstep": 0.2, "alpha": 70.0},
@@ -224,13 +233,13 @@ def _project_rigid(hessian, positions, n_rot: int):
     return projector @ hessian @ projector
 
 
-def vibrational_index(atoms, step: float = 1e-4, tol: float = 1e-6) -> int:
-    """Hessian index on the free atoms.
+def _free_vibration(atoms, step: float = 1e-4, tol: float = 1e-6):
+    """Index, Cartesian unit mode, and lowest eigenvalue on the free atoms.
 
     The difference is central. Calls made here must already be marked as
     verification on the attached counter. Fixed atoms are left out of the
-    matrix. Rigid modes are projected only when every atom is free, because
-    a fixed substrate removes those zeros itself.
+    matrix and stay zero in the mode. Rigid modes are projected only when
+    every atom is free, because a fixed substrate removes those zeros itself.
     """
     import numpy as np
 
@@ -238,7 +247,7 @@ def vibrational_index(atoms, step: float = 1e-4, tol: float = 1e-6) -> int:
     free = np.asarray(_free_mask(atoms), dtype=bool)
     free_index = np.flatnonzero(free)
     if len(free_index) == 0:
-        return 0
+        return 0, None, None
     dimension = 3 * len(free_index)
     hessian = np.zeros((dimension, dimension))
     try:
@@ -258,22 +267,103 @@ def vibrational_index(atoms, step: float = 1e-4, tol: float = 1e-6) -> int:
     if bool(free.all()):
         rotations = 0 if np.any(atoms.pbc) else 3
         hessian = _project_rigid(hessian, positions, rotations)
-    values = np.linalg.eigvalsh(hessian)
-    return int(np.sum(values < -float(tol)))
+    values, vectors = np.linalg.eigh(hessian)
+    index = int(np.sum(values < -float(tol)))
+    local = int(np.argmin(values))
+    mode = np.zeros_like(positions)
+    mode[free_index] = np.asarray(vectors[:, local], dtype=float).reshape(-1, 3)
+    scale = float(np.linalg.norm(mode))
+    if scale == 0.0:
+        return index, None, float(values[local])
+    mode /= scale
+    return index, mode, float(values[local])
+
+
+def vibrational_index(atoms, step: float = 1e-4, tol: float = 1e-6) -> int:
+    """Hessian index on the free atoms."""
+    index, _mode, _lowest = _free_vibration(atoms, step, tol)
+    return index
 
 
 def _verify_index(atoms, expected: int) -> int:
     """Count a Hessian as verification, not as search cost."""
+    index, _mode, _lowest = _verify_vibration(atoms)
+    return index
+
+
+def _verify_vibration(atoms):
+    """Hessian index and lowest free mode. The calls are verification."""
     state = getattr(getattr(atoms, "calc", None), "optbench_counter", None)
     previous = False
     if state is not None:
         previous = bool(state.get("verifying", False))
         state["verifying"] = True
     try:
-        return vibrational_index(atoms)
+        return _free_vibration(atoms)
     finally:
         if state is not None:
             state["verifying"] = previous
+
+
+def _set_cap(bucket: CallCounter, cap: int) -> None:
+    bucket.state["cap"] = int(cap)
+    bucket.harness.cap = int(cap)
+
+
+def _position_rows(values) -> list:
+    import numpy as np
+
+    return np.asarray(values, dtype=float).reshape(-1, 3).tolist()
+
+
+def _archive_search_endpoints(rows: list[dict], output: Path, atoms) -> None:
+    """Store both endpoint minima beside the starts file.
+
+    The archive is free-atom coordinates. A search that stopped before
+    both minimizations is ``not_minimized``. The reactant row is the
+    minimized reactant when the search recorded one.
+    """
+    import numpy as np
+
+    from .endpoints import EndpointArchive, stamp_endpoint, stored_cell
+
+    free_index = np.flatnonzero(np.asarray(_free_mask(atoms), dtype=bool))
+    archive = EndpointArchive(output.with_name(output.stem + ".endpoints.npz"), int(free_index.size))
+    archive.reset(stored_cell(atoms.cell), free_index)
+    initial = np.asarray(atoms.get_positions(), dtype=np.float64)
+
+    def free_rows(values):
+        return np.asarray(values, dtype=np.float64).reshape(-1, 3)[free_index]
+
+    for index, row in enumerate(rows):
+        reactant = row.get("reactant_minimum")
+        reactant_rows = free_rows(initial if reactant is None else reactant)
+        plus = row.get("endpoint_plus")
+        minus = row.get("endpoint_minus")
+        if plus is None or minus is None:
+            status = archive.add(reactant_rows, None, None)
+        else:
+            status = archive.add(reactant_rows, free_rows(plus), free_rows(minus))
+        stamp_endpoint(row, archive.name, index, status)
+    archive.save()
+    archive.drop_log()
+
+
+def _search_context(problem: dict | None) -> dict:
+    connection = {} if problem is None else (problem.get("connection") or {})
+    goal = {} if problem is None else (problem.get("goal") or {})
+    return {
+        "link_tolerance": float(connection.get("distance_difference", 0.1)),
+        "energy_difference": float(connection.get("energy_difference", 0.01)),
+        "barrier_max": float(goal.get("barrier_below_eV", 1.5)),
+    }
+
+
+def _minimize_lbfgs(atoms, bucket: CallCounter, tol: float, max_steps: int):
+    from ase.optimize import LBFGS
+
+    opt = LBFGS(atoms, logfile=None, maxstep=0.2)
+    return _drive_l2(opt, atoms.calc, bucket, tol, max_steps, atoms)
 
 
 def entry_id(template: dict) -> str:
@@ -1065,41 +1155,213 @@ def _run_sella_neb(payload: dict, bucket: CallCounter) -> dict:
     return band_row
 
 
+def _climb_sella(opt, atoms, bucket: CallCounter, tol: float, max_steps: int):
+    """Climb until the force stop or the climb cap.
+
+    A step that meets the force stop is kept, including the step that
+    reaches the climb cap. The cap is the bucket limit for this climb.
+    """
+    norm = None
+    capped = False
+    try:
+        for _converged in opt.irun(fmax=0.0, steps=max_steps):
+            norm = _cached_l2(atoms.calc, atoms)
+            if norm is not None and norm <= tol:
+                return False, norm, False
+            if bucket[0] >= bucket[1]:
+                capped = True
+                break
+    except Exception as exc:
+        if not _cap_error(exc):
+            raise
+        capped = True
+        norm = _cached_l2(atoms.calc, atoms)
+    if norm is not None and norm <= tol:
+        return False, norm, False
+    return True, norm, capped or bucket[0] >= bucket[1]
+
+
 def _run_sella_search(payload: dict, bucket: CallCounter) -> dict:
-    """One Sella order-1 search from a Gaussian kick of the free atoms."""
-    spec = payload.get("sella_search") or {}
-    atoms = _read_atoms(Path(payload["paths"][0]))
-    _apply_pbc(atoms, payload["potential"])
-    _displace_free(atoms, int(payload["seed"]), float(spec.get("gauss_std", 0.1)))
-    _attach(atoms, payload["potential"], bucket)
-    search = dict(payload)
-    search["paths"] = payload["paths"]
-    # The geometry is already displaced and attached. Run Sella on it.
+    """One Sella search, then both endpoint minimizations.
+
+    The reactant minimization uses its own counter and is not part of
+    the search cost. The climb stops at 1064 harness calls. Each
+    endpoint then has 2000 calls, and the shared search counter stops
+    at the template cap. The link and the repeat test are applied later,
+    in seed order, by ``_apply_search_catalog``.
+    """
+    import numpy as np
     from sella import Sella
 
+    spec = payload.get("sella_search") or {}
+    order = 1
+    row = {
+        "failed": True,
+        "force_norm": None,
+        "expected_index": order,
+        "endpoint_judged": False,
+        "link_tolerance": float(payload.get("link_tolerance", 0.1)),
+        "energy_difference": float(payload.get("energy_difference", 0.01)),
+        "barrier_max": float(payload.get("barrier_max", 1.5)),
+    }
+    problem_cap = int(bucket[1])
+    atoms = _read_atoms(Path(payload["paths"][0]))
+    _apply_pbc(atoms, payload["potential"])
+    reactant_bucket = CallCounter(_SEARCH_REACTANT_BUDGET)
+    try:
+        _attach(atoms, payload["potential"], reactant_bucket)
+        _minimize_lbfgs(atoms, reactant_bucket, float(payload["tol"]), _SEARCH_REACTANT_BUDGET)
+    except Exception as exc:
+        if not _cap_error(exc):
+            row["error"] = f"reactant {type(exc).__name__}: {exc}"[:500]
+            return row
+    reactant = np.array(atoms.get_positions(), dtype=float, copy=True)
+    min_energy = _safe_energy(atoms)
+    row["reactant_minimum"] = _position_rows(reactant)
+    row["cell"] = np.asarray(atoms.cell.array, dtype=float).tolist()
+    row["minimize_calls"] = int(reactant_bucket[0])
+    atoms.set_positions(reactant)
+    _displace_free(atoms, int(payload["seed"]), float(spec.get("gauss_std", 0.1)))
+    climb_limit = min(problem_cap, _SEARCH_CLIMB_BUDGET + _SEARCH_CLIMB_OVERSHOOT)
+    _set_cap(bucket, climb_limit)
+    _attach(atoms, payload["potential"], bucket)
     requested = dict(payload["optimizer"].get("parameters") or {})
-    order = int(requested.pop("order", 1))
+    order = int(requested.pop("order", row["expected_index"]))
+    row["expected_index"] = order
     kwargs = {key: value for key, value in requested.items() if value is not None}
-    row = {"failed": True, "force_norm": None, "expected_index": order}
     try:
         opt = Sella(atoms, logfile=None, order=order, v0=None, **kwargs)
         if payload.get("snapshot"):
             snapped = _snapshot_sella(opt, order, requested)
             snapped["v0"] = "none"
             snapped["gauss_std"] = float(spec.get("gauss_std", 0.1))
+            snapped["endpoint_push"] = _SEARCH_PUSH
+            snapped["climb_calls"] = climb_limit
+            snapped["endpoint_budget"] = _SEARCH_ENDPOINT_BUDGET
             row["parameters"] = snapped
-        failed, norm = _drive_l2(opt, atoms.calc, bucket, payload["tol"], payload["max_steps"], atoms)
+        failed, norm, capped = _climb_sella(opt, atoms, bucket, float(payload["tol"]), int(payload["max_steps"]))
     except Exception as exc:
+        _set_cap(bucket, problem_cap)
         if _cap_error(exc):
+            row["climb_capped"] = True
+            row["climb_calls"] = int(bucket[0])
             return _cap_row(row, atoms)
         row["error"] = f"{type(exc).__name__}: {exc}"[:500]
         return row
+    _set_cap(bucket, problem_cap)
+    row["climb_calls"] = int(bucket[0])
+    row["climb_capped"] = bool(capped and failed)
     row["failed"] = failed
     row["force_norm"] = norm
     row["energy"] = _safe_energy(atoms)
-    if not failed and bucket[0] < bucket[1]:
-        _attach_index(row, atoms, order)
+    if failed or norm is None or float(norm) > float(payload["tol"]):
+        return row
+    try:
+        index, mode, lowest = _verify_vibration(atoms)
+    except Exception as exc:
+        row["error"] = f"Hessian {type(exc).__name__}: {exc}"[:500]
+        row["failed"] = True
+        return row
+    row["hessian_index"] = int(index)
+    row["lowest_eigenvalue"] = lowest
+    if index != order or mode is None:
+        row["failed"] = True
+        return row
+    saddle = np.array(atoms.get_positions(), dtype=float, copy=True)
+    saddle_energy = _safe_energy(atoms)
+    row["saddle_positions"] = _position_rows(saddle)
+    if saddle_energy is None or min_energy is None:
+        row["failed"] = True
+        return row
+    row["barrier"] = float(saddle_energy - min_energy)
+    row["energy"] = float(saddle_energy)
+    endpoints = {}
+    for sign, key in ((1.0, "endpoint_plus"), (-1.0, "endpoint_minus")):
+        if bucket[0] >= problem_cap:
+            row["climb_capped"] = True
+            return row
+        trial = atoms.copy()
+        trial.set_constraint(atoms.constraints)
+        trial.set_positions(saddle + float(sign) * _SEARCH_PUSH * mode)
+        _set_cap(bucket, min(problem_cap, int(bucket[0]) + _SEARCH_ENDPOINT_BUDGET))
+        try:
+            _attach(trial, payload["potential"], bucket)
+            _minimize_lbfgs(trial, bucket, float(payload["tol"]), _SEARCH_ENDPOINT_BUDGET)
+        except Exception as exc:
+            _set_cap(bucket, problem_cap)
+            if _cap_error(exc):
+                endpoints[key] = _position_rows(trial.get_positions())
+                continue
+            row["error"] = f"endpoint {type(exc).__name__}: {exc}"[:500]
+            row["failed"] = True
+            return row
+        endpoints[key] = _position_rows(trial.get_positions())
+    _set_cap(bucket, problem_cap)
+    if "endpoint_plus" not in endpoints or "endpoint_minus" not in endpoints:
+        return row
+    row["endpoint_plus"] = endpoints["endpoint_plus"]
+    row["endpoint_minus"] = endpoints["endpoint_minus"]
+    row["endpoint_judged"] = True
+    row["endpoint_calls"] = int(bucket[0]) - int(row["climb_calls"])
     return row
+
+
+def _apply_search_catalog(rows: list[dict]) -> ProcessCatalog | None:
+    """Judge searches in seed order with the eOn r2205 rule.
+
+    Exactly one minimized endpoint must be the reactant. A repeat is a
+    barrier within ``energy_difference`` and the same per-atom test on
+    the saddle. A search that never minimized its endpoints keeps the
+    stationary reasons and stays in ``fraction_connected``.
+    """
+    sample = next((row for row in rows if row.get("cell") is not None), None)
+    if sample is None:
+        return None
+    tolerance = float(sample.get("link_tolerance", 0.1))
+    energy_difference = float(sample.get("energy_difference", 0.01))
+    barrier_max = float(sample.get("barrier_max", 1.5))
+    catalog = ProcessCatalog(
+        sample["cell"],
+        tolerance=tolerance,
+        energy_difference=energy_difference,
+        barrier_max=barrier_max,
+    )
+    for row in rows:
+        stationary = [str(reason) for reason in (row.get("stationary_reasons") or [])]
+        plus = row.get("endpoint_plus")
+        minus = row.get("endpoint_minus")
+        reactant = row.get("reactant_minimum")
+        judged = bool(row.get("endpoint_judged")) and not stationary
+        if judged and (plus is None or minus is None or reactant is None):
+            judged = False
+        linked = False
+        structure = None
+        if judged:
+            linked = connected_endpoints(reactant, plus, minus, sample["cell"], tolerance)
+            row["linked"] = bool(linked)
+            row["per_atom_max_plus"] = per_atom_max(plus, reactant, sample["cell"])
+            row["per_atom_max_minus"] = per_atom_max(minus, reactant, sample["cell"])
+            structure = row.get("saddle_positions") if linked else None
+        decision = catalog.observe(
+            judged=judged,
+            linked=linked,
+            structure=structure,
+            barrier=row.get("barrier"),
+        )
+        if stationary:
+            reasons = stationary
+            success = False
+        else:
+            reasons = [str(reason) for reason in decision["reasons"]]
+            success = bool(decision["success"])
+        if not success and not reasons:
+            reasons = ["divergence"]
+        row["reasons"] = reasons
+        row["success"] = success
+        row["failed"] = not success
+        row["failure"] = None if success else classify_failure(reasons)
+        row["converged"] = "force_norm" not in reasons and "cap" not in reasons and "error" not in reasons
+    return catalog
 
 
 def _run_dimer(payload: dict, bucket: CallCounter) -> dict:
@@ -1225,9 +1487,14 @@ def _run_start(payload: dict) -> dict:
     # NEB success is the band residual, not a Hessian index.
     if payload["task"] in {"neb", "sella-neb"}:
         reasons = [reason for reason in reasons if reason != "hessian_index"]
+    if payload["task"] == "sella-search" and row.get("climb_capped") and "cap" not in reasons:
+        reasons = ["cap", *reasons]
     row["reasons"] = reasons
+    if payload["task"] == "sella-search":
+        row["stationary_reasons"] = list(reasons)
     row["success"] = not reasons
     row["failed"] = not row["success"]
+    row["failure"] = None if row["success"] else classify_failure(reasons or ["divergence"])
     row["converged"] = "force_norm" not in reasons and "cap" not in reasons and "error" not in reasons
     return row
 
@@ -1256,7 +1523,14 @@ def _v2_records(rows: list[dict], template: dict) -> tuple[list[dict], int]:
     for row in rows:
         calls = float(row["force_calls"])
         success = bool(row.get("success")) and calls < cap
-        records.append({"force_calls": calls, "success": success})
+        record = {"force_calls": calls, "success": success}
+        if not success:
+            failure = row.get("failure")
+            if failure in {"crash", "divergence", "cap", "wrong_stationary"}:
+                record["failure"] = failure
+            elif row.get("reasons"):
+                record["reasons"] = [str(reason) for reason in row["reasons"]]
+        records.append(record)
     return records, cap
 
 
@@ -1357,7 +1631,13 @@ def _write_dat(
         "stop": template.get("stop") or {},
     }
     note = template.get("note", "")
-    if template["task"] in {"minimize", "sella", "sella-search", "dimer"}:
+    if template["task"] == "sella-search":
+        note = (
+            note
+            + " v2 success is the per-search cap, index 1 at the force stop, the eOn r2205 link,"
+            + " and find_repeat on the saddle."
+        ).strip()
+    elif template["task"] in {"minimize", "sella", "dimer"}:
         note = (
             note
             + " v2 success is the harness cap, the stop norm, and the Hessian index"
@@ -1376,6 +1656,10 @@ def _write_dat(
         ("force_calls_median", summary.get("force_calls_median")),
         ("force_calls_max", summary.get("force_calls_max")),
         ("nfailed", summary.get("nfailed")),
+        ("fraction_connected", summary.get("fraction_connected")),
+        ("unique_saddles", summary.get("unique_saddles")),
+        ("total_searches", summary.get("total_searches")),
+        ("connected", summary.get("connected")),
         ("force_calls_raw", summary.get("force_calls_raw")),
         ("force_calls_per_image", summary.get("force_calls_per_image")),
         ("force_calls_per_image_min", summary.get("force_calls_per_image_min")),
@@ -1467,6 +1751,7 @@ def run_template(
         done = {}
     cap = raw_cap(template)
     tol = float(template["stop"].get("force_norm", template["stop"].get("gradient_norm")))
+    context = _search_context(problem) if template["task"] == "sella-search" else {}
     payloads = []
     for name, paths, seed in jobs:
         if name in done:
@@ -1487,6 +1772,7 @@ def run_template(
                 "max_steps": int(template["stop"]["max_steps"]),
                 "raw_cap": cap,
                 "snapshot": False,
+                **context,
             }
         )
     if payloads:
@@ -1503,7 +1789,11 @@ def run_template(
                     handle.write(json.dumps(_jsonable(row), sort_keys=True) + "\n")
                     handle.flush()
                     if index == 1 or index == total or index % 25 == 0:
-                        print(f"{template['id']} {index}/{total}", flush=True)
+                        print(
+                            f"{template['id']} {index}/{total} calls={row.get('force_calls')} "
+                            f"failure={row.get('failure')}",
+                            flush=True,
+                        )
             else:
                 import multiprocessing as mp
 
@@ -1517,11 +1807,20 @@ def run_template(
                         handle.write(json.dumps(_jsonable(row), sort_keys=True) + "\n")
                         handle.flush()
                         if index == 1 or index == total or index % 25 == 0:
-                            print(f"{template['id']} {index}/{total}", flush=True)
+                            print(
+                                f"{template['id']} {index}/{total} calls={row.get('force_calls')} "
+                                f"failure={row.get('failure')}",
+                                flush=True,
+                            )
     by_start = dict(done)
     for row in fresh:
         by_start[row["start"]] = row
     ordered = [by_start[name] for name, _paths, _seed in jobs]
+    catalog = _apply_search_catalog(ordered) if template["task"] == "sella-search" else None
+    if template["task"] == "sella-search":
+        geometry = _read_atoms(Path(jobs[0][1][0]))
+        _apply_pbc(geometry, template["potential"])
+        _archive_search_endpoints(ordered, output, geometry)
     starts_path.write_text(
         "".join(json.dumps(_jsonable(row), sort_keys=True) + "\n" for row in ordered),
         encoding="utf-8",
@@ -1530,6 +1829,16 @@ def run_template(
     for row in errors[:5]:
         print(f"error {template['id']} {row['start']}: {row['error']}", flush=True)
     summary = _summarize(ordered, template)
+    if catalog is not None:
+        summary["fraction_connected"] = catalog.fraction_connected
+        summary["unique_saddles"] = catalog.unique
+        summary["total_searches"] = catalog.searches
+        summary["connected"] = catalog.qualifying
+        print(
+            f"{template['id']} connected {catalog.qualifying} unique {catalog.unique} "
+            f"fraction {catalog.fraction_connected}",
+            flush=True,
+        )
     records, score_cap = _v2_records(ordered, template)
     scored = score_v2(records, score_cap)
     summary["par2_mean"] = scored.get("par2_mean")
@@ -1588,6 +1897,7 @@ def run_point(root: Path, template_name: str, start: str, seed: int, *, cache: P
         reactant = next(path for path in material.rglob("reactant.con") if path.is_file())
         reactant_positions = _read_positions(reactant)
     tol = float(template["stop"].get("force_norm", template["stop"].get("gradient_norm")))
+    context = _search_context(problem) if template["task"] == "sella-search" else {}
     payload = {
         "start": name,
         "task": template["task"],
@@ -1603,9 +1913,12 @@ def run_point(root: Path, template_name: str, start: str, seed: int, *, cache: P
         "max_steps": int(template["stop"]["max_steps"]),
         "raw_cap": raw_cap(template),
         "snapshot": True,
+        **context,
     }
     started = time.perf_counter()
     row = _run_start(payload)
+    if template["task"] == "sella-search":
+        _apply_search_catalog([row])
     row["wall_seconds"] = time.perf_counter() - started
     row["template"] = template["id"]
     row["problem"] = template["problem"]
@@ -1615,6 +1928,7 @@ def run_point(root: Path, template_name: str, start: str, seed: int, *, cache: P
 def write_rows(root: Path, template_name: str, rows: list[dict], output: Path) -> dict:
     """Write one campaign dat and its starts file from finished v2 rows."""
     template = load_template(root, template_name)
+    catalog = _apply_search_catalog(rows) if template["task"] == "sella-search" else None
     for row in rows:
         row["failed"] = not bool(row.get("success"))
         row.setdefault("schema", "optbench.start/v2")
@@ -1627,6 +1941,11 @@ def write_rows(root: Path, template_name: str, rows: list[dict], output: Path) -
         encoding="utf-8",
     )
     summary = _summarize(rows, template)
+    if catalog is not None:
+        summary["fraction_connected"] = catalog.fraction_connected
+        summary["unique_saddles"] = catalog.unique
+        summary["total_searches"] = catalog.searches
+        summary["connected"] = catalog.qualifying
     records, score_cap = _v2_records(rows, template)
     scored = score_v2(records, score_cap)
     summary["par2_mean"] = scored.get("par2_mean")

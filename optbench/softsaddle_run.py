@@ -714,8 +714,8 @@ def _attach_endpoints(
     force_tol: float,
     barrier_max: float,
 ) -> None:
-    """Minimize both sides and apply the paper's either-endpoint link test."""
-    from .connection import per_atom_max, same_minimum
+    """Minimize both sides and apply the eOn r2205 exactly-one-endpoint test."""
+    from .connection import connected_endpoints, per_atom_max
 
     axis = _unit(np.asarray(mode, dtype=np.float64))
     plus, _plus_ok = _lbfgs_minimize(
@@ -724,9 +724,7 @@ def _attach_endpoints(
     minus, _minus_ok = _lbfgs_minimize(
         potential, np.asarray(point, dtype=np.float64) - endpoint_step * axis, force_tol, _SADDLE_ENDPOINT_BUDGET
     )
-    links = bool(
-        same_minimum(plus, minimum, cell, tolerance) or same_minimum(minus, minimum, cell, tolerance)
-    )
+    links = connected_endpoints(minimum, plus, minus, cell, tolerance)
     barrier = float(record["barrier"])
     reasons: list[str] = []
     if not links:
@@ -743,8 +741,6 @@ def _attach_endpoints(
 
 
 def _judge_saddle(payload: dict, climbed: dict, potential: HarnessSurface, calls_before_endpoints: int) -> dict:
-    from .connection import per_atom_max, same_minimum
-
     force_tol = float(payload["force_tol"])
     minimum = np.asarray(payload["minimum"], dtype=np.float64)
     min_energy = float(payload["min_energy"])
@@ -1228,7 +1224,7 @@ def write_archive_comparison(root: Path, campaign: Path | None = None) -> Path:
     if missing:
         raise FileNotFoundError(f"oracle is missing {sorted(missing)}")
     lines = [
-        "SoftSaddle Pt-island repetitions, set beside the archived website entries.",
+        "SoftSaddle Pt-island repetitions, listed with the website entries.",
         "",
         "Archive rows are the benchmark.dat values in oracle/entries.jsonl for",
         "website/saddle-search/pt-island/adaptive_HSphere-*. The oracle dates those",
@@ -1243,7 +1239,7 @@ def write_archive_comparison(root: Path, campaign: Path | None = None) -> Path:
         "the sum of harness calls over the searches, plus endpoint minimizations",
         "of novel saddles. The initial minimization is outside the sum.",
         "unique_sp_sofar counts novel saddles. n_connected_sp counts those whose",
-        "either minimized endpoint matches the reactant by per-atom distance 0.1.",
+        "exactly one minimized endpoint matches the reactant by the per-atom test of 0.1.",
         "The stop is 27 of those with barrier below 1.5 eV. Those counters are",
         "not MATLAB iteration counts.",
         "",

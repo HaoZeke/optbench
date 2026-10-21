@@ -1,0 +1,38 @@
+force_calls 718
+force_calls_min 718
+force_calls_median 718
+force_calls_max 718
+nfailed 15
+fraction_connected 0.25
+unique_saddles 1
+total_searches 16
+connected 1
+starts 16
+code Sella
+code_version 2.6.0
+commit 6cfb60cdb100a146c3c6f0587d5308b247aa8010
+algorithm Sella
+profile default
+template sella/pt-island-search-default
+problem saddle-search/pt-island
+counter harness
+reducer capped
+parameter_source default
+method {"counter":"harness attach_ase_counter","parameter_source":"default","parameters":{"climb_calls":1064,"delta":0.1,"delta0":0.1,"eig":true,"endpoint_budget":2000,"endpoint_push":0.1,"eta":0.0001,"gamma":0.1,"gauss_std":0.1,"internal":false,"method":"prfo","order":1,"rho_dec":5.0,"rho_inc":1.035,"sigma_dec":0.65,"sigma_inc":1.15,"threepoint":false,"v0":"none"},"potential":{"D":0.7102,"alpha":1.6047,"form":"shift","kind":"morse","pbc":[true,true,false],"r0":2.897,"rc":9.5},"profile":"default","reducer":"capped","stop":{"force_norm":0.001,"max_force_calls":5064,"max_steps":5000,"norm":"l2"}}
+note Sella 2.6.0 saddle defaults, order 1. Sixteen searches. The reactant is minimized outside the count. Each search kicks every free atom with a Gaussian of standard deviation 0.1 and climbs with Sella order 1, v0 unset. The climb stops at 1064 harness calls. Both endpoints are minimized, 2000 calls each. The per-search cap is 5064. A success is index 1 at the force stop, barrier below 1.5 eV, exactly one minimized endpoint the same as the minimized reactant by the eOn r2205 per-atom test, and not a repeat under find_repeat. The potential is energy-shifted Morse at cutoff 9.5, the eOn Morse::force surface. v2 success is the per-search cap, index 1 at the force stop, the eOn r2205 link, and find_repeat on the saddle.
+host cursor
+date 2026-10-21
+contributor Rohit Goswami
+scoring par2-bootstrap
+par2_mean 9539.875
+par2_median 10128
+par2_median_low 10128
+par2_median_high 10128
+par2_iqr 0
+success_rate 0.0625
+wilson_low 0.01111934476
+wilson_high 0.2832873757
+par_applied true
+par_factor 2
+bootstrap_resamples 2000
+bootstrap_seed 20261015

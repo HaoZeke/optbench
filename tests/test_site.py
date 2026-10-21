@@ -113,14 +113,20 @@ def test_rendered_pages_use_the_board_rank():
     assert 'data-board-table="ranked" data-problem="saddle-search/pt-island"' in saddle
     assert "rgsaddle/saddle-dimer-rotskip-tuned" in saddle
     assert 'data-field="par2_mean">10127.1<' in saddle
+    assert "sella/pt-island-search-default" in saddle
+    assert 'data-field="par2_mean">9539.88<' in saddle
+    assert 'data-field="success_rate">0.0625<' in saddle
+    assert 'data-field="median_calls">409<' in saddle
+    assert 'data-field="mean_calls">416.375<' in saddle
+    assert "5201.625" not in saddle
     assert "No full harness row." not in saddle
     assert "eon-3.5.0-saddle-pt-dimer" in saddle
     assert "eon-3.5.0-saddle-pt-classic" not in saddle
-    assert "EON SVN r2549" in saddle
-    assert "eOn (develop 500350d9)" in saddle
-    assert "5719004.8" in saddle
-    assert "406030.3" in saddle
-    assert ">115.5<" in saddle
+    assert "EON SVN r2549" not in saddle
+    assert "eOn (develop 500350d9)" not in saddle
+    assert "5719004.8" not in saddle
+    assert "406030.3" not in saddle
+    assert ">115.5<" not in saddle
     assert "not yet on the harness counter" in saddle
     assert "Per-search cost" not in saddle
     assert "noise/rgmin-dogleg-s0" in minimization

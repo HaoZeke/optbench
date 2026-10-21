@@ -745,8 +745,8 @@ potential callback. `pykmc/lattice` writes nothing.
 **softsaddle.** The tree under `softsaddle/` is MATLAB. `softsaddle/entry.toml`
 is the April 2019 archive (mean force calls 423491.1 over 10 repetitions).
 The GitHub workflow builds the Morse, Davidson, and Lanczos libraries and
-runs a two-search MATLAB smoke. MATLAB is not installed here. That smoke is
-not a harness campaign.
+runs two MATLAB searches. MATLAB is absent from this tree. Those two
+searches are separate from a harness campaign.
 
 **CatLearn.** Commit `6a307f32` (2023-02-07). `setup.py` says 0.6.2 and
 `catlearn/__init__.py` says 0.7.0. ASE 3.29 has no `ase.neb` (it is

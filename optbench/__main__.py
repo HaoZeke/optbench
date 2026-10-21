@@ -276,7 +276,7 @@ def statistics(
     results: Path = Path("results/asv"),
     commit: str = "",
 ) -> None:
-    """Score the quadratic sample from saved asv tracks. This does not rerun it."""
+    """Score the quadratic sample from saved asv tracks."""
     from optbench.asv_score import write_statistics_from_asv
 
     document = write_statistics_from_asv(output, root=root, results_dir=root / results)
@@ -309,7 +309,7 @@ def board(
     root: Path = Path("."),
     output: Path = Path("results/board"),
 ) -> None:
-    """Score committed results and write the v2 leaderboard. This does not run a campaign."""
+    """Score committed results and write the v2 leaderboard."""
     from optbench.board import write_board
 
     destination = output if output.is_absolute() else root / output

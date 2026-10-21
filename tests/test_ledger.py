@@ -1,4 +1,4 @@
-"""Campaigns sit beside the 2014 archive with the numbers they measured."""
+"""Measured campaigns stay in the ledger. The 2014 table is the archive."""
 
 import json
 from pathlib import Path
@@ -39,7 +39,7 @@ def test_the_ledger_covers_the_oracle_in_order():
     assert ledger_errors(ROOT) == []
 
 
-def test_measured_campaigns_stay_beside_the_archive():
+def test_measured_campaigns_stay_in_the_ledger():
     ledger = {row_id(row): row for row in load_ledger(ROOT / LEDGER_PATH)}
     dimer = ledger["saddle-search/pt-island/eon-dimer"]["latest"]
     assert [item["label"] for item in dimer] == [
@@ -56,15 +56,12 @@ def test_measured_campaigns_stay_beside_the_archive():
     assert develop["template"] == "eon/develop-saddle-pt-dimer"
     assert _metric(develop, "force_calls") > 0
 
-    soft = {
-        "adaptive_HSphere-lbfgs-davidson-sm50": (406030.3, 115.5),
-        "adaptive_HSphere-lbfgs-lanczos-sm50": (927873.6, 169.1),
-        "adaptive_HSphere-lbfgs-lanczos-sm0": (1506841.4, 177.8),
-    }
-    for entry, (force, unique) in soft.items():
-        item = ledger[f"saddle-search/pt-island/{entry}"]["latest"][0]
-        assert _metric(item, "force_calls") == force
-        assert _metric(item, "unique_saddles") == unique
+    for entry in (
+        "adaptive_HSphere-lbfgs-davidson-sm50",
+        "adaptive_HSphere-lbfgs-lanczos-sm50",
+        "adaptive_HSphere-lbfgs-lanczos-sm0",
+    ):
+        assert ledger[f"saddle-search/pt-island/{entry}"]["latest"] == []
 
     assert _metric(ledger["tsopt/LJ38/sella"]["latest"][0], "force_calls") == 69
     assert _metric(ledger["tsopt/pt-island/sella"]["latest"][0], "force_calls") == 59
@@ -99,10 +96,9 @@ def test_archive_tables_have_no_pass_mark():
     assert "paper baseline" not in html.lower()
     saddle = load_problem(ROOT / "problems" / "saddle-search" / "pt-island.toml")
     saddle_html = problem_html(saddle, oracle)
-    assert "EON SVN r2549" in saddle_html
-    assert "eOn (develop 500350d9)" in saddle_html
-    assert "5719004.8" in saddle_html
-    assert "112.6" in saddle_html
-    assert "406030.3" in saddle_html
-    assert ">115.5<" in saddle_html
+    assert "EON SVN r2549" not in saddle_html
+    assert "eOn (develop 500350d9)" not in saddle_html
+    assert "5719004.8" not in saddle_html
+    assert "406030.3" not in saddle_html
+    assert ">115.5<" not in saddle_html
     assert "not reproduced" not in saddle_html

@@ -46,7 +46,7 @@
    <dt>v2</dt><dd>par2-bootstrap</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
-   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
+   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A one-start record is not.</p>
    <p class="bench-gaps">No committed harness run.</p>
    <details class="bench-details" id="C2H4-templates">
    <summary>All templates (0 ranked)</summary>
@@ -61,7 +61,7 @@
    <h3>2014 archive</h3>
    <details class="bench-details">
    <summary>2014 archive</summary>
-   <p class="bench-archive">2014 archive. These rows stay in the published order, and each latest campaign sits beside its archive row. They are not a v2 score.</p>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-archive">
    <caption>2014 archive. Fewest epochs first. Failures are left out of this mean.</caption>
    <thead><tr>
@@ -171,7 +171,7 @@
    <dt>Cap</dt><dd>10000 epochs</dd>
    <dt>v2</dt><dd>par2-bootstrap</dd>
    </dl>
-   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
+   <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A one-start record is not.</p>
    <p class="bench-gaps">No committed harness run.</p>
    <details class="bench-details" id="emt-pt38-templates">
    <summary>All templates (0 ranked)</summary>
@@ -186,7 +186,7 @@
    <h3>2014 archive</h3>
    <details class="bench-details">
    <summary>2014 archive</summary>
-   <p class="bench-archive">2014 archive. These rows stay in the published order, and each latest campaign sits beside its archive row. They are not a v2 score.</p>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are not a v2 score.</p>
    <div class="bench-table"><table class="bench-archive">
    <caption>2014 archive. Fewest epochs first. Failures are left out of this mean.</caption>
    <thead><tr>
