@@ -159,6 +159,11 @@ the free-atom Euclidean norm itself. The start moves one listed atom by
 0.1 Å. The climb is the stock `BFGSTS` block with `USEDIAG 2`, `STEPS`
 and `BFGSSTEPS` 1000. Each endpoint quench is `BFGSMIN` with budget
 2000. The scored cap is 5064. The initial quench is outside that count.
+The stock run is 20000 searches. Connected saddles are 0 and the PAR-2
+mean is 10128. 18988 climbs stop at Hessian index 1 with both endpoints
+inside Cartesian RMSD 0.5 of the reactant, so the link test fails. 1012
+climbs reach the 1000-call stop. One saddle is new under the RMSD 0.5
+test. The starts file holds one record per search.
 
 ## pARTn
 
