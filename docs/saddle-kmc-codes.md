@@ -173,6 +173,18 @@ the standalone `next_displ` loop. Morse uses `lammps/metal`. Lennard-Jones
 uses `lammps/lj`. The saddle-search catalog on `saddle-search/pt-island`
 is running. It has not written a file.
 
+## EON SVN basin hopping
+
+SVN r2549 basin hopping uses the LJ38 ini: temperature 8000, displacement
+0.5, `adjust_displacement` true, `target_ratio` 0.3, 10000000 steps,
+L-BFGS memory 20, force norm 0.001. The stop is the Cambridge minimum
+plus 0.001. The force-call cap is 2000000. The kernel is unshifted
+`lj/cut`, epsilon 1, sigma 1, cutoff 40. LJ38 reads `100_lj38.tar.gz`.
+LJ75 reads `coords.1` through `coords.200`. LJ98 and LJ150 read
+`coords.1` through `coords.100`. `tip4p` has no harness kernel.
+`lj100-binary` states the Cambridge 42/58 composition. Its archived
+start geometries are mixed compositions, so they are not this potential.
+
 ## TSASE
 
 Pin `tsase`, commit `98aac60` (2025-09-26). `setup.py` says 1.0. The

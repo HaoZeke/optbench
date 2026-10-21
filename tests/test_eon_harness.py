@@ -94,13 +94,13 @@ def test_lj75_coordinate_file_is_75_atoms(tmp_path):
     assert positions_ten.tolist() != positions.tolist()
 
 
-def test_develop_lj75_keeps_the_lj38_ini():
+def test_svn_lj75_keeps_the_lj38_ini():
     from optbench.campaign import load_template
     from optbench.eon_harness import _family_of, template_starts
 
-    loaded = load_template(ROOT, "eon-develop/bh-lj75")
-    assert _family_of(loaded) == "develop"
-    assert loaded["commit"] == "80e94f88b54e24815287860f32a0558683e9c02b"
+    loaded = load_template(ROOT, "eon-svn/bh-lj75")
+    assert _family_of(loaded) == "svn"
+    assert loaded["commit"] == "r2549"
     assert int(loaded["failure_cap"]) == 2000000
     assert loaded["ini"]["Main"]["temperature"] == 8000
     assert loaded["ini"]["Basin Hopping"]["displacement"] == 0.5
@@ -110,11 +110,16 @@ def test_develop_lj75_keeps_the_lj38_ini():
     assert starts[0] == "1"
     assert starts[-1] == "200"
     assert len(starts) == 200
-    for name in ("bh-lj38", "bh-lj98", "bh-lj150"):
-        other = load_template(ROOT, f"eon-develop/{name}")
+    for name, stop in (
+        ("bh-lj38", "-173.927427"),
+        ("bh-lj98", "-543.664361"),
+        ("bh-lj150", "-893.309258"),
+    ):
+        other = load_template(ROOT, f"eon-svn/{name}")
         assert int(other["failure_cap"]) == 2000000
         assert other["ini"]["Main"]["temperature"] == 8000
         assert other["ini"]["Basin Hopping"]["displacement"] == 0.5
+        assert other["ini"]["Basin Hopping"]["stop_energy"] == stop
 
 
 def test_wall_clock_stop_stays_in_the_start_file(tmp_path):
