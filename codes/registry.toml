@@ -406,14 +406,6 @@ task = "sella"
 ranked = true
 
 [[template]]
-id = "sella/pt-island-ts-tuned"
-code = "sella"
-problem = "tsopt/pt-island"
-profile = "tuned"
-task = "sella"
-ranked = true
-
-[[template]]
 id = "ase/neb-pt-heptamer-default"
 code = "ase"
 problem = "neb/Pt-heptamer"

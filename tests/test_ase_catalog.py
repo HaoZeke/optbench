@@ -28,7 +28,12 @@ def test_catalog_covers_every_problem_and_both_profiles():
         by_problem.setdefault(spec["problem"], set()).add(spec["profile"])
     assert set(by_problem) == PROBLEMS
     for problem, profiles in by_problem.items():
-        if problem in {"minimization/lj38", "minimization/morse-bulk", "tsopt/LJ38"}:
+        if problem in {
+            "minimization/lj38",
+            "minimization/morse-bulk",
+            "tsopt/LJ38",
+            "tsopt/pt-island",
+        }:
             assert profiles == {"default"}
         else:
             assert profiles == {"default", "tuned"}
