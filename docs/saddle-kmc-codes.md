@@ -190,6 +190,8 @@ median is 53.5.
 Basin hopping and minima hopping on `globalopt/*` share
 `max_force_calls` 2000000. The harness reads that field. On
 `lj100-binary`, `sample.max_evaluations` is the same number.
+The FIRE quench template `ase-globalopt/lj75-basinhopping` sets
+`ranked` false. The board keeps that template off the ranked table.
 AMD-SVM on `accelerated-md/aladatom` is not scored. The problem has no
 force-call protocol and the harness has no EAM potential. hTST
 prefactors are not scored for the same reason.

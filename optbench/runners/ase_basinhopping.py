@@ -447,6 +447,9 @@ def write_campaign(
         lines.append(f"energy_max {_format(max(energies))}")
     if partial:
         lines.append("partial true")
+    template_path = root / "templates" / "ase-globalopt" / "lj75-basinhopping.toml"
+    if template_path.is_file() and load_template(root, TEMPLATE_ID).get("ranked") is False:
+        lines.append("ranked false")
     dat = directory / f"{stem}.dat"
     jsonl = directory / f"{stem}.starts.jsonl"
     _atomic_write(dat, "\n".join(lines) + "\n")

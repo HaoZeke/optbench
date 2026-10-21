@@ -275,7 +275,41 @@ def test_campaign_file_names_keep_the_ase_version(tmp_path: Path):
     dat, jsonl = write_campaign(tmp_path, [record], partial=True, cap=10)
     assert dat.name == "ase-3.29.0-lj75-basinhopping.dat"
     assert jsonl.name == "ase-3.29.0-lj75-basinhopping.starts.jsonl"
-    assert dat.read_text(encoding="utf-8").splitlines()[0].startswith("# ASE 3.29.0")
+    text = dat.read_text(encoding="utf-8")
+    assert text.splitlines()[0].startswith("# ASE 3.29.0")
+    assert "ranked false" not in text
+
+
+def test_campaign_file_records_an_unranked_template(tmp_path: Path):
+    import tomllib
+
+    from optbench.campaign import load_template
+    from optbench.runners.ase_basinhopping import write_campaign
+
+    template = tmp_path / "templates" / "ase-globalopt" / "lj75-basinhopping.toml"
+    template.parent.mkdir(parents=True)
+    template.write_text(
+        'id = "ase-globalopt/lj75-basinhopping"\nengine = "ase"\nranked = false\n',
+        encoding="utf-8",
+    )
+    record = {
+        "schema": "optbench.start/v2",
+        "counter": "harness",
+        "comparable": True,
+        "success": False,
+        "failure": "cap",
+        "reasons": ["energy", "cap"],
+        "force_calls": 10,
+        "energy": -1.0,
+        "start": "coords.1",
+    }
+    dat, _jsonl = write_campaign(tmp_path, [record], partial=False, cap=10)
+    assert "ranked false" in dat.read_text(encoding="utf-8")
+    loaded = load_template(ROOT, "ase-globalopt/lj75-basinhopping")
+    assert loaded["ranked"] is False
+    registry = tomllib.loads((ROOT / "codes" / "registry.toml").read_text(encoding="utf-8"))
+    row = next(item for item in registry["template"] if item["id"] == "ase-globalopt/lj75-basinhopping")
+    assert row["ranked"] is False
 
 
 def test_resume_skips_starts_already_in_the_jsonl(tmp_path: Path):
