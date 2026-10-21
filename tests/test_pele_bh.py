@@ -13,7 +13,11 @@ PROBLEMS = ("globalopt/lj38", "globalopt/lj75", "globalopt/lj98", "globalopt/lj1
 
 
 def _pele_templates() -> list[dict]:
-    return [row for row in list_templates(ROOT) if str(row["id"]).startswith("pele/")]
+    return [
+        row
+        for row in list_templates(ROOT)
+        if str(row.get("algorithm") or "") == "basin hopping"
+    ]
 
 
 def test_pele_templates_match_the_registry_pin():

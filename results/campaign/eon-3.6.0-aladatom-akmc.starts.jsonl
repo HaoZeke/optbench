@@ -1,0 +1,1 @@
+{"comparable": false, "confidence": 0.9523809523809523, "counter": "client", "failure": null, "force_calls": 108435, "geometry": "rep-1", "problem": "accelerated-md/aladatom", "rate": 855329109.89, "repeats": 21, "schema": "optbench.start/v2", "seconds": 59.88139711900021, "seed": 20261018, "start": "rep-1", "success": true, "template": "eon/aladatom-akmc", "total_searches": 128}

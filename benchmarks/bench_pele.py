@@ -1,7 +1,11 @@
-"""pele basin hopping, one class per template.
+"""pele searches, one class per template.
+
+Minimization templates use ``pele.optimize``. Basin-hopping templates use
+``pele.basinhopping.BasinHopping`` with the ``lbfgs_cpp`` quench.
 
 ``param_names`` are the seed and the start index. Seed ``0`` selects the
-archived start names. The generator seed is the integer in that name.
+archived start. A basin-hopping generator seed is the integer in that
+start name. The pele minimizers take no seed.
 
 The default grid is seed ``0`` and start index ``0``. That keeps
 ``asv check`` on one parameter. ``OPTBENCH_ASV_FULL=1`` selects every
@@ -11,9 +15,7 @@ has to set it.
 ``time_search`` is the search. Track methods read the record that call
 wrote. The force count is a ``HarnessCounter`` entry through
 ``getEnergyGradient``. ``setup`` raises ``NotImplementedError`` when
-pele is not installed, and asv-runner stores that parameter as NaN.
-The ranked row is the campaign file. A one-start asv track is a smoke
-run.
+pele is not installed. The ranked row is the campaign file.
 """
 
 from __future__ import annotations
@@ -34,10 +36,10 @@ def _cache_dir() -> Path:
 
 def _pele_ready() -> bool:
     try:
-        import pele.version as pele_version
+        import pele  # noqa: F401
     except ImportError:
         return False
-    return bool(getattr(pele_version, "git_revision", ""))
+    return True
 
 
 def selected_indices(count: int) -> list[str]:
@@ -52,67 +54,150 @@ def _class_name(template_id: str) -> str:
     return "Pele" + "".join(part.capitalize() for part in slug.split("-"))
 
 
-def _count(problem_id: str) -> int:
-    if os.environ.get("OPTBENCH_ASV_FULL") != "1":
-        return 1
-    return len(_geometries(problem_id))
+def _basin_hopping(template: dict) -> bool:
+    return str(template.get("algorithm") or "") == "basin hopping"
 
 
-def _geometries(problem_id: str):
-    if problem_id not in _GEOMETRIES:
-        from optbench.campaign import load_template, resolve_problem
+def _cache_path(template_id: str, start: str) -> Path:
+    slug = template_id.replace("/", "-")
+    return _cache_dir() / slug / f"{SEED}-{int(start)}.json"
+
+
+def _archive_count(problem_id: str) -> int:
+    import tarfile
+
+    from optbench.campaign import geometry_archive, resolve_problem
+
+    archive = geometry_archive(ROOT, resolve_problem(ROOT, problem_id))
+    with tarfile.open(archive) as packed:
+        return sum(1 for name in packed.getnames() if name.endswith(".con"))
+
+
+_MIN_GEOMETRIES: dict[str, list] = {}
+_BH_GEOMETRIES: dict[str, list] = {}
+
+
+def _min_geometries(problem_id: str):
+    if problem_id not in _MIN_GEOMETRIES:
+        from optbench.campaign import resolve_problem
+        from optbench.runners.pele_min import _load_geometries
+
+        problem = resolve_problem(ROOT, problem_id)
+        work = Path("/tmp/optbench-asv-geo")
+        _MIN_GEOMETRIES[problem_id] = _load_geometries(
+            ROOT, problem, None, work, work / "unused.dat"
+        )
+    return _MIN_GEOMETRIES[problem_id]
+
+
+def _bh_geometries(problem_id: str):
+    if problem_id not in _BH_GEOMETRIES:
+        from optbench.campaign import list_templates, resolve_problem
         from optbench.runners.pele_bh import _load_geometries
 
         problem = resolve_problem(ROOT, problem_id)
-        template = next(row for row in _TEMPLATES if row["problem"] == problem_id)
+        template = next(
+            row
+            for row in list_templates(ROOT)
+            if row.get("engine") == "pele"
+            and _basin_hopping(row)
+            and row.get("problem") == problem_id
+        )
         work = Path("/tmp/optbench-asv-geo")
-        _GEOMETRIES[problem_id] = _load_geometries(
+        _BH_GEOMETRIES[problem_id] = _load_geometries(
             ROOT, problem, template, None, work, work / "unused.dat"
         )
-    return _GEOMETRIES[problem_id]
+    return _BH_GEOMETRIES[problem_id]
 
 
-_GEOMETRIES: dict[str, list] = {}
-_TEMPLATES: list[dict] = []
+def _min_specs() -> list[dict]:
+    from optbench.campaign import list_templates, resolve_problem
+    from optbench.runners.pele_min import _kind, _section
 
-
-def _cache_path(template_id: str, seed: str, start: str) -> Path:
-    slug = template_id.replace("/", "-")
-    return _cache_dir() / slug / f"{seed}-{start}.json"
-
-
-def _specs() -> list[dict]:
-    from optbench.campaign import list_templates
-
-    global _TEMPLATES
     found = []
-    _TEMPLATES = [row for row in list_templates(ROOT) if row.get("engine") == "pele"]
-    for template in _TEMPLATES:
+    counts: dict[str, int] = {}
+    full = os.environ.get("OPTBENCH_ASV_FULL") == "1"
+    for template in list_templates(ROOT):
+        if template.get("engine") != "pele" or _basin_hopping(template):
+            continue
         problem_id = str(template["problem"])
+        if problem_id not in counts:
+            counts[problem_id] = _archive_count(problem_id) if full else 1
+        problem = resolve_problem(ROOT, problem_id)
+        convergence = problem.get("convergence") or {}
+        method, options = _section(template)
         found.append(
             {
+                "runner": "min",
                 "class_name": _class_name(str(template["id"])),
-                "template": template,
                 "template_id": str(template["id"]),
                 "problem_id": problem_id,
-                "cap": int(template["stop"]["max_force_calls"]),
-                "n": _count(problem_id),
+                "kind": _kind(problem_id),
+                "method": method,
+                "options": options,
+                "gtol": float(convergence["force_norm"]),
+                "cap": int(convergence["max_force_calls"]),
+                "n": counts[problem_id],
+                "timeout": 7200,
             }
         )
     return found
 
 
-def _job(spec: dict, start: str) -> dict:
+def _bh_specs() -> list[dict]:
+    from optbench.campaign import list_templates
+
+    found = []
+    full = os.environ.get("OPTBENCH_ASV_FULL") == "1"
+    for template in list_templates(ROOT):
+        if template.get("engine") != "pele" or not _basin_hopping(template):
+            continue
+        problem_id = str(template["problem"])
+        found.append(
+            {
+                "runner": "bh",
+                "class_name": _class_name(str(template["id"])),
+                "template": template,
+                "template_id": str(template["id"]),
+                "problem_id": problem_id,
+                "cap": int(template["stop"]["max_force_calls"]),
+                "n": len(_bh_geometries(problem_id)) if full else 1,
+                "timeout": 14400,
+            }
+        )
+    return found
+
+
+def _min_job(spec: dict, start: str) -> dict:
+    index = int(start)
+    geometries = _min_geometries(spec["problem_id"])
+    if index < 0 or index >= len(geometries):
+        raise IndexError(f"{spec['template_id']} start {start} is outside the archive")
+    name, coords, box = geometries[index]
+    kind = spec["kind"]
+    return {
+        "index": index,
+        "start": name,
+        "coords": coords.tolist(),
+        "box": None if kind == "lj" or box is None else box.tolist(),
+        "kind": kind,
+        "method": spec["method"],
+        "options": dict(spec["options"]),
+        "gtol": spec["gtol"],
+        "cap": spec["cap"],
+    }
+
+
+def _bh_job(spec: dict, start: str) -> dict:
+    from optbench.campaign import resolve_problem
     from optbench.runners.pele_bh import _options, _rule
 
     index = int(start)
-    geometries = _geometries(spec["problem_id"])
+    geometries = _bh_geometries(spec["problem_id"])
     if index < 0 or index >= len(geometries):
         raise IndexError(f"{spec['template_id']} start {start} is outside the archive")
     name, coords, seed = geometries[index]
     template = spec["template"]
-    from optbench.campaign import resolve_problem
-
     minimum, tolerance, _partial = _rule(resolve_problem(ROOT, spec["problem_id"]), template)
     return {
         "index": index,
@@ -132,14 +217,19 @@ def _job(spec: dict, start: str) -> dict:
 
 
 def _compute(spec: dict, seed: str, start: str) -> dict:
-    """Search this start and store the record. The caller is the timed sample."""
     if str(seed) != SEED:
         raise ValueError(f"seed {seed} is not the archived-start seed {SEED}")
-    from optbench.runners.pele_bh import _hop_job
+    if spec["runner"] == "bh":
+        from optbench.runners.pele_bh import _hop_job
 
-    record = _hop_job(_job(spec, start))
-    record["seed_param"] = SEED
-    path = _cache_path(spec["template_id"], SEED, str(int(start)))
+        record = _hop_job(_bh_job(spec, start))
+        record["seed_param"] = SEED
+    else:
+        from optbench.runners.pele_min import _minimize_job
+
+        record = _minimize_job(_min_job(spec, start))
+        record["seed"] = SEED
+    path = _cache_path(spec["template_id"], start)
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(".json.tmp")
     temporary.write_text(json.dumps(record), encoding="utf-8")
@@ -148,7 +238,7 @@ def _compute(spec: dict, seed: str, start: str) -> dict:
 
 
 def _load(spec: dict, seed: str, start: str) -> dict:
-    path = _cache_path(spec["template_id"], SEED, str(int(start)))
+    path = _cache_path(spec["template_id"], start)
     if path.is_file():
         return json.loads(path.read_text(encoding="utf-8"))
     return _compute(spec, seed, start)
@@ -204,12 +294,12 @@ def _benchmark(spec: dict):
     template_name = spec["template_id"]
     problem_name = spec["problem_id"]
     class_name = spec["class_name"]
+    budget = spec["timeout"]
 
     class _Benchmark(_PeleSearch):
         param_names = ["seed", "start"]
         params = [[SEED], starts]
-        # One LJ38 start at the budget is a few minutes. LJ150 is longer.
-        timeout = 14400
+        timeout = budget
         cap = limit
         spec = bound
         template_id = template_name
@@ -220,5 +310,5 @@ def _benchmark(spec: dict):
     return _Benchmark
 
 
-for _spec in _specs():
+for _spec in _min_specs() + _bh_specs():
     globals()[_spec["class_name"]] = _benchmark(_spec)

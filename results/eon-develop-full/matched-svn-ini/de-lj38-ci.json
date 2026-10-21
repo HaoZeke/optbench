@@ -1,0 +1,19 @@
+{
+  "name": "de-lj38-ci",
+  "develop_template": "eon/develop-de-lj38-cap",
+  "svn_template": "eon-svn/de-lj38-ci",
+  "kind": "de-lj38",
+  "seed": 1,
+  "start": "pair_00",
+  "eon_commit": "7095b23ac17d49f434a5e08ccb072897ceca698e",
+  "probe_cap": 100000,
+  "potential": "lammps",
+  "counter": "harness",
+  "force_calls": 382.0,
+  "verify_calls": 0,
+  "client_calls": 382,
+  "client_reason": "0",
+  "extrema": 2,
+  "seconds": 0.9273595479899086,
+  "ini": "[Main]\njob = nudged_elastic_band\nrandom_seed = 1\nparallel = false\n\n[Potential]\npotential = ext_pot\next_pot_path = /tmp/optbench-extpot-43kn7_r6/extpot-bridge\n\n[Optimizer]\nopt_method = lbfgs\nconvergence_metric = norm\nconverged_force = 0.001\nmax_move = 0.05\nmax_iterations = 8000\nlbfgs_memory = 20\nlbfgs_inverse_curvature = 0.01\nlbfgs_max_inverse_curvature = 0.0\nlbfgs_auto_scale = true\nlbfgs_angle_reset = true\nlbfgs_distance_reset = true\n\n[Nudged Elastic Band]\nimages = 5\nspring = 5.0\nclimbing_image_method = true\nclimbing_image_converged_only = true\nold_tangent = false\ndoubly_nudged = false\ndoubly_nudged_switching = false\nconverged_force = 0.001\nmax_iterations = 8000\n"
+}
