@@ -14,7 +14,7 @@ from __future__ import annotations
 import json
 import math
 import os
-from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures import FIRST_COMPLETED, ProcessPoolExecutor, wait
 from pathlib import Path
 
 import numpy as np
@@ -392,76 +392,90 @@ def run_template(
             reactant = positions.copy()
             reactant[free] = minimum.reshape(-1, 3)
             width = max(1, int(workers))
-            while catalog.qualifying < goal and catalog.searches < max_searches:
-                batch = []
-                while len(batch) < width and catalog.searches + len(batch) < max_searches:
-                    attempt = catalog.searches + len(batch) + 1
-                    drawn = draw_search_start(
-                        reactant,
-                        fixed,
-                        cell,
-                        pbc,
-                        listed,
-                        rep=rep,
-                        attempt=attempt,
-                        radius=radius,
-                        magnitude=magnitude,
-                    )
-                    batch.append(
-                        {
-                            "name": f"rep{rep}-search{attempt}",
-                            "positions": drawn["start"],
-                            "fixed": fixed,
-                            "cell": cell,
-                            "pbc": pbc,
-                            "potential": problem["potential"],
-                            "task": task,
-                            "sella_parameters": parameters,
-                            "maxiter": maxiter,
-                            "force_tol": force_tol,
-                            "climb_cap": _CLIMB_BUDGET,
-                            "minimum": minimum,
-                            "min_energy": min_energy,
-                            "kick": drawn["kick"],
-                            "tolerance": tolerance,
-                            "seed": int(drawn["seed"]),
-                        }
-                    )
+            next_attempt = catalog.searches + 1
+            pending: dict = {}
+            payloads: dict = {}
+            finished: dict = {}
+
+            def _submit(attempt: int) -> None:
+                drawn = draw_search_start(
+                    reactant,
+                    fixed,
+                    cell,
+                    pbc,
+                    listed,
+                    rep=rep,
+                    attempt=attempt,
+                    radius=radius,
+                    magnitude=magnitude,
+                )
+                item = {
+                    "name": f"rep{rep}-search{attempt}",
+                    "positions": drawn["start"],
+                    "fixed": fixed,
+                    "cell": cell,
+                    "pbc": pbc,
+                    "potential": problem["potential"],
+                    "task": task,
+                    "sella_parameters": parameters,
+                    "maxiter": maxiter,
+                    "force_tol": force_tol,
+                    "climb_cap": _CLIMB_BUDGET,
+                    "minimum": minimum,
+                    "min_energy": min_energy,
+                    "kick": drawn["kick"],
+                    "tolerance": tolerance,
+                    "seed": int(drawn["seed"]),
+                }
+                payloads[attempt] = item
                 if pool is None:
-                    outcomes = [_catalog_job(item) for item in batch]
+                    finished[attempt] = _catalog_job(item)
                 else:
-                    outcomes = list(pool.map(_catalog_job, batch))
-                for item, raw_row in zip(batch, outcomes):
-                    if catalog.qualifying >= goal:
+                    pending[pool.submit(_catalog_job, item)] = attempt
+
+            while catalog.qualifying < goal and catalog.searches < max_searches:
+                while next_attempt <= max_searches and len(pending) < width and catalog.qualifying < goal:
+                    _submit(next_attempt)
+                    next_attempt += 1
+                    if pool is None:
                         break
-                    judged = bool(raw_row["judged"])
-                    decision = catalog.observe(
-                        judged=judged,
-                        linked=bool(raw_row["linked"]),
-                        structure=raw_row.get("saddle_x"),
-                        barrier=raw_row.get("barrier"),
+                if pool is not None and pending and (catalog.searches + 1) not in finished:
+                    done, _pending_left = wait(set(pending), return_when=FIRST_COMPLETED)
+                    for future in done:
+                        finished[pending.pop(future)] = future.result()
+                attempt = catalog.searches + 1
+                if attempt not in finished:
+                    continue
+                item = payloads.pop(attempt)
+                raw_row = finished.pop(attempt)
+                judged = bool(raw_row["judged"])
+                decision = catalog.observe(
+                    judged=judged,
+                    linked=bool(raw_row["linked"]),
+                    structure=raw_row.get("saddle_x"),
+                    barrier=raw_row.get("barrier"),
+                )
+                record = _public_row(template, problem["id"], raw_row, decision)
+                plus = None if raw_row.get("endpoint_plus") is None else np.asarray(raw_row["endpoint_plus"], dtype=np.float64).reshape(-1, 3)
+                minus = None if raw_row.get("endpoint_minus") is None else np.asarray(raw_row["endpoint_minus"], dtype=np.float64).reshape(-1, 3)
+                status = archive.add(minimum.reshape(-1, 3), plus, minus)
+                stamp_endpoint(record, archive.name, archive.count - 1, status)
+                stored = dict(record)
+                stored["seed"] = int(item["seed"])
+                _append_partial(partial_path, stored)
+                public = {
+                    key: value
+                    for key, value in record.items()
+                    if key not in {"saddle_x", "endpoint_plus", "endpoint_minus"}
+                }
+                all_records.append(public)
+                if catalog.searches == 1 or catalog.searches % 10 == 0 or catalog.qualifying >= goal:
+                    print(
+                        f"{template['id']} rep {rep} searches {catalog.searches} "
+                        f"connected {catalog.qualifying} unique {catalog.unique} "
+                        f"calls {record['force_calls']} failure {record['failure']}",
+                        flush=True,
                     )
-                    record = _public_row(template, problem["id"], raw_row, decision)
-                    plus = None if raw_row.get("endpoint_plus") is None else np.asarray(raw_row["endpoint_plus"], dtype=np.float64).reshape(-1, 3)
-                    minus = None if raw_row.get("endpoint_minus") is None else np.asarray(raw_row["endpoint_minus"], dtype=np.float64).reshape(-1, 3)
-                    status = archive.add(minimum.reshape(-1, 3), plus, minus)
-                    stamp_endpoint(record, archive.name, archive.count - 1, status)
-                    stored = dict(record)
-                    stored["seed"] = int(item["seed"])
-                    _append_partial(partial_path, stored)
-                    public = {
-                        key: value
-                        for key, value in record.items()
-                        if key not in {"saddle_x", "endpoint_plus", "endpoint_minus"}
-                    }
-                    all_records.append(public)
-                    if catalog.searches == 1 or catalog.searches % 10 == 0 or catalog.qualifying >= goal:
-                        print(
-                            f"{template['id']} rep {rep} searches {catalog.searches} "
-                            f"connected {catalog.qualifying} unique {catalog.unique} "
-                            f"calls {record['force_calls']} failure {record['failure']}",
-                            flush=True,
-                        )
             if catalog.qualifying < goal:
                 failed_reps += 1
             rep_calls = sum(
