@@ -2,7 +2,7 @@ id = "neb/Pt-heptamer"
 title = "Pt-heptamer"
 suite = "neb"
 problem = "Pt-heptamer"
-contract = "partial"
+contract = "shared"
 entry_count = 12
 
 [convergence]

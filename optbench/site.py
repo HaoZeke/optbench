@@ -128,8 +128,8 @@ def _bits(problem: dict) -> list[tuple[str, str]]:
         bits.append(("v2 cost", str(version2["cost"])))
     if problem.get("remark"):
         bits.append(("Note", str(problem["remark"])))
-    if problem.get("contract") == "partial":
-        bits.append(("Contract", "Partly stated. The columns are the keys shared by every archived file."))
+    if problem.get("contract") in {"partial", "shared"}:
+        bits.append(("Contract", "The columns are the keys shared by every archived file."))
     return bits
 
 

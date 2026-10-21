@@ -2,7 +2,7 @@ id = "double-ended-saddle-search/lj38_2ts_separation"
 title = "lj38_2ts_separation"
 suite = "double-ended-saddle-search"
 problem = "lj38_2ts_separation"
-contract = "partial"
+contract = "shared"
 entry_count = 2
 
 # The archive does not state an image count or a force cap. Five interior

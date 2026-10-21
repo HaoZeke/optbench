@@ -2,7 +2,7 @@ id = "globalopt/lj75"
 title = "lj75"
 suite = "globalopt"
 problem = "lj75"
-contract = "partial"
+contract = "shared"
 entry_count = 1
 
 [metrics]

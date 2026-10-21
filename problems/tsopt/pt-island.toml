@@ -2,7 +2,7 @@ id = "tsopt/pt-island"
 title = "pt-island"
 suite = "tsopt"
 problem = "pt-island"
-contract = "partial"
+contract = "shared"
 entry_count = 7
 
 [potential]

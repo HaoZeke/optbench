@@ -2,7 +2,7 @@ id = "lowest-eigenvector/lj38"
 title = "lj38"
 suite = "lowest-eigenvector"
 problem = "lj38"
-contract = "partial"
+contract = "shared"
 entry_count = 11
 
 [potential]
