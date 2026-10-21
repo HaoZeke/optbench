@@ -1,0 +1,51 @@
+id = "eon-develop/bh-lj38"
+engine = "eon"
+problem = "globalopt/lj38"
+code = "eOn"
+code_version = "3.6.0"
+commit = "80e94f88b54e24815287860f32a0558683e9c02b"
+algorithm = "Basin hopping"
+tuning = "default"
+reducer = "harness"
+failure_cap = 2000000
+kind = "basin"
+kernel = "lj40"
+asv_class = "EonDevelopBhLj38"
+archive = "website/globalopt/lj38/100_lj38.tar.gz"
+member = "{start}.con"
+start_first = 0
+start_count = 100
+note = '''
+Basin hopping toward the LJ38 minimum. Temperature 8000, random_seed 314159, displacement 0.5, adjust_displacement true, target_ratio 0.3, steps 10000000, stop_energy -173.927427. The knobs are the LJ38 basin-hopping ini. The stop is the Cambridge minimum -173.928427 plus 0.001. The client writes termination_reason 0 when the step loop ends, including when the energy is still above the stop. Success is minimum_energy below the stop and harness calls under 2000000. The binary is develop 80e94f88, version string 3.6.0 (80e94f88), which contains b0bd4d5a. The harness kernel is unshifted lj/cut with epsilon 1, sigma 1, and cutoff 40. The per-start wall budget is 21600 s so a start can reach that call cap.
+'''
+seeds = [314159]
+asv_full = false
+asv_timeout = 21600
+budget_seconds = 21600
+
+[ini.Main]
+job = "basin_hopping"
+temperature = 8000
+random_seed = 314159
+finite_difference = 0.001
+
+[ini.Potential]
+potential = "lammps"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+convergence_metric = "norm"
+converged_force = 0.001
+max_move = 0.2
+max_iterations = 1000
+lbfgs_memory = 20
+
+[ini.LBFGS]
+lbfgs_memory = 20
+
+[ini."Basin Hopping"]
+steps = 10000000
+displacement = 0.5
+adjust_displacement = true
+target_ratio = 0.3
+stop_energy = "-173.927427"
