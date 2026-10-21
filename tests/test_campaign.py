@@ -176,6 +176,26 @@ def test_b0bd4d5a_rows_are_separate_stock_methods():
     assert improved["ini"]["Lanczos"]["quit_early"] is True
 
 
+def test_older_develop_minmode_rows_are_off_the_ranked_table():
+    from optbench.campaign import load_template
+
+    campaign = ROOT / "results" / "campaign"
+    for name in (
+        "eon-develop-de-2ts-lanczos-improved.dat",
+        "eon-develop-ts-lj38-lanczos-improved.dat",
+        "eon-develop-ts-pt-lanczos-improved.dat",
+        "eon-develop-de-lj38-lanczos-improved.dat",
+    ):
+        assert "ranked false" in (campaign / name).read_text(encoding="utf-8").splitlines()
+    for name in ("eon/develop-saddle-pt-dimer", "eon/develop-saddle-pt-lanczos"):
+        assert load_template(ROOT, name)["ranked"] is False
+    for name in (
+        "eon/develop-b0bd4d5a-saddle-pt-dimer",
+        "eon/develop-b0bd4d5a-saddle-pt-lanczos",
+    ):
+        assert load_template(ROOT, name).get("ranked", True) is True
+
+
 def test_b0bd4d5a_label_is_code_plus_version():
     from optbench.board import ranked_cells
     from optbench.campaign import load_template

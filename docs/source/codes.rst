@@ -173,14 +173,15 @@ The number is written only after the run finishes under the problem rule.
    <p>No full ranked run</p><ul>
    <li>Al adatom on Al(100) at 250 K: not yet on the harness counter, partial.</li>
    <li>Al adatom on Al(100) at 150 K: not yet on the harness counter.</li>
-   <li>LJ38 double-ended saddle: not yet on the harness counter.</li>
+   <li>LJ38 double-ended saddle: not yet on the harness counter, partial.</li>
+   <li>lj38_2ts_separation: partial.</li>
    <li>pt-island: not yet on the harness counter, partial.</li>
    <li>Al: partial.</li>
    <li>Pt: partial.</li>
    <li>Pt-heptamer: not yet on the harness counter, partial.</li>
    <li>Pt heptamer island: not yet on the harness counter, partial.</li>
-   <li>LJ38: not yet on the harness counter.</li>
-   <li>pt-island: not yet on the harness counter.</li>
+   <li>LJ38: not yet on the harness counter, partial.</li>
+   <li>pt-island: not yet on the harness counter, partial.</li>
    <li>eon-ci-neb: no per-start record.</li>
    <li>eon-ci-swdneb: no per-start record.</li>
    <li>eon-cg: no per-start record.</li>
@@ -724,17 +725,6 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="median_calls">28</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
-   </tr>
-   <tr data-problem="saddle-search/pt-island" data-template="sella/pt-island-search-default">
-   <td>Pt heptamer island</td>
-   <td data-field="template">sella/pt-island-search-default</td>
-   <td data-field="version">Sella 2.6.0</td>
-   <td data-field="commit">6cfb60cdb100</td>
-   <td data-field="par2_mean">5201.62</td>
-   <td data-field="mean_calls">247.812</td>
-   <td data-field="median_calls">225</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 4</td>
-   <td data-field="n">16</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-template="sella/lj38-ts-default">
    <td>LJ38</td>

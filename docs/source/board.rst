@@ -96,7 +96,7 @@ It does not run a campaign.
    <td data-code="rgsaddle" data-template="rgsaddle/saddle-dimer-rotskip-tuned" data-par2="10127.1"><span class="bench-score">10127.1</span><a href="generated/suites/saddle-search.html#pt-island-templates">rgsaddle/saddle-dimer-rotskip-tuned</a></td>
    <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
-   <td data-code="Sella" data-template="sella/pt-island-search-default" data-par2="5201.62"><span class="bench-score">5201.62</span><a href="generated/suites/saddle-search.html#pt-island-templates">sella/pt-island-search-default</a></td>
+   <td data-code="Sella">—</td>
    <td data-code="GMIN">—</td>
    <td data-code="pele">—</td>
    <td data-code="LAMMPS">—</td>
