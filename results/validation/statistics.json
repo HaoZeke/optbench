@@ -638,7 +638,7 @@
     "window": 5
   },
   "note": "Track values from results/asv for one commit. Not a Lennard-Jones campaign. Caps are the benchmark class attributes.",
-  "problem": "smoke/quadratic",
+  "problem": "quadratic/bowl",
   "profile": {
     "calls": {
       "gd-step-0.001-cap-30": [
@@ -888,5 +888,5 @@
   },
   "schema": "optbench.validation/v2",
   "source": "asv",
-  "status": "smoke"
+  "status": "quadratic"
 }

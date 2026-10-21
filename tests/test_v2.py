@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 
 from optbench.score import distribution_summary, penalised_cost, quantile, score_v2, rate_interval
-from optbench.smoke import build_smoke
+from optbench.quadratic import build_smoke
 from optbench.v2 import parse_repetitions
 
 ROOT = Path(__file__).resolve().parents[1]

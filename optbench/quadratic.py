@@ -1,4 +1,4 @@
-"""A deterministic quadratic smoke of the v2 score.
+"""A deterministic quadratic sample of the v2 score.
 
 This is not a campaign. The bowl and the saddle are analytic, the
 optimizers are a few lines, and the force calls are harness counts.
@@ -186,14 +186,14 @@ def build_smoke(commit: str = "", machine: dict | str | None = None) -> dict:
     )
     return {
         "schema": "optbench.result/v2",
-        "status": "smoke",
-        "problem": "smoke/quadratic",
+        "status": "quadratic",
+        "problem": "quadratic/bowl",
         "scoring": "par2-bootstrap",
         "par_factor": 2,
         "bootstrap_resamples": 2000,
         "bootstrap_seed": 20261015,
         "note": (
-            "Quadratic smoke of the harness counter and the v2 score. "
+            "Quadratic sample of the harness counter and the v2 score. "
             "Not a Lennard-Jones campaign."
         ),
         "runs": [default, tuned, failed, good_saddle, false_saddle],
