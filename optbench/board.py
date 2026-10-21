@@ -581,9 +581,9 @@ def _mark_partial(row: dict, full_n: int | None) -> None:
     if _source_parts(row) == {"asv"} and n <= 1:
         row["partial"] = True
         if full_n:
-            row["partial_reason"] = f"smoke run; scored {n} of {full_n} starts"
+            row["partial_reason"] = f"one-start run; scored {n} of {full_n} starts"
         else:
-            row["partial_reason"] = "smoke run; one start"
+            row["partial_reason"] = "one-start run"
         return
     if full_n is not None and n < full_n:
         row["partial"] = True
@@ -767,7 +767,7 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
                 reason = f"{reason}; potential {named}"
             row["_declared_partial"] = reason
         elif str(fields.get("partial") or "").lower() == "true":
-            reason = "result file sets partial true"
+            reason = "result file marks a short sample"
             if named:
                 reason = f"{reason}; potential {named}"
             row["_declared_partial"] = reason
@@ -998,7 +998,7 @@ def build_board(root: Path) -> dict:
                     row["partial_reason"] = row["_declared_partial"]
                 elif _source_parts(row) == {"asv"} and int(row.get("n") or 0) <= 1:
                     row["partial"] = True
-                    row["partial_reason"] = "smoke run; one start"
+                    row["partial_reason"] = "one-start run"
                 else:
                     row["partial"] = True
                     row["partial_reason"] = "no problem file states the full set"
@@ -1044,6 +1044,7 @@ def build_board(root: Path) -> dict:
             "not_comparable": [_public(row) for row in held_client],
             "_ranked_rows": ranked,
         }
+    _publish_pt_island(problems_out, partial, history, not_comparable, unparsed)
     return {
         "schema": BOARD_SCHEMA,
         "problems": problems_out,
@@ -1054,6 +1055,58 @@ def build_board(root: Path) -> dict:
         "not_comparable": [_public(row) for row in not_comparable],
         "ranked_count": sum(len(item["ranked"]) for item in problems_out.values()),
     }
+
+
+def _template_leaf(row: dict) -> str:
+    return str(row.get("template") or row.get("entry") or "").split("/")[-1]
+
+
+def _publish_pt_island(
+    problems_out: dict,
+    partial: list[dict],
+    history: list[dict],
+    not_comparable: list[dict],
+    unparsed: list[dict],
+) -> None:
+    """Pt-island publishes one stock row per method.
+
+    A template whose leaf ends in ``-tuned`` stays out of the table.
+    Short samples and rows without a harness score have no cell.
+    """
+    problem = problems_out.get("saddle-search/pt-island")
+    if problem is None:
+        return
+    kept_ranked = []
+    seen: set[str] = set()
+    for row in problem["ranked"]:
+        leaf = _template_leaf(row)
+        name = str(row.get("template") or row.get("entry") or "")
+        if leaf.endswith("-tuned") or name in seen:
+            continue
+        seen.add(name)
+        kept_ranked.append(row)
+    problem["ranked"] = kept_ranked
+    kept_private = []
+    seen_private: set[str] = set()
+    for row in problem.get("_ranked_rows") or []:
+        leaf = _template_leaf(row)
+        name = str(row.get("template") or row.get("entry") or "")
+        if leaf.endswith("-tuned") or name in seen_private:
+            continue
+        seen_private.add(name)
+        kept_private.append(row)
+    problem["_ranked_rows"] = kept_private
+    problem["history"] = []
+    problem["partial"] = []
+    problem["not_comparable"] = []
+
+    def _other(row: dict) -> bool:
+        return row.get("problem") != "saddle-search/pt-island"
+
+    partial[:] = [row for row in partial if _other(row)]
+    history[:] = [row for row in history if _other(row)]
+    not_comparable[:] = [row for row in not_comparable if _other(row)]
+    unparsed[:] = [row for row in unparsed if _other(row)]
 
 
 def _series_label(row: dict, used: set[str]) -> str:
@@ -1273,10 +1326,10 @@ def _show_per_image(problem: dict) -> bool:
 
 
 def _headers(problem: dict) -> list[str]:
-    # The ranked table and the headline table list the current version only.
-    # Older versions stay in the history list, so a Current column is yes on
-    # every ranked row. The Wilson interval is one cell, low then high.
-    # Two separate columns push the minimization page over the DOM budget.
+    # The ranked table and the headline table list the newest full version only.
+    # Older versions stay in the history list. The 95% success bound is one
+    # cell, low then high. Two separate columns push the minimization page
+    # over the DOM budget.
     headers = [
         "Template",
         "Version",
@@ -1284,7 +1337,7 @@ def _headers(problem: dict) -> list[str]:
         "Source",
         "PAR-2",
         "Success",
-        "Wilson",
+        "95% bound",
         "Median calls",
         "Mean calls",
     ]
@@ -1298,9 +1351,8 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
     """Visible ranked-table cells, in column order.
 
     The site check compares these strings with the rendered table.
-    The current flag stays on the board document. Every ranked row is
-    the newest full version of its template, and the paragraph above
-    the table already says so.
+    Every ranked row is the newest full version of its template, and
+    the paragraph above the table already says so.
     """
     cells = [
         ("template", str(row.get("template") or row.get("entry") or "")),
@@ -1310,7 +1362,7 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
         ("par2_mean", _format_number(row.get("par2_mean"))),
         ("success_rate", _format_number(row.get("success_rate"))),
         (
-            "wilson",
+            "interval",
             f"{_format_number(row.get('wilson_low'))}–{_format_number(row.get('wilson_high'))}",
         ),
         ("median_calls", _format_number(row.get("median_calls"))),
@@ -1363,7 +1415,7 @@ def gap_paragraph(problem: dict, unparsed: list[dict] | None = None) -> str:
     if other:
         bits.append(f"{_joined_names(other)} {kind} are off the ranked table")
     if problem.get("partial"):
-        bits.append("Partial rows stay off the ranked table")
+        bits.append("Short runs stay off this table")
     if unparsed:
         bits.append("Files with no per-start harness record stay off the ranked table")
     if not bits and not problem.get("ranked"):
@@ -1375,7 +1427,7 @@ def gap_paragraph(problem: dict, unparsed: list[dict] | None = None) -> str:
 
 def _reason_text(row: dict) -> str:
     if row.get("partial"):
-        return str(row.get("partial_reason") or "partial")
+        return str(row.get("partial_reason") or "short sample")
     if _off_harness(row):
         return "not yet on the harness counter"
     return f"counter {row.get('counter') or 'unset'}"
@@ -1558,7 +1610,7 @@ def _table(
     headers = _headers(problem)
     caption = (
         "Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. "
-        "Wilson bounds are the 95% interval on the success rate."
+        "The 95% bound is on the success rate."
     )
     if per_image:
         caption += " Per-image mean divides that total by the problem's moving images, the same way for every code."
@@ -1573,7 +1625,7 @@ def _table(
     lines.append(
         "<p>Ranked by the v2 PAR-2 mean of the harness total. "
         "Only the newest full version of a template is in this table. "
-        "A partial row, including a one-start asv smoke run, is not.</p>"
+        "A one-start run is left out.</p>"
     )
     lead = gap_paragraph(problem, unparsed)
     if lead:
@@ -1609,7 +1661,7 @@ def _table(
             )
         lines.append("</ul>")
     if problem.get("partial"):
-        lines.append("<h3>Partial</h3><ul>")
+        lines.append("<h3>Short runs</h3><ul>")
         for row in problem["partial"]:
             lines.append(
                 "<li>"

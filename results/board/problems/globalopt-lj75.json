@@ -37,7 +37,7 @@
       "note": "starts.jsonl",
       "par2_mean": 50562.0,
       "partial": true,
-      "partial_reason": "result file sets partial true",
+      "partial_reason": "result file marks a short sample",
       "path": "results/campaign/airss-0.9.4-lj75.dat",
       "problem": "globalopt/lj75",
       "registry_match": true,

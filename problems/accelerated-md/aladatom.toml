@@ -4,7 +4,7 @@ suite = "accelerated-md"
 problem = "aladatom"
 contract = "stated"
 entry_count = 1
-remark = "Aluminum adatom on Al(100). The reactant is the 151-atom legacy con, and the potential is the Voter-Chen EAM built into eOn as eam_al. The reference escape rate is the 250 K parallel-replica row. One repetition is one AKMC catalogue. The published method sample is 5000 products, and that count turns the rate into simulated time."
+remark = "Aluminum adatom on Al(100). The reactant is the 151-atom archived con, and the potential is the Voter-Chen EAM built into eOn as eam_al. The reference escape rate is the 250 K parallel-replica row. One repetition is one AKMC catalogue. The published method sample is 5000 products, and that count turns the rate into simulated time."
 
 [potential]
 kind = "eam_al"

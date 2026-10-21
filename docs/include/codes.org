@@ -1,8 +1,8 @@
 #+begin_export rst
 .. raw:: html
 
-   <section class="bench" id="current-codes">
-   <h2>Current codes</h2>
+   <section class="bench" id="registered-codes">
+   <h2>Registered codes</h2>
    <p>The benchmark contributor is Rohit Goswami. A ranked row is a full harness run. The commit on that row is the commit that produced the score.</p>
    <h3>eOn</h3>
    <div class="bench-scroll"><table>
@@ -159,18 +159,17 @@
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>Al adatom on Al(100) at 250 K: not yet on the harness counter, partial.</li>
+   <li>Al adatom on Al(100) at 250 K: not yet on the harness counter, short sample.</li>
    <li>Al adatom on Al(100) at 150 K: not yet on the harness counter.</li>
-   <li>LJ38 double-ended saddle: not yet on the harness counter, partial.</li>
-   <li>lj38_2ts_separation: partial.</li>
-   <li>pt-island: not yet on the harness counter, partial.</li>
-   <li>Al: partial.</li>
-   <li>Pt: partial.</li>
-   <li>lj38: partial.</li>
-   <li>Pt-heptamer: not yet on the harness counter, partial.</li>
-   <li>Pt heptamer island: not yet on the harness counter, partial.</li>
-   <li>LJ38: not yet on the harness counter, partial.</li>
-   <li>pt-island: not yet on the harness counter, partial.</li>
+   <li>LJ38 double-ended saddle: not yet on the harness counter, short sample.</li>
+   <li>lj38_2ts_separation: short sample.</li>
+   <li>pt-island: not yet on the harness counter, short sample.</li>
+   <li>Al: short sample.</li>
+   <li>Pt: short sample.</li>
+   <li>lj38: short sample.</li>
+   <li>Pt-heptamer: not yet on the harness counter, short sample.</li>
+   <li>LJ38: not yet on the harness counter, short sample.</li>
+   <li>pt-island: not yet on the harness counter, short sample.</li>
    <li>eon-ci-neb: no per-start record.</li>
    <li>eon-ci-swdneb: no per-start record.</li>
    <li>eon-cg: no per-start record.</li>
@@ -316,14 +315,13 @@
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>Al adatom on Al(100) at 250 K: partial.</li>
-   <li>lj38_2ts_separation: partial.</li>
-   <li>Al: partial.</li>
-   <li>Pt: partial.</li>
-   <li>lj38: partial.</li>
-   <li>Pt heptamer island: partial.</li>
-   <li>LJ38: partial.</li>
-   <li>pt-island: partial.</li>
+   <li>Al adatom on Al(100) at 250 K: short sample.</li>
+   <li>lj38_2ts_separation: short sample.</li>
+   <li>Al: short sample.</li>
+   <li>Pt: short sample.</li>
+   <li>lj38: short sample.</li>
+   <li>LJ38: short sample.</li>
+   <li>pt-island: short sample.</li>
    <li>eon-svn/cg: no per-start record.</li>
    <li>eon-svn/fire: no per-start record.</li>
    <li>eon-svn/lbfgs-m100: no per-start record.</li>
@@ -453,15 +451,15 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
-   <tr data-problem="saddle-search/pt-island" data-template="rgsaddle/saddle-dimer-rotskip-tuned">
+   <tr data-problem="saddle-search/pt-island" data-template="rgsaddle/saddle-dimer-fire">
    <td>Pt heptamer island</td>
-   <td data-field="template">rgsaddle/saddle-dimer-rotskip-tuned</td>
+   <td data-field="template">rgsaddle/saddle-dimer-fire</td>
    <td data-field="version">rgsaddle 0.2.2</td>
    <td data-field="commit">c0db2b8d333c</td>
-   <td data-field="par2_mean">10127.1</td>
-   <td data-field="mean_calls">619.017</td>
-   <td data-field="median_calls">550</td>
-   <td data-field="failures">crash 0, divergence 17717, cap 2246, wrong_stationary 35</td>
+   <td data-field="par2_mean">10128</td>
+   <td data-field="mean_calls">1011.03</td>
+   <td data-field="median_calls">1013</td>
+   <td data-field="failures">crash 0, divergence 1, cap 19999, wrong_stationary 0</td>
    <td data-field="n">20000</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-template="rgsaddle/prfo-tuned">
@@ -639,13 +637,12 @@
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>LJ38 double-ended saddle: partial.</li>
-   <li>lj38_2ts_separation: partial.</li>
-   <li>pt-island: partial.</li>
-   <li>Lennard-Jones 38 clusters: partial.</li>
-   <li>Morse bulk: partial.</li>
-   <li>Pt-heptamer: partial.</li>
-   <li>Pt heptamer island: partial.</li>
+   <li>LJ38 double-ended saddle: short sample.</li>
+   <li>lj38_2ts_separation: short sample.</li>
+   <li>pt-island: short sample.</li>
+   <li>Lennard-Jones 38 clusters: short sample.</li>
+   <li>Morse bulk: short sample.</li>
+   <li>Pt-heptamer: short sample.</li>
    </ul>
    <h3>Sella</h3>
    <div class="bench-scroll"><table>
@@ -762,14 +759,13 @@
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>LJ38 double-ended saddle: partial.</li>
-   <li>lj38_2ts_separation: partial.</li>
-   <li>pt-island: partial.</li>
-   <li>Lennard-Jones 38 clusters: partial.</li>
-   <li>Morse bulk: partial.</li>
-   <li>Pt heptamer island: partial.</li>
-   <li>LJ38: partial.</li>
-   <li>pt-island: partial.</li>
+   <li>LJ38 double-ended saddle: short sample.</li>
+   <li>lj38_2ts_separation: short sample.</li>
+   <li>pt-island: short sample.</li>
+   <li>Lennard-Jones 38 clusters: short sample.</li>
+   <li>Morse bulk: short sample.</li>
+   <li>LJ38: short sample.</li>
+   <li>pt-island: short sample.</li>
    <li>sella-lj38: no per-start record.</li>
    </ul>
    <h3>GMIN</h3>
@@ -915,8 +911,8 @@
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>LJ38: partial.</li>
-   <li>pt-island: partial.</li>
+   <li>LJ38: short sample.</li>
+   <li>pt-island: short sample.</li>
    </ul>
    <h3>pARTn</h3>
    <div class="bench-scroll"><table>
@@ -1398,7 +1394,7 @@
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>lj75: partial.</li>
+   <li>lj75: short sample.</li>
    </ul>
    <h3>vc-SQNM</h3>
    <div class="bench-scroll"><table>
