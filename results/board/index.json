@@ -10856,6 +10856,51 @@
           "tuning": "default",
           "wilson_high": 0.03699349820698568,
           "wilson_low": 0.0
+        },
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": 1000000,
+          "code": "scipy",
+          "code_version": "1.18.1",
+          "commit": "e4e854eaa8f18d807cd3496028e257e36caa93cc",
+          "comparable": true,
+          "counter": "harness",
+          "current": true,
+          "entry": "scipy-1.18.1-bh-lj38",
+          "failures": {
+            "cap": 100,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": 100,
+          "history": false,
+          "max_calls": 1000000.0,
+          "mean_calls": 1000000.0,
+          "mean_per_image": null,
+          "median": 2000000.0,
+          "median_calls": 1000000.0,
+          "median_high": 2000000.0,
+          "median_low": 2000000.0,
+          "median_per_image": null,
+          "min_calls": 1000000.0,
+          "n": 100,
+          "nfailed": 100,
+          "note": "starts.jsonl",
+          "par2_mean": 2000000.0,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/scipy-1.18.1-bh-lj38.dat",
+          "problem": "globalopt/lj38",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 0.0,
+          "template": "scipy/bh-lj38",
+          "tuning": "default",
+          "wilson_high": 0.03699349820698568,
+          "wilson_low": 0.0
         }
       ],
       "title": "Lennard-Jones 38 global minimum"
@@ -30633,7 +30678,7 @@
       "title": "pt-island"
     }
   },
-  "ranked_count": 305,
+  "ranked_count": 306,
   "schema": "optbench.board/v1",
   "unmapped": [
     {

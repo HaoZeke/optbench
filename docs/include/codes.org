@@ -496,6 +496,17 @@
    <table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="globalopt/lj38" data-template="scipy/bh-lj38">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="template">scipy/bh-lj38</td>
+   <td data-field="version">scipy 1.18.1</td>
+   <td data-field="commit">e4e854eaa8f1</td>
+   <td data-field="par2_mean">2e+06</td>
+   <td data-field="mean_calls">1e+06</td>
+   <td data-field="median_calls">1e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 100, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
    <tr data-problem="lowest-eigenvector/lj38" data-template="scipy/eig-lj38-eigsh">
    <td>lj38</td>
    <td data-field="template">scipy/eig-lj38-eigsh</td>
