@@ -1,1 +1,1 @@
-BPGA and PyBCGA stock searches on the unary Lennard-Jones globalopt problems stop at the earlier of the scheduled quench budget and the problem force-call cap of 2000000. PAR-2 uses that problem cap. One stock row is kept for each method.
+BPGA and PyBCGA stock searches on the unary Lennard-Jones globalopt problems stop at the earlier of the scheduled quench budget and the problem force-call cap of 2000000. PAR-2 uses that problem cap. One stock row is kept for each method. The ASE lj75 basin-hopping stop on this branch follows that same problem cap.
