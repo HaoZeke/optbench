@@ -326,26 +326,10 @@ task = "minimize"
 ranked = true
 
 [[template]]
-id = "ase/morse-bfgs-tuned"
-code = "ase"
-problem = "minimization/morse-bulk"
-profile = "tuned"
-task = "minimize"
-ranked = true
-
-[[template]]
 id = "ase/morse-lbfgs-default"
 code = "ase"
 problem = "minimization/morse-bulk"
 profile = "default"
-task = "minimize"
-ranked = true
-
-[[template]]
-id = "ase/morse-lbfgs-tuned"
-code = "ase"
-problem = "minimization/morse-bulk"
-profile = "tuned"
 task = "minimize"
 ranked = true
 
@@ -358,26 +342,10 @@ task = "minimize"
 ranked = true
 
 [[template]]
-id = "ase/morse-fire-tuned"
-code = "ase"
-problem = "minimization/morse-bulk"
-profile = "tuned"
-task = "minimize"
-ranked = true
-
-[[template]]
 id = "ase/morse-bfgslinesearch-default"
 code = "ase"
 problem = "minimization/morse-bulk"
 profile = "default"
-task = "minimize"
-ranked = true
-
-[[template]]
-id = "ase/morse-bfgslinesearch-tuned"
-code = "ase"
-problem = "minimization/morse-bulk"
-profile = "tuned"
 task = "minimize"
 ranked = true
 
@@ -390,26 +358,10 @@ task = "minimize"
 ranked = true
 
 [[template]]
-id = "ase/morse-gpmin-tuned"
-code = "ase"
-problem = "minimization/morse-bulk"
-profile = "tuned"
-task = "minimize"
-ranked = true
-
-[[template]]
 id = "ase/morse-preconlbfgs-default"
 code = "ase"
 problem = "minimization/morse-bulk"
 profile = "default"
-task = "minimize"
-ranked = true
-
-[[template]]
-id = "ase/morse-preconlbfgs-tuned"
-code = "ase"
-problem = "minimization/morse-bulk"
-profile = "tuned"
 task = "minimize"
 ranked = true
 
@@ -422,14 +374,6 @@ task = "minimize"
 ranked = true
 
 [[template]]
-id = "ase/morse-preconfire-tuned"
-code = "ase"
-problem = "minimization/morse-bulk"
-profile = "tuned"
-task = "minimize"
-ranked = true
-
-[[template]]
 id = "ase/morse-preconode12r-default"
 code = "ase"
 problem = "minimization/morse-bulk"
@@ -438,26 +382,10 @@ task = "minimize"
 ranked = true
 
 [[template]]
-id = "ase/morse-preconode12r-tuned"
-code = "ase"
-problem = "minimization/morse-bulk"
-profile = "tuned"
-task = "minimize"
-ranked = true
-
-[[template]]
 id = "sella/morse-min-default"
 code = "sella"
 problem = "minimization/morse-bulk"
 profile = "default"
-task = "sella"
-ranked = true
-
-[[template]]
-id = "sella/morse-min-tuned"
-code = "sella"
-problem = "minimization/morse-bulk"
-profile = "tuned"
 task = "sella"
 ranked = true
 

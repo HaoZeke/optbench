@@ -126,10 +126,7 @@ def specs() -> list[dict]:
                 continue
             for tuned, profile, parameters in (
                 (False, "default", DEFAULT),
-                (True, "tuned", TUNED),
             ):
-                if tuned and problem == "minimization/lj38":
-                    continue
                 suffix = "-tuned" if tuned else ""
                 found.append(
                     {
