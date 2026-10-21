@@ -1,0 +1,18 @@
+id = "scgo/lj38-bh-tuned"
+engine = "scgo"
+problem = "globalopt/lj38"
+code = "SCGO"
+code_version = "0.9.1"
+commit = "2338742a434a920ed82e52a72dc1338cf06647c1"
+algorithm = "basin hopping"
+tuning = "tuned"
+failure_cap = 955658
+note = "Basin hopping keeps the documented SCGO gas-cluster step and Metropolis scale: dr 0.2 angstrom and temperature 1.0 eV, from the BH table in docs/source/parameters.rst and from get_default_params. Local FIRE length stays the 38-atom automatic size, 233 steps. The hop count is 955658, the same number as the call ceiling, so a short FIRE relaxation cannot end the search early. The ceiling is 955658, the largest harness count on the AIRSS Lennard-Jones 38 row in cells/airss/go. A start stops when the harness energy is within 0.001 of reference.energy -173.928427, or when the ceiling is spent. Seed 314159 matches the archived eOn basin-hopping config. Energies and forces come from optbench.potentials.lennard_jones. The atom symbol is carbon, a label for the SCGO distance floor."
+
+[scgo]
+algorithm = "bh"
+symbol = "C"
+seed = 314159
+dr = 0.2
+temperature = 1.0
+niter = 955658

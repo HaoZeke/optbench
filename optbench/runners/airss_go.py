@@ -621,7 +621,10 @@ def run_template(
     problem_cap = int(stated_cap) if stated_cap not in (None, "") else None
     config = _config(template)
     raw_tolerance = convergence.get("energy_above_minimum")
-    if raw_tolerance is None and not config.get("budget_structures"):
+    # A structure budget is its own row. globalopt/lj75 now has a Cambridge
+    # window, and the 75-atom template does not use the 38-atom Wales file.
+    budget_only = bool(config.get("budget_structures"))
+    if raw_tolerance is None and not budget_only:
         raise ValueError(
             f"{problem['id']} has no energy_above_minimum and {template['id']} has no airss.budget_structures"
         )
@@ -631,7 +634,7 @@ def run_template(
         names = [f"{label}.{index}" for index in range(1, int(config["starts"]) + 1)]
     else:
         names = _load_start_names(root, problem, geometries, work, output)
-    if raw_tolerance is None:
+    if budget_only or raw_tolerance is None:
         reference = None
         tolerance = None
     else:
@@ -672,7 +675,6 @@ def run_template(
                     flush=True,
                 )
     records.sort(key=lambda row: row["index"])
-    budget_only = reference is None
     crashes = [row for row in records if row.get("failure") == "crash"]
     missed = [row for row in records if not row["success"]]
     if crashes or (missed and not budget_only and problem_cap is None):

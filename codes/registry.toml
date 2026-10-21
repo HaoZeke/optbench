@@ -204,6 +204,24 @@ commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
 note = "No public git commit. The pin is the sha256 of the Wales svn.tar.bz2 snapshot, 122743078 bytes. Minimization L-BFGS calls the ASE socket and pes.evaluate. OPTIM's own call counter is not a score. Saddle search, NEB, noise, and PATHSAMPLE are not scored."
 
 [[code]]
+id = "scgo"
+name = "SCGO"
+role = "global optimization"
+repository = "https://github.com/rlaplaza-lab/scgo"
+ref = "main"
+commit = "2338742a434a920ed82e52a72dc1338cf06647c1"
+committed = "2026-10-01"
+note = "SCGO 0.9.1 at main 2338742a. Basin hopping starts from each archived geometry. The potential is optbench.potentials.lennard_jones. The atom symbol is carbon so the library distance floor stays under the Lennard-Jones contact distance. Force calls are harness calculator evaluations."
+
+[[template]]
+id = "ase-globalopt/lj75-basinhopping"
+code = "ase"
+problem = "globalopt/lj75"
+profile = "default"
+task = "basin-hopping"
+ranked = true
+
+[[code]]
 id = "airss"
 name = "AIRSS"
 role = "random structure search"

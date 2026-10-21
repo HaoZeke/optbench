@@ -1,0 +1,25 @@
+# counter harness. One force call is one ASE calculate on optbench.potentials.lennard_jones.
+# A start succeeds when the harness energy is within energy_above_minimum of reference.energy.
+# The force-call cap is the default basin-hopping budget, counted in FIRE evaluations.
+# Default basin hopping from SCGO 0.9.1 get_default_params. Optimizer FIRE, fmax 0.05, dr 0.2, move_fraction 0.3, move_strategy random, temperature 1.0, energy_tolerance 0.1. For 38 atoms the automatic sizes are 131 hops and 233 FIRE steps. The force-call cap is (131 + 1) * (233 + 1) = 30888, one evaluation per FIRE step for the opening quench and each hop, plus the evaluation that meets fmax. Seed 314159 is the seed in the archived eOn basin-hopping config. The known minimum is reference.energy on the problem, the Cambridge Cluster Database value -173.928427. A start stops when the harness energy is within 0.001 of that minimum. The atom symbol is C.
+nfailed 100
+code SCGO
+code_version 0.9.1
+commit 2338742a434a920ed82e52a72dc1338cf06647c1
+algorithm basin hopping
+template scgo/lj38-bh
+problem globalopt/lj38
+tuning default
+counter harness
+cap 30888
+par2_mean 61776
+wilson_low 0
+wilson_high 0.036993498207
+par2_median 61776
+par2_median_low 61776
+par2_median_high 61776
+v2_nfailed 100
+v2_successes 0
+n 100
+energy_min -169.194840967
+energy_max -140.239739393
