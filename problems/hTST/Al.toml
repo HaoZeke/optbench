@@ -2,7 +2,7 @@ id = "hTST/Al"
 title = "Al"
 suite = "hTST"
 problem = "Al"
-contract = "partial"
+contract = "shared"
 entry_count = 2
 
 [metrics]

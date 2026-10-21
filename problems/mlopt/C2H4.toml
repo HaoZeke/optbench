@@ -2,7 +2,7 @@ id = "mlopt/C2H4"
 title = "C2H4"
 suite = "mlopt"
 problem = "C2H4"
-contract = "partial"
+contract = "shared"
 entry_count = 6
 
 [metrics]

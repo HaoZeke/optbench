@@ -2,7 +2,7 @@ id = "double-ended-saddle-search/pt-island"
 title = "pt-island"
 suite = "double-ended-saddle-search"
 problem = "pt-island"
-contract = "partial"
+contract = "shared"
 entry_count = 11
 
 [convergence]

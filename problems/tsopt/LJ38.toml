@@ -2,7 +2,7 @@ id = "tsopt/LJ38"
 title = "LJ38"
 suite = "tsopt"
 problem = "LJ38"
-contract = "partial"
+contract = "shared"
 entry_count = 8
 
 [potential]

@@ -2,7 +2,7 @@ id = "globalopt/tip4p20"
 title = "tip4p20"
 suite = "globalopt"
 problem = "tip4p20"
-contract = "partial"
+contract = "shared"
 entry_count = 2
 
 [metrics]
