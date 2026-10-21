@@ -190,7 +190,9 @@ median is 53.5.
 Basin hopping and minima hopping on `globalopt/*` share
 `max_force_calls` 2000000. The runner reads that field on every
 Cartesian problem, including lj38. `sample.max_evaluations` on
-`lj100-binary` is the same number. Campaign files record that cap.
+`lj100-binary` is the same number. That problem is 42 atoms of sigma
+1.0 and 58 atoms of sigma 1.3, and a start succeeds at or below
+-604.796307 plus 0.001. Campaign files record that cap.
 A template that sets ranked false stays off the ranked table.
 AMD-SVM on `accelerated-md/aladatom` is not scored. The problem has no
 force-call protocol and the harness has no EAM potential. hTST
