@@ -1065,41 +1065,31 @@ The number is written only after the run finishes under the problem rule.
    <td>240f51d01ca2</td>
    <td><a href="https://gitlab.com/pyamff/pyamff">https://gitlab.com/pyamff/pyamff</a></td>
    </tr>
-   <tr>
-   <td>machine-learning optimization</td>
-   <td>8037eb98</td>
-   <td>8037eb98e228</td>
-   <td><a href="https://gitlab.com/pyamff/pyamff">https://gitlab.com/pyamff/pyamff</a></td>
-   </tr>
    </tbody></table></div>
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="mlopt/C2H4" data-template="pyamff/c2h4-rprop-paper">
+   <tr data-problem="mlopt/C2H4" data-template="pyamff/c2h4-rprop">
    <td>C2H4</td>
-   <td data-field="template">pyamff/c2h4-rprop-paper</td>
-   <td data-field="version">pyamff-8037eb98 8037eb98</td>
-   <td data-field="commit">8037eb98e228</td>
-   <td data-field="par2_mean">202.12</td>
-   <td data-field="mean_calls">202.12</td>
-   <td data-field="median_calls">185</td>
+   <td data-field="template">pyamff/c2h4-rprop</td>
+   <td data-field="version">PyAMFF 0.1.0-beta</td>
+   <td data-field="commit">240f51d01ca2</td>
+   <td data-field="par2_mean">191.02</td>
+   <td data-field="mean_calls">191.02</td>
+   <td data-field="median_calls">188</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
-   <tr data-problem="mlopt/emt-pt38" data-template="pyamff/emt-pt38-rprop-paper">
+   <tr data-problem="mlopt/emt-pt38" data-template="pyamff/emt-pt38-rprop">
    <td>EMT Pt 38 nanoparticle</td>
-   <td data-field="template">pyamff/emt-pt38-rprop-paper</td>
-   <td data-field="version">pyamff-8037eb98 8037eb98</td>
-   <td data-field="commit">8037eb98e228</td>
-   <td data-field="par2_mean">101.82</td>
-   <td data-field="mean_calls">101.82</td>
-   <td data-field="median_calls">90</td>
+   <td data-field="template">pyamff/emt-pt38-rprop</td>
+   <td data-field="version">PyAMFF 240f51d0</td>
+   <td data-field="commit">240f51d01ca2</td>
+   <td data-field="par2_mean">91.04</td>
+   <td data-field="mean_calls">91.04</td>
+   <td data-field="median_calls">75</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, not_converged 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    </tbody></table></div>
-   <p>No full ranked run</p><ul>
-   <li>C2H4: partial.</li>
-   <li>EMT Pt 38 nanoparticle: partial.</li>
-   </ul>
    </section>
