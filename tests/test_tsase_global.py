@@ -31,7 +31,7 @@ def test_published_lj38_minimum_matches_the_harness_potential():
 def test_lj75_window_is_the_cambridge_minimum():
     problem = resolve_problem(ROOT, "globalopt/lj75")
     assert energy_threshold(problem) == pytest.approx(-397.492331 + 0.001)
-    assert int(problem["convergence"]["max_force_calls"]) == 1_000_000
+    assert int(problem["convergence"]["max_force_calls"]) == 2_000_000
     assert int(problem["sample"]["starts"]) == 200
 
 
@@ -135,8 +135,7 @@ def test_templates_use_the_registry_pin_and_the_problem_stop():
         assert template["tuning"] == "default"
         problem = resolve_problem(ROOT, template["problem"])
         _check_stop(problem, template)
-        expected_cap = 1_000_000 if template["problem"] == "globalopt/lj75" else 2_000_000
-        assert int(template["stop"]["max_force_calls"]) == expected_cap
+        assert int(template["stop"]["max_force_calls"]) == 2_000_000
     default = next(row for row in found if row["id"] == "tsase/lj38-basinhopping")
     described = describe_parameters(default["tsase"], -173.927)
     assert described["fmax"] == 0.1
