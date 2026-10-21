@@ -81,7 +81,7 @@ It does not run a campaign.
    <td data-code="pysisyphus">—</td>
    <td data-code="AIRSS">—</td>
    <td data-code="vc-SQNM" data-template="vcsqnm/morse-ase" data-par2="40.51"><span class="bench-score">40.51</span><a href="generated/suites/minimization.html#morse-bulk-templates">vcsqnm/morse-ase</a></td>
-   <td data-code="EON" data-template="eon-svn/morse-sd-harness" data-par2="20000"><span class="bench-score">20000</span><a href="generated/suites/minimization.html#morse-bulk-templates">eon-svn/morse-sd-harness</a></td>
+   <td data-code="EON" data-template="eon-svn/morse-sd-harness" data-par2="122"><span class="bench-score">122</span><a href="generated/suites/minimization.html#morse-bulk-templates">eon-svn/morse-sd-harness</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind" data-template="dlfind/lbfgs-morse" data-par2="13626.5"><span class="bench-score">13626.5</span><a href="generated/suites/minimization.html#morse-bulk-templates">dlfind/lbfgs-morse</a></td>
@@ -201,7 +201,7 @@ It does not run a campaign.
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="GMIN">—</td>
-   <td data-code="pele" data-template="pele/lj38-basinhopping" data-par2="5.37522e+06"><span class="bench-score">5.37522e+06</span><a href="generated/suites/globalopt.html#lj38-templates">pele/lj38-basinhopping</a></td>
+   <td data-code="pele" data-template="pele/lj38-basinhopping" data-par2="528658"><span class="bench-score">528658</span><a href="generated/suites/globalopt.html#lj38-templates">pele/lj38-basinhopping</a></td>
    <td data-code="LAMMPS">—</td>
    <td data-code="pysisyphus">—</td>
    <td data-code="AIRSS" data-template="airss/lj38" data-par2=""><span class="bench-score"></span><a href="generated/suites/globalopt.html#lj38-templates">airss/lj38</a></td>
@@ -343,7 +343,7 @@ It does not run a campaign.
    </tr>
    <tr data-problem="hTST/Al">
    <th scope="row"><a href="generated/suites/hTST.html#Al">Al</a></th>
-   <td data-code="eOn" data-template="eon-develop/htst-al-dimer-cg-stock" data-par2="4721.53"><span class="bench-score">4721.53</span><a href="generated/suites/hTST.html#Al-templates">eon-develop/htst-al-dimer-cg-stock</a></td>
+   <td data-code="eOn" data-template="eon-develop/htst-al-dimer-cg-stock" data-par2="117877"><span class="bench-score">117877</span><a href="generated/suites/hTST.html#Al-templates">eon-develop/htst-al-dimer-cg-stock</a></td>
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
@@ -356,7 +356,7 @@ It does not run a campaign.
    <td data-code="pysisyphus">—</td>
    <td data-code="AIRSS">—</td>
    <td data-code="vc-SQNM">—</td>
-   <td data-code="EON" data-template="eon-svn/htst-al-dimer-cg-stock" data-par2="4802.58"><span class="bench-score">4802.58</span><a href="generated/suites/hTST.html#Al-templates">eon-svn/htst-al-dimer-cg-stock</a></td>
+   <td data-code="EON" data-template="eon-svn/htst-al-dimer-cg-stock" data-par2="83937.2"><span class="bench-score">83937.2</span><a href="generated/suites/hTST.html#Al-templates">eon-svn/htst-al-dimer-cg-stock</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>

@@ -31,7 +31,15 @@ def test_pele_templates_cover_the_minimization_problems():
         _check_stop(problem, template)
         method = template["pele"]["method"]
         if method == "basinhopping":
-            assert set(template["pele"]) == {"method"}
+            assert set(template["pele"]) == {
+                "method",
+                "temperature",
+                "stepsize",
+                "acc_ratio",
+                "interval",
+                "quench_tol",
+                "nquenches",
+            }
             assert template["problem"] == "globalopt/lj38"
             assert template["tuning"] == "default"
             continue

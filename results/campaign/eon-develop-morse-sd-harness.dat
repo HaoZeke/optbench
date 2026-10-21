@@ -1,24 +1,29 @@
 # counter harness. One force call is one ext_pot evaluation.
 # The potential is morse_bulk, cutoff 7, shifted, orthorhombic minimum image.
-# sd_alpha, sd_twopoint, and max_move are omitted, so the client keeps its constructor step.
-# v2 success is under the cap, at the force stop, and Hessian index 0.
-# Stock steepest descent on the harness Morse bulk potential. opt_method is sd. converged_force is the problem force norm, 0.001. max_iterations is the problem cap, 10000. sd_alpha, sd_twopoint, and max_move are omitted, so develop keeps its constructor step. The client is eOn develop a7aa57472fb7, a different code from EON r2549. Force calls are HarnessCounter charges through ext_pot.
-nfailed 100
+# Archived r2030 config: opt_method sd, sd_alpha 0.04, max_move 0.2, converged_force 0.001.
+# sd_twopoint and max_iterations are unset. The constructor iteration limit is 1000.
+# v2 success is under the problem cap, at the force stop, and Hessian index 0.
+# Steepest descent on the harness Morse bulk potential. The archived r2030 config sets opt_method sd, sd_alpha 0.04, max_move 0.2, and converged_force 0.001. sd_twopoint is unset. max_iterations is unset, so the client keeps its constructor limit of 1000. This client reads sd_alpha from the SD section. The potential is the harness morse_bulk surface through ext_pot. The client is eOn develop 500350d9. Force calls are HarnessCounter charges.
+force_calls 122
+force_calls_min 88
+force_calls_max 136
+nfailed 0
+median 123
 code eOn
-code_version (develop a7aa57472fb7)
-commit a7aa57472fb7d823953fd36b78cd755fa4842d30
+code_version (develop 500350d9)
+commit 500350d9fae881f06c7ef194e5868da079c4be5a
 algorithm SD
 template eon-develop/morse-sd-harness
 tuning default
 counter harness
 problem minimization/morse-bulk
 reducer harness
-par2_mean 20000
-wilson_low 0
-wilson_high 0.036993498207
-par2_median 20000
-par2_median_low 20000
-par2_median_high 20000
-v2_nfailed 100
-v2_successes 0
+par2_mean 122
+wilson_low 0.963006501793
+wilson_high 1
+par2_median 123
+par2_median_low 120
+par2_median_high 126
+v2_nfailed 0
+v2_successes 100
 n 100

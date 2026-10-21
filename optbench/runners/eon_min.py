@@ -5,12 +5,13 @@ is one ``HarnessCounter`` charge on that socket. The potential is
 ``morse_bulk``: depth 0.7102, alpha 1.6047, r0 2.897, cutoff 7, energy
 shifted to zero at the cutoff, orthorhombic minimum image.
 
-The stop is the problem force norm. ``max_iterations`` is the problem
-force-call cap. The step length stays the client constructor value:
-this template does not set ``sd_alpha``, ``sd_twopoint``, or
-``max_move``. A v2 success is under the cap, at the force stop, and
-Hessian index 0. The Hessian is computed after the client returns and
-is not charged.
+The step and the stop are the archived r2030 config:
+``opt_method = sd``, ``sd_alpha = 0.04``, ``max_move = 0.2``,
+``converged_force = 1e-3``. ``sd_twopoint`` stays unset. ``max_iterations``
+stays unset, so the client keeps its constructor limit of 1000. The
+problem cap, 10000, is the harness ceiling used for PAR-2. A v2 success
+is under that ceiling, at the force stop, and Hessian index 0. The
+Hessian is computed after the client returns and is not charged.
 """
 
 from __future__ import annotations
@@ -46,7 +47,7 @@ _CLIENTS = {
         "env": "EON_DEVELOP_CLIENT",
         "default": Path.home() / "opt" / "eon-develop" / "bin" / "eonclient",
         "flag": "--version",
-        "token": "a7aa574",
+        "token": "500350d9",
     },
 }
 
@@ -109,8 +110,9 @@ def _dat(summary: dict, template: dict, metrics: dict, partial: bool) -> str:
     lines = [
         "# counter harness. One force call is one ext_pot evaluation.",
         "# The potential is morse_bulk, cutoff 7, shifted, orthorhombic minimum image.",
-        "# sd_alpha, sd_twopoint, and max_move are omitted, so the client keeps its constructor step.",
-        "# v2 success is under the cap, at the force stop, and Hessian index 0.",
+        "# Archived r2030 config: opt_method sd, sd_alpha 0.04, max_move 0.2, converged_force 0.001.",
+        "# sd_twopoint and max_iterations are unset. The constructor iteration limit is 1000.",
+        "# v2 success is under the problem cap, at the force stop, and Hessian index 0.",
     ]
     note = str(template.get("note") or "").strip()
     if note:
@@ -167,9 +169,12 @@ def _evaluate(fallback: np.ndarray):
 def _ini_text(template: dict, wrapper: Path) -> str:
     sections = json.loads(json.dumps(template["ini"]))
     optimizer = sections.get("Optimizer") or {}
-    for key in ("sd_alpha", "sd_twopoint", "max_move"):
-        if key in optimizer:
-            raise ValueError(f"{template['id']} sets {key}; stock steepest descent takes no step override")
+    if str(optimizer.get("opt_method") or "") != "sd":
+        raise ValueError(f"{template['id']} is not steepest descent")
+    if "max_iterations" in optimizer:
+        raise ValueError(f"{template['id']} sets max_iterations; the archived config leaves the constructor limit")
+    if "sd_twopoint" in optimizer or "sd_twopoint" in (sections.get("SD") or {}):
+        raise ValueError(f"{template['id']} sets sd_twopoint; that is the other Morse row")
     sections["Potential"] = {"potential": "ext_pot", "ext_pot_path": str(wrapper)}
     return format_ini(sections)
 
@@ -203,7 +208,10 @@ def _min_job(job: dict) -> dict:
         server.stop()
         os.environ.pop("OPTBENCH_POTSERVER", None)
     calls = min(int(calls), cap)
-    final = work / "pos.con"
+    # MinimizationJob writes the relaxed geometry to min.con and leaves pos.con at the start.
+    final = work / "min.con"
+    if not final.is_file():
+        final = work / "pos.con"
     energy = None
     force_norm = None
     hessian_index = None

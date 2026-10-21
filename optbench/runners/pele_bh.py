@@ -1,17 +1,18 @@
-"""Stock basin hopping with pele on the harness Lennard-Jones potential.
+"""Basin hopping with pele on the harness Lennard-Jones potential.
 
-``BasinHopping`` keeps its constructor temperature, 1.0. The step is
-``RandomDisplacement`` at its constructor step size, 1.0. There is no
-adaptive step. The quench is ``mylbfgs`` with the constructor values
-at this release: memory 4, maxstep 0.1, maxErise 1e-4, H0 0.1, tol
-1e-5, and 10000 iterations. ``iprint`` is -1 so the log stays quiet.
+The archived driver sets the quench tolerance to 1e-3, the temperature
+to 1.0, ``RandomDisplacement(stepsize=0.41)``, and
+``AdaptiveStepsize`` with acceptance ratio 0.5 and interval 100. The
+adaptive factor stays the constructor value, 0.9. The quench is
+``lbfgs_cpp``. Only ``tol`` is set. Memory 4, maxstep 0.1, maxErise
+1e-4, H0 0.1, and 10000 iterations stay the constructor values.
 
-One force call is one ``getEnergyGradient`` entry on a
-``HarnessCounter``. A repeated coordinate is cached. A start succeeds
-when a converged quench lies within the problem ``energy_above_minimum``
-of the harness energy of the Wales LJ38 coordinates. The call budget
-on the template is only the cap that turns a search that never meets
-that rule into a failure. It is not an optimizer parameter.
+The driver takes up to 100000 quenches and checks the Markov energy
+after each hop, not before the first hop. The target is the harness
+energy of the Wales LJ38 coordinates plus the problem tolerance. One
+force call is one ``getEnergyGradient`` entry on a ``HarnessCounter``.
+A repeated coordinate is cached. The template call ceiling is the PAR-2
+cap. It sits above the archived maximum and is not a quench setting.
 """
 
 from __future__ import annotations
@@ -80,53 +81,59 @@ def _meets(energy: float | None, minimum: float, tolerance: float, converged: bo
 def _hop_job(job: dict) -> dict:
     import numpy as np
     from pele.basinhopping import BasinHopping
-    from pele.optimize import mylbfgs
-    from pele.takestep import RandomDisplacement
+    from pele.optimize import lbfgs_cpp
+    from pele.takestep import AdaptiveStepsize, RandomDisplacement
 
     cap = int(job["cap"])
     minimum = float(job["energy_minimum"])
     tolerance = float(job["energy_tolerance"])
     seed = int(job["seed"])
+    nquenches = int(job["nquenches"])
     np.random.seed(seed)
     potential = _HarnessLJ(cap)
-    best = {"energy": None, "calls": 0, "converged": False}
     error = ""
     steps = 0
     caught_cap = False
+    energy = None
 
     def quench(coords):
-        result = mylbfgs(coords, potential, iprint=-1)
-        energy = float(result.energy)
-        converged = bool(result.success) and math.isfinite(energy)
-        if converged and (best["energy"] is None or energy < best["energy"]):
-            best["energy"] = energy
-            best["calls"] = int(potential.counter.calls)
-            best["converged"] = True
-        return result
+        return lbfgs_cpp(coords, potential, tol=float(job["quench_tol"]))
 
     try:
+        step = AdaptiveStepsize(
+            RandomDisplacement(stepsize=float(job["stepsize"])),
+            acc_ratio=float(job["acc_ratio"]),
+            interval=int(job["interval"]),
+        )
         hopper = BasinHopping(
             np.asarray(job["coords"], dtype=np.float64),
             potential,
-            RandomDisplacement(),
+            step,
             quench=quench,
+            temperature=float(job["temperature"]),
             outstream=io.StringIO(),
         )
-        while potential.counter.calls < cap and not _meets(
-            best["energy"], minimum, tolerance, best["converged"], best["calls"], cap
-        ):
-            if best["energy"] is not None and best["energy"] < minimum - _BELOW_MINIMUM:
+        # The constructor quenches once. The driver checks the Markov
+        # energy only after each later hop.
+        for _ in range(nquenches):
+            if potential.counter.calls >= cap:
+                caught_cap = True
                 break
-            hopper.takeOneStep()
+            hopper.run(1)
             steps += 1
+            trial = float(hopper.markovE)
+            energy = trial
+            if trial < minimum - _BELOW_MINIMUM:
+                break
+            if math.isfinite(trial) and trial <= minimum + tolerance:
+                break
     except Exception as exc:
         if isinstance(exc, ForceCallCap) or potential.counter.calls >= cap:
             caught_cap = True
         else:
             error = f"{type(exc).__name__}: {exc}"
     calls = min(int(potential.counter.calls), cap)
-    energy = best["energy"]
-    converged = bool(best["converged"])
+    converged = energy is not None and math.isfinite(energy)
     success = _meets(energy, minimum, tolerance, converged, calls, cap)
     reasons: list[str] = []
     if error:
@@ -207,7 +214,8 @@ def _dat(summary: dict, template: dict, metrics: dict, commit: str, version: str
         "# counter harness. One force call is one getEnergyGradient entry.",
         "# The potential is the harness Lennard-Jones potential. A repeated coordinate is cached.",
         "# A start succeeds when a converged quench is within energy_above_minimum of the Wales LJ38 energy.",
-        "# The call budget is the cap on a search that never meets that rule. It is not an optimizer parameter.",
+        "# The quench is lbfgs_cpp with the archived tolerance. Other quench arguments stay at the constructor.",
+        "# The call ceiling is the PAR-2 cap. It is above the archived maximum and is not a quench setting.",
     ]
     note = str(template.get("note") or "").strip()
     if note:
@@ -243,11 +251,15 @@ def run_template(
     if commit != PELE_COMMIT:
         raise RuntimeError(f"{template['id']} commit {commit} is not the built pele revision {PELE_COMMIT}")
     section = template.get("pele") or {}
+    expected = ("method", "temperature", "stepsize", "acc_ratio", "interval", "quench_tol", "nquenches")
     if str(section.get("method") or "") != "basinhopping":
-        raise ValueError(f"{template['id']} is not stock basin hopping")
-    for key in section:
-        if key != "method":
-            raise ValueError(f"{template['id']} sets {key}; stock basin hopping takes no optimizer override")
+        raise ValueError(f"{template['id']} is not basin hopping")
+    unknown = [key for key in section if key not in expected]
+    if unknown:
+        raise ValueError(f"{template['id']} sets {unknown}; the archived driver does not")
+    missing = [key for key in expected if key not in section]
+    if missing:
+        raise ValueError(f"{template['id']} is missing {missing}")
     tolerance = float((problem.get("convergence") or {})["energy_above_minimum"])
     minimum = reference_energy()
     cap = int(template["failure_cap"])
@@ -263,6 +275,12 @@ def run_template(
                 "coords": coords.tolist(),
                 "seed": _seed_of(name),
                 "cap": cap,
+                "temperature": float(section["temperature"]),
+                "stepsize": float(section["stepsize"]),
+                "acc_ratio": float(section["acc_ratio"]),
+                "interval": int(section["interval"]),
+                "quench_tol": float(section["quench_tol"]),
+                "nquenches": int(section["nquenches"]),
                 "energy_minimum": minimum,
                 "energy_tolerance": tolerance,
                 "problem": problem["id"],

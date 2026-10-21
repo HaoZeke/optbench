@@ -10,18 +10,40 @@ commit = "r2549"
 algorithm = "Dimer-CG rotation: max=50 tol=1"
 tuning = "default"
 failure_cap = 100000000
-pass_limit = 64
+search_limit = 10000
 rate_template = "eon-svn/htst-al-dimer-cg-stock-rate"
 rate_stem = "eon-svn-htst-al-dimer-cg-stock-rate"
 geometry = "website/hTST/Al/eon-dimer-cg/pos.con"
-note = "Stock dimer CG on the Al reactant. The dimer block is the published algorithm, CG with 50 rotations and angle 1. Confidence, displacement, prefactor, and the optimizer iteration limit stay at the r2549 constructor. The kernel is the Fortran Aluminum EAM through ext_pot. Window closure uses the 2014 report rule and is not an optimizer setting. Stock confidence does not stop a reactant that has not collected the reference processes, so the run is 64 AKMC passes unless both window targets close first. That bound is the observation, not an optimizer parameter."
+note = "Dimer CG on the Al reactant. The archived config sets confidence 1.95, displace_radius 3.3, displace_magnitude 0.5, max_energy 100, listed-atom weight 1 with atom list -1, prefactor 1.2e12, minimize_first, optimizer force 0.001 and max_iterations 5000, and num_jobs 10000. The dimer block is CG, 50 rotations, angle 1. The names displace_listed_atom_weight and displace_atom_list are the keys this server accepts for the archived displace_listed_weight and displace_atomlist. The kernel is the Fortran Aluminum EAM through ext_pot. A window closes by the 2014 report rule once the processtable holds the eight reference barriers. The search stops at 10000 registered searches or when 639 barrier windows and 20 rate windows have closed."
 
 [ini.Main]
 job = "akmc"
 temperature = 300
 random_seed = 42
 
+[ini.Optimizer]
+converged_force = 0.001
+max_iterations = 5000
+
+[ini.AKMC]
+confidence = 1.95
+server_side_process_search = false
+
+[ini.Prefactor]
+default_value = 1.2e12
+
+[ini."Process Search"]
+minimize_first = true
+
+[ini.Communicator]
+num_jobs = 10000
+
 [ini."Saddle Search"]
+displace_radius = 3.3
+displace_magnitude = 0.5
+max_energy = 100.0
+displace_listed_atom_weight = 1.0
+displace_atom_list = "-1"
 min_mode_method = "dimer"
 
 [ini.Dimer]

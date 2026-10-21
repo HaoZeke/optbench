@@ -68,7 +68,7 @@
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
    <td data-code="GMIN">—</td>
-   <td data-code="pele" data-template="pele/lj38-basinhopping" data-par2="5.37522e+06"><span class="bench-score">5.37522e+06</span><a href="#lj38-templates">pele/lj38-basinhopping</a></td>
+   <td data-code="pele" data-template="pele/lj38-basinhopping" data-par2="528658"><span class="bench-score">528658</span><a href="#lj38-templates">pele/lj38-basinhopping</a></td>
    <td data-code="LAMMPS">—</td>
    <td data-code="pysisyphus">—</td>
    <td data-code="AIRSS" data-template="airss/lj38" data-par2=""><span class="bench-score"></span><a href="#lj38-templates">airss/lj38</a></td>
@@ -354,8 +354,8 @@
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td data-field="template">airss/lj38</td><td data-field="version">AIRSS 0.9.4</td><td data-field="commit">5593cc4ee360</td><td data-field="source">campaign</td><td data-field="par2_mean"></td><td data-field="success_rate">1</td><td data-field="wilson">0.963007–1</td><td data-field="median_calls">70635.5</td><td data-field="mean_calls">112134</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">eon-client/bh-lj38</td><td data-field="version">eOn 3.5.0</td><td data-field="commit">4d8b34baf1ba</td><td data-field="source">campaign</td><td data-field="par2_mean">503146</td><td data-field="success_rate">1</td><td data-field="wilson">0.963007–1</td><td data-field="median_calls">369028</td><td data-field="mean_calls">503146</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">pele/lj38-basinhopping</td><td data-field="version">pele 0.1.2</td><td data-field="commit">b7081b932a06</td><td data-field="source">campaign</td><td data-field="par2_mean">528658</td><td data-field="success_rate">1</td><td data-field="wilson">0.963007–1</td><td data-field="median_calls">385464</td><td data-field="mean_calls">528658</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">eon-svn/bh-lj38</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">598530</td><td data-field="success_rate">0.98</td><td data-field="wilson">0.929988–0.994498</td><td data-field="median_calls">423226</td><td data-field="mean_calls">558530</td><td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 0</td><td data-field="n">100</td></tr>
-   <tr><td data-field="template">pele/lj38-basinhopping</td><td data-field="version">pele 0.1.2</td><td data-field="commit">b7081b932a06</td><td data-field="source">campaign</td><td data-field="par2_mean">5.37522e+06</td><td data-field="success_rate">0.14</td><td data-field="wilson">0.0852634–0.221372</td><td data-field="median_calls">3e+06</td><td data-field="mean_calls">2.79522e+06</td><td data-field="failures">crash 0, divergence 0, cap 86, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    </details>
    </section><section class="bench bench-legacy-section" id="lj38-legacy">

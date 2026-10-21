@@ -87,8 +87,8 @@ FAMILIES = {
         "env": "EON_DEVELOP_CLIENT",
         "default": Path.home() / "opt" / "eon-develop" / "bin" / "eonclient",
         "flag": "--version",
-        "token": "a7aa574",
-        "cache": "a7aa574",
+        "token": "500350d9",
+        "cache": "500350d9",
     },
 }
 
@@ -122,7 +122,7 @@ def bridge_binary() -> Path:
     dest.parent.mkdir(parents=True, exist_ok=True)
     temporary = dest.with_suffix(".tmp")
     subprocess.run(
-        ["cc", "-O2", "-o", str(temporary), str(source)],
+        ["cc", "-O2", "-o", str(temporary), str(source), "-ldl"],
         check=True,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
