@@ -9,9 +9,9 @@ task = "global-minimize"
 profile = "tuned"
 tuning = "tuned"
 reducer = "harness"
-ranked = true
+ranked = false
 seed = 314159
-note = "Temperature 8000 K is the archived eOn value, stored by ASE as kT = 8000 * kB. Displacement 0.5 and the LBFGS force stop 0.001 are the archived keys. ASE does not adjust the step size. The local iteration bound is 1000, the archived max_iterations. Seed 314159 is the archived random_seed, reused for every start. The problem file states no force-call cap. This cap is 2000000, above the archived eOn maximum of 1795901."
+note = "Temperature 8000 K is the archived eOn value, stored by ASE as kT = 8000 * kB. Displacement 0.5 and the LBFGS force stop 0.001 are the archived keys. ASE does not adjust the step size. The local iteration bound is 1000, the archived max_iterations. Seed 314159 is the archived random_seed, reused for every start. The problem file caps a start at 2000000 force calls."
 
 [method]
 name = "BasinHopping"

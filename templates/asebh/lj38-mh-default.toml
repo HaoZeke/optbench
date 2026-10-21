@@ -11,7 +11,7 @@ tuning = "default"
 reducer = "harness"
 ranked = true
 seed = 0
-note = "MinimaHopping constructor defaults. The initial temperature is 1000 K, Ediff0 is 0.5, mdmin is 2, the timestep is 1 fs, and the local minimizer is QuasiNewton with fmax 0.05. The local iteration bound is 1000. Seed 0 seeds the momenta. Plain coordinate files are read as carbon, the element in the Lennard-Jones 38 con files. Step trajectories are not stored. ASE reads those files only to resume a search. The minima list is kept, and the library identity test decides a revisit. The problem file states no force-call cap. This cap is 2000000, above the archived eOn maximum of 1795901."
+note = "MinimaHopping constructor defaults. The initial temperature is 1000 K, Ediff0 is 0.5, mdmin is 2, the timestep is 1 fs, and the local minimizer is QuasiNewton with fmax 0.05. The local iteration bound is 1000. Seed 0 seeds the momenta. Plain coordinate files are read as carbon, the element in the Lennard-Jones 38 con files. Step trajectories are not stored. ASE reads those files only to resume a search. The minima list is kept, and the library identity test decides a revisit. The problem file caps a start at 2000000 force calls."
 
 [method]
 name = "MinimaHopping"

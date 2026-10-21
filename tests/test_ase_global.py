@@ -42,9 +42,11 @@ def test_lj38_stop_is_the_archived_eon_energy():
     assert target_energy(lj75) == -397.492331 + 0.001
     assert target_energy(lj98) == -543.665361 + 0.001
     assert target_energy(lj150) == -893.310258 + 0.001
-    assert load_template(ROOT, "asebh/lj75-basin-default")["stop"]["max_force_calls"] == 1000000
-    assert load_template(ROOT, "asebh/lj98-mh-default")["stop"]["max_force_calls"] == 1000000000
-    assert load_template(ROOT, "asebh/lj150-basin-tuned")["stop"]["max_force_calls"] == 10000000
+    assert load_template(ROOT, "asebh/lj75-basin-default")["stop"]["max_force_calls"] == 2000000
+    assert load_template(ROOT, "asebh/lj98-mh-default")["stop"]["max_force_calls"] == 2000000
+    assert load_template(ROOT, "asebh/lj150-basin-tuned")["stop"]["max_force_calls"] == 2000000
+    assert load_template(ROOT, "asebh/lj150-basin-tuned")["ranked"] is False
+    assert load_template(ROOT, "asebh/lj38-basin-default")["ranked"] is True
     tuned = load_template(ROOT, "asebh/lj38-basin-tuned")
     assert tuned["method"]["parameters"]["temperature_kelvin"] == 8000
     assert tuned["method"]["parameters"]["dr"] == 0.5
@@ -52,6 +54,7 @@ def test_lj38_stop_is_the_archived_eon_energy():
     assert tuned["method"]["parameters"]["optimizer"] == "LBFGS"
     assert tuned["seed"] == 314159
     assert tuned["stop"]["max_force_calls"] == 2000000
+    assert tuned["ranked"] is False
     default = load_template(ROOT, "asebh/lj38-basin-default")
     assert "temperature_kelvin" not in default["method"]["parameters"]
     assert default["method"]["name"] == "BasinHopping"

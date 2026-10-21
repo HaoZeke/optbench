@@ -1,0 +1,1 @@
+ASE basin hopping and minima hopping on `globalopt/lj38`, `globalopt/lj75`, `globalopt/lj98`, and `globalopt/lj150` use the problem force-call cap, 2000000. Ranked rows keep the constructor defaults. The temperature-8000 parameter sets have ranked false.

@@ -11,7 +11,7 @@ tuning = "default"
 reducer = "harness"
 ranked = true
 seed = 0
-note = "Constructor defaults. Temperature is 100 kB, the local minimizer is FIRE, fmax is 0.1, and the displacement is 0.1. The local iteration bound is 1000. The ASE optimizer default of 1e8 steps does not return on an overlapping trial. Seed 0 is reused for every start. The problem file caps a start at 1000000 force calls."
+note = "Constructor defaults. Temperature is 100 kB, the local minimizer is FIRE, fmax is 0.1, and the displacement is 0.1. The local iteration bound is 1000. The ASE optimizer default of 1e8 steps does not return on an overlapping trial. Seed 0 is reused for every start. The problem file caps a start at 2000000 force calls."
 
 [method]
 name = "BasinHopping"
@@ -28,7 +28,7 @@ smooth = false
 pbc = [false, false, false]
 
 [stop]
-max_force_calls = 1000000
+max_force_calls = 2000000
 max_hops = 10000000
 
 [input]

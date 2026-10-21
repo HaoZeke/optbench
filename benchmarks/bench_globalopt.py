@@ -21,7 +21,7 @@ def _starts() -> list[str]:
 class AseLj75BasinHopping(TrackedSearch):
     template_id = "ase-globalopt/lj75-basinhopping"
     problem_id = "globalopt/lj75"
-    cap = 1000000
+    cap = 2000000
     timeout = 7200
     param_names = ["seed", "start"]
     params = [["314159"], _starts()]
