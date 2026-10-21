@@ -1,4 +1,7 @@
-"""Harness runs for eOn SVN r2549 and the 3.5.0 source build.
+"""Harness runs for eOn SVN r2549, the 3.5.0 source build, and develop.
+
+Develop basin hopping uses commit 80e94f88 (3.6.0), which contains
+b0bd4d5a. ``eonclient --version`` prints ``3.6.0 (80e94f88)``.
 
 Each force evaluation is one ``HarnessCounter`` charge. eonclient is
 started with ``potential = ext_pot``. A small C program forwards
@@ -53,7 +56,7 @@ from .campaign import (
     write_starts,
 )
 from .eon_jobs import _client_env, _numpy_direction, _read_dat, _seeded_mode
-from .eon_parse import abs_overlap, flat_floats, xyz_to_con
+from .eon_parse import abs_overlap, bare_coords_to_con, flat_floats, xyz_to_con
 from .stationary import negative_index, vibrational_eigenvalues
 from .surfaces import lennard_jones, morse_smooth_linear, read_con
 
@@ -62,6 +65,7 @@ CACHE = Path(os.environ.get("OPTBENCH_ASV_CACHE", "/tmp/optbench-asv"))
 KERNEL = "problem-surface-2"
 SVN_COMMIT = "r2549"
 CLIENT_COMMIT = "4d8b34baf1ba8d2d980df29838bac1f969d1662c"
+DEVELOP_COMMIT = "80e94f88b54e24815287860f32a0558683e9c02b"
 _CLIENT_OK: set[str] = set()
 _EAM = None
 
@@ -81,6 +85,14 @@ FAMILIES = {
         "flag": "--version",
         "token": "4d8b34ba",
         "cache": "4d8b34ba",
+    },
+    "develop": {
+        "prefix": "eon-develop/",
+        "env": "EON_DEVELOP_CLIENT",
+        "default": Path.home() / "opt" / "eon-develop" / "bin" / "eonclient",
+        "flag": "--version",
+        "token": "80e94f88",
+        "cache": "80e94f88",
     },
 }
 
@@ -389,7 +401,7 @@ def _family_of(template: dict) -> str:
     for name, spec in FAMILIES.items():
         if ident.startswith(spec["prefix"]) and template.get("kind"):
             return name
-    raise ValueError(f"{ident} is not an r2549 or 3.5.0 harness template")
+    raise ValueError(f"{ident} is not an r2549, 3.5.0, or develop harness template")
 
 
 def _ini_text(template: dict, seed: int, wrapper: Path, *, python_job: bool) -> str:
@@ -463,7 +475,63 @@ def _interpolated(reactant: Path, product: Path, dest: Path) -> tuple[str, str]:
     return str(dest / "displacement.con"), _mode_text(delta / norm)
 
 
-def _files(kind: str, start: str, work: Path) -> tuple[list[tuple[str, str]], list[tuple[str, str]]]:
+def template_starts(template: dict) -> list[str]:
+    """Starts the template names, or the kind default.
+
+    ``start_first`` and ``start_count`` name a contiguous index range.
+    LJ75 coordinate files are ``coords.1`` through ``coords.200``.
+    """
+    if template.get("starts"):
+        return [str(start) for start in template["starts"]]
+    if template.get("start_count") not in (None, "", 0, "0"):
+        first = int(template.get("start_first", 0))
+        count = int(template["start_count"])
+        return [str(index) for index in range(first, first + count)]
+    return default_starts(str(template["kind"]))
+
+
+def _read_member(archive: Path, name: str) -> str:
+    """File text whose basename is exactly ``name``."""
+    with tarfile.open(archive) as packed:
+        match = None
+        for member in packed.getmembers():
+            if member.isfile() and Path(member.name).name == name:
+                match = member
+                break
+        if match is None:
+            raise FileNotFoundError(f"{name} is not in {archive}")
+        extracted = packed.extractfile(match)
+        if extracted is None:
+            raise FileNotFoundError(name)
+        return extracted.read().decode("utf-8", errors="replace")
+
+
+def basin_con(template: dict, start: str, work: Path) -> Path:
+    """One basin-hopping geometry as a free-cluster ``.con``.
+
+    A ``.con`` member is copied. A coordinate member is three floats per
+    line and is centered in a cube. Lennard-Jones depends on distances.
+    """
+    archive_path = str(template.get("archive") or "website/globalopt/lj38/100_lj38.tar.gz")
+    pattern = str(template.get("member") or "{start}.con")
+    label = str(int(start)) if str(start).isdigit() else str(start)
+    name = pattern.format(start=label)
+    text = _read_member(_archive(archive_path), name)
+    dest = work / "src.con"
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    if name.endswith(".con"):
+        dest.write_text(text, encoding="utf-8")
+    else:
+        dest.write_text(bare_coords_to_con(text), encoding="utf-8")
+    return dest
+
+
+def _files(
+    kind: str,
+    start: str,
+    work: Path,
+    template: dict | None = None,
+) -> tuple[list[tuple[str, str]], list[tuple[str, str]]]:
     work.mkdir(parents=True, exist_ok=True)
     if kind == "ts-lj38":
         archive = _archive("website/tsopt/LJ38/coords-con.tar.gz")
@@ -529,8 +597,7 @@ def _files(kind: str, start: str, work: Path) -> tuple[list[tuple[str, str]], li
             )
         return [], [("reactant.con", reactant_text), ("product.con", product_text)]
     if kind in {"basin", "minima"}:
-        archive = _archive("website/globalopt/lj38/100_lj38.tar.gz")
-        con = _extract_suffix(archive, f"/{int(start)}.con", work / "src.con")
+        con = basin_con(template or {}, start, work)
         return [(str(con), "pos.con")], []
     if kind in {"prd", "hyper"}:
         path = _archive("website/accelerated-md/reactant.con")
@@ -794,7 +861,7 @@ def run_case(
                     record["uncached"] = True
                 record = _guard(record, record.get("client_calls"))
             else:
-                copies, texts = _files(kind, str(start), work / "src")
+                copies, texts = _files(kind, str(start), work / "src", template)
                 found = _run_client(
                     client,
                     _ini_text(template, int(seed), wrapper, python_job=python_job),
@@ -900,7 +967,7 @@ def _jobs(family: str) -> list[dict]:
 
 def grid_points(template: dict, *, full: bool, limit: int = 0) -> list[tuple[int, str]]:
     seeds = [int(seed) for seed in template.get("seeds", [1])]
-    starts = [str(start) for start in (template.get("starts") or default_starts(str(template["kind"])))]
+    starts = template_starts(template)
     if not full:
         seeds, starts = seeds[:1], starts[:1]
     points = [(seed, start) for seed in seeds for start in starts]
@@ -945,13 +1012,16 @@ def _start_row(seed: int, start: str, record: dict) -> dict:
 
 
 def write_campaign(template: dict, rows: list[tuple[int, str, dict]], output: Path) -> dict | None:
-    """Write benchmark.dat and the per-start file. Timeouts stay out."""
+    """Write benchmark.dat and the per-start file.
+
+    A wall-clock stop and a crash stay in the file. Both are failures.
+    """
     from .board import stated_full_n
 
     kept = [
         (seed, start, row)
         for seed, start, row in rows
-        if not row.get("timed_out") and not row.get("uncached")
+        if "success" in row and "force_calls" in row
     ]
     if not kept:
         return None
@@ -983,51 +1053,138 @@ def write_campaign(template: dict, rows: list[tuple[int, str, dict]], output: Pa
     return summary
 
 
+def _campaign_stem(template_id: str) -> Path:
+    return ROOT / "results" / "campaign" / template_id.replace("/", "-")
+
+
+def _resume_ok(row: dict) -> bool:
+    """True when this start should not be repeated.
+
+    A wall-clock stop is repeated: the call cap was not reached. A crash
+    with no calls is repeated. A finished success or failure stays.
+    """
+    if "success" not in row or "force_calls" not in row:
+        return False
+    if row.get("timed_out"):
+        return False
+    calls = int(round(float(row.get("force_calls") or 0)))
+    if row.get("uncached") and calls == 0:
+        return False
+    return True
+
+
+def _load_partial(template_id: str) -> dict[tuple[int, str], dict]:
+    path = _campaign_stem(template_id).with_suffix(".records.jsonl")
+    found: dict[tuple[int, str], dict] = {}
+    if not path.is_file():
+        return found
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        row = json.loads(line)
+        found[(int(row["seed"]), str(row["start"]))] = row
+    return found
+
+
+def _append_partial(template_id: str, row: dict) -> None:
+    path = _campaign_stem(template_id).with_suffix(".records.jsonl")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8") as handle:
+        handle.write(json.dumps(row, sort_keys=True) + "\n")
+        handle.flush()
+        os.fsync(handle.fileno())
+
+
 def fill(family: str, *, kinds: set[str] | None = None, workers: int = 1, limit: int = 0, full: bool = True) -> list[dict]:
-    """Run harness starts and write one campaign file per template."""
-    from concurrent.futures import ProcessPoolExecutor
+    """Run harness starts and write one campaign file per template.
+
+    Each finished start is appended to a ``.records.jsonl`` before the
+    campaign file is rewritten. A template is written when every start
+    has a record, including while other templates are still running.
+    """
+    from concurrent.futures import ProcessPoolExecutor, as_completed
 
     jobs = []
     templates = {}
+    held: dict[str, dict[tuple[int, str], dict]] = {}
+    wanted: dict[str, list[tuple[int, str]]] = {}
+    pending: dict[str, int] = {}
     for template in _jobs(family):
         kind = str(template["kind"])
         if kinds and kind not in kinds and template["id"] not in kinds and template["id"].split("/", 1)[-1] not in kinds:
             continue
-        templates[template["id"]] = template
+        ident = template["id"]
+        templates[ident] = template
+        points = grid_points(template, full=full, limit=limit)
+        wanted[ident] = points
+        stored = _load_partial(ident)
+        held[ident] = stored
         passes = int(template.get("pass_limit") or 0)
-        for seed, start in grid_points(template, full=full, limit=limit):
-            jobs.append((template["id"], seed, start, passes))
-    if workers <= 1:
-        results = [_fill_job(job) for job in jobs]
-    else:
-        import multiprocessing as mp
-
-        with ProcessPoolExecutor(max_workers=workers, mp_context=mp.get_context("spawn")) as pool:
-            results = list(pool.map(_fill_job, jobs))
-    grouped: dict[str, list] = {ident: [] for ident in templates}
-    for row in results:
-        grouped.setdefault(row["template"], []).append((row["seed"], row["start"], row))
+        waiting = 0
+        for seed, start in points:
+            previous = stored.get((int(seed), str(start)))
+            if previous is not None and _resume_ok(previous):
+                continue
+            jobs.append((ident, seed, start, passes))
+            waiting += 1
+        pending[ident] = waiting
     written = []
-    for ident, template in templates.items():
-        stem = ident.replace("/", "-")
-        output = ROOT / "results" / "campaign" / f"{stem}.dat"
-        rows = grouped.get(ident, [])
+
+    def _publish(ident: str) -> None:
+        if pending.get(ident, 0) != 0:
+            return
+        rows = []
+        for seed, start in wanted.get(ident, []):
+            row = held.get(ident, {}).get((int(seed), str(start)))
+            if row is None:
+                return
+            rows.append((seed, start, row))
+        if not rows:
+            return
+        template = templates[ident]
+        output = _campaign_stem(ident).with_suffix(".dat")
         summary = write_campaign(template, rows, output)
         if summary:
             written.append(summary)
             print(
                 f"{summary['problem']} {summary['template']} "
                 f"force_calls={summary.get('force_calls')} nfailed={summary['nfailed']} "
-                f"starts={summary['starts']} partial={summary['partial']}",
+                f"starts={summary['starts']}",
                 flush=True,
             )
         else:
-            errors = [str(row.get("error") or row.get("failure") or "") for _seed, _start, row in rows]
-            print(
-                f"{template['problem']} {ident} wrote nothing "
-                f"rows={len(rows)} errors={errors[:4]}",
-                flush=True,
-            )
+            print(f"{template['problem']} {ident} wrote nothing rows={len(rows)}", flush=True)
+
+    for ident in templates:
+        _publish(ident)
+    if not jobs:
+        return written
+
+    def _absorb(row: dict) -> None:
+        ident = str(row["template"])
+        key = (int(row["seed"]), str(row["start"]))
+        held.setdefault(ident, {})[key] = row
+        _append_partial(ident, row)
+        pending[ident] = pending.get(ident, 0) - 1
+        record = row
+        print(
+            f"{ident} {key[1]} calls={record.get('force_calls')} "
+            f"energy={record.get('minimum_energy')} success={record.get('success')} "
+            f"failure={record.get('failure')}",
+            flush=True,
+        )
+        _publish(ident)
+
+    if workers <= 1:
+        for job in jobs:
+            _absorb(_fill_job(job))
+    else:
+        import multiprocessing as mp
+
+        with ProcessPoolExecutor(max_workers=workers, mp_context=mp.get_context("spawn")) as pool:
+            futures = [pool.submit(_fill_job, job) for job in jobs]
+            for future in as_completed(futures):
+                _absorb(future.result())
     return written
 
 
@@ -1063,7 +1220,7 @@ def install_benchmarks(family: str, namespace: dict) -> None:
         kind = str(template["kind"])
         asv_full = bool(template.get("asv_full", True))
         seeds = [int(seed) for seed in template.get("seeds", [1])]
-        starts = [str(start) for start in (template.get("starts") or default_starts(kind))]
+        starts = template_starts(template)
         if full_grid() and asv_full:
             used_seeds, used_starts = seeds, starts
             passes = int(template.get("pass_limit") or 0)

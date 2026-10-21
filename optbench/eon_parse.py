@@ -8,6 +8,30 @@ file the force calls came from.
 from __future__ import annotations
 
 
+def bare_coords_to_con(text: str, *, box: float | None = None) -> str:
+    """Three floats per line to a free-cluster ``.con``.
+
+    The numbered coordinate archives have no atom count and no element.
+    Lennard-Jones depends on distances, so the cube is the same one
+    ``xyz_to_con`` uses.
+    """
+    coords: list[tuple[float, float, float]] = []
+    for line in text.splitlines():
+        stripped = line.strip()
+        if not stripped:
+            continue
+        parts = stripped.split()
+        if len(parts) < 3:
+            raise ValueError(f"coordinate line needs x y z: {line}")
+        coords.append((float(parts[0]), float(parts[1]), float(parts[2])))
+    if not coords:
+        raise ValueError("coordinate file is empty")
+    lines = [str(len(coords)), "bare"]
+    for x, y, z in coords:
+        lines.append(f"H {x:.8f} {y:.8f} {z:.8f}")
+    return xyz_to_con("\n".join(lines) + "\n", box=box)
+
+
 def xyz_to_con(text: str, *, box: float | None = None) -> str:
     """Extended XYZ to a free-cluster ``.con``.
 
