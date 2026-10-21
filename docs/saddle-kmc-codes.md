@@ -189,7 +189,9 @@ median is 53.5.
 
 Basin hopping and minima hopping on `globalopt/*` share
 `max_force_calls` 2000000. The harness reads that field. On
-`lj100-binary`, `sample.max_evaluations` is the same number.
+`lj100-binary`, `sample.max_evaluations` is the same number. That
+problem is 42 atoms of sigma 1.0 and 58 atoms of sigma 1.3, and a
+start succeeds at or below -604.796307 plus 0.001.
 The FIRE quench template `ase-globalopt/lj75-basinhopping` sets
 `ranked` false. The board keeps that template off the ranked table.
 AMD-SVM on `accelerated-md/aladatom` is not scored. The problem has no
