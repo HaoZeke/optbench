@@ -39,10 +39,10 @@ id = "eon-develop-500350d9"
 name = "eOn"
 role = "minimization and saddle search"
 repository = "https://github.com/TheochemUI/eon"
-ref = "fix/develop-regressions-vs-350"
+ref = "develop"
 commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
 committed = "2026-10-20"
-note = "Branch fix/develop-regressions-vs-350 at 500350d9. The version string is 3.6.0 (500350d9). Built from that commit with the stock meson wraps. GPR-dimer is absent. The lj38_2ts_separation double-ended rows use this pin."
+note = "develop 500350d9fae881f06c7ef194e5868da079c4be5a built from that commit with no source patch. eonclient --version prints 3.6.0 (500350d9). The Pt-heptamer and LJ38 band rows on this commit use the harness force counter. EON SVN r2549 is a different code."
 
 [[code]]
 id = "eon-svn"
@@ -112,7 +112,17 @@ repository = "https://www-wales.ch.cam.ac.uk/svn.tar.bz2"
 ref = "svn.tar.bz2"
 commit = "df8da599267534fbe43a250e578f7396a7946311"
 committed = "2026-10-18"
-note = "Wales group GMIN. Tarball sha256 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f. SVNREV df8da599267534fbe43a250e578f7396a7946311, fetched 2026-10-18. The quench is source/mymylbfgs.F90. Keyword defaults are MUPDATE 4, DGUESS 0.1, MAXBFGS 0.4, and MAXERISE 1e-10. The RMS tolerance is the Euclidean force norm divided by sqrt(3N). The potential is the harness Lennard-Jones or Morse through POTENTIAL. Force calls are HarnessCounter entries."
+note = "Wales group GMIN. Tarball sha256 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f. SVNREV df8da599267534fbe43a250e578f7396a7946311, fetched 2026-10-18. The quench is source/mymylbfgs.F90. Keyword defaults are MUPDATE 4, DGUESS 0.1, MAXBFGS 0.4, and MAXERISE 1e-10. The RMS tolerance is the Euclidean force norm divided by sqrt(3N). The potential is the harness Lennard-Jones or Morse through POTENTIAL. Force calls are HarnessCounter entries. Basin-hopping rows use the same tarball and are pinned as gmin-bh."
+
+[[code]]
+id = "gmin-bh"
+name = "GMIN"
+role = "global optimization"
+repository = "https://www-wales.ch.cam.ac.uk/svn.tar.bz2"
+ref = "02aaf45245af"
+commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+committed = "2026-10-18"
+note = "Same Wales tarball as gmin, sha256 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f, SVNREV df8da599267534fbe43a250e578f7396a7946311. Basin-hopping and parallel tempering call the harness Lennard-Jones through codes/gmin/optbench_pot.F90. codes/gmin/build-bh.sh builds the MPI binary."
 
 [[code]]
 id = "pele"
@@ -254,6 +264,14 @@ committed = "2026-09-30"
 note = "LAMMPS 30 Sep 2026, tag stable_30Sep2026. Band rows use fix neb with a climbing stage and min_style quickmin or fire. The pair style is the spec potential: lj/cut 40 with no shift, and morse 9.5 with pair_modify shift yes. Kspring is 1.0 with the default parallel neigh spring. The timestep is the unit default. Force calls are pair computes summed across replicas. The FIRE row leaves one fifth of the cap unused so a velocity-reset evaluation stays inside the cap."
 
 # generated ASE and Sella templates
+
+[[template]]
+id = "ase-globalopt/lj75-basinhopping"
+code = "ase"
+problem = "globalopt/lj75"
+profile = "default"
+task = "basin-hopping"
+ranked = true
 
 [[template]]
 id = "ase/lj38-bfgs-default"

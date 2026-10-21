@@ -47,6 +47,42 @@ def archive_gaps(problems: dict[str, dict], rows: list[dict]) -> list[str]:
     return gaps
 
 
+_HELD_BACK_FILES = ("optbench/board.py", "optbench/findings.py")
+_HELD_BACK_MARKERS = (
+    "def " + "holdback(",
+    "def " + "_apply_omitted(",
+    "def " + "_matches_hold(",
+    "class " + "Hold:",
+    '"hold":',
+    "'hold':",
+)
+
+
+def held_back_errors(root: Path) -> list[str]:
+    """Reject a list that keeps templates off the ranked table."""
+    errors: list[str] = []
+    for rel in _HELD_BACK_FILES:
+        path = root / rel
+        if not path.is_file():
+            continue
+        text = path.read_text(encoding="utf-8")
+        if any(marker in text for marker in _HELD_BACK_MARKERS):
+            errors.append(f"{rel} keeps templates off the ranked table")
+    ledger = root / "oracle" / "findings.jsonl"
+    if ledger.is_file():
+        for lineno, line in enumerate(ledger.read_text(encoding="utf-8").splitlines(), 1):
+            if not line.strip():
+                continue
+            row = json.loads(line)
+            beside = row.get("beside") or {}
+            if (isinstance(beside, dict) and ("omitted" in beside or "hold" in beside)) or "hold" in row:
+                errors.append(
+                    f"oracle/findings.jsonl line {lineno} keeps templates off the ranked table"
+                )
+                break
+    return errors
+
+
 def check(problems_dir: Path, oracle_path: Path) -> int:
     """Return 0 when archive gaps match oracle/archive_gaps.txt."""
     problems = load_all(problems_dir)
@@ -95,10 +131,20 @@ def check(problems_dir: Path, oracle_path: Path) -> int:
     root = oracle_path.resolve().parent.parent
     site_errors = check_site(root)
     site_errors.extend(rank_violations(build_board(root)))
+    site_errors.extend(held_back_errors(root))
     if site_errors:
         print(f"site {len(site_errors)}")
         for line in site_errors:
             print(line)
         return 1
     print("site tables match the board")
+    from .findings import findings_errors
+
+    finding_errors = findings_errors(root)
+    if finding_errors:
+        print(f"findings {len(finding_errors)}")
+        for line in finding_errors:
+            print(line)
+        return 1
+    print("findings match the archive rows")
     return 0

@@ -1,0 +1,15 @@
+force_calls 715
+force_calls_min 332
+force_calls_max 1552
+force_calls_median 657.0
+call_unit total
+nfailed 6
+code eOn
+code_version (develop 500350d9) · Doubly nudged CI-NEB
+commit 500350d9fae881f06c7ef194e5868da079c4be5a
+algorithm Doubly nudged CI-NEB
+template eon/500350d9-de-lj38-ci-swdneb
+problem double-ended-saddle-search/lj38
+reducer harness
+counter harness
+count_keys HarnessCounter
