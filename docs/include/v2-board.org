@@ -12,7 +12,7 @@
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin" data-template="rgmin/lj38-dogleg" data-par2="81.881"><span class="bench-score">81.881</span><a href="generated/suites/minimization.html#lj38-templates">rgmin/lj38-dogleg</a></td>
    <td data-code="rgsaddle">—</td>
-   <td data-code="ASE" data-template="ase/lj38-lbfgs-tuned" data-par2="395.645"><span class="bench-score">395.645</span><a href="generated/suites/minimization.html#lj38-templates">ase/lj38-lbfgs-tuned</a></td>
+   <td data-code="ASE" data-template="ase/lj38-lbfgs-default" data-par2="532.882"><span class="bench-score">532.882</span><a href="generated/suites/minimization.html#lj38-templates">ase/lj38-lbfgs-default</a></td>
    <td data-code="Sella" data-template="sella/lj38-min-default" data-par2="710.089"><span class="bench-score">710.089</span><a href="generated/suites/minimization.html#lj38-templates">sella/lj38-min-default</a></td>
    <td data-code="pysisyphus" data-template="pysisyphus/cg-lj38" data-par2="15124.7"><span class="bench-score">15124.7</span><a href="generated/suites/minimization.html#lj38-templates">pysisyphus/cg-lj38</a></td>
    <td data-code="artn">—</td>
@@ -59,7 +59,7 @@
    <td data-code="eOn">—</td>
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
-   <td data-code="rgsaddle" data-template="rgsaddle/saddle-dimer-rotskip-tuned" data-par2="10127.1"><span class="bench-score">10127.1</span><a href="generated/suites/saddle-search.html#pt-island-templates">rgsaddle/saddle-dimer-rotskip-tuned</a></td>
+   <td data-code="rgsaddle" data-template="rgsaddle/saddle-dimer-fire" data-par2="10128"><span class="bench-score">10128</span><a href="generated/suites/saddle-search.html#pt-island-templates">rgsaddle/saddle-dimer-fire</a></td>
    <td data-code="ASE">—</td>
    <td data-code="Sella" data-template="sella/pt-island-search-default" data-par2="9539.88"><span class="bench-score">9539.88</span><a href="generated/suites/saddle-search.html#pt-island-templates">sella/pt-island-search-default</a></td>
    <td data-code="pysisyphus">—</td>
@@ -76,7 +76,7 @@
    <td data-code="Eon svn" data-template="eon-svn/de-lj38-lanczos-improved" data-par2="235.2"><span class="bench-score">235.2</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">eon-svn/de-lj38-lanczos-improved</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="853.56"><span class="bench-score">853.56</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
-   <td data-code="ASE" data-template="ase/de-lj38-tuned" data-par2="3463.64"><span class="bench-score">3463.64</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">ase/de-lj38-tuned</a></td>
+   <td data-code="ASE" data-template="ase/de-lj38-default" data-par2="4912.84"><span class="bench-score">4912.84</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">ase/de-lj38-default</a></td>
    <td data-code="Sella" data-template="sella/de-lj38-default" data-par2="2055.3"><span class="bench-score">2055.3</span><a href="generated/suites/double-ended-saddle-search.html#lj38-templates">sella/de-lj38-default</a></td>
    <td data-code="pysisyphus">—</td>
    <td data-code="artn">—</td>
@@ -108,7 +108,7 @@
    <td data-code="Eon svn" data-template="eon-svn/de-pt-lanczos-improved" data-par2="180.644"><span class="bench-score">180.644</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">eon-svn/de-pt-lanczos-improved</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="422.136"><span class="bench-score">422.136</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
-   <td data-code="ASE" data-template="ase/de-pt-island-tuned" data-par2="847.678"><span class="bench-score">847.678</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">ase/de-pt-island-tuned</a></td>
+   <td data-code="ASE" data-template="ase/de-pt-island-default" data-par2="926.475"><span class="bench-score">926.475</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">ase/de-pt-island-default</a></td>
    <td data-code="Sella" data-template="sella/de-pt-island-default" data-par2="921.847"><span class="bench-score">921.847</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">sella/de-pt-island-default</a></td>
    <td data-code="pysisyphus">—</td>
    <td data-code="artn">—</td>
@@ -155,7 +155,7 @@
    <td data-code="eOn" data-template="eon-client/ts-lj38-lanczos-improved" data-par2="280.33"><span class="bench-score">280.33</span><a href="generated/suites/tsopt.html#LJ38-templates">eon-client/ts-lj38-lanczos-improved</a></td>
    <td data-code="Eon svn" data-template="eon-svn/ts-lj38-lanczos-improved" data-par2="270.85"><span class="bench-score">270.85</span><a href="generated/suites/tsopt.html#LJ38-templates">eon-svn/ts-lj38-lanczos-improved</a></td>
    <td data-code="rgmin">—</td>
-   <td data-code="rgsaddle" data-template="rgsaddle/prfo-tuned" data-par2="192.6"><span class="bench-score">192.6</span><a href="generated/suites/tsopt.html#LJ38-templates">rgsaddle/prfo-tuned</a></td>
+   <td data-code="rgsaddle" data-template="rgsaddle/dimer-rotskip" data-par2="7803.19"><span class="bench-score">7803.19</span><a href="generated/suites/tsopt.html#LJ38-templates">rgsaddle/dimer-rotskip</a></td>
    <td data-code="ASE">—</td>
    <td data-code="Sella" data-template="sella/lj38-ts-default" data-par2="68.74"><span class="bench-score">68.74</span><a href="generated/suites/tsopt.html#LJ38-templates">sella/lj38-ts-default</a></td>
    <td data-code="pysisyphus">—</td>
@@ -188,7 +188,7 @@
    <td data-code="Eon svn" data-template="eon-svn/neb-pt-ci" data-par2="336.769"><span class="bench-score">336.769</span><a href="generated/suites/neb.html#Pt-heptamer-templates">eon-svn/neb-pt-ci</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/idpp-ci-neb-lbfgs" data-par2="318.308"><span class="bench-score">318.308</span><a href="generated/suites/neb.html#Pt-heptamer-templates">rgsaddle/idpp-ci-neb-lbfgs</a></td>
-   <td data-code="ASE" data-template="ase/neb-pt-heptamer-tuned" data-par2="442.615"><span class="bench-score">442.615</span><a href="generated/suites/neb.html#Pt-heptamer-templates">ase/neb-pt-heptamer-tuned</a></td>
+   <td data-code="ASE" data-template="ase/neb-pt-heptamer-default" data-par2="606.923"><span class="bench-score">606.923</span><a href="generated/suites/neb.html#Pt-heptamer-templates">ase/neb-pt-heptamer-default</a></td>
    <td data-code="Sella">—</td>
    <td data-code="pysisyphus">—</td>
    <td data-code="artn">—</td>

@@ -325,6 +325,11 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
+   <p>No full ranked run</p><ul>
+   <li>Lennard-Jones 38 clusters: off this rank.</li>
+   <li>Lennard-Jones 38 clusters with Gaussian force noise: off this rank.</li>
+   <li>Morse bulk: off this rank.</li>
+   </ul>
    <h3>rgsaddle</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
@@ -394,26 +399,26 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
-   <tr data-problem="saddle-search/pt-island" data-template="rgsaddle/saddle-dimer-rotskip-tuned">
+   <tr data-problem="saddle-search/pt-island" data-template="rgsaddle/saddle-dimer-fire">
    <td>Pt heptamer island</td>
-   <td data-field="template">rgsaddle/saddle-dimer-rotskip-tuned</td>
+   <td data-field="template">rgsaddle/saddle-dimer-fire</td>
    <td data-field="version">rgsaddle 0.2.2</td>
    <td data-field="commit">c0db2b8d333c</td>
-   <td data-field="par2_mean">10127.1</td>
-   <td data-field="mean_calls">619.017</td>
-   <td data-field="median_calls">550</td>
-   <td data-field="failures">crash 0, divergence 17717, cap 2246, wrong_stationary 35</td>
+   <td data-field="par2_mean">10128</td>
+   <td data-field="mean_calls">1011.03</td>
+   <td data-field="median_calls">1013</td>
+   <td data-field="failures">crash 0, divergence 1, cap 19999, wrong_stationary 0</td>
    <td data-field="n">20000</td>
    </tr>
-   <tr data-problem="tsopt/LJ38" data-template="rgsaddle/prfo-tuned">
+   <tr data-problem="tsopt/LJ38" data-template="rgsaddle/dimer-rotskip">
    <td>LJ38</td>
-   <td data-field="template">rgsaddle/prfo-tuned</td>
+   <td data-field="template">rgsaddle/dimer-rotskip</td>
    <td data-field="version">rgsaddle 0.2.2</td>
    <td data-field="commit">c0db2b8d333c</td>
-   <td data-field="par2_mean">192.6</td>
-   <td data-field="mean_calls">192.6</td>
-   <td data-field="median_calls">173</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="par2_mean">7803.19</td>
+   <td data-field="mean_calls">2926.82</td>
+   <td data-field="median_calls">856.5</td>
+   <td data-field="failures">crash 0, divergence 0, cap 27, wrong_stationary 47</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="tsopt/pt-island" data-template="rgsaddle/pt-dimer-rotskip">
@@ -428,6 +433,12 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="n">49</td>
    </tr>
    </tbody></table></div>
+   <p>No full ranked run</p><ul>
+   <li>lj38: off this rank.</li>
+   <li>Pt heptamer island: off this rank.</li>
+   <li>LJ38: off this rank.</li>
+   <li>pt-island: off this rank.</li>
+   </ul>
    <h3>ASE</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
@@ -442,15 +453,15 @@ The number is written only after the run finishes under the problem rule.
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="double-ended-saddle-search/lj38" data-template="ase/de-lj38-tuned">
+   <tr data-problem="double-ended-saddle-search/lj38" data-template="ase/de-lj38-default">
    <td>LJ38 double-ended saddle</td>
-   <td data-field="template">ase/de-lj38-tuned</td>
+   <td data-field="template">ase/de-lj38-default</td>
    <td data-field="version">ASE 3.29.0</td>
    <td data-field="commit">f27c0005ae6a</td>
-   <td data-field="par2_mean">3463.64</td>
-   <td data-field="mean_calls">2014.22</td>
+   <td data-field="par2_mean">4912.84</td>
+   <td data-field="mean_calls">2463.82</td>
    <td data-field="median_calls">2501</td>
-   <td data-field="failures">crash 0, divergence 0, cap 29, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 49, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-template="ase/de-lj38-2ts-default">
@@ -464,26 +475,26 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 51, cap 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/pt-island" data-template="ase/de-pt-island-tuned">
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="ase/de-pt-island-default">
    <td>pt-island</td>
-   <td data-field="template">ase/de-pt-island-tuned</td>
+   <td data-field="template">ase/de-pt-island-default</td>
    <td data-field="version">ASE 3.29.0</td>
    <td data-field="commit">f27c0005ae6a</td>
-   <td data-field="par2_mean">847.678</td>
-   <td data-field="mean_calls">593.864</td>
-   <td data-field="median_calls">374</td>
-   <td data-field="failures">crash 0, divergence 0, cap 5, wrong_stationary 0</td>
+   <td data-field="par2_mean">926.475</td>
+   <td data-field="mean_calls">875.712</td>
+   <td data-field="median_calls">707</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
-   <tr data-problem="minimization/lj38" data-template="ase/lj38-lbfgs-tuned">
+   <tr data-problem="minimization/lj38" data-template="ase/lj38-lbfgs-default">
    <td>Lennard-Jones 38 clusters</td>
-   <td data-field="template">ase/lj38-lbfgs-tuned</td>
+   <td data-field="template">ase/lj38-lbfgs-default</td>
    <td data-field="version">ASE 3.29.0</td>
    <td data-field="commit">f27c0005ae6a</td>
-   <td data-field="par2_mean">395.645</td>
-   <td data-field="mean_calls">375.645</td>
-   <td data-field="median_calls">319</td>
-   <td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 0</td>
+   <td data-field="par2_mean">532.882</td>
+   <td data-field="mean_calls">344.881</td>
+   <td data-field="median_calls">257</td>
+   <td data-field="failures">crash 0, divergence 0, cap 7, wrong_stationary 6</td>
    <td data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38-noise" data-template="noise/ase-lbfgs-s0">
@@ -508,14 +519,14 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
-   <tr data-problem="neb/Pt-heptamer" data-template="ase/neb-pt-heptamer-tuned">
+   <tr data-problem="neb/Pt-heptamer" data-template="ase/neb-pt-heptamer-default">
    <td>Pt-heptamer</td>
-   <td data-field="template">ase/neb-pt-heptamer-tuned</td>
+   <td data-field="template">ase/neb-pt-heptamer-default</td>
    <td data-field="version">ASE 3.29.0</td>
    <td data-field="commit">f27c0005ae6a</td>
-   <td data-field="par2_mean">442.615</td>
-   <td data-field="mean_calls">442.615</td>
-   <td data-field="median_calls">450</td>
+   <td data-field="par2_mean">606.923</td>
+   <td data-field="mean_calls">606.923</td>
+   <td data-field="median_calls">618</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>

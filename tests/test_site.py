@@ -107,12 +107,15 @@ def test_rendered_pages_use_the_board_rank():
     pt_ranked = [row["template"] for row in document["problems"]["tsopt/pt-island"]["ranked"]]
     assert "sella/pt-island-ts-default" in pt_ranked
     assert "sella/pt-island-ts-tuned" not in pt_ranked
-    assert "rgsaddle/dimer-rotskip-tuned" in ts_ranked
+    assert "rgsaddle/dimer-rotskip" in ts_ranked
+    assert "rgsaddle/dimer-rotskip-tuned" not in ts_ranked
+    assert "rgsaddle/prfo-tuned" not in ts_ranked
     assert "tsopt-LJ38-profile.svg" in tsopt
     saddle = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "saddle-search.org").read_text(encoding="utf-8")
     assert 'data-board-table="ranked" data-problem="saddle-search/pt-island"' in saddle
-    assert "rgsaddle/saddle-dimer-rotskip-tuned" in saddle
-    assert 'data-field="par2_mean">10127.1<' in saddle
+    assert 'data-field="template">rgsaddle/saddle-dimer-rotskip<' in saddle
+    assert 'data-field="template">rgsaddle/saddle-dimer-rotskip-tuned<' not in saddle
+    assert 'data-field="par2_mean">10127.1<' not in saddle
     assert "sella/pt-island-search-default" in saddle
     assert 'data-field="par2_mean">9539.88<' in saddle
     assert 'data-field="success_rate">0.0625<' in saddle

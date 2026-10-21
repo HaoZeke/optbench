@@ -13,7 +13,9 @@ from .board import (
     build_board,
     ranked_cells,
     summary_codes,
+    template_is_tuned,
 )
+from .campaign import list_templates
 from .problems import load_all
 
 STALE_CAPTIONS = (
@@ -247,6 +249,24 @@ def _require(text: str, needle: str, label: str, errors: list[str]) -> None:
         errors.append(f"{label} is missing {needle}")
 
 
+def ranked_tuned_errors(root: Path, document: dict) -> list[str]:
+    """Ranked rows whose template is tuned.
+
+    ``optbench check`` fails when a ranked template name ends in
+    ``-tuned`` or the template sets ``tuned = true``.
+    """
+    templates = {}
+    if (Path(root) / "templates").is_dir():
+        templates = {str(item.get("id") or ""): item for item in list_templates(root)}
+    errors: list[str] = []
+    for problem_id, problem in (document.get("problems") or {}).items():
+        for row in problem.get("ranked") or []:
+            template_id = str(row.get("template") or "")
+            if template_is_tuned(template_id, templates.get(template_id)):
+                errors.append(f"{problem_id} ranks tuned template {template_id}")
+    return errors
+
+
 def check_site(root: Path) -> list[str]:
     """Compare rendered v2 tables with a fresh board.
 
@@ -257,12 +277,13 @@ def check_site(root: Path) -> list[str]:
         document = build_board(root)
     except MissingAsvCommit as exc:
         return [str(exc)]
+    errors: list[str] = ranked_tuned_errors(root, document)
     problems = load_all(root / "problems") if (root / "problems").is_dir() else {}
     codes = summary_codes(document, _registry(root))
-    errors: list[str] = []
     pages = _page_texts(root)
     if not pages:
-        return ["site pages are missing"]
+        errors.append("site pages are missing")
+        return errors
     texts = {label: text for label, text in pages}
     summary_ids: dict[str, set[str]] = {}
     for label, text in pages:

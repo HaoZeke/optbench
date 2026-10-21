@@ -158,6 +158,78 @@ def test_full_harness_row_is_ranked_by_par2(tmp_path: Path):
     assert row["partial"] is False
 
 
+def test_tuned_templates_stay_off_the_ranked_table(tmp_path: Path):
+    _problem(tmp_path, starts=2, cap=10)
+    _template(tmp_path, "toy/fast")
+    _template(tmp_path, "toy/fast-tuned")
+    flagged = tmp_path / "templates" / "toy" / "flagged.toml"
+    flagged.parent.mkdir(parents=True, exist_ok=True)
+    flagged.write_text(
+        "\n".join(
+            [
+                'id = "toy/flagged"',
+                'engine = "toy"',
+                'problem = "minimization/toy"',
+                'code = "toy"',
+                'code_version = "1.0"',
+                f'commit = "{PIN}"',
+                'tuning = "default"',
+                "tuned = true",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    _registry(tmp_path)
+    _dat(tmp_path, "toy-fast", PIN, template="toy/fast")
+    _dat(tmp_path, "toy-tuned", PIN, template="toy/fast-tuned")
+    _dat(tmp_path, "toy-flagged", PIN, template="toy/flagged")
+    full = [_row(3, True, "0"), _row(4, True, "1")]
+    _starts(tmp_path, "toy-fast", full)
+    _starts(tmp_path, "toy-tuned", [_row(1, True, "0"), _row(1, True, "1")])
+    _starts(tmp_path, "toy-flagged", [_row(2, True, "0"), _row(2, True, "1")])
+
+    problem = build_board(tmp_path)["problems"]["minimization/toy"]
+    assert [row["template"] for row in problem["ranked"]] == ["toy/fast"]
+    reasons = {row["template"]: row["partial_reason"] for row in problem["partial"]}
+    assert reasons["toy/fast-tuned"] == "tuned template"
+    assert reasons["toy/flagged"] == "tuned template"
+
+
+def test_a_ranked_tuned_template_fails_the_check(tmp_path: Path):
+    from optbench.site_check import ranked_tuned_errors
+
+    _template(tmp_path, "toy/fast-tuned")
+    flagged = tmp_path / "templates" / "toy" / "flagged.toml"
+    flagged.parent.mkdir(parents=True, exist_ok=True)
+    flagged.write_text(
+        "\n".join(
+            [
+                'id = "toy/flagged"',
+                'engine = "toy"',
+                "tuned = true",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    document = {
+        "problems": {
+            "minimization/toy": {
+                "ranked": [
+                    {"template": "toy/fast-tuned"},
+                    {"template": "toy/flagged"},
+                    {"template": "toy/fast"},
+                ]
+            }
+        }
+    }
+    errors = ranked_tuned_errors(tmp_path, document)
+    assert "minimization/toy ranks tuned template toy/fast-tuned" in errors
+    assert "minimization/toy ranks tuned template toy/flagged" in errors
+    assert not any(line.endswith(" toy/fast") for line in errors)
+
+
 def test_short_grid_stays_off_the_ranked_table(tmp_path: Path):
     _problem(tmp_path, starts=4, cap=10)
     _template(tmp_path)

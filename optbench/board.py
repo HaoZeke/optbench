@@ -15,7 +15,9 @@ the ranked table. An asv result that covers one start stays off too.
 The full set is the problem file's sample, or the Morse archive when
 that file gives no sample count. It is not the largest campaign file.
 A result that sets ``ranked false`` stays off the ranked table.
-An alternate counter named by the ledger stays off the ranked table.
+A template whose name ends in ``-tuned``, or which sets ``tuned = true``,
+stays off the ranked table. An alternate counter named by the ledger
+stays off the ranked table.
 Those rows stay in the output. A campaign file and an asv track for
 the same run are one row. Only the newest full version of a template
 is ranked. Older full versions stay in the history list.
@@ -961,6 +963,29 @@ def _public(row: dict) -> dict:
     return {key: value for key, value in row.items() if not key.startswith("_")}
 
 
+def template_is_tuned(template_id: str, template: dict | None = None) -> bool:
+    """A stock template is the ranked row.
+
+    A name that ends in ``-tuned`` is a tuned profile. ``tuned = true``
+    on the template is the same thing.
+    """
+    if str(template_id).endswith("-tuned"):
+        return True
+    return bool(template) and template.get("tuned") is True
+
+
+def _drop_tuned(rows: list[dict], templates: dict) -> None:
+    """Keep tuned profiles off the ranked table."""
+    for row in rows:
+        template_id = str(row.get("template") or "")
+        if not template_is_tuned(template_id, templates.get(template_id)):
+            continue
+        if row.get("partial"):
+            continue
+        row["partial"] = True
+        row["partial_reason"] = "tuned template"
+
+
 def _one_method_row(rows: list[dict]) -> None:
     """Sella and SoftSaddle keep one ranked row per method.
 
@@ -1074,6 +1099,7 @@ def build_board(root: Path) -> dict:
         for row in group:
             _mark_partial(row, stated)
     _one_method_row(rows)
+    _drop_tuned(rows, templates)
     for row in rows:
         row["registry_match"] = _registry_match(row, registry)
     _mark_versions(rows)
