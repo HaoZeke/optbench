@@ -1,0 +1,35 @@
+id = "asebh/lj98-basin-default"
+engine = "asebh"
+code = "asebh"
+code_version = "3.29.0"
+commit = "f27c0005ae6a67ea419f996e728668865bfc1f86"
+algorithm = "BasinHopping"
+problem = "globalopt/lj98"
+task = "global-minimize"
+profile = "default"
+tuning = "default"
+reducer = "harness"
+ranked = true
+seed = 0
+note = "Constructor defaults. Temperature is 100 kB, the local minimizer is FIRE, fmax is 0.1, and the displacement is 0.1. The local iteration bound is 1000. The ASE optimizer default of 1e8 steps does not return on an overlapping trial. Seed 0 is reused for every start. The problem file caps a start at 1000000000 force calls."
+
+[method]
+name = "BasinHopping"
+
+[method.parameters]
+local_steps = 1000
+
+[potential]
+kind = "lennard-jones"
+epsilon = 1.0
+sigma = 1.0
+rc = 40.0
+smooth = false
+pbc = [false, false, false]
+
+[stop]
+max_force_calls = 1000000000
+max_hops = 10000000
+
+[input]
+archive_path = "website/globalopt/lj98/lj98_clusters.tgz"

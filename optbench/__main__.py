@@ -76,7 +76,19 @@ def run(
     from optbench.campaign import run as run_campaign
 
     loaded = load_template(root, template)
-    if loaded["engine"] == "rgsaddle-band" or (
+    if loaded["engine"] == "asebh":
+        from optbench.ase_global import run as run_asebh
+
+        summary = run_asebh(
+            root,
+            problem,
+            template,
+            output=output,
+            workers=workers,
+            limit=limit,
+            resume=resume,
+        )
+    elif loaded["engine"] == "rgsaddle-band" or (
         loaded["engine"] == "geodesic" and loaded.get("backend") == "rgsaddle"
     ):
         from optbench.rgsaddle_band import run as run_band

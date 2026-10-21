@@ -140,6 +140,7 @@ def test_pending_grid_is_every_problem_and_code():
         "rgsaddle",
         "geodesic",
         "ase",
+        "asebh",
         "sella",
         "gmin",
         "pele",

@@ -621,19 +621,21 @@ def run_template(
     problem_cap = int(stated_cap) if stated_cap not in (None, "") else None
     config = _config(template)
     raw_tolerance = convergence.get("energy_above_minimum")
-    if raw_tolerance is None and not config.get("budget_structures"):
-        raise ValueError(
-            f"{problem['id']} has no energy_above_minimum and {template['id']} has no airss.budget_structures"
-        )
     binary = find_buildcell()
     if config.get("starts"):
         label = str(config.get("start_label") or "start")
         names = [f"{label}.{index}" for index in range(1, int(config["starts"]) + 1)]
     else:
         names = _load_start_names(root, problem, geometries, work, output)
-    if raw_tolerance is None:
+    # A structure budget is the whole search. The LJ38 Wales file is not a
+    # reference for a larger cluster, and the published lj75 row stops at the budget.
+    if config.get("budget_structures"):
         reference = None
         tolerance = None
+    elif raw_tolerance is None:
+        raise ValueError(
+            f"{problem['id']} has no energy_above_minimum and {template['id']} has no airss.budget_structures"
+        )
     else:
         tolerance = float(raw_tolerance)
         coords = load_wales_coordinates()

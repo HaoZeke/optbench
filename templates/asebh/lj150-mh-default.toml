@@ -1,0 +1,35 @@
+id = "asebh/lj150-mh-default"
+engine = "asebh"
+code = "asebh"
+code_version = "3.29.0"
+commit = "f27c0005ae6a67ea419f996e728668865bfc1f86"
+algorithm = "MinimaHopping"
+problem = "globalopt/lj150"
+task = "global-minimize"
+profile = "default"
+tuning = "default"
+reducer = "harness"
+ranked = true
+seed = 0
+note = "MinimaHopping constructor defaults. The initial temperature is 1000 K, Ediff0 is 0.5, mdmin is 2, the timestep is 1 fs, and the local minimizer is QuasiNewton with fmax 0.05. The local iteration bound is 1000. Seed 0 seeds the momenta. Plain coordinate files are read as carbon, the element in the Lennard-Jones 38 con files. Step trajectories are not stored. ASE reads those files only to resume a search. The minima list is kept, and the library identity test decides a revisit. The problem file caps a start at 10000000 force calls."
+
+[method]
+name = "MinimaHopping"
+
+[method.parameters]
+local_steps = 1000
+
+[potential]
+kind = "lennard-jones"
+epsilon = 1.0
+sigma = 1.0
+rc = 40.0
+smooth = false
+pbc = [false, false, false]
+
+[stop]
+max_force_calls = 10000000
+max_hops = 10000000
+
+[input]
+archive_path = "website/globalopt/lj150/lj150_clusters.tgz"

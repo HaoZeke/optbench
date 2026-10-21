@@ -85,6 +85,16 @@ committed = "2026-10-15"
 note = "Atomic Simulation Environment 3.29.0. BFGS, LBFGS, FIRE, BFGSLineSearch, GPMin, PreconLBFGS, PreconFIRE, and PreconODE12r, plus NEB and dimer. Force calls are harness calculator evaluations."
 
 [[code]]
+id = "asebh"
+name = "asebh"
+role = "global optimization"
+repository = "https://gitlab.com/ase/ase"
+ref = "3.29.0"
+commit = "f27c0005ae6a67ea419f996e728668865bfc1f86"
+committed = "2026-06-21"
+note = "ASE 3.29.0 BasinHopping and MinimaHopping, built from commit f27c0005ae6a67ea419f996e728668865bfc1f86. The potential is free-cluster Lennard-Jones with epsilon 1, sigma 1, and cutoff 40, the same pair potential as the archived LAMMPS lj/cut runs and the ASE minimization rows. Force calls are harness calculator evaluations."
+
+[[code]]
 id = "sella"
 name = "Sella"
 role = "minimization and saddle search"
@@ -242,6 +252,14 @@ ref = "stable_30Sep2026"
 commit = "8de817dd79bfe4525d5d39246a212d833e6dee07"
 committed = "2026-09-30"
 note = "LAMMPS 30 Sep 2026, tag stable_30Sep2026. Band rows use fix neb with a climbing stage and min_style quickmin or fire. The pair style is the spec potential: lj/cut 40 with no shift, and morse 9.5 with pair_modify shift yes. Kspring is 1.0 with the default parallel neigh spring. The timestep is the unit default. Force calls are pair computes summed across replicas. The FIRE row leaves one fifth of the cap unused so a velocity-reset evaluation stays inside the cap."
+
+[[template]]
+id = "ase-globalopt/lj75-basinhopping"
+code = "ase"
+problem = "globalopt/lj75"
+profile = "default"
+task = "basin-hopping"
+ranked = true
 
 # generated ASE and Sella templates
 
