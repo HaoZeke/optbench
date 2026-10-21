@@ -55,6 +55,14 @@ ASE_DEFAULTS = {
         "alpha": 10.0,
         "stpmax": 50.0,
     },
+    "LBFGSLineSearch": {
+        "maxstep": 0.2,
+        "memory": 100,
+        "damping": 1.0,
+        "alpha": 70.0,
+        "c1": 0.23,
+        "c2": 0.46,
+    },
     "GPMin": {"update_prior_strategy": "maximum", "update_hyperparams": False},
     "PreconLBFGS": {
         "maxstep": 0.04,
@@ -635,6 +643,14 @@ def _cached_l2(calc, atoms=None) -> float | None:
     return float(np.linalg.norm(np.asarray(forces, dtype=float)))
 
 
+def _lbfgs_line_search():
+    try:
+        from ase.optimize import LBFGSLineSearch
+    except ImportError:
+        from ase.optimize.lbfgs import LBFGSLineSearch
+    return LBFGSLineSearch
+
+
 def _build_optimizer(spec: dict, target):
     from ase.optimize import BFGS, BFGSLineSearch, FIRE, GPMin, LBFGS
     from ase.optimize.precon import Exp, PreconFIRE, PreconLBFGS, PreconODE12r
@@ -644,6 +660,7 @@ def _build_optimizer(spec: dict, target):
         "LBFGS": LBFGS,
         "FIRE": FIRE,
         "BFGSLineSearch": BFGSLineSearch,
+        "LBFGSLineSearch": _lbfgs_line_search(),
         "GPMin": GPMin,
         "PreconLBFGS": PreconLBFGS,
         "PreconFIRE": PreconFIRE,
