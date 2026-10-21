@@ -1,0 +1,5022 @@
+{
+  "schema": "optbench.result/v2",
+  "status": "measured",
+  "problem": "globalopt/lj75",
+  "scoring": "par2-wilson-bootstrap",
+  "par_factor": 2,
+  "bootstrap_resamples": 2000,
+  "bootstrap_seed": 20261015,
+  "note": "The problem energy bound is the success rule. The harness counter is the call count.",
+  "runs": [
+    {
+      "problem": "globalopt/lj75",
+      "entry": "anneal-0.11.1-lj75-recommended",
+      "code": "anneal",
+      "code_version": "0.11.1 (recommended)",
+      "commit": "db22b99d09a0cdf1d4f004136f9ecb04104fcb39",
+      "algorithm": "cluster search",
+      "template": "anneal/lj75-recommended",
+      "tuning": "default",
+      "cap": 1000000,
+      "present_source": true,
+      "provenance": {
+        "code": "anneal",
+        "code_version": "0.11.1 (recommended)",
+        "commit": "db22b99d09a0cdf1d4f004136f9ecb04104fcb39",
+        "parameters": {
+          "preset": "recommended",
+          "cap": 1000000,
+          "reference_energy": -397.492331,
+          "tolerance": 0.001,
+          "seed_base": 20261018,
+          "potential": "lennard_jones",
+          "epsilon": 1.0,
+          "sigma": 1.0,
+          "cutoff": 40.0,
+          "centered": true,
+          "rgmin_version": "0.2.0",
+          "rgmin_commit": "20832fd169932a1cd0d47ac84dc77fa9b435f940",
+          "budget_factor": 3
+        },
+        "machine": {
+          "node": "cursor",
+          "system": "Linux",
+          "machine": "x86_64",
+          "python": "3.12.3"
+        }
+      },
+      "parameters": {
+        "preset": "recommended",
+        "cap": 1000000,
+        "reference_energy": -397.492331,
+        "tolerance": 0.001,
+        "seed_base": 20261018,
+        "potential": "lennard_jones",
+        "epsilon": 1.0,
+        "sigma": 1.0,
+        "cutoff": 40.0,
+        "centered": true,
+        "rgmin_version": "0.2.0",
+        "rgmin_commit": "20832fd169932a1cd0d47ac84dc77fa9b435f940",
+        "budget_factor": 3
+      },
+      "metrics": {
+        "n": 200,
+        "mean": 1817681.685,
+        "median": 2000000.0,
+        "median_low": 2000000.0,
+        "median_high": 2000000.0,
+        "q25": 2000000.0,
+        "q75": 2000000.0,
+        "iqr": 0.0,
+        "iqr_low": 0.0,
+        "iqr_high": 0.0,
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "scoring": "par2-wilson-bootstrap",
+        "successes": 25,
+        "nfailed": 175,
+        "success_rate": 0.125,
+        "wilson_low": 0.08611974475712644,
+        "wilson_high": 0.17801425002582347,
+        "par_factor": 2,
+        "cap": 1000000,
+        "par_applied": true,
+        "par2_mean": 1817681.685,
+        "includes_failures": true,
+        "success_only_mean": 541453.48,
+        "n_crash": 0,
+        "n_divergence": 0,
+        "n_cap": 175,
+        "n_wrong_stationary": 0
+      },
+      "starts": [
+        {
+          "start": "coords.1",
+          "seed": 20261018,
+          "force_calls": 427800,
+          "success": true,
+          "failure": null,
+          "reasons": [],
+          "energy": -397.4913822391878,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 25863,
+            "quench_calls": 427797,
+            "mean_quench_calls": 16.540888528012992,
+            "max_quench_calls": 264,
+            "improvements": 44,
+            "probe_calls": 3,
+            "obj_calls": 428151,
+            "grad_calls": 442638
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.2",
+          "seed": 20261019,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60939,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.40980324586882,
+            "max_quench_calls": 257,
+            "improvements": 27,
+            "probe_calls": 3,
+            "obj_calls": 1001242,
+            "grad_calls": 1035247
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.3",
+          "seed": 20261020,
+          "force_calls": 478963,
+          "success": true,
+          "failure": null,
+          "reasons": [],
+          "energy": -397.4914855912542,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 29595,
+            "quench_calls": 478960,
+            "mean_quench_calls": 16.183814833586755,
+            "max_quench_calls": 274,
+            "improvements": 28,
+            "probe_calls": 3,
+            "obj_calls": 479248,
+            "grad_calls": 495553
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.4",
+          "seed": 20261021,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60206,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.6095904062718,
+            "max_quench_calls": 269,
+            "improvements": 49,
+            "probe_calls": 3,
+            "obj_calls": 1001301,
+            "grad_calls": 1035208
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.5",
+          "seed": 20261022,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.4132478034327,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 58385,
+            "quench_calls": 999997,
+            "mean_quench_calls": 17.127635522822644,
+            "max_quench_calls": 265,
+            "improvements": 48,
+            "probe_calls": 3,
+            "obj_calls": 1000978,
+            "grad_calls": 1034780
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.6",
+          "seed": 20261023,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 57865,
+            "quench_calls": 999997,
+            "mean_quench_calls": 17.28155188801521,
+            "max_quench_calls": 253,
+            "improvements": 37,
+            "probe_calls": 3,
+            "obj_calls": 1002123,
+            "grad_calls": 1035925
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.7",
+          "seed": 20261024,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517522,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 63910,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.64695665780003,
+            "max_quench_calls": 235,
+            "improvements": 27,
+            "probe_calls": 3,
+            "obj_calls": 1000226,
+            "grad_calls": 1034599
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.8",
+          "seed": 20261025,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.18396221178597,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 58398,
+            "quench_calls": 999997,
+            "mean_quench_calls": 17.123822733655263,
+            "max_quench_calls": 258,
+            "improvements": 25,
+            "probe_calls": 3,
+            "obj_calls": 1001739,
+            "grad_calls": 1035557
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.9",
+          "seed": 20261026,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517522,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 62301,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.051058570488436,
+            "max_quench_calls": 291,
+            "improvements": 23,
+            "probe_calls": 3,
+            "obj_calls": 1000238,
+            "grad_calls": 1034615
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.10",
+          "seed": 20261027,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 62467,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.00840443754302,
+            "max_quench_calls": 267,
+            "improvements": 39,
+            "probe_calls": 3,
+            "obj_calls": 1000879,
+            "grad_calls": 1034882
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.11",
+          "seed": 20261028,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.28224882557123,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 62034,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.120143792114003,
+            "max_quench_calls": 251,
+            "improvements": 30,
+            "probe_calls": 3,
+            "obj_calls": 1001014,
+            "grad_calls": 1035043
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.12",
+          "seed": 20261029,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517522,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 64244,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.565609239773364,
+            "max_quench_calls": 244,
+            "improvements": 38,
+            "probe_calls": 3,
+            "obj_calls": 1000358,
+            "grad_calls": 1034806
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.13",
+          "seed": 20261030,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 59465,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.816564365593205,
+            "max_quench_calls": 272,
+            "improvements": 30,
+            "probe_calls": 3,
+            "obj_calls": 1001810,
+            "grad_calls": 1035686
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.14",
+          "seed": 20261031,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 58954,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.962326559690606,
+            "max_quench_calls": 234,
+            "improvements": 32,
+            "probe_calls": 3,
+            "obj_calls": 1002026,
+            "grad_calls": 1035734
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.15",
+          "seed": 20261032,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517522,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 63388,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.775809301445069,
+            "max_quench_calls": 209,
+            "improvements": 20,
+            "probe_calls": 3,
+            "obj_calls": 1000497,
+            "grad_calls": 1034905
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.16",
+          "seed": 20261033,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60990,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.396081324807344,
+            "max_quench_calls": 298,
+            "improvements": 24,
+            "probe_calls": 3,
+            "obj_calls": 1000827,
+            "grad_calls": 1034992
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.17",
+          "seed": 20261034,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -395.0717609758349,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 64093,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.602281060334201,
+            "max_quench_calls": 254,
+            "improvements": 24,
+            "probe_calls": 3,
+            "obj_calls": 1000303,
+            "grad_calls": 1034611
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.18",
+          "seed": 20261035,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517521,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 63163,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.832006079508574,
+            "max_quench_calls": 215,
+            "improvements": 17,
+            "probe_calls": 3,
+            "obj_calls": 1000488,
+            "grad_calls": 1034908
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.19",
+          "seed": 20261036,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -393.42840777315143,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60331,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.57517694054466,
+            "max_quench_calls": 210,
+            "improvements": 30,
+            "probe_calls": 3,
+            "obj_calls": 1001229,
+            "grad_calls": 1035372
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.20",
+          "seed": 20261037,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.56015435175215,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 62241,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.06653170739545,
+            "max_quench_calls": 297,
+            "improvements": 34,
+            "probe_calls": 3,
+            "obj_calls": 1000505,
+            "grad_calls": 1034829
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.21",
+          "seed": 20261038,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 59659,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.761880018102886,
+            "max_quench_calls": 210,
+            "improvements": 33,
+            "probe_calls": 3,
+            "obj_calls": 1001678,
+            "grad_calls": 1035558
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.22",
+          "seed": 20261039,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60849,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.434074512317377,
+            "max_quench_calls": 247,
+            "improvements": 23,
+            "probe_calls": 3,
+            "obj_calls": 1001461,
+            "grad_calls": 1035523
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.23",
+          "seed": 20261040,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 59510,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.80384809275752,
+            "max_quench_calls": 272,
+            "improvements": 39,
+            "probe_calls": 3,
+            "obj_calls": 1001388,
+            "grad_calls": 1035404
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.24",
+          "seed": 20261041,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.63726818191145,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61213,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.336350121706175,
+            "max_quench_calls": 359,
+            "improvements": 27,
+            "probe_calls": 3,
+            "obj_calls": 1000531,
+            "grad_calls": 1034747
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.25",
+          "seed": 20261042,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517522,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 59189,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.894980486238996,
+            "max_quench_calls": 333,
+            "improvements": 27,
+            "probe_calls": 3,
+            "obj_calls": 1000426,
+            "grad_calls": 1034799
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.26",
+          "seed": 20261043,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.6286501420913,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 59330,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.8548289229732,
+            "max_quench_calls": 255,
+            "improvements": 25,
+            "probe_calls": 3,
+            "obj_calls": 1001484,
+            "grad_calls": 1035447
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.27",
+          "seed": 20261044,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.28224882557123,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 64529,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.496861876055727,
+            "max_quench_calls": 239,
+            "improvements": 13,
+            "probe_calls": 3,
+            "obj_calls": 1000826,
+            "grad_calls": 1034961
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.28",
+          "seed": 20261045,
+          "force_calls": 504207,
+          "success": true,
+          "failure": null,
+          "reasons": [],
+          "energy": -397.49186770290765,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 29466,
+            "quench_calls": 504204,
+            "mean_quench_calls": 17.1113826104663,
+            "max_quench_calls": 242,
+            "improvements": 27,
+            "probe_calls": 3,
+            "obj_calls": 505126,
+            "grad_calls": 522278
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.29",
+          "seed": 20261046,
+          "force_calls": 35487,
+          "success": true,
+          "failure": null,
+          "reasons": [],
+          "energy": -397.4915613071826,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 1566,
+            "quench_calls": 35484,
+            "mean_quench_calls": 22.659003831417625,
+            "max_quench_calls": 247,
+            "improvements": 24,
+            "probe_calls": 3,
+            "obj_calls": 35608,
+            "grad_calls": 36695
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.30",
+          "seed": 20261047,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.28224882557123,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 62023,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.123002757041743,
+            "max_quench_calls": 248,
+            "improvements": 42,
+            "probe_calls": 3,
+            "obj_calls": 1000670,
+            "grad_calls": 1034873
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.31",
+          "seed": 20261048,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.47796178136525,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 63192,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.824740473477656,
+            "max_quench_calls": 264,
+            "improvements": 28,
+            "probe_calls": 3,
+            "obj_calls": 1000366,
+            "grad_calls": 1034615
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.32",
+          "seed": 20261049,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60097,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.63971579280164,
+            "max_quench_calls": 262,
+            "improvements": 44,
+            "probe_calls": 3,
+            "obj_calls": 1001420,
+            "grad_calls": 1035183
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.33",
+          "seed": 20261050,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517522,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61231,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.33154774542307,
+            "max_quench_calls": 293,
+            "improvements": 37,
+            "probe_calls": 3,
+            "obj_calls": 1000777,
+            "grad_calls": 1034973
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.34",
+          "seed": 20261051,
+          "force_calls": 857695,
+          "success": true,
+          "failure": null,
+          "reasons": [],
+          "energy": -397.49151373627166,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 51127,
+            "quench_calls": 857692,
+            "mean_quench_calls": 16.775715375437635,
+            "max_quench_calls": 282,
+            "improvements": 33,
+            "probe_calls": 3,
+            "obj_calls": 858946,
+            "grad_calls": 888075
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.35",
+          "seed": 20261052,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.28224882557123,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60564,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.511409418136186,
+            "max_quench_calls": 291,
+            "improvements": 28,
+            "probe_calls": 3,
+            "obj_calls": 1001096,
+            "grad_calls": 1035053
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.36",
+          "seed": 20261053,
+          "force_calls": 907133,
+          "success": true,
+          "failure": null,
+          "reasons": [],
+          "energy": -397.4913805796184,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 54881,
+            "quench_calls": 907130,
+            "mean_quench_calls": 16.529035549643776,
+            "max_quench_calls": 243,
+            "improvements": 32,
+            "probe_calls": 3,
+            "obj_calls": 907808,
+            "grad_calls": 938727
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.37",
+          "seed": 20261054,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61260,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.323816519751876,
+            "max_quench_calls": 263,
+            "improvements": 20,
+            "probe_calls": 3,
+            "obj_calls": 1000917,
+            "grad_calls": 1035068
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.38",
+          "seed": 20261055,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -393.63990381145436,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 63927,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.642795688832575,
+            "max_quench_calls": 245,
+            "improvements": 14,
+            "probe_calls": 3,
+            "obj_calls": 1000217,
+            "grad_calls": 1034552
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.39",
+          "seed": 20261056,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60204,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.61014218324364,
+            "max_quench_calls": 234,
+            "improvements": 35,
+            "probe_calls": 3,
+            "obj_calls": 1001606,
+            "grad_calls": 1035553
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.40",
+          "seed": 20261057,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517522,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61240,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.329147615937295,
+            "max_quench_calls": 210,
+            "improvements": 23,
+            "probe_calls": 3,
+            "obj_calls": 1000333,
+            "grad_calls": 1034757
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.41",
+          "seed": 20261058,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517522,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61346,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.300932416131452,
+            "max_quench_calls": 272,
+            "improvements": 33,
+            "probe_calls": 3,
+            "obj_calls": 1000896,
+            "grad_calls": 1035111
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.42",
+          "seed": 20261059,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -393.6399038114544,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60873,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.42759515713042,
+            "max_quench_calls": 241,
+            "improvements": 20,
+            "probe_calls": 3,
+            "obj_calls": 1001101,
+            "grad_calls": 1035226
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.43",
+          "seed": 20261060,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.4779617813652,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61444,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.2749332725734,
+            "max_quench_calls": 245,
+            "improvements": 34,
+            "probe_calls": 3,
+            "obj_calls": 1000669,
+            "grad_calls": 1034917
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.44",
+          "seed": 20261061,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 58752,
+            "quench_calls": 999997,
+            "mean_quench_calls": 17.02064610566449,
+            "max_quench_calls": 255,
+            "improvements": 44,
+            "probe_calls": 3,
+            "obj_calls": 1001891,
+            "grad_calls": 1035462
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.45",
+          "seed": 20261062,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.63726818191157,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60502,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.528329641995306,
+            "max_quench_calls": 243,
+            "improvements": 36,
+            "probe_calls": 3,
+            "obj_calls": 1000995,
+            "grad_calls": 1035054
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.46",
+          "seed": 20261063,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -392.65946859967346,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 56431,
+            "quench_calls": 999997,
+            "mean_quench_calls": 17.720703159610853,
+            "max_quench_calls": 269,
+            "improvements": 38,
+            "probe_calls": 3,
+            "obj_calls": 1002024,
+            "grad_calls": 1035814
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.47",
+          "seed": 20261064,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60360,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.567213386348577,
+            "max_quench_calls": 308,
+            "improvements": 28,
+            "probe_calls": 3,
+            "obj_calls": 1001376,
+            "grad_calls": 1035449
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.48",
+          "seed": 20261065,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60765,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.456792561507445,
+            "max_quench_calls": 287,
+            "improvements": 31,
+            "probe_calls": 3,
+            "obj_calls": 1001260,
+            "grad_calls": 1035182
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.49",
+          "seed": 20261066,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517522,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 62646,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.962663218721067,
+            "max_quench_calls": 248,
+            "improvements": 48,
+            "probe_calls": 3,
+            "obj_calls": 1000602,
+            "grad_calls": 1034750
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.50",
+          "seed": 20261067,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -393.6399038114545,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60374,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.563371650048033,
+            "max_quench_calls": 248,
+            "improvements": 47,
+            "probe_calls": 3,
+            "obj_calls": 1000900,
+            "grad_calls": 1035059
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.51",
+          "seed": 20261068,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60969,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.401728747396216,
+            "max_quench_calls": 243,
+            "improvements": 20,
+            "probe_calls": 3,
+            "obj_calls": 1001431,
+            "grad_calls": 1035478
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.52",
+          "seed": 20261069,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517522,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60875,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.42705544147844,
+            "max_quench_calls": 242,
+            "improvements": 24,
+            "probe_calls": 3,
+            "obj_calls": 1000589,
+            "grad_calls": 1034969
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.53",
+          "seed": 20261070,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61240,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.329147615937295,
+            "max_quench_calls": 241,
+            "improvements": 17,
+            "probe_calls": 3,
+            "obj_calls": 1001099,
+            "grad_calls": 1035305
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.54",
+          "seed": 20261071,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.56015435175215,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61613,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.2302923084414,
+            "max_quench_calls": 257,
+            "improvements": 32,
+            "probe_calls": 3,
+            "obj_calls": 1000735,
+            "grad_calls": 1034926
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.55",
+          "seed": 20261072,
+          "force_calls": 455518,
+          "success": true,
+          "failure": null,
+          "reasons": [],
+          "energy": -397.49158065479486,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 26174,
+            "quench_calls": 455515,
+            "mean_quench_calls": 17.403339191564147,
+            "max_quench_calls": 249,
+            "improvements": 34,
+            "probe_calls": 3,
+            "obj_calls": 456100,
+            "grad_calls": 471488
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.56",
+          "seed": 20261073,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 59109,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.917846690013366,
+            "max_quench_calls": 271,
+            "improvements": 28,
+            "probe_calls": 3,
+            "obj_calls": 1001720,
+            "grad_calls": 1035674
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.57",
+          "seed": 20261074,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.28224882557123,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 63100,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.847812995245642,
+            "max_quench_calls": 389,
+            "improvements": 18,
+            "probe_calls": 3,
+            "obj_calls": 1000476,
+            "grad_calls": 1034909
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.58",
+          "seed": 20261075,
+          "force_calls": 307754,
+          "success": true,
+          "failure": null,
+          "reasons": [],
+          "energy": -397.49159206891585,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 17643,
+            "quench_calls": 307751,
+            "mean_quench_calls": 17.443235277447148,
+            "max_quench_calls": 227,
+            "improvements": 26,
+            "probe_calls": 3,
+            "obj_calls": 308150,
+            "grad_calls": 318621
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.59",
+          "seed": 20261076,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 59774,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.72963161240673,
+            "max_quench_calls": 234,
+            "improvements": 26,
+            "probe_calls": 3,
+            "obj_calls": 1001483,
+            "grad_calls": 1035525
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.60",
+          "seed": 20261077,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60124,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.632243363714988,
+            "max_quench_calls": 265,
+            "improvements": 24,
+            "probe_calls": 3,
+            "obj_calls": 1001480,
+            "grad_calls": 1035419
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.61",
+          "seed": 20261078,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60893,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.42219959601268,
+            "max_quench_calls": 212,
+            "improvements": 24,
+            "probe_calls": 3,
+            "obj_calls": 1001271,
+            "grad_calls": 1035268
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.62",
+          "seed": 20261079,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61748,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.194807929001747,
+            "max_quench_calls": 261,
+            "improvements": 30,
+            "probe_calls": 3,
+            "obj_calls": 1000929,
+            "grad_calls": 1035004
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.63",
+          "seed": 20261080,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 59052,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.934176657860867,
+            "max_quench_calls": 248,
+            "improvements": 41,
+            "probe_calls": 3,
+            "obj_calls": 1001483,
+            "grad_calls": 1035442
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.64",
+          "seed": 20261081,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61825,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.174638091386978,
+            "max_quench_calls": 267,
+            "improvements": 16,
+            "probe_calls": 3,
+            "obj_calls": 1000695,
+            "grad_calls": 1034957
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.65",
+          "seed": 20261082,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517521,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 63250,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.810229249011858,
+            "max_quench_calls": 241,
+            "improvements": 20,
+            "probe_calls": 3,
+            "obj_calls": 1000439,
+            "grad_calls": 1034837
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.66",
+          "seed": 20261083,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60231,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.6026962859657,
+            "max_quench_calls": 286,
+            "improvements": 32,
+            "probe_calls": 3,
+            "obj_calls": 1001274,
+            "grad_calls": 1035285
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.67",
+          "seed": 20261084,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.28224882557123,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 63379,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.778049511667902,
+            "max_quench_calls": 291,
+            "improvements": 20,
+            "probe_calls": 3,
+            "obj_calls": 1000385,
+            "grad_calls": 1034702
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.68",
+          "seed": 20261085,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60022,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.660507813801605,
+            "max_quench_calls": 237,
+            "improvements": 32,
+            "probe_calls": 3,
+            "obj_calls": 1001702,
+            "grad_calls": 1035686
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.69",
+          "seed": 20261086,
+          "force_calls": 939404,
+          "success": true,
+          "failure": null,
+          "reasons": [],
+          "energy": -397.4915753732165,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 55106,
+            "quench_calls": 939401,
+            "mean_quench_calls": 17.047163648241572,
+            "max_quench_calls": 263,
+            "improvements": 36,
+            "probe_calls": 3,
+            "obj_calls": 941039,
+            "grad_calls": 972780
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.70",
+          "seed": 20261087,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255712,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61780,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.18641955325348,
+            "max_quench_calls": 238,
+            "improvements": 30,
+            "probe_calls": 3,
+            "obj_calls": 1000613,
+            "grad_calls": 1034920
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.71",
+          "seed": 20261088,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -393.63990381145436,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61887,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.158433919886246,
+            "max_quench_calls": 211,
+            "improvements": 19,
+            "probe_calls": 3,
+            "obj_calls": 1000692,
+            "grad_calls": 1034904
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.72",
+          "seed": 20261089,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61577,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.239781087094208,
+            "max_quench_calls": 262,
+            "improvements": 37,
+            "probe_calls": 3,
+            "obj_calls": 1000917,
+            "grad_calls": 1034948
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.73",
+          "seed": 20261090,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 59469,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.815433250937463,
+            "max_quench_calls": 253,
+            "improvements": 47,
+            "probe_calls": 3,
+            "obj_calls": 1001505,
+            "grad_calls": 1035430
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.74",
+          "seed": 20261091,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60462,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.539264331315536,
+            "max_quench_calls": 325,
+            "improvements": 33,
+            "probe_calls": 3,
+            "obj_calls": 1001537,
+            "grad_calls": 1035309
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.75",
+          "seed": 20261092,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 59217,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.88699191110661,
+            "max_quench_calls": 272,
+            "improvements": 35,
+            "probe_calls": 3,
+            "obj_calls": 1001562,
+            "grad_calls": 1035208
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.76",
+          "seed": 20261093,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60110,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.63611711861587,
+            "max_quench_calls": 302,
+            "improvements": 24,
+            "probe_calls": 3,
+            "obj_calls": 1001572,
+            "grad_calls": 1035352
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.77",
+          "seed": 20261094,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 63042,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.862393325084865,
+            "max_quench_calls": 242,
+            "improvements": 25,
+            "probe_calls": 3,
+            "obj_calls": 1000856,
+            "grad_calls": 1035123
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.78",
+          "seed": 20261095,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -395.4551554125359,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 63480,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.752945809703844,
+            "max_quench_calls": 287,
+            "improvements": 20,
+            "probe_calls": 3,
+            "obj_calls": 1000177,
+            "grad_calls": 1034288
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.79",
+          "seed": 20261096,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61314,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.309439932152525,
+            "max_quench_calls": 238,
+            "improvements": 32,
+            "probe_calls": 3,
+            "obj_calls": 1001412,
+            "grad_calls": 1035485
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.80",
+          "seed": 20261097,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60167,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.620356673924245,
+            "max_quench_calls": 294,
+            "improvements": 21,
+            "probe_calls": 3,
+            "obj_calls": 1001456,
+            "grad_calls": 1035214
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.81",
+          "seed": 20261098,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60129,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.63086031698515,
+            "max_quench_calls": 266,
+            "improvements": 29,
+            "probe_calls": 3,
+            "obj_calls": 1001568,
+            "grad_calls": 1035450
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.82",
+          "seed": 20261099,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517521,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 59429,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.82675124939003,
+            "max_quench_calls": 300,
+            "improvements": 46,
+            "probe_calls": 3,
+            "obj_calls": 1000710,
+            "grad_calls": 1034860
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.83",
+          "seed": 20261100,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60363,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.56639000712357,
+            "max_quench_calls": 244,
+            "improvements": 35,
+            "probe_calls": 3,
+            "obj_calls": 1001570,
+            "grad_calls": 1035487
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.84",
+          "seed": 20261101,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 58971,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.957436706177614,
+            "max_quench_calls": 247,
+            "improvements": 38,
+            "probe_calls": 3,
+            "obj_calls": 1001708,
+            "grad_calls": 1035699
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.85",
+          "seed": 20261102,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61031,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.385066605495567,
+            "max_quench_calls": 228,
+            "improvements": 27,
+            "probe_calls": 3,
+            "obj_calls": 1001383,
+            "grad_calls": 1035378
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.86",
+          "seed": 20261103,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60082,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.643870044272827,
+            "max_quench_calls": 300,
+            "improvements": 20,
+            "probe_calls": 3,
+            "obj_calls": 1001716,
+            "grad_calls": 1035686
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.87",
+          "seed": 20261104,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.28224882557123,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61674,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.214239387748485,
+            "max_quench_calls": 278,
+            "improvements": 54,
+            "probe_calls": 3,
+            "obj_calls": 1001251,
+            "grad_calls": 1035438
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.88",
+          "seed": 20261105,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60033,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.65745506638016,
+            "max_quench_calls": 269,
+            "improvements": 19,
+            "probe_calls": 3,
+            "obj_calls": 1001065,
+            "grad_calls": 1035114
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.89",
+          "seed": 20261106,
+          "force_calls": 516460,
+          "success": true,
+          "failure": null,
+          "reasons": [],
+          "energy": -397.49134822750773,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 30743,
+            "quench_calls": 516457,
+            "mean_quench_calls": 16.7991737956608,
+            "max_quench_calls": 267,
+            "improvements": 30,
+            "probe_calls": 3,
+            "obj_calls": 516722,
+            "grad_calls": 534327
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.90",
+          "seed": 20261107,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517522,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 63433,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.764617785695142,
+            "max_quench_calls": 284,
+            "improvements": 27,
+            "probe_calls": 3,
+            "obj_calls": 1000434,
+            "grad_calls": 1034625
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.91",
+          "seed": 20261108,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61999,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.12924402006484,
+            "max_quench_calls": 297,
+            "improvements": 25,
+            "probe_calls": 3,
+            "obj_calls": 1001024,
+            "grad_calls": 1035118
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.92",
+          "seed": 20261109,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517522,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61102,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.36602729861543,
+            "max_quench_calls": 231,
+            "improvements": 22,
+            "probe_calls": 3,
+            "obj_calls": 1000661,
+            "grad_calls": 1035097
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.93",
+          "seed": 20261110,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 57378,
+            "quench_calls": 999997,
+            "mean_quench_calls": 17.428230332183066,
+            "max_quench_calls": 280,
+            "improvements": 21,
+            "probe_calls": 3,
+            "obj_calls": 1001777,
+            "grad_calls": 1035741
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.94",
+          "seed": 20261111,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 58145,
+            "quench_calls": 999997,
+            "mean_quench_calls": 17.19833175681486,
+            "max_quench_calls": 259,
+            "improvements": 33,
+            "probe_calls": 3,
+            "obj_calls": 1001881,
+            "grad_calls": 1035701
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.95",
+          "seed": 20261112,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.2182875132972,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61779,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.186681558458375,
+            "max_quench_calls": 279,
+            "improvements": 37,
+            "probe_calls": 3,
+            "obj_calls": 1000749,
+            "grad_calls": 1034912
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.96",
+          "seed": 20261113,
+          "force_calls": 740478,
+          "success": true,
+          "failure": null,
+          "reasons": [],
+          "energy": -397.4917650147909,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 44350,
+            "quench_calls": 740475,
+            "mean_quench_calls": 16.696166854565952,
+            "max_quench_calls": 266,
+            "improvements": 44,
+            "probe_calls": 3,
+            "obj_calls": 741301,
+            "grad_calls": 766423
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.97",
+          "seed": 20261114,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60478,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.534888719865076,
+            "max_quench_calls": 272,
+            "improvements": 26,
+            "probe_calls": 3,
+            "obj_calls": 1001439,
+            "grad_calls": 1035224
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.98",
+          "seed": 20261115,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60950,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.40684167350287,
+            "max_quench_calls": 267,
+            "improvements": 32,
+            "probe_calls": 3,
+            "obj_calls": 1001405,
+            "grad_calls": 1035370
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.99",
+          "seed": 20261116,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61023,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.38721465676876,
+            "max_quench_calls": 323,
+            "improvements": 33,
+            "probe_calls": 3,
+            "obj_calls": 1001499,
+            "grad_calls": 1035516
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.100",
+          "seed": 20261117,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 57800,
+            "quench_calls": 999997,
+            "mean_quench_calls": 17.30098615916955,
+            "max_quench_calls": 258,
+            "improvements": 24,
+            "probe_calls": 3,
+            "obj_calls": 1001941,
+            "grad_calls": 1035915
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.101",
+          "seed": 20261118,
+          "force_calls": 224172,
+          "success": true,
+          "failure": null,
+          "reasons": [],
+          "energy": -397.4915577374601,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 13742,
+            "quench_calls": 224169,
+            "mean_quench_calls": 16.312691020229952,
+            "max_quench_calls": 286,
+            "improvements": 30,
+            "probe_calls": 3,
+            "obj_calls": 224485,
+            "grad_calls": 231999
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.102",
+          "seed": 20261119,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 59008,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.946803823210413,
+            "max_quench_calls": 252,
+            "improvements": 30,
+            "probe_calls": 3,
+            "obj_calls": 1001587,
+            "grad_calls": 1035475
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.103",
+          "seed": 20261120,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517522,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 62634,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.965721493118753,
+            "max_quench_calls": 289,
+            "improvements": 42,
+            "probe_calls": 3,
+            "obj_calls": 1000571,
+            "grad_calls": 1034843
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.104",
+          "seed": 20261121,
+          "force_calls": 646052,
+          "success": true,
+          "failure": null,
+          "reasons": [],
+          "energy": -397.49150912499636,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 38642,
+            "quench_calls": 646049,
+            "mean_quench_calls": 16.718829253144246,
+            "max_quench_calls": 271,
+            "improvements": 25,
+            "probe_calls": 3,
+            "obj_calls": 646610,
+            "grad_calls": 668624
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.105",
+          "seed": 20261122,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.28224882557123,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 58828,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.998657102060243,
+            "max_quench_calls": 280,
+            "improvements": 40,
+            "probe_calls": 3,
+            "obj_calls": 1001368,
+            "grad_calls": 1035219
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.106",
+          "seed": 20261123,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.47796178136525,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 63060,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.857865524896923,
+            "max_quench_calls": 244,
+            "improvements": 20,
+            "probe_calls": 3,
+            "obj_calls": 1000376,
+            "grad_calls": 1034748
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.107",
+          "seed": 20261124,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 57739,
+            "quench_calls": 999997,
+            "mean_quench_calls": 17.319264275446404,
+            "max_quench_calls": 290,
+            "improvements": 34,
+            "probe_calls": 3,
+            "obj_calls": 1001935,
+            "grad_calls": 1035209
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.108",
+          "seed": 20261125,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -393.23856801255045,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 62108,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.100937077349133,
+            "max_quench_calls": 269,
+            "improvements": 44,
+            "probe_calls": 3,
+            "obj_calls": 1000840,
+            "grad_calls": 1035055
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.109",
+          "seed": 20261126,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.6286501420913,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 58513,
+            "quench_calls": 999997,
+            "mean_quench_calls": 17.0901679968554,
+            "max_quench_calls": 268,
+            "improvements": 25,
+            "probe_calls": 3,
+            "obj_calls": 1001395,
+            "grad_calls": 1035511
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.110",
+          "seed": 20261127,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -395.3533674346286,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 62798,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.924026242873976,
+            "max_quench_calls": 253,
+            "improvements": 13,
+            "probe_calls": 3,
+            "obj_calls": 1000205,
+            "grad_calls": 1034587
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.111",
+          "seed": 20261128,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.21828751329724,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61141,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.355587903370896,
+            "max_quench_calls": 270,
+            "improvements": 34,
+            "probe_calls": 3,
+            "obj_calls": 1000861,
+            "grad_calls": 1034987
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.112",
+          "seed": 20261129,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.28224882557123,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60074,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.646086493324898,
+            "max_quench_calls": 241,
+            "improvements": 29,
+            "probe_calls": 3,
+            "obj_calls": 1001362,
+            "grad_calls": 1035519
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.113",
+          "seed": 20261130,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517521,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 63370,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.780290358213666,
+            "max_quench_calls": 262,
+            "improvements": 21,
+            "probe_calls": 3,
+            "obj_calls": 1000431,
+            "grad_calls": 1034844
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.114",
+          "seed": 20261131,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.21828751329724,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 58063,
+            "quench_calls": 999997,
+            "mean_quench_calls": 17.22262025730672,
+            "max_quench_calls": 240,
+            "improvements": 29,
+            "probe_calls": 3,
+            "obj_calls": 1001458,
+            "grad_calls": 1035415
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.115",
+          "seed": 20261132,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.2182875132971,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 62256,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.062660627088153,
+            "max_quench_calls": 241,
+            "improvements": 25,
+            "probe_calls": 3,
+            "obj_calls": 1000447,
+            "grad_calls": 1034679
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.116",
+          "seed": 20261133,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60301,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.58342316047827,
+            "max_quench_calls": 342,
+            "improvements": 24,
+            "probe_calls": 3,
+            "obj_calls": 1001830,
+            "grad_calls": 1035667
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.117",
+          "seed": 20261134,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61914,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.1513874083406,
+            "max_quench_calls": 296,
+            "improvements": 23,
+            "probe_calls": 3,
+            "obj_calls": 1001302,
+            "grad_calls": 1035412
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.118",
+          "seed": 20261135,
+          "force_calls": 666536,
+          "success": true,
+          "failure": null,
+          "reasons": [],
+          "energy": -397.49138724446817,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 39962,
+            "quench_calls": 666533,
+            "mean_quench_calls": 16.679170211701116,
+            "max_quench_calls": 279,
+            "improvements": 42,
+            "probe_calls": 3,
+            "obj_calls": 667394,
+            "grad_calls": 689912
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.119",
+          "seed": 20261136,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 59558,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.790305248665167,
+            "max_quench_calls": 304,
+            "improvements": 14,
+            "probe_calls": 3,
+            "obj_calls": 1001782,
+            "grad_calls": 1035712
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.120",
+          "seed": 20261137,
+          "force_calls": 267290,
+          "success": true,
+          "failure": null,
+          "reasons": [],
+          "energy": -397.49185084563976,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 15008,
+            "quench_calls": 267287,
+            "mean_quench_calls": 17.80963486140725,
+            "max_quench_calls": 238,
+            "improvements": 30,
+            "probe_calls": 3,
+            "obj_calls": 267724,
+            "grad_calls": 276686
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.121",
+          "seed": 20261138,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 58875,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.985087048832273,
+            "max_quench_calls": 371,
+            "improvements": 43,
+            "probe_calls": 3,
+            "obj_calls": 1001977,
+            "grad_calls": 1035783
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.122",
+          "seed": 20261139,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 58927,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.970098596568636,
+            "max_quench_calls": 274,
+            "improvements": 37,
+            "probe_calls": 3,
+            "obj_calls": 1001937,
+            "grad_calls": 1035549
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.123",
+          "seed": 20261140,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 58968,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.95829941663275,
+            "max_quench_calls": 302,
+            "improvements": 43,
+            "probe_calls": 3,
+            "obj_calls": 1001588,
+            "grad_calls": 1035490
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.124",
+          "seed": 20261141,
+          "force_calls": 444108,
+          "success": true,
+          "failure": null,
+          "reasons": [],
+          "energy": -397.49135229102154,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 25409,
+            "quench_calls": 444105,
+            "mean_quench_calls": 17.47825573615648,
+            "max_quench_calls": 265,
+            "improvements": 31,
+            "probe_calls": 3,
+            "obj_calls": 444787,
+            "grad_calls": 459707
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.125",
+          "seed": 20261142,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517522,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 62924,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.892139724111626,
+            "max_quench_calls": 240,
+            "improvements": 36,
+            "probe_calls": 3,
+            "obj_calls": 1000545,
+            "grad_calls": 1034903
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.126",
+          "seed": 20261143,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.6372681819116,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 59635,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.76862580699254,
+            "max_quench_calls": 243,
+            "improvements": 28,
+            "probe_calls": 3,
+            "obj_calls": 1000979,
+            "grad_calls": 1035038
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.127",
+          "seed": 20261144,
+          "force_calls": 149735,
+          "success": true,
+          "failure": null,
+          "reasons": [],
+          "energy": -397.49151772134036,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 8071,
+            "quench_calls": 149732,
+            "mean_quench_calls": 18.551852310742163,
+            "max_quench_calls": 290,
+            "improvements": 18,
+            "probe_calls": 3,
+            "obj_calls": 149949,
+            "grad_calls": 154921
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.128",
+          "seed": 20261145,
+          "force_calls": 526039,
+          "success": true,
+          "failure": null,
+          "reasons": [],
+          "energy": -397.4913767685207,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 32286,
+            "quench_calls": 526036,
+            "mean_quench_calls": 16.2930062565818,
+            "max_quench_calls": 323,
+            "improvements": 27,
+            "probe_calls": 3,
+            "obj_calls": 526336,
+            "grad_calls": 544218
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.129",
+          "seed": 20261146,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517522,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61666,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.21634287938248,
+            "max_quench_calls": 265,
+            "improvements": 43,
+            "probe_calls": 3,
+            "obj_calls": 1000403,
+            "grad_calls": 1034384
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.130",
+          "seed": 20261147,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517522,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61528,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.25271421141594,
+            "max_quench_calls": 236,
+            "improvements": 27,
+            "probe_calls": 3,
+            "obj_calls": 1000590,
+            "grad_calls": 1035025
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.131",
+          "seed": 20261148,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -393.43506467554676,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 59632,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.769469412396028,
+            "max_quench_calls": 208,
+            "improvements": 38,
+            "probe_calls": 3,
+            "obj_calls": 1001141,
+            "grad_calls": 1035364
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.132",
+          "seed": 20261149,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 59724,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.743637398700688,
+            "max_quench_calls": 269,
+            "improvements": 35,
+            "probe_calls": 3,
+            "obj_calls": 1001772,
+            "grad_calls": 1035664
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.133",
+          "seed": 20261150,
+          "force_calls": 909205,
+          "success": true,
+          "failure": null,
+          "reasons": [],
+          "energy": -397.4913343866464,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 55554,
+            "quench_calls": 909202,
+            "mean_quench_calls": 16.36609425063902,
+            "max_quench_calls": 330,
+            "improvements": 27,
+            "probe_calls": 3,
+            "obj_calls": 910287,
+            "grad_calls": 941056
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.134",
+          "seed": 20261151,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517522,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61450,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.273344182262,
+            "max_quench_calls": 245,
+            "improvements": 38,
+            "probe_calls": 3,
+            "obj_calls": 1000998,
+            "grad_calls": 1035181
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.135",
+          "seed": 20261152,
+          "force_calls": 746714,
+          "success": true,
+          "failure": null,
+          "reasons": [],
+          "energy": -397.4914414350843,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 43869,
+            "quench_calls": 746711,
+            "mean_quench_calls": 17.021381841391417,
+            "max_quench_calls": 224,
+            "improvements": 28,
+            "probe_calls": 3,
+            "obj_calls": 747552,
+            "grad_calls": 773136
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.136",
+          "seed": 20261153,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 59043,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.936757956065918,
+            "max_quench_calls": 227,
+            "improvements": 35,
+            "probe_calls": 3,
+            "obj_calls": 1001643,
+            "grad_calls": 1035711
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.137",
+          "seed": 20261154,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517522,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61695,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.20872031769187,
+            "max_quench_calls": 245,
+            "improvements": 34,
+            "probe_calls": 3,
+            "obj_calls": 1000439,
+            "grad_calls": 1034773
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.138",
+          "seed": 20261155,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60550,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.515227085053674,
+            "max_quench_calls": 295,
+            "improvements": 37,
+            "probe_calls": 3,
+            "obj_calls": 1001122,
+            "grad_calls": 1034969
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.139",
+          "seed": 20261156,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 59005,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.947665452080333,
+            "max_quench_calls": 247,
+            "improvements": 31,
+            "probe_calls": 3,
+            "obj_calls": 1001989,
+            "grad_calls": 1035784
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.140",
+          "seed": 20261157,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 59214,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.88784746850407,
+            "max_quench_calls": 270,
+            "improvements": 31,
+            "probe_calls": 3,
+            "obj_calls": 1001874,
+            "grad_calls": 1035488
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.141",
+          "seed": 20261158,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517522,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 62054,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.114948270860864,
+            "max_quench_calls": 284,
+            "improvements": 19,
+            "probe_calls": 3,
+            "obj_calls": 1000549,
+            "grad_calls": 1034918
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.142",
+          "seed": 20261159,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -392.85192601299866,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60127,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.631413508074576,
+            "max_quench_calls": 209,
+            "improvements": 19,
+            "probe_calls": 3,
+            "obj_calls": 1001106,
+            "grad_calls": 1035203
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.143",
+          "seed": 20261160,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 59932,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.685526930521256,
+            "max_quench_calls": 262,
+            "improvements": 29,
+            "probe_calls": 3,
+            "obj_calls": 1001569,
+            "grad_calls": 1035442
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.144",
+          "seed": 20261161,
+          "force_calls": 510065,
+          "success": true,
+          "failure": null,
+          "reasons": [],
+          "energy": -397.4916888001392,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 30877,
+            "quench_calls": 510062,
+            "mean_quench_calls": 16.519156653819994,
+            "max_quench_calls": 242,
+            "improvements": 34,
+            "probe_calls": 3,
+            "obj_calls": 510737,
+            "grad_calls": 528057
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.145",
+          "seed": 20261162,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.56015435175215,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 63874,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.65577543288349,
+            "max_quench_calls": 247,
+            "improvements": 32,
+            "probe_calls": 3,
+            "obj_calls": 1000486,
+            "grad_calls": 1034883
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.146",
+          "seed": 20261163,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 58701,
+            "quench_calls": 999997,
+            "mean_quench_calls": 17.035433808623363,
+            "max_quench_calls": 294,
+            "improvements": 37,
+            "probe_calls": 3,
+            "obj_calls": 1001563,
+            "grad_calls": 1035453
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.147",
+          "seed": 20261164,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.183962211786,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 58770,
+            "quench_calls": 999997,
+            "mean_quench_calls": 17.015433044070104,
+            "max_quench_calls": 247,
+            "improvements": 27,
+            "probe_calls": 3,
+            "obj_calls": 1000989,
+            "grad_calls": 1034986
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.148",
+          "seed": 20261165,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61219,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.334749015828418,
+            "max_quench_calls": 245,
+            "improvements": 39,
+            "probe_calls": 3,
+            "obj_calls": 1001495,
+            "grad_calls": 1035334
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.149",
+          "seed": 20261166,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 59748,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.73691169578898,
+            "max_quench_calls": 286,
+            "improvements": 34,
+            "probe_calls": 3,
+            "obj_calls": 1001325,
+            "grad_calls": 1035314
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.150",
+          "seed": 20261167,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60798,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.44786012697786,
+            "max_quench_calls": 272,
+            "improvements": 60,
+            "probe_calls": 3,
+            "obj_calls": 1001185,
+            "grad_calls": 1034960
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.151",
+          "seed": 20261168,
+          "force_calls": 834273,
+          "success": true,
+          "failure": null,
+          "reasons": [],
+          "energy": -397.49151337694786,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 51719,
+            "quench_calls": 834270,
+            "mean_quench_calls": 16.130822328351282,
+            "max_quench_calls": 242,
+            "improvements": 15,
+            "probe_calls": 3,
+            "obj_calls": 834959,
+            "grad_calls": 863444
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.152",
+          "seed": 20261169,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517521,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 63750,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.686227450980391,
+            "max_quench_calls": 235,
+            "improvements": 31,
+            "probe_calls": 3,
+            "obj_calls": 1000438,
+            "grad_calls": 1034886
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.153",
+          "seed": 20261170,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 59497,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.807519706875976,
+            "max_quench_calls": 239,
+            "improvements": 28,
+            "probe_calls": 3,
+            "obj_calls": 1001703,
+            "grad_calls": 1035607
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.154",
+          "seed": 20261171,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.21828751329724,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 62725,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.942558788361897,
+            "max_quench_calls": 288,
+            "improvements": 25,
+            "probe_calls": 3,
+            "obj_calls": 1000358,
+            "grad_calls": 1034731
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.155",
+          "seed": 20261172,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.2182875132971,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 62135,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.093940613180976,
+            "max_quench_calls": 229,
+            "improvements": 26,
+            "probe_calls": 3,
+            "obj_calls": 1000670,
+            "grad_calls": 1034971
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.156",
+          "seed": 20261173,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.6372681819116,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 62103,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.102233386470864,
+            "max_quench_calls": 287,
+            "improvements": 31,
+            "probe_calls": 3,
+            "obj_calls": 1000421,
+            "grad_calls": 1034642
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.157",
+          "seed": 20261174,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517522,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 62128,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.09575392737574,
+            "max_quench_calls": 245,
+            "improvements": 30,
+            "probe_calls": 3,
+            "obj_calls": 1000711,
+            "grad_calls": 1034899
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.158",
+          "seed": 20261175,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -393.43506467554676,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 59496,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.807802205190264,
+            "max_quench_calls": 259,
+            "improvements": 32,
+            "probe_calls": 3,
+            "obj_calls": 1001439,
+            "grad_calls": 1035467
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.159",
+          "seed": 20261176,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517522,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61641,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.22291980986681,
+            "max_quench_calls": 245,
+            "improvements": 18,
+            "probe_calls": 3,
+            "obj_calls": 1000588,
+            "grad_calls": 1035009
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.160",
+          "seed": 20261177,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.1916488557592,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 63108,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.845804018507955,
+            "max_quench_calls": 298,
+            "improvements": 32,
+            "probe_calls": 3,
+            "obj_calls": 1000453,
+            "grad_calls": 1034725
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.161",
+          "seed": 20261178,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.9951324968064,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 62237,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.067564310619087,
+            "max_quench_calls": 264,
+            "improvements": 25,
+            "probe_calls": 3,
+            "obj_calls": 1000274,
+            "grad_calls": 1034573
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.162",
+          "seed": 20261179,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 59308,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.861081135765833,
+            "max_quench_calls": 269,
+            "improvements": 35,
+            "probe_calls": 3,
+            "obj_calls": 1001710,
+            "grad_calls": 1035687
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.163",
+          "seed": 20261180,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 56393,
+            "quench_calls": 999997,
+            "mean_quench_calls": 17.732644122497472,
+            "max_quench_calls": 292,
+            "improvements": 52,
+            "probe_calls": 3,
+            "obj_calls": 1001822,
+            "grad_calls": 1035508
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.164",
+          "seed": 20261181,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.6372681819116,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 57874,
+            "quench_calls": 999997,
+            "mean_quench_calls": 17.278864429622974,
+            "max_quench_calls": 272,
+            "improvements": 51,
+            "probe_calls": 3,
+            "obj_calls": 1001392,
+            "grad_calls": 1035314
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.165",
+          "seed": 20261182,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61517,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.25562039761367,
+            "max_quench_calls": 268,
+            "improvements": 20,
+            "probe_calls": 3,
+            "obj_calls": 1000599,
+            "grad_calls": 1035109
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.166",
+          "seed": 20261183,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60378,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.562274338335154,
+            "max_quench_calls": 315,
+            "improvements": 39,
+            "probe_calls": 3,
+            "obj_calls": 1000817,
+            "grad_calls": 1034938
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.167",
+          "seed": 20261184,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.6372681819117,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61988,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.132106214105956,
+            "max_quench_calls": 224,
+            "improvements": 28,
+            "probe_calls": 3,
+            "obj_calls": 1000598,
+            "grad_calls": 1034818
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.168",
+          "seed": 20261185,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 58230,
+            "quench_calls": 999997,
+            "mean_quench_calls": 17.173226859007386,
+            "max_quench_calls": 268,
+            "improvements": 41,
+            "probe_calls": 3,
+            "obj_calls": 1001925,
+            "grad_calls": 1035720
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.169",
+          "seed": 20261186,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 57073,
+            "quench_calls": 999997,
+            "mean_quench_calls": 17.521367371611795,
+            "max_quench_calls": 273,
+            "improvements": 30,
+            "probe_calls": 3,
+            "obj_calls": 1002121,
+            "grad_calls": 1035887
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.170",
+          "seed": 20261187,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.20145649604444,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 64792,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.433957896036548,
+            "max_quench_calls": 240,
+            "improvements": 19,
+            "probe_calls": 3,
+            "obj_calls": 1000476,
+            "grad_calls": 1034695
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.171",
+          "seed": 20261188,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 62685,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.952731913535933,
+            "max_quench_calls": 264,
+            "improvements": 40,
+            "probe_calls": 3,
+            "obj_calls": 1000664,
+            "grad_calls": 1034853
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.172",
+          "seed": 20261189,
+          "force_calls": 562516,
+          "success": true,
+          "failure": null,
+          "reasons": [],
+          "energy": -397.49147299659165,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 35432,
+            "quench_calls": 562513,
+            "mean_quench_calls": 15.875846692255589,
+            "max_quench_calls": 302,
+            "improvements": 40,
+            "probe_calls": 3,
+            "obj_calls": 563034,
+            "grad_calls": 582061
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.173",
+          "seed": 20261190,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60098,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.639438916436486,
+            "max_quench_calls": 273,
+            "improvements": 23,
+            "probe_calls": 3,
+            "obj_calls": 1001317,
+            "grad_calls": 1035401
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.174",
+          "seed": 20261191,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61916,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.150865688997996,
+            "max_quench_calls": 241,
+            "improvements": 27,
+            "probe_calls": 3,
+            "obj_calls": 1001266,
+            "grad_calls": 1035292
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.175",
+          "seed": 20261192,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.2182875132971,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61612,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.230555735895607,
+            "max_quench_calls": 249,
+            "improvements": 33,
+            "probe_calls": 3,
+            "obj_calls": 1000501,
+            "grad_calls": 1034624
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.176",
+          "seed": 20261193,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61852,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.16757744292828,
+            "max_quench_calls": 248,
+            "improvements": 25,
+            "probe_calls": 3,
+            "obj_calls": 1001125,
+            "grad_calls": 1035299
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.177",
+          "seed": 20261194,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517521,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 63164,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.831755430308403,
+            "max_quench_calls": 282,
+            "improvements": 36,
+            "probe_calls": 3,
+            "obj_calls": 1000566,
+            "grad_calls": 1034813
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.178",
+          "seed": 20261195,
+          "force_calls": 707265,
+          "success": true,
+          "failure": null,
+          "reasons": [],
+          "energy": -397.4916371290703,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 43400,
+            "quench_calls": 707262,
+            "mean_quench_calls": 16.29635944700461,
+            "max_quench_calls": 290,
+            "improvements": 21,
+            "probe_calls": 3,
+            "obj_calls": 707953,
+            "grad_calls": 732059
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.179",
+          "seed": 20261196,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61448,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.273873844551492,
+            "max_quench_calls": 309,
+            "improvements": 25,
+            "probe_calls": 3,
+            "obj_calls": 1001235,
+            "grad_calls": 1035209
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.180",
+          "seed": 20261197,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 58486,
+            "quench_calls": 999997,
+            "mean_quench_calls": 17.098057654823375,
+            "max_quench_calls": 238,
+            "improvements": 34,
+            "probe_calls": 3,
+            "obj_calls": 1002037,
+            "grad_calls": 1035836
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.181",
+          "seed": 20261198,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517522,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 62562,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.984095776989227,
+            "max_quench_calls": 237,
+            "improvements": 19,
+            "probe_calls": 3,
+            "obj_calls": 1000651,
+            "grad_calls": 1035012
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.182",
+          "seed": 20261199,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 57411,
+            "quench_calls": 999997,
+            "mean_quench_calls": 17.418212537666996,
+            "max_quench_calls": 295,
+            "improvements": 41,
+            "probe_calls": 3,
+            "obj_calls": 1001691,
+            "grad_calls": 1035710
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.183",
+          "seed": 20261200,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -393.43506467554676,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 59063,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.93102280615614,
+            "max_quench_calls": 247,
+            "improvements": 21,
+            "probe_calls": 3,
+            "obj_calls": 1001342,
+            "grad_calls": 1035444
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.184",
+          "seed": 20261201,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255712,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 63108,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.845804018507955,
+            "max_quench_calls": 204,
+            "improvements": 19,
+            "probe_calls": 3,
+            "obj_calls": 1000439,
+            "grad_calls": 1034760
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.185",
+          "seed": 20261202,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -393.6399038114544,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60754,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.459772196069395,
+            "max_quench_calls": 268,
+            "improvements": 29,
+            "probe_calls": 3,
+            "obj_calls": 1001031,
+            "grad_calls": 1035098
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.186",
+          "seed": 20261203,
+          "force_calls": 171468,
+          "success": true,
+          "failure": null,
+          "reasons": [],
+          "energy": -397.4914517448925,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 10721,
+            "quench_calls": 171465,
+            "mean_quench_calls": 15.993377483443709,
+            "max_quench_calls": 246,
+            "improvements": 23,
+            "probe_calls": 3,
+            "obj_calls": 171761,
+            "grad_calls": 177547
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.187",
+          "seed": 20261204,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60091,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.64137724451249,
+            "max_quench_calls": 241,
+            "improvements": 18,
+            "probe_calls": 3,
+            "obj_calls": 1001650,
+            "grad_calls": 1035607
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.188",
+          "seed": 20261205,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.5601543517522,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 62522,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.994321998656472,
+            "max_quench_calls": 245,
+            "improvements": 43,
+            "probe_calls": 3,
+            "obj_calls": 1000570,
+            "grad_calls": 1034957
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.189",
+          "seed": 20261206,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255712,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 62792,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.925547840489234,
+            "max_quench_calls": 291,
+            "improvements": 29,
+            "probe_calls": 3,
+            "obj_calls": 1000724,
+            "grad_calls": 1034871
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.190",
+          "seed": 20261207,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60475,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.53570897064903,
+            "max_quench_calls": 472,
+            "improvements": 47,
+            "probe_calls": 3,
+            "obj_calls": 1001396,
+            "grad_calls": 1035204
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.191",
+          "seed": 20261208,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -395.35343714629334,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 64110,
+            "quench_calls": 999997,
+            "mean_quench_calls": 15.598143815317423,
+            "max_quench_calls": 267,
+            "improvements": 16,
+            "probe_calls": 3,
+            "obj_calls": 1000124,
+            "grad_calls": 1034446
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.192",
+          "seed": 20261209,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -393.63990381145436,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61655,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.219236071689238,
+            "max_quench_calls": 241,
+            "improvements": 19,
+            "probe_calls": 3,
+            "obj_calls": 1000520,
+            "grad_calls": 1034843
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.193",
+          "seed": 20261210,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61770,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.18903998704873,
+            "max_quench_calls": 236,
+            "improvements": 27,
+            "probe_calls": 3,
+            "obj_calls": 1001123,
+            "grad_calls": 1035202
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.194",
+          "seed": 20261211,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 62220,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.0719543555127,
+            "max_quench_calls": 267,
+            "improvements": 24,
+            "probe_calls": 3,
+            "obj_calls": 1001039,
+            "grad_calls": 1035167
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.195",
+          "seed": 20261212,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60220,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.605728993689805,
+            "max_quench_calls": 247,
+            "improvements": 43,
+            "probe_calls": 3,
+            "obj_calls": 1001568,
+            "grad_calls": 1035340
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.196",
+          "seed": 20261213,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 60282,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.58865001161209,
+            "max_quench_calls": 237,
+            "improvements": 31,
+            "probe_calls": 3,
+            "obj_calls": 1001847,
+            "grad_calls": 1035671
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.197",
+          "seed": 20261214,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -393.40555892537725,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 61250,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.32648163265306,
+            "max_quench_calls": 292,
+            "improvements": 35,
+            "probe_calls": 3,
+            "obj_calls": 1000415,
+            "grad_calls": 1034658
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.198",
+          "seed": 20261215,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 59680,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.755981903485253,
+            "max_quench_calls": 264,
+            "improvements": 35,
+            "probe_calls": 3,
+            "obj_calls": 1001755,
+            "grad_calls": 1035677
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.199",
+          "seed": 20261216,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -394.2182875132971,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 59764,
+            "quench_calls": 999997,
+            "mean_quench_calls": 16.73243089485309,
+            "max_quench_calls": 240,
+            "improvements": 25,
+            "probe_calls": 3,
+            "obj_calls": 1000623,
+            "grad_calls": 1034871
+          },
+          "error": ""
+        },
+        {
+          "start": "coords.200",
+          "seed": 20261217,
+          "force_calls": 1000000,
+          "success": false,
+          "failure": "cap",
+          "reasons": [
+            "energy",
+            "cap"
+          ],
+          "energy": -396.2822488255713,
+          "counter": "harness",
+          "preset": "recommended",
+          "profile": {
+            "quenches": 58066,
+            "quench_calls": 999997,
+            "mean_quench_calls": 17.221730444666413,
+            "max_quench_calls": 246,
+            "improvements": 46,
+            "probe_calls": 3,
+            "obj_calls": 1002349,
+            "grad_calls": 1036001
+          },
+          "error": ""
+        }
+      ]
+    }
+  ]
+}
