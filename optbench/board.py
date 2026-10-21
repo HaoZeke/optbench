@@ -285,17 +285,17 @@ def _commit_divides_band(root: Path, commit: str) -> bool:
 def _cap_of(problem: dict | None, template: dict | None, fields: dict[str, str]) -> int | None:
     """Cap used to score one row.
 
-    A problem that states ``max_force_calls`` wins. Otherwise the cap
-    written on the result is the budget that search ran. The template
-    stop fills in only when the result does not record one.
+    The cap written on the result is the budget that search ran. A
+    problem cap fills in when the result does not record one, then the
+    template stop.
     """
+    raw_field = _float_field(fields, "cap")
+    if raw_field is not None:
+        return int(raw_field)
     if problem is not None:
         stated = (problem.get("convergence") or {}).get("max_force_calls")
         if stated not in (None, ""):
             return int(stated)
-    raw_field = _float_field(fields, "cap")
-    if raw_field is not None:
-        return int(raw_field)
     if template is not None:
         if template.get("failure_cap") not in (None, ""):
             return int(template["failure_cap"])

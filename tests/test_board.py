@@ -801,7 +801,8 @@ def test_recorded_cap_scores_a_row_when_the_problem_states_none():
 
     silent = {"convergence": {"energy_above_minimum": 0.001}}
     template = {"stop": {"max_force_calls": 2000000}, "failure_cap": 2000000}
-    assert _cap_of(silent, template, {"cap": "500000"}) == 500000
     stated = {"convergence": {"max_force_calls": 1000000}}
-    assert _cap_of(stated, template, {"cap": "500000"}) == 1000000
+    assert _cap_of(silent, template, {"cap": "500000"}) == 500000
+    assert _cap_of(stated, template, {"cap": "25281"}) == 25281
+    assert _cap_of(stated, template, {}) == 1000000
     assert _cap_of(silent, template, {}) == 2000000
