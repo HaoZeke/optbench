@@ -144,10 +144,12 @@ def test_basin_hopping_stops_at_the_cap(tmp_path: Path):
 
     template = load_template(ROOT, "agox/lj38-bh")
     template["stop"] = {"max_force_calls": 60}
+    problem = copy.deepcopy(resolve_problem(ROOT, "globalopt/lj38"))
+    problem["convergence"]["max_force_calls"] = 60
     output = tmp_path / "benchmark.dat"
     summary = run_template(
         ROOT,
-        resolve_problem(ROOT, "globalopt/lj38"),
+        problem,
         template,
         geometries=None,
         output=output,
