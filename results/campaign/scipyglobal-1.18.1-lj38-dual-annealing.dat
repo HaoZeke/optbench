@@ -1,0 +1,26 @@
+# counter harness. One force call is one lennard_jones evaluation.
+# A repeated coordinate is cached, so the gradient of that geometry is the same call.
+# The cap refuses the next search call and does not count it.
+# Success is a finite harness energy at or below -173.927427 with calls under the cap.
+# SciPy 1.18.1 dual_annealing at the constructor defaults, with maxiter and maxfun set to the force-call cap. The local search is L-BFGS-B with the analytic gradient, the coordinate bounds, and maxiter min(max(n*6, 100), 1000). initial_temp is 5230, restart_temp_ratio is 2e-5, visit is 2.62, and accept is -5. Each centered coordinate lies in [-6, 6]. The seed is 314159 plus the start index. The force-call cap is 2000000.
+nfailed 100
+code SciPy
+code_version 1.18.1
+commit e4e854eaa8f18d807cd3496028e257e36caa93cc
+algorithm dual_annealing
+template scipyglobal/lj38-dual-annealing
+problem globalopt/lj38
+tuning default
+counter harness
+cap 2000000
+par2_mean 4000000
+wilson_low 0
+wilson_high 0.036993498207
+par2_median 4000000
+par2_median_low 4000000
+par2_median_high 4000000
+v2_nfailed 100
+v2_successes 0
+n 100
+energy_min -170.015436641
+energy_max -147.19912708

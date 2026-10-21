@@ -1,0 +1,11 @@
+# SciPy 1.18.1 is built from the commit in codes/registry.toml.
+# This file does not select a conda-forge scipy build. asv has one
+# environment_type, so this yml cannot be bound to one class.
+# The globalopt rows call the source build pinned under id scipyglobal:
+#   ref = v1.18.1
+#   commit = e4e854eaa8f18d807cd3496028e257e36caa93cc
+name: scipy-1.18.1
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
