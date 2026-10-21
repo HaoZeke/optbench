@@ -256,7 +256,7 @@ It does not run a campaign.
    <td data-code="pysisyphus">—</td>
    <td data-code="AIRSS">—</td>
    <td data-code="vc-SQNM">—</td>
-   <td data-code="ogolem">—</td>
+   <td data-code="ogolem" data-template="ogolem/lj75" data-par2="1.99272e+06"><span class="bench-score">1.99272e+06</span><a href="generated/suites/globalopt.html#lj75-templates">ogolem/lj75</a></td>
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>

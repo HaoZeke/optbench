@@ -1515,10 +1515,20 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
+   <tr data-problem="globalopt/lj75" data-template="ogolem/lj75">
+   <td>lj75</td>
+   <td data-field="template">ogolem/lj75</td>
+   <td data-field="version">ogolem 2016.CURRENT</td>
+   <td data-field="commit">cce35a376d92</td>
+   <td data-field="par2_mean">1.99272e+06</td>
+   <td data-field="mean_calls">991641</td>
+   <td data-field="median_calls">1e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 197, wrong_stationary 2</td>
+   <td data-field="n">200</td>
+   </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
    <li>lj150: partial.</li>
-   <li>lj75: partial.</li>
    <li>lj98: partial.</li>
    </ul>
    </section>

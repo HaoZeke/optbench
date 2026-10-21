@@ -1202,8 +1202,9 @@
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/lj75">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">ase-globalopt/lj75-basinhopping</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">campaign</td><td data-field="par2_mean">2e+06</td><td data-field="success_rate">0</td><td data-field="wilson">0–0.0188453</td><td data-field="median_calls">1e+06</td><td data-field="mean_calls">1e+06</td><td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td><td data-field="n">200</td></tr>
+   <tr><td data-field="template">ogolem/lj75</td><td data-field="version">ogolem 2016.CURRENT</td><td data-field="commit">cce35a376d92</td><td data-field="source">campaign</td><td data-field="par2_mean">1.99272e+06</td><td data-field="success_rate">0.005</td><td data-field="wilson">0.000883169–0.0277737</td><td data-field="median_calls">1e+06</td><td data-field="mean_calls">991641</td><td data-field="failures">crash 0, divergence 0, cap 197, wrong_stationary 2</td><td data-field="n">200</td></tr>
    </tbody></table></div>
+   <p class="bench-finding">ogolem/lj75: 184 of 200 starts at -396.28224883; lowest energy -397.49134614.</p>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/globalopt.html#lj75">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="lj75-legacy">

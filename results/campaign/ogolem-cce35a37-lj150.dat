@@ -2,13 +2,13 @@
 # A repeated geometry is one call. The call that would pass the cap is not counted.
 # The potential is epsilon 1, sigma 1, cutoff 40, no shift.
 # One reduced sigma is the Ar sigma 6.434516991 bohr. The socket divides by it.
-# partial. scored 12 of 100 starts; lowest energy -893.30962342; 3 of 12 starts at -884.65296483; mean calls 2918860.0; median calls 1873549.5
+# partial. scored 16 of 100 starts; lowest energy -893.30971076; 3 of 16 starts at -884.65296483; mean calls 3128434.6; median calls 2779595.5
 # Same genetic algorithm as ogolem/lj38. The archive is website/globalopt/lj150/lj150_clusters.tgz, 100 numbered coords files. The archived run.sh says 200 and ljj8_clusters. Success is the Cambridge N=150 minimum -893.310258 plus energy_above_minimum 0.001. The force cap is the problem max_force_calls, 10000000. The generation budget stays 19900. A start that exhausts the force cap is cap. A start that ends under the cap above the window is wrong_stationary.
-force_calls 2918860
-force_calls_min 712141
-force_calls_max 5665581
+force_calls 3128435
+force_calls_min 649069
+force_calls_max 7081456
 nfailed 0
-median 1873549.5
+median 2779595.5
 code ogolem
 code_version 2016.CURRENT
 commit cce35a376d929852ab1e80e98105c0d13d784b8d
@@ -18,16 +18,16 @@ problem globalopt/lj150
 tuning default
 counter harness
 cap 10000000
-par2_mean 10854721.9167
-wilson_low 0.253781597634
-wilson_high 0.746218402366
-par2_median 12360127
-par2_median_low 1072654.5
+par2_mean 9887740
+wilson_low 0.331785563988
+wilson_high 0.769013475945
+par2_median 4198786.5
+par2_median_low 1200197
 par2_median_high 20000000
-v2_nfailed 6
-v2_successes 6
-n 12
-energy_min -893.309623422
-energy_max -882.750395166
+v2_nfailed 7
+v2_successes 9
+n 16
+energy_min -893.309710761
+energy_max -881.984645476
 partial true
-partial_reason scored 12 of 100 starts; lowest energy -893.30962342; 3 of 12 starts at -884.65296483; mean calls 2918860.0; median calls 1873549.5
+partial_reason scored 16 of 100 starts; lowest energy -893.30971076; 3 of 16 starts at -884.65296483; mean calls 3128434.6; median calls 2779595.5
