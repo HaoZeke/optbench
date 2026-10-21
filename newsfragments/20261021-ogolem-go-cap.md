@@ -1,0 +1,1 @@
+OGOLEM stock searches on lj38, lj75, lj98, and lj150 use the problem force-call cap of 2000000. The Sweden pool, generation count, and LBFGS settings stay as they are. PAR-2 uses that problem cap. The ASE lj75 basin-hopping stop on this branch follows that same problem cap.

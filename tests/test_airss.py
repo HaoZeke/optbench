@@ -135,7 +135,7 @@ def test_template_pins_the_tarball_and_the_asv_grid_is_one_start(monkeypatch, tm
         AirssLj38().setup("0", "0")
 
 
-def test_lj75_window_writes_a_partial_log_when_every_start_misses(tmp_path, monkeypatch):
+def test_lj75_window_scores_every_miss_at_the_problem_cap(tmp_path, monkeypatch):
     import json
 
     import optbench.runners.airss_go as airss
@@ -156,7 +156,6 @@ def test_lj75_window_writes_a_partial_log_when_every_start_misses(tmp_path, monk
         work=tmp_path / "work",
     )
     text = output.read_text(encoding="utf-8")
-    assert "partial true" in text
     assert "cap 2000000" in text
     assert "n 200" in text
     assert summary["starts"] == 200
@@ -164,7 +163,7 @@ def test_lj75_window_writes_a_partial_log_when_every_start_misses(tmp_path, monk
     assert summary["par2_mean"] == 4000000
     rows = [
         json.loads(line)
-        for line in output.with_suffix(".partial.jsonl").read_text(encoding="utf-8").splitlines()
+        for line in output.with_suffix(".starts.jsonl").read_text(encoding="utf-8").splitlines()
     ]
     assert len(rows) == 200
     assert [row["start"] for row in rows[:2]] == ["coords.1", "coords.2"]

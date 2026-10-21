@@ -69,7 +69,7 @@ def test_lj38_stop_is_the_archived_eon_threshold():
     template = load_template(ROOT, "ogolem/lj38")
     problem = resolve_problem(ROOT, "globalopt/lj38")
     assert template["commit"] == COMMIT
-    assert template["failure_cap"] == 5000000
+    assert template["failure_cap"] == 2000000
     assert float(template["reference_energy"]) + float(problem["convergence"]["energy_above_minimum"]) == pytest.approx(
         LJ38_STOP_ENERGY
     )
@@ -77,9 +77,9 @@ def test_lj38_stop_is_the_archived_eon_threshold():
 
 def test_larger_clusters_use_the_cambridge_window_and_the_problem_cap():
     expected = {
-        "lj75": (-397.492331, 1_000_000, 200),
-        "lj98": (-543.665361, 1_000_000_000, 100),
-        "lj150": (-893.310258, 10_000_000, 100),
+        "lj75": (-397.492331, 2_000_000, 200),
+        "lj98": (-543.665361, 2_000_000, 100),
+        "lj150": (-893.310258, 2_000_000, 100),
     }
     for slug, (energy, cap, starts) in expected.items():
         problem = resolve_problem(ROOT, f"globalopt/{slug}")
@@ -90,7 +90,7 @@ def test_larger_clusters_use_the_cambridge_window_and_the_problem_cap():
         assert _threshold(problem, template) == pytest.approx(energy + 0.001)
     lj38 = resolve_problem(ROOT, "globalopt/lj38")
     assert _threshold(lj38, load_template(ROOT, "ogolem/lj38")) == pytest.approx(LJ38_STOP_ENERGY)
-    assert _force_cap(lj38, load_template(ROOT, "ogolem/lj38")) == 5_000_000
+    assert _force_cap(lj38, load_template(ROOT, "ogolem/lj38")) == 2_000_000
 
 
 def test_archive_counts_do_not_double_count_xyz(tmp_path: Path):
