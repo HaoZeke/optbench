@@ -55,6 +55,14 @@ ASE_DEFAULTS = {
         "alpha": 10.0,
         "stpmax": 50.0,
     },
+    "LBFGSLineSearch": {
+        "maxstep": 0.2,
+        "memory": 100,
+        "damping": 1.0,
+        "alpha": 70.0,
+        "c1": 0.23,
+        "c2": 0.46,
+    },
     "GPMin": {"update_prior_strategy": "maximum", "update_hyperparams": False},
     "PreconLBFGS": {
         "maxstep": 0.04,
@@ -635,6 +643,14 @@ def _cached_l2(calc, atoms=None) -> float | None:
     return float(np.linalg.norm(np.asarray(forces, dtype=float)))
 
 
+def _lbfgs_line_search():
+    try:
+        from ase.optimize import LBFGSLineSearch
+    except ImportError:
+        from ase.optimize.lbfgs import LBFGSLineSearch
+    return LBFGSLineSearch
+
+
 def _build_optimizer(spec: dict, target):
     from ase.optimize import BFGS, BFGSLineSearch, FIRE, GPMin, LBFGS
     from ase.optimize.precon import Exp, PreconFIRE, PreconLBFGS, PreconODE12r
@@ -644,6 +660,7 @@ def _build_optimizer(spec: dict, target):
         "LBFGS": LBFGS,
         "FIRE": FIRE,
         "BFGSLineSearch": BFGSLineSearch,
+        "LBFGSLineSearch": _lbfgs_line_search(),
         "GPMin": GPMin,
         "PreconLBFGS": PreconLBFGS,
         "PreconFIRE": PreconFIRE,
@@ -810,7 +827,16 @@ def _run_minimize(payload: dict, bucket: CallCounter) -> dict:
     if payload.get("snapshot"):
         row["parameters"] = _snapshot_optimizer(opt, payload["optimizer"])
     try:
-        failed, norm = _drive_l2(opt, atoms.calc, bucket, payload["tol"], payload["max_steps"], atoms)
+        measure = (lambda: _fmax(atoms)) if payload.get("norm") == "fmax" else None
+        failed, norm = _drive_l2(
+            opt,
+            atoms.calc,
+            bucket,
+            payload["tol"],
+            payload["max_steps"],
+            atoms,
+            norm_of=measure,
+        )
     except Exception as exc:
         if _cap_error(exc):
             return _cap_row(row, atoms)
@@ -1519,6 +1545,7 @@ def run_template(
                 "reactant_positions": reactant_positions,
                 "seed": 0 if seed is None else seed,
                 "tol": tol,
+                "norm": str(template["stop"].get("norm") or "l2"),
                 "max_steps": int(template["stop"]["max_steps"]),
                 "raw_cap": cap,
                 "snapshot": False,
@@ -1635,6 +1662,7 @@ def run_point(root: Path, template_name: str, start: str, seed: int, *, cache: P
         "reactant_positions": reactant_positions,
         "seed": job_seed_i,
         "tol": tol,
+        "norm": str(template["stop"].get("norm") or "l2"),
         "max_steps": int(template["stop"]["max_steps"]),
         "raw_cap": raw_cap(template),
         "snapshot": True,
