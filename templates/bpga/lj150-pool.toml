@@ -1,0 +1,23 @@
+id = "bpga/lj150-pool"
+engine = "bpga"
+problem = "globalopt/lj150"
+code = "BPGA"
+code_version = "0"
+commit = "b32cd227e8071429825f990449048eb21c7f8730"
+algorithm = "pool GA"
+tuning = "default"
+failure_cap = 1010000
+note = "Default pool. nPool is 10, the offspring loop is 1000 steps, the mutation probability is 0.1, the mutation is random, and the crossover is weighted. r_ij is 3.0 and boxAdd is 10, the values in Examples/Run.py. The first pool member is the quenched archived geometry. Later members and operators are the code's own draws. minMut and Select call random.seed() with no argument, so those draws follow the system time. The local quench stops at Euclidean force 0.001 or 1000 evaluations, the archived eon basin-hopping settings on this potential. The scheduled budget is one quench for every pool member and iteration. Success is the Cambridge N=150 minimum plus 0.001. The search stops at that budget, or earlier at the problem force-call cap of 2000000."
+
+[bpga]
+method = "pool"
+n_pool = 10
+iterations = 1000
+mutate = 0.1
+mut_type = "random"
+cross = "weighted"
+r_ij = 3.0
+box_add = 10.0
+quench_force = 0.001
+quench_maxfun = 1000
+seed = 20261015

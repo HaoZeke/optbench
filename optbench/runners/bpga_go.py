@@ -12,8 +12,10 @@ just wrote and returns an OUTCAR the parser already reads.
 
 A start is one archived geometry. It is the first member of the population.
 The search stops when the best quenched energy is within the problem's
-``energy_above_minimum`` of the Lennard-Jones 38 truncated octahedron, or
-when the template force budget or the code's own iteration limit is spent.
+``energy_above_minimum`` of the problem reference, or when the harness
+count reaches the earlier of the scheduled quench budget and the problem
+``max_force_calls``. That cap is 2000000 on every globalopt problem.
+PAR-2 charges a failure at twice the problem cap.
 """
 
 from __future__ import annotations

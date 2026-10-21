@@ -251,7 +251,7 @@ repository = "https://github.com/jbadavis/bpga"
 ref = "master"
 commit = "b32cd227e8071429825f990449048eb21c7f8730"
 committed = "2016-05-23"
-note = "Pool genetic algorithm at b32cd227. The repository has no release number, so the recorded version is 0. The build imports on Python 3: three print statements gain parentheses, four mixed tab indents are rewritten at the same column, MinimiseRan passes calcNum into Database.updatePool, and Database.addEle uses integer division. fixOverlap stops after 100000 separation steps; a crossover geometry can otherwise cycle in that loop. The potential is the harness Lennard-Jones kernel. The code's POSCAR command is answered in process. Homotop mutation expects two elements and is not used."
+note = "Pool genetic algorithm at b32cd227, the latest master commit. The repository has no release number, so the recorded version is 0. The build imports on Python 3: three print statements gain parentheses, four mixed tab indents are rewritten at the same column, MinimiseRan passes calcNum into Database.updatePool, and Database.addEle uses integer division. fixOverlap stops after 100000 separation steps; a crossover geometry can otherwise cycle in that loop. The potential is the harness Lennard-Jones kernel. The code's POSCAR command is answered in process. Homotop mutation expects two elements and is not used. The stock pool is nPool 10, 1000 offspring steps, mutation probability 0.1, random mutation, and weighted crossover. The search stops at the earlier of that quench budget and the problem max_force_calls. PAR-2 uses the problem cap, 2000000."
 
 [[code]]
 id = "pybcga"
@@ -261,7 +261,7 @@ repository = "https://github.com/marktoakley/PyBCGA"
 ref = "master"
 commit = "fb646c19b1829656bf16cc72ca318bef2d37bfeb"
 committed = "2016-02-26"
-note = "Birmingham cluster genetic algorithm, setup.py version 0, commit fb646c19. Each local relaxation is L-BFGS-B on the harness Lennard-Jones potential. Pele's Lennard-Jones is not called."
+note = "Birmingham cluster genetic algorithm, setup.py version 0, commit fb646c19, the latest master commit. Population 10, 10 generations, 8 offspring, mutation probability 0.1, tournament size 3, duplicates kept. Each local relaxation is L-BFGS-B on the harness Lennard-Jones potential. Pele's Lennard-Jones is not called. The search stops at the earlier of that quench budget and the problem max_force_calls. PAR-2 uses the problem cap, 2000000."
 
 [[template]]
 id = "ase-globalopt/lj75-basinhopping"

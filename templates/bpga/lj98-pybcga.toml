@@ -1,0 +1,23 @@
+id = "bpga/lj98-pybcga"
+engine = "bpga"
+problem = "globalopt/lj98"
+code = "PyBCGA"
+code_version = "0"
+commit = "fb646c19b1829656bf16cc72ca318bef2d37bfeb"
+algorithm = "BCGA"
+tuning = "default"
+failure_cap = 270000
+note = "Library default. Population 10, 10 generations, 8 offspring, mutation probability 0.1, tournament size 3, duplicates kept. The first member of the initial population is the archived geometry. The other members use numpy seed 20261015 plus the start index. The local quench stops at Euclidean force 0.001 or 1000 evaluations. The force cap is one quench budget for the initial population and, in each generation, the offspring plus one mutant of every member of that expanded population. Success is the Cambridge N=98 minimum plus 0.001. The search stops at that budget, or earlier at the problem force-call cap of 2000000."
+
+[bpga]
+method = "pybcga"
+pop_size = 10
+max_generation = 10
+offspring = 8
+mutant_rate = 0.1
+tournament = 3
+remove_duplicates = false
+mass_extinction = false
+quench_force = 0.001
+quench_maxfun = 1000
+seed = 20261015

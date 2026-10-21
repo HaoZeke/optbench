@@ -14,6 +14,8 @@ from optbench.runners.bpga_go import (
     _load_starts,
     _quench,
     _read_poscar,
+    _runtime_cap,
+    _score_cap,
     build_bpga,
     lj38_reference_energy,
     lj38_truncated_octahedron,
@@ -50,7 +52,9 @@ def test_templates_use_the_scheduled_budgets():
         if stated in (None, ""):
             assert _check_stop(problem, template) == int(template["failure_cap"])
         else:
-            assert _check_stop(problem, template) == int(stated)
+            assert _check_stop(problem, template) == int(stated) == 2000000
+            assert _score_cap(problem, template) == 2000000
+            assert _runtime_cap(problem, template) == min(int(template["failure_cap"]), 2000000)
         section = template["bpga"]
         if section["method"] == "pybcga":
             scheduled = scheduled_pybcga_cap(
@@ -69,13 +73,13 @@ def test_templates_use_the_scheduled_budgets():
             assert int(template["failure_cap"]) == scheduled
     assert set(found) == {
         "bpga/lj38-pool",
-        "bpga/lj38-pool-tuned",
         "bpga/lj38-pybcga",
-        "bpga/lj38-pybcga-tuned",
         "bpga/lj75-pool",
-        "bpga/lj75-pool-tuned",
         "bpga/lj75-pybcga",
-        "bpga/lj75-pybcga-tuned",
+        "bpga/lj98-pool",
+        "bpga/lj98-pybcga",
+        "bpga/lj150-pool",
+        "bpga/lj150-pybcga",
     }
 
 
@@ -88,6 +92,12 @@ def test_archived_starts_match_the_manifests():
     wide = _load_starts(ROOT, lj75, None, Path("/tmp/optbench-bpga-test-geo"), ROOT / "unused.dat")
     assert [name for name, _coords in wide] == [f"coords.{index}" for index in range(1, 201)]
     assert wide[0][1].shape == (75, 3)
+    for slug, atoms, count in (("lj98", 98, 100), ("lj150", 150, 100)):
+        problem = resolve_problem(ROOT, f"globalopt/{slug}")
+        loaded = _load_starts(ROOT, problem, None, Path("/tmp/optbench-bpga-test-geo"), ROOT / "unused.dat")
+        assert len(loaded) == count
+        assert loaded[0][1].shape == (atoms, 3)
+        assert [name for name, _coords in loaded] == [f"coords.{index}" for index in range(1, count + 1)]
 
 
 def test_poscar_roundtrip_is_cartesian():
