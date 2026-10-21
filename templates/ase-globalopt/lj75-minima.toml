@@ -1,0 +1,43 @@
+id = "ase-globalopt/lj75-minima"
+engine = "ase"
+code = "ASE"
+code_version = "3.29.0"
+commit = "f27c0005ae6a67ea419f996e728668865bfc1f86"
+algorithm = "MinimaHopping"
+problem = "globalopt/lj75"
+task = "minima-hopping"
+profile = "default"
+reducer = "par2"
+ranked = true
+parameter_source = "documented"
+note = """
+ASE 3.29.0 MinimaHopping at commit f27c0005ae6a67ea419f996e728668865bfc1f86. doc/ase/optimize.rst at that commit calls MinimaHopping(atoms) and lists T0 = 1000 K, beta1 = 1.1, beta2 = 1.1, beta3 = 1/1.1, Ediff0 = 0.5 eV, alpha1 = 0.98, alpha2 = 1/0.98, mdmin = 2, minima_threshold = 0.5 A, timestep = 1.0 fs, optimizer = QuasiNewton, and fmax = 0.05 eV/A. Those values are _default_settings in ase/optimize/minimahopping.py. QuasiNewton is BFGSLineSearch. The call omits totalsteps, so the search runs until the force-call cap. rng stays None, and the harness seeds numpy.random with 314159 plus the start index before thermalize_momenta reads it. The energy window is the problem file. Coords files carry positions only. Those atoms use symbol C, the symbol on the lj38 con geometries, and ASE's carbon mass. Binary con files keep the written symbol and mass. Component 1 is species B and component 2 is species A, matching pair_coeff sigma 1.3 and sigma 1.0 in archive/entries/globalopt/lj100-binary/eon-basinhopping/in.lammps.
+"""
+
+[optimizer]
+name = "MinimaHopping"
+local = "QuasiNewton"
+
+[optimizer.parameters]
+T0 = 1000.0
+beta1 = 1.1
+beta2 = 1.1
+beta3 = 0.9090909090909091
+Ediff0 = 0.5
+alpha1 = 0.98
+alpha2 = 1.0204081632653061
+mdmin = 2
+minima_threshold = 0.5
+timestep = 1.0
+fmax = 0.05
+seed = 314159
+
+[potential]
+kind = "lennard-jones"
+
+[stop]
+energy_above_minimum = 0.001
+max_force_calls = 1000000
+
+[input]
+archive_path = "website/globalopt/lj75/lj75_clusters.tgz"

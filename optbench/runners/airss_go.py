@@ -621,6 +621,8 @@ def run_template(
     problem_cap = int(stated_cap) if stated_cap not in (None, "") else None
     config = _config(template)
     raw_tolerance = convergence.get("energy_above_minimum")
+    if config.get("budget_structures"):
+        raw_tolerance = None
     if raw_tolerance is None and not config.get("budget_structures"):
         raise ValueError(
             f"{problem['id']} has no energy_above_minimum and {template['id']} has no airss.budget_structures"

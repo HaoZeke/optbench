@@ -1,7 +1,7 @@
 {
   "bootstrap_resamples": 2000,
   "bootstrap_seed": 20261015,
-  "note": "Harness counter on optbench.potentials.lennard_jones. buildcell generates each cell. The problem states no energy window, so each start stops at the structure budget.",
+  "note": "Harness counter on optbench.potentials.lennard_jones. buildcell generates each cell. The template stops each start at the structure budget and does not apply the problem energy window.",
   "par_factor": 2,
   "problem": "globalopt/lj75",
   "runs": [
