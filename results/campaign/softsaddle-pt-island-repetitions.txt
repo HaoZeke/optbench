@@ -1,0 +1,72 @@
+SoftSaddle Pt-island repetitions, set beside the archived website entries.
+
+Archive rows are the benchmark.dat values in oracle/entries.jsonl for
+website/saddle-search/pt-island/adaptive_HSphere-*. The oracle dates those
+files April 2019. force_calls there counts MATLAB evaluations
+(m_minimizer_func_calls + sp_func_calls). force_calls_mean_error is MATLAB
+std, the sample standard deviation. fraction_connected is the mean of
+1 - (unique_sp_sofar - n_connected_sp) / N_searches. unique_saddles is the
+mean of n_connected_sp. total_searches is the mean of N_searches.
+The reduction is softsaddle/upstream/test_run/get_data_for_web_benchmark.m.
+
+Harness rows are the repetition comments. force_calls is the sum of harness
+calls over the searches. The initial minimization is outside the sum.
+unique_saddles counts linked novel saddles, including a barrier at or above
+1.5 eV. fraction_connected is the done.py ratio. The link is the eOn r2205
+per-atom test and novelty is find_repeat. A repetition stops at 27 saddles
+below 1.5 eV, or at the 5000 archived hypersphere directions.
+
+template                                 source        force_calls       mean_error     fraction     searches   unique_saddles
+softsaddle/saddle-davidson-sm50          archive          423491.1         179062.2          0.8       1737.5            114.9
+                                         sha256   a2ac157d2360aba65c5b6148cd3924665c7df39aef5527362d0014d55b55d08c
+softsaddle/saddle-davidson-sm50          harness          992214.7      287423.8284 0.6226476972       2449.3            136.2
+softsaddle/saddle-lanczos-sm0            archive         1003433.0         417022.4          0.9       2752.5            130.4
+                                         sha256   03c18a5e41f04613db2b0c952923abe60c6a92716fb3c9ab7929d5bd5a91f495
+softsaddle/saddle-lanczos-sm0            harness         1607254.4      715505.2108 0.5355695377       3052.1            165.2
+softsaddle/saddle-lanczos-sm50           archive          814519.3         314659.7          0.9       3072.5            142.6
+                                         sha256   f0dade76cc3029f82e2878bf9874138ef8c203f81cf5f771997b4acdb4e54dcb
+softsaddle/saddle-lanczos-sm50           harness         1614543.6      534117.9626 0.5051311711       3785.5            179.9
+
+Per repetition. unique_sp is the linked novel count, including barriers
+at or above 1.5 eV. connected is the count below 1.5 eV.
+matlab_fraction is 1 - (unique_sp - connected) / searches.
+The # rep fraction_connected field is the done.py ratio.
+
+softsaddle/saddle-davidson-sm50
+ rep  force_calls  unique_sp  connected   searches  matlab_fraction
+   1       759815        124         27       1988         0.951207
+   2       667344        125         27       1820         0.946154
+   3      1255065        156         27       3157         0.959138
+   4       820689        129         27       2007         0.949178
+   5      1161643        146         27       2758         0.956853
+   6      1020602        136         27       2488         0.956190
+   7       648154        118         27       1595         0.942947
+   8      1553600        155         27       3746         0.965830
+   9       914864        134         27       2158         0.950417
+  10      1120371        139         27       2776         0.959654
+
+softsaddle/saddle-lanczos-sm0
+ rep  force_calls  unique_sp  connected   searches  matlab_fraction
+   1      2648825        189         26       5000         0.967400
+   2      1341891        168         27       2504         0.943690
+   3      1146276        167         27       2115         0.933806
+   4       722051        137         27       1363         0.919296
+   5      1646675        172         27       3082         0.952953
+   6      1577195        164         27       2972         0.953903
+   7      2319782        195         27       4324         0.961147
+   8      2289632        198         27       4321         0.960426
+   9       437665        107         27        904         0.911504
+  10      1942552        155         27       3936         0.967480
+
+softsaddle/saddle-lanczos-sm50
+ rep  force_calls  unique_sp  connected   searches  matlab_fraction
+   1       800046        141         27       1890         0.939683
+   2      2189099        211         26       5000         0.963000
+   3      2182024        210         26       5000         0.963200
+   4      1043087        171         27       2397         0.939925
+   5      1004169        173         27       2303         0.936604
+   6      1573289        178         27       3629         0.958391
+   7      1874514        202         27       4281         0.959122
+   8      2167828        203         26       5000         0.964600
+   9      1950705        169         27       4787         0.970336
+  10      1360675        141         27       3568         0.968049
