@@ -160,7 +160,7 @@ def test_stock_templates_copy_the_lj38_basin_settings():
         assert template["tuning"] == "lj38"
         assert template["label"] == "target_ratio 0.3"
         assert template["label"] != "lj38"
-        assert template["cache_token"] == "cambridge-1"
+        assert template["cache_token"] == "cambridge-2e6"
         assert template.get("budget_seconds") in (None, 0)
         assert int(template["failure_cap"]) == force_cap(problem)
         stop = float(template["ini"]["Basin Hopping"]["stop_energy"])
@@ -185,7 +185,7 @@ def test_cambridge_cache_token_does_not_move_the_lj38_path():
     lj38 = _cache_path("svn", "eon-svn/bh-lj38", 314159, "0", 0)
     assert "cambridge-1" not in lj38.parts
     lj75 = _cache_path("svn", "eon-svn/bh-lj75", 314159, "1", 0)
-    assert "cambridge-1" in lj75.parts
+    assert "cambridge-2e6" in lj75.parts
     develop = _cache_path("develop", "eon-develop/bh-lj75", 314159, "1", 0)
     assert develop.parts[2] == "7095b23" or "7095b23" in develop.parts
 
@@ -199,7 +199,7 @@ def test_lj75_ratio_row_restores_the_documented_acceptance_target():
         stock = load_template(ROOT, f"{name.split('/')[0]}/bh-lj75")
         assert template["tuning"] == "target-ratio-0.5"
         assert template["label"] == "target_ratio 0.5"
-        assert template["cache_token"] == "cambridge-1-ratio-0.5"
+        assert template["cache_token"] == "cambridge-2e6-ratio-0.5"
         assert template["ini"]["Basin Hopping"]["target_ratio"] == 0.5
         assert template["ini"]["Main"]["temperature"] == stock["ini"]["Main"]["temperature"]
         assert template["ini"]["Basin Hopping"]["displacement"] == stock["ini"]["Basin Hopping"]["displacement"]
@@ -208,7 +208,7 @@ def test_lj75_ratio_row_restores_the_documented_acceptance_target():
         assert len(template_starts(template)) == 200
         path = _cache_path(family, name, 314159, "1", 0)
         stock_path = _cache_path(family, stock["id"], 314159, "1", 0)
-        assert "cambridge-1-ratio-0.5" in path.parts
+        assert "cambridge-2e6-ratio-0.5" in path.parts
         assert path != stock_path
 
 
@@ -324,7 +324,7 @@ def test_complete_cap_row_is_ranked_with_par2(tmp_path):
             314159,
             str(start),
             {
-                "force_calls": 1000000.0,
+                "force_calls": 2000000.0,
                 "success": False,
                 "failure": "cap",
                 "minimum_energy": -396.282,
@@ -336,7 +336,7 @@ def test_complete_cap_row_is_ranked_with_par2(tmp_path):
     fields = parse((tmp_path / "row.dat").read_text(encoding="utf-8"))
     assert summary["partial"] is False
     assert "partial" not in fields
-    assert float(fields["par2_mean"]) == 2000000.0
+    assert float(fields["par2_mean"]) == 4000000.0
     assert fields["n_cap"] == "200"
     assert fields["n"] == "200"
     assert fields["label"] == "target_ratio 0.3"
@@ -357,6 +357,6 @@ def test_asv_default_is_the_first_real_start():
     assert EonSvnBhLj100Binary.params == [[314159], ["0"]]
     assert EonDevelopBhLj75.params == [[314159], ["1"]]
     assert EonDevelopBhLj100Binary.params == [[314159], ["0"]]
-    assert EonSvnBhLj75.cap == 1000000
+    assert EonSvnBhLj75.cap == 2000000
     assert EonDevelopBhLj75.template_name == "eon-develop/bh-lj75"
     assert EonSvnBhLj75.template_name == "eon-svn/bh-lj75"

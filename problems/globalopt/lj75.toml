@@ -4,7 +4,7 @@ suite = "globalopt"
 problem = "lj75"
 contract = "partial"
 entry_count = 1
-remark = "Success is an energy at or below the Cambridge Cluster Database N=75 minimum plus 0.001. The cap of 1000000 force calls is above the archived GMIN maximum of 310110."
+remark = "Success is an energy at or below the Cambridge Cluster Database N=75 minimum plus 0.001. The force-call cap is 2000000."
 
 [potential]
 kind = "lennard-jones"
@@ -23,7 +23,7 @@ starts = 200
 
 [convergence]
 energy_above_minimum = 0.001
-max_force_calls = 1000000
+max_force_calls = 2000000
 
 [input]
 archive_path = "website/globalopt/lj75/lj75_clusters.tgz"

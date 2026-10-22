@@ -4,7 +4,7 @@ suite = "globalopt"
 problem = "tip4p15"
 contract = "partial"
 entry_count = 2
-remark = "Success is an energy at or below the Cambridge Cluster Database TIP4P N=15 minimum plus 0.001. The cap of 10000000 force calls is above the archived GMIN maximum of 6176900."
+remark = "Success is an energy at or below the Cambridge Cluster Database TIP4P N=15 minimum plus 0.001. The force-call cap is 2000000."
 
 [potential]
 kind = "tip4p"
@@ -20,7 +20,7 @@ starts = 500
 
 [convergence]
 energy_above_minimum = 0.001
-max_force_calls = 10000000
+max_force_calls = 2000000
 
 [input]
 archive_path = "website/globalopt/tip4p15/500_tip4p15.tar.gz"
