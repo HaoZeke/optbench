@@ -1,0 +1,31 @@
+# rep 1 force_calls 1673308 unique_saddles 97 fraction_connected 0.7551330798479088 total_searches 2630 reached 1
+# rep 2 force_calls 4474994 unique_saddles 117 fraction_connected 0.7669575007036308 total_searches 7106 reached 1
+# rep 3 force_calls 1127156 unique_saddles 85 fraction_connected 0.7760445682451254 total_searches 1795 reached 1
+# rep 4 force_calls 3945036 unique_saddles 124 fraction_connected 0.7617670682730924 total_searches 6225 reached 1
+# rep 5 force_calls 2383458 unique_saddles 97 fraction_connected 0.7665958576739246 total_searches 3766 reached 1
+# rep 6 force_calls 3026895 unique_saddles 117 fraction_connected 0.7634161620380038 total_searches 4789 reached 1
+# rep 7 force_calls 3777186 unique_saddles 122 fraction_connected 0.7564316739057801 total_searches 5986 reached 1
+# rep 8 force_calls 1890015 unique_saddles 92 fraction_connected 0.769307923771314 total_searches 2991 reached 1
+# rep 9 force_calls 1517722 unique_saddles 86 fraction_connected 0.7717842323651453 total_searches 2410 reached 1
+code eOn (develop a079a39c)
+code_version 3.6.0
+commit a079a39c69160200f6fc39b862b09af72583c62c
+counter client-search-results
+count_keys sad-fcs+mins-fcs
+contributor Rohit Goswami
+repetitions 9
+min_mode_method dimer
+communicator_jobs 8
+force_calls 2646196.6666666665
+force_calls_min 1127156
+force_calls_max 4474994
+unique_saddles 104.11111111111111
+fraction_connected 0.7652708963137695
+total_searches 4188.666666666667
+nfailed 0
+algorithm Dimer
+template eon-develop-a079a39c/saddle-pt-island-dimer-cg-bowl
+problem saddle-search/pt-island
+reducer akmc-until-27
+tuning stock
+cap 100000000

@@ -1,0 +1,20 @@
+# rep 1000 force_calls 2771491 unique_saddles 92 fraction_connected 0.7734319103267351 total_searches 4193 client_calls 2767090
+force_calls 2771491
+unique_saddles 92
+fraction_connected 0.7734319103267351
+total_searches 4193
+nfailed 0
+code eOn (develop a079a39c)
+code_version 3.6.0
+commit a079a39c69160200f6fc39b862b09af72583c62c
+algorithm Dimer
+template eon-develop-a079a39c/pt-island-stock
+problem saddle-search/pt-island
+reducer harness
+counter harness
+count_keys HarnessCounter
+tuning default
+cap 100000000
+par2_mean 2771491
+force_calls_min 2771491
+force_calls_max 2771491

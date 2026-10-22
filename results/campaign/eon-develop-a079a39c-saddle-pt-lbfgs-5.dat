@@ -1,0 +1,28 @@
+# rep 1 force_calls 1643582 unique_saddles 114 fraction_connected 0.6839064649243466 total_searches 3635 client_calls 1623448
+# rep 2 force_calls 3539988 unique_saddles 138 fraction_connected 0.6686202063957192 total_searches 7849 client_calls 3515607
+# rep 3 force_calls 912258 unique_saddles 92 fraction_connected 0.6704024452368823 total_searches 1963 client_calls 890530
+# rep 4 force_calls 1212346 unique_saddles 103 fraction_connected 0.6780104712041884 total_searches 2674 client_calls 1193780
+# rep 5 force_calls 2825038 unique_saddles 129 fraction_connected 0.6655948553054662 total_searches 6220 client_calls 2804315
+# rep 6 force_calls 1974409 unique_saddles 122 fraction_connected 0.6713302752293578 total_searches 4360 client_calls 1949324
+# rep 7 force_calls 1581491 unique_saddles 108 fraction_connected 0.6742120343839542 total_searches 3490 client_calls 1553821
+# rep 8 force_calls 2491718 unique_saddles 123 fraction_connected 0.6726212176449143 total_searches 5486 client_calls 2469623
+# rep 9 force_calls 1374402 unique_saddles 111 fraction_connected 0.6708360763660303 total_searches 3038 client_calls 1357838
+force_calls 1950581.3333333333
+unique_saddles 115.55555555555556
+fraction_connected 0.6728371162989844
+total_searches 4301.666666666667
+nfailed 0
+code eOn (develop a079a39c)
+code_version 3.6.0
+commit a079a39c69160200f6fc39b862b09af72583c62c
+algorithm Dimer
+template eon-develop-a079a39c/saddle-pt-lbfgs-5
+problem saddle-search/pt-island
+reducer harness
+counter harness
+count_keys HarnessCounter
+tuning default
+cap 100000000
+par2_mean 1950581.3333333333
+force_calls_min 912258
+force_calls_max 3539988

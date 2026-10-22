@@ -500,7 +500,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td data-field="template">sella/pt-island-search-default</td><td data-field="version">Sella 2.6.0</td><td data-field="commit">6cfb60cdb100</td><td data-field="source">asv</td><td data-field="par2_mean">5201.62</td><td data-field="success_rate">0.75</td><td data-field="wilson">0.505017–0.898179</td><td data-field="median_calls">225</td><td data-field="mean_calls">247.812</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 4</td><td data-field="n">16</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">Eon rows are not yet on the harness counter. Partial rows stay off the ranked table.</p>
+   <p class="bench-gaps">Eon rows are not yet on the harness counter. eOn (develop a079a39c) rows are off the ranked table. Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/saddle-search.html#pt-island">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="pt-island-legacy">
    <h3>Legacy 2014 archive</h3>
