@@ -16,8 +16,8 @@ tuning default
 counter harness
 cap 2000000
 par2_mean 3537346.51
-wilson_low 0.0930598528366
-wilson_high 0.232835595908
+rate_low 0.0930598528366
+rate_high 0.232835595908
 par2_median 4000000
 par2_median_low 4000000
 par2_median_high 4000000

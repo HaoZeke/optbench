@@ -1,0 +1,41 @@
+id = "eon/500350d9-neb-pt-qm"
+engine = "eon"
+problem = "neb/Pt-heptamer"
+code = "eOn"
+code_version = "(develop 500350d9) · QuickMin"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
+algorithm = "QuickMin"
+reducer = "harness"
+failure_cap = 10000
+kind = "neb-pt"
+seeds = [1]
+note = '''
+Stock ini of eon-client/neb-pt-qm. eOn develop 500350d9fae881f06c7ef194e5868da079c4be5a, no source patch. The harness counts every force() on ext_pot. failure_cap 10000 is neb/Pt-heptamer convergence.max_force_calls.
+'''
+[ini.Main]
+job = "nudged_elastic_band"
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "qm"
+convergence_metric = "norm"
+converged_force = 0.01
+max_move = 0.2
+max_iterations = 1000
+time_step = 1.527
+
+[ini."Nudged Elastic Band"]
+images = 8
+climbing_image_method = true
+climbing_image = true
+doubly_nudged = false
+doubly_nudged_switching = false
+opt_method = "qm"
+converged_force = 0.01
+max_iterations = 1000
+spring = 5
+
+[ini.QuickMin]
+time_step = 1.527

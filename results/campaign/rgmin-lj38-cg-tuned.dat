@@ -15,11 +15,11 @@ code_version 0.4.0
 commit 24236559f3815847cac89ba0a7be634ce0beb4a9
 algorithm CG
 template rgmin/lj38-cg-tuned
-tuning tuned
+tuning adjusted
 counter harness
 par2_mean 669.237
-wilson_low 0.989760443723
-wilson_high 0.99844341186
+rate_low 0.989760443723
+rate_high 0.99844341186
 par2_median 539
 par2_median_low 523
 par2_median_high 554.5

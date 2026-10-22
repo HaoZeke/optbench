@@ -519,8 +519,8 @@ def _dat(summary: dict, template: dict, metrics: dict) -> str:
         "tuning": template.get("tuning", ""),
         "counter": "harness",
         "par2_mean": metrics.get("par2_mean"),
-        "wilson_low": metrics.get("wilson_low"),
-        "wilson_high": metrics.get("wilson_high"),
+        "rate_low": metrics.get("rate_low"),
+        "rate_high": metrics.get("rate_high"),
         "par2_median": metrics.get("median"),
         "par2_median_low": metrics.get("median_low"),
         "par2_median_high": metrics.get("median_high"),
@@ -588,9 +588,9 @@ def run_template(
         names = [f"{label}.{index}" for index in range(1, int(config["starts"]) + 1)]
     else:
         names = _load_start_names(root, problem, geometries, work, output)
-    # A template structure budget is the whole row. A window added on
-    # the problem does not turn that budget into a success search.
-    if raw_tolerance is None or config.get("budget_structures"):
+    if config.get("budget_structures") or raw_tolerance is None:
+        # A structure budget is the stop. The Wales minimum is the LJ38 file
+        # and is not applied to a larger cluster.
         reference = None
         tolerance = None
     else:
@@ -677,7 +677,7 @@ def run_template(
         "schema": "optbench.result/v2",
         "status": "measured",
         "problem": problem["id"],
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-bootstrap",
         "par_factor": 2,
         "bootstrap_resamples": 2000,
         "bootstrap_seed": 20261015,

@@ -19,8 +19,8 @@ tuning default
 counter harness
 problem minimization/lj38
 par2_mean 288.145
-wilson_low 0.992737192137
-wilson_high 0.999451356412
+rate_low 0.992737192137
+rate_high 0.999451356412
 par2_median 235.5
 par2_median_low 232
 par2_median_high 242

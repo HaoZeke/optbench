@@ -26,7 +26,7 @@ def test_pele_templates_cover_the_minimization_problems():
         assert template["commit"] == PELE_COMMIT
         assert template["code_version"] == PELE_VERSION
         assert template["code"] == "pele"
-        assert template["tuning"] in ("default", "tuned")
+        assert template["tuning"] in ("default", "adjusted")
         problem = resolve_problem(ROOT, template["problem"])
         _check_stop(problem, template)
         method = template["pele"]["method"]
@@ -36,7 +36,7 @@ def test_pele_templates_cover_the_minimization_problems():
     for problem in ("minimization/lj38", "minimization/morse-bulk"):
         for method in METHODS:
             assert (problem, method, "default") in seen
-    assert ("minimization/lj38", "lbfgs", "tuned") in seen
+    assert ("minimization/lj38", "lbfgs", "adjusted") in seen
     tuned = next(row for row in found if row["id"] == "pele/lj38-lbfgs-m100")
     assert tuned["pele"]["M"] == 100
     assert tuned["pele"]["maxstep"] == 0.2

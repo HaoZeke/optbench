@@ -1,0 +1,570 @@
+#+TITLE: rgsaddle
+#+OPTIONS: toc:nil num:nil author:nil
+
+#+begin_export rst
+.. raw:: html
+
+   <section class="bench" id="code-rgsaddle">
+   <h2>rgsaddle</h2>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>saddle search</td>
+   <td>main</td>
+   <td>c0db2b8d333c</td>
+   <td><a href="https://github.com/OmniPotentRPC/rgsaddle">https://github.com/OmniPotentRPC/rgsaddle</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-rows">
+   <caption>Every ranked row for this code.</caption>
+   <thead><tr><th>Problem</th><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="double-ended-saddle-search/lj38" data-label="rgsaddle (0.2.2) · CI-NEB energy-weighted">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="label">rgsaddle (0.2.2) · CI-NEB energy-weighted</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">9</td>
+   <td data-field="par2_mean">2145.72</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1461.5</td>
+   <td data-field="mean_calls">1595.72</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 11, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38" data-label="rgsaddle (0.2.2) · CI-NEB">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="label">rgsaddle (0.2.2) · CI-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">10</td>
+   <td data-field="par2_mean">2272.18</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1484.5</td>
+   <td data-field="mean_calls">1617.82</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 1, cap 12, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38" data-label="rgsaddle (0.2.2) · OCI-NEB">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="label">rgsaddle (0.2.2) · OCI-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">11</td>
+   <td data-field="par2_mean">2289.86</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1508.5</td>
+   <td data-field="mean_calls">1639.86</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 13, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38" data-label="rgsaddle (0.2.2) · IDPP CI-NEB">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="label">rgsaddle (0.2.2) · IDPP CI-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">12</td>
+   <td data-field="par2_mean">2374.04</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1614.5</td>
+   <td data-field="mean_calls">1670.18</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 1, cap 13, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38" data-label="rgsaddle (0.2.2) · S-IDPP CI-NEB">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="label">rgsaddle (0.2.2) · S-IDPP CI-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">14</td>
+   <td data-field="par2_mean">2473.46</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1454.5</td>
+   <td data-field="mean_calls">1664.2</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 1, cap 15, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38" data-label="rgsaddle (0.2.2) · NEB">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="label">rgsaddle (0.2.2) · NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">21</td>
+   <td data-field="par2_mean">5000</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">2478.5</td>
+   <td data-field="mean_calls">2126.6</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 25, cap 25, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="rgsaddle (0.2.2) · CI-NEB energy-weighted">
+   <td>lj38_2ts_separation</td>
+   <td data-field="label">rgsaddle (0.2.2) · CI-NEB energy-weighted</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">7</td>
+   <td data-field="par2_mean">266216</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="mean_calls">6803.94</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 27, wrong_stationary 0</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="rgsaddle (0.2.2) · CI-NEB">
+   <td>lj38_2ts_separation</td>
+   <td data-field="label">rgsaddle (0.2.2) · CI-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">12</td>
+   <td data-field="par2_mean">402545</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="mean_calls">8309.86</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 37, wrong_stationary 4</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="rgsaddle (0.2.2) · OCI-NEB">
+   <td>lj38_2ts_separation</td>
+   <td data-field="label">rgsaddle (0.2.2) · OCI-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">13</td>
+   <td data-field="par2_mean">402564</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="mean_calls">8470.33</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 38, wrong_stationary 3</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="rgsaddle (0.2.2) · IDPP CI-NEB">
+   <td>lj38_2ts_separation</td>
+   <td data-field="label">rgsaddle (0.2.2) · IDPP CI-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">16</td>
+   <td data-field="par2_mean">431764</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="mean_calls">8882.94</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 41, wrong_stationary 3</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="rgsaddle (0.2.2) · S-IDPP CI-NEB">
+   <td>lj38_2ts_separation</td>
+   <td data-field="label">rgsaddle (0.2.2) · S-IDPP CI-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">17</td>
+   <td data-field="par2_mean">441455</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="mean_calls">8880.2</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 41, wrong_stationary 4</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="rgsaddle (0.2.2) · NEB">
+   <td>lj38_2ts_separation</td>
+   <td data-field="label">rgsaddle (0.2.2) · NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">24</td>
+   <td data-field="par2_mean">500000</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">10000</td>
+   <td data-field="mean_calls">9773.86</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 3, cap 45, wrong_stationary 3</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-label="rgsaddle (0.2.2) · CI-NEB energy-weighted">
+   <td>pt-island</td>
+   <td data-field="label">rgsaddle (0.2.2) · CI-NEB energy-weighted</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">10</td>
+   <td data-field="par2_mean">938.102</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">478</td>
+   <td data-field="mean_calls">561.644</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 2, cap 0, wrong_stationary 2</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-label="rgsaddle (0.2.2) · OCI-NEB">
+   <td>pt-island</td>
+   <td data-field="label">rgsaddle (0.2.2) · OCI-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">11</td>
+   <td data-field="par2_mean">975.983</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">602</td>
+   <td data-field="mean_calls">823.441</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 3, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-label="rgsaddle (0.2.2) · IDPP CI-NEB">
+   <td>pt-island</td>
+   <td data-field="label">rgsaddle (0.2.2) · IDPP CI-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">12</td>
+   <td data-field="par2_mean">1062.46</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">491</td>
+   <td data-field="mean_calls">585.729</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 5, cap 0, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-label="rgsaddle (0.2.2) · CI-NEB">
+   <td>pt-island</td>
+   <td data-field="label">rgsaddle (0.2.2) · CI-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">13</td>
+   <td data-field="par2_mean">1078.42</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">479</td>
+   <td data-field="mean_calls">601.542</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 5, cap 0, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-label="rgsaddle (0.2.2) · S-IDPP CI-NEB">
+   <td>pt-island</td>
+   <td data-field="label">rgsaddle (0.2.2) · S-IDPP CI-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">15</td>
+   <td data-field="par2_mean">1134.93</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">461</td>
+   <td data-field="mean_calls">607.153</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 5, cap 1, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-label="rgsaddle (0.2.2) · NEB">
+   <td>pt-island</td>
+   <td data-field="label">rgsaddle (0.2.2) · NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">21</td>
+   <td data-field="par2_mean">6000</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">533</td>
+   <td data-field="mean_calls">744.475</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 56, cap 3, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="lowest-eigenvector/lj38" data-label="rgsaddle (0.2.2) · Lanczos">
+   <td>lj38</td>
+   <td data-field="label">rgsaddle (0.2.2) · Lanczos</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">3</td>
+   <td data-field="par2_mean">26.12</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">26</td>
+   <td data-field="mean_calls">26.12</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="lowest-eigenvector/lj38" data-label="rgsaddle (0.2.2) · Dimer">
+   <td>lj38</td>
+   <td data-field="label">rgsaddle (0.2.2) · Dimer</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">17</td>
+   <td data-field="par2_mean">31.4</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">23</td>
+   <td data-field="mean_calls">31.4</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-label="rgsaddle (0.2.2) · S-IDPP CI-NEB">
+   <td>Pt-heptamer</td>
+   <td data-field="label">rgsaddle (0.2.2) · S-IDPP CI-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">4</td>
+   <td data-field="par2_mean">732.462</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">682</td>
+   <td data-field="mean_calls">732.462</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-label="rgsaddle (0.2.2) · IDPP CI-NEB">
+   <td>Pt-heptamer</td>
+   <td data-field="label">rgsaddle (0.2.2) · IDPP CI-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">5</td>
+   <td data-field="par2_mean">735.538</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">706</td>
+   <td data-field="mean_calls">735.538</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-label="rgsaddle (0.2.2) · CI-NEB">
+   <td>Pt-heptamer</td>
+   <td data-field="label">rgsaddle (0.2.2) · CI-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">6</td>
+   <td data-field="par2_mean">736.769</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">698</td>
+   <td data-field="mean_calls">736.769</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-label="rgsaddle (0.2.2) · CI-NEB energy-weighted">
+   <td>Pt-heptamer</td>
+   <td data-field="label">rgsaddle (0.2.2) · CI-NEB energy-weighted</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">7</td>
+   <td data-field="par2_mean">759.692</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">740</td>
+   <td data-field="mean_calls">759.692</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-label="rgsaddle (0.2.2) · OCI-NEB">
+   <td>Pt-heptamer</td>
+   <td data-field="label">rgsaddle (0.2.2) · OCI-NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">8</td>
+   <td data-field="par2_mean">760.769</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">722</td>
+   <td data-field="mean_calls">760.769</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-label="rgsaddle (0.2.2) · NEB">
+   <td>Pt-heptamer</td>
+   <td data-field="label">rgsaddle (0.2.2) · NEB</td>
+   <td data-field="family">Band / NEB</td>
+   <td data-field="family_rank">14</td>
+   <td data-field="par2_mean">20000</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">962</td>
+   <td data-field="mean_calls">970.615</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 13, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   <tr data-problem="saddle-search/pt-island" data-label="rgsaddle (0.2.2) · Dimer FIRE">
+   <td>Pt heptamer island</td>
+   <td data-field="label">rgsaddle (0.2.2) · Dimer FIRE</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">2</td>
+   <td data-field="par2_mean">10128</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1013</td>
+   <td data-field="mean_calls">1011.03</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 1, cap 19999, wrong_stationary 0</td>
+   <td data-field="n">20000</td>
+   </tr>
+   <tr data-problem="saddle-search/pt-island" data-label="rgsaddle (0.2.2) · Dimer L-BFGS">
+   <td>Pt heptamer island</td>
+   <td data-field="label">rgsaddle (0.2.2) · Dimer L-BFGS</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">3</td>
+   <td data-field="par2_mean">10128</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1013</td>
+   <td data-field="mean_calls">1012.16</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 20000, wrong_stationary 0</td>
+   <td data-field="n">20000</td>
+   </tr>
+   <tr data-problem="saddle-search/pt-island" data-label="rgsaddle (0.2.2) · Dimer rotation-skip L-BFGS">
+   <td>Pt heptamer island</td>
+   <td data-field="label">rgsaddle (0.2.2) · Dimer rotation-skip L-BFGS</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">4</td>
+   <td data-field="par2_mean">10128</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">441</td>
+   <td data-field="mean_calls">479.98</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 19718, cap 262, wrong_stationary 20</td>
+   <td data-field="n">20000</td>
+   </tr>
+   <tr data-problem="saddle-search/pt-island" data-label="rgsaddle (0.2.2) · Lanczos L-BFGS">
+   <td>Pt heptamer island</td>
+   <td data-field="label">rgsaddle (0.2.2) · Lanczos L-BFGS</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">5</td>
+   <td data-field="par2_mean">10128</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1002</td>
+   <td data-field="mean_calls">998.34</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 4068, cap 15932, wrong_stationary 0</td>
+   <td data-field="n">20000</td>
+   </tr>
+   <tr data-problem="tsopt/LJ38" data-label="rgsaddle (0.2.2) · Dimer rotation-skip L-BFGS">
+   <td>LJ38</td>
+   <td data-field="label">rgsaddle (0.2.2) · Dimer rotation-skip L-BFGS</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">11</td>
+   <td data-field="par2_mean">7803.19</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">856.5</td>
+   <td data-field="mean_calls">2926.82</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 27, wrong_stationary 47</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/LJ38" data-label="rgsaddle (0.2.2) · P-RFO">
+   <td>LJ38</td>
+   <td data-field="label">rgsaddle (0.2.2) · P-RFO</td>
+   <td data-field="family">Single-ended saddle</td>
+   <td data-field="family_rank">6</td>
+   <td data-field="par2_mean">15147</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">460.5</td>
+   <td data-field="mean_calls">723.265</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 3, wrong_stationary 147</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/LJ38" data-label="rgsaddle (0.2.2) · Lanczos L-BFGS">
+   <td>LJ38</td>
+   <td data-field="label">rgsaddle (0.2.2) · Lanczos L-BFGS</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">12</td>
+   <td data-field="par2_mean">19418.8</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">10011</td>
+   <td data-field="mean_calls">9779.39</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 193, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/LJ38" data-label="rgsaddle (0.2.2) · Dimer FIRE">
+   <td>LJ38</td>
+   <td data-field="label">rgsaddle (0.2.2) · Dimer FIRE</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">13</td>
+   <td data-field="par2_mean">19455</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">3666</td>
+   <td data-field="mean_calls">4792.34</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 164, cap 28, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/LJ38" data-label="rgsaddle (0.2.2) · Dimer L-BFGS">
+   <td>LJ38</td>
+   <td data-field="label">rgsaddle (0.2.2) · Dimer L-BFGS</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">15</td>
+   <td data-field="par2_mean">20000</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">10011</td>
+   <td data-field="mean_calls">9991.44</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 199, wrong_stationary 1</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="tsopt/pt-island" data-label="rgsaddle (0.2.2) · Dimer rotation-skip L-BFGS">
+   <td>pt-island</td>
+   <td data-field="label">rgsaddle (0.2.2) · Dimer rotation-skip L-BFGS</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">10</td>
+   <td data-field="par2_mean">223.898</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">145</td>
+   <td data-field="mean_calls">223.898</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">49</td>
+   </tr>
+   <tr data-problem="tsopt/pt-island" data-label="rgsaddle (0.2.2) · Dimer FIRE">
+   <td>pt-island</td>
+   <td data-field="label">rgsaddle (0.2.2) · Dimer FIRE</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">13</td>
+   <td data-field="par2_mean">3274.14</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">2337</td>
+   <td data-field="mean_calls">3070.14</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
+   <td data-field="n">49</td>
+   </tr>
+   <tr data-problem="tsopt/pt-island" data-label="rgsaddle (0.2.2) · Lanczos L-BFGS">
+   <td>pt-island</td>
+   <td data-field="label">rgsaddle (0.2.2) · Lanczos L-BFGS</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">14</td>
+   <td data-field="par2_mean">9736.8</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">974</td>
+   <td data-field="mean_calls">5048.08</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 23, wrong_stationary 0</td>
+   <td data-field="n">49</td>
+   </tr>
+   <tr data-problem="tsopt/pt-island" data-label="rgsaddle (0.2.2) · Dimer L-BFGS">
+   <td>pt-island</td>
+   <td data-field="label">rgsaddle (0.2.2) · Dimer L-BFGS</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">15</td>
+   <td data-field="par2_mean">11854.5</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">10011</td>
+   <td data-field="mean_calls">6146.45</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 28, wrong_stationary 0</td>
+   <td data-field="n">49</td>
+   </tr>
+   </tbody></table></div>
+   </section>
+#+end_export
