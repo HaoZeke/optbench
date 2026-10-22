@@ -1,0 +1,45 @@
+id = "pele/pt-island-search"
+engine = "pele"
+code = "pele"
+code_version = "0.1.2"
+commit = "b7081b932a060be11342fbe8287ac35da8ada879"
+algorithm = "hybrid eigenvector following"
+problem = "saddle-search/pt-island"
+task = "saddle-search"
+tuning = "default"
+note = "Hybrid eigenvector following from draw_search_start. Library HEF controls and first-order Rayleigh-Ritz. orthog is none because the substrate pins the island. The climb stops at 1000 force calls. Each endpoint minimization has a budget of 2000. The PAR-2 cap is 5064. The link is the eOn r2205 per-atom test and novelty is find_repeat."
+
+[stop]
+force_norm = 0.001
+
+[ini.Optimizer]
+max_iterations = 1000
+converged_force = 0.001
+
+[hef]
+nsteps = 100
+nfail_max = 200
+nsteps_tangent1 = 10
+nsteps_tangent2 = 100
+max_uphill_step = 0.5
+max_uphill_step_initial = 0.2
+demand_initial_negative_vec = false
+check_negative = true
+index_seed = 0
+orthog = "none"
+eigenvec0 = "kick"
+
+[hef.lowest]
+first_order = true
+
+[search]
+repetitions = 1
+displace_atoms = "0,1,2,3,4,5,6"
+displace_magnitude = 0.1
+displace_radius = 3.3
+max_searches = 20000
+connected = 27
+barrier_eV = 1.5
+endpoint_budget = 2000
+climb_overshoot = 64
+minimize_budget = 5000
