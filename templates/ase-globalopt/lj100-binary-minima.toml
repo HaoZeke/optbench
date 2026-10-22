@@ -40,4 +40,4 @@ energy_above_minimum = 0.001
 max_force_calls = 2000000
 
 [input]
-archive_path = "website/globalopt/lj100-binary/lj100-binary-con.tgz"
+archive_path = "website/globalopt/lj100-binary/lj100-binary-a42b58.tgz"
