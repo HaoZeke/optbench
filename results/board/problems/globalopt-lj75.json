@@ -95,6 +95,53 @@
       "wilson_low": 0.0
     }
   ],
-  "ranked": [],
+  "profile_gap": "No performance profile. One start has no finite cost.",
+  "ranked": [
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 2000000,
+      "code": "pele",
+      "code_version": "0.1.2",
+      "commit": "b7081b932a060be11342fbe8287ac35da8ada879",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "pele-b7081b93-lj75-basinhopping",
+      "failures": {
+        "cap": 199,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 200,
+      "history": false,
+      "max_calls": 2000000.0,
+      "mean_calls": 1998531.525,
+      "mean_per_image": null,
+      "median": 4000000.0,
+      "median_calls": 2000000.0,
+      "median_high": 4000000.0,
+      "median_low": 4000000.0,
+      "median_per_image": null,
+      "min_calls": 1706305.0,
+      "n": 200,
+      "nfailed": 199,
+      "note": "starts.jsonl",
+      "par2_mean": 3988531.525,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/pele-b7081b93-lj75-basinhopping.dat",
+      "problem": "globalopt/lj75",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 0.005,
+      "template": "pele/lj75-basinhopping",
+      "tuning": "default",
+      "wilson_high": 0.02777370439789293,
+      "wilson_low": 0.0008831687156009814
+    }
+  ],
   "title": "lj75"
 }
