@@ -22,10 +22,17 @@ A native bridge forwards each call to a ``PotServer`` in this process,
 and ``python -m optbench.extpot`` does that when the bridge is not built.
 The server refuses a search call at ``failure_cap`` before the potential
 runs, and that run is ``cap``. The client's ``total_force_calls`` is
-stored beside the harness count and is not the track. The binary is the
-develop source build named by ``EONCLIENT``
-(commit 7095b23ac17d49f434a5e08ccb072897ceca698e). The conda-forge 3.5.0
-pin is a different environment.
+stored beside the harness count and is not the track. The binary for the asv classes is the develop source build named by
+``EONCLIENT`` (commit 7095b23ac17d49f434a5e08ccb072897ceca698e).
+``run_case(..., expect_commit=...)`` checks a different pin, so a later
+develop commit can be measured without moving this one. The conda-forge
+3.5.0 pin is a different environment. Minimization kinds ``min-lj38``
+and ``min-morse`` read ``min.con`` after the client returns. A success
+there is the client stop under the cap, the force norm of the harness
+kernel at the problem stop, and Hessian index 0. That Hessian is not
+charged to ``HarnessCounter``. LJ38 drops the six rigid modes and uses
+``curvature_tolerance``. Morse bulk uses the full eigenvalue list and
+tolerance ``1e-6``.
 
 The default grid is one seed and the first start. ``OPTBENCH_ASV_FULL=1``
 at import selects the campaign grid. That subset is not a published
@@ -304,7 +311,17 @@ def classify_akmc(*, calls, cap, reached, crashed) -> dict:
     return {"force_calls": float(count), "success": False, "failure": "cap"}
 
 
-def _client() -> str:
+def _commit_matches(printed: str, expected: str) -> bool:
+    """True when the parenthesised ``--version`` token is that commit.
+
+    The binary prints the short token, and the pin stores the full sha.
+    """
+    if not printed or not expected:
+        return False
+    return expected.startswith(printed) or printed.startswith(expected)
+
+
+def _client(expected: str | None = None) -> str:
     global _CLIENT_OK
     env = os.environ.get("EONCLIENT")
     if env:
@@ -314,12 +331,15 @@ def _client() -> str:
         path = str(default) if default.is_file() else (shutil.which("eonclient") or "")
     if not path or not Path(path).is_file():
         raise RuntimeError("put the develop eonclient on EONCLIENT")
-    if not _CLIENT_OK:
-        from optbench.validate_counter import client_version
+    want = expected or EON_COMMIT
+    if expected is None and _CLIENT_OK:
+        return path
+    from optbench.validate_counter import client_version
 
-        _version, commit, _first = client_version(Path(path))
-        if not commit.startswith(EON_VERSION_TOKEN):
-            raise RuntimeError(f"{path} prints {commit}, expected {EON_COMMIT}")
+    _version, commit, _first = client_version(Path(path))
+    if not _commit_matches(commit, want):
+        raise RuntimeError(f"{path} prints {commit}, expected {want}")
+    if expected is None:
         _CLIENT_OK = True
     return path
 
@@ -452,20 +472,21 @@ def _extract(archive: Path, member: str, dest: Path) -> Path:
     return dest
 
 
-def _cache_path(template_name: str, seed: int, start: str, passes: int) -> Path:
+def _cache_path(template_name: str, seed: int, start: str, passes: int, commit: str | None = None) -> Path:
     safe = template_name.replace("/", "-")
-    return _CACHE / "harness-1" / EON_COMMIT / safe / f"passes-{passes}" / str(seed) / f"{start}.json"
+    pinned = commit or EON_COMMIT
+    return _CACHE / "harness-1" / pinned / safe / f"passes-{passes}" / str(seed) / f"{start}.json"
 
 
-def _read_cache(template_name: str, seed: int, start: str, passes: int) -> dict | None:
-    path = _cache_path(template_name, seed, start, passes)
+def _read_cache(template_name: str, seed: int, start: str, passes: int, commit: str | None = None) -> dict | None:
+    path = _cache_path(template_name, seed, start, passes, commit)
     if not path.is_file():
         return None
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def _write_cache(template_name: str, seed: int, start: str, passes: int, row: dict) -> None:
-    path = _cache_path(template_name, seed, start, passes)
+def _write_cache(template_name: str, seed: int, start: str, passes: int, row: dict, commit: str | None = None) -> None:
+    path = _cache_path(template_name, seed, start, passes, commit)
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(".tmp")
     temporary.write_text(json.dumps(row, sort_keys=True) + "\n", encoding="utf-8")
@@ -517,6 +538,14 @@ def _client_files(kind: str, start: str, work: Path):
             work / "product.con",
         )
         return [(str(reactant), "reactant.con"), (str(product), "product.con")], []
+    if kind == "min-lj38":
+        archive = _stored(ROOT, "website/minimization/lj38/lj38-clusters.tgz")
+        con = _extract(archive, f"lj38-clusters/{Path(start).name}", work / "src.con")
+        return [(str(con), "pos.con")], []
+    if kind == "min-morse":
+        archive = _stored(ROOT, "website/minimization/morse-bulk/morse-bulk.tgz")
+        con = _extract(archive, f"morse-bulk/{Path(start).name}", work / "src.con")
+        return [(str(con), "pos.con")], []
     if kind == "neb-pt":
         from optbench.eon_jobs import _extract as _unpack
 
@@ -657,7 +686,121 @@ def _run_akmc(template: dict, seed: int, work: Path, server, wrapper: Path, cap:
     return _guard_uncounted(record)
 
 
-def run_case(template_name: str, kind: str, seed: int, start: str, *, passes: int = 0, workers: int = 1) -> dict:
+def _lj_cluster_hessian(coords):
+    """Energy Hessian of shifted ``ljcluster`` at cutoff 15.
+
+    The shift is constant inside the cutoff, so the pair derivatives match
+    the unshifted 12-6 kernel. Pairs at or beyond the cutoff are omitted.
+    """
+    import numpy as np
+
+    from optbench.potentials import _as_positions, _hessian_from_pairs, _pairs
+
+    pos = _as_positions(coords)
+    iu, ju, diff, r2 = _pairs(pos, 15.0, None)
+    dim = pos.shape[0] * 3
+    if r2.size == 0:
+        return np.zeros((dim, dim))
+    inv_r2 = 1.0 / r2
+    sr6 = inv_r2**3
+    sr12 = sr6 * sr6
+    radius = np.sqrt(r2)
+    first = 24.0 * (-2.0 * sr12 + sr6) / radius
+    second = 24.0 * (26.0 * sr12 - 7.0 * sr6) * inv_r2
+    return _hessian_from_pairs(pos.shape[0], iu, ju, diff, r2, first, second)
+
+
+def _morse_pt_hessian(coords, box):
+    """Energy Hessian of ``morse_pt``: cutoff 9.5, shift does not enter."""
+    import numpy as np
+
+    from optbench.potentials import _as_positions, _hessian_from_pairs, _pairs
+
+    pos = _as_positions(coords)
+    lengths = _morse_lengths(box)
+    cell = None if lengths is None else np.asarray(lengths, dtype=np.float64)
+    iu, ju, diff, r2 = _pairs(pos, MORSE_CUTOFF, cell)
+    dim = pos.shape[0] * 3
+    if r2.size == 0:
+        return np.zeros((dim, dim))
+    radius = np.sqrt(r2)
+    gap = np.exp(-MORSE_A * (radius - MORSE_RE))
+    first = 2.0 * MORSE_D * MORSE_A * gap * (1.0 - gap)
+    second = 2.0 * MORSE_D * MORSE_A * MORSE_A * gap * (2.0 * gap - 1.0)
+    return _hessian_from_pairs(pos.shape[0], iu, ju, diff, r2, first, second)
+
+
+def minimum_stationary(potential: str, con_text: str, force_stop: float) -> dict:
+    """Force norm and Hessian index of one ``min.con`` on the harness kernel.
+
+    The evaluation does not go through ``HarnessCounter``. LJ38 is a free
+    cluster: six rigid modes are removed, and a curvature counts only below
+    ``-curvature_tolerance``. Morse bulk keeps every eigenvalue and uses
+    tolerance ``1e-6``.
+    """
+    import numpy as np
+
+    from optbench.lj import lj_cluster
+    from optbench.potentials import read_con
+    from optbench.stationary import curvature_tolerance, negative_index, vibrational_eigenvalues
+
+    pos, lengths = read_con(con_text)
+    flat = [float(value) for value in pos.reshape(-1)]
+    if potential == "ljcluster":
+        energy, forces = lj_cluster(flat)
+        matrix = _lj_cluster_hessian(flat)
+        values = vibrational_eigenvalues(matrix, flat, rotations=True)
+        tolerance = curvature_tolerance(force_stop, float(np.linalg.norm(matrix)))
+    elif potential == "morse_pt":
+        box = [
+            float(lengths[0]),
+            0.0,
+            0.0,
+            0.0,
+            float(lengths[1]),
+            0.0,
+            0.0,
+            0.0,
+            float(lengths[2]),
+        ]
+        energy, forces = morse_cluster(flat, None, box)
+        matrix = _morse_pt_hessian(flat, box)
+        matrix = 0.5 * (matrix + matrix.T)
+        values = [float(value) for value in np.linalg.eigvalsh(matrix)]
+        tolerance = 1e-6
+    else:
+        raise ValueError(f"no minimum index for potential {potential}")
+    return {
+        "energy": float(energy),
+        "force_norm": float(np.linalg.norm(np.asarray(forces, dtype=np.float64))),
+        "hessian_index": negative_index(values, tolerance),
+    }
+
+
+def _apply_minimum(record: dict, potential: str, con_text: str, force_stop: float) -> dict:
+    found = minimum_stationary(potential, con_text, force_stop)
+    record["energy"] = found["energy"]
+    record["force_norm"] = found["force_norm"]
+    record["hessian_index"] = found["hessian_index"]
+    if found["force_norm"] > force_stop:
+        record["success"] = False
+        record["failure"] = "divergence"
+    elif found["hessian_index"] != 0:
+        record["success"] = False
+        record["failure"] = "wrong_stationary"
+    return record
+
+
+def run_case(
+    template_name: str,
+    kind: str,
+    seed: int,
+    start: str,
+    *,
+    passes: int = 0,
+    workers: int = 1,
+    expect_commit: str | None = None,
+) -> dict:
     """One seed and one start. The dict is what the tracks report."""
     from optbench.campaign import load_template
     from optbench.eon_jobs import _execute
@@ -679,7 +822,7 @@ def run_case(template_name: str, kind: str, seed: int, start: str, *, passes: in
                 count_key = "force_calls_neb" if kind == "neb-pt" else "total_force_calls"
                 found = _execute(
                     (
-                        _client(),
+                        _client(expect_commit),
                         _ini(template, seed, wrapper),
                         str(work / "run"),
                         copies,
@@ -693,6 +836,20 @@ def run_case(template_name: str, kind: str, seed: int, start: str, *, passes: in
                 record["client_reason"] = found.get("reason")
                 record["extrema"] = found.get("extrema")
                 record = _guard_uncounted(record)
+                if kind in {"min-lj38", "min-morse"} and record.get("success"):
+                    min_con = work / "run" / "min.con"
+                    if not min_con.is_file():
+                        record["success"] = False
+                        record["failure"] = "crash"
+                    else:
+                        con_text = min_con.read_text(encoding="utf-8")
+                        stop = float(template["ini"]["Optimizer"]["converged_force"])
+                        try:
+                            _apply_minimum(record, potential, con_text, stop)
+                        except Exception as exc:
+                            record["success"] = False
+                            record["failure"] = "crash"
+                            record["error"] = f"{type(exc).__name__}: {exc}"
         record["seconds"] = time.monotonic() - started
         record["potential"] = potential
         record["counter"] = "harness"
@@ -901,3 +1058,122 @@ def _specs() -> list[dict]:
 for _spec in _specs():
     _cls = _bind(_spec)
     globals()[_spec["cls"]] = _cls
+
+
+def campaign_starts(kind: str) -> list[str]:
+    """Full start list for one develop campaign kind."""
+    if kind == "min-lj38":
+        return [f"cluster_{index:04d}.con" for index in range(1000)]
+    if kind == "min-morse":
+        return [f"pos_{index:04d}.con" for index in range(100)]
+    if kind == "neb-pt":
+        return [f"min{index:02d}" for index in range(1, 14)]
+    if kind == "ts-pt":
+        return [f"initial_{index}" for index in range(49)]
+    raise ValueError(f"no campaign grid for {kind}")
+
+
+def _fill_one(payload: tuple) -> dict:
+    name, kind, seed, start, commit = payload
+    try:
+        cached = _read_cache(name, int(seed), str(start), 0, commit)
+        if cached is None:
+            cached = run_case(name, kind, int(seed), str(start), expect_commit=commit)
+            _write_cache(name, int(seed), str(start), 0, cached, commit)
+        row = dict(cached)
+    except Exception as exc:
+        row = {
+            "force_calls": 0.0,
+            "success": False,
+            "failure": "crash",
+            "error": f"{type(exc).__name__}: {exc}",
+            "counter": "harness",
+            "uncached": True,
+        }
+    row["template"] = name
+    row["seed"] = int(seed)
+    row["start"] = str(start)
+    return row
+
+
+def fill_named(names: list[str], *, commit: str, workers: int = 1) -> list[dict]:
+    """Run each template on its full grid and write ``results/campaign``.
+
+    ``commit`` is the develop pin ``EONCLIENT`` must print. Workers use
+    the spawn context so each one imports a fresh interpreter.
+    """
+    from concurrent.futures import ProcessPoolExecutor, as_completed
+
+    from optbench.campaign import load_template
+    from optbench.eon_harness import write_campaign
+
+    if not commit:
+        raise ValueError("commit is required")
+    templates = {}
+    jobs = []
+    for name in names:
+        template = load_template(ROOT, name)
+        templates[name] = template
+        kind = str(template["kind"])
+        for start in campaign_starts(kind):
+            jobs.append((name, kind, 1, start, commit))
+    results = []
+
+    def _note(index: int, row: dict) -> None:
+        if index % 25 == 0 or index == len(jobs):
+            print(
+                f"{index}/{len(jobs)} {row['template']} {row['start']} "
+                f"calls={row.get('force_calls')} success={row.get('success')} failure={row.get('failure')}",
+                flush=True,
+            )
+
+    if workers <= 1:
+        for index, job in enumerate(jobs, start=1):
+            row = _fill_one(job)
+            results.append(row)
+            _note(index, row)
+    else:
+        import multiprocessing as mp
+
+        with ProcessPoolExecutor(max_workers=workers, mp_context=mp.get_context("spawn")) as pool:
+            futures = [pool.submit(_fill_one, job) for job in jobs]
+            for index, future in enumerate(as_completed(futures), start=1):
+                row = future.result()
+                results.append(row)
+                _note(index, row)
+    grouped: dict[str, list] = {name: [] for name in templates}
+    for row in results:
+        grouped.setdefault(row["template"], []).append((row["seed"], row["start"], row))
+    written = []
+    for name, template in templates.items():
+        stem = name.replace("/", "-")
+        output = ROOT / "results" / "campaign" / f"{stem}.dat"
+        rows = grouped.get(name, [])
+        summary = write_campaign(template, rows, output)
+        if summary:
+            written.append(summary)
+            print(
+                f"{summary['problem']} {summary['template']} "
+                f"force_calls={summary.get('force_calls')} nfailed={summary['nfailed']} "
+                f"starts={summary['starts']} partial={summary['partial']}",
+                flush=True,
+            )
+        else:
+            errors = [str(row.get("error") or row.get("failure") or "") for _seed, _start, row in rows]
+            print(f"{template['problem']} {name} wrote nothing rows={len(rows)} errors={errors[:4]}", flush=True)
+    return written
+
+
+def main(argv: list[str] | None = None) -> None:
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Run named eOn develop templates through the harness.")
+    parser.add_argument("templates", nargs="+")
+    parser.add_argument("--commit", required=True)
+    parser.add_argument("--workers", type=int, default=1)
+    args = parser.parse_args(argv)
+    fill_named(list(args.templates), commit=str(args.commit), workers=int(args.workers))
+
+
+if __name__ == "__main__":
+    main()

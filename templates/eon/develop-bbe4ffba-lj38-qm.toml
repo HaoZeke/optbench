@@ -1,0 +1,27 @@
+id = "eon/develop-bbe4ffba-lj38-qm"
+engine = "eon"
+problem = "minimization/lj38"
+code = "eOn"
+code_version = "(develop bbe4ffba)"
+commit = "bbe4ffbad32b8a479bf171cd7ff1497e363940e3"
+algorithm = "QuickMin"
+kind = "min-lj38"
+reducer = "harness"
+failure_cap = 10000
+note = "QuickMin on develop bbe4ffbad32b8a479bf171cd7ff1497e363940e3. opt_backend is unset, so the binary keeps the eon backend. The ini matches eon-client/qm: QuickMin time_step 0.01. Potential ljcluster, counted by the harness. A kept start has harness calls under the cap 10000, a force norm at 0.01, and vibrational Hessian index 0."
+
+[ini.Main]
+job = "minimization"
+
+[ini.Potential]
+potential = "ljcluster"
+
+[ini.Optimizer]
+opt_method = "qm"
+convergence_metric = "norm"
+converged_force = 0.01
+max_move = 0.2
+max_iterations = 10000
+
+[ini.QuickMin]
+time_step = 0.01

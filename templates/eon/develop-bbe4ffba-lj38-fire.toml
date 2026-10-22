@@ -1,0 +1,24 @@
+id = "eon/develop-bbe4ffba-lj38-fire"
+engine = "eon"
+problem = "minimization/lj38"
+code = "eOn"
+code_version = "(develop bbe4ffba)"
+commit = "bbe4ffbad32b8a479bf171cd7ff1497e363940e3"
+algorithm = "FIRE"
+kind = "min-lj38"
+reducer = "harness"
+failure_cap = 10000
+note = "FIRE on develop bbe4ffbad32b8a479bf171cd7ff1497e363940e3. opt_backend is unset, so the binary keeps the eon backend. The optimizer block matches eon-client/fire and eon-svn/fire: opt_method fire, max_move 0.2, max_iterations 10000, converged_force 0.01. There is no FIRE section, so the struct FIRE defaults stand. Potential ljcluster, counted by the harness. A kept start has harness calls under the cap 10000, a force norm at 0.01, and vibrational Hessian index 0."
+
+[ini.Main]
+job = "minimization"
+
+[ini.Potential]
+potential = "ljcluster"
+
+[ini.Optimizer]
+opt_method = "fire"
+convergence_metric = "norm"
+converged_force = 0.01
+max_move = 0.2
+max_iterations = 10000

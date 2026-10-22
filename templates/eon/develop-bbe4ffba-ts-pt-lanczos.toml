@@ -1,0 +1,38 @@
+id = "eon/develop-bbe4ffba-ts-pt-lanczos"
+engine = "eon"
+problem = "tsopt/pt-island"
+code = "eOn"
+code_version = "(develop bbe4ffba)"
+commit = "bbe4ffbad32b8a479bf171cd7ff1497e363940e3"
+algorithm = "Lanczos"
+kind = "ts-pt"
+reducer = "harness"
+failure_cap = 10000
+note = "Lanczos min-mode on the 49 Pt-island starts at develop bbe4ffbad32b8a479bf171cd7ff1497e363940e3. opt_backend is unset. The ini matches eon/develop-ts-pt-lanczos: opt_method cg, min_mode_method lanczos, max_move 0.35, client_displace_type load. This row is the min-mode control beside the minimization and NEB rows. Potential morse_pt, counted by the harness. A termination_reason of 0 under the cap 10000 is a success."
+
+[ini.Main]
+job = "saddle_search"
+finite_difference = 0.001
+random_seed = 1
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "cg"
+convergence_metric = "norm"
+converged_force = 0.001
+max_move = 0.35
+max_iterations = 1000
+
+[ini."Saddle Search"]
+min_mode_method = "lanczos"
+client_displace_type = "load"
+converged_force = 0.001
+max_iterations = 1000
+displace_magnitude = 0.1
+
+[ini.Lanczos]
+tolerance = 0.02
+max_iterations = 15
+quit_early = true

@@ -1,0 +1,17 @@
+# eOn develop at bbe4ffba is not a conda-forge package. This file does
+# not select eon=3.6.0 and it does not invent a build string. The binary
+# the bbe4ffba campaigns run is the source build pinned in
+# codes/registry.toml under id eon-develop-bbe4ffba:
+#   ref = develop
+#   commit = bbe4ffbad32b8a479bf171cd7ff1497e363940e3
+#   version string 3.6.0 (bbe4ffba)
+# The measured build leaves -Dwith_rgmin and -Dwith_rgsaddle disabled.
+# asv has one environment_type, so this yml cannot be bound to one
+# class. benchmarks/bench_eon_develop.py classes call EONCLIENT and stay
+# on the 7095b23 pin in environments/eon-develop.yml. A campaign passes
+# expect_commit for this pin.
+name: eon-develop-bbe4ffba
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
