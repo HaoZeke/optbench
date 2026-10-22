@@ -124,7 +124,7 @@ def test_rendered_pages_use_the_board_rank():
     rgmin = (ROOT / "docs" / "orgmode" / "generated" / "codes" / "rgmin.org").read_text(encoding="utf-8")
     assert "f15726f1c798" in rgmin
     rgsaddle = (ROOT / "docs" / "orgmode" / "generated" / "codes" / "rgsaddle.org").read_text(encoding="utf-8")
-    assert "c0db2b8d333c" in rgsaddle
+    assert "2db34b42e6e0" in rgsaddle
     assert not (ROOT / "docs" / "include" / "featured.org").exists()
     assert not (ROOT / "docs" / "include" / "terra-pass.org").exists()
     for problem in document["problems"].values():
