@@ -7,6 +7,8 @@ file the force calls came from.
 
 from __future__ import annotations
 
+from .connection import done_fraction, result_is_not_connected
+
 
 def xyz_to_con(text: str, *, box: float | None = None) -> str:
     """Extended XYZ to a free-cluster ``.con``.
@@ -127,7 +129,9 @@ def saddle_progress(text: str, *, target: int = 27, barrier: float = 1.5) -> dic
     header. Each later line contributes ``sad-fcs + mins-fcs``. A result
     token containing ``good`` is a unique saddle. A result token
     containing ``Connected`` increments the not-connected count, which
-    is how that script matches ``Not Connected``. Lines after the
+    is how that script matches ``Not Connected``. That label is the
+    r2205 ``Matter::compare`` rejection in ``optbench.connection``.
+    ``fraction_connected`` is ``done_fraction``. Lines after the
     target are ignored. ``reached`` is false when the file ends first.
     """
     if target <= 0:
@@ -149,7 +153,7 @@ def saddle_progress(text: str, *, target: int = 27, barrier: float = 1.5) -> dic
         result = fields[-1]
         if "good" in result:
             unique += 1
-        if "Connected" in result:
+        if result_is_not_connected(result):
             not_connected += 1
         if "good" in result and height < barrier:
             found += 1
@@ -158,7 +162,7 @@ def saddle_progress(text: str, *, target: int = 27, barrier: float = 1.5) -> dic
                 break
     fraction = None
     if searches:
-        fraction = (searches - not_connected) / searches
+        fraction = done_fraction(searches, not_connected)
     return {
         "reached": reached,
         "force_calls": force_calls,
