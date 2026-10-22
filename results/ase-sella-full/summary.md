@@ -63,13 +63,13 @@ Commit `ade7c5132e47bb4008b9d4c8ddb26492e9e7287d`. PAR-2 is `score_v2` on tracke
 | SellaPtIslandTsDefault | 49 | 49 | 49 | 0 | 0 | 0 | 0 | 0 | 74.2857 | 71 | 41 | 128 | 74.2857 |
 | SellaPtIslandTsTuned | 49 | 49 | 49 | 0 | 0 | 0 | 0 | 0 | 87.551 | 88 | 67 | 141 | 87.551 |
 
-## Partial or absent grids
+## Short or absent grids
 
-- `AseLj38GpminDefault`: tracked 0 of 1000 (not run)
-- `AseLj38GpminTuned`: tracked 0 of 1000 (not run)
-- `AseLj38PreconfireTuned`: tracked 0 of 1000 (not run)
-- `AseLj38PreconlbfgsTuned`: tracked 0 of 1000 (not run)
-- `AseLj38Preconode12rDefault`: tracked 0 of 1000 (not run)
-- `AseLj38Preconode12rTuned`: tracked 0 of 1000 (not run)
-- `AseMorseGpminDefault`: tracked 0 of 100 (not run)
+- `AseLj38GpminDefault`: tracked 0 of 1000 (no track)
+- `AseLj38GpminTuned`: tracked 0 of 1000 (no track)
+- `AseLj38PreconfireTuned`: tracked 0 of 1000 (no track)
+- `AseLj38PreconlbfgsTuned`: tracked 0 of 1000 (no track)
+- `AseLj38Preconode12rDefault`: tracked 0 of 1000 (no track)
+- `AseLj38Preconode12rTuned`: tracked 0 of 1000 (no track)
+- `AseMorseGpminDefault`: tracked 0 of 100 (no track)
 - `AseMorseGpminTuned`: tracked 0 of 100 (asv recorded no track)

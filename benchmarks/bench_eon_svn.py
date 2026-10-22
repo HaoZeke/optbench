@@ -259,7 +259,7 @@ def _noise_evaluate(template: dict, start: str):
     lucky draw does not end the search. Sigma 0 is the clean force.
     """
     from optbench.noise import WINDOW, energy_span, stop_threshold
-    from optbench.smoke import ENERGY_TOL
+    from optbench.quadratic import ENERGY_TOL
 
     sigma = float(template["noise_sigma"])
     kappa = float(template.get("noise_kappa", 3.0))

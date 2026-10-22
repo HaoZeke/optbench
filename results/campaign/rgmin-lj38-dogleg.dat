@@ -18,8 +18,8 @@ template rgmin/lj38-dogleg
 tuning default
 counter harness
 par2_mean 81.881
-wilson_low 0.996173241514
-wilson_high 1
+rate_low 0.996173241514
+rate_high 1
 par2_median 79
 par2_median_low 77
 par2_median_high 80

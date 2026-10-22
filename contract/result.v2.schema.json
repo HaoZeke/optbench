@@ -8,7 +8,7 @@
     "schema": { "const": "optbench.result/v2" },
     "status": { "enum": ["sota", "archive", "smoke"] },
     "problem": { "type": "string" },
-    "scoring": { "const": "par2-wilson-bootstrap" },
+    "scoring": { "const": "par2-bootstrap" },
     "par_factor": { "const": 2 },
     "bootstrap_resamples": { "type": "integer", "minimum": 1 },
     "bootstrap_seed": { "type": "integer" },

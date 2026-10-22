@@ -16,7 +16,7 @@ code_version 0.2.2
 commit c0db2b8d333c557251635cb8bb7b3d81f0088a71
 algorithm OCI-NEB
 template rgsaddle/oci-neb-lbfgs
-tuning tuned
+tuning adjusted
 counter harness
 images 3
 ranked false

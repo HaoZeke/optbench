@@ -1,0 +1,31 @@
+id = "n2p2/emt-pt38-kalman-force"
+engine = "n2p2"
+problem = "mlopt/emt-pt38"
+code = "n2p2"
+code_version = "2.3.0"
+commit = "29b9c9f10b1ac9ea45631b3d556a129ca3b701c2"
+algorithm = "Kalman"
+preset = "Kalman force"
+tuning = "force"
+loss = "force"
+order = "n2p2"
+starts = 50
+note = "Force-trained squared error on the pyamff fingerprints and the 10-7 tanh network. The archived fcoeff0_1 configs use energy coefficient 1, force coefficient 0.1, loss_grad_tol 0.1, and epochs_max 30000. The EMT problem states force_training_grad_norm 0.1; its max_epochs 10000 is the energy-only cap. One force call is one combined loss-gradient evaluation. n2p2 2.3.0 is the latest release, tag e51667abf784bb9a6fd659857b6a9a878fdc6a90. The linked filter is commit 29b9c9f10b1ac9ea45631b3d556a129ca3b701c2; KalmanFilter::update matches that tag aside from comments. The standard Kalman filter uses examples/input.nn.recommended: epsilon 0.01, q0 0.01, qtau 2.302, qmin 1e-6, eta 0.01, etatau 2.302, etamax 1, force_weight 1, force_energy_ratio 3, and one structure or one force component per update. qtau and etatau are divided by the projected updates in an epoch, 500 energy updates plus 1500 force updates. Each epoch shuffles energy candidates, then force-component candidates, with std::mt19937_64 from random_seed 1234567, and shuffles the property schedule with the one-process rngGlobalNew stream. Weights are the harness uniform[-1, 1) draw, seed 20261015 plus the start index. Dataset normalization stays off so the loss stays the pyamff NoScaler loss; units.rst marks normalization optional."
+
+[stop]
+max_force_calls = 30000
+grad_abs = 0.1
+
+[kalman]
+type = "standard"
+epsilon = 1.0e-2
+q0 = 0.01
+qtau = 2.302
+qmin = 1.0e-6
+eta0 = 0.01
+etatau = 2.302
+etamax = 1.0
+update_strategy = "combined"
+selection = "n2p2"
+force_weight = 1.0
+force_energy_ratio = 3.0

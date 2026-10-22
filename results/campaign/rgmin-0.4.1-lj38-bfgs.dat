@@ -18,8 +18,8 @@ template rgmin/lj38-bfgs
 tuning default
 counter harness
 par2_mean 1010.446
-wilson_low 0.996173241514
-wilson_high 1
+rate_low 0.996173241514
+rate_high 1
 par2_median 970
 par2_median_low 957
 par2_median_high 981

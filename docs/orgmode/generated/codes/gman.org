@@ -1,0 +1,32 @@
+#+TITLE: Gman
+#+OPTIONS: toc:nil num:nil author:nil
+
+#+begin_export rst
+.. raw:: html
+
+   <section class="bench" id="code-gman">
+   <h2>Gman</h2>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-rows">
+   <caption>Every ranked row for this code.</caption>
+   <thead><tr><th>Problem</th><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="neb/Pt-heptamer" data-label="Gman (r235) · lbfgs">
+   <td>Pt-heptamer</td>
+   <td data-field="label">Gman (r235) · lbfgs</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">2</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">48</td>
+   <td data-field="median_calls"></td>
+   <td data-field="mean_calls">48</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   </tbody></table></div>
+   </section>
+#+end_export
