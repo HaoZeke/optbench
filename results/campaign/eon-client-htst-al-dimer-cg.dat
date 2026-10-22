@@ -13,4 +13,4 @@ problem hTST/Al
 reducer harness
 counter harness
 count_keys HarnessCounter
-partial true
+short true

@@ -19,4 +19,4 @@ except Exception as exc:
     print(f"{type(exc).__name__}: {exc}")
 else:
     print(f"matches returned {accepted!r}")
-    raise SystemExit("Uv.matches('3.12') did not raise; this reproducer is stale")
+    raise SystemExit("Uv.matches('3.12') did not raise; this check is stale")

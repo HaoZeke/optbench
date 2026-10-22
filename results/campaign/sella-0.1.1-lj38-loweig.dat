@@ -1,0 +1,15 @@
+force_calls 17.8
+force_calls_min 4
+force_calls_max 37
+nfailed 0
+starts 200
+code Sella
+code_version 0.1.1
+commit 0.1.1
+algorithm lowest eigenvector
+template sella-0.1.1/lj38-loweig
+problem lowest-eigenvector/lj38
+counter harness
+reducer all
+parameter_source archive
+note Archive lowest-eigv.py: PESWrapper.diag eta 1e-6, gamma 1e-16, vreftol 0.99, gradient v0, projection. ASE Lennard-Jones cutoff 40. One harness force call is one PESWrapper.calls evaluation.

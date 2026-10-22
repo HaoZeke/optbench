@@ -8,7 +8,7 @@ code ASE
 code_version 3.29.0
 commit f27c0005ae6a67ea419f996e728668865bfc1f86
 algorithm NEB-LBFGS
-profile tuned
+profile adjusted
 template ase/de-pt-island-tuned
 problem double-ended-saddle-search/pt-island
 counter harness

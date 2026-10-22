@@ -1,0 +1,16 @@
+force_calls 35908
+force_calls_min 727
+force_calls_max 244552
+force_calls_median 18987.0
+call_unit total
+nfailed 4
+code eOn
+code_version (develop 500350d9)
+commit 500350d9fae881f06c7ef194e5868da079c4be5a
+algorithm Doubly nudged CI-NEB
+template eon-client/de-2ts-500350d9-ci-swdneb
+problem double-ended-saddle-search/lj38_2ts_separation
+reducer harness
+counter harness
+count_keys HarnessCounter
+potential lj

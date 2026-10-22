@@ -19,15 +19,15 @@ note Initialiser ablation of ase/de-lj38-default. The path is geodesic-interpola
 host cursor
 date 2026-10-18
 contributor Rohit Goswami
-scoring par2-wilson-bootstrap
+scoring par2-bootstrap
 par2_mean 4889.98
 par2_median 5000
 par2_median_low 5000
 par2_median_high 5000
 par2_iqr 0
 success_rate 0.04
-wilson_low 0.01103888433
-wilson_high 0.1346009069
+rate_low 0.01103888433
+rate_high 0.1346009069
 par_applied true
 par_factor 2
 bootstrap_resamples 2000
