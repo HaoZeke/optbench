@@ -136,27 +136,48 @@ def test_runtime_requires_successful_validation_and_exact_executable(tmp_path, m
 
 def test_timeout_terminates_child_processes(tmp_path):
     import os
+    import select
+    import signal
     import sys
+    import time
 
     script = tmp_path / "parent.py"
     script.write_text(
         "import subprocess, sys, time\n"
-        "from pathlib import Path\n"
-        "child = subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(60)'])\n"
-        "Path('child.pid').write_text(str(child.pid))\n"
+        "child = subprocess.Popen([sys.executable, '-c', "
+        "\"import os, time; print('ready', os.getpgrp(), flush=True); time.sleep(60)\"])\n"
         "time.sleep(60)\n"
     )
-    with (tmp_path / "run.log").open("w") as log:
-        status = native.run_search([sys.executable, str(script)], tmp_path,
-                                   os.environ.copy(), log, 2.)
-    assert status == 124
-    child = int((tmp_path / "child.pid").read_text())
-    state = Path(f"/proc/{child}/stat")
+    reader, writer = os.pipe()
+    group = None
+    closed = False
     try:
-        child_state = state.read_text().split()[2]
-    except FileNotFoundError:
-        child_state = None
-    assert child_state is None or child_state == "Z"
+        with os.fdopen(writer, "w") as log:
+            status = native.run_search([sys.executable, str(script)], tmp_path,
+                                       os.environ.copy(), log, 2.)
+        assert status == 124
+        deadline = time.monotonic() + 2.
+        received = b""
+        while time.monotonic() < deadline:
+            readable, _, _ = select.select([reader], [], [], deadline - time.monotonic())
+            if not readable:
+                break
+            chunk = os.read(reader, 4096)
+            if not chunk:
+                closed = True
+                break
+            received += chunk
+            if received.startswith(b"ready ") and b"\n" in received:
+                group = int(received.splitlines()[0].split()[1])
+        assert received.startswith(b"ready ")
+        assert closed, "a descendant retains the output pipe after timeout"
+    finally:
+        os.close(reader)
+        if group is not None and not closed:
+            try:
+                os.killpg(group, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
 
 
 def test_packaged_runtime_keeps_the_validated_source_hash(tmp_path, monkeypatch):
