@@ -151,6 +151,27 @@ def test_vibrational_index_drops_only_a_numerical_rigid_mode():
     assert negative_index(single, 1e-6) == 2
 
 
+_MINMODE_TIP = "fd8fb3d13dcb75a35066222d2496ea0525b727d1"
+_BAND_TIP = "c0db2b8d333c557251635cb8bb7b3d81f0088a71"
+# Stock dimer and Lanczos, both translators. Tuned rows and P-RFO stay on the band pin.
+_MINMODE_STOCK = {
+    "rgsaddle/dimer-fire",
+    "rgsaddle/dimer-lbfgs",
+    "rgsaddle/dimer-rotskip",
+    "rgsaddle/lanczos",
+    "rgsaddle/mode-dimer",
+    "rgsaddle/mode-lanczos",
+    "rgsaddle/pt-dimer-fire",
+    "rgsaddle/pt-dimer-lbfgs",
+    "rgsaddle/pt-dimer-rotskip",
+    "rgsaddle/pt-lanczos",
+    "rgsaddle/saddle-dimer-fire",
+    "rgsaddle/saddle-dimer-lbfgs",
+    "rgsaddle/saddle-dimer-rotskip",
+    "rgsaddle/saddle-lanczos",
+}
+
+
 def test_rgsaddle_templates_match_their_problem_stop():
     found = []
     for template in list_templates(ROOT):
@@ -160,7 +181,8 @@ def test_rgsaddle_templates_match_their_problem_stop():
         problem = resolve_problem(ROOT, template["problem"])
         cap = _check_stop(problem, template)
         assert cap >= 1000
-        assert template["commit"] == "c0db2b8d333c557251635cb8bb7b3d81f0088a71"
+        expected = _MINMODE_TIP if template["id"] in _MINMODE_STOCK else _BAND_TIP
+        assert template["commit"] == expected
         assert template["engine"] == "rgsaddle"
     assert "rgsaddle/dimer-lbfgs" in found
     assert "rgsaddle/prfo-tuned" in found
