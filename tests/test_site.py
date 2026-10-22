@@ -110,7 +110,10 @@ def test_rendered_pages_use_the_board_rank():
     assert 'data-board-table="ranked" data-problem="saddle-search/pt-island"' in saddle
     assert "rgsaddle/saddle-dimer-rotskip-tuned" not in saddle
     assert "No full harness row." not in saddle
-    entries = [row.get("entry") for problem in document["problems"].values() for row in problem.get("ranked", [])]
+    entries = [row.get("entry") for row in document.get("client_counter", [])]
+    entries.extend(
+        row.get("entry") for problem in document["problems"].values() for row in problem.get("ranked", [])
+    )
     entries.extend(row.get("entry") for row in document.get("short", []))
     entries.extend(row.get("entry") for row in document.get("withheld", []))
     assert "eon-3.5.0-saddle-pt-dimer" in entries
