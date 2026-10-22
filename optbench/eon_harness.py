@@ -2,7 +2,7 @@
 
 EON and eOn are different codes. EON is the r2549 client. eOn is
 https://github.com/TheochemUI/eon at develop
-7095b23ac17d49f434a5e08ccb072897ceca698e. The r2549 client is not rebuilt.
+f6817b537ec1d1563420023fb45fbd0e5b75e7fd. The r2549 client is not rebuilt.
 
 Each force evaluation is one ``HarnessCounter`` charge. eonclient is
 started with ``potential = ext_pot``. A small C program forwards
@@ -21,7 +21,7 @@ started with ``potential = ext_pot``. A small C program forwards
 
 ``tip4p`` is the uncut rigid Cambridge TIP4P. A GMIN ``.aa`` start is
 centre then angle-axis. EON (SVN r2549) and eOn
-(develop 7095b23ac17d49f434a5e08ccb072897ceca698e) each receive the same
+(develop f6817b537ec1d1563420023fb45fbd0e5b75e7fd) each receive the same
 Cartesian ``.con``: ``optbench.tip4p.sites_from_aa`` rotated with the GMIN
 map, written in the CCL order ``Tip4p::computeHH_O_`` reads (H, H pairs,
 then oxygens). The kernel reports that energy to the client in eV using
@@ -110,8 +110,8 @@ FAMILIES = {
         "env": "EONCLIENT",
         "default": Path.home() / "opt" / "eon-develop" / "bin" / "eonclient",
         "flag": "--version",
-        "token": "7095b23",
-        "cache": "7095b23",
+        "token": "f6817b53",
+        "cache": "f6817b53",
     },
 }
 

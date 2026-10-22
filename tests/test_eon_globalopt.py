@@ -187,7 +187,7 @@ def test_cambridge_cache_token_does_not_move_the_lj38_path():
     lj75 = _cache_path("svn", "eon-svn/bh-lj75", 314159, "1", 0)
     assert "cambridge-2e6" in lj75.parts
     develop = _cache_path("develop", "eon-develop/bh-lj75", 314159, "1", 0)
-    assert develop.parts[2] == "7095b23" or "7095b23" in develop.parts
+    assert develop.parts[2] == "f6817b53" or "f6817b53" in develop.parts
 
 
 def test_lj75_ratio_row_restores_the_documented_acceptance_target():
@@ -301,7 +301,7 @@ def test_tip4p_templates_share_the_ledger_and_the_ev_stop():
         if name.startswith("eon-svn/"):
             assert template["code"] == "EON (SVN r2549)"
         else:
-            assert template["code"] == "eOn (develop 7095b23ac17d49f434a5e08ccb072897ceca698e)"
+            assert template["code"] == "eOn (develop f6817b537ec1d1563420023fb45fbd0e5b75e7fd)"
         assert template["ini"]["Potential"]["potential"] == "tip4p"
         assert float(template["energy_kj_per_ev"]) == KJ_PER_EV
         stop = float(template["ini"]["Basin Hopping"]["stop_energy"])

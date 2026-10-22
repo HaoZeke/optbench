@@ -1,9 +1,9 @@
 id = "eon-develop/bh-lj100-binary"
 engine = "eon"
 problem = "globalopt/lj100-binary"
-code = "eOn (develop 7095b23ac17d49f434a5e08ccb072897ceca698e)"
+code = "eOn (develop f6817b537ec1d1563420023fb45fbd0e5b75e7fd)"
 code_version = "3.6.0"
-commit = "7095b23ac17d49f434a5e08ccb072897ceca698e"
+commit = "f6817b537ec1d1563420023fb45fbd0e5b75e7fd"
 algorithm = "Basin hopping"
 reducer = "harness"
 failure_cap = 2000000

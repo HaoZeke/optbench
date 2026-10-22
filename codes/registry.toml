@@ -26,13 +26,13 @@ note = "Current main, including merged pull request 776. The version string is 3
 
 [[code]]
 id = "eon-develop"
-name = "eOn (develop 7095b23ac17d49f434a5e08ccb072897ceca698e)"
+name = "eOn (develop f6817b537ec1d1563420023fb45fbd0e5b75e7fd)"
 role = "minimization and saddle search"
 repository = "https://github.com/TheochemUI/eon"
 ref = "develop"
-commit = "7095b23ac17d49f434a5e08ccb072897ceca698e"
-committed = "2026-10-16"
-note = "eOn from https://github.com/TheochemUI/eon and https://eondocs.org, develop commit 7095b23ac17d49f434a5e08ccb072897ceca698e. The version string is 3.6.0 (7095b23a). This is a different code from EON (SVN r2549). GPR-dimer is absent: TheochemUI/gpr_optim is private and eonclient reports GPRD disabled. This pin is not the conda-forge 3.5.0 binary."
+commit = "f6817b537ec1d1563420023fb45fbd0e5b75e7fd"
+committed = "2026-10-21"
+note = "eOn from https://github.com/TheochemUI/eon and https://eondocs.org, develop commit f6817b537ec1d1563420023fb45fbd0e5b75e7fd. The version string is 3.6.0 (f6817b53). This is a different code from EON (SVN r2549). GPR-dimer is absent: TheochemUI/gpr_optim is private and eonclient reports GPRD disabled. This pin is not the conda-forge 3.5.0 binary."
 
 [[code]]
 id = "eon-svn"

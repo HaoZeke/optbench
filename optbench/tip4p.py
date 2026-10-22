@@ -236,7 +236,7 @@ KJ_PER_EV = E_CHARGE_C * AVOGADRO / 1000.0
 CONVERSION_LEDGER = (
     "GMIN .aa is centre then angle-axis, six floats per molecule, rotated by "
     "optbench.tip4p.reference_sites with the GMIN angle-axis map. "
-    "EON (SVN r2549) and eOn (develop 7095b23ac17d49f434a5e08ccb072897ceca698e) "
+    "EON (SVN r2549) and eOn (develop f6817b537ec1d1563420023fb45fbd0e5b75e7fd) "
     "each get the same .con: H, H pairs then oxygens, the stride in tip4p_ccl.cpp "
     "computeHH_O_. The harness kernel is uncut rigid TIP4P in kJ/mol divided by "
     "e_charge*N_A/1000 from tip4p_unit_system.hpp. The Cambridge test multiplies "
