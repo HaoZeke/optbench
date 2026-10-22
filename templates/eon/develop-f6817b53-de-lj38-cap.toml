@@ -1,0 +1,47 @@
+id = "eon/develop-f6817b53-de-lj38-cap"
+engine = "eon"
+problem = "double-ended-saddle-search/lj38"
+code = "eOn (develop f6817b53)"
+code_version = "3.6.0"
+commit = "f6817b537ec1d1563420023fb45fbd0e5b75e7fd"
+algorithm = "LBFGS"
+tuning = "r2549-ini"
+reducer = "harness"
+failure_cap = 2500
+kind = "de-lj38"
+kernel = "lj40"
+seeds = [1]
+asv_class = "EonDevelopF6817b53DeLj38Cap"
+note = "Develop binary f6817b537ec1d1563420023fb45fbd0e5b75e7fd with the stock eon/develop-de-lj38-cap ini. Five images, L-BFGS memory 20, max_move 0.05, max_iterations 8000, converged_force 0.001. The force budget is 2500. The harness kernel is unshifted lj/cut with epsilon 1, sigma 1, and cutoff 40, the archived in.lammps pair style. Main random_seed is 1. The L-BFGS keys r2549 reads sit in [Optimizer]. energy_weighted, ci_mmf, climbing_image_band_slack, setup_mmf_peaks, and lbfgs_accept are omitted. A missing lbfgs_accept stays the generated SSOT default none."
+budget_seconds = 7200
+
+[ini.Main]
+job = "nudged_elastic_band"
+random_seed = 1
+
+[ini.Potential]
+potential = "lammps"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+convergence_metric = "norm"
+converged_force = 0.001
+max_move = 0.05
+max_iterations = 8000
+lbfgs_memory = 20
+lbfgs_inverse_curvature = 0.01
+lbfgs_max_inverse_curvature = 0.0
+lbfgs_auto_scale = true
+lbfgs_angle_reset = true
+lbfgs_distance_reset = true
+
+[ini."Nudged Elastic Band"]
+images = 5
+spring = 5.0
+climbing_image_method = true
+climbing_image_converged_only = true
+old_tangent = false
+doubly_nudged = false
+doubly_nudged_switching = false
+converged_force = 0.001
+max_iterations = 8000
