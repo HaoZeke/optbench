@@ -712,7 +712,7 @@
       "tuning": "default"
     },
     {
-      "asv_commit": "",
+      "asv_commit": "0f44bb0f8451605710390d10d36e619971b9c348",
       "call_unit": "total",
       "cap": 10000,
       "code": "geomeTRIC",
@@ -748,7 +748,7 @@
       "note": "starts.jsonl",
       "origin": "harness",
       "par2_mean": 488.502,
-      "path": "results/campaign/noise-geometric-cart-s1em4.dat",
+      "path": "results/campaign/noise-geometric-cart-s1em4.dat; results/asv/0f44bb0f8451605710390d10d36e619971b9c348",
       "problem": "minimization/lj38-noise",
       "published": null,
       "rank_cost": 488.502,
@@ -756,7 +756,7 @@
       "scored": true,
       "short": false,
       "short_reason": "",
-      "source": "campaign",
+      "source": "campaign, asv",
       "success_rate": 0.995,
       "template": "noise/geometric-cart-s1em4",
       "tuning": "default"
@@ -1162,7 +1162,7 @@
       "tuning": "default"
     },
     {
-      "asv_commit": "",
+      "asv_commit": "0f44bb0f8451605710390d10d36e619971b9c348",
       "call_unit": "total",
       "cap": 10000,
       "code": "geomeTRIC",
@@ -1198,7 +1198,7 @@
       "note": "starts.jsonl",
       "origin": "harness",
       "par2_mean": 1216.215,
-      "path": "results/campaign/noise-geometric-tric-s0.dat",
+      "path": "results/campaign/noise-geometric-tric-s0.dat; results/asv/0f44bb0f8451605710390d10d36e619971b9c348",
       "problem": "minimization/lj38-noise",
       "published": null,
       "rank_cost": 1216.215,
@@ -1206,7 +1206,7 @@
       "scored": true,
       "short": false,
       "short_reason": "",
-      "source": "campaign",
+      "source": "campaign, asv",
       "success_rate": 0.99,
       "template": "noise/geometric-tric-s0",
       "tuning": "default"

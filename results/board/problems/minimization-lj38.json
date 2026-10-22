@@ -1650,7 +1650,7 @@
       "tuning": ""
     },
     {
-      "asv_commit": "",
+      "asv_commit": "0f44bb0f8451605710390d10d36e619971b9c348",
       "call_unit": "total",
       "cap": 10000,
       "code": "geomeTRIC",
@@ -1686,7 +1686,7 @@
       "note": "starts.jsonl",
       "origin": "harness",
       "par2_mean": 507.683,
-      "path": "results/campaign/geometric-1.1.1-lj38-cart.dat",
+      "path": "results/campaign/geometric-1.1.1-lj38-cart.dat; results/asv/0f44bb0f8451605710390d10d36e619971b9c348",
       "problem": "minimization/lj38",
       "published": null,
       "rank_cost": 507.683,
@@ -1694,7 +1694,7 @@
       "scored": true,
       "short": false,
       "short_reason": "",
-      "source": "campaign",
+      "source": "campaign, asv",
       "success_rate": 0.994,
       "template": "geometric/lj38-cart",
       "tuning": "default"
@@ -2830,7 +2830,7 @@
       "tuning": "default"
     },
     {
-      "asv_commit": "",
+      "asv_commit": "0f44bb0f8451605710390d10d36e619971b9c348",
       "call_unit": "total",
       "cap": 10000,
       "code": "geomeTRIC",
@@ -2866,7 +2866,7 @@
       "note": "starts.jsonl",
       "origin": "harness",
       "par2_mean": 1216.215,
-      "path": "results/campaign/geometric-1.1.1-lj38-tric.dat",
+      "path": "results/campaign/geometric-1.1.1-lj38-tric.dat; results/asv/0f44bb0f8451605710390d10d36e619971b9c348",
       "problem": "minimization/lj38",
       "published": null,
       "rank_cost": 1216.215,
@@ -2874,7 +2874,7 @@
       "scored": true,
       "short": false,
       "short_reason": "",
-      "source": "campaign",
+      "source": "campaign, asv",
       "success_rate": 0.99,
       "template": "geometric/lj38-tric",
       "tuning": "default"

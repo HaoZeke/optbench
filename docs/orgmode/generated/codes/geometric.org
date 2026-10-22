@@ -89,6 +89,20 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
+   <tr data-problem="minimization/morse-bulk" data-label="geomeTRIC (1.1.1) · TRIC">
+   <td>Morse bulk</td>
+   <td data-field="label">geomeTRIC (1.1.1) · TRIC</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">56</td>
+   <td data-field="par2_mean">1312.01</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">808.5</td>
+   <td data-field="mean_calls">1212.01</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
    </tbody></table></div>
    </section>
 #+end_export
