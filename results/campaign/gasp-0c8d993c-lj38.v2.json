@@ -7,7 +7,7 @@
   "runs": [
     {
       "algorithm": "GASP",
-      "cap": 16000801,
+      "cap": 2000000,
       "code": "gasp",
       "code_version": "0.1",
       "commit": "0c8d993c82e0e1c69a05b3c34bbb2fcbbdbb7f07",
@@ -15,26 +15,26 @@
       "metrics": {
         "bootstrap_resamples": 2000,
         "bootstrap_seed": 20261015,
-        "cap": 16000801,
+        "cap": 2000000,
         "includes_failures": true,
         "iqr": 0.0,
         "iqr_high": 0.0,
         "iqr_low": 0.0,
-        "mean": 29781389.23,
-        "median": 32001602.0,
-        "median_high": 32001602.0,
-        "median_low": 32001602.0,
+        "mean": 3739899.37,
+        "median": 4000000.0,
+        "median_high": 4000000.0,
+        "median_low": 4000000.0,
         "n": 100,
         "n_cap": 0,
         "n_crash": 0,
         "n_divergence": 0,
         "n_wrong_stationary": 93,
         "nfailed": 93,
-        "par2_mean": 29781389.23,
+        "par2_mean": 3739899.37,
         "par_applied": true,
         "par_factor": 2,
-        "q25": 32001602.0,
-        "q75": 32001602.0,
+        "q25": 4000000.0,
+        "q75": 4000000.0,
         "scoring": "par2-wilson-bootstrap",
         "success_only_mean": 284276.71428571426,
         "success_rate": 0.07,
@@ -64,7 +64,7 @@
       },
       "starts": [
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -82,7 +82,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -100,7 +100,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.928426590629,
@@ -116,7 +116,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -134,7 +134,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -152,7 +152,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -170,7 +170,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -188,7 +188,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -206,7 +206,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -170.989860472813,
@@ -224,7 +224,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -242,7 +242,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -260,7 +260,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -278,7 +278,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -296,7 +296,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -172.237562755683,
@@ -314,7 +314,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -332,7 +332,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -350,7 +350,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -368,7 +368,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -386,7 +386,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.928426590629,
@@ -402,7 +402,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -171.357339540455,
@@ -420,7 +420,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -438,7 +438,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -456,7 +456,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -474,7 +474,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -171.640093882306,
@@ -492,7 +492,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -171.357339540455,
@@ -510,7 +510,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -528,7 +528,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -546,7 +546,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.928426590629,
@@ -562,7 +562,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -580,7 +580,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -598,7 +598,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -172.237562755683,
@@ -616,7 +616,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -634,7 +634,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -652,7 +652,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -670,7 +670,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -688,7 +688,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -706,7 +706,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -724,7 +724,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -742,7 +742,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -171.357339540455,
@@ -760,7 +760,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -170.989860472813,
@@ -778,7 +778,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.928426590629,
@@ -794,7 +794,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -812,7 +812,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -171.387016243379,
@@ -830,7 +830,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -848,7 +848,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -866,7 +866,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -884,7 +884,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -172.877736411173,
@@ -902,7 +902,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -920,7 +920,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -171.500432144306,
@@ -938,7 +938,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -956,7 +956,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -171.387016243379,
@@ -974,7 +974,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -171.499842519203,
@@ -992,7 +992,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -1010,7 +1010,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -170.989860472813,
@@ -1028,7 +1028,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -1046,7 +1046,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -1064,7 +1064,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -1082,7 +1082,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.928426590629,
@@ -1098,7 +1098,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -1116,7 +1116,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -171.357339540455,
@@ -1134,7 +1134,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -171.357339540455,
@@ -1152,7 +1152,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -1170,7 +1170,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -1188,7 +1188,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -171.357339540455,
@@ -1206,7 +1206,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -172.237562755683,
@@ -1224,7 +1224,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -171.297166639675,
@@ -1242,7 +1242,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -1260,7 +1260,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -1278,7 +1278,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -1296,7 +1296,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -1314,7 +1314,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -1332,7 +1332,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -1350,7 +1350,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -1368,7 +1368,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -1386,7 +1386,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.928426590629,
@@ -1402,7 +1402,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -1420,7 +1420,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -1438,7 +1438,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -1456,7 +1456,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.928426590628,
@@ -1472,7 +1472,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -171.357339540455,
@@ -1490,7 +1490,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -1508,7 +1508,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -1526,7 +1526,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -1544,7 +1544,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -171.357339540455,
@@ -1562,7 +1562,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -1580,7 +1580,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -171.500432144306,
@@ -1598,7 +1598,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -171.357339540455,
@@ -1616,7 +1616,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -1634,7 +1634,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -1652,7 +1652,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -1670,7 +1670,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -172.237562755683,
@@ -1688,7 +1688,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -172.230710164723,
@@ -1706,7 +1706,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -171.357339540455,
@@ -1724,7 +1724,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -1742,7 +1742,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -171.357339540455,
@@ -1760,7 +1760,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -1778,7 +1778,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.134317008843,
@@ -1796,7 +1796,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -171.297166639675,
@@ -1814,7 +1814,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
@@ -1832,7 +1832,7 @@
           "verify_calls": 0
         },
         {
-          "cap": 16000801,
+          "cap": 2000000,
           "comparable": true,
           "counter": "harness",
           "energy": -173.25237841565,
