@@ -44,6 +44,25 @@ def test_command_keeps_the_problem_stop_and_geometry(tmp_path):
     assert flags["--endpoint-assign"] == flags["--sidpp"] == "false"
 
 
+@pytest.mark.parametrize("name", ["pt-heptamer-gp-neb", "pt-island-gp-neb"])
+def test_gp_templates_select_the_publication_fit_and_arithmetic(tmp_path, name):
+    from optbench.campaign import load_template
+
+    root = Path(__file__).resolve().parents[1]
+    template = load_template(root, f"gpridge/{name}")
+    argv = native.command("gprn", tmp_path, settings(), template["gpridge"])
+    flags = dict(zip(argv[1::2], argv[2::2]))
+    assert flags["--gp-model-profile"] == "gprd_zbl"
+    assert flags["--hyperparameter-mode"] == "rgmin:lbfgs"
+    assert flags["--linalg-mode"] == "library"
+    assert flags["--gp-hssvd"] == "false"
+    assert flags["--gp-active-posterior"] == "true"
+    assert flags["--gp-prior-mean-statistic"] == "max"
+    assert flags["--seed-full-chain"] == "true"
+    assert flags["--gp-zbl-prior-mean"] == "false"
+    assert flags["--climbing-image-converged-only"] == "false"
+
+
 def test_input_roundtrip_retains_fixed_atoms_cell_and_cutoff(tmp_path):
     import tomllib
     from ase.io import read
