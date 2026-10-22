@@ -1,10 +1,10 @@
-# rep 1 force_calls 20241059 unique_saddles 0 fraction_connected 0.0 total_searches 20000 connected 0 minimize_calls 14 minimum_converged 1 seed 20261016
-force_calls 20241059.0
-force_calls_min 20241059
-force_calls_max 20241059
+# rep 1 force_calls 8384756 unique_saddles 19 fraction_connected 0.00045 total_searches 20000 connected 9 minimize_calls 14 minimum_converged 1 seed 20261016
+force_calls 8384756.0
+force_calls_min 8384756
+force_calls_max 8384756
 code rgsaddle
 code_version 0.2.2
-commit df8ec2f8debaf22326e8f7ba1859ae277840e20a
+commit 8fa0eb1559c92b6ae9d1de190e253787a183729d
 algorithm Dimer L-BFGS
 tuning default
 template rgsaddle/saddle-dimer-lbfgs
@@ -15,5 +15,5 @@ nfailed 1
 goal 27
 cap 5064
 n 20000
-par2_mean 10128.0
-v2_nfailed 20000
+par2_mean 10123.66375
+v2_nfailed 19991
