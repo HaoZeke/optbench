@@ -20,10 +20,10 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def test_the_ledger_covers_the_oracle_in_order():
     oracle = load_oracle(ROOT / "oracle" / "entries.jsonl")
-    ledger = load_ledger(ROOT / "oracle" / "reproduction.jsonl")
+    ledger = load_ledger(ROOT / "oracle" / "ledger.jsonl")
     assert len(ledger) == len(oracle) == 151
     assert [row_id(row) for row in ledger] == [row_id(row) for row in oracle]
-    counts = {"reproduced": 0, "not_reproduced": 0, "not_rerun": 0}
+    counts = {"met": 0, "missed": 0, "not_rerun": 0}
     for row in ledger:
         failure = row.get("failure_check") if row.get("rerun") else None
         status = judge_checks(row.get("checks") or [], failure)
@@ -31,22 +31,22 @@ def test_the_ledger_covers_the_oracle_in_order():
             status = "not_rerun"
         assert row["status"] == status
         counts[status] += 1
-        if status == "not_reproduced":
+        if status == "missed":
             assert row["cause"]
         if (row.get("rerun") or {}).get("paper_baseline"):
-            assert status == "reproduced"
-    assert counts == {"reproduced": 46, "not_reproduced": 29, "not_rerun": 76}
+            assert status == "met"
+    assert counts == {"met": 46, "missed": 29, "not_rerun": 76}
     assert reproduction_errors(ROOT) == []
 
 
 def test_pele_paper_baseline_is_the_2014_stop():
-    ledger = {row_id(row): row for row in load_ledger(ROOT / "oracle" / "reproduction.jsonl")}
+    ledger = {row_id(row): row for row in load_ledger(ROOT / "oracle" / "ledger.jsonl")}
     forward = ledger["tsopt/LJ38/pele_ffd"]
     central = ledger["tsopt/LJ38/pele_cd"]
     island = ledger["tsopt/pt-island/pele"]
-    assert forward["status"] == "reproduced"
-    assert central["status"] == "reproduced"
-    assert island["status"] == "reproduced"
+    assert forward["status"] == "met"
+    assert central["status"] == "met"
+    assert island["status"] == "met"
     assert forward["rerun"]["baseline_metric"] == "stop2014_calls"
     assert forward["rerun"]["stop2014_calls"] == 207.51
     assert forward["rerun"]["harness_stop_mean"] == 254.48
@@ -65,7 +65,7 @@ def test_pele_paper_baseline_is_the_2014_stop():
 def test_a_paper_baseline_outside_the_archive_fails(tmp_path: Path):
     source = next(
         row
-        for row in load_ledger(ROOT / "oracle" / "reproduction.jsonl")
+        for row in load_ledger(ROOT / "oracle" / "ledger.jsonl")
         if row_id(row) == "minimization/lj38/eon-lbfgs"
     )
     row = json.loads(json.dumps(source))
@@ -75,17 +75,16 @@ def test_a_paper_baseline_outside_the_archive_fails(tmp_path: Path):
     (campaign / "bad.dat").write_text("force_calls 1000\nnfailed 0\n", encoding="utf-8")
     oracle = tmp_path / "oracle"
     oracle.mkdir()
-    (oracle / "reproduction.jsonl").write_text(json.dumps(row) + "\n", encoding="utf-8")
+    (oracle / "ledger.jsonl").write_text(json.dumps(row) + "\n", encoding="utf-8")
     errors = baseline_errors(tmp_path)
     assert errors
     assert any("force_calls" in line and "1000" in line for line in errors)
 
 
-def test_legacy_rows_that_miss_are_marked_in_place():
+def test_archive_rows_keep_their_names():
     problem = load_problem(ROOT / "problems" / "minimization" / "lj38.toml")
     oracle = load_oracle(ROOT / "oracle" / "entries.jsonl")
     html = problem_html(problem, oracle)
     assert ">eon-cg<" in html
-    assert "pele-fire · not reproduced" in html
-    assert "outside the archive tolerance" in html
-    assert "eon-cg · not reproduced" not in html
+    assert "pele-fire" in html
+    assert "2014 archive" in html

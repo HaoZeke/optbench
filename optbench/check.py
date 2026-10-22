@@ -60,10 +60,10 @@ def check(problems_dir: Path, oracle_path: Path) -> int:
         if problem is None:
             structural.append(f"{ident} has an oracle row and no problem file")
             continue
-        if problem.get("contract") == "partial":
+        if problem.get("contract") == "shared":
             missing = missing_keys(problem, row["fields"])
             for key in missing:
-                structural.append(f"partial {row['path']} missing {key}")
+                structural.append(f"shared {row['path']} missing {key}")
     for ident, problem in problems.items():
         expected = problem.get("entry_count")
         got = counts.get(ident, 0)
@@ -101,11 +101,11 @@ def check(problems_dir: Path, oracle_path: Path) -> int:
     print("site tables match the board")
     from .reproduction import reproduction_errors
 
-    reproduced = reproduction_errors(root)
-    if reproduced:
-        print(f"reproduction {len(reproduced)}")
-        for line in reproduced:
+    ledger_errors = reproduction_errors(root)
+    if ledger_errors:
+        print(f"ledger {len(ledger_errors)}")
+        for line in ledger_errors:
             print(line)
         return 1
-    print("reproduction ledger matches the archive")
+    print("ledger matches the archive")
     return 0

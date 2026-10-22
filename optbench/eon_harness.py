@@ -997,7 +997,7 @@ def write_campaign(template: dict, rows: list[tuple[int, str, dict]], output: Pa
         return None
     problem = resolve_problem(ROOT, template["problem"])
     full_n = stated_full_n(ROOT, problem)
-    partial = bool(template.get("declare_partial")) or full_n is None or len(kept) < int(full_n or 0)
+    partial = bool(template.get("declare_short")) or full_n is None or len(kept) < int(full_n or 0)
     successes = [row for _seed, _start, row in kept if row.get("success")]
     summary = {
         "nfailed": len(kept) - len(successes),

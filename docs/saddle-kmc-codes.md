@@ -323,7 +323,7 @@ potential callback. `pykmc/lattice` writes nothing.
 **softsaddle.** The tree under `softsaddle/` is MATLAB. `softsaddle/entry.toml`
 is the April 2019 archive (mean force calls 423491.1 over 10 repetitions).
 The GitHub workflow builds the Morse, Davidson, and Lanczos libraries and
-runs a two-search MATLAB smoke. MATLAB is not installed here. That smoke is
+runs a two-search MATLAB check. MATLAB is not installed here. That check is
 not a harness campaign.
 
 **CatLearn.** Commit `6a307f32` (2023-02-07). `setup.py` says 0.6.2 and

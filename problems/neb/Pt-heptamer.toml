@@ -2,7 +2,7 @@ id = "neb/Pt-heptamer"
 title = "Pt-heptamer"
 suite = "neb"
 problem = "Pt-heptamer"
-contract = "partial"
+contract = "shared"
 entry_count = 12
 
 [convergence]
@@ -28,9 +28,9 @@ kind = "con-minima-pairs"
 [metrics]
 required = ["force_calls", "force_calls_max", "force_calls_min"]
 
-[scoring.legacy]
-label = "legacy"
-rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row stays labelled legacy."
+[scoring.archive]
+label = "2014"
+rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean."
 
 [scoring.v2]
 version = "par2-wilson-bootstrap"

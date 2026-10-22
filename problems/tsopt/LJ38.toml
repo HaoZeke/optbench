@@ -2,7 +2,7 @@ id = "tsopt/LJ38"
 title = "LJ38"
 suite = "tsopt"
 problem = "LJ38"
-contract = "partial"
+contract = "shared"
 entry_count = 8
 
 [potential]
@@ -28,9 +28,9 @@ max_force_calls = 10000
 [metrics]
 required = ["force_calls", "force_calls_max", "force_calls_median", "force_calls_min", "nfailed"]
 
-[scoring.legacy]
-label = "legacy"
-rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row stays labelled legacy."
+[scoring.archive]
+label = "2014"
+rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean."
 
 [scoring.v2]
 version = "par2-wilson-bootstrap"

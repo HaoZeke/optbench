@@ -52,7 +52,7 @@ uv run asv publish
 uv run asv compare COMMIT COMMIT
 ```
 
-`asv check` imports the suite. `asv run --quick` is the smoke gate. Run it before the saved `asv run`, because asv 0.6.6 rewrites the result file. `asv compare` on one commit compares that commit with itself.
+`asv check` imports the suite. `asv run --quick` is the short gate. Run it before the saved `asv run`, because asv 0.6.6 rewrites the result file. `asv compare` on one commit compares that commit with itself.
 
 ## CI
 

@@ -2,15 +2,15 @@ id = "globalopt/lj150"
 title = "lj150"
 suite = "globalopt"
 problem = "lj150"
-contract = "partial"
+contract = "shared"
 entry_count = 2
 
 [metrics]
 required = ["basin_hopping_steps_mean", "basin_hopping_steps_stddev", "cpu_time_mean", "cpu_time_stddev", "energy_calls_mean", "energy_calls_stddev", "nfailed"]
 
-[scoring.legacy]
-label = "legacy"
-rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row stays labelled legacy."
+[scoring.archive]
+label = "2014"
+rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean."
 
 [scoring.v2]
 version = "par2-wilson-bootstrap"

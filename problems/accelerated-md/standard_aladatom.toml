@@ -2,15 +2,15 @@ id = "accelerated-md/standard_aladatom"
 title = "standard_aladatom"
 suite = "accelerated-md"
 problem = "standard_aladatom"
-contract = "partial"
+contract = "shared"
 entry_count = 1
 
 [metrics]
 required = ["percent_uncertainty", "thermostat", "true_rate", "uncertainty"]
 
-[scoring.legacy]
-label = "legacy"
-rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row stays labelled legacy."
+[scoring.archive]
+label = "2014"
+rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean."
 
 [scoring.v2]
 version = "par2-wilson-bootstrap"

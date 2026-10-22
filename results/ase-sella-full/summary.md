@@ -63,7 +63,7 @@ Commit `ade7c5132e47bb4008b9d4c8ddb26492e9e7287d`. PAR-2 is `score_v2` on tracke
 | SellaPtIslandTsDefault | 49 | 49 | 49 | 0 | 0 | 0 | 0 | 0 | 74.2857 | 71 | 41 | 128 | 74.2857 |
 | SellaPtIslandTsTuned | 49 | 49 | 49 | 0 | 0 | 0 | 0 | 0 | 87.551 | 88 | 67 | 141 | 87.551 |
 
-## Partial or absent grids
+## Short or absent grids
 
 - `AseLj38GpminDefault`: tracked 0 of 1000 (not run)
 - `AseLj38GpminTuned`: tracked 0 of 1000 (not run)

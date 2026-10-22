@@ -1,12 +1,12 @@
-"""Reproduction ledger for the 2014 archive and the JCTC tables.
+"""Ledger for the 2014 archive and the JCTC tables.
 
-A row is reproduced when every archived metric is within one archived
-standard error or 10 percent, and the failure count sits in the Wilson
-interval of the archived failure count. The ledger is
-``oracle/reproduction.jsonl``. ``paper_baseline`` marks the rerun whose
-score is the published comparison. The 2014 pele transition-state stop
-is the first RMS crossing plus one eigenvector search, with the
-transverse-screen calls left out.
+A row is met when every archived metric is within one archived standard
+error or one tenth of the archived value, and the failure count sits in
+the Wilson interval of the archived failure count. The ledger is
+``oracle/ledger.jsonl``. ``paper_baseline`` marks the rerun whose score
+is the published comparison. The 2014 pele transition-state stop is the
+first RMS crossing plus one eigenvector search, with the transverse-screen
+calls left out.
 """
 
 from __future__ import annotations
@@ -17,6 +17,8 @@ from pathlib import Path
 
 RELATIVE = 0.10
 Z = 1.96
+LEDGER_JSON = "oracle/ledger.jsonl"
+LEDGER_MD = "docs/ledger.md"
 
 # Numbered tables in Chill et al., JCTC 2014, 10, 5476. SoftSaddle is the
 # April 2019 website, already in the oracle, and is not one of those tables.
@@ -204,17 +206,17 @@ MATCHES: list[dict] = [
 
 CAUSE_TEXT = {
     "lj38_ts_starts": (
-        "Inside the 10% band (207.51 vs 192). "
+        "Within one tenth (207.51 vs 192). "
         "Archive run.sh unpacks coords-xyz.tar.gz (200 xyz, max pair about 4.4). "
         "The harness problem points at coords-con.tar.gz (max pair about 37). "
         "Kabsch RMS is about 6.33, so the sets are not the same geometry. "
         "Neither set has a pair past cutoff 40, and both drivers use RMS tolerance 1e-3/sqrt(114). "
-        "The 8% residual is the starting set. The paper baseline is this 2014-stop mean, not the harness-stop mean 254.48."
+        "The 8% residual is the starting set. The published comparison is this 2014-stop mean, not the harness-stop mean 254.48."
     ),
     "lj38_ts_starts_cd": (
-        "Inside the 10% band (263.52 vs 254). The same xyz-versus-con starting set as ts-ffd. "
+        "Within one tenth (263.52 vs 254). The same xyz-versus-con starting set as ts-ffd. "
         "findTS_local.py for the CD row does not pass orthogZeroEigs; the harness template sets orthog translations-rotations. "
-        "The paper baseline is this 2014-stop mean, not the harness-stop mean 335.06."
+        "The published comparison is this 2014-stop mean, not the harness-stop mean 335.06."
     ),
     "optim_lj38_ts": (
         "Archive run.sh unpacks coords-xyz.tar.gz. The harness uses the problem coords-con set (Kabsch RMS about 6.33). "
@@ -222,13 +224,13 @@ CAUSE_TEXT = {
     ),
     "pt_lanczos": (
         "The svn template uses the archived Lanczos keys (10 iterations, tolerance 0.05) and shifted Morse::force. "
-        "Dimer and climbing-image on that kernel reproduce. Lanczos does not, and the failure count is 0 against 5 or 8."
+        "Dimer and climbing-image on that kernel meet the archive. Lanczos does not, and the failure count is 0 against 5 or 8."
     ),
     "ase_morse_script": (
         "ASE 3.29 with the archived Morse script (L-BFGS memory 20, maxstep 0.2, alpha 25; FIRE maxstep 0.2; PreconLBFGS Exp A 3) "
         "scores 32, 113, and 29 against 53.8, 147.47, and 34. "
         "Constructor-default L-BFGS scores 53, next to 53.8, but that is not the archived alpha and memory. "
-        "eOn Morse L-BFGS and FIRE on the same bulk file reproduce, so the geometry set is not the split."
+        "eOn Morse L-BFGS and FIRE on the same bulk file meet the archive, so the geometry set is not the split."
     ),
     "optim_pt_units": (
         "archive run.sh divides coordinates by r0 = 2.897 and scales rho and rcut into those units. "
@@ -247,15 +249,15 @@ CAUSE_TEXT = {
         "The Rayleigh-Ritz template uses updates 4. The archived first-order mean is 25 and the second-order mean is 46. "
         "This default scores 61, so it is not either archived order."
     ),
-    "pele_fire": "pele FIRE on LJ38 scores 1264 with 7 failures. The archive is 709 with 0 failures. The M100 L-BFGS row on the same build reproduces, so this is the FIRE step, not the LJ kernel.",
-    "pele_morse": "pele Morse L-BFGS scores 92. The archive is 51. eOn Morse L-BFGS on the same bulk file reproduces at 52, so the gap is the pele memory and step, not the shared Morse parameters.",
-    "morse_sd": "eOn Morse steepest descent scores 7038 with 19 failures. The archive is 196 with 0. Morse L-BFGS, CG, and FIRE on the same client reproduce, so the kernel is not the split.",
-    "improved_unset": "The r2549 template turns improved on. The 2014 ini left that key unset. The mean lands outside 10 percent.",
+    "pele_fire": "pele FIRE on LJ38 scores 1264 with 7 failures. The archive is 709 with 0 failures. The M100 L-BFGS row on the same build meets the archive, so this is the FIRE step, not the LJ kernel.",
+    "pele_morse": "pele Morse L-BFGS scores 92. The archive is 51. eOn Morse L-BFGS on the same bulk file meets the archive at 52, so the gap is the pele memory and step, not the shared Morse parameters.",
+    "morse_sd": "eOn Morse steepest descent scores 7038 with 19 failures. The archive is 196 with 0. Morse L-BFGS, CG, and FIRE on the same client meet the archive, so the kernel is not the split.",
+    "improved_unset": "The r2549 template turns improved on. The 2014 ini left that key unset. The mean is past one tenth of the archived value.",
     "sella_trust": "Sella 2.6.0 with the archived trust-region numbers (eta, gamma, delta0, rho, sigma) is the parameter_source=archive row. It misses the 2014 mean. The constructor-default row is a different setup.",
-    "heptamer_cg": "The 3.5.0 file already stores the per-image mean, 142 against the archive 120. L-BFGS, FIRE, and QM on the same 8-image spring-5 climb reproduce, so the image count is not the split.",
-    "de_exclusion": "The 3.5.0 doubly-nudged file is the per-band mean under the 2500-call exclusion (708, 5 failures). The archive mean is 861. The client total is a different counter and is also outside 10 percent.",
+    "heptamer_cg": "The 3.5.0 file already stores the per-image mean, 142 against the archive 120. L-BFGS, FIRE, and QM on the same 8-image spring-5 climb meet the archive, so the image count is not the split.",
+    "de_exclusion": "The 3.5.0 doubly-nudged file is the per-band mean under the 2500-call exclusion (708, 5 failures). The archive mean is 861. The client total is a different counter and is also past one tenth of the archived value.",
     "eon_saddle_count": (
-        "The classic dimer campaign (improved false, the 2014 key) has fraction_connected 0.692 against 0.746, inside 10 percent, "
+        "The classic dimer campaign (improved false, the 2014 key) has fraction_connected 0.692 against 0.746, within one tenth, "
         "but force calls 6.97e6 against 3.78e6 and unique saddles 91.7 against 109.2. "
         "The archive standard error on the force calls is 5.27e5. "
         "This eOn AKMC counter is not the harness RMSD link test."
@@ -267,19 +269,20 @@ CAUSE_TEXT = {
         "The per-search cap of 5064 then puts every repetition on the PAR-2 cap."
     ),
     "saddle_lanczos_sm50": (
-        "The paper-ini adaptive hypersphere Lanczos run stops at 27 barriers at or below 1.5 eV or at 5000 searches. "
-        "Force calls are 957258 against 814519, inside the archived standard error. "
-        "benchmark_unique_saddles is 169.7 against 142.6 and benchmark_fraction_connected is 0.665 against 0.9."
+        "The adaptive hypersphere Lanczos run stops at 27 barriers at or below 1.5 eV or at 5000 searches. "
+        "The mean of runs 1 to 9 is 963110 force calls against 814519, within the archived standard error. "
+        "Unique saddles are 172.3 against 142.6 and the connected fraction is 0.642 against 0.9. "
+        "All 10 runs are listed on the row."
     ),
     "pele_bh_defaults": (
         "The archived driver is the dangling path bin/js850/globalopt.py. "
         "The harness uses pele LJCluster defaults (temperature 1, step 0.6, LBFGS memory 4) on unshifted cutoff 40. "
         "The mean is 688720 against 521595."
     ),
-    "htst_al": "The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) misses barrier_force_calls and rate_force_calls by about 30 percent. Pt dimer CG with max 10 reproduces all four hTST counts.",
+    "htst_al": "The r2549 Al dimer with the archived rotation string (CG, max 50, tol 1) misses barrier_force_calls and rate_force_calls by about 30 percent. Pt dimer CG with max 10 meets all four hTST counts.",
     "precon_hessian_index": (
         "ASE 3.29 PreconLBFGS with the archived opt.py setup (Exp A 3, maxstep 0.1, ASE fmax 0.01) "
-        "scores 2605 against 2686, inside 10 percent. "
+        "scores 2605 against 2686, within one tenth. "
         "The script uses a tsase LJ cutoff of 35. This row uses the harness cutoff 40. "
         "report.sh counts a failure only when a written total_force_calls is at least 10000. "
         "The harness records 10 failures, each a Hessian index of 1 after the maximum force is under 0.01. "
@@ -287,7 +290,7 @@ CAUSE_TEXT = {
     ),
     "linesearch_exceptions": (
         "ASE 3.29 LBFGSLineSearch with the archived opt.py arguments (maxstep 0.2, alpha 1/0.001, memory 100) "
-        "scores 410 against 417, inside 10 percent. "
+        "scores 410 against 417, within one tenth. "
         "report.sh counts a start as failed only when a written total_force_calls is at least 10000, and the benchmark.dat label says M=5 while opt.py sets memory 100. "
         "The harness records 7 failures: 5 RuntimeError LineSearch failed (ASE 3.8.2 already raises that; ASE 3.6.0 is not on PyPI) "
         "and 2 Hessian index 1 after the Euclidean force norm is under 0.01. "
@@ -295,7 +298,7 @@ CAUSE_TEXT = {
     ),
     "akmc_vs_langevin": (
         "The archive rows are Langevin parallel replica. The harness rows are AKMC. "
-        "On infra/aladatom-repro, eon/aladatom-akmc true_rate 3.597591452e9 is 14.1 times 2.542941e8, "
+        "On the aladatom AKMC comparison, eon/aladatom-akmc true_rate 3.597591452e9 is 14.1 times 2.542941e8, "
         "and eon/standard-aladatom-akmc true_rate 3.80613e7 is 45.5 times 8.359e5."
     ),
 }
@@ -306,7 +309,7 @@ def row_id(row: dict) -> str:
 
 
 def within_mean(archive: float, rerun: float, se: float | None) -> bool:
-    """True when the rerun is inside one standard error or 10 percent."""
+    """True when the rerun is within one standard error or one tenth."""
     if archive == 0:
         close = rerun == 0
     else:
@@ -393,7 +396,7 @@ def judge_checks(checks: list[dict], failure: dict | None) -> str:
     ok = all(item["ok"] for item in checks)
     if failure is not None and not failure["ok"]:
         ok = False
-    return "reproduced" if ok else "not_reproduced"
+    return "met" if ok else "missed"
 
 
 def build_checks(
@@ -512,15 +515,15 @@ class Hold:
 def holdback(root: Path) -> Hold:
     """Templates and campaign paths whose archive rerun missed the tolerance.
 
-    ``hold`` entries are included for every ledger row. A reproduced
+    ``hold`` entries are included for every ledger row. A met
     per-image file can still keep a raw-total template off the table.
     """
     found = Hold()
-    for row in load_ledger(root / "oracle" / "reproduction.jsonl"):
+    for row in load_ledger(root / LEDGER_JSON):
         rerun = row.get("rerun") or {}
         problem = f"{row['suite']}/{row['problem']}"
         template = str(rerun.get("template") or "")
-        if row.get("status") == "not_reproduced":
+        if row.get("status") == "missed":
             if template:
                 found.templates.add((problem, template))
             rel = str(rerun.get("path") or "")
@@ -541,7 +544,7 @@ def _local_fields(root: Path, rerun: dict) -> dict[str, str] | None:
 def baseline_errors(root: Path) -> list[str]:
     """Paper-baseline rows whose live campaign misses the archive tolerance."""
     errors = []
-    ledger = load_ledger(root / "oracle" / "reproduction.jsonl")
+    ledger = load_ledger(root / LEDGER_JSON)
     marked = []
     for row in ledger:
         rerun = row.get("rerun") or {}
@@ -549,7 +552,7 @@ def baseline_errors(root: Path) -> list[str]:
             continue
         ident = row_id(row)
         marked.append(rerun.get("template"))
-        if row.get("status") != "reproduced":
+        if row.get("status") != "met":
             errors.append(f"{ident} is paper_baseline and {row.get('status')}")
             continue
         fields = _local_fields(root, rerun)
@@ -589,7 +592,7 @@ def baseline_errors(root: Path) -> list[str]:
         for path in templates.rglob("*.toml"):
             data = tomllib.loads(path.read_text(encoding="utf-8"))
             if data.get("paper_baseline") and data.get("id") not in known:
-                errors.append(f"{data.get('id')} sets paper_baseline and is not a reproduced ledger row")
+                errors.append(f"{data.get('id')} sets paper_baseline and is not a met ledger row")
     return errors
 
 
@@ -652,28 +655,28 @@ def large_endpoint_files(root: Path, limit: int = 1_000_000) -> list[str]:
 
 
 def reproduction_errors(root: Path) -> list[str]:
-    ledger_path = root / "oracle" / "reproduction.jsonl"
+    ledger_path = root / LEDGER_JSON
     if not ledger_path.is_file():
-        return ["oracle/reproduction.jsonl is missing"]
+        return [f"{LEDGER_JSON} is missing"]
     from .check import load_oracle
 
     oracle = load_oracle(root / "oracle" / "entries.jsonl")
     ledger = load_ledger(ledger_path)
     errors = []
     if len(ledger) != len(oracle):
-        errors.append(f"reproduction ledger has {len(ledger)} rows and the oracle has {len(oracle)}")
+        errors.append(f"ledger has {len(ledger)} rows and the oracle has {len(oracle)}")
     oracle_ids = [row_id(row) for row in oracle]
     ledger_ids = [row_id(row) for row in ledger]
     if oracle_ids != ledger_ids:
-        errors.append("reproduction ledger is not in oracle order")
+        errors.append("ledger is not in oracle order")
     for row in ledger:
         status = judge_checks(row.get("checks") or [], row.get("failure_check") if row.get("rerun") else None)
         if row.get("rerun") is None:
             status = "not_rerun"
         if status != row.get("status"):
             errors.append(f"{row_id(row)} stored {row.get('status')} and the checks say {status}")
-        if row.get("rerun", {}) and row["rerun"].get("paper_baseline") and row.get("status") != "reproduced":
-            errors.append(f"{row_id(row)} paper_baseline is not reproduced")
+        if row.get("rerun", {}) and row["rerun"].get("paper_baseline") and row.get("status") != "met":
+            errors.append(f"{row_id(row)} paper_baseline is not met")
     errors.extend(baseline_errors(root))
     errors.extend(large_endpoint_files(root))
     return errors
@@ -759,18 +762,18 @@ def build_rows(root: Path) -> list[dict]:
             }
         status = judge_checks(checks, failure)
         named = match.get("cause", "")
-        cause = named if status == "not_reproduced" else ""
+        cause = named if status == "missed" else ""
         record["checks"] = checks
         record["failure_check"] = failure
         record["status"] = status
-        record["gap"] = _gap(checks, failure) if status == "not_reproduced" else ""
+        record["gap"] = _gap(checks, failure) if status == "missed" else ""
         record["cause"] = cause
         record["cause_detail"] = CAUSE_TEXT.get(cause, "") if cause else ""
-        record["note"] = CAUSE_TEXT.get(named, "") if status == "reproduced" and named else ""
-        baseline = status == "reproduced"
+        record["note"] = CAUSE_TEXT.get(named, "") if status == "met" and named else ""
+        baseline = status == "met"
         # The ranked harness-stop mean is not the 2014 pele score.
         if kind == "screen":
-            baseline = status == "reproduced"
+            baseline = status == "met"
         rerun = {
             "template": match["template"],
             "branch": match["branch"],
@@ -801,15 +804,15 @@ def _fmt(value: float) -> str:
 
 
 def render_markdown(rows: list[dict]) -> str:
-    counts = {"reproduced": 0, "not_reproduced": 0, "not_rerun": 0}
+    counts = {"met": 0, "missed": 0, "not_rerun": 0}
     for row in rows:
         counts[row["status"]] = counts.get(row["status"], 0) + 1
     lines = [
-        "# Reproduction",
+        "# Archive ledger",
         "",
-        "Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or 10%, and `nfailed` is inside the Wilson interval of the archived failure count.",
+        "Archive commit `0f26b796`. A rerun matches when each archived metric is within one archived standard error or one tenth of the archived value, and `nfailed` is in the Wilson interval of the archived failure count.",
         "",
-        f"{counts['reproduced']} reproduced, {counts['not_reproduced']} not reproduced, {counts['not_rerun']} not rerun. {len(rows)} archive rows.",
+        f"{counts['met']} met, {counts['missed']} missed, {counts['not_rerun']} not rerun. {len(rows)} archive rows.",
         "",
         "The pele transition-state paper score is the 2014 stop: break at the first RMS below tolerance, then one eigenvector search, transverse screen calls subtracted. Pt-island ts-ffd is 88.55 against 88 and is the paper baseline. The ranked harness-stop means are 111.27, 254.48, and 335.06 and are not that score.",
         "",
@@ -822,13 +825,13 @@ def render_markdown(rows: list[dict]) -> str:
         "Endpoint minima are free-atom float32 deltas against the reactant, compressed. A file over 1 MB is a git-LFS pointer, not a loose blob.",
         "",
     ]
-    current = ""
+    previous = ""
     for row in rows:
         suite = row["suite"]
-        if suite != current:
-            if current:
+        if suite != previous:
+            if previous:
                 lines.append("")
-            current = suite
+            previous = suite
             lines.append(f"## {suite}")
             lines.append("")
             lines.append("| Row | Archive | Rerun | Status |")
@@ -847,7 +850,7 @@ def render_markdown(rows: list[dict]) -> str:
             status = f"{status}; residual"
         lines.append(f"| {ident} | {archive} | {rerun} | {status} |")
     lines.append("")
-    lines.append("## Residuals inside the band")
+    lines.append("## Notes on rows that met")
     lines.append("")
     for row in rows:
         if row.get("note"):
@@ -875,10 +878,16 @@ def render_markdown(rows: list[dict]) -> str:
 
 def write_ledger(root: Path) -> list[dict]:
     rows = build_rows(root)
-    path = root / "oracle" / "reproduction.jsonl"
+    path = root / LEDGER_JSON
     payload = "\n".join(json.dumps(row, sort_keys=True) for row in rows) + "\n"
     path.write_text(payload, encoding="utf-8")
-    (root / "docs" / "reproduction.md").write_text(render_markdown(rows), encoding="utf-8")
+    old_json = root / "oracle" / "reproduction.jsonl"
+    old_md = root / "docs" / "reproduction.md"
+    if old_json.is_file() and old_json != path:
+        old_json.unlink()
+    if old_md.is_file():
+        old_md.unlink()
+    (root / LEDGER_MD).write_text(render_markdown(rows), encoding="utf-8")
     return rows
 
 
@@ -890,7 +899,7 @@ def main() -> None:
         counts[row["status"]] = counts.get(row["status"], 0) + 1
     print(counts)
     for row in rows:
-        if row["status"] == "not_reproduced":
+        if row["status"] == "missed":
             print(f"{row_id(row)} {row['cause']} {row['gap']}")
 
 
