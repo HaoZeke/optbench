@@ -1,7 +1,10 @@
 # force_calls is the harness PotServer total and the ranked cost
 # barrier_force_calls and rate_force_calls are sad-fcs in per-batch wuid order
 # sorting the whole file by wuid mixes the 20 batches, because each batch reuses wuid 0-7, and that sort sums the barrier to 782238
+# one confirmation, not the 13 barrier-window sample. PAR-2 uses the hTST/Pt cap.
+# the total is under the cap, so the penalty is not applied
 force_calls 1712105
+cap 20000000
 barrier_force_calls 1038889
 barrier_jobs 156
 rate_force_calls 519444.5
