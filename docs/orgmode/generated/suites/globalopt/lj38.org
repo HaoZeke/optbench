@@ -1,0 +1,31 @@
+#+TITLE: Lennard-Jones 38 global minimum
+#+OPTIONS: toc:nil num:nil author:nil
+
+#+begin_export rst
+.. raw:: html
+
+   <section class="bench" id="lj38" data-problem="globalopt/lj38">
+   <h2>Lennard-Jones 38 global minimum</h2>
+   <dl class="bench-rule">
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>100</dd>
+   <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   </dl>
+   <p>Every method is one row, ranked by the v2 PAR-2 mean of the harness total. The 2014 archive column is that method's archived record.</p>
+   <p class="bench-gaps">No performance profile. No full harness row.</p>
+   <details class="bench-details" id="lj38-templates">
+   <summary>All templates (6 ranked)</summary>
+   <div class="bench-scroll">
+   <table data-board-table="ranked" data-problem="globalopt/lj38">
+   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>2014 archive</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td data-field="template">eon-svn/bh-lj38</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">304315</td><td data-field="success_rate">1</td><td data-field="wilson_low">0.950008</td><td data-field="wilson_high">1</td><td data-field="median_calls">238263</td><td data-field="mean_calls">304315</td><td data-field="archive"></td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">73</td></tr>
+   <tr><td data-field="template">eon-client/bh-lj38</td><td data-field="version">Eon r2156</td><td data-field="commit"></td><td data-field="source">archive</td><td data-field="par2_mean"></td><td data-field="success_rate"></td><td data-field="wilson_low"></td><td data-field="wilson_high"></td><td data-field="median_calls"></td><td data-field="mean_calls"></td><td data-field="archive">eon-basinhopping: Eon r2156, force calls 508011</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n"></td></tr>
+   <tr><td data-field="template">gmin-csm</td><td data-field="version">GMIN</td><td data-field="commit"></td><td data-field="source">archive</td><td data-field="par2_mean"></td><td data-field="success_rate"></td><td data-field="wilson_low"></td><td data-field="wilson_high"></td><td data-field="median_calls"></td><td data-field="mean_calls"></td><td data-field="archive">gmin-csm: GMIN, force calls 6.42100e+03</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n"></td></tr>
+   <tr><td data-field="template">gmin-nosym</td><td data-field="version">GMIN</td><td data-field="commit"></td><td data-field="source">archive</td><td data-field="par2_mean"></td><td data-field="success_rate"></td><td data-field="wilson_low"></td><td data-field="wilson_high"></td><td data-field="median_calls"></td><td data-field="mean_calls"></td><td data-field="archive">gmin-nosym: GMIN, force calls 2.65951e+05</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n"></td></tr>
+   <tr><td data-field="template">gmin-symmetrise</td><td data-field="version">GMIN</td><td data-field="commit"></td><td data-field="source">archive</td><td data-field="par2_mean"></td><td data-field="success_rate"></td><td data-field="wilson_low"></td><td data-field="wilson_high"></td><td data-field="median_calls"></td><td data-field="mean_calls"></td><td data-field="archive">gmin-symmetrise: GMIN, force calls 2.27110e+04</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n"></td></tr>
+   <tr><td data-field="template">pele/lj38-basinhopping</td><td data-field="version">pele</td><td data-field="commit"></td><td data-field="source">archive</td><td data-field="par2_mean"></td><td data-field="success_rate"></td><td data-field="wilson_low"></td><td data-field="wilson_high"></td><td data-field="median_calls"></td><td data-field="mean_calls"></td><td data-field="archive">pele-basinhopping: pele, force calls 5.21595e+05</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n"></td></tr>
+   </tbody></table></div>
+   </details>
+   </section>
+#+end_export

@@ -1,8 +1,8 @@
 #+begin_export rst
 .. raw:: html
 
-   <section class="bench" id="current-codes">
-   <h2>Current codes</h2>
+   <section class="bench" id="pinned-codes">
+   <h2>Codes</h2>
    <p>The benchmark contributor is Rohit Goswami. A ranked row is a full harness run. The commit on that row is the commit that produced the score.</p>
    <h3>eOn</h3>
    <div class="bench-scroll"><table>
@@ -109,20 +109,15 @@
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>aladatom: partial.</li>
-   <li>LJ38 double-ended saddle: not yet on the harness counter, partial.</li>
-   <li>lj38_2ts_separation: partial.</li>
-   <li>pt-island: not yet on the harness counter, partial.</li>
-   <li>Al: partial.</li>
-   <li>Pt: partial.</li>
-   <li>lj38: partial.</li>
-   <li>Pt-heptamer: not yet on the harness counter, partial.</li>
-   <li>Pt heptamer island: not yet on the harness counter, partial.</li>
-   <li>LJ38: not yet on the harness counter, partial.</li>
-   <li>pt-island: not yet on the harness counter, partial.</li>
+   <li>LJ38 double-ended saddle: not yet on the harness counter.</li>
+   <li>pt-island: not yet on the harness counter.</li>
+   <li>Pt-heptamer: not yet on the harness counter.</li>
+   <li>Pt heptamer island: not yet on the harness counter.</li>
+   <li>LJ38: not yet on the harness counter.</li>
+   <li>pt-island: not yet on the harness counter.</li>
    <li>eon-ci-neb: no per-start record.</li>
-   <li>eon-ci-swdneb: no per-start record; does not reproduce the 2014 archive.</li>
-   <li>eon-cg: no per-start record; does not reproduce the 2014 archive.</li>
+   <li>eon-ci-swdneb: no per-start record.</li>
+   <li>eon-cg: no per-start record.</li>
    <li>eon-fire: no per-start record.</li>
    <li>eon-lbfgs: no per-start record.</li>
    <li>eon-qm: no per-start record.</li>
@@ -133,7 +128,7 @@
    <li>eon-client/morse-cg: no per-start record.</li>
    <li>eon-client/morse-fire: no per-start record.</li>
    <li>eon-client/morse-lbfgs: no per-start record.</li>
-   <li>eon-client/morse-sd: no per-start record; does not reproduce the 2014 archive.</li>
+   <li>eon-client/morse-sd: no per-start record.</li>
    <li>eon-client/qm: no per-start record.</li>
    <li>eon-client/sd-twopoint: no per-start record.</li>
    <li>eon-client/sd: no per-start record.</li>
@@ -174,14 +169,14 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
-   <tr data-problem="double-ended-saddle-search/pt-island" data-template="eon-svn/de-pt-dimer">
+   <tr data-problem="double-ended-saddle-search/pt-island" data-template="eon-svn/de-pt-lanczos-improved">
    <td>pt-island</td>
-   <td data-field="template">eon-svn/de-pt-dimer</td>
+   <td data-field="template">eon-svn/de-pt-lanczos-improved</td>
    <td data-field="version">Eon svn r2549</td>
    <td data-field="commit">r2549</td>
-   <td data-field="par2_mean">192.051</td>
-   <td data-field="mean_calls">192.051</td>
-   <td data-field="median_calls">188</td>
+   <td data-field="par2_mean">180.644</td>
+   <td data-field="mean_calls">180.644</td>
+   <td data-field="median_calls">161</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
@@ -218,14 +213,14 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
-   <tr data-problem="tsopt/LJ38" data-template="eon-svn/ts-lj38-lanczos-ljcut">
+   <tr data-problem="tsopt/LJ38" data-template="eon-svn/ts-lj38-lanczos-improved">
    <td>LJ38</td>
-   <td data-field="template">eon-svn/ts-lj38-lanczos-ljcut</td>
+   <td data-field="template">eon-svn/ts-lj38-lanczos-improved</td>
    <td data-field="version">Eon svn r2549</td>
    <td data-field="commit">r2549</td>
-   <td data-field="par2_mean">292.78</td>
-   <td data-field="mean_calls">292.78</td>
-   <td data-field="median_calls">219</td>
+   <td data-field="par2_mean">270.85</td>
+   <td data-field="mean_calls">270.85</td>
+   <td data-field="median_calls">180</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
@@ -242,17 +237,6 @@
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>aladatom: partial.</li>
-   <li>LJ38 double-ended saddle: partial.</li>
-   <li>lj38_2ts_separation: partial.</li>
-   <li>pt-island: partial.</li>
-   <li>Lennard-Jones 38 global minimum: partial.</li>
-   <li>Al: partial.</li>
-   <li>Pt: partial.</li>
-   <li>lj38: partial.</li>
-   <li>Pt heptamer island: partial.</li>
-   <li>LJ38: partial.</li>
-   <li>pt-island: partial.</li>
    <li>eon-svn/cg: no per-start record.</li>
    <li>eon-svn/fire: no per-start record.</li>
    <li>eon-svn/lbfgs-m100: no per-start record.</li>
@@ -291,14 +275,14 @@
    <td data-field="n">9</td>
    </tr>
    </tbody></table></div>
-   <h3>eOn (develop 500350d9)</h3>
+   <h3>eOn (develop 4c1b814f)</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
    <tr>
    <td>saddle search</td>
-   <td>fix/develop-regressions-vs-350</td>
-   <td>500350d9fae8</td>
+   <td>develop</td>
+   <td>4c1b814f62f1</td>
    <td><a href="https://github.com/TheochemUI/eon">https://github.com/TheochemUI/eon</a></td>
    </tr>
    </tbody></table></div>
@@ -308,11 +292,11 @@
    <tr data-problem="saddle-search/pt-island" data-template="eon-develop/saddle-pt-stock">
    <td>Pt heptamer island</td>
    <td data-field="template">eon-develop/saddle-pt-stock</td>
-   <td data-field="version">eOn (develop 500350d9) 500350d9</td>
-   <td data-field="commit">500350d9fae8</td>
-   <td data-field="par2_mean">5.1294e+06</td>
-   <td data-field="mean_calls">5.1294e+06</td>
-   <td data-field="median_calls">5.15872e+06</td>
+   <td data-field="version">eOn (develop 4c1b814f) 4c1b814f</td>
+   <td data-field="commit">4c1b814f62f1</td>
+   <td data-field="par2_mean">5.4257e+06</td>
+   <td data-field="mean_calls">5.4257e+06</td>
+   <td data-field="median_calls">4.77124e+06</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">9</td>
    </tr>
@@ -560,15 +544,6 @@
    <td data-field="n">13</td>
    </tr>
    </tbody></table></div>
-   <p>No full ranked run</p><ul>
-   <li>LJ38 double-ended saddle: partial.</li>
-   <li>lj38_2ts_separation: partial.</li>
-   <li>pt-island: partial.</li>
-   <li>Lennard-Jones 38 clusters: partial.</li>
-   <li>Morse bulk: partial.</li>
-   <li>Pt-heptamer: partial.</li>
-   <li>Pt heptamer island: partial.</li>
-   </ul>
    <h3>Sella</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
@@ -701,14 +676,6 @@
    </tr>
    </tbody></table></div>
    <p>No full ranked run</p><ul>
-   <li>LJ38 double-ended saddle: partial.</li>
-   <li>lj38_2ts_separation: partial.</li>
-   <li>pt-island: partial.</li>
-   <li>Lennard-Jones 38 clusters: partial.</li>
-   <li>Morse bulk: partial.</li>
-   <li>Pt heptamer island: partial.</li>
-   <li>LJ38: partial.</li>
-   <li>pt-island: partial.</li>
    <li>sella-lj38: no per-start record.</li>
    </ul>
    <h3>pARTn</h3>
@@ -1125,9 +1092,20 @@
    <td><a href="https://github.com/lode-org/optbench">https://github.com/lode-org/optbench</a></td>
    </tr>
    </tbody></table></div>
-   <p>No full ranked run.</p>
-   <p>No full ranked run</p><ul>
-   <li>Pt heptamer island: partial.</li>
-   </ul>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="saddle-search/pt-island" data-template="softsaddle/saddle-lanczos-sm50">
+   <td>Pt heptamer island</td>
+   <td data-field="template">softsaddle/saddle-lanczos-sm50</td>
+   <td data-field="version">SoftSaddle 2019.04</td>
+   <td data-field="commit">5a00aeede06f</td>
+   <td data-field="par2_mean">963110</td>
+   <td data-field="mean_calls">963110</td>
+   <td data-field="median_calls">970223</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">9</td>
+   </tr>
+   </tbody></table></div>
    </section>
 #+end_export
