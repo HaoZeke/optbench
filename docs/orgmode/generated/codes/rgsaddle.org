@@ -387,7 +387,7 @@
    <td>Pt heptamer island</td>
    <td data-field="label">rgsaddle (0.2.2) · Dimer FIRE</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">2</td>
+   <td data-field="family_rank">4</td>
    <td data-field="par2_mean">10128</td>
    <td data-field="published"></td>
    <td data-field="median_calls">1013</td>
@@ -401,7 +401,7 @@
    <td>Pt heptamer island</td>
    <td data-field="label">rgsaddle (0.2.2) · Dimer L-BFGS</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">3</td>
+   <td data-field="family_rank">5</td>
    <td data-field="par2_mean">10128</td>
    <td data-field="published"></td>
    <td data-field="median_calls">1013</td>
@@ -415,7 +415,7 @@
    <td>Pt heptamer island</td>
    <td data-field="label">rgsaddle (0.2.2) · Dimer rotation-skip L-BFGS</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">4</td>
+   <td data-field="family_rank">6</td>
    <td data-field="par2_mean">10128</td>
    <td data-field="published"></td>
    <td data-field="median_calls">441</td>
@@ -429,7 +429,7 @@
    <td>Pt heptamer island</td>
    <td data-field="label">rgsaddle (0.2.2) · Lanczos L-BFGS</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">5</td>
+   <td data-field="family_rank">7</td>
    <td data-field="par2_mean">10128</td>
    <td data-field="published"></td>
    <td data-field="median_calls">1002</td>
