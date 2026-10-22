@@ -265,6 +265,8 @@
    <h2>lj150</h2>
    <dl class="bench-rule">
    <dt>Cap</dt><dd>2000000 force calls</dd>
+   <dt>Starts</dt><dd>100</dd>
+   <dt>Potential</dt><dd>lennard-jones</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Note</dt><dd>The 2014 archive states no force-call cap. archive/entries/globalopt/lj150/gmin-nosym/benchmark.dat records energy_calls_mean and energy_calls_stddev, not a force-call cap. The declared cap is 2000000, the cap recorded for ranked rows eon-client-bh-lj38 and eon-svn-bh-lj38 in results/board/problems/globalopt-lj38.json.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
@@ -435,6 +437,8 @@
    <h2>lj75</h2>
    <dl class="bench-rule">
    <dt>Cap</dt><dd>2000000 force calls</dd>
+   <dt>Starts</dt><dd>200</dd>
+   <dt>Potential</dt><dd>lennard-jones</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Note</dt><dd>The 2014 archive states no force-call cap. archive/entries/globalopt/lj75/gmin/benchmark.dat records an observed force_calls_max of 3.1011e+05, which is not a cap. The declared cap is 2000000, the cap recorded for ranked rows eon-client-bh-lj38 and eon-svn-bh-lj38 in results/board/problems/globalopt-lj38.json.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
@@ -491,6 +495,8 @@
    <h2>lj98</h2>
    <dl class="bench-rule">
    <dt>Cap</dt><dd>2000000 force calls</dd>
+   <dt>Starts</dt><dd>100</dd>
+   <dt>Potential</dt><dd>lennard-jones</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
    <dt>Note</dt><dd>The 2014 archive states no force-call cap. archive/entries/globalopt/lj98/gmin-nosym/benchmark.dat records energy_calls_mean and energy_calls_stddev, not a force-call cap. The declared cap is 2000000, the cap recorded for ranked rows eon-client-bh-lj38 and eon-svn-bh-lj38 in results/board/problems/globalopt-lj38.json.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>

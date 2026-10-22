@@ -1,0 +1,20 @@
+id = "ezga/lj38"
+engine = "ezga"
+code = "EZGA"
+code_version = "1.2.31"
+commit = "1395e8de01f003e40a3352987377d5f863a2e388"
+algorithm = "GA"
+problem = "globalopt/lj38"
+task = "globalopt"
+profile = "default"
+tuning = "default"
+reducer = "capped"
+ranked = true
+note = "EZGA 1.2.31. The relaxer is FIRE at fmax 0.05 with no MD. steps_max and the generation count are the force-call cap. The population is 16 copies of the archived start. A hit is a quench inside fmax and inside the energy window. The seed is 314159 plus the start index."
+
+[search]
+family = "globalopt"
+method = "ezga"
+
+[stop]
+max_force_calls = 2000000

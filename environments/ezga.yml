@@ -1,0 +1,13 @@
+# EZGA is not a conda-forge package. This file does not invent a
+# build. The search the benchmarks run is the source pin in
+# codes/registry.toml under id ezga:
+#   repository = https://gitlab.mpcdf.mpg.de/fhi-theory/EZGA
+#   commit = 1395e8de01f003e40a3352987377d5f863a2e388
+#   version string 1.2.31
+# asv has one environment_type, so this yml cannot be bound to one
+# class. The campaign installs ezga-lib==1.2.31.
+name: ezga
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12

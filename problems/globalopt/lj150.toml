@@ -6,8 +6,27 @@ contract = "partial"
 entry_count = 2
 remark = "The 2014 archive states no force-call cap. archive/entries/globalopt/lj150/gmin-nosym/benchmark.dat records energy_calls_mean and energy_calls_stddev, not a force-call cap. The declared cap is 2000000, the cap recorded for ranked rows eon-client-bh-lj38 and eon-svn-bh-lj38 in results/board/problems/globalopt-lj38.json."
 
+[potential]
+kind = "lennard-jones"
+epsilon = 1.0
+sigma = 1.0
+cutoff = 40.0
+
+[reference]
+energy = -893.310258
+window = 0.001
+symmetry = "C3v"
+page = "https://www-wales.ch.cam.ac.uk/~jon/structures/LJ/tables.150.html"
+points = "https://www-wales.ch.cam.ac.uk/~jon/structures/LJ/points/150"
+
+[sample]
+starts = 100
+
 [convergence]
 max_force_calls = 2000000
+
+[input]
+archive_path = "website/globalopt/lj150/lj150_clusters.tgz"
 
 [metrics]
 required = ["basin_hopping_steps_mean", "basin_hopping_steps_stddev", "cpu_time_mean", "cpu_time_stddev", "energy_calls_mean", "energy_calls_stddev", "nfailed"]

@@ -204,6 +204,16 @@ commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
 note = "No public git commit. The pin is the sha256 of the Wales svn.tar.bz2 snapshot, 122743078 bytes. Minimization L-BFGS calls the ASE socket and pes.evaluate. OPTIM's own call counter is not a score. Saddle search, NEB, noise, and PATHSAMPLE are not scored."
 
 [[code]]
+id = "ezga"
+name = "EZGA"
+role = "global optimization"
+repository = "https://gitlab.mpcdf.mpg.de/fhi-theory/EZGA"
+ref = "1.2.31"
+commit = "1395e8de01f003e40a3352987377d5f863a2e388"
+committed = "2026-08-27"
+note = "1.2.31, MIT. ase_calculator accepts an ASE calculator. The relaxer is FIRE at fmax 0.05 with no MD. steps_max and the generation count are the force-call cap. The population is 16 copies of the archived start. The engine catches Exception, so a hit and the force-call cap leave through BaseException."
+
+[[code]]
 id = "airss"
 name = "AIRSS"
 role = "random structure search"
