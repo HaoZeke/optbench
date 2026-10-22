@@ -45,6 +45,16 @@ committed = "2026-10-20"
 note = "develop 500350d9fae881f06c7ef194e5868da079c4be5a built from that commit with no source patch. eonclient --version prints 3.6.0 (500350d9). The Pt-heptamer and LJ38 band rows on this commit use the harness force counter. EON SVN r2549 is a different code."
 
 [[code]]
+id = "eon-develop-53055cfe"
+name = "eOn"
+role = "minimization and saddle search"
+repository = "https://github.com/TheochemUI/eon"
+ref = "develop"
+commit = "53055cfe4ee7d12904c0915de583be0859b48536"
+committed = "2026-10-22"
+note = "develop 53055cfe4ee7d12904c0915de583be0859b48536, the merge of pull request 800, built from that commit with no source patch. eonclient --version prints 3.6.0 (53055cfe). GPR-dimer is absent. The aluminium adatom AKMC rows and the min-mode rows on this pin use the same problems, caps, and counters as the other eOn pins. The 7095b23 pin and the 500350d9 pin stay for the scores already run on them."
+
+[[code]]
 id = "eon-svn"
 name = "Eon svn"
 role = "minimization and saddle search"

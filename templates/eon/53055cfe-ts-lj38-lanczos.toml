@@ -1,0 +1,37 @@
+id = "eon/53055cfe-ts-lj38-lanczos"
+engine = "eon"
+problem = "tsopt/LJ38"
+code = "eOn"
+code_version = "(develop 53055cfe)"
+commit = "53055cfe4ee7d12904c0915de583be0859b48536"
+algorithm = "Lanczos"
+reducer = "report-capped"
+failure_cap = 10000
+note = "The binary is eOn develop 53055cfe, built from that commit with no source patch. Lanczos minimum mode and conjugate-gradient translation on the 200 LJ38 starts. Lanczos tolerance 0.02, 15 iterations, quit_early true. Optimizer max_move 0.35, max_iterations 1000, converged_force 0.001. Potential ljcluster. client_displace_type load. direction.dat is Python random.Random(index), three draws in [0, 1) per atom. Main random_seed is 1. The mean keeps total_force_calls under 10000. GPR-dimer is not in this build."
+
+[ini.Main]
+job = "saddle_search"
+finite_difference = 0.001
+random_seed = 1
+
+[ini.Potential]
+potential = "ljcluster"
+
+[ini.Optimizer]
+opt_method = "cg"
+convergence_metric = "norm"
+converged_force = 0.001
+max_move = 0.35
+max_iterations = 1000
+
+[ini."Saddle Search"]
+min_mode_method = "lanczos"
+client_displace_type = "load"
+converged_force = 0.001
+max_iterations = 1000
+displace_magnitude = 0.1
+
+[ini.Lanczos]
+tolerance = 0.02
+max_iterations = 15
+quit_early = true

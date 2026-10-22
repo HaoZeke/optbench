@@ -5,6 +5,10 @@
 #   ref = develop
 #   commit = 7095b23ac17d49f434a5e08ccb072897ceca698e
 #   version string 3.6.0 (7095b23a)
+# id eon-develop-53055cfe is develop
+#   commit = 53055cfe4ee7d12904c0915de583be0859b48536
+#   version string 3.6.0 (53055cfe)
+# The 7095b23 pin stays for the scores already run on it.
 # asv has one environment_type, so this yml cannot be bound to one
 # class. Those classes call EONCLIENT. environments/eon-3.5.0.yml
 # remains the conda-forge 3.5.0 pin.

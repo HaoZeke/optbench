@@ -1,0 +1,66 @@
+id = "eon/53055cfe-standard-aladatom-akmc"
+engine = "eon"
+problem = "accelerated-md/standard_aladatom"
+code = "eOn"
+code_version = "(develop 53055cfe)"
+commit = "53055cfe4ee7d12904c0915de583be0859b48536"
+algorithm = "AKMC dimer"
+reducer = "amd-catalogue"
+failure_cap = 1000000000
+pass_limit = 400
+note = "The binary is eOn develop 53055cfe, built from that commit with no source patch. AKMC on the 151-atom Al adatom with the built-in eam_al potential at 150 K. The run stays on the reactant. eOn confidence is 1.1 with the old scheme, so akmc() does not take a KMC step. The harness stops when the old-scheme repeat confidence reaches 0.95 and the thermal-window rate is positive. Prefactor default_value 1e12 skips the Hessian. Force calls are sad-fcs plus mins-fcs. Prefactor calls are not included. Classic dimer, improved false, rotations_max 20, converged_angle 5. Optimizer L-BFGS, max_move 0.2, max_iterations 1000, converged_force 0.001. The displacement epicenter is atom 150, the adatom, with radius 3.3 and magnitude 0.3. A displacement of every free atom walks the search into a high-energy or disconnected saddle. Thermal window 20 kT. Seed is 20261018 plus the repetition index. Communicator num_jobs 8. pass_limit 400 stops a repetition that has not reached confidence. The catalogue probabilities on this problem were measured at 250 K."
+
+[ini.Main]
+job = "akmc"
+temperature = 150
+finite_difference = 0.001
+random_seed = 1
+
+[ini.Potential]
+potential = "eam_al"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+convergence_metric = "norm"
+converged_force = 0.001
+max_move = 0.2
+max_iterations = 1000
+
+[ini.AKMC]
+confidence = 1.1
+thermally_accessible_window = 20
+confidence_scheme = "old"
+
+[ini."Process Search"]
+minimize_first = true
+
+[ini.Communicator]
+type = "local"
+num_jobs = 8
+jobs_per_bundle = 8
+number_of_CPUs = 1
+client_path = "eonclient"
+
+[ini."Saddle Search"]
+method = "min_mode"
+min_mode_method = "dimer"
+displace_radius = 3.3
+displace_magnitude = 0.3
+displace_listed_atom_weight = 1.0
+displace_random_weight = 0.0
+displace_atom_list = "150"
+displace_all_listed = false
+max_energy = 10.0
+max_iterations = 1000
+converged_force = 0.001
+
+[ini.Prefactor]
+default_value = 1e12
+
+[ini.Dimer]
+improved = false
+opt_method = "sd"
+converged_angle = 5.0
+rotations_max = 20
+rotations_min = 1
+finite_angle = 0.005

@@ -1,0 +1,37 @@
+id = "eon/53055cfe-ts-pt-lanczos"
+engine = "eon"
+problem = "tsopt/pt-island"
+code = "eOn"
+code_version = "(develop 53055cfe)"
+commit = "53055cfe4ee7d12904c0915de583be0859b48536"
+algorithm = "Lanczos"
+reducer = "report-capped"
+failure_cap = 10000
+note = "The binary is eOn develop 53055cfe, built from that commit with no source patch. Same Lanczos and conjugate-gradient settings as eon/develop-ts-lj38-lanczos, on the 49 Pt-island starts. Potential morse_pt. max_move 0.35. pos.con is reactant.con. displacement.con is initial_N.con. direction.dat is that displacement minus the reactant, divided by its norm. client_displace_type load. Main random_seed is 1. The mean keeps total_force_calls under 10000."
+
+[ini.Main]
+job = "saddle_search"
+finite_difference = 0.001
+random_seed = 1
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "cg"
+convergence_metric = "norm"
+converged_force = 0.001
+max_move = 0.35
+max_iterations = 1000
+
+[ini."Saddle Search"]
+min_mode_method = "lanczos"
+client_displace_type = "load"
+converged_force = 0.001
+max_iterations = 1000
+displace_magnitude = 0.1
+
+[ini.Lanczos]
+tolerance = 0.02
+max_iterations = 15
+quit_early = true
