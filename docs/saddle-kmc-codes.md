@@ -192,9 +192,9 @@ Basin hopping and minima hopping on `globalopt/*` share
 `lj100-binary` is 42 atoms of sigma 1.0 and 58 atoms of sigma 1.3,
 and a start succeeds at or below -604.796307 plus 0.001.
 A template that sets ranked false stays off the ranked table.
-NLopt files for globalopt/lj38 and globalopt/lj75 stopped at 1000000
-force calls. The lj150 basin file stopped at 10000000. The problem cap
-is 2000000, so those files are not kept.
+NLopt files and asv tracks for globalopt/lj38 and globalopt/lj75 stopped
+at 1000000 force calls. The lj150 basin file and its asv track stopped
+at 10000000. The problem cap is 2000000, so those records are not kept.
 AMD-SVM on `accelerated-md/aladatom` is not
 scored. The problem has no force-call protocol and the harness has no EAM
 potential. hTST prefactors are not scored for the same reason.
