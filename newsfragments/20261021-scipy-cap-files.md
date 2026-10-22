@@ -1,0 +1,1 @@
+SciPy files for globalopt/lj75 stopped at 1000000 force calls. The lj38 shgo file records Sobol sampling. The problem cap is 2000000 and the ranked shgo row is the constructor simplicial sampler, so those files are not kept.
