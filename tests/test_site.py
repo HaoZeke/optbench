@@ -105,7 +105,7 @@ def test_rendered_pages_use_the_board_rank():
     saddle = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "saddle-search.org").read_text(encoding="utf-8")
     assert 'data-board-table="ranked" data-problem="saddle-search/pt-island"' in saddle
     assert "rgsaddle/saddle-dimer-rotskip" in saddle
-    assert 'data-field="par2_mean">10121.8<' in saddle
+    assert 'data-field="par2_mean">10123.7<' in saddle
     assert "No full harness row." not in saddle
     assert "eon-3.5.0-saddle-pt-dimer" in saddle
     assert "not yet on the harness counter" in saddle
@@ -122,7 +122,7 @@ def test_rendered_pages_use_the_board_rank():
     assert "1d71c9445018" in codes
     assert "f15726f1c798" in codes
     assert "c0db2b8d333c" in codes
-    assert "df8ec2f8deba" in codes
+    assert "8fa0eb1559c9" in codes
     assert 'data-board-table="code-best"' in codes
     assert not (ROOT / "docs" / "include" / "featured.org").exists()
     assert not (ROOT / "docs" / "include" / "terra-pass.org").exists()

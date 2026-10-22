@@ -379,7 +379,7 @@
    <tr>
    <td>saddle search</td>
    <td>main</td>
-   <td>df8ec2f8deba</td>
+   <td>8fa0eb1559c9</td>
    <td><a href="https://github.com/OmniPotentRPC/rgsaddle">https://github.com/OmniPotentRPC/rgsaddle</a></td>
    </tr>
    </tbody></table></div>
@@ -441,15 +441,15 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">13</td>
    </tr>
-   <tr data-problem="saddle-search/pt-island" data-template="rgsaddle/saddle-dimer-rotskip">
+   <tr data-problem="saddle-search/pt-island" data-template="rgsaddle/saddle-dimer-lbfgs">
    <td>Pt heptamer island</td>
-   <td data-field="template">rgsaddle/saddle-dimer-rotskip</td>
+   <td data-field="template">rgsaddle/saddle-dimer-lbfgs</td>
    <td data-field="version">rgsaddle 0.2.2</td>
-   <td data-field="commit">df8ec2f8deba</td>
-   <td data-field="par2_mean">10121.8</td>
-   <td data-field="mean_calls">479.948</td>
-   <td data-field="median_calls">441</td>
-   <td data-field="failures">crash 0, divergence 19700, cap 267, wrong_stationary 20</td>
+   <td data-field="commit">8fa0eb1559c9</td>
+   <td data-field="par2_mean">10123.7</td>
+   <td data-field="mean_calls">419.237</td>
+   <td data-field="median_calls">411</td>
+   <td data-field="failures">crash 0, divergence 19969, cap 10, wrong_stationary 12</td>
    <td data-field="n">20000</td>
    </tr>
    <tr data-problem="tsopt/LJ38" data-template="rgsaddle/prfo-tuned">
