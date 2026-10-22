@@ -241,3 +241,108 @@ def test_packaged_runtime_keeps_the_validated_source_hash(tmp_path, monkeypatch)
     library.write_bytes(b"wrong library")
     with pytest.raises(ValueError, match="package file mismatch"):
         native.runtime({"commit": "revision"})
+
+
+@pytest.mark.parametrize("selection,flag", [
+    ("auto", None), ("radius", "--radius-only"), ("window", "--evict-frozen"),
+])
+def test_frozen_selection_maps_to_the_native_cli(tmp_path, selection, flag):
+    argv = native.command("gprn", tmp_path, settings(), {
+        "frozen_selection": selection, "frozen_neighbors": 0,
+        "frozen_activation_distance": 5.0,
+    })
+    assert argv[argv.index("--nn-frozen") + 1] == "0"
+    assert argv[argv.index("--gp-frozen-activation-distance") + 1] == "5.0"
+    assert ("--radius-only" in argv) == (flag == "--radius-only")
+    assert ("--evict-frozen" in argv) == (flag == "--evict-frozen")
+
+
+@pytest.mark.parametrize("neighbors", [2, 16])
+def test_explicit_frozen_neighbor_count_reaches_the_native_cli(tmp_path, neighbors):
+    argv = native.command("gprn", tmp_path, settings(), {"frozen_neighbors": neighbors})
+    assert argv[argv.index("--nn-frozen") + 1] == str(neighbors)
+    assert "--radius-only" not in argv
+    assert "--evict-frozen" not in argv
+
+
+@pytest.mark.parametrize("options", [
+    {"frozen_selection": "nearest"}, {"frozen_selection": None},
+    {"frozen_neighbors": -1}, {"frozen_neighbors": 2.5},
+    {"frozen_neighbors": "2"}, {"frozen_neighbors": True},
+    {"frozen_neighbors": 2, "frozen_selection": "radius"},
+    {"frozen_neighbors": 2, "frozen_selection": "window"},
+    {"frozen_activation_distance": -1},
+    {"frozen_activation_distance": float("nan")},
+    {"frozen_activation_distance": float("inf")},
+    {"frozen_activation_distance": "5"}, {"frozen_activation_distance": True},
+])
+def test_invalid_frozen_policy_is_rejected_before_launch(tmp_path, options):
+    with pytest.raises(ValueError, match="frozen_"):
+        native.command("gprn", tmp_path, settings(), options)
+
+
+@pytest.mark.parametrize("system", ["heptamer", "island"])
+@pytest.mark.parametrize("variant,neighbors,selection", [
+    ("auto", 0, "auto"), ("radius", 0, "radius"),
+    ("k2", 2, "auto"), ("k16", 16, "auto"),
+])
+def test_frozen_comparison_templates_change_only_environment_selection(
+        tmp_path, system, variant, neighbors, selection):
+    from optbench.campaign import load_template
+    from optbench.engines.common import registry_pin, require_pin
+
+    root = Path(__file__).resolve().parents[1]
+    base = load_template(root, f"gpridge/pt-{system}-gp-neb")
+    comparison = load_template(root, f"gpridge/pt-{system}-gp-neb-{variant}")
+    require_pin(comparison, registry_pin(root, "gpridge"))
+    assert comparison["problem"] == base["problem"]
+    assert comparison["gpridge"] == {
+        **base["gpridge"], "frozen_neighbors": neighbors,
+        "frozen_selection": selection, "frozen_activation_distance": 5.0,
+    }
+    argv = native.command("gprn", tmp_path, settings(), comparison["gpridge"])
+    base_argv = native.command("gprn", tmp_path, settings(), base["gpridge"])
+    assert argv[:len(base_argv)] == base_argv
+    assert argv[argv.index("--nn-frozen") + 1] == str(neighbors)
+    assert ("--radius-only" in argv) == (selection == "radius")
+
+
+@pytest.mark.parametrize("program", ["gprd", "potserv"])
+def test_runtime_validates_the_selected_native_program(tmp_path, monkeypatch, program):
+    binary = tmp_path / program
+    binary.write_bytes(program.encode())
+    manifest = tmp_path / "validation"
+    manifest.mkdir()
+    (manifest / "provenance.json").write_text('{"source_revision": "revision"}')
+    (manifest / "result.json").write_text('{"exit_code": 0}')
+    (manifest / "programs.sha256").write_text(f"{native.digest(binary)}  {binary}\n")
+    monkeypatch.setenv(f"GPRIDGE_{program.upper()}", str(binary))
+    monkeypatch.setenv("GPRIDGE_VALIDATION", str(manifest))
+    assert native.runtime({"commit": "revision"}, program)["binary"] == str(binary)
+    binary.write_bytes(b"different")
+    with pytest.raises(ValueError, match="native-validation"):
+        native.runtime({"commit": "revision"}, program)
+
+
+def test_runtime_validates_a_nested_packaged_server(tmp_path, monkeypatch):
+    import json
+
+    relative = "subprojects/rgpot/CppCore/potserv"
+    binary = tmp_path / relative
+    binary.parent.mkdir(parents=True)
+    binary.write_bytes(b"packaged server")
+    manifest = tmp_path / "validation"
+    manifest.mkdir()
+    (manifest / "provenance.json").write_text('{"source_revision": "revision"}')
+    (manifest / "result.json").write_text('{"exit_code": 0}')
+    (manifest / "programs.sha256").write_text("original-server /build/potserv\n")
+    (tmp_path / "runtime.json").write_text(json.dumps({
+        "source_revision": "revision", "files": {
+            relative: {"sha256": native.digest(binary), "source_sha256": "original-server"},
+        },
+    }))
+    monkeypatch.setenv("GPRIDGE_POTSERV", str(binary))
+    monkeypatch.setenv("GPRIDGE_VALIDATION", str(manifest))
+    identity = native.runtime({"commit": "revision"}, "potserv")
+    assert identity["validated_sha256"] == "original-server"
+    assert identity["runtime_manifest_sha256"] == native.digest(tmp_path / "runtime.json")
