@@ -1,0 +1,1998 @@
+{
+  "bootstrap_resamples": 2000,
+  "bootstrap_seed": 20261015,
+  "note": "Random structure search follows the AGOX random-search example. The archived geometry is quenched first and its energy is kept. Later candidates come from RandomGenerator inside the confinement cube. Local optimization, seed, potential, success window, and cap are the same as agox/lj38-bh.",
+  "par_factor": 2,
+  "problem": "globalopt/lj38",
+  "runs": [
+    {
+      "algorithm": "random structure search",
+      "cap": 2000000,
+      "code": "AGOX",
+      "code_version": "3.11.2.dev2+g22d94a6fa",
+      "commit": "22d94a6fae8cf2d08d51ecc8b9291a47667aa95c",
+      "entry": "agox-22d94a6-lj38-rss",
+      "legacy": {
+        "force_calls": null,
+        "force_calls_max": null,
+        "force_calls_min": null,
+        "median": null,
+        "nfailed": 100
+      },
+      "metrics": {
+        "bootstrap_resamples": 2000,
+        "bootstrap_seed": 20261015,
+        "cap": 2000000,
+        "includes_failures": true,
+        "iqr": 0.0,
+        "iqr_high": 0.0,
+        "iqr_low": 0.0,
+        "mean": 4000000.0,
+        "median": 4000000.0,
+        "median_high": 4000000.0,
+        "median_low": 4000000.0,
+        "n": 100,
+        "n_cap": 100,
+        "n_crash": 0,
+        "n_divergence": 0,
+        "n_wrong_stationary": 0,
+        "nfailed": 100,
+        "par2_mean": 4000000.0,
+        "par_applied": true,
+        "par_factor": 2,
+        "q25": 4000000.0,
+        "q75": 4000000.0,
+        "scoring": "par2-wilson-bootstrap",
+        "success_only_mean": null,
+        "success_rate": 0.0,
+        "successes": 0,
+        "wilson_high": 0.03699349820698568,
+        "wilson_low": 0.0
+      },
+      "parameters": {
+        "cap": 2000000,
+        "cell": 40.0,
+        "confinement": 24.0,
+        "fmax": 0.05,
+        "max_steps": 500,
+        "method": "rss",
+        "optimizer": "scipy-lbfgsb",
+        "rattle_amplitude": 3.0,
+        "rattle_fraction": 0.25,
+        "reference_source": "problem",
+        "seed_base": 314159
+      },
+      "present_source": true,
+      "provenance": {
+        "code": "agox",
+        "code_version": "3.11.2.dev2+g22d94a6fa",
+        "commit": "22d94a6fae8cf2d08d51ecc8b9291a47667aa95c",
+        "machine": {
+          "machine": "x86_64",
+          "node": "cursor",
+          "python": "3.12.3",
+          "system": "Linux"
+        },
+        "parameters": {
+          "cap": 2000000,
+          "cell": 40.0,
+          "confinement": 24.0,
+          "fmax": 0.05,
+          "max_steps": 500,
+          "method": "rss",
+          "optimizer": "scipy-lbfgsb",
+          "rattle_amplitude": 3.0,
+          "rattle_fraction": 0.25,
+          "reference_source": "problem",
+          "seed_base": 314159
+        }
+      },
+      "starts": [
+        {
+          "calls_at_lowest": 338057,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5953,
+          "lowest_energy": -171.30358992290058,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314159,
+          "start": "0.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 663989,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5983,
+          "lowest_energy": -170.09762181382717,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314160,
+          "start": "1.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1222863,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5936,
+          "lowest_energy": -171.49976960879675,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314161,
+          "start": "2.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 598363,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5927,
+          "lowest_energy": -170.7115669646296,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314162,
+          "start": "3.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1784232,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5952,
+          "lowest_energy": -170.78849587778876,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314163,
+          "start": "4.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1983846,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5941,
+          "lowest_energy": -170.274966013834,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314164,
+          "start": "5.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 486736,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5960,
+          "lowest_energy": -169.80119623109533,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314165,
+          "start": "6.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 847996,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5951,
+          "lowest_energy": -170.82692741279834,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314166,
+          "start": "7.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 944310,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5927,
+          "lowest_energy": -169.32772587134906,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314167,
+          "start": "8.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1402130,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5970,
+          "lowest_energy": -171.04686074101053,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314168,
+          "start": "9.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1950658,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5953,
+          "lowest_energy": -171.6952654216853,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314169,
+          "start": "10.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 728257,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5952,
+          "lowest_energy": -171.03209366624992,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314170,
+          "start": "11.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 243292,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5967,
+          "lowest_energy": -170.2322480236419,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314171,
+          "start": "12.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1082070,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5923,
+          "lowest_energy": -172.192944465722,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314172,
+          "start": "13.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1927077,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5940,
+          "lowest_energy": -170.4804367581057,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314173,
+          "start": "14.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 135400,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5941,
+          "lowest_energy": -170.7969957138833,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314174,
+          "start": "15.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1233992,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5955,
+          "lowest_energy": -170.05830938182044,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314175,
+          "start": "16.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 147133,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5942,
+          "lowest_energy": -173.13422500836856,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314176,
+          "start": "17.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1549679,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5978,
+          "lowest_energy": -172.87765075003185,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314177,
+          "start": "18.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 415753,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5949,
+          "lowest_energy": -170.93317134756825,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314178,
+          "start": "19.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1304188,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5921,
+          "lowest_energy": -169.79231044390528,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314179,
+          "start": "20.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 579453,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5948,
+          "lowest_energy": -170.08599156629145,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314180,
+          "start": "21.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1835182,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5902,
+          "lowest_energy": -171.66339564011952,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314181,
+          "start": "22.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 591642,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5950,
+          "lowest_energy": -170.91609853976394,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314182,
+          "start": "23.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 766539,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5905,
+          "lowest_energy": -170.80994624010913,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314183,
+          "start": "24.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 978866,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5941,
+          "lowest_energy": -170.18752579286567,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314184,
+          "start": "25.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 421864,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5996,
+          "lowest_energy": -170.5577978901399,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314185,
+          "start": "26.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 610452,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5930,
+          "lowest_energy": -172.19304655743105,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314186,
+          "start": "27.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1262288,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5955,
+          "lowest_energy": -170.66482391808836,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314187,
+          "start": "28.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1311395,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5979,
+          "lowest_energy": -170.69810278693132,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314188,
+          "start": "29.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1136848,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5903,
+          "lowest_energy": -171.30315026113036,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314189,
+          "start": "30.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 560257,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5947,
+          "lowest_energy": -171.4995908650136,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314190,
+          "start": "31.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 374180,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5898,
+          "lowest_energy": -171.04916636886236,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314191,
+          "start": "32.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1225615,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5960,
+          "lowest_energy": -171.4688618235103,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314192,
+          "start": "33.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1305367,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5959,
+          "lowest_energy": -170.29000391406765,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314193,
+          "start": "34.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 816229,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5949,
+          "lowest_energy": -170.1611237291562,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314194,
+          "start": "35.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 434245,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5928,
+          "lowest_energy": -170.19469662316806,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314195,
+          "start": "36.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1984015,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5900,
+          "lowest_energy": -171.37572123892187,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314196,
+          "start": "37.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1295036,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5945,
+          "lowest_energy": -170.6950373830637,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314197,
+          "start": "38.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1737606,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5956,
+          "lowest_energy": -169.81878478218835,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314198,
+          "start": "39.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 219011,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5919,
+          "lowest_energy": -171.6398559612425,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314199,
+          "start": "40.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 78512,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5903,
+          "lowest_energy": -170.57919120746044,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314200,
+          "start": "41.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 839683,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5929,
+          "lowest_energy": -170.97176339953933,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314201,
+          "start": "42.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 516536,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5952,
+          "lowest_energy": -173.25231017799322,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314202,
+          "start": "43.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1825411,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5927,
+          "lowest_energy": -170.9778626560884,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314203,
+          "start": "44.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1651656,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5926,
+          "lowest_energy": -172.2338167257094,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314204,
+          "start": "45.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 699564,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5955,
+          "lowest_energy": -171.0162304988649,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314205,
+          "start": "46.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1905399,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5916,
+          "lowest_energy": -170.23118247577162,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314206,
+          "start": "47.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 357954,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5903,
+          "lowest_energy": -170.26598864078605,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314207,
+          "start": "48.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 540528,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5938,
+          "lowest_energy": -171.04057332639894,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314208,
+          "start": "49.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 609768,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5980,
+          "lowest_energy": -170.54939593018895,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314209,
+          "start": "50.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1635583,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5934,
+          "lowest_energy": -170.96143563068014,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314210,
+          "start": "51.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1224040,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5922,
+          "lowest_energy": -170.1017693674221,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314211,
+          "start": "52.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1093916,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5956,
+          "lowest_energy": -170.49247451179315,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314212,
+          "start": "53.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1548449,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5921,
+          "lowest_energy": -171.50992079907402,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314213,
+          "start": "54.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 882869,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5900,
+          "lowest_energy": -170.88990986323518,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314214,
+          "start": "55.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1363274,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5910,
+          "lowest_energy": -172.4441884629679,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314215,
+          "start": "56.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 212314,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5990,
+          "lowest_energy": -170.50340754301035,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314216,
+          "start": "57.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 223705,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5952,
+          "lowest_energy": -169.93985143725865,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314217,
+          "start": "58.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1558100,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5970,
+          "lowest_energy": -170.90638059289404,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314218,
+          "start": "59.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1864822,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5958,
+          "lowest_energy": -169.8875960246922,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314219,
+          "start": "60.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 375587,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5966,
+          "lowest_energy": -170.2482254238691,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314220,
+          "start": "61.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1893940,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5937,
+          "lowest_energy": -170.12782772717844,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314221,
+          "start": "62.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 332498,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5980,
+          "lowest_energy": -171.0526647620252,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314222,
+          "start": "63.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 292217,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5896,
+          "lowest_energy": -170.69201928385425,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314223,
+          "start": "64.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1430148,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5922,
+          "lowest_energy": -170.01079705825123,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314224,
+          "start": "65.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 985396,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5936,
+          "lowest_energy": -170.26808387977238,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314225,
+          "start": "66.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 120961,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5939,
+          "lowest_energy": -173.2523493945134,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314226,
+          "start": "67.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 286506,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5933,
+          "lowest_energy": -170.9590578423061,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314227,
+          "start": "68.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1667530,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5917,
+          "lowest_energy": -170.63196081035494,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314228,
+          "start": "69.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 915805,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5943,
+          "lowest_energy": -170.5157615625464,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314229,
+          "start": "70.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1600775,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5978,
+          "lowest_energy": -169.69542524757463,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314230,
+          "start": "71.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1678882,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5921,
+          "lowest_energy": -169.98670161420844,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314231,
+          "start": "72.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 617162,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5941,
+          "lowest_energy": -170.9898073151059,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314232,
+          "start": "73.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 169045,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5937,
+          "lowest_energy": -171.1850528698109,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314233,
+          "start": "74.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1962651,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5950,
+          "lowest_energy": -170.2538829722863,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314234,
+          "start": "75.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 256871,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5944,
+          "lowest_energy": -171.3048031594571,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314235,
+          "start": "76.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1634478,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5928,
+          "lowest_energy": -170.11936458788438,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314236,
+          "start": "77.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 24528,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5918,
+          "lowest_energy": -171.99258274477762,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314237,
+          "start": "78.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 52652,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5912,
+          "lowest_energy": -170.79081360808902,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314238,
+          "start": "79.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 822805,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5912,
+          "lowest_energy": -170.63971355998788,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314239,
+          "start": "80.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 861305,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5943,
+          "lowest_energy": -171.06503566141635,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314240,
+          "start": "81.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 187429,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5975,
+          "lowest_energy": -171.50969531420736,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314241,
+          "start": "82.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 862195,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5929,
+          "lowest_energy": -171.00905326634336,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314242,
+          "start": "83.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1343916,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5965,
+          "lowest_energy": -170.16839056604934,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314243,
+          "start": "84.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 583207,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5939,
+          "lowest_energy": -169.9049143542993,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314244,
+          "start": "85.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1172550,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5968,
+          "lowest_energy": -169.92436428847563,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314245,
+          "start": "86.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1150923,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5925,
+          "lowest_energy": -170.2424528764666,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314246,
+          "start": "87.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1434366,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5967,
+          "lowest_energy": -170.47144659997656,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314247,
+          "start": "88.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 323920,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5933,
+          "lowest_energy": -170.211768367643,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314248,
+          "start": "89.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1106704,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5926,
+          "lowest_energy": -172.23012612618442,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314249,
+          "start": "90.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 865967,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5951,
+          "lowest_energy": -172.12491157296236,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314250,
+          "start": "91.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 973817,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5925,
+          "lowest_energy": -170.6651250331969,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314251,
+          "start": "92.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1437546,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5945,
+          "lowest_energy": -171.12141731616072,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314252,
+          "start": "93.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1872575,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5934,
+          "lowest_energy": -171.18027961187926,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314253,
+          "start": "94.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1598514,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5916,
+          "lowest_energy": -170.47149812478392,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314254,
+          "start": "95.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 918893,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5936,
+          "lowest_energy": -171.7822521389649,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314255,
+          "start": "96.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1295320,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5963,
+          "lowest_energy": -170.47130279128442,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314256,
+          "start": "97.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 553595,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5952,
+          "lowest_energy": -171.1585830112096,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314257,
+          "start": "98.con",
+          "success": false,
+          "target_energy": -173.927427
+        },
+        {
+          "calls_at_lowest": 1987787,
+          "comparable": true,
+          "counter": "harness",
+          "failure": "cap",
+          "force_calls": 2000000,
+          "iterations": 5911,
+          "lowest_energy": -170.62153935636422,
+          "optimizer": "scipy-lbfgsb",
+          "reasons": [
+            "cap"
+          ],
+          "reference_energy": -173.928427,
+          "schema": "optbench.start/v2",
+          "seed": 314258,
+          "start": "99.con",
+          "success": false,
+          "target_energy": -173.927427
+        }
+      ],
+      "tuning": "default"
+    }
+  ],
+  "schema": "optbench.result/v2",
+  "scoring": "par2-wilson-bootstrap",
+  "status": "archive"
+}
