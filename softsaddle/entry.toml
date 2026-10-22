@@ -19,8 +19,8 @@ total_searches = 1737.5
 unique_saddles = 114.9
 library = "libdavidson"
 
-[smoke]
-workflow = ".github/workflows/softsaddle-smoke.yml"
+[check]
+workflow = ".github/workflows/softsaddle-check.yml"
 repetitions = 1
 searches = 2
 runtime_cap_s = 600

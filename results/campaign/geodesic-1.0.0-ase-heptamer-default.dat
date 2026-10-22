@@ -25,15 +25,15 @@ note Initialiser ablation of ase/neb-pt-heptamer-default. The path is geodesic-i
 host cursor
 date 2026-10-18
 contributor Rohit Goswami
-scoring par2-wilson-bootstrap
+scoring par2-bootstrap
 par2_mean 543.5384615
 par2_median 522
 par2_median_low 498
 par2_median_high 578
 par2_iqr 80
 success_rate 1
-wilson_low 0.7719046276
-wilson_high 1
+rate_low 0.7719046276
+rate_high 1
 par_applied true
 par_factor 2
 bootstrap_resamples 2000

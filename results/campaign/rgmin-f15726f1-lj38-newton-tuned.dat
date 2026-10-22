@@ -15,11 +15,11 @@ code_version 0.4.1
 commit f15726f1c7983b3656c5dbc2f812e2394e144500
 algorithm NEWTON
 template rgmin/lj38-newton-tuned
-tuning tuned
+tuning adjusted
 counter harness
 par2_mean 166.337
-wilson_low 0.988349044627
-wilson_high 0.997862464473
+rate_low 0.988349044627
+rate_high 0.997862464473
 par2_median 64
 par2_median_low 63
 par2_median_high 65.5

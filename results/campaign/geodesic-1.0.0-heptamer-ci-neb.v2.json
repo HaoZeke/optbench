@@ -73,12 +73,12 @@
     "par_factor": 2,
     "q25": 690.0,
     "q75": 770.0,
-    "scoring": "par2-wilson-bootstrap",
+    "scoring": "par2-bootstrap",
     "success_only_mean": 762.6153846153846,
     "success_rate": 1.0,
     "successes": 13,
-    "wilson_high": 1.0,
-    "wilson_low": 0.7719046276458016
+    "rate_high": 1.0,
+    "rate_low": 0.7719046276458016
   },
   "template": "geodesic/ci-neb"
 }

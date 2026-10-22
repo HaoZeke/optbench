@@ -3,13 +3,16 @@
 
 The score on this site is the v2 PAR-2 mean of harness force calls
 on the problem's full start set.
+eOn develop NEB methods, the n2p2 energy and force presets, and the
+hTST Al dimer rows for EON SVN r2549 and eOn develop 500350d9 are ranked
+with the other stock rows.
 A row with fewer starts stays off the ranked table.
 =python -m optbench.site= writes these pages from that scorer.
 The same numbers are in =results/board/index.json=.
 
 #+INCLUDE: "../include/sota.org"
 
-The 2014 archive is labelled legacy on each problem page and on the archive page.
+Archived rows sit in the same tables as the latest rows on each problem page.
 The commands that write a new =benchmark.dat= are on the Run a score page.
 
 #+begin_export rst
@@ -31,4 +34,5 @@ The commands that write a new =benchmark.dat= are on the Run a score page.
    generated/suites/accelerated-md
    archive
    codes
+   changelog
 #+end_export

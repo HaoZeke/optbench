@@ -1,0 +1,29 @@
+id = "n2p2/emt-pt38-kalman"
+engine = "n2p2"
+problem = "mlopt/emt-pt38"
+code = "n2p2"
+code_version = "2.3.0"
+commit = "29b9c9f10b1ac9ea45631b3d556a129ca3b701c2"
+algorithm = "Kalman"
+preset = "Kalman energy"
+tuning = "default"
+loss = "energy"
+order = "n2p2"
+starts = 50
+note = "Energy-only squared error on the pyamff fingerprints and the 10-7 tanh network. The loss sums the squared per-atom energy error over the EMT trajectory. Training stops when every parameter tensor has max-abs loss gradient below 0.02. One force call is one full loss-gradient evaluation, capped at 10000. n2p2 2.3.0 is the latest release, tag e51667abf784bb9a6fd659857b6a9a878fdc6a90. The linked filter is commit 29b9c9f10b1ac9ea45631b3d556a129ca3b701c2; KalmanFilter::update matches that tag aside from comments. The standard Kalman filter uses examples/input.nn.recommended: epsilon 0.01, q0 0.01, qtau 2.302, qmin 1e-6, eta 0.01, etatau 2.302, etamax 1. qtau and etatau are divided by the 500 structures. Each epoch visits every structure once, in n2p2 std::shuffle with random_seed 1234567. Weights are the harness uniform[-1, 1) draw, seed 20261015 plus the start index. The observation is the total-energy residual and its Jacobian. Force RMSE is -1 because this row does not train forces."
+
+[stop]
+max_force_calls = 10000
+grad_abs = 0.02
+
+[kalman]
+type = "standard"
+epsilon = 1.0e-2
+q0 = 0.01
+qtau = 2.302
+qmin = 1.0e-6
+eta0 = 0.01
+etatau = 2.302
+etamax = 1.0
+update_strategy = "combined"
+selection = "n2p2"

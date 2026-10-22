@@ -231,7 +231,7 @@ def _fixed_flag(flag: int, spec: int) -> bool:
     """
     if spec < 2:
         if flag not in (0, 1):
-            raise ValueError(f"legacy con flag must be 0 or 1, found {flag}")
+            raise ValueError(f"con flag must be 0 or 1, found {flag}")
         return flag == 1
     if flag < 0 or flag > 7:
         raise ValueError(f"con flag must be a 3-bit mask, found {flag}")

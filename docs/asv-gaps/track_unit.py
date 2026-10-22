@@ -10,4 +10,4 @@ seconds = human_value(1.5, "seconds")
 print(f"force calls: {force!r}")
 print(f"seconds: {seconds!r}")
 if "force" in str(force):
-    raise SystemExit("unit was displayed; this reproducer is stale")
+    raise SystemExit("unit was displayed; this check is stale")

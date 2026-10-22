@@ -2,18 +2,18 @@
 
 Status: selected. The reasons are in `decision.md`.
 
-## What is wrong with the current mean
+## What is wrong with the half-even mean
 
-`summarize_capped` averages force calls that sit strictly below the cap and rounds with half-even. A start at the cap is counted in `nfailed` and then left out of the mean. On the published Lennard-Jones 38 board that changes the number. The rounded legacy means below are taken from `results/sota-lj38.json` (1000 starts, cap 10000).
+`summarize_capped` averages force calls that sit strictly below the cap and rounds with half-even. A start at the cap is counted in `nfailed` and then left out of the mean. On the published Lennard-Jones 38 board that changes the number. The rounded half-even means below are taken from `results/sota-lj38.json` (1000 starts, cap 10000).
 
-| Entry | Legacy mean | Failed | Illustration PAR-2 mean |
+| Entry | Half-even mean | Failed | Illustration PAR-2 mean |
 | --- | ---: | ---: | ---: |
 | eon-3.5.0-lbfgs-m100 | 181 | 0 | 181 |
 | rgmin-quickmin-0.3.0 | 1849 | 1 | 1867.151 |
 | eon-3.5.0-qm | 3514 | 25 | 3926.15 |
 | eon-3.5.0-sd | 4901 | 96 | 6350.504 |
 
-The illustration rebuilds a PAR-2 mean as `(successes * legacy mean + failures * 2 * 10000) / 1000`. It uses the rounded legacy mean as if every success had that cost. It is not a v2 score. It only shows that dropping failures moves the published number.
+The illustration rebuilds a PAR-2 mean as `(successes * half-even mean + failures * 2 * 10000) / 1000`. It uses the rounded half-even mean as if every success had that cost. It is not a v2 score. It only shows that dropping failures moves the published number.
 
 ## Score
 
@@ -31,11 +31,11 @@ The penalised cost of a success is its harness force-call count. The penalised c
 
 Beside that mean the record carries:
 
-- successes `k` out of `n`, and the Wilson 95% interval for `k/n`
+- successes `k` out of `n`, and the success-rate 95% interval for `k/n`
 - the median and the interquartile range of the same penalised costs
 - a percentile bootstrap 95% interval for the median and for the interquartile range, with 2000 resamples and seed `20261015`
 
-The Wilson interval uses `z = 1.959963984540054`. For the published 1000/1000 successes the interval is 0.996173 to 1. For the published 975/1000 successes it is 0.963355 to 0.983010. For 904/1000 it is 0.884165 to 0.920743. Those three intervals use only `k` and `n` from `results/sota-lj38.json`. They do not need the per-start vector.
+The success-rate interval uses `z = 1.959963984540054`. For the published 1000/1000 successes the interval is 0.996173 to 1. For the published 975/1000 successes it is 0.963355 to 0.983010. For 904/1000 it is 0.884165 to 0.920743. Those three intervals use only `k` and `n` from `results/sota-lj38.json`. They do not need the per-start vector.
 
 ## Pt islands
 
@@ -45,10 +45,10 @@ The rgsaddle displacement rows are a different sample. Each start is one search.
 
 ## Tuning and provenance
 
-`tuning` is `default` or `tuned`. `default` means every optimizer parameter is the value the code ships. `tuned` means a parameter was changed, including a change that copies the 2014 archive. The eOn 3.5.0 client default L-BFGS memory is 20, so `eon-client/lbfgs-m20` is `default` and `eon-client/lbfgs-m100` is `tuned`. Rows without that fact stay unlabelled.
+`tuning` is `default` or `adjusted`. `default` means every optimizer parameter is the value the code ships. `adjusted` means a parameter was changed, including a change that copies the 2014 archive. The eOn 3.5.0 client default L-BFGS memory is 20, so `eon-client/lbfgs-m20` is `default` and `eon-client/lbfgs-m100` is `adjusted`. Rows without that fact stay unlabelled. An adjusted row stays off the ranked table.
 
 Provenance is the code name, the version, the commit, the parameter object, and the machine. A score without those fields is not a v2 score.
 
-## What stays legacy
+## What the archive keeps
 
-The 2014 `benchmark.dat` mean stays the half-even mean of starts under the cap. Archive rows remain on the site with a legacy label. They are not recomputed.
+The 2014 `benchmark.dat` mean stays the half-even mean of starts under the cap. Archive rows remain on the site under the same code, version, and method key. They are not recomputed.
