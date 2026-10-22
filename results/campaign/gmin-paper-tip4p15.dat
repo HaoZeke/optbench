@@ -1,0 +1,9 @@
+# exact archive data file, serial GMIN, internal potential
+# entry globalopt/tip4p15/gmin
+# ncalls is the Target hit after function-call field
+nfailed 0
+n 500
+force_calls 5.80721e+05
+force_calls_median 3.99631e+05
+force_calls_min 4.4220e+03
+force_calls_max 3.9603e+06

@@ -2,7 +2,7 @@ id = "mlopt/C2H4"
 title = "C2H4"
 suite = "mlopt"
 problem = "C2H4"
-contract = "partial"
+contract = "shared"
 entry_count = 6
 
 [sample]
@@ -22,12 +22,12 @@ archive_path = "website/mlopt/C2H4/C2H4_md.traj"
 [metrics]
 required = ["mean_energy_rmse", "mean_epoch", "mean_force_rmse", "median_energy_rmse", "median_epoch", "median_force_rmse", "nfailed"]
 
-[scoring.legacy]
-label = "legacy"
-rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row stays labelled legacy."
+[scoring.half_even]
+label = "half-even"
+rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row keeps that mean as its published number."
 
 [scoring.v2]
-version = "par2-wilson-bootstrap"
+version = "par2-bootstrap"
 par_factor = 2
 bootstrap_resamples = 2000
 bootstrap_seed = 20261015
@@ -47,8 +47,8 @@ required = [
   "median",
   "median_low",
   "median_high",
-  "wilson_low",
-  "wilson_high",
+  "rate_low",
+  "rate_high",
   "n",
   "nfailed",
   "n_cap",

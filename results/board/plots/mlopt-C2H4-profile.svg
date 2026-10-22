@@ -222,9 +222,9 @@ L 173.318068 260.6
 L 277.781172 260.6 
 L 277.781172 260.6 
 L 382.244276 260.6 
-L 382.244276 251.668952 
-L 486.707379 251.668952 
-L 486.707379 189.151619 
+L 382.244276 260.6 
+L 486.707379 260.6 
+L 486.707379 260.6 
 " clip-path="url(#p4e380cea4b)" style="fill: none; stroke: #9467bd; stroke-width: 1.5; stroke-linecap: square"/>
    </g>
    <g id="line2d_17">
@@ -234,10 +234,34 @@ L 173.318068 260.6
 L 277.781172 260.6 
 L 277.781172 260.6 
 L 382.244276 260.6 
+L 382.244276 251.668952 
+L 486.707379 251.668952 
+L 486.707379 189.151619 
+" clip-path="url(#p4e380cea4b)" style="fill: none; stroke: #8c564b; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_18">
+    <path d="M 68.854964 260.6 
+L 173.318068 260.6 
+L 173.318068 260.6 
+L 277.781172 260.6 
+L 277.781172 260.6 
+L 382.244276 260.6 
 L 382.244276 260.6 
 L 486.707379 260.6 
 L 486.707379 260.6 
-" clip-path="url(#p4e380cea4b)" style="fill: none; stroke: #8c564b; stroke-width: 1.5; stroke-linecap: square"/>
+" clip-path="url(#p4e380cea4b)" style="fill: none; stroke: #e377c2; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_19">
+    <path d="M 68.854964 260.6 
+L 173.318068 260.6 
+L 173.318068 260.6 
+L 277.781172 260.6 
+L 277.781172 260.6 
+L 382.244276 260.6 
+L 382.244276 260.6 
+L 486.707379 260.6 
+L 486.707379 260.6 
+" clip-path="url(#p4e380cea4b)" style="fill: none; stroke: #7f7f7f; stroke-width: 1.5; stroke-linecap: square"/>
    </g>
    <g id="patch_3">
     <path d="M 47.962344 260.6 
@@ -264,83 +288,105 @@ L 507.6 26.16
    </g>
    <g id="legend_1">
     <g id="patch_7">
-     <path d="M 260.369844 257.1 
+     <path d="M 360.125312 257.1 
 L 502.7 257.1 
 Q 504.1 257.1 504.1 255.7 
-L 504.1 193.396719 
-Q 504.1 191.996719 502.7 191.996719 
-L 260.369844 191.996719 
-Q 258.969844 191.996719 258.969844 193.396719 
-L 258.969844 255.7 
-Q 258.969844 257.1 260.369844 257.1 
+L 504.1 172.395625 
+Q 504.1 170.995625 502.7 170.995625 
+L 360.125312 170.995625 
+Q 358.725312 170.995625 358.725312 172.395625 
+L 358.725312 255.7 
+Q 358.725312 257.1 360.125312 257.1 
 z
 " style="fill: #ffffff; opacity: 0.8; stroke: #cccccc; stroke-linejoin: miter"/>
     </g>
-    <g id="line2d_18">
-     <path d="M 261.769844 197.665625 
-L 268.769844 197.665625 
-L 268.769844 197.665625 
-L 275.769844 197.665625 
-L 275.769844 197.665625 
+    <g id="line2d_20">
+     <path d="M 361.525312 176.664531 
+L 368.525312 176.664531 
+L 368.525312 176.664531 
+L 375.525312 176.664531 
+L 375.525312 176.664531 
 " style="fill: none; stroke: #1f77b4; stroke-width: 1.5; stroke-linecap: square"/>
     </g>
     <g id="text_15">
-     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="281.369844" y="200.115625" transform="rotate(-0 281.369844 200.115625)">pyamff/c2h4-rprop 0.1.0-beta default campaign 240f51d</text>
+     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="381.125312" y="179.114531" transform="rotate(-0 381.125312 179.114531)">PyAMFF (0.1.0-beta) · Rprop</text>
     </g>
-    <g id="line2d_19">
-     <path d="M 261.769844 208.166172 
-L 268.769844 208.166172 
-L 268.769844 208.166172 
-L 275.769844 208.166172 
-L 275.769844 208.166172 
+    <g id="line2d_21">
+     <path d="M 361.525312 187.165078 
+L 368.525312 187.165078 
+L 368.525312 187.165078 
+L 375.525312 187.165078 
+L 375.525312 187.165078 
 " style="fill: none; stroke: #ff7f0e; stroke-width: 1.5; stroke-linecap: square"/>
     </g>
     <g id="text_16">
-     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="281.369844" y="210.616172" transform="rotate(-0 281.369844 210.616172)">pyamff/c2h4-lbfgs 0.1.0-beta default campaign 240f51d</text>
+     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="381.125312" y="189.615078" transform="rotate(-0 381.125312 189.615078)">PyAMFF (0.1.0-beta) · LBFGS</text>
     </g>
-    <g id="line2d_20">
-     <path d="M 261.769844 218.666719 
-L 268.769844 218.666719 
-L 268.769844 218.666719 
-L 275.769844 218.666719 
-L 275.769844 218.666719 
+    <g id="line2d_22">
+     <path d="M 361.525312 197.665625 
+L 368.525312 197.665625 
+L 368.525312 197.665625 
+L 375.525312 197.665625 
+L 375.525312 197.665625 
 " style="fill: none; stroke: #2ca02c; stroke-width: 1.5; stroke-linecap: square"/>
     </g>
     <g id="text_17">
-     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="281.369844" y="221.116719" transform="rotate(-0 281.369844 221.116719)">pyamff/c2h4-adam 0.1.0-beta default campaign 240f51d</text>
+     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="381.125312" y="200.115625" transform="rotate(-0 381.125312 200.115625)">PyAMFF (0.1.0-beta) · Adam</text>
     </g>
-    <g id="line2d_21">
-     <path d="M 261.769844 229.167266 
-L 268.769844 229.167266 
-L 268.769844 229.167266 
-L 275.769844 229.167266 
-L 275.769844 229.167266 
+    <g id="line2d_23">
+     <path d="M 361.525312 208.166172 
+L 368.525312 208.166172 
+L 368.525312 208.166172 
+L 375.525312 208.166172 
+L 375.525312 208.166172 
 " style="fill: none; stroke: #d62728; stroke-width: 1.5; stroke-linecap: square"/>
     </g>
     <g id="text_18">
-     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="281.369844" y="231.617266" transform="rotate(-0 281.369844 231.617266)">pyamff/c2h4-adam-force 0.1.0-beta default campaign 240f51d</text>
+     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="381.125312" y="210.616172" transform="rotate(-0 381.125312 210.616172)">n2p2 (2.3.0) · Kalman energy</text>
     </g>
-    <g id="line2d_22">
-     <path d="M 261.769844 239.667813 
-L 268.769844 239.667813 
-L 268.769844 239.667813 
-L 275.769844 239.667813 
-L 275.769844 239.667813 
+    <g id="line2d_24">
+     <path d="M 361.525312 218.666719 
+L 368.525312 218.666719 
+L 368.525312 218.666719 
+L 375.525312 218.666719 
+L 375.525312 218.666719 
 " style="fill: none; stroke: #9467bd; stroke-width: 1.5; stroke-linecap: square"/>
     </g>
     <g id="text_19">
-     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="281.369844" y="242.117813" transform="rotate(-0 281.369844 242.117813)">pyamff/c2h4-rprop-force 0.1.0-beta default campaign 240f51d</text>
+     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="381.125312" y="221.116719" transform="rotate(-0 381.125312 221.116719)">PyAMFF (0.1.0-beta) · Adam force</text>
     </g>
-    <g id="line2d_23">
-     <path d="M 261.769844 250.168359 
-L 268.769844 250.168359 
-L 268.769844 250.168359 
-L 275.769844 250.168359 
-L 275.769844 250.168359 
+    <g id="line2d_25">
+     <path d="M 361.525312 229.167266 
+L 368.525312 229.167266 
+L 368.525312 229.167266 
+L 375.525312 229.167266 
+L 375.525312 229.167266 
 " style="fill: none; stroke: #8c564b; stroke-width: 1.5; stroke-linecap: square"/>
     </g>
     <g id="text_20">
-     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="281.369844" y="252.618359" transform="rotate(-0 281.369844 252.618359)">pyamff/c2h4-lbfgs-force 0.1.0-beta default campaign 240f51d</text>
+     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="381.125312" y="231.617266" transform="rotate(-0 381.125312 231.617266)">PyAMFF (0.1.0-beta) · Rprop force</text>
+    </g>
+    <g id="line2d_26">
+     <path d="M 361.525312 239.667813 
+L 368.525312 239.667813 
+L 368.525312 239.667813 
+L 375.525312 239.667813 
+L 375.525312 239.667813 
+" style="fill: none; stroke: #e377c2; stroke-width: 1.5; stroke-linecap: square"/>
+    </g>
+    <g id="text_21">
+     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="381.125312" y="242.117813" transform="rotate(-0 381.125312 242.117813)">PyAMFF (0.1.0-beta) · LBFGS force</text>
+    </g>
+    <g id="line2d_27">
+     <path d="M 361.525312 250.168359 
+L 368.525312 250.168359 
+L 368.525312 250.168359 
+L 375.525312 250.168359 
+L 375.525312 250.168359 
+" style="fill: none; stroke: #7f7f7f; stroke-width: 1.5; stroke-linecap: square"/>
+    </g>
+    <g id="text_22">
+     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="381.125312" y="252.618359" transform="rotate(-0 381.125312 252.618359)">n2p2 (2.3.0) · Kalman force</text>
     </g>
    </g>
   </g>

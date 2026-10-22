@@ -37,6 +37,8 @@ def test_asv_uses_the_uv_environment():
     workflow = (ROOT / ".github" / "workflows" / "asv.yml").read_text(encoding="utf-8")
     assert "HaoZeke/asv-perch@v1" in workflow
     assert "results/asv" in workflow
+    assert 'regression-threshold: "10"' in workflow
+    assert "asv-spyglass-args: --factor 10" in workflow
 
 
 def test_rgsaddle_grid_is_seed_then_one_start_until_full(monkeypatch):
@@ -104,6 +106,29 @@ def test_quadratic_grid_uses_the_sample_seeds():
     assert dimer["hessian_index"] == 1
 
 
+def test_n2p2_benchmarks_select_one_start():
+    from benchmarks.bench_n2p2 import N2p2C2h4Kalman, N2p2EmtPt38Kalman
+
+    assert N2p2EmtPt38Kalman.params == [["20261015"], ["0"]]
+    assert N2p2EmtPt38Kalman.template_id == "n2p2/emt-pt38-kalman"
+    assert N2p2EmtPt38Kalman.problem_id == "mlopt/emt-pt38"
+    assert N2p2EmtPt38Kalman.cap == 10000
+    assert N2p2C2h4Kalman.params == [["20261015"], ["0"]]
+    assert N2p2C2h4Kalman.template_id == "n2p2/c2h4-kalman"
+    assert N2p2C2h4Kalman.problem_id == "mlopt/C2H4"
+    assert N2p2C2h4Kalman.cap == 10000
+    assert N2p2EmtPt38Kalman.spec["order"] == "n2p2"
+    assert N2p2C2h4Kalman.spec["order"] == "n2p2"
+    from benchmarks.bench_n2p2 import N2p2C2h4KalmanForce, N2p2EmtPt38KalmanForce
+
+    assert N2p2EmtPt38KalmanForce.spec["order"] == "n2p2"
+    assert N2p2EmtPt38KalmanForce.spec["loss"] == "force"
+    assert N2p2EmtPt38KalmanForce.cap == 30000
+    assert N2p2C2h4KalmanForce.spec["order"] == "n2p2"
+    assert N2p2C2h4KalmanForce.cap == 30000
+    assert not hasattr(__import__("benchmarks.bench_n2p2", fromlist=["x"]), "N2p2EmtPt38KalmanRng")
+
+
 def test_optking_grid_is_seed_then_the_first_start():
     from benchmarks import bench_optking
 
@@ -135,6 +160,7 @@ def test_pending_grid_is_every_problem_and_code():
         "eon",
         "eon-main",
         "eon-develop",
+        "eon-develop-500350d9",
         "eon-svn",
         "rgmin",
         "rgsaddle",
@@ -142,6 +168,7 @@ def test_pending_grid_is_every_problem_and_code():
         "ase",
         "sella",
         "gmin",
+        "gmin-bh",
         "pele",
         "optking",
         "artn",
@@ -152,11 +179,13 @@ def test_pending_grid_is_every_problem_and_code():
         "compass",
         "pysisyphus",
         "optim",
+        "n2p2",
         "airss",
         "vcsqnm",
         "softsaddle",
         "lammpsneb",
         "pyamff",
+        "sella-0.1.1",
     ]
     assert Pending.params[1] == code_ids()
     assert Pending.track_force_calls.unit == "force calls"

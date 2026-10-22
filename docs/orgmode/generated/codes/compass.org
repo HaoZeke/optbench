@@ -1,0 +1,80 @@
+#+TITLE: COMPASS
+#+OPTIONS: toc:nil num:nil author:nil
+
+#+begin_export rst
+.. raw:: html
+
+   <section class="bench" id="code-compass">
+   <h2>COMPASS</h2>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>double-ended saddle search</td>
+   <td>1.0.0</td>
+   <td>22da7bd5f69c</td>
+   <td><a href="https://gitlab.com/goedeckergroup/compass">https://gitlab.com/goedeckergroup/compass</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-rows">
+   <caption>Every ranked row for this code.</caption>
+   <thead><tr><th>Problem</th><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="double-ended-saddle-search/lj38" data-label="COMPASS (1.0.0) · COMPASS">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="label">COMPASS (1.0.0) · COMPASS</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">6</td>
+   <td data-field="par2_mean">1517.3</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1234</td>
+   <td data-field="mean_calls">1367.3</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 3, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="COMPASS (1.0.0) · COMPASS">
+   <td>lj38_2ts_separation</td>
+   <td data-field="label">COMPASS (1.0.0) · COMPASS</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">4</td>
+   <td data-field="par2_mean">100831</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">4031</td>
+   <td data-field="mean_calls">4586.12</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 9, wrong_stationary 1</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-label="COMPASS (1.0.0) · COMPASS">
+   <td>pt-island</td>
+   <td data-field="label">COMPASS (1.0.0) · COMPASS</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">5</td>
+   <td data-field="par2_mean">1078.12</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1002</td>
+   <td data-field="mean_calls">1027.27</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="neb/Pt-heptamer" data-label="COMPASS (1.0.0) · COMPASS">
+   <td>Pt-heptamer</td>
+   <td data-field="label">COMPASS (1.0.0) · COMPASS</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">8</td>
+   <td data-field="par2_mean">561.462</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">548</td>
+   <td data-field="mean_calls">561.462</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">13</td>
+   </tr>
+   </tbody></table></div>
+   </section>
+#+end_export

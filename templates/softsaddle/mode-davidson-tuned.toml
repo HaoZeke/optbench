@@ -5,7 +5,7 @@ code = "softsaddle"
 code_version = "2019.04"
 commit = "5a00aeede06fd822ef302624ec4c9bc7889d21fc0b5804b701a5785695c68d16"
 algorithm = "Davidson"
-tuning = "tuned"
+tuning = "adjusted"
 
 [ini.Main]
 job = "lowest_eigenvector"

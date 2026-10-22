@@ -1,0 +1,11 @@
+# exact archive data file, serial GMIN, internal potential
+# entry globalopt/lj150/gmin-symmetrise
+# ncalls is the Target hit after function-call field
+nfailed 0
+n 100
+energy_calls_mean 1.39904040e+05
+energy_calls_stddev 1.37065712e+05
+basin_hopping_steps_mean 7.424700e+02
+basin_hopping_steps_stddev 7.204040e+02
+cpu_time_mean 1.00103e+01
+cpu_time_stddev 9.7982e+00
