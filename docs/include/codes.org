@@ -580,7 +580,7 @@
    <td data-field="template">ase-globalopt/lj75-basinhopping</td>
    <td data-field="version">ASE 3.29.0</td>
    <td data-field="commit">f27c0005ae6a</td>
-   <td data-field="par2_mean">2e+06</td>
+   <td data-field="par2_mean">4e+06</td>
    <td data-field="mean_calls">1e+06</td>
    <td data-field="median_calls">1e+06</td>
    <td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td>
@@ -777,56 +777,67 @@
    </tr>
    <tr>
    <td>global optimization</td>
-   <td>02aaf45245af</td>
-   <td>02aaf45245af</td>
+   <td>0e4a022bcdd4</td>
+   <td>0e4a022bcdd4</td>
    <td><a href="https://www-wales.ch.cam.ac.uk/svn.tar.bz2">https://www-wales.ch.cam.ac.uk/svn.tar.bz2</a></td>
    </tr>
    </tbody></table></div>
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
    <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="globalopt/lj100-binary" data-template="gmin/lj100-binary-bh">
+   <td>Binary Lennard-Jones 100</td>
+   <td data-field="template">gmin/lj100-binary-bh</td>
+   <td data-field="version">GMIN df8da599</td>
+   <td data-field="commit">0e4a022bcdd4</td>
+   <td data-field="par2_mean">4e+06</td>
+   <td data-field="mean_calls">2e+06</td>
+   <td data-field="median_calls">2e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 100, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
    <tr data-problem="globalopt/lj150" data-template="gmin/lj150-bh">
    <td>lj150</td>
    <td data-field="template">gmin/lj150-bh</td>
    <td data-field="version">GMIN df8da599</td>
-   <td data-field="commit">02aaf45245af</td>
-   <td data-field="par2_mean">1.75804e+06</td>
-   <td data-field="mean_calls">1.65804e+06</td>
-   <td data-field="median_calls">1.14412e+06</td>
-   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
+   <td data-field="commit">0e4a022bcdd4</td>
+   <td data-field="par2_mean">1.65799e+06</td>
+   <td data-field="mean_calls">1.19799e+06</td>
+   <td data-field="median_calls">1.14409e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 23, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
-   <tr data-problem="globalopt/lj38" data-template="gmin/lj38-csm">
+   <tr data-problem="globalopt/lj38" data-template="gmin/lj38-bh">
    <td>Lennard-Jones 38 global minimum</td>
-   <td data-field="template">gmin/lj38-csm</td>
+   <td data-field="template">gmin/lj38-bh</td>
    <td data-field="version">GMIN df8da599</td>
-   <td data-field="commit">02aaf45245af</td>
-   <td data-field="par2_mean">5883.83</td>
-   <td data-field="mean_calls">5883.83</td>
-   <td data-field="median_calls">3980.5</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="commit">0e4a022bcdd4</td>
+   <td data-field="par2_mean">502534</td>
+   <td data-field="mean_calls">462534</td>
+   <td data-field="median_calls">312740</td>
+   <td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="globalopt/lj75" data-template="gmin/lj75-bhpt">
    <td>lj75</td>
    <td data-field="template">gmin/lj75-bhpt</td>
    <td data-field="version">GMIN df8da599</td>
-   <td data-field="commit">02aaf45245af</td>
-   <td data-field="par2_mean">1.96655e+06</td>
-   <td data-field="mean_calls">986545</td>
-   <td data-field="median_calls">1e+06</td>
-   <td data-field="failures">crash 0, divergence 0, cap 196, wrong_stationary 0</td>
+   <td data-field="commit">0e4a022bcdd4</td>
+   <td data-field="par2_mean">3.91548e+06</td>
+   <td data-field="mean_calls">1.96548e+06</td>
+   <td data-field="median_calls">2e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 195, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
-   <tr data-problem="globalopt/lj98" data-template="gmin/lj98-bh">
+   <tr data-problem="globalopt/lj98" data-template="gmin/lj98-bhpt">
    <td>lj98</td>
-   <td data-field="template">gmin/lj98-bh</td>
+   <td data-field="template">gmin/lj98-bhpt</td>
    <td data-field="version">GMIN df8da599</td>
-   <td data-field="commit">02aaf45245af</td>
-   <td data-field="par2_mean">282815</td>
-   <td data-field="mean_calls">282815</td>
-   <td data-field="median_calls">173058</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="commit">0e4a022bcdd4</td>
+   <td data-field="par2_mean">3.9791e+06</td>
+   <td data-field="mean_calls">1.9991e+06</td>
+   <td data-field="median_calls">2e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 99, wrong_stationary 0</td>
    <td data-field="n">100</td>
    </tr>
    <tr data-problem="minimization/lj38" data-template="gmin/lj38-lbfgs">
@@ -863,6 +874,9 @@
    <td data-field="n">100</td>
    </tr>
    </tbody></table></div>
+   <p>No full ranked run</p><ul>
+   <li>Lennard-Jones 38 global minimum: partial.</li>
+   </ul>
    <h3>pele</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>

@@ -17,7 +17,7 @@
    <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
-   <td data-code="GMIN">—</td>
+   <td data-code="GMIN" data-template="gmin/lj100-binary-bh" data-par2="4e+06"><span class="bench-score">4e+06</span><a href="#lj100-binary-templates">gmin/lj100-binary-bh</a></td>
    <td data-code="pele">—</td>
    <td data-code="LAMMPS">—</td>
    <td data-code="pysisyphus">—</td>
@@ -41,7 +41,7 @@
    <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
-   <td data-code="GMIN">—</td>
+   <td data-code="GMIN" data-template="gmin/lj150-bh" data-par2="1.65799e+06"><span class="bench-score">1.65799e+06</span><a href="#lj150-templates">gmin/lj150-bh</a></td>
    <td data-code="pele">—</td>
    <td data-code="LAMMPS">—</td>
    <td data-code="pysisyphus">—</td>
@@ -65,7 +65,7 @@
    <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
-   <td data-code="GMIN">—</td>
+   <td data-code="GMIN" data-template="gmin/lj38-bh" data-par2="502534"><span class="bench-score">502534</span><a href="#lj38-templates">gmin/lj38-bh</a></td>
    <td data-code="pele">—</td>
    <td data-code="LAMMPS">—</td>
    <td data-code="pysisyphus">—</td>
@@ -87,9 +87,9 @@
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="geodesic">—</td>
-   <td data-code="ASE">—</td>
+   <td data-code="ASE" data-template="ase-globalopt/lj75-basinhopping" data-par2="4e+06"><span class="bench-score">4e+06</span><a href="#lj75-templates">ase-globalopt/lj75-basinhopping</a></td>
    <td data-code="Sella">—</td>
-   <td data-code="GMIN">—</td>
+   <td data-code="GMIN" data-template="gmin/lj75-bhpt" data-par2="3.91548e+06"><span class="bench-score">3.91548e+06</span><a href="#lj75-templates">gmin/lj75-bhpt</a></td>
    <td data-code="pele">—</td>
    <td data-code="LAMMPS">—</td>
    <td data-code="pysisyphus">—</td>
@@ -113,7 +113,7 @@
    <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
-   <td data-code="GMIN">—</td>
+   <td data-code="GMIN" data-template="gmin/lj98-bhpt" data-par2="3.9791e+06"><span class="bench-score">3.9791e+06</span><a href="#lj98-templates">gmin/lj98-bhpt</a></td>
    <td data-code="pele">—</td>
    <td data-code="LAMMPS">—</td>
    <td data-code="pysisyphus">—</td>
@@ -207,27 +207,29 @@
    <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
    <dt>Starts</dt><dd>100</dd>
    <dt>Potential</dt><dd>binary-lennard-jones</dd>
-   <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>v2</dt><dd>par2-rate-bootstrap</dd>
    <dt>Note</dt><dd>The 100 starts are quenched random clusters packed as the other globalopt start sets are: packing fraction 0.1, a neighbor distance between 0.8 and 1.3 covalent radii, then a shift to the center of a cubic cell of side 100. The draw uses seed 1. Component 1 is species B, symbol H, 58 atoms, sigma 1.3. Component 2 is species A, symbol C, 42 atoms, sigma 1.0. The unlike sigma is the arithmetic mean. Each cluster is quenched with L-BFGS-B until the maximum force component is below 1e-4 on the unshifted lj/cut potential, cutoff 20. A start succeeds at or below energy_minimum plus 0.001. The force-call cap is max_evaluations, 2000000.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">No committed harness run.</p>
+   <figure class="bench-plot"><a href="../../_static/board/globalopt-lj100-binary-cost.svg"><picture><source srcset="../../_static/board/globalopt-lj100-binary-cost.webp" type="image/webp"><img src="../../_static/board/globalopt-lj100-binary-cost.png" alt="Cost versus success for globalopt/lj100-binary" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
+   <p class="bench-gaps">No performance profile. One start has no finite cost.</p>
    <details class="bench-details" id="lj100-binary-templates">
-   <summary>All templates (0 ranked)</summary>
+   <summary>All templates (2 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="globalopt/lj100-binary">
-   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
-   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="11">No full harness row.</td></tr>
+   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Rate bounds are the 95% interval on the success rate.</caption>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Rate</th><th>Median calls</th><th>Mean calls</th><th>Min</th><th>Max</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td data-field="template">gmin/lj100-binary-bh</td><td data-field="version">GMIN df8da599</td><td data-field="commit">0e4a022bcdd4</td><td data-field="source">campaign</td><td data-field="par2_mean">4e+06</td><td data-field="success_rate">0</td><td data-field="rate">0–0.0369935</td><td data-field="median_calls">2e+06</td><td data-field="mean_calls">2e+06</td><td data-field="min_calls">2e+06</td><td data-field="max_calls">2e+06</td><td data-field="failures">crash 0, divergence 0, cap 100, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">gmin/lj100-binary-bhpt</td><td data-field="version">GMIN df8da599</td><td data-field="commit">0e4a022bcdd4</td><td data-field="source">campaign</td><td data-field="par2_mean">4e+06</td><td data-field="success_rate">0</td><td data-field="rate">0–0.0369935</td><td data-field="median_calls">2e+06</td><td data-field="mean_calls">2e+06</td><td data-field="min_calls">2e+06</td><td data-field="max_calls">2e+06</td><td data-field="failures">crash 0, divergence 0, cap 100, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    </details>
-   </section><section class="bench bench-legacy-section" id="lj100-binary-legacy">
-   <h3>Legacy 2014 archive</h3>
+   </section><section class="bench bench-archive-section" id="lj100-binary-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Lowest energy first.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are the paper rows. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Lowest energy first.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -265,28 +267,33 @@
    <h2>lj150</h2>
    <dl class="bench-rule">
    <dt>Cap</dt><dd>2000000 force calls</dd>
-   <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
-   <dt>Note</dt><dd>The 2014 archive states no force-call cap. archive/entries/globalopt/lj150/gmin-nosym/benchmark.dat records energy_calls_mean and energy_calls_stddev, not a force-call cap. The declared cap is 2000000, the cap recorded for ranked rows eon-client-bh-lj38 and eon-svn-bh-lj38 in results/board/problems/globalopt-lj38.json.</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>100</dd>
+   <dt>Potential</dt><dd>lennard-jones</dd>
+   <dt>v2</dt><dd>par2-rate-bootstrap</dd>
+   <dt>Note</dt><dd>The 2014 archive states no force-call cap. archive/entries/globalopt/lj150/gmin-nosym/benchmark.dat records energy_calls_mean and energy_calls_stddev, not a force-call cap. The declared cap is 2000000, the cap recorded for ranked rows eon-client-bh-lj38 and eon-svn-bh-lj38 in results/board/problems/globalopt-lj38.json. Success is an energy at or below the Cambridge Cluster Database N=150 minimum plus 0.001.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">No committed harness run.</p>
+   <figure class="bench-plot"><a href="../../_static/board/globalopt-lj150-cost.svg"><picture><source srcset="../../_static/board/globalopt-lj150-cost.webp" type="image/webp"><img src="../../_static/board/globalopt-lj150-cost.png" alt="Cost versus success for globalopt/lj150" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
+   <p class="bench-gaps">No performance profile. One start has no finite cost.</p>
    <details class="bench-details" id="lj150-templates">
-   <summary>All templates (0 ranked)</summary>
+   <summary>All templates (2 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="globalopt/lj150">
-   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
-   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="11">No full harness row.</td></tr>
+   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Rate bounds are the 95% interval on the success rate.</caption>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Rate</th><th>Median calls</th><th>Mean calls</th><th>Min</th><th>Max</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td data-field="template">gmin/lj150-bh</td><td data-field="version">GMIN df8da599</td><td data-field="commit">0e4a022bcdd4</td><td data-field="source">campaign</td><td data-field="par2_mean">1.65799e+06</td><td data-field="success_rate">0.77</td><td data-field="rate">0.678456–0.841567</td><td data-field="median_calls">1.14409e+06</td><td data-field="mean_calls">1.19799e+06</td><td data-field="min_calls">83258</td><td data-field="max_calls">2e+06</td><td data-field="failures">crash 0, divergence 0, cap 23, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">gmin/lj150-bhpt</td><td data-field="version">GMIN df8da599</td><td data-field="commit">0e4a022bcdd4</td><td data-field="source">campaign</td><td data-field="par2_mean">2.66191e+06</td><td data-field="success_rate">0.49</td><td data-field="rate">0.39422–0.58652</td><td data-field="median_calls">2e+06</td><td data-field="mean_calls">1.64191e+06</td><td data-field="min_calls">219739</td><td data-field="max_calls">2e+06</td><td data-field="failures">crash 0, divergence 0, cap 51, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    </details>
-   </section><section class="bench bench-legacy-section" id="lj150-legacy">
-   <h3>Legacy 2014 archive</h3>
+   </section><section class="bench bench-archive-section" id="lj150-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. The columns are the archived keys.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are the paper rows. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. The columns are the archived keys.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -330,7 +337,7 @@
    <td class="text">03 Oct 2022</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "basin_hopping_steps_mean", "scale": "linear", "points": [{"id": "globalopt-lj150-gmin-symmetrise", "entry": "gmin-symmetrise", "code": "GMIN", "value": 667.38, "best": true, "held": false, "failed": false}, {"id": "globalopt-lj150-gmin-nosym", "entry": "gmin-nosym", "code": "GMIN", "value": 3280.89, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 archive scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "basin_hopping_steps_mean", "scale": "linear", "points": [{"id": "globalopt-lj150-gmin-symmetrise", "entry": "gmin-symmetrise", "code": "GMIN", "value": 667.38, "best": true, "held": false, "failed": false}, {"id": "globalopt-lj150-gmin-nosym", "entry": "gmin-nosym", "code": "GMIN", "value": 3280.89, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section><section class="bench" id="lj38" data-problem="globalopt/lj38">
    <h2>Lennard-Jones 38 global minimum</h2>
@@ -338,30 +345,36 @@
    <dt>Cap</dt><dd>2000000 force calls</dd>
    <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
    <dt>Starts</dt><dd>100</dd>
-   <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
+   <dt>v2</dt><dd>par2-rate-bootstrap</dd>
    <dt>Note</dt><dd>The 2014 eOn config at archive/entries/globalopt/lj38/eon-basinhopping/config.ini sets steps to 10000000 and states no force-call cap. benchmark.dat in that directory records an observed force_calls_max of 1795901. The pele benchmark.dat records an observed force_calls_max of 2.5339e+06. Those lines are maxima, not caps. The declared cap is 2000000, the cap recorded for ranked rows eon-client-bh-lj38 and eon-svn-bh-lj38 in results/board/problems/globalopt-lj38.json.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
+   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <figure class="bench-plot"><a href="../../_static/board/globalopt-lj38-profile.svg"><picture><source srcset="../../_static/board/globalopt-lj38-profile.webp" type="image/webp"><img src="../../_static/board/globalopt-lj38-profile.png" alt="Dolan-More profile for globalopt/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/globalopt-lj38-cost.svg"><picture><source srcset="../../_static/board/globalopt-lj38-cost.webp" type="image/webp"><img src="../../_static/board/globalopt-lj38-cost.png" alt="Cost versus success for globalopt/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="lj38-templates">
-   <summary>All templates (3 ranked)</summary>
+   <summary>All templates (5 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="globalopt/lj38">
-   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
-   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">airss/lj38</td><td data-field="version">AIRSS 0.9.4</td><td data-field="commit">5593cc4ee360</td><td data-field="source">campaign</td><td data-field="par2_mean">112134</td><td data-field="success_rate">1</td><td data-field="wilson">0.963007–1</td><td data-field="median_calls">70635.5</td><td data-field="mean_calls">112134</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
-   <tr><td data-field="template">eon-client/bh-lj38</td><td data-field="version">eOn 3.5.0</td><td data-field="commit">4d8b34baf1ba</td><td data-field="source">campaign</td><td data-field="par2_mean">503146</td><td data-field="success_rate">1</td><td data-field="wilson">0.963007–1</td><td data-field="median_calls">369028</td><td data-field="mean_calls">503146</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
-   <tr><td data-field="template">eon-svn/bh-lj38</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">598530</td><td data-field="success_rate">0.98</td><td data-field="wilson">0.929988–0.994498</td><td data-field="median_calls">423226</td><td data-field="mean_calls">558530</td><td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Rate bounds are the 95% interval on the success rate.</caption>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Rate</th><th>Median calls</th><th>Mean calls</th><th>Min</th><th>Max</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td data-field="template">airss/lj38</td><td data-field="version">AIRSS 0.9.4</td><td data-field="commit">5593cc4ee360</td><td data-field="source">campaign</td><td data-field="par2_mean">112134</td><td data-field="success_rate">1</td><td data-field="rate">0.963007–1</td><td data-field="median_calls">70635.5</td><td data-field="mean_calls">112134</td><td data-field="min_calls">1672</td><td data-field="max_calls">955658</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">gmin/lj38-bh</td><td data-field="version">GMIN df8da599</td><td data-field="commit">0e4a022bcdd4</td><td data-field="source">campaign</td><td data-field="par2_mean">502534</td><td data-field="success_rate">0.98</td><td data-field="rate">0.929988–0.994498</td><td data-field="median_calls">312740</td><td data-field="mean_calls">462534</td><td data-field="min_calls">6037</td><td data-field="max_calls">2e+06</td><td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">eon-client/bh-lj38</td><td data-field="version">eOn 3.5.0</td><td data-field="commit">4d8b34baf1ba</td><td data-field="source">campaign</td><td data-field="par2_mean">503146</td><td data-field="success_rate">1</td><td data-field="rate">0.963007–1</td><td data-field="median_calls">369028</td><td data-field="mean_calls">503146</td><td data-field="min_calls">3257</td><td data-field="max_calls">1.96565e+06</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">eon-svn/bh-lj38</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">598530</td><td data-field="success_rate">0.98</td><td data-field="rate">0.929988–0.994498</td><td data-field="median_calls">423226</td><td data-field="mean_calls">558530</td><td data-field="min_calls">9176</td><td data-field="max_calls">2e+06</td><td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">gmin/lj38-bhpt</td><td data-field="version">GMIN df8da599</td><td data-field="commit">0e4a022bcdd4</td><td data-field="source">campaign</td><td data-field="par2_mean">1.13565e+06</td><td data-field="success_rate">0.84</td><td data-field="rate">0.755797–0.899047</td><td data-field="median_calls">595554</td><td data-field="mean_calls">815648</td><td data-field="min_calls">3568</td><td data-field="max_calls">2e+06</td><td data-field="failures">crash 0, divergence 0, cap 16, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
+   <h3>Partial</h3><ul>
+   <li>gmin/lj38-csm GMIN campaign n=100, result file sets ranked false.</li>
+   </ul>
    </details>
-   </section><section class="bench bench-legacy-section" id="lj38-legacy">
-   <h3>Legacy 2014 archive</h3>
+   </section><section class="bench bench-archive-section" id="lj38-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are the paper rows. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -429,37 +442,44 @@
    <td class="text">29 Aug 2013</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:5"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "globalopt-lj38-gmin-csm", "entry": "gmin-csm", "code": "GMIN", "value": 6421.0, "best": true, "held": false, "failed": false}, {"id": "globalopt-lj38-gmin-symmetrise", "entry": "gmin-symmetrise", "code": "GMIN", "value": 22711.0, "best": false, "held": false, "failed": false}, {"id": "globalopt-lj38-gmin-nosym", "entry": "gmin-nosym", "code": "GMIN", "value": 265951.0, "best": false, "held": false, "failed": false}, {"id": "globalopt-lj38-eon-basinhopping", "entry": "eon-basinhopping", "code": "Eon r2156", "value": 508011.0, "best": false, "held": false, "failed": false}, {"id": "globalopt-lj38-pele-basinhopping", "entry": "pele-basinhopping", "code": "pele", "value": 521595.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 archive scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:5"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "globalopt-lj38-gmin-csm", "entry": "gmin-csm", "code": "GMIN", "value": 6421.0, "best": true, "held": false, "failed": false}, {"id": "globalopt-lj38-gmin-symmetrise", "entry": "gmin-symmetrise", "code": "GMIN", "value": 22711.0, "best": false, "held": false, "failed": false}, {"id": "globalopt-lj38-gmin-nosym", "entry": "gmin-nosym", "code": "GMIN", "value": 265951.0, "best": false, "held": false, "failed": false}, {"id": "globalopt-lj38-eon-basinhopping", "entry": "eon-basinhopping", "code": "Eon r2156", "value": 508011.0, "best": false, "held": false, "failed": false}, {"id": "globalopt-lj38-pele-basinhopping", "entry": "pele-basinhopping", "code": "pele", "value": 521595.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section><section class="bench" id="lj75" data-problem="globalopt/lj75">
    <h2>lj75</h2>
    <dl class="bench-rule">
    <dt>Cap</dt><dd>2000000 force calls</dd>
-   <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
-   <dt>Note</dt><dd>The 2014 archive states no force-call cap. archive/entries/globalopt/lj75/gmin/benchmark.dat records an observed force_calls_max of 3.1011e+05, which is not a cap. The declared cap is 2000000, the cap recorded for ranked rows eon-client-bh-lj38 and eon-svn-bh-lj38 in results/board/problems/globalopt-lj38.json.</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>200</dd>
+   <dt>Potential</dt><dd>lennard-jones</dd>
+   <dt>v2</dt><dd>par2-rate-bootstrap</dd>
+   <dt>Note</dt><dd>The 2014 archive states no force-call cap. archive/entries/globalopt/lj75/gmin/benchmark.dat records an observed force_calls_max of 3.1011e+05, which is not a cap. The declared cap is 2000000, the cap recorded for ranked rows eon-client-bh-lj38 and eon-svn-bh-lj38 in results/board/problems/globalopt-lj38.json. Success is an energy at or below the Cambridge Cluster Database N=75 minimum plus 0.001.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
    <p class="bench-gaps">Partial rows stay off the ranked table.</p>
+   <figure class="bench-plot"><a href="../../_static/board/globalopt-lj75-cost.svg"><picture><source srcset="../../_static/board/globalopt-lj75-cost.webp" type="image/webp"><img src="../../_static/board/globalopt-lj75-cost.png" alt="Cost versus success for globalopt/lj75" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
+   <p class="bench-gaps">No performance profile. One start has no finite cost.</p>
    <details class="bench-details" id="lj75-templates">
-   <summary>All templates (0 ranked)</summary>
+   <summary>All templates (3 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="globalopt/lj75">
-   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
-   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="11">No full harness row.</td></tr>
+   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Rate bounds are the 95% interval on the success rate.</caption>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Rate</th><th>Median calls</th><th>Mean calls</th><th>Min</th><th>Max</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td data-field="template">gmin/lj75-bhpt</td><td data-field="version">GMIN df8da599</td><td data-field="commit">0e4a022bcdd4</td><td data-field="source">campaign</td><td data-field="par2_mean">3.91548e+06</td><td data-field="success_rate">0.025</td><td data-field="rate">0.0107247–0.0571783</td><td data-field="median_calls">2e+06</td><td data-field="mean_calls">1.96548e+06</td><td data-field="min_calls">92782</td><td data-field="max_calls">2e+06</td><td data-field="failures">crash 0, divergence 0, cap 195, wrong_stationary 0</td><td data-field="n">200</td></tr>
+   <tr><td data-field="template">gmin/lj75-bh</td><td data-field="version">GMIN df8da599</td><td data-field="commit">0e4a022bcdd4</td><td data-field="source">campaign</td><td data-field="par2_mean">3.97043e+06</td><td data-field="success_rate">0.01</td><td data-field="rate">0.00274666–0.0357218</td><td data-field="median_calls">2e+06</td><td data-field="mean_calls">1.99043e+06</td><td data-field="min_calls">417342</td><td data-field="max_calls">2e+06</td><td data-field="failures">crash 0, divergence 0, cap 198, wrong_stationary 0</td><td data-field="n">200</td></tr>
+   <tr><td data-field="template">ase-globalopt/lj75-basinhopping</td><td data-field="version">ASE 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">campaign</td><td data-field="par2_mean">4e+06</td><td data-field="success_rate">0</td><td data-field="rate">0–0.0188453</td><td data-field="median_calls">1e+06</td><td data-field="mean_calls">1e+06</td><td data-field="min_calls">1e+06</td><td data-field="max_calls">1e+06</td><td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td><td data-field="n">200</td></tr>
    </tbody></table></div>
    <h3>Partial</h3><ul>
    <li>airss/lj75 AIRSS campaign n=200, result file sets partial true.</li>
    </ul>
    </details>
-   </section><section class="bench bench-legacy-section" id="lj75-legacy">
-   <h3>Legacy 2014 archive</h3>
+   </section><section class="bench bench-archive-section" id="lj75-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are the paper rows. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -491,28 +511,33 @@
    <h2>lj98</h2>
    <dl class="bench-rule">
    <dt>Cap</dt><dd>2000000 force calls</dd>
-   <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
-   <dt>Note</dt><dd>The 2014 archive states no force-call cap. archive/entries/globalopt/lj98/gmin-nosym/benchmark.dat records energy_calls_mean and energy_calls_stddev, not a force-call cap. The declared cap is 2000000, the cap recorded for ranked rows eon-client-bh-lj38 and eon-svn-bh-lj38 in results/board/problems/globalopt-lj38.json.</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>100</dd>
+   <dt>Potential</dt><dd>lennard-jones</dd>
+   <dt>v2</dt><dd>par2-rate-bootstrap</dd>
+   <dt>Note</dt><dd>The 2014 archive states no force-call cap. archive/entries/globalopt/lj98/gmin-nosym/benchmark.dat records energy_calls_mean and energy_calls_stddev, not a force-call cap. The declared cap is 2000000, the cap recorded for ranked rows eon-client-bh-lj38 and eon-svn-bh-lj38 in results/board/problems/globalopt-lj38.json. Success is an energy at or below the Cambridge Cluster Database N=98 minimum plus 0.001.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
-   <p class="bench-gaps">No committed harness run.</p>
+   <figure class="bench-plot"><a href="../../_static/board/globalopt-lj98-cost.svg"><picture><source srcset="../../_static/board/globalopt-lj98-cost.webp" type="image/webp"><img src="../../_static/board/globalopt-lj98-cost.png" alt="Cost versus success for globalopt/lj98" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
+   <p class="bench-gaps">No performance profile. One start has no finite cost.</p>
    <details class="bench-details" id="lj98-templates">
-   <summary>All templates (0 ranked)</summary>
+   <summary>All templates (2 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="globalopt/lj98">
-   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
-   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="11">No full harness row.</td></tr>
+   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Rate bounds are the 95% interval on the success rate.</caption>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Rate</th><th>Median calls</th><th>Mean calls</th><th>Min</th><th>Max</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td data-field="template">gmin/lj98-bhpt</td><td data-field="version">GMIN df8da599</td><td data-field="commit">0e4a022bcdd4</td><td data-field="source">campaign</td><td data-field="par2_mean">3.9791e+06</td><td data-field="success_rate">0.01</td><td data-field="rate">0.00176743–0.0544862</td><td data-field="median_calls">2e+06</td><td data-field="mean_calls">1.9991e+06</td><td data-field="min_calls">1.91012e+06</td><td data-field="max_calls">2e+06</td><td data-field="failures">crash 0, divergence 0, cap 99, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">gmin/lj98-bh</td><td data-field="version">GMIN df8da599</td><td data-field="commit">0e4a022bcdd4</td><td data-field="source">campaign</td><td data-field="par2_mean">4e+06</td><td data-field="success_rate">0</td><td data-field="rate">0–0.0369935</td><td data-field="median_calls">2e+06</td><td data-field="mean_calls">2e+06</td><td data-field="min_calls">2e+06</td><td data-field="max_calls">2e+06</td><td data-field="failures">crash 0, divergence 0, cap 100, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
    </details>
-   </section><section class="bench bench-legacy-section" id="lj98-legacy">
-   <h3>Legacy 2014 archive</h3>
+   </section><section class="bench bench-archive-section" id="lj98-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. The columns are the archived keys.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are the paper rows. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. The columns are the archived keys.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -556,14 +581,17 @@
    <td class="text">03 Oct 2022</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "basin_hopping_steps_mean", "scale": "log", "points": [{"id": "globalopt-lj98-gmin-symmetrise", "entry": "gmin-symmetrise", "code": "GMIN", "value": 1281.92, "best": true, "held": false, "failed": false}, {"id": "globalopt-lj98-gmin-nosym", "entry": "gmin-nosym", "code": "GMIN", "value": 43819.76, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 archive scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "basin_hopping_steps_mean", "scale": "log", "points": [{"id": "globalopt-lj98-gmin-symmetrise", "entry": "gmin-symmetrise", "code": "GMIN", "value": 1281.92, "best": true, "held": false, "failed": false}, {"id": "globalopt-lj98-gmin-nosym", "entry": "gmin-nosym", "code": "GMIN", "value": 43819.76, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section><section class="bench" id="tip4p10" data-problem="globalopt/tip4p10">
    <h2>tip4p10</h2>
    <dl class="bench-rule">
    <dt>Cap</dt><dd>2000000 force calls</dd>
-   <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
-   <dt>Note</dt><dd>The 2014 archive states no force-call cap. archive/entries/globalopt/tip4p10/gmin/benchmark.dat records an observed force_calls_max of 1.4836e+05, which is not a cap. The declared cap is 2000000, the cap recorded for ranked rows eon-client-bh-lj38 and eon-svn-bh-lj38 in results/board/problems/globalopt-lj38.json.</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>10000</dd>
+   <dt>Potential</dt><dd>tip4p</dd>
+   <dt>v2</dt><dd>par2-rate-bootstrap</dd>
+   <dt>Note</dt><dd>The 2014 archive states no force-call cap. archive/entries/globalopt/tip4p10/gmin/benchmark.dat records an observed force_calls_max of 1.4836e+05, which is not a cap. The declared cap is 2000000, the cap recorded for ranked rows eon-client-bh-lj38 and eon-svn-bh-lj38 in results/board/problems/globalopt-lj38.json. Success is an energy at or below the Cambridge Cluster Database TIP4P N=10 minimum plus 0.001.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
@@ -572,18 +600,18 @@
    <summary>All templates (0 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="globalopt/tip4p10">
-   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
-   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="11">No full harness row.</td></tr>
+   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Rate bounds are the 95% interval on the success rate.</caption>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Rate</th><th>Median calls</th><th>Mean calls</th><th>Min</th><th>Max</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
    </details>
-   </section><section class="bench bench-legacy-section" id="tip4p10-legacy">
-   <h3>Legacy 2014 archive</h3>
+   </section><section class="bench bench-archive-section" id="tip4p10-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are the paper rows. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -621,14 +649,17 @@
    <td class="text">05 May 2014</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "globalopt-tip4p10-gmin-tbp", "entry": "gmin-tbp", "code": "GMIN", "value": 16099.0, "best": true, "held": false, "failed": false}, {"id": "globalopt-tip4p10-gmin", "entry": "gmin", "code": "GMIN", "value": 16236.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 archive scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "globalopt-tip4p10-gmin-tbp", "entry": "gmin-tbp", "code": "GMIN", "value": 16099.0, "best": true, "held": false, "failed": false}, {"id": "globalopt-tip4p10-gmin", "entry": "gmin", "code": "GMIN", "value": 16236.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section><section class="bench" id="tip4p15" data-problem="globalopt/tip4p15">
    <h2>tip4p15</h2>
    <dl class="bench-rule">
    <dt>Cap</dt><dd>2000000 force calls</dd>
-   <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
-   <dt>Note</dt><dd>The 2014 archive states no force-call cap. archive/entries/globalopt/tip4p15/gmin/benchmark.dat records an observed force_calls_max of 5.0265e+06 and gmin-tbp/benchmark.dat records 6.1769e+06. Those are observed maxima, not caps. The declared cap is 2000000, the cap recorded for ranked rows eon-client-bh-lj38 and eon-svn-bh-lj38 in results/board/problems/globalopt-lj38.json.</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>500</dd>
+   <dt>Potential</dt><dd>tip4p</dd>
+   <dt>v2</dt><dd>par2-rate-bootstrap</dd>
+   <dt>Note</dt><dd>The 2014 archive states no force-call cap. archive/entries/globalopt/tip4p15/gmin/benchmark.dat records an observed force_calls_max of 5.0265e+06 and gmin-tbp/benchmark.dat records 6.1769e+06. Those are observed maxima, not caps. The declared cap is 2000000, the cap recorded for ranked rows eon-client-bh-lj38 and eon-svn-bh-lj38 in results/board/problems/globalopt-lj38.json. Success is an energy at or below the Cambridge Cluster Database TIP4P N=15 minimum plus 0.001.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
@@ -637,18 +668,18 @@
    <summary>All templates (0 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="globalopt/tip4p15">
-   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
-   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="11">No full harness row.</td></tr>
+   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Rate bounds are the 95% interval on the success rate.</caption>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Rate</th><th>Median calls</th><th>Mean calls</th><th>Min</th><th>Max</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
    </details>
-   </section><section class="bench bench-legacy-section" id="tip4p15-legacy">
-   <h3>Legacy 2014 archive</h3>
+   </section><section class="bench bench-archive-section" id="tip4p15-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are the paper rows. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -686,14 +717,17 @@
    <td class="text">05 May 2014</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "globalopt-tip4p15-gmin-tbp", "entry": "gmin-tbp", "code": "GMIN", "value": 625362.0, "best": true, "held": false, "failed": false}, {"id": "globalopt-tip4p15-gmin", "entry": "gmin", "code": "GMIN", "value": 670645.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 archive scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "globalopt-tip4p15-gmin-tbp", "entry": "gmin-tbp", "code": "GMIN", "value": 625362.0, "best": true, "held": false, "failed": false}, {"id": "globalopt-tip4p15-gmin", "entry": "gmin", "code": "GMIN", "value": 670645.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section><section class="bench" id="tip4p20" data-problem="globalopt/tip4p20">
    <h2>tip4p20</h2>
    <dl class="bench-rule">
    <dt>Cap</dt><dd>2000000 force calls</dd>
-   <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
-   <dt>Note</dt><dd>The 2014 archive states no force-call cap. archive/entries/globalopt/tip4p20/gmin/benchmark.dat records an observed force_calls_max of 1.4191e+08 and gmin-tbp/benchmark.dat records 1.4340e+08. Those are observed maxima, not caps. The declared cap is 2000000, the cap recorded for ranked rows eon-client-bh-lj38 and eon-svn-bh-lj38 in results/board/problems/globalopt-lj38.json.</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>100</dd>
+   <dt>Potential</dt><dd>tip4p</dd>
+   <dt>v2</dt><dd>par2-rate-bootstrap</dd>
+   <dt>Note</dt><dd>The 2014 archive states no force-call cap. archive/entries/globalopt/tip4p20/gmin/benchmark.dat records an observed force_calls_max of 1.4191e+08 and gmin-tbp/benchmark.dat records 1.4340e+08. Those are observed maxima, not caps. The declared cap is 2000000, the cap recorded for ranked rows eon-client-bh-lj38 and eon-svn-bh-lj38 in results/board/problems/globalopt-lj38.json. Success is an energy at or below the Cambridge Cluster Database TIP4P N=20 minimum plus 0.001.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
@@ -702,18 +736,18 @@
    <summary>All templates (0 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="globalopt/tip4p20">
-   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
-   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td colspan="11">No full harness row.</td></tr>
+   <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Rate bounds are the 95% interval on the success rate.</caption>
+   <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Rate</th><th>Median calls</th><th>Mean calls</th><th>Min</th><th>Max</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr><td colspan="13">No full harness row.</td></tr>
    </tbody></table></div>
    </details>
-   </section><section class="bench bench-legacy-section" id="tip4p20-legacy">
-   <h3>Legacy 2014 archive</h3>
+   </section><section class="bench bench-archive-section" id="tip4p20-archive">
+   <h3>2014 archive</h3>
    <details class="bench-details">
-   <summary>Legacy 2014 archive</summary>
-   <p class="bench-legacy">Legacy 2014 archive. These rows stay in the published order. They are not a v2 score.</p>
-   <div class="bench-table"><table class="bench-legacy">
-   <caption>Legacy 2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
+   <summary>2014 archive</summary>
+   <p class="bench-archive">2014 archive. These rows stay in the published order. They are the paper rows. They are not a v2 score.</p>
+   <div class="bench-table"><table class="bench-archive">
+   <caption>2014 archive. Fewest force calls first. Failures are left out of this mean.</caption>
    <thead><tr>
    <th class="num" scope="col"></th>
    <th class="text" scope="col">Entry</th>
@@ -751,7 +785,7 @@
    <td class="text">09 May 2014</td>
    </tr>
    </tbody></table></div>
-   <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "globalopt-tip4p20-gmin-tbp", "entry": "gmin-tbp", "code": "GMIN", "value": 25566700.0, "best": true, "held": false, "failed": false}, {"id": "globalopt-tip4p20-gmin", "entry": "gmin", "code": "GMIN", "value": 28596700.0, "best": false, "held": false, "failed": false}]}</script></figure>
+   <figure class="bench-plot"><figcaption>2014 archive scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:2"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "linear", "points": [{"id": "globalopt-tip4p20-gmin-tbp", "entry": "gmin-tbp", "code": "GMIN", "value": 25566700.0, "best": true, "held": false, "failed": false}, {"id": "globalopt-tip4p20-gmin", "entry": "gmin", "code": "GMIN", "value": 28596700.0, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
    </section>
 #+end_export

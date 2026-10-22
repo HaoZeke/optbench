@@ -184,6 +184,30 @@ It does not run a campaign.
    <td data-code="softsaddle">—</td>
    <td data-code="tsase" data-template="tsase/ci-neb" data-par2="2524.53"><span class="bench-score">2524.53</span><a href="generated/suites/double-ended-saddle-search.html#pt-island-templates">tsase/ci-neb</a></td>
    </tr>
+   <tr data-problem="globalopt/lj100-binary">
+   <th scope="row"><a href="generated/suites/globalopt.html#lj100-binary">Binary Lennard-Jones 100</a></th>
+   <td data-code="eOn">—</td>
+   <td data-code="Eon svn">—</td>
+   <td data-code="rgmin">—</td>
+   <td data-code="rgsaddle">—</td>
+   <td data-code="geodesic">—</td>
+   <td data-code="ASE">—</td>
+   <td data-code="Sella">—</td>
+   <td data-code="GMIN" data-template="gmin/lj100-binary-bh" data-par2="4e+06"><span class="bench-score">4e+06</span><a href="generated/suites/globalopt.html#lj100-binary-templates">gmin/lj100-binary-bh</a></td>
+   <td data-code="pele">—</td>
+   <td data-code="LAMMPS">—</td>
+   <td data-code="pysisyphus">—</td>
+   <td data-code="AIRSS">—</td>
+   <td data-code="vc-SQNM">—</td>
+   <td data-code="artn">—</td>
+   <td data-code="compass">—</td>
+   <td data-code="dlfind">—</td>
+   <td data-code="lammps">—</td>
+   <td data-code="optim">—</td>
+   <td data-code="optking">—</td>
+   <td data-code="softsaddle">—</td>
+   <td data-code="tsase">—</td>
+   </tr>
    <tr data-problem="globalopt/lj150">
    <th scope="row"><a href="generated/suites/globalopt.html#lj150">lj150</a></th>
    <td data-code="eOn">—</td>
@@ -193,7 +217,7 @@ It does not run a campaign.
    <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
-   <td data-code="GMIN" data-template="gmin/lj150-bh" data-par2="1.75804e+06"><span class="bench-score">1.75804e+06</span><a href="generated/suites/globalopt.html#lj150-templates">gmin/lj150-bh</a></td>
+   <td data-code="GMIN" data-template="gmin/lj150-bh" data-par2="1.65799e+06"><span class="bench-score">1.65799e+06</span><a href="generated/suites/globalopt.html#lj150-templates">gmin/lj150-bh</a></td>
    <td data-code="pele">—</td>
    <td data-code="LAMMPS">—</td>
    <td data-code="pysisyphus">—</td>
@@ -217,7 +241,7 @@ It does not run a campaign.
    <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
-   <td data-code="GMIN" data-template="gmin/lj38-csm" data-par2="5883.83"><span class="bench-score">5883.83</span><a href="generated/suites/globalopt.html#lj38-templates">gmin/lj38-csm</a></td>
+   <td data-code="GMIN" data-template="gmin/lj38-bh" data-par2="502534"><span class="bench-score">502534</span><a href="generated/suites/globalopt.html#lj38-templates">gmin/lj38-bh</a></td>
    <td data-code="pele">—</td>
    <td data-code="LAMMPS">—</td>
    <td data-code="pysisyphus">—</td>
@@ -239,9 +263,9 @@ It does not run a campaign.
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="geodesic">—</td>
-   <td data-code="ASE" data-template="ase-globalopt/lj75-basinhopping" data-par2="2e+06"><span class="bench-score">2e+06</span><a href="generated/suites/globalopt.html#lj75-templates">ase-globalopt/lj75-basinhopping</a></td>
+   <td data-code="ASE" data-template="ase-globalopt/lj75-basinhopping" data-par2="4e+06"><span class="bench-score">4e+06</span><a href="generated/suites/globalopt.html#lj75-templates">ase-globalopt/lj75-basinhopping</a></td>
    <td data-code="Sella">—</td>
-   <td data-code="GMIN" data-template="gmin/lj75-bhpt" data-par2="1.96655e+06"><span class="bench-score">1.96655e+06</span><a href="generated/suites/globalopt.html#lj75-templates">gmin/lj75-bhpt</a></td>
+   <td data-code="GMIN" data-template="gmin/lj75-bhpt" data-par2="3.91548e+06"><span class="bench-score">3.91548e+06</span><a href="generated/suites/globalopt.html#lj75-templates">gmin/lj75-bhpt</a></td>
    <td data-code="pele">—</td>
    <td data-code="LAMMPS">—</td>
    <td data-code="pysisyphus">—</td>
@@ -265,7 +289,7 @@ It does not run a campaign.
    <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
    <td data-code="Sella">—</td>
-   <td data-code="GMIN" data-template="gmin/lj98-bh" data-par2="282815"><span class="bench-score">282815</span><a href="generated/suites/globalopt.html#lj98-templates">gmin/lj98-bh</a></td>
+   <td data-code="GMIN" data-template="gmin/lj98-bhpt" data-par2="3.9791e+06"><span class="bench-score">3.9791e+06</span><a href="generated/suites/globalopt.html#lj98-templates">gmin/lj98-bhpt</a></td>
    <td data-code="pele">—</td>
    <td data-code="LAMMPS">—</td>
    <td data-code="pysisyphus">—</td>
