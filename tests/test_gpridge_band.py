@@ -8,6 +8,19 @@ from optbench import gpridge_band as native
 from optbench.pes import Pair
 
 
+@pytest.mark.parametrize("name", [
+    "pt-heptamer-gp-neb", "pt-heptamer-ci-neb",
+    "pt-island-gp-neb", "pt-island-ci-neb",
+])
+def test_committed_templates_match_registry(name):
+    from optbench.campaign import load_template
+    from optbench.engines.common import registry_pin, require_pin
+
+    root = Path(__file__).resolve().parents[1]
+    template = load_template(root, f"gpridge/{name}")
+    require_pin(template, registry_pin(root, "gpridge"))
+
+
 def pair():
     return Pair("start", np.array([[0., 0., 0.], [3., 0., 0.]]),
                 np.array([[1., 0., 0.], [3., 0., 0.]]),
