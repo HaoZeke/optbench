@@ -1,0 +1,23 @@
+# rep 1 force_calls 2517276 total_searches 2360 repeats 20 rate 38097310 confidence 0.95 reached 1
+code eOn
+code_version (develop 53055cfe)
+commit 53055cfe4ee7d12904c0915de583be0859b48536
+counter client
+count_keys sad-fcs+mins-fcs
+contributor Rohit Goswami
+repetitions 1
+workers 8
+temperature_K 150
+thermostat akmc
+reference_rate 835900
+reference_products 5000
+true_rate 38097310
+rate_accuracy 0
+catalogue_accuracy 0.8251271843
+force_calls_per_simulated_time 1.918028883e+10
+force_calls 2517276
+nfailed 0
+algorithm AKMC dimer
+template eon/53055cfe-standard-aladatom-akmc
+problem accelerated-md/standard_aladatom
+reducer amd-catalogue
