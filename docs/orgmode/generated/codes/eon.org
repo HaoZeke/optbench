@@ -1101,9 +1101,9 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">0</td>
    </tr>
-   <tr data-problem="saddle-search/pt-island" data-label="eOn (r2205) · eon-dimer">
+   <tr data-problem="saddle-search/pt-island" data-label="archived EON r2205 reference · measured gap">
    <td>Pt heptamer island</td>
-   <td data-field="label">eOn (r2205) · eon-dimer</td>
+   <td data-field="label">archived EON r2205 reference · measured gap</td>
    <td data-field="family">Minimum mode</td>
    <td data-field="family_rank">13</td>
    <td data-field="par2_mean"></td>
@@ -1147,7 +1147,7 @@
    <td>Pt heptamer island</td>
    <td data-field="label">eOn (3.6.0) · Lanczos</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">16</td>
+   <td data-field="family_rank">18</td>
    <td data-field="par2_mean">2e+08</td>
    <td data-field="published"></td>
    <td data-field="median_calls">3.98507e+06</td>

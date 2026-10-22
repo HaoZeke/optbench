@@ -15,6 +15,8 @@ Archived rows use the same key and appear on that code page.
    <ul>
    <li><a href="generated/codes/eon.html">eOn</a></li>
    <li><a href="generated/codes/eon-svn.html">Eon svn</a></li>
+   <li><a href="generated/codes/eon--svn-r2549.html">EON (SVN r2549)</a></li>
+   <li><a href="generated/codes/eon--develop-4c1b814f62f1dcf5fcd0cf18ba0b6df3bcff7a28.html">eOn (develop 4c1b814f62f1dcf5fcd0cf18ba0b6df3bcff7a28)</a></li>
    <li><a href="generated/codes/rgmin.html">rgmin</a></li>
    <li><a href="generated/codes/rgsaddle.html">rgsaddle</a></li>
    <li><a href="generated/codes/geodesic.html">geodesic</a></li>
@@ -35,7 +37,6 @@ Archived rows use the same key and appear on that code page.
    <li><a href="generated/codes/airss.html">AIRSS</a></li>
    <li><a href="generated/codes/vc-sqnm.html">vc-SQNM</a></li>
    <li><a href="generated/codes/softsaddle.html">SoftSaddle</a></li>
-   <li><a href="generated/codes/eon--svn-r2549.html">EON (SVN r2549)</a></li>
    <li><a href="generated/codes/eon--develop-500350d9.html">eOn (develop 500350d9)</a></li>
    <li><a href="generated/codes/eon-r2006.html">Eon r2006</a></li>
    <li><a href="generated/codes/unknown.html">unknown</a></li>
@@ -49,6 +50,8 @@ Archived rows use the same key and appear on that code page.
 
    generated/codes/eon
    generated/codes/eon-svn
+   generated/codes/eon--svn-r2549
+   generated/codes/eon--develop-4c1b814f62f1dcf5fcd0cf18ba0b6df3bcff7a28
    generated/codes/rgmin
    generated/codes/rgsaddle
    generated/codes/geodesic
@@ -69,7 +72,6 @@ Archived rows use the same key and appear on that code page.
    generated/codes/airss
    generated/codes/vc-sqnm
    generated/codes/softsaddle
-   generated/codes/eon--svn-r2549
    generated/codes/eon--develop-500350d9
    generated/codes/eon-r2006
    generated/codes/unknown

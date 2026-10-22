@@ -9,6 +9,12 @@
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>saddle search</td>
+   <td>r2549</td>
+   <td>r2549</td>
+   <td><a href="https://theory.cm.utexas.edu/svn/eon">https://theory.cm.utexas.edu/svn/eon</a></td>
+   </tr>
    </tbody></table></div>
    <div class="bench-scroll"><table data-board-table="code-rows">
    <caption>Every ranked row for this code.</caption>
@@ -26,6 +32,20 @@
    <td data-field="fd_calls">0</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">639</td>
+   </tr>
+   <tr data-problem="saddle-search/pt-island" data-label="EON (SVN r2549) (r2549) · Dimer">
+   <td>Pt heptamer island</td>
+   <td data-field="label">EON (SVN r2549) (r2549) · Dimer</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">17</td>
+   <td data-field="par2_mean">2.43552e+07</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">4.49574e+06</td>
+   <td data-field="mean_calls">5.29672e+06</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
+   <td data-field="n">10</td>
    </tr>
    </tbody></table></div>
    </section>

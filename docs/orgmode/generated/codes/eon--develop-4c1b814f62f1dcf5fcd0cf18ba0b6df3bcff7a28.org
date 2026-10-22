@@ -1,0 +1,38 @@
+#+TITLE: eOn (develop 4c1b814f62f1dcf5fcd0cf18ba0b6df3bcff7a28)
+#+OPTIONS: toc:nil num:nil author:nil
+
+#+begin_export rst
+.. raw:: html
+
+   <section class="bench" id="code-eon--develop-4c1b814f62f1dcf5fcd0cf18ba0b6df3bcff7a28">
+   <h2>eOn (develop 4c1b814f62f1dcf5fcd0cf18ba0b6df3bcff7a28)</h2>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>saddle search</td>
+   <td>develop</td>
+   <td>4c1b814f62f1</td>
+   <td><a href="https://github.com/TheochemUI/eon">https://github.com/TheochemUI/eon</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-rows">
+   <caption>Every ranked row for this code.</caption>
+   <thead><tr><th>Problem</th><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="saddle-search/pt-island" data-label="eOn (develop 4c1b814f62f1dcf5fcd0cf18ba0b6df3bcff7a28) (4c1b814f) · Dimer">
+   <td>Pt heptamer island</td>
+   <td data-field="label">eOn (develop 4c1b814f62f1dcf5fcd0cf18ba0b6df3bcff7a28) (4c1b814f) · Dimer</td>
+   <td data-field="family">Minimum mode</td>
+   <td data-field="family_rank">16</td>
+   <td data-field="par2_mean">2.3988e+07</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">4.90296e+06</td>
+   <td data-field="mean_calls">4.93049e+06</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
+   <td data-field="n">10</td>
+   </tr>
+   </tbody></table></div>
+   </section>
+#+end_export
