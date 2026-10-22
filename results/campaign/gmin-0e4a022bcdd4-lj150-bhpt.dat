@@ -1,0 +1,29 @@
+# counter harness. One force call is one GMIN potential request: the energy and gradient of the problem potential.
+# The binary was built from the Wales tarball named by commit. The pin is that sha256.
+# energy is the lowest quench at or below SLOPPYCONV. lowest_energy on each start is the lowest finite evaluation.
+# Parallel tempering basin-hopping. Four replicas, temperatures geometric from 0.1 to 1, exchange probability 0.1. Quenches are L-BFGS with SLOPPYCONV 0.005, TIGHTCONV 0.001, MAXIT 600 and 500. STEP is 0.40 and ASTEP is 0.51. The container radius is 50 and the coordinates are translated to the origin, so the archived start is inside the container. CENTRE keeps the cluster at the origin. The random seed is 20261018 plus the start index. This deck is the same on every globalopt problem GMIN runs. The failure cap and MAX_NPCALL are the problem max_force_calls, 2000000 harness calls. TARGET is the problem reference energy and EDIFF is the problem energy_above_minimum, 0.001. A start succeeds at the first harness evaluation inside that window. The data file starts with MPI because the binary is the MPI build, and mpirun launches it, including the one-replica run. Starts are the 100 numbered coords files in the website tarball. The unnumbered coords file is not a start.
+force_calls 1269208
+force_calls_min 219739
+force_calls_max 1997453
+nfailed 51
+median 1369642
+code GMIN
+code_version df8da599
+commit 0e4a022bcdd43cef9dfdda9dad7fab69e1f6211b8917d96b360d6ce3862d0d9c
+algorithm parallel tempering basin-hopping
+template gmin/lj150-bhpt
+tuning default
+problem globalopt/lj150
+counter harness
+par2_mean 2661911.94
+rate_low 0.394219989304
+rate_high 0.58651988066
+par2_median 4000000
+par2_median_low 1772757
+par2_median_high 4000000
+v2_nfailed 51
+v2_successes 49
+n 100
+energy_min -893.30969346
+energy_max -881.695331163
+cap 2000000
