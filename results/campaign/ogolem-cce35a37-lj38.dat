@@ -1,0 +1,30 @@
+# counter harness. One force call is one lennard_jones evaluation through the OGOLEM socket.
+# A repeated geometry is one call. The call that would pass the cap is not counted.
+# The potential is epsilon 1, sigma 1, cutoff 40, no shift.
+# One reduced sigma is the Ar sigma 6.434516991 bohr. The socket divides by it.
+# Genetic algorithm from examples/clusteropt/ar38/ar38_sweden.ogo at this commit. PoolSize is 100 and NumberOfGlobIterations is 19900. Crossover is 75 percent Sweden cutstyle 2 and 25 percent Sweden cutstyle 1. Mutation is 75 percent Monte Carlo some and 25 percent Monte Carlo one. Local optimization is LBFGS at the OGOLEM defaults: 2000 iterations, gradient threshold 1e-8, maximum step 1 bohr. The harness potential is lennard_jones with epsilon 1, sigma 1, cutoff 40, and no shift. It is not LennardJonesFF. Collision radii are bohr and Ar is 1.85, sized for the Ar Lennard-Jones sigma 6.434516991 bohr. Archived coordinates are reduced units. The xyz seed is scaled by that sigma over Constants.ANGTOBOHR, and the socket divides by the sigma. CellSize is 60 bohr, the example cell. setRandomCOM draws the other pool members about the origin, so the archived geometry is centered there and written as one xyz seed. The RNG is javarng with seed start_index+1. One JVM and one thread per start. The force-call cap is the problem max_force_calls, 2000000. Success is energy at or below the archived eon-basinhopping stop_energy -173.927427, reference_energy plus energy_above_minimum 0.001.
+force_calls 827684
+force_calls_min 1778
+force_calls_max 1956935
+nfailed 17
+median 785974
+code ogolem
+code_version 2016.CURRENT
+commit cce35a376d929852ab1e80e98105c0d13d784b8d
+algorithm genetic algorithm
+template ogolem/lj38
+problem globalopt/lj38
+tuning default
+counter harness
+cap 2000000
+par2_mean 1366977.37
+wilson_low 0.744519952324
+wilson_high 0.891064338859
+par2_median 964743
+par2_median_low 785093
+par2_median_high 1252833
+v2_nfailed 17
+v2_successes 83
+n 100
+energy_min -173.928068574
+energy_max -173.252378416
