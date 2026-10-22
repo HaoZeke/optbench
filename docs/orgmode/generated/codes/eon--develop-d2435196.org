@@ -1,11 +1,11 @@
-#+TITLE: eOn (develop 500350d9)
+#+TITLE: eOn (develop d2435196)
 #+OPTIONS: toc:nil num:nil author:nil
 
 #+begin_export rst
 .. raw:: html
 
-   <section class="bench" id="code-eon--develop-500350d9">
-   <h2>eOn (develop 500350d9)</h2>
+   <section class="bench" id="code-eon--develop-d2435196">
+   <h2>eOn (develop d2435196)</h2>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
    <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
@@ -13,15 +13,15 @@
    <div class="bench-scroll"><table data-board-table="code-rows">
    <caption>Every ranked row for this code.</caption>
    <thead><tr><th>Problem</th><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr data-problem="hTST/Al" data-label="eOn (develop 500350d9) (500350d9) · Dimer-CG rotation: max=50 tol=1">
+   <tr data-problem="hTST/Al" data-label="eOn (develop d2435196) (d2435196) · Dimer-CG rotation: max=50 tol=1">
    <td>Al</td>
-   <td data-field="label">eOn (develop 500350d9) (500350d9) · Dimer-CG rotation: max=50 tol=1</td>
+   <td data-field="label">eOn (develop d2435196) (d2435196) · Dimer-CG rotation: max=50 tol=1</td>
    <td data-field="family">Minimum mode</td>
    <td data-field="family_rank">4</td>
    <td data-field="par2_mean"></td>
    <td data-field="published"></td>
-   <td data-field="median_calls">41820</td>
-   <td data-field="mean_calls">48128.8</td>
+   <td data-field="median_calls">19766</td>
+   <td data-field="mean_calls">24333.3</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
