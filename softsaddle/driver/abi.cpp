@@ -8,7 +8,6 @@
 
 #ifdef SOFTSADDLE_DAVIDSON
 #include "davidson.hpp"
-extern int softsaddle_davidson_kk;
 #else
 #include "lanczos.hpp"
 #endif
@@ -51,9 +50,11 @@ extern "C" {
 
 void softsaddle_reset(void) {
     callback_failed = 0;
+    // Davidson keeps the BFGS Hessian and its file-local step counter for
+    // the life of the process. solver.clear() frees that matrix, and the
+    // next search then reads it. Lanczos has no such matrix.
+#ifndef SOFTSADDLE_DAVIDSON
     solver.clear();
-#ifdef SOFTSADDLE_DAVIDSON
-    softsaddle_davidson_kk = 0;
 #endif
 }
 
@@ -66,11 +67,7 @@ void softsaddle_set_error(int flag) {
 }
 
 int softsaddle_kk(void) {
-#ifdef SOFTSADDLE_DAVIDSON
-    return softsaddle_davidson_kk;
-#else
     return -1;
-#endif
 }
 
 int softsaddle_minimum_mode(

@@ -32,7 +32,7 @@ save_lanczos_call = true
 save_lanczos_factor = 0.0
 
 [ini.Search]
-repetitions = 1
+repetitions = 10
 batch = 25
 hyper_rad0 = 0.1
 mix_prev_hyper_rad = true
