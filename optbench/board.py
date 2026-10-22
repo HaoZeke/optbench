@@ -988,6 +988,19 @@ def _rank_key(row: dict) -> tuple:
     )
 
 
+def _mark_r2205_gap(row: dict) -> None:
+    """Name the 15 Jul 2014 Pt-island dimer row and the classic campaign."""
+    if "eon-3.5.0-saddle-pt-classic.dat" in str(row.get("path") or ""):
+        row["note"] = "measured gap against the archived EON r2205 reference"
+    if (
+        row.get("problem") == "saddle-search/pt-island"
+        and row.get("entry") == "eon-dimer"
+        and row.get("origin") == "archive"
+    ):
+        row["label"] = "archived EON r2205 reference · measured gap"
+        row["note"] = "measured gap"
+
+
 def _annotate_row(row: dict, problem: dict | None, registry: list[dict]) -> None:
     code = display_code(str(row.get("code") or ""), registry)
     version = version_text(str(row.get("code_version") or ""), str(row.get("commit") or ""))
@@ -1152,6 +1165,7 @@ def build_board(root: Path) -> dict:
         for row in group:
             row["registry_match"] = _registry_match(row, registry)
             _annotate_row(row, problem, registry)
+            _mark_r2205_gap(row)
         by_problem[problem_id] = _collapse_methods(group)
 
     problems_out: dict[str, dict] = {}
@@ -1511,6 +1525,9 @@ def gap_paragraph(problem: dict, unparsed: list[dict] | None = None) -> str:
 
 
 def _reason_text(row: dict) -> str:
+    note = str(row.get("note") or "")
+    if note.startswith("measured gap against the archived EON r2205 reference"):
+        return note
     if row.get("short"):
         return str(row.get("short_reason") or "short of the full set")
     if _off_harness(row):

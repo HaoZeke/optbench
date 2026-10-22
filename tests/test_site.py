@@ -42,6 +42,18 @@ def test_campaign_names_map_to_problems():
     assert campaign_problem("rgsaddle-0.2.2-dimer-lbfgs-saddle-pt") == "saddle-search/pt-island"
 
 
+def test_pt_island_archive_row_is_the_r2205_reference():
+    problem = load_problem(ROOT / "problems" / "saddle-search" / "pt-island.toml")
+    oracle = load_oracle(ROOT / "oracle" / "entries.jsonl")
+    html = problem_html(problem, oracle)
+    assert "archived EON r2205 reference · measured gap" in html
+    assert "A row marked measured gap is the archived EON r2205 reference." in html
+    other = load_problem(ROOT / "problems" / "double-ended-saddle-search" / "pt-island.toml")
+    other_html = problem_html(other, oracle)
+    assert "archived EON r2205 reference" not in other_html
+    assert ">eon-dimer<" in other_html
+
+
 def test_lj38_table_ranks_the_archived_scores():
     problem = load_problem(ROOT / "problems" / "minimization" / "lj38.toml")
     oracle = load_oracle(ROOT / "oracle" / "entries.jsonl")
@@ -111,6 +123,11 @@ def test_rendered_pages_use_the_board_rank():
     assert "rgsaddle/saddle-dimer-rotskip-tuned" not in saddle
     assert "No full harness row." not in saddle
     assert "Per-search cost" not in saddle
+    assert "archived EON r2205 reference · measured gap" in saddle
+    assert "measured gap against the archived EON r2205 reference" in saddle
+    labels = [row["label"] for row in document["problems"]["saddle-search/pt-island"]["ranked"]]
+    assert any(label.startswith("EON (SVN r2549)") and "Dimer" in label for label in labels)
+    assert any("4c1b814f62f1dcf5fcd0cf18ba0b6df3bcff7a28" in label and "Dimer" in label for label in labels)
     board = (ROOT / "docs" / "include" / "v2-board.org").read_text(encoding="utf-8")
     assert 'data-board-table="headline" data-problem="minimization/lj38"' in board
     assert 'data-board-table="summary"' not in board

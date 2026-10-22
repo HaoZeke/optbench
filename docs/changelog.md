@@ -37,3 +37,5 @@ n2p2 2.3.0 Kalman force: `mlopt/C2H4` and `mlopt/emt-pt38` are 0/50 at PAR-2 600
 hTST Al dimer, 639 windows, 0 failures. PAR-2 is unset. The mean of the recorded window costs is 45626.85758998435 for EON SVN r2549 and 48128.758998435056 for eOn develop `500350d9`.
 
 The asv-perch job was failing every pull request after a clean comparison table. asv-spyglass exits 1 at its default factor of 1.1, and the action does not ignore that status. The workflow now passes `--factor 10`, the same ratio as `regression-threshold`, so only a slowdown past 10x fails the job.
+
+Pt island saddle search. EON (SVN r2549) and eOn (develop 4c1b814f62f1dcf5fcd0cf18ba0b6df3bcff7a28) are ranked on seeds 1000-1009, stopping at 27 good saddles below 1.5 eV. EON mean force calls 5296717.6, PAR-2 24355166.8, 9 of 10. eOn mean force calls 4930488.5, PAR-2 23987974.5, 9 of 10. The 15 Jul 2014 archive row is the archived EON r2205 reference, status measured gap. Fraction connected follows the r2205 per-atom rule in `optbench/connection.py`. The eon-develop pin stays at 7095b23.

@@ -210,6 +210,15 @@ def _code_label(fields: dict[str, str]) -> str:
     return f"{code} {version}".strip() if version else code
 
 
+def _archive_entry_label(problem_id: str, entry: str, held: bool) -> str:
+    """Visible name of one 2014 archive row."""
+    if problem_id == "saddle-search/pt-island" and entry == "eon-dimer":
+        return "archived EON r2205 reference · measured gap"
+    if held:
+        return f"{entry} (held out of the original table)"
+    return entry
+
+
 def campaign_problem(stem: str) -> str | None:
     """Map a results/campaign file name to a problem id."""
     if "morse" in stem:
@@ -288,13 +297,20 @@ def problem_html(
                 "id": row_id,
                 "rank": rank,
                 "entry": row["entry"],
-                "label": f"{row['entry']} (held out of the original table)" if held else row["entry"],
+                "label": _archive_entry_label(str(problem["id"]), str(row["entry"]), held),
                 "code": code,
                 "fields": fields,
                 "value": value,
                 "best": best is not None and value == best,
                 "held": held,
             }
+        )
+    if any(
+        str(problem["id"]) == "saddle-search/pt-island" and str(row["entry"]) == "eon-dimer"
+        for row, _fields in canonical_rows
+    ):
+        lines.append(
+            '<p class="bench-aside">A row marked measured gap is the archived EON r2205 reference.</p>'
         )
     lines.append('<div class="bench-table"><table class="bench-archive">')
     lines.append(f"<caption>{html.escape(_caption(primary))}</caption>")
