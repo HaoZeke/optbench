@@ -10,7 +10,7 @@ profile = "default"
 reducer = "capped"
 ranked = false
 parameter_source = "default"
-note = "Sella 2.6.0 saddle defaults, order 1. Sixteen searches, each a Gaussian displacement of standard deviation 0.1 on the free atoms, then Sella order 1 with v0 unset. One search is not the saddle catalog, so this row is not ranked and fraction_connected is not reported. The cost is the per-search harness count."
+note = "Sella 2.6.0 saddle defaults, order 1. Sixteen searches, each a Gaussian displacement of standard deviation 0.1 on the free atoms, then Sella order 1 with v0 unset. One search is not the saddle catalog, so this row is not ranked and fraction_connected is not reported. The cost is the per-search harness count. The potential is energy-shifted Morse at cutoff 9.5, the eOn Morse::force surface."
 
 [optimizer]
 name = "Sella"
@@ -23,7 +23,7 @@ kind = "morse"
 D = 0.7102
 alpha = 1.6047
 r0 = 2.897
-rc = 7.0
+rc = 9.5
 form = "shift"
 pbc = [true, true, false]
 

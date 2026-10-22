@@ -331,6 +331,10 @@ def _evaluate(potential: str):
         return lambda positions, numbers, box: lj_cluster(positions, numbers, box)
     if potential == "morse_pt":
         return morse_cluster
+    if potential == "morse_eon":
+        from benchmarks.bench_eon_svn import _morse_fast
+
+        return _morse_fast
     if potential == "lammps":
         lammps = ROOT / "archive/entries/double-ended-saddle-search/lj38/eon-ci-neb/in.lammps"
         epsilon, sigma, cutoff = lammps_lj_params(lammps)

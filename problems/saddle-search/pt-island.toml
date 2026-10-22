@@ -11,7 +11,7 @@ D = 0.7102
 alpha = 1.6047
 r0 = 2.897
 cutoff = 9.5
-pair_style = "morse/smooth/linear"
+pair_style = "eon-morse"
 pbc = [true, true, false]
 
 [goal]
@@ -40,7 +40,7 @@ rule = "2014 half-even mean of the starts under the cap. Failures are left out o
 version = "par2-bootstrap"
 cost = "one displacement search: the climb plus the two endpoint minimizations"
 success = "index 1 at eigenvalue tolerance 1e-6, force norm at the stop, barrier below 1.5 eV, and exactly one endpoint within Cartesian RMSD 0.5 of the minimized minimum. The substrate pins the frame, so the RMSD is Cartesian."
-note = "The result file stores the cap: climb budget 1000, 64 calls of overshoot, and two endpoint budgets of 2000. The initial minimization is outside that count. An index-1 saddle that misses the link, the novelty test, or the barrier is a failure, and those reasons fall through to divergence. An archived file that records only a campaign ratio has no per-search cap, so PAR-2 is not applied to that ratio."
+note = "The potential is eOn Morse::force: pair_style eon-morse, pair energy shifted to zero at the cutoff, raw Morse force. morse/smooth/linear is a different force. The result file stores the cap: climb budget 1000, 64 calls of overshoot, and two endpoint budgets of 2000. The initial minimization is outside that count. An index-1 saddle that misses the link, the novelty test, or the barrier is a failure, and those reasons fall through to divergence. An archived file that records only a campaign ratio has no per-search cap, so PAR-2 is not applied to that ratio."
 counter = "harness"
 required = [
   "schema",
