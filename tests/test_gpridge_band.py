@@ -305,3 +305,44 @@ def test_frozen_comparison_templates_change_only_environment_selection(
     assert argv[:len(base_argv)] == base_argv
     assert argv[argv.index("--nn-frozen") + 1] == str(neighbors)
     assert ("--radius-only" in argv) == (selection == "radius")
+
+
+@pytest.mark.parametrize("program", ["gprd", "potserv"])
+def test_runtime_validates_the_selected_native_program(tmp_path, monkeypatch, program):
+    binary = tmp_path / program
+    binary.write_bytes(program.encode())
+    manifest = tmp_path / "validation"
+    manifest.mkdir()
+    (manifest / "provenance.json").write_text('{"source_revision": "revision"}')
+    (manifest / "result.json").write_text('{"exit_code": 0}')
+    (manifest / "programs.sha256").write_text(f"{native.digest(binary)}  {binary}\n")
+    monkeypatch.setenv(f"GPRIDGE_{program.upper()}", str(binary))
+    monkeypatch.setenv("GPRIDGE_VALIDATION", str(manifest))
+    assert native.runtime({"commit": "revision"}, program)["binary"] == str(binary)
+    binary.write_bytes(b"different")
+    with pytest.raises(ValueError, match="native-validation"):
+        native.runtime({"commit": "revision"}, program)
+
+
+def test_runtime_validates_a_nested_packaged_server(tmp_path, monkeypatch):
+    import json
+
+    relative = "subprojects/rgpot/CppCore/potserv"
+    binary = tmp_path / relative
+    binary.parent.mkdir(parents=True)
+    binary.write_bytes(b"packaged server")
+    manifest = tmp_path / "validation"
+    manifest.mkdir()
+    (manifest / "provenance.json").write_text('{"source_revision": "revision"}')
+    (manifest / "result.json").write_text('{"exit_code": 0}')
+    (manifest / "programs.sha256").write_text("original-server /build/potserv\n")
+    (tmp_path / "runtime.json").write_text(json.dumps({
+        "source_revision": "revision", "files": {
+            relative: {"sha256": native.digest(binary), "source_sha256": "original-server"},
+        },
+    }))
+    monkeypatch.setenv("GPRIDGE_POTSERV", str(binary))
+    monkeypatch.setenv("GPRIDGE_VALIDATION", str(manifest))
+    identity = native.runtime({"commit": "revision"}, "potserv")
+    assert identity["validated_sha256"] == "original-server"
+    assert identity["runtime_manifest_sha256"] == native.digest(tmp_path / "runtime.json")

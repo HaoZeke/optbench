@@ -31,9 +31,11 @@ def digest(path: Path) -> str:
         return hashlib.file_digest(stream, "sha256").hexdigest()
 
 
-def runtime(template: dict) -> dict:
+def runtime(template: dict, program: str = "gprn") -> dict:
     """Resolve the executable through a verified native-validation manifest."""
-    binary = Path(os.environ["GPRIDGE_GPRN"]).resolve(strict=True)
+    if program not in ("gprn", "gprd", "potserv"):
+        raise ValueError("unknown native program")
+    binary = Path(os.environ[f"GPRIDGE_{program.upper()}"]).resolve(strict=True)
     manifest = Path(os.environ["GPRIDGE_VALIDATION"]).resolve(strict=True)
     result = json.loads((manifest / "result.json").read_text())
     if result.get("exit_code") != 0:
@@ -50,23 +52,24 @@ def runtime(template: dict) -> dict:
     }
     checksum = digest(binary)
     source_checksum = checksum
-    package = binary.parent / "runtime.json"
+    package = next((parent / "runtime.json" for parent in binary.parents
+                    if (parent / "runtime.json").is_file()), None)
     package_checksum = None
-    if package.is_file():
+    if package is not None:
         packaged = json.loads(package.read_text())
         if packaged.get("source_revision") != revision:
             raise ValueError("packaged runtime revision does not match validation")
-        entry = packaged["files"]["gprn"]
+        entry = packaged["files"][binary.relative_to(package.parent).as_posix()]
         if entry["sha256"] != checksum:
-            raise ValueError("gprn does not match its runtime package")
+            raise ValueError(f"{program} does not match its runtime package")
         for relative, record in packaged["files"].items():
-            member = (binary.parent / relative).resolve(strict=True)
-            if not member.is_relative_to(binary.parent) or digest(member) != record["sha256"]:
+            member = (package.parent / relative).resolve(strict=True)
+            if not member.is_relative_to(package.parent) or digest(member) != record["sha256"]:
                 raise ValueError(f"runtime package file mismatch: {relative}")
         source_checksum = entry["source_sha256"]
         package_checksum = digest(package)
-    if expected.get("gprn") != source_checksum:
-        raise ValueError("gprn does not match the native-validation binary")
+    if expected.get(program) != source_checksum:
+        raise ValueError(f"{program} does not match the native-validation binary")
     return {"binary": str(binary), "sha256": checksum, "revision": revision,
             "manifest": str(manifest), "validated_sha256": source_checksum,
             "runtime_manifest_sha256": package_checksum}
