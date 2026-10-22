@@ -221,7 +221,8 @@ def _execute(job: dict) -> dict:
         reasons.append("timeout")
     elif status not in (0, 2):
         reasons.append("crash")
-    if status != 0 or not re.search(r"Converged:\s*yes", text, re.I):
+    convergence = re.findall(r"Converged:\s*(yes|no)", text, re.I)
+    if status != 0 or not convergence or convergence[-1].lower() != "yes":
         reasons.append("not_converged")
     if calls is None:
         reasons.append("missing_count")
@@ -240,7 +241,7 @@ def _execute(job: dict) -> dict:
             checked = verify_positions(atoms, positions, calc,
                                        job["problem"]["convergence"]["force_norm"])
         reasons.extend(checked.pop("reasons"))
-    except (OSError, ValueError, RuntimeError) as error:
+    except Exception as error:
         reasons.append("invalid_output")
         checked["error"] = str(error)
     failure = classify_failure(reasons)
