@@ -2,12 +2,12 @@ id = "eon/develop-saddle-pt-lanczos"
 engine = "eon"
 problem = "saddle-search/pt-island"
 code = "eOn"
-code_version = "3.6.0"
-commit = "7095b23ac17d49f434a5e08ccb072897ceca698e"
+code_version = "(develop 5ed40082)"
+commit = "5ed40082c9c2e591ce16447b5ecb555bc1acc646"
 algorithm = "Lanczos"
 reducer = "akmc-until-27"
 failure_cap = 100000000
-note = "AKMC on the Pt island until 27 good saddles below 1.5 eV. Same thermostat, displacement list, prefactor, and L-BFGS translation as eon/develop-saddle-pt-dimer. The minimum mode is Lanczos, tolerance 0.001, max_iterations 20, quit_early true. Force calls are sad-fcs plus mins-fcs. Seeds are 1000 and 1001. pass_limit 250 stops a repetition that has not reached 27. A repetition that stops there stays out of the mean."
+note = "AKMC on the Pt island until 27 good saddles below 1.5 eV. Same thermostat, displacement list, prefactor, and L-BFGS translation as eon/develop-saddle-pt-dimer. The minimum mode is Lanczos, tolerance 0.001, max_iterations 20, quit_early true. Force calls are sad-fcs plus mins-fcs. Seeds are 1000 and 1001. pass_limit 250 stops a repetition that has not reached 27. A repetition that stops there stays out of the mean. Process Search known_saddles is unset, so the 5ed40082 source default stays in force."
 
 pass_limit = 250
 

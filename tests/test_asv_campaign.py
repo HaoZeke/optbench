@@ -83,4 +83,4 @@ def test_akmc_mean_keeps_only_repetitions_that_reach_27(tmp_path: Path):
     assert fields["counter"] == "harness"
     assert fields["published_mean"] == "false"
     assert fields["total_searches"] == "4000"
-    assert "7095b23ac17d49f434a5e08ccb072897ceca698e" in fields["commit"]
+    assert "5ed40082c9c2e591ce16447b5ecb555bc1acc646" in fields["commit"]

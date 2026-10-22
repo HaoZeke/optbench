@@ -30,9 +30,19 @@ name = "eOn"
 role = "minimization and saddle search"
 repository = "https://github.com/TheochemUI/eon"
 ref = "develop"
+commit = "5ed40082c9c2e591ce16447b5ecb555bc1acc646"
+committed = "2026-10-22"
+note = "develop at 5ed40082c9c2e591ce16447b5ecb555bc1acc646, built from source. The version string is 3.6.0 (5ed40082). Process search known_saddles is the source default true. GPR-dimer is absent: TheochemUI/gpr_optim is private and eonclient reports GPRD disabled. This pin is not the conda-forge 3.5.0 binary."
+
+[[code]]
+id = "eon-develop-7095b23"
+name = "eOn"
+role = "minimization and saddle search"
+repository = "https://github.com/TheochemUI/eon"
+ref = "develop"
 commit = "7095b23ac17d49f434a5e08ccb072897ceca698e"
 committed = "2026-10-16"
-note = "develop HEAD built from source. The version string is 3.6.0 (7095b23a). GPR-dimer is absent: TheochemUI/gpr_optim is private and eonclient reports GPRD disabled. This pin is not the conda-forge 3.5.0 binary."
+note = "develop at 7095b23ac17d49f434a5e08ccb072897ceca698e. The version string is 3.6.0 (7095b23a). Rows measured on this binary keep the commit. GPR-dimer is absent: TheochemUI/gpr_optim is private and eonclient reports GPRD disabled. This pin is not the conda-forge 3.5.0 binary."
 
 [[code]]
 id = "eon-svn"
