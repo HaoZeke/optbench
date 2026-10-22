@@ -1,0 +1,36 @@
+id = "sella/pt-island-catalog"
+engine = "saddle-catalog"
+code = "Sella"
+code_version = "2.6.0"
+commit = "6cfb60cdb100a146c3c6f0587d5308b247aa8010"
+algorithm = "Sella"
+problem = "saddle-search/pt-island"
+task = "sella"
+tuning = "default"
+note = "Sella 2.6.0 saddle defaults, order 1. The geometry and v0 are draw_search_start. maxiter 1000. Morse::force at cutoff 9.5. The climb stops at 1000 force calls. The link is r2205 and novelty is find_repeat."
+
+[optimizer]
+name = "Sella"
+
+[optimizer.parameters]
+order = 1
+
+[sella]
+v0 = "kick"
+maxiter = 1000
+
+[search]
+repetitions = 1
+displace_atoms = "0,1,2,3,4,5,6"
+displace_magnitude = 0.1
+displace_radius = 3.3
+max_searches = 20000
+connected = 27
+stop = "budget"
+
+[stop]
+force_norm = 0.001
+
+[ini.Optimizer]
+max_iterations = 1000
+converged_force = 0.001

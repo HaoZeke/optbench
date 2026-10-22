@@ -1,0 +1,33 @@
+id = "ase/dimer-pt-island-catalog"
+engine = "saddle-catalog"
+code = "ASE"
+code_version = "3.29.0"
+commit = "f27c0005ae6a67ea419f996e728668865bfc1f86"
+algorithm = "Dimer"
+problem = "saddle-search/pt-island"
+task = "dimer"
+tuning = "default"
+note = "ASE 3.29.0 DimerControl defaults. The geometry and the initial eigenmode are draw_search_start. Morse::force at cutoff 9.5. The climb stops at 1000 force calls. The link is r2205 and novelty is find_repeat."
+
+[optimizer]
+name = "Dimer"
+
+[optimizer.parameters]
+
+[dimer]
+maxiter = 1000
+
+[search]
+repetitions = 1
+displace_atoms = "0,1,2,3,4,5,6"
+displace_magnitude = 0.1
+displace_radius = 3.3
+max_searches = 20000
+connected = 27
+
+[stop]
+force_norm = 0.001
+
+[ini.Optimizer]
+max_iterations = 1000
+converged_force = 0.001

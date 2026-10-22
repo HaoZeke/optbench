@@ -864,8 +864,14 @@ def write_all(root: Path) -> list[Path]:
         if not directory.is_dir():
             continue
         for path in directory.glob("*.toml"):
-            if path.resolve() not in expected:
-                path.unlink()
+            if path.resolve() in expected:
+                continue
+            text = path.read_text(encoding="utf-8")
+            # Campaign rows in these folders carry a [search] table.
+            # The generated single-search files do not.
+            if "[search]" in text:
+                continue
+            path.unlink()
     registry = root / "codes" / "registry.toml"
     text = registry.read_text(encoding="utf-8")
     # The hand-written registry has no generated block. Rewriting it here
