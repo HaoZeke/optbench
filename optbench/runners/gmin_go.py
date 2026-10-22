@@ -6,8 +6,10 @@ energy and gradient of the problem potential and each request is one
 harness call. The server is the call count. GMIN's NPCALL is not the
 score. The problem ``[potential]`` picks the kernel: ``lennard-jones``
 is the compiled harness LJ, and ``binary-lennard-jones`` is
-``optbench.potentials.binary_lennard_jones``, compiled as ``codes/gmin/blj.c``, with the first ``n_A``
-atoms of each start as species A and the rest as species B.
+``optbench.potentials.binary_lennard_jones``, compiled as ``codes/gmin/blj.c``. A binary start
+is the ``.con`` file, which names each component's symbol. The ``symbol_A``
+atoms go first and the ``symbol_B`` atoms after them, the order of the
+server species list.
 
 ``failure_cap`` is the problem ``max_force_calls`` and TARGET is the
 problem reference energy. A start succeeds when a harness evaluation is
@@ -65,6 +67,8 @@ def potential_spec(problem: dict) -> dict:
             "kind": kind,
             "n_A": int(section["n_A"]),
             "n_B": int(section["n_B"]),
+            "symbol_A": str(section["symbol_A"]),
+            "symbol_B": str(section["symbol_B"]),
             "epsilon_AA": float(section["epsilon_AA"]),
             "epsilon_AB": float(section["epsilon_AB"]),
             "epsilon_BB": float(section["epsilon_BB"]),
@@ -127,8 +131,7 @@ def _center(pos: np.ndarray) -> np.ndarray:
 
 def _read_geometry(path: Path) -> np.ndarray:
     text = path.read_text(encoding="utf-8", errors="replace")
-    # The lj100-binary starts are .con files named coords.N.
-    if path.suffix == ".con" or "Coordinates of Component" in text:
+    if path.suffix == ".con":
         pos, _box = read_con(text)
         return pos
     rows = []
@@ -142,8 +145,30 @@ def _read_geometry(path: Path) -> np.ndarray:
     return np.asarray(rows, dtype=np.float64)
 
 
-def _start_paths(dest: Path, problem_id: str) -> list[Path]:
-    if problem_id == "globalopt/lj38":
+def binary_start(text: str, spec: dict) -> np.ndarray:
+    """Positions of a two-component ``.con``: the ``symbol_A`` atoms, then the ``symbol_B`` atoms."""
+    lines = text.splitlines()
+    blocks: dict[str, list[list[float]]] = {}
+    for index, line in enumerate(lines):
+        if not line.startswith("Coordinates of Component"):
+            continue
+        rows = []
+        for row in lines[index + 1 :]:
+            parts = row.split()
+            if len(parts) < 3 or not row[:1].isspace():
+                break
+            rows.append([float(parts[0]), float(parts[1]), float(parts[2])])
+        blocks[lines[index - 1].strip()] = rows
+    species_a = blocks.get(spec["symbol_A"], [])
+    species_b = blocks.get(spec["symbol_B"], [])
+    if len(blocks) != 2 or len(species_a) != spec["n_A"] or len(species_b) != spec["n_B"]:
+        counts = {symbol: len(rows) for symbol, rows in blocks.items()}
+        raise ValueError(f"binary start has components {counts}, expected {spec['symbol_A']} {spec['n_A']} and {spec['symbol_B']} {spec['n_B']}")
+    return np.asarray(species_a + species_b, dtype=np.float64)
+
+
+def _start_paths(dest: Path, problem_id: str, *, cons: bool = False) -> list[Path]:
+    if cons or problem_id == "globalopt/lj38":
         files = list(dest.rglob("*.con"))
         return sorted(files, key=lambda path: int(path.stem))
     numbered = []
@@ -195,7 +220,9 @@ def load_geometries(root: Path, problem: dict, work: Path, *, center: bool = Tru
     archive = geometry_archive(root, _problem_for_archive(problem))
     dest = work / "geometries" / problem["id"].replace("/", "-")
     _extract(archive, dest)
-    paths = _start_paths(dest, problem["id"])
+    spec = potential_spec(problem)
+    binary = spec["kind"] == "binary-lennard-jones"
+    paths = _start_paths(dest, problem["id"], cons=binary)
     if not paths:
         raise FileNotFoundError(f"{archive} has no starts")
     expected = (problem.get("sample") or {}).get("starts")
@@ -203,7 +230,10 @@ def load_geometries(root: Path, problem: dict, work: Path, *, center: bool = Tru
         raise ValueError(f"{problem['id']} expected {expected} starts, found {len(paths)}")
     loaded = []
     for path in paths:
-        pos = _read_geometry(path)
+        if binary:
+            pos = binary_start(path.read_text(encoding="utf-8"), spec)
+        else:
+            pos = _read_geometry(path)
         if center:
             pos = _center(pos)
         # coords.1 has stem "coords". Keep the numeric name. A .con stem is the start index.

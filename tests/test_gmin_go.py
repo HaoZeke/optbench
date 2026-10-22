@@ -11,6 +11,7 @@ from optbench.campaign import resolve_problem
 from optbench.potentials import binary_lennard_jones
 from optbench.runners.gmin_go import (
     _classify,
+    binary_start,
     evaluator,
     load_geometries,
     potential_spec,
@@ -78,7 +79,32 @@ def test_binary_starts_are_the_100_con_files(tmp_path):
     problem = resolve_problem(ROOT, "globalopt/lj100-binary")
     loaded = load_geometries(ROOT, problem, tmp_path)
     assert len(loaded) == 100
-    assert loaded[0][0] == "coords.0"
-    assert loaded[-1][0] == "coords.99"
+    assert loaded[0][0] == "0"
+    assert loaded[-1][0] == "99"
     assert all(pos.shape == (100, 3) for _name, pos in loaded)
     assert max(float(np.max(np.abs(pos))) for _name, pos in loaded) < 10.0
+    raw = load_geometries(ROOT, problem, tmp_path, center=False)
+    coords = np.loadtxt(next(tmp_path.rglob("coords.0")))
+    assert np.array_equal(raw[0][1][:42], coords[58:])
+    assert np.array_equal(raw[0][1][42:], coords[:58])
+
+
+def test_binary_start_puts_species_a_first():
+    spec = {"symbol_A": "C", "symbol_B": "H", "n_A": 1, "n_B": 2}
+    text = "\n".join(
+        [
+            "2",
+            "2 1",
+            "1.0 1.0",
+            "H",
+            "Coordinates of Component 1",
+            "  1.0 0.0 0.0 0 0",
+            "  2.0 0.0 0.0 0 1",
+            "C",
+            "Coordinates of Component 2",
+            "  3.0 0.0 0.0 0 2",
+        ]
+    )
+    assert binary_start(text, spec).tolist() == [[3.0, 0.0, 0.0], [1.0, 0.0, 0.0], [2.0, 0.0, 0.0]]
+    with pytest.raises(ValueError):
+        binary_start(text, spec | {"n_A": 2})
