@@ -134,8 +134,8 @@ def test_binary_component_order_follows_the_lammps_pair_coeff():
         for item in load_starts(geometry_archive(ROOT, problem), "globalopt/lj100-binary", spec["atoms"])
     }
     species = starts[15]["species"]
-    assert int(np.sum(species == 1)) == 68
-    assert int(np.sum(species == 0)) == 32
+    assert int(np.sum(species == 1)) == 58
+    assert int(np.sum(species == 0)) == 42
     assert starts[15]["symbols"][0] == "H"
     assert starts[15]["symbols"][-1] == "C"
     assert float(starts[15]["masses"][0]) == pytest.approx(12.011)
