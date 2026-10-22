@@ -1,0 +1,38 @@
+id = "sella-0.1.1/lj38-loweig"
+engine = "sella"
+code = "Sella"
+code_version = "0.1.1"
+commit = "0.1.1"
+algorithm = "lowest eigenvector"
+problem = "lowest-eigenvector/lj38"
+task = "lowest-eigenvector"
+profile = "archive"
+reducer = "all"
+ranked = true
+parameter_source = "archive"
+note = "Archive lowest-eigv.py: PESWrapper.diag eta 1e-6, gamma 1e-16, vreftol 0.99, gradient v0, rigid-mode projection. ASE Lennard-Jones cutoff 40. The score is PESWrapper.calls."
+
+[optimizer]
+name = "PESWrapper.diag"
+
+[optimizer.parameters]
+eta = 1e-6
+gamma = 1e-16
+vreftol = 0.99
+shift = false
+
+[potential]
+kind = "lennard-jones"
+epsilon = 1.0
+sigma = 1.0
+rc = 40.0
+pbc = [false, false, false]
+
+[stop]
+norm = "overlap"
+overlap = 0.99
+max_force_calls = 10000
+max_steps = 10000
+
+[input]
+archive_path = "website/lowest-eigenvector/lj38/coords-con.tar.gz"

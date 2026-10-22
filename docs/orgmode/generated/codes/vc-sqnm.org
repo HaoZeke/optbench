@@ -1,0 +1,136 @@
+#+TITLE: vc-SQNM
+#+OPTIONS: toc:nil num:nil author:nil
+
+#+begin_export rst
+.. raw:: html
+
+   <section class="bench" id="code-vc-sqnm">
+   <h2>vc-SQNM</h2>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>minimization</td>
+   <td>v1.3</td>
+   <td>4241692173cc</td>
+   <td><a href="https://github.com/moritzgubler/vc-sqnm">https://github.com/moritzgubler/vc-sqnm</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-rows">
+   <caption>Every ranked row for this code.</caption>
+   <thead><tr><th>Problem</th><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="minimization/lj38" data-label="vc-SQNM (1.3) · ASE-SQNM">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="label">vc-SQNM (1.3) · ASE-SQNM</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">27</td>
+   <td data-field="par2_mean">598.05</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">365.5</td>
+   <td data-field="mean_calls">382.068</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 11</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38" data-label="vc-SQNM (1.3) · SQNM">
+   <td>Lennard-Jones 38 clusters</td>
+   <td data-field="label">vc-SQNM (1.3) · SQNM</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">28</td>
+   <td data-field="par2_mean">598.05</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">365.5</td>
+   <td data-field="mean_calls">382.068</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 11</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="vc-SQNM (1.3) · ASE-SQNM">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">vc-SQNM (1.3) · ASE-SQNM</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">11</td>
+   <td data-field="par2_mean">598.05</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">365.5</td>
+   <td data-field="mean_calls">382.068</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 11</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38-noise" data-label="vc-SQNM (1.3) · SQNM">
+   <td>Lennard-Jones 38 clusters with Gaussian force noise</td>
+   <td data-field="label">vc-SQNM (1.3) · SQNM</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">12</td>
+   <td data-field="par2_mean">598.05</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">365.5</td>
+   <td data-field="mean_calls">382.068</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 11</td>
+   <td data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-label="vc-SQNM (1.3) · ASE-SQNM">
+   <td>Morse bulk</td>
+   <td data-field="label">vc-SQNM (1.3) · ASE-SQNM</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">13</td>
+   <td data-field="par2_mean">40.51</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">41</td>
+   <td data-field="mean_calls">40.51</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-label="vc-SQNM (1.3) · SQNM">
+   <td>Morse bulk</td>
+   <td data-field="label">vc-SQNM (1.3) · SQNM</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">14</td>
+   <td data-field="par2_mean">40.51</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">41</td>
+   <td data-field="mean_calls">40.51</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-label="vc-SQNM (1.3) · vc-SQNM">
+   <td>Morse bulk</td>
+   <td data-field="label">vc-SQNM (1.3) · vc-SQNM</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">17</td>
+   <td data-field="par2_mean">48.73</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">40</td>
+   <td data-field="mean_calls">48.73</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="minimization/morse-bulk" data-label="vc-SQNM (1.3) · ASE-vc-SQNM">
+   <td>Morse bulk</td>
+   <td data-field="label">vc-SQNM (1.3) · ASE-vc-SQNM</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">18</td>
+   <td data-field="par2_mean">49.37</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">40</td>
+   <td data-field="mean_calls">49.37</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table></div>
+   </section>
+#+end_export

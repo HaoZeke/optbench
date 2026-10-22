@@ -52,8 +52,8 @@
       "tuning": "default",
       "wall_mean_s": 2.8566000466000285,
       "wall_median_s": 2.8453144290001546,
-      "wilson_high": 0.018845326377266575,
-      "wilson_low": 0.0
+      "rate_high": 0.018845326377266575,
+      "rate_low": 0.0
     },
     {
       "algorithm": "Dimer L-BFGS",
@@ -90,11 +90,11 @@
       "rotation_steps": 1652381,
       "stem": "rgsaddle-0.2.2-dimer-lbfgs-tuned-ts-lj38",
       "template": "rgsaddle/dimer-lbfgs-tuned",
-      "tuning": "tuned",
+      "tuning": "adjusted",
       "wall_mean_s": 2.849546298599953,
       "wall_median_s": 2.833631907999006,
-      "wilson_high": 0.02777370439789293,
-      "wilson_low": 0.0008831687156009814
+      "rate_high": 0.02777370439789293,
+      "rate_low": 0.0008831687156009814
     },
     {
       "algorithm": "Dimer FIRE",
@@ -134,8 +134,8 @@
       "tuning": "default",
       "wall_mean_s": 1.9494854623200308,
       "wall_median_s": 1.7446699040001477,
-      "wilson_high": 0.07693206820093293,
-      "wilson_low": 0.020405632066152306
+      "rate_high": 0.07693206820093293,
+      "rate_low": 0.020405632066152306
     },
     {
       "algorithm": "Dimer FIRE",
@@ -171,11 +171,11 @@
       "rotation_steps": 485686,
       "stem": "rgsaddle-0.2.2-dimer-fire-tuned-ts-lj38",
       "template": "rgsaddle/dimer-fire-tuned",
-      "tuning": "tuned",
+      "tuning": "adjusted",
       "wall_mean_s": 1.638087033840029,
       "wall_median_s": 1.5536359750003612,
-      "wilson_high": 0.29841368882762537,
-      "wilson_low": 0.18157433415232588
+      "rate_high": 0.29841368882762537,
+      "rate_low": 0.18157433415232588
     },
     {
       "algorithm": "Lanczos L-BFGS",
@@ -227,8 +227,8 @@
       "tuning": "default",
       "wall_mean_s": 2.710245144835053,
       "wall_median_s": 2.7218539335008245,
-      "wilson_high": 0.07047061152229073,
-      "wilson_low": 0.017055542008567192
+      "rate_high": 0.07047061152229073,
+      "rate_low": 0.017055542008567192
     },
     {
       "algorithm": "Lanczos L-BFGS",
@@ -276,11 +276,11 @@
       "rotation_steps": 1714632,
       "stem": "rgsaddle-0.2.2-lanczos-tuned-ts-lj38",
       "template": "rgsaddle/lanczos-tuned",
-      "tuning": "tuned",
+      "tuning": "adjusted",
       "wall_mean_s": 2.6469850138399487,
       "wall_median_s": 2.6885268000005453,
-      "wilson_high": 0.08957814813877599,
-      "wilson_low": 0.02738264560076393
+      "rate_high": 0.08957814813877599,
+      "rate_low": 0.02738264560076393
     },
     {
       "algorithm": "Dimer rotation-skip L-BFGS",
@@ -330,8 +330,8 @@
       "tuning": "default",
       "wall_mean_s": 1.4825635905499348,
       "wall_median_s": 1.175914733999889,
-      "wilson_high": 0.6938739159014088,
-      "wilson_low": 0.5612262992405018
+      "rate_high": 0.6938739159014088,
+      "rate_low": 0.5612262992405018
     },
     {
       "algorithm": "Dimer rotation-skip L-BFGS",
@@ -376,11 +376,11 @@
       "rotation_steps": 427798,
       "stem": "rgsaddle-0.2.2-dimer-rotskip-tuned-ts-lj38",
       "template": "rgsaddle/dimer-rotskip-tuned",
-      "tuning": "tuned",
+      "tuning": "adjusted",
       "wall_mean_s": 2.077707040709947,
       "wall_median_s": 2.1977569580003546,
-      "wilson_high": 0.22815883628312625,
-      "wilson_low": 0.12427907912586969
+      "rate_high": 0.22815883628312625,
+      "rate_low": 0.12427907912586969
     },
     {
       "algorithm": "P-RFO",
@@ -421,8 +421,8 @@
       "tuning": "default",
       "wall_mean_s": 239.71952763364493,
       "wall_median_s": 178.51110097750006,
-      "wilson_high": 0.31434098312045833,
-      "wilson_low": 0.19508168006817497
+      "rate_high": 0.31434098312045833,
+      "rate_low": 0.19508168006817497
     },
     {
       "algorithm": "P-RFO",
@@ -453,11 +453,11 @@
       "rotation_steps": 0,
       "stem": "rgsaddle-0.2.2-prfo-tuned-ts-lj38",
       "template": "rgsaddle/prfo-tuned",
-      "tuning": "tuned",
+      "tuning": "adjusted",
       "wall_mean_s": 76.24312888785492,
       "wall_median_s": 69.99329990449951,
-      "wilson_high": 1.0,
-      "wilson_low": 0.9811546736227335
+      "rate_high": 1.0,
+      "rate_low": 0.9811546736227335
     },
     {
       "algorithm": "Dimer L-BFGS",
@@ -492,8 +492,8 @@
       "tuning": "default",
       "wall_mean_s": 185.19334740000005,
       "wall_median_s": 209.95040332999997,
-      "wilson_high": 0.5672950690998263,
-      "wilson_low": 0.30023319078881594
+      "rate_high": 0.5672950690998263,
+      "rate_low": 0.30023319078881594
     },
     {
       "algorithm": "Dimer L-BFGS",
@@ -525,11 +525,11 @@
       "rotation_steps": 163765,
       "stem": "rgsaddle-0.2.2-pt-dimer-lbfgs-tuned-ts-pt",
       "template": "rgsaddle/pt-dimer-lbfgs-tuned",
-      "tuning": "tuned",
+      "tuning": "adjusted",
       "wall_mean_s": 169.50360077373477,
       "wall_median_s": 145.55826640799933,
-      "wilson_high": 0.7533482703131686,
-      "wilson_low": 0.49267067560792427
+      "rate_high": 0.7533482703131686,
+      "rate_low": 0.49267067560792427
     },
     {
       "algorithm": "Dimer FIRE",
@@ -563,8 +563,8 @@
       "tuning": "default",
       "wall_mean_s": 163.57886375610212,
       "wall_median_s": 159.38505226500092,
-      "wilson_high": 0.9963883274101746,
-      "wilson_low": 0.8930647847660838
+      "rate_high": 0.9963883274101746,
+      "rate_low": 0.8930647847660838
     },
     {
       "algorithm": "Dimer FIRE",
@@ -595,11 +595,11 @@
       "rotation_steps": 35819,
       "stem": "rgsaddle-0.2.2-pt-dimer-fire-tuned-ts-pt",
       "template": "rgsaddle/pt-dimer-fire-tuned",
-      "tuning": "tuned",
+      "tuning": "adjusted",
       "wall_mean_s": 149.58902263799996,
       "wall_median_s": 148.19753895399845,
-      "wilson_high": 1.0,
-      "wilson_low": 0.9273021807795035
+      "rate_high": 1.0,
+      "rate_low": 0.9273021807795035
     },
     {
       "algorithm": "Lanczos L-BFGS",
@@ -634,8 +634,8 @@
       "tuning": "default",
       "wall_mean_s": 177.5764523577145,
       "wall_median_s": 150.33181675400192,
-      "wilson_high": 0.6629649630682484,
-      "wilson_low": 0.39380863983661896
+      "rate_high": 0.6629649630682484,
+      "rate_low": 0.39380863983661896
     },
     {
       "algorithm": "Lanczos L-BFGS",
@@ -667,11 +667,11 @@
       "rotation_steps": 221497,
       "stem": "rgsaddle-0.2.2-pt-lanczos-tuned-ts-pt",
       "template": "rgsaddle/pt-lanczos-tuned",
-      "tuning": "tuned",
+      "tuning": "adjusted",
       "wall_mean_s": 178.3695468447958,
       "wall_median_s": 147.62783835799928,
-      "wilson_high": 0.6442488968969421,
-      "wilson_low": 0.37467563740468035
+      "rate_high": 0.6442488968969421,
+      "rate_low": 0.37467563740468035
     },
     {
       "algorithm": "Dimer rotation-skip L-BFGS",
@@ -705,8 +705,8 @@
       "tuning": "default",
       "wall_mean_s": 142.51731546840824,
       "wall_median_s": 142.09521979899728,
-      "wilson_high": 1.0,
-      "wilson_low": 0.9273021807795035
+      "rate_high": 1.0,
+      "rate_low": 0.9273021807795035
     },
     {
       "algorithm": "Dimer rotation-skip L-BFGS",
@@ -737,11 +737,11 @@
       "rotation_steps": 4905,
       "stem": "rgsaddle-0.2.2-pt-dimer-rotskip-tuned-ts-pt",
       "template": "rgsaddle/pt-dimer-rotskip-tuned",
-      "tuning": "tuned",
+      "tuning": "adjusted",
       "wall_mean_s": 143.52432271389787,
       "wall_median_s": 142.64700663999974,
-      "wilson_high": 1.0,
-      "wilson_low": 0.9273021807795035
+      "rate_high": 1.0,
+      "rate_low": 0.9273021807795035
     },
     {
       "algorithm": "Dimer",
@@ -779,8 +779,8 @@
       "tuning": "default",
       "wall_mean_s": 0.9750838760351144,
       "wall_median_s": 0.9720401909999055,
-      "wilson_high": 1.0,
-      "wilson_low": 0.9811546736227335
+      "rate_high": 1.0,
+      "rate_low": 0.9811546736227335
     },
     {
       "algorithm": "Dimer",
@@ -815,11 +815,11 @@
       "rotation_steps": 8430,
       "stem": "rgsaddle-0.2.2-mode-dimer-tuned-loweig",
       "template": "rgsaddle/mode-dimer-tuned",
-      "tuning": "tuned",
+      "tuning": "adjusted",
       "wall_mean_s": 0.9769814881650108,
       "wall_median_s": 0.9727364635000413,
-      "wilson_high": 1.0,
-      "wilson_low": 0.9811546736227335
+      "rate_high": 1.0,
+      "rate_low": 0.9811546736227335
     },
     {
       "algorithm": "Lanczos",
@@ -857,8 +857,8 @@
       "tuning": "default",
       "wall_mean_s": 0.9808375406551931,
       "wall_median_s": 0.9745751740010746,
-      "wilson_high": 1.0,
-      "wilson_low": 0.9811546736227335
+      "rate_high": 1.0,
+      "rate_low": 0.9811546736227335
     },
     {
       "algorithm": "Lanczos",
@@ -893,11 +893,11 @@
       "rotation_steps": 6912,
       "stem": "rgsaddle-0.2.2-mode-lanczos-tuned-loweig",
       "template": "rgsaddle/mode-lanczos-tuned",
-      "tuning": "tuned",
+      "tuning": "adjusted",
       "wall_mean_s": 0.9754679359699275,
       "wall_median_s": 0.9751889234994451,
-      "wilson_high": 1.0,
-      "wilson_low": 0.9811546736227335
+      "rate_high": 1.0,
+      "rate_low": 0.9811546736227335
     }
   ]
 }

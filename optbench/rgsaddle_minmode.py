@@ -944,8 +944,8 @@ def _summarize(records: list[dict], template: dict, cap: int, problem_id: str) -
     metrics = score_v2(records, cap)
     lines.append(f"par2_mean {metrics['par2_mean']:.10f}")
     lines.append(f"successes {metrics['successes']}")
-    lines.append(f"wilson_low {metrics['wilson_low']:.10f}")
-    lines.append(f"wilson_high {metrics['wilson_high']:.10f}")
+    lines.append(f"rate_low {metrics['rate_low']:.10f}")
+    lines.append(f"rate_high {metrics['rate_high']:.10f}")
     lines.append(f"par2_median {metrics['median']:.10f}")
     lines.append(f"n_cap {metrics['n_cap']}")
     lines.append(f"n_wrong_stationary {metrics['n_wrong_stationary']}")
@@ -1426,7 +1426,7 @@ def _run_saddle_search(root: Path, problem: dict, template: dict, *, output: Pat
             "schema": "optbench.result/v2",
             "status": "archive",
             "problem": problem["id"],
-            "scoring": "par2-wilson-bootstrap",
+            "scoring": "par2-bootstrap",
             "par_factor": 2,
             "bootstrap_resamples": 2000,
             "bootstrap_seed": 20261015,

@@ -59,12 +59,12 @@
     "par_factor": 2,
     "q25": 135.25,
     "q75": 362.5,
-    "scoring": "par2-wilson-bootstrap",
+    "scoring": "par2-bootstrap",
     "success_only_mean": 247.87078651685394,
     "success_rate": 0.89,
     "successes": 178,
-    "wilson_high": 0.926227555398747,
-    "wilson_low": 0.839073090026985
+    "rate_high": 0.926227555398747,
+    "rate_low": 0.839073090026985
   },
   "template": "tsase/mode-lj38"
 }

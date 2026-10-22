@@ -1,0 +1,15 @@
+force_calls 728
+force_calls_min 530
+force_calls_max 1002
+force_calls_median 690.0
+call_unit total
+nfailed 0
+code eOn (develop f6817b53)
+code_version 3.6.0
+commit f6817b537ec1d1563420023fb45fbd0e5b75e7fd
+algorithm CG
+template eon/develop-f6817b53-neb-pt-cg
+problem neb/Pt-heptamer
+reducer harness
+counter harness
+count_keys HarnessCounter

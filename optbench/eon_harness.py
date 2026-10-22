@@ -1,4 +1,4 @@
-"""Harness runs for eOn SVN r2549 and the 3.5.0 source build.
+"""Harness runs for eOn SVN r2549, the 3.5.0 source build, and develop f6817b53.
 
 Each force evaluation is one ``HarnessCounter`` charge. eonclient is
 started with ``potential = ext_pot``. A small C program forwards
@@ -12,6 +12,8 @@ started with ``potential = ext_pot``. A small C program forwards
   r0, cutoff 9.5, pair energy shifted to zero at the cutoff, minimum
   image on the box diagonal.
 * ``eam`` calls the r2549 Aluminum Fortran ``force_`` in this process.
+* ``ljcluster`` is rgpot ``LJClusterPot``: u0 1, psi 1, cutoff 15, free
+  boundary, pair energy shifted to zero at the cutoff.
 
 A tsopt success is a client stop under the cap, a free-atom Euclidean
 force norm at the problem stop, and Hessian index 1. That Hessian is
@@ -81,6 +83,14 @@ FAMILIES = {
         "flag": "--version",
         "token": "4d8b34ba",
         "cache": "4d8b34ba",
+    },
+    "f6817b53": {
+        "prefix": "eon/develop-f6817b53-",
+        "env": "EON_DEVELOP_F6817B53",
+        "default": Path.home() / "opt" / "eon-f6817b53" / "bin" / "eonclient",
+        "flag": "--version",
+        "token": "f6817b53",
+        "cache": "f6817b53",
     },
 }
 
@@ -308,6 +318,10 @@ def saddle_index(kernel, text: str, *, periodic: bool) -> dict:
 def kernel_for(name: str):
     if name == "lj40":
         return lj40
+    if name == "ljcluster":
+        from optbench.lj import lj_cluster
+
+        return lj_cluster
     if name == "morse":
         return morse_pt
     if name == "morse_shift":
@@ -389,7 +403,7 @@ def _family_of(template: dict) -> str:
     for name, spec in FAMILIES.items():
         if ident.startswith(spec["prefix"]) and template.get("kind"):
             return name
-    raise ValueError(f"{ident} is not an r2549 or 3.5.0 harness template")
+    raise ValueError(f"{ident} is not a harness template")
 
 
 def _ini_text(template: dict, seed: int, wrapper: Path, *, python_job: bool) -> str:

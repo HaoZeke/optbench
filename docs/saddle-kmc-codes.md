@@ -323,7 +323,7 @@ potential callback. `pykmc/lattice` writes nothing.
 **softsaddle.** The tree under `softsaddle/` is MATLAB. `softsaddle/entry.toml`
 is the April 2019 archive (mean force calls 423491.1 over 10 repetitions).
 The GitHub workflow builds the Morse, Davidson, and Lanczos libraries and
-runs a two-search MATLAB smoke. MATLAB is not installed here. That smoke is
+runs a two-search MATLAB batch. MATLAB is not installed here. That batch is
 not a harness campaign.
 
 **CatLearn.** Commit `6a307f32` (2023-02-07). `setup.py` says 0.6.2 and
@@ -367,7 +367,7 @@ saddle search. It was not paired with a NEB.
 
 **pyGSM.** Commit `1b4d5a5`. `examples/ase_api_de_gsm.py` grows a string in
 TRIC delocalized internals from a molecular topology. The dependency list
-includes xtb. That path was not run on LJ38.
+includes xtb. That path has no LJ38 campaign.
 
 **phonopy.** hTST asks for barrier and rate force calls. phonopy is the
 finite-displacement half of a prefactor. There is no EAM evaluator and no

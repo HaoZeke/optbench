@@ -29,8 +29,8 @@ pbc = [false, false, false]
 [stop]
 norm = "fmax"
 force_norm = 0.001
-max_force_calls = 10000
-max_steps = 10000
+max_force_calls = 250000
+max_steps = 250000
 
 [input]
 archive_path = "website/double-ended-saddle-search/lj38_2ts_separation/coords.tgz"
