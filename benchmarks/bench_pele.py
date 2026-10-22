@@ -79,6 +79,8 @@ def _specs() -> list[dict]:
     for template in list_templates(ROOT):
         if template.get("engine") != "pele":
             continue
+        if str(template.get("task")) == "saddle-search":
+            continue
         problem_id = str(template["problem"])
         if problem_id not in counts:
             counts[problem_id] = _archive_count(problem_id) if os.environ.get("OPTBENCH_ASV_FULL") == "1" else 1

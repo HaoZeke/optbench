@@ -18,7 +18,10 @@ def test_pele_templates_cover_the_minimization_problems():
     registry = tomllib.loads((ROOT / "codes" / "registry.toml").read_text(encoding="utf-8"))
     pinned = next(row for row in registry["code"] if row["id"] == "pele")
     assert pinned["commit"] == PELE_COMMIT
-    found = [row for row in list_templates(ROOT) if str(row["id"]).startswith("pele/")]
+    pele_rows = [row for row in list_templates(ROOT) if str(row["id"]).startswith("pele/")]
+    saddle = [row for row in pele_rows if row.get("task") == "saddle-search"]
+    assert [row["id"] for row in saddle] == ["pele/pt-island-search"]
+    found = [row for row in pele_rows if row.get("task") != "saddle-search"]
     assert len(found) == 9
     seen = set()
     for template in found:
