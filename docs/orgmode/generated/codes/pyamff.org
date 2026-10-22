@@ -1,0 +1,186 @@
+#+TITLE: Pyamff
+#+OPTIONS: toc:nil num:nil author:nil
+
+#+begin_export rst
+.. raw:: html
+
+   <section class="bench" id="code-pyamff">
+   <h2>Pyamff</h2>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-rows">
+   <caption>Every ranked row for this code.</caption>
+   <thead><tr><th>Problem</th><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="mlopt/C2H4" data-label="Pyamff (8037eb98) · pyamff-rprop10-7-fcoeff0">
+   <td>C2H4</td>
+   <td data-field="label">Pyamff (8037eb98) · pyamff-rprop10-7-fcoeff0</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">1</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">184.56</td>
+   <td data-field="median_calls"></td>
+   <td data-field="mean_calls">184.56</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">0</td>
+   </tr>
+   <tr data-problem="mlopt/C2H4" data-label="Pyamff (8037eb98) · pyamff-lbfgs10-7-fcoeff0">
+   <td>C2H4</td>
+   <td data-field="label">Pyamff (8037eb98) · pyamff-lbfgs10-7-fcoeff0</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">2</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">2157.14</td>
+   <td data-field="median_calls"></td>
+   <td data-field="mean_calls">2157.14</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">0</td>
+   </tr>
+   <tr data-problem="mlopt/C2H4" data-label="Pyamff (8037eb98) · pyamff-adam10-7-fcoeff0">
+   <td>C2H4</td>
+   <td data-field="label">Pyamff (8037eb98) · pyamff-adam10-7-fcoeff0</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">3</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">4395.3</td>
+   <td data-field="median_calls"></td>
+   <td data-field="mean_calls">4395.3</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">0</td>
+   </tr>
+   <tr data-problem="mlopt/C2H4" data-label="Pyamff (8037eb98) · pyamff-rprop10-7-fcoeff0_1">
+   <td>C2H4</td>
+   <td data-field="label">Pyamff (8037eb98) · pyamff-rprop10-7-fcoeff0_1</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">4</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">12926.9</td>
+   <td data-field="median_calls"></td>
+   <td data-field="mean_calls">12926.9</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">0</td>
+   </tr>
+   <tr data-problem="mlopt/C2H4" data-label="Pyamff (8037eb98) · pyamff-adam10-7-fcoeff0_1">
+   <td>C2H4</td>
+   <td data-field="label">Pyamff (8037eb98) · pyamff-adam10-7-fcoeff0_1</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">5</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">13876.7</td>
+   <td data-field="median_calls"></td>
+   <td data-field="mean_calls">13876.7</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">0</td>
+   </tr>
+   <tr data-problem="mlopt/C2H4" data-label="Pyamff (8037eb98) · pyamff-lbfgs10-7-fcoeff0_1">
+   <td>C2H4</td>
+   <td data-field="label">Pyamff (8037eb98) · pyamff-lbfgs10-7-fcoeff0_1</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">7</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">23314.5</td>
+   <td data-field="median_calls"></td>
+   <td data-field="mean_calls">23314.5</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">0</td>
+   </tr>
+   <tr data-problem="mlopt/emt-pt38" data-label="Pyamff (8037eb98) · pyamff-rprop10-7-fcoeff0">
+   <td>EMT Pt 38 nanoparticle</td>
+   <td data-field="label">Pyamff (8037eb98) · pyamff-rprop10-7-fcoeff0</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">2</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">97.58</td>
+   <td data-field="median_calls"></td>
+   <td data-field="mean_calls">97.58</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">0</td>
+   </tr>
+   <tr data-problem="mlopt/emt-pt38" data-label="Pyamff (8037eb98) · pyamff-rprop10-7-fcoeff0_1">
+   <td>EMT Pt 38 nanoparticle</td>
+   <td data-field="label">Pyamff (8037eb98) · pyamff-rprop10-7-fcoeff0_1</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">3</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">1022.86</td>
+   <td data-field="median_calls"></td>
+   <td data-field="mean_calls">1022.86</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">0</td>
+   </tr>
+   <tr data-problem="mlopt/emt-pt38" data-label="Pyamff (8037eb98) · pyamff-adam10-7-fcoeff0">
+   <td>EMT Pt 38 nanoparticle</td>
+   <td data-field="label">Pyamff (8037eb98) · pyamff-adam10-7-fcoeff0</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">4</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">1103.24</td>
+   <td data-field="median_calls"></td>
+   <td data-field="mean_calls">1103.24</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">0</td>
+   </tr>
+   <tr data-problem="mlopt/emt-pt38" data-label="Pyamff (8037eb98) · pyamff-adam10-7-fcoeff0_1">
+   <td>EMT Pt 38 nanoparticle</td>
+   <td data-field="label">Pyamff (8037eb98) · pyamff-adam10-7-fcoeff0_1</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">5</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">1708.8</td>
+   <td data-field="median_calls"></td>
+   <td data-field="mean_calls">1708.8</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">0</td>
+   </tr>
+   <tr data-problem="mlopt/emt-pt38" data-label="Pyamff (8037eb98) · pyamff-lbfgs10-7-fcoeff0">
+   <td>EMT Pt 38 nanoparticle</td>
+   <td data-field="label">Pyamff (8037eb98) · pyamff-lbfgs10-7-fcoeff0</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">6</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">1791.8</td>
+   <td data-field="median_calls"></td>
+   <td data-field="mean_calls">1791.8</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">0</td>
+   </tr>
+   <tr data-problem="mlopt/emt-pt38" data-label="Pyamff (8037eb98) · pyamff-lbfgs10-7-fcoeff0_1">
+   <td>EMT Pt 38 nanoparticle</td>
+   <td data-field="label">Pyamff (8037eb98) · pyamff-lbfgs10-7-fcoeff0_1</td>
+   <td data-field="family">Minimizers</td>
+   <td data-field="family_rank">7</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="published">1943.34</td>
+   <td data-field="median_calls"></td>
+   <td data-field="mean_calls">1943.34</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">0</td>
+   </tr>
+   </tbody></table></div>
+   </section>
+#+end_export

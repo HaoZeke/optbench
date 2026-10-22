@@ -1,0 +1,16 @@
+force_calls 41107
+force_calls_min 687
+force_calls_max 235014
+force_calls_median 23020.0
+call_unit total
+nfailed 6
+code eOn
+code_version (develop 500350d9)
+commit 500350d9fae881f06c7ef194e5868da079c4be5a
+algorithm LBFGS
+template eon/develop-500350d9-de-2ts-oci
+problem double-ended-saddle-search/lj38_2ts_separation
+reducer harness
+counter harness
+count_keys HarnessCounter
+potential ljcluster (shifted, cutoff 15)

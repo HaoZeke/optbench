@@ -14,11 +14,11 @@ code_version 0.4.0
 commit 24236559f3815847cac89ba0a7be634ce0beb4a9
 algorithm SR2
 template rgmin/morse-sr2-tuned
-tuning tuned
+tuning adjusted
 counter harness
 par2_mean 1198.65
-wilson_low 0.901629285641
-wilson_high 0.984336696008
+rate_low 0.901629285641
+rate_high 0.984336696008
 par2_median 362.5
 par2_median_low 355
 par2_median_high 378

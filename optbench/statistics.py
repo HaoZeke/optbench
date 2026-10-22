@@ -1,7 +1,7 @@
 """Deterministic v2 sample: seeds, a performance profile, noise, and failures.
 
 This is not a Lennard-Jones campaign. The bowl and the saddle are the
-quadratic smoke. Every number in the document is produced by running
+quadratic bowl. Every number in the document is produced by running
 these optimizers.
 """
 
@@ -14,7 +14,7 @@ from .noise import KAPPA, SIGMA_LEVELS, WINDOW, noise_floor, noisy_descent, stop
 from .profile import performance_profile, profile_cost
 from .score import score_v2
 from .seeds import descend, dimer_search, displace, random_orientation
-from .smoke import (
+from .quadratic import (
     ENERGY_TOL,
     FORCE_NORM,
     REFERENCE_MINIMUM,
@@ -355,8 +355,8 @@ def build_statistics(commit: str = "", machine: dict | str | None = "validation"
     )
     return {
         "schema": "optbench.validation/v2",
-        "status": "smoke",
-        "problem": "smoke/quadratic",
+        "status": "quadratic",
+        "problem": "quadratic/bowl",
         "note": (
             "Seeded displacements, dimer orientations, a Dolan-Moré profile, "
             "noisy forces, and one of each failure class. Not a Lennard-Jones campaign."
