@@ -102,9 +102,35 @@ def frozen_arguments(options: dict) -> list[str]:
     return argv
 
 
+
+def atomic_arguments(options: dict) -> list[str]:
+    """Select the fixed-noise atomic model without changing physical inputs."""
+    if "atomic_environments" not in options:
+        return []
+    enabled = options["atomic_environments"]
+    if not isinstance(enabled, bool):
+        raise ValueError("atomic_environments must be a boolean")
+    if not enabled:
+        return ["--gp-atomic-environments", "false"]
+    if options.get("model_profile", "extended") != "gprd_zbl":
+        raise ValueError("atomic_environments requires the fixed-noise gprd_zbl profile")
+    if options.get("hyperparameter_mode", "inla") == "inla":
+        raise ValueError("atomic_environments does not support INLA fitting")
+    if options.get("active_posterior", False):
+        raise ValueError("atomic_environments requires active_posterior=false")
+    return [
+        "--gp-atomic-environments", "true",
+        "--uncertainty-mode", "map", "--hyperparameter-objective", "nlml",
+        "--gp-learn-noise", "false", "--rff-features", "0",
+        "--gp-virtual-obs", "false", "--gp-robust-nu", "0",
+        "--gp-local-tier", "false",
+    ]
+
+
 def command(binary: str, directory: Path, settings: dict, options: dict) -> list[str]:
     """Explicit physical and numerical settings for a Pt band."""
     frozen = frozen_arguments(options)
+    atomic = atomic_arguments(options)
     return [
         binary, "--reactant", str(directory / "reactant.con"),
         "--product", str(directory / "product.con"),
@@ -132,7 +158,7 @@ def command(binary: str, directory: Path, settings: dict, options: dict) -> list
         "--output", str(directory / "band.h5"),
         "--write-con", str(directory / "band.con"),
         "--gp-observation-archive", str(directory / "observations"),
-    ] + frozen
+    ] + frozen + atomic
 
 
 def write_inputs(directory: Path, pair) -> None:

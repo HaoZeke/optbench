@@ -363,3 +363,50 @@ def test_extended_fit_baseline_keeps_publication_physical_settings(system):
         "hyperparameter_mode": "inla", "hssvd": True, "active_posterior": False,
         "prior_mean_statistic": "mean", "seed_full_chain": False,
     }
+
+
+@pytest.mark.parametrize("system", ["heptamer", "island"])
+def test_atomic_templates_preserve_the_physical_comparison(tmp_path, system):
+    from optbench.campaign import load_template
+    from optbench.engines.common import registry_pin, require_pin
+
+    root = Path(__file__).resolve().parents[1]
+    publication = load_template(root, f"gpridge/pt-{system}-gp-neb-auto")
+    atomic = load_template(root, f"gpridge/pt-{system}-gp-neb-atomic")
+    require_pin(atomic, registry_pin(root, "gpridge"))
+    assert atomic["problem"] == publication["problem"]
+    assert atomic["gpridge"] == {
+        **publication["gpridge"], "active_posterior": False,
+        "atomic_environments": True,
+    }
+    assert atomic["gpridge"]["timeout"] == 1800
+    base_argv = native.command("gprn", tmp_path, settings(), publication["gpridge"])
+    argv = native.command("gprn", tmp_path, settings(), atomic["gpridge"])
+    base_flags = dict(zip(base_argv[1::2], base_argv[2::2]))
+    flags = dict(zip(argv[1::2], argv[2::2]))
+    assert flags == {
+        **base_flags, "--gp-active-posterior": "false",
+        "--gp-atomic-environments": "true", "--uncertainty-mode": "map",
+        "--hyperparameter-objective": "nlml", "--gp-learn-noise": "false",
+        "--rff-features": "0", "--gp-virtual-obs": "false",
+        "--gp-robust-nu": "0", "--gp-local-tier": "false",
+    }
+
+
+def test_atomic_model_is_opt_in(tmp_path):
+    assert "--gp-atomic-environments" not in native.command(
+        "gprn", tmp_path, settings(), {})
+    assert native.atomic_arguments({"atomic_environments": False}) == [
+        "--gp-atomic-environments", "false"]
+
+
+@pytest.mark.parametrize("options", [
+    {"atomic_environments": "true"}, {"atomic_environments": 1},
+    {"atomic_environments": None}, {"model_profile": "extended"},
+    {"hyperparameter_mode": "inla"}, {"active_posterior": True},
+])
+def test_atomic_model_rejects_unsupported_fit_settings(tmp_path, options):
+    valid = {"atomic_environments": True, "model_profile": "gprd_zbl",
+             "hyperparameter_mode": "rgmin:lbfgs", "active_posterior": False}
+    with pytest.raises(ValueError, match="atomic_environments"):
+        native.command("gprn", tmp_path, settings(), {**valid, **options})
