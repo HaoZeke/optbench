@@ -1,0 +1,32 @@
+# rep 1 seed 1000 force_calls 19803955 unique_saddles 79 fraction_connected 0.8445119059 total_searches 10541 reached 1 harness_calls 19826434
+# rep 2 seed 1001 force_calls 14977342 unique_saddles 69 fraction_connected 0.8520820385 total_searches 8045 reached 1 harness_calls 14998077
+# rep 3 seed 1002 force_calls 41192406 unique_saddles 119 fraction_connected 0.8492945606 total_searches 22043 reached 1 harness_calls 41222057
+# rep 4 seed 1003 force_calls 16364397 unique_saddles 73 fraction_connected 0.8441857785 total_searches 8677 reached 1 harness_calls 16383200
+# rep 5 seed 1004 force_calls 15969451 unique_saddles 75 fraction_connected 0.8514909603 total_searches 8518 reached 1 harness_calls 15987137
+# rep 6 seed 1005 force_calls 27134762 unique_saddles 88 fraction_connected 0.8581648095 total_searches 14538 reached 1 harness_calls 27163146
+# rep 7 seed 1006 force_calls 18365143 unique_saddles 83 fraction_connected 0.8556144284 total_searches 9814 reached 1 harness_calls 18381469
+# rep 8 seed 1007 force_calls 21973606 unique_saddles 88 fraction_connected 0.8444651636 total_searches 11798 reached 1 harness_calls 21992048
+# rep 9 seed 1008 force_calls 21596540 unique_saddles 78 fraction_connected 0.844257314 total_searches 11519 reached 1 harness_calls 21611969
+code eOn (develop 500350d9)
+code_version 500350d9
+commit 500350d9fae881f06c7ef194e5868da079c4be5a
+counter client-search-results
+count_keys sad-fcs+mins-fcs
+contributor Rohit Goswami
+repetitions 9
+report_runs 9
+saddle_method dynamics
+communicator_jobs 8
+force_calls 21930844.67
+force_calls_mean_error 2558729.262
+force_calls_min 14977342
+force_calls_max 41192406
+unique_saddles 83.55555556
+fraction_connected 0.8493407733
+total_searches 11721.44444
+nfailed 0
+algorithm Dynamics
+template eon/develop-saddle-pt-md
+problem saddle-search/pt-island
+reducer harness
+tuning default

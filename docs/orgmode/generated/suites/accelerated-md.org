@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>EON (SVN r2549)</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>EON (SVN r2549)</th><th>artn</th><th>compass</th><th>dlfind</th><th>eOn (develop 500350d9)</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="accelerated-md/aladatom">
    <th scope="row"><a href="#aladatom">aladatom</a></th>
    <td data-code="eOn">—</td>
@@ -21,6 +21,7 @@
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
+   <td data-code="eOn (develop 500350d9)">—</td>
    <td data-code="lammps">—</td>
    <td data-code="optim">—</td>
    <td data-code="tsase">—</td>
@@ -38,6 +39,7 @@
    <td data-code="artn">—</td>
    <td data-code="compass">—</td>
    <td data-code="dlfind">—</td>
+   <td data-code="eOn (develop 500350d9)">—</td>
    <td data-code="lammps">—</td>
    <td data-code="optim">—</td>
    <td data-code="tsase">—</td>
