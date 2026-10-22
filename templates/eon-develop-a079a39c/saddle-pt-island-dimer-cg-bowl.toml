@@ -1,0 +1,57 @@
+id = "eon-develop-a079a39c/saddle-pt-island-dimer-cg-bowl"
+engine = "eon"
+problem = "saddle-search/pt-island"
+code = "eOn (develop a079a39c)"
+code_version = "3.6.0"
+commit = "a079a39c69160200f6fc39b862b09af72583c62c"
+algorithm = "Dimer"
+reducer = "akmc-until-27"
+tuning = "stock"
+pass_limit = 20000
+failure_cap = 100000000
+note = """AKMC on the archived Pt island reactant until 27 good saddles below 1.5 eV. The deck is archive/entries/saddle-search/pt-island/eon-dimer/config.ini. It sets job akmc, temperature 700, potential morse_pt, optimizer converged_force 1e-3, max_iterations 1000, max_move 0.2, AKMC confidence 1.1, thermally_accessible_window 99999, minimize_first true, communicator local, num_jobs 32, number_of_cpus 8, displace_listed_weight 1, displace_all_listed false, displace_radius 3.3, displace_atomlist 0,1,2,3,4,5,6, displace_magnitude 0.1, min_mode_method dimer, max_energy 5, saddle max_iterations 1000, dimer converged_angle 5, and prefactor default_value 5e12. The client spells those displacement keys displace_listed_atom_weight and displace_atom_list, and the cpu count number_of_CPUs. This row sets optimizer CG and dimer rotations_max 5, and turns bowl breakout on with confine_positive true and bowl_breakout true. Keys that deck does not set stay at the client default, including bowl_active_atoms 20 and the saddle converged_force copied from the optimizer. Repetition seeds are 1000 through 1008. Force calls are sad-fcs plus mins-fcs through the 27th qualifying line. The cap is 100000000."""
+
+[ini.Main]
+job = "akmc"
+temperature = 700
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "cg"
+max_move = 0.2
+converged_force = 0.001
+max_iterations = 1000
+
+[ini.AKMC]
+confidence = 1.1
+thermally_accessible_window = 99999
+
+[ini."Process Search"]
+minimize_first = true
+
+[ini.Communicator]
+type = "local"
+num_jobs = 32
+number_of_CPUs = 8
+client_path = "eonclient"
+
+[ini."Saddle Search"]
+min_mode_method = "dimer"
+displace_listed_atom_weight = 1.0
+displace_all_listed = false
+displace_atom_list = "0,1,2,3,4,5,6"
+displace_radius = 3.3
+displace_magnitude = 0.1
+max_energy = 5.0
+max_iterations = 1000
+confine_positive = true
+bowl_breakout = true
+
+[ini.Dimer]
+rotations_max = 5
+converged_angle = 5.0
+
+[ini.Prefactor]
+default_value = 5e12
