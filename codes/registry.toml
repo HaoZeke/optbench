@@ -70,9 +70,9 @@ name = "rgsaddle"
 role = "saddle search"
 repository = "https://github.com/OmniPotentRPC/rgsaddle"
 ref = "main"
-commit = "df8ec2f8debaf22326e8f7ba1859ae277840e20a"
-committed = "2026-10-18"
-note = "0.2.2 at main df8ec2f, rgmin d76539d. The four default saddle-search/pt-island templates use this commit. Since c0db2b8d the dimer measures the rotated dimer when the trial angle sits on its 1e-4 floor, and the band gained quick-min options and a solid-state cell."
+commit = "8fa0eb1559c92b6ae9d1de190e253787a183729d"
+committed = "2026-10-21"
+note = "0.2.2 at main 8fa0eb15, rgmin d76539d. The four default saddle-search/pt-island templates use this commit. Since df8ec2f the translator keeps its memory inside a 45 degree mode cone, and a capped FIRE step that leaves the negative mode is replaced. The dimer still measures the rotated dimer when the trial angle sits on its 1e-4 floor."
 
 [[code]]
 id = "geodesic"
