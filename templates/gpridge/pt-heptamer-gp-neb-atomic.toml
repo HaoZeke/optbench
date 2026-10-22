@@ -1,0 +1,26 @@
+id = "gpridge/pt-heptamer-gp-neb-atomic"
+engine = "gpridge"
+code = "gpridge"
+code_version = "develop"
+commit = "c9b71e4788c2c49daafd05f0ef4fcc522a87c29a"
+algorithm = "GP-NEB"
+problem = "neb/Pt-heptamer"
+tuning = "adjusted"
+ranked = false
+note = "Energy-shifted Morse at 9.5 Angstrom; free-atom L2 norm; linear band and constant spring 5. Native provider count includes endpoint evaluations."
+
+[gpridge]
+mode = "gp_oie"
+threads = 1
+timeout = 1800
+arithmetic = "library"
+model_profile = "gprd_zbl"
+hyperparameter_mode = "rgmin:lbfgs"
+hssvd = false
+active_posterior = false
+prior_mean_statistic = "max"
+seed_full_chain = true
+frozen_neighbors = 0
+frozen_selection = "auto"
+frozen_activation_distance = 5.0
+atomic_environments = true
