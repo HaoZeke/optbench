@@ -73,10 +73,6 @@ delta_explore = 0.35
 half_life = 50
 
 [pruning]
-# Accepted for file compatibility and ignored: the observation-pruning
-# policy was removed from the engine because it discarded the newest
-# oracle corrections on high-force landscapes. The dimer's cost is
-# bounded by the HS-SVD local active set, not here.
 usePrune = false
 pruneBegin = 10
 pruneNVals = 4

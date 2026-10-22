@@ -159,3 +159,34 @@ def test_fixed_atom_movement_is_rejected_before_oracle_evaluation():
     with pytest.raises(ValueError, match="fixed Cu"):
         native.verify_positions(atoms, positions, calc, .01)
     assert calc.calls == 0
+
+
+def test_timed_out_search_keeps_a_failed_record_without_fabricating_calls(tmp_path, monkeypatch):
+    import json
+
+    def inputs(directory, job):
+        directory.mkdir()
+        for name in ("pos.con", "direction.dat", "params.bin"):
+            (directory / name).write_text("fixture")
+        return slab()
+
+    def timeout(argv, directory, env, stream, seconds):
+        stream.write("unfinished outer loop\n")
+        return 124
+
+    problem, files = fixture()
+    options = load_template(ROOT, "gpridge/cuh2-gp-dimer-k2")["gpridge"]
+    job = {"name": "displacement-3", "displacement": 3., "directory": str(tmp_path / "case"),
+           "files": files, "sources": {}, "problem": problem,
+           "runtime": {"binary": "gprd"}, "oracle": {"binary": "potserv"}, "options": options}
+    monkeypatch.setattr(native, "write_inputs", inputs)
+    monkeypatch.setattr(native, "run_search", timeout)
+    result = native._execute(job)
+    assert result["success"] is False
+    assert result["count_available"] is False
+    assert result["returncode"] == 124
+    assert {"timeout", "not_converged", "missing_count"}.issubset(result["reasons"])
+    assert json.loads((tmp_path / "case/result.json").read_text()) == result
+    command = json.loads((tmp_path / "case/command.json").read_text())
+    assert command["displacement"] == 3.
+    assert command["source_input_sha256"] == problem["input"]["sha256"]

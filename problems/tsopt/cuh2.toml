@@ -22,7 +22,7 @@ source_revision = "fa64cf37aaf0172180de8dac0a0baefbdba85a0d"
 "CuH2-init_PES_point.dat" = "914cdd7debe4900c404ecec8241dffeca66bdee5a9ba11d75ae5e4eca1dbbebc"
 "displacedH2.dat" = "e687e80c0fdbf72c6be2eb543b039298ecca1c495b6df9d29289ecfd3cac65f8"
 "orients_CuH2.dat" = "21babdb65fadfd9d6551a4209214f3e4e10d9d7a8ab5da3ef115e3cc365c51ea"
-"params.toml" = "147703d445252f560c4fd6f5e99fa378a7e0d751cef671a78c189023ab22bd8d"
+"params.toml" = "be0bcbce74fe045695ff75ced40a26d7deee1e9ca75bd81e9d78a53c110c4a5d"
 
 [native_sources.sha256]
 "scripts/prepare_petmad_assets.py" = "8353d9a4e6b5ed4454072bb3826621a3198bfd2a52b73765e6d601c1fcb49d09"
