@@ -1,15 +1,15 @@
 id = "eon-develop/saddle-pt-stock"
 engine = "eon-client"
 problem = "saddle-search/pt-island"
-code = "eOn (develop 500350d9)"
-code_version = "500350d9"
-commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
+code = "eOn (develop 4c1b814f)"
+code_version = "4c1b814f"
+commit = "4c1b814f62f1dcf5fcd0cf18ba0b6df3bcff7a28"
 algorithm = "Dimer"
 reducer = "harness"
 failure_cap = 100000000
 tuning = "stock"
 pass_limit = 100000000
-note = """Stock eOn develop 500350d9fae881f06c7ef194e5868da079c4be5a, branch fix/develop-regressions-vs-350. This is the git code, not the SVN client. Temperature stays at that tree's default. The minimizer is the archive ini's LBFGS with max_move 0.2. The dimer rotation count and angle are that ini's rotations_max 20 and converged_angle 5; the rotation method stays the code default. The archive run.sh copies config.ini and loops eon until done.py sees 27 good saddles below 1.5 eV. That ini keeps the run in state 0 with AKMC confidence 1.1 and thermally_accessible_window 99999. confidence_scheme old is set because this tree's default scheme is new, and the old scheme never reaches 1.1, so there is no KMC step. The same ini displaces the heptamer: listed weight 1, atoms 0-6, radius 3.3, magnitude 0.1, max energy 5. The prefactor default 5e12 skips the Hessian, which that ini uses because the run never takes a KMC step. Optimizer and Saddle Search converged_force are the problem stop, 0.001 eV/Ang. Their max_iterations and the search ceiling are the problem cap, 100000000. The run stops at 27 qualifying saddles or at that cap. Runs 1-10 use seeds 1000-1009. The scored mean is runs 1-9, matching report.sh. The potential is ext_pot and the harness kernel is morse/smooth/linear."""
+note = """Stock eOn develop 4c1b814f62f1dcf5fcd0cf18ba0b6df3bcff7a28. This is the git code, not the SVN client. Temperature stays at that tree's default. The minimizer is the archive ini's LBFGS with max_move 0.2. The dimer rotation count and angle are that ini's rotations_max 20 and converged_angle 5; the rotation method stays the code default. The archive run.sh copies config.ini and loops eon until done.py sees 27 good saddles below 1.5 eV. That ini keeps the run in state 0 with AKMC confidence 1.1 and thermally_accessible_window 99999. confidence_scheme old is set because this tree's default scheme is new, and the old scheme never reaches 1.1, so there is no KMC step. The same ini displaces the heptamer: listed weight 1, atoms 0-6, radius 3.3, magnitude 0.1, max energy 5. The prefactor default 5e12 skips the Hessian, which that ini uses because the run never takes a KMC step. Optimizer and Saddle Search converged_force are the problem stop, 0.001 eV/Ang. Their max_iterations and the search ceiling are the problem cap, 100000000. The run stops at 27 qualifying saddles or at that cap. Runs 1-10 use seeds 1000-1009. The potential is ext_pot and the harness kernel is morse/smooth/linear."""
 
 [ini.Main]
 job = "akmc"

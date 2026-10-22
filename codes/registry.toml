@@ -22,7 +22,7 @@ repository = "https://github.com/TheochemUI/eon"
 ref = "main"
 commit = "1d71c944501832bfafb955ffe13b9aae50c8efd4"
 committed = "2026-10-15"
-note = "Current main, including merged pull request 776. The version string is 3.6.0. Templates under templates/eon/ use this commit. The 3.5.0 pin above stays for the scores that were run on it."
+note = "Develop, including merged pull request 776. The version string is 3.6.0. Templates under templates/eon/ use this commit. The 3.5.0 pin above stays for the scores that were run on it."
 
 [[code]]
 id = "eon-develop"
@@ -55,14 +55,14 @@ committed = "2026-01-23"
 note = "The old SVN code, not a version of https://github.com/TheochemUI/eon. Latest revision r2549, Fortran potentials linked, eonclient -v prints r2549. QSC sources are not in the revision, so that potential is left out of the link. The saddle-search row keeps the stock dimer method and minimizer. The archive config.ini that run.sh copies sets dimer rotations_max 20 and converged_angle 5, confidence 1.1 so the run stays in the initial state, and the heptamer displacement. Search limits are the problem cap. The problem force stop and the harness potential are set. The name Eon svn above is a different registry pin and is unchanged."
 
 [[code]]
-id = "eon-develop-500350d9"
-name = "eOn (develop 500350d9)"
+id = "eon-develop-4c1b814f"
+name = "eOn (develop 4c1b814f)"
 role = "saddle search"
 repository = "https://github.com/TheochemUI/eon"
-ref = "fix/develop-regressions-vs-350"
-commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
-committed = "2026-10-20"
-note = "The git code at https://eondocs.org and https://github.com/TheochemUI/eon, not a version of the SVN client. Branch fix/develop-regressions-vs-350 at 500350d9fae881f06c7ef194e5868da079c4be5a. eonclient --version prints 3.6.0 (500350d9). Fortran kernels come from the linked rgpot. The saddle-search row keeps the stock dimer method. The archive config.ini that run.sh copies sets dimer rotations_max 20 and converged_angle 5, confidence 1.1 so the run stays in the initial state, and the heptamer displacement. Search limits are the problem cap. The eOn and eon-develop pins above stay on their own commits."
+ref = "develop"
+commit = "4c1b814f62f1dcf5fcd0cf18ba0b6df3bcff7a28"
+committed = "2026-10-21"
+note = "The git code at https://eondocs.org and https://github.com/TheochemUI/eon, not a version of the SVN client. develop at 4c1b814f62f1dcf5fcd0cf18ba0b6df3bcff7a28. eonclient --version prints 3.6.0 (4c1b814f). Fortran kernels come from the linked rgpot. The saddle-search row keeps the stock dimer method. The archive config.ini that run.sh copies sets dimer rotations_max 20 and converged_angle 5, confidence 1.1 so the run stays in the initial state, and the heptamer displacement. Search limits are the problem cap. The eOn and eon-develop pins above stay on their own commits."
 
 [[code]]
 id = "rgmin"
@@ -102,7 +102,7 @@ repository = "https://github.com/zadorlab/sella"
 ref = "2.6.0"
 commit = "6cfb60cdb100a146c3c6f0587d5308b247aa8010"
 committed = "2026-10-15"
-note = "Sella 2.6.0. Order 1 is a saddle and order 0 is a minimum. The Sella 0.1.1 rows on the 2014 tables are legacy and are not this pin. Force calls are harness calculator evaluations."
+note = "Sella 2.6.0. Order 1 is a saddle and order 0 is a minimum. The Sella 0.1.1 rows on the 2014 tables are an earlier pin and are not this pin. Force calls are harness calculator evaluations."
 
 [[code]]
 id = "artn"

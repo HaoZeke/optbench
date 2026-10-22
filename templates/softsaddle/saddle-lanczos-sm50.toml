@@ -6,6 +6,8 @@ code_version = "2019.04"
 commit = "5a00aeede06fd822ef302624ec4c9bc7889d21fc0b5804b701a5785695c68d16"
 algorithm = "adaptive hypersphere LBFGS Lanczos"
 tuning = "sm50"
+reducer = "harness"
+failure_cap = 100000000
 
 [ini.Main]
 job = "saddle_search"

@@ -1,0 +1,32 @@
+# run 1 seed 1000 force_calls 14504362 qualifying 27 total_searches 39467
+# run 2 seed 1001 force_calls 5015475 qualifying 27 total_searches 13692
+# run 3 seed 1002 force_calls 1819479 qualifying 27 total_searches 5000
+# run 4 seed 1003 force_calls 3797337 qualifying 27 total_searches 10418
+# run 5 seed 1004 force_calls 4362103 qualifying 27 total_searches 11914
+# run 6 seed 1005 force_calls 5217389 qualifying 27 total_searches 14234
+# run 7 seed 1006 force_calls 1432918 qualifying 27 total_searches 3926
+# run 8 seed 1007 force_calls 7910970 qualifying 27 total_searches 21544
+# run 9 seed 1008 force_calls 4771244 qualifying 27 total_searches 12958
+# run 10 seed 1009 force_calls 5424400 qualifying 27 total_searches 14967
+force_calls 5425697.444444444
+force_calls_min 1432918
+force_calls_max 14504362
+call_unit total
+nfailed 0
+code eOn (develop 4c1b814f)
+code_version 4c1b814f
+commit 4c1b814f62f1dcf5fcd0cf18ba0b6df3bcff7a28
+algorithm Dimer
+template eon-develop/saddle-pt-stock
+problem saddle-search/pt-island
+reducer harness
+force_calls_mean_error 1227104.411
+unique_saddles 97
+fraction_connected 0.7676174595
+total_searches 14794.77778
+counter harness
+count_keys HarnessCounter
+tuning stock
+potential morse/smooth/linear
+scored_runs 1-9
+launched_runs 1-10

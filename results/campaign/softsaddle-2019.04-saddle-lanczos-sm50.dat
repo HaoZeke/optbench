@@ -8,22 +8,12 @@
 # rep 8 force_calls 1370074 unique_saddles 1993 fraction_connected 0.05161290322580645 total_searches 3875 connected 200 low_barrier 27 minimize_calls 6 minimum_converged 1 seed 20961016 hypersphere 0a505b66a05a11387a866df88b135faa2573819ffb1a693161cc1de0aaeb3159
 # rep 9 force_calls 404368 unique_saddles 360 fraction_connected 0.07868852459016394 total_searches 1525 connected 120 low_barrier 27 minimize_calls 6 minimum_converged 1 seed 21061016 hypersphere 1ce1f597259e75e1360337de5e7249ccbe186666583b62e667bc45e2fcf1c801
 # rep 10 force_calls 904597 unique_saddles 599 fraction_connected 0.04325925925925926 total_searches 3375 connected 146 low_barrier 27 minimize_calls 6 minimum_converged 1 seed 21161016 hypersphere 6efd3373f4b6a8048137be6bec51b760da8b7cab9486f1be79ce77612a1a69ba
-force_calls 957258.5
-force_calls_mean_error 403923.7563213164
+force_calls 963109.7778
+force_calls_mean_error 134499.9076
 force_calls_min 368143
 force_calls_max 1665278
-unique_saddles 1165.8
-fraction_connected 0.06523767724373
-total_searches 2925.0
-benchmark_force_calls 957258.5
-benchmark_force_calls_mean_error 403923.7563213164
-benchmark_fraction_connected 0.664681651495024
-benchmark_total_searches 2925.0
-benchmark_unique_saddles 169.7
-success_force_calls 344
-success_force_calls_min 190
-success_force_calls_median 314.0
-success_force_calls_max 998
+call_unit total
+nfailed 0
 code SoftSaddle
 code_version 2019.04
 commit 5a00aeede06fd822ef302624ec4c9bc7889d21fc0b5804b701a5785695c68d16
@@ -31,19 +21,17 @@ algorithm adaptive hypersphere LBFGS Lanczos
 tuning sm50
 template softsaddle/saddle-lanczos-sm50
 problem saddle-search/pt-island
+reducer harness
+unique_saddles 172.3333333
+fraction_connected 0.6423376375
+total_searches 2875
+benchmark_force_calls 963109.7778
+benchmark_force_calls_mean_error 134499.9076
+benchmark_fraction_connected 0.6423376375
+benchmark_total_searches 2875
+benchmark_unique_saddles 172.3333333
 counter harness
 repetitions 10
-nfailed 1
+scored_runs 1-9
+launched_runs 1-10
 goal 27
-cap 5064
-n 29250
-par2_mean 10038.016102564103
-successes 269
-wilson_low 0.008165269209333336
-wilson_high 0.010356792571285108
-par2_median 10128.0
-n_cap 0
-n_wrong_stationary 0
-n_divergence 28981
-n_crash 0
-v2_nfailed 28981

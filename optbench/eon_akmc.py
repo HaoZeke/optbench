@@ -634,21 +634,25 @@ def _stock_worker(spec: dict) -> dict:
     return record
 
 
-def _write_stock(template: dict, rows: list[dict], output: Path) -> None:
+def _write_stock(template: dict, rows: list[dict], output: Path, *, scored: int) -> None:
     from .campaign import benchmark_text
 
-    scored = [row for row in rows if row.get("success")]
-    failed = len(rows) - len(scored)
+    ordered = sorted(rows, key=lambda row: int(row.get("repetition") or 0))
+    for row in ordered:
+        row["in_mean"] = int(row.get("repetition") or 0) <= scored
+    kept = [row for row in ordered if row["in_mean"]]
+    finished_ok = [row for row in kept if row.get("success")]
+    failed = len(kept) - len(finished_ok)
     summary: dict = {"call_unit": "total", "nfailed": failed}
-    if scored:
-        calls = [float(row["force_calls"]) for row in scored]
+    if finished_ok:
+        calls = [float(row["force_calls"]) for row in finished_ok]
         summary["force_calls"] = _mean(calls)
         summary["force_calls_mean_error"] = _mean_error(calls)
         summary["force_calls_min"] = int(min(calls))
         summary["force_calls_max"] = int(max(calls))
-        summary["unique_saddles"] = _mean([float(row["unique_saddles"]) for row in scored])
-        summary["fraction_connected"] = _mean([float(row["fraction_connected"]) for row in scored])
-        summary["total_searches"] = _mean([float(row["total_searches"]) for row in scored])
+        summary["unique_saddles"] = _mean([float(row["unique_saddles"]) for row in finished_ok])
+        summary["fraction_connected"] = _mean([float(row["fraction_connected"]) for row in finished_ok])
+        summary["total_searches"] = _mean([float(row["total_searches"]) for row in finished_ok])
     text = benchmark_text(summary, template)
     metrics = []
     for key in (
@@ -670,9 +674,17 @@ def _write_stock(template: dict, rows: list[dict], output: Path) -> None:
         "scored_runs 1-9",
         "launched_runs 1-10",
     ]
+    comments = [
+        (
+            f"# run {int(row['repetition'])} seed {row.get('seed')} "
+            f"force_calls {int(float(row['force_calls']))} "
+            f"qualifying {row.get('qualifying')} total_searches {row.get('total_searches')}"
+        )
+        for row in ordered
+    ]
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(text + "\n".join(extra) + "\n", encoding="utf-8")
-    write_starts(output.with_suffix(".starts"), rows)
+    output.write_text("\n".join(comments) + "\n" + text + "\n".join(extra) + "\n", encoding="utf-8")
+    write_starts(output.with_suffix(".starts"), ordered)
 
 
 def run_stock_shard(
@@ -737,11 +749,19 @@ def run_stock_shard(
                     # A killed worker must not discard the other runs.
                     # The checkpoint stays, and the next launch resumes it.
                     print(f"run {repetition} failed: {type(exc).__name__}: {exc}", flush=True)
-    rows = [done[index] for index in range(1, scored + 1) if index in done and done[index].get("finished")]
-    if len(rows) == scored:
-        _write_stock(load_template(root, template_name), rows, output)
-    missing = [index for index in range(1, scored + 1) if index not in done or not done[index].get("finished")]
-    return {"scored": len(rows), "launched": launched, "missing": missing, "output": str(output)}
+    finished = [
+        done[index] for index in range(1, launched + 1) if index in done and done[index].get("finished")
+    ]
+    scored_done = [row for row in finished if int(row.get("repetition") or 0) <= scored]
+    if len(scored_done) == scored and len(finished) == launched:
+        _write_stock(load_template(root, template_name), finished, output, scored=scored)
+    missing = [index for index in range(1, launched + 1) if index not in done or not done[index].get("finished")]
+    return {
+        "scored": len(scored_done),
+        "launched": launched,
+        "missing": missing,
+        "output": str(output),
+    }
 
 
 def main(argv: list[str] | None = None) -> int:
