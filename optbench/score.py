@@ -4,7 +4,7 @@ The archive mean is awk ``printf "%.0f"``. On halves that rounds to even,
 which is what Python ``round`` does for these ties.
 
 The v2 cost is the PAR-2 mean. A failure is charged ``2 * cap`` instead
-of being dropped. The Wilson interval and the bootstrap median sit
+of being dropped. The success-rate interval and the bootstrap median sit
 beside that mean. See ``docs/design/decision.md``.
 """
 
@@ -16,7 +16,7 @@ import statistics
 
 from .failures import FAILURES, failure_tally
 
-WILSON_Z = 1.959963984540054
+RATE_Z = 1.959963984540054
 PAR_FACTOR = 2
 BOOTSTRAP_RESAMPLES = 2000
 BOOTSTRAP_SEED = 20261015
@@ -202,10 +202,11 @@ def summarize_capped(counts: list[int], cap: int) -> dict[str, int | None]:
     }
 
 
-def wilson_interval(successes: int, starts: int, z: float = WILSON_Z) -> tuple[float, float]:
-    """Wilson score interval for ``successes / starts``.
+def rate_interval(successes: int, starts: int, z: float = RATE_Z) -> tuple[float, float]:
+    """Success-rate interval for ``successes / starts``.
 
     ``z`` is the standard-normal quantile. The default is the 95% value.
+    The board does not show this interval.
     """
     if starts <= 0:
         raise ValueError("starts must be positive")
@@ -325,7 +326,7 @@ def score_v2(
     resamples: int = BOOTSTRAP_RESAMPLES,
     seed: int = BOOTSTRAP_SEED,
 ) -> dict:
-    """PAR-2 mean, Wilson success interval, and bootstrap median of one run.
+    """PAR-2 mean, success-rate interval, and bootstrap median of one run.
 
     Each record has ``force_calls`` and ``success``. When ``cap`` is
     ``None`` every record must be a success, and ``par_applied`` is false.
@@ -341,7 +342,7 @@ def score_v2(
             successes += 1
         costs.append(penalised_cost(float(record["force_calls"]), success, cap, factor))
     starts = len(records)
-    low, high = wilson_interval(successes, starts)
+    low, high = rate_interval(successes, starts)
     summary = distribution_summary(costs, resamples=resamples, seed=seed)
     tally = failure_tally(records, cap)
     failed = starts - successes
@@ -350,12 +351,12 @@ def score_v2(
     finished = [float(record["force_calls"]) for record in records if record["success"]]
     summary.update(
         {
-            "scoring": "par2-wilson-bootstrap",
+            "scoring": "par2-bootstrap",
             "successes": successes,
             "nfailed": failed,
             "success_rate": successes / starts,
-            "wilson_low": low,
-            "wilson_high": high,
+            "rate_low": low,
+            "rate_high": high,
             "par_factor": factor,
             "cap": cap,
             "par_applied": cap is not None,

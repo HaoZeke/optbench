@@ -196,9 +196,9 @@ def test_current_eon_writes_a_fixed_mask_of_seven():
     )
     _points, fixed = parse_con(text)
     assert fixed.tolist() == [True, False]
-    legacy = "0 0 0 7 0\n"
+    success_only = "0 0 0 7 0\n"
     with pytest.raises(ValueError):
-        parse_con(legacy)
+        parse_con(success_only)
 
 
 def test_catalogue_geometries_stay_distinct_at_the_match_tolerance():

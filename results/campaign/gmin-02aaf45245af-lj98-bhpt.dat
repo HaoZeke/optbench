@@ -1,0 +1,29 @@
+# counter harness. One force call is one GMIN potential request to lennard_jones.
+# The binary was built from the Wales tarball named by commit. The pin is that sha256.
+# energy is the lowest quench at or below SLOPPYCONV. lowest_energy on each start is the lowest finite evaluation.
+# Parallel tempering basin-hopping with the archived lj98 symmetrise moves. Four replicas, temperatures geometric from 0.1 to 1.3, exchange probability 0.1. The hot end is the archive temperature 1.3. On the MPI binary, mc replaces TEMPERATURE with that ladder. Quenches are L-BFGS with SLOPPYCONV 0.007, TIGHTCONV 1.0e-5, and MAXIT 1000 and 1000. STEP is 0.46 and ASTEP is 0.47. FIXBOTH, PERMDIST 0.01, NEWRESTART 6, SORT, SAVE 1, and SYMMETRISE 1 0.01 0.05 0.3 0.1 0.6 3 0.3 2.1 are the archive data file. STEPS is 100000 1.0. The archive sets no RADIUS and no RANSEED. RADIUS is omitted and the coordinates are not translated before CENTRE. The cap and MAX_NPCALL are problems/globalopt/lj98.toml convergence.max_force_calls, 1000000000. EDIFF is 0.001, the problem energy_above_minimum. TARGET is the harness energy of codes/gmin/reference/lj98.points. The data file starts with MPI because the binary is the MPI build, and mpirun launches it. A symmetry hit stays on that rank and BHPT_TARGET takes every rank out of the loop together. One replica still exits on HIT. Starts are the 100 numbered coords files. The unnumbered coords file is not a start. A start that already succeeded keeps its call count.
+force_calls 523212
+force_calls_min 5844
+force_calls_max 2426648
+nfailed 0
+median 403002.5
+code GMIN
+code_version df8da599
+commit 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f
+algorithm parallel tempering basin-hopping with core-orbit symmetrisation
+template gmin/lj98-bhpt
+tuning default
+problem globalopt/lj98
+counter harness
+par2_mean 523211.69
+rate_low 0.963006501793
+rate_high 1
+par2_median 403002.5
+par2_median_low 292285
+par2_median_high 458174
+v2_nfailed 0
+v2_successes 100
+n 100
+energy_min -543.665360771
+energy_max -543.66536077
+cap 1000000000

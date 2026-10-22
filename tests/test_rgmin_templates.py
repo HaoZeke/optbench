@@ -35,12 +35,12 @@ def test_rgmin_templates_cover_both_problems_and_both_tunings():
         assert template["engine"] == "rgmin"
         assert template["commit"] == COMMIT
         assert template["code_version"] == "0.4.1"
-        assert template["tuning"] in ("default", "tuned")
+        assert template["tuning"] in ("default", "adjusted")
         assert template["rgmin"]["method"] in METHODS
         problem = resolve_problem(ROOT, template["problem"])
         _check_stop(problem, template)
         lj_like = template["problem"] in {"minimization/lj38", "minimization/lj38-noise"}
-        if lj_like or template["tuning"] == "tuned":
+        if lj_like or template["tuning"] == "adjusted":
             assert template["rgmin"]["maxstep"] == 0.2
         else:
             assert "maxstep" not in template["rgmin"]
@@ -52,10 +52,10 @@ def test_rgmin_templates_cover_both_problems_and_both_tunings():
     for problem in ("minimization/lj38", "minimization/morse-bulk"):
         for method in METHODS:
             assert (problem, method, "default") in seen
-            assert (problem, method, "tuned") in seen
+            assert (problem, method, "adjusted") in seen
     assert noise_sigmas == {
         (tuning, sigma)
-        for tuning in ("default", "tuned")
+        for tuning in ("default", "adjusted")
         for sigma in (0.0, 1e-4, 1e-3, 1e-2)
     }
     memories = {

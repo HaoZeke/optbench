@@ -2,25 +2,49 @@ id = "hTST/Pt"
 title = "Pt"
 suite = "hTST"
 problem = "Pt"
-contract = "partial"
+contract = "shared"
 entry_count = 11
-remark = "A start is one barrier window. The window closes when each reference barrier has been matched once. Force calls are the harness tally for that window. The rank uses PAR-2 on that cap. A missing rate window does not drop a finished barrier window. The 2014 Pt archive used shifted Morse."
+remark = "A start is one barrier window. The window closes when each reference barrier below 1.3 eV has been matched once from the processtable. Force calls are sad-fcs. The stop is the maximum force on any atom. The potential is morse_pt."
+
+[potential]
+evaluator = "morse_pt"
+kind = "morse"
+name = "morse_pt"
+D = 0.7102
+alpha = 1.6047
+r0 = 2.897
+cutoff = 9.5
+
+[htst]
+temperature = 700
+rate_ref = 155055901.244
+rate_accuracy = 0.999
+prefactor = 1.2e12
+kb = 8.6173324e-5
+barrier_ceiling = 1.3
+barriers = [0.601, 0.601, 0.620, 0.986, 0.987, 0.989, 0.986, 0.987, 0.989, 1.196, 1.196, 1.196, 1.196, 1.207, 1.207]
 
 [convergence]
+norm = "max_atom"
+force_norm = 0.001
+force_unit = "eV/Angstrom"
 max_force_calls = 20000000
 
 [sample]
 starts = 13
 
+[input]
+archive_path = "website/hTST/Pt/eon-dimer-cg/pos.con"
+
 [metrics]
 required = ["barrier_force_calls", "barrier_jobs", "rate_force_calls", "rate_jobs"]
 
-[scoring.legacy]
-label = "legacy"
-rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row stays labelled legacy."
+[scoring.half_even]
+label = "half-even"
+rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row keeps that mean as its published number."
 
 [scoring.v2]
-version = "par2-wilson-bootstrap"
+version = "par2-bootstrap"
 par_factor = 2
 bootstrap_resamples = 2000
 bootstrap_seed = 20261015
@@ -40,8 +64,8 @@ required = [
   "median",
   "median_low",
   "median_high",
-  "wilson_low",
-  "wilson_high",
+  "rate_low",
+  "rate_high",
   "n",
   "nfailed",
   "n_cap",

@@ -15,4 +15,4 @@ try:
 except OSError as exc:
     print(exc)
 else:
-    raise SystemExit("uv was found in an empty bin; this reproducer is stale")
+    raise SystemExit("uv was found in an empty bin; this check is stale")

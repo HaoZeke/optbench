@@ -2,18 +2,41 @@ id = "globalopt/lj150"
 title = "lj150"
 suite = "globalopt"
 problem = "lj150"
-contract = "partial"
+contract = "shared"
 entry_count = 2
+remark = "Success is an energy at or below the Cambridge Cluster Database N=150 minimum plus 0.001. The start set is the 100 numbered coordinate files. The cap of 10000000 force calls is above the archived nosym energy-call mean 6.9596491e+05 plus ten times its standard deviation 5.8454129e+05."
+
+[potential]
+kind = "lennard-jones"
+epsilon = 1.0
+sigma = 1.0
+cutoff = 40.0
+
+[reference]
+energy = -893.310258
+symmetry = "C3v"
+page = "https://www-wales.ch.cam.ac.uk/~jon/structures/LJ/tables.150.html"
+points = "https://www-wales.ch.cam.ac.uk/~jon/structures/LJ/points/150"
+
+[sample]
+starts = 100
+
+[convergence]
+energy_above_minimum = 0.001
+max_force_calls = 10000000
+
+[input]
+archive_path = "website/globalopt/lj150/lj150_clusters.tgz"
 
 [metrics]
 required = ["basin_hopping_steps_mean", "basin_hopping_steps_stddev", "cpu_time_mean", "cpu_time_stddev", "energy_calls_mean", "energy_calls_stddev", "nfailed"]
 
-[scoring.legacy]
-label = "legacy"
-rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row stays labelled legacy."
+[scoring.half_even]
+label = "half-even"
+rule = "2014 half-even mean of the starts under the cap. Failures are left out of that mean. The row keeps that mean as its published number."
 
 [scoring.v2]
-version = "par2-wilson-bootstrap"
+version = "par2-bootstrap"
 par_factor = 2
 bootstrap_resamples = 2000
 bootstrap_seed = 20261015
@@ -33,8 +56,8 @@ required = [
   "median",
   "median_low",
   "median_high",
-  "wilson_low",
-  "wilson_high",
+  "rate_low",
+  "rate_high",
   "n",
   "nfailed",
   "n_cap",

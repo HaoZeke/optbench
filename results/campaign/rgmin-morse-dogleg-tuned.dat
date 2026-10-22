@@ -14,11 +14,11 @@ code_version 0.4.0
 commit 24236559f3815847cac89ba0a7be634ce0beb4a9
 algorithm DOGLEG
 template rgmin/morse-dogleg-tuned
-tuning tuned
+tuning adjusted
 counter harness
 par2_mean 31.26
-wilson_low 0.963006501793
-wilson_high 1
+rate_low 0.963006501793
+rate_high 1
 par2_median 32.5
 par2_median_low 29.4875
 par2_median_high 35.0125
