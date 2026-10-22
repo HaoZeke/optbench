@@ -793,4 +793,4 @@ def test_initializations_are_the_full_set(tmp_path: Path):
     problem = build_board(tmp_path)["problems"]["minimization/toy"]
     assert problem["full_n"] == 4
     assert problem["ranked"] == []
-    assert problem["partial"][0]["partial_reason"] == "scored 2 of 4 starts"
+    assert problem["short"][0]["short_reason"] == "scored 2 of 4 starts"
