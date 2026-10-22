@@ -1,0 +1,27 @@
+# counter harness. One force call is one entry into the harness potential.
+# FIRE at fmax 0.05, no MD. steps_max and the generation count are the force-call cap.
+# A hit is a quench inside fmax and inside the energy window. The cap and a hit leave the search.
+# The problem force-call cap is 2000000. A start at or above it fails. PAR-2 charges each failure twice that cap.
+# EZGA 1.2.31. The relaxer is FIRE at fmax 0.05 with no MD. steps_max and the generation count are the force-call cap. The population is 16 copies of the archived start. A hit is a quench inside fmax and inside the energy window. The seed is 314159 plus the start index.
+counter harness
+force_calls 1882411
+force_calls_min 44076
+force_calls_max 2000000
+force_calls_median 2000000
+nfailed 93
+n 100
+cap 2000000
+par2_mean 3742411.45
+median 4000000
+median_low 4000000
+median_high 4000000
+wilson_low 0.03431926107
+wilson_high 0.1374951474
+code EZGA
+code_version 1.2.31
+commit 1395e8de01f003e40a3352987377d5f863a2e388
+algorithm GA
+tuning default
+template ezga/lj38
+problem globalopt/lj38
+reducer capped

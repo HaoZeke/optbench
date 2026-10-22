@@ -17260,37 +17260,46 @@
       "partial": [],
       "profile": {
         "area_log10": {
-          "airss/lj38 0.9.4 default campaign 5593cc4": 1.1062852340651308,
-          "eon-client/bh-lj38 3.5.0 campaign 4d8b34b": 0.5252973424336471,
-          "eon-svn/bh-lj38 r2549 campaign r2549": 0.4786376931057301
+          "airss/lj38 0.9.4 default campaign 5593cc4": 1.1002646341518514,
+          "eon-client/bh-lj38 3.5.0 campaign 4d8b34b": 0.5207818924986874,
+          "eon-svn/bh-lj38 r2549 campaign r2549": 0.4756273931490903,
+          "ezga/lj38 1.2.31 default campaign 1395e8d": 0.0496699492845569
         },
         "rho": {
           "airss/lj38 0.9.4 default campaign 5593cc4": [
             0.77,
-            0.9,
-            0.92,
+            0.89,
+            0.91,
             0.98,
             0.98
           ],
           "eon-client/bh-lj38 3.5.0 campaign 4d8b34b": [
-            0.13,
-            0.27,
+            0.12,
+            0.26,
             0.43,
             0.6,
             0.76
           ],
           "eon-svn/bh-lj38 r2549 campaign r2549": [
             0.1,
-            0.22,
+            0.21,
             0.38,
             0.57,
             0.74
+          ],
+          "ezga/lj38 1.2.31 default campaign 1395e8d": [
+            0.01,
+            0.02,
+            0.05,
+            0.06,
+            0.06
           ]
         },
         "solved": {
           "airss/lj38 0.9.4 default campaign 5593cc4": 1.0,
           "eon-client/bh-lj38 3.5.0 campaign 4d8b34b": 1.0,
-          "eon-svn/bh-lj38 r2549 campaign r2549": 0.98
+          "eon-svn/bh-lj38 r2549 campaign r2549": 0.98,
+          "ezga/lj38 1.2.31 default campaign 1395e8d": 0.07
         },
         "taus": [
           1.0,
@@ -17435,6 +17444,51 @@
           "tuning": "",
           "wilson_high": 0.9944980324498376,
           "wilson_low": 0.929988209271456
+        },
+        {
+          "asv_commit": "",
+          "call_unit": "total",
+          "cap": 2000000,
+          "code": "EZGA",
+          "code_version": "1.2.31",
+          "commit": "1395e8de01f003e40a3352987377d5f863a2e388",
+          "comparable": true,
+          "counter": "harness",
+          "current": true,
+          "entry": "ezga-1.2.31-lj38",
+          "failures": {
+            "cap": 93,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 0
+          },
+          "full_n": 100,
+          "history": false,
+          "max_calls": 2000000.0,
+          "mean_calls": 1882411.45,
+          "mean_per_image": null,
+          "median": 4000000.0,
+          "median_calls": 2000000.0,
+          "median_high": 4000000.0,
+          "median_low": 4000000.0,
+          "median_per_image": null,
+          "min_calls": 44076.0,
+          "n": 100,
+          "nfailed": 93,
+          "note": "starts.jsonl",
+          "par2_mean": 3742411.45,
+          "partial": false,
+          "partial_reason": "",
+          "path": "results/campaign/ezga-1.2.31-lj38.dat",
+          "problem": "globalopt/lj38",
+          "registry_match": true,
+          "scored": true,
+          "source": "campaign",
+          "success_rate": 0.07,
+          "template": "ezga/lj38",
+          "tuning": "default",
+          "wilson_high": 0.137495147390735,
+          "wilson_low": 0.03431926106727268
         }
       ],
       "title": "Lennard-Jones 38 global minimum"
@@ -47972,7 +48026,7 @@
       "title": "pt-island"
     }
   },
-  "ranked_count": 559,
+  "ranked_count": 560,
   "schema": "optbench.board/v1",
   "unmapped": [
     {

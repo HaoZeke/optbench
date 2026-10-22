@@ -1376,7 +1376,21 @@ The number is written only after the run finishes under the problem rule.
    <td><a href="https://gitlab.mpcdf.mpg.de/fhi-theory/EZGA">https://gitlab.mpcdf.mpg.de/fhi-theory/EZGA</a></td>
    </tr>
    </tbody></table></div>
-   <p>No full ranked run.</p>
+   <div class="bench-scroll"><table data-board-table="code-best">
+   <caption>Best full harness run on each problem.</caption>
+   <thead><tr><th>Problem</th><th>Template</th><th>Version</th><th>Commit</th><th>PAR-2</th><th>Mean calls</th><th>Median calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="globalopt/lj38" data-template="ezga/lj38">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="template">ezga/lj38</td>
+   <td data-field="version">EZGA 1.2.31</td>
+   <td data-field="commit">1395e8de01f0</td>
+   <td data-field="par2_mean">3.74241e+06</td>
+   <td data-field="mean_calls">1.88241e+06</td>
+   <td data-field="median_calls">2e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 93, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   </tbody></table></div>
    <h3>AIRSS</h3>
    <div class="bench-scroll"><table>
    <caption>Registry pins.</caption>
