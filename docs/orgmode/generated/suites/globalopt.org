@@ -7,7 +7,7 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>Sella</th><th>GMIN</th><th>pele</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>Eon svn</th><th>rgmin</th><th>rgsaddle</th><th>geodesic</th><th>ASE</th><th>asebh</th><th>Sella</th><th>GMIN</th><th>pele</th><th>LAMMPS</th><th>pysisyphus</th><th>AIRSS</th><th>vc-SQNM</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>optking</th><th>softsaddle</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="globalopt/lj100-binary">
    <th scope="row"><a href="#lj100-binary">Binary Lennard-Jones 100</a></th>
    <td data-code="eOn">—</td>
@@ -16,6 +16,7 @@
    <td data-code="rgsaddle">—</td>
    <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
+   <td data-code="asebh">—</td>
    <td data-code="Sella">—</td>
    <td data-code="GMIN">—</td>
    <td data-code="pele">—</td>
@@ -40,6 +41,7 @@
    <td data-code="rgsaddle">—</td>
    <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
+   <td data-code="asebh">—</td>
    <td data-code="Sella">—</td>
    <td data-code="GMIN">—</td>
    <td data-code="pele">—</td>
@@ -64,6 +66,7 @@
    <td data-code="rgsaddle">—</td>
    <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
+   <td data-code="asebh" data-template="asebh/lj38-basin-default" data-par2="3.97747e+06"><span class="bench-score">3.97747e+06</span><a href="#lj38-templates">asebh/lj38-basin-default</a></td>
    <td data-code="Sella">—</td>
    <td data-code="GMIN">—</td>
    <td data-code="pele">—</td>
@@ -88,6 +91,7 @@
    <td data-code="rgsaddle">—</td>
    <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
+   <td data-code="asebh">—</td>
    <td data-code="Sella">—</td>
    <td data-code="GMIN">—</td>
    <td data-code="pele">—</td>
@@ -112,6 +116,7 @@
    <td data-code="rgsaddle">—</td>
    <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
+   <td data-code="asebh">—</td>
    <td data-code="Sella">—</td>
    <td data-code="GMIN">—</td>
    <td data-code="pele">—</td>
@@ -136,6 +141,7 @@
    <td data-code="rgsaddle">—</td>
    <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
+   <td data-code="asebh">—</td>
    <td data-code="Sella">—</td>
    <td data-code="GMIN">—</td>
    <td data-code="pele">—</td>
@@ -160,6 +166,7 @@
    <td data-code="rgsaddle">—</td>
    <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
+   <td data-code="asebh">—</td>
    <td data-code="Sella">—</td>
    <td data-code="GMIN">—</td>
    <td data-code="pele">—</td>
@@ -184,6 +191,7 @@
    <td data-code="rgsaddle">—</td>
    <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
+   <td data-code="asebh">—</td>
    <td data-code="Sella">—</td>
    <td data-code="GMIN">—</td>
    <td data-code="pele">—</td>
@@ -265,8 +273,11 @@
    <h2>lj150</h2>
    <dl class="bench-rule">
    <dt>Cap</dt><dd>2000000 force calls</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>100</dd>
+   <dt>Potential</dt><dd>lennard-jones</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
-   <dt>Note</dt><dd>The 2014 archive states no force-call cap. archive/entries/globalopt/lj150/gmin-nosym/benchmark.dat records energy_calls_mean and energy_calls_stddev, not a force-call cap. The declared cap is 2000000, the cap recorded for ranked rows eon-client-bh-lj38 and eon-svn-bh-lj38 in results/board/problems/globalopt-lj38.json.</dd>
+   <dt>Note</dt><dd>Success is an energy at or below the Cambridge Cluster Database N=150 minimum plus 0.001. The declared force-call cap is 2000000.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
@@ -342,10 +353,11 @@
    <dt>Note</dt><dd>The 2014 eOn config at archive/entries/globalopt/lj38/eon-basinhopping/config.ini sets steps to 10000000 and states no force-call cap. benchmark.dat in that directory records an observed force_calls_max of 1795901. The pele benchmark.dat records an observed force_calls_max of 2.5339e+06. Those lines are maxima, not caps. The declared cap is 2000000, the cap recorded for ranked rows eon-client-bh-lj38 and eon-svn-bh-lj38 in results/board/problems/globalopt-lj38.json.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
+   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <figure class="bench-plot"><a href="../../_static/board/globalopt-lj38-profile.svg"><picture><source srcset="../../_static/board/globalopt-lj38-profile.webp" type="image/webp"><img src="../../_static/board/globalopt-lj38-profile.png" alt="Dolan-More profile for globalopt/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Dolan-More profile. Select the plot for the full SVG.</figcaption></figure>
    <figure class="bench-plot"><a href="../../_static/board/globalopt-lj38-cost.svg"><picture><source srcset="../../_static/board/globalopt-lj38-cost.webp" type="image/webp"><img src="../../_static/board/globalopt-lj38-cost.png" alt="Cost versus success for globalopt/lj38" loading="lazy" decoding="async"></picture></a><figcaption>Cost versus success. Select the plot for the full SVG.</figcaption></figure>
    <details class="bench-details" id="lj38-templates">
-   <summary>All templates (3 ranked)</summary>
+   <summary>All templates (4 ranked)</summary>
    <div class="bench-scroll">
    <table data-board-table="ranked" data-problem="globalopt/lj38">
    <caption>Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. Wilson bounds are the 95% interval on the success rate.</caption>
@@ -353,7 +365,12 @@
    <tr><td data-field="template">airss/lj38</td><td data-field="version">AIRSS 0.9.4</td><td data-field="commit">5593cc4ee360</td><td data-field="source">campaign</td><td data-field="par2_mean">112134</td><td data-field="success_rate">1</td><td data-field="wilson">0.963007–1</td><td data-field="median_calls">70635.5</td><td data-field="mean_calls">112134</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">eon-client/bh-lj38</td><td data-field="version">eOn 3.5.0</td><td data-field="commit">4d8b34baf1ba</td><td data-field="source">campaign</td><td data-field="par2_mean">503146</td><td data-field="success_rate">1</td><td data-field="wilson">0.963007–1</td><td data-field="median_calls">369028</td><td data-field="mean_calls">503146</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    <tr><td data-field="template">eon-svn/bh-lj38</td><td data-field="version">Eon svn r2549</td><td data-field="commit">r2549</td><td data-field="source">campaign</td><td data-field="par2_mean">598530</td><td data-field="success_rate">0.98</td><td data-field="wilson">0.929988–0.994498</td><td data-field="median_calls">423226</td><td data-field="mean_calls">558530</td><td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 0</td><td data-field="n">100</td></tr>
+   <tr><td data-field="template">asebh/lj38-basin-default</td><td data-field="version">asebh 3.29.0</td><td data-field="commit">f27c0005ae6a</td><td data-field="source">campaign, asv</td><td data-field="par2_mean">3.97747e+06</td><td data-field="success_rate">0.01</td><td data-field="wilson">0.00176743–0.0544862</td><td data-field="median_calls">2e+06</td><td data-field="mean_calls">1.99747e+06</td><td data-field="failures">crash 0, divergence 0, cap 99, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
+   <h3>Partial</h3><ul>
+   <li>asebh/lj38-basin-tuned asebh campaign, asv n=100, template sets ranked false.</li>
+   <li>asebh/lj38-mh-default asebh campaign n=17, result file sets partial true.</li>
+   </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="lj38-legacy">
    <h3>Legacy 2014 archive</h3>
@@ -435,8 +452,11 @@
    <h2>lj75</h2>
    <dl class="bench-rule">
    <dt>Cap</dt><dd>2000000 force calls</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>200</dd>
+   <dt>Potential</dt><dd>lennard-jones</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
-   <dt>Note</dt><dd>The 2014 archive states no force-call cap. archive/entries/globalopt/lj75/gmin/benchmark.dat records an observed force_calls_max of 3.1011e+05, which is not a cap. The declared cap is 2000000, the cap recorded for ranked rows eon-client-bh-lj38 and eon-svn-bh-lj38 in results/board/problems/globalopt-lj38.json.</dd>
+   <dt>Note</dt><dd>Success is an energy at or below the Cambridge Cluster Database N=75 minimum plus 0.001. The declared force-call cap is 2000000.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
@@ -451,6 +471,7 @@
    </tbody></table></div>
    <h3>Partial</h3><ul>
    <li>airss/lj75 AIRSS campaign n=200, result file sets partial true.</li>
+   <li>ase-globalopt/lj75-basinhopping ASE campaign n=200, template sets ranked false.</li>
    </ul>
    </details>
    </section><section class="bench bench-legacy-section" id="lj75-legacy">
@@ -491,8 +512,11 @@
    <h2>lj98</h2>
    <dl class="bench-rule">
    <dt>Cap</dt><dd>2000000 force calls</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>100</dd>
+   <dt>Potential</dt><dd>lennard-jones</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
-   <dt>Note</dt><dd>The 2014 archive states no force-call cap. archive/entries/globalopt/lj98/gmin-nosym/benchmark.dat records energy_calls_mean and energy_calls_stddev, not a force-call cap. The declared cap is 2000000, the cap recorded for ranked rows eon-client-bh-lj38 and eon-svn-bh-lj38 in results/board/problems/globalopt-lj38.json.</dd>
+   <dt>Note</dt><dd>Success is an energy at or below the Cambridge Cluster Database N=98 minimum plus 0.001. The declared force-call cap is 2000000.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
@@ -562,8 +586,11 @@
    <h2>tip4p10</h2>
    <dl class="bench-rule">
    <dt>Cap</dt><dd>2000000 force calls</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>10000</dd>
+   <dt>Potential</dt><dd>tip4p</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
-   <dt>Note</dt><dd>The 2014 archive states no force-call cap. archive/entries/globalopt/tip4p10/gmin/benchmark.dat records an observed force_calls_max of 1.4836e+05, which is not a cap. The declared cap is 2000000, the cap recorded for ranked rows eon-client-bh-lj38 and eon-svn-bh-lj38 in results/board/problems/globalopt-lj38.json.</dd>
+   <dt>Note</dt><dd>Success is an energy at or below the Cambridge Cluster Database TIP4P N=10 minimum plus 0.001. The declared force-call cap is 2000000.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
@@ -627,8 +654,11 @@
    <h2>tip4p15</h2>
    <dl class="bench-rule">
    <dt>Cap</dt><dd>2000000 force calls</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>500</dd>
+   <dt>Potential</dt><dd>tip4p</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
-   <dt>Note</dt><dd>The 2014 archive states no force-call cap. archive/entries/globalopt/tip4p15/gmin/benchmark.dat records an observed force_calls_max of 5.0265e+06 and gmin-tbp/benchmark.dat records 6.1769e+06. Those are observed maxima, not caps. The declared cap is 2000000, the cap recorded for ranked rows eon-client-bh-lj38 and eon-svn-bh-lj38 in results/board/problems/globalopt-lj38.json.</dd>
+   <dt>Note</dt><dd>Success is an energy at or below the Cambridge Cluster Database TIP4P N=15 minimum plus 0.001. The declared force-call cap is 2000000.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
@@ -692,8 +722,11 @@
    <h2>tip4p20</h2>
    <dl class="bench-rule">
    <dt>Cap</dt><dd>2000000 force calls</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
+   <dt>Starts</dt><dd>100</dd>
+   <dt>Potential</dt><dd>tip4p</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
-   <dt>Note</dt><dd>The 2014 archive states no force-call cap. archive/entries/globalopt/tip4p20/gmin/benchmark.dat records an observed force_calls_max of 1.4191e+08 and gmin-tbp/benchmark.dat records 1.4340e+08. Those are observed maxima, not caps. The declared cap is 2000000, the cap recorded for ranked rows eon-client-bh-lj38 and eon-svn-bh-lj38 in results/board/problems/globalopt-lj38.json.</dd>
+   <dt>Note</dt><dd>Success is an energy at or below the Cambridge Cluster Database TIP4P N=20 minimum plus 0.001. The declared force-call cap is 2000000.</dd>
    <dt>Contract</dt><dd>Partly stated. The columns are the keys shared by every archived file.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>

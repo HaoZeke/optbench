@@ -90,7 +90,7 @@
    <td data-code="geodesic">—</td>
    <td data-code="ASE">—</td>
    <td data-code="asebh">—</td>
-   <td data-code="Sella" data-template="sella/pt-island-search-default" data-par2="5201.62"><span class="bench-score">5201.62</span><a href="generated/suites/saddle-search.html#pt-island-templates">sella/pt-island-search-default</a></td>
+   <td data-code="Sella">—</td>
    <td data-code="GMIN">—</td>
    <td data-code="pele">—</td>
    <td data-code="LAMMPS">—</td>
@@ -213,8 +213,8 @@
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle">—</td>
    <td data-code="geodesic">—</td>
-   <td data-code="ASE" data-template="ase-globalopt/lj75-basinhopping" data-par2="2e+06"><span class="bench-score">2e+06</span><a href="generated/suites/globalopt.html#lj75-templates">ase-globalopt/lj75-basinhopping</a></td>
-   <td data-code="asebh" data-template="asebh/lj75-basin-default" data-par2="2e+06"><span class="bench-score">2e+06</span><a href="generated/suites/globalopt.html#lj75-templates">asebh/lj75-basin-default</a></td>
+   <td data-code="ASE">—</td>
+   <td data-code="asebh">—</td>
    <td data-code="Sella">—</td>
    <td data-code="GMIN">—</td>
    <td data-code="pele">—</td>

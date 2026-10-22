@@ -5,6 +5,51 @@
   "not_comparable": [],
   "partial": [
     {
+      "asv_commit": "352e1af6deee7496d3ad4738fa81772befc2294b",
+      "call_unit": "total",
+      "cap": 2000000,
+      "code": "asebh",
+      "code_version": "3.29.0",
+      "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
+      "comparable": true,
+      "counter": "harness",
+      "current": false,
+      "entry": "asebh-3.29.0-lj38-basin-tuned",
+      "failures": {
+        "cap": 100,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "full_n": 100,
+      "history": false,
+      "max_calls": 2000000.0,
+      "mean_calls": 2000000.0,
+      "mean_per_image": null,
+      "median": 4000000.0,
+      "median_calls": 2000000.0,
+      "median_high": 4000000.0,
+      "median_low": 4000000.0,
+      "median_per_image": null,
+      "min_calls": 2000000.0,
+      "n": 100,
+      "nfailed": 100,
+      "note": "starts.jsonl",
+      "par2_mean": 4000000.0,
+      "partial": true,
+      "partial_reason": "template sets ranked false",
+      "path": "results/campaign/asebh-3.29.0-lj38-basin-tuned.dat; results/asv/352e1af6deee7496d3ad4738fa81772befc2294b",
+      "problem": "globalopt/lj38",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign, asv",
+      "success_rate": 0.0,
+      "template": "asebh/lj38-basin-tuned",
+      "tuning": "tuned",
+      "wilson_high": 0.03699349820698568,
+      "wilson_low": 0.0
+    },
+    {
       "asv_commit": "",
       "call_unit": "total",
       "cap": 2000000,
@@ -54,7 +99,6 @@
     "area_log10": {
       "airss/lj38 0.9.4 default campaign 5593cc4": 1.089728584303612,
       "asebh/lj38-basin-default 3.29.0 default campaign, asv f27c000": 0.0,
-      "asebh/lj38-basin-tuned 3.29.0 tuned campaign, asv f27c000": 0.0,
       "eon-client/bh-lj38 3.5.0 campaign 4d8b34b": 0.4906788929322894,
       "eon-svn/bh-lj38 r2549 campaign r2549": 0.4741222431707704
     },
@@ -67,13 +111,6 @@
         0.98
       ],
       "asebh/lj38-basin-default 3.29.0 default campaign, asv f27c000": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "asebh/lj38-basin-tuned 3.29.0 tuned campaign, asv f27c000": [
         0.0,
         0.0,
         0.0,
@@ -98,7 +135,6 @@
     "solved": {
       "airss/lj38 0.9.4 default campaign 5593cc4": 1.0,
       "asebh/lj38-basin-default 3.29.0 default campaign, asv f27c000": 0.01,
-      "asebh/lj38-basin-tuned 3.29.0 tuned campaign, asv f27c000": 0.0,
       "eon-client/bh-lj38 3.5.0 campaign 4d8b34b": 1.0,
       "eon-svn/bh-lj38 r2549 campaign r2549": 0.98
     },
@@ -290,51 +326,6 @@
       "tuning": "default",
       "wilson_high": 0.054486196178705315,
       "wilson_low": 0.0017674320641406505
-    },
-    {
-      "asv_commit": "352e1af6deee7496d3ad4738fa81772befc2294b",
-      "call_unit": "total",
-      "cap": 2000000,
-      "code": "asebh",
-      "code_version": "3.29.0",
-      "commit": "f27c0005ae6a67ea419f996e728668865bfc1f86",
-      "comparable": true,
-      "counter": "harness",
-      "current": true,
-      "entry": "asebh-3.29.0-lj38-basin-tuned",
-      "failures": {
-        "cap": 100,
-        "crash": 0,
-        "divergence": 0,
-        "wrong_stationary": 0
-      },
-      "full_n": 100,
-      "history": false,
-      "max_calls": 2000000.0,
-      "mean_calls": 2000000.0,
-      "mean_per_image": null,
-      "median": 4000000.0,
-      "median_calls": 2000000.0,
-      "median_high": 4000000.0,
-      "median_low": 4000000.0,
-      "median_per_image": null,
-      "min_calls": 2000000.0,
-      "n": 100,
-      "nfailed": 100,
-      "note": "starts.jsonl",
-      "par2_mean": 4000000.0,
-      "partial": false,
-      "partial_reason": "",
-      "path": "results/campaign/asebh-3.29.0-lj38-basin-tuned.dat; results/asv/352e1af6deee7496d3ad4738fa81772befc2294b",
-      "problem": "globalopt/lj38",
-      "registry_match": true,
-      "scored": true,
-      "source": "campaign, asv",
-      "success_rate": 0.0,
-      "template": "asebh/lj38-basin-tuned",
-      "tuning": "tuned",
-      "wilson_high": 0.03699349820698568,
-      "wilson_low": 0.0
     }
   ],
   "title": "Lennard-Jones 38 global minimum"
