@@ -178,6 +178,7 @@ def test_timed_out_search_keeps_a_failed_record_without_fabricating_calls(tmp_pa
     options = load_template(ROOT, "gpridge/cuh2-gp-dimer-k2")["gpridge"]
     job = {"name": "displacement-3", "displacement": 3., "directory": str(tmp_path / "case"),
            "files": files, "sources": {}, "problem": problem,
+           "rpc_sources": {}, "rpc_client": problem["rpc_client"],
            "runtime": {"binary": "gprd"}, "oracle": {"binary": "potserv"}, "options": options}
     monkeypatch.setattr(native, "write_inputs", inputs)
     monkeypatch.setattr(native, "run_search", timeout)
@@ -206,3 +207,32 @@ def test_failed_verification_retains_completed_evaluations_and_request_count():
         native.verify_positions(atoms, atoms.positions.copy(), calc, .01, progress)
     assert progress == {"completed": 2, "requested": 3}
     assert calc.calls == 2
+
+
+def test_rpc_client_pin_is_independent_and_rejects_revision_schema_or_source_changes(tmp_path):
+    import json
+
+    client = tmp_path / "calculator.py"
+    client.write_text("bounded calculator")
+    schema = tmp_path / "Potentials.capnp"
+    schema.write_text("compatible server")
+    contract = {"source_repository": "https://github.com/OmniPotentRPC/rgpot",
+                "source_revision": "a" * 40, "sha256": {"calculator.py": native.digest(client)},
+                "server_schema_sha256": native.digest(schema)}
+    provenance = tmp_path / "source-provenance.json"
+    provenance.write_text(json.dumps({"source_revision": "a" * 40}))
+    files, identity = native.checked_rpc_client(tmp_path, contract, str(schema))
+    assert files == {"calculator.py": str(client)}
+    assert identity == {**contract, "source_root": str(tmp_path),
+                        "source_provenance_sha256": native.digest(provenance)}
+    provenance.write_text(json.dumps({"source_revision": "b" * 40}))
+    with pytest.raises(ValueError, match="revision"):
+        native.checked_rpc_client(tmp_path, contract, str(schema))
+    provenance.write_text(json.dumps({"source_revision": "a" * 40}))
+    schema.write_text("incompatible server")
+    with pytest.raises(ValueError, match="server schema"):
+        native.checked_rpc_client(tmp_path, contract, str(schema))
+    schema.write_text("compatible server")
+    client.write_text("unbounded calculator")
+    with pytest.raises(ValueError, match="checksum"):
+        native.checked_rpc_client(tmp_path, contract, str(schema))

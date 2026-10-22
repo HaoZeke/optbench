@@ -27,8 +27,16 @@ source_revision = "fa64cf37aaf0172180de8dac0a0baefbdba85a0d"
 [native_sources.sha256]
 "scripts/prepare_petmad_assets.py" = "8353d9a4e6b5ed4454072bb3826621a3198bfd2a52b73765e6d601c1fcb49d09"
 "schema/gprd_params.capnp" = "a2cf858e986ee6d04ecf79d61e76f0114d0609bec48e4989d89de7fd91fe4724"
-"subprojects/rgpot/CppCore/rgpot/rpc/ase_calculator.py" = "4bde08be273bb7c0d7db2aefc4b43a61e7869c65a93b6c4186d30f70702575c8"
 "subprojects/rgpot/CppCore/rgpot/rpc/Potentials.capnp" = "8c24c3a4b489d0d5d614c3acfc9ba68b39e6afca3536d0f94fbafc25ca88dcf0"
+
+[rpc_client]
+source_repository = "https://github.com/OmniPotentRPC/rgpot"
+source_revision = "4bcdd7859c29fde7162ee14a5722c86dd1e9095e"
+server_schema_sha256 = "8c24c3a4b489d0d5d614c3acfc9ba68b39e6afca3536d0f94fbafc25ca88dcf0"
+
+[rpc_client.sha256]
+"CppCore/rgpot/rpc/ase_calculator.py" = "4f82220786baf262e756cad564716d4d36ffb637aad52bb938ecf29c5642f79a"
+"CppCore/rgpot/rpc/Potentials.capnp" = "f501ee764928ab29056b16e4870e12485db8d5f479314366d1b1c907b7539deb"
 
 [convergence]
 norm = "linf"

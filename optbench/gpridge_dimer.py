@@ -30,6 +30,24 @@ def checked_files(directory: Path, hashes: dict) -> dict[str, str]:
     return result
 
 
+def checked_rpc_client(directory: Path, contract: dict, server_schema: str) -> tuple[dict, dict]:
+    """Pin the maintained client independently of the numerical executable."""
+    directory = directory.resolve(strict=True)
+    provenance = directory / "source-provenance.json"
+    found = json.loads(provenance.read_text())["source_revision"]
+    if found != contract["source_revision"]:
+        raise ValueError("rgpot RPC client revision differs from the problem contract")
+    sources = checked_files(directory, contract["sha256"])
+    if digest(Path(server_schema)) != contract["server_schema_sha256"]:
+        raise ValueError("rgpot server schema differs from the compatible pinned contract")
+    identity = {"source_repository": contract["source_repository"],
+                "source_revision": found, "source_root": str(directory),
+                "source_provenance_sha256": digest(provenance),
+                "sha256": contract["sha256"],
+                "server_schema_sha256": contract["server_schema_sha256"]}
+    return sources, identity
+
+
 def load_module(path: str, name: str):
     spec = importlib.util.spec_from_file_location(name, path)
     module = importlib.util.module_from_spec(spec)
@@ -212,6 +230,7 @@ def _execute(job: dict) -> dict:
         "argv": argv, "runtime": job["runtime"], "oracle": job["oracle"],
         "input_sha256": inputs, "source_input_sha256": job["problem"]["input"]["sha256"],
         "native_source_sha256": job["problem"]["native_sources"]["sha256"],
+        "rpc_client": job["rpc_client"],
         "displacement": job["displacement"],
         "environment": {key: env[key] for key in
                         ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS")},
@@ -243,7 +262,7 @@ def _execute(job: dict) -> dict:
         final = atoms.copy()
         final.positions[:] = positions
         write(directory / "saddle.con", final, format="eon")
-        module = load_module(job["sources"]["subprojects/rgpot/CppCore/rgpot/rpc/ase_calculator.py"],
+        module = load_module(job["rpc_sources"]["CppCore/rgpot/rpc/ase_calculator.py"],
                              "gpridge_rgpot_calculator")
         with module.RgpotCalculator.spawn(
                 server_bin=job["oracle"]["binary"], potential="CuH2",
@@ -288,6 +307,9 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path,
         raise ValueError("verification_timeout must be finite and positive")
     files = checked_files(root / problem["input"]["directory"], problem["input"]["sha256"])
     sources = checked_files(Path(os.environ["GPRIDGE_SOURCE"]), problem["native_sources"]["sha256"])
+    rpc_sources, rpc_client = checked_rpc_client(
+        Path(os.environ["GPRIDGE_RGPOT_SOURCE"]), problem["rpc_client"],
+        sources["subprojects/rgpot/CppCore/rgpot/rpc/Potentials.capnp"])
     identity = runtime(template, "gprd")
     oracle = runtime(template, "potserv")
     displacements = problem["sample"]["displacements"]
@@ -297,12 +319,14 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path,
     jobs = [{"name": f"displacement-{value:g}", "displacement": value,
              "directory": str(work / f"displacement-{value:g}"),
              "files": files, "sources": sources, "problem": problem,
+             "rpc_sources": rpc_sources, "rpc_client": rpc_client,
              "runtime": identity, "oracle": oracle, "options": template["gpridge"]}
             for value in displacements]
     records = run_jobs(jobs, _execute, workers)
     settings = {"cap": problem["convergence"]["max_force_calls"]}
     return write_campaign(output, records, template, problem, settings,
                           {"runtime": identity, "oracle": oracle, "gpridge": template["gpridge"],
+                           "rpc_client": rpc_client,
                            "input_sha256": problem["input"]["sha256"],
                            "native_source_sha256": problem["native_sources"]["sha256"]},
                           images=None, counter="client",
