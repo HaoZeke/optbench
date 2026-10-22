@@ -346,3 +346,20 @@ def test_runtime_validates_a_nested_packaged_server(tmp_path, monkeypatch):
     identity = native.runtime({"commit": "revision"}, "potserv")
     assert identity["validated_sha256"] == "original-server"
     assert identity["runtime_manifest_sha256"] == native.digest(tmp_path / "runtime.json")
+
+
+@pytest.mark.parametrize("system", ["heptamer", "island"])
+def test_extended_fit_baseline_keeps_publication_physical_settings(system):
+    from optbench.campaign import load_template
+    from optbench.engines.common import registry_pin, require_pin
+
+    root = Path(__file__).resolve().parents[1]
+    publication = load_template(root, f"gpridge/pt-{system}-gp-neb-auto")
+    extended = load_template(root, f"gpridge/pt-{system}-gp-neb-extended")
+    require_pin(extended, registry_pin(root, "gpridge"))
+    assert extended["problem"] == publication["problem"]
+    assert extended["gpridge"] == {
+        **publication["gpridge"], "arithmetic": "reproducible", "model_profile": "extended",
+        "hyperparameter_mode": "inla", "hssvd": True, "active_posterior": False,
+        "prior_mean_statistic": "mean", "seed_full_chain": False,
+    }
