@@ -12,6 +12,26 @@ LAMMPS calculator that calls it. The harness has no EAM evaluator. hTST and
 accelerated-md problems state rates and barriers, not a force-call cap, so
 they are not given a force-call row.
 
+## saddle-search/pt-island
+
+The potential is eOn `Morse::force`: `pair_style = "eon-morse"`, cutoff 9.5,
+pair energy shifted to zero at the cutoff, raw Morse force, minimum image on
+every positive box axis. `pes.morse_pt` matches that force.
+`morse/smooth/linear` does not. On the island reactant the smooth-linear
+force differs by 3.285e-3 eV/angstrom, above the 1e-3 stop.
+`tsopt/pt-island` stays on smooth-linear.
+
+The link is the eOn r2205 rule. `Matter::perAtomNorm` is strictly below
+`distance_difference` 0.1 angstrom, and exactly one minimized endpoint
+matches the reactant. Novelty is `AKMCState.find_repeat`: the absolute
+barrier difference is at most 0.01 eV, and the same per-atom test is applied
+to the saddle. `fraction_connected` is the 2014 `done.py` ratio.
+`unique_saddles` counts good saddles, including a barrier at or above 1.5 eV.
+
+One search start is `draw_search_start`. The seed is
+`(20261015+rep)*1000003+attempt`. Both endpoint minima are stored in
+`<stem>.endpoints.npz` next to the starts file.
+
 ## Rows on disk
 
 Failure classes are the v2 counts. They sum to `nfailed`. The median is the
