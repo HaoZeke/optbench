@@ -7,11 +7,10 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>eOn (develop 7095b23ac17d49f434a5e08ccb072897ceca698e)</th><th>EON (SVN r2549)</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>EON (SVN r2549)</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="neb/Pt-heptamer">
    <th scope="row"><a href="#Pt-heptamer">Pt-heptamer</a></th>
    <td data-code="eOn">—</td>
-   <td data-code="eOn (develop 7095b23ac17d49f434a5e08ccb072897ceca698e)">—</td>
    <td data-code="EON (SVN r2549)" data-template="eon-svn/neb-pt-ci" data-par2="336.769"><span class="bench-score">336.769</span><a href="#Pt-heptamer-templates">eon-svn/neb-pt-ci</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/idpp-ci-neb-lbfgs" data-par2="318.308"><span class="bench-score">318.308</span><a href="#Pt-heptamer-templates">rgsaddle/idpp-ci-neb-lbfgs</a></td>

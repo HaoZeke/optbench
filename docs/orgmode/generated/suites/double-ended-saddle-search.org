@@ -7,11 +7,10 @@
    <section class="bench" id="summary"><div class="bench-scroll">
    <table data-board-table="summary">
    <caption>Best full harness run of each code. Lower PAR-2 is better. The full template table is on the problem page.</caption>
-   <thead><tr><th>Problem</th><th>eOn</th><th>eOn (develop 7095b23ac17d49f434a5e08ccb072897ceca698e)</th><th>EON (SVN r2549)</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
+   <thead><tr><th>Problem</th><th>eOn</th><th>EON (SVN r2549)</th><th>rgmin</th><th>rgsaddle</th><th>ASE</th><th>Sella</th><th>pysisyphus</th><th>artn</th><th>compass</th><th>dlfind</th><th>lammps</th><th>optim</th><th>tsase</th></tr></thead><tbody>
    <tr data-problem="double-ended-saddle-search/lj38">
    <th scope="row"><a href="#lj38">LJ38 double-ended saddle</a></th>
    <td data-code="eOn" data-template="eon-client/de-lj38-lanczos-improved" data-par2="259.46"><span class="bench-score">259.46</span><a href="#lj38-templates">eon-client/de-lj38-lanczos-improved</a></td>
-   <td data-code="eOn (develop 7095b23ac17d49f434a5e08ccb072897ceca698e)">—</td>
    <td data-code="EON (SVN r2549)" data-template="eon-svn/de-lj38-lanczos-improved" data-par2="235.2"><span class="bench-score">235.2</span><a href="#lj38-templates">eon-svn/de-lj38-lanczos-improved</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="853.56"><span class="bench-score">853.56</span><a href="#lj38-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
@@ -28,7 +27,6 @@
    <tr data-problem="double-ended-saddle-search/lj38_2ts_separation">
    <th scope="row"><a href="#lj38_2ts_separation">lj38_2ts_separation</a></th>
    <td data-code="eOn" data-template="eon-client/de-2ts-lanczos-improved" data-par2="520.333"><span class="bench-score">520.333</span><a href="#lj38_2ts_separation-templates">eon-client/de-2ts-lanczos-improved</a></td>
-   <td data-code="eOn (develop 7095b23ac17d49f434a5e08ccb072897ceca698e)">—</td>
    <td data-code="EON (SVN r2549)" data-template="eon-svn/de-2ts-lanczos-improved" data-par2="502.784"><span class="bench-score">502.784</span><a href="#lj38_2ts_separation-templates">eon-svn/de-2ts-lanczos-improved</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="8024.43"><span class="bench-score">8024.43</span><a href="#lj38_2ts_separation-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
@@ -45,7 +43,6 @@
    <tr data-problem="double-ended-saddle-search/pt-island">
    <th scope="row"><a href="#pt-island">pt-island</a></th>
    <td data-code="eOn">—</td>
-   <td data-code="eOn (develop 7095b23ac17d49f434a5e08ccb072897ceca698e)">—</td>
    <td data-code="EON (SVN r2549)" data-template="eon-svn/de-pt-lanczos-improved" data-par2="180.644"><span class="bench-score">180.644</span><a href="#pt-island-templates">eon-svn/de-pt-lanczos-improved</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/ew-ci-neb-lbfgs" data-par2="422.136"><span class="bench-score">422.136</span><a href="#pt-island-templates">rgsaddle/ew-ci-neb-lbfgs</a></td>
