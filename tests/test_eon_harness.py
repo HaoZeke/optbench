@@ -100,7 +100,7 @@ def test_develop_lj75_keeps_the_lj38_ini():
 
     loaded = load_template(ROOT, "eon-develop/bh-lj75")
     assert _family_of(loaded) == "develop"
-    assert loaded["commit"] == "80e94f88b54e24815287860f32a0558683e9c02b"
+    assert loaded["commit"] == "f6817b537ec1d1563420023fb45fbd0e5b75e7fd"
     assert int(loaded["failure_cap"]) == 2000000
     assert loaded["ini"]["Main"]["temperature"] == 8000
     assert loaded["ini"]["Basin Hopping"]["displacement"] == 0.5

@@ -3,7 +3,7 @@ engine = "eon"
 problem = "globalopt/lj98"
 code = "eOn"
 code_version = "3.6.0"
-commit = "80e94f88b54e24815287860f32a0558683e9c02b"
+commit = "f6817b537ec1d1563420023fb45fbd0e5b75e7fd"
 algorithm = "Basin hopping"
 tuning = "default"
 reducer = "harness"
@@ -16,7 +16,7 @@ member = "coords.{start}"
 start_first = 1
 start_count = 100
 note = '''
-Basin hopping toward the LJ98 minimum. Temperature 8000, random_seed 314159, displacement 0.5, adjust_displacement true, target_ratio 0.3, steps 10000000, stop_energy -543.664361. The knobs are the LJ38 basin-hopping ini. The stop is the Cambridge N=98 minimum -543.665361 plus 0.001. The client writes termination_reason 0 when the step loop ends, including when the energy is still above the stop. Success is minimum_energy below the stop and harness calls under 2000000. The binary is develop 80e94f88, version string 3.6.0 (80e94f88), which contains b0bd4d5a. The harness kernel is unshifted lj/cut with epsilon 1, sigma 1, and cutoff 40. Starts are coords.1 through coords.100. The per-start wall budget is 172800 s so a start can reach that call cap.
+Basin hopping toward the LJ98 minimum. Temperature 8000, random_seed 314159, displacement 0.5, adjust_displacement true, target_ratio 0.3, steps 10000000, stop_energy -543.664361. The knobs are the LJ38 basin-hopping ini. The stop is the Cambridge N=98 minimum -543.665361 plus 0.001. The client writes termination_reason 0 when the step loop ends, including when the energy is still above the stop. Success is minimum_energy below the stop and harness calls under 2000000. The binary is develop f6817b53, version string 3.6.0 (f6817b53), which contains 80e94f88 and b0bd4d5a. The harness kernel is unshifted lj/cut with epsilon 1, sigma 1, and cutoff 40. Starts are coords.1 through coords.100. The per-start wall budget is 172800 s so a start can reach that call cap.
 '''
 seeds = [314159]
 asv_full = false

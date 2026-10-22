@@ -175,17 +175,18 @@ is running. It has not written a file.
 
 ## eOn basin hopping
 
-Develop basin hopping is commit `80e94f88` (version string `3.6.0 (80e94f88)`),
-which contains `b0bd4d5a`. SVN basin hopping is r2549. Both use the LJ38
+Develop basin hopping is commit `f6817b53` (version string `3.6.0 (f6817b53)`),
+which contains `80e94f88` and `b0bd4d5a`. SVN basin hopping is r2549. Both use the LJ38
 ini: temperature 8000, displacement 0.5, `adjust_displacement` true,
 `target_ratio` 0.3, 10000000 steps, L-BFGS memory 20, force norm 0.001.
 The stop is the Cambridge minimum plus 0.001. The force-call cap is
 2000000. The kernel is unshifted `lj/cut`, epsilon 1, sigma 1, cutoff 40.
 LJ38 reads `100_lj38.tar.gz` (100 `.con` files). LJ75 reads
 `coords.1` through `coords.200`. LJ98 and LJ150 read `coords.1` through
-`coords.100`. `tip4p` has no harness kernel. `lj100-binary` states the
-Cambridge 42/58 composition and target -604.796307. Its archived start
-geometries are mixed compositions, so they are not this potential.
+`coords.100`. `tip4p` has no harness kernel. `lj100-binary` states 42 atoms at
+sigma 1.0, 58 atoms at sigma 1.3, and target -604.796307. The harness
+kernel is monoatomic `lj/cut`. There is no binary LJ kernel, so
+`lj100-binary` is skipped.
 
 ## TSASE
 

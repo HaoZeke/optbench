@@ -1,7 +1,7 @@
 """Harness runs for eOn SVN r2549, the 3.5.0 source build, and develop.
 
-Develop basin hopping uses commit 80e94f88 (3.6.0), which contains
-b0bd4d5a. ``eonclient --version`` prints ``3.6.0 (80e94f88)``.
+Develop basin hopping uses commit f6817b53 (3.6.0), which contains
+80e94f88 and b0bd4d5a. ``eonclient --version`` prints ``3.6.0 (f6817b53)``.
 
 Each force evaluation is one ``HarnessCounter`` charge. eonclient is
 started with ``potential = ext_pot``. A small C program forwards
@@ -65,7 +65,7 @@ CACHE = Path(os.environ.get("OPTBENCH_ASV_CACHE", "/tmp/optbench-asv"))
 KERNEL = "problem-surface-2"
 SVN_COMMIT = "r2549"
 CLIENT_COMMIT = "4d8b34baf1ba8d2d980df29838bac1f969d1662c"
-DEVELOP_COMMIT = "80e94f88b54e24815287860f32a0558683e9c02b"
+DEVELOP_COMMIT = "f6817b537ec1d1563420023fb45fbd0e5b75e7fd"
 _CLIENT_OK: set[str] = set()
 _EAM = None
 
@@ -91,8 +91,8 @@ FAMILIES = {
         "env": "EON_DEVELOP_CLIENT",
         "default": Path.home() / "opt" / "eon-develop" / "bin" / "eonclient",
         "flag": "--version",
-        "token": "80e94f88",
-        "cache": "80e94f88",
+        "token": "f6817b53",
+        "cache": "f6817b53",
     },
 }
 

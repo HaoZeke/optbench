@@ -35,14 +35,14 @@ committed = "2026-10-16"
 note = "develop HEAD built from source. The version string is 3.6.0 (7095b23a). GPR-dimer is absent: TheochemUI/gpr_optim is private and eonclient reports GPRD disabled. This pin is not the conda-forge 3.5.0 binary. Saddle templates that name 7095b23 keep this pin."
 
 [[code]]
-id = "eon-develop-80e94f88"
+id = "eon-develop-f6817b53"
 name = "eOn"
 role = "minimization and saddle search"
 repository = "https://github.com/TheochemUI/eon"
 ref = "develop"
-commit = "80e94f88b54e24815287860f32a0558683e9c02b"
+commit = "f6817b537ec1d1563420023fb45fbd0e5b75e7fd"
 committed = "2026-10-21"
-note = "develop at 80e94f88, which contains b0bd4d5a. eonclient --version prints 3.6.0 (80e94f88). Globalopt basin hopping uses this pin. GPR-dimer is absent. The 7095b23 pin stays on the saddle templates that name it."
+note = "develop at f6817b53, which contains 80e94f88 and b0bd4d5a. eonclient --version prints 3.6.0 (f6817b53). Globalopt basin hopping uses this pin. GPR-dimer is absent. The 7095b23 pin stays on the saddle templates that name it."
 
 [[code]]
 id = "eon-svn"

@@ -38,6 +38,12 @@ The number is written only after the run finishes under the problem rule.
    <td>7095b23ac17d</td>
    <td><a href="https://github.com/TheochemUI/eon">https://github.com/TheochemUI/eon</a></td>
    </tr>
+   <tr>
+   <td>minimization and saddle search</td>
+   <td>develop</td>
+   <td>f6817b537ec1</td>
+   <td><a href="https://github.com/TheochemUI/eon">https://github.com/TheochemUI/eon</a></td>
+   </tr>
    </tbody></table></div>
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
