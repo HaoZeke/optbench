@@ -11,6 +11,7 @@ import hashlib
 import json
 import os
 import re
+import signal
 import subprocess
 import time
 from pathlib import Path
@@ -33,6 +34,9 @@ def runtime(template: dict) -> dict:
     """Resolve the executable through a verified native-validation manifest."""
     binary = Path(os.environ["GPRIDGE_GPRN"]).resolve(strict=True)
     manifest = Path(os.environ["GPRIDGE_VALIDATION"]).resolve(strict=True)
+    result = json.loads((manifest / "result.json").read_text())
+    if result.get("exit_code") != 0:
+        raise ValueError("native validation did not succeed")
     provenance = json.loads((manifest / "provenance.json").read_text())
     revision = provenance.get("source_revision")
     if not revision and (manifest / "source-provenance.json").is_file():
@@ -117,10 +121,18 @@ def verify_band(path: Path, pair, settings: dict) -> dict:
     def evaluate(point):
         nonlocal verification_calls
         verification_calls += 1
-        return morse_pt(point, pair.box)
+        energy, gradient = morse_pt(point, pair.box)
+        if not np.isfinite(energy) or not np.all(np.isfinite(gradient)):
+            raise ValueError("non-finite independent energy or gradient")
+        if np.shape(gradient) != point.shape:
+            raise ValueError("independent gradient has an unexpected dimension")
+        return energy, gradient
 
     with h5py.File(path, "r") as handle:
-        index = int(np.asarray(handle["summary/max_energy_image"]).item())
+        raw_index = float(np.asarray(handle["summary/max_energy_image"]).item())
+        if not np.isfinite(raw_index) or not raw_index.is_integer():
+            raise ValueError("invalid maximum-energy image index")
+        index = int(raw_index)
         if not 0 < index < settings["n_interior"] + 1:
             raise ValueError("reported saddle is not an interior image")
         image = handle[f"converged/{index}"]
@@ -140,6 +152,10 @@ def verify_band(path: Path, pair, settings: dict) -> dict:
         native_energy = float(np.asarray(image["energy"]).item())
     if not np.all(np.isfinite(point)):
         raise ValueError("non-finite native geometry")
+    if gradient.shape != (int(pair.free.sum()), 3):
+        raise ValueError("native gradient has an unexpected coordinate dimension")
+    if not np.isfinite(native_energy) or not np.all(np.isfinite(gradient)):
+        raise ValueError("non-finite native energy or gradient")
     energy, full_gradient = evaluate(point)
     free_gradient = full_gradient[pair.free]
     energy_error = abs(energy - native_energy)
@@ -175,6 +191,21 @@ def verify_band(path: Path, pair, settings: dict) -> dict:
             "reasons": reasons}
 
 
+def run_search(argv: list[str], directory: Path, env: dict, log, timeout: float) -> int:
+    """Run one search, terminating its process group when the budget expires."""
+    with subprocess.Popen(argv, cwd=directory, env=env, stdout=log,
+                          stderr=subprocess.STDOUT, start_new_session=True) as proc:
+        try:
+            return proc.wait(timeout=timeout)
+        except subprocess.TimeoutExpired:
+            try:
+                os.killpg(proc.pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+            proc.wait()
+            return 124
+
+
 def _execute(job: dict) -> dict:
     pair, settings = job["pair"], job["settings"]
     directory = Path(job["directory"]).resolve()
@@ -193,13 +224,9 @@ def _execute(job: dict) -> dict:
     began = time.perf_counter()
     reasons = []
     with (directory / "search.log").open("w") as log:
-        try:
-            proc = subprocess.run(argv, cwd=directory, env=env, stdout=log,
-                                  stderr=subprocess.STDOUT,
-                                  timeout=float(job["options"].get("timeout", 1800)))
-            returncode = proc.returncode
-        except subprocess.TimeoutExpired:
-            returncode = 124
+        returncode = run_search(argv, directory, env, log,
+                                float(job["options"].get("timeout", 1800)))
+        if returncode == 124:
             reasons.append("timeout")
     search_wall = time.perf_counter() - began
     text = (directory / "search.log").read_text(errors="replace")
