@@ -496,6 +496,11 @@ def run(
             limit=limit,
             resume=resume,
         )
+    if template["engine"] == "gpridge":
+        from .gpridge_band import run as run_gpridge
+
+        return run_gpridge(root, problem_name, template_name, output=output,
+                           workers=workers, work=work, limit=limit)
     from .engines import find as find_engine
 
     plugged = find_engine(str(template["engine"]))
