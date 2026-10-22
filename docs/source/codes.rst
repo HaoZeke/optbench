@@ -35,7 +35,7 @@ The number is written only after the run finishes under the problem rule.
    <tr>
    <td>minimization and saddle search</td>
    <td>develop</td>
-   <td>7095b23ac17d</td>
+   <td>8f3119a22a71</td>
    <td><a href="https://github.com/TheochemUI/eon">https://github.com/TheochemUI/eon</a></td>
    </tr>
    </tbody></table></div>
@@ -67,12 +67,12 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="double-ended-saddle-search/pt-island" data-template="eon/develop-de-pt-oci">
    <td>pt-island</td>
    <td data-field="template">eon/develop-de-pt-oci</td>
-   <td data-field="version">eOn 3.6.0</td>
-   <td data-field="commit">7095b23ac17d</td>
-   <td data-field="par2_mean">3080.19</td>
-   <td data-field="mean_calls">3220.9</td>
-   <td data-field="median_calls">2260</td>
-   <td data-field="failures">crash 0, divergence 0, cap 21, wrong_stationary 0</td>
+   <td data-field="version">eOn (develop 8f3119a2)</td>
+   <td data-field="commit">8f3119a22a71</td>
+   <td data-field="par2_mean">311.186</td>
+   <td data-field="mean_calls">260.339</td>
+   <td data-field="median_calls">188</td>
+   <td data-field="failures">crash 0, divergence 0, cap 1, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
    <tr data-problem="globalopt/lj38" data-template="eon-client/bh-lj38">
@@ -133,11 +133,11 @@ The number is written only after the run finishes under the problem rule.
    <tr data-problem="saddle-search/pt-island" data-template="eon/develop-saddle-pt-lanczos">
    <td>Pt heptamer island</td>
    <td data-field="template">eon/develop-saddle-pt-lanczos</td>
-   <td data-field="version">eOn 3.6.0</td>
-   <td data-field="commit">7095b23ac17d</td>
+   <td data-field="version">eOn (develop 8f3119a2)</td>
+   <td data-field="commit">8f3119a22a71</td>
    <td data-field="par2_mean">2e+08</td>
-   <td data-field="mean_calls">3.98507e+06</td>
-   <td data-field="median_calls">3.98507e+06</td>
+   <td data-field="mean_calls">4.04854e+06</td>
+   <td data-field="median_calls">4.04854e+06</td>
    <td data-field="failures">crash 0, divergence 0, cap 2, wrong_stationary 0</td>
    <td data-field="n">2</td>
    </tr>
