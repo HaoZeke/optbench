@@ -152,7 +152,11 @@ def test_timeout_terminates_child_processes(tmp_path):
     assert status == 124
     child = int((tmp_path / "child.pid").read_text())
     state = Path(f"/proc/{child}/stat")
-    assert not state.exists() or state.read_text().split()[2] == "Z"
+    try:
+        child_state = state.read_text().split()[2]
+    except FileNotFoundError:
+        child_state = None
+    assert child_state is None or child_state == "Z"
 
 
 def test_packaged_runtime_keeps_the_validated_source_hash(tmp_path, monkeypatch):
