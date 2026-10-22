@@ -32,7 +32,7 @@
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="saddle-search/pt-island">
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="template">sella/pt-island-search-default</td><td data-field="version">Sella 2.6.0</td><td data-field="commit">6cfb60cdb100</td><td data-field="source">asv</td><td data-field="par2_mean">5201.62</td><td data-field="success_rate">0.75</td><td data-field="wilson">0.505017–0.898179</td><td data-field="median_calls">225</td><td data-field="mean_calls">247.812</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 4</td><td data-field="n">16</td></tr>
+   <tr><td data-field="template">softsaddle/saddle-lanczos-sm0</td><td data-field="version">softsaddle 2019.04</td><td data-field="commit">5a00aeede06f</td><td data-field="source">campaign</td><td data-field="par2_mean">10124.2</td><td data-field="success_rate">0.0004</td><td data-field="wilson">0.000109701–0.00145739</td><td data-field="median_calls">389</td><td data-field="mean_calls">431.839</td><td data-field="failures">crash 0, divergence 4884, cap 108, wrong_stationary 6</td><td data-field="n">5000</td></tr>
    </tbody></table></div>
    <p class="bench-gaps">Eon rows are not yet on the harness counter. Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/saddle-search.html#pt-island">Ranked table, performance profile, and the 2014 archive</a>.</p>
@@ -76,6 +76,7 @@
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>PAR-2</th><th>Success</th><th>Wilson</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td data-field="template">airss/lj38</td><td data-field="version">AIRSS 0.9.4</td><td data-field="commit">5593cc4ee360</td><td data-field="source">campaign</td><td data-field="par2_mean">112134</td><td data-field="success_rate">1</td><td data-field="wilson">0.963007–1</td><td data-field="median_calls">70635.5</td><td data-field="mean_calls">112134</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">100</td></tr>
    </tbody></table></div>
+   <p class="bench-gaps">Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/globalopt.html#lj38">Ranked table, performance profile, and the 2014 archive</a>.</p>
    <h3>lj150</h3>
    <div class="bench-scroll">
