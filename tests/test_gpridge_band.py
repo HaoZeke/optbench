@@ -153,3 +153,34 @@ def test_timeout_terminates_child_processes(tmp_path):
     child = int((tmp_path / "child.pid").read_text())
     state = Path(f"/proc/{child}/stat")
     assert not state.exists() or state.read_text().split()[2] == "Z"
+
+
+def test_packaged_runtime_keeps_the_validated_source_hash(tmp_path, monkeypatch):
+    import json
+
+    binary = tmp_path / "gprn"
+    binary.write_bytes(b"relocated executable")
+    library = tmp_path / "libgpr.so"
+    library.write_bytes(b"packaged library")
+    manifest = tmp_path / "validation"
+    manifest.mkdir()
+    (manifest / "provenance.json").write_text('{"source_revision": "revision"}')
+    (manifest / "result.json").write_text('{"exit_code": 0}')
+    (manifest / "programs.sha256").write_text("original-hash  /build/gprn\n")
+    package = {"source_revision": "revision", "files": {
+        "gprn": {"sha256": native.digest(binary), "source_sha256": "original-hash"},
+        "libgpr.so": {"sha256": native.digest(library)},
+    }}
+    (tmp_path / "runtime.json").write_text(json.dumps(package))
+    monkeypatch.setenv("GPRIDGE_GPRN", str(binary))
+    monkeypatch.setenv("GPRIDGE_VALIDATION", str(manifest))
+    assert native.runtime({"commit": "revision"})["validated_sha256"] == "original-hash"
+    package["files"]["gprn"]["source_sha256"] = "different-build"
+    (tmp_path / "runtime.json").write_text(json.dumps(package))
+    with pytest.raises(ValueError, match="native-validation"):
+        native.runtime({"commit": "revision"})
+    package["files"]["gprn"]["source_sha256"] = "original-hash"
+    (tmp_path / "runtime.json").write_text(json.dumps(package))
+    library.write_bytes(b"wrong library")
+    with pytest.raises(ValueError, match="package file mismatch"):
+        native.runtime({"commit": "revision"})

@@ -48,10 +48,28 @@ def runtime(template: dict) -> dict:
         for line in (manifest / "programs.sha256").read_text().splitlines()
     }
     checksum = digest(binary)
-    if expected.get("gprn") != checksum:
+    source_checksum = checksum
+    package = binary.parent / "runtime.json"
+    package_checksum = None
+    if package.is_file():
+        packaged = json.loads(package.read_text())
+        if packaged.get("source_revision") != revision:
+            raise ValueError("packaged runtime revision does not match validation")
+        entry = packaged["files"]["gprn"]
+        if entry["sha256"] != checksum:
+            raise ValueError("gprn does not match its runtime package")
+        for relative, record in packaged["files"].items():
+            member = (binary.parent / relative).resolve(strict=True)
+            if not member.is_relative_to(binary.parent) or digest(member) != record["sha256"]:
+                raise ValueError(f"runtime package file mismatch: {relative}")
+        source_checksum = entry["source_sha256"]
+        package_checksum = digest(package)
+    if expected.get("gprn") != source_checksum:
         raise ValueError("gprn does not match the native-validation binary")
     return {"binary": str(binary), "sha256": checksum, "revision": revision,
-            "manifest": str(manifest)}
+            "manifest": str(manifest), "validated_sha256": source_checksum,
+            "runtime_manifest_sha256": package_checksum}
+
 
 
 def command(binary: str, directory: Path, settings: dict, options: dict) -> list[str]:
