@@ -12629,28 +12629,28 @@
       "id": "hTST/Al",
       "profile": {
         "area_log10": {
-          "EON (SVN r2549) (r2549) \u00b7 Dimer-CG rotation: max=50 tol=1": 1.0517206030044413,
-          "eOn (develop 500350d9) (500350d9) \u00b7 Dimer-CG rotation: max=50 tol=1": 1.0090864643384159
+          "EON (SVN r2549) (r2549) \u00b7 Dimer-CG rotation: max=50 tol=1": 0.8531538687753835,
+          "eOn (develop d2435196) (d2435196) \u00b7 Dimer-CG rotation: max=50 tol=1": 1.1289802576036478
         },
         "rho": {
           "EON (SVN r2549) (r2549) \u00b7 Dimer-CG rotation: max=50 tol=1": [
-            0.5414710485133021,
-            0.7981220657276995,
-            0.9342723004694836,
-            0.9906103286384976,
-            1.0
+            0.25821596244131456,
+            0.5211267605633803,
+            0.7668231611893583,
+            0.9233176838810642,
+            0.9874804381846636
           ],
-          "eOn (develop 500350d9) (500350d9) \u00b7 Dimer-CG rotation: max=50 tol=1": [
-            0.458528951486698,
-            0.7261345852895149,
-            0.9107981220657277,
-            0.9859154929577465,
+          "eOn (develop d2435196) (d2435196) \u00b7 Dimer-CG rotation: max=50 tol=1": [
+            0.7417840375586855,
+            0.9061032863849765,
+            0.9796557120500783,
+            0.9937402190923318,
             1.0
           ]
         },
         "solved": {
           "EON (SVN r2549) (r2549) \u00b7 Dimer-CG rotation: max=50 tol=1": 1.0,
-          "eOn (develop 500350d9) (500350d9) \u00b7 Dimer-CG rotation: max=50 tol=1": 1.0
+          "eOn (develop d2435196) (d2435196) \u00b7 Dimer-CG rotation: max=50 tol=1": 1.0
         },
         "taus": [
           1.0,
@@ -12805,9 +12805,9 @@
           "asv_commit": "",
           "call_unit": "total",
           "cap": null,
-          "code": "eOn (develop 500350d9)",
-          "code_version": "500350d9",
-          "commit": "6d9d629a086080f85687a6ca0a0220cdc3b084e4",
+          "code": "eOn (develop d2435196)",
+          "code_version": "d2435196",
+          "commit": "d2435196c6dd7b70def58c52f2ece44349f82ca9",
           "counter": "harness",
           "entry": "eon-develop-htst-al-dimer",
           "failures": {
@@ -12822,17 +12822,17 @@
           "full_n": 639,
           "hessian_calls": 0.0,
           "kind": "",
-          "label": "eOn (develop 500350d9) (500350d9) \u00b7 Dimer-CG rotation: max=50 tol=1",
-          "max_calls": 182132.0,
-          "mean_calls": 48128.758998435056,
+          "label": "eOn (develop d2435196) (d2435196) \u00b7 Dimer-CG rotation: max=50 tol=1",
+          "max_calls": 122093.0,
+          "mean_calls": 24333.267605633802,
           "mean_per_image": null,
-          "median": 41820.0,
-          "median_calls": 41820.0,
-          "median_high": 44827.0,
-          "median_low": 39687.5,
+          "median": 19766.0,
+          "median_calls": 19766.0,
+          "median_high": 21115.0,
+          "median_low": 18294.325,
           "median_per_image": null,
           "method": "Dimer-CG rotation: max=50 tol=1",
-          "min_calls": 6152.0,
+          "min_calls": 2476.0,
           "n": 639,
           "nfailed": 0,
           "note": "starts.jsonl",
