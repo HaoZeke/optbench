@@ -388,6 +388,12 @@ The number is written only after the run finishes under the problem rule.
    <td>c0db2b8d333c</td>
    <td><a href="https://github.com/OmniPotentRPC/rgsaddle">https://github.com/OmniPotentRPC/rgsaddle</a></td>
    </tr>
+   <tr>
+   <td>saddle search</td>
+   <td>main</td>
+   <td>8fa0eb1559c9</td>
+   <td><a href="https://github.com/OmniPotentRPC/rgsaddle">https://github.com/OmniPotentRPC/rgsaddle</a></td>
+   </tr>
    </tbody></table></div>
    <div class="bench-scroll"><table data-board-table="code-best">
    <caption>Best full harness run on each problem.</caption>
