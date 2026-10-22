@@ -100,119 +100,104 @@ SAMPLE_N = {
     "neb/Pt-heptamer": 13,
 }
 
-SHA = {
-    "main": "883b4153baa013b52de36c4512f0859bea15dc35",
-    "cells/optim/min": "f3cf41d74f73fb2ffb3b5199291c90a4743a1000",
-    "cells/optim/ts": "3c03653c03cd714cd42db7e68d165c5158f40457",
-    "cells/optim/saddle-pt-repro": "b60e4596c60931ce37347442b3bcc59c8877c4e7",
-    "cells/pele/min": "5bb7c3801f52b697c48ada5811c5f766dd81a23d",
-    "cells/pele/go": "0528a37b8ff6e54805b9fa75345ee3c40b756a5d",
-    "cells/pele/ts-repro": "54ac7e7a1aa6581c261c17fc2c52a20e77121911",
-    "cells/softsaddle/ts-reps": "bd1a5c9fc2685f5876266d53715accb31a049e73",
-    "entries/eon-svn-htst": "715bc521c827f1f18102c1c027d99d0d8624b0fb",
-    "entries/eon-svn-lane-a": "c140d970f659ba27d6048130f0e67fa02944bd7a",
-    "cells/gmin/go-paper": "71f366d9e50b7eedcdc22c75ab0cbba0188d578c",
-    "cells/gmin/go": "7e49bdf6da152047d721dc206bd2d526cfcdd189",
-    "infra/aladatom-repro": "d3a28c98d4f544aa3f79876028f95d7e352fd17b",
-}
-
 # Exact-setup campaigns. kind is dat, screen, or htst.
+# A citation is a full commit sha. A branch name is not a citation.
 # value_from renames a file field onto the archived metric name.
 MATCHES: list[dict] = [
     # minimization / lj38
-    {"key": "minimization/lj38/eon-lbfgs", "template": "eon-client/lbfgs-m100", "branch": "main", "path": "results/campaign/eon-client-lbfgs-m100.dat"},
-    {"key": "minimization/lj38/eon-cg", "template": "eon-client/cg", "branch": "main", "path": "results/campaign/eon-client-cg.dat"},
-    {"key": "minimization/lj38/eon-fire", "template": "eon-client/fire", "branch": "main", "path": "results/campaign/eon-client-fire.dat"},
-    {"key": "minimization/lj38/eon-qm", "template": "eon-client/qm", "branch": "main", "path": "results/campaign/eon-client-qm.dat"},
-    {"key": "minimization/lj38/eon-sd", "template": "eon-client/sd", "branch": "main", "path": "results/campaign/eon-client-sd.dat"},
-    {"key": "minimization/lj38/eon-sd-twopoint", "template": "eon-client/sd-twopoint", "branch": "main", "path": "results/campaign/eon-client-sd-twopoint.dat"},
-    {"key": "minimization/lj38/ase-lbfgs", "template": "ase/lj38-lbfgs-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-lj38-lbfgs-tuned.dat"},
-    {"key": "minimization/lj38/ase-BFGS", "template": "ase/lj38-bfgs-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-lj38-bfgs-tuned.dat"},
-    {"key": "minimization/lj38/ase-bfgslinesearch", "template": "ase/lj38-bfgslinesearch-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-lj38-bfgslinesearch-tuned.dat"},
-    {"key": "minimization/lj38/ase-fire", "template": "ase/lj38-fire-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-lj38-fire-tuned.dat"},
-    {"key": "minimization/lj38/optim", "template": "optim/lj38-lbfgs-tuned", "branch": "cells/optim/min", "path": "results/campaign/optim-02aaf45245af-lj38-lbfgs-tuned.dat", "extra": {"unrounded_mean": 175.537}},
-    {"key": "minimization/lj38/pele-lbfgs-M1-maxstep0.1", "template": "pele-lbfgs-M1-maxstep0.1", "branch": "main", "path": "results/campaign/pele-0.1.2-lbfgs-M1-maxstep0.1.dat"},
-    {"key": "minimization/lj38/pele-lbfgs-M10-maxstep0.1", "template": "pele-lbfgs-M10-maxstep0.1", "branch": "main", "path": "results/campaign/pele-0.1.2-lbfgs-M10-maxstep0.1.dat"},
-    {"key": "minimization/lj38/pele-lbfgs-M100-maxstep0.2", "template": "pele-lbfgs-M100-maxstep0.2", "branch": "main", "path": "results/campaign/pele-0.1.2-lbfgs-M100-maxstep0.2.dat"},
-    {"key": "minimization/lj38/pele-lbfgs-M20-maxstep0.1", "template": "pele-lbfgs-M20-maxstep0.1", "branch": "main", "path": "results/campaign/pele-0.1.2-lbfgs-M20-maxstep0.1.dat"},
-    {"key": "minimization/lj38/pele-lbfgs-M4-maxstep0.05", "template": "pele-lbfgs-M4-maxstep0.05", "branch": "main", "path": "results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.05.dat"},
-    {"key": "minimization/lj38/pele-lbfgs-M4-maxstep0.1", "template": "pele-lbfgs-M4-maxstep0.1", "branch": "main", "path": "results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.1.dat"},
-    {"key": "minimization/lj38/pele-lbfgs-M4-maxstep0.2", "template": "pele-lbfgs-M4-maxstep0.2", "branch": "main", "path": "results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.2.dat"},
-    {"key": "minimization/lj38/pele-fire", "template": "pele/lj38-fire", "branch": "cells/pele/min", "path": "results/campaign/pele-b7081b93-lj38-fire.dat", "cause": "pele_fire"},
+    {"key": "minimization/lj38/eon-lbfgs", "template": "eon-client/lbfgs-m100", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-client-lbfgs-m100.dat"},
+    {"key": "minimization/lj38/eon-cg", "template": "eon-client/cg", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-client-cg.dat"},
+    {"key": "minimization/lj38/eon-fire", "template": "eon-client/fire", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-client-fire.dat"},
+    {"key": "minimization/lj38/eon-qm", "template": "eon-client/qm", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-client-qm.dat"},
+    {"key": "minimization/lj38/eon-sd", "template": "eon-client/sd", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-client-sd.dat"},
+    {"key": "minimization/lj38/eon-sd-twopoint", "template": "eon-client/sd-twopoint", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-client-sd-twopoint.dat"},
+    {"key": "minimization/lj38/ase-lbfgs", "template": "ase/lj38-lbfgs-tuned", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/ase-3.29.0-lj38-lbfgs-tuned.dat"},
+    {"key": "minimization/lj38/ase-BFGS", "template": "ase/lj38-bfgs-tuned", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/ase-3.29.0-lj38-bfgs-tuned.dat"},
+    {"key": "minimization/lj38/ase-bfgslinesearch", "template": "ase/lj38-bfgslinesearch-tuned", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/ase-3.29.0-lj38-bfgslinesearch-tuned.dat"},
+    {"key": "minimization/lj38/ase-fire", "template": "ase/lj38-fire-tuned", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/ase-3.29.0-lj38-fire-tuned.dat"},
+    {"key": "minimization/lj38/optim", "template": "optim/lj38-lbfgs-tuned", "sha": "f3cf41d74f73fb2ffb3b5199291c90a4743a1000", "path": "results/campaign/optim-02aaf45245af-lj38-lbfgs-tuned.dat", "extra": {"unrounded_mean": 175.537}},
+    {"key": "minimization/lj38/pele-lbfgs-M1-maxstep0.1", "template": "pele-lbfgs-M1-maxstep0.1", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/pele-0.1.2-lbfgs-M1-maxstep0.1.dat"},
+    {"key": "minimization/lj38/pele-lbfgs-M10-maxstep0.1", "template": "pele-lbfgs-M10-maxstep0.1", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/pele-0.1.2-lbfgs-M10-maxstep0.1.dat"},
+    {"key": "minimization/lj38/pele-lbfgs-M100-maxstep0.2", "template": "pele-lbfgs-M100-maxstep0.2", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/pele-0.1.2-lbfgs-M100-maxstep0.2.dat"},
+    {"key": "minimization/lj38/pele-lbfgs-M20-maxstep0.1", "template": "pele-lbfgs-M20-maxstep0.1", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/pele-0.1.2-lbfgs-M20-maxstep0.1.dat"},
+    {"key": "minimization/lj38/pele-lbfgs-M4-maxstep0.05", "template": "pele-lbfgs-M4-maxstep0.05", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.05.dat"},
+    {"key": "minimization/lj38/pele-lbfgs-M4-maxstep0.1", "template": "pele-lbfgs-M4-maxstep0.1", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.1.dat"},
+    {"key": "minimization/lj38/pele-lbfgs-M4-maxstep0.2", "template": "pele-lbfgs-M4-maxstep0.2", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/pele-0.1.2-lbfgs-M4-maxstep0.2.dat"},
+    {"key": "minimization/lj38/pele-fire", "template": "pele/lj38-fire", "sha": "5bb7c3801f52b697c48ada5811c5f766dd81a23d", "path": "results/campaign/pele-b7081b93-lj38-fire.dat", "cause": "pele_fire"},
     # minimization / morse
-    {"key": "minimization/morse-bulk/eon-lbfgs", "template": "eon-client/morse-lbfgs", "branch": "main", "path": "results/campaign/eon-client-morse-lbfgs.dat"},
-    {"key": "minimization/morse-bulk/eon-cg", "template": "eon-client/morse-cg", "branch": "main", "path": "results/campaign/eon-client-morse-cg.dat"},
-    {"key": "minimization/morse-bulk/eon-fire", "template": "eon-client/morse-fire", "branch": "main", "path": "results/campaign/eon-client-morse-fire.dat"},
-    {"key": "minimization/morse-bulk/eon-sd", "template": "eon-client/morse-sd", "branch": "main", "path": "results/campaign/eon-client-morse-sd.dat", "cause": "morse_sd"},
-    {"key": "minimization/morse-bulk/optim", "template": "optim/morse-lbfgs-tuned", "branch": "cells/optim/min", "path": "results/campaign/optim-02aaf45245af-morse-lbfgs-tuned.dat", "cause": "optim_morse_memory"},
-    {"key": "minimization/morse-bulk/pele-lbfgs", "template": "pele/morse-lbfgs", "branch": "cells/pele/min", "path": "results/campaign/pele-b7081b93-morse-lbfgs.dat", "cause": "pele_morse"},
-    {"key": "minimization/morse-bulk/ase-lbfgs", "template": "ase/morse-lbfgs-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-morse-lbfgs-tuned.dat", "cause": "ase_morse_script"},
-    {"key": "minimization/morse-bulk/ase-fire", "template": "ase/morse-fire-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-morse-fire-tuned.dat", "cause": "ase_morse_script"},
-    {"key": "minimization/morse-bulk/ase-preconLBFGS", "template": "ase/morse-preconlbfgs-tuned", "branch": "main", "path": "results/campaign/ase-3.29.0-morse-preconlbfgs-tuned.dat", "cause": "ase_morse_script"},
+    {"key": "minimization/morse-bulk/eon-lbfgs", "template": "eon-client/morse-lbfgs", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-client-morse-lbfgs.dat"},
+    {"key": "minimization/morse-bulk/eon-cg", "template": "eon-client/morse-cg", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-client-morse-cg.dat"},
+    {"key": "minimization/morse-bulk/eon-fire", "template": "eon-client/morse-fire", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-client-morse-fire.dat"},
+    {"key": "minimization/morse-bulk/eon-sd", "template": "eon-client/morse-sd", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-client-morse-sd.dat", "cause": "morse_sd"},
+    {"key": "minimization/morse-bulk/optim", "template": "optim/morse-lbfgs-tuned", "sha": "f3cf41d74f73fb2ffb3b5199291c90a4743a1000", "path": "results/campaign/optim-02aaf45245af-morse-lbfgs-tuned.dat", "cause": "optim_morse_memory"},
+    {"key": "minimization/morse-bulk/pele-lbfgs", "template": "pele/morse-lbfgs", "sha": "5bb7c3801f52b697c48ada5811c5f766dd81a23d", "path": "results/campaign/pele-b7081b93-morse-lbfgs.dat", "cause": "pele_morse"},
+    {"key": "minimization/morse-bulk/ase-lbfgs", "template": "ase/morse-lbfgs-tuned", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/ase-3.29.0-morse-lbfgs-tuned.dat", "cause": "ase_morse_script"},
+    {"key": "minimization/morse-bulk/ase-fire", "template": "ase/morse-fire-tuned", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/ase-3.29.0-morse-fire-tuned.dat", "cause": "ase_morse_script"},
+    {"key": "minimization/morse-bulk/ase-preconLBFGS", "template": "ase/morse-preconlbfgs-tuned", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/ase-3.29.0-morse-preconlbfgs-tuned.dat", "cause": "ase_morse_script"},
     # lowest eigenvector
-    {"key": "lowest-eigenvector/lj38/eon-dimer-cg", "template": "eon-client/low-lj38-dimer-cg", "branch": "main", "path": "results/campaign/eon-client-low-lj38-dimer-cg.dat"},
-    {"key": "lowest-eigenvector/lj38/eon-dimer-lbfgs", "template": "eon-client/low-lj38-dimer-lbfgs", "branch": "main", "path": "results/campaign/eon-client-low-lj38-dimer-lbfgs.dat"},
-    {"key": "lowest-eigenvector/lj38/eon-lanczos", "template": "eon-svn/low-lj38-lanczos-ljcut", "branch": "main", "path": "results/campaign/eon-svn-low-lj38-lanczos-ljcut.dat"},
-    {"key": "lowest-eigenvector/lj38/pele-first-order", "template": "pele/lj38-loweig-forward", "branch": "cells/pele/ts", "path": "results/campaign/pele-b7081b93-lj38-loweig-forward.dat"},
-    {"key": "lowest-eigenvector/lj38/pele-second-order", "template": "pele/lj38-loweig-central", "branch": "cells/pele/ts", "path": "results/campaign/pele-b7081b93-lj38-loweig-central.dat"},
-    {"key": "lowest-eigenvector/lj38/optim-first-order", "template": "optim/rr-loweig", "branch": "cells/optim/ts", "path": "results/campaign/optim-df8da599-rr-loweig.dat", "cause": "optim_rr_defaults"},
+    {"key": "lowest-eigenvector/lj38/eon-dimer-cg", "template": "eon-client/low-lj38-dimer-cg", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-client-low-lj38-dimer-cg.dat"},
+    {"key": "lowest-eigenvector/lj38/eon-dimer-lbfgs", "template": "eon-client/low-lj38-dimer-lbfgs", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-client-low-lj38-dimer-lbfgs.dat"},
+    {"key": "lowest-eigenvector/lj38/eon-lanczos", "template": "eon-svn/low-lj38-lanczos-ljcut", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-svn-low-lj38-lanczos-ljcut.dat"},
+    {"key": "lowest-eigenvector/lj38/pele-first-order", "template": "pele/lj38-loweig-forward", "sha": "158d27812f76160469f6134a14eda16e4ab151e1", "path": "results/campaign/pele-b7081b93-lj38-loweig-forward.dat"},
+    {"key": "lowest-eigenvector/lj38/pele-second-order", "template": "pele/lj38-loweig-central", "sha": "158d27812f76160469f6134a14eda16e4ab151e1", "path": "results/campaign/pele-b7081b93-lj38-loweig-central.dat"},
+    {"key": "lowest-eigenvector/lj38/optim-first-order", "template": "optim/rr-loweig", "sha": "02405b0d55809cb81921e75f9ef29dc85a13f4bf", "path": "results/campaign/optim-df8da599-rr-loweig.dat", "cause": "optim_rr_defaults"},
     # tsopt
-    {"key": "tsopt/LJ38/eon-dimer", "template": "eon-svn/ts-lj38-dimer-ljcut", "branch": "main", "path": "results/campaign/eon-svn-ts-lj38-dimer-ljcut.dat"},
-    {"key": "tsopt/LJ38/eon-lanczos", "template": "eon-svn/ts-lj38-lanczos-ljcut", "branch": "main", "path": "results/campaign/eon-svn-ts-lj38-lanczos-ljcut.dat"},
-    {"key": "tsopt/LJ38/eon-lanczos-improved", "template": "eon-svn/ts-lj38-lanczos-improved", "branch": "main", "path": "results/campaign/eon-svn-ts-lj38-lanczos-improved.dat", "cause": "improved_unset"},
-    {"key": "tsopt/LJ38/sella", "template": "sella/lj38-ts-tuned", "branch": "main", "path": "results/campaign/sella-2.6.0-lj38-ts-tuned.dat", "cause": "sella_trust"},
-    {"key": "tsopt/LJ38/pele_ffd", "template": "pele/lj38-ts-ffd", "branch": "cells/pele/ts-repro", "path": "results/campaign/pele-b7081b93-lj38-ts-ffd.screen.jsonl", "kind": "screen", "cause": "lj38_ts_starts"},
-    {"key": "tsopt/LJ38/pele_cd", "template": "pele/lj38-ts-cd", "branch": "cells/pele/ts-repro", "path": "results/campaign/pele-b7081b93-lj38-ts-cd.screen.jsonl", "kind": "screen", "cause": "lj38_ts_starts_cd"},
-    {"key": "tsopt/LJ38/optim_ffd", "template": "optim/hef-ffd-ts-lj38", "branch": "cells/optim/ts", "path": "results/campaign/optim-df8da599-hef-ffd-ts-lj38.dat", "cause": "optim_lj38_ts"},
-    {"key": "tsopt/pt-island/eon-dimer", "template": "eon-svn/ts-pt-dimer-smooth", "branch": "main", "path": "results/campaign/eon-svn-ts-pt-dimer-smooth.dat"},
-    {"key": "tsopt/pt-island/eon-lanczos", "template": "eon-svn/ts-pt-lanczos-smooth", "branch": "main", "path": "results/campaign/eon-svn-ts-pt-lanczos-smooth.dat"},
-    {"key": "tsopt/pt-island/eon-lanczos-improved", "template": "eon-svn/ts-pt-lanczos-improved", "branch": "main", "path": "results/campaign/eon-svn-ts-pt-lanczos-improved.dat"},
-    {"key": "tsopt/pt-island/sella", "template": "sella/pt-island-ts-tuned", "branch": "main", "path": "results/campaign/sella-2.6.0-pt-island-ts-tuned.dat", "cause": "sella_trust"},
-    {"key": "tsopt/pt-island/pele", "template": "pele/pt-island-ts-ffd", "branch": "cells/pele/ts-repro", "path": "results/campaign/pele-b7081b93-pt-island-ts-ffd.screen.jsonl", "kind": "screen"},
-    {"key": "tsopt/pt-island/optim_ffd", "template": "optim/hef-ffd-ts-pt", "branch": "cells/optim/ts", "path": "results/campaign/optim-df8da599-hef-ffd-ts-pt.dat", "cause": "optim_pt_units"},
+    {"key": "tsopt/LJ38/eon-dimer", "template": "eon-svn/ts-lj38-dimer-ljcut", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-svn-ts-lj38-dimer-ljcut.dat"},
+    {"key": "tsopt/LJ38/eon-lanczos", "template": "eon-svn/ts-lj38-lanczos-ljcut", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-svn-ts-lj38-lanczos-ljcut.dat"},
+    {"key": "tsopt/LJ38/eon-lanczos-improved", "template": "eon-svn/ts-lj38-lanczos-improved", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-svn-ts-lj38-lanczos-improved.dat", "cause": "improved_unset"},
+    {"key": "tsopt/LJ38/sella", "template": "sella/lj38-ts-tuned", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/sella-2.6.0-lj38-ts-tuned.dat", "cause": "sella_trust"},
+    {"key": "tsopt/LJ38/pele_ffd", "template": "pele/lj38-ts-ffd", "sha": "54ac7e7a1aa6581c261c17fc2c52a20e77121911", "path": "results/campaign/pele-b7081b93-lj38-ts-ffd.screen.jsonl", "kind": "screen", "cause": "lj38_ts_starts"},
+    {"key": "tsopt/LJ38/pele_cd", "template": "pele/lj38-ts-cd", "sha": "54ac7e7a1aa6581c261c17fc2c52a20e77121911", "path": "results/campaign/pele-b7081b93-lj38-ts-cd.screen.jsonl", "kind": "screen", "cause": "lj38_ts_starts_cd"},
+    {"key": "tsopt/LJ38/optim_ffd", "template": "optim/hef-ffd-ts-lj38", "sha": "02405b0d55809cb81921e75f9ef29dc85a13f4bf", "path": "results/campaign/optim-df8da599-hef-ffd-ts-lj38.dat", "cause": "optim_lj38_ts"},
+    {"key": "tsopt/pt-island/eon-dimer", "template": "eon-svn/ts-pt-dimer-smooth", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-svn-ts-pt-dimer-smooth.dat"},
+    {"key": "tsopt/pt-island/eon-lanczos", "template": "eon-svn/ts-pt-lanczos-smooth", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-svn-ts-pt-lanczos-smooth.dat"},
+    {"key": "tsopt/pt-island/eon-lanczos-improved", "template": "eon-svn/ts-pt-lanczos-improved", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-svn-ts-pt-lanczos-improved.dat"},
+    {"key": "tsopt/pt-island/sella", "template": "sella/pt-island-ts-tuned", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/sella-2.6.0-pt-island-ts-tuned.dat", "cause": "sella_trust"},
+    {"key": "tsopt/pt-island/pele", "template": "pele/pt-island-ts-ffd", "sha": "54ac7e7a1aa6581c261c17fc2c52a20e77121911", "path": "results/campaign/pele-b7081b93-pt-island-ts-ffd.screen.jsonl", "kind": "screen"},
+    {"key": "tsopt/pt-island/optim_ffd", "template": "optim/hef-ffd-ts-pt", "sha": "02405b0d55809cb81921e75f9ef29dc85a13f4bf", "path": "results/campaign/optim-df8da599-hef-ffd-ts-pt.dat", "cause": "optim_pt_units"},
     # double-ended
-    {"key": "double-ended-saddle-search/lj38/eon-ci-neb", "template": "eon-svn/de-lj38-ci-neb", "branch": "main", "path": "results/campaign/eon-svn-de-lj38-ci-neb.dat"},
-    {"key": "double-ended-saddle-search/lj38/eon-ci-swdneb", "template": "eon-3.5.0/de-lj38-ci-swdneb", "branch": "main", "path": "results/campaign/eon-3.5.0-de-lj38-ci-swdneb.dat", "cause": "de_exclusion"},
-    {"key": "double-ended-saddle-search/lj38/eon-dimer", "template": "eon-svn/de-lj38-dimer", "branch": "main", "path": "results/campaign/eon-svn-de-lj38-dimer.dat", "cause": "improved_unset"},
-    {"key": "double-ended-saddle-search/lj38/eon-lanczos", "template": "eon-client/de-lj38-lanczos", "branch": "main", "path": "results/campaign/eon-client-de-lj38-lanczos.dat"},
-    {"key": "double-ended-saddle-search/lj38/eon-lanczos-improved", "template": "eon-client/de-lj38-lanczos-improved", "branch": "main", "path": "results/campaign/eon-client-de-lj38-lanczos-improved.dat"},
-    {"key": "double-ended-saddle-search/lj38/optim", "template": "optim/de-lj38", "branch": "cells/optim/saddle-pt-repro", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-lj38--optim-de-lj38.dat", "cause": "optim_pes_counter"},
-    {"key": "double-ended-saddle-search/lj38_2ts_separation/optim", "template": "optim/de-2ts", "branch": "cells/optim/saddle-pt-repro", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-lj38_2ts_separation--optim-de-2ts.dat", "cause": "optim_pes_counter"},
-    {"key": "double-ended-saddle-search/pt-island/eon-ci-neb", "template": "eon-svn/de-pt-ci-neb", "branch": "main", "path": "results/campaign/eon-svn-de-pt-ci-neb.dat"},
-    {"key": "double-ended-saddle-search/pt-island/eon-ci-swdneb", "template": "eon-svn/de-pt-ci-swdneb", "branch": "main", "path": "results/campaign/eon-svn-de-pt-ci-swdneb.dat"},
-    {"key": "double-ended-saddle-search/pt-island/eon-dimer", "template": "eon-svn/de-pt-dimer", "branch": "main", "path": "results/campaign/eon-svn-de-pt-dimer.dat"},
-    {"key": "double-ended-saddle-search/pt-island/eon-lanczos", "template": "eon-svn/de-pt-lanczos", "branch": "main", "path": "results/campaign/eon-svn-de-pt-lanczos.dat", "cause": "pt_lanczos"},
-    {"key": "double-ended-saddle-search/pt-island/eon-lanczos-improved", "template": "eon-svn/de-pt-lanczos-improved", "branch": "main", "path": "results/campaign/eon-svn-de-pt-lanczos-improved.dat", "cause": "pt_lanczos"},
-    {"key": "double-ended-saddle-search/pt-island/optim", "template": "optim/de-pt", "branch": "cells/optim/saddle-pt-repro", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-pt-island--optim-de-pt.dat", "cause": "optim_pt_units"},
+    {"key": "double-ended-saddle-search/lj38/eon-ci-neb", "template": "eon-svn/de-lj38-ci-neb", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-svn-de-lj38-ci-neb.dat"},
+    {"key": "double-ended-saddle-search/lj38/eon-ci-swdneb", "template": "eon-3.5.0/de-lj38-ci-swdneb", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-3.5.0-de-lj38-ci-swdneb.dat", "cause": "de_exclusion"},
+    {"key": "double-ended-saddle-search/lj38/eon-dimer", "template": "eon-svn/de-lj38-dimer", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-svn-de-lj38-dimer.dat", "cause": "improved_unset"},
+    {"key": "double-ended-saddle-search/lj38/eon-lanczos", "template": "eon-client/de-lj38-lanczos", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-client-de-lj38-lanczos.dat"},
+    {"key": "double-ended-saddle-search/lj38/eon-lanczos-improved", "template": "eon-client/de-lj38-lanczos-improved", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-client-de-lj38-lanczos-improved.dat"},
+    {"key": "double-ended-saddle-search/lj38/optim", "template": "optim/de-lj38", "sha": "02405b0d55809cb81921e75f9ef29dc85a13f4bf", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-lj38--optim-de-lj38.dat", "cause": "optim_pes_counter"},
+    {"key": "double-ended-saddle-search/lj38_2ts_separation/optim", "template": "optim/de-2ts", "sha": "02405b0d55809cb81921e75f9ef29dc85a13f4bf", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-lj38_2ts_separation--optim-de-2ts.dat", "cause": "optim_pes_counter"},
+    {"key": "double-ended-saddle-search/pt-island/eon-ci-neb", "template": "eon-svn/de-pt-ci-neb", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-svn-de-pt-ci-neb.dat"},
+    {"key": "double-ended-saddle-search/pt-island/eon-ci-swdneb", "template": "eon-svn/de-pt-ci-swdneb", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-svn-de-pt-ci-swdneb.dat"},
+    {"key": "double-ended-saddle-search/pt-island/eon-dimer", "template": "eon-svn/de-pt-dimer", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-svn-de-pt-dimer.dat"},
+    {"key": "double-ended-saddle-search/pt-island/eon-lanczos", "template": "eon-svn/de-pt-lanczos", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-svn-de-pt-lanczos.dat", "cause": "pt_lanczos"},
+    {"key": "double-ended-saddle-search/pt-island/eon-lanczos-improved", "template": "eon-svn/de-pt-lanczos-improved", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-svn-de-pt-lanczos-improved.dat", "cause": "pt_lanczos"},
+    {"key": "double-ended-saddle-search/pt-island/optim", "template": "optim/de-pt", "sha": "02405b0d55809cb81921e75f9ef29dc85a13f4bf", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-pt-island--optim-de-pt.dat", "cause": "optim_pt_units"},
     # neb per-image means already stored in the 3.5.0 files
-    {"key": "neb/Pt-heptamer/eon-lbfgs", "template": "eon-lbfgs", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-lbfgs.dat"},
-    {"key": "neb/Pt-heptamer/eon-cg", "template": "eon-cg", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-cg.dat", "cause": "heptamer_cg"},
-    {"key": "neb/Pt-heptamer/eon-fire", "template": "eon-fire", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-fire.dat"},
-    {"key": "neb/Pt-heptamer/eon-qm", "template": "eon-qm", "branch": "main", "path": "results/campaign/eon-3.5.0-neb-pt-qm.dat"},
+    {"key": "neb/Pt-heptamer/eon-lbfgs", "template": "eon-lbfgs", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-3.5.0-neb-pt-lbfgs.dat"},
+    {"key": "neb/Pt-heptamer/eon-cg", "template": "eon-cg", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-3.5.0-neb-pt-cg.dat", "cause": "heptamer_cg"},
+    {"key": "neb/Pt-heptamer/eon-fire", "template": "eon-fire", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-3.5.0-neb-pt-fire.dat"},
+    {"key": "neb/Pt-heptamer/eon-qm", "template": "eon-qm", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-3.5.0-neb-pt-qm.dat"},
     # saddle search
-    {"key": "saddle-search/pt-island/eon-dimer", "template": "eon-svn/saddle-pt-dimer", "branch": "main", "path": "results/campaign/eon-3.5.0-saddle-pt-classic.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "cause": "eon_saddle_count"},
-    {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-davidson-sm50", "template": "softsaddle/saddle-davidson-sm50", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-davidson-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
-    {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm50", "template": "softsaddle/saddle-lanczos-sm50", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
-    {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm0", "template": "softsaddle/saddle-lanczos-sm0", "branch": "cells/softsaddle/ts-reps", "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm0.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
+    {"key": "saddle-search/pt-island/eon-dimer", "template": "eon-svn/saddle-pt-dimer", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-3.5.0-saddle-pt-classic.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "cause": "eon_saddle_count"},
+    {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-davidson-sm50", "template": "softsaddle/saddle-davidson-sm50", "sha": "247b70deafb2cfeb452022bb9599e6e6563abded", "path": "results/campaign/softsaddle-2019.04-saddle-davidson-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
+    {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm50", "template": "softsaddle/saddle-lanczos-sm50", "sha": "247b70deafb2cfeb452022bb9599e6e6563abded", "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
+    {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm0", "template": "softsaddle/saddle-lanczos-sm0", "sha": "247b70deafb2cfeb452022bb9599e6e6563abded", "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm0.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
     # globalopt and htst and aladatom rates
-    {"key": "globalopt/lj38/eon-basinhopping", "template": "eon-client/bh-lj38", "branch": "entries/eon-svn-lane-a", "path": "results/campaign/eon-client-bh-lj38.dat"},
-    {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "cells/pele/go", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
-    {"key": "globalopt/lj38/gmin-nosym", "template": "gmin-paper/lj38-nosym", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-lj38-nosym.dat"},
-    {"key": "globalopt/lj38/gmin-csm", "template": "gmin/lj38-csm", "branch": "cells/gmin/go", "path": "results/campaign/gmin-df8da599-lj38-csm.dat", "cause": "gmin_csm", "ranked_path": "results/campaign/gmin-df8da599-lj38-csm.dat", "ranked_branch": "cells/gmin/go"},
-    {"key": "globalopt/lj38/gmin-symmetrise", "template": "gmin-paper/lj38-symmetrise", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-lj38-symmetrise.dat"},
-    {"key": "globalopt/lj75/gmin", "template": "gmin-paper/lj75", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-lj75.dat"},
-    {"key": "globalopt/lj98/gmin-nosym", "template": "gmin-paper/lj98-nosym", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-lj98-nosym.dat", "metrics": ["energy_calls_mean", "basin_hopping_steps_mean"], "cause": "gmin_nosym_calls"},
-    {"key": "globalopt/lj98/gmin-symmetrise", "template": "gmin-paper/lj98-symmetrise", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-lj98-symmetrise.dat", "metrics": ["energy_calls_mean", "basin_hopping_steps_mean"], "cause": "gmin_quench_count", "ranked_path": "results/campaign/gmin-02aaf45245af-lj98-bh.dat", "ranked_branch": "cells/gmin/go"},
-    {"key": "globalopt/lj150/gmin-nosym", "template": "gmin-paper/lj150-nosym", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-lj150-nosym.dat", "metrics": ["energy_calls_mean", "basin_hopping_steps_mean"], "cause": "gmin_quench_count"},
-    {"key": "globalopt/lj150/gmin-symmetrise", "template": "gmin-paper/lj150-symmetrise", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-lj150-symmetrise.dat", "metrics": ["energy_calls_mean", "basin_hopping_steps_mean"], "cause": "gmin_quench_count"},
-    {"key": "globalopt/tip4p10/gmin", "template": "gmin-paper/tip4p10", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-tip4p10.dat"},
-    {"key": "globalopt/tip4p10/gmin-tbp", "template": "gmin-paper/tip4p10-tbp", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-tip4p10-tbp.dat"},
-    {"key": "globalopt/tip4p15/gmin", "template": "gmin-paper/tip4p15", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-tip4p15.dat", "cause": "gmin_tip4p15"},
-    {"key": "globalopt/tip4p15/gmin-tbp", "template": "gmin-paper/tip4p15-tbp", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-tip4p15-tbp.dat"},
-    {"key": "globalopt/tip4p20/gmin", "template": "gmin-paper/tip4p20", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-tip4p20.dat", "cause": "gmin_tip4p20"},
-    {"key": "globalopt/tip4p20/gmin-tbp", "template": "gmin-paper/tip4p20-tbp", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-tip4p20-tbp.dat"},
-    {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn/htst-al-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
-    {"key": "hTST/Pt/eon-dimer-cg", "template": "eon-svn/htst-pt-dimer", "branch": "entries/eon-svn-htst", "path": "results/campaign/eon-svn-htst-pt-dimer.dat", "kind": "htst"},
+    {"key": "globalopt/lj38/eon-basinhopping", "template": "eon-client/bh-lj38", "sha": "c140d970f659ba27d6048130f0e67fa02944bd7a", "path": "results/campaign/eon-client-bh-lj38.dat"},
+    {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "sha": "0528a37b8ff6e54805b9fa75345ee3c40b756a5d", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
+    {"key": "globalopt/lj38/gmin-nosym", "template": "gmin-paper/lj38-nosym", "sha": "71f366d9e50b7eedcdc22c75ab0cbba0188d578c", "path": "results/campaign/gmin-paper-lj38-nosym.dat"},
+    {"key": "globalopt/lj38/gmin-csm", "template": "gmin/lj38-csm", "sha": "7e49bdf6da152047d721dc206bd2d526cfcdd189", "path": "results/campaign/gmin-df8da599-lj38-csm.dat", "cause": "gmin_csm", "ranked_path": "results/campaign/gmin-df8da599-lj38-csm.dat", "ranked_sha": "7e49bdf6da152047d721dc206bd2d526cfcdd189"},
+    {"key": "globalopt/lj38/gmin-symmetrise", "template": "gmin-paper/lj38-symmetrise", "sha": "71f366d9e50b7eedcdc22c75ab0cbba0188d578c", "path": "results/campaign/gmin-paper-lj38-symmetrise.dat"},
+    {"key": "globalopt/lj75/gmin", "template": "gmin-paper/lj75", "sha": "71f366d9e50b7eedcdc22c75ab0cbba0188d578c", "path": "results/campaign/gmin-paper-lj75.dat"},
+    {"key": "globalopt/lj98/gmin-nosym", "template": "gmin-paper/lj98-nosym", "sha": "71f366d9e50b7eedcdc22c75ab0cbba0188d578c", "path": "results/campaign/gmin-paper-lj98-nosym.dat", "metrics": ["energy_calls_mean", "basin_hopping_steps_mean"], "cause": "gmin_nosym_calls"},
+    {"key": "globalopt/lj98/gmin-symmetrise", "template": "gmin-paper/lj98-symmetrise", "sha": "71f366d9e50b7eedcdc22c75ab0cbba0188d578c", "path": "results/campaign/gmin-paper-lj98-symmetrise.dat", "metrics": ["energy_calls_mean", "basin_hopping_steps_mean"], "cause": "gmin_quench_count", "ranked_path": "results/campaign/gmin-02aaf45245af-lj98-bh.dat", "ranked_sha": "7e49bdf6da152047d721dc206bd2d526cfcdd189"},
+    {"key": "globalopt/lj150/gmin-nosym", "template": "gmin-paper/lj150-nosym", "sha": "71f366d9e50b7eedcdc22c75ab0cbba0188d578c", "path": "results/campaign/gmin-paper-lj150-nosym.dat", "metrics": ["energy_calls_mean", "basin_hopping_steps_mean"], "cause": "gmin_quench_count"},
+    {"key": "globalopt/lj150/gmin-symmetrise", "template": "gmin-paper/lj150-symmetrise", "sha": "71f366d9e50b7eedcdc22c75ab0cbba0188d578c", "path": "results/campaign/gmin-paper-lj150-symmetrise.dat", "metrics": ["energy_calls_mean", "basin_hopping_steps_mean"], "cause": "gmin_quench_count"},
+    {"key": "globalopt/tip4p10/gmin", "template": "gmin-paper/tip4p10", "sha": "71f366d9e50b7eedcdc22c75ab0cbba0188d578c", "path": "results/campaign/gmin-paper-tip4p10.dat"},
+    {"key": "globalopt/tip4p10/gmin-tbp", "template": "gmin-paper/tip4p10-tbp", "sha": "71f366d9e50b7eedcdc22c75ab0cbba0188d578c", "path": "results/campaign/gmin-paper-tip4p10-tbp.dat"},
+    {"key": "globalopt/tip4p15/gmin", "template": "gmin-paper/tip4p15", "sha": "71f366d9e50b7eedcdc22c75ab0cbba0188d578c", "path": "results/campaign/gmin-paper-tip4p15.dat", "cause": "gmin_tip4p15"},
+    {"key": "globalopt/tip4p15/gmin-tbp", "template": "gmin-paper/tip4p15-tbp", "sha": "71f366d9e50b7eedcdc22c75ab0cbba0188d578c", "path": "results/campaign/gmin-paper-tip4p15-tbp.dat"},
+    {"key": "globalopt/tip4p20/gmin", "template": "gmin-paper/tip4p20", "sha": "71f366d9e50b7eedcdc22c75ab0cbba0188d578c", "path": "results/campaign/gmin-paper-tip4p20.dat", "cause": "gmin_tip4p20"},
+    {"key": "globalopt/tip4p20/gmin-tbp", "template": "gmin-paper/tip4p20-tbp", "sha": "71f366d9e50b7eedcdc22c75ab0cbba0188d578c", "path": "results/campaign/gmin-paper-tip4p20-tbp.dat"},
+    {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn/htst-al-dimer", "sha": "715bc521c827f1f18102c1c027d99d0d8624b0fb", "path": "results/campaign/eon-svn-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
+    {"key": "hTST/Pt/eon-dimer-cg", "template": "eon-svn/htst-pt-dimer", "sha": "715bc521c827f1f18102c1c027d99d0d8624b0fb", "path": "results/campaign/eon-svn-htst-pt-dimer.dat", "kind": "htst"},
 ]
 
 
@@ -428,26 +413,65 @@ def screen_fields(text: str) -> dict[str, str]:
     }
 
 
-def read_campaign(root: Path, branch: str, path: str) -> str:
-    local = root / path
-    if branch in LOCAL_BRANCHES and local.is_file():
-        return local.read_text(encoding="utf-8")
-    if branch == "main":
-        return local.read_text(encoding="utf-8")
+def require_commit_sha(citation: object) -> str:
+    """A finding cites a commit. A branch name is rejected."""
+    if not isinstance(citation, str):
+        raise ValueError("a finding cites a commit sha")
+    text = citation.strip().lower()
+    if len(text) == 40 and all(char in "0123456789abcdef" for char in text):
+        return text
+    raise ValueError(f"{citation} is a branch name; a finding cites a commit sha")
+
+
+def _have_commit(root: Path, sha: str) -> bool:
+    try:
+        subprocess.check_output(
+            ["git", "cat-file", "-e", f"{sha}^{{commit}}"],
+            cwd=root,
+            stderr=subprocess.DEVNULL,
+        )
+    except (subprocess.CalledProcessError, FileNotFoundError, OSError):
+        return False
+    return True
+
+
+def _ensure_commit(root: Path, sha: str) -> None:
+    """Bring a pinned commit into the clone when a branch fetch left it out."""
+    if _have_commit(root, sha):
+        return
+    subprocess.check_output(
+        ["git", "fetch", "origin", sha],
+        cwd=root,
+        stderr=subprocess.STDOUT,
+    )
+
+
+def read_campaign(root: Path, citation: str, path: str) -> str:
+    sha = require_commit_sha(citation)
+    _ensure_commit(root, sha)
     return subprocess.check_output(
-        ["git", "show", f"origin/{branch}:{path}"],
+        ["git", "show", f"{sha}:{path}"],
         cwd=root,
         text=True,
     )
 
 
-def _sha(branch: str) -> str:
-    if branch == "cells/pele/ts" and "cells/pele/ts" not in SHA:
-        SHA[branch] = subprocess.check_output(
-            ["git", "rev-parse", "origin/cells/pele/ts"],
-            text=True,
-        ).strip()
-    return SHA[branch]
+def citation_errors(rows: list[dict]) -> list[str]:
+    """Reject a ledger row whose campaign file is cited only by branch name."""
+    errors = []
+    for row in rows:
+        beside = row.get("beside") or {}
+        if not beside:
+            continue
+        ident = row_id(row) if "suite" in row else "finding"
+        if "sha" not in beside:
+            errors.append(f"{ident} cites a branch name")
+            continue
+        try:
+            require_commit_sha(beside["sha"])
+        except ValueError:
+            errors.append(f"{ident} cites {beside.get('sha')}")
+    return errors
 
 
 def load_ledger(path: Path) -> list[dict]:
@@ -565,6 +589,19 @@ def findings_errors(root: Path) -> list[str]:
         errors.append(f"findings have {len(stored)} rows and the oracle has {len(oracle)}")
     if [row_id(row) for row in stored] != [row_id(row) for row in oracle]:
         errors.append("findings are not in oracle order")
+    errors.extend(citation_errors(stored))
+    for item in MATCHES:
+        try:
+            require_commit_sha(item.get("sha"))
+        except ValueError:
+            errors.append(f"{item.get('key', 'match')} cites a branch name")
+        if item.get("ranked_path"):
+            try:
+                require_commit_sha(item.get("ranked_sha"))
+            except ValueError:
+                errors.append(f"{item.get('key', 'match')} ranked file cites a branch name")
+    if any("cites" in line for line in errors):
+        return errors
     fresh = build_rows(root)
     for left, right in zip(stored, fresh):
         if left != right:
@@ -673,7 +710,7 @@ def build_rows(root: Path) -> list[dict]:
             continue
         kind = match.get("kind", "dat")
         try:
-            text = read_campaign(root, match["branch"], match["path"])
+            text = read_campaign(root, match["sha"], match["path"])
         except (OSError, subprocess.CalledProcessError):
             named = match.get("cause", "")
             if named:
@@ -699,8 +736,7 @@ def build_rows(root: Path) -> list[dict]:
         record["finding"] = CAUSE_TEXT.get(named, "") if named else ""
         beside = {
             "template": match["template"],
-            "branch": match["branch"],
-            "sha": _sha(match["branch"]),
+            "sha": match["sha"],
             "path": match["path"],
             "kind": kind,
             "metric": campaign_fields.get("metric", names[0] if names else "force_calls"),
@@ -714,7 +750,7 @@ def build_rows(root: Path) -> list[dict]:
         ranked_path = match.get("ranked_path")
         if ranked_path:
             try:
-                ranked_text = read_campaign(root, match.get("ranked_branch", match["branch"]), ranked_path)
+                ranked_text = read_campaign(root, match["ranked_sha"], ranked_path)
             except (OSError, subprocess.CalledProcessError):
                 ranked_text = ""
             ranked = _ranked_block(ranked_text) if ranked_text else None

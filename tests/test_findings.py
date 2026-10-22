@@ -1,10 +1,21 @@
 """Archive numbers stay the archived rows. A later file is a finding, not a gate."""
 
 import json
+import subprocess
 from pathlib import Path
 
+import pytest
+
 from optbench.check import banned_word_errors, held_back_errors, load_oracle
-from optbench.findings import campaign_mismatch, findings_errors, load_ledger, row_id
+from optbench.findings import (
+    campaign_mismatch,
+    citation_errors,
+    findings_errors,
+    load_ledger,
+    read_campaign,
+    require_commit_sha,
+    row_id,
+)
 from optbench.problems import load_problem
 from optbench.site import problem_html
 
@@ -54,6 +65,68 @@ def test_a_list_that_keeps_templates_off_the_table_is_rejected(tmp_path: Path):
     assert any(line.startswith("optbench/board.py") for line in errors)
     assert any(line.startswith("optbench/findings.py") for line in errors)
     assert any("oracle/findings.jsonl" in line for line in errors)
+
+
+SADDLE_SHA = "02405b0d55809cb81921e75f9ef29dc85a13f4bf"
+SADDLE_PATHS = {
+    "results/campaign/optim-df8da599-rr-loweig.dat",
+    "results/campaign/optim-df8da599-hef-ffd-ts-lj38.dat",
+    "results/campaign/optim-df8da599-hef-ffd-ts-pt.dat",
+    "results/campaign/optim-svn-snapshot-double-ended-saddle-search-lj38--optim-de-lj38.dat",
+    "results/campaign/optim-svn-snapshot-double-ended-saddle-search-lj38_2ts_separation--optim-de-2ts.dat",
+    "results/campaign/optim-svn-snapshot-double-ended-saddle-search-pt-island--optim-de-pt.dat",
+}
+
+
+def test_a_branch_only_citation_is_rejected():
+    with pytest.raises(ValueError, match="commit sha"):
+        require_commit_sha("cells/optim/saddle-pt")
+    row = {
+        "suite": "tsopt",
+        "problem": "LJ38",
+        "entry": "optim_ffd",
+        "beside": {
+            "branch": "cells/optim/saddle-pt",
+            "path": "results/campaign/optim-df8da599-hef-ffd-ts-lj38.dat",
+        },
+    }
+    errors = citation_errors([row])
+    assert errors
+    assert "branch name" in errors[0]
+
+
+def test_saddle_files_stay_on_their_commit():
+    ledger = load_ledger(ROOT / "oracle" / "findings.jsonl")
+    seen = set()
+    for row in ledger:
+        beside = row.get("beside") or {}
+        if not beside:
+            continue
+        assert "branch" not in beside
+        assert require_commit_sha(beside["sha"]) == beside["sha"]
+        if beside["path"] in SADDLE_PATHS:
+            assert beside["sha"] == SADDLE_SHA
+            seen.add(beside["path"])
+    assert seen == SADDLE_PATHS
+
+
+def test_a_missing_pin_is_fetched(monkeypatch):
+    calls = []
+
+    def fake_check_output(args, **kwargs):
+        calls.append(list(args))
+        if args[1] == "cat-file":
+            raise subprocess.CalledProcessError(1, args)
+        if args[1] == "fetch":
+            return b""
+        if args[1] == "show":
+            return "force_calls 1\n"
+        raise AssertionError(args)
+
+    monkeypatch.setattr("optbench.findings.subprocess.check_output", fake_check_output)
+    text = read_campaign(ROOT, SADDLE_SHA, "results/campaign/x.dat")
+    assert text == "force_calls 1\n"
+    assert ["git", "fetch", "origin", SADDLE_SHA] in calls
 
 
 def test_a_campaign_file_that_disagrees_is_reported(tmp_path: Path):
