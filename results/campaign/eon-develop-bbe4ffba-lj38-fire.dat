@@ -1,0 +1,15 @@
+force_calls 733
+force_calls_min 227
+force_calls_max 2918
+force_calls_median 636.0
+call_unit total
+nfailed 10
+code eOn
+code_version (develop bbe4ffba)
+commit bbe4ffbad32b8a479bf171cd7ff1497e363940e3
+algorithm FIRE
+template eon/develop-bbe4ffba-lj38-fire
+problem minimization/lj38
+reducer harness
+counter harness
+count_keys HarnessCounter
