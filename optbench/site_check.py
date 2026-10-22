@@ -8,9 +8,13 @@ from pathlib import Path
 from .board import (
     MissingAsvCommit,
     _registry,
+    _full_harness,
+    _show_archive,
     _show_per_image,
+    _show_runs,
     best_ranked_by_code,
     build_board,
+    headline_row,
     ranked_cells,
     summary_codes,
 )
@@ -95,10 +99,12 @@ def _check_ranked(label: str, table: dict, document: dict) -> list[str]:
     if len(body) != len(ranked):
         return [f"{label} {problem_id} ranked rows {len(body)} != board {len(ranked)}"]
     per_image = _show_per_image(problem) if problem else False
+    archive = _show_archive(problem) if problem else False
+    runs = _show_runs(problem) if problem else False
     errors: list[str] = []
     for index, (got_row, board_row) in enumerate(zip(body, ranked), start=1):
         got = _cell_map(got_row)
-        expected = dict(ranked_cells(board_row, per_image))
+        expected = dict(ranked_cells(board_row, per_image, archive=archive, runs=runs))
         for field, value in expected.items():
             if got.get(field) != value:
                 errors.append(
@@ -110,17 +116,19 @@ def _check_ranked(label: str, table: dict, document: dict) -> list[str]:
 def _check_headline(label: str, table: dict, document: dict) -> list[str]:
     problem_id = table["attrs"].get("data-problem", "")
     problem = (document.get("problems") or {}).get(problem_id)
-    ranked = list(problem.get("ranked") or []) if problem else []
+    lead = headline_row(problem) if problem else None
     body = _ranked_body(table)
-    if not ranked:
+    if lead is None:
         if body:
             return [f"{label} {problem_id} headline has a row and the board has no full run"]
         return []
     if len(body) != 1:
         return [f"{label} {problem_id} headline rows {len(body)} != 1"]
     per_image = _show_per_image(problem) if problem else False
+    archive = _show_archive(problem) if problem else False
+    runs = _show_runs(problem) if problem else False
     got = _cell_map(body[0])
-    expected = dict(ranked_cells(ranked[0], per_image))
+    expected = dict(ranked_cells(lead, per_image, archive=archive, runs=runs))
     errors = []
     for field, value in expected.items():
         if got.get(field) != value:
@@ -202,10 +210,13 @@ def _check_code_best(label: str, table: dict, document: dict) -> list[str]:
             continue
         problem = (document.get("problems") or {}).get(problem_id)
         ranked = list(problem.get("ranked") or []) if problem else []
-        board_row = next(
-            (item for item in ranked if str(item.get("template") or item.get("entry") or "") == template),
-            None,
-        )
+        same = [
+            item
+            for item in ranked
+            if str(item.get("template") or item.get("entry") or "") == template
+        ]
+        full = [item for item in same if _full_harness(item)]
+        board_row = full[0] if full else (same[0] if same else None)
         got = _cell_map(row)
         if board_row is None:
             errors.append(f"{label} {problem_id} code row {template!r} is not a ranked board row")
@@ -228,7 +239,7 @@ def _page_texts(root: Path) -> list[tuple[str, str]]:
         pages.append(include / name)
     suite_dir = root / "docs" / "orgmode" / "generated" / "suites"
     if suite_dir.is_dir():
-        pages.extend(sorted(suite_dir.glob("*.org")))
+        pages.extend(sorted(suite_dir.rglob("*.org")))
     org = root / "docs" / "orgmode"
     for name in ("index.org", "codes.org", "archive.org", "board.org", "run.org"):
         pages.append(org / name)
@@ -288,20 +299,25 @@ def check_site(root: Path) -> list[str]:
         if not suite:
             errors.append(f"{suite_label} is missing")
             continue
-        _require(
-            suite,
-            f'data-board-table="ranked" data-problem="{problem["id"]}"',
-            suite_label,
-            errors,
-        )
         if problem["id"] not in summary_ids.get(suite_label, set()):
             errors.append(f"{suite_label} summary is missing {problem['id']}")
+        page_label = f"docs/orgmode/generated/suites/{problem['suite']}/{problem['problem']}.org"
+        page = texts.get(page_label, "")
+        if not page:
+            errors.append(f"{page_label} is missing")
+            continue
+        _require(
+            page,
+            f'data-board-table="ranked" data-problem="{problem["id"]}"',
+            page_label,
+            errors,
+        )
         board_problem = (document.get("problems") or {}).get(problem["id"]) or {}
         slug = str(problem["id"]).replace("/", "-")
         if board_problem.get("profile"):
-            _require(suite, f"{slug}-profile.svg", suite_label, errors)
-        if board_problem.get("ranked"):
-            _require(suite, f"{slug}-cost.svg", suite_label, errors)
+            _require(page, f"{slug}-profile.svg", page_label, errors)
+        if any(_full_harness(row) for row in board_problem.get("ranked") or []):
+            _require(page, f"{slug}-cost.svg", page_label, errors)
         for name in ("docs/include/sota.org", "docs/include/collection.org"):
             page = texts.get(name, "")
             if not page:
@@ -341,7 +357,13 @@ def check_site(root: Path) -> list[str]:
                 if problem_id not in found:
                     errors.append(f"{built_board} summary is missing {problem_id}")
         for problem in problems.values():
-            built = f"docs/build/generated/suites/{problem['suite']}.html"
+            built_suite = f"docs/build/generated/suites/{problem['suite']}.html"
+            suite_page = texts.get(built_suite, "")
+            if not suite_page:
+                errors.append(f"{built_suite} is missing")
+            elif problem["id"] not in summary_ids.get(built_suite, set()):
+                errors.append(f"{built_suite} summary is missing {problem['id']}")
+            built = f"docs/build/generated/suites/{problem['suite']}/{problem['problem']}.html"
             page = texts.get(built, "")
             if not page:
                 errors.append(f"{built} is missing")
@@ -352,6 +374,4 @@ def check_site(root: Path) -> list[str]:
                 built,
                 errors,
             )
-            if problem["id"] not in summary_ids.get(built, set()):
-                errors.append(f"{built} summary is missing {problem['id']}")
     return errors

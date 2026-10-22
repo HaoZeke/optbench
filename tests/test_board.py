@@ -123,6 +123,27 @@ def _row(calls: float, success: bool, start: str, failure: str | None = None) ->
     return record
 
 
+def test_a_run_left_out_of_the_mean_stays_on_the_row(tmp_path: Path):
+    _problem(tmp_path, starts=2, cap=1000)
+    _template(tmp_path)
+    _registry(tmp_path)
+    _dat(tmp_path, "toy-fast", PIN)
+    _starts(
+        tmp_path,
+        "toy-fast",
+        [
+            {"force_calls": 3, "success": True, "start": "1", "counter": "harness", "repetition": 1, "in_mean": True},
+            {"force_calls": 9, "success": True, "start": "2", "counter": "harness", "repetition": 2, "in_mean": True},
+            {"force_calls": 100, "success": True, "start": "3", "counter": "harness", "repetition": 3, "in_mean": False},
+        ],
+    )
+
+    row = build_board(tmp_path)["problems"]["minimization/toy"]["ranked"][0]
+    assert row["n"] == 2
+    assert row["mean_calls"] == 6
+    assert row["runs"] == [3.0, 9.0, 100.0]
+
+
 def test_full_harness_row_is_ranked_by_par2(tmp_path: Path):
     _problem(tmp_path, starts=2, cap=10)
     _template(tmp_path)
@@ -158,7 +179,7 @@ def test_full_harness_row_is_ranked_by_par2(tmp_path: Path):
     assert row["partial"] is False
 
 
-def test_short_grid_stays_off_the_ranked_table(tmp_path: Path):
+def test_short_grid_is_its_own_ranked_row(tmp_path: Path):
     _problem(tmp_path, starts=4, cap=10)
     _template(tmp_path)
     _registry(tmp_path)
@@ -167,12 +188,12 @@ def test_short_grid_stays_off_the_ranked_table(tmp_path: Path):
 
     document = build_board(tmp_path)
     problem = document["problems"]["minimization/toy"]
-    assert problem["ranked"] == []
-    assert len(problem["partial"]) == 1
-    partial = problem["partial"][0]
-    assert partial["n"] == 2
-    assert partial["partial_reason"] == "scored 2 of 4 starts"
-    assert document["partial"][0]["template"] == "toy/fast"
+    assert len(problem["ranked"]) == 1
+    assert problem["partial"] == []
+    row = problem["ranked"][0]
+    assert row["n"] == 2
+    assert row["partial"] is True
+    assert row["partial_reason"] == "scored 2 of 4 starts"
 
 
 def test_duplicate_files_are_kept_and_the_registry_commit_is_current(tmp_path: Path):
@@ -217,9 +238,9 @@ def test_client_counter_is_not_on_the_ranked_board(tmp_path: Path):
 
     document = build_board(tmp_path)
     problem = document["problems"]["minimization/toy"]
-    assert problem["ranked"] == []
-    assert len(problem["not_comparable"]) == 1
-    assert problem["not_comparable"][0]["counter"] == "client"
+    assert len(problem["ranked"]) == 1
+    assert problem["ranked"][0]["counter"] == "client"
+    assert problem["not_comparable"] == []
     assert document["partial"] == []
 
 
@@ -301,12 +322,12 @@ def test_ranked_false_stays_off_the_table(tmp_path: Path):
     _starts(tmp_path, "toy-fast", [_row(3, True, "0"), _row(4, True, "1")])
 
     problem = build_board(tmp_path)["problems"]["minimization/toy"]
-    assert problem["ranked"] == []
-    assert problem["partial"][0]["partial_reason"] == "result file sets ranked false"
+    assert len(problem["ranked"]) == 1
+    assert problem["ranked"][0]["partial_reason"] == "result file sets ranked false"
     path.write_text(path.read_text(encoding="utf-8") + "potential ljcluster (shifted, cutoff 15)\n", encoding="utf-8")
     problem = build_board(tmp_path)["problems"]["minimization/toy"]
-    assert problem["ranked"] == []
-    assert problem["partial"][0]["partial_reason"] == (
+    assert len(problem["ranked"]) == 1
+    assert problem["ranked"][0]["partial_reason"] == (
         "result file sets ranked false; potential ljcluster (shifted, cutoff 15)"
     )
 
@@ -398,19 +419,17 @@ def test_one_start_asv_grid_is_partial(tmp_path: Path):
     _asv_one_start(tmp_path)
 
     document = build_board(tmp_path)
-    partial = [row for row in document["partial"] if row["entry"].endswith("Lj38EonLbfgsM100")]
-    assert len(partial) == 1
-    assert partial[0]["n"] == 1
-    assert partial[0]["partial"] is True
-    assert "smoke" in partial[0]["partial_reason"]
-    assert "1 of 1000" in partial[0]["partial_reason"]
     ranked = [
         row
         for problem_rows in document["problems"].values()
         for row in problem_rows["ranked"]
         if str(row["entry"]).endswith("Lj38EonLbfgsM100")
     ]
-    assert ranked == []
+    assert len(ranked) == 1
+    assert ranked[0]["n"] == 1
+    assert ranked[0]["partial"] is True
+    assert "1 of 1000" in ranked[0]["partial_reason"]
+    assert document["partial"] == []
 
 
 def test_profile_lines_up_the_same_starts(tmp_path: Path):
@@ -486,7 +505,7 @@ def test_a_partial_problem_drops_a_plot_left_from_an_earlier_run(tmp_path: Path)
 
     written = write_board(tmp_path, tmp_path / "board")
 
-    assert written["problems"]["minimization/toy"]["ranked"] == []
+    assert len(written["problems"]["minimization/toy"]["ranked"]) == 1
     assert not stale.exists()
     assert not site_stale.exists()
     assert not site_webp.exists()
@@ -506,12 +525,15 @@ def test_only_the_newest_full_version_is_ranked(tmp_path: Path):
     _starts(tmp_path, "short", [_row(1, True, "0")])
 
     problem = build_board(tmp_path)["problems"]["minimization/toy"]
-    assert [row["code_version"] for row in problem["ranked"]] == ["0.4.1"]
-    assert problem["ranked"][0]["current"] is True
-    assert [row["code_version"] for row in problem["history"]] == ["0.4.0"]
-    assert problem["history"][0]["current"] is False
-    assert problem["history"][0]["history"] is True
-    assert [row["code_version"] for row in problem["partial"]] == ["0.4.2"]
+    by_version = {row["code_version"]: row for row in problem["ranked"]}
+    assert set(by_version) == {"0.4.0", "0.4.1", "0.4.2"}
+    assert by_version["0.4.1"]["current"] is True
+    assert by_version["0.4.1"]["history"] is False
+    assert by_version["0.4.0"]["history"] is True
+    assert by_version["0.4.0"]["current"] is False
+    assert by_version["0.4.2"]["partial"] is True
+    assert problem["history"] == []
+    assert problem["partial"] == []
     assert old.is_file()
     assert current.is_file()
 
@@ -685,17 +707,16 @@ def test_a_one_start_asv_track_stays_out_of_the_ranked_mean(tmp_path: Path):
     _asv_track(tmp_path, "bench_rgmin.RgminLj38Lbfgs", [100.0])
 
     problem_rows = build_board(tmp_path)["problems"]["minimization/lj38"]
-    assert len(problem_rows["ranked"]) == 1
-    assert problem_rows["ranked"][0]["n"] == 2
-    assert problem_rows["ranked"][0]["mean_calls"] == 15
-    assert problem_rows["ranked"][0]["code_version"] == "0.4.0"
-    assert problem_rows["ranked"][0]["source"] == "campaign"
-    smoke = problem_rows["partial"]
-    assert len(smoke) == 1
-    assert smoke[0]["n"] == 1
-    assert smoke[0]["mean_calls"] == 100
-    assert smoke[0]["code_version"] == "0.4.1"
-    assert "smoke" in smoke[0]["partial_reason"]
+    full = [row for row in problem_rows["ranked"] if row["n"] == 2]
+    short = [row for row in problem_rows["ranked"] if row["n"] == 1]
+    assert len(full) == 1
+    assert full[0]["mean_calls"] == 15
+    assert full[0]["code_version"] == "0.4.0"
+    assert full[0]["source"] == "campaign"
+    assert len(short) == 1
+    assert short[0]["mean_calls"] == 100
+    assert short[0]["code_version"] == "0.4.1"
+    assert "1 of" in short[0]["partial_reason"]
 
 
 def test_shipped_band_starts_share_one_call_unit():

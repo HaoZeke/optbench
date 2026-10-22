@@ -24,12 +24,6 @@
   margin: 0;
 }
 
-.bench-smoke,
-.bench-legacy {
-  max-width: 68ch;
-  margin: 0 0 1.25rem;
-}
-
 .bench-plot {
   margin: 1.5rem 0 0;
 }

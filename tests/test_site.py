@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from optbench.board import ranked_cells
+from optbench.board import headline_row, ranked_cells
 from optbench.check import load_oracle
 from optbench.problems import load_problem
 from optbench.site import campaign_problem, problem_html, render
@@ -57,9 +57,10 @@ def test_lj38_table_ranks_the_archived_scores():
 def test_rendered_pages_use_the_board_rank():
     render(ROOT)
     document = json.loads((ROOT / "results" / "board" / "index.json").read_text(encoding="utf-8"))
-    lj38 = document["problems"]["minimization/lj38"]["ranked"][0]
-    morse = document["problems"]["minimization/morse-bulk"]["ranked"][0]
-    neb = document["problems"]["neb/Pt-heptamer"]["ranked"][0]
+    lj38 = headline_row(document["problems"]["minimization/lj38"])
+    morse = headline_row(document["problems"]["minimization/morse-bulk"])
+    neb = headline_row(document["problems"]["neb/Pt-heptamer"])
+    assert lj38 is not None and morse is not None and neb is not None
     cells = dict(ranked_cells(lj38, False))
     sota = (ROOT / "docs" / "include" / "sota.org").read_text(encoding="utf-8")
     assert f'data-board-table="headline" data-problem="minimization/lj38"' in sota
@@ -72,35 +73,37 @@ def test_rendered_pages_use_the_board_rank():
     assert "Morse bulk" in collection
     assert morse["template"] in collection
     assert "No present run is recorded." not in collection
-    assert "No committed harness run." in collection
-    minimization = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "minimization.org").read_text(encoding="utf-8")
-    assert f'data-board-table="ranked" data-problem="minimization/lj38"' in minimization
-    assert f'data-field="par2_mean">{cells["par2_mean"]}<' in minimization
-    assert "minimization-lj38-profile.svg" in minimization
-    assert "minimization-lj38-profile.webp" in minimization
-    assert 'loading="lazy"' in minimization
+    assert "No committed harness run." not in collection
+    assert "No full harness row." in collection
+    suites = ROOT / "docs" / "orgmode" / "generated" / "suites"
+    minimization = (suites / "minimization.org").read_text(encoding="utf-8")
+    lj38_page = (suites / "minimization" / "lj38.org").read_text(encoding="utf-8")
+    assert f'data-board-table="ranked" data-problem="minimization/lj38"' in lj38_page
+    assert f'data-field="par2_mean">{cells["par2_mean"]}<' in lj38_page
+    assert "minimization-lj38-profile.svg" in lj38_page
+    assert "minimization-lj38-profile.webp" in lj38_page
+    assert 'loading="lazy"' in lj38_page
     assert 'data-board-table="summary"' in minimization
     assert f'data-par2="{cells["par2_mean"]}"' in minimization
-    assert "<details" in minimization
-    assert "Legacy 2014 archive" in minimization
-    assert "eon-cg" in minimization
-    assert ">eon-cg<" in minimization
-    assert "pele-fire · not reproduced" in minimization
-    assert "par2-wilson-bootstrap" in minimization
-    assert "Present runs. Fewer force calls first." not in minimization
-    neb_page = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "neb.org").read_text(encoding="utf-8")
+    assert "<details" in lj38_page
+    assert "2014 archive" in minimization
+    assert "2014 archive" in lj38_page
+    assert "eon-cg" in lj38_page
+    assert "eon-client/cg" in lj38_page
+    assert "par2-wilson-bootstrap" in lj38_page
+    assert "Present runs. Fewer force calls first." not in lj38_page
+    assert "minimization/lj38" in minimization
+    neb_page = (suites / "neb" / "Pt-heptamer.org").read_text(encoding="utf-8")
     assert neb["template"] in neb_page
     assert "not yet on the harness counter" in neb_page
-    assert "Legacy 2014 scores. Fewer calls is to the left." in neb_page
-    tsopt = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "tsopt.org").read_text(encoding="utf-8")
-    assert "Sella 0.1.1 legacy" in tsopt
-    assert "2.6.0 legacy" not in tsopt
+    tsopt = (suites / "tsopt" / "LJ38.org").read_text(encoding="utf-8")
+    assert "Sella 0.1.1" in tsopt
     ts_ranked = [row["template"] for row in document["problems"]["tsopt/LJ38"]["ranked"]]
     assert "sella/lj38-ts-default" in ts_ranked
-    assert "sella/lj38-ts-tuned" not in ts_ranked
+    assert "sella/lj38-ts-tuned" in ts_ranked
     assert "rgsaddle/dimer-rotskip-tuned" in ts_ranked
     assert "tsopt-LJ38-profile.svg" in tsopt
-    saddle = (ROOT / "docs" / "orgmode" / "generated" / "suites" / "saddle-search.org").read_text(encoding="utf-8")
+    saddle = (suites / "saddle-search" / "pt-island.org").read_text(encoding="utf-8")
     assert 'data-board-table="ranked" data-problem="saddle-search/pt-island"' in saddle
     assert "rgsaddle/saddle-dimer-rotskip-tuned" in saddle
     assert 'data-field="par2_mean">10127.1<' in saddle
@@ -108,8 +111,9 @@ def test_rendered_pages_use_the_board_rank():
     assert "eon-3.5.0-saddle-pt-dimer" in saddle
     assert "not yet on the harness counter" in saddle
     assert "Per-search cost" not in saddle
-    assert "noise/rgmin-dogleg-s0" in minimization
-    assert 'data-field="par2_mean">81.881<' in minimization
+    noise = (suites / "minimization" / "lj38-noise.org").read_text(encoding="utf-8")
+    assert "noise/rgmin-dogleg-s0" in noise
+    assert 'data-field="par2_mean">81.881<' in noise
     board = (ROOT / "docs" / "include" / "v2-board.org").read_text(encoding="utf-8")
     assert 'data-board-table="summary"' in board
     assert f'data-par2="{cells["par2_mean"]}"' in board
@@ -125,8 +129,10 @@ def test_rendered_pages_use_the_board_rank():
     assert not (ROOT / "docs" / "include" / "terra-pass.org").exists()
     for problem in document["problems"].values():
         if problem.get("ranked") and not problem.get("profile"):
-            suite = problem["id"].split("/")[0]
-            page = (ROOT / "docs" / "orgmode" / "generated" / "suites" / f"{suite}.org").read_text(encoding="utf-8")
+            suite, _, name = problem["id"].partition("/")
+            page = (ROOT / "docs" / "orgmode" / "generated" / "suites" / suite / f"{name}.org").read_text(
+                encoding="utf-8"
+            )
             assert problem["profile_gap"]
             assert problem["profile_gap"] in page
     assert check_site(ROOT) == []
@@ -135,7 +141,8 @@ def test_rendered_pages_use_the_board_rank():
 def test_a_stale_summary_number_fails_the_check():
     render(ROOT)
     document = json.loads((ROOT / "results" / "board" / "index.json").read_text(encoding="utf-8"))
-    top = document["problems"]["minimization/lj38"]["ranked"][0]
+    top = headline_row(document["problems"]["minimization/lj38"])
+    assert top is not None
     par2 = dict(ranked_cells(top, False))["par2_mean"]
     path = ROOT / "docs" / "include" / "v2-board.org"
     original = path.read_text(encoding="utf-8")
@@ -153,9 +160,10 @@ def test_a_stale_summary_number_fails_the_check():
 def test_a_stale_ranked_number_fails_the_check():
     render(ROOT)
     document = json.loads((ROOT / "results" / "board" / "index.json").read_text(encoding="utf-8"))
-    top = document["problems"]["minimization/lj38"]["ranked"][0]
+    top = headline_row(document["problems"]["minimization/lj38"])
+    assert top is not None
     par2 = dict(ranked_cells(top, False))["par2_mean"]
-    path = ROOT / "docs" / "orgmode" / "generated" / "suites" / "minimization.org"
+    path = ROOT / "docs" / "orgmode" / "generated" / "suites" / "minimization" / "lj38.org"
     original = path.read_text(encoding="utf-8")
     needle = f'data-field="par2_mean">{par2}<'
     assert needle in original

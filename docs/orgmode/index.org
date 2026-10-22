@@ -1,15 +1,14 @@
 #+TITLE: OptBench
 #+OPTIONS: toc:nil num:nil author:nil
 
-The score on this site is the v2 PAR-2 mean of harness force calls
-on the problem's full start set.
-A row with fewer starts stays off the ranked table.
+The score on this site is the v2 PAR-2 mean of harness force calls.
+Every method is one ranked row.
 =python -m optbench.site= writes these pages from that scorer.
 The same numbers are in =results/board/index.json=.
 
 #+INCLUDE: "../include/sota.org"
 
-The 2014 archive is labelled legacy on each problem page and on the archive page.
+The 2014 archive is a column on the matching method.
 The commands that write a new =benchmark.dat= are on the Run a score page.
 
 #+begin_export rst

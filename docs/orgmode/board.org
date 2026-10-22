@@ -3,7 +3,7 @@
 
 Each column is one code.
 The cell is that code's best full harness run, ranked by the v2 PAR-2 mean.
-The problem page lists every template, including history and partial rows.
+The problem page lists every template, including older versions and short runs.
 =uv run optbench board= writes this page from the committed results.
 It does not run a campaign.
 

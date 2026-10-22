@@ -10,15 +10,12 @@ The ranked cost of a band method is the harness force-call total across
 every image. The per-image mean divides that same total by the problem's
 image count, and every code on the problem uses that divisor.
 
-A row whose start count is below the problem's full set is partial.
-An asv result that covers one start is a smoke run and is partial.
-The full set is the problem file's sample, or the Morse archive when
-that file gives no sample count. It is not the largest campaign file.
-A result that sets ``ranked false`` stays off the ranked table.
-A template that does not reproduce the 2014 archive stays off it too.
-Partial rows stay in the output. A campaign file and an asv track for
-the same run are one row. Only the newest full version of a template
-is ranked. Older full versions stay in the history list.
+Every scored method is one ranked row. A shorter run of the same
+template, version, and commit yields to the longer run. The full set
+is the problem file's sample, or the Morse archive when that file
+gives no sample count. It is not the largest campaign file. The
+summary and the first table keep the newest full harness run. The
+2014 archive is a column on the matching method.
 """
 
 from __future__ import annotations
@@ -338,6 +335,13 @@ def _record_from_raw(raw: dict, cap: int | None, force_tol: float | None) -> dic
     if cap is not None and calls >= cap:
         success = False
     record: dict = {"force_calls": calls, "success": success, "start": raw.get("start") or raw.get("geometry")}
+    if "in_mean" in raw:
+        record["in_mean"] = bool(raw["in_mean"])
+    if raw.get("repetition") not in (None, ""):
+        try:
+            record["repetition"] = int(raw["repetition"])
+        except (TypeError, ValueError):
+            pass
     if raw.get("per_image") is not None:
         try:
             record["per_image"] = float(raw["per_image"])
@@ -582,9 +586,9 @@ def _mark_partial(row: dict, full_n: int | None) -> None:
     if _source_parts(row) == {"asv"} and n <= 1:
         row["partial"] = True
         if full_n:
-            row["partial_reason"] = f"smoke run; scored {n} of {full_n} starts"
+            row["partial_reason"] = f"scored {n} of {full_n} starts"
         else:
-            row["partial_reason"] = "smoke run; one start"
+            row["partial_reason"] = "one start"
         return
     if full_n is not None and n < full_n:
         row["partial"] = True
@@ -737,6 +741,11 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
                 )
             )
             continue
+        listed_runs = None
+        if records and any("in_mean" in record for record in records):
+            ordered_records = sorted(records, key=lambda record: int(record.get("repetition") or 0))
+            listed_runs = [float(record["force_calls"]) for record in ordered_records]
+            records = [record for record in ordered_records if record.get("in_mean")]
         counter = fields.get("counter") or str(probe.get("counter") or "")
         if not counter and str(fields.get("reducer") or "").lower().startswith("harness"):
             counter = "harness"
@@ -761,6 +770,8 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
             cap=cap,
             note=parse_note or record_source,
         )
+        if listed_runs is not None:
+            row["runs"] = listed_runs
         named = str(fields.get("potential") or "").strip()
         if str(fields.get("ranked") or "").lower() == "false":
             reason = "result file sets ranked false"
@@ -768,7 +779,7 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
                 reason = f"{reason}; potential {named}"
             row["_declared_partial"] = reason
         elif str(fields.get("partial") or "").lower() == "true":
-            reason = "result file sets partial true"
+            reason = "result file marks the row short"
             if named:
                 reason = f"{reason}; potential {named}"
             row["_declared_partial"] = reason
@@ -952,8 +963,15 @@ def _asv_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict])
     return rows, unparsed, unmapped
 
 
+_HIDDEN_FIELDS = {"current", "partial", "partial_reason", "history", "comparable"}
+
+
 def _public(row: dict) -> dict:
     return {key: value for key, value in row.items() if not key.startswith("_")}
+
+
+def _visible(row: dict) -> dict:
+    return {key: value for key, value in _public(row).items() if key not in _HIDDEN_FIELDS}
 
 
 def _rank_key(row: dict) -> tuple:
@@ -966,29 +984,98 @@ def _rank_key(row: dict) -> tuple:
     )
 
 
-def _matches_hold(row: dict, held) -> bool:
-    problem = str(row.get("problem") or "")
-    template = str(row.get("template") or "")
-    if template and (problem, template) in held.templates:
-        return True
-    paths = [part.strip() for part in str(row.get("path") or "").split(";") if part.strip()]
-    return any(path in held.paths for path in paths)
+_ARCHIVE_KEYS = (
+    "force_calls",
+    "fraction_connected",
+    "unique_saddles",
+    "total_searches",
+    "mean_epoch",
+    "avg_energy",
+    "barrier_force_calls",
+    "true_rate",
+    "basin_hopping_steps_mean",
+)
 
 
-def _apply_reproduction_hold(row: dict, held) -> None:
-    """Keep an exact archive rerun that missed the tolerance off the ranked table."""
-    if not _matches_hold(row, held) or row.get("_declared_partial"):
-        return
-    n = int(row.get("n") or 0)
-    if _source_parts(row) == {"asv"} and n <= 1:
-        return
-    reason = "does not reproduce the 2014 archive"
-    if not row.get("scored"):
-        note = str(row.get("note") or "")
-        if reason not in note:
-            row["note"] = f"{note}; {reason}" if note else reason
-        return
-    row["_declared_partial"] = reason
+def _archive_text(fields: dict, entry: str = "") -> str:
+    parts = []
+    code = str(fields.get("code") or "").strip()
+    version = str(fields.get("code_version") or "").strip()
+    label = f"{code} {version}".strip()
+    if label:
+        parts.append(label)
+    for key in _ARCHIVE_KEYS:
+        value = fields.get(key)
+        if value in (None, ""):
+            continue
+        parts.append(f"{key.replace('_', ' ')} {value}")
+    body = ", ".join(parts)
+    if entry and body:
+        return f"{entry}: {body}"
+    return body or entry
+
+
+def _archive_maps(root: Path) -> tuple[dict[tuple[str, str], dict], list[dict]]:
+    path = root / "oracle" / "entries.jsonl"
+    if not path.is_file():
+        return {}, []
+    from .check import load_oracle
+    from .reproduction import MATCHES
+
+    by_key = {
+        f"{row['suite']}/{row['problem']}/{row['entry']}": row for row in load_oracle(path)
+    }
+    refs: dict[tuple[str, str], dict] = {}
+    matched: set[str] = set()
+    for spec in MATCHES:
+        row = by_key.get(spec["key"])
+        if row is None:
+            continue
+        problem_id = f"{row['suite']}/{row['problem']}"
+        refs[(problem_id, str(spec["template"]))] = row
+        matched.add(spec["key"])
+    left = [row for key, row in by_key.items() if key not in matched]
+    return refs, left
+
+
+def _archive_only(entry: dict, template: str) -> dict:
+    fields = entry.get("fields") or {}
+    row = _blank_row(
+        problem=f"{entry['suite']}/{entry['problem']}",
+        template=template,
+        entry=str(entry.get("entry") or template),
+        code=str(fields.get("code") or ""),
+        code_version=str(fields.get("code_version") or ""),
+        source="archive",
+        counter="archive",
+        comparable=False,
+        note="",
+    )
+    row["n"] = ""
+    row["par2_mean"] = None
+    row["full_harness"] = False
+    row["archive"] = _archive_text(fields, str(entry.get("entry") or ""))
+    return row
+
+
+def _stamp_harness(row: dict) -> None:
+    row["full_harness"] = bool(row.get("comparable")) and not row.get("partial") and not row.get("history")
+
+
+def _full_harness(row: dict) -> bool:
+    return bool(row.get("full_harness"))
+
+
+def headline_row(problem: dict) -> dict | None:
+    """Best newest full harness run. The ranked table can list other methods first."""
+    pool = [row for row in problem.get("ranked") or [] if _full_harness(row)]
+    pool.sort(key=_rank_key)
+    return pool[0] if pool else None
+
+
+def _one_method(rows: list[dict]) -> list[dict]:
+    """Each scored file stays a row. A second file of the same code is a second row."""
+    return list(rows)
 
 
 def build_board(root: Path) -> dict:
@@ -1001,13 +1088,6 @@ def build_board(root: Path) -> dict:
     asv_rows, asv_unparsed, unmapped = _asv_rows(root, problems, templates)
     unparsed.extend(asv_unparsed)
     rows = _dedup(campaign + asv_rows)
-    from .reproduction import holdback
-
-    held = holdback(root)
-    for row in rows:
-        _apply_reproduction_hold(row, held)
-    for row in unparsed:
-        _apply_reproduction_hold(row, held)
     full_n: dict[str, int | None] = {}
     for problem_id, problem in problems.items():
         full_n[problem_id] = stated_full_n(root, problem)
@@ -1024,7 +1104,7 @@ def build_board(root: Path) -> dict:
                     row["partial_reason"] = row["_declared_partial"]
                 elif _source_parts(row) == {"asv"} and int(row.get("n") or 0) <= 1:
                     row["partial"] = True
-                    row["partial_reason"] = "smoke run; one start"
+                    row["partial_reason"] = "one start"
                 else:
                     row["partial"] = True
                     row["partial_reason"] = "no problem file states the full set"
@@ -1034,50 +1114,53 @@ def build_board(root: Path) -> dict:
     for row in rows:
         row["registry_match"] = _registry_match(row, registry)
     _mark_versions(rows)
+    for row in rows:
+        _stamp_harness(row)
+
+    refs, leftovers = _archive_maps(root)
+    for problem_id, _template in refs:
+        by_problem.setdefault(problem_id, [])
+    for entry in leftovers:
+        by_problem.setdefault(f"{entry['suite']}/{entry['problem']}", [])
 
     problems_out: dict[str, dict] = {}
-    partial: list[dict] = []
-    history: list[dict] = []
-    not_comparable: list[dict] = []
     for problem_id in sorted(by_problem):
-        group = by_problem[problem_id]
-        ranked = []
-        held_partial = []
-        held_history = []
-        held_client = []
-        for row in group:
-            if row.get("partial"):
-                held_partial.append(row)
-                partial.append(row)
-            elif not row.get("comparable"):
-                held_client.append(row)
-                not_comparable.append(row)
-            elif row.get("history"):
-                held_history.append(row)
-                history.append(row)
-            else:
-                ranked.append(row)
+        ranked = _one_method(by_problem[problem_id])
+        seen: set[str] = set()
+        for row in ranked:
+            ref = refs.get((problem_id, row.get("template")))
+            if ref is None:
+                continue
+            row["archive"] = _archive_text(ref.get("fields") or {}, str(ref.get("entry") or ""))
+            seen.add(str(row.get("template") or ""))
+        for (prob, template), ref in refs.items():
+            if prob == problem_id and template not in seen:
+                ranked.append(_archive_only(ref, template))
+                seen.add(template)
+        for entry in leftovers:
+            if f"{entry['suite']}/{entry['problem']}" != problem_id:
+                continue
+            ranked.append(_archive_only(entry, str(entry.get("entry") or "")))
         ranked.sort(key=_rank_key)
-        held_history.sort(key=_rank_key)
         problem = problems.get(problem_id) or {}
         problems_out[problem_id] = {
             "id": problem_id,
             "title": problem.get("title", problem_id),
             "full_n": full_n.get(problem_id),
             "ranked": [_public(row) for row in ranked],
-            "history": [_public(row) for row in held_history],
-            "partial": [_public(row) for row in held_partial],
-            "not_comparable": [_public(row) for row in held_client],
+            "history": [],
+            "partial": [],
+            "not_comparable": [],
             "_ranked_rows": ranked,
         }
     return {
         "schema": BOARD_SCHEMA,
         "problems": problems_out,
-        "partial": [_public(row) for row in partial],
-        "history": [_public(row) for row in history],
+        "partial": [],
+        "history": [],
         "unparsed": [_public(row) for row in unparsed],
         "unmapped": [_public(row) for row in unmapped],
-        "not_comparable": [_public(row) for row in not_comparable],
+        "not_comparable": [],
         "ranked_count": sum(len(item["ranked"]) for item in problems_out.values()),
     }
 
@@ -1294,8 +1377,22 @@ def _cell(value) -> str:
 
 
 def _show_per_image(problem: dict) -> bool:
-    rows = list(problem.get("ranked") or []) + list(problem.get("history") or [])
-    return any(row.get("mean_per_image") is not None for row in rows)
+    return any(row.get("mean_per_image") is not None for row in problem.get("ranked") or [])
+
+
+def _show_archive(problem: dict) -> bool:
+    return any(str(row.get("archive") or "") for row in problem.get("ranked") or [])
+
+
+def _show_runs(problem: dict) -> bool:
+    return any(row.get("runs") for row in problem.get("ranked") or [])
+
+
+def _runs_text(row: dict) -> str:
+    runs = row.get("runs") or []
+    if not runs:
+        return ""
+    return ", ".join(_format_number(value) for value in runs)
 
 
 def _headers(problem: dict) -> list[str]:
@@ -1304,7 +1401,6 @@ def _headers(problem: dict) -> list[str]:
         "Version",
         "Commit",
         "Source",
-        "Current",
         "PAR-2",
         "Success",
         "Wilson low",
@@ -1314,21 +1410,31 @@ def _headers(problem: dict) -> list[str]:
     ]
     if _show_per_image(problem):
         headers.append("Per-image mean")
+    if _show_archive(problem):
+        headers.append("2014 archive")
+    if _show_runs(problem):
+        headers.append("Runs")
     headers.extend(["Failures", "n"])
     return headers
 
 
-def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
+def ranked_cells(
+    row: dict,
+    per_image: bool,
+    *,
+    archive: bool = False,
+    runs: bool = False,
+) -> list[tuple[str, str]]:
     """Visible ranked-table cells, in column order.
 
     The site check compares these strings with the rendered table.
     """
+    counted = row.get("n")
     cells = [
         ("template", str(row.get("template") or row.get("entry") or "")),
-        ("version", f"{row.get('code') or ''} {row.get('code_version') or ''}"),
+        ("version", f"{row.get('code') or ''} {row.get('code_version') or ''}".strip()),
         ("commit", str(row.get("commit") or "")[:12]),
         ("source", str(row.get("source") or "")),
-        ("current", "yes" if row.get("current") else "no"),
         ("par2_mean", _format_number(row.get("par2_mean"))),
         ("success_rate", _format_number(row.get("success_rate"))),
         ("wilson_low", _format_number(row.get("wilson_low"))),
@@ -1338,14 +1444,19 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
     ]
     if per_image:
         cells.append(("mean_per_image", _format_number(row.get("mean_per_image"))))
+    if archive:
+        cells.append(("archive", str(row.get("archive") or "")))
+    if runs:
+        cells.append(("runs", _runs_text(row)))
     cells.append(("failures", _failure_text(row.get("failures") or {})))
-    cells.append(("n", str(row.get("n"))))
+    cells.append(("n", "" if counted in (None, "") else str(counted)))
     return cells
 
 
-def _row_cells(row: dict, per_image: bool) -> str:
+def _row_cells(row: dict, per_image: bool, *, archive: bool = False, runs: bool = False) -> str:
     return "".join(
-        f'<td data-field="{field}">{_cell(value)}</td>' for field, value in ranked_cells(row, per_image)
+        f'<td data-field="{field}">{_cell(value)}</td>'
+        for field, value in ranked_cells(row, per_image, archive=archive, runs=runs)
     )
 
 
@@ -1372,21 +1483,17 @@ def _joined_names(rows: list[dict]) -> str:
 
 
 def gap_paragraph(problem: dict, unparsed: list[dict] | None = None) -> str:
-    """Why a code is off the ranked table for this problem."""
+    """Notes for counters that are not the harness total."""
     bits: list[str] = []
-    missing = [row for row in problem.get("not_comparable") or [] if _off_harness(row)]
-    other = [row for row in problem.get("not_comparable") or [] if not _off_harness(row)]
+    ranked = list(problem.get("ranked") or [])
+    missing = [row for row in ranked if _off_harness(row)]
     suite = str(problem.get("id") or "").split("/")[0]
     kind = "band rows" if suite in {"neb", "double-ended-saddle-search"} else "rows"
     if missing:
         bits.append(f"{_joined_names(missing)} {kind} are not yet on the harness counter")
-    if other:
-        bits.append(f"{_joined_names(other)} {kind} are off the ranked table")
-    if problem.get("partial"):
-        bits.append("Partial rows stay off the ranked table")
     if unparsed:
         bits.append("Files with no per-start harness record stay off the ranked table")
-    if not bits and not problem.get("ranked"):
+    if not bits and not ranked:
         bits.append("No committed harness run")
     if not bits:
         return ""
@@ -1395,7 +1502,7 @@ def gap_paragraph(problem: dict, unparsed: list[dict] | None = None) -> str:
 
 def _reason_text(row: dict) -> str:
     if row.get("partial"):
-        return str(row.get("partial_reason") or "partial")
+        return str(row.get("partial_reason") or "short of the full set")
     if _off_harness(row):
         return "not yet on the harness counter"
     return f"counter {row.get('counter') or 'unset'}"
@@ -1425,7 +1532,7 @@ def plot_names_for(problem: dict) -> set[str]:
     """SVG files ``write_board`` emits for this problem."""
     slug = _slug(str(problem.get("id") or ""))
     names: set[str] = set()
-    if problem.get("ranked"):
+    if any(_full_harness(row) for row in problem.get("ranked") or []):
         names.add(f"{slug}-cost.svg")
     if problem.get("profile"):
         names.add(f"{slug}-profile.svg")
@@ -1443,10 +1550,12 @@ def _problem_order(problem: dict) -> tuple:
 
 
 def summary_codes(document: dict, registry: list[dict]) -> list[str]:
-    """Codes that have a full ranked run, in registry order, then any extras."""
+    """Codes that have a full harness run, in registry order, then any extras."""
     present: set[str] = set()
     for problem in (document.get("problems") or {}).values():
         for row in problem.get("ranked") or []:
+            if not _full_harness(row):
+                continue
             code = str(row.get("code") or "").strip()
             if code:
                 present.add(code)
@@ -1461,9 +1570,11 @@ def summary_codes(document: dict, registry: list[dict]) -> list[str]:
 
 
 def best_ranked_by_code(ranked: list[dict]) -> dict[str, dict]:
-    """First ranked row of each code. The list is already best-PAR-2 first."""
+    """Best full harness run of each code."""
     best: dict[str, dict] = {}
-    for row in ranked:
+    pool = [row for row in ranked if _full_harness(row)]
+    pool.sort(key=_rank_key)
+    for row in pool:
         code = str(row.get("code") or "").strip()
         if code and code not in best:
             best[code] = row
@@ -1482,7 +1593,7 @@ def _board_problem_link(problem: dict, templates: bool = False) -> str:
     anchor = _problem_anchor(problem, templates)
     if not suite or not name:
         return f"#{anchor}"
-    return f"generated/suites/{suite}.html#{anchor}"
+    return f"generated/suites/{suite}/{name}.html#{anchor}"
 
 
 def summary_table(problems: list[dict], codes: list[str], link) -> str:
@@ -1527,15 +1638,17 @@ def summary_table(problems: list[dict], codes: list[str], link) -> str:
 def headline_table(problem: dict) -> str:
     """One ranked row: the best full harness run."""
     per_image = _show_per_image(problem)
+    archive = _show_archive(problem)
+    runs = _show_runs(problem)
     headers = _headers(problem)
     lines = [
         '<div class="bench-scroll">',
         f'<table data-board-table="headline" data-problem="{_cell(problem["id"])}">',
         "<thead><tr>" + "".join(f"<th>{_cell(header)}</th>" for header in headers) + "</tr></thead><tbody>",
     ]
-    ranked = list(problem.get("ranked") or [])
-    if ranked:
-        lines.append(f"<tr>{_row_cells(ranked[0], per_image)}</tr>")
+    lead = headline_row(problem)
+    if lead is not None:
+        lines.append(f"<tr>{_row_cells(lead, per_image, archive=archive, runs=runs)}</tr>")
     else:
         lines.append(f'<tr><td colspan="{len(headers)}">No full harness row.</td></tr>')
     lines.append("</tbody></table></div>")
@@ -1575,6 +1688,8 @@ def _table(
     heading: str = "h2",
 ) -> str:
     per_image = _show_per_image(problem)
+    archive = _show_archive(problem)
+    runs = _show_runs(problem)
     headers = _headers(problem)
     caption = (
         "Lower PAR-2 is better. PAR-2 and the call columns are harness force-call totals. "
@@ -1591,9 +1706,8 @@ def _table(
     if preamble:
         lines.append(preamble)
     lines.append(
-        "<p>Ranked by the v2 PAR-2 mean of the harness total. "
-        "Only the newest full version of a template is in this table. "
-        "A partial row, including a one-start asv smoke run, is not.</p>"
+        "<p>Every method is one row, ranked by the v2 PAR-2 mean of the harness total. "
+        "The 2014 archive column is that method's archived record.</p>"
     )
     lead = gap_paragraph(problem, unparsed)
     if lead:
@@ -1613,42 +1727,10 @@ def _table(
     lines.append(f"<caption>{caption}</caption>")
     lines.append("<thead><tr>" + "".join(f"<th>{_cell(header)}</th>" for header in headers) + "</tr></thead><tbody>")
     for row in ranked:
-        lines.append(f"<tr>{_row_cells(row, per_image)}</tr>")
+        lines.append(f"<tr>{_row_cells(row, per_image, archive=archive, runs=runs)}</tr>")
     if not ranked:
         lines.append(f'<tr><td colspan="{len(headers)}">No full harness row.</td></tr>')
     lines.append("</tbody></table></div>")
-    if problem.get("history"):
-        lines.append("<h3>History</h3><ul>")
-        for row in problem["history"]:
-            lines.append(
-                "<li>"
-                f"{_cell(row['template'] or row['entry'])} {_cell(row['code'])} {_cell(row['code_version'])} "
-                f"{_cell(row['source'])} n={row['n']} PAR-2={_format_number(row['par2_mean'])} "
-                f"mean={_format_number(row['mean_calls'])}"
-                "</li>"
-            )
-        lines.append("</ul>")
-    if problem.get("partial"):
-        lines.append("<h3>Partial</h3><ul>")
-        for row in problem["partial"]:
-            lines.append(
-                "<li>"
-                f"{_cell(row['template'] or row['entry'])} {_cell(row.get('code') or '')} "
-                f"{_cell(row['source'])} n={row['n']}, {_cell(row['partial_reason'])}."
-                "</li>"
-            )
-        lines.append("</ul>")
-    held = list(problem.get("not_comparable") or [])
-    if held:
-        lines.append("<h3>Not a harness score</h3><ul>")
-        for row in held:
-            lines.append(
-                "<li>"
-                f"{_cell(row['template'] or row['entry'])} {_cell(row.get('code') or '')} "
-                f"n={row['n']}, {_cell(_reason_text(row))}."
-                "</li>"
-            )
-        lines.append("</ul>")
     pending = list(unparsed or [])
     if pending:
         lines.append("<h3>Not scored</h3><ul>")
@@ -1673,18 +1755,17 @@ def _drop_unwritten(directory: Path, keep_names: set[str]) -> None:
 def _strip_private(document: dict) -> dict:
     public_problems = {}
     for problem_id, problem in document["problems"].items():
-        public_problems[problem_id] = {
-            key: value for key, value in problem.items() if not key.startswith("_")
-        }
+        public = {key: value for key, value in problem.items() if not key.startswith("_")}
+        for key in ("partial", "history", "not_comparable"):
+            public.pop(key, None)
+        public["ranked"] = [_visible(row) for row in problem.get("ranked") or []]
+        public_problems[problem_id] = public
     return {
         "schema": document["schema"],
         "ranked_count": document["ranked_count"],
         "problems": public_problems,
-        "partial": document["partial"],
-        "history": document["history"],
-        "unparsed": document["unparsed"],
-        "unmapped": document["unmapped"],
-        "not_comparable": document["not_comparable"],
+        "unparsed": [_visible(row) for row in document["unparsed"]],
+        "unmapped": [_visible(row) for row in document["unmapped"]],
     }
 
 
@@ -1700,7 +1781,8 @@ def write_board(root: Path, output: Path) -> dict:
     written_names: set[str] = set()
     for problem_id, problem in document["problems"].items():
         ranked_rows = problem.get("_ranked_rows") or []
-        profile = _profile_for(ranked_rows)
+        plotted = [row for row in ranked_rows if _full_harness(row)]
+        profile = _profile_for(plotted) if plotted else None
         if profile is not None:
             problem["profile"] = {
                 "taus": profile["taus"],
@@ -1708,11 +1790,13 @@ def write_board(root: Path, output: Path) -> dict:
                 "solved": profile["solved"],
                 "area_log10": profile["area_log10"],
             }
-        written = _write_plots(problem_id, ranked_rows, profile, plot_dir) if ranked_rows else []
-        if ranked_rows and profile is None:
-            gap = profile_gap(ranked_rows)
+        written = _write_plots(problem_id, plotted, profile, plot_dir) if plotted else []
+        if plotted and profile is None:
+            gap = profile_gap(plotted)
             if gap:
                 problem["profile_gap"] = gap
+        elif ranked_rows and not plotted:
+            problem["profile_gap"] = "No performance profile. No full harness row."
         for path in written:
             written_names.add(Path(path).name)
     ordered = sorted(document["problems"].values(), key=_problem_order)
@@ -1759,4 +1843,4 @@ def write_board(root: Path, output: Path) -> dict:
     include.parent.mkdir(parents=True, exist_ok=True)
     html = "\n".join(sections) if sections else "<p>No committed results.</p>"
     include.write_text(_org_html(html), encoding="utf-8")
-    return public
+    return document
