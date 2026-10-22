@@ -89,3 +89,67 @@ def test_surface_mismatch_and_moved_substrate_are_rejected(tmp_path):
     write_band(path, [[0., 0., 0.], [3.1, 0., 0.]])
     with pytest.raises(ValueError, match="fixed substrate"):
         native.verify_band(path, pair(), settings())
+
+
+@pytest.mark.parametrize("energy,gradient", [
+    (float("nan"), [0., 0., 0.]),
+    (float("inf"), [0., 0., 0.]),
+    (0., [float("nan"), 0., 0.]),
+    (0., [float("inf"), 0., 0.]),
+])
+def test_nonfinite_native_values_are_rejected(tmp_path, energy, gradient):
+    path = tmp_path / "band.h5"
+    write_band(path, [0., 0., 0.], gradient, energy)
+    with pytest.raises(ValueError, match="non-finite native energy or gradient"):
+        native.verify_band(path, pair(), settings())
+
+
+def test_nonfinite_independent_surface_is_rejected(tmp_path, monkeypatch):
+    path = tmp_path / "band.h5"
+    write_band(path, [0., 0., 0.])
+    monkeypatch.setattr(native, "morse_pt", lambda positions, box:
+                        (float("nan"), np.zeros_like(positions)))
+    with pytest.raises(ValueError, match="non-finite independent"):
+        native.verify_band(path, pair(), settings())
+
+
+def test_runtime_requires_successful_validation_and_exact_executable(tmp_path, monkeypatch):
+    import json
+
+    binary = tmp_path / "gprn"
+    binary.write_bytes(b"verified executable")
+    manifest = tmp_path / "validation"
+    manifest.mkdir()
+    (manifest / "provenance.json").write_text(json.dumps({"source_revision": "revision"}))
+    (manifest / "programs.sha256").write_text(f"{native.digest(binary)}  {binary}\n")
+    monkeypatch.setenv("GPRIDGE_GPRN", str(binary))
+    monkeypatch.setenv("GPRIDGE_VALIDATION", str(manifest))
+    (manifest / "result.json").write_text('{"exit_code": 1}')
+    with pytest.raises(ValueError, match="validation did not succeed"):
+        native.runtime({"commit": "revision"})
+    (manifest / "result.json").write_text('{"exit_code": 0}')
+    assert native.runtime({"commit": "revision"})["sha256"] == native.digest(binary)
+    binary.write_bytes(b"different executable")
+    with pytest.raises(ValueError, match="does not match"):
+        native.runtime({"commit": "revision"})
+
+
+def test_timeout_terminates_child_processes(tmp_path):
+    import os
+    import sys
+
+    script = tmp_path / "parent.py"
+    script.write_text(
+        "import subprocess, sys, time\n"
+        "from pathlib import Path\n"
+        "child = subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(60)'])\n"
+        "Path('child.pid').write_text(str(child.pid))\n"
+        "time.sleep(60)\n"
+    )
+    with (tmp_path / "run.log").open("w") as log:
+        status = native.run_search([sys.executable, str(script)], tmp_path,
+                                   os.environ.copy(), log, 2.)
+    assert status == 124
+    child = int((tmp_path / "child.pid").read_text())
+    state = Path(f"/proc/{child}/stat")
+    assert not state.exists() or state.read_text().split()[2] == "Z"
