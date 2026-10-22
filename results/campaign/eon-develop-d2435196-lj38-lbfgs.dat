@@ -1,0 +1,15 @@
+force_calls 204
+force_calls_min 98
+force_calls_max 477
+force_calls_median 192.0
+call_unit total
+nfailed 0
+code eOn
+code_version (develop d2435196)
+commit d2435196c6dd7b70def58c52f2ece44349f82ca9
+algorithm LBFGS
+template eon/develop-d2435196-lj38-lbfgs
+problem minimization/lj38
+reducer harness
+counter harness
+count_keys HarnessCounter

@@ -1,0 +1,15 @@
+force_calls 54
+force_calls_min 35
+force_calls_max 85
+force_calls_median 52.0
+call_unit total
+nfailed 0
+code eOn
+code_version (develop d2435196)
+commit d2435196c6dd7b70def58c52f2ece44349f82ca9
+algorithm LBFGS
+template eon/develop-d2435196-morse-lbfgs
+problem minimization/morse-bulk
+reducer harness
+counter harness
+count_keys HarnessCounter

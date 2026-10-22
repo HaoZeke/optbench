@@ -1,0 +1,15 @@
+force_calls 4904
+force_calls_min 1355
+force_calls_max 9982
+force_calls_median 4556.0
+call_unit total
+nfailed 98
+code eOn
+code_version (develop d2435196)
+commit d2435196c6dd7b70def58c52f2ece44349f82ca9
+algorithm SD
+template eon/develop-d2435196-lj38-sd
+problem minimization/lj38
+reducer harness
+counter harness
+count_keys HarnessCounter
