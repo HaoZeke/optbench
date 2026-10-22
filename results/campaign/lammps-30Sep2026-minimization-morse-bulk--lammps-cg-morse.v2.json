@@ -53,12 +53,12 @@
     "par_factor": 2,
     "q25": 20000.0,
     "q75": 20000.0,
-    "scoring": "par2-wilson-bootstrap",
+    "scoring": "par2-bootstrap",
     "success_only_mean": 94.6,
     "success_rate": 0.05,
     "successes": 5,
-    "wilson_high": 0.11175046923191913,
-    "wilson_low": 0.02154367915436796
+    "rate_high": 0.11175046923191913,
+    "rate_low": 0.02154367915436796
   },
   "template": "lammps/cg-morse"
 }

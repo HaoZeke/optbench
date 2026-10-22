@@ -104,7 +104,7 @@ def _note(method: str, tuned: bool, variable_cell: bool) -> str:
         else:
             body += " The call goes through free_sqnm."
     if tuned:
-        body += " Tuned row: history length 20. eps_subsp stays 1e-5."
+        body += " Adjusted row: history length 20. eps_subsp stays 1e-5."
     else:
         body += " Default row: history length 10 and eps_subsp 1e-5."
     return body
@@ -126,7 +126,7 @@ def specs() -> list[dict]:
                 continue
             for tuned, profile, parameters in (
                 (False, "default", DEFAULT),
-                (True, "tuned", TUNED),
+                (True, "adjusted", TUNED),
             ):
                 suffix = "-tuned" if tuned else ""
                 found.append(

@@ -15,11 +15,11 @@ code_version 0.4.0
 commit 24236559f3815847cac89ba0a7be634ce0beb4a9
 algorithm BB
 template rgmin/lj38-bb-tuned
-tuning tuned
+tuning adjusted
 counter harness
 par2_mean 639.474
-wilson_low 0.986971831758
-wilson_high 0.997247330858
+rate_low 0.986971831758
+rate_high 0.997247330858
 par2_median 476
 par2_median_low 456
 par2_median_high 494

@@ -1,0 +1,41 @@
+id = "eon/500350d9-de-lj38-ci-swdneb"
+engine = "eon"
+problem = "double-ended-saddle-search/lj38"
+code = "eOn"
+code_version = "(develop 500350d9) · Doubly nudged CI-NEB"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
+algorithm = "Doubly nudged CI-NEB"
+reducer = "harness"
+failure_cap = 2500
+kind = "de-lj38"
+seeds = [1]
+note = '''
+Stock ini of eon-client/de-lj38-ci-swdneb. eOn develop 500350d9fae881f06c7ef194e5868da079c4be5a, no source patch. The harness counts every force() on ext_pot. failure_cap 2500 is double-ended-saddle-search/lj38 convergence.max_force_calls.
+'''
+[ini.Main]
+job = "nudged_elastic_band"
+
+[ini.Potential]
+potential = "lammps"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+convergence_metric = "norm"
+converged_force = 0.001
+max_move = 0.05
+max_iterations = 1000
+lbfgs_memory = 20
+
+[ini."Nudged Elastic Band"]
+images = 5
+climbing_image_method = true
+climbing_image = true
+doubly_nudged = true
+doubly_nudged_switching = true
+opt_method = "lbfgs"
+converged_force = 0.001
+max_iterations = 1000
+spring = 10
+
+[ini.LBFGS]
+lbfgs_memory = 20

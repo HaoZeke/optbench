@@ -340,17 +340,17 @@ def write_campaign(
         settings["cap"],
     )
     successes = [int(row["force_calls"]) for row in stamped if row["success"]]
-    legacy = {
+    success_only = {
         "successes": len(successes),
         "nfailed": len(stamped) - len(successes),
         "n": len(stamped),
         "transition_states": sum(1 for row in stamped if row.get("hessian_index") == 1),
     }
     if successes:
-        legacy["force_calls"] = int(round(statistics.fmean(successes)))
-        legacy["force_calls_min"] = min(successes)
-        legacy["force_calls_max"] = max(successes)
-        legacy["force_calls_median"] = statistics.median(successes)
+        success_only["force_calls"] = int(round(statistics.fmean(successes)))
+        success_only["force_calls_min"] = min(successes)
+        success_only["force_calls_max"] = max(successes)
+        success_only["force_calls_median"] = statistics.median(successes)
     document = {
         "schema": "optbench.score/v2",
         "problem": problem["id"],
@@ -363,7 +363,7 @@ def write_campaign(
             parameters=parameters,
         ),
         "score": score,
-        "legacy": legacy,
+        "success_mean": success_only,
     }
     output.with_suffix(".v2.json").write_text(
         json.dumps(document, indent=2, sort_keys=True) + "\n",
@@ -372,10 +372,10 @@ def write_campaign(
     return {
         "problem": problem["id"],
         "template": template["id"],
-        "force_calls": legacy.get("force_calls"),
-        "nfailed": legacy["nfailed"],
-        "starts": legacy["n"],
-        "successes": legacy["successes"],
+        "force_calls": success_only.get("force_calls"),
+        "nfailed": success_only["nfailed"],
+        "starts": success_only["n"],
+        "successes": success_only["successes"],
         "output": str(output),
     }
 

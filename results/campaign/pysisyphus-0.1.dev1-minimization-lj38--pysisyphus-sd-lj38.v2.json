@@ -52,12 +52,12 @@
     "par_factor": 2,
     "q25": 20000.0,
     "q75": 20000.0,
-    "scoring": "par2-wilson-bootstrap",
+    "scoring": "par2-bootstrap",
     "success_only_mean": 950.1658536585365,
     "success_rate": 0.205,
     "successes": 205,
-    "wilson_high": 0.23112770103057595,
-    "wilson_low": 0.18113008647590156
+    "rate_high": 0.23112770103057595,
+    "rate_low": 0.18113008647590156
   },
   "template": "pysisyphus/sd-lj38"
 }

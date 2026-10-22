@@ -22,7 +22,7 @@ repository = "https://github.com/TheochemUI/eon"
 ref = "main"
 commit = "1d71c944501832bfafb955ffe13b9aae50c8efd4"
 committed = "2026-10-15"
-note = "Current main, including merged pull request 776. The version string is 3.6.0. Templates under templates/eon/ use this commit. The 3.5.0 pin above stays for the scores that were run on it."
+note = "main, including merged pull request 776. The version string is 3.6.0. Templates under templates/eon/ use this commit. The 3.5.0 pin above stays for the scores that were run on it."
 
 [[code]]
 id = "eon-develop"
@@ -32,7 +32,17 @@ repository = "https://github.com/TheochemUI/eon"
 ref = "develop"
 commit = "7095b23ac17d49f434a5e08ccb072897ceca698e"
 committed = "2026-10-16"
-note = "develop HEAD built from source. The version string is 3.6.0 (7095b23a). GPR-dimer is absent: TheochemUI/gpr_optim is private and eonclient reports GPRD disabled. This pin is not the conda-forge 3.5.0 binary."
+note = "develop HEAD built from source. The version string is 3.6.0 (7095b23a). GPR-dimer is absent: TheochemUI/gpr_optim is private and eonclient reports GPRD disabled. This pin is not the conda-forge 3.5.0 binary. This is eOn at https://eondocs.org and https://github.com/TheochemUI/eon. It is not a version of the SVN code. The hTST Al dimer campaign is fix/develop-regressions-vs-350 at 6d9d629a, which contains 500350d9, stock and unpatched, labelled eOn (develop 500350d9). The 7095b23 pin stays for the scores already run on it."
+
+[[code]]
+id = "eon-develop-500350d9"
+name = "eOn"
+role = "minimization and saddle search"
+repository = "https://github.com/TheochemUI/eon"
+ref = "develop"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
+committed = "2026-10-20"
+note = "develop 500350d9fae881f06c7ef194e5868da079c4be5a built from that commit with no source patch. eonclient --version prints 3.6.0 (500350d9). The Pt-heptamer and LJ38 band rows on this commit use the harness force counter. EON SVN r2549 is a different code."
 
 [[code]]
 id = "eon-svn"
@@ -42,7 +52,7 @@ repository = "https://theory.cm.utexas.edu/svn/eon"
 ref = "r2549"
 commit = "r2549"
 committed = "2026-01-23"
-note = "SVN revision 2549, last changed 2026-01-23 by eboniw. eonclient -v prints r2549. The 2014 tables used earlier revisions. Export of those trees is forbidden, so the runs here are r2549. QSC sources are not in the revision. LAMMPS is not linked. Min-mode methods in this revision are dimer and lanczos. One harness uses r2549 Morse::force: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. The lane harness uses unshifted lj/cut and morse/smooth/linear. github.com/henkelmangroup/eon mirrors the same tree. The conda-forge 3.5.0 binary is a different pin. The name is Eon svn so it does not collide with the git eOn pins."
+note = "SVN revision 2549, last changed 2026-01-23 by eboniw. eonclient -v prints r2549. The 2014 tables used earlier revisions. Export of those trees is forbidden, so the runs here are r2549. QSC sources are not in the revision. LAMMPS is not linked. Min-mode methods in this revision are dimer and lanczos. One harness uses r2549 Morse::force: cutoff 9.5, pair energy shifted to zero at the cutoff, minimum image on the box diagonal. The lane harness uses unshifted lj/cut and morse/smooth/linear. github.com/henkelmangroup/eon mirrors the same tree. The conda-forge 3.5.0 binary is a different pin. The name is Eon svn so it does not collide with the git eOn pins. This is EON, the SVN code. It is not a version of https://github.com/TheochemUI/eon. The hTST Al dimer campaign labels the stock unpatched Fortran build EON (SVN r2549)."
 
 [[code]]
 id = "rgmin"
@@ -82,7 +92,7 @@ repository = "https://gitlab.com/ase/ase"
 ref = "3.29.0"
 commit = "f27c0005ae6a67ea419f996e728668865bfc1f86"
 committed = "2026-10-15"
-note = "Atomic Simulation Environment 3.29.0. BFGS, LBFGS, FIRE, BFGSLineSearch, GPMin, PreconLBFGS, PreconFIRE, and PreconODE12r, plus NEB and dimer. Force calls are harness calculator evaluations."
+note = "Atomic Simulation Environment 3.29.0. BFGS, LBFGS, FIRE, BFGSLineSearch, LBFGSLineSearch, GPMin, PreconLBFGS, PreconFIRE, and PreconODE12r, plus NEB and dimer. Force calls are harness calculator evaluations."
 
 [[code]]
 id = "sella"
@@ -92,7 +102,7 @@ repository = "https://github.com/zadorlab/sella"
 ref = "2.6.0"
 commit = "6cfb60cdb100a146c3c6f0587d5308b247aa8010"
 committed = "2026-10-15"
-note = "Sella 2.6.0. Order 1 is a saddle and order 0 is a minimum. The Sella 0.1.1 rows on the 2014 tables are legacy and are not this pin. Force calls are harness calculator evaluations."
+note = "Sella 2.6.0. Order 1 is a saddle and order 0 is a minimum. The Sella 0.1.1 rows on the 2014 tables are a different pin. Force calls are harness calculator evaluations."
 
 [[code]]
 id = "gmin"
@@ -102,7 +112,17 @@ repository = "https://www-wales.ch.cam.ac.uk/svn.tar.bz2"
 ref = "svn.tar.bz2"
 commit = "df8da599267534fbe43a250e578f7396a7946311"
 committed = "2026-10-18"
-note = "Wales group GMIN. Tarball sha256 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f. SVNREV df8da599267534fbe43a250e578f7396a7946311, fetched 2026-10-18. The quench is source/mymylbfgs.F90. Keyword defaults are MUPDATE 4, DGUESS 0.1, MAXBFGS 0.4, and MAXERISE 1e-10. The RMS tolerance is the Euclidean force norm divided by sqrt(3N). The potential is the harness Lennard-Jones or Morse through POTENTIAL. Force calls are HarnessCounter entries."
+note = "Wales group GMIN. Tarball sha256 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f. SVNREV df8da599267534fbe43a250e578f7396a7946311, fetched 2026-10-18. The quench is source/mymylbfgs.F90. Keyword defaults are MUPDATE 4, DGUESS 0.1, MAXBFGS 0.4, and MAXERISE 1e-10. The RMS tolerance is the Euclidean force norm divided by sqrt(3N). The potential is the harness Lennard-Jones or Morse through POTENTIAL. Force calls are HarnessCounter entries. Basin-hopping rows use the same tarball and are pinned as gmin-bh."
+
+[[code]]
+id = "gmin-bh"
+name = "GMIN"
+role = "global optimization"
+repository = "https://www-wales.ch.cam.ac.uk/svn.tar.bz2"
+ref = "02aaf45245af"
+commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+committed = "2026-10-18"
+note = "Same Wales tarball as gmin, sha256 02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f, SVNREV df8da599267534fbe43a250e578f7396a7946311. Basin-hopping and parallel tempering call the harness Lennard-Jones through codes/gmin/optbench_pot.F90. codes/gmin/build-bh.sh builds the MPI binary."
 
 [[code]]
 id = "pele"
@@ -204,6 +224,16 @@ commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
 note = "No public git commit. The pin is the sha256 of the Wales svn.tar.bz2 snapshot, 122743078 bytes. Minimization L-BFGS calls the ASE socket and pes.evaluate. OPTIM's own call counter is not a score. Saddle search, NEB, noise, and PATHSAMPLE are not scored."
 
 [[code]]
+id = "n2p2"
+name = "n2p2"
+role = "neural network training"
+repository = "https://github.com/CompPhysVienna/n2p2"
+ref = "master"
+commit = "29b9c9f10b1ac9ea45631b3d556a129ca3b701c2"
+committed = "2025-03-17"
+note = "n2p2 2.3.0 is the latest release, tag e51667abf784bb9a6fd659857b6a9a878fdc6a90 (2024-11-23). Rows record commit 29b9c9f10b1ac9ea45631b3d556a129ca3b701c2. KalmanFilter::update matches the tag aside from three commented diagnostics. The standard Kalman filter uses the defaults in examples/input.nn.recommended: epsilon 0.01, q0 0.01, qtau 2.302, qmin 1e-6, eta 0.01, etatau 2.302, etamax 1. The fading-memory block there is commented and is not used. Training.cpp divides qtau and etatau by the projected updates in one epoch: the structure count for an energy row, and that count times one plus force_energy_ratio 3 for a force row. Force rows also use the recommended force_weight 1 and one force component per update. The comparable loss is the pyamff 8037eb98 squared error on the problem trajectory and fpParas.dat. Dataset normalization stays off; units.rst marks it optional, and the pyamff rows use NoScaler. A force call is one loss-gradient evaluation. Structure order is the one-process std::mt19937_64 shuffle from random_seed 1234567. A force epoch shuffles the property schedule with rngGlobalNew. Weights are the harness uniform[-1, 1) draw. On the C2H4 energy row the documented filter meets the 0.02 batch-gradient stop on 10 of 50 starts inside 10000 evaluations. The 40 capped starts have per-atom energy RMSE from 0.0004986 to 0.0009369, median 0.0006811, while the batch gradient stays above the tolerance, median max-abs 1.323. The Kalman update is one structure at a time. The stop looks at the gradient of the summed loss. On the EMT and C2H4 force rows the same filter meets the 0.1 batch-gradient stop on 0 of 50 starts inside 30000 evaluations. The 50 EMT starts have per-atom energy RMSE from 0.0001565 to 0.0002135, median 0.0001758, force RMSE from 0.02218 to 0.02401, median 0.02269, and batch-gradient max-abs from 2.928 to 23.87, median 7.818. The 50 C2H4 starts have per-atom energy RMSE from 0.005014 to 0.01075, median 0.007214, force RMSE from 0.07070 to 0.08664, median 0.07509, and batch-gradient max-abs from 7.267 to 163.0, median 35.18. A force-row Kalman update is one structure or one force component at a time. The stop still looks at the gradient of the summed loss."
+
+[[code]]
 id = "airss"
 name = "AIRSS"
 role = "random structure search"
@@ -243,6 +273,24 @@ commit = "8de817dd79bfe4525d5d39246a212d833e6dee07"
 committed = "2026-09-30"
 note = "LAMMPS 30 Sep 2026, tag stable_30Sep2026. Band rows use fix neb with a climbing stage and min_style quickmin or fire. The pair style is the spec potential: lj/cut 40 with no shift, and morse 9.5 with pair_modify shift yes. Kspring is 1.0 with the default parallel neigh spring. The timestep is the unit default. Force calls are pair computes summed across replicas. The FIRE row leaves one fifth of the cap unused so a velocity-reset evaluation stays inside the cap."
 
+[[code]]
+id = "sella-0.1.1"
+name = "Sella"
+role = "lowest eigenvector"
+repository = "https://github.com/zadorlab/sella"
+ref = "0.1.1"
+commit = "0.1.1"
+committed = "2019-12-10"
+note = "Sella 0.1.1 PESWrapper.diag for the lowest-eigenvector row. eta 1e-6, gamma 1e-16, vreftol 0.99, gradient v0, rigid-mode projection. This pin is not Sella 2.6.0."
+
+[[template]]
+id = "sella-0.1.1/lj38-loweig"
+code = "sella-0.1.1"
+problem = "lowest-eigenvector/lj38"
+profile = "archive"
+task = "lowest-eigenvector"
+ranked = true
+
 # generated ASE and Sella templates
 
 [[template]]
@@ -257,7 +305,7 @@ ranked = true
 id = "ase/lj38-bfgs-tuned"
 code = "ase"
 problem = "minimization/lj38"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -273,7 +321,7 @@ ranked = true
 id = "ase/lj38-lbfgs-tuned"
 code = "ase"
 problem = "minimization/lj38"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -289,7 +337,7 @@ ranked = true
 id = "ase/lj38-fire-tuned"
 code = "ase"
 problem = "minimization/lj38"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -305,7 +353,23 @@ ranked = true
 id = "ase/lj38-bfgslinesearch-tuned"
 code = "ase"
 problem = "minimization/lj38"
-profile = "tuned"
+profile = "adjusted"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/lj38-lbfgslinesearch-default"
+code = "ase"
+problem = "minimization/lj38"
+profile = "default"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/lj38-lbfgslinesearch-tuned"
+code = "ase"
+problem = "minimization/lj38"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -321,7 +385,7 @@ ranked = true
 id = "ase/lj38-gpmin-tuned"
 code = "ase"
 problem = "minimization/lj38"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -337,7 +401,7 @@ ranked = true
 id = "ase/lj38-preconlbfgs-tuned"
 code = "ase"
 problem = "minimization/lj38"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -353,7 +417,7 @@ ranked = true
 id = "ase/lj38-preconfire-tuned"
 code = "ase"
 problem = "minimization/lj38"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -369,7 +433,7 @@ ranked = true
 id = "ase/lj38-preconode12r-tuned"
 code = "ase"
 problem = "minimization/lj38"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -385,7 +449,7 @@ ranked = true
 id = "sella/lj38-min-tuned"
 code = "sella"
 problem = "minimization/lj38"
-profile = "tuned"
+profile = "adjusted"
 task = "sella"
 ranked = true
 
@@ -401,7 +465,7 @@ ranked = true
 id = "ase/morse-bfgs-tuned"
 code = "ase"
 problem = "minimization/morse-bulk"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -417,7 +481,7 @@ ranked = true
 id = "ase/morse-lbfgs-tuned"
 code = "ase"
 problem = "minimization/morse-bulk"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -433,7 +497,7 @@ ranked = true
 id = "ase/morse-fire-tuned"
 code = "ase"
 problem = "minimization/morse-bulk"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -449,7 +513,23 @@ ranked = true
 id = "ase/morse-bfgslinesearch-tuned"
 code = "ase"
 problem = "minimization/morse-bulk"
-profile = "tuned"
+profile = "adjusted"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/morse-lbfgslinesearch-default"
+code = "ase"
+problem = "minimization/morse-bulk"
+profile = "default"
+task = "minimize"
+ranked = true
+
+[[template]]
+id = "ase/morse-lbfgslinesearch-tuned"
+code = "ase"
+problem = "minimization/morse-bulk"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -465,7 +545,7 @@ ranked = true
 id = "ase/morse-gpmin-tuned"
 code = "ase"
 problem = "minimization/morse-bulk"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -481,7 +561,7 @@ ranked = true
 id = "ase/morse-preconlbfgs-tuned"
 code = "ase"
 problem = "minimization/morse-bulk"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -497,7 +577,7 @@ ranked = true
 id = "ase/morse-preconfire-tuned"
 code = "ase"
 problem = "minimization/morse-bulk"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -513,7 +593,7 @@ ranked = true
 id = "ase/morse-preconode12r-tuned"
 code = "ase"
 problem = "minimization/morse-bulk"
-profile = "tuned"
+profile = "adjusted"
 task = "minimize"
 ranked = true
 
@@ -529,7 +609,7 @@ ranked = true
 id = "sella/morse-min-tuned"
 code = "sella"
 problem = "minimization/morse-bulk"
-profile = "tuned"
+profile = "adjusted"
 task = "sella"
 ranked = true
 
@@ -545,7 +625,7 @@ ranked = true
 id = "sella/lj38-ts-tuned"
 code = "sella"
 problem = "tsopt/LJ38"
-profile = "tuned"
+profile = "adjusted"
 task = "sella"
 ranked = true
 
@@ -561,7 +641,7 @@ ranked = true
 id = "sella/pt-island-ts-tuned"
 code = "sella"
 problem = "tsopt/pt-island"
-profile = "tuned"
+profile = "adjusted"
 task = "sella"
 ranked = true
 
@@ -577,7 +657,7 @@ ranked = true
 id = "ase/neb-pt-heptamer-tuned"
 code = "ase"
 problem = "neb/Pt-heptamer"
-profile = "tuned"
+profile = "adjusted"
 task = "neb"
 ranked = true
 
@@ -593,7 +673,7 @@ ranked = true
 id = "ase/de-lj38-tuned"
 code = "ase"
 problem = "double-ended-saddle-search/lj38"
-profile = "tuned"
+profile = "adjusted"
 task = "neb"
 ranked = true
 
@@ -609,7 +689,7 @@ ranked = true
 id = "ase/de-pt-island-tuned"
 code = "ase"
 problem = "double-ended-saddle-search/pt-island"
-profile = "tuned"
+profile = "adjusted"
 task = "neb"
 ranked = true
 
@@ -625,7 +705,7 @@ ranked = true
 id = "ase/de-lj38-2ts-tuned"
 code = "ase"
 problem = "double-ended-saddle-search/lj38_2ts_separation"
-profile = "tuned"
+profile = "adjusted"
 task = "neb"
 ranked = true
 
@@ -641,7 +721,7 @@ ranked = true
 id = "sella/de-lj38-tuned"
 code = "sella"
 problem = "double-ended-saddle-search/lj38"
-profile = "tuned"
+profile = "adjusted"
 task = "sella-neb"
 ranked = true
 
@@ -657,7 +737,7 @@ ranked = true
 id = "sella/de-pt-island-tuned"
 code = "sella"
 problem = "double-ended-saddle-search/pt-island"
-profile = "tuned"
+profile = "adjusted"
 task = "sella-neb"
 ranked = true
 
@@ -673,7 +753,7 @@ ranked = true
 id = "sella/de-lj38-2ts-tuned"
 code = "sella"
 problem = "double-ended-saddle-search/lj38_2ts_separation"
-profile = "tuned"
+profile = "adjusted"
 task = "sella-neb"
 ranked = true
 
@@ -689,7 +769,7 @@ ranked = false
 id = "ase/dimer-pt-island-tuned"
 code = "ase"
 problem = "saddle-search/pt-island"
-profile = "tuned"
+profile = "adjusted"
 task = "dimer"
 ranked = false
 
@@ -705,6 +785,6 @@ ranked = false
 id = "sella/pt-island-search-tuned"
 code = "sella"
 problem = "saddle-search/pt-island"
-profile = "tuned"
+profile = "adjusted"
 task = "sella-search"
 ranked = false

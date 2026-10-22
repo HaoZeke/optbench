@@ -24,12 +24,12 @@
       "par_factor": 2,
       "q25": 42.25,
       "q75": 48.25,
-      "scoring": "par2-wilson-bootstrap",
+      "scoring": "par2-bootstrap",
       "success_only_mean": 45.375,
       "success_rate": 1.0,
       "successes": 8,
-      "wilson_high": 1.0,
-      "wilson_low": 0.6755924351161198
+      "rate_high": 1.0,
+      "rate_low": 0.6755924351161198
     },
     "samples": 8,
     "seed": 20261016,
@@ -130,12 +130,12 @@
       "par_factor": 2,
       "q25": 139.0,
       "q75": 139.0,
-      "scoring": "par2-wilson-bootstrap",
+      "scoring": "par2-bootstrap",
       "success_only_mean": 139.125,
       "success_rate": 1.0,
       "successes": 8,
-      "wilson_high": 1.0,
-      "wilson_low": 0.6755924351161198
+      "rate_high": 1.0,
+      "rate_low": 0.6755924351161198
     },
     "samples": 8,
     "seed": 20261016,
@@ -236,12 +236,12 @@
           "par_factor": 2,
           "q25": 400.0,
           "q75": 400.0,
-          "scoring": "par2-wilson-bootstrap",
+          "scoring": "par2-bootstrap",
           "success_only_mean": null,
           "success_rate": 0.0,
           "successes": 0,
-          "wilson_high": 0.7934506856227626,
-          "wilson_low": 0.0
+          "rate_high": 0.7934506856227626,
+          "rate_low": 0.0
         },
         "start": {
           "failure": "cap",
@@ -278,12 +278,12 @@
           "par_factor": 2,
           "q25": 10000.0,
           "q75": 10000.0,
-          "scoring": "par2-wilson-bootstrap",
+          "scoring": "par2-bootstrap",
           "success_only_mean": null,
           "success_rate": 0.0,
           "successes": 0,
-          "wilson_high": 0.7934506856227626,
-          "wilson_low": 0.0
+          "rate_high": 0.7934506856227626,
+          "rate_low": 0.0
         },
         "start": {
           "failure": "wrong_stationary",
@@ -320,12 +320,12 @@
           "par_factor": 2,
           "q25": 200.0,
           "q75": 200.0,
-          "scoring": "par2-wilson-bootstrap",
+          "scoring": "par2-bootstrap",
           "success_only_mean": null,
           "success_rate": 0.0,
           "successes": 0,
-          "wilson_high": 0.7934506856227626,
-          "wilson_low": 0.0
+          "rate_high": 0.7934506856227626,
+          "rate_low": 0.0
         },
         "start": {
           "failure": "divergence",
@@ -362,12 +362,12 @@
           "par_factor": 2,
           "q25": 200.0,
           "q75": 200.0,
-          "scoring": "par2-wilson-bootstrap",
+          "scoring": "par2-bootstrap",
           "success_only_mean": null,
           "success_rate": 0.0,
           "successes": 0,
-          "wilson_high": 0.7934506856227626,
-          "wilson_low": 0.0
+          "rate_high": 0.7934506856227626,
+          "rate_low": 0.0
         },
         "start": {
           "failure": "crash",
@@ -421,12 +421,12 @@
       "par_factor": 2,
       "q25": 204.25,
       "q75": 334.75,
-      "scoring": "par2-wilson-bootstrap",
+      "scoring": "par2-bootstrap",
       "success_only_mean": 139.0,
       "success_rate": 0.5,
       "successes": 1,
-      "wilson_high": 0.9054687942657693,
-      "wilson_low": 0.09453120573423074
+      "rate_high": 0.9054687942657693,
+      "rate_low": 0.09453120573423074
     }
   },
   "noise": {
@@ -461,12 +461,12 @@
           "par_factor": 2,
           "q25": 139.0,
           "q75": 139.0,
-          "scoring": "par2-wilson-bootstrap",
+          "scoring": "par2-bootstrap",
           "success_only_mean": 139.0,
           "success_rate": 1.0,
           "successes": 1,
-          "wilson_high": 1.0,
-          "wilson_low": 0.20654931437723745
+          "rate_high": 1.0,
+          "rate_low": 0.20654931437723745
         },
         "noise_floor": 0.0,
         "rmsd_tol": 1e-05,
@@ -510,12 +510,12 @@
           "par_factor": 2,
           "q25": 80.0,
           "q75": 80.0,
-          "scoring": "par2-wilson-bootstrap",
+          "scoring": "par2-bootstrap",
           "success_only_mean": 80.0,
           "success_rate": 1.0,
           "successes": 1,
-          "wilson_high": 1.0,
-          "wilson_low": 0.20654931437723745
+          "rate_high": 1.0,
+          "rate_low": 0.20654931437723745
         },
         "noise_floor": 0.0004242640687119286,
         "rmsd_tol": 0.00030000000000000003,
@@ -559,12 +559,12 @@
           "par_factor": 2,
           "q25": 61.0,
           "q75": 61.0,
-          "scoring": "par2-wilson-bootstrap",
+          "scoring": "par2-bootstrap",
           "success_only_mean": 61.0,
           "success_rate": 1.0,
           "successes": 1,
-          "wilson_high": 1.0,
-          "wilson_low": 0.20654931437723745
+          "rate_high": 1.0,
+          "rate_low": 0.20654931437723745
         },
         "noise_floor": 0.004242640687119286,
         "rmsd_tol": 0.003,
@@ -608,12 +608,12 @@
           "par_factor": 2,
           "q25": 39.0,
           "q75": 39.0,
-          "scoring": "par2-wilson-bootstrap",
+          "scoring": "par2-bootstrap",
           "success_only_mean": 39.0,
           "success_rate": 1.0,
           "successes": 1,
-          "wilson_high": 1.0,
-          "wilson_low": 0.20654931437723745
+          "rate_high": 1.0,
+          "rate_low": 0.20654931437723745
         },
         "noise_floor": 0.042426406871192854,
         "rmsd_tol": 0.03,
@@ -638,7 +638,7 @@
     "window": 5
   },
   "note": "Track values from results/asv for one commit. Not a Lennard-Jones campaign. Caps are the benchmark class attributes.",
-  "problem": "smoke/quadratic",
+  "problem": "quadratic/bowl",
   "profile": {
     "calls": {
       "gd-step-0.001-cap-30": [
@@ -736,12 +736,12 @@
         "par_factor": 2,
         "q25": 60.0,
         "q75": 60.0,
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-bootstrap",
         "success_only_mean": null,
         "success_rate": 0.0,
         "successes": 0,
-        "wilson_high": 0.43448246478317476,
-        "wilson_low": 0.0
+        "rate_high": 0.43448246478317476,
+        "rate_low": 0.0
       },
       "gd-step-0.01": {
         "bootstrap_resamples": 200,
@@ -766,12 +766,12 @@
         "par_factor": 2,
         "q25": 718.0,
         "q75": 723.0,
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-bootstrap",
         "success_only_mean": 720.2,
         "success_rate": 1.0,
         "successes": 5,
-        "wilson_high": 1.0,
-        "wilson_low": 0.5655175352168251
+        "rate_high": 1.0,
+        "rate_low": 0.5655175352168251
       },
       "gd-step-0.05": {
         "bootstrap_resamples": 200,
@@ -796,12 +796,12 @@
         "par_factor": 2,
         "q25": 139.0,
         "q75": 140.0,
-        "scoring": "par2-wilson-bootstrap",
+        "scoring": "par2-bootstrap",
         "success_only_mean": 139.4,
         "success_rate": 1.0,
         "successes": 5,
-        "wilson_high": 1.0,
-        "wilson_low": 0.5655175352168251
+        "rate_high": 1.0,
+        "rate_low": 0.5655175352168251
       }
     },
     "problems": [
@@ -888,5 +888,5 @@
   },
   "schema": "optbench.validation/v2",
   "source": "asv",
-  "status": "smoke"
+  "status": "quadratic"
 }

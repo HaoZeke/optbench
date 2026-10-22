@@ -62,12 +62,12 @@
     "par_factor": 2,
     "q25": 1230.5,
     "q75": 5000.0,
-    "scoring": "par2-wilson-bootstrap",
+    "scoring": "par2-bootstrap",
     "success_only_mean": 1383.7692307692307,
     "success_rate": 0.52,
     "successes": 26,
-    "wilson_high": 0.6520286471342196,
-    "wilson_low": 0.38511744890044614
+    "rate_high": 0.6520286471342196,
+    "rate_low": 0.38511744890044614
   },
   "template": "tsase/ci-neb"
 }

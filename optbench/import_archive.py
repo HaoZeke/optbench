@@ -92,7 +92,7 @@ def _write_partial(path: Path, suite: str, problem: str, count: int, required: l
                 f"title = {_toml_string(problem)}",
                 f"suite = {_toml_string(suite)}",
                 f"problem = {_toml_string(problem)}",
-                'contract = "partial"',
+                'contract = "shared"',
                 f"entry_count = {count}",
                 "",
                 "[metrics]",

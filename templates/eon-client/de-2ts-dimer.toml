@@ -5,6 +5,7 @@ code = "eOn"
 code_version = "3.5.0"
 commit = "4d8b34baf1ba8d2d980df29838bac1f969d1662c"
 algorithm = "Dimer L-BFGS"
+method = "dimer"
 reducer = "harness"
 failure_cap = 10000
 kind = "de-2ts-mode"
