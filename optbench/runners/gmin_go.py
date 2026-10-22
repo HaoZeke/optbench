@@ -499,7 +499,7 @@ def _dat(summary: dict, template: dict, metrics: dict, partial: bool) -> str:
     if partial:
         rows["partial"] = "true"
     lines = [
-        "# counter harness. One force call is one GMIN potential request to lennard_jones.",
+        "# counter harness. One force call is one GMIN potential request: the energy and gradient of the problem potential.",
         "# The binary was built from the Wales tarball named by commit. The pin is that sha256.",
         "# energy is the lowest quench at or below SLOPPYCONV. lowest_energy on each start is the lowest finite evaluation.",
     ]
