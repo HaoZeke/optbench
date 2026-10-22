@@ -1007,6 +1007,17 @@ The number is written only after the run finishes under the problem rule.
    <td data-field="failures">crash 0, divergence 20, cap 1, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
+   <tr data-problem="hTST/Pt" data-template="tsase/htst-pt-quench-stock">
+   <td>Pt</td>
+   <td data-field="template">tsase/htst-pt-quench-stock</td>
+   <td data-field="version">TSASE 1.0 (98aac60)</td>
+   <td data-field="commit">98aac60b5d99</td>
+   <td data-field="par2_mean"></td>
+   <td data-field="mean_calls">1.7121e+06</td>
+   <td data-field="median_calls">1.7121e+06</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">1</td>
+   </tr>
    <tr data-problem="lowest-eigenvector/lj38" data-template="tsase/mode-lj38">
    <td>lj38</td>
    <td data-field="template">tsase/mode-lj38</td>
