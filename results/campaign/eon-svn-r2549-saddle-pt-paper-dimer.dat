@@ -8,7 +8,7 @@
 # rep 8 force_calls 5844886 unique_saddles 127 fraction_connected 0.7535530507 total_searches 16324 reached 1
 # rep 9 force_calls 3976322 unique_saddles 110 fraction_connected 0.750969604 total_searches 11087 reached 1
 # rep 10 force_calls 6356383 unique_saddles 127 fraction_connected 0.7567446547 total_searches 17866 reached 1
-code Eon svn
+code EON (SVN r2549)
 code_version r2549
 commit r2549
 counter client-search-results

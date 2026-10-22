@@ -1,0 +1,38 @@
+# rep 1 force_calls 5465915 unique_saddles 77 fraction_connected 0.7501210185 total_searches 20658 reached 1
+# rep 2 force_calls 6037747 unique_saddles 91 fraction_connected 0.7540558079 total_searches 23115 reached 1
+# rep 3 force_calls 2953963 unique_saddles 68 fraction_connected 0.7512038523 total_searches 11214 reached 1
+# rep 4 force_calls 5592579 unique_saddles 80 fraction_connected 0.7508184454 total_searches 21382 reached 1
+# rep 5 force_calls 5231999 unique_saddles 80 fraction_connected 0.7543603186 total_searches 19838 reached 1
+# rep 6 force_calls 2082000 unique_saddles 61 fraction_connected 0.7506946199 total_searches 7918 reached 1
+# rep 7 force_calls 11063392 unique_saddles 92 fraction_connected 0.7516422315 total_searches 42016 reached 1
+# rep 8 force_calls 4914932 unique_saddles 77 fraction_connected 0.754228642 total_searches 18623 reached 1
+# rep 9 force_calls 7797127 unique_saddles 84 fraction_connected 0.7505565675 total_searches 29646 reached 1
+# rep 10 force_calls 3128994 unique_saddles 74 fraction_connected 0.7552837411 total_searches 12018 reached 1
+code eOn (develop 500350d9)
+code_version 500350d9
+commit 500350d9fae881f06c7ef194e5868da079c4be5a
+counter client-search-results
+count_keys sad-fcs+mins-fcs
+contributor Rohit Goswami
+repetitions 10
+min_mode_method dimer
+communicator_jobs 8
+force_calls 5426864.8
+force_calls_mean_error 778937.5256
+force_calls_min 2082000
+force_calls_max 11063392
+unique_saddles 78.4
+fraction_connected 0.7522965245
+total_searches 20642.8
+nfailed 0
+algorithm Dimer
+template eon-develop/saddle-pt-dimer
+problem saddle-search/pt-island
+reducer akmc-until-27
+# report.sh averages run-1 through run-9. Later runs stay in the rep lines and out of that mean.
+report_runs 9
+force_calls_9 5682183.778
+force_calls_mean_error_9 822578.5012
+unique_saddles_9 78.88888889
+fraction_connected_9 0.7519646115
+total_searches_9 21601.11111

@@ -380,6 +380,15 @@ def _legacy_section(problem: dict, oracle: list[dict]) -> str:
     )
 
 
+def _saddle_comparison(problem: dict, oracle: list[dict], root: Path | None) -> str:
+    """Dimer and dynamics rows for the Pt island. Empty on every other problem."""
+    if root is None or problem.get("id") != "saddle-search/pt-island":
+        return ""
+    from .saddle_pt import saddle_pt_html
+
+    return saddle_pt_html(root, oracle)
+
+
 def _sorted_problems(group: list[dict]) -> list[dict]:
     return sorted(group, key=lambda item: str(item.get("title") or item["problem"]).lower())
 
@@ -425,6 +434,7 @@ def _collection_html(
     document: dict,
     pending: dict[str, list[dict]],
     oracle: list[dict],
+    root: Path,
 ) -> str:
     from .board import gap_paragraph, headline_table
 
@@ -449,6 +459,9 @@ def _collection_html(
                 lines.append(lead)
             lines.append(f'<p><a href="{html.escape(href)}">Full ranked table and performance profile</a>.</p>')
             lines.append(_legacy_section(problem, oracle))
+            comparison = _saddle_comparison(problem, oracle, root)
+            if comparison:
+                lines.append(comparison)
     lines.append("</section>")
     return "\n".join(lines)
 
@@ -620,7 +633,7 @@ def render(root: Path) -> None:
         encoding="utf-8",
     )
     (include / "collection.org").write_text(
-        _raw(_collection_html(order, by_suite, document, pending, oracle)),
+        _raw(_collection_html(order, by_suite, document, pending, oracle, root)),
         encoding="utf-8",
     )
     for stale in ("featured.org", "terra-pass.org"):
@@ -654,6 +667,9 @@ def render(root: Path) -> None:
                 )
             )
             sections.append(_legacy_section(problem, oracle))
+            comparison = _saddle_comparison(problem, oracle, root)
+            if comparison:
+                sections.append(comparison)
         body = [
             f"#+TITLE: {suite_title(suite)}",
             "#+OPTIONS: toc:nil num:nil author:nil",

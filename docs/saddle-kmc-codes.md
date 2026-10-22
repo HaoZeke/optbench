@@ -307,46 +307,64 @@ The MATLAB reducer that wrote those rows is
 `1 - (unique_sp_sofar - n_connected_sp) / N_searches`, which is not the
 `done.py` ratio. The harness follows `done.py`.
 
-## r2549 rerun of the r2205 paper rows
+## Runs 1-9 beside the archive
 
-The archive paper rows for this problem are `eon-dimer` and `eon-md`, both
+The archive rows for this problem are `eon-dimer` and `eon-md`, both
 r2205. The seven r2213 directories are later dimer variants. No
 `benchmark.dat` under `archive/entries/saddle-search/pt-island` names
-develop, so this rerun has no develop row. The client is the registry pin
-r2549, git `f817a3f`. `eonclient -v` prints `rUnversioned directory`
-because that checkout embeds no svn revision. The link includes
-`libgfortran` and `Morse`. QSC is absent from the r2549 tree, so the build
-omits it. `potential = morse_pt` is `Morse::force`. The server builds each
-displacement. `draw_search_start` is unused. Seeds are 1000 through 1009.
-The archived ini leaves `random_seed` unset, which reads the clock. There
-is no wall-clock budget and no pass limit. `run.sh` launches ten runs.
-`report.sh` writes `benchmark.dat` inside `run-1` through `run-9`, and the
-published mean is that set. The result files keep all ten `# rep` lines.
-Fields with a `_9` suffix are the `report.sh` mean. The un-suffixed means
-are the ten runs.
+develop. The rank still has one develop row per method. EON and eOn are
+different codes. The SVN client is revision r2549, git `f817a3f`. The
+registry pin is `Eon svn`, id `eon-svn`. The comparison labels that
+client `EON (SVN r2549)`.
+`eonclient -v` prints `rUnversioned directory` because that checkout
+embeds no svn revision. The link includes `libgfortran` and `Morse`. QSC
+is absent from the r2549 tree, so the build omits it. `eOn (develop
+500350d9)` is TheochemUI/eon commit `500350d9` on branch
+`fix/develop-regressions-vs-350`. `eonclient -v` prints `3.6.0
+(500350d9)`. `potential = morse_pt` is the Morse potential
+(`D_e = 0.7102`, `a = 1.6047`, `r_e = 2.897`, cutoff 9.5). The server
+builds each displacement. `draw_search_start` is unused. Seeds are 1000
+through 1009. The archived ini leaves `random_seed` unset, which reads
+the clock. The harness writes one seed per run directory. There is no
+wall-clock budget and no pass limit. `run.sh` launches ten runs.
+`report.sh` writes `benchmark.dat` inside `run-1` through `run-9`, and
+the published mean is that set. The result files keep all ten `# rep`
+lines. Fields with a `_9` suffix are that mean. The un-suffixed means
+are the ten runs. One row per code per method. Fewer force calls rank
+first. A difference is that row minus the archive row.
 
 | row | sample | unique_saddles | fraction_connected | total_searches | force_calls | force_calls_mean_error |
 | --- | --- | --- | --- | --- | --- | --- |
 | archive eon-dimer r2205 | report.sh, 9 runs | 109.222 | 0.746017 | 11366.8 | 3.77888e+06 | 527337 |
-| r2549 dimer | runs 1-9 | 117.2222222 | 0.7531125773 | 13823.33333 | 4933128 | 510185.4379 |
-| r2549 dimer | runs 1-10 | 118.2 | 0.753475785 | 14227.6 | 5075453.5 | 478607.4904 |
+| EON (SVN r2549) dimer | runs 1-9 | 117.2222222 | 0.7531125773 | 13823.33333 | 4933128 | 510185.4379 |
+| EON (SVN r2549) dimer | runs 1-10 | 118.2 | 0.753475785 | 14227.6 | 5075453.5 | 478607.4904 |
+| eOn (develop 500350d9) dimer | runs 1-9 | 78.88888889 | 0.7519646115 | 21601.11111 | 5682183.778 | 822578.5012 |
+| eOn (develop 500350d9) dimer | runs 1-10 | 78.4 | 0.7522965245 | 20642.8 | 5426864.8 | 778937.5256 |
 | archive eon-md r2205 | report.sh, 9 runs | 51.6667 | 0.886966 | 800.222 | 1478168 | 118736 |
-| r2549 MD | runs 1-9 | 51.66666667 | 0.8888963112 | 834.2222222 | 1530551.222 | 151505.5355 |
-| r2549 MD | runs 1-10 | 51.7 | 0.890407524 | 845.6 | 1550616.8 | 137677.3248 |
+| EON (SVN r2549) dynamics | runs 1-9 | 51.66666667 | 0.8888963112 | 834.2222222 | 1530551.222 | 151505.5355 |
+| EON (SVN r2549) dynamics | runs 1-10 | 51.7 | 0.890407524 | 845.6 | 1550616.8 | 137677.3248 |
+| eOn (develop 500350d9) dynamics | runs 1-9 | 84 | 0.8476676664 | 12051.33333 | 22526117 | 2148944.936 |
+| eOn (develop 500350d9) dynamics | runs 1-10 | 85.7 | 0.8473331647 | 12652.5 | 23663658.6 | 2214757.756 |
 
-Every dimer run in the first nine has `fraction_connected` above
-0.746017. The nine-run mean is 0.7531125773 and the rerun standard error
-is 0.0009028144. Unique saddles are 117.2222222 against 109.222. Searches
-are 13823.33333 against 11366.8. Force calls are 4933128 against
-3.77888e+06. The published force-call standard error is 527337. The dimer
-paper row does not reproduce.
+Dimer, runs 1-9, this row minus the archive. `EON (SVN r2549)`:
+unique saddles +8.0002222, fraction connected +0.0070955773, searches
++2456.53333, force calls +1154248. The fraction standard error on that
+sample is 0.0009028144. The archive force-call standard error is 527337,
+and the r2549 force-call standard error is 510185.4379. `eOn (develop
+500350d9)`: unique saddles -30.33311111, fraction connected
++0.0059476115, searches +10234.31111, force calls +1903303.778. The
+fraction standard error on that sample is 0.0005469221, and the
+force-call standard error is 822578.5012.
 
-The MD nine-run unique-saddle mean is 51.66666667 against 51.6667. The
-fraction is 0.8888963112 against 0.886966. Searches are 834.2222222
-against 800.222. Force calls are 1530551.222 against 1478168. Each of
-those offsets is inside one rerun standard error, and the force-call
-offset is inside the combined standard error with the published 118736.
-The MD paper row reproduces.
+Dynamics, runs 1-9, this row minus the archive. `EON (SVN r2549)`:
+unique saddles -3.333e-05, fraction connected +0.0019303112, searches
++34.0002222, force calls +52383.222. The fraction standard error on that
+sample is 0.0035219220. The archive force-call standard error is 118736,
+and the r2549 force-call standard error is 151505.5355. `eOn (develop
+500350d9)`: unique saddles +32.3333, fraction connected -0.0392983336,
+searches +11251.11133, force calls +21047949. The fraction standard
+error on that sample is 0.0008168217, and the force-call standard error
+is 2148944.936.
 
 The pARTn campaign on this branch stores both endpoint minima in
 `artn-1.1.0-saddle-search-pt-island--partn-saddle-pt.endpoints.npz`
@@ -462,7 +480,7 @@ at `02405b0d` return the same coordinates for `search_seed(1, 1)`,
 `(1, 2)`, `(1, 50)`, `(2, 1)`, and `(3, 17)`. The maximum absolute
 difference is 0. Each draw moves 7 atoms, from epicentres 5, 2, 2,
 1, and 0. A generator that continues after
-`search_seed(1, 1)` does not reproduce `search_seed(1, 2)`.
+`search_seed(1, 1)` draws a different displacement from `search_seed(1, 2)`.
 `partn/saddle-pt` itself still pushes 1 to 7 island atoms in plane,
 which is the authors' script. Sella's pt-island searches displace every
 free atom from seeds 0 through 15. ASE dimer leaves the reactant and

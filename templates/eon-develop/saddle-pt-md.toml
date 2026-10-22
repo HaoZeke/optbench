@@ -1,0 +1,72 @@
+id = "eon-develop/saddle-pt-md"
+engine = "eon"
+problem = "saddle-search/pt-island"
+code = "eOn (develop 500350d9)"
+code_version = "500350d9"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
+algorithm = "Dynamics"
+reducer = "akmc-until-27"
+tuning = "default"
+note = """
+The archived eon-md config.ini, on TheochemUI/eon commit 500350d9 of branch fix/develop-regressions-vs-350. potential morse_pt is the client Morse potential. method is dynamics, temperature 2800, Langevin friction 0.004, time_step 2, time 10000, confidence_scheme dynamics, num_jobs 8. The stop is done.py: 27 good saddles with barrier strictly below 1.5 eV. There is no pass limit and no wall-clock budget. The server builds each displacement. Seeds are 1000 through 1009.
+"""
+
+[ini.Main]
+job = "akmc"
+temperature = 700
+finite_difference = 0.001
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+converged_force = 0.001
+max_move = 0.2
+max_iterations = 1000
+
+[ini.AKMC]
+confidence = 1.1
+confidence_scheme = "dynamics"
+thermally_accessible_window = 99999
+
+[ini."Process Search"]
+minimize_first = true
+
+[ini.Communicator]
+type = "local"
+num_jobs = 8
+number_of_CPUs = 8
+client_path = "eonclient"
+
+[ini."Nudged Elastic Band"]
+images = 3
+max_iterations = 100
+spring = 5.0
+climbing_image_method = true
+converged_force = 0.1
+
+[ini."Saddle Search"]
+method = "dynamics"
+dynamics_temperature = 2800
+dynamics_state_check_interval = 600
+dynamics_record_interval = 40
+dynamics_linear_interpolation = true
+max_energy = 1000
+max_iterations = 300
+
+[ini."Parallel Replica"]
+dephase_time = 0
+
+[ini.Dynamics]
+time_step = 2.0
+time = 10000
+thermostat = "langevin"
+langevin_friction = 0.004
+
+[ini.Dimer]
+rotations_max = 20
+converged_angle = 5.0
+
+[ini.Prefactor]
+default_value = 5e12

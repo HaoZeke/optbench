@@ -293,6 +293,22 @@ def _write_saddle(template: dict, rows: list[dict], output: Path, workers: int) 
     lines.append(f"template {template['id']}")
     lines.append(f"problem {template.get('problem', '')}")
     lines.append(f"reducer {template.get('reducer', 'akmc-until-27')}")
+    sample = [row for row in rows if row["reached"] and 1 <= int(row["repetition"]) <= 9]
+    if len(sample) == 9:
+        report = _summary(sample, 0)
+        lines.append(
+            "# report.sh averages run-1 through run-9. "
+            "Later runs stay in the rep lines and out of that mean."
+        )
+        lines.append("report_runs 9")
+        for key in (
+            "force_calls",
+            "force_calls_mean_error",
+            "unique_saddles",
+            "fraction_connected",
+            "total_searches",
+        ):
+            lines.append(f"{key}_9 {_fmt(float(report[key]))}")
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text("\n".join(lines) + "\n", encoding="utf-8")
     start_rows = []

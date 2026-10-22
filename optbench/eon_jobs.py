@@ -599,6 +599,8 @@ JOBS = {
     "saddle-pt-lanczos": ("eon/develop-saddle-pt-lanczos", None),
     "saddle-pt-paper-dimer": ("eon-svn/saddle-pt-paper-dimer", None),
     "saddle-pt-paper-md": ("eon-svn/saddle-pt-paper-md", None),
+    "saddle-pt-develop-dimer": ("eon-develop/saddle-pt-dimer", None),
+    "saddle-pt-develop-md": ("eon-develop/saddle-pt-md", None),
 }
 
 

@@ -500,7 +500,7 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    <thead><tr><th>Template</th><th>Version</th><th>Commit</th><th>Source</th><th>Current</th><th>PAR-2</th><th>Success</th><th>Wilson low</th><th>Wilson high</th><th>Median calls</th><th>Mean calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
    <tr><td data-field="template">sella/pt-island-search-default</td><td data-field="version">Sella 2.6.0</td><td data-field="commit">6cfb60cdb100</td><td data-field="source">asv</td><td data-field="current">yes</td><td data-field="par2_mean">5201.62</td><td data-field="success_rate">0.75</td><td data-field="wilson_low">0.505017</td><td data-field="wilson_high">0.898179</td><td data-field="median_calls">225</td><td data-field="mean_calls">247.812</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 4</td><td data-field="n">16</td></tr>
    </tbody></table></div>
-   <p class="bench-gaps">Eon rows are not yet on the harness counter. Eon svn rows are off the ranked table. Partial rows stay off the ranked table.</p>
+   <p class="bench-gaps">Eon rows are not yet on the harness counter. eOn (develop 500350d9) and EON (SVN r2549) rows are off the ranked table. Partial rows stay off the ranked table.</p>
    <p><a href="generated/suites/saddle-search.html#pt-island">Full ranked table and performance profile</a>.</p>
    <section class="bench bench-legacy-section" id="pt-island-legacy">
    <h3>Legacy 2014 archive</h3>
@@ -668,6 +668,122 @@ The 2014 rows follow, in the published order, inside Legacy 2014 archive.
    </tbody></table></div>
    <figure class="bench-plot"><figcaption>Legacy 2014 scores. Fewer calls is to the left. Same order as the table.</figcaption><div class="bench-plot-mount" style="--bench-rows:12"></div><script type="application/json" class="bench-plot-data">{"metric": "force_calls", "scale": "log", "points": [{"id": "saddle-search-pt-island-adaptive-hsphere-lbfgs-davidson-sm50", "entry": "adaptive_HSphere-lbfgs-davidson-sm50", "code": "SoftSaddle", "value": 423491.1, "best": true, "held": false, "failed": false}, {"id": "saddle-search-pt-island-adaptive-hsphere-lbfgs-lanczos-sm50", "entry": "adaptive_HSphere-lbfgs-lanczos-sm50", "code": "SoftSaddle", "value": 814519.3, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-adaptive-hsphere-lbfgs-lanczos-sm0", "entry": "adaptive_HSphere-lbfgs-lanczos-sm0", "code": "SoftSaddle", "value": 1003433.0, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-lbfgs-5-rotations-20-bowl-breakout", "entry": "eon-dimer-lbfgs-5-rotations-20-bowl_breakout", "code": "Eon r2213", "value": 1345465.88889, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-md", "entry": "eon-md", "code": "Eon r2205", "value": 1478168.0, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-lbfgs-5-rotations", "entry": "eon-dimer-lbfgs-5-rotations", "code": "Eon r2213", "value": 1684436.77778, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-lbfgs-20-rotations-20-bowl-breakout", "entry": "eon-dimer-lbfgs-20-rotations-20-bowl_breakout", "code": "Eon r2213", "value": 2732309.11111, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-lbfgs-20-rotations", "entry": "eon-dimer-lbfgs-20-rotations", "code": "Eon r2213", "value": 3341488.0, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-cg-5-rotations-20-bowl-breakout", "entry": "eon-dimer-cg-5-rotations-20-bowl_breakout", "code": "Eon r2213", "value": 3463700.66667, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer", "entry": "eon-dimer", "code": "Eon r2205", "value": 3778880.0, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-cg-20-rotations-20-bowl-breakout", "entry": "eon-dimer-cg-20-rotations-20-bowl_breakout", "code": "Eon r2213", "value": 7174213.66667, "best": false, "held": false, "failed": false}, {"id": "saddle-search-pt-island-eon-dimer-cg-20-rotations", "entry": "eon-dimer-cg-20-rotations", "code": "Eon r2213", "value": 7947070.11111, "best": false, "held": false, "failed": false}]}</script></figure>
    </details>
+   </section>
+   <section class="bench" id="pt-island-dimer-dynamics">
+   <h3>Dimer and dynamics</h3>
+   <p>Runs 1-9. Fewer force calls rank first. A difference is this row minus the archive row.</p>
+   <h4>Dimer</h4>
+   <div class="bench-table"><table class="bench">
+   <caption>Runs 1-9. Fewer force calls rank first. A difference is this row minus the archive row.</caption>
+   <thead><tr>
+   <th>Rank</th>
+   <th>Code</th>
+   <th>unique saddles</th>
+   <th>unique saddles difference</th>
+   <th>fraction connected</th>
+   <th>fraction connected difference</th>
+   <th>total searches</th>
+   <th>total searches difference</th>
+   <th>force calls</th>
+   <th>force calls difference</th>
+   <th>force calls mean error</th>
+   </tr></thead><tbody>
+   <tr>
+   <td>1</td>
+   <td>Eon r2205</td>
+   <td>109.222</td>
+   <td>0</td>
+   <td>0.746017</td>
+   <td>0</td>
+   <td>11366.8</td>
+   <td>0</td>
+   <td>3.77888e+06</td>
+   <td>0</td>
+   <td>527337</td>
+   </tr>
+   <tr>
+   <td>2</td>
+   <td>EON (SVN r2549)</td>
+   <td>117.2222222</td>
+   <td>+8.0002222</td>
+   <td>0.7531125773</td>
+   <td>+0.0070955773</td>
+   <td>13823.33333</td>
+   <td>+2456.53333</td>
+   <td>4933128</td>
+   <td>+1154248</td>
+   <td>510185.4379</td>
+   </tr>
+   <tr>
+   <td>3</td>
+   <td>eOn (develop 500350d9)</td>
+   <td>78.88888889</td>
+   <td>-30.33311111</td>
+   <td>0.7519646115</td>
+   <td>+0.0059476115</td>
+   <td>21601.11111</td>
+   <td>+10234.31111</td>
+   <td>5682183.778</td>
+   <td>+1903303.778</td>
+   <td>822578.5012</td>
+   </tr>
+   </tbody></table></div>
+   <h4>Dynamics</h4>
+   <div class="bench-table"><table class="bench">
+   <caption>Runs 1-9. Fewer force calls rank first. A difference is this row minus the archive row.</caption>
+   <thead><tr>
+   <th>Rank</th>
+   <th>Code</th>
+   <th>unique saddles</th>
+   <th>unique saddles difference</th>
+   <th>fraction connected</th>
+   <th>fraction connected difference</th>
+   <th>total searches</th>
+   <th>total searches difference</th>
+   <th>force calls</th>
+   <th>force calls difference</th>
+   <th>force calls mean error</th>
+   </tr></thead><tbody>
+   <tr>
+   <td>1</td>
+   <td>Eon r2205</td>
+   <td>51.6667</td>
+   <td>0</td>
+   <td>0.886966</td>
+   <td>0</td>
+   <td>800.222</td>
+   <td>0</td>
+   <td>1478168</td>
+   <td>0</td>
+   <td>118736</td>
+   </tr>
+   <tr>
+   <td>2</td>
+   <td>EON (SVN r2549)</td>
+   <td>51.66666667</td>
+   <td>-3.333e-05</td>
+   <td>0.8888963112</td>
+   <td>+0.0019303112</td>
+   <td>834.2222222</td>
+   <td>+34.0002222</td>
+   <td>1530551.222</td>
+   <td>+52383.222</td>
+   <td>151505.5355</td>
+   </tr>
+   <tr>
+   <td>3</td>
+   <td>eOn (develop 500350d9)</td>
+   <td>84</td>
+   <td>+32.3333</td>
+   <td>0.8476676664</td>
+   <td>-0.0392983336</td>
+   <td>12051.33333</td>
+   <td>+11251.11133</td>
+   <td>22526117</td>
+   <td>+21047949</td>
+   <td>2148944.936</td>
+   </tr>
+   </tbody></table></div>
    </section>
    <h2 id="suite-double-ended-saddle-search">Double-ended saddle search</h2>
    <h3>LJ38 double-ended saddle</h3>

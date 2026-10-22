@@ -22,9 +22,11 @@ from pathlib import Path
 import numpy as np
 import pytest
 
+from optbench.check import load_oracle
 from optbench.connection import rescore_endpoints
 from optbench.dat import parse_lenient
 from optbench.endpoints import load_endpoints
+from optbench.saddle_pt import DEVELOP_LABEL, SVN_LABEL, comparison_rows, saddle_pt_html
 from optbench.score import score_v2
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -143,6 +145,7 @@ def test_r2549_paper_rerun_matches_report_sh_mean():
         path = campaign / name
         assert not path.with_suffix(".starts").exists()
         fields = _fields(path)
+        assert fields["code"] == "EON (SVN r2549)"
         assert fields["code_version"] == "r2549"
         assert fields["problem"] == "saddle-search/pt-island"
         assert fields["reducer"] == "akmc-until-27"
@@ -160,6 +163,138 @@ def test_r2549_paper_rerun_matches_report_sh_mean():
         assert statistics.fmean(row["total_searches"] for row in sample) == pytest.approx(
             float(fields["total_searches_9"])
         )
+
+
+def test_develop_500350d9_dimer_matches_report_sh_mean():
+    path = ROOT / "results" / "campaign" / "eon-develop-500350d9-saddle-pt-dimer.dat"
+    assert not path.with_suffix(".starts").exists()
+    fields = _fields(path)
+    assert fields["code"] == "eOn (develop 500350d9)"
+    assert fields["code_version"] == "500350d9"
+    assert fields["commit"] == "500350d9fae881f06c7ef194e5868da079c4be5a"
+    assert fields["problem"] == "saddle-search/pt-island"
+    assert fields["reducer"] == "akmc-until-27"
+    assert fields["algorithm"] == "Dimer"
+    assert fields["report_runs"] == "9"
+    assert fields["nfailed"] == "0"
+    assert fields["repetitions"] == "10"
+    locked = {
+        "fraction_connected_9": "0.7519646115",
+        "total_searches_9": "21601.11111",
+        "unique_saddles_9": "78.88888889",
+        "force_calls_9": "5682183.778",
+        "force_calls_mean_error_9": "822578.5012",
+        "force_calls": "5426864.8",
+        "fraction_connected": "0.7522965245",
+        "total_searches": "20642.8",
+        "unique_saddles": "78.4",
+        "force_calls_mean_error": "778937.5256",
+    }
+    for key, value in locked.items():
+        assert fields[key] == value
+    reps = _comment_reps(path)
+    assert len(reps) == 10
+    numbers = [
+        int(line.split()[2])
+        for line in path.read_text(encoding="utf-8").splitlines()
+        if line.startswith("# rep ")
+    ]
+    assert numbers == list(range(1, 11))
+    sample = reps[:9]
+    assert statistics.fmean(row["fraction_connected"] for row in sample) == pytest.approx(
+        float(fields["fraction_connected_9"])
+    )
+    assert statistics.fmean(row["force_calls"] for row in sample) == pytest.approx(float(fields["force_calls_9"]))
+    assert statistics.fmean(row["force_calls"] for row in reps) == pytest.approx(float(fields["force_calls"]))
+
+
+def test_develop_500350d9_dynamics_matches_report_sh_mean():
+    path = ROOT / "results" / "campaign" / "eon-develop-500350d9-saddle-pt-md.dat"
+    assert not path.with_suffix(".starts").exists()
+    fields = _fields(path)
+    assert fields["code"] == "eOn (develop 500350d9)"
+    assert fields["code_version"] == "500350d9"
+    assert fields["commit"] == "500350d9fae881f06c7ef194e5868da079c4be5a"
+    assert fields["problem"] == "saddle-search/pt-island"
+    assert fields["reducer"] == "akmc-until-27"
+    assert fields["algorithm"] == "Dynamics"
+    assert fields["report_runs"] == "9"
+    assert fields["nfailed"] == "0"
+    assert fields["repetitions"] == "10"
+    locked = {
+        "fraction_connected_9": "0.8476676664",
+        "total_searches_9": "12051.33333",
+        "unique_saddles_9": "84",
+        "force_calls_9": "22526117",
+        "force_calls_mean_error_9": "2148944.936",
+        "force_calls": "23663658.6",
+        "fraction_connected": "0.8473331647",
+        "total_searches": "12652.5",
+        "unique_saddles": "85.7",
+        "force_calls_mean_error": "2214757.756",
+    }
+    for key, value in locked.items():
+        assert fields[key] == value
+    reps = _comment_reps(path)
+    assert len(reps) == 10
+    numbers = [
+        int(line.split()[2])
+        for line in path.read_text(encoding="utf-8").splitlines()
+        if line.startswith("# rep ")
+    ]
+    assert numbers == list(range(1, 11))
+    sample = reps[:9]
+    assert statistics.fmean(row["fraction_connected"] for row in sample) == pytest.approx(
+        float(fields["fraction_connected_9"])
+    )
+    assert statistics.fmean(row["force_calls"] for row in sample) == pytest.approx(float(fields["force_calls_9"]))
+    assert statistics.fmean(row["force_calls"] for row in reps) == pytest.approx(float(fields["force_calls"]))
+
+
+def test_pt_island_ranks_one_row_per_code():
+    oracle = load_oracle(ROOT / "oracle" / "entries.jsonl")
+    rows = comparison_rows(ROOT, oracle)
+    fragment = saddle_pt_html(ROOT, oracle)
+    folded = fragment.casefold()
+    for banned in (
+        "reproduce",
+        "reproduces",
+        "does not reproduce",
+        "legacy",
+        "current",
+        "paper baseline",
+        "10%",
+        "wilson",
+    ):
+        assert banned.casefold() not in folded
+    by_method: dict[str, list[dict]] = {}
+    for row in rows:
+        by_method.setdefault(row["method"], []).append(row)
+    assert set(by_method) == {"Dimer", "Dynamics"}
+    for group in by_method.values():
+        labels = [row["label"] for row in group]
+        assert labels.count(SVN_LABEL) == 1
+        assert labels.count(DEVELOP_LABEL) == 1
+        assert sum(bool(row["archive"]) for row in group) == 1
+        assert [row["rank"] for row in group] == list(range(1, len(group) + 1))
+        calls = [float(row["metrics"]["force_calls"]) for row in group]
+        assert calls == sorted(calls)
+        archive = next(row for row in group if row["archive"])
+        for row in group:
+            if row["archive"]:
+                assert row["difference"]["force_calls"] == 0
+                continue
+            for key, gap in row["difference"].items():
+                assert gap == pytest.approx(float(row["metrics"][key]) - float(archive["metrics"][key]))
+                assert f"{gap:+.10g}" in fragment
+    assert "5075453.5" not in fragment
+    assert "1550616.8" not in fragment
+    assert "5426864.8" not in fragment
+    assert "23663658.6" not in fragment
+    assert "4933128" in fragment
+    assert "1530551.222" in fragment
+    assert "5682183.778" in fragment
+    assert "22526117" in fragment
 
 
 def test_r2213_per_run_lists_average_to_the_published_row():
