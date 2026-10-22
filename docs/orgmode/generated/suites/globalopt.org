@@ -204,10 +204,11 @@
    <h2>Binary Lennard-Jones 100</h2>
    <dl class="bench-rule">
    <dt>Cap</dt><dd>2000000 force calls</dd>
+   <dt>Stop</dt><dd>within 0.001 of the known minimum</dd>
    <dt>Starts</dt><dd>100</dd>
    <dt>Potential</dt><dd>binary-lennard-jones</dd>
    <dt>v2</dt><dd>par2-wilson-bootstrap</dd>
-   <dt>Note</dt><dd>The archived files record energies. They do not record force calls. The force-call cap is max_evaluations in this file, 2000000.</dd>
+   <dt>Note</dt><dd>The 100 starts are quenched random clusters packed as the other globalopt start sets are: packing fraction 0.1, a neighbor distance between 0.8 and 1.3 covalent radii, then a shift to the center of a cubic cell of side 100. The draw uses seed 1. Component 1 is species B, symbol H, 58 atoms, sigma 1.3. Component 2 is species A, symbol C, 42 atoms, sigma 1.0. The unlike sigma is the arithmetic mean. Each cluster is quenched with L-BFGS-B until the maximum force component is below 1e-4 on the unshifted lj/cut potential, cutoff 20. A start succeeds at or below energy_minimum plus 0.001. The force-call cap is max_evaluations, 2000000.</dd>
    </dl>
    <p>Ranked by the v2 PAR-2 mean of the harness total. Only the newest full version of a template is in this table. A partial row, including a one-start asv smoke run, is not.</p>
    <p class="bench-gaps">No committed harness run.</p>
