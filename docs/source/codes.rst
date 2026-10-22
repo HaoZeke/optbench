@@ -14,6 +14,7 @@ Archived rows use the same key and appear on that code page.
    <p>The benchmark contributor is Rohit Goswami. Each code page lists every ranked row for that code.</p>
    <ul>
    <li><a href="generated/codes/eon.html">eOn</a></li>
+   <li><a href="generated/codes/eon--develop-f6817b53.html">eOn (develop f6817b53)</a></li>
    <li><a href="generated/codes/eon-svn.html">Eon svn</a></li>
    <li><a href="generated/codes/rgmin.html">rgmin</a></li>
    <li><a href="generated/codes/rgsaddle.html">rgsaddle</a></li>
@@ -48,6 +49,7 @@ Archived rows use the same key and appear on that code page.
    :maxdepth: 1
 
    generated/codes/eon
+   generated/codes/eon--develop-f6817b53
    generated/codes/eon-svn
    generated/codes/rgmin
    generated/codes/rgsaddle
