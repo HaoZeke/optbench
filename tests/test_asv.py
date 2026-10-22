@@ -161,6 +161,7 @@ def test_pending_grid_is_every_problem_and_code():
         "eon-main",
         "eon-develop",
         "eon-develop-500350d9",
+        "eon-develop-f6817b53",
         "eon-svn",
         "rgmin",
         "rgsaddle",

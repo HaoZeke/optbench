@@ -1,0 +1,80 @@
+#+TITLE: AGOX
+#+OPTIONS: toc:nil num:nil author:nil
+
+#+begin_export rst
+.. raw:: html
+
+   <section class="bench" id="code-agox">
+   <h2>AGOX</h2>
+   <div class="bench-scroll"><table>
+   <caption>Registry pins.</caption>
+   <thead><tr><th>Role</th><th>Ref</th><th>Commit</th><th>Source</th></tr></thead><tbody>
+   <tr>
+   <td>global optimization</td>
+   <td>v3.11.1-2-g22d94a6</td>
+   <td>22d94a6fae8c</td>
+   <td><a href="https://gitlab.com/agox/agox">https://gitlab.com/agox/agox</a></td>
+   </tr>
+   </tbody></table></div>
+   <div class="bench-scroll"><table data-board-table="code-rows">
+   <caption>Every ranked row for this code.</caption>
+   <thead><tr><th>Problem</th><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
+   <tr data-problem="globalopt/lj38" data-label="AGOX (3.11.2.dev2+g22d94a6fa) · basin hopping">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="label">AGOX (3.11.2.dev2+g22d94a6fa) · basin hopping</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">10</td>
+   <td data-field="par2_mean">3.53735e+06</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">2e+06</td>
+   <td data-field="mean_calls">1.83735e+06</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 85, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="globalopt/lj38" data-label="AGOX (3.11.2.dev2+g22d94a6fa) · random structure search">
+   <td>Lennard-Jones 38 global minimum</td>
+   <td data-field="label">AGOX (3.11.2.dev2+g22d94a6fa) · random structure search</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">11</td>
+   <td data-field="par2_mean">4e+06</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">2e+06</td>
+   <td data-field="mean_calls">2e+06</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 100, wrong_stationary 0</td>
+   <td data-field="n">100</td>
+   </tr>
+   <tr data-problem="globalopt/lj75" data-label="AGOX (3.11.2.dev2+g22d94a6fa) · basin hopping">
+   <td>lj75</td>
+   <td data-field="label">AGOX (3.11.2.dev2+g22d94a6fa) · basin hopping</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">4</td>
+   <td data-field="par2_mean">2e+06</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1e+06</td>
+   <td data-field="mean_calls">1e+06</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   <tr data-problem="globalopt/lj75" data-label="AGOX (3.11.2.dev2+g22d94a6fa) · random structure search">
+   <td>lj75</td>
+   <td data-field="label">AGOX (3.11.2.dev2+g22d94a6fa) · random structure search</td>
+   <td data-field="family">Basin hopping / global</td>
+   <td data-field="family_rank">5</td>
+   <td data-field="par2_mean">2e+06</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">1e+06</td>
+   <td data-field="mean_calls">1e+06</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 200, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
+   </tbody></table></div>
+   </section>
+#+end_export

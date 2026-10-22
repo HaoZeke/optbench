@@ -377,7 +377,7 @@
    <td>lj38_2ts_separation</td>
    <td data-field="label">eOn (3.6.0) · LBFGS</td>
    <td data-field="family">Connect / double-ended</td>
-   <td data-field="family_rank">5</td>
+   <td data-field="family_rank">4</td>
    <td data-field="par2_mean">343644</td>
    <td data-field="published"></td>
    <td data-field="median_calls">44412</td>
@@ -629,7 +629,7 @@
    <td>lj38</td>
    <td data-field="label">eOn (r2156) · eon-dimer-lbfgs</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">8</td>
+   <td data-field="family_rank">9</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">28</td>
    <td data-field="median_calls"></td>
@@ -643,7 +643,7 @@
    <td>lj38</td>
    <td data-field="label">eOn (r2156) · eon-lanczos</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">9</td>
+   <td data-field="family_rank">10</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">28</td>
    <td data-field="median_calls"></td>
@@ -657,7 +657,7 @@
    <td>lj38</td>
    <td data-field="label">eOn (3.5.0) · Dimer L-BFGS</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">11</td>
+   <td data-field="family_rank">12</td>
    <td data-field="par2_mean">28.33</td>
    <td data-field="published"></td>
    <td data-field="median_calls">27</td>
@@ -671,7 +671,7 @@
    <td>lj38</td>
    <td data-field="label">eOn (r2156) · eon-dimer-cg</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">13</td>
+   <td data-field="family_rank">14</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">30</td>
    <td data-field="median_calls"></td>
@@ -685,7 +685,7 @@
    <td>lj38</td>
    <td data-field="label">eOn (3.5.0) · Dimer CG</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">15</td>
+   <td data-field="family_rank">16</td>
    <td data-field="par2_mean">30.355</td>
    <td data-field="published"></td>
    <td data-field="median_calls">29</td>
@@ -699,7 +699,7 @@
    <td>lj38</td>
    <td data-field="label">eOn (3.6.0) · Dimer</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">16</td>
+   <td data-field="family_rank">17</td>
    <td data-field="par2_mean">30.355</td>
    <td data-field="published"></td>
    <td data-field="median_calls">29</td>
@@ -979,7 +979,7 @@
    <td>Pt-heptamer</td>
    <td data-field="label">eOn ((develop 500350d9) · CG) · CG</td>
    <td data-field="family">Connect / double-ended</td>
-   <td data-field="family_rank">12</td>
+   <td data-field="family_rank">13</td>
    <td data-field="par2_mean">1141.08</td>
    <td data-field="published"></td>
    <td data-field="median_calls">778</td>
@@ -993,7 +993,7 @@
    <td>Pt-heptamer</td>
    <td data-field="label">eOn ((develop 500350d9) · QuickMin) · QuickMin</td>
    <td data-field="family">Connect / double-ended</td>
-   <td data-field="family_rank">14</td>
+   <td data-field="family_rank">15</td>
    <td data-field="par2_mean">1322</td>
    <td data-field="published"></td>
    <td data-field="median_calls">1242</td>
@@ -1007,7 +1007,7 @@
    <td>Pt-heptamer</td>
    <td data-field="label">eOn (3.6.0) · LBFGS</td>
    <td data-field="family">Connect / double-ended</td>
-   <td data-field="family_rank">15</td>
+   <td data-field="family_rank">16</td>
    <td data-field="par2_mean">3517.69</td>
    <td data-field="published"></td>
    <td data-field="median_calls">3738</td>
