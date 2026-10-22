@@ -66,7 +66,7 @@ It does not run a campaign.
    </tr>
    <tr data-problem="minimization/morse-bulk">
    <th scope="row"><a href="generated/suites/minimization.html#morse-bulk">Morse bulk</a></th>
-   <td data-code="eOn" data-template="eon/morse-lbfgs-m100" data-par2="54.18"><span class="bench-score">54.18</span><a href="generated/suites/minimization.html#morse-bulk-templates">eon/morse-lbfgs-m100</a></td>
+   <td data-code="eOn" data-template="eon/develop-bbe4ffba-morse-lbfgs" data-par2="54.14"><span class="bench-score">54.14</span><a href="generated/suites/minimization.html#morse-bulk-templates">eon/develop-bbe4ffba-morse-lbfgs</a></td>
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin" data-template="rgmin/morse-newton" data-par2="8.35"><span class="bench-score">8.35</span><a href="generated/suites/minimization.html#morse-bulk-templates">rgmin/morse-newton</a></td>
    <td data-code="rgsaddle">—</td>
@@ -306,7 +306,7 @@ It does not run a campaign.
    </tr>
    <tr data-problem="neb/Pt-heptamer">
    <th scope="row"><a href="generated/suites/neb.html#Pt-heptamer">Pt-heptamer</a></th>
-   <td data-code="eOn" data-template="eon/neb-pt-lbfgs" data-par2="3517.69"><span class="bench-score">3517.69</span><a href="generated/suites/neb.html#Pt-heptamer-templates">eon/neb-pt-lbfgs</a></td>
+   <td data-code="eOn" data-template="eon/develop-bbe4ffba-neb-pt-lbfgs" data-par2="319.538"><span class="bench-score">319.538</span><a href="generated/suites/neb.html#Pt-heptamer-templates">eon/develop-bbe4ffba-neb-pt-lbfgs</a></td>
    <td data-code="Eon svn" data-template="eon-svn/neb-pt-ci" data-par2="336.769"><span class="bench-score">336.769</span><a href="generated/suites/neb.html#Pt-heptamer-templates">eon-svn/neb-pt-ci</a></td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/idpp-ci-neb-lbfgs" data-par2="318.308"><span class="bench-score">318.308</span><a href="generated/suites/neb.html#Pt-heptamer-templates">rgsaddle/idpp-ci-neb-lbfgs</a></td>
