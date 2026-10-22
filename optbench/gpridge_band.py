@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import os
 import re
 import signal
@@ -72,8 +73,35 @@ def runtime(template: dict) -> dict:
 
 
 
+def frozen_arguments(options: dict) -> list[str]:
+    """Validate the frozen-environment policy before launching a search."""
+    selection = options.get("frozen_selection", "auto")
+    if selection not in ("auto", "radius", "window"):
+        raise ValueError("frozen_selection must be auto, radius, or window")
+    neighbors = options.get("frozen_neighbors", 0)
+    if isinstance(neighbors, bool) or not isinstance(neighbors, int) or neighbors < 0:
+        raise ValueError("frozen_neighbors must be a nonnegative integer")
+    if neighbors > 0 and selection != "auto":
+        raise ValueError("positive frozen_neighbors requires frozen_selection=auto")
+    argv = []
+    if "frozen_neighbors" in options:
+        argv.extend(["--nn-frozen", str(neighbors)])
+    if selection == "radius":
+        argv.append("--radius-only")
+    elif selection == "window":
+        argv.append("--evict-frozen")
+    if "frozen_activation_distance" in options:
+        distance = options["frozen_activation_distance"]
+        if (isinstance(distance, bool) or not isinstance(distance, (int, float))
+                or not math.isfinite(distance) or distance < 0):
+            raise ValueError("frozen_activation_distance must be finite and nonnegative")
+        argv.extend(["--gp-frozen-activation-distance", str(distance)])
+    return argv
+
+
 def command(binary: str, directory: Path, settings: dict, options: dict) -> list[str]:
     """Explicit physical and numerical settings for a Pt band."""
+    frozen = frozen_arguments(options)
     return [
         binary, "--reactant", str(directory / "reactant.con"),
         "--product", str(directory / "product.con"),
@@ -101,7 +129,7 @@ def command(binary: str, directory: Path, settings: dict, options: dict) -> list
         "--output", str(directory / "band.h5"),
         "--write-con", str(directory / "band.con"),
         "--gp-observation-archive", str(directory / "observations"),
-    ]
+    ] + frozen
 
 
 def write_inputs(directory: Path, pair) -> None:
