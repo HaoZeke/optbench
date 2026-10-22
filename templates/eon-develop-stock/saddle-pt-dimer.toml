@@ -1,0 +1,57 @@
+id = "eon-develop-stock/saddle-pt-dimer"
+engine = "eon"
+problem = "saddle-search/pt-island"
+code = "eOn (develop 4c1b814f62f1dcf5fcd0cf18ba0b6df3bcff7a28)"
+code_version = "4c1b814f"
+commit = "4c1b814f62f1dcf5fcd0cf18ba0b6df3bcff7a28"
+algorithm = "Dimer"
+reducer = "harness"
+failure_cap = 100000000
+tuning = "default"
+workers = 8
+note = "Stock eOn develop 4c1b814f62f1dcf5fcd0cf18ba0b6df3bcff7a28 on the same Pt island, starts, and stop as EON SVN r2549. The archived ini keys only. improved, the dimer optimizer, finite_difference, and confidence_scheme stay at this code's defaults. The harness kernel is morse/smooth/linear. Seeds 1000-1009. Stop is 27 good saddles below 1.5 eV."
+
+pass_limit = 800
+
+[ini.Main]
+job = "akmc"
+temperature = 700
+
+[ini.Potential]
+potential = "morse_pt"
+
+[ini.Optimizer]
+opt_method = "lbfgs"
+converged_force = 0.001
+max_move = 0.2
+max_iterations = 1000
+
+[ini.AKMC]
+confidence = 1.1
+thermally_accessible_window = 99999
+
+[ini."Process Search"]
+minimize_first = true
+
+[ini.Communicator]
+type = "local"
+num_jobs = 32
+number_of_CPUs = 8
+client_path = "eonclient"
+
+[ini."Saddle Search"]
+min_mode_method = "dimer"
+displace_listed_atom_weight = 1
+displace_all_listed = false
+displace_radius = 3.3
+displace_atom_list = "0,1,2,3,4,5,6"
+displace_magnitude = 0.1
+max_energy = 5.0
+max_iterations = 1000
+
+[ini.Dimer]
+rotations_max = 20
+converged_angle = 5.0
+
+[ini.Prefactor]
+default_value = 5e12

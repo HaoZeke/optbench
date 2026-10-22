@@ -162,6 +162,8 @@ def test_pending_grid_is_every_problem_and_code():
         "eon-develop",
         "eon-develop-500350d9",
         "eon-svn",
+        "eon-svn-r2549",
+        "eon-develop-4c1b814",
         "rgmin",
         "rgsaddle",
         "geodesic",
