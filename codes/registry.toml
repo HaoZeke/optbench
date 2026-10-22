@@ -32,7 +32,7 @@ repository = "https://github.com/TheochemUI/eon"
 ref = "develop"
 commit = "7095b23ac17d49f434a5e08ccb072897ceca698e"
 committed = "2026-10-16"
-note = "develop HEAD built from source. The version string is 3.6.0 (7095b23a). GPR-dimer is absent: TheochemUI/gpr_optim is private and eonclient reports GPRD disabled. This pin is not the conda-forge 3.5.0 binary. This is eOn at https://eondocs.org and https://github.com/TheochemUI/eon. It is not a version of the SVN code. The hTST Al dimer campaign is fix/develop-regressions-vs-350 at 6d9d629a, which contains 500350d9, stock and unpatched, labelled eOn (develop 500350d9). The 7095b23 pin stays for the scores already run on it."
+note = "develop HEAD built from source. The version string is 3.6.0 (7095b23a). GPR-dimer is absent: TheochemUI/gpr_optim is private and eonclient reports GPRD disabled. This pin is not the conda-forge 3.5.0 binary. This is eOn at https://eondocs.org and https://github.com/TheochemUI/eon. It is not a version of the SVN code. The hTST Al dimer campaign is develop d2435196, labelled eOn (develop d2435196). The 7095b23 pin stays for the scores already run on it."
 
 [[code]]
 id = "eon-develop-500350d9"
@@ -43,6 +43,16 @@ ref = "develop"
 commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
 committed = "2026-10-20"
 note = "develop 500350d9fae881f06c7ef194e5868da079c4be5a built from that commit with no source patch. eonclient --version prints 3.6.0 (500350d9). The Pt-heptamer and LJ38 band rows on this commit use the harness force counter. EON SVN r2549 is a different code."
+
+[[code]]
+id = "eon-develop-d2435196"
+name = "eOn"
+role = "minimization and saddle search"
+repository = "https://github.com/TheochemUI/eon"
+ref = "develop"
+commit = "d2435196c6dd7b70def58c52f2ece44349f82ca9"
+committed = "2026-10-22"
+note = "develop d2435196c6dd7b70def58c52f2ece44349f82ca9, pull request 799. eonclient --version prints 3.6.0 (d2435196). The hTST Al dimer row uses the client eam_al potential. The r2549 aluminium literals in that potential are stored at single precision. Band rows stay on 500350d9."
 
 [[code]]
 id = "eon-svn"
