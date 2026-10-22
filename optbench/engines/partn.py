@@ -3,7 +3,10 @@
 The plugin and this standalone loop are the same library. Each step
 evaluates the harness potential, passes the force (the negative
 gradient), and applies the returned displacement. ``nevalf`` is recorded
-and is not the score. The product of a pair chooses the initial push.
+and is not the score. When ``has_sad`` is set, the scored geometry is
+``tau_sad`` and the loop stops. The displacement from that call is the
+push off the saddle. With ``lpush_final`` the later position is a minimum.
+The product of a pair chooses the initial push.
 The search does not build a path to that product.
 
 ``engine_units`` is ``lammps/metal`` on Morse platinum and ``lammps/lj``
@@ -13,6 +16,7 @@ not this library.
 
 from __future__ import annotations
 
+import json
 import os
 import sys
 import tempfile
@@ -20,6 +24,10 @@ from ctypes import POINTER, byref, c_char_p
 from pathlib import Path
 
 import numpy as np
+
+from optbench.connection import ProcessCatalog, connected_endpoints, link_tolerance, per_atom_max
+from optbench.endpoints import STATUS_STORED, EndpointArchive, stamp_endpoint, stored_cell
+from optbench.eon_displace import draw_search_start, problem_pbc
 
 from .common import (
     cached_pairs,
@@ -78,10 +86,40 @@ def _section(template: dict) -> dict:
     section.setdefault("ninit", 3)
     section.setdefault("lanczos_max_size", 16)
     section.setdefault("lanczos_disp", None)
+    section.setdefault("lanczos_min_size", None)
+    section.setdefault("lanczos_eval_conv_thr", None)
     section.setdefault("etot_diff_limit", None)
     section.setdefault("lpush_final", False)
     section.setdefault("converge_property", "norm")
+    section.setdefault("nsmooth", None)
+    section.setdefault("nnewchance", None)
+    section.setdefault("eigval_thr", None)
+    section.setdefault("push_over", None)
+    section.setdefault("nperp_limitation", None)
+    section.setdefault("fire_dt_max_f", None)
     return section
+
+
+def _knobs(section: dict) -> dict:
+    """Documented pARTn inputs. Absent keys keep the library default."""
+    return {
+        "push_step_size": float(section["push_step_size"]),
+        "eigen_step_size": float(section["eigen_step_size"]),
+        "ninit": int(section["ninit"]),
+        "lanczos_max_size": int(section["lanczos_max_size"]),
+        "lanczos_disp": section.get("lanczos_disp"),
+        "lanczos_min_size": section.get("lanczos_min_size"),
+        "lanczos_eval_conv_thr": section.get("lanczos_eval_conv_thr"),
+        "etot_diff_limit": section.get("etot_diff_limit"),
+        "lpush_final": bool(section["lpush_final"]),
+        "converge_property": str(section["converge_property"]),
+        "nsmooth": section.get("nsmooth"),
+        "nnewchance": section.get("nnewchance"),
+        "eigval_thr": section.get("eigval_thr"),
+        "push_over": section.get("push_over"),
+        "nperp_limitation": section.get("nperp_limitation"),
+        "fire_dt_max_f": section.get("fire_dt_max_f"),
+    }
 
 
 def _job(pair, settings: dict, template: dict, seed: str) -> dict:
@@ -96,14 +134,7 @@ def _job(pair, settings: dict, template: dict, seed: str) -> dict:
         "kind": settings["potential"],
         "cap": settings["cap"],
         "force_norm": settings["force_norm"],
-        "push_step_size": float(section["push_step_size"]),
-        "eigen_step_size": float(section["eigen_step_size"]),
-        "ninit": int(section["ninit"]),
-        "lanczos_max_size": int(section["lanczos_max_size"]),
-        "lanczos_disp": section.get("lanczos_disp"),
-        "etot_diff_limit": section.get("etot_diff_limit"),
-        "lpush_final": bool(section["lpush_final"]),
-        "converge_property": str(section["converge_property"]),
+        **_knobs(section),
         "fire_dt": _fire_dt(section, settings["potential"]),
         "task": "saddle",
         "reference": None,
@@ -175,6 +206,31 @@ def _set(art, name: str, value) -> None:
         raise RuntimeError(f"pARTn set {name} failed: {exc}") from exc
 
 
+def _atom_rows(raw, nat: int) -> np.ndarray:
+    """``(nat, 3)`` positions. ``get_data`` already reverses a Fortran ``(3, nat)`` size."""
+    arr = np.asarray(raw, dtype=np.float64)
+    if arr.shape == (nat, 3):
+        return np.array(arr, copy=True)
+    if arr.shape == (3, nat):
+        return np.array(arr.T, copy=True)
+    raise RuntimeError(f"pARTn coordinate array has shape {arr.shape}, expected {(nat, 3)}")
+
+
+def _stored_saddle(art, nat: int, free: np.ndarray, reactant: np.ndarray, kind: str, box, counter):
+    """Energy and gradient at ``tau_sad``. The search already paid for that geometry."""
+    from optbench.pes import evaluate
+
+    if not bool(art.extract("has_sad")):
+        return None, None, None
+    tau = _atom_rows(art.extract("tau_sad"), nat)
+    if not np.all(np.isfinite(tau)):
+        raise RuntimeError("pARTn tau_sad is non-finite")
+    tau[~free] = reactant[~free]
+    with counter.verification():
+        energy, gradient = evaluate(kind, tau, box)
+    return tau, float(energy), np.asarray(gradient, dtype=np.float64)
+
+
 def _execute(job: dict) -> dict:
     os.environ.setdefault("OMP_NUM_THREADS", "1")
     interface = job["interface"]
@@ -199,10 +255,14 @@ def _execute(job: dict) -> dict:
     error = ""
     lconv = False
     overlap = 0.0
+    max_step = 0.0
     has_sad = None
     has_error = None
     artn_nevalf = None
     art = None
+    saddle_pos = None
+    saddle_energy = None
+    saddle_gradient = None
     previous = Path.cwd()
     try:
         version = None
@@ -233,9 +293,14 @@ def _execute(job: dict) -> dict:
             _set(art, "struc_format_out", "none")
             _set(art, "nevalf_max", int(cap))
             _set(art, "zseed", int(job["zseed"]))
+            _apply_documented(art, job)
             if job.get("fire_dt") is not None:
                 art.fire_set("dt_init", float(job["fire_dt"]))
-            if product is None:
+            if job.get("fire_dt_max_f") is not None:
+                art.fire_set("dt_max_f", float(job["fire_dt_max_f"]))
+            if job.get("push_init") is not None:
+                push = np.asarray(job["push_init"], dtype=np.float64)
+            elif product is None:
                 push = np.zeros_like(reactant)
                 push[int(np.flatnonzero(free)[0]), 0] = float(job["push_step_size"])
             else:
@@ -269,6 +334,17 @@ def _execute(job: dict) -> dict:
                     cell,
                     if_pos,
                 )
+                if task != "mode":
+                    try:
+                        stored = bool(art.extract("has_sad"))
+                    except Exception:
+                        stored = False
+                    if stored:
+                        # The displacement from this call is the push off the
+                        # saddle (block_pushover when lpush_final is set).
+                        # tau_sad is the geometry just passed in. The final
+                        # minima are the harness connection test.
+                        break
                 if task == "mode":
                     found = _mode_overlap(art, job.get("reference"), free)
                     if found is not None:
@@ -283,7 +359,10 @@ def _execute(job: dict) -> dict:
                 step = np.array(dr, dtype=np.float64, copy=True)
                 if not np.all(np.isfinite(step)):
                     raise RuntimeError("pARTn returned a non-finite displacement")
-                if float(np.linalg.norm(step)) < 1e-14:
+                step_norm = float(np.linalg.norm(step))
+                if step_norm > max_step:
+                    max_step = step_norm
+                if step_norm < 1e-14:
                     stalled += 1
                 else:
                     stalled = 0
@@ -307,7 +386,7 @@ def _execute(job: dict) -> dict:
                 artn_nevalf = int(art.extract("nevalf"))
             except Exception:
                 pass
-            if has_error:
+            if has_error and not has_sad:
                 ierr, message = art.get_error()
                 raise RuntimeError(f"pARTn error {ierr}: {message}")
     except ForceCallCap as exc:
@@ -315,12 +394,22 @@ def _execute(job: dict) -> dict:
     except Exception as exc:
         error = f"{type(exc).__name__}: {exc}"
     finally:
-        os.chdir(previous)
         if art is not None:
+            try:
+                has_error = bool(art.extract("has_error"))
+                has_sad = bool(art.extract("has_sad"))
+                artn_nevalf = int(art.extract("nevalf"))
+                if has_sad:
+                    saddle_pos, saddle_energy, saddle_gradient = _stored_saddle(
+                        art, int(reactant.shape[0]), free, reactant, kind, box, counter
+                    )
+            except Exception:
+                pass
             try:
                 art.destroy()
             except Exception:
                 pass
+        os.chdir(previous)
     prefix: list[str] = []
     if error:
         if "force-call cap" in error or "ForceCallCap" in error:
@@ -341,10 +430,21 @@ def _execute(job: dict) -> dict:
         record["lconv"] = bool(lconv)
         record["artn_has_sad"] = has_sad
         record["artn_nevalf"] = artn_nevalf
+        record["max_step"] = float(max_step)
+        record["geometry"] = "final"
         return record
+    if saddle_pos is not None:
+        pos = saddle_pos
+        energy = saddle_energy
+        gradient = saddle_gradient
+        # A library error after the saddle is stored belongs to the final
+        # push. The scored point is tau_sad.
+        if prefix == ["crash"]:
+            prefix = []
+            error = ""
     record = judge_saddle(
         job["name"],
-        pos if error == "" or "force-call cap" in error else pos,
+        pos,
         None if energy is None else float(energy),
         None if gradient is None else np.asarray(gradient, dtype=np.float64),
         counter=counter,
@@ -365,6 +465,8 @@ def _execute(job: dict) -> dict:
     record["lconv"] = bool(lconv)
     record["artn_has_sad"] = has_sad
     record["artn_nevalf"] = artn_nevalf
+    record["max_step"] = float(max_step)
+    record["geometry"] = "tau_sad" if saddle_pos is not None else "final"
     return record
 
 
@@ -390,6 +492,28 @@ def search_named(root: Path, problem_name: str, template_name: str, start: str, 
     return record
 
 
+def _apply_documented(art, job: dict) -> None:
+    """Knobs from the pARTn input and the authors' Pt / OptBench scripts.
+
+    ``fire_set`` is separate: ``dt_init`` is the library value (atomic
+    time on ``lammps/metal``, reduced time on ``lammps/lj``) and
+    ``dt_max_f`` is the factor in ``dt_max = dt_init * dt_max_f``.
+    """
+    integers = ("nsmooth", "nnewchance", "lanczos_min_size")
+    reals = ("eigval_thr", "push_over", "lanczos_eval_conv_thr")
+    for name in integers:
+        if job.get(name) is not None:
+            _set(art, name, int(job[name]))
+    for name in reals:
+        if job.get(name) is not None:
+            _set(art, name, float(job[name]))
+    limits = job.get("nperp_limitation")
+    if limits:
+        values = np.asarray([int(item) for item in limits], dtype=np.int32)
+        _set(art, "lnperp_limitation", True)
+        _set(art, "nperp_limitation", values)
+
+
 def _point_job(start: dict, settings: dict, template: dict) -> dict:
     section = _section(template)
     task = "mode" if settings.get("task") == "mode" else "saddle"
@@ -403,15 +527,9 @@ def _point_job(start: dict, settings: dict, template: dict) -> dict:
         "kind": settings["potential"],
         "cap": settings["cap"],
         "force_norm": settings["force_norm"],
-        "push_step_size": float(section["push_step_size"]),
-        "eigen_step_size": float(section["eigen_step_size"]),
-        "ninit": int(section["ninit"]),
-        "lanczos_max_size": int(section["lanczos_max_size"]),
-        "lanczos_disp": section.get("lanczos_disp"),
-        "etot_diff_limit": section.get("etot_diff_limit"),
-        "lpush_final": bool(section["lpush_final"]),
-        "converge_property": str(section["converge_property"]),
+        **_knobs(section),
         "fire_dt": _fire_dt(section, settings["potential"]),
+        "push_init": start.get("push_init"),
         "task": task,
         "reference": start.get("reference"),
         "overlap": float(settings["overlap"]),
@@ -501,10 +619,14 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
     Each search is one pARTn run from a kick off the minimized reactant.
     The harness count for that search is the pARTn count plus the two
     endpoint minimizations. The repetition total also includes the
-    initial minimization. ``workers`` is unused: the next kick waits on
-    the saddles already stored.
+    initial minimization. A batch of ``workers`` kicks is started
+    together. Connection and ``find_repeat`` checks still run in kick order,
+    and kicks past the goal are not charged. The shipped template pushes
+    the island in plane. The atom-list path calls ``draw_search_start``
+    with ``search_seed(rep, attempt)``, the same displacement the other
+    harness saddle runners use. ``<stem>.endpoints.npz`` stores float16
+    free-atom deltas from the minimized reactant.
     """
-    del workers
     import statistics
 
     from optbench.failures import classify_failure
@@ -516,16 +638,32 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
     search = dict(template.get("search") or {})
     repetitions = int(search.get("repetitions", 1))
     magnitude = float(search.get("displace_magnitude", 0.1))
-    connect_rmsd = float(search.get("rmsd_connect", 0.5))
+    tolerance = link_tolerance(problem)
     max_searches = int(search.get("max_searches", 20000))
     budget = int(search.get("search_budget", 10000))
     listed = [int(part) for part in str(search.get("displace_atoms", "0,1,2,3,4,5,6")).split(",") if part.strip()]
+    pbc = problem_pbc(problem)
+    displace_radius = float(search.get("displace_radius", 3.3))
+    surface = str(search.get("push", "atom")) == "surface"
+    dmin = float(search.get("dmin", 0.05))
+    dmax = float(search.get("dmax", 0.5))
+    min_atoms = int(search.get("min_atoms", 1))
+    max_atoms = int(search.get("max_atoms", 7))
     starts = load_starts(root, problem, output.parent / "work" / template["id"].replace("/", "-"))
     base = starts[0]
     positions = np.asarray(base["positions"], dtype=np.float64)
     free = np.asarray([not bool(flag) for flag in base["fixed"]], dtype=bool)
     box = None if base["box"] is None else np.asarray(base["box"], dtype=np.float64)
-    comments = []
+    comments = [
+        "# counter harness. Each search is one pARTn run. The geometry is tau_sad.",
+        "# The displacement returned when the saddle is stored is the push off the saddle and is not applied.",
+        "# Endpoint minima use the eOn r2205 link: perAtomNorm strictly below 0.1 angstrom.",
+        "# A repeat is AKMCState.find_repeat on the saddle: barrier within 0.01 eV and the same per-atom test.",
+        "# fraction_connected counts every search that is not Not Connected. unique_saddles counts good saddles.",
+        "# Both minima are float16 free-atom deltas from the reactant in the sibling endpoints npz.",
+    ]
+    archive = EndpointArchive(output.with_name(output.stem + ".endpoints.npz"), int(np.count_nonzero(free)))
+    archive.reset(stored_cell(box), np.flatnonzero(free))
     records = []
     failed_reps = 0
     for rep in range(1, repetitions + 1):
@@ -533,103 +671,160 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
             settings["potential"], positions, free, box, settings["force_norm"], 5000
         )
         rng = np.random.default_rng(20261015 + rep)
-        found: list[np.ndarray] = []
-        connected = 0
-        searches = 0
+        catalog = ProcessCatalog(box, tolerance=tolerance, barrier_max=barrier_max)
         search_calls = 0
-        while connected < goal and searches < max_searches:
-            searches += 1
-            if searches == 1 or searches % 25 == 0:
-                print(
-                    f"{template['id']} rep {rep} searches {searches} connected {connected}",
-                    flush=True,
-                )
-            atom = int(listed[int(rng.integers(0, len(listed)))])
-            if not bool(free[atom]):
-                raise RuntimeError(f"displace atom {atom} is not free")
-            direction = rng.normal(size=3)
-            direction = direction / np.linalg.norm(direction)
-            kicked = np.array(minimum, copy=True)
-            kicked[atom] = kicked[atom] + magnitude * direction
-            job = _point_job(
-                {
-                    "name": f"rep{rep}-search{searches}",
-                    "positions": kicked.tolist(),
-                    "fixed": (~free).tolist(),
-                    "box": base["box"],
-                    "reference": None,
-                },
-                {**settings, "cap": budget, "task": "saddle", "overlap": 0.99},
-                template,
-            )
-            job["keep_mode"] = True
-            job["keep_positions"] = True
-            job["ninit"] = int(_section(template)["ninit"])
-            record = _execute(job)
-            climb = int(record["force_calls"])
-            saddle = None if record.get("positions") is None else np.asarray(record["positions"], dtype=np.float64).reshape(-1, 3)
-            record["reasons"] = list(record.get("reasons") or [])
-            if record["success"] and saddle is not None and record.get("lowest_mode"):
-                axis = np.asarray(record["lowest_mode"], dtype=np.float64)
-                axis = axis / np.linalg.norm(axis)
-                saddle_free = saddle[free].reshape(-1)
-                plus, _plus_ok, plus_calls, _plus_energy = _minimize_free(
-                    settings["potential"],
-                    _placed(saddle, free, saddle_free + 0.1 * axis),
-                    free,
-                    box,
-                    settings["force_norm"],
-                    2000,
-                )
-                minus, _minus_ok, minus_calls, _minus_energy = _minimize_free(
-                    settings["potential"],
-                    _placed(saddle, free, saddle_free - 0.1 * axis),
-                    free,
-                    box,
-                    settings["force_norm"],
-                    2000,
-                )
-                plus_rmsd = _rmsd(plus[free], minimum[free])
-                minus_rmsd = _rmsd(minus[free], minimum[free])
-                links = (plus_rmsd <= connect_rmsd) ^ (minus_rmsd <= connect_rmsd)
-                novel = all(_rmsd(saddle[free], old) > connect_rmsd for old in found)
-                barrier = float(record["energy"] - min_energy)
-                record["barrier"] = barrier
-                record["rmsd_plus"] = plus_rmsd
-                record["rmsd_minus"] = minus_rmsd
-                record["endpoint_calls"] = int(plus_calls + minus_calls)
-                record["force_calls"] = climb + int(plus_calls + minus_calls)
-                record["reasons"] = []
-                if novel:
-                    found.append(saddle[free].copy())
-                if links and novel and 0.0 < barrier < barrier_max:
-                    record["success"] = True
-                    record["failure"] = None
-                    connected += 1
+        width = max(1, int(workers))
+        while catalog.qualifying < goal and catalog.searches < max_searches:
+            batch = []
+            while len(batch) < width and catalog.searches + len(batch) < max_searches:
+                index = catalog.searches + len(batch) + 1
+                if surface:
+                    count = int(rng.integers(min_atoms, max_atoms + 1))
+                    chosen = [
+                        int(value)
+                        for value in rng.choice(np.asarray(listed, dtype=int), size=count, replace=False)
+                    ]
+                    push = _surface_push(positions.shape[0], chosen, dmin, dmax, rng)
+                    origin = minimum
                 else:
-                    if not links:
-                        record["reasons"].append("not_connected")
-                    if not novel:
-                        record["reasons"].append("duplicate")
-                    if barrier <= 0.0 or barrier >= barrier_max:
-                        record["reasons"].append("barrier")
-                    record["success"] = False
-                    record["failure"] = classify_failure(record["reasons"])
-            search_calls += int(record["force_calls"])
-            record.pop("positions", None)
-            record.pop("lowest_mode", None)
-            records.append(record)
+                    drawn = draw_search_start(
+                        minimum,
+                        ~free,
+                        box,
+                        pbc,
+                        listed,
+                        rep=rep,
+                        attempt=index,
+                        radius=displace_radius,
+                        magnitude=magnitude,
+                    )
+                    origin = drawn["start"]
+                    push = None
+                job = _point_job(
+                    {
+                        "name": f"rep{rep}-search{index}",
+                        "positions": np.asarray(origin, dtype=np.float64).tolist(),
+                        "fixed": (~free).tolist(),
+                        "box": base["box"],
+                        "reference": None,
+                        "push_init": None if push is None else push.tolist(),
+                    },
+                    {**settings, "cap": budget, "task": "saddle", "overlap": 0.99},
+                    template,
+                )
+                job["keep_mode"] = True
+                job["keep_positions"] = True
+                job["ninit"] = int(_section(template)["ninit"])
+                batch.append(job)
+            print(
+                f"{template['id']} rep {rep} searches {catalog.searches + 1} connected {catalog.qualifying}",
+                flush=True,
+            )
+            for record in run_jobs(batch, _execute, width):
+                if catalog.qualifying >= goal:
+                    break
+                climb = int(record["force_calls"])
+                saddle = None if record.get("positions") is None else np.asarray(record["positions"], dtype=np.float64).reshape(-1, 3)
+                record["reasons"] = list(record.get("reasons") or [])
+                plus_ep = None
+                minus_ep = None
+                judged = False
+                links = False
+                structure = None
+                barrier_value = None
+                if record["success"] and saddle is not None and record.get("lowest_mode"):
+                    axis = np.asarray(record["lowest_mode"], dtype=np.float64)
+                    axis = axis / np.linalg.norm(axis)
+                    saddle_free = saddle[free].reshape(-1)
+                    plus, _plus_ok, plus_calls, _plus_energy = _minimize_free(
+                        settings["potential"],
+                        _placed(saddle, free, saddle_free + 0.1 * axis),
+                        free,
+                        box,
+                        settings["force_norm"],
+                        2000,
+                    )
+                    minus, _minus_ok, minus_calls, _minus_energy = _minimize_free(
+                        settings["potential"],
+                        _placed(saddle, free, saddle_free - 0.1 * axis),
+                        free,
+                        box,
+                        settings["force_norm"],
+                        2000,
+                    )
+                    plus_rmsd = _rmsd(plus[free], minimum[free])
+                    minus_rmsd = _rmsd(minus[free], minimum[free])
+                    links = connected_endpoints(minimum, plus, minus, box, tolerance)
+                    barrier_value = float(record["energy"] - min_energy)
+                    record["barrier"] = barrier_value
+                    record["rmsd_plus"] = plus_rmsd
+                    record["rmsd_minus"] = minus_rmsd
+                    record["per_atom_max_plus"] = per_atom_max(plus, minimum, box)
+                    record["per_atom_max_minus"] = per_atom_max(minus, minimum, box)
+                    plus_ep = plus[free]
+                    minus_ep = minus[free]
+                    record["endpoint_calls"] = int(plus_calls + minus_calls)
+                    record["force_calls"] = climb + int(plus_calls + minus_calls)
+                    structure = saddle[free]
+                    judged = True
+                decision = catalog.observe(
+                    judged=judged,
+                    linked=links,
+                    structure=structure,
+                    barrier=barrier_value,
+                )
+                if judged:
+                    record["reasons"] = list(decision["reasons"])
+                    record["success"] = bool(decision["success"])
+                    record["failure"] = None if record["success"] else classify_failure(record["reasons"])
+                search_calls += int(record["force_calls"])
+                record.pop("positions", None)
+                record.pop("lowest_mode", None)
+                status = archive.add(minimum[free], plus_ep, minus_ep)
+                stamp_endpoint(record, archive.name, archive.count - 1, status)
+                records.append(record)
         total_calls = int(minimize_calls + search_calls)
-        if connected < goal:
+        if catalog.qualifying < goal:
             failed_reps += 1
-        fraction = connected / searches if searches else 0.0
         comments.append(
-            f"# rep {rep} force_calls {total_calls} unique_saddles {len(found)} "
-            f"fraction_connected {fraction} total_searches {searches} "
-            f"connected {connected} minimize_calls {minimize_calls} "
-            f"minimum_converged {int(min_ok)} seed {20261015 + rep}"
+            f"# rep {rep} force_calls {total_calls} unique_saddles {catalog.unique} "
+            f"fraction_connected {catalog.fraction_connected} total_searches {catalog.searches} "
+            f"connected {catalog.qualifying} minimize_calls {minimize_calls} "
+            f"minimum_converged {int(min_ok)} "
+            + (
+                f"seed {20261015 + rep}"
+                if surface
+                else f"search_seed (20261015+{rep})*1000003+attempt"
+            )
         )
-    totals = [int(line.split()[line.split().index("force_calls") + 1]) for line in comments]
+    totals = [
+        int(line.split()[line.split().index("force_calls") + 1])
+        for line in comments
+        if "force_calls" in line.split()
+    ]
+    # The problem states no cap. A missed link is still a scored search.
+    # The cap is the pARTn budget plus the two endpoint minimizations, the
+    # same shape as the rgsaddle saddle catalog. A success stays under it.
+    endpoint_budget = 2000
+    search_cap = int(budget) + 2 * endpoint_budget
+    from optbench.score import score_v2
+    from optbench.v2 import collect_provenance
+
+    metrics = (
+        score_v2(
+            [
+                {
+                    "force_calls": record["force_calls"],
+                    "success": record["success"],
+                    "failure": record["failure"],
+                }
+                for record in records
+            ],
+            search_cap,
+        )
+        if records
+        else None
+    )
     text = "\n".join(comments) + "\n"
     if totals:
         text += f"force_calls {statistics.fmean(totals)}\n"
@@ -647,10 +842,61 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
         f"repetitions {repetitions}\n"
         f"nfailed {failed_reps}\n"
         f"goal {goal}\n"
+        f"cap {search_cap}\n"
+        f"n {len(records)}\n"
     )
+    if metrics is not None:
+        text += f"par2_mean {metrics['par2_mean']}\nv2_nfailed {metrics['nfailed']}\n"
     output.parent.mkdir(parents=True, exist_ok=True)
+    archive.save()
     output.write_text(text, encoding="utf-8")
+    # The board scores one row per search. The repetition total above is
+    # the cost of the searches that were run, including misses.
+    output.with_suffix(".searches.jsonl").write_text(
+        "".join(json.dumps(row, sort_keys=True) + "\n" for row in records),
+        encoding="utf-8",
+    )
     write_starts(output.with_suffix(".starts.jsonl"), records)
+    if metrics is not None:
+        successes = [int(row["force_calls"]) for row in records if row["success"]]
+        success_block = {
+            "successes": len(successes),
+            "nfailed": len(records) - len(successes),
+            "n": len(records),
+            "transition_states": sum(1 for row in records if row.get("endpoint_status") == STATUS_STORED),
+        }
+        if successes:
+            success_block["force_calls"] = int(round(statistics.fmean(successes)))
+            success_block["force_calls_min"] = min(successes)
+            success_block["force_calls_max"] = max(successes)
+            success_block["force_calls_median"] = statistics.median(successes)
+        document = {
+            "schema": "optbench.score/v2",
+            "problem": problem["id"],
+            "template": template["id"],
+            "counter": "harness",
+            "provenance": collect_provenance(
+                code=str(template.get("code", CODE)),
+                code_version=str(template.get("code_version", "")),
+                commit=str(template.get("commit", "")),
+                parameters={
+                    "cap": search_cap,
+                    "counter": "harness",
+                    "geometry": "tau_sad",
+                    "goal": goal,
+                    "max_searches": max_searches,
+                    "search_budget": budget,
+                    "distance_difference": tolerance,
+                },
+            ),
+            "score": metrics,
+            "success_block": success_block,
+        }
+        output.with_suffix(".v2.json").write_text(
+            json.dumps(document, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+    archive.drop_log()
     return {
         "force_calls": statistics.fmean(totals) if totals else None,
         "nfailed": failed_reps,
@@ -658,6 +904,25 @@ def run_catalog(root: Path, problem: dict, template: dict, *, output: Path, work
         "template": template["id"],
         "problem": problem["id"],
     }
+
+
+def _surface_push(natoms: int, indices: list[int], dmin: float, dmax: float, rng) -> np.ndarray:
+    """In-plane push used by ``examples/OptBench_SaddleSearch.d``.
+
+    Lengths stay in angstroms. ``engine_units = lammps/metal`` reads
+    ``push_init`` in those units. The z component is zero so the
+    heptamer is not kicked off the slab.
+    """
+    vec = np.zeros((natoms, 3), dtype=np.float64)
+    for index in indices:
+        direction = rng.random(3) - np.array([0.5, 0.5, 0.0])
+        direction[2] = 0.0
+        norm = float(np.linalg.norm(direction))
+        if norm < 1e-12:
+            direction = np.array([1.0, 0.0, 0.0])
+            norm = 1.0
+        vec[int(index)] = direction / norm * float(rng.uniform(dmin, dmax))
+    return vec
 
 
 def _placed(saddle: np.ndarray, free: np.ndarray, free_flat: np.ndarray) -> np.ndarray:

@@ -40,8 +40,8 @@ success-only median. A row with no success has no median.
 | problem | template | successes | failures | median calls |
 | --- | --- | --- | --- | --- |
 | lowest-eigenvector/lj38 | partn/mode-lj38 | 174/200 | 26 divergence | 22 |
-| tsopt/pt-island | partn/ts-pt | 45/49 | 4 crash | 247 |
-| tsopt/LJ38 | partn/ts-lj38 | 0/200 | 200 crash | — |
+| tsopt/pt-island | partn/ts-pt | 49/49 |  | 325 |
+| tsopt/LJ38 | partn/ts-lj38 | 178/200 | 21 cap, 1 crash | 3302 |
 | lowest-eigenvector/lj38 | tsase/mode-lj38 | 178/200 | 22 divergence | 221.5 |
 | tsopt/pt-island | tsase/dimer-pt | 49/49 | 0 | 892 |
 | tsopt/LJ38 | tsase/dimer-lj38 | 0/200 | 200 cap | — |
@@ -124,16 +124,16 @@ success-only median. A row with no success has no median.
 | minimization/lj38 | pysisyphus/sd-lj38 | 205/1000 | 795 cap | 808 |
 
 The rgsaddle band campaigns on `neb/Pt-heptamer` and the three double-ended
-problems are on disk (12 templates each). The saddle-search catalog on
-`saddle-search/pt-island` is still running and has not written a file. A
-sample of that process was on search 387 of the first repetition, with 1
-connected saddle. The eight rgmin `lj38-noise` L-BFGS rows are on disk.
+problems are on disk (12 templates each). The pARTn saddle row on
+`saddle-search/pt-island` is on disk: 200 searches, 48 unique saddles,
+fraction connected 0.755, 154419 force calls. The eight rgmin `lj38-noise` L-BFGS rows are on disk.
 Both tunings set `maxstep` 0.2, and each pair matches. Every start met the
 force stop. The v2 failures are Hessian index not 0. Zero noise is 996 of
 1000. `1e-4` is 994 of 1000. `1e-3` is 989 of 1000. `1e-2` is 884 of 1000,
 116 wrong stationary, success median 161.
 
-pARTn on `tsopt/LJ38` stops with `pARTn error -9: BOX EXPLOSION` on every
+pARTn on `tsopt/LJ38` with `fire_dt_init` 0.005 records 178 of 200.
+The untuned step, `fire_dt_init` 0.05, stops with `pARTn error -9: BOX EXPLOSION` on every
 start. That string is the library check in `block_perprelax.f90`: the
 perpendicular step aborts when any atom's force norm exceeds `1e4`. It is
 not a harness box, unit, or cluster-cell error. Start `0000` lies in
@@ -145,12 +145,12 @@ time unscaled, and the initial energy is `-167.657` with force norm
 length 10.2, which is larger than the cluster, and the next atomic force
 crossed `1e4`. The library's `LAMMPS.LJ.SaddleRefine` input for these same
 geometries sets free boundaries, timestep 0.015, and `nperp_limitation`
-`10, 20, 30, 40, 50`. Those settings on this `next_displ` loop still
-aborted, at call 147, energy `4.0435e6`, after a perpendicular step of
-1.656. The LAMMPS example caps that step with `min_style fire`. The
-standalone FIRE cap in `m_artn_fire.f90` is commented out. The mode search
-and the Morse tsopt row are the other two pARTn point scores. `nevalf` is
-not the count.
+`10, 20, 30, 40, 50`. The recorded row keeps those limits and sets
+`fire_dt_init` 0.005 with `fire_dt_max_f` 1, which holds the FIRE step
+below the length that trips the check: 178 of 200, 21 at the cap, 1 crash,
+success median 3302. The Pt-island tsopt row with the Pt111 settings is
+49 of 49, success median 325. The mode search is the other pARTn point
+score. `nevalf` is not the count.
 
 TSASE MDMin on LJ38 hits the cap of 10000 on every start. The step limit
 keeps the force above the stop. The cap record has no final force norm,
@@ -179,19 +179,22 @@ other 87 meet the force stop with a Hessian index other than 0, so they
 are wrong stationary. The success median is 72. Start `pos_0000` took 55
 harness calls and stopped at force `0.000842553062284986`, energy
 `-1421.4513232624358`, vibrational index 6. `optim/unhooked` writes nothing.
-Noise is not scored: the relay has no noisy-force window. Saddle search,
-NEB, tsopt, and hTST are not scored: those OPTIM keywords are not connected
-to this socket. PATHSAMPLE is in the same snapshot. The PATHSAMPLE target linked
-(gfortran, `WITH_OPENMP` off). It does not call `pes.evaluate`. It writes
-`odata.*` and submits the `EXEC` program, which is OPTIM. No PATHSAMPLE
-number is written.
+Noise is not scored: the relay has no noisy-force window. Single-ended
+saddle search, tsopt, and hTST are not scored: those OPTIM keywords are not
+connected to this socket. Double-ended OPTIM and PATHSAMPLE are. PATHSAMPLE
+is in the same snapshot. The PATHSAMPLE target linked (gfortran,
+`WITH_OPENMP` off). It does not call `pes.evaluate`. It writes `odata.*`
+and submits the `EXEC` program, which is OPTIM. Each child COMPUTE is one
+harness call. The Pt-island PATHSAMPLE row is 59 of 59, median 137. The
+OPTIM double-ended row on the same pairs is 59 of 59, median 133.
 
 ## pARTn
 
 Pin `artn`, 1.1.0, DEVEL `9b753517`. `libartn.so` is the engine plugin and
 the standalone `next_displ` loop. Morse uses `lammps/metal`. Lennard-Jones
-uses `lammps/lj`. The saddle-search catalog on `saddle-search/pt-island`
-is running. It has not written a file.
+uses `lammps/lj`. The saddle row on `saddle-search/pt-island` stores both
+endpoint minima. 200 searches, 18 below 1.5 eV, 48 unique saddles, fraction
+connected 0.755, 154419 force calls. The goal of 27 was not met.
 
 ## TSASE
 

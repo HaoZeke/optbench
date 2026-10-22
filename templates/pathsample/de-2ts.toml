@@ -1,0 +1,20 @@
+# PATHSAMPLE on the 2014 lj38_2ts_separation preamble.
+id = "pathsample/de-2ts"
+engine = "pathsample"
+problem = "double-ended-saddle-search/lj38_2ts_separation"
+code = "optim"
+code_version = "svn-snapshot"
+commit = "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f"
+algorithm = "PATHSAMPLE"
+tuning = "wales-2014"
+note = "odata.connect is the archived NEWCONNECT plus DIJKSTRA preamble. Endpoint quenches use the 2014 LJ38 minimizer, DUMPDATA, and NOFRQS. One connect attempt. Archive OPTIM mean 2885 is the single-process NEWCONNECT row."
+
+[pathsample]
+preamble = "templates/optim/preambles/de-2ts.txt"
+endpoint = "templates/optim/preambles/min-lj.txt"
+symbol = "AX"
+cycles = 1
+connections = 1
+attempts = 1
+archive_force_calls = 2885
+timeout = 7200
