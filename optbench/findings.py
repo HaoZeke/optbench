@@ -197,11 +197,11 @@ MATCHES: list[dict] = [
     {"key": "globalopt/lj38/eon-basinhopping", "template": "eon-client/bh-lj38", "branch": "entries/eon-svn-lane-a", "path": "results/campaign/eon-client-bh-lj38.dat"},
     {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "branch": "cells/pele/go", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
     {"key": "globalopt/lj38/gmin-nosym", "template": "gmin-paper/lj38-nosym", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-lj38-nosym.dat"},
-    {"key": "globalopt/lj38/gmin-csm", "template": "gmin/lj38-csm", "branch": "cells/gmin/go", "path": "results/campaign/gmin-df8da599-lj38-csm.dat", "cause": "gmin_csm", "ranked_path": "results/campaign/gmin-df8da599-lj38-csm.dat", "ranked_branch": "cells/gmin/go"},
+    {"key": "globalopt/lj38/gmin-csm", "template": "gmin/lj38-csm", "branch": "cells/gmin/go", "path": "results/campaign/gmin-df8da599-lj38-csm.dat", "cause": "gmin_csm", "ranked_path": "results/campaign/gmin-0e4a022bcdd4-lj38-bh.dat", "ranked_branch": "cells/gmin/go-cap2e6"},
     {"key": "globalopt/lj38/gmin-symmetrise", "template": "gmin-paper/lj38-symmetrise", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-lj38-symmetrise.dat"},
     {"key": "globalopt/lj75/gmin", "template": "gmin-paper/lj75", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-lj75.dat"},
     {"key": "globalopt/lj98/gmin-nosym", "template": "gmin-paper/lj98-nosym", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-lj98-nosym.dat", "metrics": ["energy_calls_mean", "basin_hopping_steps_mean"], "cause": "gmin_nosym_calls"},
-    {"key": "globalopt/lj98/gmin-symmetrise", "template": "gmin-paper/lj98-symmetrise", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-lj98-symmetrise.dat", "metrics": ["energy_calls_mean", "basin_hopping_steps_mean"], "cause": "gmin_quench_count", "ranked_path": "results/campaign/gmin-02aaf45245af-lj98-bh.dat", "ranked_branch": "cells/gmin/go"},
+    {"key": "globalopt/lj98/gmin-symmetrise", "template": "gmin-paper/lj98-symmetrise", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-lj98-symmetrise.dat", "metrics": ["energy_calls_mean", "basin_hopping_steps_mean"], "cause": "gmin_quench_count", "ranked_path": "results/campaign/gmin-0e4a022bcdd4-lj98-bh.dat", "ranked_branch": "cells/gmin/go-cap2e6"},
     {"key": "globalopt/lj150/gmin-nosym", "template": "gmin-paper/lj150-nosym", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-lj150-nosym.dat", "metrics": ["energy_calls_mean", "basin_hopping_steps_mean"], "cause": "gmin_quench_count"},
     {"key": "globalopt/lj150/gmin-symmetrise", "template": "gmin-paper/lj150-symmetrise", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-lj150-symmetrise.dat", "metrics": ["energy_calls_mean", "basin_hopping_steps_mean"], "cause": "gmin_quench_count"},
     {"key": "globalopt/tip4p10/gmin", "template": "gmin-paper/tip4p10", "branch": "cells/gmin/go-paper", "path": "results/campaign/gmin-paper-tip4p10.dat"},
@@ -292,11 +292,12 @@ CAUSE_TEXT = {
     ),
     "gmin_csm": (
         "The 06 Aug 2014 file names code wales-27058. That binary is not published. "
-        "GMIN df8da599 has SYMMETRISECSM, so the ranked row runs on df8da599. "
+        "GMIN df8da599 has SYMMETRISECSM, so the CSM row runs on df8da599. "
         "The deck is the archive data file: TEMPERATURE 3.0, NEWRESTART 30, AVOID 1.25 18, "
         "STEP 0.43 0.52, SLOPPYCONV 0.002, PERMDIST 0.005, MAXIT 1000 1000, STEPS 90000000 1.0, "
         "SAVE 1, SORT, and SYMMETRISECSM 1 CI 1.0D-6 30 1 50. RANSEED is unset. "
-        "The problem file states no max_force_calls, so the campaign cap is the lj38 template budget 2000000."
+        "No other problem uses that deck, so the CSM row sets ranked false. "
+        "The ranked GMIN row is basin-hopping on the deck GMIN runs on every globalopt problem, at the problem cap 2000000."
     ),
     "gmin_quench_count": (
         "The 03 Oct 2022 files and the serial df8da599 run use the same data file and SDPRND seed 0. "
@@ -329,7 +330,7 @@ def row_id(row: dict) -> str:
     return f"{row['suite']}/{row['problem']}/{row['entry']}"
 
 
-LOCAL_BRANCHES = {"main", "cells/gmin/go", "cells/gmin/go-paper"}
+LOCAL_BRANCHES = {"main", "cells/gmin/go", "cells/gmin/go-paper", "cells/gmin/go-cap2e6"}
 FINDINGS_PATH = "oracle/findings.jsonl"
 FORBIDDEN = (
     "reproduced",
