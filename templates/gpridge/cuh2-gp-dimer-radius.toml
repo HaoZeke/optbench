@@ -1,0 +1,23 @@
+id = "gpridge/cuh2-gp-dimer-radius"
+engine = "gpridge-dimer"
+code = "gpridge"
+code_version = "develop"
+commit = "fa64cf37aaf0172180de8dac0a0baefbdba85a0d"
+algorithm = "GP-dimer"
+problem = "tsopt/cuh2"
+tuning = "adjusted"
+ranked = false
+note = "Two moving H atoms and 216 fixed Cu atoms; native provider count, with separate Cap'n Proto oracle verification."
+
+[gpridge]
+threads = 1
+timeout = 1800
+arithmetic = "library"
+model_profile = "gprd_zbl"
+hyperparameter_mode = "rgmin:lbfgs"
+hssvd = false
+active_posterior = true
+prior_mean_statistic = "max"
+frozen_neighbors = 0
+frozen_selection = "radius"
+frozen_activation_distance = 5.0
