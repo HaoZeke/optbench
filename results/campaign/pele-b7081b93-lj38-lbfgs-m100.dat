@@ -15,12 +15,12 @@ code_version 0.1.2
 commit b7081b932a060be11342fbe8287ac35da8ada879
 algorithm LBFGS
 template pele/lj38-lbfgs-m100
-tuning tuned
+tuning adjusted
 counter harness
 problem minimization/lj38
 par2_mean 197.936
-wilson_low 0.994357441402
-wilson_high 0.999823453629
+rate_low 0.994357441402
+rate_high 0.999823453629
 par2_median 167.5
 par2_median_low 163.5
 par2_median_high 171

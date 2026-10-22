@@ -1,0 +1,42 @@
+name: softsaddle check
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "softsaddle/**"
+      - ".github/workflows/softsaddle-check.yml"
+
+jobs:
+  batch:
+    name: one SoftSaddle batch
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out
+        uses: actions/checkout@v5
+
+      - name: Compilers and numeric libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            g++ make pkg-config \
+            libgsl-dev libboost-dev libblitz-dev
+
+      - name: Build the Morse, Davidson, and Lanczos libraries
+        run: sh softsaddle/check.sh
+
+      - name: Set up MATLAB
+        uses: matlab-actions/setup-matlab@v3
+        with:
+          products: >
+            Parallel_Computing_Toolbox
+            Statistics_and_Machine_Learning_Toolbox
+
+      - name: Run one batch
+        uses: matlab-actions/run-command@v3
+        env:
+          LD_LIBRARY_PATH: ${{ github.workspace }}/softsaddle/lib
+        with:
+          command: check_entry
+          startup-options: -sd ${{ github.workspace }}/softsaddle

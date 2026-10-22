@@ -1,7 +1,7 @@
 """Read asv result files and score the quadratic sample.
 
 The force-call counts, the success bit, and the failure-class bits are
-the track values asv saved. This module does not run the optimizers.
+the track values asv saved. This module reads the optimizers asv already stored.
 Caps, sigmas, and the profile points stay on the benchmark classes and
 in ``optbench.statistics`` because a result row does not store them.
 That gap is ``docs/asv-gaps.md``.
@@ -21,7 +21,7 @@ from .failures import FAILURES
 from .noise import KAPPA, WINDOW, noise_floor, stop_threshold
 from .profile import performance_profile, profile_cost
 from .score import score_v2
-from .smoke import ENERGY_TOL, FORCE_NORM, RMSD_TOL
+from .quadratic import ENERGY_TOL, FORCE_NORM, RMSD_TOL
 from .statistics import (
     COMBINED_RESAMPLES,
     DIMER_CAP,
@@ -326,9 +326,9 @@ def statistics_from_asv(root: Path, results_dir: Path) -> dict:
     )
     return {
         "schema": "optbench.validation/v2",
-        "status": "smoke",
+        "status": "quadratic",
         "source": "asv",
-        "problem": "smoke/quadratic",
+        "problem": "quadratic/bowl",
         "note": (
             "Track values from results/asv for one commit. "
             "Not a Lennard-Jones campaign. Caps are the benchmark class attributes."
