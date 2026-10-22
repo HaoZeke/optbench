@@ -33,11 +33,39 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">50</td>
    </tr>
+   <tr data-problem="double-ended-saddle-search/lj38" data-label="OPTIM (svn-snapshot) · DNEB + hybrid eigenvector following">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="label">OPTIM (svn-snapshot) · DNEB + hybrid eigenvector following</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">2</td>
+   <td data-field="par2_mean">146.82</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">129</td>
+   <td data-field="mean_calls">146.82</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38" data-label="OPTIM (svn-snapshot) · PATHSAMPLE">
+   <td>LJ38 double-ended saddle</td>
+   <td data-field="label">OPTIM (svn-snapshot) · PATHSAMPLE</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">3</td>
+   <td data-field="par2_mean">148.84</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">131</td>
+   <td data-field="mean_calls">148.84</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">50</td>
+   </tr>
    <tr data-problem="double-ended-saddle-search/lj38" data-label="OPTIM · climbing string">
    <td>LJ38 double-ended saddle</td>
    <td data-field="label">OPTIM · climbing string</td>
    <td data-field="family">Connect / double-ended</td>
-   <td data-field="family_rank">3</td>
+   <td data-field="family_rank">5</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">786</td>
    <td data-field="median_calls">625</td>
@@ -61,6 +89,34 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">51</td>
    </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="OPTIM (svn-snapshot) · DNEB + hybrid eigenvector following + Dijkstra">
+   <td>lj38_2ts_separation</td>
+   <td data-field="label">OPTIM (svn-snapshot) · DNEB + hybrid eigenvector following + Dijkstra</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">4</td>
+   <td data-field="par2_mean">71607.5</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">3268</td>
+   <td data-field="mean_calls">4352.61</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 7, wrong_stationary 0</td>
+   <td data-field="n">51</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/lj38_2ts_separation" data-label="OPTIM (svn-snapshot) · PATHSAMPLE">
+   <td>lj38_2ts_separation</td>
+   <td data-field="label">OPTIM (svn-snapshot) · PATHSAMPLE</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">5</td>
+   <td data-field="par2_mean">81388.6</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">3377</td>
+   <td data-field="mean_calls">4525.86</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 8, wrong_stationary 0</td>
+   <td data-field="n">51</td>
+   </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-label="OPTIM · DNEB + hybrid eigenvector following">
    <td>pt-island</td>
    <td data-field="label">OPTIM · DNEB + hybrid eigenvector following</td>
@@ -75,11 +131,39 @@
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">59</td>
    </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-label="OPTIM (svn-snapshot) · DNEB + hybrid eigenvector following">
+   <td>pt-island</td>
+   <td data-field="label">OPTIM (svn-snapshot) · DNEB + hybrid eigenvector following</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">2</td>
+   <td data-field="par2_mean">138</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">133</td>
+   <td data-field="mean_calls">138</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
+   <tr data-problem="double-ended-saddle-search/pt-island" data-label="OPTIM (svn-snapshot) · PATHSAMPLE">
+   <td>pt-island</td>
+   <td data-field="label">OPTIM (svn-snapshot) · PATHSAMPLE</td>
+   <td data-field="family">Connect / double-ended</td>
+   <td data-field="family_rank">3</td>
+   <td data-field="par2_mean">145.559</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">137</td>
+   <td data-field="mean_calls">145.559</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="n">59</td>
+   </tr>
    <tr data-problem="double-ended-saddle-search/pt-island" data-label="OPTIM · climbing string">
    <td>pt-island</td>
    <td data-field="label">OPTIM · climbing string</td>
    <td data-field="family">Connect / double-ended</td>
-   <td data-field="family_rank">4</td>
+   <td data-field="family_rank">6</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">319</td>
    <td data-field="median_calls">286</td>

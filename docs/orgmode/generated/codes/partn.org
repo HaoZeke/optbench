@@ -33,32 +33,46 @@
    <td data-field="failures">crash 0, divergence 26, cap 0, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
+   <tr data-problem="saddle-search/pt-island" data-label="pARTn (1.1.0) · ARTn">
+   <td>Pt heptamer island</td>
+   <td data-field="label">pARTn (1.1.0) · ARTn</td>
+   <td data-field="family">Single-ended saddle</td>
+   <td data-field="family_rank">3</td>
+   <td data-field="par2_mean">10980.2</td>
+   <td data-field="published"></td>
+   <td data-field="median_calls">667</td>
+   <td data-field="mean_calls">772.09</td>
+   <td data-field="hessian_calls">0</td>
+   <td data-field="fd_calls">0</td>
+   <td data-field="failures">crash 13, divergence 169, cap 0, wrong_stationary 0</td>
+   <td data-field="n">200</td>
+   </tr>
    <tr data-problem="tsopt/LJ38" data-label="pARTn (1.1.0) · ARTn">
    <td>LJ38</td>
    <td data-field="label">pARTn (1.1.0) · ARTn</td>
    <td data-field="family">Single-ended saddle</td>
-   <td data-field="family_rank">7</td>
-   <td data-field="par2_mean">20000</td>
+   <td data-field="family_rank">4</td>
+   <td data-field="par2_mean">5514.77</td>
    <td data-field="published"></td>
-   <td data-field="median_calls">45</td>
-   <td data-field="mean_calls">49.045</td>
+   <td data-field="median_calls">3679</td>
+   <td data-field="mean_calls">4367.19</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 200, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 1, divergence 0, cap 21, wrong_stationary 0</td>
    <td data-field="n">200</td>
    </tr>
    <tr data-problem="tsopt/pt-island" data-label="pARTn (1.1.0) · ARTn">
    <td>pt-island</td>
    <td data-field="label">pARTn (1.1.0) · ARTn</td>
    <td data-field="family">Single-ended saddle</td>
-   <td data-field="family_rank">6</td>
-   <td data-field="par2_mean">1970.22</td>
+   <td data-field="family_rank">4</td>
+   <td data-field="par2_mean">452.735</td>
    <td data-field="published"></td>
-   <td data-field="median_calls">265</td>
-   <td data-field="mean_calls">380.224</td>
+   <td data-field="median_calls">325</td>
+   <td data-field="mean_calls">452.735</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 4, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-field="n">49</td>
    </tr>
    </tbody></table></div>

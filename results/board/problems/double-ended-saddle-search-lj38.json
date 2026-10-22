@@ -155,88 +155,90 @@
   "id": "double-ended-saddle-search/lj38",
   "profile": {
     "area_log10": {
-      "ASE (3.29.0) \u00b7 NEB-FIRE": 0.009030899869919437,
-      "COMPASS (1.0.0) \u00b7 COMPASS": 0.400369894233095,
-      "Eon svn (r2549) \u00b7 CI-NEB": 0.6381835908076401,
-      "Eon svn (r2549) \u00b7 Dimer L-BFGS": 1.0024298855610574,
-      "Eon svn (r2549) \u00b7 Doubly nudged CI-NEB": 0.574967291718204,
-      "Eon svn (r2549) \u00b7 LBFGS": 0.6231320910244411,
-      "Eon svn (r2549) \u00b7 Lanczos L-BFGS": 1.0475843849106545,
-      "Eon svn (r2549) \u00b7 Lanczos improved L-BFGS": 1.1378933836098488,
-      "LAMMPS (30 Sep 2026) \u00b7 CI-NEB-fire": 0.01204119982655925,
+      "ASE (3.29.0) \u00b7 NEB-FIRE": 0.0030102999566398126,
+      "COMPASS (1.0.0) \u00b7 COMPASS": 0.18362829735502859,
+      "Eon svn (r2549) \u00b7 CI-NEB": 0.42746259384285334,
+      "Eon svn (r2549) \u00b7 Dimer L-BFGS": 0.9301826866017018,
+      "Eon svn (r2549) \u00b7 Doubly nudged CI-NEB": 0.400369894233095,
+      "Eon svn (r2549) \u00b7 LBFGS": 0.40940079410301444,
+      "Eon svn (r2549) \u00b7 Lanczos L-BFGS": 0.9331929865583417,
+      "Eon svn (r2549) \u00b7 Lanczos improved L-BFGS": 1.038553485040735,
+      "LAMMPS (30 Sep 2026) \u00b7 CI-NEB-fire": 0.006020599913279625,
       "LAMMPS (30 Sep 2026) \u00b7 CI-NEB-quickmin": 0.0,
-      "Sella (2.6.0) \u00b7 Sella+NEB": 0.21072099696478688,
-      "TSASE (1.0) \u00b7 CI-NEB": 0.18061799739838877,
+      "OPTIM (svn-snapshot) \u00b7 DNEB + hybrid eigenvector following": 1.1920787828293655,
+      "OPTIM (svn-snapshot) \u00b7 PATHSAMPLE": 1.0536049848239342,
+      "Sella (2.6.0) \u00b7 Sella+NEB": 0.0933192986558342,
+      "TSASE (1.0) \u00b7 CI-NEB": 0.09030899869919437,
       "TSASE (1.0) \u00b7 NEB": 0.0,
-      "eOn ((develop 500350d9) \u00b7 Doubly nudged CI-NEB) \u00b7 Doubly nudged CI-NEB": 0.608080591241242,
-      "eOn (3.5.0) \u00b7 CI-NEB": 0.6592556905041188,
-      "eOn (3.5.0) \u00b7 Dimer L-BFGS": 0.6201217910678014,
-      "eOn (3.5.0) \u00b7 Lanczos L-BFGS": 1.0295225851708156,
-      "eOn (3.5.0) \u00b7 Lanczos improved L-BFGS": 1.0746770845204128,
-      "eOn (3.6.0) \u00b7 LBFGS": 0.6532350905908392,
-      "geodesic (1.0.0) \u00b7 CI-NEB geodesic": 0.2348033966179054,
-      "geodesic (1.0.0) \u00b7 CI-NEB-LBFGS geodesic": 0.6231320910244411,
-      "geodesic (1.0.0) \u00b7 NEB-FIRE geodesic": 0.0030102999566398126,
-      "rgsaddle (0.2.2) \u00b7 CI-NEB": 0.26189609622766363,
-      "rgsaddle (0.2.2) \u00b7 CI-NEB energy-weighted": 0.26189609622766363,
-      "rgsaddle (0.2.2) \u00b7 IDPP CI-NEB": 0.24082399653118497,
+      "eOn ((develop 500350d9) \u00b7 Doubly nudged CI-NEB) \u00b7 Doubly nudged CI-NEB": 0.4033801941897348,
+      "eOn (3.5.0) \u00b7 CI-NEB": 0.44853469353933195,
+      "eOn (3.5.0) \u00b7 Dimer L-BFGS": 0.5328230923252467,
+      "eOn (3.5.0) \u00b7 Lanczos L-BFGS": 0.8549251876857066,
+      "eOn (3.5.0) \u00b7 Lanczos improved L-BFGS": 0.9813577858645787,
+      "eOn (3.6.0) \u00b7 LBFGS": 0.4425140936260523,
+      "geodesic (1.0.0) \u00b7 CI-NEB geodesic": 0.12643259817887212,
+      "geodesic (1.0.0) \u00b7 CI-NEB-LBFGS geodesic": 0.48465829301900976,
+      "geodesic (1.0.0) \u00b7 NEB-FIRE geodesic": 0.0,
+      "rgsaddle (0.2.2) \u00b7 CI-NEB": 0.14449439791871102,
+      "rgsaddle (0.2.2) \u00b7 CI-NEB energy-weighted": 0.12342229822223232,
+      "rgsaddle (0.2.2) \u00b7 IDPP CI-NEB": 0.11439139835231286,
       "rgsaddle (0.2.2) \u00b7 NEB": 0.0,
-      "rgsaddle (0.2.2) \u00b7 OCI-NEB": 0.255875496314384,
-      "rgsaddle (0.2.2) \u00b7 S-IDPP CI-NEB": 0.24082399653118503
+      "rgsaddle (0.2.2) \u00b7 OCI-NEB": 0.12643259817887212,
+      "rgsaddle (0.2.2) \u00b7 S-IDPP CI-NEB": 0.11439139835231286
     },
     "rho": {
       "ASE (3.29.0) \u00b7 NEB-FIRE": [
         0.0,
         0.0,
         0.0,
-        0.02,
+        0.0,
         0.02
       ],
       "COMPASS (1.0.0) \u00b7 COMPASS": [
         0.0,
         0.0,
-        0.02,
-        0.84,
+        0.0,
+        0.14,
         0.94
       ],
       "Eon svn (r2549) \u00b7 CI-NEB": [
         0.0,
-        0.02,
-        0.76,
-        0.88,
+        0.0,
+        0.14,
+        0.82,
         0.92
       ],
       "Eon svn (r2549) \u00b7 Dimer L-BFGS": [
-        0.2,
+        0.02,
+        0.82,
         0.86,
         0.92,
-        0.96,
-        0.98
+        0.96
       ],
       "Eon svn (r2549) \u00b7 Doubly nudged CI-NEB": [
         0.0,
-        0.02,
-        0.64,
-        0.82,
+        0.0,
+        0.1,
+        0.8,
         0.86
       ],
       "Eon svn (r2549) \u00b7 LBFGS": [
         0.0,
-        0.02,
-        0.74,
-        0.86,
-        0.9
+        0.0,
+        0.14,
+        0.78,
+        0.88
       ],
       "Eon svn (r2549) \u00b7 Lanczos L-BFGS": [
         0.0,
+        0.62,
         0.98,
-        1.0,
         1.0,
         1.0
       ],
       "Eon svn (r2549) \u00b7 Lanczos improved L-BFGS": [
-        0.56,
-        1.0,
+        0.06,
+        0.92,
         1.0,
         1.0,
         1.0
@@ -246,7 +248,7 @@
         0.0,
         0.0,
         0.0,
-        0.08
+        0.04
       ],
       "LAMMPS (30 Sep 2026) \u00b7 CI-NEB-quickmin": [
         0.0,
@@ -255,19 +257,33 @@
         0.0,
         0.0
       ],
+      "OPTIM (svn-snapshot) \u00b7 DNEB + hybrid eigenvector following": [
+        0.92,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "OPTIM (svn-snapshot) \u00b7 PATHSAMPLE": [
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
       "Sella (2.6.0) \u00b7 Sella+NEB": [
         0.0,
         0.0,
-        0.02,
-        0.22,
-        0.92
+        0.0,
+        0.06,
+        0.5
       ],
       "TSASE (1.0) \u00b7 CI-NEB": [
         0.0,
         0.0,
         0.0,
-        0.34,
-        0.52
+        0.08,
+        0.44
       ],
       "TSASE (1.0) \u00b7 NEB": [
         0.0,
@@ -278,57 +294,57 @@
       ],
       "eOn ((develop 500350d9) \u00b7 Doubly nudged CI-NEB) \u00b7 Doubly nudged CI-NEB": [
         0.0,
-        0.02,
-        0.7,
-        0.86,
+        0.0,
+        0.08,
+        0.82,
         0.88
       ],
       "eOn (3.5.0) \u00b7 CI-NEB": [
         0.0,
-        0.02,
-        0.76,
-        0.94,
+        0.0,
+        0.12,
+        0.9,
         0.94
       ],
       "eOn (3.5.0) \u00b7 Dimer L-BFGS": [
-        0.06,
+        0.0,
+        0.38,
         0.54,
         0.54,
-        0.62,
-        0.66
+        0.62
       ],
       "eOn (3.5.0) \u00b7 Lanczos L-BFGS": [
         0.0,
+        0.42,
         0.94,
         0.98,
-        1.0,
         1.0
       ],
       "eOn (3.5.0) \u00b7 Lanczos improved L-BFGS": [
-        0.18,
+        0.0,
+        0.78,
         0.98,
-        1.0,
         1.0,
         1.0
       ],
       "eOn (3.6.0) \u00b7 LBFGS": [
         0.0,
-        0.02,
-        0.76,
-        0.92,
+        0.0,
+        0.12,
+        0.88,
         0.94
       ],
       "geodesic (1.0.0) \u00b7 CI-NEB geodesic": [
         0.0,
         0.0,
         0.0,
-        0.44,
-        0.68
+        0.1,
+        0.64
       ],
       "geodesic (1.0.0) \u00b7 CI-NEB-LBFGS geodesic": [
         0.0,
-        0.02,
-        0.8,
+        0.0,
+        0.36,
         0.82,
         0.86
       ],
@@ -337,28 +353,28 @@
         0.0,
         0.0,
         0.0,
-        0.02
+        0.0
       ],
       "rgsaddle (0.2.2) \u00b7 CI-NEB": [
         0.0,
         0.0,
         0.0,
-        0.5,
-        0.74
+        0.14,
+        0.68
       ],
       "rgsaddle (0.2.2) \u00b7 CI-NEB energy-weighted": [
         0.0,
         0.0,
         0.0,
-        0.48,
-        0.78
+        0.04,
+        0.74
       ],
       "rgsaddle (0.2.2) \u00b7 IDPP CI-NEB": [
         0.0,
         0.0,
         0.0,
-        0.44,
-        0.72
+        0.06,
+        0.64
       ],
       "rgsaddle (0.2.2) \u00b7 NEB": [
         0.0,
@@ -371,15 +387,15 @@
         0.0,
         0.0,
         0.0,
-        0.48,
-        0.74
+        0.08,
+        0.68
       ],
       "rgsaddle (0.2.2) \u00b7 S-IDPP CI-NEB": [
         0.0,
         0.0,
         0.0,
-        0.46,
-        0.68
+        0.06,
+        0.64
       ]
     },
     "solved": {
@@ -393,6 +409,8 @@
       "Eon svn (r2549) \u00b7 Lanczos improved L-BFGS": 1.0,
       "LAMMPS (30 Sep 2026) \u00b7 CI-NEB-fire": 0.16,
       "LAMMPS (30 Sep 2026) \u00b7 CI-NEB-quickmin": 0.02,
+      "OPTIM (svn-snapshot) \u00b7 DNEB + hybrid eigenvector following": 1.0,
+      "OPTIM (svn-snapshot) \u00b7 PATHSAMPLE": 1.0,
       "Sella (2.6.0) \u00b7 Sella+NEB": 1.0,
       "TSASE (1.0) \u00b7 CI-NEB": 0.52,
       "TSASE (1.0) \u00b7 NEB": 0.0,
@@ -465,6 +483,106 @@
       "success_rate": null,
       "template": "",
       "tuning": ""
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 2500,
+      "code": "optim",
+      "code_version": "svn-snapshot",
+      "commit": "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f",
+      "counter": "harness",
+      "entry": "optim-svn-snapshot-double-ended-saddle-search-lj38--optim-de-lj38",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "family": "connect",
+      "family_rank": 2,
+      "fd_calls": 0.0,
+      "full_n": 50,
+      "hessian_calls": 0.0,
+      "kind": "",
+      "label": "OPTIM (svn-snapshot) \u00b7 DNEB + hybrid eigenvector following",
+      "max_calls": 308.0,
+      "mean_calls": 146.82,
+      "mean_per_image": 29.364,
+      "median": 129.0,
+      "median_calls": 129.0,
+      "median_high": 142.02499999999986,
+      "median_low": 117.5,
+      "median_per_image": 25.8,
+      "method": "DNEB + hybrid eigenvector following",
+      "min_calls": 74.0,
+      "n": 50,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "origin": "harness",
+      "par2_mean": 146.82,
+      "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-lj38--optim-de-lj38.dat",
+      "problem": "double-ended-saddle-search/lj38",
+      "published": null,
+      "rank_cost": 146.82,
+      "registry_match": true,
+      "scored": true,
+      "short": false,
+      "short_reason": "",
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "optim/de-lj38",
+      "tuning": "wales-2014"
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 2500,
+      "code": "optim",
+      "code_version": "svn-snapshot",
+      "commit": "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f",
+      "counter": "harness",
+      "entry": "optim-svn-snapshot-double-ended-saddle-search-lj38--pathsample-de-lj38",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "family": "connect",
+      "family_rank": 3,
+      "fd_calls": 0.0,
+      "full_n": 50,
+      "hessian_calls": 0.0,
+      "kind": "",
+      "label": "OPTIM (svn-snapshot) \u00b7 PATHSAMPLE",
+      "max_calls": 310.0,
+      "mean_calls": 148.84,
+      "mean_per_image": 29.768,
+      "median": 131.0,
+      "median_calls": 131.0,
+      "median_high": 144.02499999999986,
+      "median_low": 119.5,
+      "median_per_image": 26.2,
+      "method": "PATHSAMPLE",
+      "min_calls": 76.0,
+      "n": 50,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "origin": "harness",
+      "par2_mean": 148.84,
+      "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-lj38--pathsample-de-lj38.dat",
+      "problem": "double-ended-saddle-search/lj38",
+      "published": null,
+      "rank_cost": 148.84,
+      "registry_match": true,
+      "scored": true,
+      "short": false,
+      "short_reason": "",
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "pathsample/de-lj38",
+      "tuning": "wales-2014"
     },
     {
       "asv_commit": "",
@@ -622,7 +740,7 @@
       "entry": "pele",
       "failures": {},
       "family": "connect",
-      "family_rank": 2,
+      "family_rank": 4,
       "fd_calls": 0.0,
       "full_n": 50,
       "hessian_calls": 0.0,
@@ -907,7 +1025,7 @@
       "entry": "optim-cl-string",
       "failures": {},
       "family": "connect",
-      "family_rank": 3,
+      "family_rank": 5,
       "fd_calls": 0.0,
       "full_n": 50,
       "hessian_calls": 0.0,
@@ -1097,7 +1215,7 @@
         "wrong_stationary": 0
       },
       "family": "connect",
-      "family_rank": 4,
+      "family_rank": 6,
       "fd_calls": 0.0,
       "full_n": 50,
       "hessian_calls": 0.0,
@@ -1197,7 +1315,7 @@
         "wrong_stationary": 0
       },
       "family": "connect",
-      "family_rank": 5,
+      "family_rank": 7,
       "fd_calls": 0.0,
       "full_n": 50,
       "hessian_calls": 0.0,
@@ -1397,7 +1515,7 @@
         "wrong_stationary": 0
       },
       "family": "connect",
-      "family_rank": 6,
+      "family_rank": 8,
       "fd_calls": 0.0,
       "full_n": 50,
       "hessian_calls": 0.0,

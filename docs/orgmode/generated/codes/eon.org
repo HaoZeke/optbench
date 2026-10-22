@@ -181,7 +181,7 @@
    <td>LJ38 double-ended saddle</td>
    <td data-field="label">eOn (3.6.0) · LBFGS</td>
    <td data-field="family">Connect / double-ended</td>
-   <td data-field="family_rank">4</td>
+   <td data-field="family_rank">6</td>
    <td data-field="par2_mean">1010.08</td>
    <td data-field="published"></td>
    <td data-field="median_calls">692</td>
@@ -377,7 +377,7 @@
    <td>lj38_2ts_separation</td>
    <td data-field="label">eOn (3.6.0) · LBFGS</td>
    <td data-field="family">Connect / double-ended</td>
-   <td data-field="family_rank">5</td>
+   <td data-field="family_rank">7</td>
    <td data-field="par2_mean">343644</td>
    <td data-field="published"></td>
    <td data-field="median_calls">44412</td>
@@ -517,7 +517,7 @@
    <td>pt-island</td>
    <td data-field="label">eOn (3.6.0) · LBFGS</td>
    <td data-field="family">Connect / double-ended</td>
-   <td data-field="family_rank">6</td>
+   <td data-field="family_rank">8</td>
    <td data-field="par2_mean">3080.19</td>
    <td data-field="published"></td>
    <td data-field="median_calls">2260</td>
@@ -1035,7 +1035,7 @@
    <td>Pt heptamer island</td>
    <td data-field="label">eOn (r2205) · eon-md</td>
    <td data-field="family">Single-ended saddle</td>
-   <td data-field="family_rank">4</td>
+   <td data-field="family_rank">5</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">1.47817e+06</td>
    <td data-field="median_calls"></td>
