@@ -271,7 +271,8 @@ def _number(value: float) -> str:
     return format(float(value), ".10g")
 
 
-def _dat(records: list[dict], template: dict, *, images: int | None, comment: str) -> str:
+def _dat(records: list[dict], template: dict, *, images: int | None, comment: str,
+         counter: str = "harness") -> str:
     successes = [row for row in records if row["success"]]
     calls = [int(row["force_calls"]) for row in successes]
     lines = [line for line in comment.strip().splitlines() if line]
@@ -295,7 +296,7 @@ def _dat(records: list[dict], template: dict, *, images: int | None, comment: st
     lines.append(f"template {template['id']}")
     lines.append(f"problem {template.get('problem') or records[0].get('problem', '')}")
     lines.append(f"tuning {template['tuning']}")
-    lines.append("counter harness")
+    lines.append(f"counter {counter}")
     if images is not None:
         lines.append(f"images {images}")
     return "\n".join(lines) + "\n"
@@ -311,8 +312,13 @@ def write_campaign(
     *,
     images: int | None,
     comment: str,
+    counter: str = "harness",
 ) -> dict:
     """Write ``benchmark.dat``, the starts file, and the v2 score."""
+    if counter not in ("harness", "client"):
+        raise ValueError("counter must be harness or client")
+    if any(row.get("counter", counter) != counter for row in records):
+        raise ValueError("campaign records disagree on the counter")
     output.parent.mkdir(parents=True, exist_ok=True)
     stamped = []
     for record in records:
@@ -325,7 +331,7 @@ def write_campaign(
         row["algorithm"] = template["algorithm"]
         row["tuning"] = template["tuning"]
         stamped.append(row)
-    text = _dat(stamped, {**template, "problem": problem["id"]}, images=images, comment=comment)
+    text = _dat(stamped, {**template, "problem": problem["id"]}, images=images, comment=comment, counter=counter)
     output.write_text(text, encoding="utf-8")
     write_starts(output.with_suffix(".starts.jsonl"), stamped)
     score = score_v2(
@@ -355,7 +361,7 @@ def write_campaign(
         "schema": "optbench.score/v2",
         "problem": problem["id"],
         "template": template["id"],
-        "counter": "harness",
+        "counter": counter,
         "provenance": collect_provenance(
             code=template["code"],
             code_version=template["code_version"],
