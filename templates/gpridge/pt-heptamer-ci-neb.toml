@@ -1,0 +1,15 @@
+id = "gpridge/pt-heptamer-ci-neb"
+engine = "gpridge"
+code = "gpridge"
+code_version = "develop"
+commit = "5f615bfceb816fd848e78ed7448cdfb05566421e"
+algorithm = "CI-NEB"
+problem = "neb/Pt-heptamer"
+tuning = "adjusted"
+ranked = false
+note = "Energy-shifted Morse at 9.5 Angstrom; free-atom L2 norm; linear band and constant spring 5. Native provider count includes endpoint evaluations."
+
+[gpridge]
+mode = "standard"
+threads = 1
+timeout = 1800

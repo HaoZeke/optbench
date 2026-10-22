@@ -798,3 +798,13 @@ problem = "saddle-search/pt-island"
 profile = "adjusted"
 task = "sella-search"
 ranked = false
+
+[[code]]
+id = "gpridge"
+name = "GPRidge"
+role = "Gaussian-process band and saddle search"
+repository = "https://github.com/TheochemUI/gpridge"
+ref = "develop"
+commit = "5f615bfceb816fd848e78ed7448cdfb05566421e"
+committed = "2026-10-22"
+note = "Native GP-NEB and CI-NEB share the rgpot Morse oracle. The runtime hash must match its native validation manifest. Provider counts are client counters; these rows do not enter the harness-ranked board."
