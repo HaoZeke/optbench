@@ -1,10 +1,10 @@
-# rep 1 force_calls 9599611 unique_saddles 323 fraction_connected 0.0 total_searches 20000 connected 0 minimize_calls 14 minimum_converged 1 seed 20261016
-force_calls 9599611.0
-force_calls_min 9599611
-force_calls_max 9599611
+# rep 1 force_calls 7654180 unique_saddles 28 fraction_connected 0.0 total_searches 20000 connected 0 minimize_calls 14 minimum_converged 1 seed 20261016
+force_calls 7654180.0
+force_calls_min 7654180
+force_calls_max 7654180
 code rgsaddle
 code_version 0.2.2
-commit c0db2b8d333c557251635cb8bb7b3d81f0088a71
+commit fd8fb3d13dcb75a35066222d2496ea0525b727d1
 algorithm Dimer rotation-skip L-BFGS
 tuning default
 template rgsaddle/saddle-dimer-rotskip
