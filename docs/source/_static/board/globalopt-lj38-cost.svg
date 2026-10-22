@@ -55,6 +55,7 @@ z
      <use xlink:href="#m2d8934182f" x="486.692727" y="249.943636" style="fill: #1f77b4"/>
      <use xlink:href="#m2d8934182f" x="486.692727" y="228.286716" style="fill: #1f77b4"/>
      <use xlink:href="#m2d8934182f" x="478.245344" y="223.00368" style="fill: #1f77b4"/>
+     <use xlink:href="#m2d8934182f" x="81.218347" y="43.185709" style="fill: #1f77b4"/>
      <use xlink:href="#m2d8934182f" x="68.547273" y="36.816364" style="fill: #1f77b4"/>
     </g>
    </g>
@@ -261,9 +262,12 @@ L 507.6 26.16
     <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="481.245344" y="220.00368" transform="rotate(-0 481.245344 220.00368)">3</text>
    </g>
    <g id="text_22">
-    <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="71.547273" y="33.816364" transform="rotate(-0 71.547273 33.816364)">4</text>
+    <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="84.218347" y="40.185709" transform="rotate(-0 84.218347 40.185709)">4</text>
    </g>
    <g id="text_23">
+    <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="71.547273" y="33.816364" transform="rotate(-0 71.547273 33.816364)">5</text>
+   </g>
+   <g id="text_24">
     <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="277.62" y="20.16" transform="rotate(-0 277.62 20.16)">Cost and success: globalopt/lj38</text>
    </g>
   </g>

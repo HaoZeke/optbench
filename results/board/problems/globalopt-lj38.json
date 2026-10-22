@@ -6,18 +6,26 @@
   "partial": [],
   "profile": {
     "area_log10": {
-      "airss/lj38 0.9.4 default campaign 5593cc4": 1.101769784130171,
+      "airss/lj38 0.9.4 default campaign 5593cc4": 1.1002646341518512,
+      "bpga/lj38-pool 0 default campaign b32cd22": 0.03461844950135784,
       "bpga/lj38-pybcga 0 default campaign fb646c1": 0.012041199826559247,
-      "eon-client/bh-lj38 3.5.0 campaign 4d8b34b": 0.5252973424336471,
-      "eon-svn/bh-lj38 r2549 campaign r2549": 0.4756273931490903
+      "eon-client/bh-lj38 3.5.0 campaign 4d8b34b": 0.5222870424770074,
+      "eon-svn/bh-lj38 r2549 campaign r2549": 0.47261709319245054
     },
     "rho": {
       "airss/lj38 0.9.4 default campaign 5593cc4": [
-        0.76,
+        0.75,
         0.89,
         0.92,
         0.98,
         0.98
+      ],
+      "bpga/lj38-pool 0 default campaign b32cd22": [
+        0.01,
+        0.02,
+        0.03,
+        0.04,
+        0.04
       ],
       "bpga/lj38-pybcga 0 default campaign fb646c1": [
         0.01,
@@ -30,19 +38,20 @@
         0.13,
         0.27,
         0.43,
-        0.6,
+        0.59,
         0.76
       ],
       "eon-svn/bh-lj38 r2549 campaign r2549": [
         0.1,
         0.22,
         0.37,
-        0.57,
+        0.56,
         0.74
       ]
     },
     "solved": {
       "airss/lj38 0.9.4 default campaign 5593cc4": 1.0,
+      "bpga/lj38-pool 0 default campaign b32cd22": 0.04,
       "bpga/lj38-pybcga 0 default campaign fb646c1": 0.01,
       "eon-client/bh-lj38 3.5.0 campaign 4d8b34b": 1.0,
       "eon-svn/bh-lj38 r2549 campaign r2549": 0.98
@@ -190,6 +199,51 @@
       "tuning": "",
       "wilson_high": 0.9944980324498376,
       "wilson_low": 0.929988209271456
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": 2000000,
+      "code": "BPGA",
+      "code_version": "0",
+      "commit": "b32cd227e8071429825f990449048eb21c7f8730",
+      "comparable": true,
+      "counter": "harness",
+      "current": true,
+      "entry": "bpga-b32cd227-lj38-pool",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 96
+      },
+      "full_n": 100,
+      "history": false,
+      "max_calls": 428993.0,
+      "mean_calls": 364968.02,
+      "mean_per_image": null,
+      "median": 4000000.0,
+      "median_calls": 373405.0,
+      "median_high": 4000000.0,
+      "median_low": 4000000.0,
+      "median_per_image": null,
+      "min_calls": 78534.0,
+      "n": 100,
+      "nfailed": 96,
+      "note": "starts.jsonl",
+      "par2_mean": 3845111.93,
+      "partial": false,
+      "partial_reason": "",
+      "path": "results/campaign/bpga-b32cd227-lj38-pool.dat",
+      "problem": "globalopt/lj38",
+      "registry_match": true,
+      "scored": true,
+      "source": "campaign",
+      "success_rate": 0.04,
+      "template": "bpga/lj38-pool",
+      "tuning": "default",
+      "wilson_high": 0.0983707143588792,
+      "wilson_low": 0.01566330399154762
     },
     {
       "asv_commit": "",
