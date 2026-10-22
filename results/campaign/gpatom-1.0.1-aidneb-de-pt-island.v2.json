@@ -1,8 +1,8 @@
 {
   "counter": "harness",
   "legacy": {
-    "n": 55,
-    "nfailed": 55,
+    "n": 56,
+    "nfailed": 56,
     "successes": 0,
     "transition_states": 0
   },
@@ -58,12 +58,12 @@
     "median": 6000.0,
     "median_high": 6000.0,
     "median_low": 6000.0,
-    "n": 55,
+    "n": 56,
     "n_cap": 0,
-    "n_crash": 55,
+    "n_crash": 56,
     "n_divergence": 0,
     "n_wrong_stationary": 0,
-    "nfailed": 55,
+    "nfailed": 56,
     "par2_mean": 6000.0,
     "par_applied": true,
     "par_factor": 2,
@@ -73,7 +73,7 @@
     "success_only_mean": null,
     "success_rate": 0.0,
     "successes": 0,
-    "wilson_high": 0.06528490111708637,
+    "wilson_high": 0.06419393671876342,
     "wilson_low": 0.0
   },
   "template": "gpatom/aidneb"
