@@ -12,6 +12,7 @@ note = "Two moving H atoms and 216 fixed Cu atoms; native provider count, with s
 [gpridge]
 threads = 1
 timeout = 1800
+verification_timeout = 30
 arithmetic = "library"
 model_profile = "gprd_zbl"
 hyperparameter_mode = "rgmin:lbfgs"

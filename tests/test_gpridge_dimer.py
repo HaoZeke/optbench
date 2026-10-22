@@ -190,3 +190,19 @@ def test_timed_out_search_keeps_a_failed_record_without_fabricating_calls(tmp_pa
     command = json.loads((tmp_path / "case/command.json").read_text())
     assert command["displacement"] == 3.
     assert command["source_input_sha256"] == problem["input"]["sha256"]
+
+
+def test_failed_verification_retains_completed_evaluations_and_request_count():
+    class FailsOnThird(Quadratic):
+        def calculate(self, atoms=None, properties=("energy",), system_changes=all_changes):
+            if self.calls == 2:
+                raise TimeoutError("oracle request deadline")
+            super().calculate(atoms, properties, system_changes)
+
+    atoms = slab()
+    progress = {}
+    calc = FailsOnThird([-2, 3, 4, 5, 6, 7])
+    with pytest.raises(TimeoutError):
+        native.verify_positions(atoms, atoms.positions.copy(), calc, .01, progress)
+    assert progress == {"completed": 2, "requested": 3}
+    assert calc.calls == 2

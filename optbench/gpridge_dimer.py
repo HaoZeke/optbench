@@ -140,7 +140,8 @@ def final_positions(text: str, initial: np.ndarray) -> np.ndarray:
     return full
 
 
-def verify_positions(atoms, positions: np.ndarray, calculator, force_stop: float) -> dict:
+def verify_positions(atoms, positions: np.ndarray, calculator, force_stop: float,
+                     progress: dict | None = None) -> dict:
     """Keep every moving mode and the fixed Cu coordinates in every force call."""
     if positions.shape != atoms.positions.shape or not np.array_equal(
             positions[:-2], atoms.positions[:-2]):
@@ -150,14 +151,19 @@ def verify_positions(atoms, positions: np.ndarray, calculator, force_stop: float
     point = atoms.copy()
     point.calc = calculator
     calls = 0
+    if progress is None:
+        progress = {}
+    progress.update(completed=0, requested=0)
 
     def evaluate(values):
         nonlocal calls
         point.positions[:] = values
         point.calc.reset()
+        progress["requested"] += 1
         energy = float(point.get_potential_energy())
         forces = np.asarray(point.get_forces(apply_constraint=False))
         calls += 1
+        progress["completed"] = calls
         if not np.isfinite(energy) or forces.shape != positions.shape or not np.isfinite(forces).all():
             raise ValueError("non-finite or malformed independent Cu-H2 evaluation")
         return energy, forces
@@ -188,6 +194,7 @@ def verify_positions(atoms, positions: np.ndarray, calculator, force_stop: float
             reasons.append("unresolved_mode")
     return {"energy": energy, "force_norm": force, "force_norm_kind": "linf",
             "hessian_index": index, "expected_index": 1, "verify_calls": calls,
+            "verification_requests": progress["requested"], "verify_calls_complete": True,
             "hessian_eigenvalues": eigenvalues, "reasons": reasons}
 
 
@@ -229,6 +236,7 @@ def _execute(job: dict) -> dict:
     elif calls >= job["problem"]["convergence"]["max_force_calls"]:
         reasons.append("cap")
     checked = {}
+    progress = {"completed": 0, "requested": 0}
     verification_start = time.perf_counter()
     try:
         positions = final_positions(text, atoms.positions)
@@ -237,13 +245,16 @@ def _execute(job: dict) -> dict:
         write(directory / "saddle.con", final, format="eon")
         module = load_module(job["sources"]["subprojects/rgpot/CppCore/rgpot/rpc/ase_calculator.py"],
                              "gpridge_rgpot_calculator")
-        with module.RgpotCalculator.spawn(server_bin=job["oracle"]["binary"], potential="CuH2") as calc:
+        with module.RgpotCalculator.spawn(
+                server_bin=job["oracle"]["binary"], potential="CuH2",
+                request_timeout=job["options"]["verification_timeout"]) as calc:
             checked = verify_positions(atoms, positions, calc,
-                                       job["problem"]["convergence"]["force_norm"])
+                                       job["problem"]["convergence"]["force_norm"], progress)
         reasons.extend(checked.pop("reasons"))
     except Exception as error:
         reasons.append("invalid_output")
-        checked["error"] = str(error)
+        checked.update(error=str(error), verify_calls=progress["completed"],
+                       verification_requests=progress["requested"], verify_calls_complete=False)
     failure = classify_failure(reasons)
     record = {
         "schema": "optbench.start/v2", "start": job["name"],
@@ -251,6 +262,8 @@ def _execute(job: dict) -> dict:
         "force_calls": calls if calls is not None else 0, "count_available": calls is not None,
         "success": failure is None and not reasons, "failure": failure,
         "reasons": reasons, "returncode": status,
+        "force_call_acceptance_limit": job["problem"]["convergence"]["max_force_calls"],
+        "force_call_limit_enforced": False,
         "search_wall_seconds": search_wall,
         "verification_wall_seconds": time.perf_counter() - verification_start,
         "wall_seconds": time.perf_counter() - began, "work": str(directory), **checked,
@@ -269,6 +282,10 @@ def run(root: Path, problem_name: str, template_name: str, *, output: Path,
             or problem["convergence"]["norm"] != "linf"):
         raise ValueError("native Cu-H2 dimer requires its fixed-substrate problem contract")
     frozen_arguments(template["gpridge"])
+    deadline = template["gpridge"].get("verification_timeout")
+    if (isinstance(deadline, bool) or not isinstance(deadline, (int, float))
+            or not np.isfinite(deadline) or deadline <= 0):
+        raise ValueError("verification_timeout must be finite and positive")
     files = checked_files(root / problem["input"]["directory"], problem["input"]["sha256"])
     sources = checked_files(Path(os.environ["GPRIDGE_SOURCE"]), problem["native_sources"]["sha256"])
     identity = runtime(template, "gprd")
