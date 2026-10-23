@@ -51,6 +51,12 @@ If the problem states no cap and every record is a success, `par_applied` is fal
 
 `tuning` is `default` or `adjusted`. The previous spelling of an adjusted row names the same class and is still rejected from the ranked table. Provenance is the code, version, commit, parameters, and machine. `collect_provenance` fills the machine from the process when the caller does not pass one.
 
+## Archived starts
+
+A campaign `.starts.jsonl` is one JSON object per start. The board reads that file. `.starts.jsonl.gz` is the same JSONL with gzip, and the board reads it only when the plaintext file is absent. If both are present, the plaintext file wins.
+
+The rgsaddle 0.2.2 Pt-island saddle campaigns (dimer FIRE, dimer L-BFGS, rotation skip, and Lanczos) store those rows as `.starts.jsonl.gz`. The sibling `.v2.json` keeps the run metrics and leaves `starts` empty. The published board cells are the cells those rows already scored.
+
 ## Quadratic sample
 
 ```bash

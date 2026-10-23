@@ -1,0 +1,1 @@
+The board reads `.starts.jsonl.gz` when the plaintext `.starts.jsonl` is absent. The rgsaddle 0.2.2 Pt-island saddle rows for dimer FIRE, dimer L-BFGS, rotation skip, and Lanczos are that gzip, and each line matches the archived JSONL. Their `.v2.json` files keep the metrics and drop the starts array. The published board is unchanged.
