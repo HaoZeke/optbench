@@ -140,7 +140,7 @@ The full tables, including archived rows, are on the problem page.
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="lowest-eigenvector/lj38">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>n</th></tr></thead><tbody>
-   <tr><td data-field="label">Sella (0.1.1) · lowest eigenvector</td><td data-field="family">Minimum mode</td><td data-field="family_rank">1</td><td data-field="par2_mean">17.8</td><td data-field="published"></td><td data-field="median_calls">17</td><td data-field="mean_calls">17.8</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
+   <tr><td data-field="label">rgsaddle (0.2.2) · Lanczos</td><td data-field="family">Minimum mode</td><td data-field="family_rank">1</td><td data-field="par2_mean">17.585</td><td data-field="published"></td><td data-field="median_calls">17</td><td data-field="mean_calls">17.585</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
    </tbody></table></div>
    <p class="bench-gaps">A run short of the full set, or a run that is not the stock method, stays off the ranked table.</p>
    <p><a href="generated/suites/lowest-eigenvector/lj38.html">Family tables, overall table, and performance profile</a>.</p>

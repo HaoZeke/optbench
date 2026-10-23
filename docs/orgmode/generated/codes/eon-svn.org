@@ -317,7 +317,7 @@
    <td>lj38</td>
    <td data-field="label">Eon svn (r2549) · Dimer CG</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">15</td>
+   <td data-field="family_rank">16</td>
    <td data-field="par2_mean">30.355</td>
    <td data-field="published"></td>
    <td data-field="median_calls">29</td>
@@ -429,7 +429,7 @@
    <td>LJ38</td>
    <td data-field="label">Eon svn (r2549) · Dimer L-BFGS</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">8</td>
+   <td data-field="family_rank">9</td>
    <td data-field="par2_mean">619.89</td>
    <td data-field="published"></td>
    <td data-field="median_calls">360.5</td>
