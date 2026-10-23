@@ -4,28 +4,37 @@
   "id": "hTST/Al",
   "profile": {
     "area_log10": {
-      "EON (SVN r2549) (r2549) \u00b7 Dimer-CG rotation: max=50 tol=1": 1.0517206030044413,
-      "eOn (develop 500350d9) (500350d9) \u00b7 Dimer-CG rotation: max=50 tol=1": 1.0090864643384159
+      "EON (SVN r2549) (r2549) \u00b7 Dimer-CG rotation: max=50 tol=1": 0.8293635483042863,
+      "eOn (develop 500350d9) (500350d9) \u00b7 Dimer-CG rotation: max=50 tol=1": 0.7850805755462045,
+      "eOn (develop 53055cfe) \u00b7 Dimer-CG rotation: max=50 tol=1": 1.090114882576608
     },
     "rho": {
       "EON (SVN r2549) (r2549) \u00b7 Dimer-CG rotation: max=50 tol=1": [
-        0.5414710485133021,
-        0.7981220657276995,
-        0.9342723004694836,
-        0.9906103286384976,
-        1.0
+        0.24726134585289514,
+        0.49295774647887325,
+        0.7261345852895149,
+        0.9217527386541471,
+        0.9812206572769953
       ],
       "eOn (develop 500350d9) (500350d9) \u00b7 Dimer-CG rotation: max=50 tol=1": [
-        0.458528951486698,
-        0.7261345852895149,
-        0.9107981220657277,
-        0.9859154929577465,
+        0.14397496087636932,
+        0.4084507042253521,
+        0.7183098591549296,
+        0.9139280125195618,
+        0.9906103286384976
+      ],
+      "eOn (develop 53055cfe) \u00b7 Dimer-CG rotation: max=50 tol=1": [
+        0.6087636932707355,
+        0.863849765258216,
+        0.9577464788732394,
+        0.9953051643192489,
         1.0
       ]
     },
     "solved": {
       "EON (SVN r2549) (r2549) \u00b7 Dimer-CG rotation: max=50 tol=1": 1.0,
-      "eOn (develop 500350d9) (500350d9) \u00b7 Dimer-CG rotation: max=50 tol=1": 1.0
+      "eOn (develop 500350d9) (500350d9) \u00b7 Dimer-CG rotation: max=50 tol=1": 1.0,
+      "eOn (develop 53055cfe) \u00b7 Dimer-CG rotation: max=50 tol=1": 1.0
     },
     "taus": [
       1.0,
@@ -224,6 +233,56 @@
       "source": "campaign",
       "success_rate": 1.0,
       "template": "eon-develop/htst-al-dimer",
+      "tuning": "Dimer-CG rotation: max=50 tol=1"
+    },
+    {
+      "asv_commit": "",
+      "call_unit": "total",
+      "cap": null,
+      "code": "eOn",
+      "code_version": "(develop 53055cfe)",
+      "commit": "53055cfe4ee7d12904c0915de583be0859b48536",
+      "counter": "harness",
+      "entry": "eon-53055cfe-htst-al-dimer",
+      "failures": {
+        "cap": 0,
+        "crash": 0,
+        "divergence": 0,
+        "wrong_stationary": 0
+      },
+      "family": "min-mode",
+      "family_rank": 5,
+      "fd_calls": 0.0,
+      "full_n": 639,
+      "hessian_calls": 0.0,
+      "kind": "",
+      "label": "eOn (develop 53055cfe) \u00b7 Dimer-CG rotation: max=50 tol=1",
+      "max_calls": 131129.0,
+      "mean_calls": 25059.910798122066,
+      "mean_per_image": null,
+      "median": 19712.0,
+      "median_calls": 19712.0,
+      "median_high": 20767.0,
+      "median_low": 18476.375,
+      "median_per_image": null,
+      "method": "Dimer-CG rotation: max=50 tol=1",
+      "min_calls": 2530.0,
+      "n": 639,
+      "nfailed": 0,
+      "note": "starts.jsonl",
+      "origin": "harness",
+      "par2_mean": null,
+      "path": "results/campaign/eon-53055cfe-htst-al-dimer.dat",
+      "problem": "hTST/Al",
+      "published": null,
+      "rank_cost": null,
+      "registry_match": true,
+      "scored": true,
+      "short": false,
+      "short_reason": "",
+      "source": "campaign",
+      "success_rate": 1.0,
+      "template": "eon/53055cfe-htst-al-dimer",
       "tuning": "Dimer-CG rotation: max=50 tol=1"
     }
   ],

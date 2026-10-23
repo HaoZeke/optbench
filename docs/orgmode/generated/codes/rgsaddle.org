@@ -289,7 +289,7 @@
    <td>lj38</td>
    <td data-field="label">rgsaddle (0.2.2) · Dimer</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">17</td>
+   <td data-field="family_rank">19</td>
    <td data-field="par2_mean">31.4</td>
    <td data-field="published"></td>
    <td data-field="median_calls">23</td>
@@ -443,7 +443,7 @@
    <td>LJ38</td>
    <td data-field="label">rgsaddle (0.2.2) · Dimer rotation-skip L-BFGS</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">11</td>
+   <td data-field="family_rank">12</td>
    <td data-field="par2_mean">7803.19</td>
    <td data-field="published"></td>
    <td data-field="median_calls">856.5</td>
@@ -457,7 +457,7 @@
    <td>LJ38</td>
    <td data-field="label">rgsaddle (0.2.2) · P-RFO</td>
    <td data-field="family">Single-ended saddle</td>
-   <td data-field="family_rank">6</td>
+   <td data-field="family_rank">7</td>
    <td data-field="par2_mean">15147</td>
    <td data-field="published"></td>
    <td data-field="median_calls">460.5</td>
@@ -471,7 +471,7 @@
    <td>LJ38</td>
    <td data-field="label">rgsaddle (0.2.2) · Lanczos L-BFGS</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">12</td>
+   <td data-field="family_rank">13</td>
    <td data-field="par2_mean">19418.8</td>
    <td data-field="published"></td>
    <td data-field="median_calls">10011</td>
@@ -485,7 +485,7 @@
    <td>LJ38</td>
    <td data-field="label">rgsaddle (0.2.2) · Dimer FIRE</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">13</td>
+   <td data-field="family_rank">14</td>
    <td data-field="par2_mean">19455</td>
    <td data-field="published"></td>
    <td data-field="median_calls">3666</td>
@@ -499,7 +499,7 @@
    <td>LJ38</td>
    <td data-field="label">rgsaddle (0.2.2) · Dimer L-BFGS</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">15</td>
+   <td data-field="family_rank">16</td>
    <td data-field="par2_mean">20000</td>
    <td data-field="published"></td>
    <td data-field="median_calls">10011</td>
@@ -527,7 +527,7 @@
    <td>pt-island</td>
    <td data-field="label">rgsaddle (0.2.2) · Dimer FIRE</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">13</td>
+   <td data-field="family_rank">14</td>
    <td data-field="par2_mean">3274.14</td>
    <td data-field="published"></td>
    <td data-field="median_calls">2337</td>
@@ -541,7 +541,7 @@
    <td>pt-island</td>
    <td data-field="label">rgsaddle (0.2.2) · Lanczos L-BFGS</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">14</td>
+   <td data-field="family_rank">15</td>
    <td data-field="par2_mean">9736.8</td>
    <td data-field="published"></td>
    <td data-field="median_calls">974</td>
@@ -555,7 +555,7 @@
    <td>pt-island</td>
    <td data-field="label">rgsaddle (0.2.2) · Dimer L-BFGS</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">15</td>
+   <td data-field="family_rank">16</td>
    <td data-field="par2_mean">11854.5</td>
    <td data-field="published"></td>
    <td data-field="median_calls">10011</td>
