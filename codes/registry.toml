@@ -325,7 +325,7 @@ name = "GPRidge"
 role = "Gaussian-process band and saddle search"
 repository = "https://github.com/TheochemUI/gpridge"
 ref = "develop"
-commit = "c9b71e4788c2c49daafd05f0ef4fcc522a87c29a"
+commit = "5250cacd9ec82c211aa38a0165b38a6fbb7ebf38"
 committed = "2026-10-22"
 note = "Native GP-NEB and CI-NEB share the rgpot Morse oracle. The runtime hash must match its native validation manifest. Provider counts are client counters; these rows do not enter the harness-ranked board."
 
