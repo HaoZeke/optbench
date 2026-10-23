@@ -1,9 +1,9 @@
 id = "eon-develop/standard-aladatom-langevin"
 engine = "eon"
 problem = "accelerated-md/standard_aladatom"
-code = "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)"
+code = "eOn (develop 500350d9)"
 code_version = "3.6.0"
-commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
 algorithm = "Parallel replica"
 reducer = "harness"
 tuning = "stock"
@@ -14,12 +14,12 @@ native_eam = true
 censor_ok = true
 asv_class = "EonDevelopStandardAladatomLangevin"
 note = '''
-Stock parallel replica of eOn develop a7aa57472fb7d823953fd36b78cd755fa4842d30 on website/accelerated-md/reactant.con. The archive page requires 150 K, Langevin, Verlet, and friction 0.001/fs, and scores true_rate with its uncertainty. The archived uncertainty is the Poisson standard error on 134 escapes. Timestep 1 fs, dephase 1000 fs, state check 1000 fs, transition refinement, distance 0.1 angstrom, and the CG quench stay at the client defaults. The censor window is 5 ns, the same window as EON SVN r2549. An escape is a new quenched minimum. Exposure is transition_time_s, or 5 ns when the window ends on the reactant. The rate is the escape count divided by the summed exposure. The uncertainty is that rate divided by sqrt of the escape count. Seeds 7, 8, and 10-21 are the closed set. stop_after_transition is set and this client leaves the MD loop when an escape is found. The client's eam_al potential is used. total_force_calls is the cost. A finished trajectory is a success. The archived true_rate 8.359e5 stays the paper row.
+Stock parallel replica of eOn develop 500350d9fae881f06c7ef194e5868da079c4be5a on the published 151-atom reactant. The 26 Oct 2012 page asks for 150 K, Langevin Verlet, and friction 0.001/fs. This template sets a 1 fs timestep, a 5e6 fs window, dephase 20000 fs, a state check every 1000 fs, a save every 100 fs, 700 fs after a transition, and a CG quench to 0.01 eV/angstrom. An escape is a quenched geometry whose maximum atomic displacement from the minimized reactant exceeds 0.1 angstrom. Exposure is the escape time, or 5 ns when the window ends on the reactant. The rate is the escape count divided by the summed exposure. The uncertainty is that rate divided by sqrt of the escape count. The closed set is successive blocks of 32 seeds, kept through the block that reaches about 134 escapes, on the same seed numbers as EON SVN r2549. This client leaves the MD loop when an escape is found. total_force_calls is the cost. A finished trajectory counts.
 '''
-seeds = [7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+seeds = [1]
 starts = ["0"]
 asv_full = false
-asv_timeout = 3600
+asv_timeout = 7200
 
 [ini.Main]
 job = "parallel_replica"
@@ -30,11 +30,20 @@ potential = "eam_al"
 
 [ini."Parallel Replica"]
 stop_after_transition = true
+dephase_time = 20000
+state_check_interval = 1000
+state_save_interval = 100
+post_transition_time = 700
 
 [ini.Dynamics]
+time_step = 1.0
 time = 5000000
 thermostat = "langevin"
 langevin_friction = 0.001
+
+[ini.Optimizer]
+opt_method = "cg"
+converged_force = 0.01
 
 [ini.Debug]
 write_movies_interval = 1000

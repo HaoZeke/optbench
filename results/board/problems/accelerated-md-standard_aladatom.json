@@ -1,32 +1,32 @@
 {
-  "full_n": 14,
+  "full_n": 256,
   "history": [],
   "id": "accelerated-md/standard_aladatom",
   "not_comparable": [],
   "partial": [],
   "profile": {
     "area_log10": {
-      "eon-develop/standard-aladatom-langevin 3.6.0 stock campaign a7aa574": 1.1826178401084975,
-      "eon-svn/standard-aladatom-langevin r2549 stock campaign r2549": 1.0536049848239342
+      "eon-develop/standard-aladatom-langevin 3.6.0 stock campaign 500350d": 1.1847176587166448,
+      "eon-svn/standard-aladatom-langevin r2549 stock campaign r2549": 0.8895671551554757
     },
     "rho": {
-      "eon-develop/standard-aladatom-langevin 3.6.0 stock campaign a7aa574": [
-        0.8571428571428571,
+      "eon-develop/standard-aladatom-langevin 3.6.0 stock campaign 500350d": [
+        0.87109375,
         1.0,
         1.0,
         1.0,
         1.0
       ],
       "eon-svn/standard-aladatom-langevin r2549 stock campaign r2549": [
-        0.14285714285714285,
-        0.9285714285714286,
-        1.0,
-        1.0,
-        1.0
+        0.12890625,
+        0.67578125,
+        0.82421875,
+        0.9140625,
+        0.953125
       ]
     },
     "solved": {
-      "eon-develop/standard-aladatom-langevin 3.6.0 stock campaign a7aa574": 1.0,
+      "eon-develop/standard-aladatom-langevin 3.6.0 stock campaign 500350d": 1.0,
       "eon-svn/standard-aladatom-langevin r2549 stock campaign r2549": 1.0
     },
     "taus": [
@@ -42,9 +42,9 @@
       "asv_commit": "",
       "call_unit": "total",
       "cap": 20000000,
-      "code": "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)",
+      "code": "eOn (develop 500350d9)",
       "code_version": "3.6.0",
-      "commit": "a7aa57472fb7d823953fd36b78cd755fa4842d30",
+      "commit": "500350d9fae881f06c7ef194e5868da079c4be5a",
       "comparable": true,
       "counter": "harness",
       "current": true,
@@ -55,21 +55,21 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": 14,
+      "full_n": 256,
       "history": false,
-      "max_calls": 5236521.0,
-      "mean_calls": 4064913.5714285714,
+      "max_calls": 5255827.0,
+      "mean_calls": 3631491.5234375,
       "mean_per_image": null,
-      "median": 3942699.0,
-      "median_calls": 3942699.0,
-      "median_high": 5236029.0,
-      "median_low": 3289403.0,
+      "median": 4269794.0,
+      "median_calls": 4269794.0,
+      "median_high": 5254726.0,
+      "median_low": 3651455.0,
       "median_per_image": null,
-      "min_calls": 1753001.0,
-      "n": 14,
+      "min_calls": 77575.0,
+      "n": 256,
       "nfailed": 0,
       "note": "starts",
-      "par2_mean": 4064913.5714285714,
+      "par2_mean": 3631491.5234375,
       "partial": false,
       "partial_reason": "",
       "path": "results/campaign/eon-develop-standard-aladatom-langevin.dat",
@@ -81,7 +81,7 @@
       "template": "eon-develop/standard-aladatom-langevin",
       "tuning": "stock",
       "wilson_high": 1.0,
-      "wilson_low": 0.7846891972623643
+      "wilson_low": 0.9852161435741286
     },
     {
       "asv_commit": "",
@@ -100,21 +100,21 @@
         "divergence": 0,
         "wrong_stationary": 0
       },
-      "full_n": 14,
+      "full_n": 256,
       "history": false,
-      "max_calls": 5237567.0,
-      "mean_calls": 5235990.857142857,
+      "max_calls": 5276251.0,
+      "mean_calls": 5255277.5,
       "mean_per_image": null,
-      "median": 5237200.0,
-      "median_calls": 5237200.0,
-      "median_high": 5237305.55,
-      "median_low": 5234945.0,
+      "median": 5255884.0,
+      "median_calls": 5255884.0,
+      "median_high": 5255954.0,
+      "median_low": 5255815.0,
       "median_per_image": null,
-      "min_calls": 5231881.0,
-      "n": 14,
+      "min_calls": 5250579.0,
+      "n": 256,
       "nfailed": 0,
       "note": "starts",
-      "par2_mean": 5235990.857142857,
+      "par2_mean": 5255277.5,
       "partial": false,
       "partial_reason": "",
       "path": "results/campaign/eon-svn-standard-aladatom-langevin.dat",
@@ -126,7 +126,7 @@
       "template": "eon-svn/standard-aladatom-langevin",
       "tuning": "stock",
       "wilson_high": 1.0,
-      "wilson_low": 0.7846891972623643
+      "wilson_low": 0.9852161435741286
     }
   ],
   "title": "standard_aladatom"

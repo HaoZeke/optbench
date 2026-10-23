@@ -6,7 +6,7 @@ contract = "partial"
 entry_count = 1
 
 [sample]
-starts = 14
+starts = 256
 
 [metrics]
 required = ["percent_uncertainty", "thermostat", "true_rate", "uncertainty"]

@@ -87,10 +87,10 @@ FAMILIES = {
     "develop": {
         "prefix": "eon-develop/",
         "env": "EON_DEVELOP_CLIENT",
-        "default": Path.home() / "opt" / "eon-develop" / "bin" / "eonclient",
+        "default": Path.home() / "opt" / "eon-500350" / "bin" / "eonclient",
         "flag": "--version",
-        "token": "a7aa574",
-        "cache": "a7aa57472fb7",
+        "token": "500350d9",
+        "cache": "500350d9",
     },
 }
 

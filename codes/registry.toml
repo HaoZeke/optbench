@@ -55,14 +55,14 @@ committed = "2026-01-23"
 note = "The old SVN code at its latest revision, r2549, built with Fortran and not patched. eonclient -v prints r2549. This is not a version of https://github.com/TheochemUI/eon. The stock Langevin parallel-replica score on accelerated-md/standard_aladatom uses this pin."
 
 [[code]]
-id = "eon-develop-a7aa574"
-name = "eOn (develop a7aa57472fb7d823953fd36b78cd755fa4842d30)"
+id = "eon-develop-500350d9"
+name = "eOn (develop 500350d9)"
 role = "accelerated molecular dynamics"
 repository = "https://github.com/TheochemUI/eon"
-ref = "develop"
-commit = "a7aa57472fb7d823953fd36b78cd755fa4842d30"
-committed = "2026-10-19"
-note = "Current develop of https://github.com/TheochemUI/eon, the code documented at https://eondocs.org. Built from a7aa57472fb7d823953fd36b78cd755fa4842d30 with Fortran. This is not a version of the SVN code. The stock Langevin parallel-replica score on accelerated-md/standard_aladatom uses this pin. The older develop pin 7095b23 stays on the eOn rows that were run there."
+ref = "fix/develop-regressions-vs-350"
+commit = "500350d9fae881f06c7ef194e5868da079c4be5a"
+committed = "2026-10-20"
+note = "https://github.com/TheochemUI/eon branch fix/develop-regressions-vs-350 at 500350d9fae881f06c7ef194e5868da079c4be5a, built with Fortran. This is not a version of the SVN code. The stock Langevin parallel-replica score on accelerated-md/standard_aladatom uses this pin. The older develop pin 7095b23 stays on the eOn rows that were run there."
 
 [[code]]
 id = "rgmin"

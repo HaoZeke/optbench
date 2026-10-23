@@ -1,13 +1,16 @@
-true_rate 1.428466e+08
-uncertainty 5.399096e+07
-percent_uncertainty 3.779645e+01
+true_rate 1.606758e+08
+uncertainty 1.353134e+07
+percent_uncertainty 8.421519e+00
 thermostat langevin_0.001
-escapes 7
-exposure_s 4.900360e-08
+escapes 141
+exposure_s 8.775437e-07
+trajectories 256
 code EON (SVN r2549)
-develop_true_rate 1.472578e+08
-develop_uncertainty 5.206349e+07
-develop_percent_uncertainty 3.535534e+01
-develop_escapes 8
-develop_exposure_s 5.432650e-08
+develop_true_rate 1.597220e+08
+develop_uncertainty 1.345102e+07
+develop_percent_uncertainty 8.421519e+00
+develop_escapes 141
+develop_exposure_s 8.827839e-07
+develop_trajectories 256
+develop_code eOn (develop 500350d9)
 algorithm parallel replica
