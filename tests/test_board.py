@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from optbench.board import MissingAsvCommit, build_board, write_board
+from optbench.board import MissingAsvCommit, _registry_match, build_board, write_board
 from optbench.score import wilson_interval
 
 PIN = "a" * 40
@@ -121,6 +121,20 @@ def _row(calls: float, success: bool, start: str, failure: str | None = None) ->
     if not success:
         record["failure"] = failure or "cap"
     return record
+
+
+def test_prior_commit_matches_the_same_pin():
+    registry = [
+        {
+            "id": "eon-develop",
+            "name": "eOn",
+            "commit": "aaaa",
+            "prior_commits": ["bbbb"],
+        }
+    ]
+    assert _registry_match({"code": "eOn", "commit": "aaaa"}, registry) is True
+    assert _registry_match({"code": "eOn", "commit": "bbbb"}, registry) is True
+    assert _registry_match({"code": "eOn", "commit": "cccc"}, registry) is False
 
 
 def test_full_harness_row_is_ranked_by_par2(tmp_path: Path):

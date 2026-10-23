@@ -122,9 +122,14 @@ def _registry_match(row: dict, registry: list[dict]) -> bool:
         names.discard("")
         if code not in names:
             continue
-        pinned = str(pin.get("commit") or "")
-        if pinned and (recorded.startswith(pinned) or pinned.startswith(recorded)):
-            return True
+        pinned_values = [str(pin.get("commit") or "")]
+        extra = pin.get("prior_commits") or []
+        if isinstance(extra, str):
+            extra = [extra]
+        pinned_values.extend(str(item) for item in extra)
+        for pinned in pinned_values:
+            if pinned and (recorded.startswith(pinned) or pinned.startswith(recorded)):
+                return True
     return False
 
 
