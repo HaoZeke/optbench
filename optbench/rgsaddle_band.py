@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import ctypes
 import json
+import math
 import os
 import statistics
 import tomllib
@@ -63,11 +64,13 @@ _METHOD_FIRE = 0
 _METHOD_LBFGS = 1
 _MINMODE_DIMER = 0
 _MINMODE_LANCZOS = 1
+_DIFFERENCE_FORWARD = 0
 _DIFFERENCE_CENTRAL = 1
 _STATUS_CONVERGED = 1
 _EIGEN_TOL = 1e-6
 _FD_STEP = 1e-5
 _MINMODE_LBFGS_MEMORY = 20
+_OCINEB_ABI_MINOR = 23
 
 _SURFACE = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_void_p)
 
@@ -144,6 +147,40 @@ class MinModeConfig(ctypes.Structure):
     ]
 
 
+class OcinebConfig(ctypes.Structure):
+    _fields_ = [
+        ("major", ctypes.c_uint32),
+        ("minor", ctypes.c_uint32),
+        ("flags", ctypes.c_uint64),
+        ("trigger_factor", ctypes.c_double),
+        ("trigger_force", ctypes.c_double),
+        ("angle_tol", ctypes.c_double),
+        ("stability_count", ctypes.c_int64),
+        ("max_mmf_steps", ctypes.c_int64),
+        ("restore_unhelpful", ctypes.c_int32),
+        ("reserved", ctypes.c_int32),
+    ]
+
+
+class OcinebReport(ctypes.Structure):
+    _fields_ = [
+        ("major", ctypes.c_uint32),
+        ("minor", ctypes.c_uint32),
+        ("flags", ctypes.c_uint64),
+        ("status", ctypes.c_int32),
+        ("phase", ctypes.c_int32),
+        ("fell_back", ctypes.c_int32),
+        ("evaluations", ctypes.c_int32),
+        ("max_force", ctypes.c_double),
+        ("curvature", ctypes.c_double),
+        ("alignment", ctypes.c_double),
+        ("threshold", ctypes.c_double),
+        ("ci_index", ctypes.c_int64),
+        ("iteration", ctypes.c_int64),
+        ("rotations", ctypes.c_int64),
+    ]
+
+
 def library_path() -> Path | None:
     """The shared library this process would load, if the file exists."""
     env = os.environ.get("RGSADDLE_LIBRARY")
@@ -206,6 +243,30 @@ def _load_library():
     lib.rgsaddle_minmode_position.restype = ctypes.c_int
     lib.rgsaddle_minmode_free.argtypes = [ctypes.c_void_p]
     lib.rgsaddle_minmode_free.restype = None
+    if not hasattr(lib, "rgsaddle_ocineb_set_force_gate"):
+        return lib
+    lib.rgsaddle_ocineb_create.argtypes = [
+        ctypes.POINTER(BandConfig),
+        ctypes.POINTER(MinModeConfig),
+        ctypes.POINTER(OcinebConfig),
+        ctypes.c_int64,
+        ctypes.c_int64,
+        ctypes.POINTER(ctypes.c_double),
+    ]
+    lib.rgsaddle_ocineb_create.restype = ctypes.c_void_p
+    lib.rgsaddle_ocineb_step.argtypes = [
+        ctypes.c_void_p,
+        _SURFACE,
+        ctypes.c_void_p,
+        ctypes.POINTER(OcinebReport),
+    ]
+    lib.rgsaddle_ocineb_step.restype = ctypes.c_int
+    lib.rgsaddle_ocineb_set_force_gate.argtypes = [ctypes.c_void_p, ctypes.c_int]
+    lib.rgsaddle_ocineb_set_force_gate.restype = ctypes.c_int
+    lib.rgsaddle_ocineb_positions.argtypes = [ctypes.c_void_p, ctypes.POINTER(ctypes.c_double)]
+    lib.rgsaddle_ocineb_positions.restype = ctypes.c_int
+    lib.rgsaddle_ocineb_free.argtypes = [ctypes.c_void_p]
+    lib.rgsaddle_ocineb_free.restype = None
     return lib
 
 
@@ -724,6 +785,50 @@ def _sidpp_springs(frames, left, right, n_images, spring_k: float, d_id: float) 
         else:
             constants.append(spring_k)
     return np.asarray(constants, dtype=np.float64)
+
+
+def _create_ocineb(lib, band: BandConfig, held: np.ndarray, kind: str):
+    """An OCI-NEB session at rgsaddle's stock hand-off.
+
+    The configs are ``OcinebConfig::default()`` and ``MinModeConfig::default()``
+    with the estimate ``kind``; the hand-off reads only the estimate fields.
+    """
+    if not hasattr(lib, "rgsaddle_ocineb_set_force_gate"):
+        raise RuntimeError(f"OCI-NEB needs rgsaddle_ocineb_set_force_gate, C ABI minor {_OCINEB_ABI_MINOR}")
+    minmode = MinModeConfig()
+    minmode.major = _ABI_MAJOR
+    minmode.minor = _ABI_MINOR
+    minmode.kind = _MINMODE_LANCZOS if kind == "lanczos" else _MINMODE_DIMER
+    minmode.method = _METHOD_FIRE
+    minmode.dr = 1e-3
+    minmode.rotation_tol = 1e-4
+    minmode.max_rotations = 20
+    minmode.krylov_dim = 12
+    minmode.force_tol = band.force_tol
+    minmode.max_move = band.max_move
+    minmode.rotation_angle_tol = math.radians(5.0)
+    minmode.difference = _DIFFERENCE_FORWARD
+    config = OcinebConfig()
+    config.major = _ABI_MAJOR
+    config.minor = _OCINEB_ABI_MINOR
+    config.trigger_factor = 0.31
+    config.trigger_force = 0.0
+    config.angle_tol = 0.85
+    config.stability_count = 5
+    config.max_mmf_steps = 1000
+    config.restore_unhelpful = 0
+    n_images, dof = held.shape
+    handle = lib.rgsaddle_ocineb_create(
+        ctypes.byref(band),
+        ctypes.byref(minmode),
+        ctypes.byref(config),
+        n_images,
+        dof // 3,
+        held.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
+    )
+    if not handle:
+        raise RuntimeError("rgsaddle_ocineb_create returned null")
+    return handle
 
 
 def _refine_minmode(

@@ -27,8 +27,11 @@ from optbench.pes import (
 from optbench.rgsaddle_band import (
     BandConfig,
     MinModeConfig,
+    OcinebConfig,
+    OcinebReport,
     Report,
     _Request,
+    _create_ocineb,
     _dat,
     _registry,
     library_path,
@@ -55,6 +58,13 @@ def test_struct_sizes_match_the_c_layout():
     assert __import__("ctypes").sizeof(Report) == 64
     assert __import__("ctypes").sizeof(_Request) == 64
     assert __import__("ctypes").sizeof(MinModeConfig) == 88
+    assert __import__("ctypes").sizeof(OcinebConfig) == 64
+    assert __import__("ctypes").sizeof(OcinebReport) == 88
+
+
+def test_ocineb_session_needs_the_force_gate_setter():
+    with pytest.raises(RuntimeError, match="rgsaddle_ocineb_set_force_gate"):
+        _create_ocineb(object(), BandConfig(), np.zeros((3, 3)), "dimer")
 
 
 def test_jacobi_matches_numpy_on_a_symmetric_matrix():
