@@ -16,6 +16,12 @@ L-BFGS, rotation skip, and Lanczos are that gzip, and each line matches
 the archived JSONL. Their `.v2.json` files keep the metrics and drop the
 starts array. The published board is unchanged.
 
+Stock rgsaddle min-mode rows are pinned to `fd8fb3d1`. LJ38, the Pt island,
+and the lowest eigenvector scores move. The Pt saddle-search sample replaces
+the archived starts in those four `.starts.jsonl.gz` files. An index-1 saddle
+that misses the link, the novelty test, or the barrier is `wrong_stationary`
+(`not_connected`, `duplicate`, `barrier`). PAR-2 stays 10128.
+
 ## 2026-10-21
 
 `integrate/batch-3` ranks the stock rows from the finished board branches.
