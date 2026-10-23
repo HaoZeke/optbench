@@ -8,7 +8,9 @@ The order is fixed, so a start lands in one bin:
 3. ``cap`` — the search used the whole force-call budget and did not
    blow up.
 4. ``wrong_stationary`` — the force is at the stop, and the Hessian
-   index, the energy, or the Kabsch RMSD rejects the point.
+   index, the energy, or the Kabsch RMSD rejects the point. The
+   harness records that rejection as ``hessian_index``, ``energy``,
+   ``rmsd``, ``not_connected``, ``duplicate``, or ``barrier``.
 
 A success has no class. Every failure stays in the PAR-2 mean; the
 class says why it is there.
@@ -17,6 +19,10 @@ class says why it is there.
 from __future__ import annotations
 
 FAILURES = ("crash", "divergence", "cap", "wrong_stationary")
+
+# Connection, novelty, and barrier are RMSD and energy rejections.
+# They are not a blow-up and not a point still above the force stop.
+_STATIONARY = ("hessian_index", "energy", "rmsd", "not_connected", "duplicate", "barrier")
 
 
 def classify_failure(reasons: list[str]) -> str | None:
@@ -31,7 +37,7 @@ def classify_failure(reasons: list[str]) -> str | None:
         return "cap"
     if "force_norm" in reasons:
         return "divergence"
-    if any(name in reasons for name in ("hessian_index", "energy", "rmsd")):
+    if any(name in reasons for name in _STATIONARY):
         return "wrong_stationary"
     return "divergence"
 
