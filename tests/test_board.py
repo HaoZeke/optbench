@@ -1,5 +1,6 @@
 """Behaviour of the v2 board built from committed result files."""
 
+import gzip
 import json
 from pathlib import Path
 
@@ -155,6 +156,34 @@ def test_full_harness_row_is_ranked_by_par2(tmp_path: Path):
     assert row["registry_match"] is True
     assert row["short"] is False
     assert "rate_low" not in row or row.get("rate_low") is None
+
+
+def test_gzip_starts_score_the_same_row_and_plaintext_wins(tmp_path: Path):
+    _problem(tmp_path, starts=2, cap=10)
+    _template(tmp_path)
+    _registry(tmp_path)
+    _dat(tmp_path, "toy-fast", PIN)
+    rows = [_row(3, True, "0"), _row(10, False, "1", "cap")]
+    text = "".join(json.dumps(row) + "\n" for row in rows)
+    plain = tmp_path / "results" / "campaign" / "toy-fast.starts.jsonl"
+    packed = plain.with_name(plain.name + ".gz")
+    packed.write_bytes(gzip.compress(text.encode("utf-8"), mtime=0))
+
+    gzip_only = build_board(tmp_path)
+    row = gzip_only["problems"]["minimization/toy"]["ranked"][0]
+    assert row["par2_mean"] == (3 + 20) / 2
+    assert row["failures"]["cap"] == 1
+    assert row["note"] == "starts.jsonl.gz"
+
+    plain.write_text(
+        json.dumps(_row(4, True, "0")) + "\n" + json.dumps(_row(5, True, "1")) + "\n",
+        encoding="utf-8",
+    )
+    plaintext = build_board(tmp_path)
+    winner = plaintext["problems"]["minimization/toy"]["ranked"][0]
+    assert winner["note"] == "starts.jsonl"
+    assert winner["nfailed"] == 0
+    assert winner["mean_calls"] == 4.5
 
 
 def test_short_grid_stays_off_the_ranked_table(tmp_path: Path):

@@ -22,6 +22,7 @@ versions of one method are two rows.
 
 from __future__ import annotations
 
+import gzip
 import html
 import json
 import math
@@ -71,9 +72,17 @@ def _float_field(fields: dict[str, str], key: str) -> float | None:
         return None
 
 
+def _read_text(path: Path) -> str:
+    """File text. A ``.gz`` sibling is the same JSONL the plaintext loader reads."""
+    if path.name.endswith(".gz"):
+        with gzip.open(path, "rt", encoding="utf-8") as handle:
+            return handle.read()
+    return path.read_text(encoding="utf-8")
+
+
 def _json_lines(path: Path) -> list[dict]:
     rows = []
-    for line in path.read_text(encoding="utf-8").splitlines():
+    for line in _read_text(path).splitlines():
         if not line.strip():
             continue
         value = json.loads(line)
@@ -396,28 +405,38 @@ def _records_from_repetitions(text: str, fields: dict[str, str]) -> list[dict]:
     ]
 
 
+def _records_from_starts(
+    path: Path,
+    cap: int | None,
+    force_tol: float | None,
+    images: int | None,
+) -> list[dict]:
+    collected = []
+    for raw in _json_lines(path):
+        record = _record_from_raw(normalize_start(raw, images), cap, force_tol)
+        if record is not None:
+            collected.append(record)
+    return collected
+
+
 def _load_group_records(
     group: dict[str, Path],
     cap: int | None,
     force_tol: float | None,
     images: int | None = None,
 ) -> tuple[list[dict], str]:
-    if "starts_jsonl" in group:
-        collected = []
-        for raw in _json_lines(group["starts_jsonl"]):
-            record = _record_from_raw(normalize_start(raw, images), cap, force_tol)
-            if record is not None:
-                collected.append(record)
+    # Plaintext wins when both are present, so a stale compressed copy cannot
+    # replace the sample the campaign wrote beside it.
+    for kind, label in (
+        ("starts_jsonl", "starts.jsonl"),
+        ("starts_gz", "starts.jsonl.gz"),
+        ("starts", "starts"),
+    ):
+        if kind not in group:
+            continue
+        collected = _records_from_starts(group[kind], cap, force_tol, images)
         if collected:
-            return collected, "starts.jsonl"
-    if "starts" in group:
-        collected = []
-        for raw in _json_lines(group["starts"]):
-            record = _record_from_raw(normalize_start(raw, images), cap, force_tol)
-            if record is not None:
-                collected.append(record)
-        if collected:
-            return collected, "starts"
+            return collected, label
     if "v2" in group:
         document = json.loads(group["v2"].read_text(encoding="utf-8"))
         runs = document.get("runs") or []
@@ -446,7 +465,11 @@ def _campaign_groups(directory: Path) -> dict[str, dict[str, Path]]:
         name = path.name
         if not path.is_file():
             continue
-        if name.endswith(".starts.jsonl"):
+        if name.endswith(".starts.jsonl.gz"):
+            if path.stat().st_size == 0:
+                continue
+            stem, kind = name[: -len(".starts.jsonl.gz")], "starts_gz"
+        elif name.endswith(".starts.jsonl"):
             if path.stat().st_size == 0:
                 continue
             stem, kind = name[: -len(".starts.jsonl")], "starts_jsonl"
@@ -476,12 +499,12 @@ def _comparable(fields: dict[str, str], raw_rows: list[dict]) -> bool:
 
 
 def _first_raw(group: dict[str, Path]) -> dict:
-    for kind in ("starts_jsonl", "starts"):
+    for kind in ("starts_jsonl", "starts_gz", "starts"):
         path = group.get(kind)
         if path is None:
             continue
         try:
-            for line in path.read_text(encoding="utf-8").splitlines():
+            for line in _read_text(path).splitlines():
                 if line.strip():
                     value = json.loads(line)
                     return value if isinstance(value, dict) else {}
@@ -690,7 +713,13 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
     rows: list[dict] = []
     unparsed: list[dict] = []
     for stem, group in _campaign_groups(root / "results" / "campaign").items():
-        path = group.get("dat") or group.get("v2") or group.get("starts_jsonl") or group.get("starts")
+        path = (
+            group.get("dat")
+            or group.get("v2")
+            or group.get("starts_jsonl")
+            or group.get("starts_gz")
+            or group.get("starts")
+        )
         fields: dict[str, str] = {}
         parse_note = ""
         if "dat" in group:
