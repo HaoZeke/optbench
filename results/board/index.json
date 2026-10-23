@@ -11237,7 +11237,8 @@
           "GMIN (df8da599) \u00b7 basin-hopping": 0.10987594841735314,
           "GMIN (df8da599) \u00b7 basin-hopping with continuous symmetry measures": 1.1800375830028063,
           "GMIN (df8da599) \u00b7 parallel tempering basin-hopping": 0.0722471989593555,
-          "eOn (3.5.0) \u00b7 Basin hopping": 0.06622659904607586
+          "eOn (3.5.0) \u00b7 Basin hopping": 0.06622659904607586,
+          "gasp (0.1) \u00b7 GASP": 0.0015051499783199063
         },
         "rho": {
           "AIRSS (0.9.4) \u00b7 random structure search": [
@@ -11281,6 +11282,13 @@
             0.02,
             0.11,
             0.15
+          ],
+          "gasp (0.1) \u00b7 GASP": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.01
           ]
         },
         "solved": {
@@ -11289,7 +11297,8 @@
           "GMIN (df8da599) \u00b7 basin-hopping": 0.99,
           "GMIN (df8da599) \u00b7 basin-hopping with continuous symmetry measures": 1.0,
           "GMIN (df8da599) \u00b7 parallel tempering basin-hopping": 0.94,
-          "eOn (3.5.0) \u00b7 Basin hopping": 1.0
+          "eOn (3.5.0) \u00b7 Basin hopping": 1.0,
+          "gasp (0.1) \u00b7 GASP": 0.07
         },
         "taus": [
           1.0,
@@ -11778,6 +11787,56 @@
         {
           "asv_commit": "",
           "call_unit": "total",
+          "cap": 2000000,
+          "code": "gasp",
+          "code_version": "0.1",
+          "commit": "0c8d993c82e0e1c69a05b3c34bbb2fcbbdbb7f07",
+          "counter": "harness",
+          "entry": "gasp-0c8d993c-lj38",
+          "failures": {
+            "cap": 0,
+            "crash": 0,
+            "divergence": 0,
+            "wrong_stationary": 93
+          },
+          "family": "global",
+          "family_rank": 10,
+          "fd_calls": 0.0,
+          "full_n": 100,
+          "hessian_calls": 0.0,
+          "kind": "",
+          "label": "gasp (0.1) \u00b7 GASP",
+          "max_calls": 414007.0,
+          "mean_calls": 324128.86,
+          "mean_per_image": null,
+          "median": 4000000.0,
+          "median_calls": 318916.5,
+          "median_high": 4000000.0,
+          "median_low": 4000000.0,
+          "median_per_image": null,
+          "method": "GASP",
+          "min_calls": 190499.0,
+          "n": 100,
+          "nfailed": 93,
+          "note": "starts.jsonl",
+          "origin": "harness",
+          "par2_mean": 3739899.37,
+          "path": "results/campaign/gasp-0c8d993c-lj38.dat",
+          "problem": "globalopt/lj38",
+          "published": null,
+          "rank_cost": 3739899.37,
+          "registry_match": false,
+          "scored": true,
+          "short": false,
+          "short_reason": "",
+          "source": "campaign",
+          "success_rate": 0.07,
+          "template": "gasp/lj38-default",
+          "tuning": "default"
+        },
+        {
+          "asv_commit": "",
+          "call_unit": "total",
           "cap": null,
           "code": "AIRSS",
           "code_version": "0.9.4",
@@ -11791,7 +11850,7 @@
             "wrong_stationary": 0
           },
           "family": "global",
-          "family_rank": 10,
+          "family_rank": 11,
           "fd_calls": 0.0,
           "full_n": 100,
           "hessian_calls": 0.0,
@@ -42569,7 +42628,7 @@
       ]
     }
   },
-  "ranked_count": 461,
+  "ranked_count": 462,
   "schema": "optbench.board/v2",
   "short": [
     {
