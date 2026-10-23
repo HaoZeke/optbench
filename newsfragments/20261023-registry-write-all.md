@@ -1,0 +1,1 @@
+`write_all` keeps the handwritten block after the generated ASE and Sella template marker, including the GPRidge code entry. `problems/tsopt/cuh2.toml` declares the same half-even label and v2 scoring keys as the other tsopt problems. The counter is client and the success line is an infinity-norm stop plus Hessian index 1, matching the CuH2 runner.

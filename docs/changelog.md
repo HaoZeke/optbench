@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-10-23
+
+`write_all` keeps the handwritten block that follows the generated ASE
+and Sella template marker. The GPRidge `[[code]]` entry sits there, and
+the catalog test was deleting it. `problems/tsopt/cuh2.toml` now
+declares the same `[scoring.half_even]` label and `[scoring.v2]` keys
+as the other tsopt problems. The counter is client and the success
+line is an infinity-norm stop plus Hessian index 1, matching the CuH2
+runner.
+
 ## 2026-10-21
 
 `integrate/batch-3` ranks the stock rows from the finished board branches.
