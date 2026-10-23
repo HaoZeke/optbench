@@ -90,7 +90,7 @@ It does not run a campaign.
    </tr>
    <tr data-problem="saddle-search/pt-island">
    <th scope="row"><a href="generated/suites/saddle-search.html#pt-island">Pt heptamer island</a></th>
-   <td data-code="eOn" data-template="eon/develop-saddle-pt-lanczos" data-par2="2e+08"><span class="bench-score">2e+08</span><a href="generated/suites/saddle-search.html#pt-island-templates">eon/develop-saddle-pt-lanczos</a></td>
+   <td data-code="eOn" data-template="eon/develop-saddle-pt-dimer" data-par2="2.2821e+07"><span class="bench-score">2.2821e+07</span><a href="generated/suites/saddle-search.html#pt-island-templates">eon/develop-saddle-pt-dimer</a></td>
    <td data-code="Eon svn">—</td>
    <td data-code="rgmin">—</td>
    <td data-code="rgsaddle" data-template="rgsaddle/saddle-dimer-rotskip-tuned" data-par2="10127.1"><span class="bench-score">10127.1</span><a href="generated/suites/saddle-search.html#pt-island-templates">rgsaddle/saddle-dimer-rotskip-tuned</a></td>

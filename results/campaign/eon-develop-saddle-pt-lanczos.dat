@@ -1,0 +1,25 @@
+# eOn develop 5ed40082. HarnessCounter through ext_pot. Kernel morse_pt.
+# Pt-island AKMC Lanczos until 27 qualifying saddles. known_saddles stays the source default.
+counter harness
+count_keys HarnessCounter
+code eOn
+code_version (develop 5ed40082)
+commit 5ed40082c9c2e591ce16447b5ecb555bc1acc646
+algorithm Lanczos
+template eon/develop-saddle-pt-lanczos
+problem saddle-search/pt-island
+reducer akmc-until-27
+cap 100000000
+n 2
+par2_mean 200000000.0
+nfailed 2
+mean_calls 2589363.0
+median_calls 2589363.0
+min_calls 2573759.0
+max_calls 2604967.0
+n_crash 0
+n_divergence 0
+n_cap 2
+n_wrong_stationary 0
+communicator_jobs 8
+published_mean false

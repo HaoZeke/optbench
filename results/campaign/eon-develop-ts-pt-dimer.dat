@@ -1,0 +1,25 @@
+# eOn develop 5ed40082. HarnessCounter through ext_pot. Kernel morse_pt.
+# Develop binary 5ed40082 with the r2549 ini. Improved dimer, translation L-BFGS max_move 0.2, max_iterations 1000, converged_angle 5.0, rotations_max 10, improved true. Potential morse_pt. The mode is the normalized initial displacement. Main random_seed is 1. The L-BFGS keys r2549 reads sit in [Optimizer]. The develop [LBFGS] catalog is omitted, including lbfgs_accept, so the generated SSOT default none stays in place. The energy line-search row is eon/develop-ts-pt-dimer-accept-energy.
+counter harness
+count_keys HarnessCounter
+code eOn
+code_version (develop 5ed40082)
+commit 5ed40082c9c2e591ce16447b5ecb555bc1acc646
+algorithm LBFGS
+tuning r2549-ini
+template eon/develop-ts-pt-dimer
+problem tsopt/pt-island
+reducer report-capped
+cap 10000
+n 49
+par2_mean 116.51020408163265
+nfailed 0
+mean_calls 116.51020408163265
+median_calls 114.0
+min_calls 83.0
+max_calls 162.0
+n_crash 0
+n_divergence 0
+n_cap 0
+n_wrong_stationary 0
+published_mean false
