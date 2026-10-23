@@ -10,6 +10,10 @@ as the other tsopt problems. The counter is client and the success
 line is an infinity-norm stop plus Hessian index 1, matching the CuH2
 runner.
 
+The hTST Al dimer row is pinned to eOn develop `d2435196`. The client stores
+the r2549 aluminium literals at single precision. The 639 barrier windows
+use that client. The problem states no cap, so `par2_mean` stays unset.
+
 ## 2026-10-21
 
 `integrate/batch-3` ranks the stock rows from the finished board branches.
