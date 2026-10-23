@@ -11,6 +11,7 @@
    <dt>Cap</dt><dd>10000 force calls</dd>
    <dt>Starts</dt><dd>4</dd>
    <dt>Potential</dt><dd>cuh2</dd>
+   <dt>v2</dt><dd>par2-bootstrap</dd>
    </dl>
    <p>Rows are ranked by cost inside each method family and on one overall table. A run short of the full set, or a run that is not the stock method, stays off the table.</p>
    <p class="bench-gaps">No committed harness run.</p>
