@@ -1,0 +1,22 @@
+id = "gpridge/pt-island-gp-local"
+engine = "gpridge"
+code = "gpridge"
+code_version = "develop"
+commit = "7dac80c083aa6509621321b2c4562c05382d3dd6"
+algorithm = "GP-NEB"
+problem = "double-ended-saddle-search/pt-island"
+tuning = "adjusted"
+ranked = false
+note = "Energy-shifted Morse at 9.5 Angstrom; free-atom L2 norm; linear band and constant spring 5. gp_local relaxes the band on a pair-additive spline baseline fitted to every measured force plus a local GP residual on the atoms carrying the path, and measures one image per outer iteration. Native provider count includes endpoint evaluations."
+
+[gpridge]
+mode = "gp_local"
+threads = 1
+timeout = 1800
+arithmetic = "library"
+model_profile = "gprd_zbl"
+hyperparameter_mode = "rgmin:lbfgs"
+hssvd = false
+active_posterior = false
+prior_mean_statistic = "max"
+seed_full_chain = true
