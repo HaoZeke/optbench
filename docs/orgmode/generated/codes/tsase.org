@@ -163,7 +163,7 @@
    <td>lj38</td>
    <td data-field="label">TSASE (408) · tsase-dimer-bfgs</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">8</td>
+   <td data-field="family_rank">9</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">27</td>
    <td data-field="median_calls"></td>
@@ -177,7 +177,7 @@
    <td>lj38</td>
    <td data-field="label">TSASE (408) · tsase-dimer-cg</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">13</td>
+   <td data-field="family_rank">14</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">29</td>
    <td data-field="median_calls"></td>
@@ -191,7 +191,7 @@
    <td>lj38</td>
    <td data-field="label">TSASE (1.0) · SSDimer</td>
    <td data-field="family">Minimum mode</td>
-   <td data-field="family_rank">20</td>
+   <td data-field="family_rank">21</td>
    <td data-field="par2_mean">2420.61</td>
    <td data-field="published"></td>
    <td data-field="median_calls">233</td>

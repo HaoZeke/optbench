@@ -52,7 +52,17 @@ repository = "https://github.com/TheochemUI/eon"
 ref = "develop"
 commit = "53055cfe4ee7d12904c0915de583be0859b48536"
 committed = "2026-10-22"
-note = "develop 53055cfe4ee7d12904c0915de583be0859b48536, the merge of pull request 800, built from that commit with no source patch. eonclient --version prints 3.6.0 (53055cfe). GPR-dimer is absent. The aluminium adatom AKMC rows and the min-mode rows on this pin use the same problems, caps, and counters as the other eOn pins. The 7095b23 pin and the 500350d9 pin stay for the scores already run on them."
+note = "develop 53055cfe4ee7d12904c0915de583be0859b48536, the merge of pull request 800, built from that commit with no source patch. eonclient --version prints 3.6.0 (53055cfe). GPR-dimer is absent. The aluminium adatom AKMC rows and the min-mode rows on this pin use the same problems, caps, and counters as the other eOn pins. The 7095b23 pin, the 500350d9 pin, and the f6817b53 pin stay for the scores already run on them."
+
+[[code]]
+id = "eon-develop-f6817b53"
+name = "eOn (develop f6817b53)"
+role = "minimization and saddle search"
+repository = "https://github.com/TheochemUI/eon"
+ref = "develop"
+commit = "f6817b537ec1d1563420023fb45fbd0e5b75e7fd"
+committed = "2026-10-22"
+note = "develop at merge f6817b537ec1d1563420023fb45fbd0e5b75e7fd. The version string is 3.6.0 (f6817b53). The NEB conjugate-gradient band step uses secant lengths. This pin is not the 7095b23 develop pin and not the conda-forge 3.5.0 binary."
 
 [[code]]
 id = "eon-svn"
@@ -798,3 +808,13 @@ problem = "saddle-search/pt-island"
 profile = "adjusted"
 task = "sella-search"
 ranked = false
+
+[[code]]
+id = "gpridge"
+name = "GPRidge"
+role = "Gaussian-process band and saddle search"
+repository = "https://github.com/TheochemUI/gpridge"
+ref = "develop"
+commit = "fece04ffdbe3e6a5657cb93d0adadcf39004de7c"
+committed = "2026-10-22"
+note = "Native GP-NEB and CI-NEB share the rgpot Morse oracle. The runtime hash must match its native validation manifest. Provider counts are client counters; these rows do not enter the harness-ranked board."

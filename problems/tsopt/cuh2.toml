@@ -1,0 +1,50 @@
+id = "tsopt/cuh2"
+title = "H2 dissociation on a fixed Cu substrate"
+suite = "tsopt"
+problem = "cuh2"
+contract = "native"
+
+[potential]
+kind = "cuh2"
+pbc = [true, true, true]
+cell = [15.3456, 21.702, 100.0]
+
+[sample]
+starts = 4
+displacements = [0.02, 0.3, 1.0, 3.0]
+
+[input]
+directory = "inputs/gpridge/cuh2"
+source_repository = "https://github.com/TheochemUI/gpridge"
+source_revision = "fa64cf37aaf0172180de8dac0a0baefbdba85a0d"
+
+[input.sha256]
+"CuH2-init_PES_point.dat" = "914cdd7debe4900c404ecec8241dffeca66bdee5a9ba11d75ae5e4eca1dbbebc"
+"displacedH2.dat" = "e687e80c0fdbf72c6be2eb543b039298ecca1c495b6df9d29289ecfd3cac65f8"
+"orients_CuH2.dat" = "21babdb65fadfd9d6551a4209214f3e4e10d9d7a8ab5da3ef115e3cc365c51ea"
+"params.toml" = "be0bcbce74fe045695ff75ced40a26d7deee1e9ca75bd81e9d78a53c110c4a5d"
+
+[native_sources.sha256]
+"scripts/prepare_petmad_assets.py" = "8353d9a4e6b5ed4454072bb3826621a3198bfd2a52b73765e6d601c1fcb49d09"
+"schema/gprd_params.capnp" = "a2cf858e986ee6d04ecf79d61e76f0114d0609bec48e4989d89de7fd91fe4724"
+"subprojects/rgpot/CppCore/rgpot/rpc/Potentials.capnp" = "8c24c3a4b489d0d5d614c3acfc9ba68b39e6afca3536d0f94fbafc25ca88dcf0"
+
+[rpc_client]
+source_repository = "https://github.com/OmniPotentRPC/rgpot"
+source_revision = "4bcdd7859c29fde7162ee14a5722c86dd1e9095e"
+server_schema_sha256 = "8c24c3a4b489d0d5d614c3acfc9ba68b39e6afca3536d0f94fbafc25ca88dcf0"
+
+[rpc_client.sha256]
+"CppCore/rgpot/rpc/ase_calculator.py" = "4f82220786baf262e756cad564716d4d36ffb637aad52bb938ecf29c5642f79a"
+"CppCore/rgpot/rpc/Potentials.capnp" = "f501ee764928ab29056b16e4870e12485db8d5f479314366d1b1c907b7539deb"
+
+[convergence]
+norm = "linf"
+force_norm = 0.01
+force_unit = "eV/Angstrom"
+max_force_calls = 10000
+call_limit_enforcement = "acceptance"
+note = "The force-call threshold rejects an over-budget result; the native outer-iteration and wall-time limits bound execution."
+
+[metrics]
+required = ["force_calls", "force_calls_min", "force_calls_max", "nfailed"]

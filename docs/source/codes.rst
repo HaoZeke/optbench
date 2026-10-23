@@ -14,6 +14,7 @@ Archived rows use the same key and appear on that code page.
    <p>The benchmark contributor is Rohit Goswami. Each code page lists every ranked row for that code.</p>
    <ul>
    <li><a href="generated/codes/eon.html">eOn</a></li>
+   <li><a href="generated/codes/eon--develop-f6817b53.html">eOn (develop f6817b53)</a></li>
    <li><a href="generated/codes/eon-svn.html">Eon svn</a></li>
    <li><a href="generated/codes/rgmin.html">rgmin</a></li>
    <li><a href="generated/codes/rgsaddle.html">rgsaddle</a></li>
@@ -35,6 +36,7 @@ Archived rows use the same key and appear on that code page.
    <li><a href="generated/codes/airss.html">AIRSS</a></li>
    <li><a href="generated/codes/vc-sqnm.html">vc-SQNM</a></li>
    <li><a href="generated/codes/softsaddle.html">SoftSaddle</a></li>
+   <li><a href="generated/codes/gpridge.html">GPRidge</a></li>
    <li><a href="generated/codes/eon--svn-r2549.html">EON (SVN r2549)</a></li>
    <li><a href="generated/codes/eon--develop-500350d9.html">eOn (develop 500350d9)</a></li>
    <li><a href="generated/codes/eon-r2006.html">Eon r2006</a></li>
@@ -48,6 +50,7 @@ Archived rows use the same key and appear on that code page.
    :maxdepth: 1
 
    generated/codes/eon
+   generated/codes/eon--develop-f6817b53
    generated/codes/eon-svn
    generated/codes/rgmin
    generated/codes/rgsaddle
@@ -69,6 +72,7 @@ Archived rows use the same key and appear on that code page.
    generated/codes/airss
    generated/codes/vc-sqnm
    generated/codes/softsaddle
+   generated/codes/gpridge
    generated/codes/eon--svn-r2549
    generated/codes/eon--develop-500350d9
    generated/codes/eon-r2006

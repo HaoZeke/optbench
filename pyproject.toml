@@ -10,6 +10,7 @@ dependencies = ["cyclopts>=3.24", "numpy>=1.26", "matplotlib>=3.8"]
 optbench = "optbench.__main__:main"
 
 [dependency-groups]
+gpridge = ["ase==3.29.0", "h5py>=3.12", "pycapnp>=2"]
 dev = [
     "pytest>=8.3",
     "asv==0.6.6",
