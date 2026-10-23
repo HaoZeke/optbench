@@ -1,11 +1,11 @@
-# counter harness. One force call is one Lennard-Jones evaluation inside the two-point step.
-# buildcell draws the cell. The archived .con files name the starts.
-# A start succeeds when the harness energy is at or below the Wales minimum plus energy_above_minimum.
-# The problem states no force-call cap, so par2_mean is unset and the median is the call median.
-# AIRSS 0.9.4 example 1.4 scaled from sigma 2 to sigma 1. buildcell draws each cell with POSAMP 1.875, MINSEP 0.75, SYMMOPS 2-5, NFORM 1 and a cubic box of side 100. The seed is eight integers from the archived start index and the structure index. Relaxation is the pp3 two-point step, two passes, energy tolerance 1e-10, at most 9999 steps a pass, on optbench.potentials.lennard_jones. A start stops when that energy is at or below the harness energy of the Wales LJ38 coordinates plus 0.001.
-force_calls 112134
-force_calls_min 1672
-force_calls_max 955658
+# counter harness. One force call is one potential evaluation inside the two-point step.
+# buildcell draws the cell. The archived files name the starts.
+# A start succeeds when the harness energy is at or below the Cambridge minimum plus energy_above_minimum and the call count is under the cap.
+# A miss costs twice the cap.
+# AIRSS 0.9.4 example 1.4 scaled from sigma 2 to sigma 1. buildcell draws each cell with POSAMP 1.875, MINSEP 0.75, SYMMOPS 2-5, NFORM 1 and a cubic box of side 100. The seed is eight integers from the archived start index and the structure index. Relaxation is the pp3 two-point step, two passes, energy tolerance 1e-10, at most 9999 steps a pass, on optbench.potentials.lennard_jones. A start stops when that energy is at or below the harness energy of the Wales LJ38 coordinates plus 0.001, or when the harness count reaches the problem max_force_calls. The force-call cap is 2000000.
+force_calls 112698
+force_calls_min 1685
+force_calls_max 961328
 nfailed 0
 code AIRSS
 code_version 0.9.4
@@ -15,11 +15,12 @@ template airss/lj38
 problem globalopt/lj38
 tuning default
 counter harness
-rate_low 0.963006501793
-rate_high 1
-par2_median 70635.5
-par2_median_low 46380
-par2_median_high 96391.5
+par2_mean 112698.05
+wilson_low 0.963006501793
+wilson_high 1
+par2_median 70803.5
+par2_median_low 45762
+par2_median_high 90977
 v2_nfailed 0
 v2_successes 100
 n 100
@@ -27,3 +28,4 @@ energy_min -173.928426591
 energy_max -173.928426589
 structures_min 4
 structures_max 2480
+cap 2000000

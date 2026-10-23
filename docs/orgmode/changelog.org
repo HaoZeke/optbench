@@ -11,6 +11,8 @@ as the other tsopt problems. The counter is client and the success
 line is an infinity-norm stop plus Hessian index 1, matching the CuH2
 runner.
 
+AIRSS 0.9.4 (=5593cc4e=) on globalopt/lj38 records 100 starts at a force-call cap of 2000000. Every start reaches the Cambridge minimum. The PAR-2 mean is 112698.05.
+
 * 2026-10-21
 
 =integrate/batch-3= ranks the stock rows from the finished board branches.
