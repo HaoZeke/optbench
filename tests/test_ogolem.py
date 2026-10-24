@@ -27,6 +27,7 @@ from optbench.runners.ogolem_go import (
     jars_ready,
     load_starts,
     ogo_text,
+    selected_starts,
     smoke_dimer,
 )
 
@@ -287,3 +288,35 @@ def test_dimer_matches_the_spec_lennard_jones():
     assert record["energy"] == pytest.approx(-1.0, abs=1e-6)
     assert record["exit_code"] == 0
     assert 1 <= record["force_calls"] < 1000
+
+
+def test_lj98_scores_the_first_ten_starts_and_stays_off_the_ranked_table(tmp_path: Path):
+    template = load_template(ROOT, "ogolem/lj98")
+    problem = resolve_problem(ROOT, "globalopt/lj98")
+    assert template["ogolem"]["start_limit"] == 10
+    assert template["ogolem"]["ranked"] is False
+    assert _force_cap(problem, template) == 1_000_000_000
+    loaded = load_starts(ROOT, problem, template, tmp_path)
+    assert [name for name, _pos in loaded[:10]] == [f"coords.{index}" for index in range(1, 11)]
+    chosen = selected_starts(loaded, template, 0)
+    assert [name for name, _pos in chosen] == [f"coords.{index}" for index in range(1, 11)]
+    assert len(selected_starts(loaded, template, 3)) == 3
+    records = [
+        {
+            "energy": -543.0,
+            "force_calls": 100,
+            "success": False,
+            "failure": "cap",
+            "start": f"coords.{index}",
+            "index": index - 1,
+        }
+        for index in range(1, 11)
+    ]
+    output = tmp_path / "ogolem-lj98.dat"
+    _write_outputs(output, records, template, problem, 1_000_000_000, True)
+    text = output.read_text(encoding="utf-8")
+    assert "partial true" in text
+    assert "ranked false" in text
+    assert "cap 1000000000" in text
+    assert "n 10" in text
+    assert "scored 10 of 100 starts" in text

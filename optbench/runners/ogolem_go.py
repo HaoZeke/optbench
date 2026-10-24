@@ -547,6 +547,8 @@ def _dat(
         "energy_min": summary.get("energy_min"),
         "energy_max": summary.get("energy_max"),
     }
+    if (template.get("ogolem") or {}).get("ranked") is False:
+        rows["ranked"] = "false"
     lines = [
         "# counter harness. One force call is one lennard_jones evaluation through the OGOLEM socket.",
         "# A repeated geometry is one call. The call that would pass the cap is not counted.",
@@ -816,6 +818,19 @@ def execute_start(job: dict) -> dict:
     return record
 
 
+
+def selected_starts(loaded: list, template: dict, limit: int = 0) -> list:
+    """CLI limit wins. Otherwise the template start_limit. Zero keeps the archive."""
+    count = int(limit or 0)
+    if count <= 0:
+        raw = (template.get("ogolem") or {}).get("start_limit")
+        if raw not in (None, ""):
+            count = int(raw)
+    if count > 0:
+        return list(loaded[:count])
+    return list(loaded)
+
+
 def run_template(
     root: Path,
     problem: dict,
@@ -859,9 +874,7 @@ def run_template(
     scratch = work or Path(os.environ.get("OPTBENCH_OGOLEM_WORK", "/tmp/optbench-ogolem")) / template["id"].replace("/", "-")
     if geometries is not None:
         raise ValueError("ogolem reads the problem archive; pass no geometries directory")
-    loaded = load_starts(root, problem, template, scratch)
-    if limit:
-        loaded = loaded[: int(limit)]
+    loaded = selected_starts(load_starts(root, problem, template, scratch), template, limit)
     done = _completed(output.with_suffix(".starts.jsonl")) if resume else {}
     jobs = []
     kept = []
