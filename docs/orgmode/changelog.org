@@ -3,6 +3,8 @@
 
 * 2026-10-24
 
+OGOLEM =lj98= scores the first 10 of the 100 archived starts at the problem cap 1000000000. The row stays off the ranked table.
+
 The campaign dispatches the =ogolem= engine to one JVM per archived start.
 
 One OGOLEM start is one JVM. The printed jar stamp must match the harness pin before that start is scored. The two-atom Lennard-Jones check runs when the jars are installed.
