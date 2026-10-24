@@ -23,11 +23,11 @@
    <td>Lennard-Jones 38 global minimum</td>
    <td data-field="label">AIRSS (0.9.4) · random structure search</td>
    <td data-field="family">Basin hopping / global</td>
-   <td data-field="family_rank">10</td>
-   <td data-field="par2_mean"></td>
+   <td data-field="family_rank">4</td>
+   <td data-field="par2_mean">112698</td>
    <td data-field="published"></td>
-   <td data-field="median_calls">70635.5</td>
-   <td data-field="mean_calls">112134</td>
+   <td data-field="median_calls">70803.5</td>
+   <td data-field="mean_calls">112698</td>
    <td data-field="hessian_calls">0</td>
    <td data-field="fd_calls">0</td>
    <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>

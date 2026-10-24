@@ -141,7 +141,7 @@
    <td>Lennard-Jones 38 global minimum</td>
    <td data-field="label">GMIN · basin-hopping</td>
    <td data-field="family">Basin hopping / global</td>
-   <td data-field="family_rank">4</td>
+   <td data-field="family_rank">5</td>
    <td data-field="par2_mean"></td>
    <td data-field="published">265951</td>
    <td data-field="median_calls">202167</td>
@@ -155,7 +155,7 @@
    <td>Lennard-Jones 38 global minimum</td>
    <td data-field="label">GMIN (df8da599) · basin-hopping</td>
    <td data-field="family">Basin hopping / global</td>
-   <td data-field="family_rank">5</td>
+   <td data-field="family_rank">6</td>
    <td data-field="par2_mean">432092</td>
    <td data-field="published"></td>
    <td data-field="median_calls">301962</td>
@@ -169,7 +169,7 @@
    <td>Lennard-Jones 38 global minimum</td>
    <td data-field="label">GMIN (df8da599) · parallel tempering basin-hopping</td>
    <td data-field="family">Basin hopping / global</td>
-   <td data-field="family_rank">9</td>
+   <td data-field="family_rank">10</td>
    <td data-field="par2_mean">674789</td>
    <td data-field="published"></td>
    <td data-field="median_calls">307290</td>
