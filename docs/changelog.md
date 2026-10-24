@@ -2,6 +2,8 @@
 
 ## 2026-10-24
 
+asv imports one OGOLEM class per template. The default grid is seed 0 and start 0. The code page lists registry pin cce35a376d92. This branch adds no campaign row.
+
 OGOLEM lj98 scores the first 10 of the 100 archived starts at the problem cap 1000000000. The row stays off the ranked table.
 
 The campaign dispatches the ogolem engine to one JVM per archived start.
