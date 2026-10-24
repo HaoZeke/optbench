@@ -18,6 +18,8 @@ from pathlib import Path
 
 import numpy as np
 
+from .native_build import exclusive_publish
+
 Array = np.ndarray
 
 
@@ -175,25 +177,30 @@ def _morse_library():
     flags = "-O3 -march=native -fPIC -shared"
     digest = hashlib.sha256(source.read_bytes() + flags.encode()).hexdigest()[:16]
     library = Path(tempfile.gettempdir()) / f"optbench-morse-{digest}.so"
-    if not library.is_file():
-        try:
-            subprocess.check_call(
-                [
-                    "gcc",
-                    "-O3",
-                    "-march=native",
-                    "-fPIC",
-                    "-shared",
-                    "-o",
-                    str(library),
-                    str(source),
-                    "-lm",
-                ],
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-            )
-        except (OSError, subprocess.CalledProcessError):
+
+    def build(temporary: Path) -> bool:
+        subprocess.check_call(
+            [
+                "gcc",
+                "-O3",
+                "-march=native",
+                "-fPIC",
+                "-shared",
+                "-o",
+                str(temporary),
+                str(source),
+                "-lm",
+            ],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+        return True
+
+    try:
+        if not exclusive_publish(source, library, build):
             return None
+    except (OSError, subprocess.CalledProcessError):
+        return None
     import ctypes
 
     loaded = ctypes.CDLL(str(library))

@@ -37,6 +37,7 @@ from benchmarks.bench_eon_develop import (
 )
 from benchmarks.bench_eon_develop import MORSE_A, MORSE_D, MORSE_RE
 from optbench.asv_tracks import TrackedSearch as _TrackedSearch
+from optbench.native_build import exclusive_publish
 
 ROOT = Path(__file__).resolve().parents[1]
 EON_REVISION = "r2549"
@@ -78,10 +79,12 @@ def _bridge() -> Path:
         stale = Path(_BRIDGE).stat().st_mtime < source.stat().st_mtime
     if not stale:
         return _BRIDGE
-    if not dest.is_file() or (source.is_file() and dest.stat().st_mtime < source.stat().st_mtime):
-        temporary = dest.with_suffix(".tmp")
+
+    def build(temporary: Path) -> bool:
         subprocess.run(["gcc", "-O2", "-o", str(temporary), str(source)], check=True)
-        temporary.replace(dest)
+        return True
+
+    exclusive_publish(source, dest, build)
     _BRIDGE = dest
     return dest
 
@@ -102,13 +105,15 @@ def _morse_lib():
         return _MORSE_LIB
     source = ROOT / "optbench" / "morse_cluster.c"
     dest = Path(tempfile.gettempdir()) / "optbench-eon-svn-morse.so"
-    if not dest.is_file() or dest.stat().st_mtime < source.stat().st_mtime:
-        temporary = dest.with_suffix(".so.tmp")
+
+    def build(temporary: Path) -> bool:
         subprocess.run(
             ["gcc", "-O2", "-shared", "-fPIC", "-o", str(temporary), str(source), "-lm"],
             check=True,
         )
-        temporary.replace(dest)
+        return True
+
+    exclusive_publish(source, dest, build)
     lib = ctypes.CDLL(str(dest))
     lib.morse_eon_flat.argtypes = [
         ctypes.c_int,

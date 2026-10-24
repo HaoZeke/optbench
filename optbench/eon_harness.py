@@ -57,6 +57,7 @@ from .campaign import (
 from .eon_jobs import _client_env, _numpy_direction, _read_dat, _seeded_mode
 from .eon_parse import abs_overlap, flat_floats, xyz_to_con
 from .stationary import negative_index, vibrational_eigenvalues
+from .native_build import exclusive_publish
 from .surfaces import lennard_jones, morse_smooth_linear, read_con
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -118,19 +119,19 @@ def bridge_binary() -> Path:
     """Compile the C ext_pot forwarder once per source hash."""
     source = Path(__file__).with_name("extpot_bridge.c")
     digest = hashlib.sha256(source.read_bytes()).hexdigest()[:16]
-    dest = Path("/tmp/optbench-extpot-bridge") / digest / "extpot-bridge"
-    if dest.is_file():
-        return dest
-    dest.parent.mkdir(parents=True, exist_ok=True)
-    temporary = dest.with_suffix(".tmp")
-    subprocess.run(
-        ["cc", "-O2", "-o", str(temporary), str(source)],
-        check=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=True,
-    )
-    temporary.replace(dest)
+    dest = Path(tempfile.gettempdir()) / "optbench-extpot-bridge" / digest / "extpot-bridge"
+
+    def build(temporary: Path) -> bool:
+        subprocess.run(
+            ["cc", "-O2", "-o", str(temporary), str(source)],
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        return True
+
+    exclusive_publish(source, dest, build)
     return dest
 
 

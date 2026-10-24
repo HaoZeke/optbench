@@ -17,6 +17,8 @@ import subprocess
 import tempfile
 from pathlib import Path
 
+from .native_build import exclusive_publish
+
 NATIVE = Path(__file__).resolve().parent / "native"
 _KERNEL_SRC = NATIVE / "kernels.c"
 _BRIDGE_SRC = NATIVE / "extpot_bridge.c"
@@ -50,23 +52,23 @@ def _compile(source: Path, dest: Path, extra: list[str]) -> bool:
     gcc = shutil.which("gcc")
     if gcc is None or not source.is_file():
         return False
-    dest.parent.mkdir(parents=True, exist_ok=True)
-    temporary = dest.with_suffix(dest.suffix + ".tmp")
-    result = subprocess.run(
-        [gcc, * _CFLAGS, *extra, "-o", str(temporary), str(source), "-lm"],
-        check=False,
-        capture_output=True,
-        text=True,
-    )
-    log = dest.with_suffix(dest.suffix + ".log")
-    if result.returncode != 0:
-        log.write_text(result.stderr, encoding="utf-8")
-        temporary.unlink(missing_ok=True)
-        return False
-    log.unlink(missing_ok=True)
-    temporary.replace(dest)
-    dest.chmod(dest.stat().st_mode | 0o755)
-    return True
+
+    def build(temporary: Path) -> bool:
+        result = subprocess.run(
+            [gcc, *_CFLAGS, *extra, "-o", str(temporary), str(source), "-lm"],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        log = dest.with_suffix(dest.suffix + ".log")
+        if result.returncode != 0:
+            log.write_text(result.stderr, encoding="utf-8")
+            return False
+        log.unlink(missing_ok=True)
+        temporary.chmod(temporary.stat().st_mode | 0o755)
+        return True
+
+    return exclusive_publish(source, dest, build)
 
 
 _KERNELS: ctypes.CDLL | None | bool = None

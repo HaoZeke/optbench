@@ -28,6 +28,7 @@ from pathlib import Path
 import numpy as np
 
 from optbench.counter import ForceCallCap, HarnessCounter
+from optbench.native_build import exclusive_publish
 
 KIND_COMPUTE = 1
 KIND_QUIT = 2
@@ -208,10 +209,14 @@ def lennard_jones_compiled(coords: np.ndarray) -> tuple[float, np.ndarray]:
     if _LJ40 is None:
         source = Path(__file__).resolve().parents[1] / "codes" / "gmin" / "lj40.c"
         library = Path(tempfile.gettempdir()) / "optbench-lj40.so"
-        if not library.is_file() or library.stat().st_mtime < source.stat().st_mtime:
+
+        def build(temporary: Path) -> bool:
             subprocess.check_call(
-                ["gcc", "-O3", "-shared", "-fPIC", str(source), "-o", str(library)],
+                ["gcc", "-O3", "-shared", "-fPIC", str(source), "-o", str(temporary)],
             )
+            return True
+
+        exclusive_publish(source, library, build)
         loaded = ctypes.CDLL(str(library))
         loaded.optbench_lj40.argtypes = [
             ctypes.c_int,
