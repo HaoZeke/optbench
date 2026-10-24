@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-10-24
+
+GPRidge band tests skip when h5py is absent.
+
 ## 2026-10-23
 
 `write_all` keeps the handwritten block that follows the generated ASE
