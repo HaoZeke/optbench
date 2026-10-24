@@ -816,6 +816,118 @@ def execute_start(job: dict) -> dict:
     return record
 
 
+def run_template(
+    root: Path,
+    problem: dict,
+    template: dict,
+    *,
+    geometries: Path | None = None,
+    output: Path,
+    workers: int = 1,
+    work: Path | None = None,
+    limit: int = 0,
+    resume: bool = False,
+) -> dict:
+    commit = str(template.get("commit") or "")
+    if commit != COMMIT:
+        raise RuntimeError(f"{template['id']} commit {commit} is not the built pin {COMMIT}")
+    version = str(template.get("code_version") or "")
+    if version != CODE_VERSION:
+        raise RuntimeError(f"{template['id']} version {version} is not {CODE_VERSION}")
+    home = ogolem_home()
+    if not jars_ready(home):
+        raise RuntimeError(f"OGOLEM jars for {COMMIT} are not installed under {home}")
+    if not java_bin().is_file():
+        raise RuntimeError(f"java is missing at {java_bin()}")
+    _ensure_exploded(home)
+    printed = printed_version(home)
+    if printed != PRINTED_VERSION:
+        raise RuntimeError(f"OGOLEM printed {printed}, expected {PRINTED_VERSION}")
+    stated = template.get("problem")
+    if stated and stated != problem["id"]:
+        raise ValueError(f"{template['id']} is for {stated}, not {problem['id']}")
+    cap = _force_cap(problem, template)
+    settings = _ogolem_settings(template)
+    if settings["pool"] < 2:
+        raise ValueError(f"{template['id']} pool_size must be at least 2")
+    threshold = _threshold(problem, template)
+    if problem["id"] == "globalopt/lj38":
+        if threshold is None or abs(threshold - LJ38_STOP_ENERGY) > 1e-9:
+            raise RuntimeError(
+                f"lj38 threshold {threshold} is not the archived stop energy {LJ38_STOP_ENERGY}"
+            )
+    scratch = work or Path(os.environ.get("OPTBENCH_OGOLEM_WORK", "/tmp/optbench-ogolem")) / template["id"].replace("/", "-")
+    if geometries is not None:
+        raise ValueError("ogolem reads the problem archive; pass no geometries directory")
+    loaded = load_starts(root, problem, template, scratch)
+    if limit:
+        loaded = loaded[: int(limit)]
+    done = _completed(output.with_suffix(".starts.jsonl")) if resume else {}
+    jobs = []
+    kept = []
+    for index, (name, coords) in enumerate(loaded):
+        if name in done:
+            row = dict(done[name])
+            row["index"] = index
+            kept.append(row)
+            continue
+        jobs.append(
+            {
+                "index": index,
+                "start": name,
+                "coords": coords.reshape(-1, 3).tolist(),
+                "cap": cap,
+                "threshold": threshold,
+                "pool": settings["pool"],
+                "iterations": settings["iterations"],
+                "cell": settings["cell"],
+                "threads": settings["threads"],
+                "seed": index + 1,
+                "home": str(home),
+                "work": str(scratch / "starts" / f"{index:04d}-{name}"),
+                "wall": 86400,
+                "trace": False,
+                "code": template.get("code"),
+                "code_version": version,
+                "commit": commit,
+                "tuning": template.get("tuning", ""),
+                "template": template["id"],
+                "problem": problem["id"],
+            }
+        )
+    scored = threshold is not None
+    records = list(kept)
+
+    def _store(record: dict) -> None:
+        records.append(record)
+        _write_outputs(output, records, template, problem, cap, scored)
+        print(
+            f"{template['id']} {len(records)}/{len(loaded)} start={record['start']} "
+            f"calls={record['force_calls']} energy={record.get('energy')} "
+            f"failure={record.get('failure')} seconds={record.get('seconds', 0):.1f}",
+            flush=True,
+        )
+
+    if jobs and workers <= 1:
+        for job in jobs:
+            _store(execute_start(job))
+    elif jobs:
+        import multiprocessing as mp
+        from concurrent.futures import ProcessPoolExecutor, as_completed
+
+        context = mp.get_context("spawn")
+        with ProcessPoolExecutor(max_workers=workers, mp_context=context) as pool:
+            futures = [pool.submit(execute_start, job) for job in jobs]
+            for future in as_completed(futures):
+                _store(future.result())
+    elif records:
+        _write_outputs(output, records, template, problem, cap, scored)
+    else:
+        raise RuntimeError(f"{template['id']} has no starts")
+    summary = _write_outputs(output, records, template, problem, cap, scored)
+    return summary
+
+
 def smoke_dimer() -> dict:
     """Two atoms at the Lennard-Jones minimum, evaluated by a real JVM.
 
