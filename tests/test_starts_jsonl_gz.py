@@ -67,8 +67,20 @@ def test_recompressed_rgsaddle_022_starts_match_the_jsonl(tmp_path: Path):
         assert [run["starts"] for run in new_doc["runs"]] == [[] for _run in new_doc["runs"]]
         assert _without_starts(new_doc) == _without_starts(old_doc)
 
-    board = subprocess.run(
-        ["git", "-C", str(ROOT), "diff", "--quiet", ARCHIVE, "--", "results/board"],
-        check=False,
+    # Scores stay. The published note names the gzip file the loader read.
+    diff = subprocess.check_output(
+        ["git", "-C", str(ROOT), "diff", "-U0", ARCHIVE, "HEAD", "--", "results/board"],
+        text=True,
     )
-    assert board.returncode == 0
+    changed = [
+        line
+        for line in diff.splitlines()
+        if line[:1] in "+-" and not line.startswith(("+++", "---"))
+    ]
+    assert changed
+    assert all('"note": "starts.jsonl' in line for line in changed)
+    removed = [line[1:].strip() for line in changed if line.startswith("-")]
+    added = [line[1:].strip() for line in changed if line.startswith("+")]
+    assert removed == ['"note": "starts.jsonl",'] * len(removed)
+    assert added == ['"note": "starts.jsonl.gz",'] * len(added)
+    assert len(removed) == len(added) == 8
