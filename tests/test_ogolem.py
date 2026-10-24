@@ -24,8 +24,10 @@ from optbench.runners.ogolem_go import (
     _write_outputs,
     center_cluster,
     classify_start,
+    jars_ready,
     load_starts,
     ogo_text,
+    smoke_dimer,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -273,3 +275,15 @@ def test_partial_reason_is_kept_when_the_problem_states_no_full_set(tmp_path: Pa
     assert row["short"] is True
     assert row["short_reason"] == "no success rule on globalopt/toy; lowest energy -1.25000000; mean calls 4.0"
     assert document["problems"]["globalopt/toy"]["ranked"] == []
+
+
+def test_dimer_matches_the_spec_lennard_jones():
+    if not jars_ready():
+        pytest.skip("ogolem jars are not installed")
+    record = smoke_dimer()
+    distance = 2.0 ** (1.0 / 6.0)
+    assert record["first_distance"] == pytest.approx(distance, abs=1e-6)
+    assert record["first_energy"] == pytest.approx(-1.0, abs=1e-6)
+    assert record["energy"] == pytest.approx(-1.0, abs=1e-6)
+    assert record["exit_code"] == 0
+    assert 1 <= record["force_calls"] < 1000
