@@ -110,6 +110,42 @@ def test_saddle_files_stay_on_their_commit():
     assert seen == SADDLE_PATHS
 
 
+SOFTSADDLE_SHA = "bd1a5c9fc2685f5876266d53715accb31a049e73"
+SOFTSADDLE_HARNESS = {
+    "adaptive_HSphere-lbfgs-davidson-sm50": {
+        "force_calls": 5298701.7,
+        "unique_saddles": 0.0,
+        "fraction_connected": 1.0,
+    },
+    "adaptive_HSphere-lbfgs-lanczos-sm0": {
+        "force_calls": 1926653.9,
+        "unique_saddles": 0.5,
+        "fraction_connected": 0.9682000000000001,
+    },
+    "adaptive_HSphere-lbfgs-lanczos-sm50": {
+        "force_calls": 1582635.3,
+        "unique_saddles": 0.7,
+        "fraction_connected": 0.93584,
+    },
+}
+
+
+def test_softsaddle_rows_cite_the_ten_rep_file():
+    ledger = load_ledger(ROOT / "oracle" / "findings.jsonl")
+    seen = set()
+    for row in ledger:
+        if row.get("suite") != "saddle-search" or row.get("entry") not in SOFTSADDLE_HARNESS:
+            continue
+        beside = row["beside"]
+        assert beside["sha"] == SOFTSADDLE_SHA
+        assert "branch" not in beside
+        expected = SOFTSADDLE_HARNESS[row["entry"]]
+        harness = {item["metric"]: item["harness"] for item in row["values"]}
+        assert harness == expected
+        seen.add(row["entry"])
+    assert seen == set(SOFTSADDLE_HARNESS)
+
+
 def test_a_missing_pin_is_fetched(monkeypatch):
     calls = []
 
