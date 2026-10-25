@@ -143,9 +143,13 @@ def test_softsaddle_rows_cite_the_ten_rep_file():
         harness = {item["metric"]: item["harness"] for item in row["values"]}
         assert harness == expected
         if row["entry"] == "adaptive_HSphere-lbfgs-davidson-sm50":
+            assert "The scored Davidson sm50 row is bd1a5c9f" in row["finding"]
+            assert "247b70de is not a scored row" in row["finding"]
             assert "1054 to 1060" in row["finding"]
-            assert "softsaddle_charging returns 0" in row["finding"]
-            assert "27810 of 27900" in row["finding"]
+            assert "The Davidson library requests these gradients itself" in row["finding"]
+            assert "not an extra" not in row["finding"]
+            assert "1 + 1050 + 8 + 1 = 1060" in row["finding"]
+            assert "stays 0 converged" in row["finding"]
         seen.add(row["entry"])
     assert seen == set(SOFTSADDLE_HARNESS)
 

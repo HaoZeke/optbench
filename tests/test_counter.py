@@ -100,3 +100,44 @@ def test_pele_energy_is_one_gradient_entry():
     wrapped.getEnergyGradient([0.1, 0.0, 0.0])
     assert wrapped.calls == 2
     assert wrapped._inner.entries == 2
+
+
+def test_a_davidson_column_build_counts_each_request():
+    """The Pt-island Davidson anchor, products, and curvature probe.
+
+    ``Hessianominimo`` requests the base point and one displaced coordinate
+    for each of 525 free coordinates. ``finiteH`` adds one new point per
+    product and does not re-request the stored base. The iteration-0 LBFGS
+    step adds one curvature point. An immediate repeat is still one call,
+    and one ``energy_forces`` entry is one charge.
+    """
+    seen = []
+
+    def evaluate(coords):
+        seen.append(tuple(coords))
+        return (0.0, tuple(0.0 for _ in coords))
+
+    potential = CountedPotential(evaluate)
+    width = 525
+    base = tuple(0.0 for _ in range(width))
+    step = 1.0e-4
+    # minimumMode's first gradient is the search point. The column build
+    # uses the stored minimum, a different geometry, so it is not a cache hit.
+    potential.energy_forces(tuple(1.0 for _ in range(width)))
+    for index in range(width):
+        potential.energy_forces(base)
+        displaced = [0.0] * width
+        displaced[index] = step
+        potential.energy_forces(tuple(displaced))
+    for product in range(8):
+        point = [0.0] * width
+        point[0] = step * (2.0 + product)
+        potential.energy_forces(tuple(point))
+    probe = [0.0] * width
+    probe[1] = 1.0
+    potential.energy_forces(tuple(probe))
+    assert potential.calls == 1 + 2 * width + 8 + 1
+    assert len(seen) == potential.calls
+    potential.energy_forces(tuple(probe))
+    assert potential.calls == 1060
+    assert len(seen) == 1060

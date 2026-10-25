@@ -15,12 +15,15 @@ is benchmark_unique_saddles, the mean of connected. Davidson's
 A missing commit keeps the stored finding. A file that is present
 and disagrees with the stored row is still an error.
 
-Davidson sm50 at bd1a5c9f records one iteration and 1054 to 1060
-harness calls on every search. The template climb budget is
-max_iterations 1000, and that commit charges every Davidson
-callback, so the force norm stays above converged_force 0.001.
-At 247b70de a callback with softsaddle_charging 0 is not charged,
-and 27810 of 27900 searches converge under the same template.
+The scored Davidson sm50 row is the fully counted bd1a5c9f file.
+The Davidson library requests these gradients itself: Hessianominimo
+asks for a base gradient and one displaced gradient on each of the
+525 free coordinates, minimumMode asks once at the start, finiteH
+asks once per product (up to 8), and the first LBFGS step asks for
+one curvature gradient. 247b70de wraps Hessianominimo in
+SuppressCharge, leaving that column build off the harness tally.
+The template budget stays max_iterations 1000, and the row stays
+0 converged.
 
 * 2026-10-21
 
