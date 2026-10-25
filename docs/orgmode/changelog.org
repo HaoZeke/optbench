@@ -5,6 +5,16 @@
 
 Findings citations are commit shas. The six campaign files that =cells/optim/saddle-pt= no longer carries are cited at =02405b0d=. SoftSaddle scores are cited at =247b70de=, the commit that holds them. A branch name is rejected.
 
+The three SoftSaddle adaptive HSphere rows cite =bd1a5c9f=. Their
+harness columns are the benchmark fields in that file. Davidson
+sm50 force_calls is 5298701.7, unique_saddles is 0, and
+fraction_connected is 1. Lanczos sm0 is 1926653.9, 0.5, and
+0.9682. Lanczos sm50 is 1582635.3, 0.7, and 0.93584. unique_saddles
+is benchmark_unique_saddles, the mean of connected. Davidson's
+50000 starts all hit the cap and record no saddle, so 0 stays.
+A missing commit keeps the stored finding. A file that is present
+and disagrees with the stored row is still an error.
+
 * 2026-10-21
 
 =integrate/batch-3= ranks the stock rows from the finished board branches.
