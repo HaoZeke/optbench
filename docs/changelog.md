@@ -14,6 +14,13 @@ is benchmark_unique_saddles, the mean of connected. Davidson's
 A missing commit keeps the stored finding. A file that is present
 and disagrees with the stored row is still an error.
 
+Davidson sm50 at bd1a5c9f records one iteration and 1054 to 1060
+harness calls on every search. The template climb budget is
+max_iterations 1000, and that commit charges every Davidson
+callback, so the force norm stays above converged_force 0.001.
+At 247b70de a callback with softsaddle_charging 0 is not charged,
+and 27810 of 27900 searches converge under the same template.
+
 ## 2026-10-21
 
 `integrate/batch-3` ranks the stock rows from the finished board branches.

@@ -142,6 +142,10 @@ def test_softsaddle_rows_cite_the_ten_rep_file():
         expected = SOFTSADDLE_HARNESS[row["entry"]]
         harness = {item["metric"]: item["harness"] for item in row["values"]}
         assert harness == expected
+        if row["entry"] == "adaptive_HSphere-lbfgs-davidson-sm50":
+            assert "1054 to 1060" in row["finding"]
+            assert "softsaddle_charging returns 0" in row["finding"]
+            assert "27810 of 27900" in row["finding"]
         seen.add(row["entry"])
     assert seen == set(SOFTSADDLE_HARNESS)
 

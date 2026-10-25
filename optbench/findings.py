@@ -176,7 +176,7 @@ MATCHES: list[dict] = [
     {"key": "neb/Pt-heptamer/eon-qm", "template": "eon-qm", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-3.5.0-neb-pt-qm.dat"},
     # saddle search
     {"key": "saddle-search/pt-island/eon-dimer", "template": "eon-svn/saddle-pt-dimer", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-3.5.0-saddle-pt-classic.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "cause": "eon_saddle_count"},
-    {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-davidson-sm50", "template": "softsaddle/saddle-davidson-sm50", "sha": "bd1a5c9fc2685f5876266d53715accb31a049e73", "path": "results/campaign/softsaddle-2019.04-saddle-davidson-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
+    {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-davidson-sm50", "template": "softsaddle/saddle-davidson-sm50", "sha": "bd1a5c9fc2685f5876266d53715accb31a049e73", "path": "results/campaign/softsaddle-2019.04-saddle-davidson-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty", "extra_cause": "davidson_climb_cap"},
     {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm50", "template": "softsaddle/saddle-lanczos-sm50", "sha": "bd1a5c9fc2685f5876266d53715accb31a049e73", "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
     {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm0", "template": "softsaddle/saddle-lanczos-sm0", "sha": "bd1a5c9fc2685f5876266d53715accb31a049e73", "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm0.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
     # globalopt and htst and aladatom rates
@@ -264,6 +264,19 @@ CAUSE_TEXT = {
         "Distinct saddles collapse: benchmark_unique_saddles is 0, 0.7, and 0.5 against the archive 115, 143, and 130. "
         "benchmark_fraction_connected stays near 1 while the v2 connected fraction is about 0. "
         "The per-search cap of 5064 then puts every repetition on the PAR-2 cap."
+    ),
+    "davidson_climb_cap": (
+        "At bd1a5c9f all 50000 Davidson sm50 searches record one iteration, "
+        "harness calls from 1054 to 1060, reasons cap and force_norm, and a "
+        "positive curvature. The force norm runs from 0.7030758633778201 to "
+        "1.984485152955542. templates/softsaddle/saddle-davidson-sm50.toml sets "
+        "converged_force 0.001 and max_iterations 1000, and the climb budget is "
+        "that 1000. The climb stops when harness calls reach the budget, and the "
+        "first mode evaluation already passes it, so the force norm stays above "
+        "0.001. bd1a5c9f charges every Davidson callback through energy_forces. "
+        "At 247b70de a callback is left uncounted when softsaddle_charging returns "
+        "0, and that file records 27810 of 27900 searches converged with median "
+        "harness calls 341. The template file is the same at both commits."
     ),
     "pele_bh_defaults": (
         "The archived driver is the dangling path bin/js850/globalopt.py. "
@@ -758,6 +771,9 @@ def build_rows(root: Path, cited_sha: dict[str, str] | None = None) -> list[dict
         record["gap"] = _gap(values, failure)
         record["finding_id"] = named
         record["finding"] = CAUSE_TEXT.get(named, "") if named else ""
+        extra = match.get("extra_cause")
+        if extra:
+            record["finding"] = f"{record['finding']} {CAUSE_TEXT[extra]}".strip()
         beside = {
             "template": match["template"],
             "sha": sha,
