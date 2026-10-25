@@ -413,6 +413,10 @@ def screen_fields(text: str) -> dict[str, str]:
     }
 
 
+class MissingCampaign(Exception):
+    """The commit named by a finding is not in this repository."""
+
+
 def require_commit_sha(citation: object) -> str:
     """A finding cites a commit. A branch name is rejected."""
     if not isinstance(citation, str):
@@ -439,11 +443,14 @@ def _ensure_commit(root: Path, sha: str) -> None:
     """Bring a pinned commit into the clone when a branch fetch left it out."""
     if _have_commit(root, sha):
         return
-    subprocess.check_output(
-        ["git", "fetch", "origin", sha],
-        cwd=root,
-        stderr=subprocess.STDOUT,
-    )
+    try:
+        subprocess.check_output(
+            ["git", "fetch", "origin", sha],
+            cwd=root,
+            stderr=subprocess.STDOUT,
+        )
+    except (subprocess.CalledProcessError, FileNotFoundError, OSError) as exc:
+        raise MissingCampaign(sha) from exc
 
 
 def read_campaign(root: Path, citation: str, path: str) -> str:
@@ -602,8 +609,15 @@ def findings_errors(root: Path) -> list[str]:
                 errors.append(f"{item.get('key', 'match')} ranked file cites a branch name")
     if any("cites" in line for line in errors):
         return errors
-    fresh = build_rows(root)
+    cited = {}
+    for row in stored:
+        beside = row.get("beside") or {}
+        if beside.get("sha"):
+            cited[row_id(row)] = str(beside["sha"])
+    fresh = build_rows(root, cited)
     for left, right in zip(stored, fresh):
+        if right.pop("_missing_campaign", False):
+            continue
         if left != right:
             errors.append(f"{row_id(left)} stored finding does not match the campaign files")
             break
@@ -669,9 +683,10 @@ def _ranked_block(text: str) -> dict | None:
     return block or None
 
 
-def build_rows(root: Path) -> list[dict]:
+def build_rows(root: Path, cited_sha: dict[str, str] | None = None) -> list[dict]:
     from .check import load_oracle
 
+    cited_sha = cited_sha or {}
     oracle = {row_id(row): row for row in load_oracle(root / "oracle" / "entries.jsonl")}
     matches = {item["key"]: item for item in MATCHES}
     built = []
@@ -709,8 +724,17 @@ def build_rows(root: Path) -> list[dict]:
             built.append(record)
             continue
         kind = match.get("kind", "dat")
+        sha = cited_sha.get(ident) or match["sha"]
         try:
-            text = read_campaign(root, match["sha"], match["path"])
+            text = read_campaign(root, sha, match["path"])
+        except MissingCampaign:
+            record["_missing_campaign"] = True
+            named = match.get("cause", "")
+            if named:
+                record["finding_id"] = named
+                record["finding"] = CAUSE_TEXT.get(named, "")
+            built.append(record)
+            continue
         except (OSError, subprocess.CalledProcessError):
             named = match.get("cause", "")
             if named:
@@ -736,7 +760,7 @@ def build_rows(root: Path) -> list[dict]:
         record["finding"] = CAUSE_TEXT.get(named, "") if named else ""
         beside = {
             "template": match["template"],
-            "sha": match["sha"],
+            "sha": sha,
             "path": match["path"],
             "kind": kind,
             "metric": campaign_fields.get("metric", names[0] if names else "force_calls"),
@@ -751,6 +775,9 @@ def build_rows(root: Path) -> list[dict]:
         if ranked_path:
             try:
                 ranked_text = read_campaign(root, match["ranked_sha"], ranked_path)
+            except MissingCampaign:
+                record["_missing_campaign"] = True
+                ranked_text = ""
             except (OSError, subprocess.CalledProcessError):
                 ranked_text = ""
             ranked = _ranked_block(ranked_text) if ranked_text else None
@@ -843,6 +870,8 @@ def render_markdown(rows: list[dict]) -> str:
 
 def write_ledger(root: Path) -> list[dict]:
     rows = build_rows(root)
+    for row in rows:
+        row.pop("_missing_campaign", None)
     path = root / FINDINGS_PATH
     payload = "\n".join(json.dumps(row, sort_keys=True) for row in rows) + "\n"
     path.write_text(payload, encoding="utf-8")

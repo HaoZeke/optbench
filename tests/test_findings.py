@@ -146,6 +146,42 @@ def test_softsaddle_rows_cite_the_ten_rep_file():
     assert seen == set(SOFTSADDLE_HARNESS)
 
 
+def test_a_missing_campaign_blob_keeps_the_stored_finding(monkeypatch):
+    from optbench import findings
+
+    real = findings.read_campaign
+
+    def read_local(root, citation, path):
+        if str(path).endswith("saddle-davidson-sm50.dat"):
+            raise findings.MissingCampaign(citation)
+        return real(root, citation, path)
+
+    monkeypatch.setattr(findings, "read_campaign", read_local)
+    assert findings.findings_errors(ROOT) == []
+
+
+def test_a_cited_file_that_disagrees_is_an_error(monkeypatch):
+    from optbench import findings
+
+    real = findings.read_campaign
+
+    def read_wrong(root, citation, path):
+        if str(path).endswith("saddle-davidson-sm50.dat"):
+            return (
+                "force_calls 1\n"
+                "unique_saddles 1\n"
+                "fraction_connected 1\n"
+                "benchmark_unique_saddles 1\n"
+                "benchmark_fraction_connected 1\n"
+                "nfailed 0\n"
+            )
+        return real(root, citation, path)
+
+    monkeypatch.setattr(findings, "read_campaign", read_wrong)
+    errors = findings.findings_errors(ROOT)
+    assert any("does not match" in line for line in errors)
+
+
 def test_a_missing_pin_is_fetched(monkeypatch):
     calls = []
 
