@@ -7,8 +7,14 @@ Fourteen GMIN rows now cite =62c0d93f=. That commit is on main.
 Each cited file has the same blob there as it had at =71f366d9=
 or =7e49bdf6=, including the lj98 ranked file and the CSM file.
 A missing cited commit is an error that names the row and the
-sha. =optbench check= also rejects a cited sha that is not an
-ancestor of main or of a ref in =oracle/protected-refs.txt=.
+sha. =optbench check= accepts a cited sha that is an ancestor of
+origin/main, or exactly the commit named by a tag in
+=oracle/protected-refs.txt=.
+
+The seven off-main commits are lightweight tags under =cite/=,
+named with the first 12 hex digits. The 19 rows that cite them
+keep the sha and record that tag. A listed tag that is missing,
+or that points at a different commit, is an error.
 
 * 2026-10-25
 
