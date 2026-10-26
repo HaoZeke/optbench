@@ -1,1 +1,1 @@
-Findings citations are commit shas. The six campaign files that `cells/optim/saddle-pt` no longer carries are cited at `02405b0d`. SoftSaddle scores are cited at `247b70de`, the commit that holds them. A branch name is rejected.
+Pin findings citations to commit shas.
