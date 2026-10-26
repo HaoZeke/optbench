@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-10-26
+
+A catalog rewrite keeps the handwritten block after the generated template tables, and the asv grid names GPRidge.
+
+
 ## 2026-10-21
 
 `integrate/batch-3` ranks the stock rows from the finished board branches.
