@@ -192,23 +192,56 @@ def test_a_cited_sha_outside_main_names_the_row(monkeypatch):
 def test_an_allowlisted_ref_keeps_the_citation(monkeypatch):
     from optbench import findings
 
+    tag = "cite/bd1a5c9fc268"
     rows = [
         {
             "suite": "saddle-search",
             "problem": "pt-island",
             "entry": "adaptive_HSphere-lbfgs-davidson-sm50",
-            "beside": {"sha": SOFTSADDLE_SHA},
+            "beside": {"sha": SOFTSADDLE_SHA, "tag": tag},
         }
     ]
     monkeypatch.setattr(findings, "load_ledger", lambda path: rows)
-    monkeypatch.setattr(findings, "_main_ref", lambda root: "main")
-    monkeypatch.setattr(findings, "protected_refs", lambda root: ["refs/tags/softsaddle-bd1a5c9f"])
-
-    def ancestor(root, sha, ref):
-        return ref == "refs/tags/softsaddle-bd1a5c9f"
-
-    monkeypatch.setattr(findings, "_is_ancestor", ancestor)
+    monkeypatch.setattr(findings, "_main_ref", lambda root: "origin/main")
+    monkeypatch.setattr(findings, "protected_refs", lambda root: [tag])
+    monkeypatch.setattr(findings, "_is_ancestor", lambda root, sha, ref: False)
+    monkeypatch.setattr(findings, "_peel_commit", lambda root, ref: SOFTSADDLE_SHA)
     assert citation_reachability_errors(ROOT) == []
+
+
+def test_a_parent_of_a_protected_tag_is_rejected(monkeypatch):
+    from optbench import findings
+
+    tag = "cite/bd1a5c9fc268"
+    parent = "a" * 40
+    rows = [
+        {
+            "suite": "saddle-search",
+            "problem": "pt-island",
+            "entry": "adaptive_HSphere-lbfgs-davidson-sm50",
+            "beside": {"sha": parent, "tag": tag},
+        }
+    ]
+    monkeypatch.setattr(findings, "load_ledger", lambda path: rows)
+    monkeypatch.setattr(findings, "_main_ref", lambda root: "origin/main")
+    monkeypatch.setattr(findings, "protected_refs", lambda root: [tag])
+    monkeypatch.setattr(findings, "_is_ancestor", lambda root, sha, ref: False)
+    monkeypatch.setattr(findings, "_peel_commit", lambda root, ref: SOFTSADDLE_SHA)
+    errors = citation_reachability_errors(ROOT)
+    assert errors == [
+        f"{rows[0]['suite']}/{rows[0]['problem']}/{rows[0]['entry']} "
+        f"cites tag {tag}, which points at {SOFTSADDLE_SHA} rather than {parent}"
+    ]
+
+
+def test_a_missing_protected_tag_is_an_error(monkeypatch):
+    from optbench import findings
+
+    tag = "cite/bd1a5c9fc268"
+    monkeypatch.setattr(findings, "load_ledger", lambda path: [])
+    monkeypatch.setattr(findings, "protected_refs", lambda root: [tag])
+    monkeypatch.setattr(findings, "_peel_commit", lambda root, ref: "")
+    assert citation_reachability_errors(ROOT) == [f"protected ref {tag} is missing"]
 
 
 def test_main_reaches_the_gmin_commit_and_not_the_softsaddle_commit():
@@ -218,6 +251,37 @@ def test_main_reaches_the_gmin_commit_and_not_the_softsaddle_commit():
     assert ref
     assert _is_ancestor(ROOT, "62c0d93f650b2bcf17480297c33c6a1fcc981c45", ref)
     assert not _is_ancestor(ROOT, SOFTSADDLE_SHA, ref)
+
+
+CITE_TAGS = {
+    "cite/bd1a5c9fc268": "bd1a5c9fc2685f5876266d53715accb31a049e73",
+    "cite/02405b0d5580": "02405b0d55809cb81921e75f9ef29dc85a13f4bf",
+    "cite/0528a37b8ff6": "0528a37b8ff6e54805b9fa75345ee3c40b756a5d",
+    "cite/715bc521c827": "715bc521c827f1f18102c1c027d99d0d8624b0fb",
+    "cite/158d27812f76": "158d27812f76160469f6134a14eda16e4ab151e1",
+    "cite/f3cf41d74f73": "f3cf41d74f73fb2ffb3b5199291c90a4743a1000",
+    "cite/54ac7e7a1aa6": "54ac7e7a1aa6581c261c17fc2c52a20e77121911",
+}
+
+
+def test_the_cite_tags_name_the_off_main_commits():
+    from optbench.findings import _peel_commit
+
+    assert protected_refs(ROOT) == list(CITE_TAGS)
+    for ref, sha in CITE_TAGS.items():
+        assert _peel_commit(ROOT, ref) == sha
+    by_sha = {sha: ref for ref, sha in CITE_TAGS.items()}
+    tagged = 0
+    for row in load_ledger(ROOT / "oracle" / "findings.jsonl"):
+        beside = row.get("beside") or {}
+        sha = beside.get("sha")
+        if sha not in by_sha:
+            assert "tag" not in beside
+            continue
+        assert beside.get("tag") == by_sha[sha]
+        tagged += 1
+    assert tagged == 19
+    assert citation_reachability_errors(ROOT) == []
 
 
 def test_protected_refs_skip_comments(tmp_path: Path):

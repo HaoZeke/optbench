@@ -115,7 +115,7 @@ MATCHES: list[dict] = [
     {"key": "minimization/lj38/ase-BFGS", "template": "ase/lj38-bfgs-tuned", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/ase-3.29.0-lj38-bfgs-tuned.dat"},
     {"key": "minimization/lj38/ase-bfgslinesearch", "template": "ase/lj38-bfgslinesearch-tuned", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/ase-3.29.0-lj38-bfgslinesearch-tuned.dat"},
     {"key": "minimization/lj38/ase-fire", "template": "ase/lj38-fire-tuned", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/ase-3.29.0-lj38-fire-tuned.dat"},
-    {"key": "minimization/lj38/optim", "template": "optim/lj38-lbfgs-tuned", "sha": "f3cf41d74f73fb2ffb3b5199291c90a4743a1000", "path": "results/campaign/optim-02aaf45245af-lj38-lbfgs-tuned.dat", "extra": {"unrounded_mean": 175.537}},
+    {"key": "minimization/lj38/optim", "template": "optim/lj38-lbfgs-tuned", "sha": "f3cf41d74f73fb2ffb3b5199291c90a4743a1000", "tag": "cite/f3cf41d74f73", "path": "results/campaign/optim-02aaf45245af-lj38-lbfgs-tuned.dat", "extra": {"unrounded_mean": 175.537}},
     {"key": "minimization/lj38/pele-lbfgs-M1-maxstep0.1", "template": "pele-lbfgs-M1-maxstep0.1", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/pele-0.1.2-lbfgs-M1-maxstep0.1.dat"},
     {"key": "minimization/lj38/pele-lbfgs-M10-maxstep0.1", "template": "pele-lbfgs-M10-maxstep0.1", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/pele-0.1.2-lbfgs-M10-maxstep0.1.dat"},
     {"key": "minimization/lj38/pele-lbfgs-M100-maxstep0.2", "template": "pele-lbfgs-M100-maxstep0.2", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/pele-0.1.2-lbfgs-M100-maxstep0.2.dat"},
@@ -129,7 +129,7 @@ MATCHES: list[dict] = [
     {"key": "minimization/morse-bulk/eon-cg", "template": "eon-client/morse-cg", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-client-morse-cg.dat"},
     {"key": "minimization/morse-bulk/eon-fire", "template": "eon-client/morse-fire", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-client-morse-fire.dat"},
     {"key": "minimization/morse-bulk/eon-sd", "template": "eon-client/morse-sd", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-client-morse-sd.dat", "cause": "morse_sd"},
-    {"key": "minimization/morse-bulk/optim", "template": "optim/morse-lbfgs-tuned", "sha": "f3cf41d74f73fb2ffb3b5199291c90a4743a1000", "path": "results/campaign/optim-02aaf45245af-morse-lbfgs-tuned.dat", "cause": "optim_morse_memory"},
+    {"key": "minimization/morse-bulk/optim", "template": "optim/morse-lbfgs-tuned", "sha": "f3cf41d74f73fb2ffb3b5199291c90a4743a1000", "tag": "cite/f3cf41d74f73", "path": "results/campaign/optim-02aaf45245af-morse-lbfgs-tuned.dat", "cause": "optim_morse_memory"},
     {"key": "minimization/morse-bulk/pele-lbfgs", "template": "pele/morse-lbfgs", "sha": "5bb7c3801f52b697c48ada5811c5f766dd81a23d", "path": "results/campaign/pele-b7081b93-morse-lbfgs.dat", "cause": "pele_morse"},
     {"key": "minimization/morse-bulk/ase-lbfgs", "template": "ase/morse-lbfgs-tuned", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/ase-3.29.0-morse-lbfgs-tuned.dat", "cause": "ase_morse_script"},
     {"key": "minimization/morse-bulk/ase-fire", "template": "ase/morse-fire-tuned", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/ase-3.29.0-morse-fire-tuned.dat", "cause": "ase_morse_script"},
@@ -138,37 +138,37 @@ MATCHES: list[dict] = [
     {"key": "lowest-eigenvector/lj38/eon-dimer-cg", "template": "eon-client/low-lj38-dimer-cg", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-client-low-lj38-dimer-cg.dat"},
     {"key": "lowest-eigenvector/lj38/eon-dimer-lbfgs", "template": "eon-client/low-lj38-dimer-lbfgs", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-client-low-lj38-dimer-lbfgs.dat"},
     {"key": "lowest-eigenvector/lj38/eon-lanczos", "template": "eon-svn/low-lj38-lanczos-ljcut", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-svn-low-lj38-lanczos-ljcut.dat"},
-    {"key": "lowest-eigenvector/lj38/pele-first-order", "template": "pele/lj38-loweig-forward", "sha": "158d27812f76160469f6134a14eda16e4ab151e1", "path": "results/campaign/pele-b7081b93-lj38-loweig-forward.dat"},
-    {"key": "lowest-eigenvector/lj38/pele-second-order", "template": "pele/lj38-loweig-central", "sha": "158d27812f76160469f6134a14eda16e4ab151e1", "path": "results/campaign/pele-b7081b93-lj38-loweig-central.dat"},
-    {"key": "lowest-eigenvector/lj38/optim-first-order", "template": "optim/rr-loweig", "sha": "02405b0d55809cb81921e75f9ef29dc85a13f4bf", "path": "results/campaign/optim-df8da599-rr-loweig.dat", "cause": "optim_rr_defaults"},
+    {"key": "lowest-eigenvector/lj38/pele-first-order", "template": "pele/lj38-loweig-forward", "sha": "158d27812f76160469f6134a14eda16e4ab151e1", "tag": "cite/158d27812f76", "path": "results/campaign/pele-b7081b93-lj38-loweig-forward.dat"},
+    {"key": "lowest-eigenvector/lj38/pele-second-order", "template": "pele/lj38-loweig-central", "sha": "158d27812f76160469f6134a14eda16e4ab151e1", "tag": "cite/158d27812f76", "path": "results/campaign/pele-b7081b93-lj38-loweig-central.dat"},
+    {"key": "lowest-eigenvector/lj38/optim-first-order", "template": "optim/rr-loweig", "sha": "02405b0d55809cb81921e75f9ef29dc85a13f4bf", "tag": "cite/02405b0d5580", "path": "results/campaign/optim-df8da599-rr-loweig.dat", "cause": "optim_rr_defaults"},
     # tsopt
     {"key": "tsopt/LJ38/eon-dimer", "template": "eon-svn/ts-lj38-dimer-ljcut", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-svn-ts-lj38-dimer-ljcut.dat"},
     {"key": "tsopt/LJ38/eon-lanczos", "template": "eon-svn/ts-lj38-lanczos-ljcut", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-svn-ts-lj38-lanczos-ljcut.dat"},
     {"key": "tsopt/LJ38/eon-lanczos-improved", "template": "eon-svn/ts-lj38-lanczos-improved", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-svn-ts-lj38-lanczos-improved.dat", "cause": "improved_unset"},
     {"key": "tsopt/LJ38/sella", "template": "sella/lj38-ts-tuned", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/sella-2.6.0-lj38-ts-tuned.dat", "cause": "sella_trust"},
-    {"key": "tsopt/LJ38/pele_ffd", "template": "pele/lj38-ts-ffd", "sha": "54ac7e7a1aa6581c261c17fc2c52a20e77121911", "path": "results/campaign/pele-b7081b93-lj38-ts-ffd.screen.jsonl", "kind": "screen", "cause": "lj38_ts_starts"},
-    {"key": "tsopt/LJ38/pele_cd", "template": "pele/lj38-ts-cd", "sha": "54ac7e7a1aa6581c261c17fc2c52a20e77121911", "path": "results/campaign/pele-b7081b93-lj38-ts-cd.screen.jsonl", "kind": "screen", "cause": "lj38_ts_starts_cd"},
-    {"key": "tsopt/LJ38/optim_ffd", "template": "optim/hef-ffd-ts-lj38", "sha": "02405b0d55809cb81921e75f9ef29dc85a13f4bf", "path": "results/campaign/optim-df8da599-hef-ffd-ts-lj38.dat", "cause": "optim_lj38_ts"},
+    {"key": "tsopt/LJ38/pele_ffd", "template": "pele/lj38-ts-ffd", "sha": "54ac7e7a1aa6581c261c17fc2c52a20e77121911", "tag": "cite/54ac7e7a1aa6", "path": "results/campaign/pele-b7081b93-lj38-ts-ffd.screen.jsonl", "kind": "screen", "cause": "lj38_ts_starts"},
+    {"key": "tsopt/LJ38/pele_cd", "template": "pele/lj38-ts-cd", "sha": "54ac7e7a1aa6581c261c17fc2c52a20e77121911", "tag": "cite/54ac7e7a1aa6", "path": "results/campaign/pele-b7081b93-lj38-ts-cd.screen.jsonl", "kind": "screen", "cause": "lj38_ts_starts_cd"},
+    {"key": "tsopt/LJ38/optim_ffd", "template": "optim/hef-ffd-ts-lj38", "sha": "02405b0d55809cb81921e75f9ef29dc85a13f4bf", "tag": "cite/02405b0d5580", "path": "results/campaign/optim-df8da599-hef-ffd-ts-lj38.dat", "cause": "optim_lj38_ts"},
     {"key": "tsopt/pt-island/eon-dimer", "template": "eon-svn/ts-pt-dimer-smooth", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-svn-ts-pt-dimer-smooth.dat"},
     {"key": "tsopt/pt-island/eon-lanczos", "template": "eon-svn/ts-pt-lanczos-smooth", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-svn-ts-pt-lanczos-smooth.dat"},
     {"key": "tsopt/pt-island/eon-lanczos-improved", "template": "eon-svn/ts-pt-lanczos-improved", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-svn-ts-pt-lanczos-improved.dat"},
     {"key": "tsopt/pt-island/sella", "template": "sella/pt-island-ts-tuned", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/sella-2.6.0-pt-island-ts-tuned.dat", "cause": "sella_trust"},
-    {"key": "tsopt/pt-island/pele", "template": "pele/pt-island-ts-ffd", "sha": "54ac7e7a1aa6581c261c17fc2c52a20e77121911", "path": "results/campaign/pele-b7081b93-pt-island-ts-ffd.screen.jsonl", "kind": "screen"},
-    {"key": "tsopt/pt-island/optim_ffd", "template": "optim/hef-ffd-ts-pt", "sha": "02405b0d55809cb81921e75f9ef29dc85a13f4bf", "path": "results/campaign/optim-df8da599-hef-ffd-ts-pt.dat", "cause": "optim_pt_units"},
+    {"key": "tsopt/pt-island/pele", "template": "pele/pt-island-ts-ffd", "sha": "54ac7e7a1aa6581c261c17fc2c52a20e77121911", "tag": "cite/54ac7e7a1aa6", "path": "results/campaign/pele-b7081b93-pt-island-ts-ffd.screen.jsonl", "kind": "screen"},
+    {"key": "tsopt/pt-island/optim_ffd", "template": "optim/hef-ffd-ts-pt", "sha": "02405b0d55809cb81921e75f9ef29dc85a13f4bf", "tag": "cite/02405b0d5580", "path": "results/campaign/optim-df8da599-hef-ffd-ts-pt.dat", "cause": "optim_pt_units"},
     # double-ended
     {"key": "double-ended-saddle-search/lj38/eon-ci-neb", "template": "eon-svn/de-lj38-ci-neb", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-svn-de-lj38-ci-neb.dat"},
     {"key": "double-ended-saddle-search/lj38/eon-ci-swdneb", "template": "eon-3.5.0/de-lj38-ci-swdneb", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-3.5.0-de-lj38-ci-swdneb.dat", "cause": "de_exclusion"},
     {"key": "double-ended-saddle-search/lj38/eon-dimer", "template": "eon-svn/de-lj38-dimer", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-svn-de-lj38-dimer.dat", "cause": "improved_unset"},
     {"key": "double-ended-saddle-search/lj38/eon-lanczos", "template": "eon-client/de-lj38-lanczos", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-client-de-lj38-lanczos.dat"},
     {"key": "double-ended-saddle-search/lj38/eon-lanczos-improved", "template": "eon-client/de-lj38-lanczos-improved", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-client-de-lj38-lanczos-improved.dat"},
-    {"key": "double-ended-saddle-search/lj38/optim", "template": "optim/de-lj38", "sha": "02405b0d55809cb81921e75f9ef29dc85a13f4bf", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-lj38--optim-de-lj38.dat", "cause": "optim_pes_counter"},
-    {"key": "double-ended-saddle-search/lj38_2ts_separation/optim", "template": "optim/de-2ts", "sha": "02405b0d55809cb81921e75f9ef29dc85a13f4bf", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-lj38_2ts_separation--optim-de-2ts.dat", "cause": "optim_pes_counter"},
+    {"key": "double-ended-saddle-search/lj38/optim", "template": "optim/de-lj38", "sha": "02405b0d55809cb81921e75f9ef29dc85a13f4bf", "tag": "cite/02405b0d5580", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-lj38--optim-de-lj38.dat", "cause": "optim_pes_counter"},
+    {"key": "double-ended-saddle-search/lj38_2ts_separation/optim", "template": "optim/de-2ts", "sha": "02405b0d55809cb81921e75f9ef29dc85a13f4bf", "tag": "cite/02405b0d5580", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-lj38_2ts_separation--optim-de-2ts.dat", "cause": "optim_pes_counter"},
     {"key": "double-ended-saddle-search/pt-island/eon-ci-neb", "template": "eon-svn/de-pt-ci-neb", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-svn-de-pt-ci-neb.dat"},
     {"key": "double-ended-saddle-search/pt-island/eon-ci-swdneb", "template": "eon-svn/de-pt-ci-swdneb", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-svn-de-pt-ci-swdneb.dat"},
     {"key": "double-ended-saddle-search/pt-island/eon-dimer", "template": "eon-svn/de-pt-dimer", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-svn-de-pt-dimer.dat"},
     {"key": "double-ended-saddle-search/pt-island/eon-lanczos", "template": "eon-svn/de-pt-lanczos", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-svn-de-pt-lanczos.dat", "cause": "pt_lanczos"},
     {"key": "double-ended-saddle-search/pt-island/eon-lanczos-improved", "template": "eon-svn/de-pt-lanczos-improved", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-svn-de-pt-lanczos-improved.dat", "cause": "pt_lanczos"},
-    {"key": "double-ended-saddle-search/pt-island/optim", "template": "optim/de-pt", "sha": "02405b0d55809cb81921e75f9ef29dc85a13f4bf", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-pt-island--optim-de-pt.dat", "cause": "optim_pt_units"},
+    {"key": "double-ended-saddle-search/pt-island/optim", "template": "optim/de-pt", "sha": "02405b0d55809cb81921e75f9ef29dc85a13f4bf", "tag": "cite/02405b0d5580", "path": "results/campaign/optim-svn-snapshot-double-ended-saddle-search-pt-island--optim-de-pt.dat", "cause": "optim_pt_units"},
     # neb per-image means already stored in the 3.5.0 files
     {"key": "neb/Pt-heptamer/eon-lbfgs", "template": "eon-lbfgs", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-3.5.0-neb-pt-lbfgs.dat"},
     {"key": "neb/Pt-heptamer/eon-cg", "template": "eon-cg", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-3.5.0-neb-pt-cg.dat", "cause": "heptamer_cg"},
@@ -176,12 +176,12 @@ MATCHES: list[dict] = [
     {"key": "neb/Pt-heptamer/eon-qm", "template": "eon-qm", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-3.5.0-neb-pt-qm.dat"},
     # saddle search
     {"key": "saddle-search/pt-island/eon-dimer", "template": "eon-svn/saddle-pt-dimer", "sha": "883b4153baa013b52de36c4512f0859bea15dc35", "path": "results/campaign/eon-3.5.0-saddle-pt-classic.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "cause": "eon_saddle_count"},
-    {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-davidson-sm50", "template": "softsaddle/saddle-davidson-sm50", "sha": "bd1a5c9fc2685f5876266d53715accb31a049e73", "path": "results/campaign/softsaddle-2019.04-saddle-davidson-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty", "extra_cause": "davidson_climb_cap"},
-    {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm50", "template": "softsaddle/saddle-lanczos-sm50", "sha": "bd1a5c9fc2685f5876266d53715accb31a049e73", "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
-    {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm0", "template": "softsaddle/saddle-lanczos-sm0", "sha": "bd1a5c9fc2685f5876266d53715accb31a049e73", "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm0.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
+    {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-davidson-sm50", "template": "softsaddle/saddle-davidson-sm50", "sha": "bd1a5c9fc2685f5876266d53715accb31a049e73", "tag": "cite/bd1a5c9fc268", "path": "results/campaign/softsaddle-2019.04-saddle-davidson-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty", "extra_cause": "davidson_climb_cap"},
+    {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm50", "template": "softsaddle/saddle-lanczos-sm50", "sha": "bd1a5c9fc2685f5876266d53715accb31a049e73", "tag": "cite/bd1a5c9fc268", "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm50.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
+    {"key": "saddle-search/pt-island/adaptive_HSphere-lbfgs-lanczos-sm0", "template": "softsaddle/saddle-lanczos-sm0", "sha": "bd1a5c9fc2685f5876266d53715accb31a049e73", "tag": "cite/bd1a5c9fc268", "path": "results/campaign/softsaddle-2019.04-saddle-lanczos-sm0.dat", "metrics": ["force_calls", "unique_saddles", "fraction_connected"], "value_from": {"unique_saddles": "benchmark_unique_saddles", "fraction_connected": "benchmark_fraction_connected"}, "cause": "saddle_novelty"},
     # globalopt and htst and aladatom rates
     {"key": "globalopt/lj38/eon-basinhopping", "template": "eon-client/bh-lj38", "sha": "c140d970f659ba27d6048130f0e67fa02944bd7a", "path": "results/campaign/eon-client-bh-lj38.dat"},
-    {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "sha": "0528a37b8ff6e54805b9fa75345ee3c40b756a5d", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
+    {"key": "globalopt/lj38/pele-basinhopping", "template": "pele/lj38-basinhopping", "sha": "0528a37b8ff6e54805b9fa75345ee3c40b756a5d", "tag": "cite/0528a37b8ff6", "path": "results/campaign/pele-b7081b93-lj38-basinhopping.dat", "cause": "pele_bh_defaults"},
     {"key": "globalopt/lj38/gmin-nosym", "template": "gmin-paper/lj38-nosym", "sha": "62c0d93f650b2bcf17480297c33c6a1fcc981c45", "path": "results/campaign/gmin-paper-lj38-nosym.dat"},
     {"key": "globalopt/lj38/gmin-csm", "template": "gmin/lj38-csm", "sha": "62c0d93f650b2bcf17480297c33c6a1fcc981c45", "path": "results/campaign/gmin-df8da599-lj38-csm.dat", "cause": "gmin_csm", "ranked_path": "results/campaign/gmin-df8da599-lj38-csm.dat", "ranked_sha": "62c0d93f650b2bcf17480297c33c6a1fcc981c45"},
     {"key": "globalopt/lj38/gmin-symmetrise", "template": "gmin-paper/lj38-symmetrise", "sha": "62c0d93f650b2bcf17480297c33c6a1fcc981c45", "path": "results/campaign/gmin-paper-lj38-symmetrise.dat"},
@@ -196,8 +196,8 @@ MATCHES: list[dict] = [
     {"key": "globalopt/tip4p15/gmin-tbp", "template": "gmin-paper/tip4p15-tbp", "sha": "62c0d93f650b2bcf17480297c33c6a1fcc981c45", "path": "results/campaign/gmin-paper-tip4p15-tbp.dat"},
     {"key": "globalopt/tip4p20/gmin", "template": "gmin-paper/tip4p20", "sha": "62c0d93f650b2bcf17480297c33c6a1fcc981c45", "path": "results/campaign/gmin-paper-tip4p20.dat", "cause": "gmin_tip4p20"},
     {"key": "globalopt/tip4p20/gmin-tbp", "template": "gmin-paper/tip4p20-tbp", "sha": "62c0d93f650b2bcf17480297c33c6a1fcc981c45", "path": "results/campaign/gmin-paper-tip4p20-tbp.dat"},
-    {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn/htst-al-dimer", "sha": "715bc521c827f1f18102c1c027d99d0d8624b0fb", "path": "results/campaign/eon-svn-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
-    {"key": "hTST/Pt/eon-dimer-cg", "template": "eon-svn/htst-pt-dimer", "sha": "715bc521c827f1f18102c1c027d99d0d8624b0fb", "path": "results/campaign/eon-svn-htst-pt-dimer.dat", "kind": "htst"},
+    {"key": "hTST/Al/eon-dimer-cg", "template": "eon-svn/htst-al-dimer", "sha": "715bc521c827f1f18102c1c027d99d0d8624b0fb", "tag": "cite/715bc521c827", "path": "results/campaign/eon-svn-htst-al-dimer.dat", "kind": "htst", "cause": "htst_al"},
+    {"key": "hTST/Pt/eon-dimer-cg", "template": "eon-svn/htst-pt-dimer", "sha": "715bc521c827f1f18102c1c027d99d0d8624b0fb", "tag": "cite/715bc521c827", "path": "results/campaign/eon-svn-htst-pt-dimer.dat", "kind": "htst"},
 ]
 
 
@@ -557,23 +557,54 @@ def _is_ancestor(root: Path, sha: str, ref: str) -> bool:
     return completed.returncode == 0
 
 
+def _peel_commit(root: Path, ref: str) -> str:
+    try:
+        out = subprocess.check_output(
+            ["git", "rev-parse", "--verify", f"{ref}^{{commit}}"],
+            cwd=root,
+            text=True,
+            stderr=subprocess.DEVNULL,
+        )
+    except (subprocess.CalledProcessError, FileNotFoundError, OSError):
+        return ""
+    return out.strip()
+
+
 def citation_reachability_errors(root: Path) -> list[str]:
-    """A cited sha must be an ancestor of main or of a protected ref."""
+    """A cited sha must be on main, or be the commit a protected tag names."""
     ledger_path = root / FINDINGS_PATH
     if not ledger_path.is_file():
         return []
-    refs = []
-    main = _main_ref(root)
-    if main:
-        refs.append(main)
-    refs.extend(protected_refs(root))
     errors = []
+    tagged: dict[str, str] = {}
+    for ref in protected_refs(root):
+        commit = _peel_commit(root, ref)
+        if not commit:
+            errors.append(f"protected ref {ref} is missing")
+            continue
+        tagged[ref] = commit
+    main = _main_ref(root)
+    allowed = set(tagged.values())
     for row in load_ledger(ledger_path):
         beside = row.get("beside") or {}
         sha = beside.get("sha")
         if not sha:
             continue
-        if any(_is_ancestor(root, str(sha), ref) for ref in refs):
+        sha = str(sha)
+        tag = beside.get("tag")
+        if tag:
+            pointed = tagged.get(str(tag), _peel_commit(root, str(tag)))
+            if not pointed:
+                errors.append(f"{row_id(row)} cites tag {tag}, which is missing")
+                continue
+            if pointed != sha:
+                errors.append(
+                    f"{row_id(row)} cites tag {tag}, which points at {pointed} rather than {sha}"
+                )
+                continue
+        if main and _is_ancestor(root, sha, main):
+            continue
+        if sha in allowed:
             continue
         errors.append(
             f"{row_id(row)} cites {sha} outside main and the protected refs"
@@ -871,6 +902,8 @@ def build_rows(root: Path, cited_sha: dict[str, str] | None = None) -> list[dict
             "kind": kind,
             "metric": campaign_fields.get("metric", names[0] if names else "force_calls"),
         }
+        if match.get("tag"):
+            beside["tag"] = match["tag"]
         if kind == "screen":
             beside["stop2014_calls"] = _float(campaign_fields.get("force_calls"))
             beside["harness_stop_mean"] = _float(campaign_fields.get("harness_stop_mean"))

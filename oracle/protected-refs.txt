@@ -1,2 +1,9 @@
-# A cited sha must be an ancestor of main or of a ref listed here.
-# One git ref per line. Blank lines and comments are ignored.
+# A cited sha must be an ancestor of origin/main, or exactly the
+# commit named by a tag listed here. One git ref per line.
+cite/bd1a5c9fc268
+cite/02405b0d5580
+cite/0528a37b8ff6
+cite/715bc521c827
+cite/158d27812f76
+cite/f3cf41d74f73
+cite/54ac7e7a1aa6
