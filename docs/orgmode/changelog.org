@@ -1,9 +1,20 @@
 #+TITLE: Changelog
 #+OPTIONS: toc:nil num:nil author:nil
 
+* 2026-10-26
+
+Fourteen GMIN rows now cite =62c0d93f=. That commit is on main.
+Each cited file has the same blob there as it had at =71f366d9=
+or =7e49bdf6=, including the lj98 ranked file and the CSM file.
+A missing cited commit is an error that names the row and the
+sha. =optbench check= also rejects a cited sha that is not an
+ancestor of main or of a ref in =oracle/protected-refs.txt=.
+
 * 2026-10-25
 
-Findings citations are commit shas. The six campaign files that =cells/optim/saddle-pt= no longer carries are cited at =02405b0d=. SoftSaddle scores are cited at =247b70de=, the commit that holds them. A branch name is rejected.
+Findings citations are commit shas. The six campaign files that
+=cells/optim/saddle-pt= no longer carries are cited at =02405b0d=.
+A branch name is rejected.
 
 The three SoftSaddle adaptive HSphere rows cite =bd1a5c9f=. Their
 harness columns are the benchmark fields in that file. Davidson
@@ -12,8 +23,8 @@ fraction_connected is 1. Lanczos sm0 is 1926653.9, 0.5, and
 0.9682. Lanczos sm50 is 1582635.3, 0.7, and 0.93584. unique_saddles
 is benchmark_unique_saddles, the mean of connected. Davidson's
 50000 starts all hit the cap and record no saddle, so 0 stays.
-A missing commit keeps the stored finding. A file that is present
-and disagrees with the stored row is still an error.
+A file that is present and disagrees with the stored row is still
+an error.
 
 The scored Davidson sm50 row is the fully counted bd1a5c9f file.
 The Davidson library requests these gradients itself: Hessianominimo
