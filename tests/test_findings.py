@@ -10,8 +10,10 @@ from optbench.check import banned_word_errors, held_back_errors, load_oracle
 from optbench.findings import (
     campaign_mismatch,
     citation_errors,
+    citation_reachability_errors,
     findings_errors,
     load_ledger,
+    protected_refs,
     read_campaign,
     require_commit_sha,
     row_id,
@@ -152,6 +154,109 @@ def test_softsaddle_rows_cite_the_ten_rep_file():
             assert "stays 0 converged" in row["finding"]
         seen.add(row["entry"])
     assert seen == set(SOFTSADDLE_HARNESS)
+
+
+def test_a_cited_sha_outside_main_names_the_row(monkeypatch):
+    from optbench import findings
+
+    main_sha = "62c0d93f650b2bcf17480297c33c6a1fcc981c45"
+    rows = [
+        {
+            "suite": "saddle-search",
+            "problem": "pt-island",
+            "entry": "adaptive_HSphere-lbfgs-davidson-sm50",
+            "beside": {"sha": SOFTSADDLE_SHA},
+        },
+        {
+            "suite": "globalopt",
+            "problem": "lj38",
+            "entry": "gmin-nosym",
+            "beside": {"sha": main_sha},
+        },
+    ]
+    monkeypatch.setattr(findings, "load_ledger", lambda path: rows)
+    monkeypatch.setattr(findings, "_main_ref", lambda root: "main")
+    monkeypatch.setattr(findings, "protected_refs", lambda root: [])
+
+    def ancestor(root, sha, ref):
+        return sha == main_sha and ref == "main"
+
+    monkeypatch.setattr(findings, "_is_ancestor", ancestor)
+    errors = citation_reachability_errors(ROOT)
+    row = "saddle-search/pt-island/adaptive_HSphere-lbfgs-davidson-sm50"
+    assert errors == [
+        f"{row} cites {SOFTSADDLE_SHA} outside main and the protected refs"
+    ]
+
+
+def test_an_allowlisted_ref_keeps_the_citation(monkeypatch):
+    from optbench import findings
+
+    rows = [
+        {
+            "suite": "saddle-search",
+            "problem": "pt-island",
+            "entry": "adaptive_HSphere-lbfgs-davidson-sm50",
+            "beside": {"sha": SOFTSADDLE_SHA},
+        }
+    ]
+    monkeypatch.setattr(findings, "load_ledger", lambda path: rows)
+    monkeypatch.setattr(findings, "_main_ref", lambda root: "main")
+    monkeypatch.setattr(findings, "protected_refs", lambda root: ["refs/tags/softsaddle-bd1a5c9f"])
+
+    def ancestor(root, sha, ref):
+        return ref == "refs/tags/softsaddle-bd1a5c9f"
+
+    monkeypatch.setattr(findings, "_is_ancestor", ancestor)
+    assert citation_reachability_errors(ROOT) == []
+
+
+def test_main_reaches_the_gmin_commit_and_not_the_softsaddle_commit():
+    from optbench.findings import _is_ancestor, _main_ref
+
+    ref = _main_ref(ROOT)
+    assert ref
+    assert _is_ancestor(ROOT, "62c0d93f650b2bcf17480297c33c6a1fcc981c45", ref)
+    assert not _is_ancestor(ROOT, SOFTSADDLE_SHA, ref)
+
+
+def test_protected_refs_skip_comments(tmp_path: Path):
+    oracle = tmp_path / "oracle"
+    oracle.mkdir()
+    (oracle / "protected-refs.txt").write_text(
+        "# comment\n\nrefs/tags/keep-me\n",
+        encoding="utf-8",
+    )
+    assert protected_refs(tmp_path) == ["refs/tags/keep-me"]
+
+
+def test_the_check_command_names_an_unprotected_sha(monkeypatch, capsys):
+    from optbench.__main__ import check as cli_check
+
+    monkeypatch.setattr("optbench.check.check", lambda problems, oracle: 0)
+    row = "saddle-search/pt-island/adaptive_HSphere-lbfgs-davidson-sm50"
+    message = f"{row} cites {SOFTSADDLE_SHA} outside main and the protected refs"
+    monkeypatch.setattr(
+        "optbench.findings.citation_reachability_errors",
+        lambda root: [message],
+    )
+    with pytest.raises(SystemExit) as caught:
+        cli_check(problems=ROOT / "problems", oracle=ROOT / "oracle" / "entries.jsonl")
+    assert caught.value.code == 1
+    assert message in capsys.readouterr().out
+
+
+def test_the_check_command_passes_when_citations_are_reachable(monkeypatch):
+    from optbench.__main__ import check as cli_check
+
+    monkeypatch.setattr("optbench.check.check", lambda problems, oracle: 0)
+    monkeypatch.setattr(
+        "optbench.findings.citation_reachability_errors",
+        lambda root: [],
+    )
+    with pytest.raises(SystemExit) as caught:
+        cli_check(problems=ROOT / "problems", oracle=ROOT / "oracle" / "entries.jsonl")
+    assert caught.value.code == 0
 
 
 def test_a_missing_campaign_commit_names_the_row_and_the_sha(monkeypatch):

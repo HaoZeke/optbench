@@ -514,6 +514,72 @@ def citation_errors(rows: list[dict]) -> list[str]:
     return errors
 
 
+PROTECTED_REFS = "oracle/protected-refs.txt"
+
+
+def protected_refs(root: Path) -> list[str]:
+    """Refs that may carry a cited sha when main does not."""
+    path = root / PROTECTED_REFS
+    if not path.is_file():
+        return []
+    refs = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        text = line.split("#", 1)[0].strip()
+        if text:
+            refs.append(text)
+    return refs
+
+
+def _main_ref(root: Path) -> str:
+    for ref in ("origin/main", "main"):
+        try:
+            subprocess.check_output(
+                ["git", "rev-parse", "--verify", "--quiet", ref],
+                cwd=root,
+                stderr=subprocess.DEVNULL,
+            )
+        except (subprocess.CalledProcessError, FileNotFoundError, OSError):
+            continue
+        return ref
+    return ""
+
+
+def _is_ancestor(root: Path, sha: str, ref: str) -> bool:
+    if not ref:
+        return False
+    completed = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", sha, ref],
+        cwd=root,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        check=False,
+    )
+    return completed.returncode == 0
+
+
+def citation_reachability_errors(root: Path) -> list[str]:
+    """A cited sha must be an ancestor of main or of a protected ref."""
+    ledger_path = root / FINDINGS_PATH
+    if not ledger_path.is_file():
+        return []
+    refs = []
+    main = _main_ref(root)
+    if main:
+        refs.append(main)
+    refs.extend(protected_refs(root))
+    errors = []
+    for row in load_ledger(ledger_path):
+        beside = row.get("beside") or {}
+        sha = beside.get("sha")
+        if not sha:
+            continue
+        if any(_is_ancestor(root, str(sha), ref) for ref in refs):
+            continue
+        errors.append(
+            f"{row_id(row)} cites {sha} outside main and the protected refs"
+        )
+    return errors
+
 
 def load_ledger(path: Path) -> list[dict]:
     rows = []

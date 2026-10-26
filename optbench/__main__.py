@@ -33,8 +33,17 @@ def check(
 ) -> None:
     """Compare the oracle with the problem files."""
     from optbench.check import check as run_check
+    from optbench.findings import citation_reachability_errors
 
-    raise SystemExit(run_check(problems, oracle))
+    code = run_check(problems, oracle)
+    root = oracle.resolve().parent.parent
+    reach = citation_reachability_errors(root)
+    if reach:
+        print(f"findings {len(reach)}")
+        for line in reach:
+            print(line)
+        code = 1
+    raise SystemExit(code)
 
 
 @app.command(name="import-archive")
