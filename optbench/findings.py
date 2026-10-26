@@ -514,6 +514,7 @@ def citation_errors(rows: list[dict]) -> list[str]:
     return errors
 
 
+
 def load_ledger(path: Path) -> list[dict]:
     rows = []
     if not path.is_file():
@@ -649,7 +650,9 @@ def findings_errors(root: Path) -> list[str]:
             cited[row_id(row)] = str(beside["sha"])
     fresh = build_rows(root, cited)
     for left, right in zip(stored, fresh):
+        missing_sha = right.pop("_missing_sha", "")
         if right.pop("_missing_campaign", False):
+            errors.append(f"{row_id(left)} cites {missing_sha}, which is missing")
             continue
         if left != right:
             errors.append(f"{row_id(left)} stored finding does not match the campaign files")
@@ -762,6 +765,7 @@ def build_rows(root: Path, cited_sha: dict[str, str] | None = None) -> list[dict
             text = read_campaign(root, sha, match["path"])
         except MissingCampaign:
             record["_missing_campaign"] = True
+            record["_missing_sha"] = sha
             named = match.get("cause", "")
             if named:
                 record["finding_id"] = named
@@ -813,6 +817,7 @@ def build_rows(root: Path, cited_sha: dict[str, str] | None = None) -> list[dict
                 ranked_text = read_campaign(root, match["ranked_sha"], ranked_path)
             except MissingCampaign:
                 record["_missing_campaign"] = True
+                record["_missing_sha"] = match["ranked_sha"]
                 ranked_text = ""
             except (OSError, subprocess.CalledProcessError):
                 ranked_text = ""
@@ -908,6 +913,7 @@ def write_ledger(root: Path) -> list[dict]:
     rows = build_rows(root)
     for row in rows:
         row.pop("_missing_campaign", None)
+        row.pop("_missing_sha", None)
     path = root / FINDINGS_PATH
     payload = "\n".join(json.dumps(row, sort_keys=True) for row in rows) + "\n"
     path.write_text(payload, encoding="utf-8")

@@ -154,7 +154,7 @@ def test_softsaddle_rows_cite_the_ten_rep_file():
     assert seen == set(SOFTSADDLE_HARNESS)
 
 
-def test_a_missing_campaign_blob_keeps_the_stored_finding(monkeypatch):
+def test_a_missing_campaign_commit_names_the_row_and_the_sha(monkeypatch):
     from optbench import findings
 
     real = findings.read_campaign
@@ -165,7 +165,9 @@ def test_a_missing_campaign_blob_keeps_the_stored_finding(monkeypatch):
         return real(root, citation, path)
 
     monkeypatch.setattr(findings, "read_campaign", read_local)
-    assert findings.findings_errors(ROOT) == []
+    errors = findings.findings_errors(ROOT)
+    row = "saddle-search/pt-island/adaptive_HSphere-lbfgs-davidson-sm50"
+    assert errors == [f"{row} cites {SOFTSADDLE_SHA}, which is missing"]
 
 
 def test_a_cited_file_that_disagrees_is_an_error(monkeypatch):
