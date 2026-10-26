@@ -267,9 +267,11 @@ CITE_TAGS = {
 def test_the_cite_tags_name_the_off_main_commits():
     from optbench.findings import _peel_commit
 
-    assert protected_refs(ROOT) == list(CITE_TAGS)
+    listed = [f"refs/tags/{name}" for name in CITE_TAGS]
+    assert protected_refs(ROOT) == listed
     for ref, sha in CITE_TAGS.items():
         assert _peel_commit(ROOT, ref) == sha
+        assert _peel_commit(ROOT, f"refs/tags/{ref}") == sha
     by_sha = {sha: ref for ref, sha in CITE_TAGS.items()}
     tagged = 0
     for row in load_ledger(ROOT / "oracle" / "findings.jsonl"):
