@@ -49,6 +49,17 @@ def test_par2_charges_the_failure_and_bootstrap_is_stable():
     assert first["iqr"] == quantile([10, 30, 200], 0.75) - quantile([10, 30, 200], 0.25)
 
 
+def test_bootstrap_intervals_match_the_python_resamples():
+    # These endpoints are the random.Random(20261015) percentile interval.
+    summary = distribution_summary([1.0, 1.0, 2.0, 2.0, 2.0, 9.0], resamples=500, seed=20261015)
+    assert summary["median"] == 2.0
+    assert summary["iqr"] == 0.75
+    assert summary["median_low"] == 1.0
+    assert summary["median_high"] == 5.5
+    assert summary["iqr_low"] == 0.0
+    assert summary["iqr_high"] == 7.0
+
+
 def test_pt_island_repetitions_are_per_search():
     text = (ROOT / "results" / "campaign" / "eon-3.5.0-saddle-pt-dimer.dat").read_text(encoding="utf-8")
     rows = parse_repetitions(text)

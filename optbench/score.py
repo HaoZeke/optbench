@@ -14,6 +14,8 @@ import math
 import random
 import statistics
 
+import numpy as np
+
 from .failures import FAILURES, failure_tally
 
 RATE_Z = 1.959963984540054
@@ -255,6 +257,120 @@ def _percentile(sorted_values: list[float], fraction: float) -> float:
     return quantile(sorted_values, fraction)
 
 
+def _row_quantile(ordered: np.ndarray, fraction: float) -> np.ndarray:
+    """Linear quantile down each already-sorted row. Same ranks as ``quantile``."""
+    count = ordered.shape[1]
+    if count == 1:
+        return ordered[:, 0]
+    position = (count - 1) * fraction
+    low = int(position)
+    high = min(low + 1, count - 1)
+    weight = position - low
+    return ordered[:, low] * (1.0 - weight) + ordered[:, high] * weight
+
+
+def _row_median(ordered: np.ndarray) -> np.ndarray:
+    """``statistics.median`` down each already-sorted row."""
+    count = ordered.shape[1]
+    mid = count // 2
+    if count % 2:
+        return ordered[:, mid]
+    return (ordered[:, mid - 1] + ordered[:, mid]) / 2.0
+
+
+def _python_mt19937(seed: int) -> np.random.MT19937:
+    """NumPy MT19937 sitting on the state ``random.Random(seed)`` would use."""
+    version, state, _gauss = random.Random(seed).getstate()
+    if version != 3:
+        raise RuntimeError(f"unexpected random state version {version}")
+    bitgen = np.random.MT19937()
+    bitgen.state = {
+        "bit_generator": "MT19937",
+        "state": {"key": np.array(state[:-1], dtype=np.uint32), "pos": int(state[-1])},
+    }
+    return bitgen
+
+
+class _Randrange:
+    """``random.Random.randrange(count)`` drawn from one MT19937 stream.
+
+    ``randrange`` keeps the top ``bit_length`` bits of each word and rejects
+    a word that falls outside ``count``. A batch can accept more values than
+    the caller asked for. Those values stay queued, so the next batch
+    continues the same sequence instead of skipping ahead.
+    """
+
+    def __init__(self, seed: int, count: int) -> None:
+        width = count.bit_length()
+        if width > 32 or count <= 0:
+            raise ValueError("randrange index draw does not fit this stream")
+        self.bitgen = _python_mt19937(seed)
+        self.count = count
+        self.shift = np.uint64(32 - width)
+        self.pending = np.empty(0, dtype=np.int64)
+
+    def take(self, needed: int) -> np.ndarray:
+        parts: list[np.ndarray] = []
+        have = 0
+        if self.pending.size:
+            use = min(needed, int(self.pending.size))
+            parts.append(self.pending[:use])
+            self.pending = self.pending[use:]
+            have = use
+        while have < needed:
+            remain = needed - have
+            raw = np.asarray(self.bitgen.random_raw(remain * 2 + 64), dtype=np.uint64)
+            draw = (raw & np.uint64(0xFFFFFFFF)) >> self.shift
+            chosen = draw[draw < self.count].astype(np.int64, copy=False)
+            if chosen.size == 0:
+                continue
+            parts.append(chosen)
+            have += int(chosen.size)
+        out = parts[0] if len(parts) == 1 else np.concatenate(parts)
+        if out.size > needed:
+            self.pending = out[needed:]
+            out = out[:needed]
+        return out
+
+
+def _resample_order_statistics(
+    values: list[float],
+    resamples: int,
+    seed: int,
+    kinds: tuple[str, ...],
+) -> dict[str, list[float]]:
+    """Median and IQR of each resample.
+
+    A campaign file is tens of thousands of starts, and the board scores
+    every file. Drawing those resamples in Python and sorting each one
+    with ``sorted`` is what made ``uv run pytest`` sit for over an hour.
+    The draws are still ``random.Random.randrange``. NumPy sorts them.
+    The point estimate is still the Python statistic on the original sample.
+    """
+    count = len(values)
+    base = np.asarray(values, dtype=np.float64)
+    draw = _Randrange(seed, count)
+    block = max(1, min(resamples, max(1, 4_000_000 // count)))
+    buckets = {kind: [] for kind in kinds}
+    remaining = resamples
+    while remaining:
+        take = min(block, remaining)
+        index = draw.take(take * count).reshape(take, count)
+        ordered = np.sort(base[index], axis=1)
+        if "median" in buckets:
+            buckets["median"].extend(_row_median(ordered).tolist())
+        if "iqr" in buckets:
+            reduced = _row_quantile(ordered, 0.75) - _row_quantile(ordered, 0.25)
+            buckets["iqr"].extend(reduced.tolist())
+        remaining -= take
+    return buckets
+
+
+def _bounds(samples: list[float], alpha: float) -> tuple[float, float]:
+    samples.sort()
+    return _percentile(samples, alpha / 2.0), _percentile(samples, 1.0 - alpha / 2.0)
+
+
 def bootstrap_interval(
     values: list[float],
     statistic,
@@ -267,21 +383,26 @@ def bootstrap_interval(
 
     Returns ``(statistic(values), low, high)``. Resamples are drawn with
     replacement from a fixed seed so a published interval can be recomputed.
+    The median and the interquartile range are reduced in NumPy. The draws
+    are the ``random.Random`` sequence, so the interval is unchanged.
     """
     if not values:
         raise ValueError("values is empty")
     if resamples <= 0:
         raise ValueError("resamples must be positive")
     point = float(statistic(values))
-    rng = random.Random(seed)
-    count = len(values)
-    samples = []
-    for _ in range(resamples):
-        draw = [values[rng.randrange(count)] for _ in range(count)]
-        samples.append(float(statistic(draw)))
-    samples.sort()
-    low = _percentile(samples, alpha / 2.0)
-    high = _percentile(samples, 1.0 - alpha / 2.0)
+    if statistic is statistics.median:
+        samples = _resample_order_statistics(values, resamples, seed, ("median",))["median"]
+    elif statistic is _iqr:
+        samples = _resample_order_statistics(values, resamples, seed, ("iqr",))["iqr"]
+    else:
+        rng = random.Random(seed)
+        count = len(values)
+        samples = []
+        for _ in range(resamples):
+            draw = [values[rng.randrange(count)] for _ in range(count)]
+            samples.append(float(statistic(draw)))
+    low, high = _bounds(samples, alpha)
     return point, low, high
 
 
@@ -298,10 +419,12 @@ def distribution_summary(
     """Median, interquartile range, and bootstrap intervals of a cost sample."""
     if not values:
         raise ValueError("values is empty")
-    median, median_low, median_high = bootstrap_interval(
-        values, statistics.median, resamples=resamples, seed=seed
-    )
-    iqr, iqr_low, iqr_high = bootstrap_interval(values, _iqr, resamples=resamples, seed=seed)
+    # Both intervals use the same seed, so they share one resample stream.
+    drawn = _resample_order_statistics(values, resamples, seed, ("median", "iqr"))
+    median = float(statistics.median(values))
+    median_low, median_high = _bounds(drawn["median"], 0.05)
+    iqr = float(_iqr(values))
+    iqr_low, iqr_high = _bounds(drawn["iqr"], 0.05)
     return {
         "n": len(values),
         "mean": statistics.fmean(values),
