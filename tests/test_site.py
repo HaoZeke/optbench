@@ -62,6 +62,8 @@ def _headline_cell(text: str, problem_id: str, field: str, value: str) -> str:
 
 
 def test_rendered_pages_use_the_board_rank():
+    (ROOT / "docs" / "include").mkdir(parents=True, exist_ok=True)
+    (ROOT / "docs" / "include" / "retired-pass.org").write_text("old include\n", encoding="utf-8")
     render(ROOT)
     document = json.loads((ROOT / "results" / "board" / "index.json").read_text(encoding="utf-8"))
     lj38 = document["problems"]["minimization/lj38"]["ranked"][0]
@@ -126,7 +128,7 @@ def test_rendered_pages_use_the_board_rank():
     rgsaddle = (ROOT / "docs" / "orgmode" / "generated" / "codes" / "rgsaddle.org").read_text(encoding="utf-8")
     assert "c0db2b8d333c" in rgsaddle
     assert not (ROOT / "docs" / "include" / "featured.org").exists()
-    assert not (ROOT / "docs" / "include" / "terra-pass.org").exists()
+    assert not list((ROOT / "docs" / "include").glob("*-pass.org"))
     for problem in document["problems"].values():
         if problem.get("ranked") and not problem.get("profile"):
             suite, _, name = problem["id"].partition("/")
