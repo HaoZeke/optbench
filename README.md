@@ -208,7 +208,7 @@ A v2 success is under the cap, at the force stop, and, when a reference is suppl
 
 Pt-island cost is force calls in a repetition divided by the searches in that repetition. `eon-client/lbfgs-m20` is `tuning` `default`. `eon-client/lbfgs-m100` is `tuning` `adjusted`.
 
-`uv run optbench quadratic` writes `results/quadratic/quadratic.json`. That file is a quadratic check of the counter and the score. It is not a Lennard-Jones campaign. Those campaigns stay on rg.terra.
+`uv run optbench quadratic` writes `results/quadratic/quadratic.json`. That file is a quadratic check of the counter and the score. It is not a Lennard-Jones campaign. Those campaigns stay on `workstation-a`.
 
 ## Statistics
 

@@ -1,6 +1,6 @@
 # Harness
 
-The harness is this repository. `uv run pytest` and `uv run optbench check` are the hosted checks. A published Lennard-Jones or Pt-island campaign is run on rg.terra, not in CI.
+The harness is this repository. `uv run pytest` and `uv run optbench check` are the hosted checks. A published Lennard-Jones or Pt-island campaign is run on `workstation-a`, not in CI.
 
 ## Where the files are
 
