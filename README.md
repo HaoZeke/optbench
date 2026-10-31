@@ -208,22 +208,23 @@ A v2 success is under the cap, at the force stop, and, when a reference is suppl
 
 Pt-island cost is force calls in a repetition divided by the searches in that repetition. `eon-client/lbfgs-m20` is `tuning` `default`. `eon-client/lbfgs-m100` is `tuning` `adjusted`.
 
-`uv run optbench quadratic` writes `results/quadratic/quadratic.json`. That file is a quadratic check of the counter and the score. It is not a Lennard-Jones campaign. Those campaigns stay on `workstation-a`.
+`uv run optbench quadratic` writes `results/quadratic/quadratic.json`. That file is a quadratic check of the counter and the score. It is not a Lennard-Jones campaign. Those campaigns stay on `workstation-a` and run with `BENCH_HOST_LABEL=workstation-a`, the label a new result records as its machine. Without it the label is `unspecified`. `docs/harness.md` lists where the label is written.
 
 ## Statistics
 
-`benchmark.dat` keeps the rounded mean, because that is the 2014 record. A v2 measurement is an asv track. Force calls, the success bit, and the four failure classes are `track_*` values. Wall time is `time_*`. The parameters are the seed and the start. `results/asv` is asv's result tree, one file per commit and environment, with `machine.json` beside it. `uv.lock` pins `asv==0.6.6` and `asv-runner==0.3.1`. `environments/eon-3.5.0.yml` pins the conda-forge eOn binary. `docs/asv.md` is how another unit adds a code. `docs/asv-gaps.md` is the upstream list.
+`benchmark.dat` keeps the rounded mean, because that is the 2014 record. A v2 measurement is an asv track. Force calls, the success bit, and the four failure classes are `track_*` values. Wall time is `time_*`. The parameters are the seed and the start. `results/asv` is asv's result tree, one directory per machine label with `machine.json` in it, and one file per commit and environment in that directory. `uv.lock` pins `asv==0.6.6` and `asv-runner==0.3.1`. `environments/eon-3.5.0.yml` pins the conda-forge eOn binary. `docs/asv.md` is how another unit adds a code. `docs/asv-gaps.md` is the upstream list.
 
 The environment type is `uv-pip`, from `optbench.asv_uv`. It creates the environment with `uv venv` and installs with `uv pip`. The committed quadratic sample is that environment. eonclient is not part of it. The seven Lennard-Jones 38 classes in `benchmarks/bench_lj38.py` skip unless `OPTBENCH_ASV_EON=1`, and the default grid is one start unless `OPTBENCH_ASV_FULL=1`.
 
 ```bash
-uv run asv machine --yes
-uv run asv run COMMIT^! -b quadratic
-uv run optbench statistics --output results/validation/statistics.json
+export BENCH_HOST_LABEL=workstation-a
+uv run optbench asv-machine
+uv run asv run --machine "$BENCH_HOST_LABEL" COMMIT^! -b quadratic
+uv run optbench statistics --machine "$BENCH_HOST_LABEL" --output results/validation/statistics.json
 uv run asv publish
 ```
 
-`optbench statistics` reads the saved tracks. The saved file comes from `asv run` without `--quick`. CI runs the quadratic suite with `HaoZeke/asv-perch@v1` (`.github/workflows/asv.yml`).
+In that environment, `optbench asv-machine` stores the label for asv. It sets every other machine field to `unspecified`. With `--machine`, asv uses the label instead of the host name. `optbench statistics` reads the saved tracks for that label. The saved file comes from `asv run` without `--quick`. CI runs the quadratic suite with `HaoZeke/asv-perch@v1` (`.github/workflows/asv.yml`).
 
 ## Build the site
 
