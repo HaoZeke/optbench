@@ -102,10 +102,11 @@ def test_concurrent_eon_svn_morse_builds_share_one_library(gcc, tmp_path, monkey
     from benchmarks import bench_eon_svn
 
     monkeypatch.setattr(tempfile, "tempdir", str(tmp_path))
+    monkeypatch.setenv("OPTBENCH_FASTPOT_DIR", str(tmp_path))
     monkeypatch.setattr(bench_eon_svn, "_MORSE_LIB", None)
     libraries = _together(bench_eon_svn._morse_lib)
     assert all(library.morse_eon_flat for library in libraries)
-    assert [entry.name for entry in tmp_path.iterdir()] == ["optbench-eon-svn-morse.so"]
+    assert [entry.name for entry in tmp_path.iterdir()] == [bench_eon_svn._morse_path().name]
 
 
 def test_concurrent_catalog_writes_keep_the_registry_whole(tmp_path):
