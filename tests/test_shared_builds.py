@@ -27,6 +27,23 @@ def _together(call, workers: int = 6) -> list:
         return list(pool.map(run, range(workers)))
 
 
+def _read_while_building(build, workers: int = 12) -> set:
+    """Each caller builds, then reads its path until every caller has built."""
+    lock = threading.Lock()
+    building = [workers]
+
+    def call():
+        path = build()
+        with lock:
+            building[0] -= 1
+        seen = {(path, path.read_bytes())}
+        while building[0]:
+            seen.add((path, path.read_bytes()))
+        return seen
+
+    return set().union(*_together(call, workers))
+
+
 @pytest.fixture
 def gcc():
     if shutil.which("gcc") is None:
@@ -51,9 +68,9 @@ def test_concurrent_gmin_builds_share_one_library(gcc, tmp_path, monkeypatch):
     from optbench.gmin_pot import _lj40_path
 
     monkeypatch.setenv("OPTBENCH_FASTPOT_DIR", str(tmp_path))
-    paths = set(_together(_lj40_path))
-    assert len(paths) == 1
-    (library,) = paths
+    builds = _read_while_building(_lj40_path)
+    assert len(builds) == 1
+    ((library, _bytes),) = builds
     assert [entry.name for entry in tmp_path.iterdir()] == [library.name]
     assert ctypes.CDLL(str(library)).optbench_lj40
 
@@ -63,9 +80,9 @@ def test_concurrent_surface_builds_share_one_library(gcc, tmp_path, monkeypatch)
 
     monkeypatch.setattr(tempfile, "tempdir", str(tmp_path))
     source = Path(surfaces.__file__).with_name("morse_pair.c")
-    paths = set(_together(lambda: surfaces._morse_path(source)))
-    assert len(paths) == 1
-    (library,) = paths
+    builds = _read_while_building(lambda: surfaces._morse_path(source))
+    assert len(builds) == 1
+    ((library, _bytes),) = builds
     assert [entry.name for entry in tmp_path.iterdir()] == [library.name]
     assert ctypes.CDLL(str(library)).morse_pair_energy
 
