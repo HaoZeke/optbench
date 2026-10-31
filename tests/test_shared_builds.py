@@ -67,3 +67,24 @@ def test_concurrent_surface_builds_share_one_library(gcc, tmp_path, monkeypatch)
     (library,) = paths
     assert [entry.name for entry in tmp_path.iterdir()] == [library.name]
     assert ctypes.CDLL(str(library)).morse_pair_energy
+
+
+def test_concurrent_eon_svn_bridge_builds_share_one_binary(gcc, tmp_path, monkeypatch):
+    from benchmarks import bench_eon_svn
+
+    monkeypatch.setattr(tempfile, "tempdir", str(tmp_path))
+    monkeypatch.setattr(bench_eon_svn, "_BRIDGE", None)
+    paths = set(_together(bench_eon_svn._bridge))
+    assert paths == {tmp_path / "optbench-eon-svn-extpot-bridge"}
+    assert [entry.name for entry in tmp_path.iterdir()] == ["optbench-eon-svn-extpot-bridge"]
+    assert os.access(tmp_path / "optbench-eon-svn-extpot-bridge", os.X_OK)
+
+
+def test_concurrent_eon_svn_morse_builds_share_one_library(gcc, tmp_path, monkeypatch):
+    from benchmarks import bench_eon_svn
+
+    monkeypatch.setattr(tempfile, "tempdir", str(tmp_path))
+    monkeypatch.setattr(bench_eon_svn, "_MORSE_LIB", None)
+    libraries = _together(bench_eon_svn._morse_lib)
+    assert all(library.morse_eon_flat for library in libraries)
+    assert [entry.name for entry in tmp_path.iterdir()] == ["optbench-eon-svn-morse.so"]

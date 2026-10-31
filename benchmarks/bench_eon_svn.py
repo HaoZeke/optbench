@@ -79,9 +79,9 @@ def _bridge() -> Path:
     if not stale:
         return _BRIDGE
     if not dest.is_file() or (source.is_file() and dest.stat().st_mtime < source.stat().st_mtime):
-        temporary = dest.with_suffix(".tmp")
-        subprocess.run(["gcc", "-O2", "-o", str(temporary), str(source)], check=True)
-        temporary.replace(dest)
+        from optbench.fastpot import _link
+
+        _link(["gcc", "-O2", str(source)], dest, check=True)
     _BRIDGE = dest
     return dest
 
@@ -103,12 +103,9 @@ def _morse_lib():
     source = ROOT / "optbench" / "morse_cluster.c"
     dest = Path(tempfile.gettempdir()) / "optbench-eon-svn-morse.so"
     if not dest.is_file() or dest.stat().st_mtime < source.stat().st_mtime:
-        temporary = dest.with_suffix(".so.tmp")
-        subprocess.run(
-            ["gcc", "-O2", "-shared", "-fPIC", "-o", str(temporary), str(source), "-lm"],
-            check=True,
-        )
-        temporary.replace(dest)
+        from optbench.fastpot import _link
+
+        _link(["gcc", "-O2", "-shared", "-fPIC", str(source), "-lm"], dest, check=True)
     lib = ctypes.CDLL(str(dest))
     lib.morse_eon_flat.argtypes = [
         ctypes.c_int,
