@@ -7,6 +7,7 @@ import os
 import shutil
 import tempfile
 import threading
+import tomllib
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
@@ -88,3 +89,45 @@ def test_concurrent_eon_svn_morse_builds_share_one_library(gcc, tmp_path, monkey
     libraries = _together(bench_eon_svn._morse_lib)
     assert all(library.morse_eon_flat for library in libraries)
     assert [entry.name for entry in tmp_path.iterdir()] == ["optbench-eon-svn-morse.so"]
+
+
+def test_concurrent_catalog_writes_keep_the_registry_whole(tmp_path):
+    from optbench.ase_catalog import write_all
+
+    root = Path(__file__).resolve().parents[1]
+    for name in ("serial", "shared"):
+        (tmp_path / name / "codes").mkdir(parents=True)
+        shutil.copy(root / "codes" / "registry.toml", tmp_path / name / "codes" / "registry.toml")
+    write_all(tmp_path / "serial")
+    shared = tmp_path / "shared"
+    registry = shared / "codes" / "registry.toml"
+    samples = [shared / "templates" / "ase" / "lj38-lbfgs-default.toml", registry]
+    writing = threading.Event()
+    writing.set()
+
+    def read():
+        reads = 0
+        while writing.is_set() or reads == 0:
+            for path in samples:
+                if path.is_file():
+                    assert tomllib.loads(path.read_text(encoding="utf-8"))
+            assert any(row["id"] == "eon" for row in tomllib.loads(registry.read_text(encoding="utf-8"))["code"])
+            reads += 1
+        return reads
+
+    def write():
+        write_all(shared)
+        return 0
+
+    with ThreadPoolExecutor(2) as readers:
+        pending = [readers.submit(read) for _ in range(2)]
+        try:
+            _together(write, workers=4)
+        finally:
+            writing.clear()
+        assert all(future.result() for future in pending)
+    assert registry.read_text(encoding="utf-8") == (tmp_path / "serial" / "codes" / "registry.toml").read_text(
+        encoding="utf-8"
+    )
+    leftovers = [path for path in shared.rglob("*") if path.name.startswith(".")]
+    assert leftovers == []
