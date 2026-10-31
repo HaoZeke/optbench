@@ -9,6 +9,8 @@ keeps its previous suffix.
 from __future__ import annotations
 
 import json
+import os
+import tempfile
 from pathlib import Path
 
 ASE_VERSION = "3.29.0"
@@ -837,6 +839,17 @@ def _registry_templates(specs: list[dict]) -> str:
     return "\n".join(lines).rstrip() + "\n"
 
 
+def _replace_text(path: Path, text: str) -> None:
+    """Write ``path`` so a concurrent reader sees the old or the new file whole.
+
+    The staged file is not a ``.toml``, so a template scan never picks it up.
+    """
+    with tempfile.TemporaryDirectory(prefix=f".{path.name}.", dir=path.parent) as scratch:
+        staged = Path(scratch) / "staged"
+        staged.write_text(text, encoding="utf-8")
+        os.replace(staged, path)
+
+
 def write_all(root: Path) -> list[Path]:
     """Write ``templates/ase`` and ``templates/sella`` from the catalog."""
     specs = all_specs()
@@ -844,7 +857,7 @@ def write_all(root: Path) -> list[Path]:
     for spec in specs:
         path = root / "templates" / f"{spec['id']}.toml"
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(render_toml(spec), encoding="utf-8")
+        _replace_text(path, render_toml(spec))
         written.append(path)
     expected = {path.resolve() for path in written}
     for folder in ("ase", "sella"):
@@ -858,5 +871,5 @@ def write_all(root: Path) -> list[Path]:
     text = registry.read_text(encoding="utf-8")
     if _TEMPLATE_MARK in text:
         text = text[: text.index(_TEMPLATE_MARK)]
-    registry.write_text(text.rstrip() + "\n\n" + _registry_templates(specs), encoding="utf-8")
+    _replace_text(registry, text.rstrip() + "\n\n" + _registry_templates(specs))
     return written
