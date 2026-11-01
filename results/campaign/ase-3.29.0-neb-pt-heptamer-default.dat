@@ -17,6 +17,6 @@ reducer per_image
 parameter_source default
 method {"counter":"harness calculator force evaluations","parameter_source":"default","parameters":{"Nmin":5,"a":0.09043820750088044,"astart":0.1,"climb":false,"downhill_check":false,"dt":0.07644886306051828,"dtmax":1.0,"fa":0.99,"fdec":0.5,"finc":1.1,"maxstep":0.2,"method":"improvedtangent","moving_images":8,"spring":0.1},"potential":{"D":0.7102,"alpha":1.6047,"form":"shift","kind":"morse","pbc":[true,true,false],"r0":2.897,"rc":7.0},"profile":"default","reducer":"per_image","stop":{"force_norm":0.01,"max_force_calls":10000,"max_steps":10000,"norm":"fmax"}}
 note ASE NEB defaults on the archived 8 intermediate images: spring 0.1, climb off, FIRE. The reported force_calls value is the harness total divided by 8.
-host cursor
+host xeon-x86_64
 date 2026-10-15
 contributor Rohit Goswami

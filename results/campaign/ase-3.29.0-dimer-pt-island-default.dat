@@ -16,7 +16,7 @@ reducer capped
 parameter_source default
 method {"counter":"harness calculator force evaluations","parameter_source":"default","parameters":{"cg_translation":true,"dimer_separation":0.0001,"displacement_method":"gauss","eigenmode_method":"dimer","extrapolate_forces":false,"f_rot_max":1.0,"f_rot_min":0.1,"gauss_std":0.1,"initial_eigenmode_method":"gauss","mask":"free","max_num_rot":1,"maximum_translation":0.1,"order":1,"trial_angle":0.7853981633974483,"trial_trans_step":0.001,"use_central_forces":true},"potential":{"D":0.7102,"alpha":1.6047,"form":"shift","kind":"morse","pbc":[true,true,false],"r0":2.897,"rc":7.0},"profile":"default","reducer":"capped","stop":{"force_norm":0.001,"max_force_calls":10000,"max_steps":2000,"norm":"l2"}}
 note ASE 3.29.0 DimerControl defaults. One search is not the saddle catalog.
-host cursor
+host xeon-x86_64
 date 2026-10-15
 contributor Rohit Goswami
 ranked false

@@ -76,7 +76,7 @@
         "commit": "02aaf45245af7b521b5792fa77ffa364f67d756327ea9e4ecf580c4b6f83e24f",
         "machine": {
           "machine": "x86_64",
-          "node": "cursor",
+          "node": "xeon-x86_64",
           "python": "3.12.3",
           "system": "Linux"
         },

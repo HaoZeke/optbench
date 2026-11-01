@@ -16,7 +16,7 @@ reducer capped
 parameter_source archive
 method {"counter":"harness attach_ase_counter","parameter_source":"archive","parameters":{"alpha":70.0,"c1":0.23,"c2":0.46,"damping":1.0,"maxstep":0.1,"memory":100,"precon":"Exp A=3.0","use_armijo":true,"variable_cell":false},"potential":{"epsilon":1.0,"kind":"lennard-jones","pbc":[false,false,false],"rc":40.0,"sigma":1.0},"profile":"tuned","reducer":"capped","stop":{"force_norm":0.01,"max_force_calls":10000,"max_steps":10000,"norm":"fmax"}}
 note Archive minimization/lj38/ase-preconlbfgs/opt.py builds Exp with A 3 and PreconLBFGS maxstep 0.1, then stops on ASE fmax 0.01. The script uses a tsase LJ cutoff of 35. This row uses the harness cutoff 40. v2 success is the harness cap, the stop norm, and the Hessian index (0 minimum, 1 saddle) after rigid modes are projected out when no atom is fixed. Energy and Kabsch RMSD are not applied: these starts have no reference geometry.
-host cursor
+host xeon-x86_64
 date 2026-10-19
 contributor Rohit Goswami
 scoring par2-wilson-bootstrap

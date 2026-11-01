@@ -16,6 +16,6 @@ reducer capped
 parameter_source default
 method {"counter":"harness calculator force evaluations","parameter_source":"default","parameters":{"Nmin":5,"a":0.1,"astart":0.1,"downhill_check":false,"dt":0.1,"dtmax":1.0,"fa":0.99,"fdec":0.5,"finc":1.1,"maxstep":0.2},"potential":{"epsilon":1.0,"kind":"lennard-jones","pbc":[false,false,false],"rc":40.0,"sigma":1.0},"profile":"default","reducer":"capped","stop":{"force_norm":0.01,"max_force_calls":10000,"max_steps":10000,"norm":"l2"}}
 note ASE 3.29.0 FIRE constructor defaults.
-host cursor
+host xeon-x86_64
 date 2026-10-15
 contributor Rohit Goswami

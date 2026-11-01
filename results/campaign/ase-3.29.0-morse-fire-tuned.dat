@@ -16,6 +16,6 @@ reducer capped
 parameter_source archive
 method {"counter":"harness calculator force evaluations","parameter_source":"archive","parameters":{"Nmin":5,"a":0.1,"astart":0.1,"downhill_check":false,"dt":0.1,"dtmax":1.0,"fa":0.99,"fdec":0.5,"finc":1.1,"maxstep":0.2},"potential":{"D":0.7102,"alpha":1.6047,"form":"shift","kind":"morse","pbc":[true,true,true],"r0":2.897,"rc":7.0},"profile":"tuned","reducer":"capped","stop":{"force_norm":0.001,"max_force_calls":10000,"max_steps":10000,"norm":"l2"}}
 note Archive minimization/morse-bulk/ase-fire sets maxstep 0.2.
-host cursor
+host xeon-x86_64
 date 2026-10-15
 contributor Rohit Goswami

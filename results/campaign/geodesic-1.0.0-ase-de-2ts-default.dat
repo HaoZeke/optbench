@@ -12,7 +12,7 @@ reducer capped
 parameter_source ablation
 method {"counter":"harness attach_ase_counter","parameter_source":"ablation","parameters":{"Nmin":5,"a":0.08261686238355864,"astart":0.1,"climb":false,"downhill_check":false,"dt":0.06337871452115086,"dtmax":1.0,"fa":0.99,"fdec":0.5,"finc":1.1,"interpolate":"geodesic","maxstep":0.2,"method":"improvedtangent","moving_images":5,"spring":0.1},"potential":{"epsilon":1.0,"kind":"lennard-jones","pbc":[false,false,false],"rc":40.0,"sigma":1.0},"profile":"ablation","reducer":"capped","stop":{"force_norm":0.001,"max_force_calls":10000,"max_steps":10000,"norm":"fmax"}}
 note Initialiser ablation of ase/de-lj38-2ts-default. The path is geodesic-interpolate 1.0.0 at 476aa041. Spring 0.1, climb off, and FIRE match that template. The force cap is the problem cap 10000. v2 success is the harness cap and the template fmax stop. The band has no reference saddle, so the Hessian and Kabsch RMSD are not applied.
-host cursor
+host xeon-x86_64
 date 2026-10-18
 contributor Rohit Goswami
 scoring par2-bootstrap

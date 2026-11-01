@@ -16,7 +16,7 @@ reducer capped
 parameter_source ablation
 method {"counter":"harness attach_ase_counter","parameter_source":"ablation","parameters":{"alpha":70.0,"climb":false,"climb_after":0.4,"damping":0.2,"interpolate":"geodesic","maxstep":0.01,"memory":100,"method":"improvedtangent","moving_images":5,"spring":5.0,"use_line_search":false},"potential":{"epsilon":1.0,"kind":"lennard-jones","pbc":[false,false,false],"rc":40.0,"sigma":1.0},"profile":"ablation","reducer":"capped","stop":{"force_norm":0.001,"max_force_calls":10000,"max_steps":10000,"norm":"fmax"}}
 note Initialiser ablation of ase/de-lj38-2ts-tuned. The path is geodesic-interpolate 1.0.0 at 476aa041 instead of IDPP. Five images, spring 5, LBFGS maxstep 0.01, damping 0.2, and climb after residual 0.4 match that template. The force cap is the problem cap 10000. v2 success is the harness cap and the template fmax stop. The band has no reference saddle, so the Hessian and Kabsch RMSD are not applied.
-host cursor
+host xeon-x86_64
 date 2026-10-18
 contributor Rohit Goswami
 scoring par2-bootstrap

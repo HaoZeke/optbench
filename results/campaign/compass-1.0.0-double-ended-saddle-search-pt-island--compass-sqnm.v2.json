@@ -17,7 +17,7 @@
     "commit": "22da7bd5f69cbd64d59853c8f8d7f8d44c2d18df",
     "machine": {
       "machine": "x86_64",
-      "node": "cursor",
+      "node": "xeon-x86_64",
       "python": "3.12.3",
       "system": "Linux"
     },

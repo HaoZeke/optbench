@@ -16,6 +16,6 @@ reducer capped
 parameter_source archive
 method {"counter":"harness calculator force evaluations","parameter_source":"archive","parameters":{"alpha":1000.0,"damping":1.0,"maxstep":0.1,"memory":100,"use_line_search":false},"potential":{"epsilon":1.0,"kind":"lennard-jones","pbc":[false,false,false],"rc":40.0,"sigma":1.0},"profile":"tuned","reducer":"capped","stop":{"force_norm":0.01,"max_force_calls":10000,"max_steps":10000,"norm":"l2"}}
 note Archive minimization/lj38/ase-lbfgs sets maxstep 0.1, alpha 1000, memory 100.
-host cursor
+host xeon-x86_64
 date 2026-10-15
 contributor Rohit Goswami

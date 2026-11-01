@@ -16,6 +16,6 @@ reducer all
 parameter_source archive
 method {"counter":"harness calculator force evaluations","parameter_source":"archive","parameters":{"delta0":0.0013,"eig":true,"eta":1e-06,"gamma":0.4,"internal":false,"method":"prfo","order":1,"rho_dec":5.0,"rho_inc":1.035,"sigma_dec":0.65,"sigma_inc":1.15,"threepoint":false},"potential":{"epsilon":1.0,"kind":"lennard-jones","pbc":[false,false,false],"rc":40.0,"sigma":1.0},"profile":"tuned","reducer":"all","stop":{"force_norm":0.001,"max_force_calls":100000,"max_steps":1000,"norm":"l2"}}
 note Archived Sella trust region: eta 1e-6, gamma 0.4, delta0 1.3e-3, rho_inc 1.035, rho_dec 5, sigma_inc 1.15, sigma_dec 0.65.
-host cursor
+host xeon-x86_64
 date 2026-10-15
 contributor Rohit Goswami

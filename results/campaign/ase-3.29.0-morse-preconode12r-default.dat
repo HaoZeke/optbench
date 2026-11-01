@@ -16,6 +16,6 @@ reducer capped
 parameter_source default
 method {"counter":"harness calculator force evaluations","parameter_source":"default","parameters":{"alpha":1.0,"precon":"Exp A=3.0","rtol":0.01,"verbose":0},"potential":{"D":0.7102,"alpha":1.6047,"form":"shift","kind":"morse","pbc":[true,true,true],"r0":2.897,"rc":7.0},"profile":"default","reducer":"capped","stop":{"force_norm":0.001,"max_force_calls":10000,"max_steps":10000,"norm":"l2"}}
 note ASE 3.29.0 PreconODE12r constructor defaults.
-host cursor
+host xeon-x86_64
 date 2026-10-15
 contributor Rohit Goswami

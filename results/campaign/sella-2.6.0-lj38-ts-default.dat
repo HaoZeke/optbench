@@ -16,6 +16,6 @@ reducer all
 parameter_source default
 method {"counter":"harness calculator force evaluations","parameter_source":"default","parameters":{"delta0":0.1,"eig":true,"eta":0.0001,"gamma":0.1,"internal":false,"method":"prfo","order":1,"rho_dec":5.0,"rho_inc":1.035,"sigma_dec":0.65,"sigma_inc":1.15,"threepoint":false},"potential":{"epsilon":1.0,"kind":"lennard-jones","pbc":[false,false,false],"rc":40.0,"sigma":1.0},"profile":"default","reducer":"all","stop":{"force_norm":0.001,"max_force_calls":100000,"max_steps":1000,"norm":"l2"}}
 note Sella 2.6.0 saddle defaults, order 1.
-host cursor
+host xeon-x86_64
 date 2026-10-15
 contributor Rohit Goswami

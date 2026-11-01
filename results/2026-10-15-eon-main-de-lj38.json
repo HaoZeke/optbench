@@ -4,7 +4,7 @@
   "problem": "double-ended-saddle-search/lj38",
   "submitter": "Rohit Goswami",
   "date": "2026-10-15",
-  "host": "cursor",
+  "host": "xeon-x86_64",
   "runs": [
     {
       "entry": "eon-main-de-lj38-lbfgs",
@@ -484,7 +484,7 @@
           "reason": "0"
         }
       ],
-      "notes": "Default L-BFGS climbing-image NEB on the 50 LJ38 pairs. Memory 20 is the struct default. The archived file listed max_iterations as 1000 and then 600. This client keeps the first value, 1000. Potential lammps uses the archived in.lammps, pair_style lj/cut/opt 40.0. The mean keeps total_force_calls under 2500. 6 of 50 pairs are under the cap of 2500 and enter the mean. 20 pairs terminated FAIL_MAX_ITERATIONS. The other pairs above the cap have termination_reason 0 and stay out of nfailed. Unrounded mean 1342.8333333333333. 6 starts enter the mean. Per-start rows are in results/campaign/eon-main-de-lj38-lbfgs.starts. Run on host cursor."
+      "notes": "Default L-BFGS climbing-image NEB on the 50 LJ38 pairs. Memory 20 is the struct default. The archived file listed max_iterations as 1000 and then 600. This client keeps the first value, 1000. Potential lammps uses the archived in.lammps, pair_style lj/cut/opt 40.0. The mean keeps total_force_calls under 2500. 6 of 50 pairs are under the cap of 2500 and enter the mean. 20 pairs terminated FAIL_MAX_ITERATIONS. The other pairs above the cap have termination_reason 0 and stay out of nfailed. Unrounded mean 1342.8333333333333. 6 starts enter the mean. Per-start rows are in results/campaign/eon-main-de-lj38-lbfgs.starts. Run on host xeon-x86_64."
     },
     {
       "entry": "eon-main-de-lj38-lbfgs-m100",
@@ -964,7 +964,7 @@
           "reason": "0"
         }
       ],
-      "notes": "Tuned L-BFGS climbing-image NEB. Memory 100 is the only change from eon/de-lj38-lbfgs. 7 of 50 pairs are under the cap of 2500 and enter the mean. 20 pairs terminated FAIL_MAX_ITERATIONS. Unrounded mean 1327.7142857142858. 7 starts enter the mean. Per-start rows are in results/campaign/eon-main-de-lj38-lbfgs-m100.starts. Run on host cursor."
+      "notes": "Tuned L-BFGS climbing-image NEB. Memory 100 is the only change from eon/de-lj38-lbfgs. 7 of 50 pairs are under the cap of 2500 and enter the mean. 20 pairs terminated FAIL_MAX_ITERATIONS. Unrounded mean 1327.7142857142858. 7 starts enter the mean. Per-start rows are in results/campaign/eon-main-de-lj38-lbfgs-m100.starts. Run on host xeon-x86_64."
     }
   ]
 }

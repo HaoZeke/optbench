@@ -4,7 +4,7 @@
   "problem": "minimization/morse-bulk",
   "submitter": "Rohit Goswami",
   "date": "2026-10-15",
-  "host": "cursor",
+  "host": "xeon-x86_64",
   "runs": [
     {
       "entry": "eon-main-morse-lbfgs",
@@ -669,7 +669,7 @@
           "reason": "0"
         }
       ],
-      "notes": "Default L-BFGS on the Morse bulk stop. Memory 20 and lbfgs_accept energy are the struct defaults at this commit. Median of the 100 counts is 52. Unrounded mean 54.31. 100 starts enter the mean. Per-start rows are in results/campaign/eon-main-morse-lbfgs.starts. Run on host cursor."
+      "notes": "Default L-BFGS on the Morse bulk stop. Memory 20 and lbfgs_accept energy are the struct defaults at this commit. Median of the 100 counts is 52. Unrounded mean 54.31. 100 starts enter the mean. Per-start rows are in results/campaign/eon-main-morse-lbfgs.starts. Run on host xeon-x86_64."
     },
     {
       "entry": "eon-main-morse-lbfgs-m100",
@@ -1334,7 +1334,7 @@
           "reason": "0"
         }
       ],
-      "notes": "Tuned L-BFGS on Morse bulk. Memory 100 matches the archived eon-client/morse-lbfgs setting. Every other key matches eon/morse-lbfgs. Median of the 100 counts is 53. Unrounded mean 54.18. 100 starts enter the mean. Per-start rows are in results/campaign/eon-main-morse-lbfgs-m100.starts. Run on host cursor."
+      "notes": "Tuned L-BFGS on Morse bulk. Memory 100 matches the archived eon-client/morse-lbfgs setting. Every other key matches eon/morse-lbfgs. Median of the 100 counts is 53. Unrounded mean 54.18. 100 starts enter the mean. Per-start rows are in results/campaign/eon-main-morse-lbfgs-m100.starts. Run on host xeon-x86_64."
     }
   ]
 }

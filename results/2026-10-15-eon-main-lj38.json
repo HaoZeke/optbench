@@ -4,7 +4,7 @@
   "problem": "minimization/lj38",
   "submitter": "Rohit Goswami",
   "date": "2026-10-15",
-  "host": "cursor",
+  "host": "xeon-x86_64",
   "runs": [
     {
       "entry": "eon-main-lj38-lbfgs",
@@ -6069,7 +6069,7 @@
           "reason": "0"
         }
       ],
-      "notes": "Default L-BFGS on current main. Memory 20 and lbfgs_accept energy are the struct defaults at this commit. The problem stop replaces the struct max_iterations of 1000. Median of the 1000 counts is 190. The problem contract does not ask for a median, so benchmark.dat omits it. Unrounded mean 203.898. 1000 starts enter the mean. Per-start rows are in results/campaign/eon-main-lj38-lbfgs.starts. Run on host cursor."
+      "notes": "Default L-BFGS on current main. Memory 20 and lbfgs_accept energy are the struct defaults at this commit. The problem stop replaces the struct max_iterations of 1000. Median of the 1000 counts is 190. The problem contract does not ask for a median, so benchmark.dat omits it. Unrounded mean 203.898. 1000 starts enter the mean. Per-start rows are in results/campaign/eon-main-lj38-lbfgs.starts. Run on host xeon-x86_64."
     },
     {
       "entry": "eon-main-lj38-lbfgs-m100",
@@ -12134,7 +12134,7 @@
           "reason": "0"
         }
       ],
-      "notes": "Tuned L-BFGS. Memory 100 is the setting that scored 181 on eOn 3.5.0. Every other key matches eon/lj38-lbfgs. Median of the 1000 counts is 171. The problem contract does not ask for a median, so benchmark.dat omits it. Unrounded mean 180.137. 1000 starts enter the mean. Per-start rows are in results/campaign/eon-main-lj38-lbfgs-m100.starts. Run on host cursor."
+      "notes": "Tuned L-BFGS. Memory 100 is the setting that scored 181 on eOn 3.5.0. Every other key matches eon/lj38-lbfgs. Median of the 1000 counts is 171. The problem contract does not ask for a median, so benchmark.dat omits it. Unrounded mean 180.137. 1000 starts enter the mean. Per-start rows are in results/campaign/eon-main-lj38-lbfgs-m100.starts. Run on host xeon-x86_64."
     }
   ]
 }

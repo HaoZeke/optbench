@@ -16,6 +16,6 @@ reducer capped
 parameter_source default
 method {"counter":"harness calculator force evaluations","parameter_source":"default","parameters":{"Nmin":5,"a":0.1,"astart":0.1,"climb":false,"downhill_check":false,"dt":0.009646118626509718,"dtmax":1.0,"fa":0.99,"fdec":0.5,"finc":1.1,"maxstep":0.2,"method":"improvedtangent","moving_images":5,"spring":0.1},"potential":{"epsilon":1.0,"kind":"lennard-jones","pbc":[false,false,false],"rc":40.0,"sigma":1.0},"profile":"default","reducer":"capped","stop":{"force_norm":0.001,"gradient_norm":0.001,"max_force_calls":2500,"max_steps":1000,"norm":"fmax"}}
 note ASE NEB defaults on those 50 pairs and 5 intermediate images: spring 0.1, climb off, FIRE. The same 2500 cap applies.
-host cursor
+host xeon-x86_64
 date 2026-10-15
 contributor Rohit Goswami

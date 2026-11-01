@@ -4,7 +4,7 @@
   "problem": "double-ended-saddle-search/pt-island",
   "submitter": "Rohit Goswami",
   "date": "2026-10-15",
-  "host": "cursor",
+  "host": "xeon-x86_64",
   "runs": [
     {
       "entry": "eon-main-de-pt-lbfgs",
@@ -556,7 +556,7 @@
           "reason": "0"
         }
       ],
-      "notes": "Default L-BFGS climbing-image NEB on the 59 Pt-island pairs. Memory 20 is the struct default. The 2014 file spelled climbing_image. This client reads climbing_image_method, whose default is true. The mean keeps total_force_calls under 3000. nfailed counts termination_reason other than 0. 32 of 59 pairs are under the cap of 3000 and enter the mean. 27 finished with termination_reason 0 and a counter at or above 3000, so they stay out of the mean and out of nfailed. product_44 terminated with reason 1 after 14807 calls. Unrounded mean 1514.75. 32 starts enter the mean. Per-start rows are in results/campaign/eon-main-de-pt-lbfgs.starts. Run on host cursor."
+      "notes": "Default L-BFGS climbing-image NEB on the 59 Pt-island pairs. Memory 20 is the struct default. The 2014 file spelled climbing_image. This client reads climbing_image_method, whose default is true. The mean keeps total_force_calls under 3000. nfailed counts termination_reason other than 0. 32 of 59 pairs are under the cap of 3000 and enter the mean. 27 finished with termination_reason 0 and a counter at or above 3000, so they stay out of the mean and out of nfailed. product_44 terminated with reason 1 after 14807 calls. Unrounded mean 1514.75. 32 starts enter the mean. Per-start rows are in results/campaign/eon-main-de-pt-lbfgs.starts. Run on host xeon-x86_64."
     },
     {
       "entry": "eon-main-de-pt-lbfgs-m100",
@@ -1108,7 +1108,7 @@
           "reason": "0"
         }
       ],
-      "notes": "Tuned L-BFGS climbing-image NEB. Memory 100 is the only change from eon/de-pt-lbfgs. 30 of 59 pairs are under the cap of 3000 and enter the mean. product_44 terminated with reason 1 after 14807 calls. Unrounded mean 1312.2. 30 starts enter the mean. Per-start rows are in results/campaign/eon-main-de-pt-lbfgs-m100.starts. Run on host cursor."
+      "notes": "Tuned L-BFGS climbing-image NEB. Memory 100 is the only change from eon/de-pt-lbfgs. 30 of 59 pairs are under the cap of 3000 and enter the mean. product_44 terminated with reason 1 after 14807 calls. Unrounded mean 1312.2. 30 starts enter the mean. Per-start rows are in results/campaign/eon-main-de-pt-lbfgs-m100.starts. Run on host xeon-x86_64."
     }
   ]
 }

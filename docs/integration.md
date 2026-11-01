@@ -8,7 +8,7 @@ It was merged when it appeared, after those two, without rewriting them.
 | Order | Branch | Tip | Result |
 | --- | --- | --- | --- |
 | 1 | `entries/ase-sella-v2` | `ade7c5132e47bb4008b9d4c8ddb26492e9e7287d` | already in `design/v2-hardening` |
-| 2 | `cursor/eon-develop-asv-dee4` | `c4dde48c2d8171991a931ebab95fa59a68308017` | already in `design/v2-hardening` |
+| 2 | `eon-develop-asv` topic branch, since deleted | `c4dde48c2d8171991a931ebab95fa59a68308017` | already in `design/v2-hardening` |
 | 3 | `entries/eon-full` | `f00867a5eb6a050c46e282143f8ab88f5646af9b` | already in `design/v2-hardening` |
 | 4 | `entries/rgmin` | `bddbe2ddbac6606357b9043b41612ec337539a00` | merged |
 | 5 | `entries/rgmin-fixes` | `5960e693f7d543f9498c81e62d467961b858ca0f` | merged after `entries/rgsaddle-minmode` |

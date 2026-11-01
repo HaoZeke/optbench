@@ -4,7 +4,7 @@
   "problem": "tsopt/pt-island",
   "submitter": "Rohit Goswami",
   "date": "2026-10-15",
-  "host": "cursor",
+  "host": "xeon-x86_64",
   "runs": [
     {
       "entry": "eon-main-ts-pt-dimer",
@@ -478,7 +478,7 @@
           "reason": "0"
         }
       ],
-      "notes": "Default L-BFGS dimer on the 49 Pt-island starts. Memory 20 is the struct default. Potential morse_pt. pos.con is reactant.con. displacement.con is initial_N.con for N from 0 to 48. direction.dat is that displacement minus the reactant, divided by its norm. client_displace_type is load. The mean keeps total_force_calls under 10000. Dimer improved is the binary default. All 49 starts finished with termination_reason 0 under the cap of 10000. Unrounded mean 1658.591836734694. 49 starts enter the mean. Per-start rows are in results/campaign/eon-main-ts-pt-dimer.starts. Run on host cursor."
+      "notes": "Default L-BFGS dimer on the 49 Pt-island starts. Memory 20 is the struct default. Potential morse_pt. pos.con is reactant.con. displacement.con is initial_N.con for N from 0 to 48. direction.dat is that displacement minus the reactant, divided by its norm. client_displace_type is load. The mean keeps total_force_calls under 10000. Dimer improved is the binary default. All 49 starts finished with termination_reason 0 under the cap of 10000. Unrounded mean 1658.591836734694. 49 starts enter the mean. Per-start rows are in results/campaign/eon-main-ts-pt-dimer.starts. Run on host xeon-x86_64."
     },
     {
       "entry": "eon-main-ts-pt-dimer-m100",
@@ -952,7 +952,7 @@
           "reason": "0"
         }
       ],
-      "notes": "Tuned L-BFGS dimer. Memory 100 is the only change from eon/ts-pt-dimer. All 49 starts finished with termination_reason 0 under the cap of 10000. Unrounded mean 1680.3673469387754. 49 starts enter the mean. Per-start rows are in results/campaign/eon-main-ts-pt-dimer-m100.starts. Run on host cursor."
+      "notes": "Tuned L-BFGS dimer. Memory 100 is the only change from eon/ts-pt-dimer. All 49 starts finished with termination_reason 0 under the cap of 10000. Unrounded mean 1680.3673469387754. 49 starts enter the mean. Per-start rows are in results/campaign/eon-main-ts-pt-dimer-m100.starts. Run on host xeon-x86_64."
     }
   ]
 }

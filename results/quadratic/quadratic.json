@@ -49,7 +49,7 @@
         "commit": "267959adba9e98e2f3002a4868ed44a66329ac84",
         "machine": {
           "machine": "x86_64",
-          "node": "cursor",
+          "node": "xeon-x86_64",
           "python": "3.12.3",
           "system": "Linux"
         },
@@ -140,7 +140,7 @@
         "commit": "267959adba9e98e2f3002a4868ed44a66329ac84",
         "machine": {
           "machine": "x86_64",
-          "node": "cursor",
+          "node": "xeon-x86_64",
           "python": "3.12.3",
           "system": "Linux"
         },
@@ -215,7 +215,7 @@
         "commit": "267959adba9e98e2f3002a4868ed44a66329ac84",
         "machine": {
           "machine": "x86_64",
-          "node": "cursor",
+          "node": "xeon-x86_64",
           "python": "3.12.3",
           "system": "Linux"
         },
@@ -295,7 +295,7 @@
         "commit": "267959adba9e98e2f3002a4868ed44a66329ac84",
         "machine": {
           "machine": "x86_64",
-          "node": "cursor",
+          "node": "xeon-x86_64",
           "python": "3.12.3",
           "system": "Linux"
         },
@@ -370,7 +370,7 @@
         "commit": "267959adba9e98e2f3002a4868ed44a66329ac84",
         "machine": {
           "machine": "x86_64",
-          "node": "cursor",
+          "node": "xeon-x86_64",
           "python": "3.12.3",
           "system": "Linux"
         },

@@ -13,7 +13,7 @@
     "commit": "c0db2b8d333c557251635cb8bb7b3d81f0088a71",
     "machine": {
       "machine": "x86_64",
-      "node": "cursor",
+      "node": "xeon-x86_64",
       "python": "3.12.3",
       "system": "Linux"
     },

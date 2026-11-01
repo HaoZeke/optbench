@@ -18,14 +18,14 @@ def _summary():
 
 
 def _write_result(directory: Path, rows: list[dict]) -> None:
-    machine = directory / "cursor"
+    machine = directory / "xeon-x86_64"
     machine.mkdir()
     (machine / "machine.json").write_text(
         json.dumps(
             {
                 "arch": "x86_64",
                 "cpu": "test",
-                "machine": "cursor",
+                "machine": "xeon-x86_64",
                 "num_cpu": "1",
                 "os": "test",
                 "ram": "1",
@@ -80,7 +80,7 @@ def _write_result(directory: Path, rows: list[dict]) -> None:
         "params": {
             "arch": "x86_64",
             "cpu": "test",
-            "machine": "cursor",
+            "machine": "xeon-x86_64",
             "num_cpu": "1",
             "os": "test",
             "ram": "1",

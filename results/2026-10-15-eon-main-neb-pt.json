@@ -4,7 +4,7 @@
   "problem": "neb/Pt-heptamer",
   "submitter": "Rohit Goswami",
   "date": "2026-10-15",
-  "host": "cursor",
+  "host": "xeon-x86_64",
   "runs": [
     {
       "entry": "eon-main-neb-pt-lbfgs",
@@ -188,7 +188,7 @@
           "reason": "0"
         }
       ],
-      "notes": "Default L-BFGS climbing-image NEB on the 13 Pt-heptamer bands. Memory 20 is the struct default. The mean is force_calls_neb divided by 8. A value under 10000 stays in the mean. nfailed counts termination_reason other than 0. climbing_image_converged_only and setup_mmf_peaks are the binary defaults at this commit. All 13 bands finished under the cap. The published mean divides force_calls_neb by 8. Unrounded mean 439.46153846153845. 13 starts enter the mean. Per-start rows are in results/campaign/eon-main-neb-pt-lbfgs.starts. Run on host cursor."
+      "notes": "Default L-BFGS climbing-image NEB on the 13 Pt-heptamer bands. Memory 20 is the struct default. The mean is force_calls_neb divided by 8. A value under 10000 stays in the mean. nfailed counts termination_reason other than 0. climbing_image_converged_only and setup_mmf_peaks are the binary defaults at this commit. All 13 bands finished under the cap. The published mean divides force_calls_neb by 8. Unrounded mean 439.46153846153845. 13 starts enter the mean. Per-start rows are in results/campaign/eon-main-neb-pt-lbfgs.starts. Run on host xeon-x86_64."
     },
     {
       "entry": "eon-main-neb-pt-lbfgs-m100",
@@ -372,7 +372,7 @@
           "reason": "0"
         }
       ],
-      "notes": "Tuned L-BFGS climbing-image NEB. Memory 100 is the only change from eon/neb-pt-lbfgs. All 13 bands finished under the cap. The published mean divides force_calls_neb by 8. Unrounded mean 440.2307692307692. 13 starts enter the mean. Per-start rows are in results/campaign/eon-main-neb-pt-lbfgs-m100.starts. Run on host cursor."
+      "notes": "Tuned L-BFGS climbing-image NEB. Memory 100 is the only change from eon/neb-pt-lbfgs. All 13 bands finished under the cap. The published mean divides force_calls_neb by 8. Unrounded mean 440.2307692307692. 13 starts enter the mean. Per-start rows are in results/campaign/eon-main-neb-pt-lbfgs-m100.starts. Run on host xeon-x86_64."
     }
   ]
 }

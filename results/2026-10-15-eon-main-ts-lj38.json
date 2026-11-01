@@ -4,7 +4,7 @@
   "problem": "tsopt/LJ38",
   "submitter": "Rohit Goswami",
   "date": "2026-10-15",
-  "host": "cursor",
+  "host": "xeon-x86_64",
   "runs": [
     {
       "entry": "eon-main-ts-lj38-dimer",
@@ -1686,7 +1686,7 @@
           "reason": "0"
         }
       ],
-      "notes": "Default L-BFGS dimer on the 200 LJ38 starts. Memory 20 is the struct default. Potential ljcluster. The farthest pair among these geometries is under the cutoff of 40, so ljcluster matches lj/cut 40. client_displace_type is load. pos.con and displacement.con are the same geometry. direction.dat is Python random.Random(index), three draws in [0, 1) per atom. The mean keeps total_force_calls under 10000. Dimer improved is the binary default. 171 of 200 starts are under the cap of 10000 and enter the mean. 14 starts have a termination reason other than 0: 11 are too many iterations and 3 are barrier too high. Two barrier-too-high starts are under the cap and stay in the mean. Unrounded mean 2082.5730994152045. 171 starts enter the mean. Per-start rows are in results/campaign/eon-main-ts-lj38-dimer.starts. Run on host cursor."
+      "notes": "Default L-BFGS dimer on the 200 LJ38 starts. Memory 20 is the struct default. Potential ljcluster. The farthest pair among these geometries is under the cutoff of 40, so ljcluster matches lj/cut 40. client_displace_type is load. pos.con and displacement.con are the same geometry. direction.dat is Python random.Random(index), three draws in [0, 1) per atom. The mean keeps total_force_calls under 10000. Dimer improved is the binary default. 171 of 200 starts are under the cap of 10000 and enter the mean. 14 starts have a termination reason other than 0: 11 are too many iterations and 3 are barrier too high. Two barrier-too-high starts are under the cap and stay in the mean. Unrounded mean 2082.5730994152045. 171 starts enter the mean. Per-start rows are in results/campaign/eon-main-ts-lj38-dimer.starts. Run on host xeon-x86_64."
     },
     {
       "entry": "eon-main-ts-lj38-dimer-m100",
@@ -3368,7 +3368,7 @@
           "reason": "0"
         }
       ],
-      "notes": "Tuned L-BFGS dimer. Memory 100 is the only change from eon/ts-lj38-dimer. The mode seed is the same. 173 of 200 starts are under the cap of 10000 and enter the mean. 12 starts have a termination reason other than 0. Two of those are under the cap and stay in the mean. Unrounded mean 2014.6473988439307. 173 starts enter the mean. Per-start rows are in results/campaign/eon-main-ts-lj38-dimer-m100.starts. Run on host cursor."
+      "notes": "Tuned L-BFGS dimer. Memory 100 is the only change from eon/ts-lj38-dimer. The mode seed is the same. 173 of 200 starts are under the cap of 10000 and enter the mean. 12 starts have a termination reason other than 0. Two of those are under the cap and stay in the mean. Unrounded mean 2014.6473988439307. 173 starts enter the mean. Per-start rows are in results/campaign/eon-main-ts-lj38-dimer-m100.starts. Run on host xeon-x86_64."
     }
   ]
 }
