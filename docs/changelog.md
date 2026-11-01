@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-11-01
+
+The asv-perch job no longer posts a comment on a pull request from a fork.
+GitHub refused that comment, and the refusal failed the job.
+The comparison table for a fork is in the job summary of the run.
+A pull request from a branch of this repository still gets the comment.
+A benchmark failure or a comparison failure still fails the job.
+
 ## 2026-10-21
 
 `integrate/batch-3` ranks the stock rows from the finished board branches.

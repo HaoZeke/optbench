@@ -57,6 +57,21 @@ uv run asv compare COMMIT COMMIT
 
 ## CI
 
-`.github/workflows/asv.yml` checks out the history, installs Python 3.12, syncs the lockfile, and runs `HaoZeke/asv-perch@v1`. The benchmark command is `uv run asv run --skip-existing --bench quadratic {sha}^!`. That is the in-process sample, not the 1000-start eonclient grid. `post-comment` is true on a pull request and false on a push. A pull request whose base commit does not contain `benchmarks/quadratic.py` fails this job, because asv runs that commit. `check.yml` is still the oracle and pytest job.
+`.github/workflows/asv.yml` fetches the full history, installs Python 3.12, syncs the lockfile, and runs `HaoZeke/asv-perch@v1`.
+The benchmark command is `uv run asv run --skip-existing --bench quadratic {sha}^!`.
+That is the in-process sample, not the 1000-start eonclient grid.
+`post-comment` is true when the head branch of a pull request is in this repository.
+It is false on a push, on a manual run and on a pull request from a fork.
+A pull request whose base commit does not contain `benchmarks/quadratic.py` fails this job, because asv runs that commit.
+`check.yml` is still the oracle and pytest job.
 
 asv-spyglass `compare` exits 1 when any benchmark is worse by `--factor`. The default factor is 1.1. `HaoZeke/asv-perch@v1` does not ignore that status, so the step stops before `regression-threshold` is applied. A pull request compares two commits. A push compares a commit with itself, which is why those runs stay green. Quadratic timings move by about ten percent between two runs, and that is enough to exit 1. The workflow sets `regression-threshold` to 10 and passes `--factor 10`. A slowdown past that factor still fails the job.
+
+GitHub gives a pull request from a fork a read-only `GITHUB_TOKEN`.
+The comment request then fails with `Resource not accessible by integration`.
+That refusal used to fail the job on every pull request from a fork.
+`HaoZeke/asv-perch@v1` reads `post-comment` first, while it resolves its inputs.
+It then runs the benchmarks and the comparison, and it writes the comparison table to the job summary.
+With `post-comment` false the step returns after the summary and sends no request for the pull request.
+A fork's table is on the summary page of the run.
+A failure in the benchmarks or the comparison ends the step before the summary, so it still fails the job.
