@@ -13,6 +13,7 @@ The same numbers are in =results/board/index.json=.
 #+INCLUDE: "../include/sota.org"
 
 Archived rows sit in the same tables as the latest rows on each problem page.
+The tutorial page scores two optimizers on 100 starts from a fresh clone.
 The commands that write a new =benchmark.dat= are on the Run a score page.
 
 #+begin_export rst
@@ -20,6 +21,7 @@ The commands that write a new =benchmark.dat= are on the Run a score page.
    :hidden:
    :maxdepth: 2
 
+   tutorial
    run
    board
    generated/suites/minimization
