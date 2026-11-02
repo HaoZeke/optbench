@@ -319,7 +319,10 @@ def problem_html(
         lines.append(f'<tr id="{html.escape(point["id"])}"{class_attr}>')
         for index, cell in enumerate(cells):
             kind = "num" if index == 0 or headers[index] in metrics else "text"
-            lines.append(f'<td class="{kind}">{html.escape(cell)}</td>')
+            label = headers[index].replace("_", " ") or "Rank"
+            lines.append(
+                f'<td class="{kind}" data-label="{html.escape(label)}">{html.escape(cell)}</td>'
+            )
         lines.append("</tr>")
     lines.append("</tbody></table></div>")
     lines.append(_plot(prepared, primary, "Archived scores"))
@@ -478,7 +481,8 @@ def _problem_titles(root: Path) -> dict[str, str]:
 
 def _code_page_html(name: str, pins: list[dict], document: dict, registry: list[dict], titles: dict[str, str]) -> str:
     from .board import _headers, ranked_cells
-    from .site_pages import code_blurb, code_page_name, versions_html
+    from .site_charts import cost_bars_svg
+    from .site_pages import code_blurb, code_page_name, code_summaries, versions_html
 
     found: list[tuple[dict, dict]] = []
     for problem in (document.get("problems") or {}).values():
@@ -508,6 +512,22 @@ def _code_page_html(name: str, pins: list[dict], document: dict, registry: list[
     history = code_charts(Path(__file__).resolve().parents[1], codes, "../../_static/paper")
     if history:
         lines.append(history)
+    seen: set[str] = set()
+    charts: list[tuple[str, list[dict]]] = []
+    for problem, _row in found:
+        ident = str(problem.get("id") or "")
+        if not ident or ident in seen:
+            continue
+        seen.add(ident)
+        ranked = list(problem.get("ranked") or [])
+        items = code_summaries(problem, ranked, registry)
+        if not items:
+            continue
+        title = titles.get(ident) or str(problem.get("title") or ident)
+        charts.append((title, items))
+    if charts:
+        lines.append("<h3>Best cost</h3>")
+        lines.append(cost_bars_svg(charts))
     lines.append("<h3>Results</h3>")
     lines.append(
         "<p>Ranked rows for this code, one version and one method on each row. "
@@ -533,10 +553,14 @@ def _code_page_html(name: str, pins: list[dict], document: dict, registry: list[
                 f'data-problem="{html.escape(ident)}" '
                 f'data-label="{html.escape(str(row.get("label") or ""))}">'
             )
-            lines.append(f"<td>{html.escape(suite_title(suite))}</td>")
-            lines.append(f'<td><a href="{html.escape(href)}">{html.escape(title)}</a></td>')
-            for field, value in cells.items():
-                lines.append(f'<td data-field="{field}">{html.escape(value)}</td>')
+            lines.append(f'<td data-label="Suite">{html.escape(suite_title(suite))}</td>')
+            lines.append(
+                f'<td data-label="Problem"><a href="{html.escape(href)}">{html.escape(title)}</a></td>'
+            )
+            for header, (field, value) in zip(headers, cells.items()):
+                lines.append(
+                    f'<td data-field="{field}" data-label="{html.escape(header)}">{html.escape(value)}</td>'
+                )
             lines.append("</tr>")
         lines.append("</tbody></table></div>")
     else:
@@ -653,13 +677,19 @@ def _fact(value: str, note: str, notes: list[str]) -> str:
 
 
 def _problem_leaderboard(problem: dict, ranked: list[dict], registry: list[dict], code_prefix: str) -> str:
+    from .site_charts import cost_bars_svg
     from .site_pages import code_summaries, leaderboard_html
 
     items = []
     for item in code_summaries(problem, ranked, registry):
         slug = "".join(ch.lower() if ch.isalnum() else "-" for ch in str(item["code"])).strip("-")
         items.append({**item, "group": str(problem["id"]), "code_href": f"{code_prefix}{slug}.html"})
-    return "<h2>Leaderboard</h2>\n" + leaderboard_html(items, show_problem=False, bench="leader")
+    title = str(problem.get("title") or problem.get("id") or "")
+    chart = cost_bars_svg([(title, items)]) if items else ""
+    leaderboard = leaderboard_html(items, show_problem=False, bench="leader")
+    if chart:
+        return chart + "\n<h2>Leaderboard</h2>\n" + leaderboard
+    return "<h2>Leaderboard</h2>\n" + leaderboard
 
 
 def _problem_preamble(root: Path, problem: dict, ranked: list[dict], note: str = "") -> str:
@@ -788,7 +818,7 @@ def render(root: Path) -> None:
                 codes.append(item["code"])
         parts = [
             '<section class="bench plate-suite">',
-            f"<p>{html.escape(suite_paragraph(suite_title(suite), ordered, root, by_slug))}</p>",
+            suite_paragraph(suite_title(suite), ordered, root, by_slug),
             '<div class="stat-row stat-row-2">',
             f'<div class="stat"><span class="k">Problems</span><span class="v num">{len(ordered)}</span></div>',
             f'<div class="stat"><span class="k">Codes</span><span class="v num">{len(codes)}</span></div>',

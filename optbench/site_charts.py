@@ -24,26 +24,77 @@ def _slug(text: str) -> str:
     return "".join(ch.lower() if ch.isalnum() else "-" for ch in text).strip("-") or "chart"
 
 
-def bar_percent(value: float, best: float, worst: float) -> float:
-    """Bar length from 16 to 100. The best value fills the bar.
+AXIS_TITLE = "cost (force calls, log scale)"
+_READ = "A shorter bar is a lower cost on a log scale shared by the codes of this problem."
+_READ_OFF = (
+    "A shorter bar is a lower cost on a log scale shared by the codes of this problem, "
+    "and a cost at or below zero is left off the axis."
+)
+_READ_NONE = "A cost at or below zero is left off the log scale, so this problem has no bar."
+_NOISE = 1e-9
+_SUPERS = str.maketrans("-0123456789", "⁻⁰¹²³⁴⁵⁶⁷⁸⁹")
 
-    Positive costs use best/value, so a cost twice as large is half as long.
-    Signed values, including energies below zero, stay linear in the value.
-    A small gap stays a small gap.
+
+def _positive(value: float) -> bool:
+    return math.isfinite(value) and value > 0.0
+
+
+def _near(left: float, right: float) -> bool:
+    return math.isclose(left, right, rel_tol=_NOISE, abs_tol=0.0)
+
+
+def decade_floor(value: float) -> int:
+    """Largest integer k with 10**k <= value.
+
+    ``floor(log10(1000))`` can come back one short. The power is checked,
+    and only a 1e-9 relative miss at the boundary is absorbed.
     """
-    if best == worst or value == best:
-        return 100.0
-    if best > 0 and worst > 0 and value > 0:
-        return max(16.0, min(100.0, 100.0 * best / value))
-    span = worst - best
-    if span == 0:
-        return 100.0
-    t = (value - best) / span
-    t = min(1.0, max(0.0, t))
-    scale = max(abs(best), abs(worst), 1e-12)
-    closeness = min(1.0, abs(span) / scale)
-    floor = 100.0 - closeness * 84.0
-    return 100.0 - t * (100.0 - floor)
+    if not _positive(value):
+        raise ValueError("decade_floor expects a positive finite cost")
+    k = math.floor(math.log10(value))
+    if _near(value, 10.0 ** (k + 1)):
+        return k + 1
+    if 10.0 ** k > value and not _near(value, 10.0 ** k):
+        return k - 1
+    return k
+
+
+def decade_ceil(value: float) -> int:
+    """Smallest integer k with 10**k >= value."""
+    k = decade_floor(value)
+    if value <= 10.0 ** k or _near(value, 10.0 ** k):
+        return k
+    return k + 1
+
+
+def cost_decades(values) -> tuple[int, int] | None:
+    """Decade at or below the minimum and decade at or above the maximum.
+
+    Non-positive costs are not on a log scale. An empty positive set has no axis.
+    """
+    positive = [float(value) for value in values if _positive(float(value))]
+    if not positive:
+        return None
+    return min(decade_floor(value) for value in positive), max(decade_ceil(value) for value in positive)
+
+
+def log_cost_fraction(value: float, k_lo: int, k_hi: int) -> float | None:
+    """Bar length from the shared decade axis. Zero is allowed. Nothing is clamped."""
+    value = float(value)
+    if not _positive(value):
+        return None
+    if k_hi == k_lo:
+        return 0.0
+    raw = (math.log10(value) - float(k_lo)) / float(k_hi - k_lo)
+    if abs(raw) <= _NOISE:
+        return 0.0
+    if abs(raw - 1.0) <= _NOISE:
+        return 1.0
+    return raw
+
+
+def decade_label(k: int) -> str:
+    return "10" + str(int(k)).translate(_SUPERS)
 
 
 def _figure(slug: str, title: str, body: str, caption: str, legend: str = "") -> str:
@@ -251,52 +302,95 @@ def cost_distribution_svg(rows: list[dict], title: str = "") -> str:
     )
 
 
+def _cost_chart(title: str, rows: list[dict]) -> str:
+    """One problem, one log10 axis, one sentence underneath."""
+    if not rows:
+        return ""
+    values = [float(row["best"]) for row in rows]
+    span = cost_decades(values)
+    omitted = any(not _positive(value) for value in values)
+    if span is None:
+        caption = _READ_NONE
+    elif omitted:
+        caption = _READ_OFF
+    else:
+        caption = _READ
+    width = 680
+    label_w = 156
+    number_w = 96
+    bar_x = label_w + 12
+    bar_max = width - bar_x - number_w
+    parts: list[str] = []
+    y = 18.0
+    parts.append(f'<text class="group-label" x="0" y="{y:.0f}">{_esc(title)}</text>')
+    y += 10
+    positive = [value for value in values if _positive(value)]
+    cheapest = min(positive) if positive else None
+    k_lo, k_hi = span if span is not None else (0, 0)
+    plot_top = y + 4
+    row_mids: list[float] = []
+    for _row in rows:
+        row_mids.append(y + 14)
+        y += 22
+    if span is not None:
+        y += 8
+        axis_y = y
+        parts.append(
+            f'<line class="axis" x1="{bar_x:.2f}" y1="{axis_y:.2f}" x2="{bar_x + bar_max:.2f}" y2="{axis_y:.2f}"/>'
+        )
+        for k in range(k_lo, k_hi + 1):
+            if k_hi == k_lo:
+                tick_x = float(bar_x)
+            else:
+                tick_x = bar_x + (k - k_lo) / (k_hi - k_lo) * bar_max
+            parts.append(
+                f'<line class="grid" x1="{tick_x:.2f}" y1="{plot_top:.2f}" x2="{tick_x:.2f}" y2="{axis_y:.2f}"/>'
+            )
+            parts.append(
+                f'<line class="axis" x1="{tick_x:.2f}" y1="{axis_y - 4:.2f}" x2="{tick_x:.2f}" y2="{axis_y:.2f}"/>'
+            )
+            parts.append(
+                f'<text class="num" x="{tick_x:.2f}" y="{axis_y + 14:.2f}" text-anchor="middle">{_esc(decade_label(k))}</text>'
+            )
+        parts.append(
+            f'<text class="axis-name" x="{bar_x + bar_max / 2:.2f}" y="{axis_y + 30:.2f}" text-anchor="middle">{_esc(AXIS_TITLE)}</text>'
+        )
+        y = axis_y + 36
+    else:
+        y += 8
+    for row, value, mid in zip(rows, values, row_mids):
+        code = str(row.get("code") or "")
+        parts.append("<g>")
+        parts.append(f"<title>{_esc(code)}: {_fmt(value)}</title>")
+        parts.append(
+            f'<text class="code-label" x="{label_w}" y="{mid + 4:.2f}" text-anchor="end">{_esc(code)}</text>'
+        )
+        fraction = None if span is None else log_cost_fraction(value, k_lo, k_hi)
+        if fraction is not None:
+            bar_w = bar_max * fraction
+            css = "suite-bar is-best" if cheapest is not None and value == cheapest else "suite-bar"
+            parts.append(
+                f'<rect class="{css}" x="{bar_x:.2f}" y="{mid - 5:.2f}" width="{bar_w:.4f}" height="10"/>'
+            )
+        parts.append(
+            f'<text class="num" x="{bar_x + bar_max + 8:.2f}" y="{mid + 4:.2f}">{_fmt(value)}</text>'
+        )
+        parts.append("</g>")
+    slug = _slug(title) + "-cost-bars"
+    return _figure(slug, f"Best cost for {title}", (width, y, "".join(parts)), _esc(caption))
+
+
+def cost_bars_svg(groups: list[tuple[str, list[dict]]]) -> str:
+    """One chart per problem. The axis is shared by the codes in that problem."""
+    return "\n".join(_cost_chart(title, rows) for title, rows in groups if rows)
+
+
 def suite_bars_svg(series: list[dict]) -> str:
-    """Horizontal bars of best cost, one scale per problem."""
+    """Horizontal bars of best cost, one log scale per problem."""
     groups: list[tuple[str, list[dict]]] = []
     for item in series:
         title = str(item.get("title") or "")
         if not groups or groups[-1][0] != title:
             groups.append((title, []))
         groups[-1][1].append(item)
-    groups = [(title, rows) for title, rows in groups if rows]
-    if not groups:
-        return ""
-    width = 640
-    label_w = 148
-    number_w = 84
-    bar_x = label_w + 10
-    bar_max = width - bar_x - number_w
-    top = 8
-    height = top
-    parts: list[str] = []
-    for title, rows in groups:
-        values = [float(row["best"]) for row in rows]
-        best, worst = min(values), max(values)
-        header_y = height + 16
-        height += 24
-        parts.append(f'<text class="group-label" x="0" y="{header_y}">{_esc(title)}</text>')
-        for index, row in enumerate(rows):
-            value = float(row["best"])
-            mid = height + 11
-            height += 22
-            percent = bar_percent(value, best, worst)
-            bar_w = bar_max * percent / 100.0
-            css = "suite-bar is-best" if index == 0 else "suite-bar"
-            code = str(row.get("code") or "")
-            parts.append("<g>")
-            parts.append(f"<title>{_esc(code)}: {_fmt(value)}</title>")
-            parts.append(
-                f'<text class="code-label" x="{label_w}" y="{mid + 4}" text-anchor="end">{_esc(code)}</text>'
-            )
-            parts.append(
-                f'<rect class="{css}" x="{bar_x}" y="{mid - 5}" width="{bar_w:.2f}" height="10"/>'
-            )
-            parts.append(
-                f'<text class="num" x="{bar_x + bar_max + 8}" y="{mid + 4}">{_fmt(value)}</text>'
-            )
-            parts.append("</g>")
-        height += 10
-    height += 4
-    caption = "Best cost of each code. Each problem has its own scale. A longer bar is closer to the best."
-    return _figure("suite-bars", "Best cost by code", (width, height, "".join(parts)), _esc(caption))
+    return cost_bars_svg(groups)

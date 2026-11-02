@@ -335,12 +335,13 @@ def _english(items: list[str]) -> str:
 
 
 def suite_paragraph(suite_name: str, group: list[dict], root: Path, by_slug: dict[str, list[dict]]) -> str:
-    """One sentence naming the problems in this suite."""
+    """A short count, then the problem names as a strip."""
     del root
     names = [human_title(problem, by_slug) for problem in group]
     count = len(group)
     noun = "problem" if count == 1 else "problems"
-    return f"{suite_name} has {count} {noun}: {_english(names)}."
+    items = "".join(f"<li>{_cell(name)}</li>" for name in names)
+    return f"<p>{_cell(suite_name)} compares {count} {noun}.</p>" f'<ul class="suite-facts">{items}</ul>'
 
 
 def _metric_value(row: dict) -> float | None:
@@ -459,8 +460,8 @@ def _th(label: str, tip: str = "") -> str:
 
 
 def leaderboard_html(items: list[dict], *, show_problem: bool, bench: str) -> str:
-    """Ranked codes. A longer bar is closer to the best cost in the group."""
-    from .site_charts import bar_percent
+    """Ranked codes. The bar uses the same log10 axis as the chart for that problem."""
+    from .site_charts import cost_decades, log_cost_fraction
 
     notes: list[str] = []
 
@@ -475,7 +476,7 @@ def leaderboard_html(items: list[dict], *, show_problem: bool, bench: str) -> st
     headers.extend(
         [
             _th("Code"),
-            _th("Best", "Lowest cost for this code. A longer bar is closer to the best on that problem."),
+            _th("Best", "Lowest cost for this code. A shorter bar is a lower cost on the shared log scale."),
             _th("Median", "Median of this code's costs on that problem."),
             _th("Success", "Share of runs that finished."),
             _th("PAR-2", "Mean cost of the runs. A failure counts as twice the cap."),
@@ -484,10 +485,11 @@ def leaderboard_html(items: list[dict], *, show_problem: bool, bench: str) -> st
     grouped: dict[str, list[float]] = defaultdict(list)
     for item in items:
         grouped[str(item.get("group") or "")].append(float(item["best"]))
+    spans = {group: cost_decades(values) for group, values in grouped.items()}
     lines = [
         '<div class="bench-scroll">',
         f'<table class="bench-sortable leader" data-bench="{_cell(bench)}">',
-        "<caption>A longer bar is closer to the best on that problem. Select a column heading to sort.</caption>",
+        "<caption>A shorter bar is a lower cost on the log scale for that problem. Select a column heading to sort.</caption>",
         "<thead><tr>" + "".join(headers) + "</tr></thead><tbody>",
     ]
     rank = 0
@@ -503,9 +505,9 @@ def leaderboard_html(items: list[dict], *, show_problem: bool, bench: str) -> st
         else:
             rank += 1
             started = False
-        values = grouped[group]
-        best_value, worst_value = min(values), max(values)
-        percent = bar_percent(float(item["best"]), best_value, worst_value)
+        span = spans[group]
+        fraction = None if span is None else log_cost_fraction(float(item["best"]), span[0], span[1])
+        percent = 0.0 if fraction is None else 100.0 * fraction
         classes = []
         if rank == 1:
             classes.append("is-best")
@@ -514,25 +516,37 @@ def leaderboard_html(items: list[dict], *, show_problem: bool, bench: str) -> st
         class_attr = f' class="{" ".join(classes)}"' if classes else ""
         rank_class = "rank r1" if rank == 1 else "rank r2" if rank == 2 else "rank r3" if rank == 3 else "rank"
         lines.append(f"<tr{class_attr}>")
-        lines.append(f'<td class="rank-cell"><span class="{rank_class}">{rank}</span></td>')
+        lines.append(
+            f'<td class="rank-cell" data-label="Rank"><span class="{rank_class}">{rank}</span></td>'
+        )
         if show_problem:
             lines.append(
-                f'<td class="problem"><a href="{_cell(item.get("problem_href") or "")}">{_cell(item.get("problem_title") or "")}</a></td>'
+                '<td class="problem" data-label="Problem">'
+                f'<a href="{_cell(item.get("problem_href") or "")}">{_cell(item.get("problem_title") or "")}</a></td>'
             )
-        lines.append(f'<td class="code"><a href="{_cell(item.get("code_href") or "")}">{_cell(item.get("code") or "")}</a></td>')
         lines.append(
-            '<td class="num best">'
-            f'<span class="bar" aria-hidden="true" style="--w:{percent:.1f}%"><i></i></span>'
+            '<td class="code" data-label="Code">'
+            f'<a href="{_cell(item.get("code_href") or "")}">{_cell(item.get("code") or "")}</a></td>'
+        )
+        if fraction is None:
+            bar = ""
+        else:
+            bar = f'<span class="bar" aria-hidden="true" style="--w:{percent:.4f}%"><i></i></span>'
+        lines.append(
+            '<td class="num best" data-label="Best">'
+            f"{bar}"
             f'<span class="bar-num">{_cell(_format_number(item["best"]) or "—")}</span>'
             "</td>"
         )
-        lines.append(f'<td class="num">{_cell(_format_number(item["median"]) or "—")}</td>')
+        lines.append(
+            f'<td class="num" data-label="Median">{_cell(_format_number(item["median"]) or "—")}</td>'
+        )
         rate = _format_rate(item.get("success"))
         rate_mark = "" if rate else marker(rate_dash)
-        lines.append(f'<td class="num">{_cell(rate or "—")}{rate_mark}</td>')
+        lines.append(f'<td class="num" data-label="Success">{_cell(rate or "—")}{rate_mark}</td>')
         par2 = _format_number(item.get("par2"))
         par2_mark = "" if par2 else marker(par2_dash)
-        lines.append(f'<td class="num">{_cell(par2 or "—")}{par2_mark}</td>')
+        lines.append(f'<td class="num" data-label="PAR-2">{_cell(par2 or "—")}{par2_mark}</td>')
         lines.append("</tr>")
     if not items:
         span = 7 if show_problem else 6
@@ -586,20 +600,22 @@ def suite_tables(
     notes: list[str] = []
     for item in prepared:
         lines.append("<tr>")
-        lines.append(f'<th scope="row"><a href="{_cell(item["href"])}">{_cell(item["title"])}</a></th>')
-        lines.append(f"<td>{_cell(item['system'] or '—')}</td>")
+        lines.append(
+            f'<th scope="row" data-label="Problem"><a href="{_cell(item["href"])}">{_cell(item["title"])}</a></th>'
+        )
+        lines.append(f'<td data-label="System">{_cell(item["system"] or "—")}</td>')
         if show_atoms:
             if item["atoms"]:
-                lines.append(f'<td class="num">{_cell(item["atoms"])}</td>')
+                lines.append(f'<td class="num" data-label="Atoms">{_cell(item["atoms"])}</td>')
             else:
                 missing_atoms = True
-                lines.append('<td class="num">—</td>')
+                lines.append('<td class="num" data-label="Atoms">—</td>')
         if show_runs:
             mark = ""
             if item["note"]:
                 notes.append(item["note"])
                 mark = f"<sup>{len(notes)}</sup>"
-            lines.append(f'<td class="num">{_cell(item["runs"] or "—")}{mark}</td>')
+            lines.append(f'<td class="num" data-label="Runs">{_cell(item["runs"] or "—")}{mark}</td>')
         lines.append("</tr>")
     lines.append("</tbody></table></div>")
     if missing_atoms:
@@ -649,13 +665,14 @@ def _style_axes(axis) -> None:
 
 
 def write_suite_plot(suite: str, series: list[dict], directory: Path) -> str | None:
-    """One matplotlib figure, same text and raster settings as the board plots."""
+    """One matplotlib figure on the same decade axis as the page chart."""
     if len(series) < 1:
         return None
+    import math
     import os
 
     import matplotlib
-    from matplotlib.ticker import FuncFormatter, ScalarFormatter
+    from matplotlib.ticker import FuncFormatter
 
     matplotlib.use("Agg", force=False)
     matplotlib.rcParams["svg.hashsalt"] = "optbench"
@@ -663,43 +680,62 @@ def write_suite_plot(suite: str, series: list[dict], directory: Path) -> str | N
     os.environ.setdefault("SOURCE_DATE_EPOCH", "0")
     import matplotlib.pyplot as plt
 
-    from .board import _plain_tick, _save_figure
+    from .board import _save_figure
+    from .site_charts import AXIS_TITLE, cost_decades, decade_label
 
     problems: list[str] = []
-    plotted: list[dict] = []
     for item in series:
         if item["title"] not in problems:
             problems.append(item["title"])
-    for title in problems:
-        rows = [row for row in series if row["title"] == title][:12]
-        plotted.extend(rows)
-    series = plotted
-    height = max(2.6, 0.36 * max(len([row for row in series if row["title"] == title]) for title in problems) + 1.1)
+    counts = [sum(1 for row in series if row["title"] == title) for title in problems]
+    height = max(2.6, 0.36 * max(counts) + 1.35)
     figure, axes = plt.subplots(
         nrows=len(problems),
         ncols=1,
         figsize=(7.2, height * len(problems)),
         squeeze=False,
-        layout="tight",
+        layout="constrained",
     )
     figure.patch.set_facecolor("#f7f4ee")
-    plain = FuncFormatter(_plain_tick)
+
+    def _tick(value: float, _position: object) -> str:
+        if value <= 0:
+            return ""
+        return decade_label(int(round(math.log10(value))))
+
     for axis, title in zip(axes[:, 0], problems):
         rows = [row for row in series if row["title"] == title]
         labels = [row["code"] for row in rows]
-        values = [row["best"] for row in rows]
-        positions = list(range(len(rows)))
+        values = [float(row["best"]) for row in rows]
         _style_axes(axis)
-        axis.barh(positions, values, color="#0f6e6e", height=0.62)
-        axis.set_yticks(positions, labels)
-        axis.invert_yaxis()
-        axis.xaxis.set_major_formatter(plain if min(values) > 0 else ScalarFormatter(useOffset=False))
-        axis.set_xlabel("Best cost")
         axis.set_title(title)
-        if min(values) > 0 and max(values) / min(values) >= 8:
-            axis.set_xscale("log")
-            axis.xaxis.set_major_formatter(plain)
-    figure.tight_layout()
+        axis.set_xlabel(AXIS_TITLE)
+        axis.set_yticks(list(range(len(rows))), labels)
+        axis.invert_yaxis()
+        span = cost_decades(values)
+        if span is None:
+            axis.set_xticks([])
+            continue
+        k_lo, k_hi = span
+        if k_hi == k_lo:
+            axis.set_xlim(0, 1)
+            axis.set_xticks([0.5])
+            axis.set_xticklabels([decade_label(k_lo)])
+            continue
+        cheapest = min(value for value in values if value > 0)
+        left = 10.0 ** k_lo
+        axis.set_xscale("log")
+        axis.set_xlim(left, 10.0 ** k_hi)
+        for index, value in enumerate(values):
+            if value <= 0:
+                continue
+            color = "#c2410c" if value == cheapest else "#1c1915"
+            axis.barh(index, value - left, left=left, color=color, height=0.62)
+        axis.set_xlim(left, 10.0 ** k_hi)
+        axis.set_xticks([10.0 ** k for k in range(k_lo, k_hi + 1)])
+        axis.xaxis.set_major_formatter(FuncFormatter(_tick))
+        axis.margins(x=0)
+        axis.set_xlim(left, 10.0 ** k_hi)
     directory.mkdir(parents=True, exist_ok=True)
     _save_figure(figure, directory, f"suite-{suite}")
     plt.close(figure)
@@ -798,8 +834,28 @@ def metric_html(_problem: dict, primary: str | None, method_href: str) -> str:
     return f'<p class="metric-line">{lead}<a href="{_cell(method_href)}">Scoring rules</a>.</p>'
 
 
+def _sentences(text: str) -> list[str]:
+    """Split on a sentence end that is followed by a capital letter."""
+    parts: list[str] = []
+    start = 0
+    index = 0
+    while index < len(text):
+        if text[index] in ".!?" and (index + 1 == len(text) or text[index + 1] == " "):
+            rest = text[index + 1 :].lstrip()
+            if not rest or rest[0].isupper():
+                sentence = text[start : index + 1].strip()
+                if sentence:
+                    parts.append(sentence)
+                start = index + 1
+        index += 1
+    tail = text[start:].strip()
+    if tail:
+        parts.append(tail)
+    return parts
+
+
 def success_note(problem: dict) -> str:
-    """Problem-specific success rule. Generic rates live on the methodology page."""
+    """Problem-specific success rule, one sentence per paragraph."""
     version2 = (problem.get("scoring") or {}).get("v2") or {}
     success = str(version2.get("success") or "").strip()
     if not success:
@@ -807,9 +863,18 @@ def success_note(problem: dict) -> str:
         if not cost:
             return ""
         return f'<p class="bench-note">The cost is {_cell(cost)}.</p>'
-    if success[-1] not in ".!?":
-        success += "."
-    return f'<p class="bench-note">Success on this problem: {_cell(success)}</p>'
+    sentences = _sentences(success)
+    if not sentences:
+        return ""
+    lines = []
+    for index, sentence in enumerate(sentences):
+        if sentence[-1] not in ".!?":
+            sentence += "."
+        if index == 0:
+            lines.append(f'<p class="bench-note">Success on this problem: {_cell(sentence)}</p>')
+        else:
+            lines.append(f'<p class="bench-note">{_cell(sentence)}</p>')
+    return "\n".join(lines)
 
 
 def _first_sentence(text: str) -> str:
@@ -873,10 +938,10 @@ def versions_html(pins: list[dict]) -> str:
         commit = str(pin.get("commit") or "")
         repo = str(pin.get("repository") or "")
         lines.append("<tr>")
-        lines.append(f"<td>{_cell(pin.get('role') or '')}</td>")
-        lines.append(f"<td>{_cell(pin.get('ref') or '')}</td>")
-        lines.append(f"<td>{_cell(commit[:12])}</td>")
-        lines.append(f'<td><a href="{_cell(repo)}">{_cell(repo)}</a></td>')
+        lines.append(f'<td data-label="Role">{_cell(pin.get("role") or "")}</td>')
+        lines.append(f'<td data-label="Ref">{_cell(pin.get("ref") or "")}</td>')
+        lines.append(f'<td data-label="Commit">{_cell(commit[:12])}</td>')
+        lines.append(f'<td data-label="Source"><a href="{_cell(repo)}">{_cell(repo)}</a></td>')
         lines.append("</tr>")
     lines.append("</tbody></table></div>")
     return "\n".join(lines)

@@ -26,12 +26,13 @@ It has no PAR-2 score, so the leaderboard shows a dash.
 
 Best is the lowest cost for that code on that problem.
 Median is the median of that code's costs on that problem.
-A longer bar is closer to the best cost on that problem.
-The best row fills the bar.
-When every cost is positive, the length is the best cost divided by that row's cost.
-A cost twice as large is half as long, and the bar stops at one sixth of the width.
-When a cost is below zero, the length is linear in the value.
-A small gap stays a small gap.
+Each problem has one log scale, shared by every code on that problem.
+The scale is labeled "cost (force calls, log scale)".
+It runs from the decade at or below the lowest positive cost to the one at or above the highest.
+A shorter bar is a lower cost.
+The lowest positive cost is drawn in copper.
+A bar has no minimum length.
+A cost at or below zero is left off the scale, and the sentence under the chart says so.
 
 * Performance profile
 
