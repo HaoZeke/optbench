@@ -86,6 +86,15 @@ def _drop_remote_assets(app, exception):
         text = js.read_text(encoding="utf-8")
         text = text.replace("function Tn(t,e){", "function Tn(t,e){return;")
         text = text.replace("//cdn.carbonads.com/carbon.js?serve=${t}&placement=${e}", "")
+        for host in (
+            "https://api.iconify.design",
+            "https://api.simplesvg.com",
+            "https://api.unisvg.com",
+            "https://api.github.com/repos/",
+            "https://gitlab.com/api/v4/projects/",
+        ):
+            text = text.replace(host, "")
+        text = text.replace('import("https://esm.sh/turndown")', "Promise.reject()")
         js.write_text(text, encoding="utf-8")
 
 
