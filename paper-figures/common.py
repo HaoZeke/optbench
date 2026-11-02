@@ -56,7 +56,17 @@ def code_token(code: str) -> str:
 
 
 def version_label(row: dict) -> str:
+    """Recorded version, or the commit when the row has no version.
+
+    A few harness rows stored the method after the version
+    (``(develop 500350d9) · LBFGS``). The method is already its own field,
+    so the axis keeps the version only.
+    """
     version = str(row.get("code_version") or "").strip()
+    method = str(row.get("method") or "").strip()
+    leaked = f" · {method}" if method else ""
+    if version and leaked and version.endswith(leaked):
+        version = version[: -len(leaked)].strip()
     if version:
         return version
     commit = str(row.get("commit") or row.get("asv_commit") or "").strip()

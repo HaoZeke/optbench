@@ -46,6 +46,29 @@ def _series(rows: list[dict]) -> tuple[list[str], dict[str, dict[str, tuple[floa
     return labels, series
 
 
+def _runs(labels: list[str], points: dict, slot: int) -> list[tuple[list[int], list[float]]]:
+    """Contiguous versions only. A missing value breaks the line."""
+    runs: list[tuple[list[int], list[float]]] = []
+    xs: list[int] = []
+    ys: list[float] = []
+    previous: int | None = None
+    for position, label in enumerate(labels):
+        value = points.get(label, (None, None))[slot]
+        if value is None or previous is not None and position != previous + 1:
+            if ys:
+                runs.append((xs, ys))
+            xs, ys = [], []
+            if value is None:
+                previous = None
+                continue
+        xs.append(position)
+        ys.append(value)
+        previous = position
+    if ys:
+        runs.append((xs, ys))
+    return runs
+
+
 def main() -> None:
     common.apply_style()
     import matplotlib.pyplot as plt
@@ -89,28 +112,22 @@ def main() -> None:
             for index, (method, points) in enumerate(sorted(series.items())):
                 color = common.OKABE[index % len(common.OKABE)]
                 for slot, axis in enumerate(axes):
-                    xs = []
-                    ys = []
-                    for position, label in enumerate(labels):
-                        value = points.get(label, (None, None))[slot]
-                        if value is None:
-                            continue
-                        xs.append(position)
-                        ys.append(value)
-                        values[slot].append(value)
-                    if not ys:
+                    runs = _runs(labels, points, slot)
+                    if not runs:
                         continue
                     drawn[slot] = True
-                    axis.plot(
-                        xs,
-                        ys,
-                        linestyle="-" if len(ys) >= 2 else "none",
-                        marker="o",
-                        color=color,
-                        linewidth=1.1,
-                        markersize=3.5,
-                        label=method,
-                    )
+                    for run_index, (xs, ys) in enumerate(runs):
+                        values[slot].extend(ys)
+                        axis.plot(
+                            xs,
+                            ys,
+                            linestyle="-" if len(ys) >= 2 else "none",
+                            marker="o",
+                            color=color,
+                            linewidth=1.1,
+                            markersize=3.5,
+                            label=method if run_index == 0 else None,
+                        )
             names = ("PAR-2", "Mean force calls")
             for slot, axis in enumerate(axes):
                 axis.set_ylabel(names[slot])
