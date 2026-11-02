@@ -16,8 +16,8 @@
    <h2>Leaderboard</h2>
    <div class="bench-scroll">
    <table class="bench-sortable leader" data-bench="leader">
-   <caption>A longer bar is closer to the best on that problem. Select a column heading to sort.</caption>
-   <thead><tr><th>Rank</th><th>Code</th><th title="Lowest cost for this code. A longer bar is closer to the best on that problem.">Best</th><th title="Median of this code&#x27;s costs on that problem.">Median</th><th title="Share of runs that finished.">Success</th><th title="Mean cost of the runs. A failure counts as twice the cap.">PAR-2</th></tr></thead><tbody>
+   <caption>A shorter bar is a lower cost on the log scale for that problem. Select a column heading to sort.</caption>
+   <thead><tr><th>Rank</th><th>Code</th><th title="Lowest cost for this code. A shorter bar is a lower cost on the shared log scale.">Best</th><th title="Median of this code&#x27;s costs on that problem.">Median</th><th title="Share of runs that finished.">Success</th><th title="Mean cost of the runs. A failure counts as twice the cap.">PAR-2</th></tr></thead><tbody>
    <tr><td colspan="6">No ranked row.</td></tr>
    </tbody></table></div>
    <p class="bench-note">The tables below list every ranked row, by method family and overall.</p>
@@ -29,5 +29,6 @@
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
    <tr><td colspan="11">No ranked row.</td></tr>
    </tbody></table></div>
+   <p class="bench-note">Success on this problem: client force calls under the cap, a converged native search, fixed Cu atoms, max-norm H force at the stop on an independent RPC evaluation, and Hessian index 1 over the six H coordinates with no eigenvalue within 1e-6 of zero.</p>
    </section>
 #+end_export

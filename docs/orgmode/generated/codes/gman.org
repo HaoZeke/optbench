@@ -7,25 +7,27 @@
    <section class="bench" id="code-gman">
    <p>The registry has no pin for this code string. The rows below use the spelling on the archived file.</p>
    <p>No registry pin.</p>
+   <h3>Best cost</h3>
+   <figure class="plate-figure"><svg class="plate-chart" role="img" aria-labelledby="pt-heptamer-island-cost-bars-title" viewBox="0 0 680 270.0"><title id="pt-heptamer-island-cost-bars-title">Best cost for Pt heptamer island</title><text class="group-label" x="0" y="18">Pt heptamer island</text><line class="axis" x1="168.00" y1="234.00" x2="584.00" y2="234.00"/><line class="grid" x1="168.00" y1="32.00" x2="168.00" y2="234.00"/><line class="axis" x1="168.00" y1="230.00" x2="168.00" y2="234.00"/><text class="num" x="168.00" y="248.00" text-anchor="middle">10¹</text><line class="grid" x1="306.67" y1="32.00" x2="306.67" y2="234.00"/><line class="axis" x1="306.67" y1="230.00" x2="306.67" y2="234.00"/><text class="num" x="306.67" y="248.00" text-anchor="middle">10²</text><line class="grid" x1="445.33" y1="32.00" x2="445.33" y2="234.00"/><line class="axis" x1="445.33" y1="230.00" x2="445.33" y2="234.00"/><text class="num" x="445.33" y="248.00" text-anchor="middle">10³</text><line class="grid" x1="584.00" y1="32.00" x2="584.00" y2="234.00"/><line class="axis" x1="584.00" y1="230.00" x2="584.00" y2="234.00"/><text class="num" x="584.00" y="248.00" text-anchor="middle">10⁴</text><text class="axis-name" x="376.00" y="264.00" text-anchor="middle">cost (force calls, log scale)</text><g><title>Eon svn: 42</title><text class="code-label" x="156" y="46.00" text-anchor="end">Eon svn</text><rect class="suite-bar is-best" x="168.00" y="37.00" width="86.4239" height="10"/><text class="num" x="592.00" y="46.00">42</text></g><g><title>Gman: 48</title><text class="code-label" x="156" y="68.00" text-anchor="end">Gman</text><rect class="suite-bar" x="168.00" y="59.00" width="94.4655" height="10"/><text class="num" x="592.00" y="68.00">48</text></g><g><title>geodesic: 318.923</title><text class="code-label" x="156" y="90.00" text-anchor="end">geodesic</text><rect class="suite-bar" x="168.00" y="81.00" width="208.5111" height="10"/><text class="num" x="592.00" y="90.00">318.923</text></g><g><title>eOn: 319.538</title><text class="code-label" x="156" y="112.00" text-anchor="end">eOn</text><rect class="suite-bar" x="168.00" y="103.00" width="208.6272" height="10"/><text class="num" x="592.00" y="112.00">319.538</text></g><g><title>COMPASS: 561.462</title><text class="code-label" x="156" y="134.00" text-anchor="end">COMPASS</text><rect class="suite-bar" x="168.00" y="125.00" width="242.5724" height="10"/><text class="num" x="592.00" y="134.00">561.462</text></g><g><title>ASE: 606.923</title><text class="code-label" x="156" y="156.00" text-anchor="end">ASE</text><rect class="suite-bar" x="168.00" y="147.00" width="247.2612" height="10"/><text class="num" x="592.00" y="156.00">606.923</text></g><g><title>rgsaddle: 732.462</title><text class="code-label" x="156" y="178.00" text-anchor="end">rgsaddle</text><rect class="suite-bar" x="168.00" y="169.00" width="258.5835" height="10"/><text class="num" x="592.00" y="178.00">732.462</text></g><g><title>LAMMPS: 1398.46</title><text class="code-label" x="156" y="200.00" text-anchor="end">LAMMPS</text><rect class="suite-bar" x="168.00" y="191.00" width="297.5302" height="10"/><text class="num" x="592.00" y="200.00">1398.46</text></g><g><title>TSASE: 1521.15</title><text class="code-label" x="156" y="222.00" text-anchor="end">TSASE</text><rect class="suite-bar" x="168.00" y="213.00" width="302.5947" height="10"/><text class="num" x="592.00" y="222.00">1521.15</text></g></svg><figcaption>A shorter bar is a lower cost on a log scale shared by the codes of this problem.</figcaption></figure>
    <h3>Results</h3>
    <p>Ranked rows for this code, one version and one method on each row. <a href="../../methodology.html">Scoring rules</a>.</p>
    <div class="bench-scroll"><table class="bench-sortable" data-board-table="code-rows">
    <caption>Every ranked row for this code. Select a column heading to sort.</caption>
    <thead><tr><th>Suite</th><th>Problem</th><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
    <tr data-problem="neb/Pt-heptamer" data-label="Gman (r235) · lbfgs">
-   <td>Nudged elastic band</td>
-   <td><a href="../suites/neb/Pt-heptamer.html">Pt heptamer island</a></td>
-   <td data-field="label">Gman (r235) · lbfgs</td>
-   <td data-field="family">Connect / double-ended</td>
-   <td data-field="family_rank">2</td>
-   <td data-field="par2_mean"></td>
-   <td data-field="published">48</td>
-   <td data-field="median_calls"></td>
-   <td data-field="mean_calls">48</td>
-   <td data-field="hessian_calls">0</td>
-   <td data-field="fd_calls">0</td>
-   <td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-   <td data-field="n">13</td>
+   <td data-label="Suite">Nudged elastic band</td>
+   <td data-label="Problem"><a href="../suites/neb/Pt-heptamer.html">Pt heptamer island</a></td>
+   <td data-label="Row" data-field="label">Gman (r235) · lbfgs</td>
+   <td data-label="Family" data-field="family">Connect / double-ended</td>
+   <td data-label="Family rank" data-field="family_rank">2</td>
+   <td data-label="PAR-2" data-field="par2_mean"></td>
+   <td data-label="Published" data-field="published">48</td>
+   <td data-label="Median calls" data-field="median_calls"></td>
+   <td data-label="Mean calls" data-field="mean_calls">48</td>
+   <td data-label="Hessians" data-field="hessian_calls">0</td>
+   <td data-label="FD calls" data-field="fd_calls">0</td>
+   <td data-label="Failures" data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-label="Runs" data-field="n">13</td>
    </tr>
    </tbody></table></div>
    </section>

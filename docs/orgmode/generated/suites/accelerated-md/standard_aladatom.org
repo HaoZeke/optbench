@@ -20,18 +20,19 @@
    <p class="chart-files"><a href="../../../_static/board/accelerated-md-standard_aladatom-cost.svg">Cost and success SVG</a></p>
    <div class="bench-export"><figure class="bench-plot"><a href="../../../_static/board/accelerated-md-standard_aladatom-cost.svg"><picture><source srcset="../../../_static/board/accelerated-md-standard_aladatom-cost.webp" type="image/webp"><img src="../../../_static/board/accelerated-md-standard_aladatom-cost.png" alt="Cost and success for Al adatom on Al(100) at 150 K" loading="lazy" decoding="async"></picture></a><figcaption>Cost and success. Select the plot for the full SVG.</figcaption></figure></div>
    </div>
+   <figure class="plate-figure"><svg class="plate-chart" role="img" aria-labelledby="al-adatom-on-al-100--at-150-k-cost-bars-title" viewBox="0 0 680 94.0"><title id="al-adatom-on-al-100--at-150-k-cost-bars-title">Best cost for Al adatom on Al(100) at 150 K</title><text class="group-label" x="0" y="18">Al adatom on Al(100) at 150 K</text><line class="axis" x1="168.00" y1="58.00" x2="584.00" y2="58.00"/><line class="grid" x1="168.00" y1="32.00" x2="168.00" y2="58.00"/><line class="axis" x1="168.00" y1="54.00" x2="168.00" y2="58.00"/><text class="num" x="168.00" y="72.00" text-anchor="middle">10⁵</text><line class="grid" x1="584.00" y1="32.00" x2="584.00" y2="58.00"/><line class="axis" x1="584.00" y1="54.00" x2="584.00" y2="58.00"/><text class="num" x="584.00" y="72.00" text-anchor="middle">10⁶</text><text class="axis-name" x="376.00" y="88.00" text-anchor="middle">cost (force calls, log scale)</text><g><title>Eon svn: 835900</title><text class="code-label" x="156" y="46.00" text-anchor="end">Eon svn</text><rect class="suite-bar is-best" x="168.00" y="37.00" width="383.6162" height="10"/><text class="num" x="592.00" y="46.00">835900</text></g></svg><figcaption>A shorter bar is a lower cost on a log scale shared by the codes of this problem.</figcaption></figure>
    <h2>Leaderboard</h2>
    <div class="bench-scroll">
    <table class="bench-sortable leader" data-bench="leader">
-   <caption>A longer bar is closer to the best on that problem. Select a column heading to sort.</caption>
-   <thead><tr><th>Rank</th><th>Code</th><th title="Lowest cost for this code. A longer bar is closer to the best on that problem.">Best</th><th title="Median of this code&#x27;s costs on that problem.">Median</th><th title="Share of runs that finished.">Success</th><th title="Mean cost of the runs. A failure counts as twice the cap.">PAR-2</th></tr></thead><tbody>
+   <caption>A shorter bar is a lower cost on the log scale for that problem. Select a column heading to sort.</caption>
+   <thead><tr><th>Rank</th><th>Code</th><th title="Lowest cost for this code. A shorter bar is a lower cost on the shared log scale.">Best</th><th title="Median of this code&#x27;s costs on that problem.">Median</th><th title="Share of runs that finished.">Success</th><th title="Mean cost of the runs. A failure counts as twice the cap.">PAR-2</th></tr></thead><tbody>
    <tr class="is-best">
-   <td class="rank-cell"><span class="rank r1">1</span></td>
-   <td class="code"><a href="../../codes/eon-svn.html">Eon svn</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:100.0%"><i></i></span><span class="bar-num">835900</span></td>
-   <td class="num">835900</td>
-   <td class="num">—<sup>1</sup></td>
-   <td class="num">—<sup>2</sup></td>
+   <td class="rank-cell" data-label="Rank"><span class="rank r1">1</span></td>
+   <td class="code" data-label="Code"><a href="../../codes/eon-svn.html">Eon svn</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:92.2154%"><i></i></span><span class="bar-num">835900</span></td>
+   <td class="num" data-label="Median">835900</td>
+   <td class="num" data-label="Success">—<sup>1</sup></td>
+   <td class="num" data-label="PAR-2">—<sup>2</sup></td>
    </tr>
    </tbody></table></div>
    <p class="bench-note"><sup>1</sup> A dash in the success rate means that row did not record one.</p>
@@ -43,14 +44,14 @@
    <table class="bench-sortable" data-board-table="family" data-family="minimize" data-problem="accelerated-md/standard_aladatom">
    <caption>Minimizers. One row is one code, one version, and one method. A lower cost is better.</caption>
    <thead><tr><th>Rank</th><th>Row</th><th>Cost</th><th>Hessians</th><th>FD calls</th><th>Runs</th></tr></thead><tbody>
-   <tr><td data-field="family_rank">1</td><td data-field="label">eOn · parallel replica</td><td data-field="rank_cost">835900</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="n">1</td></tr>
+   <tr><td data-label="Rank" data-field="family_rank">1</td><td data-label="Row" data-field="label">eOn · parallel replica</td><td data-label="Cost" data-field="rank_cost">835900</td><td data-label="Hessians" data-field="hessian_calls">0</td><td data-label="FD calls" data-field="fd_calls">0</td><td data-label="Runs" data-field="n">1</td></tr>
    </tbody></table></div>
    <h3>Overall</h3>
    <div class="bench-scroll">
    <table class="bench-sortable" data-board-table="ranked" data-problem="accelerated-md/standard_aladatom">
    <caption>One row is one code, one version, and one method. A lower cost is better.</caption>
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
-   <tr><td data-field="label">eOn · parallel replica</td><td data-field="family">Minimizers</td><td data-field="family_rank">1</td><td data-field="par2_mean"></td><td data-field="published">835900</td><td data-field="median_calls"></td><td data-field="mean_calls">835900</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">1</td></tr>
+   <tr><td data-label="Row" data-field="label">eOn · parallel replica</td><td data-label="Family" data-field="family">Minimizers</td><td data-label="Family rank" data-field="family_rank">1</td><td data-label="PAR-2" data-field="par2_mean"></td><td data-label="Published" data-field="published">835900</td><td data-label="Median calls" data-field="median_calls"></td><td data-label="Mean calls" data-field="mean_calls">835900</td><td data-label="Hessians" data-field="hessian_calls">0</td><td data-label="FD calls" data-field="fd_calls">0</td><td data-label="Failures" data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-label="Runs" data-field="n">1</td></tr>
    </tbody></table></div>
    <h3>Off the ranked table</h3><ul>
    <li>eOn (3.6.0) · AKMC dimer n=1, not yet on the harness counter.</li>

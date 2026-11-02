@@ -5,14 +5,21 @@
 .. raw:: html
 
    <section class="bench plate-suite">
-   <p>Global optimization has 8 problems: Binary Lennard-Jones 100, Lennard-Jones 150, Lennard-Jones 38 global minimum, Lennard-Jones 75, Lennard-Jones 98, TIP4P 10, TIP4P 15, and TIP4P 20.</p>
+   <p>Global optimization compares 8 problems.</p><ul class="suite-facts"><li>Binary Lennard-Jones 100</li><li>Lennard-Jones 150</li><li>Lennard-Jones 38 global minimum</li><li>Lennard-Jones 75</li><li>Lennard-Jones 98</li><li>TIP4P 10</li><li>TIP4P 15</li><li>TIP4P 20</li></ul>
    <div class="stat-row stat-row-2">
    <div class="stat"><span class="k">Problems</span><span class="v num">8</span></div>
    <div class="stat"><span class="k">Codes</span><span class="v num">5</span></div>
    </div>
    <h2>Charts</h2>
    <div class="lead-charts">
-   <figure class="plate-figure"><svg class="plate-chart" role="img" aria-labelledby="suite-bars-title" viewBox="0 0 640 570"><title id="suite-bars-title">Best cost by code</title><text class="group-label" x="0" y="24">Binary Lennard-Jones 100</text><g><title>GMIN: -589.507</title><text class="code-label" x="148" y="47" text-anchor="end">GMIN</text><rect class="suite-bar is-best" x="158" y="38" width="398.00" height="10"/><text class="num" x="564" y="47">-589.507</text></g><g><title>Eon svn: -584.579</title><text class="code-label" x="148" y="69" text-anchor="end">Eon svn</text><rect class="suite-bar" x="158" y="60" width="395.21" height="10"/><text class="num" x="564" y="69">-584.579</text></g><text class="group-label" x="0" y="102">Lennard-Jones 150</text><g><title>GMIN: 667.38</title><text class="code-label" x="148" y="125" text-anchor="end">GMIN</text><rect class="suite-bar is-best" x="158" y="116" width="398.00" height="10"/><text class="num" x="564" y="125">667.38</text></g><text class="group-label" x="0" y="158">Lennard-Jones 38 global minimum</text><g><title>GMIN: 5883.83</title><text class="code-label" x="148" y="181" text-anchor="end">GMIN</text><rect class="suite-bar is-best" x="158" y="172" width="398.00" height="10"/><text class="num" x="564" y="181">5883.83</text></g><g><title>eOn: 503146</title><text class="code-label" x="148" y="203" text-anchor="end">eOn</text><rect class="suite-bar" x="158" y="194" width="63.68" height="10"/><text class="num" x="564" y="203">503146</text></g><g><title>Eon svn: 508011</title><text class="code-label" x="148" y="225" text-anchor="end">Eon svn</text><rect class="suite-bar" x="158" y="216" width="63.68" height="10"/><text class="num" x="564" y="225">508011</text></g><g><title>pele: 521595</title><text class="code-label" x="148" y="247" text-anchor="end">pele</text><rect class="suite-bar" x="158" y="238" width="63.68" height="10"/><text class="num" x="564" y="247">521595</text></g><text class="group-label" x="0" y="280">Lennard-Jones 75</text><g><title>GMIN: 60692</title><text class="code-label" x="148" y="303" text-anchor="end">GMIN</text><rect class="suite-bar is-best" x="158" y="294" width="398.00" height="10"/><text class="num" x="564" y="303">60692</text></g><g><title>ASE: 2e+06</title><text class="code-label" x="148" y="325" text-anchor="end">ASE</text><rect class="suite-bar" x="158" y="316" width="63.68" height="10"/><text class="num" x="564" y="325">2e+06</text></g><text class="group-label" x="0" y="358">Lennard-Jones 98</text><g><title>GMIN: 1281.92</title><text class="code-label" x="148" y="381" text-anchor="end">GMIN</text><rect class="suite-bar is-best" x="158" y="372" width="398.00" height="10"/><text class="num" x="564" y="381">1281.92</text></g><text class="group-label" x="0" y="414">TIP4P 10</text><g><title>GMIN: 16099</title><text class="code-label" x="148" y="437" text-anchor="end">GMIN</text><rect class="suite-bar is-best" x="158" y="428" width="398.00" height="10"/><text class="num" x="564" y="437">16099</text></g><text class="group-label" x="0" y="470">TIP4P 15</text><g><title>GMIN: 625362</title><text class="code-label" x="148" y="493" text-anchor="end">GMIN</text><rect class="suite-bar is-best" x="158" y="484" width="398.00" height="10"/><text class="num" x="564" y="493">625362</text></g><text class="group-label" x="0" y="526">TIP4P 20</text><g><title>GMIN: 2.55667e+07</title><text class="code-label" x="148" y="549" text-anchor="end">GMIN</text><rect class="suite-bar is-best" x="158" y="540" width="398.00" height="10"/><text class="num" x="564" y="549">2.55667e+07</text></g></svg><figcaption>Best cost of each code. Each problem has its own scale. A longer bar is closer to the best.</figcaption></figure>
+   <figure class="plate-figure"><svg class="plate-chart" role="img" aria-labelledby="binary-lennard-jones-100-cost-bars-title" viewBox="0 0 680 80.0"><title id="binary-lennard-jones-100-cost-bars-title">Best cost for Binary Lennard-Jones 100</title><text class="group-label" x="0" y="18">Binary Lennard-Jones 100</text><g><title>GMIN: -589.507</title><text class="code-label" x="156" y="46.00" text-anchor="end">GMIN</text><text class="num" x="592.00" y="46.00">-589.507</text></g><g><title>Eon svn: -584.579</title><text class="code-label" x="156" y="68.00" text-anchor="end">Eon svn</text><text class="num" x="592.00" y="68.00">-584.579</text></g></svg><figcaption>A cost at or below zero is left off the log scale, so this problem has no bar.</figcaption></figure>
+   <figure class="plate-figure"><svg class="plate-chart" role="img" aria-labelledby="lennard-jones-150-cost-bars-title" viewBox="0 0 680 94.0"><title id="lennard-jones-150-cost-bars-title">Best cost for Lennard-Jones 150</title><text class="group-label" x="0" y="18">Lennard-Jones 150</text><line class="axis" x1="168.00" y1="58.00" x2="584.00" y2="58.00"/><line class="grid" x1="168.00" y1="32.00" x2="168.00" y2="58.00"/><line class="axis" x1="168.00" y1="54.00" x2="168.00" y2="58.00"/><text class="num" x="168.00" y="72.00" text-anchor="middle">10²</text><line class="grid" x1="584.00" y1="32.00" x2="584.00" y2="58.00"/><line class="axis" x1="584.00" y1="54.00" x2="584.00" y2="58.00"/><text class="num" x="584.00" y="72.00" text-anchor="middle">10³</text><text class="axis-name" x="376.00" y="88.00" text-anchor="middle">cost (force calls, log scale)</text><g><title>GMIN: 667.38</title><text class="code-label" x="156" y="46.00" text-anchor="end">GMIN</text><rect class="suite-bar is-best" x="168.00" y="37.00" width="342.9392" height="10"/><text class="num" x="592.00" y="46.00">667.38</text></g></svg><figcaption>A shorter bar is a lower cost on a log scale shared by the codes of this problem.</figcaption></figure>
+   <figure class="plate-figure"><svg class="plate-chart" role="img" aria-labelledby="lennard-jones-38-global-minimum-cost-bars-title" viewBox="0 0 680 160.0"><title id="lennard-jones-38-global-minimum-cost-bars-title">Best cost for Lennard-Jones 38 global minimum</title><text class="group-label" x="0" y="18">Lennard-Jones 38 global minimum</text><line class="axis" x1="168.00" y1="124.00" x2="584.00" y2="124.00"/><line class="grid" x1="168.00" y1="32.00" x2="168.00" y2="124.00"/><line class="axis" x1="168.00" y1="120.00" x2="168.00" y2="124.00"/><text class="num" x="168.00" y="138.00" text-anchor="middle">10³</text><line class="grid" x1="306.67" y1="32.00" x2="306.67" y2="124.00"/><line class="axis" x1="306.67" y1="120.00" x2="306.67" y2="124.00"/><text class="num" x="306.67" y="138.00" text-anchor="middle">10⁴</text><line class="grid" x1="445.33" y1="32.00" x2="445.33" y2="124.00"/><line class="axis" x1="445.33" y1="120.00" x2="445.33" y2="124.00"/><text class="num" x="445.33" y="138.00" text-anchor="middle">10⁵</text><line class="grid" x1="584.00" y1="32.00" x2="584.00" y2="124.00"/><line class="axis" x1="584.00" y1="120.00" x2="584.00" y2="124.00"/><text class="num" x="584.00" y="138.00" text-anchor="middle">10⁶</text><text class="axis-name" x="376.00" y="154.00" text-anchor="middle">cost (force calls, log scale)</text><g><title>GMIN: 5883.83</title><text class="code-label" x="156" y="46.00" text-anchor="end">GMIN</text><rect class="suite-bar is-best" x="168.00" y="37.00" width="106.7262" height="10"/><text class="num" x="592.00" y="46.00">5883.83</text></g><g><title>eOn: 503146</title><text class="code-label" x="156" y="68.00" text-anchor="end">eOn</text><rect class="suite-bar" x="168.00" y="59.00" width="374.6349" height="10"/><text class="num" x="592.00" y="68.00">503146</text></g><g><title>Eon svn: 508011</title><text class="code-label" x="156" y="90.00" text-anchor="end">Eon svn</text><rect class="suite-bar" x="168.00" y="81.00" width="375.2144" height="10"/><text class="num" x="592.00" y="90.00">508011</text></g><g><title>pele: 521595</title><text class="code-label" x="156" y="112.00" text-anchor="end">pele</text><rect class="suite-bar" x="168.00" y="103.00" width="376.8036" height="10"/><text class="num" x="592.00" y="112.00">521595</text></g></svg><figcaption>A shorter bar is a lower cost on a log scale shared by the codes of this problem.</figcaption></figure>
+   <figure class="plate-figure"><svg class="plate-chart" role="img" aria-labelledby="lennard-jones-75-cost-bars-title" viewBox="0 0 680 116.0"><title id="lennard-jones-75-cost-bars-title">Best cost for Lennard-Jones 75</title><text class="group-label" x="0" y="18">Lennard-Jones 75</text><line class="axis" x1="168.00" y1="80.00" x2="584.00" y2="80.00"/><line class="grid" x1="168.00" y1="32.00" x2="168.00" y2="80.00"/><line class="axis" x1="168.00" y1="76.00" x2="168.00" y2="80.00"/><text class="num" x="168.00" y="94.00" text-anchor="middle">10⁴</text><line class="grid" x1="306.67" y1="32.00" x2="306.67" y2="80.00"/><line class="axis" x1="306.67" y1="76.00" x2="306.67" y2="80.00"/><text class="num" x="306.67" y="94.00" text-anchor="middle">10⁵</text><line class="grid" x1="445.33" y1="32.00" x2="445.33" y2="80.00"/><line class="axis" x1="445.33" y1="76.00" x2="445.33" y2="80.00"/><text class="num" x="445.33" y="94.00" text-anchor="middle">10⁶</text><line class="grid" x1="584.00" y1="32.00" x2="584.00" y2="80.00"/><line class="axis" x1="584.00" y1="76.00" x2="584.00" y2="80.00"/><text class="num" x="584.00" y="94.00" text-anchor="middle">10⁷</text><text class="axis-name" x="376.00" y="110.00" text-anchor="middle">cost (force calls, log scale)</text><g><title>GMIN: 60692</title><text class="code-label" x="156" y="46.00" text-anchor="end">GMIN</text><rect class="suite-bar is-best" x="168.00" y="37.00" width="108.5942" height="10"/><text class="num" x="592.00" y="46.00">60692</text></g><g><title>ASE: 2e+06</title><text class="code-label" x="156" y="68.00" text-anchor="end">ASE</text><rect class="suite-bar" x="168.00" y="59.00" width="319.0762" height="10"/><text class="num" x="592.00" y="68.00">2e+06</text></g></svg><figcaption>A shorter bar is a lower cost on a log scale shared by the codes of this problem.</figcaption></figure>
+   <figure class="plate-figure"><svg class="plate-chart" role="img" aria-labelledby="lennard-jones-98-cost-bars-title" viewBox="0 0 680 94.0"><title id="lennard-jones-98-cost-bars-title">Best cost for Lennard-Jones 98</title><text class="group-label" x="0" y="18">Lennard-Jones 98</text><line class="axis" x1="168.00" y1="58.00" x2="584.00" y2="58.00"/><line class="grid" x1="168.00" y1="32.00" x2="168.00" y2="58.00"/><line class="axis" x1="168.00" y1="54.00" x2="168.00" y2="58.00"/><text class="num" x="168.00" y="72.00" text-anchor="middle">10³</text><line class="grid" x1="584.00" y1="32.00" x2="584.00" y2="58.00"/><line class="axis" x1="584.00" y1="54.00" x2="584.00" y2="58.00"/><text class="num" x="584.00" y="72.00" text-anchor="middle">10⁴</text><text class="axis-name" x="376.00" y="88.00" text-anchor="middle">cost (force calls, log scale)</text><g><title>GMIN: 1281.92</title><text class="code-label" x="156" y="46.00" text-anchor="end">GMIN</text><rect class="suite-bar is-best" x="168.00" y="37.00" width="44.8701" height="10"/><text class="num" x="592.00" y="46.00">1281.92</text></g></svg><figcaption>A shorter bar is a lower cost on a log scale shared by the codes of this problem.</figcaption></figure>
+   <figure class="plate-figure"><svg class="plate-chart" role="img" aria-labelledby="tip4p-10-cost-bars-title" viewBox="0 0 680 94.0"><title id="tip4p-10-cost-bars-title">Best cost for TIP4P 10</title><text class="group-label" x="0" y="18">TIP4P 10</text><line class="axis" x1="168.00" y1="58.00" x2="584.00" y2="58.00"/><line class="grid" x1="168.00" y1="32.00" x2="168.00" y2="58.00"/><line class="axis" x1="168.00" y1="54.00" x2="168.00" y2="58.00"/><text class="num" x="168.00" y="72.00" text-anchor="middle">10⁴</text><line class="grid" x1="584.00" y1="32.00" x2="584.00" y2="58.00"/><line class="axis" x1="584.00" y1="54.00" x2="584.00" y2="58.00"/><text class="num" x="584.00" y="72.00" text-anchor="middle">10⁵</text><text class="axis-name" x="376.00" y="88.00" text-anchor="middle">cost (force calls, log scale)</text><g><title>GMIN: 16099</title><text class="code-label" x="156" y="46.00" text-anchor="end">GMIN</text><rect class="suite-bar is-best" x="168.00" y="37.00" width="86.0283" height="10"/><text class="num" x="592.00" y="46.00">16099</text></g></svg><figcaption>A shorter bar is a lower cost on a log scale shared by the codes of this problem.</figcaption></figure>
+   <figure class="plate-figure"><svg class="plate-chart" role="img" aria-labelledby="tip4p-15-cost-bars-title" viewBox="0 0 680 94.0"><title id="tip4p-15-cost-bars-title">Best cost for TIP4P 15</title><text class="group-label" x="0" y="18">TIP4P 15</text><line class="axis" x1="168.00" y1="58.00" x2="584.00" y2="58.00"/><line class="grid" x1="168.00" y1="32.00" x2="168.00" y2="58.00"/><line class="axis" x1="168.00" y1="54.00" x2="168.00" y2="58.00"/><text class="num" x="168.00" y="72.00" text-anchor="middle">10⁵</text><line class="grid" x1="584.00" y1="32.00" x2="584.00" y2="58.00"/><line class="axis" x1="584.00" y1="54.00" x2="584.00" y2="58.00"/><text class="num" x="584.00" y="72.00" text-anchor="middle">10⁶</text><text class="axis-name" x="376.00" y="88.00" text-anchor="middle">cost (force calls, log scale)</text><g><title>GMIN: 625362</title><text class="code-label" x="156" y="46.00" text-anchor="end">GMIN</text><rect class="suite-bar is-best" x="168.00" y="37.00" width="331.1907" height="10"/><text class="num" x="592.00" y="46.00">625362</text></g></svg><figcaption>A shorter bar is a lower cost on a log scale shared by the codes of this problem.</figcaption></figure>
+   <figure class="plate-figure"><svg class="plate-chart" role="img" aria-labelledby="tip4p-20-cost-bars-title" viewBox="0 0 680 94.0"><title id="tip4p-20-cost-bars-title">Best cost for TIP4P 20</title><text class="group-label" x="0" y="18">TIP4P 20</text><line class="axis" x1="168.00" y1="58.00" x2="584.00" y2="58.00"/><line class="grid" x1="168.00" y1="32.00" x2="168.00" y2="58.00"/><line class="axis" x1="168.00" y1="54.00" x2="168.00" y2="58.00"/><text class="num" x="168.00" y="72.00" text-anchor="middle">10⁷</text><line class="grid" x1="584.00" y1="32.00" x2="584.00" y2="58.00"/><line class="axis" x1="584.00" y1="54.00" x2="584.00" y2="58.00"/><text class="num" x="584.00" y="72.00" text-anchor="middle">10⁸</text><text class="axis-name" x="376.00" y="88.00" text-anchor="middle">cost (force calls, log scale)</text><g><title>GMIN: 2.55667e+07</title><text class="code-label" x="156" y="46.00" text-anchor="end">GMIN</text><rect class="suite-bar is-best" x="168.00" y="37.00" width="169.5927" height="10"/><text class="num" x="592.00" y="46.00">2.55667e+07</text></g></svg><figcaption>A shorter bar is a lower cost on a log scale shared by the codes of this problem.</figcaption></figure>
    <p class="chart-files"><a href="../../_static/board/suite-globalopt.svg">SVG file</a></p>
    <div class="bench-export">
    <figure class="bench-plot"><a href="../../_static/board/suite-globalopt.svg"><picture><source srcset="../../_static/board/suite-globalopt.webp" type="image/webp"><img src="../../_static/board/suite-globalopt.png" alt="Global optimization best ranked cost" loading="lazy" decoding="async"></picture></a><figcaption>Global optimization best ranked cost. Select the plot for the full SVG.</figcaption></figure>
@@ -21,124 +28,124 @@
    <h2>Leaderboard</h2>
    <div class="bench-scroll">
    <table class="bench-sortable leader" data-bench="codes">
-   <caption>A longer bar is closer to the best on that problem. Select a column heading to sort.</caption>
-   <thead><tr><th>Rank</th><th>Problem</th><th>Code</th><th title="Lowest cost for this code. A longer bar is closer to the best on that problem.">Best</th><th title="Median of this code&#x27;s costs on that problem.">Median</th><th title="Share of runs that finished.">Success</th><th title="Mean cost of the runs. A failure counts as twice the cap.">PAR-2</th></tr></thead><tbody>
+   <caption>A shorter bar is a lower cost on the log scale for that problem. Select a column heading to sort.</caption>
+   <thead><tr><th>Rank</th><th>Problem</th><th>Code</th><th title="Lowest cost for this code. A shorter bar is a lower cost on the shared log scale.">Best</th><th title="Median of this code&#x27;s costs on that problem.">Median</th><th title="Share of runs that finished.">Success</th><th title="Mean cost of the runs. A failure counts as twice the cap.">PAR-2</th></tr></thead><tbody>
    <tr class="is-best group-start">
-   <td class="rank-cell"><span class="rank r1">1</span></td>
-   <td class="problem"><a href="globalopt/lj100-binary.html">Binary Lennard-Jones 100</a></td>
-   <td class="code"><a href="../codes/gmin.html">GMIN</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:100.0%"><i></i></span><span class="bar-num">-589.507</span></td>
-   <td class="num">-589.507</td>
-   <td class="num">—<sup>1</sup></td>
-   <td class="num">—<sup>2</sup></td>
+   <td class="rank-cell" data-label="Rank"><span class="rank r1">1</span></td>
+   <td class="problem" data-label="Problem"><a href="globalopt/lj100-binary.html">Binary Lennard-Jones 100</a></td>
+   <td class="code" data-label="Code"><a href="../codes/gmin.html">GMIN</a></td>
+   <td class="num best" data-label="Best"><span class="bar-num">-589.507</span></td>
+   <td class="num" data-label="Median">-589.507</td>
+   <td class="num" data-label="Success">—<sup>1</sup></td>
+   <td class="num" data-label="PAR-2">—<sup>2</sup></td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank r2">2</span></td>
-   <td class="problem"><a href="globalopt/lj100-binary.html">Binary Lennard-Jones 100</a></td>
-   <td class="code"><a href="../codes/eon-svn.html">Eon svn</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:99.3%"><i></i></span><span class="bar-num">-584.579</span></td>
-   <td class="num">-584.579</td>
-   <td class="num">—<sup>1</sup></td>
-   <td class="num">—<sup>2</sup></td>
+   <td class="rank-cell" data-label="Rank"><span class="rank r2">2</span></td>
+   <td class="problem" data-label="Problem"><a href="globalopt/lj100-binary.html">Binary Lennard-Jones 100</a></td>
+   <td class="code" data-label="Code"><a href="../codes/eon-svn.html">Eon svn</a></td>
+   <td class="num best" data-label="Best"><span class="bar-num">-584.579</span></td>
+   <td class="num" data-label="Median">-584.579</td>
+   <td class="num" data-label="Success">—<sup>1</sup></td>
+   <td class="num" data-label="PAR-2">—<sup>2</sup></td>
    </tr>
    <tr class="is-best group-start">
-   <td class="rank-cell"><span class="rank r1">1</span></td>
-   <td class="problem"><a href="globalopt/lj150.html">Lennard-Jones 150</a></td>
-   <td class="code"><a href="../codes/gmin.html">GMIN</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:100.0%"><i></i></span><span class="bar-num">667.38</span></td>
-   <td class="num">880661</td>
-   <td class="num">100.0%</td>
-   <td class="num">—<sup>2</sup></td>
+   <td class="rank-cell" data-label="Rank"><span class="rank r1">1</span></td>
+   <td class="problem" data-label="Problem"><a href="globalopt/lj150.html">Lennard-Jones 150</a></td>
+   <td class="code" data-label="Code"><a href="../codes/gmin.html">GMIN</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:82.4373%"><i></i></span><span class="bar-num">667.38</span></td>
+   <td class="num" data-label="Median">880661</td>
+   <td class="num" data-label="Success">100.0%</td>
+   <td class="num" data-label="PAR-2">—<sup>2</sup></td>
    </tr>
    <tr class="is-best group-start">
-   <td class="rank-cell"><span class="rank r1">1</span></td>
-   <td class="problem"><a href="globalopt/lj38.html">Lennard-Jones 38 global minimum</a></td>
-   <td class="code"><a href="../codes/gmin.html">GMIN</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:100.0%"><i></i></span><span class="bar-num">5883.83</span></td>
-   <td class="num">144331</td>
-   <td class="num">100.0%</td>
-   <td class="num">5883.83</td>
+   <td class="rank-cell" data-label="Rank"><span class="rank r1">1</span></td>
+   <td class="problem" data-label="Problem"><a href="globalopt/lj38.html">Lennard-Jones 38 global minimum</a></td>
+   <td class="code" data-label="Code"><a href="../codes/gmin.html">GMIN</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:25.6553%"><i></i></span><span class="bar-num">5883.83</span></td>
+   <td class="num" data-label="Median">144331</td>
+   <td class="num" data-label="Success">100.0%</td>
+   <td class="num" data-label="PAR-2">5883.83</td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank r2">2</span></td>
-   <td class="problem"><a href="globalopt/lj38.html">Lennard-Jones 38 global minimum</a></td>
-   <td class="code"><a href="../codes/eon.html">eOn</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:16.0%"><i></i></span><span class="bar-num">503146</span></td>
-   <td class="num">503146</td>
-   <td class="num">100.0%</td>
-   <td class="num">503146</td>
+   <td class="rank-cell" data-label="Rank"><span class="rank r2">2</span></td>
+   <td class="problem" data-label="Problem"><a href="globalopt/lj38.html">Lennard-Jones 38 global minimum</a></td>
+   <td class="code" data-label="Code"><a href="../codes/eon.html">eOn</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:90.0565%"><i></i></span><span class="bar-num">503146</span></td>
+   <td class="num" data-label="Median">503146</td>
+   <td class="num" data-label="Success">100.0%</td>
+   <td class="num" data-label="PAR-2">503146</td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank r3">3</span></td>
-   <td class="problem"><a href="globalopt/lj38.html">Lennard-Jones 38 global minimum</a></td>
-   <td class="code"><a href="../codes/eon-svn.html">Eon svn</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:16.0%"><i></i></span><span class="bar-num">508011</span></td>
-   <td class="num">553271</td>
-   <td class="num">—<sup>1</sup></td>
-   <td class="num">—<sup>2</sup></td>
+   <td class="rank-cell" data-label="Rank"><span class="rank r3">3</span></td>
+   <td class="problem" data-label="Problem"><a href="globalopt/lj38.html">Lennard-Jones 38 global minimum</a></td>
+   <td class="code" data-label="Code"><a href="../codes/eon-svn.html">Eon svn</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:90.1958%"><i></i></span><span class="bar-num">508011</span></td>
+   <td class="num" data-label="Median">553271</td>
+   <td class="num" data-label="Success">—<sup>1</sup></td>
+   <td class="num" data-label="PAR-2">—<sup>2</sup></td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank">4</span></td>
-   <td class="problem"><a href="globalopt/lj38.html">Lennard-Jones 38 global minimum</a></td>
-   <td class="code"><a href="../codes/pele.html">pele</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:16.0%"><i></i></span><span class="bar-num">521595</span></td>
-   <td class="num">521595</td>
-   <td class="num">100.0%</td>
-   <td class="num">—<sup>2</sup></td>
+   <td class="rank-cell" data-label="Rank"><span class="rank">4</span></td>
+   <td class="problem" data-label="Problem"><a href="globalopt/lj38.html">Lennard-Jones 38 global minimum</a></td>
+   <td class="code" data-label="Code"><a href="../codes/pele.html">pele</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:90.5778%"><i></i></span><span class="bar-num">521595</span></td>
+   <td class="num" data-label="Median">521595</td>
+   <td class="num" data-label="Success">100.0%</td>
+   <td class="num" data-label="PAR-2">—<sup>2</sup></td>
    </tr>
    <tr class="is-best group-start">
-   <td class="rank-cell"><span class="rank r1">1</span></td>
-   <td class="problem"><a href="globalopt/lj75.html">Lennard-Jones 75</a></td>
-   <td class="code"><a href="../codes/gmin.html">GMIN</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:100.0%"><i></i></span><span class="bar-num">60692</span></td>
-   <td class="num">1.96655e+06</td>
-   <td class="num">100.0%</td>
-   <td class="num">—<sup>2</sup></td>
+   <td class="rank-cell" data-label="Rank"><span class="rank r1">1</span></td>
+   <td class="problem" data-label="Problem"><a href="globalopt/lj75.html">Lennard-Jones 75</a></td>
+   <td class="code" data-label="Code"><a href="../codes/gmin.html">GMIN</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:26.1044%"><i></i></span><span class="bar-num">60692</span></td>
+   <td class="num" data-label="Median">1.96655e+06</td>
+   <td class="num" data-label="Success">100.0%</td>
+   <td class="num" data-label="PAR-2">—<sup>2</sup></td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank r2">2</span></td>
-   <td class="problem"><a href="globalopt/lj75.html">Lennard-Jones 75</a></td>
-   <td class="code"><a href="../codes/ase.html">ASE</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:16.0%"><i></i></span><span class="bar-num">2e+06</span></td>
-   <td class="num">2e+06</td>
-   <td class="num">0.0%</td>
-   <td class="num">2e+06</td>
+   <td class="rank-cell" data-label="Rank"><span class="rank r2">2</span></td>
+   <td class="problem" data-label="Problem"><a href="globalopt/lj75.html">Lennard-Jones 75</a></td>
+   <td class="code" data-label="Code"><a href="../codes/ase.html">ASE</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:76.7010%"><i></i></span><span class="bar-num">2e+06</span></td>
+   <td class="num" data-label="Median">2e+06</td>
+   <td class="num" data-label="Success">0.0%</td>
+   <td class="num" data-label="PAR-2">2e+06</td>
    </tr>
    <tr class="is-best group-start">
-   <td class="rank-cell"><span class="rank r1">1</span></td>
-   <td class="problem"><a href="globalopt/lj98.html">Lennard-Jones 98</a></td>
-   <td class="code"><a href="../codes/gmin.html">GMIN</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:100.0%"><i></i></span><span class="bar-num">1281.92</span></td>
-   <td class="num">163318</td>
-   <td class="num">100.0%</td>
-   <td class="num">—<sup>2</sup></td>
+   <td class="rank-cell" data-label="Rank"><span class="rank r1">1</span></td>
+   <td class="problem" data-label="Problem"><a href="globalopt/lj98.html">Lennard-Jones 98</a></td>
+   <td class="code" data-label="Code"><a href="../codes/gmin.html">GMIN</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:10.7861%"><i></i></span><span class="bar-num">1281.92</span></td>
+   <td class="num" data-label="Median">163318</td>
+   <td class="num" data-label="Success">100.0%</td>
+   <td class="num" data-label="PAR-2">—<sup>2</sup></td>
    </tr>
    <tr class="is-best group-start">
-   <td class="rank-cell"><span class="rank r1">1</span></td>
-   <td class="problem"><a href="globalopt/tip4p10.html">TIP4P 10</a></td>
-   <td class="code"><a href="../codes/gmin.html">GMIN</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:100.0%"><i></i></span><span class="bar-num">16099</span></td>
-   <td class="num">16167.5</td>
-   <td class="num">100.0%</td>
-   <td class="num">—<sup>2</sup></td>
+   <td class="rank-cell" data-label="Rank"><span class="rank r1">1</span></td>
+   <td class="problem" data-label="Problem"><a href="globalopt/tip4p10.html">TIP4P 10</a></td>
+   <td class="code" data-label="Code"><a href="../codes/gmin.html">GMIN</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:20.6799%"><i></i></span><span class="bar-num">16099</span></td>
+   <td class="num" data-label="Median">16167.5</td>
+   <td class="num" data-label="Success">100.0%</td>
+   <td class="num" data-label="PAR-2">—<sup>2</sup></td>
    </tr>
    <tr class="is-best group-start">
-   <td class="rank-cell"><span class="rank r1">1</span></td>
-   <td class="problem"><a href="globalopt/tip4p15.html">TIP4P 15</a></td>
-   <td class="code"><a href="../codes/gmin.html">GMIN</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:100.0%"><i></i></span><span class="bar-num">625362</span></td>
-   <td class="num">648004</td>
-   <td class="num">100.0%</td>
-   <td class="num">—<sup>2</sup></td>
+   <td class="rank-cell" data-label="Rank"><span class="rank r1">1</span></td>
+   <td class="problem" data-label="Problem"><a href="globalopt/tip4p15.html">TIP4P 15</a></td>
+   <td class="code" data-label="Code"><a href="../codes/gmin.html">GMIN</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:79.6131%"><i></i></span><span class="bar-num">625362</span></td>
+   <td class="num" data-label="Median">648004</td>
+   <td class="num" data-label="Success">100.0%</td>
+   <td class="num" data-label="PAR-2">—<sup>2</sup></td>
    </tr>
    <tr class="is-best group-start">
-   <td class="rank-cell"><span class="rank r1">1</span></td>
-   <td class="problem"><a href="globalopt/tip4p20.html">TIP4P 20</a></td>
-   <td class="code"><a href="../codes/gmin.html">GMIN</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:100.0%"><i></i></span><span class="bar-num">2.55667e+07</span></td>
-   <td class="num">2.70817e+07</td>
-   <td class="num">100.0%</td>
-   <td class="num">—<sup>2</sup></td>
+   <td class="rank-cell" data-label="Rank"><span class="rank r1">1</span></td>
+   <td class="problem" data-label="Problem"><a href="globalopt/tip4p20.html">TIP4P 20</a></td>
+   <td class="code" data-label="Code"><a href="../codes/gmin.html">GMIN</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:40.7675%"><i></i></span><span class="bar-num">2.55667e+07</span></td>
+   <td class="num" data-label="Median">2.70817e+07</td>
+   <td class="num" data-label="Success">100.0%</td>
+   <td class="num" data-label="PAR-2">—<sup>2</sup></td>
    </tr>
    </tbody></table></div>
    <p class="bench-note"><sup>1</sup> A dash in the success rate means that row did not record one.</p>
@@ -149,52 +156,52 @@
    <caption>Problems in this suite.</caption>
    <thead><tr><th>Problem</th><th>System</th><th>Atoms</th><th>Runs</th></tr></thead><tbody>
    <tr>
-   <th scope="row"><a href="globalopt/lj100-binary.html">Binary Lennard-Jones 100</a></th>
-   <td>binary Lennard-Jones</td>
-   <td class="num">100</td>
-   <td class="num">100</td>
+   <th scope="row" data-label="Problem"><a href="globalopt/lj100-binary.html">Binary Lennard-Jones 100</a></th>
+   <td data-label="System">binary Lennard-Jones</td>
+   <td class="num" data-label="Atoms">100</td>
+   <td class="num" data-label="Runs">100</td>
    </tr>
    <tr>
-   <th scope="row"><a href="globalopt/lj150.html">Lennard-Jones 150</a></th>
-   <td>Lennard-Jones</td>
-   <td class="num">150</td>
-   <td class="num">100</td>
+   <th scope="row" data-label="Problem"><a href="globalopt/lj150.html">Lennard-Jones 150</a></th>
+   <td data-label="System">Lennard-Jones</td>
+   <td class="num" data-label="Atoms">150</td>
+   <td class="num" data-label="Runs">100</td>
    </tr>
    <tr>
-   <th scope="row"><a href="globalopt/lj38.html">Lennard-Jones 38 global minimum</a></th>
-   <td>Lennard-Jones</td>
-   <td class="num">38</td>
-   <td class="num">100</td>
+   <th scope="row" data-label="Problem"><a href="globalopt/lj38.html">Lennard-Jones 38 global minimum</a></th>
+   <td data-label="System">Lennard-Jones</td>
+   <td class="num" data-label="Atoms">38</td>
+   <td class="num" data-label="Runs">100</td>
    </tr>
    <tr>
-   <th scope="row"><a href="globalopt/lj75.html">Lennard-Jones 75</a></th>
-   <td>Lennard-Jones</td>
-   <td class="num">75</td>
-   <td class="num">200</td>
+   <th scope="row" data-label="Problem"><a href="globalopt/lj75.html">Lennard-Jones 75</a></th>
+   <td data-label="System">Lennard-Jones</td>
+   <td class="num" data-label="Atoms">75</td>
+   <td class="num" data-label="Runs">200</td>
    </tr>
    <tr>
-   <th scope="row"><a href="globalopt/lj98.html">Lennard-Jones 98</a></th>
-   <td>Lennard-Jones</td>
-   <td class="num">98</td>
-   <td class="num">100</td>
+   <th scope="row" data-label="Problem"><a href="globalopt/lj98.html">Lennard-Jones 98</a></th>
+   <td data-label="System">Lennard-Jones</td>
+   <td class="num" data-label="Atoms">98</td>
+   <td class="num" data-label="Runs">100</td>
    </tr>
    <tr>
-   <th scope="row"><a href="globalopt/tip4p10.html">TIP4P 10</a></th>
-   <td>TIP4P, N=10</td>
-   <td class="num">—</td>
-   <td class="num">10000</td>
+   <th scope="row" data-label="Problem"><a href="globalopt/tip4p10.html">TIP4P 10</a></th>
+   <td data-label="System">TIP4P, N=10</td>
+   <td class="num" data-label="Atoms">—</td>
+   <td class="num" data-label="Runs">10000</td>
    </tr>
    <tr>
-   <th scope="row"><a href="globalopt/tip4p15.html">TIP4P 15</a></th>
-   <td>TIP4P, N=15</td>
-   <td class="num">—</td>
-   <td class="num">500</td>
+   <th scope="row" data-label="Problem"><a href="globalopt/tip4p15.html">TIP4P 15</a></th>
+   <td data-label="System">TIP4P, N=15</td>
+   <td class="num" data-label="Atoms">—</td>
+   <td class="num" data-label="Runs">500</td>
    </tr>
    <tr>
-   <th scope="row"><a href="globalopt/tip4p20.html">TIP4P 20</a></th>
-   <td>TIP4P, N=20</td>
-   <td class="num">—</td>
-   <td class="num">100</td>
+   <th scope="row" data-label="Problem"><a href="globalopt/tip4p20.html">TIP4P 20</a></th>
+   <td data-label="System">TIP4P, N=20</td>
+   <td class="num" data-label="Atoms">—</td>
+   <td class="num" data-label="Runs">100</td>
    </tr>
    </tbody></table></div>
    <p class="bench-note">A dash means the problem file does not state an atom count.</p>

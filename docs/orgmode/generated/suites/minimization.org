@@ -5,14 +5,16 @@
 .. raw:: html
 
    <section class="bench plate-suite">
-   <p>Minimization has 3 problems: Lennard-Jones 38 clusters, Lennard-Jones 38 clusters with Gaussian force noise, and Morse bulk.</p>
+   <p>Minimization compares 3 problems.</p><ul class="suite-facts"><li>Lennard-Jones 38 clusters</li><li>Lennard-Jones 38 clusters with Gaussian force noise</li><li>Morse bulk</li></ul>
    <div class="stat-row stat-row-2">
    <div class="stat"><span class="k">Problems</span><span class="v num">3</span></div>
    <div class="stat"><span class="k">Codes</span><span class="v num">14</span></div>
    </div>
    <h2>Charts</h2>
    <div class="lead-charts">
-   <figure class="plate-figure"><svg class="plate-chart" role="img" aria-labelledby="suite-bars-title" viewBox="0 0 640 884"><title id="suite-bars-title">Best cost by code</title><text class="group-label" x="0" y="24">Lennard-Jones 38 clusters</text><g><title>unknown: 79</title><text class="code-label" x="148" y="47" text-anchor="end">unknown</text><rect class="suite-bar is-best" x="158" y="38" width="398.00" height="10"/><text class="num" x="564" y="47">79</text></g><g><title>rgmin: 81.881</title><text class="code-label" x="148" y="69" text-anchor="end">rgmin</text><rect class="suite-bar" x="158" y="60" width="384.00" height="10"/><text class="num" x="564" y="69">81.881</text></g><g><title>TSASE: 166</title><text class="code-label" x="148" y="91" text-anchor="end">TSASE</text><rect class="suite-bar" x="158" y="82" width="189.41" height="10"/><text class="num" x="564" y="91">166</text></g><g><title>OPTIM: 176</title><text class="code-label" x="148" y="113" text-anchor="end">OPTIM</text><rect class="suite-bar" x="158" y="104" width="178.65" height="10"/><text class="num" x="564" y="113">176</text></g><g><title>pele: 179</title><text class="code-label" x="148" y="135" text-anchor="end">pele</text><rect class="suite-bar" x="158" y="126" width="175.65" height="10"/><text class="num" x="564" y="135">179</text></g><g><title>eOn: 180.137</title><text class="code-label" x="148" y="157" text-anchor="end">eOn</text><rect class="suite-bar" x="158" y="148" width="174.54" height="10"/><text class="num" x="564" y="157">180.137</text></g><g><title>Eon svn: 181</title><text class="code-label" x="148" y="179" text-anchor="end">Eon svn</text><rect class="suite-bar" x="158" y="170" width="173.71" height="10"/><text class="num" x="564" y="179">181</text></g><g><title>DL-FIND: 231.908</title><text class="code-label" x="148" y="201" text-anchor="end">DL-FIND</text><rect class="suite-bar" x="158" y="192" width="135.58" height="10"/><text class="num" x="564" y="201">231.908</text></g><g><title>GMIN: 301.399</title><text class="code-label" x="148" y="223" text-anchor="end">GMIN</text><rect class="suite-bar" x="158" y="214" width="104.32" height="10"/><text class="num" x="564" y="223">301.399</text></g><g><title>ASE: 355</title><text class="code-label" x="148" y="245" text-anchor="end">ASE</text><rect class="suite-bar" x="158" y="236" width="88.57" height="10"/><text class="num" x="564" y="245">355</text></g><g><title>vc-SQNM: 598.05</title><text class="code-label" x="148" y="267" text-anchor="end">vc-SQNM</text><rect class="suite-bar" x="158" y="258" width="63.68" height="10"/><text class="num" x="564" y="267">598.05</text></g><g><title>Sella: 710.089</title><text class="code-label" x="148" y="289" text-anchor="end">Sella</text><rect class="suite-bar" x="158" y="280" width="63.68" height="10"/><text class="num" x="564" y="289">710.089</text></g><g><title>LAMMPS: 1123.81</title><text class="code-label" x="148" y="311" text-anchor="end">LAMMPS</text><rect class="suite-bar" x="158" y="302" width="63.68" height="10"/><text class="num" x="564" y="311">1123.81</text></g><g><title>pysisyphus: 15124.7</title><text class="code-label" x="148" y="333" text-anchor="end">pysisyphus</text><rect class="suite-bar" x="158" y="324" width="63.68" height="10"/><text class="num" x="564" y="333">15124.7</text></g><text class="group-label" x="0" y="366">Lennard-Jones 38 clusters with Gaussian force noise</text><g><title>rgmin: 81.881</title><text class="code-label" x="148" y="389" text-anchor="end">rgmin</text><rect class="suite-bar is-best" x="158" y="380" width="398.00" height="10"/><text class="num" x="564" y="389">81.881</text></g><g><title>DL-FIND: 231.908</title><text class="code-label" x="148" y="411" text-anchor="end">DL-FIND</text><rect class="suite-bar" x="158" y="402" width="140.52" height="10"/><text class="num" x="564" y="411">231.908</text></g><g><title>pele: 268.036</title><text class="code-label" x="148" y="433" text-anchor="end">pele</text><rect class="suite-bar" x="158" y="424" width="121.58" height="10"/><text class="num" x="564" y="433">268.036</text></g><g><title>Eon svn: 300.052</title><text class="code-label" x="148" y="455" text-anchor="end">Eon svn</text><rect class="suite-bar" x="158" y="446" width="108.61" height="10"/><text class="num" x="564" y="455">300.052</text></g><g><title>GMIN: 301.399</title><text class="code-label" x="148" y="477" text-anchor="end">GMIN</text><rect class="suite-bar" x="158" y="468" width="108.12" height="10"/><text class="num" x="564" y="477">301.399</text></g><g><title>ASE: 396.55</title><text class="code-label" x="148" y="499" text-anchor="end">ASE</text><rect class="suite-bar" x="158" y="490" width="82.18" height="10"/><text class="num" x="564" y="499">396.55</text></g><g><title>vc-SQNM: 598.05</title><text class="code-label" x="148" y="521" text-anchor="end">vc-SQNM</text><rect class="suite-bar" x="158" y="512" width="63.68" height="10"/><text class="num" x="564" y="521">598.05</text></g><g><title>Sella: 729.433</title><text class="code-label" x="148" y="543" text-anchor="end">Sella</text><rect class="suite-bar" x="158" y="534" width="63.68" height="10"/><text class="num" x="564" y="543">729.433</text></g><g><title>LAMMPS: 1123.81</title><text class="code-label" x="148" y="565" text-anchor="end">LAMMPS</text><rect class="suite-bar" x="158" y="556" width="63.68" height="10"/><text class="num" x="564" y="565">1123.81</text></g><text class="group-label" x="0" y="598">Morse bulk</text><g><title>rgmin: 8.35</title><text class="code-label" x="148" y="621" text-anchor="end">rgmin</text><rect class="suite-bar is-best" x="158" y="612" width="398.00" height="10"/><text class="num" x="564" y="621">8.35</text></g><g><title>TSASE: 19</title><text class="code-label" x="148" y="643" text-anchor="end">TSASE</text><rect class="suite-bar" x="158" y="634" width="174.91" height="10"/><text class="num" x="564" y="643">19</text></g><g><title>Sella: 28.89</title><text class="code-label" x="148" y="665" text-anchor="end">Sella</text><rect class="suite-bar" x="158" y="656" width="115.03" height="10"/><text class="num" x="564" y="665">28.89</text></g><g><title>ASE: 28.91</title><text class="code-label" x="148" y="687" text-anchor="end">ASE</text><rect class="suite-bar" x="158" y="678" width="114.95" height="10"/><text class="num" x="564" y="687">28.91</text></g><g><title>GMIN: 34.4</title><text class="code-label" x="148" y="709" text-anchor="end">GMIN</text><rect class="suite-bar" x="158" y="700" width="96.61" height="10"/><text class="num" x="564" y="709">34.4</text></g><g><title>vc-SQNM: 40.51</title><text class="code-label" x="148" y="731" text-anchor="end">vc-SQNM</text><rect class="suite-bar" x="158" y="722" width="82.04" height="10"/><text class="num" x="564" y="731">40.51</text></g><g><title>OPTIM: 46</title><text class="code-label" x="148" y="753" text-anchor="end">OPTIM</text><rect class="suite-bar" x="158" y="744" width="72.25" height="10"/><text class="num" x="564" y="753">46</text></g><g><title>pele: 51</title><text class="code-label" x="148" y="775" text-anchor="end">pele</text><rect class="suite-bar" x="158" y="766" width="65.16" height="10"/><text class="num" x="564" y="775">51</text></g><g><title>Eon svn: 52</title><text class="code-label" x="148" y="797" text-anchor="end">Eon svn</text><rect class="suite-bar" x="158" y="788" width="63.91" height="10"/><text class="num" x="564" y="797">52</text></g><g><title>eOn: 54.18</title><text class="code-label" x="148" y="819" text-anchor="end">eOn</text><rect class="suite-bar" x="158" y="810" width="63.68" height="10"/><text class="num" x="564" y="819">54.18</text></g><g><title>DL-FIND: 13626.5</title><text class="code-label" x="148" y="841" text-anchor="end">DL-FIND</text><rect class="suite-bar" x="158" y="832" width="63.68" height="10"/><text class="num" x="564" y="841">13626.5</text></g><g><title>LAMMPS: 17656.7</title><text class="code-label" x="148" y="863" text-anchor="end">LAMMPS</text><rect class="suite-bar" x="158" y="854" width="63.68" height="10"/><text class="num" x="564" y="863">17656.7</text></g></svg><figcaption>Best cost of each code. Each problem has its own scale. A longer bar is closer to the best.</figcaption></figure>
+   <figure class="plate-figure"><svg class="plate-chart" role="img" aria-labelledby="lennard-jones-38-clusters-cost-bars-title" viewBox="0 0 680 380.0"><title id="lennard-jones-38-clusters-cost-bars-title">Best cost for Lennard-Jones 38 clusters</title><text class="group-label" x="0" y="18">Lennard-Jones 38 clusters</text><line class="axis" x1="168.00" y1="344.00" x2="584.00" y2="344.00"/><line class="grid" x1="168.00" y1="32.00" x2="168.00" y2="344.00"/><line class="axis" x1="168.00" y1="340.00" x2="168.00" y2="344.00"/><text class="num" x="168.00" y="358.00" text-anchor="middle">10¹</text><line class="grid" x1="272.00" y1="32.00" x2="272.00" y2="344.00"/><line class="axis" x1="272.00" y1="340.00" x2="272.00" y2="344.00"/><text class="num" x="272.00" y="358.00" text-anchor="middle">10²</text><line class="grid" x1="376.00" y1="32.00" x2="376.00" y2="344.00"/><line class="axis" x1="376.00" y1="340.00" x2="376.00" y2="344.00"/><text class="num" x="376.00" y="358.00" text-anchor="middle">10³</text><line class="grid" x1="480.00" y1="32.00" x2="480.00" y2="344.00"/><line class="axis" x1="480.00" y1="340.00" x2="480.00" y2="344.00"/><text class="num" x="480.00" y="358.00" text-anchor="middle">10⁴</text><line class="grid" x1="584.00" y1="32.00" x2="584.00" y2="344.00"/><line class="axis" x1="584.00" y1="340.00" x2="584.00" y2="344.00"/><text class="num" x="584.00" y="358.00" text-anchor="middle">10⁵</text><text class="axis-name" x="376.00" y="374.00" text-anchor="middle">cost (force calls, log scale)</text><g><title>unknown: 79</title><text class="code-label" x="156" y="46.00" text-anchor="end">unknown</text><rect class="suite-bar is-best" x="168.00" y="37.00" width="93.3532" height="10"/><text class="num" x="592.00" y="46.00">79</text></g><g><title>rgmin: 81.881</title><text class="code-label" x="156" y="68.00" text-anchor="end">rgmin</text><rect class="suite-bar" x="168.00" y="59.00" width="94.9710" height="10"/><text class="num" x="592.00" y="68.00">81.881</text></g><g><title>TSASE: 166</title><text class="code-label" x="156" y="90.00" text-anchor="end">TSASE</text><rect class="suite-bar" x="168.00" y="81.00" width="126.8912" height="10"/><text class="num" x="592.00" y="90.00">166</text></g><g><title>OPTIM: 176</title><text class="code-label" x="156" y="112.00" text-anchor="end">OPTIM</text><rect class="suite-bar" x="168.00" y="103.00" width="129.5333" height="10"/><text class="num" x="592.00" y="112.00">176</text></g><g><title>pele: 179</title><text class="code-label" x="156" y="134.00" text-anchor="end">pele</text><rect class="suite-bar" x="168.00" y="125.00" width="130.2967" height="10"/><text class="num" x="592.00" y="134.00">179</text></g><g><title>eOn: 180.137</title><text class="code-label" x="156" y="156.00" text-anchor="end">eOn</text><rect class="suite-bar" x="168.00" y="147.00" width="130.5827" height="10"/><text class="num" x="592.00" y="156.00">180.137</text></g><g><title>Eon svn: 181</title><text class="code-label" x="156" y="178.00" text-anchor="end">Eon svn</text><rect class="suite-bar" x="168.00" y="169.00" width="130.7986" height="10"/><text class="num" x="592.00" y="178.00">181</text></g><g><title>DL-FIND: 231.908</title><text class="code-label" x="156" y="200.00" text-anchor="end">DL-FIND</text><rect class="suite-bar" x="168.00" y="191.00" width="141.9928" height="10"/><text class="num" x="592.00" y="200.00">231.908</text></g><g><title>GMIN: 301.399</title><text class="code-label" x="156" y="222.00" text-anchor="end">GMIN</text><rect class="suite-bar" x="168.00" y="213.00" width="153.8307" height="10"/><text class="num" x="592.00" y="222.00">301.399</text></g><g><title>ASE: 355</title><text class="code-label" x="156" y="244.00" text-anchor="end">ASE</text><rect class="suite-bar" x="168.00" y="235.00" width="161.2237" height="10"/><text class="num" x="592.00" y="244.00">355</text></g><g><title>vc-SQNM: 598.05</title><text class="code-label" x="156" y="266.00" text-anchor="end">vc-SQNM</text><rect class="suite-bar" x="168.00" y="257.00" width="184.7807" height="10"/><text class="num" x="592.00" y="266.00">598.05</text></g><g><title>Sella: 710.089</title><text class="code-label" x="156" y="288.00" text-anchor="end">Sella</text><rect class="suite-bar" x="168.00" y="279.00" width="192.5365" height="10"/><text class="num" x="592.00" y="288.00">710.089</text></g><g><title>LAMMPS: 1123.81</title><text class="code-label" x="156" y="310.00" text-anchor="end">LAMMPS</text><rect class="suite-bar" x="168.00" y="301.00" width="213.2722" height="10"/><text class="num" x="592.00" y="310.00">1123.81</text></g><g><title>pysisyphus: 15124.7</title><text class="code-label" x="156" y="332.00" text-anchor="end">pysisyphus</text><rect class="suite-bar" x="168.00" y="323.00" width="330.6874" height="10"/><text class="num" x="592.00" y="332.00">15124.7</text></g></svg><figcaption>A shorter bar is a lower cost on a log scale shared by the codes of this problem.</figcaption></figure>
+   <figure class="plate-figure"><svg class="plate-chart" role="img" aria-labelledby="lennard-jones-38-clusters-with-gaussian-force-noise-cost-bars-title" viewBox="0 0 680 270.0"><title id="lennard-jones-38-clusters-with-gaussian-force-noise-cost-bars-title">Best cost for Lennard-Jones 38 clusters with Gaussian force noise</title><text class="group-label" x="0" y="18">Lennard-Jones 38 clusters with Gaussian force noise</text><line class="axis" x1="168.00" y1="234.00" x2="584.00" y2="234.00"/><line class="grid" x1="168.00" y1="32.00" x2="168.00" y2="234.00"/><line class="axis" x1="168.00" y1="230.00" x2="168.00" y2="234.00"/><text class="num" x="168.00" y="248.00" text-anchor="middle">10¹</text><line class="grid" x1="306.67" y1="32.00" x2="306.67" y2="234.00"/><line class="axis" x1="306.67" y1="230.00" x2="306.67" y2="234.00"/><text class="num" x="306.67" y="248.00" text-anchor="middle">10²</text><line class="grid" x1="445.33" y1="32.00" x2="445.33" y2="234.00"/><line class="axis" x1="445.33" y1="230.00" x2="445.33" y2="234.00"/><text class="num" x="445.33" y="248.00" text-anchor="middle">10³</text><line class="grid" x1="584.00" y1="32.00" x2="584.00" y2="234.00"/><line class="axis" x1="584.00" y1="230.00" x2="584.00" y2="234.00"/><text class="num" x="584.00" y="248.00" text-anchor="middle">10⁴</text><text class="axis-name" x="376.00" y="264.00" text-anchor="middle">cost (force calls, log scale)</text><g><title>rgmin: 81.881</title><text class="code-label" x="156" y="46.00" text-anchor="end">rgmin</text><rect class="suite-bar is-best" x="168.00" y="37.00" width="126.6281" height="10"/><text class="num" x="592.00" y="46.00">81.881</text></g><g><title>DL-FIND: 231.908</title><text class="code-label" x="156" y="68.00" text-anchor="end">DL-FIND</text><rect class="suite-bar" x="168.00" y="59.00" width="189.3238" height="10"/><text class="num" x="592.00" y="68.00">231.908</text></g><g><title>pele: 268.036</title><text class="code-label" x="156" y="90.00" text-anchor="end">pele</text><rect class="suite-bar" x="168.00" y="81.00" width="198.0428" height="10"/><text class="num" x="592.00" y="90.00">268.036</text></g><g><title>Eon svn: 300.052</title><text class="code-label" x="156" y="112.00" text-anchor="end">Eon svn</text><rect class="suite-bar" x="168.00" y="103.00" width="204.8379" height="10"/><text class="num" x="592.00" y="112.00">300.052</text></g><g><title>GMIN: 301.399</title><text class="code-label" x="156" y="134.00" text-anchor="end">GMIN</text><rect class="suite-bar" x="168.00" y="125.00" width="205.1077" height="10"/><text class="num" x="592.00" y="134.00">301.399</text></g><g><title>ASE: 396.55</title><text class="code-label" x="156" y="156.00" text-anchor="end">ASE</text><rect class="suite-bar" x="168.00" y="147.00" width="221.6306" height="10"/><text class="num" x="592.00" y="156.00">396.55</text></g><g><title>vc-SQNM: 598.05</title><text class="code-label" x="156" y="178.00" text-anchor="end">vc-SQNM</text><rect class="suite-bar" x="168.00" y="169.00" width="246.3743" height="10"/><text class="num" x="592.00" y="178.00">598.05</text></g><g><title>Sella: 729.433</title><text class="code-label" x="156" y="200.00" text-anchor="end">Sella</text><rect class="suite-bar" x="168.00" y="191.00" width="258.3340" height="10"/><text class="num" x="592.00" y="200.00">729.433</text></g><g><title>LAMMPS: 1123.81</title><text class="code-label" x="156" y="222.00" text-anchor="end">LAMMPS</text><rect class="suite-bar" x="168.00" y="213.00" width="284.3630" height="10"/><text class="num" x="592.00" y="222.00">1123.81</text></g></svg><figcaption>A shorter bar is a lower cost on a log scale shared by the codes of this problem.</figcaption></figure>
+   <figure class="plate-figure"><svg class="plate-chart" role="img" aria-labelledby="morse-bulk-cost-bars-title" viewBox="0 0 680 336.0"><title id="morse-bulk-cost-bars-title">Best cost for Morse bulk</title><text class="group-label" x="0" y="18">Morse bulk</text><line class="axis" x1="168.00" y1="300.00" x2="584.00" y2="300.00"/><line class="grid" x1="168.00" y1="32.00" x2="168.00" y2="300.00"/><line class="axis" x1="168.00" y1="296.00" x2="168.00" y2="300.00"/><text class="num" x="168.00" y="314.00" text-anchor="middle">10⁰</text><line class="grid" x1="251.20" y1="32.00" x2="251.20" y2="300.00"/><line class="axis" x1="251.20" y1="296.00" x2="251.20" y2="300.00"/><text class="num" x="251.20" y="314.00" text-anchor="middle">10¹</text><line class="grid" x1="334.40" y1="32.00" x2="334.40" y2="300.00"/><line class="axis" x1="334.40" y1="296.00" x2="334.40" y2="300.00"/><text class="num" x="334.40" y="314.00" text-anchor="middle">10²</text><line class="grid" x1="417.60" y1="32.00" x2="417.60" y2="300.00"/><line class="axis" x1="417.60" y1="296.00" x2="417.60" y2="300.00"/><text class="num" x="417.60" y="314.00" text-anchor="middle">10³</text><line class="grid" x1="500.80" y1="32.00" x2="500.80" y2="300.00"/><line class="axis" x1="500.80" y1="296.00" x2="500.80" y2="300.00"/><text class="num" x="500.80" y="314.00" text-anchor="middle">10⁴</text><line class="grid" x1="584.00" y1="32.00" x2="584.00" y2="300.00"/><line class="axis" x1="584.00" y1="296.00" x2="584.00" y2="300.00"/><text class="num" x="584.00" y="314.00" text-anchor="middle">10⁵</text><text class="axis-name" x="376.00" y="330.00" text-anchor="middle">cost (force calls, log scale)</text><g><title>rgmin: 8.35</title><text class="code-label" x="156" y="46.00" text-anchor="end">rgmin</text><rect class="suite-bar is-best" x="168.00" y="37.00" width="76.6843" height="10"/><text class="num" x="592.00" y="46.00">8.35</text></g><g><title>TSASE: 19</title><text class="code-label" x="156" y="68.00" text-anchor="end">TSASE</text><rect class="suite-bar" x="168.00" y="59.00" width="106.3923" height="10"/><text class="num" x="592.00" y="68.00">19</text></g><g><title>Sella: 28.89</title><text class="code-label" x="156" y="90.00" text-anchor="end">Sella</text><rect class="suite-bar" x="168.00" y="81.00" width="121.5342" height="10"/><text class="num" x="592.00" y="90.00">28.89</text></g><g><title>ASE: 28.91</title><text class="code-label" x="156" y="112.00" text-anchor="end">ASE</text><rect class="suite-bar" x="168.00" y="103.00" width="121.5592" height="10"/><text class="num" x="592.00" y="112.00">28.91</text></g><g><title>GMIN: 34.4</title><text class="code-label" x="156" y="134.00" text-anchor="end">GMIN</text><rect class="suite-bar" x="168.00" y="125.00" width="127.8417" height="10"/><text class="num" x="592.00" y="134.00">34.4</text></g><g><title>vc-SQNM: 40.51</title><text class="code-label" x="156" y="156.00" text-anchor="end">vc-SQNM</text><rect class="suite-bar" x="168.00" y="147.00" width="133.7492" height="10"/><text class="num" x="592.00" y="156.00">40.51</text></g><g><title>OPTIM: 46</title><text class="code-label" x="156" y="178.00" text-anchor="end">OPTIM</text><rect class="suite-bar" x="168.00" y="169.00" width="138.3415" height="10"/><text class="num" x="592.00" y="178.00">46</text></g><g><title>pele: 51</title><text class="code-label" x="156" y="200.00" text-anchor="end">pele</text><rect class="suite-bar" x="168.00" y="191.00" width="142.0698" height="10"/><text class="num" x="592.00" y="200.00">51</text></g><g><title>Eon svn: 52</title><text class="code-label" x="156" y="222.00" text-anchor="end">Eon svn</text><rect class="suite-bar" x="168.00" y="213.00" width="142.7715" height="10"/><text class="num" x="592.00" y="222.00">52</text></g><g><title>eOn: 54.18</title><text class="code-label" x="156" y="244.00" text-anchor="end">eOn</text><rect class="suite-bar" x="168.00" y="235.00" width="144.2554" height="10"/><text class="num" x="592.00" y="244.00">54.18</text></g><g><title>DL-FIND: 13626.5</title><text class="code-label" x="156" y="266.00" text-anchor="end">DL-FIND</text><rect class="suite-bar" x="168.00" y="257.00" width="343.9807" height="10"/><text class="num" x="592.00" y="266.00">13626.5</text></g><g><title>LAMMPS: 17656.7</title><text class="code-label" x="156" y="288.00" text-anchor="end">LAMMPS</text><rect class="suite-bar" x="168.00" y="279.00" width="353.3428" height="10"/><text class="num" x="592.00" y="288.00">17656.7</text></g></svg><figcaption>A shorter bar is a lower cost on a log scale shared by the codes of this problem.</figcaption></figure>
    <p class="chart-files"><a href="../../_static/board/suite-minimization.svg">SVG file</a></p>
    <div class="bench-export">
    <figure class="bench-plot"><a href="../../_static/board/suite-minimization.svg"><picture><source srcset="../../_static/board/suite-minimization.webp" type="image/webp"><img src="../../_static/board/suite-minimization.png" alt="Minimization best ranked cost" loading="lazy" decoding="async"></picture></a><figcaption>Minimization best ranked cost. Select the plot for the full SVG.</figcaption></figure>
@@ -21,322 +23,322 @@
    <h2>Leaderboard</h2>
    <div class="bench-scroll">
    <table class="bench-sortable leader" data-bench="codes">
-   <caption>A longer bar is closer to the best on that problem. Select a column heading to sort.</caption>
-   <thead><tr><th>Rank</th><th>Problem</th><th>Code</th><th title="Lowest cost for this code. A longer bar is closer to the best on that problem.">Best</th><th title="Median of this code&#x27;s costs on that problem.">Median</th><th title="Share of runs that finished.">Success</th><th title="Mean cost of the runs. A failure counts as twice the cap.">PAR-2</th></tr></thead><tbody>
+   <caption>A shorter bar is a lower cost on the log scale for that problem. Select a column heading to sort.</caption>
+   <thead><tr><th>Rank</th><th>Problem</th><th>Code</th><th title="Lowest cost for this code. A shorter bar is a lower cost on the shared log scale.">Best</th><th title="Median of this code&#x27;s costs on that problem.">Median</th><th title="Share of runs that finished.">Success</th><th title="Mean cost of the runs. A failure counts as twice the cap.">PAR-2</th></tr></thead><tbody>
    <tr class="is-best group-start">
-   <td class="rank-cell"><span class="rank r1">1</span></td>
-   <td class="problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
-   <td class="code"><a href="../codes/unknown.html">unknown</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:100.0%"><i></i></span><span class="bar-num">79</span></td>
-   <td class="num">79</td>
-   <td class="num">100.0%</td>
-   <td class="num">—<sup>1</sup></td>
+   <td class="rank-cell" data-label="Rank"><span class="rank r1">1</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
+   <td class="code" data-label="Code"><a href="../codes/unknown.html">unknown</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:22.4407%"><i></i></span><span class="bar-num">79</span></td>
+   <td class="num" data-label="Median">79</td>
+   <td class="num" data-label="Success">100.0%</td>
+   <td class="num" data-label="PAR-2">—<sup>1</sup></td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank r2">2</span></td>
-   <td class="problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
-   <td class="code"><a href="../codes/rgmin.html">rgmin</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:96.5%"><i></i></span><span class="bar-num">81.881</span></td>
-   <td class="num">928.197</td>
-   <td class="num">100.0%</td>
-   <td class="num">81.881</td>
+   <td class="rank-cell" data-label="Rank"><span class="rank r2">2</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
+   <td class="code" data-label="Code"><a href="../codes/rgmin.html">rgmin</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:22.8296%"><i></i></span><span class="bar-num">81.881</span></td>
+   <td class="num" data-label="Median">928.197</td>
+   <td class="num" data-label="Success">100.0%</td>
+   <td class="num" data-label="PAR-2">81.881</td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank r3">3</span></td>
-   <td class="problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
-   <td class="code"><a href="../codes/tsase.html">TSASE</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:47.6%"><i></i></span><span class="bar-num">166</span></td>
-   <td class="num">257.2</td>
-   <td class="num">100.0%</td>
-   <td class="num">—<sup>1</sup></td>
+   <td class="rank-cell" data-label="Rank"><span class="rank r3">3</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
+   <td class="code" data-label="Code"><a href="../codes/tsase.html">TSASE</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:30.5027%"><i></i></span><span class="bar-num">166</span></td>
+   <td class="num" data-label="Median">257.2</td>
+   <td class="num" data-label="Success">100.0%</td>
+   <td class="num" data-label="PAR-2">—<sup>1</sup></td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank">4</span></td>
-   <td class="problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
-   <td class="code"><a href="../codes/optim.html">OPTIM</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:44.9%"><i></i></span><span class="bar-num">176</span></td>
-   <td class="num">223.171</td>
-   <td class="num">100.0%</td>
-   <td class="num">—<sup>1</sup></td>
+   <td class="rank-cell" data-label="Rank"><span class="rank">4</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
+   <td class="code" data-label="Code"><a href="../codes/optim.html">OPTIM</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:31.1378%"><i></i></span><span class="bar-num">176</span></td>
+   <td class="num" data-label="Median">223.171</td>
+   <td class="num" data-label="Success">100.0%</td>
+   <td class="num" data-label="PAR-2">—<sup>1</sup></td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank">5</span></td>
-   <td class="problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
-   <td class="code"><a href="../codes/pele.html">pele</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:44.1%"><i></i></span><span class="bar-num">179</span></td>
-   <td class="num">288.145</td>
-   <td class="num">100.0%</td>
-   <td class="num">—<sup>1</sup></td>
+   <td class="rank-cell" data-label="Rank"><span class="rank">5</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
+   <td class="code" data-label="Code"><a href="../codes/pele.html">pele</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:31.3213%"><i></i></span><span class="bar-num">179</span></td>
+   <td class="num" data-label="Median">288.145</td>
+   <td class="num" data-label="Success">100.0%</td>
+   <td class="num" data-label="PAR-2">—<sup>1</sup></td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank">6</span></td>
-   <td class="problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
-   <td class="code"><a href="../codes/eon.html">eOn</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:43.9%"><i></i></span><span class="bar-num">180.137</span></td>
-   <td class="num">180.137</td>
-   <td class="num">100.0%</td>
-   <td class="num">180.137</td>
+   <td class="rank-cell" data-label="Rank"><span class="rank">6</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
+   <td class="code" data-label="Code"><a href="../codes/eon.html">eOn</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:31.3901%"><i></i></span><span class="bar-num">180.137</span></td>
+   <td class="num" data-label="Median">180.137</td>
+   <td class="num" data-label="Success">100.0%</td>
+   <td class="num" data-label="PAR-2">180.137</td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank">7</span></td>
-   <td class="problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
-   <td class="code"><a href="../codes/eon-svn.html">Eon svn</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:43.6%"><i></i></span><span class="bar-num">181</span></td>
-   <td class="num">635</td>
-   <td class="num">100.0%</td>
-   <td class="num">—<sup>1</sup></td>
+   <td class="rank-cell" data-label="Rank"><span class="rank">7</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
+   <td class="code" data-label="Code"><a href="../codes/eon-svn.html">Eon svn</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:31.4420%"><i></i></span><span class="bar-num">181</span></td>
+   <td class="num" data-label="Median">635</td>
+   <td class="num" data-label="Success">100.0%</td>
+   <td class="num" data-label="PAR-2">—<sup>1</sup></td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank">8</span></td>
-   <td class="problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
-   <td class="code"><a href="../codes/dl-find.html">DL-FIND</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:34.1%"><i></i></span><span class="bar-num">231.908</span></td>
-   <td class="num">3048.62</td>
-   <td class="num">99.8%</td>
-   <td class="num">231.908</td>
+   <td class="rank-cell" data-label="Rank"><span class="rank">8</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
+   <td class="code" data-label="Code"><a href="../codes/dl-find.html">DL-FIND</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:34.1329%"><i></i></span><span class="bar-num">231.908</span></td>
+   <td class="num" data-label="Median">3048.62</td>
+   <td class="num" data-label="Success">99.8%</td>
+   <td class="num" data-label="PAR-2">231.908</td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank">9</span></td>
-   <td class="problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
-   <td class="code"><a href="../codes/gmin.html">GMIN</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:26.2%"><i></i></span><span class="bar-num">301.399</span></td>
-   <td class="num">301.399</td>
-   <td class="num">99.7%</td>
-   <td class="num">301.399</td>
+   <td class="rank-cell" data-label="Rank"><span class="rank">9</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
+   <td class="code" data-label="Code"><a href="../codes/gmin.html">GMIN</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:36.9785%"><i></i></span><span class="bar-num">301.399</span></td>
+   <td class="num" data-label="Median">301.399</td>
+   <td class="num" data-label="Success">99.7%</td>
+   <td class="num" data-label="PAR-2">301.399</td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank">10</span></td>
-   <td class="problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
-   <td class="code"><a href="../codes/ase.html">ASE</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:22.3%"><i></i></span><span class="bar-num">355</span></td>
-   <td class="num">656</td>
-   <td class="num">99.9%</td>
-   <td class="num">—<sup>1</sup></td>
+   <td class="rank-cell" data-label="Rank"><span class="rank">10</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
+   <td class="code" data-label="Code"><a href="../codes/ase.html">ASE</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:38.7557%"><i></i></span><span class="bar-num">355</span></td>
+   <td class="num" data-label="Median">656</td>
+   <td class="num" data-label="Success">99.9%</td>
+   <td class="num" data-label="PAR-2">—<sup>1</sup></td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank">11</span></td>
-   <td class="problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
-   <td class="code"><a href="../codes/vc-sqnm.html">vc-SQNM</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:16.0%"><i></i></span><span class="bar-num">598.05</span></td>
-   <td class="num">598.05</td>
-   <td class="num">98.9%</td>
-   <td class="num">598.05</td>
+   <td class="rank-cell" data-label="Rank"><span class="rank">11</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
+   <td class="code" data-label="Code"><a href="../codes/vc-sqnm.html">vc-SQNM</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:44.4184%"><i></i></span><span class="bar-num">598.05</span></td>
+   <td class="num" data-label="Median">598.05</td>
+   <td class="num" data-label="Success">98.9%</td>
+   <td class="num" data-label="PAR-2">598.05</td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank">12</span></td>
-   <td class="problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
-   <td class="code"><a href="../codes/sella.html">Sella</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:16.0%"><i></i></span><span class="bar-num">710.089</span></td>
-   <td class="num">710.089</td>
-   <td class="num">100.0%</td>
-   <td class="num">710.089</td>
+   <td class="rank-cell" data-label="Rank"><span class="rank">12</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
+   <td class="code" data-label="Code"><a href="../codes/sella.html">Sella</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:46.2828%"><i></i></span><span class="bar-num">710.089</span></td>
+   <td class="num" data-label="Median">710.089</td>
+   <td class="num" data-label="Success">100.0%</td>
+   <td class="num" data-label="PAR-2">710.089</td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank">13</span></td>
-   <td class="problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
-   <td class="code"><a href="../codes/lammps.html">LAMMPS</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:16.0%"><i></i></span><span class="bar-num">1123.81</span></td>
-   <td class="num">4361.3</td>
-   <td class="num">99.7%</td>
-   <td class="num">1123.81</td>
+   <td class="rank-cell" data-label="Rank"><span class="rank">13</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
+   <td class="code" data-label="Code"><a href="../codes/lammps.html">LAMMPS</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:51.2674%"><i></i></span><span class="bar-num">1123.81</span></td>
+   <td class="num" data-label="Median">4361.3</td>
+   <td class="num" data-label="Success">99.7%</td>
+   <td class="num" data-label="PAR-2">1123.81</td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank">14</span></td>
-   <td class="problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
-   <td class="code"><a href="../codes/pysisyphus.html">pysisyphus</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:16.0%"><i></i></span><span class="bar-num">15124.7</span></td>
-   <td class="num">16094.8</td>
-   <td class="num">25.4%</td>
-   <td class="num">15124.7</td>
-   </tr>
-   <tr class="is-best group-start">
-   <td class="rank-cell"><span class="rank r1">1</span></td>
-   <td class="problem"><a href="minimization/lj38-noise.html">Lennard-Jones 38 clusters with Gaussian force noise</a></td>
-   <td class="code"><a href="../codes/rgmin.html">rgmin</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:100.0%"><i></i></span><span class="bar-num">81.881</span></td>
-   <td class="num">197.228</td>
-   <td class="num">100.0%</td>
-   <td class="num">81.881</td>
-   </tr>
-   <tr>
-   <td class="rank-cell"><span class="rank r2">2</span></td>
-   <td class="problem"><a href="minimization/lj38-noise.html">Lennard-Jones 38 clusters with Gaussian force noise</a></td>
-   <td class="code"><a href="../codes/dl-find.html">DL-FIND</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:35.3%"><i></i></span><span class="bar-num">231.908</span></td>
-   <td class="num">2747.86</td>
-   <td class="num">99.8%</td>
-   <td class="num">231.908</td>
-   </tr>
-   <tr>
-   <td class="rank-cell"><span class="rank r3">3</span></td>
-   <td class="problem"><a href="minimization/lj38-noise.html">Lennard-Jones 38 clusters with Gaussian force noise</a></td>
-   <td class="code"><a href="../codes/pele.html">pele</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:30.5%"><i></i></span><span class="bar-num">268.036</span></td>
-   <td class="num">1098.85</td>
-   <td class="num">99.9%</td>
-   <td class="num">268.036</td>
-   </tr>
-   <tr>
-   <td class="rank-cell"><span class="rank">4</span></td>
-   <td class="problem"><a href="minimization/lj38-noise.html">Lennard-Jones 38 clusters with Gaussian force noise</a></td>
-   <td class="code"><a href="../codes/eon-svn.html">Eon svn</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:27.3%"><i></i></span><span class="bar-num">300.052</span></td>
-   <td class="num">300.052</td>
-   <td class="num">99.5%</td>
-   <td class="num">300.052</td>
-   </tr>
-   <tr>
-   <td class="rank-cell"><span class="rank">5</span></td>
-   <td class="problem"><a href="minimization/lj38-noise.html">Lennard-Jones 38 clusters with Gaussian force noise</a></td>
-   <td class="code"><a href="../codes/gmin.html">GMIN</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:27.2%"><i></i></span><span class="bar-num">301.399</span></td>
-   <td class="num">301.399</td>
-   <td class="num">99.7%</td>
-   <td class="num">301.399</td>
-   </tr>
-   <tr>
-   <td class="rank-cell"><span class="rank">6</span></td>
-   <td class="problem"><a href="minimization/lj38-noise.html">Lennard-Jones 38 clusters with Gaussian force noise</a></td>
-   <td class="code"><a href="../codes/ase.html">ASE</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:20.6%"><i></i></span><span class="bar-num">396.55</span></td>
-   <td class="num">555.614</td>
-   <td class="num">99.4%</td>
-   <td class="num">396.55</td>
-   </tr>
-   <tr>
-   <td class="rank-cell"><span class="rank">7</span></td>
-   <td class="problem"><a href="minimization/lj38-noise.html">Lennard-Jones 38 clusters with Gaussian force noise</a></td>
-   <td class="code"><a href="../codes/vc-sqnm.html">vc-SQNM</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:16.0%"><i></i></span><span class="bar-num">598.05</span></td>
-   <td class="num">598.05</td>
-   <td class="num">98.9%</td>
-   <td class="num">598.05</td>
-   </tr>
-   <tr>
-   <td class="rank-cell"><span class="rank">8</span></td>
-   <td class="problem"><a href="minimization/lj38-noise.html">Lennard-Jones 38 clusters with Gaussian force noise</a></td>
-   <td class="code"><a href="../codes/sella.html">Sella</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:16.0%"><i></i></span><span class="bar-num">729.433</span></td>
-   <td class="num">729.433</td>
-   <td class="num">99.9%</td>
-   <td class="num">729.433</td>
-   </tr>
-   <tr>
-   <td class="rank-cell"><span class="rank">9</span></td>
-   <td class="problem"><a href="minimization/lj38-noise.html">Lennard-Jones 38 clusters with Gaussian force noise</a></td>
-   <td class="code"><a href="../codes/lammps.html">LAMMPS</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:16.0%"><i></i></span><span class="bar-num">1123.81</span></td>
-   <td class="num">3138.21</td>
-   <td class="num">99.7%</td>
-   <td class="num">1123.81</td>
+   <td class="rank-cell" data-label="Rank"><span class="rank">14</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
+   <td class="code" data-label="Code"><a href="../codes/pysisyphus.html">pysisyphus</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:79.4922%"><i></i></span><span class="bar-num">15124.7</span></td>
+   <td class="num" data-label="Median">16094.8</td>
+   <td class="num" data-label="Success">25.4%</td>
+   <td class="num" data-label="PAR-2">15124.7</td>
    </tr>
    <tr class="is-best group-start">
-   <td class="rank-cell"><span class="rank r1">1</span></td>
-   <td class="problem"><a href="minimization/morse-bulk.html">Morse bulk</a></td>
-   <td class="code"><a href="../codes/rgmin.html">rgmin</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:100.0%"><i></i></span><span class="bar-num">8.35</span></td>
-   <td class="num">61.89</td>
-   <td class="num">100.0%</td>
-   <td class="num">8.35</td>
+   <td class="rank-cell" data-label="Rank"><span class="rank r1">1</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/lj38-noise.html">Lennard-Jones 38 clusters with Gaussian force noise</a></td>
+   <td class="code" data-label="Code"><a href="../codes/rgmin.html">rgmin</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:30.4394%"><i></i></span><span class="bar-num">81.881</span></td>
+   <td class="num" data-label="Median">197.228</td>
+   <td class="num" data-label="Success">100.0%</td>
+   <td class="num" data-label="PAR-2">81.881</td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank r2">2</span></td>
-   <td class="problem"><a href="minimization/morse-bulk.html">Morse bulk</a></td>
-   <td class="code"><a href="../codes/tsase.html">TSASE</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:43.9%"><i></i></span><span class="bar-num">19</span></td>
-   <td class="num">8812.68</td>
-   <td class="num">100.0%</td>
-   <td class="num">—<sup>1</sup></td>
+   <td class="rank-cell" data-label="Rank"><span class="rank r2">2</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/lj38-noise.html">Lennard-Jones 38 clusters with Gaussian force noise</a></td>
+   <td class="code" data-label="Code"><a href="../codes/dl-find.html">DL-FIND</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:45.5105%"><i></i></span><span class="bar-num">231.908</span></td>
+   <td class="num" data-label="Median">2747.86</td>
+   <td class="num" data-label="Success">99.8%</td>
+   <td class="num" data-label="PAR-2">231.908</td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank r3">3</span></td>
-   <td class="problem"><a href="minimization/morse-bulk.html">Morse bulk</a></td>
-   <td class="code"><a href="../codes/sella.html">Sella</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:28.9%"><i></i></span><span class="bar-num">28.89</span></td>
-   <td class="num">28.89</td>
-   <td class="num">100.0%</td>
-   <td class="num">28.89</td>
+   <td class="rank-cell" data-label="Rank"><span class="rank r3">3</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/lj38-noise.html">Lennard-Jones 38 clusters with Gaussian force noise</a></td>
+   <td class="code" data-label="Code"><a href="../codes/pele.html">pele</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:47.6064%"><i></i></span><span class="bar-num">268.036</span></td>
+   <td class="num" data-label="Median">1098.85</td>
+   <td class="num" data-label="Success">99.9%</td>
+   <td class="num" data-label="PAR-2">268.036</td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank">4</span></td>
-   <td class="problem"><a href="minimization/morse-bulk.html">Morse bulk</a></td>
-   <td class="code"><a href="../codes/ase.html">ASE</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:28.9%"><i></i></span><span class="bar-num">28.91</span></td>
-   <td class="num">53.58</td>
-   <td class="num">100.0%</td>
-   <td class="num">28.91</td>
+   <td class="rank-cell" data-label="Rank"><span class="rank">4</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/lj38-noise.html">Lennard-Jones 38 clusters with Gaussian force noise</a></td>
+   <td class="code" data-label="Code"><a href="../codes/eon-svn.html">Eon svn</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:49.2399%"><i></i></span><span class="bar-num">300.052</span></td>
+   <td class="num" data-label="Median">300.052</td>
+   <td class="num" data-label="Success">99.5%</td>
+   <td class="num" data-label="PAR-2">300.052</td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank">5</span></td>
-   <td class="problem"><a href="minimization/morse-bulk.html">Morse bulk</a></td>
-   <td class="code"><a href="../codes/gmin.html">GMIN</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:24.3%"><i></i></span><span class="bar-num">34.4</span></td>
-   <td class="num">34.4</td>
-   <td class="num">100.0%</td>
-   <td class="num">34.4</td>
+   <td class="rank-cell" data-label="Rank"><span class="rank">5</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/lj38-noise.html">Lennard-Jones 38 clusters with Gaussian force noise</a></td>
+   <td class="code" data-label="Code"><a href="../codes/gmin.html">GMIN</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:49.3047%"><i></i></span><span class="bar-num">301.399</span></td>
+   <td class="num" data-label="Median">301.399</td>
+   <td class="num" data-label="Success">99.7%</td>
+   <td class="num" data-label="PAR-2">301.399</td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank">6</span></td>
-   <td class="problem"><a href="minimization/morse-bulk.html">Morse bulk</a></td>
-   <td class="code"><a href="../codes/vc-sqnm.html">vc-SQNM</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:20.6%"><i></i></span><span class="bar-num">40.51</span></td>
-   <td class="num">44.62</td>
-   <td class="num">100.0%</td>
-   <td class="num">40.51</td>
+   <td class="rank-cell" data-label="Rank"><span class="rank">6</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/lj38-noise.html">Lennard-Jones 38 clusters with Gaussian force noise</a></td>
+   <td class="code" data-label="Code"><a href="../codes/ase.html">ASE</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:53.2766%"><i></i></span><span class="bar-num">396.55</span></td>
+   <td class="num" data-label="Median">555.614</td>
+   <td class="num" data-label="Success">99.4%</td>
+   <td class="num" data-label="PAR-2">396.55</td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank">7</span></td>
-   <td class="problem"><a href="minimization/morse-bulk.html">Morse bulk</a></td>
-   <td class="code"><a href="../codes/optim.html">OPTIM</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:18.2%"><i></i></span><span class="bar-num">46</span></td>
-   <td class="num">8727.4</td>
-   <td class="num">100.0%</td>
-   <td class="num">—<sup>1</sup></td>
+   <td class="rank-cell" data-label="Rank"><span class="rank">7</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/lj38-noise.html">Lennard-Jones 38 clusters with Gaussian force noise</a></td>
+   <td class="code" data-label="Code"><a href="../codes/vc-sqnm.html">vc-SQNM</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:59.2246%"><i></i></span><span class="bar-num">598.05</span></td>
+   <td class="num" data-label="Median">598.05</td>
+   <td class="num" data-label="Success">98.9%</td>
+   <td class="num" data-label="PAR-2">598.05</td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank">8</span></td>
-   <td class="problem"><a href="minimization/morse-bulk.html">Morse bulk</a></td>
-   <td class="code"><a href="../codes/pele.html">pele</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:16.4%"><i></i></span><span class="bar-num">51</span></td>
-   <td class="num">92.06</td>
-   <td class="num">100.0%</td>
-   <td class="num">—<sup>1</sup></td>
+   <td class="rank-cell" data-label="Rank"><span class="rank">8</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/lj38-noise.html">Lennard-Jones 38 clusters with Gaussian force noise</a></td>
+   <td class="code" data-label="Code"><a href="../codes/sella.html">Sella</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:62.0995%"><i></i></span><span class="bar-num">729.433</span></td>
+   <td class="num" data-label="Median">729.433</td>
+   <td class="num" data-label="Success">99.9%</td>
+   <td class="num" data-label="PAR-2">729.433</td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank">9</span></td>
-   <td class="problem"><a href="minimization/morse-bulk.html">Morse bulk</a></td>
-   <td class="code"><a href="../codes/eon-svn.html">Eon svn</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:16.1%"><i></i></span><span class="bar-num">52</span></td>
-   <td class="num">106</td>
-   <td class="num">100.0%</td>
-   <td class="num">—<sup>1</sup></td>
+   <td class="rank-cell" data-label="Rank"><span class="rank">9</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/lj38-noise.html">Lennard-Jones 38 clusters with Gaussian force noise</a></td>
+   <td class="code" data-label="Code"><a href="../codes/lammps.html">LAMMPS</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:68.3565%"><i></i></span><span class="bar-num">1123.81</span></td>
+   <td class="num" data-label="Median">3138.21</td>
+   <td class="num" data-label="Success">99.7%</td>
+   <td class="num" data-label="PAR-2">1123.81</td>
+   </tr>
+   <tr class="is-best group-start">
+   <td class="rank-cell" data-label="Rank"><span class="rank r1">1</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/morse-bulk.html">Morse bulk</a></td>
+   <td class="code" data-label="Code"><a href="../codes/rgmin.html">rgmin</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:18.4337%"><i></i></span><span class="bar-num">8.35</span></td>
+   <td class="num" data-label="Median">61.89</td>
+   <td class="num" data-label="Success">100.0%</td>
+   <td class="num" data-label="PAR-2">8.35</td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank">10</span></td>
-   <td class="problem"><a href="minimization/morse-bulk.html">Morse bulk</a></td>
-   <td class="code"><a href="../codes/eon.html">eOn</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:16.0%"><i></i></span><span class="bar-num">54.18</span></td>
-   <td class="num">54.18</td>
-   <td class="num">100.0%</td>
-   <td class="num">54.18</td>
+   <td class="rank-cell" data-label="Rank"><span class="rank r2">2</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/morse-bulk.html">Morse bulk</a></td>
+   <td class="code" data-label="Code"><a href="../codes/tsase.html">TSASE</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:25.5751%"><i></i></span><span class="bar-num">19</span></td>
+   <td class="num" data-label="Median">8812.68</td>
+   <td class="num" data-label="Success">100.0%</td>
+   <td class="num" data-label="PAR-2">—<sup>1</sup></td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank">11</span></td>
-   <td class="problem"><a href="minimization/morse-bulk.html">Morse bulk</a></td>
-   <td class="code"><a href="../codes/dl-find.html">DL-FIND</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:16.0%"><i></i></span><span class="bar-num">13626.5</span></td>
-   <td class="num">16449.2</td>
-   <td class="num">32.0%</td>
-   <td class="num">13626.5</td>
+   <td class="rank-cell" data-label="Rank"><span class="rank r3">3</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/morse-bulk.html">Morse bulk</a></td>
+   <td class="code" data-label="Code"><a href="../codes/sella.html">Sella</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:29.2150%"><i></i></span><span class="bar-num">28.89</span></td>
+   <td class="num" data-label="Median">28.89</td>
+   <td class="num" data-label="Success">100.0%</td>
+   <td class="num" data-label="PAR-2">28.89</td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank">12</span></td>
-   <td class="problem"><a href="minimization/morse-bulk.html">Morse bulk</a></td>
-   <td class="code"><a href="../codes/lammps.html">LAMMPS</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:16.0%"><i></i></span><span class="bar-num">17656.7</span></td>
-   <td class="num">19150.8</td>
-   <td class="num">12.0%</td>
-   <td class="num">17656.7</td>
+   <td class="rank-cell" data-label="Rank"><span class="rank">4</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/morse-bulk.html">Morse bulk</a></td>
+   <td class="code" data-label="Code"><a href="../codes/ase.html">ASE</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:29.2210%"><i></i></span><span class="bar-num">28.91</span></td>
+   <td class="num" data-label="Median">53.58</td>
+   <td class="num" data-label="Success">100.0%</td>
+   <td class="num" data-label="PAR-2">28.91</td>
+   </tr>
+   <tr>
+   <td class="rank-cell" data-label="Rank"><span class="rank">5</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/morse-bulk.html">Morse bulk</a></td>
+   <td class="code" data-label="Code"><a href="../codes/gmin.html">GMIN</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:30.7312%"><i></i></span><span class="bar-num">34.4</span></td>
+   <td class="num" data-label="Median">34.4</td>
+   <td class="num" data-label="Success">100.0%</td>
+   <td class="num" data-label="PAR-2">34.4</td>
+   </tr>
+   <tr>
+   <td class="rank-cell" data-label="Rank"><span class="rank">6</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/morse-bulk.html">Morse bulk</a></td>
+   <td class="code" data-label="Code"><a href="../codes/vc-sqnm.html">vc-SQNM</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:32.1512%"><i></i></span><span class="bar-num">40.51</span></td>
+   <td class="num" data-label="Median">44.62</td>
+   <td class="num" data-label="Success">100.0%</td>
+   <td class="num" data-label="PAR-2">40.51</td>
+   </tr>
+   <tr>
+   <td class="rank-cell" data-label="Rank"><span class="rank">7</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/morse-bulk.html">Morse bulk</a></td>
+   <td class="code" data-label="Code"><a href="../codes/optim.html">OPTIM</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:33.2552%"><i></i></span><span class="bar-num">46</span></td>
+   <td class="num" data-label="Median">8727.4</td>
+   <td class="num" data-label="Success">100.0%</td>
+   <td class="num" data-label="PAR-2">—<sup>1</sup></td>
+   </tr>
+   <tr>
+   <td class="rank-cell" data-label="Rank"><span class="rank">8</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/morse-bulk.html">Morse bulk</a></td>
+   <td class="code" data-label="Code"><a href="../codes/pele.html">pele</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:34.1514%"><i></i></span><span class="bar-num">51</span></td>
+   <td class="num" data-label="Median">92.06</td>
+   <td class="num" data-label="Success">100.0%</td>
+   <td class="num" data-label="PAR-2">—<sup>1</sup></td>
+   </tr>
+   <tr>
+   <td class="rank-cell" data-label="Rank"><span class="rank">9</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/morse-bulk.html">Morse bulk</a></td>
+   <td class="code" data-label="Code"><a href="../codes/eon-svn.html">Eon svn</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:34.3201%"><i></i></span><span class="bar-num">52</span></td>
+   <td class="num" data-label="Median">106</td>
+   <td class="num" data-label="Success">100.0%</td>
+   <td class="num" data-label="PAR-2">—<sup>1</sup></td>
+   </tr>
+   <tr>
+   <td class="rank-cell" data-label="Rank"><span class="rank">10</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/morse-bulk.html">Morse bulk</a></td>
+   <td class="code" data-label="Code"><a href="../codes/eon.html">eOn</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:34.6768%"><i></i></span><span class="bar-num">54.18</span></td>
+   <td class="num" data-label="Median">54.18</td>
+   <td class="num" data-label="Success">100.0%</td>
+   <td class="num" data-label="PAR-2">54.18</td>
+   </tr>
+   <tr>
+   <td class="rank-cell" data-label="Rank"><span class="rank">11</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/morse-bulk.html">Morse bulk</a></td>
+   <td class="code" data-label="Code"><a href="../codes/dl-find.html">DL-FIND</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:82.6877%"><i></i></span><span class="bar-num">13626.5</span></td>
+   <td class="num" data-label="Median">16449.2</td>
+   <td class="num" data-label="Success">32.0%</td>
+   <td class="num" data-label="PAR-2">13626.5</td>
+   </tr>
+   <tr>
+   <td class="rank-cell" data-label="Rank"><span class="rank">12</span></td>
+   <td class="problem" data-label="Problem"><a href="minimization/morse-bulk.html">Morse bulk</a></td>
+   <td class="code" data-label="Code"><a href="../codes/lammps.html">LAMMPS</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:84.9382%"><i></i></span><span class="bar-num">17656.7</span></td>
+   <td class="num" data-label="Median">19150.8</td>
+   <td class="num" data-label="Success">12.0%</td>
+   <td class="num" data-label="PAR-2">17656.7</td>
    </tr>
    </tbody></table></div>
    <p class="bench-note"><sup>1</sup> A dash in PAR-2 means that row has no PAR-2 score.</p>
@@ -346,22 +348,22 @@
    <caption>Problems in this suite.</caption>
    <thead><tr><th>Problem</th><th>System</th><th>Atoms</th><th>Runs</th></tr></thead><tbody>
    <tr>
-   <th scope="row"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></th>
-   <td>Lennard-Jones</td>
-   <td class="num">38</td>
-   <td class="num">1000</td>
+   <th scope="row" data-label="Problem"><a href="minimization/lj38.html">Lennard-Jones 38 clusters</a></th>
+   <td data-label="System">Lennard-Jones</td>
+   <td class="num" data-label="Atoms">38</td>
+   <td class="num" data-label="Runs">1000</td>
    </tr>
    <tr>
-   <th scope="row"><a href="minimization/lj38-noise.html">Lennard-Jones 38 clusters with Gaussian force noise</a></th>
-   <td>Lennard-Jones</td>
-   <td class="num">38</td>
-   <td class="num">1000</td>
+   <th scope="row" data-label="Problem"><a href="minimization/lj38-noise.html">Lennard-Jones 38 clusters with Gaussian force noise</a></th>
+   <td data-label="System">Lennard-Jones</td>
+   <td class="num" data-label="Atoms">38</td>
+   <td class="num" data-label="Runs">1000</td>
    </tr>
    <tr>
-   <th scope="row"><a href="minimization/morse-bulk.html">Morse bulk</a></th>
-   <td>Morse</td>
-   <td class="num">—</td>
-   <td class="num">100</td>
+   <th scope="row" data-label="Problem"><a href="minimization/morse-bulk.html">Morse bulk</a></th>
+   <td data-label="System">Morse</td>
+   <td class="num" data-label="Atoms">—</td>
+   <td class="num" data-label="Runs">100</td>
    </tr>
    </tbody></table></div>
    <p class="bench-note">A dash means the problem file does not state an atom count.</p>

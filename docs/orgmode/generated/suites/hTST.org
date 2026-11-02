@@ -5,14 +5,15 @@
 .. raw:: html
 
    <section class="bench plate-suite">
-   <p>Harmonic transition state theory has 2 problems: EAM aluminum and Pt heptamer island.</p>
+   <p>Harmonic transition state theory compares 2 problems.</p><ul class="suite-facts"><li>EAM aluminum</li><li>Pt heptamer island</li></ul>
    <div class="stat-row stat-row-2">
    <div class="stat"><span class="k">Problems</span><span class="v num">2</span></div>
    <div class="stat"><span class="k">Codes</span><span class="v num">2</span></div>
    </div>
    <h2>Charts</h2>
    <div class="lead-charts">
-   <figure class="plate-figure"><svg class="plate-chart" role="img" aria-labelledby="suite-bars-title" viewBox="0 0 640 146"><title id="suite-bars-title">Best cost by code</title><text class="group-label" x="0" y="24">EAM aluminum</text><g><title>Eon svn: 21070</title><text class="code-label" x="148" y="47" text-anchor="end">Eon svn</text><rect class="suite-bar is-best" x="158" y="38" width="398.00" height="10"/><text class="num" x="564" y="47">21070</text></g><text class="group-label" x="0" y="80">Pt heptamer island</text><g><title>TSASE: 293200</title><text class="code-label" x="148" y="103" text-anchor="end">TSASE</text><rect class="suite-bar is-best" x="158" y="94" width="398.00" height="10"/><text class="num" x="564" y="103">293200</text></g><g><title>Eon svn: 496000</title><text class="code-label" x="148" y="125" text-anchor="end">Eon svn</text><rect class="suite-bar" x="158" y="116" width="235.27" height="10"/><text class="num" x="564" y="125">496000</text></g></svg><figcaption>Best cost of each code. Each problem has its own scale. A longer bar is closer to the best.</figcaption></figure>
+   <figure class="plate-figure"><svg class="plate-chart" role="img" aria-labelledby="eam-aluminum-cost-bars-title" viewBox="0 0 680 94.0"><title id="eam-aluminum-cost-bars-title">Best cost for EAM aluminum</title><text class="group-label" x="0" y="18">EAM aluminum</text><line class="axis" x1="168.00" y1="58.00" x2="584.00" y2="58.00"/><line class="grid" x1="168.00" y1="32.00" x2="168.00" y2="58.00"/><line class="axis" x1="168.00" y1="54.00" x2="168.00" y2="58.00"/><text class="num" x="168.00" y="72.00" text-anchor="middle">10⁴</text><line class="grid" x1="584.00" y1="32.00" x2="584.00" y2="58.00"/><line class="axis" x1="584.00" y1="54.00" x2="584.00" y2="58.00"/><text class="num" x="584.00" y="72.00" text-anchor="middle">10⁵</text><text class="axis-name" x="376.00" y="88.00" text-anchor="middle">cost (force calls, log scale)</text><g><title>Eon svn: 21070</title><text class="code-label" x="156" y="46.00" text-anchor="end">Eon svn</text><rect class="suite-bar is-best" x="168.00" y="37.00" width="134.6444" height="10"/><text class="num" x="592.00" y="46.00">21070</text></g></svg><figcaption>A shorter bar is a lower cost on a log scale shared by the codes of this problem.</figcaption></figure>
+   <figure class="plate-figure"><svg class="plate-chart" role="img" aria-labelledby="pt-heptamer-island-cost-bars-title" viewBox="0 0 680 116.0"><title id="pt-heptamer-island-cost-bars-title">Best cost for Pt heptamer island</title><text class="group-label" x="0" y="18">Pt heptamer island</text><line class="axis" x1="168.00" y1="80.00" x2="584.00" y2="80.00"/><line class="grid" x1="168.00" y1="32.00" x2="168.00" y2="80.00"/><line class="axis" x1="168.00" y1="76.00" x2="168.00" y2="80.00"/><text class="num" x="168.00" y="94.00" text-anchor="middle">10⁵</text><line class="grid" x1="584.00" y1="32.00" x2="584.00" y2="80.00"/><line class="axis" x1="584.00" y1="76.00" x2="584.00" y2="80.00"/><text class="num" x="584.00" y="94.00" text-anchor="middle">10⁶</text><text class="axis-name" x="376.00" y="110.00" text-anchor="middle">cost (force calls, log scale)</text><g><title>TSASE: 293200</title><text class="code-label" x="156" y="46.00" text-anchor="end">TSASE</text><rect class="suite-bar is-best" x="168.00" y="37.00" width="194.3402" height="10"/><text class="num" x="592.00" y="46.00">293200</text></g><g><title>Eon svn: 496000</title><text class="code-label" x="156" y="68.00" text-anchor="end">Eon svn</text><rect class="suite-bar" x="168.00" y="59.00" width="289.3204" height="10"/><text class="num" x="592.00" y="68.00">496000</text></g></svg><figcaption>A shorter bar is a lower cost on a log scale shared by the codes of this problem.</figcaption></figure>
    <p class="chart-files"><a href="../../_static/board/suite-hTST.svg">SVG file</a></p>
    <div class="bench-export">
    <figure class="bench-plot"><a href="../../_static/board/suite-hTST.svg"><picture><source srcset="../../_static/board/suite-hTST.webp" type="image/webp"><img src="../../_static/board/suite-hTST.png" alt="Harmonic transition state theory best ranked cost" loading="lazy" decoding="async"></picture></a><figcaption>Harmonic transition state theory best ranked cost. Select the plot for the full SVG.</figcaption></figure>
@@ -21,34 +22,34 @@
    <h2>Leaderboard</h2>
    <div class="bench-scroll">
    <table class="bench-sortable leader" data-bench="codes">
-   <caption>A longer bar is closer to the best on that problem. Select a column heading to sort.</caption>
-   <thead><tr><th>Rank</th><th>Problem</th><th>Code</th><th title="Lowest cost for this code. A longer bar is closer to the best on that problem.">Best</th><th title="Median of this code&#x27;s costs on that problem.">Median</th><th title="Share of runs that finished.">Success</th><th title="Mean cost of the runs. A failure counts as twice the cap.">PAR-2</th></tr></thead><tbody>
+   <caption>A shorter bar is a lower cost on the log scale for that problem. Select a column heading to sort.</caption>
+   <thead><tr><th>Rank</th><th>Problem</th><th>Code</th><th title="Lowest cost for this code. A shorter bar is a lower cost on the shared log scale.">Best</th><th title="Median of this code&#x27;s costs on that problem.">Median</th><th title="Share of runs that finished.">Success</th><th title="Mean cost of the runs. A failure counts as twice the cap.">PAR-2</th></tr></thead><tbody>
    <tr class="is-best group-start">
-   <td class="rank-cell"><span class="rank r1">1</span></td>
-   <td class="problem"><a href="hTST/Al.html">EAM aluminum</a></td>
-   <td class="code"><a href="../codes/eon-svn.html">Eon svn</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:100.0%"><i></i></span><span class="bar-num">21070</span></td>
-   <td class="num">24970</td>
-   <td class="num">—<sup>1</sup></td>
-   <td class="num">—<sup>2</sup></td>
+   <td class="rank-cell" data-label="Rank"><span class="rank r1">1</span></td>
+   <td class="problem" data-label="Problem"><a href="hTST/Al.html">EAM aluminum</a></td>
+   <td class="code" data-label="Code"><a href="../codes/eon-svn.html">Eon svn</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:32.3665%"><i></i></span><span class="bar-num">21070</span></td>
+   <td class="num" data-label="Median">24970</td>
+   <td class="num" data-label="Success">—<sup>1</sup></td>
+   <td class="num" data-label="PAR-2">—<sup>2</sup></td>
    </tr>
    <tr class="is-best group-start">
-   <td class="rank-cell"><span class="rank r1">1</span></td>
-   <td class="problem"><a href="hTST/Pt.html">Pt heptamer island</a></td>
-   <td class="code"><a href="../codes/tsase.html">TSASE</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:100.0%"><i></i></span><span class="bar-num">293200</span></td>
-   <td class="num">3.239e+06</td>
-   <td class="num">—<sup>1</sup></td>
-   <td class="num">—<sup>2</sup></td>
+   <td class="rank-cell" data-label="Rank"><span class="rank r1">1</span></td>
+   <td class="problem" data-label="Problem"><a href="hTST/Pt.html">Pt heptamer island</a></td>
+   <td class="code" data-label="Code"><a href="../codes/tsase.html">TSASE</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:46.7164%"><i></i></span><span class="bar-num">293200</span></td>
+   <td class="num" data-label="Median">3.239e+06</td>
+   <td class="num" data-label="Success">—<sup>1</sup></td>
+   <td class="num" data-label="PAR-2">—<sup>2</sup></td>
    </tr>
    <tr>
-   <td class="rank-cell"><span class="rank r2">2</span></td>
-   <td class="problem"><a href="hTST/Pt.html">Pt heptamer island</a></td>
-   <td class="code"><a href="../codes/eon-svn.html">Eon svn</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:59.1%"><i></i></span><span class="bar-num">496000</span></td>
-   <td class="num">752950</td>
-   <td class="num">—<sup>1</sup></td>
-   <td class="num">—<sup>2</sup></td>
+   <td class="rank-cell" data-label="Rank"><span class="rank r2">2</span></td>
+   <td class="problem" data-label="Problem"><a href="hTST/Pt.html">Pt heptamer island</a></td>
+   <td class="code" data-label="Code"><a href="../codes/eon-svn.html">Eon svn</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:69.5482%"><i></i></span><span class="bar-num">496000</span></td>
+   <td class="num" data-label="Median">752950</td>
+   <td class="num" data-label="Success">—<sup>1</sup></td>
+   <td class="num" data-label="PAR-2">—<sup>2</sup></td>
    </tr>
    </tbody></table></div>
    <p class="bench-note"><sup>1</sup> A dash in the success rate means that row did not record one.</p>
@@ -59,16 +60,16 @@
    <caption>Problems in this suite.</caption>
    <thead><tr><th>Problem</th><th>System</th><th>Atoms</th><th>Runs</th></tr></thead><tbody>
    <tr>
-   <th scope="row"><a href="hTST/Al.html">EAM aluminum</a></th>
-   <td>EAM</td>
-   <td class="num">101</td>
-   <td class="num">639</td>
+   <th scope="row" data-label="Problem"><a href="hTST/Al.html">EAM aluminum</a></th>
+   <td data-label="System">EAM</td>
+   <td class="num" data-label="Atoms">101</td>
+   <td class="num" data-label="Runs">639</td>
    </tr>
    <tr>
-   <th scope="row"><a href="hTST/Pt.html">Pt heptamer island</a></th>
-   <td>Morse</td>
-   <td class="num">343</td>
-   <td class="num">13</td>
+   <th scope="row" data-label="Problem"><a href="hTST/Pt.html">Pt heptamer island</a></th>
+   <td data-label="System">Morse</td>
+   <td class="num" data-label="Atoms">343</td>
+   <td class="num" data-label="Runs">13</td>
    </tr>
    </tbody></table></div>
    </section>

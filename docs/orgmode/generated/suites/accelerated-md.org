@@ -5,14 +5,15 @@
 .. raw:: html
 
    <section class="bench plate-suite">
-   <p>Accelerated molecular dynamics has 2 problems: Al adatom on Al(100) at 150 K and Al adatom on Al(100) at 250 K.</p>
+   <p>Accelerated molecular dynamics compares 2 problems.</p><ul class="suite-facts"><li>Al adatom on Al(100) at 150 K</li><li>Al adatom on Al(100) at 250 K</li></ul>
    <div class="stat-row stat-row-2">
    <div class="stat"><span class="k">Problems</span><span class="v num">2</span></div>
    <div class="stat"><span class="k">Codes</span><span class="v num">1</span></div>
    </div>
    <h2>Charts</h2>
    <div class="lead-charts">
-   <figure class="plate-figure"><svg class="plate-chart" role="img" aria-labelledby="suite-bars-title" viewBox="0 0 640 124"><title id="suite-bars-title">Best cost by code</title><text class="group-label" x="0" y="24">Al adatom on Al(100) at 150 K</text><g><title>Eon svn: 835900</title><text class="code-label" x="148" y="47" text-anchor="end">Eon svn</text><rect class="suite-bar is-best" x="158" y="38" width="398.00" height="10"/><text class="num" x="564" y="47">835900</text></g><text class="group-label" x="0" y="80">Al adatom on Al(100) at 250 K</text><g><title>Eon svn: 2.54294e+08</title><text class="code-label" x="148" y="103" text-anchor="end">Eon svn</text><rect class="suite-bar is-best" x="158" y="94" width="398.00" height="10"/><text class="num" x="564" y="103">2.54294e+08</text></g></svg><figcaption>Best cost of each code. Each problem has its own scale. A longer bar is closer to the best.</figcaption></figure>
+   <figure class="plate-figure"><svg class="plate-chart" role="img" aria-labelledby="al-adatom-on-al-100--at-150-k-cost-bars-title" viewBox="0 0 680 94.0"><title id="al-adatom-on-al-100--at-150-k-cost-bars-title">Best cost for Al adatom on Al(100) at 150 K</title><text class="group-label" x="0" y="18">Al adatom on Al(100) at 150 K</text><line class="axis" x1="168.00" y1="58.00" x2="584.00" y2="58.00"/><line class="grid" x1="168.00" y1="32.00" x2="168.00" y2="58.00"/><line class="axis" x1="168.00" y1="54.00" x2="168.00" y2="58.00"/><text class="num" x="168.00" y="72.00" text-anchor="middle">10⁵</text><line class="grid" x1="584.00" y1="32.00" x2="584.00" y2="58.00"/><line class="axis" x1="584.00" y1="54.00" x2="584.00" y2="58.00"/><text class="num" x="584.00" y="72.00" text-anchor="middle">10⁶</text><text class="axis-name" x="376.00" y="88.00" text-anchor="middle">cost (force calls, log scale)</text><g><title>Eon svn: 835900</title><text class="code-label" x="156" y="46.00" text-anchor="end">Eon svn</text><rect class="suite-bar is-best" x="168.00" y="37.00" width="383.6162" height="10"/><text class="num" x="592.00" y="46.00">835900</text></g></svg><figcaption>A shorter bar is a lower cost on a log scale shared by the codes of this problem.</figcaption></figure>
+   <figure class="plate-figure"><svg class="plate-chart" role="img" aria-labelledby="al-adatom-on-al-100--at-250-k-cost-bars-title" viewBox="0 0 680 94.0"><title id="al-adatom-on-al-100--at-250-k-cost-bars-title">Best cost for Al adatom on Al(100) at 250 K</title><text class="group-label" x="0" y="18">Al adatom on Al(100) at 250 K</text><line class="axis" x1="168.00" y1="58.00" x2="584.00" y2="58.00"/><line class="grid" x1="168.00" y1="32.00" x2="168.00" y2="58.00"/><line class="axis" x1="168.00" y1="54.00" x2="168.00" y2="58.00"/><text class="num" x="168.00" y="72.00" text-anchor="middle">10⁸</text><line class="grid" x1="584.00" y1="32.00" x2="584.00" y2="58.00"/><line class="axis" x1="584.00" y1="54.00" x2="584.00" y2="58.00"/><text class="num" x="584.00" y="72.00" text-anchor="middle">10⁹</text><text class="axis-name" x="376.00" y="88.00" text-anchor="middle">cost (force calls, log scale)</text><g><title>Eon svn: 2.54294e+08</title><text class="code-label" x="156" y="46.00" text-anchor="end">Eon svn</text><rect class="suite-bar is-best" x="168.00" y="37.00" width="168.6199" height="10"/><text class="num" x="592.00" y="46.00">2.54294e+08</text></g></svg><figcaption>A shorter bar is a lower cost on a log scale shared by the codes of this problem.</figcaption></figure>
    <p class="chart-files"><a href="../../_static/board/suite-accelerated-md.svg">SVG file</a></p>
    <div class="bench-export">
    <figure class="bench-plot"><a href="../../_static/board/suite-accelerated-md.svg"><picture><source srcset="../../_static/board/suite-accelerated-md.webp" type="image/webp"><img src="../../_static/board/suite-accelerated-md.png" alt="Accelerated molecular dynamics best ranked cost" loading="lazy" decoding="async"></picture></a><figcaption>Accelerated molecular dynamics best ranked cost. Select the plot for the full SVG.</figcaption></figure>
@@ -21,25 +22,25 @@
    <h2>Leaderboard</h2>
    <div class="bench-scroll">
    <table class="bench-sortable leader" data-bench="codes">
-   <caption>A longer bar is closer to the best on that problem. Select a column heading to sort.</caption>
-   <thead><tr><th>Rank</th><th>Problem</th><th>Code</th><th title="Lowest cost for this code. A longer bar is closer to the best on that problem.">Best</th><th title="Median of this code&#x27;s costs on that problem.">Median</th><th title="Share of runs that finished.">Success</th><th title="Mean cost of the runs. A failure counts as twice the cap.">PAR-2</th></tr></thead><tbody>
+   <caption>A shorter bar is a lower cost on the log scale for that problem. Select a column heading to sort.</caption>
+   <thead><tr><th>Rank</th><th>Problem</th><th>Code</th><th title="Lowest cost for this code. A shorter bar is a lower cost on the shared log scale.">Best</th><th title="Median of this code&#x27;s costs on that problem.">Median</th><th title="Share of runs that finished.">Success</th><th title="Mean cost of the runs. A failure counts as twice the cap.">PAR-2</th></tr></thead><tbody>
    <tr class="is-best group-start">
-   <td class="rank-cell"><span class="rank r1">1</span></td>
-   <td class="problem"><a href="accelerated-md/standard_aladatom.html">Al adatom on Al(100) at 150 K</a></td>
-   <td class="code"><a href="../codes/eon-svn.html">Eon svn</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:100.0%"><i></i></span><span class="bar-num">835900</span></td>
-   <td class="num">835900</td>
-   <td class="num">—<sup>1</sup></td>
-   <td class="num">—<sup>2</sup></td>
+   <td class="rank-cell" data-label="Rank"><span class="rank r1">1</span></td>
+   <td class="problem" data-label="Problem"><a href="accelerated-md/standard_aladatom.html">Al adatom on Al(100) at 150 K</a></td>
+   <td class="code" data-label="Code"><a href="../codes/eon-svn.html">Eon svn</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:92.2154%"><i></i></span><span class="bar-num">835900</span></td>
+   <td class="num" data-label="Median">835900</td>
+   <td class="num" data-label="Success">—<sup>1</sup></td>
+   <td class="num" data-label="PAR-2">—<sup>2</sup></td>
    </tr>
    <tr class="is-best group-start">
-   <td class="rank-cell"><span class="rank r1">1</span></td>
-   <td class="problem"><a href="accelerated-md/aladatom.html">Al adatom on Al(100) at 250 K</a></td>
-   <td class="code"><a href="../codes/eon-svn.html">Eon svn</a></td>
-   <td class="num best"><span class="bar" aria-hidden="true" style="--w:100.0%"><i></i></span><span class="bar-num">2.54294e+08</span></td>
-   <td class="num">2.54294e+08</td>
-   <td class="num">—<sup>1</sup></td>
-   <td class="num">—<sup>2</sup></td>
+   <td class="rank-cell" data-label="Rank"><span class="rank r1">1</span></td>
+   <td class="problem" data-label="Problem"><a href="accelerated-md/aladatom.html">Al adatom on Al(100) at 250 K</a></td>
+   <td class="code" data-label="Code"><a href="../codes/eon-svn.html">Eon svn</a></td>
+   <td class="num best" data-label="Best"><span class="bar" aria-hidden="true" style="--w:40.5336%"><i></i></span><span class="bar-num">2.54294e+08</span></td>
+   <td class="num" data-label="Median">2.54294e+08</td>
+   <td class="num" data-label="Success">—<sup>1</sup></td>
+   <td class="num" data-label="PAR-2">—<sup>2</sup></td>
    </tr>
    </tbody></table></div>
    <p class="bench-note"><sup>1</sup> A dash in the success rate means that row did not record one.</p>
@@ -50,16 +51,16 @@
    <caption>Problems in this suite.</caption>
    <thead><tr><th>Problem</th><th>System</th><th>Atoms</th><th>Runs</th></tr></thead><tbody>
    <tr>
-   <th scope="row"><a href="accelerated-md/standard_aladatom.html">Al adatom on Al(100) at 150 K</a></th>
-   <td>Voter-Chen EAM</td>
-   <td class="num">—</td>
-   <td class="num">1</td>
+   <th scope="row" data-label="Problem"><a href="accelerated-md/standard_aladatom.html">Al adatom on Al(100) at 150 K</a></th>
+   <td data-label="System">Voter-Chen EAM</td>
+   <td class="num" data-label="Atoms">—</td>
+   <td class="num" data-label="Runs">1</td>
    </tr>
    <tr>
-   <th scope="row"><a href="accelerated-md/aladatom.html">Al adatom on Al(100) at 250 K</a></th>
-   <td>Voter-Chen EAM</td>
-   <td class="num">151</td>
-   <td class="num">1</td>
+   <th scope="row" data-label="Problem"><a href="accelerated-md/aladatom.html">Al adatom on Al(100) at 250 K</a></th>
+   <td data-label="System">Voter-Chen EAM</td>
+   <td class="num" data-label="Atoms">151</td>
+   <td class="num" data-label="Runs">1</td>
    </tr>
    </tbody></table></div>
    <p class="bench-note">A dash means the problem file does not state an atom count.</p>
