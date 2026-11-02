@@ -1457,8 +1457,10 @@ def family_cells(row: dict) -> list[tuple[str, str]]:
 
 
 def _row_cells(row: dict, per_image: bool) -> str:
+    headers = _headers({"ranked": [{"mean_per_image": 0}] if per_image else []})
     return "".join(
-        f'<td data-field="{field}">{_cell(value)}</td>' for field, value in ranked_cells(row, per_image)
+        f'<td data-field="{field}" data-label="{_cell(header)}">{_cell(value)}</td>'
+        for header, (field, value) in zip(headers, ranked_cells(row, per_image))
     )
 
 
@@ -1507,7 +1509,7 @@ def gap_paragraph(problem: dict, unparsed: list[dict] | None = None) -> str:
         bits.append("No committed harness run")
     if not bits:
         return ""
-    return '<p class="bench-gaps">' + ". ".join(bits) + ".</p>"
+    return "".join(f'<p class="bench-gaps">{_cell(bit)}.</p>' for bit in bits)
 
 
 def _reason_text(row: dict) -> str:
@@ -1629,17 +1631,19 @@ def summary_table(problems: list[dict], codes: list[str], link) -> str:
         best = best_ranked_by_code(list(problem.get("ranked") or []))
         lines.append(f'<tr data-problem="{_cell(problem["id"])}">')
         title = str(problem.get("title") or problem["id"])
-        lines.append(f'<th scope="row"><a href="{_cell(link(problem))}">{_cell(title)}</a></th>')
+        lines.append(
+            f'<th scope="row" data-label="Problem"><a href="{_cell(link(problem))}">{_cell(title)}</a></th>'
+        )
         detail = link(problem, templates=True)
         for code in codes:
             row = best.get(code)
             if row is None:
-                lines.append(f'<td data-code="{_cell(code)}">—</td>')
+                lines.append(f'<td data-code="{_cell(code)}" data-label="{_cell(code)}">—</td>')
                 continue
             template = str(row.get("template") or row.get("entry") or "")
             par2 = dict(ranked_cells(row, False))["par2_mean"]
             lines.append(
-                f'<td data-code="{_cell(code)}" data-template="{_cell(template)}" data-par2="{_cell(par2)}">'
+                f'<td data-code="{_cell(code)}" data-label="{_cell(code)}" data-template="{_cell(template)}" data-par2="{_cell(par2)}">'
                 f'<span class="bench-score">{_cell(par2)}</span>'
                 f'<a href="{_cell(detail)}">{_cell(template)}</a>'
                 "</td>"
@@ -1736,7 +1740,10 @@ def _family_table(problem: dict, family_id: str, rows: list[dict]) -> str:
         "<thead><tr>" + "".join(f"<th>{_cell(header)}</th>" for header in headers) + "</tr></thead><tbody>",
     ]
     for row in rows:
-        cells = "".join(f'<td data-field="{field}">{_cell(value)}</td>' for field, value in family_cells(row))
+        cells = "".join(
+            f'<td data-field="{field}" data-label="{_cell(header)}">{_cell(value)}</td>'
+            for header, (field, value) in zip(headers, family_cells(row))
+        )
         lines.append(f"<tr>{cells}</tr>")
     lines.append("</tbody></table></div>")
     return "\n".join(lines)
