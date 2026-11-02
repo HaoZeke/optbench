@@ -45,15 +45,9 @@ def _check_family(label: str, table: dict, document: dict) -> list[str]:
 
 
 def _code_name(row: dict, registry: list[dict]) -> str:
-    code = str(row.get("code") or "").strip()
-    if not code:
-        return "unknown"
-    folded = code.lower()
-    for pin in registry:
-        names = {str(pin.get("id") or "").lower(), str(pin.get("name") or "").lower()}
-        if folded in names and pin.get("name"):
-            return str(pin["name"])
-    return code
+    from .site_pages import code_page_name
+
+    return code_page_name(row, registry)
 
 
 def _check_code_rows(label: str, table: dict, document: dict) -> list[str]:
@@ -264,7 +258,9 @@ def check_site(root: Path) -> list[str]:
         )
         board_problem = (document.get("problems") or {}).get(problem["id"]) or {}
         slug = str(problem["id"]).replace("/", "-")
-        if board_problem.get("profile"):
+        from .site_pages import profile_worth_showing
+
+        if profile_worth_showing(board_problem):
             _require(suite, f"{slug}-profile.svg", suite_label, errors)
         harness = [row for row in board_problem.get("ranked") or [] if row.get("par2_mean") is not None]
         if harness:
@@ -319,8 +315,8 @@ def check_site(root: Path) -> list[str]:
         index = texts.get("docs/build/index.html", "")
         if not index:
             errors.append("docs/build/index.html is missing")
-        elif 'data-board-table="headline"' not in index:
-            errors.append("docs/build/index.html has no v2 headline table")
+        elif 'data-bench="suites"' not in index and 'data-board-table="headline"' not in index:
+            errors.append("docs/build/index.html has no suite table")
         built_board = "docs/build/board.html"
         board_html = texts.get(built_board, "")
         if not board_html:

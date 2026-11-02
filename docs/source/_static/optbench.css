@@ -210,8 +210,6 @@ table[data-board-table="summary"] td {
   min-width: 0;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  content-visibility: auto;
-  contain-intrinsic-size: auto 32rem;
 }
 
 .bench table {
@@ -220,6 +218,31 @@ table[data-board-table="summary"] td {
   border-collapse: collapse;
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum" 1;
+}
+
+table[data-bench="suites"],
+table[data-bench="problems"] {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+table[data-bench="suites"] th,
+table[data-bench="suites"] td,
+table[data-bench="problems"] th,
+table[data-bench="problems"] td {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.bench table.bench-sortable:not([data-bench]):not([data-board-table]) {
+  width: 100%;
+  max-width: 100%;
+}
+.bench table.bench-sortable:not([data-bench]):not([data-board-table]) th,
+.bench table.bench-sortable:not([data-bench]):not([data-board-table]) td {
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .bench caption {
@@ -276,4 +299,80 @@ table[data-board-table="summary"] td {
 .bench ::selection {
   background: color-mix(in srgb, CanvasText 20%, Canvas);
   color: CanvasText;
+}
+
+.yue,
+.yue p,
+.yue li,
+.yue td,
+.yue th,
+.bench,
+.bench table {
+  font-family: var(--sy-f-text, ui-sans-serif, system-ui, sans-serif);
+}
+
+article.yue {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.sy-lside .caption,
+.sy-lside p.caption {
+  margin: 1.1rem 0 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, CanvasText 58%, Canvas);
+}
+
+.sy-lside a {
+  overflow-wrap: anywhere;
+  white-space: normal;
+  text-overflow: unset;
+}
+
+.globaltoc li > a {
+  display: block;
+  padding-right: 1.4rem;
+}
+
+.bench thead th {
+  position: sticky;
+  top: 0;
+  background: Canvas;
+  z-index: 1;
+}
+
+.bench-sortable th[aria-sort="ascending"]::after {
+  content: " \2191";
+}
+
+.bench-sortable th[aria-sort="descending"]::after {
+  content: " \2193";
+}
+
+.bench-plot picture,
+.bench-plot img,
+.bench-plot svg {
+  background: #fbfaf7;
+  border: 1px solid color-mix(in srgb, CanvasText 16%, Canvas);
+  border-radius: 2px;
+}
+
+html.dark .bench-plot picture,
+html.dark .bench-plot img,
+html.dark .bench-plot svg {
+  background: #fbfaf7;
+}
+
+@media (max-width: 48rem) {
+  .yue {
+    font-size: 1rem;
+  }
+
+  .bench th,
+  .bench td {
+    padding: 0.35rem 0.45rem;
+  }
 }
