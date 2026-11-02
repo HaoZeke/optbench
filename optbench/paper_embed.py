@@ -25,7 +25,7 @@ def _figure(item: dict, prefix: str) -> str:
     safe = html.escape(caption)
     return (
         '<figure class="paper-figure">'
-        f'<img src="{svg}" alt="{safe}">'
+        f'<img src="{svg}" alt="{safe}" loading="lazy" decoding="async">'
         f"<figcaption>{safe} <a href=\"{pdf}\">PDF</a>.</figcaption>"
         "</figure>"
     )
