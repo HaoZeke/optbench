@@ -4,8 +4,190 @@
 #+begin_export rst
 .. raw:: html
 
-   <section class="bench">
-   <p>Transition state optimization covers H2 dissociation on a fixed Cu substrate, Lennard-Jones 38, and Pt heptamer island. The recorded metrics include Force calls, Fewest force calls, Most force calls, and Median force calls. H2 dissociation on a fixed Cu substrate has 4 runs, Lennard-Jones 38 has 200 runs, and Pt heptamer island has 49 runs. An archived score is the average of the runs that finished under the cap. A run that hit the cap is a failure and is left out of that average.</p>
+   <section class="bench plate-suite">
+   <p>Transition state optimization has 3 problems: H2 dissociation on a fixed Cu substrate, Lennard-Jones 38, and Pt heptamer island.</p>
+   <div class="stat-row stat-row-2">
+   <div class="stat"><span class="k">Problems</span><span class="v num">3</span></div>
+   <div class="stat"><span class="k">Codes</span><span class="v num">9</span></div>
+   </div>
+   <h2>Charts</h2>
+   <div class="lead-charts">
+   <figure class="plate-figure"><svg class="plate-chart" role="img" aria-labelledby="suite-bars-title" viewBox="0 0 640 476"><title id="suite-bars-title">Best cost by code</title><text class="group-label" x="0" y="24">Lennard-Jones 38</text><g><title>Sella: 68.74</title><text class="code-label" x="148" y="47" text-anchor="end">Sella</text><rect class="suite-bar is-best" x="158" y="38" width="398.00" height="10"/><text class="num" x="564" y="47">68.74</text></g><g><title>OPTIM: 145</title><text class="code-label" x="148" y="69" text-anchor="end">OPTIM</text><rect class="suite-bar" x="158" y="60" width="188.68" height="10"/><text class="num" x="564" y="69">145</text></g><g><title>pele: 192</title><text class="code-label" x="148" y="91" text-anchor="end">pele</text><rect class="suite-bar" x="158" y="82" width="142.49" height="10"/><text class="num" x="564" y="91">192</text></g><g><title>Eon svn: 237</title><text class="code-label" x="148" y="113" text-anchor="end">Eon svn</text><rect class="suite-bar" x="158" y="104" width="115.44" height="10"/><text class="num" x="564" y="113">237</text></g><g><title>eOn: 280.33</title><text class="code-label" x="148" y="135" text-anchor="end">eOn</text><rect class="suite-bar" x="158" y="126" width="97.59" height="10"/><text class="num" x="564" y="135">280.33</text></g><g><title>OptKing: 7030.36</title><text class="code-label" x="148" y="157" text-anchor="end">OptKing</text><rect class="suite-bar" x="158" y="148" width="63.68" height="10"/><text class="num" x="564" y="157">7030.36</text></g><g><title>rgsaddle: 7803.19</title><text class="code-label" x="148" y="179" text-anchor="end">rgsaddle</text><rect class="suite-bar" x="158" y="170" width="63.68" height="10"/><text class="num" x="564" y="179">7803.19</text></g><g><title>pARTn: 20000</title><text class="code-label" x="148" y="201" text-anchor="end">pARTn</text><rect class="suite-bar" x="158" y="192" width="63.68" height="10"/><text class="num" x="564" y="201">20000</text></g><g><title>TSASE: 20000</title><text class="code-label" x="148" y="223" text-anchor="end">TSASE</text><rect class="suite-bar" x="158" y="214" width="63.68" height="10"/><text class="num" x="564" y="223">20000</text></g><text class="group-label" x="0" y="256">Pt heptamer island</text><g><title>Sella: 53</title><text class="code-label" x="148" y="279" text-anchor="end">Sella</text><rect class="suite-bar is-best" x="158" y="270" width="398.00" height="10"/><text class="num" x="564" y="279">53</text></g><g><title>OPTIM: 71</title><text class="code-label" x="148" y="301" text-anchor="end">OPTIM</text><rect class="suite-bar" x="158" y="292" width="297.10" height="10"/><text class="num" x="564" y="301">71</text></g><g><title>pele: 88</title><text class="code-label" x="148" y="323" text-anchor="end">pele</text><rect class="suite-bar" x="158" y="314" width="239.70" height="10"/><text class="num" x="564" y="323">88</text></g><g><title>Eon svn: 106</title><text class="code-label" x="148" y="345" text-anchor="end">Eon svn</text><rect class="suite-bar" x="158" y="336" width="199.00" height="10"/><text class="num" x="564" y="345">106</text></g><g><title>eOn: 108.796</title><text class="code-label" x="148" y="367" text-anchor="end">eOn</text><rect class="suite-bar" x="158" y="358" width="193.89" height="10"/><text class="num" x="564" y="367">108.796</text></g><g><title>rgsaddle: 223.898</title><text class="code-label" x="148" y="389" text-anchor="end">rgsaddle</text><rect class="suite-bar" x="158" y="380" width="94.21" height="10"/><text class="num" x="564" y="389">223.898</text></g><g><title>OptKing: 1059.98</title><text class="code-label" x="148" y="411" text-anchor="end">OptKing</text><rect class="suite-bar" x="158" y="402" width="63.68" height="10"/><text class="num" x="564" y="411">1059.98</text></g><g><title>TSASE: 1144.31</title><text class="code-label" x="148" y="433" text-anchor="end">TSASE</text><rect class="suite-bar" x="158" y="424" width="63.68" height="10"/><text class="num" x="564" y="433">1144.31</text></g><g><title>pARTn: 1970.22</title><text class="code-label" x="148" y="455" text-anchor="end">pARTn</text><rect class="suite-bar" x="158" y="446" width="63.68" height="10"/><text class="num" x="564" y="455">1970.22</text></g></svg><figcaption>Best cost of each code. Each problem has its own scale. A longer bar is closer to the best.</figcaption></figure>
+   <p class="chart-files"><a href="../../_static/board/suite-tsopt.svg">SVG file</a></p>
+   <div class="bench-export">
+   <figure class="bench-plot"><a href="../../_static/board/suite-tsopt.svg"><picture><source srcset="../../_static/board/suite-tsopt.webp" type="image/webp"><img src="../../_static/board/suite-tsopt.png" alt="Transition state optimization best ranked cost" loading="lazy" decoding="async"></picture></a><figcaption>Transition state optimization best ranked cost. Select the plot for the full SVG.</figcaption></figure>
+   </div>
+   </div>
+   <h2>Leaderboard</h2>
+   <div class="bench-scroll">
+   <table class="bench-sortable leader" data-bench="codes">
+   <caption>A longer bar is closer to the best on that problem. Select a column heading to sort.</caption>
+   <thead><tr><th>Rank</th><th>Problem</th><th>Code</th><th title="Lowest cost for this code. A longer bar is closer to the best on that problem.">Best</th><th title="Median of this code&#x27;s costs on that problem.">Median</th><th title="Share of runs that finished.">Success</th><th title="Mean cost of the runs. A failure counts as twice the cap.">PAR-2</th></tr></thead><tbody>
+   <tr class="is-best group-start">
+   <td class="rank-cell"><span class="rank r1">1</span></td>
+   <td class="problem"><a href="tsopt/LJ38.html">Lennard-Jones 38</a></td>
+   <td class="code"><a href="../codes/sella.html">Sella</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:100.0%"><i></i></span><span class="bar-num">68.74</span></td>
+   <td class="num">69.145</td>
+   <td class="num">100.0%</td>
+   <td class="num">68.74</td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank r2">2</span></td>
+   <td class="problem"><a href="tsopt/LJ38.html">Lennard-Jones 38</a></td>
+   <td class="code"><a href="../codes/optim.html">OPTIM</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:47.4%"><i></i></span><span class="bar-num">145</span></td>
+   <td class="num">145</td>
+   <td class="num">100.0%</td>
+   <td class="num">—<sup>1</sup></td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank r3">3</span></td>
+   <td class="problem"><a href="tsopt/LJ38.html">Lennard-Jones 38</a></td>
+   <td class="code"><a href="../codes/pele.html">pele</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:35.8%"><i></i></span><span class="bar-num">192</span></td>
+   <td class="num">192</td>
+   <td class="num">100.0%</td>
+   <td class="num">—<sup>1</sup></td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank">4</span></td>
+   <td class="problem"><a href="tsopt/LJ38.html">Lennard-Jones 38</a></td>
+   <td class="code"><a href="../codes/eon-svn.html">Eon svn</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:29.0%"><i></i></span><span class="bar-num">237</span></td>
+   <td class="num">306.89</td>
+   <td class="num">100.0%</td>
+   <td class="num">—<sup>1</sup></td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank">5</span></td>
+   <td class="problem"><a href="tsopt/LJ38.html">Lennard-Jones 38</a></td>
+   <td class="code"><a href="../codes/eon.html">eOn</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:24.5%"><i></i></span><span class="bar-num">280.33</span></td>
+   <td class="num">2102.72</td>
+   <td class="num">100.0%</td>
+   <td class="num">280.33</td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank">6</span></td>
+   <td class="problem"><a href="tsopt/LJ38.html">Lennard-Jones 38</a></td>
+   <td class="code"><a href="../codes/optking.html">OptKing</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:16.0%"><i></i></span><span class="bar-num">7030.36</span></td>
+   <td class="num">7363.89</td>
+   <td class="num">66.5%</td>
+   <td class="num">7030.36</td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank">7</span></td>
+   <td class="problem"><a href="tsopt/LJ38.html">Lennard-Jones 38</a></td>
+   <td class="code"><a href="../codes/rgsaddle.html">rgsaddle</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:16.0%"><i></i></span><span class="bar-num">7803.19</span></td>
+   <td class="num">19418.8</td>
+   <td class="num">63.0%</td>
+   <td class="num">7803.19</td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank">8</span></td>
+   <td class="problem"><a href="tsopt/LJ38.html">Lennard-Jones 38</a></td>
+   <td class="code"><a href="../codes/partn.html">pARTn</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:16.0%"><i></i></span><span class="bar-num">20000</span></td>
+   <td class="num">20000</td>
+   <td class="num">0.0%</td>
+   <td class="num">20000</td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank">9</span></td>
+   <td class="problem"><a href="tsopt/LJ38.html">Lennard-Jones 38</a></td>
+   <td class="code"><a href="../codes/tsase.html">TSASE</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:16.0%"><i></i></span><span class="bar-num">20000</span></td>
+   <td class="num">20000</td>
+   <td class="num">0.0%</td>
+   <td class="num">20000</td>
+   </tr>
+   <tr class="is-best group-start">
+   <td class="rank-cell"><span class="rank r1">1</span></td>
+   <td class="problem"><a href="tsopt/pt-island.html">Pt heptamer island</a></td>
+   <td class="code"><a href="../codes/sella.html">Sella</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:100.0%"><i></i></span><span class="bar-num">53</span></td>
+   <td class="num">63.6429</td>
+   <td class="num">100.0%</td>
+   <td class="num">—<sup>1</sup></td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank r2">2</span></td>
+   <td class="problem"><a href="tsopt/pt-island.html">Pt heptamer island</a></td>
+   <td class="code"><a href="../codes/optim.html">OPTIM</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:74.6%"><i></i></span><span class="bar-num">71</span></td>
+   <td class="num">71</td>
+   <td class="num">100.0%</td>
+   <td class="num">—<sup>1</sup></td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank r3">3</span></td>
+   <td class="problem"><a href="tsopt/pt-island.html">Pt heptamer island</a></td>
+   <td class="code"><a href="../codes/pele.html">pele</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:60.2%"><i></i></span><span class="bar-num">88</span></td>
+   <td class="num">88</td>
+   <td class="num">100.0%</td>
+   <td class="num">—<sup>1</sup></td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank">4</span></td>
+   <td class="problem"><a href="tsopt/pt-island.html">Pt heptamer island</a></td>
+   <td class="code"><a href="../codes/eon-svn.html">Eon svn</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:50.0%"><i></i></span><span class="bar-num">106</span></td>
+   <td class="num">115.48</td>
+   <td class="num">100.0%</td>
+   <td class="num">—<sup>1</sup></td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank">5</span></td>
+   <td class="problem"><a href="tsopt/pt-island.html">Pt heptamer island</a></td>
+   <td class="code"><a href="../codes/eon.html">eOn</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:48.7%"><i></i></span><span class="bar-num">108.796</span></td>
+   <td class="num">135.408</td>
+   <td class="num">100.0%</td>
+   <td class="num">108.796</td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank">6</span></td>
+   <td class="problem"><a href="tsopt/pt-island.html">Pt heptamer island</a></td>
+   <td class="code"><a href="../codes/rgsaddle.html">rgsaddle</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:23.7%"><i></i></span><span class="bar-num">223.898</span></td>
+   <td class="num">6505.47</td>
+   <td class="num">100.0%</td>
+   <td class="num">223.898</td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank">7</span></td>
+   <td class="problem"><a href="tsopt/pt-island.html">Pt heptamer island</a></td>
+   <td class="code"><a href="../codes/optking.html">OptKing</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:16.0%"><i></i></span><span class="bar-num">1059.98</span></td>
+   <td class="num">1060.31</td>
+   <td class="num">100.0%</td>
+   <td class="num">1059.98</td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank">8</span></td>
+   <td class="problem"><a href="tsopt/pt-island.html">Pt heptamer island</a></td>
+   <td class="code"><a href="../codes/tsase.html">TSASE</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:16.0%"><i></i></span><span class="bar-num">1144.31</span></td>
+   <td class="num">1144.31</td>
+   <td class="num">100.0%</td>
+   <td class="num">1144.31</td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank">9</span></td>
+   <td class="problem"><a href="tsopt/pt-island.html">Pt heptamer island</a></td>
+   <td class="code"><a href="../codes/partn.html">pARTn</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:16.0%"><i></i></span><span class="bar-num">1970.22</span></td>
+   <td class="num">1970.22</td>
+   <td class="num">91.8%</td>
+   <td class="num">1970.22</td>
+   </tr>
+   </tbody></table></div>
+   <p class="bench-note"><sup>1</sup> A dash in PAR-2 means that row has no PAR-2 score.</p>
+   <h2>Problems</h2>
    <div class="bench-scroll">
    <table class="bench-sortable" data-bench="problems">
    <caption>Problems in this suite.</caption>
@@ -30,158 +212,6 @@
    </tr>
    </tbody></table></div>
    <p class="bench-note">A dash means the problem file does not state an atom count.</p>
-   <h2>Results by code</h2>
-   <p>Best is the lowest cost for that code on that problem. Median is the median of that code's costs. PAR-2 is the mean cost of the runs. A run that finishes counts as the calls it used. A run that fails counts as twice the cap. An archived row is ranked by the average it published. The success rate is the share of runs that finished.</p>
-   <div class="bench-scroll">
-   <table class="bench-sortable" data-bench="codes">
-   <caption>One row per code on each problem.</caption>
-   <thead><tr><th>Problem</th><th>Code</th><th>Best</th><th>Median</th><th>Success rate</th><th>Rows</th></tr></thead><tbody>
-   <tr>
-   <td>Lennard-Jones 38</td>
-   <td><a href="../codes/sella.html">Sella</a></td>
-   <td class="num">68.74</td>
-   <td class="num">69.145</td>
-   <td class="num">100.0%</td>
-   <td class="num">2</td>
-   </tr>
-   <tr>
-   <td>Lennard-Jones 38</td>
-   <td><a href="../codes/optim.html">OPTIM</a></td>
-   <td class="num">145</td>
-   <td class="num">145</td>
-   <td class="num">100.0%</td>
-   <td class="num">1</td>
-   </tr>
-   <tr>
-   <td>Lennard-Jones 38</td>
-   <td><a href="../codes/pele.html">pele</a></td>
-   <td class="num">192</td>
-   <td class="num">192</td>
-   <td class="num">100.0%</td>
-   <td class="num">1</td>
-   </tr>
-   <tr>
-   <td>Lennard-Jones 38</td>
-   <td><a href="../codes/eon-svn.html">Eon svn</a></td>
-   <td class="num">237</td>
-   <td class="num">306.89</td>
-   <td class="num">100.0%</td>
-   <td class="num">6</td>
-   </tr>
-   <tr>
-   <td>Lennard-Jones 38</td>
-   <td><a href="../codes/eon.html">eOn</a></td>
-   <td class="num">280.33</td>
-   <td class="num">2102.72</td>
-   <td class="num">100.0%</td>
-   <td class="num">5</td>
-   </tr>
-   <tr>
-   <td>Lennard-Jones 38</td>
-   <td><a href="../codes/optking.html">OptKing</a></td>
-   <td class="num">7030.36</td>
-   <td class="num">7363.89</td>
-   <td class="num">66.5%</td>
-   <td class="num">2</td>
-   </tr>
-   <tr>
-   <td>Lennard-Jones 38</td>
-   <td><a href="../codes/rgsaddle.html">rgsaddle</a></td>
-   <td class="num">7803.19</td>
-   <td class="num">19418.8</td>
-   <td class="num">63.0%</td>
-   <td class="num">5</td>
-   </tr>
-   <tr>
-   <td>Lennard-Jones 38</td>
-   <td><a href="../codes/partn.html">pARTn</a></td>
-   <td class="num">20000</td>
-   <td class="num">20000</td>
-   <td class="num">0.0%</td>
-   <td class="num">1</td>
-   </tr>
-   <tr>
-   <td>Lennard-Jones 38</td>
-   <td><a href="../codes/tsase.html">TSASE</a></td>
-   <td class="num">20000</td>
-   <td class="num">20000</td>
-   <td class="num">0.0%</td>
-   <td class="num">1</td>
-   </tr>
-   <tr>
-   <td>Pt heptamer island</td>
-   <td><a href="../codes/sella.html">Sella</a></td>
-   <td class="num">53</td>
-   <td class="num">63.6429</td>
-   <td class="num">100.0%</td>
-   <td class="num">2</td>
-   </tr>
-   <tr>
-   <td>Pt heptamer island</td>
-   <td><a href="../codes/optim.html">OPTIM</a></td>
-   <td class="num">71</td>
-   <td class="num">71</td>
-   <td class="num">100.0%</td>
-   <td class="num">1</td>
-   </tr>
-   <tr>
-   <td>Pt heptamer island</td>
-   <td><a href="../codes/pele.html">pele</a></td>
-   <td class="num">88</td>
-   <td class="num">88</td>
-   <td class="num">100.0%</td>
-   <td class="num">1</td>
-   </tr>
-   <tr>
-   <td>Pt heptamer island</td>
-   <td><a href="../codes/eon-svn.html">Eon svn</a></td>
-   <td class="num">106</td>
-   <td class="num">115.48</td>
-   <td class="num">100.0%</td>
-   <td class="num">6</td>
-   </tr>
-   <tr>
-   <td>Pt heptamer island</td>
-   <td><a href="../codes/eon.html">eOn</a></td>
-   <td class="num">108.796</td>
-   <td class="num">135.408</td>
-   <td class="num">100.0%</td>
-   <td class="num">5</td>
-   </tr>
-   <tr>
-   <td>Pt heptamer island</td>
-   <td><a href="../codes/rgsaddle.html">rgsaddle</a></td>
-   <td class="num">223.898</td>
-   <td class="num">6505.47</td>
-   <td class="num">100.0%</td>
-   <td class="num">4</td>
-   </tr>
-   <tr>
-   <td>Pt heptamer island</td>
-   <td><a href="../codes/optking.html">OptKing</a></td>
-   <td class="num">1059.98</td>
-   <td class="num">1060.31</td>
-   <td class="num">100.0%</td>
-   <td class="num">2</td>
-   </tr>
-   <tr>
-   <td>Pt heptamer island</td>
-   <td><a href="../codes/tsase.html">TSASE</a></td>
-   <td class="num">1144.31</td>
-   <td class="num">1144.31</td>
-   <td class="num">100.0%</td>
-   <td class="num">1</td>
-   </tr>
-   <tr>
-   <td>Pt heptamer island</td>
-   <td><a href="../codes/partn.html">pARTn</a></td>
-   <td class="num">1970.22</td>
-   <td class="num">1970.22</td>
-   <td class="num">91.8%</td>
-   <td class="num">1</td>
-   </tr>
-   </tbody></table></div>
-   <figure class="bench-plot"><a href="../../_static/board/suite-tsopt.svg"><picture><source srcset="../../_static/board/suite-tsopt.webp" type="image/webp"><img src="../../_static/board/suite-tsopt.png" alt="Transition state optimization best ranked cost" loading="lazy" decoding="async"></picture></a><figcaption>Transition state optimization best ranked cost. Select the plot for the full SVG.</figcaption></figure>
    </section>
 #+end_export
 

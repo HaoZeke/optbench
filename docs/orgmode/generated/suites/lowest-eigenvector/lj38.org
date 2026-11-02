@@ -5,35 +5,122 @@
 .. raw:: html
 
    <section class="bench" id="lj38" data-problem="lowest-eigenvector/lj38">
-   <dl class="bench-rule">
-   <dt>System</dt><dd>Lennard-Jones</dd>
-   <dt>Atoms</dt><dd>38</dd>
-   <dt>Task</dt><dd>Lowest eigenvector</dd>
-   <dt>Runs</dt><dd>200</dd>
-   <dt>Cap</dt><dd>10000 force calls</dd>
-   <dt>Starts</dt><dd>200</dd>
-   <dt>Potential</dt><dd>lennard-jones</dd>
-   </dl>
-   <h3>Metrics</h3>
-   <p>PAR-2 is the mean cost of the runs. A run that finishes counts as the calls it used. A run that fails counts as twice the cap.</p>
-   <p>The main metric is Force calls.</p>
-   <p>An archived score is the average of the runs that finished under the cap. A run that hit the cap is a failure and is left out of that average.</p>
-   <p>A run counts as a success when harness calls under the cap and absolute overlap of at least 0.99 with the reference lowest mode.</p>
-   <ul>
-   <li>Force calls</li>
-   <li>Most force calls</li>
-   <li>Fewest force calls</li>
-   <li>Failed runs</li>
-   </ul>
-   <p>Select a column heading to sort the table.</p>
-   <p>Rows are ranked by cost inside each method family and on one overall table. A run that used fewer starts than the full set, or that is not the standard method, stays off the table.</p>
+   <div class="stat-row">
+   <div class="stat"><span class="k">System</span><span class="v">Lennard-Jones</span></div>
+   <div class="stat"><span class="k">Atoms</span><span class="v num">38</span></div>
+   <div class="stat"><span class="k">Runs</span><span class="v num">200</span></div>
+   <div class="stat"><span class="k">Cap</span><span class="v">10000 force calls</span></div>
+   </div>
+   <p class="metric-line">The main metric is Force calls. <a href="../../../methodology.html">Scoring rules</a>.</p>
+   <h2>Charts</h2>
+   <div class="chart-stack">
+   <figure class="paper-figure"><img src="../../../_static/paper/success-lowest-eigenvector-lj38.svg" alt="Success rate on Lennard-Jones 38, in rank order. The rate is the share of runs that finished. 9 ranked rows did not record a success rate and are not drawn."><figcaption>Success rate on Lennard-Jones 38, in rank order. The rate is the share of runs that finished. 9 ranked rows did not record a success rate and are not drawn. <a href="../../../_static/paper/success-lowest-eigenvector-lj38.pdf">PDF</a>.</figcaption></figure>
+   <div class="paper-grid">
+   <figure class="paper-figure"><img src="../../../_static/paper/profile-lowest-eigenvector-lj38-min-mode.svg" alt="Dolan-Moré profile for Minimum mode on Lennard-Jones 38. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."><figcaption>Dolan-Moré profile for Minimum mode on Lennard-Jones 38. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray. <a href="../../../_static/paper/profile-lowest-eigenvector-lj38-min-mode.pdf">PDF</a>.</figcaption></figure>
+   </div>
+   <figure class="paper-figure"><img src="../../../_static/paper/distribution-lowest-eigenvector-lj38.svg" alt="Force calls on each recorded start for Lennard-Jones 38. The box is the quartiles of those counts. A blue point is a success and a vermillion cross is a recorded failure (464). The horizontal position is the recorded count. The vertical offset only keeps marks from covering one another."><figcaption>Force calls on each recorded start for Lennard-Jones 38. The box is the quartiles of those counts. A blue point is a success and a vermillion cross is a recorded failure (464). The horizontal position is the recorded count. The vertical offset only keeps marks from covering one another. <a href="../../../_static/paper/distribution-lowest-eigenvector-lj38.pdf">PDF</a>.</figcaption></figure>
+   <figure class="paper-figure"><img src="../../../_static/paper/history-lowest-eigenvector-lj38-tsase-9513.svg" alt="TSASE on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."><figcaption>TSASE on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value. <a href="../../../_static/paper/history-lowest-eigenvector-lj38-tsase-9513.pdf">PDF</a>.</figcaption></figure>
+   <figure class="paper-figure"><img src="../../../_static/paper/history-lowest-eigenvector-lj38-eon-1112.svg" alt="eOn on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."><figcaption>eOn on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value. <a href="../../../_static/paper/history-lowest-eigenvector-lj38-eon-1112.pdf">PDF</a>.</figcaption></figure>
+   </div>
+   <div class="lead-charts">
+   <figure class="plate-figure"><svg class="plate-chart" role="img" aria-labelledby="lowest-eigenvector-lj38-profile-title" viewBox="0 0 640 268"><title id="lowest-eigenvector-lj38-profile-title">Performance profile for Lennard-Jones 38</title><line class="grid" x1="52" y1="232.00" x2="624" y2="232.00"/><text class="num" x="44" y="236.00" text-anchor="end">0</text><line class="grid" x1="52" y1="128.19" x2="624" y2="128.19"/><text class="num" x="44" y="132.19" text-anchor="end">0.5</text><line class="grid" x1="52" y1="24.38" x2="624" y2="24.38"/><text class="num" x="44" y="28.38" text-anchor="end">1</text><line class="grid" x1="52.00" y1="14" x2="52.00" y2="232.00"/><text class="num" x="52.00" y="248.00" text-anchor="middle">1</text><line class="grid" x1="195.00" y1="14" x2="195.00" y2="232.00"/><text class="num" x="195.00" y="248.00" text-anchor="middle">2</text><line class="grid" x1="338.00" y1="14" x2="338.00" y2="232.00"/><text class="num" x="338.00" y="248.00" text-anchor="middle">4</text><line class="grid" x1="481.00" y1="14" x2="481.00" y2="232.00"/><text class="num" x="481.00" y="248.00" text-anchor="middle">8</text><line class="grid" x1="624.00" y1="14" x2="624.00" y2="232.00"/><text class="num" x="624.00" y="248.00" text-anchor="middle">16</text><line class="axis" x1="52" y1="14" x2="52" y2="232.00"/><line class="axis" x1="52" y1="232.00" x2="624" y2="232.00"/><text class="axis-name" x="338.00" y="262" text-anchor="middle">Cost ratio</text><text class="axis-name" transform="rotate(-90 16 123.00)" x="16" y="123.00" text-anchor="middle">Fraction of starts</text><path class="series muted" d="M 52.00 229.92 H 195.00 V 70.06 H 338.00 V 28.53 H 481.00 V 24.38 H 624.00 V 24.38"><title>eOn (3.5.0) · Dimer L-BFGS</title></path><path class="series muted" d="M 52.00 229.92 H 195.00 V 70.06 H 338.00 V 28.53 H 481.00 V 24.38 H 624.00 V 24.38"><title>Eon svn (r2549) · Dimer L-BFGS</title></path><path class="series muted" d="M 52.00 232.00 H 195.00 V 83.55 H 338.00 V 27.50 H 481.00 V 24.38 H 624.00 V 24.38"><title>eOn (3.5.0) · Dimer CG</title></path><path class="series muted" d="M 52.00 232.00 H 195.00 V 83.55 H 338.00 V 27.50 H 481.00 V 24.38 H 624.00 V 24.38"><title>eOn (3.6.0) · Dimer</title></path><path class="series muted" d="M 52.00 232.00 H 195.00 V 83.55 H 338.00 V 27.50 H 481.00 V 24.38 H 624.00 V 24.38"><title>Eon svn (r2549) · Dimer CG</title></path><path class="series muted" d="M 52.00 232.00 H 195.00 V 100.16 H 338.00 V 25.42 H 481.00 V 24.38 H 624.00 V 24.38"><title>rgsaddle (0.2.2) · Dimer</title></path><path class="series muted" d="M 52.00 209.16 H 195.00 V 77.32 H 338.00 V 52.41 H 481.00 V 51.37 H 624.00 V 51.37"><title>pARTn (1.1.0) · ARTn Lanczos</title></path><path class="series muted" d="M 52.00 208.12 H 195.00 V 83.55 H 338.00 V 66.94 H 481.00 V 65.90 H 624.00 V 65.90"><title>pysisyphus (0.1.dev1) · Lanczos</title></path><path class="series muted" d="M 52.00 232.00 H 195.00 V 230.96 H 338.00 V 223.70 H 481.00 V 192.55 H 624.00 V 111.58"><title>TSASE (1.0) · SSDimer</title></path><path class="series muted" d="M 52.00 232.00 H 195.00 V 218.50 H 338.00 V 218.50 H 481.00 V 218.50 H 624.00 V 218.50"><title>SoftSaddle (2019.04) · Lanczos</title></path><path class="series muted" d="M 52.00 232.00 H 195.00 V 232.00 H 338.00 V 232.00 H 481.00 V 232.00 H 624.00 V 232.00"><title>SoftSaddle (2019.04) · Davidson</title></path><path class="series s0" d="M 52.00 65.90 H 195.00 V 24.38 H 338.00 V 24.38 H 481.00 V 24.38 H 624.00 V 24.38"><title>Sella (0.1.1) · lowest eigenvector</title></path><path class="series s1" d="M 52.00 232.00 H 195.00 V 34.76 H 338.00 V 24.38 H 481.00 V 24.38 H 624.00 V 24.38"><title>rgsaddle (0.2.2) · Lanczos</title></path><path class="series s2" d="M 52.00 223.70 H 195.00 V 60.71 H 338.00 V 26.46 H 481.00 V 24.38 H 624.00 V 24.38"><title>eOn (3.5.0) · Lanczos CG</title></path><path class="series s3" d="M 52.00 223.70 H 195.00 V 60.71 H 338.00 V 26.46 H 481.00 V 24.38 H 624.00 V 24.38"><title>eOn (3.6.0) · Lanczos</title></path><path class="series s4" d="M 52.00 223.70 H 195.00 V 60.71 H 338.00 V 26.46 H 481.00 V 24.38 H 624.00 V 24.38"><title>eOn (develop f6817b53) (3.6.0) · Lanczos</title></path><path class="series s5" d="M 52.00 223.70 H 195.00 V 60.71 H 338.00 V 26.46 H 481.00 V 24.38 H 624.00 V 24.38"><title>Eon svn (r2549) · Lanczos CG</title></path></svg><figcaption>Performance profile. Higher means more starts solved within that cost ratio. Colored lines are the six largest areas. Thin lines are the other 11.</figcaption><ul class="chart-legend"><li><i class="swatch s0"></i><span>Sella (0.1.1) · lowest eigenvector</span></li><li><i class="swatch s1"></i><span>rgsaddle (0.2.2) · Lanczos</span></li><li><i class="swatch s2"></i><span>eOn (3.5.0) · Lanczos CG</span></li><li><i class="swatch s3"></i><span>eOn (3.6.0) · Lanczos</span></li><li><i class="swatch s4"></i><span>eOn (develop f6817b53) (3.6.0) · Lanczos</span></li><li><i class="swatch s5"></i><span>Eon svn (r2549) · Lanczos CG</span></li></ul></figure>
+   <figure class="plate-figure"><svg class="plate-chart" role="img" aria-labelledby="lennard-jones-38-cost-dist-title" viewBox="0 0 640 220"><title id="lennard-jones-38-cost-dist-title">Cost distribution for Lennard-Jones 38</title><line class="grid" x1="44" y1="192.00" x2="628" y2="192.00"/><text class="num" x="38" y="196.00" text-anchor="end">0</text><line class="grid" x1="44" y1="123.43" x2="628" y2="123.43"/><text class="num" x="38" y="127.43" text-anchor="end">8</text><line class="grid" x1="44" y1="54.86" x2="628" y2="54.86"/><text class="num" x="38" y="58.86" text-anchor="end">16</text><rect class="hist" x="52.76" y="12.00" width="55.48" height="180.00"><title>17.8 to 42.5352: 21</title></rect><rect class="hist" x="125.76" y="192.00" width="55.48" height="0.00"><title>42.5352 to 101.643: 0</title></rect><rect class="hist" x="198.76" y="192.00" width="55.48" height="0.00"><title>101.643 to 242.888: 0</title></rect><rect class="hist" x="271.76" y="192.00" width="55.48" height="0.00"><title>242.888 to 580.41: 0</title></rect><rect class="hist" x="344.76" y="192.00" width="55.48" height="0.00"><title>580.41 to 1386.96: 0</title></rect><rect class="hist" x="417.76" y="174.86" width="55.48" height="17.14"><title>1386.96 to 3314.3: 2</title></rect><rect class="hist" x="490.76" y="183.43" width="55.48" height="8.57"><title>3314.3 to 7919.91: 1</title></rect><rect class="hist" x="563.76" y="174.86" width="55.48" height="17.14"><title>7919.91 to 18925.6: 2</title></rect><line class="axis" x1="44" y1="192.00" x2="628" y2="192.00"/><text class="num" x="44" y="212" text-anchor="start">17.8</text><text class="num" x="628" y="212" text-anchor="end">18925.6</text></svg><figcaption>Cost distribution of 26 ranked rows. Logarithmic bins, from 17.8 to 18925.6.</figcaption></figure>
+   <p class="chart-files"><a href="../../../_static/board/lowest-eigenvector-lj38-profile.svg">Performance profile SVG</a> <a href="../../../_static/board/lowest-eigenvector-lj38-cost.svg">Cost and success SVG</a></p>
+   <div class="bench-export"><figure class="bench-plot"><a href="../../../_static/board/lowest-eigenvector-lj38-profile.svg"><picture><source srcset="../../../_static/board/lowest-eigenvector-lj38-profile.webp" type="image/webp"><img src="../../../_static/board/lowest-eigenvector-lj38-profile.png" alt="Performance profile for Lennard-Jones 38" loading="lazy" decoding="async"></picture></a><figcaption>Performance profile. Select the plot for the full SVG.</figcaption></figure><figure class="bench-plot"><a href="../../../_static/board/lowest-eigenvector-lj38-cost.svg"><picture><source srcset="../../../_static/board/lowest-eigenvector-lj38-cost.webp" type="image/webp"><img src="../../../_static/board/lowest-eigenvector-lj38-cost.png" alt="Cost and success for Lennard-Jones 38" loading="lazy" decoding="async"></picture></a><figcaption>Cost and success. Select the plot for the full SVG.</figcaption></figure></div>
+   </div>
+   <h2>Leaderboard</h2>
+   <div class="bench-scroll">
+   <table class="bench-sortable leader" data-bench="leader">
+   <caption>A longer bar is closer to the best on that problem. Select a column heading to sort.</caption>
+   <thead><tr><th>Rank</th><th>Code</th><th title="Lowest cost for this code. A longer bar is closer to the best on that problem.">Best</th><th title="Median of this code&#x27;s costs on that problem.">Median</th><th title="Share of runs that finished.">Success</th><th title="Mean cost of the runs. A failure counts as twice the cap.">PAR-2</th></tr></thead><tbody>
+   <tr class="is-best">
+   <td class="rank-cell"><span class="rank r1">1</span></td>
+   <td class="code"><a href="../../codes/sella.html">Sella</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:100.0%"><i></i></span><span class="bar-num">17.8</span></td>
+   <td class="num">17.8</td>
+   <td class="num">100.0%</td>
+   <td class="num">17.8</td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank r2">2</span></td>
+   <td class="code"><a href="../../codes/optim.html">OPTIM</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:71.2%"><i></i></span><span class="bar-num">25</span></td>
+   <td class="num">25</td>
+   <td class="num">100.0%</td>
+   <td class="num">—<sup>1</sup></td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank r3">3</span></td>
+   <td class="code"><a href="../../codes/pele.html">pele</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:71.2%"><i></i></span><span class="bar-num">25</span></td>
+   <td class="num">25</td>
+   <td class="num">100.0%</td>
+   <td class="num">—<sup>1</sup></td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank">4</span></td>
+   <td class="code"><a href="../../codes/tsase.html">TSASE</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:71.2%"><i></i></span><span class="bar-num">25</span></td>
+   <td class="num">28</td>
+   <td class="num">100.0%</td>
+   <td class="num">—<sup>1</sup></td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank">5</span></td>
+   <td class="code"><a href="../../codes/rgsaddle.html">rgsaddle</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:68.1%"><i></i></span><span class="bar-num">26.12</span></td>
+   <td class="num">28.76</td>
+   <td class="num">100.0%</td>
+   <td class="num">26.12</td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank">6</span></td>
+   <td class="code"><a href="../../codes/eon.html">eOn</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:67.5%"><i></i></span><span class="bar-num">26.385</span></td>
+   <td class="num">27.3575</td>
+   <td class="num">100.0%</td>
+   <td class="num">26.385</td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank">7</span></td>
+   <td class="code"><a href="../../codes/eon-svn.html">Eon svn</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:67.5%"><i></i></span><span class="bar-num">26.385</span></td>
+   <td class="num">28.165</td>
+   <td class="num">100.0%</td>
+   <td class="num">26.385</td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank">8</span></td>
+   <td class="code"><a href="../../codes/partn.html">pARTn</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:16.0%"><i></i></span><span class="bar-num">2619.84</span></td>
+   <td class="num">2619.84</td>
+   <td class="num">87.0%</td>
+   <td class="num">2619.84</td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank">9</span></td>
+   <td class="code"><a href="../../codes/pysisyphus.html">pysisyphus</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:16.0%"><i></i></span><span class="bar-num">4017.14</span></td>
+   <td class="num">4017.14</td>
+   <td class="num">80.0%</td>
+   <td class="num">4017.14</td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank">10</span></td>
+   <td class="code"><a href="../../codes/softsaddle.html">SoftSaddle</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:16.0%"><i></i></span><span class="bar-num">18700.6</span></td>
+   <td class="num">18813.1</td>
+   <td class="num">6.5%</td>
+   <td class="num">18700.6</td>
+   </tr>
+   </tbody></table></div>
+   <p class="bench-note"><sup>1</sup> A dash in PAR-2 means that row has no PAR-2 score.</p>
+   <p class="bench-note">The tables below list every ranked row, by method family and overall.</p>
    <p class="bench-gaps">A run short of the full set, or a run that is not the stock method, stays off the ranked table.</p>
-   <figure class="bench-plot"><a href="../../../_static/board/lowest-eigenvector-lj38-profile.svg"><picture><source srcset="../../../_static/board/lowest-eigenvector-lj38-profile.webp" type="image/webp"><img src="../../../_static/board/lowest-eigenvector-lj38-profile.png" alt="Performance profile for Lennard-Jones 38" loading="lazy" decoding="async"></picture></a><figcaption>Performance profile. Select the plot for the full SVG.</figcaption></figure>
-   <figure class="bench-plot"><a href="../../../_static/board/lowest-eigenvector-lj38-cost.svg"><picture><source srcset="../../../_static/board/lowest-eigenvector-lj38-cost.webp" type="image/webp"><img src="../../../_static/board/lowest-eigenvector-lj38-cost.png" alt="Cost and success for Lennard-Jones 38" loading="lazy" decoding="async"></picture></a><figcaption>Cost and success. Select the plot for the full SVG.</figcaption></figure>
    <h3>Minimum mode</h3>
    <div class="bench-scroll">
    <table class="bench-sortable" data-board-table="family" data-family="min-mode" data-problem="lowest-eigenvector/lj38">
-   <caption>Minimum mode. One row is one code, one version, and one method. A lower cost is better. PAR-2 counts a finished run as the calls it used and a failed run as twice the cap. An archived row shows the average it published. Hessians is the mean analytic Hessian count. FD calls is that count times one force call per coordinate.</caption>
+   <caption>Minimum mode. One row is one code, one version, and one method. A lower cost is better.</caption>
    <thead><tr><th>Rank</th><th>Row</th><th>Cost</th><th>Hessians</th><th>FD calls</th><th>Runs</th></tr></thead><tbody>
    <tr><td data-field="family_rank">1</td><td data-field="label">Sella (0.1.1) · lowest eigenvector</td><td data-field="rank_cost">17.8</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="n">200</td></tr>
    <tr><td data-field="family_rank">2</td><td data-field="label">TSASE (410) · tsase-lanczos</td><td data-field="rank_cost">25</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="n">200</td></tr>
@@ -62,14 +149,14 @@
    <h3>Single-ended saddle</h3>
    <div class="bench-scroll">
    <table class="bench-sortable" data-board-table="family" data-family="single-ended" data-problem="lowest-eigenvector/lj38">
-   <caption>Single-ended saddle. One row is one code, one version, and one method. A lower cost is better. PAR-2 counts a finished run as the calls it used and a failed run as twice the cap. An archived row shows the average it published. Hessians is the mean analytic Hessian count. FD calls is that count times one force call per coordinate.</caption>
+   <caption>Single-ended saddle. One row is one code, one version, and one method. A lower cost is better.</caption>
    <thead><tr><th>Rank</th><th>Row</th><th>Cost</th><th>Hessians</th><th>FD calls</th><th>Runs</th></tr></thead><tbody>
    <tr><td data-field="family_rank">1</td><td data-field="label">Sella (0.1.1) · sella</td><td data-field="rank_cost">17.8</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="n">200</td></tr>
    </tbody></table></div>
    <h3>Connect / double-ended</h3>
    <div class="bench-scroll">
    <table class="bench-sortable" data-board-table="family" data-family="connect" data-problem="lowest-eigenvector/lj38">
-   <caption>Connect / double-ended. One row is one code, one version, and one method. A lower cost is better. PAR-2 counts a finished run as the calls it used and a failed run as twice the cap. An archived row shows the average it published. Hessians is the mean analytic Hessian count. FD calls is that count times one force call per coordinate.</caption>
+   <caption>Connect / double-ended. One row is one code, one version, and one method. A lower cost is better.</caption>
    <thead><tr><th>Rank</th><th>Row</th><th>Cost</th><th>Hessians</th><th>FD calls</th><th>Runs</th></tr></thead><tbody>
    <tr><td data-field="family_rank">1</td><td data-field="label">OPTIM · hybrid eigenvector following</td><td data-field="rank_cost">25</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="n">200</td></tr>
    <tr><td data-field="family_rank">2</td><td data-field="label">pele · hybrid eigenvector following</td><td data-field="rank_cost">25</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="n">200</td></tr>
@@ -77,7 +164,7 @@
    <h3>Overall</h3>
    <div class="bench-scroll">
    <table class="bench-sortable" data-board-table="ranked" data-problem="lowest-eigenvector/lj38">
-   <caption>One row is one code, one version, and one method. A lower cost is better. PAR-2 counts a finished run as the calls it used and a failed run as twice the cap. An archived row shows the average it published. Hessians is the mean analytic Hessian count. FD calls is that count times one force call per coordinate.</caption>
+   <caption>One row is one code, one version, and one method. A lower cost is better.</caption>
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
    <tr><td data-field="label">Sella (0.1.1) · lowest eigenvector</td><td data-field="family">Minimum mode</td><td data-field="family_rank">1</td><td data-field="par2_mean">17.8</td><td data-field="published"></td><td data-field="median_calls">17</td><td data-field="mean_calls">17.8</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
    <tr><td data-field="label">Sella (0.1.1) · sella</td><td data-field="family">Single-ended saddle</td><td data-field="family_rank">1</td><td data-field="par2_mean"></td><td data-field="published">17.8</td><td data-field="median_calls"></td><td data-field="mean_calls">17.8</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
@@ -106,5 +193,6 @@
    <tr><td data-field="label">SoftSaddle (2019.04) · Lanczos</td><td data-field="family">Minimum mode</td><td data-field="family_rank">22</td><td data-field="par2_mean">18700.6</td><td data-field="published"></td><td data-field="median_calls">19</td><td data-field="mean_calls">18.91</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 187, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
    <tr><td data-field="label">SoftSaddle (2019.04) · Davidson</td><td data-field="family">Minimum mode</td><td data-field="family_rank">23</td><td data-field="par2_mean">18925.6</td><td data-field="published"></td><td data-field="median_calls">695</td><td data-field="mean_calls">696.475</td><td data-field="hessian_calls">0</td><td data-field="fd_calls">0</td><td data-field="failures">crash 0, divergence 189, cap 0, wrong_stationary 0</td><td data-field="n">200</td></tr>
    </tbody></table></div>
+   <p class="bench-note">Success on this problem: harness calls under the cap and absolute overlap of at least 0.99 with the reference lowest mode.</p>
    </section>
 #+end_export

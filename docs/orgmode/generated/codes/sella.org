@@ -23,8 +23,13 @@
    <td><a href="https://github.com/zadorlab/sella">https://github.com/zadorlab/sella</a></td>
    </tr>
    </tbody></table></div>
+   <div class="chart-stack">
+   <h3>Version history</h3>
+   <figure class="paper-figure"><img src="../../_static/paper/history-tsopt-LJ38-sella-9f5d.svg" alt="Sella on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."><figcaption>Sella on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value. <a href="../../_static/paper/history-tsopt-LJ38-sella-9f5d.pdf">PDF</a>.</figcaption></figure>
+   <figure class="paper-figure"><img src="../../_static/paper/history-tsopt-pt-island-sella-9f5d.svg" alt="Sella on Pt heptamer island. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."><figcaption>Sella on Pt heptamer island. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value. <a href="../../_static/paper/history-tsopt-pt-island-sella-9f5d.pdf">PDF</a>.</figcaption></figure>
+   </div>
    <h3>Results</h3>
-   <p>Ranked rows for this code, across every suite. One row is one version and one method. PAR-2 counts a finished run as the calls it used and a failed run as twice the cap. An archived row shows the average it published.</p>
+   <p>Ranked rows for this code, one version and one method on each row. <a href="../../methodology.html">Scoring rules</a>.</p>
    <div class="bench-scroll"><table class="bench-sortable" data-board-table="code-rows">
    <caption>Every ranked row for this code. Select a column heading to sort.</caption>
    <thead><tr><th>Suite</th><th>Problem</th><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>

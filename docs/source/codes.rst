@@ -13,34 +13,34 @@ Archived rows that spell the same code are on that page.
    <section class="bench" id="codes">
    <h2>Codes</h2>
    <p>The benchmark contributor is Rohit Goswami. Each code page lists the pinned versions and every ranked row for that code.</p>
-   <ul>
-   <li><a href="generated/codes/eon.html">eOn</a></li>
-   <li><a href="generated/codes/eon-svn.html">Eon svn</a></li>
-   <li><a href="generated/codes/rgmin.html">rgmin</a></li>
-   <li><a href="generated/codes/rgsaddle.html">rgsaddle</a></li>
-   <li><a href="generated/codes/geodesic.html">geodesic</a></li>
-   <li><a href="generated/codes/ase.html">ASE</a></li>
-   <li><a href="generated/codes/sella.html">Sella</a></li>
-   <li><a href="generated/codes/gmin.html">GMIN</a></li>
-   <li><a href="generated/codes/pele.html">pele</a></li>
-   <li><a href="generated/codes/optking.html">OptKing</a></li>
-   <li><a href="generated/codes/partn.html">pARTn</a></li>
-   <li><a href="generated/codes/tsase.html">TSASE</a></li>
-   <li><a href="generated/codes/pykmc.html">pyKMC</a></li>
-   <li><a href="generated/codes/lammps.html">LAMMPS</a></li>
-   <li><a href="generated/codes/dl-find.html">DL-FIND</a></li>
-   <li><a href="generated/codes/compass.html">COMPASS</a></li>
-   <li><a href="generated/codes/pysisyphus.html">pysisyphus</a></li>
-   <li><a href="generated/codes/optim.html">OPTIM</a></li>
-   <li><a href="generated/codes/n2p2.html">n2p2</a></li>
-   <li><a href="generated/codes/airss.html">AIRSS</a></li>
-   <li><a href="generated/codes/vc-sqnm.html">vc-SQNM</a></li>
-   <li><a href="generated/codes/softsaddle.html">SoftSaddle</a></li>
-   <li><a href="generated/codes/gpridge.html">GPRidge</a></li>
-   <li><a href="generated/codes/unknown.html">unknown</a></li>
-   <li><a href="generated/codes/pyamff.html">Pyamff</a></li>
-   <li><a href="generated/codes/gman.html">Gman</a></li>
-   </ul></section>
+   <div class="code-grid">
+   <a class="code-card" href="generated/codes/eon.html">eOn</a>
+   <a class="code-card" href="generated/codes/eon-svn.html">Eon svn</a>
+   <a class="code-card" href="generated/codes/rgmin.html">rgmin</a>
+   <a class="code-card" href="generated/codes/rgsaddle.html">rgsaddle</a>
+   <a class="code-card" href="generated/codes/geodesic.html">geodesic</a>
+   <a class="code-card" href="generated/codes/ase.html">ASE</a>
+   <a class="code-card" href="generated/codes/sella.html">Sella</a>
+   <a class="code-card" href="generated/codes/gmin.html">GMIN</a>
+   <a class="code-card" href="generated/codes/pele.html">pele</a>
+   <a class="code-card" href="generated/codes/optking.html">OptKing</a>
+   <a class="code-card" href="generated/codes/partn.html">pARTn</a>
+   <a class="code-card" href="generated/codes/tsase.html">TSASE</a>
+   <a class="code-card" href="generated/codes/pykmc.html">pyKMC</a>
+   <a class="code-card" href="generated/codes/lammps.html">LAMMPS</a>
+   <a class="code-card" href="generated/codes/dl-find.html">DL-FIND</a>
+   <a class="code-card" href="generated/codes/compass.html">COMPASS</a>
+   <a class="code-card" href="generated/codes/pysisyphus.html">pysisyphus</a>
+   <a class="code-card" href="generated/codes/optim.html">OPTIM</a>
+   <a class="code-card" href="generated/codes/n2p2.html">n2p2</a>
+   <a class="code-card" href="generated/codes/airss.html">AIRSS</a>
+   <a class="code-card" href="generated/codes/vc-sqnm.html">vc-SQNM</a>
+   <a class="code-card" href="generated/codes/softsaddle.html">SoftSaddle</a>
+   <a class="code-card" href="generated/codes/gpridge.html">GPRidge</a>
+   <a class="code-card" href="generated/codes/unknown.html">unknown</a>
+   <a class="code-card" href="generated/codes/pyamff.html">Pyamff</a>
+   <a class="code-card" href="generated/codes/gman.html">Gman</a>
+   </div></section>
 
 .. toctree::
    :hidden:

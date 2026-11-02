@@ -1,51 +1,24 @@
 #+begin_export rst
 .. raw:: html
 
-   <section class="bench" id="suites">
+   <section class="bench" id="suites" data-bench="suites">
+   <div class="section-kicker">
    <h2>Suites</h2>
-   <p>Each suite is one kind of task. The link opens its problems and the best cost of each code.</p>
-   <div class="bench-scroll"><table class="bench-sortable" data-bench="suites">
-   <caption>The suites on this site.</caption>
-   <thead><tr><th>Suite</th><th>Problems</th></tr></thead><tbody>
-   <tr>
-   <th scope="row"><a href="generated/suites/minimization.html">Minimization</a></th>
-   <td>Lennard-Jones 38 clusters, Lennard-Jones 38 clusters with Gaussian force noise, Morse bulk</td>
-   </tr>
-   <tr>
-   <th scope="row"><a href="generated/suites/saddle-search.html">Saddle search</a></th>
-   <td>Pt heptamer island</td>
-   </tr>
-   <tr>
-   <th scope="row"><a href="generated/suites/double-ended-saddle-search.html">Double-ended saddle search</a></th>
-   <td>Lennard-Jones 38 transition-state separation, LJ38 double-ended saddle, Pt heptamer island</td>
-   </tr>
-   <tr>
-   <th scope="row"><a href="generated/suites/globalopt.html">Global optimization</a></th>
-   <td>Binary Lennard-Jones 100, Lennard-Jones 150, Lennard-Jones 38 global minimum, Lennard-Jones 75, and 4 more</td>
-   </tr>
-   <tr>
-   <th scope="row"><a href="generated/suites/lowest-eigenvector.html">Lowest eigenvector</a></th>
-   <td>Lennard-Jones 38</td>
-   </tr>
-   <tr>
-   <th scope="row"><a href="generated/suites/tsopt.html">Transition state optimization</a></th>
-   <td>H2 dissociation on a fixed Cu substrate, Lennard-Jones 38, Pt heptamer island</td>
-   </tr>
-   <tr>
-   <th scope="row"><a href="generated/suites/mlopt.html">Machine learning optimization</a></th>
-   <td>EMT Pt 38 nanoparticle, Ethene</td>
-   </tr>
-   <tr>
-   <th scope="row"><a href="generated/suites/neb.html">Nudged elastic band</a></th>
-   <td>Pt heptamer island</td>
-   </tr>
-   <tr>
-   <th scope="row"><a href="generated/suites/hTST.html">Harmonic transition state theory</a></th>
-   <td>EAM aluminum, Pt heptamer island</td>
-   </tr>
-   <tr>
-   <th scope="row"><a href="generated/suites/accelerated-md.html">Accelerated molecular dynamics</a></th>
-   <td>Al adatom on Al(100) at 150 K, Al adatom on Al(100) at 250 K</td>
-   </tr>
-   </tbody></table></div></section>
+   <a class="board-link" href="board.html">Open the board</a>
+   </div>
+   <p class="count-line">10 suites, 26 problems.</p>
+   <div class="suite-grid">
+   <a class="suite-card" href="generated/suites/minimization.html"><span class="suite-count">3</span><span class="suite-name">Minimization</span><span class="suite-problems">Lennard-Jones 38 clusters, Lennard-Jones 38 clusters with Gaussian force noise, Morse bulk</span></a>
+   <a class="suite-card" href="generated/suites/saddle-search.html"><span class="suite-count">1</span><span class="suite-name">Saddle search</span><span class="suite-problems">Pt heptamer island</span></a>
+   <a class="suite-card" href="generated/suites/double-ended-saddle-search.html"><span class="suite-count">3</span><span class="suite-name">Double-ended saddle search</span><span class="suite-problems">Lennard-Jones 38 transition-state separation, LJ38 double-ended saddle, Pt heptamer island</span></a>
+   <a class="suite-card" href="generated/suites/globalopt.html"><span class="suite-count">8</span><span class="suite-name">Global optimization</span><span class="suite-problems">Binary Lennard-Jones 100, Lennard-Jones 150, Lennard-Jones 38 global minimum, and 5 more</span></a>
+   <a class="suite-card" href="generated/suites/lowest-eigenvector.html"><span class="suite-count">1</span><span class="suite-name">Lowest eigenvector</span><span class="suite-problems">Lennard-Jones 38</span></a>
+   <a class="suite-card" href="generated/suites/tsopt.html"><span class="suite-count">3</span><span class="suite-name">Transition state optimization</span><span class="suite-problems">H2 dissociation on a fixed Cu substrate, Lennard-Jones 38, Pt heptamer island</span></a>
+   <a class="suite-card" href="generated/suites/mlopt.html"><span class="suite-count">2</span><span class="suite-name">Machine learning optimization</span><span class="suite-problems">EMT Pt 38 nanoparticle, Ethene</span></a>
+   <a class="suite-card" href="generated/suites/neb.html"><span class="suite-count">1</span><span class="suite-name">Nudged elastic band</span><span class="suite-problems">Pt heptamer island</span></a>
+   <a class="suite-card" href="generated/suites/hTST.html"><span class="suite-count">2</span><span class="suite-name">Harmonic transition state theory</span><span class="suite-problems">EAM aluminum, Pt heptamer island</span></a>
+   <a class="suite-card" href="generated/suites/accelerated-md.html"><span class="suite-count">2</span><span class="suite-name">Accelerated molecular dynamics</span><span class="suite-problems">Al adatom on Al(100) at 150 K, Al adatom on Al(100) at 250 K</span></a>
+   </div>
+   <p class="page-links"><a href="methodology.html">Scoring rules</a></p>
+   </section>
 #+end_export

@@ -1,0 +1,7 @@
+{%- if pagename == "index" -%}
+  {%- extends "layout/landing.html" -%}
+{%- elif meta and meta.layout -%}
+  {%- extends "layout/" + meta.layout + ".html" -%}
+{%- else -%}
+  {%- extends "layout/" + theme_page_layout + ".html" -%}
+{%- endif -%}

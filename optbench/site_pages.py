@@ -205,24 +205,11 @@ def metric_label(key: str) -> str:
     return " ".join(parts) or text
 
 
-def _curve_code(label: str) -> str:
-    text = str(label or "").split("·", 1)[0].strip()
-    if "(" in text:
-        text = text.split("(", 1)[0].strip()
-    return text
-
-
 def profile_worth_showing(problem: dict) -> bool:
-    """A profile of one code is a flat line at 1 and is not shown."""
+    """A profile with one curve is a flat line at 1 and is not shown."""
     profile = problem.get("profile") or {}
     curves = profile.get("rho") or {}
-    if len(curves) < 2:
-        return False
-    ranked_codes = {str(row.get("code") or "").strip() for row in problem.get("ranked") or []}
-    ranked_codes.discard("")
-    curve_codes = {_curve_code(label) for label in curves}
-    curve_codes.discard("")
-    return len(ranked_codes) >= 2 and len(curve_codes) >= 2
+    return len(curves) >= 2
 
 
 def _same_pt_island(problem: dict) -> bool:
@@ -348,36 +335,12 @@ def _english(items: list[str]) -> str:
 
 
 def suite_paragraph(suite_name: str, group: list[dict], root: Path, by_slug: dict[str, list[dict]]) -> str:
-    """One paragraph from the problem files in this suite."""
+    """One sentence naming the problems in this suite."""
+    del root
     names = [human_title(problem, by_slug) for problem in group]
-    metrics: list[str] = []
-    for problem in group:
-        required = list((problem.get("metrics") or {}).get("required") or [])
-        for key in required:
-            if key == "nfailed":
-                continue
-            label = metric_label(str(key))
-            if label not in metrics:
-                metrics.append(label)
-    metric_text = _english(metrics[:6])
-    runs = []
-    for problem in group:
-        count = run_text(root, problem)
-        if count:
-            runs.append(f"{human_title(problem, by_slug)} has {count} runs")
-    text = f"{suite_name} covers {_english(names)}."
-    if metric_text:
-        text += f" The recorded metrics include {metric_text}."
-    if runs:
-        text += " " + _english(runs) + "."
-    rules = {
-        str(((problem.get("scoring") or {}).get("half_even") or {}).get("rule") or "")
-        for problem in group
-    }
-    rules.discard("")
-    if len(rules) == 1:
-        text += " " + ARCHIVE_SENTENCE
-    return text
+    count = len(group)
+    noun = "problem" if count == 1 else "problems"
+    return f"{suite_name} has {count} {noun}: {_english(names)}."
 
 
 def _metric_value(row: dict) -> float | None:
@@ -428,12 +391,14 @@ def code_summaries(problem: dict, ranked: list[dict], registry: list[dict]) -> l
         scored.sort(key=lambda item: (item[0], str(item[1].get("label") or "")))
         values = [item[0] for item in scored]
         best_value, best_row = scored[0]
+        par2 = best_row.get("par2_mean")
         found.append(
             {
                 "code": code,
                 "best": best_value,
                 "median": float(statistics.median(values)),
                 "success": _success(best_row),
+                "par2": None if par2 is None else float(par2),
                 "n": len(scored),
                 "problem": str(problem.get("id") or ""),
             }
@@ -488,6 +453,96 @@ def recorded_runs(root: Path, problem: dict, ranked: list[dict]) -> tuple[str, s
     )
 
 
+def _th(label: str, tip: str = "") -> str:
+    tip_attr = f' title="{_cell(tip)}"' if tip else ""
+    return f"<th{tip_attr}>{_cell(label)}</th>"
+
+
+def leaderboard_html(items: list[dict], *, show_problem: bool, bench: str) -> str:
+    """Ranked codes. A longer bar is closer to the best cost in the group."""
+    from .site_charts import bar_percent
+
+    notes: list[str] = []
+
+    def marker(text: str) -> str:
+        if text not in notes:
+            notes.append(text)
+        return f"<sup>{notes.index(text) + 1}</sup>"
+
+    headers = [_th("Rank")]
+    if show_problem:
+        headers.append(_th("Problem"))
+    headers.extend(
+        [
+            _th("Code"),
+            _th("Best", "Lowest cost for this code. A longer bar is closer to the best on that problem."),
+            _th("Median", "Median of this code's costs on that problem."),
+            _th("Success", "Share of runs that finished."),
+            _th("PAR-2", "Mean cost of the runs. A failure counts as twice the cap."),
+        ]
+    )
+    grouped: dict[str, list[float]] = defaultdict(list)
+    for item in items:
+        grouped[str(item.get("group") or "")].append(float(item["best"]))
+    lines = [
+        '<div class="bench-scroll">',
+        f'<table class="bench-sortable leader" data-bench="{_cell(bench)}">',
+        "<caption>A longer bar is closer to the best on that problem. Select a column heading to sort.</caption>",
+        "<thead><tr>" + "".join(headers) + "</tr></thead><tbody>",
+    ]
+    rank = 0
+    previous = None
+    par2_dash = "A dash in PAR-2 means that row has no PAR-2 score."
+    rate_dash = "A dash in the success rate means that row did not record one."
+    for item in items:
+        group = str(item.get("group") or "")
+        if group != previous:
+            rank = 1
+            previous = group
+            started = True
+        else:
+            rank += 1
+            started = False
+        values = grouped[group]
+        best_value, worst_value = min(values), max(values)
+        percent = bar_percent(float(item["best"]), best_value, worst_value)
+        classes = []
+        if rank == 1:
+            classes.append("is-best")
+        if started and show_problem:
+            classes.append("group-start")
+        class_attr = f' class="{" ".join(classes)}"' if classes else ""
+        rank_class = "rank r1" if rank == 1 else "rank r2" if rank == 2 else "rank r3" if rank == 3 else "rank"
+        lines.append(f"<tr{class_attr}>")
+        lines.append(f'<td class="rank-cell"><span class="{rank_class}">{rank}</span></td>')
+        if show_problem:
+            lines.append(
+                f'<td class="problem"><a href="{_cell(item.get("problem_href") or "")}">{_cell(item.get("problem_title") or "")}</a></td>'
+            )
+        lines.append(f'<td class="code"><a href="{_cell(item.get("code_href") or "")}">{_cell(item.get("code") or "")}</a></td>')
+        lines.append(
+            '<td class="num best">'
+            f'<span class="bar" aria-hidden="true" style="--w:{percent:.1f}%"><i></i></span>'
+            f'<span class="bar-num">{_cell(_format_number(item["best"]) or "—")}</span>'
+            "</td>"
+        )
+        lines.append(f'<td class="num">{_cell(_format_number(item["median"]) or "—")}</td>')
+        rate = _format_rate(item.get("success"))
+        rate_mark = "" if rate else marker(rate_dash)
+        lines.append(f'<td class="num">{_cell(rate or "—")}{rate_mark}</td>')
+        par2 = _format_number(item.get("par2"))
+        par2_mark = "" if par2 else marker(par2_dash)
+        lines.append(f'<td class="num">{_cell(par2 or "—")}{par2_mark}</td>')
+        lines.append("</tr>")
+    if not items:
+        span = 7 if show_problem else 6
+        lines.append(f'<tr><td colspan="{span}">No ranked row.</td></tr>')
+    lines.append("</tbody></table></div>")
+    for index, note in enumerate(notes, start=1):
+        lines.append(f'<p class="bench-note"><sup>{index}</sup> {_cell(note)}</p>')
+    return "\n".join(lines)
+
+
 def suite_tables(
     group: list[dict],
     document: dict,
@@ -495,8 +550,8 @@ def suite_tables(
     root: Path,
     by_slug: dict[str, list[dict]],
     suite: str,
-) -> tuple[str, list[dict]]:
-    """Problem table and per-code summary. The plot series is the second value."""
+) -> tuple[str, str, list[dict]]:
+    """Leaderboard, problem table, and the plot series."""
     prepared: list[dict] = []
     for problem in group:
         view = (document.get("problems") or {}).get(problem["id"]) or {}
@@ -521,6 +576,7 @@ def suite_tables(
     if show_runs:
         headers.append("Runs")
     lines = [
+        "<h2>Problems</h2>",
         '<div class="bench-scroll">',
         '<table class="bench-sortable" data-bench="problems">',
         "<caption>Problems in this suite.</caption>",
@@ -547,45 +603,29 @@ def suite_tables(
         lines.append("</tr>")
     lines.append("</tbody></table></div>")
     if missing_atoms:
-        lines.append("<p class=\"bench-note\">A dash means the problem file does not state an atom count.</p>")
+        lines.append('<p class="bench-note">A dash means the problem file does not state an atom count.</p>')
     for index, note in enumerate(notes, start=1):
         lines.append(f'<p class="bench-note"><sup>{index}</sup> {_cell(note)}</p>')
-    lines.append("<h2>Results by code</h2>")
-    lines.append(
-        "<p>Best is the lowest cost for that code on that problem. "
-        "Median is the median of that code's costs. "
-        f"{PAR2_SENTENCE} "
-        "An archived row is ranked by the average it published. "
-        "The success rate is the share of runs that finished.</p>"
-    )
-    lines.append('<div class="bench-scroll">')
-    lines.append('<table class="bench-sortable" data-bench="codes">')
-    lines.append("<caption>One row per code on each problem.</caption>")
-    lines.append(
-        "<thead><tr><th>Problem</th><th>Code</th><th>Best</th><th>Median</th><th>Success rate</th><th>Rows</th></tr></thead><tbody>"
-    )
+    problems_html = "\n".join(lines)
+    board_items: list[dict] = []
     series: list[dict] = []
     for problem in group:
         view = (document.get("problems") or {}).get(problem["id"]) or {}
         title = human_title(problem, by_slug)
+        href = f"{suite}/{problem['problem']}.html"
         for item in code_summaries(problem, list(view.get("ranked") or []), registry):
-            href = f"../codes/{_slug(item['code'])}.html"
-            lines.append("<tr>")
-            lines.append(f"<td>{_cell(title)}</td>")
-            lines.append(f'<td><a href="{_cell(href)}">{_cell(item["code"])}</a></td>')
-            best = _format_number(item["best"]) or "—"
-            median = _format_number(item["median"]) or "—"
-            rate = _format_rate(item["success"]) or "—"
-            lines.append(f'<td class="num">{_cell(best)}</td>')
-            lines.append(f'<td class="num">{_cell(median)}</td>')
-            lines.append(f'<td class="num">{_cell(rate)}</td>')
-            lines.append(f'<td class="num">{_cell(item["n"])}</td>')
-            lines.append("</tr>")
+            board_items.append(
+                {
+                    **item,
+                    "group": str(problem["id"]),
+                    "problem_title": title,
+                    "problem_href": href,
+                    "code_href": f"../codes/{_slug(item['code'])}.html",
+                }
+            )
             series.append({**item, "title": title})
-    if not series:
-        lines.append('<tr><td colspan="6">No ranked row.</td></tr>')
-    lines.append("</tbody></table></div>")
-    return "\n".join(lines), series
+    leaderboard = "<h2>Leaderboard</h2>\n" + leaderboard_html(board_items, show_problem=True, bench="codes")
+    return leaderboard, problems_html, series
 
 
 def _slug(text: str) -> str:
@@ -749,30 +789,27 @@ def plot_figure(prefix: str, name: str, label: str) -> str:
     )
 
 
-def metric_html(problem: dict, primary: str | None) -> str:
-    """Metric names and a plain statement of the two scoring rules."""
-    lines = ["<h3>Metrics</h3>", f"<p>{_cell(PAR2_SENTENCE)}</p>"]
+def metric_html(_problem: dict, primary: str | None, method_href: str) -> str:
+    """The main metric, with the scoring rules linked once."""
     if primary:
-        lines.append(f"<p>The main metric is {_cell(metric_label(primary))}.</p>")
-    scoring = problem.get("scoring") or {}
-    if (scoring.get("half_even") or {}).get("rule"):
-        lines.append(f"<p>{_cell(ARCHIVE_SENTENCE)}</p>")
-    version2 = scoring.get("v2") or {}
-    if version2.get("success"):
-        success = str(version2["success"]).strip()
-        if success and success[-1] not in ".!?":
-            success += "."
-        lines.append(f"<p>A run counts as a success when {_cell(success)}</p>")
-    elif version2.get("cost"):
-        lines.append(f"<p>The cost is {_cell(version2['cost'])}.</p>")
-    required = list((problem.get("metrics") or {}).get("required") or [])
-    if required:
-        lines.append("<ul>")
-        for key in required:
-            lines.append(f"<li>{_cell(metric_label(str(key)))}</li>")
-        lines.append("</ul>")
-    lines.append("<p>Select a column heading to sort the table.</p>")
-    return "\n".join(lines)
+        lead = f"The main metric is {_cell(metric_label(primary))}. "
+    else:
+        lead = ""
+    return f'<p class="metric-line">{lead}<a href="{_cell(method_href)}">Scoring rules</a>.</p>'
+
+
+def success_note(problem: dict) -> str:
+    """Problem-specific success rule. Generic rates live on the methodology page."""
+    version2 = (problem.get("scoring") or {}).get("v2") or {}
+    success = str(version2.get("success") or "").strip()
+    if not success:
+        cost = str(version2.get("cost") or "").strip()
+        if not cost:
+            return ""
+        return f'<p class="bench-note">The cost is {_cell(cost)}.</p>'
+    if success[-1] not in ".!?":
+        success += "."
+    return f'<p class="bench-note">Success on this problem: {_cell(success)}</p>'
 
 
 def _first_sentence(text: str) -> str:

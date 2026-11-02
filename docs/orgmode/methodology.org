@@ -1,0 +1,85 @@
+#+TITLE: Methodology
+#+OPTIONS: toc:nil num:nil author:nil
+
+PAR-2, the success rate, and archived scores are defined here.
+The other pages link to this one.
+
+* PAR-2
+
+PAR-2 is the mean cost of the runs.
+A run that finishes counts as the calls it used.
+A run that fails counts as twice the cap.
+
+* Success rate
+
+The success rate is the share of runs that finished.
+A dash means the row did not record a success rate.
+
+* Archived scores
+
+An archived score is the average of the runs that finished under the cap.
+A run that hit the cap is a failure and is left out of that average.
+An archived row is ranked by the average it published.
+It has no PAR-2 score, so the leaderboard shows a dash.
+
+* Best, median, and the bar
+
+Best is the lowest cost for that code on that problem.
+Median is the median of that code's costs on that problem.
+A longer bar is closer to the best cost on that problem.
+The best row fills the bar.
+When every cost is positive, the length is the best cost divided by that row's cost.
+A cost twice as large is half as long, and the bar stops at one sixth of the width.
+When a cost is below zero, the length is linear in the value.
+A small gap stays a small gap.
+
+* Performance profile
+
+The performance profile is a Dolan-Moré curve (Dolan, E. D. and Moré, J. J., Math. Program. 91:201-213, 2002).
+The cost ratio runs left to right.
+The height of a curve is the fraction of starts solved within that ratio of the best start.
+A higher curve is better.
+When more than six codes are drawn, the colored lines are the six largest areas under the curve.
+The other rows are thin lines.
+A family profile uses the same definition on the rows in one method family, and the best start is the best cost inside that family.
+It is drawn when the family has at least two curves with a shared start set.
+Tau is 1, 2, 4, 8, and 16.
+
+* Version history
+
+A history plot is the recorded PAR-2 and the mean force calls against the code version.
+Versions run left to right in numeric order.
+A row with no PAR-2 is left off that panel.
+No line is drawn across a missing value.
+
+* Starts
+
+Each mark on the strip plot is one recorded start.
+The box is the quartiles of those force calls.
+A blue point finished and a vermillion cross is a recorded failure.
+The vertical offset only separates marks.
+The force-call count is the recorded one.
+
+* Success rate bars
+
+Each bar is the success rate of one ranked row, in rank order.
+A row that did not record a success rate is left off the chart.
+
+* Cost distribution
+
+The cost distribution counts ranked rows in bins of their rank cost.
+Bins are logarithmic when every cost is positive and the range is at least eight to one.
+Otherwise the bins are linear.
+A row with no cost on that scale is left off the chart, and the caption says how many.
+
+* Other columns
+
+Hessians is the mean analytic Hessian count.
+FD calls is that count times one force call per coordinate.
+The per-image mean divides a band's total by the number of moving images.
+The ranked table leaves out a run that used fewer starts than the full set or a method other than the standard one.
+
+* Missing numbers
+
+A dash means the problem file or the row has no value for that number.
+The footnote on the page says which.

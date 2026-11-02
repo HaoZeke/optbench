@@ -1,0 +1,698 @@
+{
+  "problems": {
+    "double-ended-saddle-search/lj38": [
+      {
+        "kind": "success",
+        "problem": "double-ended-saddle-search/lj38",
+        "svg": "success-double-ended-saddle-search-lj38.svg",
+        "pdf": "success-double-ended-saddle-search-lj38.pdf",
+        "caption": "Success rate on LJ38 double-ended saddle, in rank order. The rate is the share of runs that finished. 8 ranked rows did not record a success rate and are not drawn."
+      },
+      {
+        "kind": "family",
+        "problem": "double-ended-saddle-search/lj38",
+        "family": "min-mode",
+        "svg": "profile-double-ended-saddle-search-lj38-min-mode.svg",
+        "pdf": "profile-double-ended-saddle-search-lj38-min-mode.pdf",
+        "caption": "Dolan-Mor\u00e9 profile for Minimum mode on LJ38 double-ended saddle. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002."
+      },
+      {
+        "kind": "distribution",
+        "problem": "double-ended-saddle-search/lj38",
+        "svg": "distribution-double-ended-saddle-search-lj38.svg",
+        "pdf": "distribution-double-ended-saddle-search-lj38.pdf",
+        "caption": "Force calls on each recorded start for LJ38 double-ended saddle. The box is the quartiles of those counts. A blue point is a success and a vermillion cross is a recorded failure (402). The horizontal position is the recorded count. The vertical offset only keeps marks from covering one another."
+      },
+      {
+        "kind": "history",
+        "problem": "double-ended-saddle-search/lj38",
+        "code": "eOn",
+        "svg": "history-double-ended-saddle-search-lj38-eon-1112.svg",
+        "pdf": "history-double-ended-saddle-search-lj38-eon-1112.pdf",
+        "caption": "eOn on LJ38 double-ended saddle. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ],
+    "double-ended-saddle-search/lj38_2ts_separation": [
+      {
+        "kind": "success",
+        "problem": "double-ended-saddle-search/lj38_2ts_separation",
+        "svg": "success-double-ended-saddle-search-lj38_2ts_separation.svg",
+        "pdf": "success-double-ended-saddle-search-lj38_2ts_separation.pdf",
+        "caption": "Success rate on Lennard-Jones 38 transition-state separation, in rank order. The rate is the share of runs that finished. 2 ranked rows did not record a success rate and are not drawn."
+      },
+      {
+        "kind": "family",
+        "problem": "double-ended-saddle-search/lj38_2ts_separation",
+        "family": "band",
+        "svg": "profile-double-ended-saddle-search-lj38_2ts_separation-band.svg",
+        "pdf": "profile-double-ended-saddle-search-lj38_2ts_separation-band.pdf",
+        "caption": "Dolan-Mor\u00e9 profile for Band / NEB on Lennard-Jones 38 transition-state separation. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
+      },
+      {
+        "kind": "family",
+        "problem": "double-ended-saddle-search/lj38_2ts_separation",
+        "family": "min-mode",
+        "svg": "profile-double-ended-saddle-search-lj38_2ts_separation-min-mode.svg",
+        "pdf": "profile-double-ended-saddle-search-lj38_2ts_separation-min-mode.pdf",
+        "caption": "Dolan-Mor\u00e9 profile for Minimum mode on Lennard-Jones 38 transition-state separation. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
+      },
+      {
+        "kind": "distribution",
+        "problem": "double-ended-saddle-search/lj38_2ts_separation",
+        "svg": "distribution-double-ended-saddle-search-lj38_2ts_separation.svg",
+        "pdf": "distribution-double-ended-saddle-search-lj38_2ts_separation.pdf",
+        "caption": "Force calls on each recorded start for Lennard-Jones 38 transition-state separation. The box is the quartiles of those counts. A blue point is a success and a vermillion cross is a recorded failure (768). The horizontal position is the recorded count. The vertical offset only keeps marks from covering one another."
+      },
+      {
+        "kind": "history",
+        "problem": "double-ended-saddle-search/lj38_2ts_separation",
+        "code": "eOn",
+        "svg": "history-double-ended-saddle-search-lj38_2ts_separation-eon-1112.svg",
+        "pdf": "history-double-ended-saddle-search-lj38_2ts_separation-eon-1112.pdf",
+        "caption": "eOn on Lennard-Jones 38 transition-state separation. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ],
+    "double-ended-saddle-search/pt-island": [
+      {
+        "kind": "success",
+        "problem": "double-ended-saddle-search/pt-island",
+        "svg": "success-double-ended-saddle-search-pt-island.svg",
+        "pdf": "success-double-ended-saddle-search-pt-island.pdf",
+        "caption": "Success rate on Pt heptamer island, in rank order. The rate is the share of runs that finished. 10 ranked rows did not record a success rate and are not drawn."
+      },
+      {
+        "kind": "family",
+        "problem": "double-ended-saddle-search/pt-island",
+        "family": "band",
+        "svg": "profile-double-ended-saddle-search-pt-island-band.svg",
+        "pdf": "profile-double-ended-saddle-search-pt-island-band.pdf",
+        "caption": "Dolan-Mor\u00e9 profile for Band / NEB on Pt heptamer island. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
+      },
+      {
+        "kind": "family",
+        "problem": "double-ended-saddle-search/pt-island",
+        "family": "min-mode",
+        "svg": "profile-double-ended-saddle-search-pt-island-min-mode.svg",
+        "pdf": "profile-double-ended-saddle-search-pt-island-min-mode.pdf",
+        "caption": "Dolan-Mor\u00e9 profile for Minimum mode on Pt heptamer island. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002."
+      },
+      {
+        "kind": "family",
+        "problem": "double-ended-saddle-search/pt-island",
+        "family": "connect",
+        "svg": "profile-double-ended-saddle-search-pt-island-connect.svg",
+        "pdf": "profile-double-ended-saddle-search-pt-island-connect.pdf",
+        "caption": "Dolan-Mor\u00e9 profile for Connect / double-ended on Pt heptamer island. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002."
+      },
+      {
+        "kind": "distribution",
+        "problem": "double-ended-saddle-search/pt-island",
+        "svg": "distribution-double-ended-saddle-search-pt-island.svg",
+        "pdf": "distribution-double-ended-saddle-search-pt-island.pdf",
+        "caption": "Force calls on each recorded start for Pt heptamer island. The box is the quartiles of those counts. A blue point is a success and a vermillion cross is a recorded failure (233). The horizontal position is the recorded count. The vertical offset only keeps marks from covering one another."
+      }
+    ],
+    "globalopt/lj150": [
+      {
+        "kind": "success",
+        "problem": "globalopt/lj150",
+        "svg": "success-globalopt-lj150.svg",
+        "pdf": "success-globalopt-lj150.pdf",
+        "caption": "Success rate on Lennard-Jones 150, in rank order. The rate is the share of runs that finished. 2 ranked rows did not record a success rate and are not drawn."
+      },
+      {
+        "kind": "family",
+        "problem": "globalopt/lj150",
+        "family": "global",
+        "svg": "profile-globalopt-lj150-global.svg",
+        "pdf": "profile-globalopt-lj150-global.pdf",
+        "caption": "Dolan-Mor\u00e9 profile for Basin hopping / global on Lennard-Jones 150. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002."
+      },
+      {
+        "kind": "distribution",
+        "problem": "globalopt/lj150",
+        "svg": "distribution-globalopt-lj150.svg",
+        "pdf": "distribution-globalopt-lj150.pdf",
+        "caption": "Force calls on each recorded start for Lennard-Jones 150. The box is the quartiles of those counts. A blue point is a success and a vermillion cross is a recorded failure (2). The horizontal position is the recorded count. The vertical offset only keeps marks from covering one another."
+      }
+    ],
+    "globalopt/lj38": [
+      {
+        "kind": "success",
+        "problem": "globalopt/lj38",
+        "svg": "success-globalopt-lj38.svg",
+        "pdf": "success-globalopt-lj38.pdf",
+        "caption": "Success rate on Lennard-Jones 38 global minimum, in rank order. The rate is the share of runs that finished. 5 ranked rows did not record a success rate and are not drawn."
+      },
+      {
+        "kind": "family",
+        "problem": "globalopt/lj38",
+        "family": "global",
+        "svg": "profile-globalopt-lj38-global.svg",
+        "pdf": "profile-globalopt-lj38-global.pdf",
+        "caption": "Dolan-Mor\u00e9 profile for Basin hopping / global on Lennard-Jones 38 global minimum. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002."
+      },
+      {
+        "kind": "distribution",
+        "problem": "globalopt/lj38",
+        "svg": "distribution-globalopt-lj38.svg",
+        "pdf": "distribution-globalopt-lj38.pdf",
+        "caption": "Force calls on each recorded start for Lennard-Jones 38 global minimum. The box is the quartiles of those counts. A blue point is a success and a vermillion cross is a recorded failure (9). The horizontal position is the recorded count. The vertical offset only keeps marks from covering one another."
+      }
+    ],
+    "globalopt/lj75": [
+      {
+        "kind": "success",
+        "problem": "globalopt/lj75",
+        "svg": "success-globalopt-lj75.svg",
+        "pdf": "success-globalopt-lj75.pdf",
+        "caption": "Success rate on Lennard-Jones 75, in rank order. The rate is the share of runs that finished. 1 ranked rows did not record a success rate and are not drawn."
+      },
+      {
+        "kind": "distribution",
+        "problem": "globalopt/lj75",
+        "svg": "distribution-globalopt-lj75.svg",
+        "pdf": "distribution-globalopt-lj75.pdf",
+        "caption": "Force calls on each recorded start for Lennard-Jones 75. The box is the quartiles of those counts. A blue point is a success and a vermillion cross is a recorded failure (595). The horizontal position is the recorded count. The vertical offset only keeps marks from covering one another."
+      }
+    ],
+    "globalopt/lj98": [
+      {
+        "kind": "success",
+        "problem": "globalopt/lj98",
+        "svg": "success-globalopt-lj98.svg",
+        "pdf": "success-globalopt-lj98.pdf",
+        "caption": "Success rate on Lennard-Jones 98, in rank order. The rate is the share of runs that finished. 2 ranked rows did not record a success rate and are not drawn."
+      },
+      {
+        "kind": "family",
+        "problem": "globalopt/lj98",
+        "family": "global",
+        "svg": "profile-globalopt-lj98-global.svg",
+        "pdf": "profile-globalopt-lj98-global.pdf",
+        "caption": "Dolan-Mor\u00e9 profile for Basin hopping / global on Lennard-Jones 98. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002."
+      },
+      {
+        "kind": "distribution",
+        "problem": "globalopt/lj98",
+        "svg": "distribution-globalopt-lj98.svg",
+        "pdf": "distribution-globalopt-lj98.pdf",
+        "caption": "Force calls on each recorded start for Lennard-Jones 98. The box is the quartiles of those counts. A blue point is a success and a vermillion cross is a recorded failure (0). The horizontal position is the recorded count. The vertical offset only keeps marks from covering one another."
+      }
+    ],
+    "hTST/Al": [
+      {
+        "kind": "success",
+        "problem": "hTST/Al",
+        "svg": "success-hTST-Al.svg",
+        "pdf": "success-hTST-Al.pdf",
+        "caption": "Success rate on EAM aluminum, in rank order. The rate is the share of runs that finished. 2 ranked rows did not record a success rate and are not drawn."
+      },
+      {
+        "kind": "family",
+        "problem": "hTST/Al",
+        "family": "min-mode",
+        "svg": "profile-hTST-Al-min-mode.svg",
+        "pdf": "profile-hTST-Al-min-mode.pdf",
+        "caption": "Dolan-Mor\u00e9 profile for Minimum mode on EAM aluminum. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002."
+      },
+      {
+        "kind": "distribution",
+        "problem": "hTST/Al",
+        "svg": "distribution-hTST-Al.svg",
+        "pdf": "distribution-hTST-Al.pdf",
+        "caption": "Force calls on each recorded start for EAM aluminum. The box is the quartiles of those counts. A blue point is a success and a vermillion cross is a recorded failure (0). The horizontal position is the recorded count. The vertical offset only keeps marks from covering one another."
+      }
+    ],
+    "lowest-eigenvector/lj38": [
+      {
+        "kind": "success",
+        "problem": "lowest-eigenvector/lj38",
+        "svg": "success-lowest-eigenvector-lj38.svg",
+        "pdf": "success-lowest-eigenvector-lj38.pdf",
+        "caption": "Success rate on Lennard-Jones 38, in rank order. The rate is the share of runs that finished. 9 ranked rows did not record a success rate and are not drawn."
+      },
+      {
+        "kind": "family",
+        "problem": "lowest-eigenvector/lj38",
+        "family": "min-mode",
+        "svg": "profile-lowest-eigenvector-lj38-min-mode.svg",
+        "pdf": "profile-lowest-eigenvector-lj38-min-mode.pdf",
+        "caption": "Dolan-Mor\u00e9 profile for Minimum mode on Lennard-Jones 38. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
+      },
+      {
+        "kind": "distribution",
+        "problem": "lowest-eigenvector/lj38",
+        "svg": "distribution-lowest-eigenvector-lj38.svg",
+        "pdf": "distribution-lowest-eigenvector-lj38.pdf",
+        "caption": "Force calls on each recorded start for Lennard-Jones 38. The box is the quartiles of those counts. A blue point is a success and a vermillion cross is a recorded failure (464). The horizontal position is the recorded count. The vertical offset only keeps marks from covering one another."
+      },
+      {
+        "kind": "history",
+        "problem": "lowest-eigenvector/lj38",
+        "code": "TSASE",
+        "svg": "history-lowest-eigenvector-lj38-tsase-9513.svg",
+        "pdf": "history-lowest-eigenvector-lj38-tsase-9513.pdf",
+        "caption": "TSASE on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      },
+      {
+        "kind": "history",
+        "problem": "lowest-eigenvector/lj38",
+        "code": "eOn",
+        "svg": "history-lowest-eigenvector-lj38-eon-1112.svg",
+        "pdf": "history-lowest-eigenvector-lj38-eon-1112.pdf",
+        "caption": "eOn on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ],
+    "minimization/lj38": [
+      {
+        "kind": "success",
+        "problem": "minimization/lj38",
+        "svg": "success-minimization-lj38.svg",
+        "pdf": "success-minimization-lj38.pdf",
+        "caption": "Success rate on Lennard-Jones 38 clusters, in rank order. The rate is the share of runs that finished. 17 ranked rows did not record a success rate and are not drawn."
+      },
+      {
+        "kind": "family",
+        "problem": "minimization/lj38",
+        "family": "minimize",
+        "svg": "profile-minimization-lj38-minimize.svg",
+        "pdf": "profile-minimization-lj38-minimize.pdf",
+        "caption": "Dolan-Mor\u00e9 profile for Minimizers on Lennard-Jones 38 clusters. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
+      },
+      {
+        "kind": "distribution",
+        "problem": "minimization/lj38",
+        "svg": "distribution-minimization-lj38.svg",
+        "pdf": "distribution-minimization-lj38.pdf",
+        "caption": "Force calls on each recorded start for Lennard-Jones 38 clusters. The box is the quartiles of those counts. A blue point is a success and a vermillion cross is a recorded failure (10441). The horizontal position is the recorded count. The vertical offset only keeps marks from covering one another."
+      },
+      {
+        "kind": "history",
+        "problem": "minimization/lj38",
+        "code": "rgmin",
+        "svg": "history-minimization-lj38-rgmin-5bf9.svg",
+        "pdf": "history-minimization-lj38-rgmin-5bf9.pdf",
+        "caption": "rgmin on Lennard-Jones 38 clusters. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      },
+      {
+        "kind": "history",
+        "problem": "minimization/lj38",
+        "code": "ASE",
+        "svg": "history-minimization-lj38-ase-e2f0.svg",
+        "pdf": "history-minimization-lj38-ase-e2f0.pdf",
+        "caption": "ASE on Lennard-Jones 38 clusters. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ],
+    "minimization/lj38-noise": [
+      {
+        "kind": "success",
+        "problem": "minimization/lj38-noise",
+        "svg": "success-minimization-lj38-noise.svg",
+        "pdf": "success-minimization-lj38-noise.pdf",
+        "caption": "Success rate on Lennard-Jones 38 clusters with Gaussian force noise, in rank order. The rate is the share of runs that finished. 0 ranked rows did not record a success rate and are not drawn."
+      },
+      {
+        "kind": "family",
+        "problem": "minimization/lj38-noise",
+        "family": "minimize",
+        "svg": "profile-minimization-lj38-noise-minimize.svg",
+        "pdf": "profile-minimization-lj38-noise-minimize.pdf",
+        "caption": "Dolan-Mor\u00e9 profile for Minimizers on Lennard-Jones 38 clusters with Gaussian force noise. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
+      },
+      {
+        "kind": "distribution",
+        "problem": "minimization/lj38-noise",
+        "svg": "distribution-minimization-lj38-noise.svg",
+        "pdf": "distribution-minimization-lj38-noise.pdf",
+        "caption": "Force calls on each recorded start for Lennard-Jones 38 clusters with Gaussian force noise. The box is the quartiles of those counts. A blue point is a success and a vermillion cross is a recorded failure (1758). The horizontal position is the recorded count. The vertical offset only keeps marks from covering one another."
+      }
+    ],
+    "minimization/morse-bulk": [
+      {
+        "kind": "success",
+        "problem": "minimization/morse-bulk",
+        "svg": "success-minimization-morse-bulk.svg",
+        "pdf": "success-minimization-morse-bulk.pdf",
+        "caption": "Success rate on Morse bulk, in rank order. The rate is the share of runs that finished. 11 ranked rows did not record a success rate and are not drawn."
+      },
+      {
+        "kind": "family",
+        "problem": "minimization/morse-bulk",
+        "family": "minimize",
+        "svg": "profile-minimization-morse-bulk-minimize.svg",
+        "pdf": "profile-minimization-morse-bulk-minimize.pdf",
+        "caption": "Dolan-Mor\u00e9 profile for Minimizers on Morse bulk. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
+      },
+      {
+        "kind": "distribution",
+        "problem": "minimization/morse-bulk",
+        "svg": "distribution-minimization-morse-bulk.svg",
+        "pdf": "distribution-minimization-morse-bulk.pdf",
+        "caption": "Force calls on each recorded start for Morse bulk. The box is the quartiles of those counts. A blue point is a success and a vermillion cross is a recorded failure (1144). The horizontal position is the recorded count. The vertical offset only keeps marks from covering one another."
+      },
+      {
+        "kind": "history",
+        "problem": "minimization/morse-bulk",
+        "code": "rgmin",
+        "svg": "history-minimization-morse-bulk-rgmin-5bf9.svg",
+        "pdf": "history-minimization-morse-bulk-rgmin-5bf9.pdf",
+        "caption": "rgmin on Morse bulk. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      },
+      {
+        "kind": "history",
+        "problem": "minimization/morse-bulk",
+        "code": "ASE",
+        "svg": "history-minimization-morse-bulk-ase-e2f0.svg",
+        "pdf": "history-minimization-morse-bulk-ase-e2f0.pdf",
+        "caption": "ASE on Morse bulk. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ],
+    "mlopt/C2H4": [
+      {
+        "kind": "success",
+        "problem": "mlopt/C2H4",
+        "svg": "success-mlopt-C2H4.svg",
+        "pdf": "success-mlopt-C2H4.pdf",
+        "caption": "Success rate on Ethene, in rank order. The rate is the share of runs that finished. 6 ranked rows did not record a success rate and are not drawn."
+      },
+      {
+        "kind": "distribution",
+        "problem": "mlopt/C2H4",
+        "svg": "distribution-mlopt-C2H4.svg",
+        "pdf": "distribution-mlopt-C2H4.pdf",
+        "caption": "Force calls on each recorded start for Ethene. The box is the quartiles of those counts. A blue point is a success and a vermillion cross is a recorded failure (90). The horizontal position is the recorded count. The vertical offset only keeps marks from covering one another."
+      }
+    ],
+    "mlopt/emt-pt38": [
+      {
+        "kind": "success",
+        "problem": "mlopt/emt-pt38",
+        "svg": "success-mlopt-emt-pt38.svg",
+        "pdf": "success-mlopt-emt-pt38.pdf",
+        "caption": "Success rate on EMT Pt 38 nanoparticle, in rank order. The rate is the share of runs that finished. 6 ranked rows did not record a success rate and are not drawn."
+      },
+      {
+        "kind": "family",
+        "problem": "mlopt/emt-pt38",
+        "family": "minimize",
+        "svg": "profile-mlopt-emt-pt38-minimize.svg",
+        "pdf": "profile-mlopt-emt-pt38-minimize.pdf",
+        "caption": "Dolan-Mor\u00e9 profile for Minimizers on EMT Pt 38 nanoparticle. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002."
+      },
+      {
+        "kind": "distribution",
+        "problem": "mlopt/emt-pt38",
+        "svg": "distribution-mlopt-emt-pt38.svg",
+        "pdf": "distribution-mlopt-emt-pt38.pdf",
+        "caption": "Force calls on each recorded start for EMT Pt 38 nanoparticle. The box is the quartiles of those counts. A blue point is a success and a vermillion cross is a recorded failure (50). The horizontal position is the recorded count. The vertical offset only keeps marks from covering one another."
+      }
+    ],
+    "neb/Pt-heptamer": [
+      {
+        "kind": "success",
+        "problem": "neb/Pt-heptamer",
+        "svg": "success-neb-Pt-heptamer.svg",
+        "pdf": "success-neb-Pt-heptamer.pdf",
+        "caption": "Success rate on Pt heptamer island, in rank order. The rate is the share of runs that finished. 5 ranked rows did not record a success rate and are not drawn."
+      },
+      {
+        "kind": "family",
+        "problem": "neb/Pt-heptamer",
+        "family": "band",
+        "svg": "profile-neb-Pt-heptamer-band.svg",
+        "pdf": "profile-neb-Pt-heptamer-band.pdf",
+        "caption": "Dolan-Mor\u00e9 profile for Band / NEB on Pt heptamer island. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
+      },
+      {
+        "kind": "family",
+        "problem": "neb/Pt-heptamer",
+        "family": "connect",
+        "svg": "profile-neb-Pt-heptamer-connect.svg",
+        "pdf": "profile-neb-Pt-heptamer-connect.pdf",
+        "caption": "Dolan-Mor\u00e9 profile for Connect / double-ended on Pt heptamer island. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
+      },
+      {
+        "kind": "distribution",
+        "problem": "neb/Pt-heptamer",
+        "svg": "distribution-neb-Pt-heptamer.svg",
+        "pdf": "distribution-neb-Pt-heptamer.pdf",
+        "caption": "Force calls on each recorded start for Pt heptamer island. The box is the quartiles of those counts. A blue point is a success and a vermillion cross is a recorded failure (26). The horizontal position is the recorded count. The vertical offset only keeps marks from covering one another."
+      },
+      {
+        "kind": "history",
+        "problem": "neb/Pt-heptamer",
+        "code": "eOn",
+        "svg": "history-neb-Pt-heptamer-eon-1112.svg",
+        "pdf": "history-neb-Pt-heptamer-eon-1112.pdf",
+        "caption": "eOn on Pt heptamer island. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ],
+    "saddle-search/pt-island": [
+      {
+        "kind": "success",
+        "problem": "saddle-search/pt-island",
+        "svg": "success-saddle-search-pt-island.svg",
+        "pdf": "success-saddle-search-pt-island.pdf",
+        "caption": "Success rate on Pt heptamer island, in rank order. The rate is the share of runs that finished. 12 ranked rows did not record a success rate and are not drawn."
+      },
+      {
+        "kind": "distribution",
+        "problem": "saddle-search/pt-island",
+        "svg": "distribution-saddle-search-pt-island.svg",
+        "pdf": "distribution-saddle-search-pt-island.pdf",
+        "caption": "Force calls on each recorded start for Pt heptamer island. The box is the quartiles of those counts. A blue point is a success and a vermillion cross is a recorded failure (89998). The horizontal position is the recorded count. The vertical offset only keeps marks from covering one another."
+      },
+      {
+        "kind": "history",
+        "problem": "saddle-search/pt-island",
+        "code": "Eon",
+        "svg": "history-saddle-search-pt-island-eon-034e.svg",
+        "pdf": "history-saddle-search-pt-island-eon-034e.pdf",
+        "caption": "Eon on Pt heptamer island. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ],
+    "tsopt/LJ38": [
+      {
+        "kind": "success",
+        "problem": "tsopt/LJ38",
+        "svg": "success-tsopt-LJ38.svg",
+        "pdf": "success-tsopt-LJ38.pdf",
+        "caption": "Success rate on Lennard-Jones 38, in rank order. The rate is the share of runs that finished. 6 ranked rows did not record a success rate and are not drawn."
+      },
+      {
+        "kind": "family",
+        "problem": "tsopt/LJ38",
+        "family": "min-mode",
+        "svg": "profile-tsopt-LJ38-min-mode.svg",
+        "pdf": "profile-tsopt-LJ38-min-mode.pdf",
+        "caption": "Dolan-Mor\u00e9 profile for Minimum mode on Lennard-Jones 38. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
+      },
+      {
+        "kind": "family",
+        "problem": "tsopt/LJ38",
+        "family": "single-ended",
+        "svg": "profile-tsopt-LJ38-single-ended.svg",
+        "pdf": "profile-tsopt-LJ38-single-ended.pdf",
+        "caption": "Dolan-Mor\u00e9 profile for Single-ended saddle on Lennard-Jones 38. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002."
+      },
+      {
+        "kind": "distribution",
+        "problem": "tsopt/LJ38",
+        "svg": "distribution-tsopt-LJ38.svg",
+        "pdf": "distribution-tsopt-LJ38.pdf",
+        "caption": "Force calls on each recorded start for Lennard-Jones 38. The box is the quartiles of those counts. A blue point is a success and a vermillion cross is a recorded failure (1367). The horizontal position is the recorded count. The vertical offset only keeps marks from covering one another."
+      },
+      {
+        "kind": "history",
+        "problem": "tsopt/LJ38",
+        "code": "Sella",
+        "svg": "history-tsopt-LJ38-sella-9f5d.svg",
+        "pdf": "history-tsopt-LJ38-sella-9f5d.pdf",
+        "caption": "Sella on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      },
+      {
+        "kind": "history",
+        "problem": "tsopt/LJ38",
+        "code": "eOn",
+        "svg": "history-tsopt-LJ38-eon-1112.svg",
+        "pdf": "history-tsopt-LJ38-eon-1112.pdf",
+        "caption": "eOn on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ],
+    "tsopt/pt-island": [
+      {
+        "kind": "success",
+        "problem": "tsopt/pt-island",
+        "svg": "success-tsopt-pt-island.svg",
+        "pdf": "success-tsopt-pt-island.pdf",
+        "caption": "Success rate on Pt heptamer island, in rank order. The rate is the share of runs that finished. 6 ranked rows did not record a success rate and are not drawn."
+      },
+      {
+        "kind": "family",
+        "problem": "tsopt/pt-island",
+        "family": "min-mode",
+        "svg": "profile-tsopt-pt-island-min-mode.svg",
+        "pdf": "profile-tsopt-pt-island-min-mode.pdf",
+        "caption": "Dolan-Mor\u00e9 profile for Minimum mode on Pt heptamer island. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
+      },
+      {
+        "kind": "family",
+        "problem": "tsopt/pt-island",
+        "family": "single-ended",
+        "svg": "profile-tsopt-pt-island-single-ended.svg",
+        "pdf": "profile-tsopt-pt-island-single-ended.pdf",
+        "caption": "Dolan-Mor\u00e9 profile for Single-ended saddle on Pt heptamer island. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002."
+      },
+      {
+        "kind": "distribution",
+        "problem": "tsopt/pt-island",
+        "svg": "distribution-tsopt-pt-island.svg",
+        "pdf": "distribution-tsopt-pt-island.pdf",
+        "caption": "Force calls on each recorded start for Pt heptamer island. The box is the quartiles of those counts. A blue point is a success and a vermillion cross is a recorded failure (56). The horizontal position is the recorded count. The vertical offset only keeps marks from covering one another."
+      },
+      {
+        "kind": "history",
+        "problem": "tsopt/pt-island",
+        "code": "Sella",
+        "svg": "history-tsopt-pt-island-sella-9f5d.svg",
+        "pdf": "history-tsopt-pt-island-sella-9f5d.pdf",
+        "caption": "Sella on Pt heptamer island. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      },
+      {
+        "kind": "history",
+        "problem": "tsopt/pt-island",
+        "code": "eOn",
+        "svg": "history-tsopt-pt-island-eon-1112.svg",
+        "pdf": "history-tsopt-pt-island-eon-1112.pdf",
+        "caption": "eOn on Pt heptamer island. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ]
+  },
+  "codes": {
+    "eOn": [
+      {
+        "kind": "history",
+        "problem": "double-ended-saddle-search/lj38",
+        "code": "eOn",
+        "svg": "history-double-ended-saddle-search-lj38-eon-1112.svg",
+        "pdf": "history-double-ended-saddle-search-lj38-eon-1112.pdf",
+        "caption": "eOn on LJ38 double-ended saddle. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      },
+      {
+        "kind": "history",
+        "problem": "double-ended-saddle-search/lj38_2ts_separation",
+        "code": "eOn",
+        "svg": "history-double-ended-saddle-search-lj38_2ts_separation-eon-1112.svg",
+        "pdf": "history-double-ended-saddle-search-lj38_2ts_separation-eon-1112.pdf",
+        "caption": "eOn on Lennard-Jones 38 transition-state separation. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      },
+      {
+        "kind": "history",
+        "problem": "lowest-eigenvector/lj38",
+        "code": "eOn",
+        "svg": "history-lowest-eigenvector-lj38-eon-1112.svg",
+        "pdf": "history-lowest-eigenvector-lj38-eon-1112.pdf",
+        "caption": "eOn on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      },
+      {
+        "kind": "history",
+        "problem": "neb/Pt-heptamer",
+        "code": "eOn",
+        "svg": "history-neb-Pt-heptamer-eon-1112.svg",
+        "pdf": "history-neb-Pt-heptamer-eon-1112.pdf",
+        "caption": "eOn on Pt heptamer island. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      },
+      {
+        "kind": "history",
+        "problem": "tsopt/LJ38",
+        "code": "eOn",
+        "svg": "history-tsopt-LJ38-eon-1112.svg",
+        "pdf": "history-tsopt-LJ38-eon-1112.pdf",
+        "caption": "eOn on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      },
+      {
+        "kind": "history",
+        "problem": "tsopt/pt-island",
+        "code": "eOn",
+        "svg": "history-tsopt-pt-island-eon-1112.svg",
+        "pdf": "history-tsopt-pt-island-eon-1112.pdf",
+        "caption": "eOn on Pt heptamer island. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ],
+    "TSASE": [
+      {
+        "kind": "history",
+        "problem": "lowest-eigenvector/lj38",
+        "code": "TSASE",
+        "svg": "history-lowest-eigenvector-lj38-tsase-9513.svg",
+        "pdf": "history-lowest-eigenvector-lj38-tsase-9513.pdf",
+        "caption": "TSASE on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ],
+    "rgmin": [
+      {
+        "kind": "history",
+        "problem": "minimization/lj38",
+        "code": "rgmin",
+        "svg": "history-minimization-lj38-rgmin-5bf9.svg",
+        "pdf": "history-minimization-lj38-rgmin-5bf9.pdf",
+        "caption": "rgmin on Lennard-Jones 38 clusters. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      },
+      {
+        "kind": "history",
+        "problem": "minimization/morse-bulk",
+        "code": "rgmin",
+        "svg": "history-minimization-morse-bulk-rgmin-5bf9.svg",
+        "pdf": "history-minimization-morse-bulk-rgmin-5bf9.pdf",
+        "caption": "rgmin on Morse bulk. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ],
+    "ASE": [
+      {
+        "kind": "history",
+        "problem": "minimization/lj38",
+        "code": "ASE",
+        "svg": "history-minimization-lj38-ase-e2f0.svg",
+        "pdf": "history-minimization-lj38-ase-e2f0.pdf",
+        "caption": "ASE on Lennard-Jones 38 clusters. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      },
+      {
+        "kind": "history",
+        "problem": "minimization/morse-bulk",
+        "code": "ASE",
+        "svg": "history-minimization-morse-bulk-ase-e2f0.svg",
+        "pdf": "history-minimization-morse-bulk-ase-e2f0.pdf",
+        "caption": "ASE on Morse bulk. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ],
+    "Eon": [
+      {
+        "kind": "history",
+        "problem": "saddle-search/pt-island",
+        "code": "Eon",
+        "svg": "history-saddle-search-pt-island-eon-034e.svg",
+        "pdf": "history-saddle-search-pt-island-eon-034e.pdf",
+        "caption": "Eon on Pt heptamer island. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ],
+    "Sella": [
+      {
+        "kind": "history",
+        "problem": "tsopt/LJ38",
+        "code": "Sella",
+        "svg": "history-tsopt-LJ38-sella-9f5d.svg",
+        "pdf": "history-tsopt-LJ38-sella-9f5d.pdf",
+        "caption": "Sella on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      },
+      {
+        "kind": "history",
+        "problem": "tsopt/pt-island",
+        "code": "Sella",
+        "svg": "history-tsopt-pt-island-sella-9f5d.svg",
+        "pdf": "history-tsopt-pt-island-sella-9f5d.pdf",
+        "caption": "Sella on Pt heptamer island. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ]
+  }
+}

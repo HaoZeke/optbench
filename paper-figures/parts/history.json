@@ -1,0 +1,260 @@
+{
+  "problems": {
+    "double-ended-saddle-search/lj38": [
+      {
+        "kind": "history",
+        "problem": "double-ended-saddle-search/lj38",
+        "code": "eOn",
+        "svg": "history-double-ended-saddle-search-lj38-eon-1112.svg",
+        "pdf": "history-double-ended-saddle-search-lj38-eon-1112.pdf",
+        "caption": "eOn on LJ38 double-ended saddle. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ],
+    "double-ended-saddle-search/lj38_2ts_separation": [
+      {
+        "kind": "history",
+        "problem": "double-ended-saddle-search/lj38_2ts_separation",
+        "code": "eOn",
+        "svg": "history-double-ended-saddle-search-lj38_2ts_separation-eon-1112.svg",
+        "pdf": "history-double-ended-saddle-search-lj38_2ts_separation-eon-1112.pdf",
+        "caption": "eOn on Lennard-Jones 38 transition-state separation. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ],
+    "lowest-eigenvector/lj38": [
+      {
+        "kind": "history",
+        "problem": "lowest-eigenvector/lj38",
+        "code": "TSASE",
+        "svg": "history-lowest-eigenvector-lj38-tsase-9513.svg",
+        "pdf": "history-lowest-eigenvector-lj38-tsase-9513.pdf",
+        "caption": "TSASE on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      },
+      {
+        "kind": "history",
+        "problem": "lowest-eigenvector/lj38",
+        "code": "eOn",
+        "svg": "history-lowest-eigenvector-lj38-eon-1112.svg",
+        "pdf": "history-lowest-eigenvector-lj38-eon-1112.pdf",
+        "caption": "eOn on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ],
+    "minimization/lj38": [
+      {
+        "kind": "history",
+        "problem": "minimization/lj38",
+        "code": "rgmin",
+        "svg": "history-minimization-lj38-rgmin-5bf9.svg",
+        "pdf": "history-minimization-lj38-rgmin-5bf9.pdf",
+        "caption": "rgmin on Lennard-Jones 38 clusters. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      },
+      {
+        "kind": "history",
+        "problem": "minimization/lj38",
+        "code": "ASE",
+        "svg": "history-minimization-lj38-ase-e2f0.svg",
+        "pdf": "history-minimization-lj38-ase-e2f0.pdf",
+        "caption": "ASE on Lennard-Jones 38 clusters. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ],
+    "minimization/morse-bulk": [
+      {
+        "kind": "history",
+        "problem": "minimization/morse-bulk",
+        "code": "rgmin",
+        "svg": "history-minimization-morse-bulk-rgmin-5bf9.svg",
+        "pdf": "history-minimization-morse-bulk-rgmin-5bf9.pdf",
+        "caption": "rgmin on Morse bulk. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      },
+      {
+        "kind": "history",
+        "problem": "minimization/morse-bulk",
+        "code": "ASE",
+        "svg": "history-minimization-morse-bulk-ase-e2f0.svg",
+        "pdf": "history-minimization-morse-bulk-ase-e2f0.pdf",
+        "caption": "ASE on Morse bulk. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ],
+    "neb/Pt-heptamer": [
+      {
+        "kind": "history",
+        "problem": "neb/Pt-heptamer",
+        "code": "eOn",
+        "svg": "history-neb-Pt-heptamer-eon-1112.svg",
+        "pdf": "history-neb-Pt-heptamer-eon-1112.pdf",
+        "caption": "eOn on Pt heptamer island. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ],
+    "saddle-search/pt-island": [
+      {
+        "kind": "history",
+        "problem": "saddle-search/pt-island",
+        "code": "Eon",
+        "svg": "history-saddle-search-pt-island-eon-034e.svg",
+        "pdf": "history-saddle-search-pt-island-eon-034e.pdf",
+        "caption": "Eon on Pt heptamer island. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ],
+    "tsopt/LJ38": [
+      {
+        "kind": "history",
+        "problem": "tsopt/LJ38",
+        "code": "Sella",
+        "svg": "history-tsopt-LJ38-sella-9f5d.svg",
+        "pdf": "history-tsopt-LJ38-sella-9f5d.pdf",
+        "caption": "Sella on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      },
+      {
+        "kind": "history",
+        "problem": "tsopt/LJ38",
+        "code": "eOn",
+        "svg": "history-tsopt-LJ38-eon-1112.svg",
+        "pdf": "history-tsopt-LJ38-eon-1112.pdf",
+        "caption": "eOn on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ],
+    "tsopt/pt-island": [
+      {
+        "kind": "history",
+        "problem": "tsopt/pt-island",
+        "code": "Sella",
+        "svg": "history-tsopt-pt-island-sella-9f5d.svg",
+        "pdf": "history-tsopt-pt-island-sella-9f5d.pdf",
+        "caption": "Sella on Pt heptamer island. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      },
+      {
+        "kind": "history",
+        "problem": "tsopt/pt-island",
+        "code": "eOn",
+        "svg": "history-tsopt-pt-island-eon-1112.svg",
+        "pdf": "history-tsopt-pt-island-eon-1112.pdf",
+        "caption": "eOn on Pt heptamer island. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ]
+  },
+  "codes": {
+    "eOn": [
+      {
+        "kind": "history",
+        "problem": "double-ended-saddle-search/lj38",
+        "code": "eOn",
+        "svg": "history-double-ended-saddle-search-lj38-eon-1112.svg",
+        "pdf": "history-double-ended-saddle-search-lj38-eon-1112.pdf",
+        "caption": "eOn on LJ38 double-ended saddle. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      },
+      {
+        "kind": "history",
+        "problem": "double-ended-saddle-search/lj38_2ts_separation",
+        "code": "eOn",
+        "svg": "history-double-ended-saddle-search-lj38_2ts_separation-eon-1112.svg",
+        "pdf": "history-double-ended-saddle-search-lj38_2ts_separation-eon-1112.pdf",
+        "caption": "eOn on Lennard-Jones 38 transition-state separation. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      },
+      {
+        "kind": "history",
+        "problem": "lowest-eigenvector/lj38",
+        "code": "eOn",
+        "svg": "history-lowest-eigenvector-lj38-eon-1112.svg",
+        "pdf": "history-lowest-eigenvector-lj38-eon-1112.pdf",
+        "caption": "eOn on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      },
+      {
+        "kind": "history",
+        "problem": "neb/Pt-heptamer",
+        "code": "eOn",
+        "svg": "history-neb-Pt-heptamer-eon-1112.svg",
+        "pdf": "history-neb-Pt-heptamer-eon-1112.pdf",
+        "caption": "eOn on Pt heptamer island. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      },
+      {
+        "kind": "history",
+        "problem": "tsopt/LJ38",
+        "code": "eOn",
+        "svg": "history-tsopt-LJ38-eon-1112.svg",
+        "pdf": "history-tsopt-LJ38-eon-1112.pdf",
+        "caption": "eOn on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      },
+      {
+        "kind": "history",
+        "problem": "tsopt/pt-island",
+        "code": "eOn",
+        "svg": "history-tsopt-pt-island-eon-1112.svg",
+        "pdf": "history-tsopt-pt-island-eon-1112.pdf",
+        "caption": "eOn on Pt heptamer island. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ],
+    "TSASE": [
+      {
+        "kind": "history",
+        "problem": "lowest-eigenvector/lj38",
+        "code": "TSASE",
+        "svg": "history-lowest-eigenvector-lj38-tsase-9513.svg",
+        "pdf": "history-lowest-eigenvector-lj38-tsase-9513.pdf",
+        "caption": "TSASE on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ],
+    "rgmin": [
+      {
+        "kind": "history",
+        "problem": "minimization/lj38",
+        "code": "rgmin",
+        "svg": "history-minimization-lj38-rgmin-5bf9.svg",
+        "pdf": "history-minimization-lj38-rgmin-5bf9.pdf",
+        "caption": "rgmin on Lennard-Jones 38 clusters. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      },
+      {
+        "kind": "history",
+        "problem": "minimization/morse-bulk",
+        "code": "rgmin",
+        "svg": "history-minimization-morse-bulk-rgmin-5bf9.svg",
+        "pdf": "history-minimization-morse-bulk-rgmin-5bf9.pdf",
+        "caption": "rgmin on Morse bulk. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ],
+    "ASE": [
+      {
+        "kind": "history",
+        "problem": "minimization/lj38",
+        "code": "ASE",
+        "svg": "history-minimization-lj38-ase-e2f0.svg",
+        "pdf": "history-minimization-lj38-ase-e2f0.pdf",
+        "caption": "ASE on Lennard-Jones 38 clusters. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      },
+      {
+        "kind": "history",
+        "problem": "minimization/morse-bulk",
+        "code": "ASE",
+        "svg": "history-minimization-morse-bulk-ase-e2f0.svg",
+        "pdf": "history-minimization-morse-bulk-ase-e2f0.pdf",
+        "caption": "ASE on Morse bulk. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ],
+    "Eon": [
+      {
+        "kind": "history",
+        "problem": "saddle-search/pt-island",
+        "code": "Eon",
+        "svg": "history-saddle-search-pt-island-eon-034e.svg",
+        "pdf": "history-saddle-search-pt-island-eon-034e.pdf",
+        "caption": "Eon on Pt heptamer island. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ],
+    "Sella": [
+      {
+        "kind": "history",
+        "problem": "tsopt/LJ38",
+        "code": "Sella",
+        "svg": "history-tsopt-LJ38-sella-9f5d.svg",
+        "pdf": "history-tsopt-LJ38-sella-9f5d.pdf",
+        "caption": "Sella on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      },
+      {
+        "kind": "history",
+        "problem": "tsopt/pt-island",
+        "code": "Sella",
+        "svg": "history-tsopt-pt-island-sella-9f5d.svg",
+        "pdf": "history-tsopt-pt-island-sella-9f5d.pdf",
+        "caption": "Sella on Pt heptamer island. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+      }
+    ]
+  }
+}

@@ -20,6 +20,7 @@ The full tables, including archived rows, are on the problem page.
    <p>Each problem leads with its lowest-cost row. The full tables are on the problem page. Archived rows sit in those tables.</p>
    <h2 id="suite-minimization">Minimization</h2>
    <h3>Lennard-Jones 38 clusters</h3>
+   <div class="winner"><p class="winner-name">Newtons Method maxstep=0.25</p><p class="winner-score"><small>Published</small>79</p></div>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="minimization/lj38">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
@@ -28,6 +29,7 @@ The full tables, including archived rows, are on the problem page.
    <p class="bench-gaps">A run short of the full set, or a run that is not the stock method, stays off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
    <p><a href="generated/suites/minimization/lj38.html">Family tables, overall table, and performance profile</a>.</p>
    <h3>Lennard-Jones 38 clusters with Gaussian force noise</h3>
+   <div class="winner"><p class="winner-name">rgmin (0.4.1) · DOGLEG</p><p class="winner-score"><small>PAR-2</small>81.881</p></div>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="minimization/lj38-noise">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
@@ -36,6 +38,7 @@ The full tables, including archived rows, are on the problem page.
    <p class="bench-gaps">A run short of the full set, or a run that is not the stock method, stays off the ranked table.</p>
    <p><a href="generated/suites/minimization/lj38-noise.html">Family tables, overall table, and performance profile</a>.</p>
    <h3>Morse bulk</h3>
+   <div class="winner"><p class="winner-name">rgmin (0.4.1) · NEWTON</p><p class="winner-score"><small>PAR-2</small>8.35</p></div>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="minimization/morse-bulk">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
@@ -45,6 +48,7 @@ The full tables, including archived rows, are on the problem page.
    <p><a href="generated/suites/minimization/morse-bulk.html">Family tables, overall table, and performance profile</a>.</p>
    <h2 id="suite-saddle-search">Saddle search</h2>
    <h3>Pt heptamer island</h3>
+   <div class="winner"><p class="winner-name">Sella (2.6.0) · Sella</p><p class="winner-score"><small>PAR-2</small>5201.62</p></div>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="saddle-search/pt-island">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
@@ -54,6 +58,7 @@ The full tables, including archived rows, are on the problem page.
    <p><a href="generated/suites/saddle-search/pt-island.html">Family tables, overall table, and performance profile</a>.</p>
    <h2 id="suite-double-ended-saddle-search">Double-ended saddle search</h2>
    <h3>LJ38 double-ended saddle</h3>
+   <div class="winner"><p class="winner-name">OPTIM · DNEB + hybrid eigenvector following</p><p class="winner-score"><small>Published</small>131</p></div>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="double-ended-saddle-search/lj38">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Per-image mean</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
@@ -62,6 +67,7 @@ The full tables, including archived rows, are on the problem page.
    <p class="bench-gaps">eOn band rows are not yet on the harness counter. A run short of the full set, or a run that is not the stock method, stays off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
    <p><a href="generated/suites/double-ended-saddle-search/lj38.html">Family tables, overall table, and performance profile</a>.</p>
    <h3>Lennard-Jones 38 transition-state separation</h3>
+   <div class="winner"><p class="winner-name">Eon svn (r2549) · Lanczos improved L-BFGS</p><p class="winner-score"><small>PAR-2</small>502.784</p></div>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="double-ended-saddle-search/lj38_2ts_separation">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Per-image mean</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
@@ -70,6 +76,7 @@ The full tables, including archived rows, are on the problem page.
    <p class="bench-gaps">A run short of the full set, or a run that is not the stock method, stays off the ranked table.</p>
    <p><a href="generated/suites/double-ended-saddle-search/lj38_2ts_separation.html">Family tables, overall table, and performance profile</a>.</p>
    <h3>Pt heptamer island</h3>
+   <div class="winner"><p class="winner-name">OPTIM · DNEB + hybrid eigenvector following</p><p class="winner-score"><small>Published</small>103</p></div>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="double-ended-saddle-search/pt-island">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Per-image mean</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
@@ -79,6 +86,7 @@ The full tables, including archived rows, are on the problem page.
    <p><a href="generated/suites/double-ended-saddle-search/pt-island.html">Family tables, overall table, and performance profile</a>.</p>
    <h2 id="suite-globalopt">Global optimization</h2>
    <h3>Binary Lennard-Jones 100</h3>
+   <div class="winner"><p class="winner-name">GMIN · basin-hopping</p><p class="winner-score"><small>Published</small>-589.507</p></div>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/lj100-binary">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
@@ -86,6 +94,7 @@ The full tables, including archived rows, are on the problem page.
    </tbody></table></div>
    <p><a href="generated/suites/globalopt/lj100-binary.html">Family tables, overall table, and performance profile</a>.</p>
    <h3>Lennard-Jones 38 global minimum</h3>
+   <div class="winner"><p class="winner-name">GMIN (df8da599) · basin-hopping with continuous symmetry measures</p><p class="winner-score"><small>PAR-2</small>5883.83</p></div>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/lj38">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
@@ -93,6 +102,7 @@ The full tables, including archived rows, are on the problem page.
    </tbody></table></div>
    <p><a href="generated/suites/globalopt/lj38.html">Family tables, overall table, and performance profile</a>.</p>
    <h3>Lennard-Jones 150</h3>
+   <div class="winner"><p class="winner-name">GMIN · core orbits symmetrisation scheme</p><p class="winner-score"><small>Published</small>667.38</p></div>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/lj150">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
@@ -100,6 +110,7 @@ The full tables, including archived rows, are on the problem page.
    </tbody></table></div>
    <p><a href="generated/suites/globalopt/lj150.html">Family tables, overall table, and performance profile</a>.</p>
    <h3>Lennard-Jones 75</h3>
+   <div class="winner"><p class="winner-name">GMIN · basin-hopping with symmetrise csm moves</p><p class="winner-score"><small>Published</small>60692</p></div>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/lj75">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
@@ -108,6 +119,7 @@ The full tables, including archived rows, are on the problem page.
    <p class="bench-gaps">A run short of the full set, or a run that is not the stock method, stays off the ranked table.</p>
    <p><a href="generated/suites/globalopt/lj75.html">Family tables, overall table, and performance profile</a>.</p>
    <h3>Lennard-Jones 98</h3>
+   <div class="winner"><p class="winner-name">GMIN · core orbits symmetrisation scheme</p><p class="winner-score"><small>Published</small>1281.92</p></div>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/lj98">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
@@ -115,6 +127,7 @@ The full tables, including archived rows, are on the problem page.
    </tbody></table></div>
    <p><a href="generated/suites/globalopt/lj98.html">Family tables, overall table, and performance profile</a>.</p>
    <h3>TIP4P 10</h3>
+   <div class="winner"><p class="winner-name">GMIN · linear temperature basin-paving</p><p class="winner-score"><small>Published</small>16099</p></div>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/tip4p10">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
@@ -122,6 +135,7 @@ The full tables, including archived rows, are on the problem page.
    </tbody></table></div>
    <p><a href="generated/suites/globalopt/tip4p10.html">Family tables, overall table, and performance profile</a>.</p>
    <h3>TIP4P 15</h3>
+   <div class="winner"><p class="winner-name">GMIN · linear temperature basin-paving</p><p class="winner-score"><small>Published</small>625362</p></div>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/tip4p15">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
@@ -129,6 +143,7 @@ The full tables, including archived rows, are on the problem page.
    </tbody></table></div>
    <p><a href="generated/suites/globalopt/tip4p15.html">Family tables, overall table, and performance profile</a>.</p>
    <h3>TIP4P 20</h3>
+   <div class="winner"><p class="winner-name">GMIN · linear temperature basin-paving</p><p class="winner-score"><small>Published</small>2.55667e+07</p></div>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="globalopt/tip4p20">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
@@ -137,6 +152,7 @@ The full tables, including archived rows, are on the problem page.
    <p><a href="generated/suites/globalopt/tip4p20.html">Family tables, overall table, and performance profile</a>.</p>
    <h2 id="suite-lowest-eigenvector">Lowest eigenvector</h2>
    <h3>Lennard-Jones 38</h3>
+   <div class="winner"><p class="winner-name">Sella (0.1.1) · lowest eigenvector</p><p class="winner-score"><small>PAR-2</small>17.8</p></div>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="lowest-eigenvector/lj38">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
@@ -154,6 +170,7 @@ The full tables, including archived rows, are on the problem page.
    <p class="bench-gaps">No committed harness run.</p>
    <p><a href="generated/suites/tsopt/cuh2.html">Family tables, overall table, and performance profile</a>.</p>
    <h3>Lennard-Jones 38</h3>
+   <div class="winner"><p class="winner-name">Sella (2.6.0) · Sella</p><p class="winner-score"><small>PAR-2</small>68.74</p></div>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="tsopt/LJ38">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
@@ -162,6 +179,7 @@ The full tables, including archived rows, are on the problem page.
    <p class="bench-gaps">eOn rows are not yet on the harness counter. A run short of the full set, or a run that is not the stock method, stays off the ranked table. Files with no per-start harness record stay off the ranked table.</p>
    <p><a href="generated/suites/tsopt/LJ38.html">Family tables, overall table, and performance profile</a>.</p>
    <h3>Pt heptamer island</h3>
+   <div class="winner"><p class="winner-name">Sella (0.1.1) · sella</p><p class="winner-score"><small>Published</small>53</p></div>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="tsopt/pt-island">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
@@ -171,6 +189,7 @@ The full tables, including archived rows, are on the problem page.
    <p><a href="generated/suites/tsopt/pt-island.html">Family tables, overall table, and performance profile</a>.</p>
    <h2 id="suite-mlopt">Machine learning optimization</h2>
    <h3>Ethene</h3>
+   <div class="winner"><p class="winner-name">Pyamff (8037eb98) · pyamff-rprop10-7-fcoeff0</p><p class="winner-score"><small>Published</small>184.56</p></div>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="mlopt/C2H4">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
@@ -178,6 +197,7 @@ The full tables, including archived rows, are on the problem page.
    </tbody></table></div>
    <p><a href="generated/suites/mlopt/C2H4.html">Family tables, overall table, and performance profile</a>.</p>
    <h3>EMT Pt 38 nanoparticle</h3>
+   <div class="winner"><p class="winner-name">n2p2 (2.3.0) · Kalman energy</p><p class="winner-score"><small>PAR-2</small>25.02</p></div>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="mlopt/emt-pt38">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
@@ -186,6 +206,7 @@ The full tables, including archived rows, are on the problem page.
    <p><a href="generated/suites/mlopt/emt-pt38.html">Family tables, overall table, and performance profile</a>.</p>
    <h2 id="suite-neb">Nudged elastic band</h2>
    <h3>Pt heptamer island</h3>
+   <div class="winner"><p class="winner-name">eOn (r2090) · eon-lbfgs</p><p class="winner-score"><small>Published</small>42</p></div>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="neb/Pt-heptamer">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Per-image mean</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
@@ -195,6 +216,7 @@ The full tables, including archived rows, are on the problem page.
    <p><a href="generated/suites/neb/Pt-heptamer.html">Family tables, overall table, and performance profile</a>.</p>
    <h2 id="suite-hTST">Harmonic transition state theory</h2>
    <h3>EAM aluminum</h3>
+   <div class="winner"><p class="winner-name">eOn (r2006) · Dimer-CG rotation: max=10 tol=1</p><p class="winner-score"><small>Published</small>21070</p></div>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="hTST/Al">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
@@ -203,6 +225,7 @@ The full tables, including archived rows, are on the problem page.
    <p class="bench-gaps">A run short of the full set, or a run that is not the stock method, stays off the ranked table.</p>
    <p><a href="generated/suites/hTST/Al.html">Family tables, overall table, and performance profile</a>.</p>
    <h3>Pt heptamer island</h3>
+   <div class="winner"><p class="winner-name">TSASE · quenchDimer+neb-QM</p><p class="winner-score"><small>Published</small>293200</p></div>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="hTST/Pt">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
@@ -212,6 +235,7 @@ The full tables, including archived rows, are on the problem page.
    <p><a href="generated/suites/hTST/Pt.html">Family tables, overall table, and performance profile</a>.</p>
    <h2 id="suite-accelerated-md">Accelerated molecular dynamics</h2>
    <h3>Al adatom on Al(100) at 150 K</h3>
+   <div class="winner"><p class="winner-name">eOn · parallel replica</p><p class="winner-score"><small>Published</small>835900</p></div>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="accelerated-md/standard_aladatom">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
@@ -220,6 +244,7 @@ The full tables, including archived rows, are on the problem page.
    <p class="bench-gaps">eOn rows are not yet on the harness counter.</p>
    <p><a href="generated/suites/accelerated-md/standard_aladatom.html">Family tables, overall table, and performance profile</a>.</p>
    <h3>Al adatom on Al(100) at 250 K</h3>
+   <div class="winner"><p class="winner-name">eOn · parallel replica</p><p class="winner-score"><small>Published</small>2.54294e+08</p></div>
    <div class="bench-scroll">
    <table data-board-table="headline" data-problem="accelerated-md/aladatom">
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
@@ -229,5 +254,5 @@ The full tables, including archived rows, are on the problem page.
    <p><a href="generated/suites/accelerated-md/aladatom.html">Family tables, overall table, and performance profile</a>.</p>
    </section>
 
-The suite list in the sidebar is the board.
-This page keeps the 2014 provenance and the same problem links in the text.
+The sidebar lists the suites.
+This page keeps the 2014 provenance and links each problem in the text.

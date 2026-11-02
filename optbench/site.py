@@ -480,16 +480,6 @@ def _code_page_html(name: str, pins: list[dict], document: dict, registry: list[
     from .board import _headers, ranked_cells
     from .site_pages import code_blurb, code_page_name, versions_html
 
-    lines = [
-        f'<section class="bench" id="code-{html.escape(_slug(name))}">',
-        f"<p>{html.escape(code_blurb(name, pins))}</p>",
-        versions_html(pins),
-        "<h3>Results</h3>",
-        "<p>Ranked rows for this code, across every suite. "
-        "One row is one version and one method. "
-        "PAR-2 counts a finished run as the calls it used and a failed run as twice the cap. "
-        "An archived row shows the average it published.</p>",
-    ]
     found: list[tuple[dict, dict]] = []
     for problem in (document.get("problems") or {}).values():
         for row in problem.get("ranked") or []:
@@ -502,6 +492,26 @@ def _code_page_html(name: str, pins: list[dict], document: dict, registry: list[
             float(item[1].get("rank_cost") or 0),
             str(item[1].get("label") or ""),
         )
+    )
+    from .paper_embed import code_charts
+
+    codes = []
+    for _problem, row in found:
+        code = str(row.get("code") or "").strip()
+        if code and code not in codes:
+            codes.append(code)
+    lines = [
+        f'<section class="bench" id="code-{html.escape(_slug(name))}">',
+        f"<p>{html.escape(code_blurb(name, pins))}</p>",
+        versions_html(pins),
+    ]
+    history = code_charts(Path(__file__).resolve().parents[1], codes, "../../_static/paper")
+    if history:
+        lines.append(history)
+    lines.append("<h3>Results</h3>")
+    lines.append(
+        "<p>Ranked rows for this code, one version and one method on each row. "
+        '<a href="../../methodology.html">Scoring rules</a>.</p>'
     )
     if found:
         headers = _headers({"ranked": []})
@@ -541,12 +551,14 @@ def _codes_index_html(contributor: str, order: list[str]) -> str:
         "<h2>Codes</h2>",
         f"<p>The benchmark contributor is {html.escape(contributor)}. "
         "Each code page lists the pinned versions and every ranked row for that code.</p>",
-        "<ul>",
+        '<div class="code-grid">',
     ]
     for name in order:
         slug = _slug(name)
-        lines.append(f'<li><a href="generated/codes/{html.escape(slug)}.html">{html.escape(name)}</a></li>')
-    lines.append("</ul></section>")
+        lines.append(
+            f'<a class="code-card" href="generated/codes/{html.escape(slug)}.html">{html.escape(name)}</a>'
+        )
+    lines.append("</div></section>")
     return "\n".join(lines)
 
 
@@ -631,40 +643,66 @@ def _suite_problem_link(problem: dict, templates: bool = False) -> str:
     return f"#{anchor}"
 
 
-def _problem_preamble(root: Path, problem: dict, note: str = "") -> str:
-    from .site_pages import atom_text, metric_html, run_text, system_text
+def _fact(value: str, note: str, notes: list[str]) -> str:
+    shown = value if value else "—"
+    mark = ""
+    if note:
+        notes.append(note)
+        mark = f"<sup>{len(notes)}</sup>"
+    return f"{html.escape(shown)}{mark}"
 
-    bits: list[tuple[str, str]] = []
+
+def _problem_leaderboard(problem: dict, ranked: list[dict], registry: list[dict], code_prefix: str) -> str:
+    from .site_pages import code_summaries, leaderboard_html
+
+    items = []
+    for item in code_summaries(problem, ranked, registry):
+        slug = "".join(ch.lower() if ch.isalnum() else "-" for ch in str(item["code"])).strip("-")
+        items.append({**item, "group": str(problem["id"]), "code_href": f"{code_prefix}{slug}.html"})
+    return "<h2>Leaderboard</h2>\n" + leaderboard_html(items, show_problem=False, bench="leader")
+
+
+def _problem_preamble(root: Path, problem: dict, ranked: list[dict], note: str = "") -> str:
+    from .site_pages import atom_text, recorded_runs, system_text
+
     system = system_text(problem)
-    if system:
-        bits.append(("System", system))
     atoms = atom_text(problem)
-    if atoms:
-        bits.append(("Atoms", atoms))
-    bits.append(("Task", suite_title(str(problem.get("suite") or ""))))
-    runs = run_text(root, problem)
-    if runs:
-        bits.append(("Runs", runs))
-    bits.extend(bit for bit in _bits(problem) if bit[0] not in {"v2", "v2 cost", "Contract"})
-    lines: list[str] = []
-    if bits:
-        lines.append('<dl class="bench-rule">')
-        for label, text in bits:
-            lines.append(f"<dt>{html.escape(label)}</dt><dd>{html.escape(text)}</dd>")
-        lines.append("</dl>")
+    runs, run_note = recorded_runs(root, problem, ranked)
+    caps = [text for label, text in _bits(problem) if label == "Cap"]
+    cap = ", ".join(caps)
+    notes: list[str] = []
+    system_note = "" if system else "The problem file does not state a system."
+    atom_note = "" if atoms else "The problem file does not state an atom count."
+    if not runs and not run_note:
+        run_note = "The problem file does not state a run count."
+    cap_note = "" if cap else "The problem file does not state a cap."
+    cards = [
+        ("System", _fact(system, system_note, notes), ""),
+        ("Atoms", _fact(atoms, atom_note, notes), " num"),
+        ("Runs", _fact(runs, run_note, notes), " num"),
+        ("Cap", _fact(cap, cap_note, notes), ""),
+    ]
+    lines = ['<div class="stat-row">']
+    for label, value, extra in cards:
+        lines.append(f'<div class="stat"><span class="k">{label}</span><span class="v{extra}">{value}</span></div>')
+    lines.append("</div>")
+    for index, text in enumerate(notes, start=1):
+        lines.append(f'<p class="bench-note"><sup>{index}</sup> {html.escape(text)}</p>')
     if note:
         lines.append(f'<p class="bench-aside">{html.escape(note)}</p>')
-    lines.append(metric_html(problem, _primary(problem)))
     return "\n".join(lines)
 
 
 def render(root: Path) -> None:
     """Write the site tables from the v2 scorer."""
     from .board import plot_names_for, render_problem_section, write_board
+    from .site_charts import suite_bars_svg
     from .site_pages import (
         human_title,
+        metric_html,
         plot_figure,
         restyle_problem_plots,
+        success_note,
         suite_paragraph,
         suite_tables,
         write_suite_plot,
@@ -699,6 +737,7 @@ def render(root: Path) -> None:
 
     suite_dir = root / "docs" / "orgmode" / "generated" / "suites"
     suite_dir.mkdir(parents=True, exist_ok=True)
+    _contributor, pins = _registry_pins(root)
     for suite in order:
         group = by_suite.get(suite)
         if not group:
@@ -715,11 +754,15 @@ def render(root: Path) -> None:
             title = human_title(problem, by_slug)
             view = _titled_view(problem, document, by_slug)
             note = smoke if problem["id"] == "saddle-search/pt-island" else ""
+            ranked = list(view.get("ranked") or [])
             section = render_problem_section(
                 view,
                 plot_names_for(view),
                 asset_prefix="../../../_static/board",
-                preamble=_problem_preamble(root, problem, note),
+                preamble=_problem_preamble(root, problem, ranked, note),
+                leaderboard=_problem_leaderboard(problem, ranked, pins, "../../codes/"),
+                metric_line=metric_html(problem, _primary(problem), "../../../methodology.html"),
+                success_note=success_note(problem),
                 section_id=name,
                 unparsed=pending.get(problem["id"]),
                 show_heading=False,
@@ -735,17 +778,39 @@ def render(root: Path) -> None:
         for path in problem_dir.glob("*.org"):
             if path.name not in keep:
                 path.unlink()
-        _contributor, pins = _registry_pins(root)
-        tables, series = suite_tables(ordered, document, pins, root, by_slug, suite)
+        leaderboard, problems_html, series = suite_tables(ordered, document, pins, root, by_slug, suite)
         plot_dir = root / "docs" / "source" / "_static" / "board"
         plot_name = write_suite_plot(suite, series, plot_dir)
+        chart = suite_bars_svg(series)
+        codes = []
+        for item in series:
+            if item["code"] not in codes:
+                codes.append(item["code"])
         parts = [
-            '<section class="bench">',
+            '<section class="bench plate-suite">',
             f"<p>{html.escape(suite_paragraph(suite_title(suite), ordered, root, by_slug))}</p>",
-            tables,
+            '<div class="stat-row stat-row-2">',
+            f'<div class="stat"><span class="k">Problems</span><span class="v num">{len(ordered)}</span></div>',
+            f'<div class="stat"><span class="k">Codes</span><span class="v num">{len(codes)}</span></div>',
+            "</div>",
         ]
-        if plot_name:
-            parts.append(plot_figure("../../_static/board", plot_name, f"{suite_title(suite)} best ranked cost"))
+        if chart or plot_name:
+            parts.append("<h2>Charts</h2>")
+            parts.append('<div class="lead-charts">')
+            if chart:
+                parts.append(chart)
+            if plot_name:
+                parts.append(
+                    '<p class="chart-files"><a href="'
+                    + html.escape(f"../../_static/board/{plot_name}")
+                    + '">SVG file</a></p>'
+                )
+                parts.append('<div class="bench-export">')
+                parts.append(plot_figure("../../_static/board", plot_name, f"{suite_title(suite)} best ranked cost"))
+                parts.append("</div>")
+            parts.append("</div>")
+        parts.append(leaderboard)
+        parts.append(problems_html)
         parts.append("</section>")
         body = [
             f"#+TITLE: {suite_title(suite)}",
@@ -775,29 +840,39 @@ def _overview_html(
 ) -> str:
     from .site_pages import human_title
 
-    lines = [
-        '<section class="bench" id="suites">',
-        "<h2>Suites</h2>",
-        "<p>Each suite is one kind of task. The link opens its problems and the best cost of each code.</p>",
-        '<div class="bench-scroll"><table class="bench-sortable" data-bench="suites">',
-        "<caption>The suites on this site.</caption>",
-        "<thead><tr><th>Suite</th><th>Problems</th></tr></thead><tbody>",
-    ]
+    cards: list[str] = []
+    suite_count = 0
+    problem_count = 0
     for suite in order:
         group = by_suite.get(suite)
         if not group:
             continue
+        suite_count += 1
+        problem_count += len(group)
         names = [human_title(problem, by_slug) for problem in sorted(group, key=lambda item: human_title(item, by_slug).lower())]
-        shown = ", ".join(names[:4])
-        if len(names) > 4:
-            shown += f", and {len(names) - 4} more"
-        lines.append("<tr>")
-        lines.append(
-            f'<th scope="row"><a href="generated/suites/{html.escape(suite)}.html">{html.escape(suite_title(suite))}</a></th>'
+        shown = ", ".join(names[:3])
+        if len(names) > 3:
+            shown += f", and {len(names) - 3} more"
+        cards.append(
+            f'<a class="suite-card" href="generated/suites/{html.escape(suite)}.html">'
+            f'<span class="suite-count">{len(group)}</span>'
+            f'<span class="suite-name">{html.escape(suite_title(suite))}</span>'
+            f'<span class="suite-problems">{html.escape(shown)}</span>'
+            "</a>"
         )
-        lines.append(f"<td>{html.escape(shown)}</td>")
-        lines.append("</tr>")
-    lines.append("</tbody></table></div></section>")
+    lines = [
+        '<section class="bench" id="suites" data-bench="suites">',
+        '<div class="section-kicker">',
+        "<h2>Suites</h2>",
+        '<a class="board-link" href="board.html">Open the board</a>',
+        "</div>",
+        f'<p class="count-line">{suite_count} suites, {problem_count} problems.</p>',
+        '<div class="suite-grid">',
+        *cards,
+        "</div>",
+        '<p class="page-links"><a href="methodology.html">Scoring rules</a></p>',
+        "</section>",
+    ]
     return "\n".join(lines)
 
 

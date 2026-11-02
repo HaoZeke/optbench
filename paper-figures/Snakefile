@@ -1,0 +1,70 @@
+# Rebuild the paper figures from the archived board and the campaign starts.
+# Run from the repository root:
+#   snakemake -s paper-figures/Snakefile --cores 1
+
+from pathlib import Path
+
+CAMPAIGN = sorted(str(path) for path in Path("results/campaign").iterdir() if path.is_file())
+
+rule all:
+    input:
+        "paper-figures/manifest.json"
+
+
+rule history:
+    input:
+        "results/board/index.json",
+        "paper-figures/history.py",
+        "paper-figures/common.py"
+    output:
+        "paper-figures/parts/history.json"
+    shell:
+        "python3 paper-figures/history.py"
+
+
+rule family_profile:
+    input:
+        "results/board/index.json",
+        "paper-figures/family_profile.py",
+        "paper-figures/common.py",
+        CAMPAIGN
+    output:
+        "paper-figures/parts/family.json"
+    shell:
+        "python3 paper-figures/family_profile.py"
+
+
+rule start_distribution:
+    input:
+        "results/board/index.json",
+        "paper-figures/start_distribution.py",
+        "paper-figures/common.py",
+        CAMPAIGN
+    output:
+        "paper-figures/parts/distribution.json"
+    shell:
+        "python3 paper-figures/start_distribution.py"
+
+
+rule success_bars:
+    input:
+        "results/board/index.json",
+        "paper-figures/success_bars.py",
+        "paper-figures/common.py"
+    output:
+        "paper-figures/parts/success.json"
+    shell:
+        "python3 paper-figures/success_bars.py"
+
+
+rule manifest:
+    input:
+        "paper-figures/parts/history.json",
+        "paper-figures/parts/family.json",
+        "paper-figures/parts/distribution.json",
+        "paper-figures/parts/success.json",
+        "paper-figures/manifest.py"
+    output:
+        "paper-figures/manifest.json"
+    shell:
+        "python3 paper-figures/manifest.py"

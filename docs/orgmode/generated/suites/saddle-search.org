@@ -4,8 +4,74 @@
 #+begin_export rst
 .. raw:: html
 
-   <section class="bench">
-   <p>Saddle search covers Pt heptamer island. The recorded metrics include Force calls, Mean error of force calls, Fraction connected, Searches, and Unique saddles. An archived score is the average of the runs that finished under the cap. A run that hit the cap is a failure and is left out of that average.</p>
+   <section class="bench plate-suite">
+   <p>Saddle search has 1 problem: Pt heptamer island.</p>
+   <div class="stat-row stat-row-2">
+   <div class="stat"><span class="k">Problems</span><span class="v num">1</span></div>
+   <div class="stat"><span class="k">Codes</span><span class="v num">5</span></div>
+   </div>
+   <h2>Charts</h2>
+   <div class="lead-charts">
+   <figure class="plate-figure"><svg class="plate-chart" role="img" aria-labelledby="suite-bars-title" viewBox="0 0 640 156"><title id="suite-bars-title">Best cost by code</title><text class="group-label" x="0" y="24">Pt heptamer island</text><g><title>Sella: 5201.62</title><text class="code-label" x="148" y="47" text-anchor="end">Sella</text><rect class="suite-bar is-best" x="158" y="38" width="398.00" height="10"/><text class="num" x="564" y="47">5201.62</text></g><g><title>SoftSaddle: 10124.2</title><text class="code-label" x="148" y="69" text-anchor="end">SoftSaddle</text><rect class="suite-bar" x="158" y="60" width="204.48" height="10"/><text class="num" x="564" y="69">10124.2</text></g><g><title>rgsaddle: 10128</title><text class="code-label" x="148" y="91" text-anchor="end">rgsaddle</text><rect class="suite-bar" x="158" y="82" width="204.41" height="10"/><text class="num" x="564" y="91">10128</text></g><g><title>Eon svn: 1.34547e+06</title><text class="code-label" x="148" y="113" text-anchor="end">Eon svn</text><rect class="suite-bar" x="158" y="104" width="63.68" height="10"/><text class="num" x="564" y="113">1.34547e+06</text></g><g><title>eOn: 2e+08</title><text class="code-label" x="148" y="135" text-anchor="end">eOn</text><rect class="suite-bar" x="158" y="126" width="63.68" height="10"/><text class="num" x="564" y="135">2e+08</text></g></svg><figcaption>Best cost of each code. Each problem has its own scale. A longer bar is closer to the best.</figcaption></figure>
+   <p class="chart-files"><a href="../../_static/board/suite-saddle-search.svg">SVG file</a></p>
+   <div class="bench-export">
+   <figure class="bench-plot"><a href="../../_static/board/suite-saddle-search.svg"><picture><source srcset="../../_static/board/suite-saddle-search.webp" type="image/webp"><img src="../../_static/board/suite-saddle-search.png" alt="Saddle search best ranked cost" loading="lazy" decoding="async"></picture></a><figcaption>Saddle search best ranked cost. Select the plot for the full SVG.</figcaption></figure>
+   </div>
+   </div>
+   <h2>Leaderboard</h2>
+   <div class="bench-scroll">
+   <table class="bench-sortable leader" data-bench="codes">
+   <caption>A longer bar is closer to the best on that problem. Select a column heading to sort.</caption>
+   <thead><tr><th>Rank</th><th>Problem</th><th>Code</th><th title="Lowest cost for this code. A longer bar is closer to the best on that problem.">Best</th><th title="Median of this code&#x27;s costs on that problem.">Median</th><th title="Share of runs that finished.">Success</th><th title="Mean cost of the runs. A failure counts as twice the cap.">PAR-2</th></tr></thead><tbody>
+   <tr class="is-best group-start">
+   <td class="rank-cell"><span class="rank r1">1</span></td>
+   <td class="problem"><a href="saddle-search/pt-island.html">Pt heptamer island</a></td>
+   <td class="code"><a href="../codes/sella.html">Sella</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:100.0%"><i></i></span><span class="bar-num">5201.62</span></td>
+   <td class="num">5201.62</td>
+   <td class="num">75.0%</td>
+   <td class="num">5201.62</td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank r2">2</span></td>
+   <td class="problem"><a href="saddle-search/pt-island.html">Pt heptamer island</a></td>
+   <td class="code"><a href="../codes/softsaddle.html">SoftSaddle</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:51.4%"><i></i></span><span class="bar-num">10124.2</span></td>
+   <td class="num">423491</td>
+   <td class="num">0.0%</td>
+   <td class="num">10124.2</td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank r3">3</span></td>
+   <td class="problem"><a href="saddle-search/pt-island.html">Pt heptamer island</a></td>
+   <td class="code"><a href="../codes/rgsaddle.html">rgsaddle</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:51.4%"><i></i></span><span class="bar-num">10128</span></td>
+   <td class="num">10128</td>
+   <td class="num">0.0%</td>
+   <td class="num">10128</td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank">4</span></td>
+   <td class="problem"><a href="saddle-search/pt-island.html">Pt heptamer island</a></td>
+   <td class="code"><a href="../codes/eon-svn.html">Eon svn</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:16.0%"><i></i></span><span class="bar-num">1.34547e+06</span></td>
+   <td class="num">3.34149e+06</td>
+   <td class="num">—<sup>1</sup></td>
+   <td class="num">—<sup>2</sup></td>
+   </tr>
+   <tr>
+   <td class="rank-cell"><span class="rank">5</span></td>
+   <td class="problem"><a href="saddle-search/pt-island.html">Pt heptamer island</a></td>
+   <td class="code"><a href="../codes/eon.html">eOn</a></td>
+   <td class="num best"><span class="bar" aria-hidden="true" style="--w:16.0%"><i></i></span><span class="bar-num">2e+08</span></td>
+   <td class="num">2e+08</td>
+   <td class="num">0.0%</td>
+   <td class="num">2e+08</td>
+   </tr>
+   </tbody></table></div>
+   <p class="bench-note"><sup>1</sup> A dash in the success rate means that row did not record one.</p>
+   <p class="bench-note"><sup>2</sup> A dash in PAR-2 means that row has no PAR-2 score.</p>
+   <h2>Problems</h2>
    <div class="bench-scroll">
    <table class="bench-sortable" data-bench="problems">
    <caption>Problems in this suite.</caption>
@@ -18,54 +84,6 @@
    </tr>
    </tbody></table></div>
    <p class="bench-note"><sup>1</sup> The problem file does not state a run count, and the ranked rows do not agree. They record 2 on eOn; 16 on Sella; 5000 on softsaddle; 20000 on rgsaddle.</p>
-   <h2>Results by code</h2>
-   <p>Best is the lowest cost for that code on that problem. Median is the median of that code's costs. PAR-2 is the mean cost of the runs. A run that finishes counts as the calls it used. A run that fails counts as twice the cap. An archived row is ranked by the average it published. The success rate is the share of runs that finished.</p>
-   <div class="bench-scroll">
-   <table class="bench-sortable" data-bench="codes">
-   <caption>One row per code on each problem.</caption>
-   <thead><tr><th>Problem</th><th>Code</th><th>Best</th><th>Median</th><th>Success rate</th><th>Rows</th></tr></thead><tbody>
-   <tr>
-   <td>Pt heptamer island</td>
-   <td><a href="../codes/sella.html">Sella</a></td>
-   <td class="num">5201.62</td>
-   <td class="num">5201.62</td>
-   <td class="num">75.0%</td>
-   <td class="num">1</td>
-   </tr>
-   <tr>
-   <td>Pt heptamer island</td>
-   <td><a href="../codes/softsaddle.html">SoftSaddle</a></td>
-   <td class="num">10124.2</td>
-   <td class="num">423491</td>
-   <td class="num">0.0%</td>
-   <td class="num">5</td>
-   </tr>
-   <tr>
-   <td>Pt heptamer island</td>
-   <td><a href="../codes/rgsaddle.html">rgsaddle</a></td>
-   <td class="num">10128</td>
-   <td class="num">10128</td>
-   <td class="num">0.0%</td>
-   <td class="num">4</td>
-   </tr>
-   <tr>
-   <td>Pt heptamer island</td>
-   <td><a href="../codes/eon-svn.html">Eon svn</a></td>
-   <td class="num">1.34547e+06</td>
-   <td class="num">3.34149e+06</td>
-   <td class="num">—</td>
-   <td class="num">9</td>
-   </tr>
-   <tr>
-   <td>Pt heptamer island</td>
-   <td><a href="../codes/eon.html">eOn</a></td>
-   <td class="num">2e+08</td>
-   <td class="num">2e+08</td>
-   <td class="num">0.0%</td>
-   <td class="num">1</td>
-   </tr>
-   </tbody></table></div>
-   <figure class="bench-plot"><a href="../../_static/board/suite-saddle-search.svg"><picture><source srcset="../../_static/board/suite-saddle-search.webp" type="image/webp"><img src="../../_static/board/suite-saddle-search.png" alt="Saddle search best ranked cost" loading="lazy" decoding="async"></picture></a><figcaption>Saddle search best ranked cost. Select the plot for the full SVG.</figcaption></figure>
    </section>
 #+end_export
 

@@ -1,0 +1,167 @@
+{
+  "problems": {
+    "double-ended-saddle-search/lj38": [
+      {
+        "kind": "success",
+        "problem": "double-ended-saddle-search/lj38",
+        "svg": "success-double-ended-saddle-search-lj38.svg",
+        "pdf": "success-double-ended-saddle-search-lj38.pdf",
+        "caption": "Success rate on LJ38 double-ended saddle, in rank order. The rate is the share of runs that finished. 8 ranked rows did not record a success rate and are not drawn."
+      }
+    ],
+    "double-ended-saddle-search/lj38_2ts_separation": [
+      {
+        "kind": "success",
+        "problem": "double-ended-saddle-search/lj38_2ts_separation",
+        "svg": "success-double-ended-saddle-search-lj38_2ts_separation.svg",
+        "pdf": "success-double-ended-saddle-search-lj38_2ts_separation.pdf",
+        "caption": "Success rate on Lennard-Jones 38 transition-state separation, in rank order. The rate is the share of runs that finished. 2 ranked rows did not record a success rate and are not drawn."
+      }
+    ],
+    "double-ended-saddle-search/pt-island": [
+      {
+        "kind": "success",
+        "problem": "double-ended-saddle-search/pt-island",
+        "svg": "success-double-ended-saddle-search-pt-island.svg",
+        "pdf": "success-double-ended-saddle-search-pt-island.pdf",
+        "caption": "Success rate on Pt heptamer island, in rank order. The rate is the share of runs that finished. 10 ranked rows did not record a success rate and are not drawn."
+      }
+    ],
+    "globalopt/lj150": [
+      {
+        "kind": "success",
+        "problem": "globalopt/lj150",
+        "svg": "success-globalopt-lj150.svg",
+        "pdf": "success-globalopt-lj150.pdf",
+        "caption": "Success rate on Lennard-Jones 150, in rank order. The rate is the share of runs that finished. 2 ranked rows did not record a success rate and are not drawn."
+      }
+    ],
+    "globalopt/lj38": [
+      {
+        "kind": "success",
+        "problem": "globalopt/lj38",
+        "svg": "success-globalopt-lj38.svg",
+        "pdf": "success-globalopt-lj38.pdf",
+        "caption": "Success rate on Lennard-Jones 38 global minimum, in rank order. The rate is the share of runs that finished. 5 ranked rows did not record a success rate and are not drawn."
+      }
+    ],
+    "globalopt/lj75": [
+      {
+        "kind": "success",
+        "problem": "globalopt/lj75",
+        "svg": "success-globalopt-lj75.svg",
+        "pdf": "success-globalopt-lj75.pdf",
+        "caption": "Success rate on Lennard-Jones 75, in rank order. The rate is the share of runs that finished. 1 ranked rows did not record a success rate and are not drawn."
+      }
+    ],
+    "globalopt/lj98": [
+      {
+        "kind": "success",
+        "problem": "globalopt/lj98",
+        "svg": "success-globalopt-lj98.svg",
+        "pdf": "success-globalopt-lj98.pdf",
+        "caption": "Success rate on Lennard-Jones 98, in rank order. The rate is the share of runs that finished. 2 ranked rows did not record a success rate and are not drawn."
+      }
+    ],
+    "hTST/Al": [
+      {
+        "kind": "success",
+        "problem": "hTST/Al",
+        "svg": "success-hTST-Al.svg",
+        "pdf": "success-hTST-Al.pdf",
+        "caption": "Success rate on EAM aluminum, in rank order. The rate is the share of runs that finished. 2 ranked rows did not record a success rate and are not drawn."
+      }
+    ],
+    "lowest-eigenvector/lj38": [
+      {
+        "kind": "success",
+        "problem": "lowest-eigenvector/lj38",
+        "svg": "success-lowest-eigenvector-lj38.svg",
+        "pdf": "success-lowest-eigenvector-lj38.pdf",
+        "caption": "Success rate on Lennard-Jones 38, in rank order. The rate is the share of runs that finished. 9 ranked rows did not record a success rate and are not drawn."
+      }
+    ],
+    "minimization/lj38": [
+      {
+        "kind": "success",
+        "problem": "minimization/lj38",
+        "svg": "success-minimization-lj38.svg",
+        "pdf": "success-minimization-lj38.pdf",
+        "caption": "Success rate on Lennard-Jones 38 clusters, in rank order. The rate is the share of runs that finished. 17 ranked rows did not record a success rate and are not drawn."
+      }
+    ],
+    "minimization/lj38-noise": [
+      {
+        "kind": "success",
+        "problem": "minimization/lj38-noise",
+        "svg": "success-minimization-lj38-noise.svg",
+        "pdf": "success-minimization-lj38-noise.pdf",
+        "caption": "Success rate on Lennard-Jones 38 clusters with Gaussian force noise, in rank order. The rate is the share of runs that finished. 0 ranked rows did not record a success rate and are not drawn."
+      }
+    ],
+    "minimization/morse-bulk": [
+      {
+        "kind": "success",
+        "problem": "minimization/morse-bulk",
+        "svg": "success-minimization-morse-bulk.svg",
+        "pdf": "success-minimization-morse-bulk.pdf",
+        "caption": "Success rate on Morse bulk, in rank order. The rate is the share of runs that finished. 11 ranked rows did not record a success rate and are not drawn."
+      }
+    ],
+    "mlopt/C2H4": [
+      {
+        "kind": "success",
+        "problem": "mlopt/C2H4",
+        "svg": "success-mlopt-C2H4.svg",
+        "pdf": "success-mlopt-C2H4.pdf",
+        "caption": "Success rate on Ethene, in rank order. The rate is the share of runs that finished. 6 ranked rows did not record a success rate and are not drawn."
+      }
+    ],
+    "mlopt/emt-pt38": [
+      {
+        "kind": "success",
+        "problem": "mlopt/emt-pt38",
+        "svg": "success-mlopt-emt-pt38.svg",
+        "pdf": "success-mlopt-emt-pt38.pdf",
+        "caption": "Success rate on EMT Pt 38 nanoparticle, in rank order. The rate is the share of runs that finished. 6 ranked rows did not record a success rate and are not drawn."
+      }
+    ],
+    "neb/Pt-heptamer": [
+      {
+        "kind": "success",
+        "problem": "neb/Pt-heptamer",
+        "svg": "success-neb-Pt-heptamer.svg",
+        "pdf": "success-neb-Pt-heptamer.pdf",
+        "caption": "Success rate on Pt heptamer island, in rank order. The rate is the share of runs that finished. 5 ranked rows did not record a success rate and are not drawn."
+      }
+    ],
+    "saddle-search/pt-island": [
+      {
+        "kind": "success",
+        "problem": "saddle-search/pt-island",
+        "svg": "success-saddle-search-pt-island.svg",
+        "pdf": "success-saddle-search-pt-island.pdf",
+        "caption": "Success rate on Pt heptamer island, in rank order. The rate is the share of runs that finished. 12 ranked rows did not record a success rate and are not drawn."
+      }
+    ],
+    "tsopt/LJ38": [
+      {
+        "kind": "success",
+        "problem": "tsopt/LJ38",
+        "svg": "success-tsopt-LJ38.svg",
+        "pdf": "success-tsopt-LJ38.pdf",
+        "caption": "Success rate on Lennard-Jones 38, in rank order. The rate is the share of runs that finished. 6 ranked rows did not record a success rate and are not drawn."
+      }
+    ],
+    "tsopt/pt-island": [
+      {
+        "kind": "success",
+        "problem": "tsopt/pt-island",
+        "svg": "success-tsopt-pt-island.svg",
+        "pdf": "success-tsopt-pt-island.pdf",
+        "caption": "Success rate on Pt heptamer island, in rank order. The rate is the share of runs that finished. 6 ranked rows did not record a success rate and are not drawn."
+      }
+    ]
+  },
+  "codes": {}
+}

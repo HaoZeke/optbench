@@ -1649,6 +1649,24 @@ def summary_table(problems: list[dict], codes: list[str], link) -> str:
     return "\n".join(lines)
 
 
+def _winner_html(row: dict) -> str:
+    label = str(row.get("label") or "").strip()
+    if not label:
+        return ""
+    score = ""
+    kind = ""
+    for key, name in (("par2_mean", "PAR-2"), ("published", "Published"), ("rank_cost", "Cost")):
+        if row.get(key) is not None:
+            score = _format_number(row.get(key))
+            kind = name
+            break
+    parts = ['<div class="winner">', f'<p class="winner-name">{_cell(label)}</p>']
+    if score:
+        parts.append(f'<p class="winner-score"><small>{_cell(kind)}</small>{_cell(score)}</p>')
+    parts.append("</div>")
+    return "".join(parts)
+
+
 def headline_table(problem: dict) -> str:
     """One ranked row: the lowest cost."""
     per_image = _show_per_image(problem)
@@ -1664,7 +1682,9 @@ def headline_table(problem: dict) -> str:
     else:
         lines.append(f'<tr><td colspan="{len(headers)}">No ranked row.</td></tr>')
     lines.append("</tbody></table></div>")
-    return "\n".join(lines)
+    winner = _winner_html(ranked[0]) if ranked else ""
+    body = "\n".join(lines)
+    return f"{winner}\n{body}" if winner else body
 
 
 def render_problem_section(
@@ -1673,17 +1693,23 @@ def render_problem_section(
     *,
     asset_prefix: str = "_static/board",
     preamble: str = "",
+    leaderboard: str = "",
+    metric_line: str = "",
+    success_note: str = "",
     section_id: str | None = None,
     unparsed: list[dict] | None = None,
     heading: str = "h2",
     show_heading: bool = True,
 ) -> str:
-    """Family tables, the overall table, and the performance-profile plot."""
+    """Stat cards, the leaderboard, charts, then the family and overall tables."""
     return _table(
         problem,
         plots,
         asset_prefix=asset_prefix,
         preamble=preamble,
+        leaderboard=leaderboard,
+        metric_line=metric_line,
+        success_note=success_note,
         section_id=section_id,
         unparsed=unparsed,
         heading=heading,
@@ -1692,13 +1718,7 @@ def render_problem_section(
 
 
 def _caption(per_image: bool) -> str:
-    caption = (
-        "One row is one code, one version, and one method. A lower cost is better. "
-        "PAR-2 counts a finished run as the calls it used and a failed run as twice the cap. "
-        "An archived row shows the average it published. "
-        "Hessians is the mean analytic Hessian count. "
-        "FD calls is that count times one force call per coordinate."
-    )
+    caption = "One row is one code, one version, and one method. A lower cost is better."
     if per_image:
         caption += " The per-image mean divides the total by the number of moving images."
     return caption
@@ -1728,6 +1748,9 @@ def _table(
     *,
     asset_prefix: str = "_static/board",
     preamble: str = "",
+    leaderboard: str = "",
+    metric_line: str = "",
+    success_note: str = "",
     section_id: str | None = None,
     unparsed: list[dict] | None = None,
     heading: str = "h2",
@@ -1744,31 +1767,62 @@ def _table(
         lines.append(f"<{heading}>{_cell(problem['title'])}</{heading}>")
     if preamble:
         lines.append(preamble)
-    lines.append(
-        "<p>Rows are ranked by cost inside each method family and on one overall table. "
-        "A run that used fewer starts than the full set, or that is not the standard method, stays off the table.</p>"
-    )
-    lead = gap_paragraph(problem, unparsed)
-    if lead:
-        lines.append(lead)
+    if metric_line:
+        lines.append(metric_line)
     slug = _slug(problem["id"])
     prefix = asset_prefix.rstrip("/")
+    from .site_charts import cost_distribution_svg, profile_svg
     from .site_pages import profile_worth_showing
 
     display = str(problem.get("title") or problem.get("id") or "")
+    chart_bits: list[str] = []
+    drawn = profile_svg(problem)
+    if drawn:
+        chart_bits.append(drawn)
+    costs = cost_distribution_svg(ranked, display)
+    if costs:
+        chart_bits.append(costs)
+    exports: list[str] = []
+    file_links: list[str] = []
     for kind, label in (("profile", "Performance profile"), ("cost", "Cost and success")):
         name = f"{slug}-{kind}.svg"
         if kind == "profile" and not profile_worth_showing(problem):
             if problem.get("profile") or name in plots:
-                lines.append(
-                    "<p>A performance profile compares at least two codes. "
+                chart_bits.append(
+                    "<p class=\"bench-note\">A performance profile needs at least two curves. "
                     "This problem has fewer, so that plot is omitted.</p>"
                 )
             continue
         if name in plots:
-            lines.append(_plot_html(prefix, name, label, display))
+            exports.append(_plot_html(prefix, name, label, display))
+            file_links.append(f'<a href="{_cell(f"{prefix}/{name}")}">{_cell(label)} SVG</a>')
     if problem.get("profile_gap") and f"{slug}-profile.svg" not in plots:
-        lines.append(f'<p class="bench-gaps">{_cell(problem["profile_gap"])}</p>')
+        chart_bits.append(f'<p class="bench-gaps">{_cell(problem["profile_gap"])}</p>')
+    if file_links:
+        chart_bits.append('<p class="chart-files">' + " ".join(file_links) + "</p>")
+    if exports:
+        chart_bits.append('<div class="bench-export">' + "".join(exports) + "</div>")
+    from .paper_embed import problem_charts
+
+    root = Path(__file__).resolve().parents[1]
+    paper_prefix = prefix[: prefix.rfind("board")] + "paper" if "board" in prefix else prefix
+    paper = problem_charts(root, problem["id"], paper_prefix)
+    if paper or chart_bits:
+        lines.append("<h2>Charts</h2>")
+        if paper:
+            lines.append(paper)
+        if chart_bits:
+            lines.append('<div class="lead-charts">')
+            lines.extend(chart_bits)
+            lines.append("</div>")
+    if leaderboard:
+        lines.append(leaderboard)
+    lines.append(
+        "<p class=\"bench-note\">The tables below list every ranked row, by method family and overall.</p>"
+    )
+    lead = gap_paragraph(problem, unparsed)
+    if lead:
+        lines.append(lead)
     grouped: dict[str, list[dict]] = defaultdict(list)
     for row in ranked:
         grouped[str(row.get("family") or "")].append(row)
@@ -1806,6 +1860,8 @@ def _table(
             label = _safe_name(row) or str(row.get("entry") or row.get("path") or "")
             lines.append(f"<li>{_cell(label)}: {_cell(row.get('note') or '')}</li>")
         lines.append("</ul>")
+    if success_note:
+        lines.append(success_note)
     lines.append("</section>")
     return "\n".join(lines)
 
@@ -1867,9 +1923,17 @@ def write_board(root: Path, output: Path) -> dict:
             written_names.add(Path(path).name)
     ordered = sorted(document["problems"].values(), key=_problem_order)
     if ordered:
+        from .site_pages import human_title
+
+        loaded = load_all(root / "problems") if (root / "problems").is_dir() else {}
+        by_slug: dict[str, list] = {}
+        for item in loaded.values():
+            by_slug.setdefault(str(item.get("problem") or ""), []).append(item)
         sections.append('<section class="bench" id="headlines">')
         for problem in ordered:
-            sections.append(f"<h2>{_cell(problem.get('title') or problem['id'])}</h2>")
+            toml = loaded.get(problem["id"])
+            heading = human_title(toml, by_slug) if toml else str(problem.get("title") or problem["id"])
+            sections.append(f"<h2>{_cell(heading)}</h2>")
             sections.append(headline_table(problem))
         sections.append("</section>")
     _drop_unwritten(plot_dir, written_names)
