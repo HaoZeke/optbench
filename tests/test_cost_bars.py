@@ -9,6 +9,7 @@ from optbench.site_charts import (
     decade_ceil,
     decade_floor,
     log_cost_fraction,
+    spans_a_decade,
 )
 
 
@@ -67,3 +68,18 @@ def test_a_mixed_problem_draws_only_the_positive_costs():
     assert chart.count("<rect ") == 1
     assert "left off the axis" in chart
     assert AXIS_TITLE in chart
+
+
+def test_a_log_scale_needs_a_full_decade():
+    assert spans_a_decade([100.0, 1000.0])
+    assert not spans_a_decade([100.0, 999.0])
+    assert not spans_a_decade([0.0, 1000.0])
+    assert not spans_a_decade([1000.0])
+
+
+def test_the_ends_of_the_axis_are_exact():
+    assert decade_floor(999.0) == 2
+    assert decade_ceil(1001.0) == 4
+    assert log_cost_fraction(100.0, 2, 4) == 0.0
+    assert log_cost_fraction(10000.0, 2, 4) == 1.0
+    assert 0.0 < log_cost_fraction(1000.0, 2, 4) < 1.0

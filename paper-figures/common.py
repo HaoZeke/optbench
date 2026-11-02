@@ -393,7 +393,6 @@ def write_part(name: str, problems: dict, codes: dict | None = None) -> None:
 
 def log_scale(values: list[float]) -> bool:
     """Same display rule as the site cost chart. Not a scoring cutoff."""
-    positive = [value for value in values if value > 0]
-    if len(positive) != len(values) or len(values) < 2:
-        return False
-    return max(values) / min(values) >= 8
+    from optbench.site_charts import spans_a_decade
+
+    return spans_a_decade(values)

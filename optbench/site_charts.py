@@ -31,7 +31,8 @@ _READ_OFF = (
     "and a cost at or below zero is left off the axis."
 )
 _READ_NONE = "A cost at or below zero is left off the log scale, so this problem has no bar."
-_NOISE = 1e-9
+# optbench.css has one colour class per highlighted code, .s0 to .s5.
+PALETTE_SIZE = 6
 _SUPERS = str.maketrans("-0123456789", "⁻⁰¹²³⁴⁵⁶⁷⁸⁹")
 
 
@@ -39,32 +40,39 @@ def _positive(value: float) -> bool:
     return math.isfinite(value) and value > 0.0
 
 
-def _near(left: float, right: float) -> bool:
-    return math.isclose(left, right, rel_tol=_NOISE, abs_tol=0.0)
-
-
 def decade_floor(value: float) -> int:
     """Largest integer k with 10**k <= value.
 
-    ``floor(log10(1000))`` can come back one short. The power is checked,
-    and only a 1e-9 relative miss at the boundary is absorbed.
+    ``floor(log10(1000))`` can come back one short, so the guess is
+    corrected by comparing against the float power itself. The comparison
+    is exact, so no tolerance is needed.
     """
     if not _positive(value):
         raise ValueError("decade_floor expects a positive finite cost")
     k = math.floor(math.log10(value))
-    if _near(value, 10.0 ** (k + 1)):
-        return k + 1
-    if 10.0 ** k > value and not _near(value, 10.0 ** k):
-        return k - 1
+    while 10.0 ** (k + 1) <= value:
+        k += 1
+    while 10.0 ** k > value:
+        k -= 1
     return k
 
 
 def decade_ceil(value: float) -> int:
     """Smallest integer k with 10**k >= value."""
     k = decade_floor(value)
-    if value <= 10.0 ** k or _near(value, 10.0 ** k):
-        return k
-    return k + 1
+    return k if 10.0 ** k == value else k + 1
+
+
+def spans_a_decade(values) -> bool:
+    """True when the positive values cover at least one factor of ten.
+
+    That is the width of one decade on the cost bar axis, so a chart switches
+    to a log scale at the same point where the bars gain a second decade.
+    """
+    values = [float(value) for value in values]
+    if len(values) < 2 or not all(_positive(value) for value in values):
+        return False
+    return max(values) >= 10.0 * min(values)
 
 
 def cost_decades(values) -> tuple[int, int] | None:
@@ -84,13 +92,15 @@ def log_cost_fraction(value: float, k_lo: int, k_hi: int) -> float | None:
     if not _positive(value):
         return None
     if k_hi == k_lo:
+        # Every positive cost equals 10**k_lo, so every bar has the same zero length.
         return 0.0
-    raw = (math.log10(value) - float(k_lo)) / float(k_hi - k_lo)
-    if abs(raw) <= _NOISE:
+    # The ends are exact powers of ten. Compare them directly, because
+    # log10 of a power of ten can miss the integer by one ulp.
+    if value == 10.0 ** k_lo:
         return 0.0
-    if abs(raw - 1.0) <= _NOISE:
+    if value == 10.0 ** k_hi:
         return 1.0
-    return raw
+    return (math.log10(value) - float(k_lo)) / float(k_hi - k_lo)
 
 
 def decade_label(k: int) -> str:
@@ -130,7 +140,7 @@ def profile_svg(problem: dict) -> str:
         return ""
     area = profile.get("area_log10") or {}
     labels = sorted(rho, key=lambda label: (-float(area.get(label) or 0.0), label.lower()))
-    highlight = labels if len(labels) <= 6 else labels[:6]
+    highlight = labels[:PALETTE_SIZE]
     muted = [label for label in labels if label not in highlight]
     width, height = 640, 268
     left, right, top, bottom = 52, 16, 14, 36
@@ -223,11 +233,12 @@ def cost_distribution_svg(rows: list[dict], title: str = "") -> str:
     else:
         used = positive
         omitted = missing + (len(finite) - len(positive))
-        scale = "log" if len(used) >= 2 and min(used) > 0 and max(used) / min(used) >= 8 else "linear"
+        scale = "log" if spans_a_decade(used) else "linear"
     if len(used) < 2:
         return ""
     lo, hi = min(used), max(used)
-    bins = 1 if hi == lo else (8 if len(used) >= 12 else max(4, min(8, len(used))))
+    # Sturges, J. Am. Stat. Assoc. 21, 65 (1926): ceil(log2 n) + 1 bins.
+    bins = 1 if hi == lo else math.ceil(math.log2(len(used))) + 1
     if scale == "log" and hi > lo:
         log_lo, log_hi = math.log(lo), math.log(hi)
         edges = [math.exp(log_lo + (log_hi - log_lo) * index / bins) for index in range(bins + 1)]
@@ -269,7 +280,7 @@ def cost_distribution_svg(rows: list[dict], title: str = "") -> str:
         tick += tick_step
     slot = inner_w / bins
     for index, count in enumerate(counts):
-        bar_h = 0 if count == 0 else max(1.5, inner_h * count / peak)
+        bar_h = inner_h * count / peak
         x = left + index * slot + slot * 0.12
         bar_w = slot * 0.76
         y = top + inner_h - bar_h

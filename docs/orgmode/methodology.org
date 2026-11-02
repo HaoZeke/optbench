@@ -69,7 +69,7 @@ A row that did not record a success rate is left off the chart.
 * Cost distribution
 
 The cost distribution counts ranked rows in bins of their rank cost.
-Bins are logarithmic when every cost is positive and the range is at least eight to one.
+Bins are logarithmic when every cost is positive and the largest is at least ten times the smallest.
 Otherwise the bins are linear.
 A row with no cost on that scale is left off the chart, and the caption says how many.
 
