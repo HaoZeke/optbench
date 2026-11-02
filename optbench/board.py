@@ -1459,7 +1459,7 @@ def family_cells(row: dict) -> list[tuple[str, str]]:
 def _row_cells(row: dict, per_image: bool) -> str:
     headers = _headers({"ranked": [{"mean_per_image": 0}] if per_image else []})
     return "".join(
-        f'<td data-field="{field}" data-label="{_cell(header)}">{_cell(value)}</td>'
+        f'<td data-label="{_cell(header)}" data-field="{field}">{_cell(value)}</td>'
         for header, (field, value) in zip(headers, ranked_cells(row, per_image))
     )
 
@@ -1741,7 +1741,7 @@ def _family_table(problem: dict, family_id: str, rows: list[dict]) -> str:
     ]
     for row in rows:
         cells = "".join(
-            f'<td data-field="{field}" data-label="{_cell(header)}">{_cell(value)}</td>'
+            f'<td data-label="{_cell(header)}" data-field="{field}">{_cell(value)}</td>'
             for header, (field, value) in zip(headers, family_cells(row))
         )
         lines.append(f"<tr>{cells}</tr>")

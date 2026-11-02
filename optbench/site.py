@@ -559,7 +559,7 @@ def _code_page_html(name: str, pins: list[dict], document: dict, registry: list[
             )
             for header, (field, value) in zip(headers, cells.items()):
                 lines.append(
-                    f'<td data-field="{field}" data-label="{html.escape(header)}">{html.escape(value)}</td>'
+                    f'<td data-label="{html.escape(header)}" data-field="{field}">{html.escape(value)}</td>'
                 )
             lines.append("</tr>")
         lines.append("</tbody></table></div>")
