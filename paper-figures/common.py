@@ -164,6 +164,12 @@ def records_for_row(row: dict, by_stem: dict[str, list[dict]]) -> list[dict]:
 # Journal single column, and a full text line when the labels need it.
 COLUMN_IN = 3.5
 TEXT_IN = 7.05
+# A categorical figure is its labels, a data region, and this frame for the
+# y ticks, their padding, and the overhang of the last x tick label.
+FRAME_IN = 0.78
+# A label wider than this pushes a full-text-line figure's data region below
+# one column, so it wraps.
+LABEL_ROOM_IN = TEXT_IN - COLUMN_IN - FRAME_IN
 
 
 def apply_style() -> None:
@@ -253,50 +259,63 @@ def _install_compact_svg_markers(min_points: int = 24) -> None:
     renderer._optbench_compact = True
 
 
-def fit_labels(labels: list[str], fontsize: float = 7.0, max_in: float = 3.05) -> tuple[list[str], float]:
-    """Wrap a label only when it is wider than the space beside a column."""
+def fit_labels(labels: list[str], max_in: float = LABEL_ROOM_IN) -> tuple[list[str], float, float]:
+    """Wrap the labels only when one is wider than the room beside a column.
+
+    The wrap width runs down one character at a time from the longest label
+    to its longest word, and the first width that fits is kept, so a label
+    breaks no earlier than it must. Returns the labels, the widest label in
+    inches, and the line advance of the tick label font in inches.
+    """
     import textwrap
 
     import matplotlib.pyplot as plt
 
-    def measure(items: list[str]) -> float:
-        fig = plt.figure(figsize=(1, 1))
-        fig.canvas.draw()
-        renderer = fig.canvas.get_renderer()
-        widest = 0.0
-        for label in items:
-            artist = fig.text(0, 0, label, fontsize=fontsize)
-            widest = max(widest, artist.get_window_extent(renderer).width / fig.dpi)
-            artist.remove()
-        plt.close(fig)
-        return widest
+    fontsize = plt.rcParams["ytick.labelsize"]
+    fig = plt.figure(figsize=(1, 1))
+    fig.canvas.draw()
+    renderer = fig.canvas.get_renderer()
 
+    def extent(label: str):
+        artist = fig.text(0, 0, label, fontsize=fontsize)
+        box = artist.get_window_extent(renderer)
+        artist.remove()
+        return box.width / fig.dpi, box.height / fig.dpi
+
+    def measure(items: list[str]) -> float:
+        return max((extent(label)[0] for label in items), default=0.0)
+
+    line_in = extent("Ag\nAg")[1] - extent("Ag")[1]
     wrapped = list(labels)
     inches = measure(wrapped)
-    width_chars = 46
-    while inches > max_in and width_chars >= 22:
+    width = max((len(label) for label in labels), default=0) - 1
+    narrowest = max((len(word) for label in labels for word in label.split()), default=1)
+    while inches > max_in and width >= narrowest:
         wrapped = [
-            textwrap.fill(label, width=width_chars, break_long_words=False, break_on_hyphens=False)
+            textwrap.fill(label, width=width, break_long_words=False, break_on_hyphens=False)
             for label in labels
         ]
         inches = measure(wrapped)
-        if inches <= max_in:
-            break
-        width_chars -= 6
-    return wrapped, inches
+        width -= 1
+    plt.close(fig)
+    return wrapped, inches, line_in
 
 
-def categorical_figure(n_rows: int, labels: list[str], legend_rows: int = 0):
-    """A column-width data region, widened so the recorded labels stay whole."""
+def categorical_figure(n_rows: int, labels: list[str], legend_rows: int = 0, min_row_in: float = 0.0):
+    """A column-width data region, widened so the recorded labels stay whole.
+
+    Each row gets its label lines and one empty line, so neighbouring labels
+    never touch. A caller whose marks need more height per row passes it as
+    min_row_in.
+    """
     import matplotlib.pyplot as plt
 
-    wrapped, label_in = fit_labels(labels)
-    extra_lines = sum(label.count("\n") for label in wrapped)
-    units = n_rows + extra_lines
-    row = 0.32 if units > 12 else 0.46
-    width = label_in + COLUMN_IN + 0.78
+    wrapped, label_in, line_in = fit_labels(labels)
+    label_lines = sum(label.count("\n") + 1 for label in wrapped)
+    rows_in = max(n_rows * min_row_in, (label_lines + n_rows) * line_in)
+    width = label_in + COLUMN_IN + FRAME_IN
     width = min(TEXT_IN, max(width, COLUMN_IN + 1.5))
-    height = 0.62 + 0.36 * legend_rows + row * units
+    height = 0.62 + 0.36 * legend_rows + rows_in
     fig, ax = plt.subplots(figsize=(width, max(2.2, height)), layout="constrained")
     return fig, ax, wrapped
 
@@ -324,20 +343,44 @@ def _standalone_svg(path: Path) -> None:
     path.write_text(text, encoding="utf-8")
 
 
+CAPTION_PT = 6
+CAPTION_FONT = "helv"
+
+
+def caption_lines(caption: str, width_pt: float) -> list[str]:
+    """Break the caption between words where the next word would pass width_pt.
+
+    Each line is measured in the caption font with the space that the PDF
+    text box counts after every word, so the box sets the lines as given.
+    """
+    import pymupdf
+
+    lines: list[str] = []
+    line = ""
+    for word in caption.split():
+        trial = f"{line} {word}" if line else word
+        if line and pymupdf.get_text_length(trial + " ", fontname=CAPTION_FONT, fontsize=CAPTION_PT) > width_pt:
+            lines.append(line)
+            line = word
+        else:
+            line = trial
+    if line:
+        lines.append(line)
+    return lines or [caption]
+
+
 def _stamp_caption(pdf_path: Path, caption: str) -> None:
     """Add the caption under the saved figure.
 
     A tight bounding box repositions an outside legend onto a caption drawn
     in the same figure, so the caption is appended to the finished page.
     """
-    import textwrap
-
     import pymupdf
 
     src = pymupdf.open(pdf_path)
     page_src = src[0]
     width = float(page_src.rect.width)
-    lines = textwrap.wrap(caption, width=max(36, int(width / 3.35))) or [caption]
+    lines = caption_lines(caption, width - 2)
     leading = 8
     extra = 8 + leading * len(lines)
     out = pymupdf.open()
@@ -347,8 +390,8 @@ def _stamp_caption(pdf_path: Path, caption: str) -> None:
     unused = page.insert_textbox(
         rect,
         "\n".join(lines),
-        fontsize=6,
-        fontname="helv",
+        fontsize=CAPTION_PT,
+        fontname=CAPTION_FONT,
         color=(28 / 255, 20 / 255, 12 / 255),
         align=0,
     )

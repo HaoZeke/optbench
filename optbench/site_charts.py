@@ -28,11 +28,18 @@ AXIS_TITLE = "cost (force calls, log scale)"
 _READ = "A shorter bar is a lower cost on a log scale shared by the codes of this problem."
 _READ_OFF = (
     "A shorter bar is a lower cost on a log scale shared by the codes of this problem, "
-    "and a cost at or below zero is left off the axis."
+    "and a cost at or below zero is left off the scale."
 )
 _READ_NONE = "A cost at or below zero is left off the log scale, so this problem has no bar."
 # optbench.css has one colour class per highlighted code, .s0 to .s5.
 PALETTE_SIZE = 6
+# The profile captions name that count, so the two sit together.
+PALETTE_SENTENCE = "Colored lines are the six largest areas."
+# A profile fraction runs from 0 to 1. Above 1 the chart keeps matplotlib's
+# default data margin (axes.ymargin, 5% of the range), so a curve at 1 stays
+# off the frame. The paper profiles use the same margin.
+PROFILE_MARGIN = 0.05
+PROFILE_TOP = 1.0 + PROFILE_MARGIN
 _SUPERS = str.maketrans("-0123456789", "⁻⁰¹²³⁴⁵⁶⁷⁸⁹")
 
 
@@ -151,8 +158,8 @@ def profile_svg(problem: dict) -> str:
         return left + (math.log(tau) - math.log(lo)) / (math.log(hi) - math.log(lo)) * inner_w
 
     def y_of(fraction: float) -> float:
-        fraction = min(1.05, max(0.0, fraction))
-        return top + (1.05 - fraction) / 1.05 * inner_h
+        fraction = min(PROFILE_TOP, max(0.0, fraction))
+        return top + (PROFILE_TOP - fraction) / PROFILE_TOP * inner_h
 
     parts: list[str] = []
     for fraction in (0.0, 0.5, 1.0):
@@ -206,7 +213,7 @@ def profile_svg(problem: dict) -> str:
     display = str(problem.get("title") or problem.get("id") or "this problem")
     caption = "Performance profile. Higher means more starts solved within that cost ratio."
     if muted:
-        caption += f" Colored lines are the six largest areas. Thin lines are the other {len(muted)}."
+        caption += f" {PALETTE_SENTENCE} Thin lines are the other {len(muted)}."
     slug = _slug(str(problem.get("id") or display)) + "-profile"
     return _figure(slug, f"Performance profile for {display}", (width, height, "".join(parts)), _esc(caption), legend)
 

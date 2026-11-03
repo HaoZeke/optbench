@@ -30,6 +30,7 @@ def main() -> None:
     from optbench.board import _aligned_costs, _geometry_key
     from optbench.families import FAMILIES, family_title
     from optbench.profile import performance_profile, profile_cost
+    from optbench.site_charts import PALETTE_SENTENCE, PALETTE_SIZE, PROFILE_MARGIN, PROFILE_TOP
 
     common.apply_style()
     import matplotlib.pyplot as plt
@@ -71,12 +72,12 @@ def main() -> None:
                 "the best finite cost in this family. "
                 "Tau is 1, 2, 4, 8, and 16. "
                 "An unsolved start stays in the denominator and does not cross a finite tau. "
-                "Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002."
+                "Dolan, E. D. and Moré, J. J., Math. Program. 91:201-213, 2002."
             )
             areas = profile["area_log10"]
             ranked_names = sorted(areas, key=lambda name: areas[name], reverse=True)
-            colored = set(ranked_names[:6])
-            n_labeled = min(6, len(ranked_names))
+            colored = set(ranked_names[:PALETTE_SIZE])
+            n_labeled = min(PALETTE_SIZE, len(ranked_names))
             ncol = 1 if n_labeled > 4 else 2
             legend_rows = (n_labeled + ncol - 1) // max(ncol, 1)
             fig, ax = plt.subplots(
@@ -98,7 +99,7 @@ def main() -> None:
                 ax.plot(taus, values, linestyle="none", marker="o", markersize=2.4, color=color)
             ax.set_xscale("log")
             ax.set_xlim(min(taus), max(taus))
-            ax.set_ylim(-0.02, 1.05)
+            ax.set_ylim(-PROFILE_MARGIN, PROFILE_TOP)
             ax.set_xticks(list(taus))
             ax.set_xticklabels([str(int(tau)) for tau in taus])
             ax.set_xlabel("Cost ratio")
@@ -109,8 +110,8 @@ def main() -> None:
             handles, labels = ax.get_legend_handles_labels()
             if handles:
                 fig.legend(handles, labels, loc="outside lower center", ncol=ncol, frameon=False, fontsize=5.5)
-            if len(ranked_names) > 6:
-                caption += " Colored lines are the six largest areas. The other curves are gray."
+            if len(ranked_names) > PALETTE_SIZE:
+                caption += f" {PALETTE_SENTENCE} The other curves are gray."
             saved = common.save_pair(fig, stem, caption)
             by_problem[problem_id].append(
                 {

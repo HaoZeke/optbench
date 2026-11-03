@@ -92,7 +92,7 @@ def main() -> None:
             caption = (
                 f"{code} on {title}. "
                 "Each point is one recorded version of one method. "
-                "The axis is the recorded version in numeric order. "
+                "Versions run left to right in numeric order. "
                 "PAR-2 is omitted where that row has none. "
                 "No line is drawn across a missing value."
             )

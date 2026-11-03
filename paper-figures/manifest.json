@@ -14,7 +14,7 @@
         "family": "min-mode",
         "svg": "profile-double-ended-saddle-search-lj38-min-mode.svg",
         "pdf": "profile-double-ended-saddle-search-lj38-min-mode.pdf",
-        "caption": "Dolan-Mor\u00e9 profile for Minimum mode on LJ38 double-ended saddle. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002."
+        "caption": "Dolan-Mor\u00e9 profile for Minimum mode on LJ38 double-ended saddle. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and Mor\u00e9, J. J., Math. Program. 91:201-213, 2002."
       },
       {
         "kind": "distribution",
@@ -29,7 +29,7 @@
         "code": "eOn",
         "svg": "history-double-ended-saddle-search-lj38-eon-1112.svg",
         "pdf": "history-double-ended-saddle-search-lj38-eon-1112.pdf",
-        "caption": "eOn on LJ38 double-ended saddle. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+        "caption": "eOn on LJ38 double-ended saddle. Each point is one recorded version of one method. Versions run left to right in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
       }
     ],
     "double-ended-saddle-search/lj38_2ts_separation": [
@@ -46,7 +46,7 @@
         "family": "band",
         "svg": "profile-double-ended-saddle-search-lj38_2ts_separation-band.svg",
         "pdf": "profile-double-ended-saddle-search-lj38_2ts_separation-band.pdf",
-        "caption": "Dolan-Mor\u00e9 profile for Band / NEB on Lennard-Jones 38 transition-state separation. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
+        "caption": "Dolan-Mor\u00e9 profile for Band / NEB on Lennard-Jones 38 transition-state separation. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and Mor\u00e9, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
       },
       {
         "kind": "family",
@@ -54,7 +54,7 @@
         "family": "min-mode",
         "svg": "profile-double-ended-saddle-search-lj38_2ts_separation-min-mode.svg",
         "pdf": "profile-double-ended-saddle-search-lj38_2ts_separation-min-mode.pdf",
-        "caption": "Dolan-Mor\u00e9 profile for Minimum mode on Lennard-Jones 38 transition-state separation. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
+        "caption": "Dolan-Mor\u00e9 profile for Minimum mode on Lennard-Jones 38 transition-state separation. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and Mor\u00e9, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
       },
       {
         "kind": "distribution",
@@ -69,7 +69,7 @@
         "code": "eOn",
         "svg": "history-double-ended-saddle-search-lj38_2ts_separation-eon-1112.svg",
         "pdf": "history-double-ended-saddle-search-lj38_2ts_separation-eon-1112.pdf",
-        "caption": "eOn on Lennard-Jones 38 transition-state separation. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+        "caption": "eOn on Lennard-Jones 38 transition-state separation. Each point is one recorded version of one method. Versions run left to right in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
       }
     ],
     "double-ended-saddle-search/pt-island": [
@@ -86,7 +86,7 @@
         "family": "band",
         "svg": "profile-double-ended-saddle-search-pt-island-band.svg",
         "pdf": "profile-double-ended-saddle-search-pt-island-band.pdf",
-        "caption": "Dolan-Mor\u00e9 profile for Band / NEB on Pt heptamer island. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
+        "caption": "Dolan-Mor\u00e9 profile for Band / NEB on Pt heptamer island. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and Mor\u00e9, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
       },
       {
         "kind": "family",
@@ -94,7 +94,7 @@
         "family": "min-mode",
         "svg": "profile-double-ended-saddle-search-pt-island-min-mode.svg",
         "pdf": "profile-double-ended-saddle-search-pt-island-min-mode.pdf",
-        "caption": "Dolan-Mor\u00e9 profile for Minimum mode on Pt heptamer island. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002."
+        "caption": "Dolan-Mor\u00e9 profile for Minimum mode on Pt heptamer island. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and Mor\u00e9, J. J., Math. Program. 91:201-213, 2002."
       },
       {
         "kind": "family",
@@ -102,7 +102,7 @@
         "family": "connect",
         "svg": "profile-double-ended-saddle-search-pt-island-connect.svg",
         "pdf": "profile-double-ended-saddle-search-pt-island-connect.pdf",
-        "caption": "Dolan-Mor\u00e9 profile for Connect / double-ended on Pt heptamer island. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002."
+        "caption": "Dolan-Mor\u00e9 profile for Connect / double-ended on Pt heptamer island. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and Mor\u00e9, J. J., Math. Program. 91:201-213, 2002."
       },
       {
         "kind": "distribution",
@@ -126,7 +126,7 @@
         "family": "global",
         "svg": "profile-globalopt-lj150-global.svg",
         "pdf": "profile-globalopt-lj150-global.pdf",
-        "caption": "Dolan-Mor\u00e9 profile for Basin hopping / global on Lennard-Jones 150. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002."
+        "caption": "Dolan-Mor\u00e9 profile for Basin hopping / global on Lennard-Jones 150. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and Mor\u00e9, J. J., Math. Program. 91:201-213, 2002."
       },
       {
         "kind": "distribution",
@@ -150,7 +150,7 @@
         "family": "global",
         "svg": "profile-globalopt-lj38-global.svg",
         "pdf": "profile-globalopt-lj38-global.pdf",
-        "caption": "Dolan-Mor\u00e9 profile for Basin hopping / global on Lennard-Jones 38 global minimum. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002."
+        "caption": "Dolan-Mor\u00e9 profile for Basin hopping / global on Lennard-Jones 38 global minimum. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and Mor\u00e9, J. J., Math. Program. 91:201-213, 2002."
       },
       {
         "kind": "distribution",
@@ -190,7 +190,7 @@
         "family": "global",
         "svg": "profile-globalopt-lj98-global.svg",
         "pdf": "profile-globalopt-lj98-global.pdf",
-        "caption": "Dolan-Mor\u00e9 profile for Basin hopping / global on Lennard-Jones 98. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002."
+        "caption": "Dolan-Mor\u00e9 profile for Basin hopping / global on Lennard-Jones 98. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and Mor\u00e9, J. J., Math. Program. 91:201-213, 2002."
       },
       {
         "kind": "distribution",
@@ -214,7 +214,7 @@
         "family": "min-mode",
         "svg": "profile-hTST-Al-min-mode.svg",
         "pdf": "profile-hTST-Al-min-mode.pdf",
-        "caption": "Dolan-Mor\u00e9 profile for Minimum mode on EAM aluminum. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002."
+        "caption": "Dolan-Mor\u00e9 profile for Minimum mode on EAM aluminum. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and Mor\u00e9, J. J., Math. Program. 91:201-213, 2002."
       },
       {
         "kind": "distribution",
@@ -238,7 +238,7 @@
         "family": "min-mode",
         "svg": "profile-lowest-eigenvector-lj38-min-mode.svg",
         "pdf": "profile-lowest-eigenvector-lj38-min-mode.pdf",
-        "caption": "Dolan-Mor\u00e9 profile for Minimum mode on Lennard-Jones 38. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
+        "caption": "Dolan-Mor\u00e9 profile for Minimum mode on Lennard-Jones 38. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and Mor\u00e9, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
       },
       {
         "kind": "distribution",
@@ -253,7 +253,7 @@
         "code": "TSASE",
         "svg": "history-lowest-eigenvector-lj38-tsase-9513.svg",
         "pdf": "history-lowest-eigenvector-lj38-tsase-9513.pdf",
-        "caption": "TSASE on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+        "caption": "TSASE on Lennard-Jones 38. Each point is one recorded version of one method. Versions run left to right in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
       },
       {
         "kind": "history",
@@ -261,7 +261,7 @@
         "code": "eOn",
         "svg": "history-lowest-eigenvector-lj38-eon-1112.svg",
         "pdf": "history-lowest-eigenvector-lj38-eon-1112.pdf",
-        "caption": "eOn on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+        "caption": "eOn on Lennard-Jones 38. Each point is one recorded version of one method. Versions run left to right in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
       }
     ],
     "minimization/lj38": [
@@ -278,7 +278,7 @@
         "family": "minimize",
         "svg": "profile-minimization-lj38-minimize.svg",
         "pdf": "profile-minimization-lj38-minimize.pdf",
-        "caption": "Dolan-Mor\u00e9 profile for Minimizers on Lennard-Jones 38 clusters. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
+        "caption": "Dolan-Mor\u00e9 profile for Minimizers on Lennard-Jones 38 clusters. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and Mor\u00e9, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
       },
       {
         "kind": "distribution",
@@ -293,7 +293,7 @@
         "code": "rgmin",
         "svg": "history-minimization-lj38-rgmin-5bf9.svg",
         "pdf": "history-minimization-lj38-rgmin-5bf9.pdf",
-        "caption": "rgmin on Lennard-Jones 38 clusters. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+        "caption": "rgmin on Lennard-Jones 38 clusters. Each point is one recorded version of one method. Versions run left to right in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
       },
       {
         "kind": "history",
@@ -301,7 +301,7 @@
         "code": "ASE",
         "svg": "history-minimization-lj38-ase-e2f0.svg",
         "pdf": "history-minimization-lj38-ase-e2f0.pdf",
-        "caption": "ASE on Lennard-Jones 38 clusters. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+        "caption": "ASE on Lennard-Jones 38 clusters. Each point is one recorded version of one method. Versions run left to right in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
       }
     ],
     "minimization/lj38-noise": [
@@ -318,7 +318,7 @@
         "family": "minimize",
         "svg": "profile-minimization-lj38-noise-minimize.svg",
         "pdf": "profile-minimization-lj38-noise-minimize.pdf",
-        "caption": "Dolan-Mor\u00e9 profile for Minimizers on Lennard-Jones 38 clusters with Gaussian force noise. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
+        "caption": "Dolan-Mor\u00e9 profile for Minimizers on Lennard-Jones 38 clusters with Gaussian force noise. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and Mor\u00e9, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
       },
       {
         "kind": "distribution",
@@ -342,7 +342,7 @@
         "family": "minimize",
         "svg": "profile-minimization-morse-bulk-minimize.svg",
         "pdf": "profile-minimization-morse-bulk-minimize.pdf",
-        "caption": "Dolan-Mor\u00e9 profile for Minimizers on Morse bulk. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
+        "caption": "Dolan-Mor\u00e9 profile for Minimizers on Morse bulk. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and Mor\u00e9, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
       },
       {
         "kind": "distribution",
@@ -357,7 +357,7 @@
         "code": "rgmin",
         "svg": "history-minimization-morse-bulk-rgmin-5bf9.svg",
         "pdf": "history-minimization-morse-bulk-rgmin-5bf9.pdf",
-        "caption": "rgmin on Morse bulk. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+        "caption": "rgmin on Morse bulk. Each point is one recorded version of one method. Versions run left to right in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
       },
       {
         "kind": "history",
@@ -365,7 +365,7 @@
         "code": "ASE",
         "svg": "history-minimization-morse-bulk-ase-e2f0.svg",
         "pdf": "history-minimization-morse-bulk-ase-e2f0.pdf",
-        "caption": "ASE on Morse bulk. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+        "caption": "ASE on Morse bulk. Each point is one recorded version of one method. Versions run left to right in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
       }
     ],
     "mlopt/C2H4": [
@@ -398,7 +398,7 @@
         "family": "minimize",
         "svg": "profile-mlopt-emt-pt38-minimize.svg",
         "pdf": "profile-mlopt-emt-pt38-minimize.pdf",
-        "caption": "Dolan-Mor\u00e9 profile for Minimizers on EMT Pt 38 nanoparticle. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002."
+        "caption": "Dolan-Mor\u00e9 profile for Minimizers on EMT Pt 38 nanoparticle. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and Mor\u00e9, J. J., Math. Program. 91:201-213, 2002."
       },
       {
         "kind": "distribution",
@@ -422,7 +422,7 @@
         "family": "band",
         "svg": "profile-neb-Pt-heptamer-band.svg",
         "pdf": "profile-neb-Pt-heptamer-band.pdf",
-        "caption": "Dolan-Mor\u00e9 profile for Band / NEB on Pt heptamer island. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
+        "caption": "Dolan-Mor\u00e9 profile for Band / NEB on Pt heptamer island. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and Mor\u00e9, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
       },
       {
         "kind": "family",
@@ -430,7 +430,7 @@
         "family": "connect",
         "svg": "profile-neb-Pt-heptamer-connect.svg",
         "pdf": "profile-neb-Pt-heptamer-connect.pdf",
-        "caption": "Dolan-Mor\u00e9 profile for Connect / double-ended on Pt heptamer island. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
+        "caption": "Dolan-Mor\u00e9 profile for Connect / double-ended on Pt heptamer island. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and Mor\u00e9, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
       },
       {
         "kind": "distribution",
@@ -445,7 +445,7 @@
         "code": "eOn",
         "svg": "history-neb-Pt-heptamer-eon-1112.svg",
         "pdf": "history-neb-Pt-heptamer-eon-1112.pdf",
-        "caption": "eOn on Pt heptamer island. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+        "caption": "eOn on Pt heptamer island. Each point is one recorded version of one method. Versions run left to right in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
       }
     ],
     "saddle-search/pt-island": [
@@ -469,7 +469,7 @@
         "code": "Eon",
         "svg": "history-saddle-search-pt-island-eon-034e.svg",
         "pdf": "history-saddle-search-pt-island-eon-034e.pdf",
-        "caption": "Eon on Pt heptamer island. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+        "caption": "Eon on Pt heptamer island. Each point is one recorded version of one method. Versions run left to right in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
       }
     ],
     "tsopt/LJ38": [
@@ -486,7 +486,7 @@
         "family": "min-mode",
         "svg": "profile-tsopt-LJ38-min-mode.svg",
         "pdf": "profile-tsopt-LJ38-min-mode.pdf",
-        "caption": "Dolan-Mor\u00e9 profile for Minimum mode on Lennard-Jones 38. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
+        "caption": "Dolan-Mor\u00e9 profile for Minimum mode on Lennard-Jones 38. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and Mor\u00e9, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
       },
       {
         "kind": "family",
@@ -494,7 +494,7 @@
         "family": "single-ended",
         "svg": "profile-tsopt-LJ38-single-ended.svg",
         "pdf": "profile-tsopt-LJ38-single-ended.pdf",
-        "caption": "Dolan-Mor\u00e9 profile for Single-ended saddle on Lennard-Jones 38. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002."
+        "caption": "Dolan-Mor\u00e9 profile for Single-ended saddle on Lennard-Jones 38. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and Mor\u00e9, J. J., Math. Program. 91:201-213, 2002."
       },
       {
         "kind": "distribution",
@@ -509,7 +509,7 @@
         "code": "Sella",
         "svg": "history-tsopt-LJ38-sella-9f5d.svg",
         "pdf": "history-tsopt-LJ38-sella-9f5d.pdf",
-        "caption": "Sella on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+        "caption": "Sella on Lennard-Jones 38. Each point is one recorded version of one method. Versions run left to right in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
       },
       {
         "kind": "history",
@@ -517,7 +517,7 @@
         "code": "eOn",
         "svg": "history-tsopt-LJ38-eon-1112.svg",
         "pdf": "history-tsopt-LJ38-eon-1112.pdf",
-        "caption": "eOn on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+        "caption": "eOn on Lennard-Jones 38. Each point is one recorded version of one method. Versions run left to right in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
       }
     ],
     "tsopt/pt-island": [
@@ -534,7 +534,7 @@
         "family": "min-mode",
         "svg": "profile-tsopt-pt-island-min-mode.svg",
         "pdf": "profile-tsopt-pt-island-min-mode.pdf",
-        "caption": "Dolan-Mor\u00e9 profile for Minimum mode on Pt heptamer island. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
+        "caption": "Dolan-Mor\u00e9 profile for Minimum mode on Pt heptamer island. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and Mor\u00e9, J. J., Math. Program. 91:201-213, 2002. Colored lines are the six largest areas. The other curves are gray."
       },
       {
         "kind": "family",
@@ -542,7 +542,7 @@
         "family": "single-ended",
         "svg": "profile-tsopt-pt-island-single-ended.svg",
         "pdf": "profile-tsopt-pt-island-single-ended.pdf",
-        "caption": "Dolan-Mor\u00e9 profile for Single-ended saddle on Pt heptamer island. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and More, J. J., Math. Program. 91:201-213, 2002."
+        "caption": "Dolan-Mor\u00e9 profile for Single-ended saddle on Pt heptamer island. The curve is the fraction of starts whose cost is at most tau times the best finite cost in this family. Tau is 1, 2, 4, 8, and 16. An unsolved start stays in the denominator and does not cross a finite tau. Dolan, E. D. and Mor\u00e9, J. J., Math. Program. 91:201-213, 2002."
       },
       {
         "kind": "distribution",
@@ -557,7 +557,7 @@
         "code": "Sella",
         "svg": "history-tsopt-pt-island-sella-9f5d.svg",
         "pdf": "history-tsopt-pt-island-sella-9f5d.pdf",
-        "caption": "Sella on Pt heptamer island. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+        "caption": "Sella on Pt heptamer island. Each point is one recorded version of one method. Versions run left to right in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
       },
       {
         "kind": "history",
@@ -565,7 +565,7 @@
         "code": "eOn",
         "svg": "history-tsopt-pt-island-eon-1112.svg",
         "pdf": "history-tsopt-pt-island-eon-1112.pdf",
-        "caption": "eOn on Pt heptamer island. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+        "caption": "eOn on Pt heptamer island. Each point is one recorded version of one method. Versions run left to right in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
       }
     ]
   },
@@ -577,7 +577,7 @@
         "code": "eOn",
         "svg": "history-double-ended-saddle-search-lj38-eon-1112.svg",
         "pdf": "history-double-ended-saddle-search-lj38-eon-1112.pdf",
-        "caption": "eOn on LJ38 double-ended saddle. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+        "caption": "eOn on LJ38 double-ended saddle. Each point is one recorded version of one method. Versions run left to right in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
       },
       {
         "kind": "history",
@@ -585,7 +585,7 @@
         "code": "eOn",
         "svg": "history-double-ended-saddle-search-lj38_2ts_separation-eon-1112.svg",
         "pdf": "history-double-ended-saddle-search-lj38_2ts_separation-eon-1112.pdf",
-        "caption": "eOn on Lennard-Jones 38 transition-state separation. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+        "caption": "eOn on Lennard-Jones 38 transition-state separation. Each point is one recorded version of one method. Versions run left to right in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
       },
       {
         "kind": "history",
@@ -593,7 +593,7 @@
         "code": "eOn",
         "svg": "history-lowest-eigenvector-lj38-eon-1112.svg",
         "pdf": "history-lowest-eigenvector-lj38-eon-1112.pdf",
-        "caption": "eOn on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+        "caption": "eOn on Lennard-Jones 38. Each point is one recorded version of one method. Versions run left to right in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
       },
       {
         "kind": "history",
@@ -601,7 +601,7 @@
         "code": "eOn",
         "svg": "history-neb-Pt-heptamer-eon-1112.svg",
         "pdf": "history-neb-Pt-heptamer-eon-1112.pdf",
-        "caption": "eOn on Pt heptamer island. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+        "caption": "eOn on Pt heptamer island. Each point is one recorded version of one method. Versions run left to right in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
       },
       {
         "kind": "history",
@@ -609,7 +609,7 @@
         "code": "eOn",
         "svg": "history-tsopt-LJ38-eon-1112.svg",
         "pdf": "history-tsopt-LJ38-eon-1112.pdf",
-        "caption": "eOn on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+        "caption": "eOn on Lennard-Jones 38. Each point is one recorded version of one method. Versions run left to right in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
       },
       {
         "kind": "history",
@@ -617,7 +617,7 @@
         "code": "eOn",
         "svg": "history-tsopt-pt-island-eon-1112.svg",
         "pdf": "history-tsopt-pt-island-eon-1112.pdf",
-        "caption": "eOn on Pt heptamer island. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+        "caption": "eOn on Pt heptamer island. Each point is one recorded version of one method. Versions run left to right in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
       }
     ],
     "TSASE": [
@@ -627,7 +627,7 @@
         "code": "TSASE",
         "svg": "history-lowest-eigenvector-lj38-tsase-9513.svg",
         "pdf": "history-lowest-eigenvector-lj38-tsase-9513.pdf",
-        "caption": "TSASE on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+        "caption": "TSASE on Lennard-Jones 38. Each point is one recorded version of one method. Versions run left to right in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
       }
     ],
     "rgmin": [
@@ -637,7 +637,7 @@
         "code": "rgmin",
         "svg": "history-minimization-lj38-rgmin-5bf9.svg",
         "pdf": "history-minimization-lj38-rgmin-5bf9.pdf",
-        "caption": "rgmin on Lennard-Jones 38 clusters. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+        "caption": "rgmin on Lennard-Jones 38 clusters. Each point is one recorded version of one method. Versions run left to right in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
       },
       {
         "kind": "history",
@@ -645,7 +645,7 @@
         "code": "rgmin",
         "svg": "history-minimization-morse-bulk-rgmin-5bf9.svg",
         "pdf": "history-minimization-morse-bulk-rgmin-5bf9.pdf",
-        "caption": "rgmin on Morse bulk. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+        "caption": "rgmin on Morse bulk. Each point is one recorded version of one method. Versions run left to right in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
       }
     ],
     "ASE": [
@@ -655,7 +655,7 @@
         "code": "ASE",
         "svg": "history-minimization-lj38-ase-e2f0.svg",
         "pdf": "history-minimization-lj38-ase-e2f0.pdf",
-        "caption": "ASE on Lennard-Jones 38 clusters. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+        "caption": "ASE on Lennard-Jones 38 clusters. Each point is one recorded version of one method. Versions run left to right in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
       },
       {
         "kind": "history",
@@ -663,7 +663,7 @@
         "code": "ASE",
         "svg": "history-minimization-morse-bulk-ase-e2f0.svg",
         "pdf": "history-minimization-morse-bulk-ase-e2f0.pdf",
-        "caption": "ASE on Morse bulk. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+        "caption": "ASE on Morse bulk. Each point is one recorded version of one method. Versions run left to right in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
       }
     ],
     "Eon": [
@@ -673,7 +673,7 @@
         "code": "Eon",
         "svg": "history-saddle-search-pt-island-eon-034e.svg",
         "pdf": "history-saddle-search-pt-island-eon-034e.pdf",
-        "caption": "Eon on Pt heptamer island. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+        "caption": "Eon on Pt heptamer island. Each point is one recorded version of one method. Versions run left to right in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
       }
     ],
     "Sella": [
@@ -683,7 +683,7 @@
         "code": "Sella",
         "svg": "history-tsopt-LJ38-sella-9f5d.svg",
         "pdf": "history-tsopt-LJ38-sella-9f5d.pdf",
-        "caption": "Sella on Lennard-Jones 38. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+        "caption": "Sella on Lennard-Jones 38. Each point is one recorded version of one method. Versions run left to right in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
       },
       {
         "kind": "history",
@@ -691,7 +691,7 @@
         "code": "Sella",
         "svg": "history-tsopt-pt-island-sella-9f5d.svg",
         "pdf": "history-tsopt-pt-island-sella-9f5d.pdf",
-        "caption": "Sella on Pt heptamer island. Each point is one recorded version of one method. The axis is the recorded version in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
+        "caption": "Sella on Pt heptamer island. Each point is one recorded version of one method. Versions run left to right in numeric order. PAR-2 is omitted where that row has none. No line is drawn across a missing value."
       }
     ]
   }

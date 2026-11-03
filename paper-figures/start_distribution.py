@@ -21,6 +21,15 @@ def _common():
 
 common = _common()
 
+# A start mark sits up to half the strip above or below its row, and the box
+# is centered on the row. Both are fractions of the row pitch. A failure cross
+# at the edge of the strip stays inside the box when the gap between them on
+# one side holds half the cross, which sets the shortest row.
+STRIP = 0.28
+BOX = 0.45
+CROSS_PT = 3.2
+MIN_ROW_IN = CROSS_PT / (BOX - STRIP) / 72
+
 
 def main() -> None:
     common.apply_style()
@@ -61,6 +70,7 @@ def main() -> None:
             len(methods),
             [label for label, _success, _failed in methods],
             legend_rows=1,
+            min_row_in=MIN_ROW_IN,
         )
         box_data = []
         positions = []
@@ -76,14 +86,13 @@ def main() -> None:
                 positions.append(index)
                 all_values.extend(calls)
             # 37 and 53 are coprime to 100, so i * stride % 100 gives each of
-            # the first 100 starts in a strip its own offset. The strip is 0.28
-            # of a row wide, inside the 0.45-row box below.
+            # the first 100 starts in a strip its own offset.
             for point_index, value in enumerate(success):
-                offset = (((point_index * 37) % 100) / 100.0 - 0.5) * 0.28
+                offset = (((point_index * 37) % 100) / 100.0 - 0.5) * STRIP
                 success_x.append(value)
                 success_y.append(index + offset)
             for point_index, value in enumerate(failed):
-                offset = (((point_index * 53) % 100) / 100.0 - 0.5) * 0.28
+                offset = (((point_index * 53) % 100) / 100.0 - 0.5) * STRIP
                 failed_x.append(value)
                 failed_y.append(index + offset)
         if success_x:
@@ -105,7 +114,7 @@ def main() -> None:
                 failed_y,
                 marker="x",
                 color=common.FAILURE,
-                markersize=3.2,
+                markersize=CROSS_PT,
                 linestyle="none",
                 label="Failure",
             )
@@ -116,7 +125,7 @@ def main() -> None:
                 box_data,
                 positions=positions,
                 orientation="horizontal",
-                widths=0.45,
+                widths=BOX,
                 showfliers=False,
                 manage_ticks=False,
                 boxprops={"color": common.INK, "linewidth": 0.6},

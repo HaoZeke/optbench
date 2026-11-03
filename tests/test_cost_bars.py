@@ -66,7 +66,7 @@ def test_a_mixed_problem_draws_only_the_positive_costs():
         [("mixed", [{"code": "low", "best": -2.0}, {"code": "high", "best": 50.0}])]
     )
     assert chart.count("<rect ") == 1
-    assert "left off the axis" in chart
+    assert "left off the scale" in chart
     assert AXIS_TITLE in chart
 
 
