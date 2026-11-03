@@ -75,6 +75,9 @@ def main() -> None:
                 box_data.append(calls)
                 positions.append(index)
                 all_values.extend(calls)
+            # 37 and 53 are coprime to 100, so i * stride % 100 gives each of
+            # the first 100 starts in a strip its own offset. The strip is 0.28
+            # of a row wide, inside the 0.45-row box below.
             for point_index, value in enumerate(success):
                 offset = (((point_index * 37) % 100) / 100.0 - 0.5) * 0.28
                 success_x.append(value)

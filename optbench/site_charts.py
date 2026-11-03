@@ -269,6 +269,9 @@ def cost_distribution_svg(rows: list[dict], title: str = "") -> str:
     inner_h = height - top - bottom
     peak = max(counts) or 1
     parts: list[str] = []
+    # Counts are whole numbers, so the grid step starts at 1 and doubles until
+    # four steps or fewer reach the peak. The count labels then sit at least a
+    # quarter of the plot height apart.
     tick_step = 1
     while peak / tick_step > 4:
         tick_step *= 2
@@ -279,10 +282,13 @@ def cost_distribution_svg(rows: list[dict], title: str = "") -> str:
         parts.append(f'<text class="num" x="{left - 6}" y="{y + 4:.2f}" text-anchor="end">{tick}</text>')
         tick += tick_step
     slot = inner_w / bins
+    # Each bar leaves this fraction of its bin empty on both sides, so two
+    # neighbouring bins with the same count still read as two bars.
+    gap = 0.12
     for index, count in enumerate(counts):
         bar_h = inner_h * count / peak
-        x = left + index * slot + slot * 0.12
-        bar_w = slot * 0.76
+        x = left + index * slot + slot * gap
+        bar_w = slot * (1 - 2 * gap)
         y = top + inner_h - bar_h
         start, end = edges[index], edges[index + 1]
         tip = f"{_fmt(start)} to {_fmt(end)}: {count}"
