@@ -68,34 +68,51 @@ html_theme_options = {
 html_baseurl = "https://lode-org.github.io/optbench/"
 
 
+_FLAG_FONT = "@font-face{font-family:Twemoji Country Flags;"
+# The theme JS is minified, so each edit matches its exact text in the
+# shibuya release that pixi.lock pins.
+_JS_EDITS = (
+    ("function Tn(t,e){", "function Tn(t,e){return;"),
+    ("//cdn.carbonads.com/carbon.js?serve=${t}&placement=${e}", ""),
+    ("https://api.iconify.design", ""),
+    ("https://api.simplesvg.com", ""),
+    ("https://api.unisvg.com", ""),
+    ("https://api.github.com/repos/", ""),
+    ("https://gitlab.com/api/v4/projects/", ""),
+    ('import("https://esm.sh/turndown")', "Promise.reject()"),
+)
+
+
+class ThemeAssetError(RuntimeError):
+    """A theme file no longer holds the text that _drop_remote_assets removes."""
+
+
+def _missing(path, target):
+    return ThemeAssetError(
+        f"{path.name} has no {target!r}, so the page would load a remote asset again. "
+        "The theme changed. Find the new text and update docs/source/conf.py."
+    )
+
+
 def _drop_remote_assets(app, exception):
     """The theme ships a flag font and an ad loader that point at CDNs."""
-    if exception is not None:
+    if exception is not None or app.builder.format != "html":
         return
     out = Path(app.outdir)
     css = out / "_static" / "shibuya.css"
-    if css.is_file():
-        text = css.read_text(encoding="utf-8")
-        start = text.find("@font-face{font-family:Twemoji Country Flags;")
-        end = text.find("}", start)
-        if start != -1 and end != -1 and "jsdelivr" in text[start:end]:
-            text = text[:start] + text[end + 1 :]
-            css.write_text(text, encoding="utf-8")
+    text = css.read_text(encoding="utf-8")
+    start = text.find(_FLAG_FONT)
+    end = text.find("}", start)
+    if start == -1 or end == -1 or "jsdelivr" not in text[start:end]:
+        raise _missing(css, _FLAG_FONT)
+    css.write_text(text[:start] + text[end + 1 :], encoding="utf-8")
     js = out / "_static" / "shibuya.js"
-    if js.is_file():
-        text = js.read_text(encoding="utf-8")
-        text = text.replace("function Tn(t,e){", "function Tn(t,e){return;")
-        text = text.replace("//cdn.carbonads.com/carbon.js?serve=${t}&placement=${e}", "")
-        for host in (
-            "https://api.iconify.design",
-            "https://api.simplesvg.com",
-            "https://api.unisvg.com",
-            "https://api.github.com/repos/",
-            "https://gitlab.com/api/v4/projects/",
-        ):
-            text = text.replace(host, "")
-        text = text.replace('import("https://esm.sh/turndown")', "Promise.reject()")
-        js.write_text(text, encoding="utf-8")
+    text = js.read_text(encoding="utf-8")
+    for old, new in _JS_EDITS:
+        if old not in text:
+            raise _missing(js, old)
+        text = text.replace(old, new)
+    js.write_text(text, encoding="utf-8")
 
 
 def setup(app):
