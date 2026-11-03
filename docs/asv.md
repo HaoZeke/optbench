@@ -62,8 +62,10 @@ It then runs `HaoZeke/asv-perch@v1`.
 The benchmark command is `uv run asv run --skip-existing --bench quadratic {sha}^!`.
 That is the in-process sample, not the 1000-start eonclient grid.
 `post-comment` is true when the head branch of a pull request lives in this repository.
-It is false on a push and on a pull request from a fork, because the token of a fork's run cannot write comments.
+It stays false on a push, on a manual run and on a pull request from a fork.
+A fork's run has a read-only token, so GitHub refuses its comment request.
 Those runs still write the table to the step summary.
+A failure in the benchmarks or the comparison ends the step before the summary, so it still fails the job.
 A pull request whose base commit lacks `benchmarks/quadratic.py` fails this job, because asv runs that commit.
 `check.yml` is still the oracle and pytest job.
 
