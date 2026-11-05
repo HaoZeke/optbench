@@ -26,12 +26,30 @@ asv is the measurement store. A result file is keyed to the commit asv checked o
 
 1. Pin the code commit in `codes/registry.toml`. A published eOn score keeps commit `4d8b34baf1ba8d2d980df29838bac1f969d1662c`. A conda binary's printed token is not that commit.
 2. If the code is a conda package, add `environments/<name>.yml` with the version. Do not invent a build string. A source build that is not a conda package still gets a yml so its pin is not the 3.5.0 file; leave the package out. asv has one `environment_type` for the run, so the yml is the pin and `asv run -E` is how a later unit selects it. There is no per-benchmark environment attribute. See the gaps file. `environments/eon-develop.yml` is that source pin. The develop classes call `EONCLIENT`.
-3. Copy `benchmarks/quadratic.py`. `param_names` is `["seed", "start"]`. `measure` returns the `record_start` dict. Set `cap` on the class. The result row does not store the cap.
+3. Copy `benchmarks/quadratic.py`.
+   `param_names` is `["seed", "start"]`.
+   `measure` returns the `record_start` dict.
+   Set `cap` on the class.
+   The result row carries no cap.
+   The board scores the track with the problem's `max_force_calls`, as it scores a campaign file.
+   For a problem that states no cap, the class `cap` scores the track.
 4. Inherit `optbench.asv_tracks.TrackedSearch`, or copy its methods. `track_*` returns a float. Set `.unit` on the function (`force calls`, `fraction`, `count`). A dict with `samples` and `number` is a timing result, and asv replaces the value. `time_search` is the wall clock.
 5. Set `repeat = 1`, `rounds = 1`, `number = 1`, `sample_time = 0`, `warmup_time = 0`. `repeat == 0` means up to ten repeats.
 6. Commit the benchmark. `asv run` installs that commit. Uncommitted edits are not the run.
-7. `uv run asv machine --yes`, then `uv run asv machine --yes --machine xeon-8c`, once on the machine. That writes `~/.asv-machine.json`. The committed machine is `xeon-8c`, and the copy that is committed is `results/asv/xeon-8c/machine.json`. Without `--machine`, asv names the machine after the host, and `asv run` writes a new folder beside `results/asv/xeon-8c`. The first command records the host's `os`, `arch`, `cpu`, `num_cpu` and `ram`. The second command copies that record to the name `xeon-8c`. When `~/.asv-machine.json` has no record for the host, `--machine` alone records only the name, and `asv run` writes that bare record over the committed `machine.json`.
-8. `uv run asv run --machine xeon-8c <commit>^! -b YourClass`. Do not pass `--quick`. On asv 0.6.6 a quick run still writes `results/asv`. The help text says it does not. That is `docs/asv-gaps.md`. The committed file is the run without `--quick`.
+7. `uv run python -m optbench.asv_launch machine --yes --machine xeon-8c` once on the machine.
+   The committed machine is `xeon-8c`.
+   That writes every field to `~/.asv-machine.json`.
+   Upstream `asv machine --yes --machine NAME` stores only the name (gap 9 in `docs/asv-gaps.md`).
+   Without `--machine`, asv names the machine after the host, and `asv run` writes a new folder beside `results/asv/xeon-8c`.
+   The copy that is committed is `results/asv/xeon-8c/machine.json`.
+8. `uv run python -m optbench.asv_launch run --machine xeon-8c <commit>^! -b YourClass`.
+   The launcher pins BLAS to one thread before asv starts.
+   See Threads below.
+   Leave out `--quick`.
+   On asv 0.6.6 a quick run still writes `results/asv`.
+   The help text says it does not.
+   That is `docs/asv-gaps.md`.
+   The committed file is the run without `--quick`.
 9. Commit the new files under `results/asv`.
 10. Score with `asv.results.iter_results` and `Results.get_result_value`, then `score_v2`. `optbench.asv_score` does that for the quadratic sample. Parameter strings in the result JSON are wrapped in `repr` quotes; the reader unwraps them with `ast.literal_eval`. `uv run optbench statistics` refuses to write a document when those tracks are absent.
 
@@ -71,10 +89,9 @@ The quadratic sample is the run that `results/validation/statistics.json` scores
 
 ```bash
 uv run asv check
-uv run asv machine --yes
-uv run asv machine --yes --machine xeon-8c
-uv run asv run --quick --machine xeon-8c
-uv run asv run --machine xeon-8c COMMIT^! -b quadratic
+uv run python -m optbench.asv_launch machine --yes --machine xeon-8c
+uv run python -m optbench.asv_launch run --quick --machine xeon-8c
+uv run python -m optbench.asv_launch run --machine xeon-8c COMMIT^! -b quadratic
 uv run optbench statistics --output results/validation/statistics.json
 uv run asv publish
 uv run asv compare COMMIT COMMIT
@@ -82,10 +99,41 @@ uv run asv compare COMMIT COMMIT
 
 `asv check` imports the suite. `asv run --quick` is the gate before the saved run. Run it before the saved `asv run`, because asv 0.6.6 rewrites the result file. `asv compare` on one commit compares that commit with itself.
 
+## Launcher
+
+`python -m optbench.asv_launch <asv arguments>` runs asv in its own process with the same arguments.
+The benchmark server imports NumPy before any benchmark module, and OpenBLAS sizes its pool once, when it loads.
+NumPy's pool is therefore sized before the suite loads, and no asv result file records the pools.
+Before asv starts, the launcher probes the server's import order in a fresh interpreter under the same environment.
+`OPTBENCH_ASV_RECORD=<file>` writes the thread variables, the probed pools, and the asv arguments as JSON.
+`results/ase-sella-full/summarize.py --run-env` reads that file.
+
+## Threads
+
+The asv-runner package loads Pympler, and Pympler imports NumPy.
+A benchmark module that sets `OPENBLAS_NUM_THREADS` at import is too late for NumPy's pool and in time for SciPy's.
+A bare `asv run` then gives NumPy one thread per core and SciPy one thread.
+On `sella/de-lj38-default` that moved 4 of the 50 starts, and one of them reached the cap.
+The geodesic starting path changes in its last bits.
+
+The launcher sets every variable in `optbench.blas_threads.PINNED` to 1 before it probes, and asv copies that environment into the server.
+One thread is what the committed rows ran with.
+The launch stops unless every probed BLAS pool runs one thread.
+Gap 11 in `docs/asv-gaps.md` says why `asv.conf.json` has no place for the variables.
+
+## Machine file
+
+asv writes `~/.asv-machine.json` back in place at the start of every run, so two asv runs that start together can read it empty.
+Each launched `run`, `continuous`, or `find` gets a private file with only the entry it loads, and the shared file is read under a lock on `~/.asv-machine.json.lock`.
+A launched `machine` or `update` keeps that lock while it writes.
+Start concurrent runs through the launcher.
+See gap 10 in `docs/asv-gaps.md`.
+
 ## CI
 
 `.github/workflows/asv.yml` fetches the full history, installs Python 3.12 and syncs the lockfile.
 It then runs `HaoZeke/asv-perch@v1`.
+The job sets the variables in `optbench.blas_threads.PINNED`, so the asv that the action starts already has them.
 The benchmark command is `uv run asv run --skip-existing --bench quadratic {sha}^!`.
 That is the in-process sample, not the 1000-start eonclient grid.
 The init command runs `asv machine --yes` without `--machine`, so CI names its machine after the runner.

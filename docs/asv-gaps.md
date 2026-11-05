@@ -8,6 +8,8 @@ The local pieces that stay until then:
 - `optbench/asv_score.py` reads track values with `asv.results` and calls `score_v2`. It does not patch `Results.save` or `compute_stats`.
 - Failure classes are four `track_failure_*` floats, because a result file cannot store a per-parameter cause.
 - `cap` is a class attribute. The score records the cap it used in `results/validation/statistics.json`.
+- `optbench/asv_launch.py` writes the whole machine entry and gives each run its own machine file.
+- `optbench/asv_launch.py` also sets the BLAS thread variables before asv starts its server.
 
 ## 1. Track units other than seconds and bytes
 
@@ -166,4 +168,110 @@ skip_save = dry_run or (
                             isinstance(env, environment.ExistingEnvironment)
                             and set_commit_hash is None
                         )
+```
+
+## 9. `asv machine --machine NAME` stores only the name
+
+`asv/commands/machine.py` passes `Machine.load` only the options that differ from `Machine.get_defaults()`.
+With any option given, the prompt is skipped and the defaults are never filled in.
+`Machine.load` starts from the entry stored under the hostname, or from the only entry in the file, and ignores the entry named by `--machine`.
+On a new machine file, `asv machine --yes --machine NAME` therefore stores `{"machine": NAME}`.
+`asv run --machine NAME` copies that entry into `results/<machine>/machine.json`, without `arch`, `cpu`, `num_cpu`, `os`, or `ram`.
+`asv machine --yes` with no option takes the prompt path and stores every field under the hostname.
+
+Upstream: `airspeed-velocity/asv`, `asv/machine.py`, `Machine.load`.
+When `use_defaults` is set, fill each field the entry lacks from `get_defaults()` after the given options are applied.
+Look the entry up under the given `machine` option, so an existing entry keeps its stored fields.
+
+Until then, `python -m optbench.asv_launch machine --yes --machine NAME` writes the whole entry.
+Each field is the given value, else the stored one, else the detected one.
+
+`python -m optbench.asv_launch run` also fills each field the stored entry lacks from detection.
+A run from an entry that `asv machine` saved as just the name then records every field, both in `results/<machine>/machine.json` and in each result's `params`.
+The asv workflow writes its entry with the launcher.
+
+```bash
+uv run python docs/asv-gaps/machine_fields.py
+```
+
+```
+stored fields: ['machine']
+missing fields: ['arch', 'cpu', 'num_cpu', 'os', 'ram']
+```
+
+## 10. Concurrent runs race on `~/.asv-machine.json`
+
+`asv run`, `asv continuous`, and `asv find` call `Machine.load`, and every load ends in `MachineCollection.save`.
+`save` reads the whole file, sets one entry, and writes the file back with `util.write_json`.
+`write_json` opens the file for writing, so it truncates the file in place.
+Another asv process that reads in that window sees an empty or half-written file.
+Its `Machine.load` logs the parse error and goes on with an empty entry, or its `save` fails with `UserError`.
+`asv run` loads with `interactive=True`, so off a console the empty entry fails with `UserError: Run asv at the console the first time to generate one, or run asv machine --yes.`
+On a console it starts the machine prompt instead.
+Two saves that overlap keep only the later file, so an entry that one of them added is lost.
+Two writes that overlap on the same open file can also leave it unparseable.
+Both the read and the write run unlocked.
+The machine file is always `~/.asv-machine.json`, and `Run.run` takes `_machine_file` only from Python.
+
+`docs/asv-gaps/machine_race_trials.py` starts eight processes together, each loading an existing entry 200 times, and repeats that in nine trials.
+On an eight-CPU machine, the loads alone failed a median of 1181 of 1600 times, with a range of 1162 to 1362.
+A ninth process added 50 entries with `asv machine --yes --machine NAME` during the loads.
+A median of 1285 loads then failed (986 to 1395), and a median of 1 of the 50 entries was missing at the end (0 to 3).
+When that process added the entries with `python -m optbench.asv_launch machine` instead, 1285 loads failed (1118 to 1414).
+A median of 48 of the 50 entries were missing (41 to 50), most of them because the merge read a truncated file.
+One of those nine trials left the machine file unparseable.
+With every load launched, no load or merge failed in any trial, and all 50 entries were kept.
+
+Upstream: `airspeed-velocity/asv`, `asv/util.py`, `write_json`.
+Write a temporary file in the same directory and `os.replace` it over the target, so a reader sees the old file or the new one.
+`asv/machine.py`: hold a lockfile around the read and the write in `MachineCollection.save`, and skip the save in `Machine.load` when the entry is unchanged.
+Add an `ASV_MACHINE_FILE` variable or a `--machine-file` option.
+Two runs that share a results directory also write `results/<machine>/machine.json` and `results/benchmarks.json` with `write_json`.
+Two runs of the same commit and environment load and save the same result file, and the later save drops the other run's results.
+
+Until then, `optbench/asv_launch.py` reads the shared file under a shared `flock` on `~/.asv-machine.json.lock`.
+Each launched `run`, `continuous`, or `find` gets a private file with only the entry it loads, and asv writes that one.
+A launched `machine` or `update` runs under the exclusive lock.
+A bare `asv` takes no lock.
+
+```bash
+uv run python docs/asv-gaps/machine_race.py
+```
+
+```
+a load writes the file: True
+same inode, so truncated in place: True
+asv run --machine -m: Use the given name to retrieve machine information.
+```
+
+## 11. The benchmark server loads NumPy before the suite
+
+`asv_runner.benchmarks` imports every benchmark type at import.
+`asv_runner/benchmarks/mem.py` imports `pympler.asizeof` at module level, and Pympler imports NumPy.
+The server imports that package before it imports any benchmark module.
+OpenBLAS sizes its thread pool once, when it loads.
+A benchmark module that sets `OPENBLAS_NUM_THREADS` at import is in time for SciPy's bundled OpenBLAS and too late for NumPy's.
+With the variables unset, NumPy's pool is one thread per core.
+
+The one `asv.conf.json` route to the server's environment is a matrix `env_nobuild` value.
+That value becomes part of the environment name, and so of every result file name.
+`-E existing` ignores the matrix.
+
+Upstream: `airspeed-velocity/asv_runner`, `asv_runner/benchmarks/mem.py`.
+Import `pympler.asizeof` inside `MemBenchmark` when a memory benchmark runs, so discovery leaves NumPy unloaded.
+`airspeed-velocity/asv`: an `asv.conf.json` key for variables that reach the server, that is not part of the environment name, and that an `existing` environment honors.
+
+Until then, `optbench/asv_launch.py` sets `optbench.blas_threads.PINNED` in the process that starts asv.
+`.github/workflows/asv.yml` sets the same variables on the job.
+
+```bash
+uv run python docs/asv-gaps/numpy_preimport.py
+```
+
+```
+numpy loaded before asv_runner.benchmarks: False
+numpy loaded by asv_runner.benchmarks: True
+pympler.asizeof loaded: True
+environment name with env_nobuild OPENBLAS_NUM_THREADS=1: uv-pip-py3.12-OPENBLAS_NUM_THREADS1
+existing environments ignore the matrix: True
 ```

@@ -10,9 +10,15 @@ from .board import (
     MissingAsvCommit,
     _registry,
     _show_per_image,
+    board_rows,
+    budget_per_image,
     build_board,
+    difference_rows,
+    difference_text,
     family_cells,
+    inferred_rows,
     ranked_cells,
+    unit_per_image,
 )
 from .problems import load_all
 
@@ -58,7 +64,7 @@ def _check_code_rows(label: str, table: dict, document: dict) -> list[str]:
         if not problem_id:
             continue
         problem = (document.get("problems") or {}).get(problem_id)
-        ranked = list(problem.get("ranked") or []) if problem else []
+        ranked = board_rows(problem) if problem else []
         board_row = next((item for item in ranked if str(item.get("label") or "") == shown), None)
         got = _cell_map(row)
         if board_row is None:
@@ -144,6 +150,36 @@ def _check_ranked(label: str, table: dict, document: dict) -> list[str]:
                     f"{label} {problem_id} row {index} {field} is {got.get(field)!r}, board has {value!r}"
                 )
     return errors
+
+
+def _check_rows(where: str, table: dict, rows: list[dict], per_image: bool) -> list[str]:
+    body = _ranked_body(table)
+    if len(body) != len(rows):
+        return [f"{where} rows {len(body)} != board {len(rows)}"]
+    errors: list[str] = []
+    for index, (got_row, board_row) in enumerate(zip(body, rows), start=1):
+        got = _cell_map(got_row)
+        for field, value in ranked_cells(board_row, per_image):
+            if got.get(field) != value:
+                errors.append(f"{where} row {index} {field} is {got.get(field)!r}, board has {value!r}")
+    return errors
+
+
+def _check_unit(label: str, table: dict, document: dict) -> list[str]:
+    problem_id = table["attrs"].get("data-problem", "")
+    unit = table["attrs"].get("data-unit", "")
+    problem = (document.get("problems") or {}).get(problem_id) or {}
+    group = next((item for item in problem.get("other_units") or [] if item.get("unit") == unit), None)
+    if group is None:
+        return [f"{label} {problem_id} ranks {unit!r} and the board has no such unit table"]
+    return _check_rows(f"{label} {problem_id} {unit}", table, list(group.get("rows") or []), unit_per_image(group))
+
+
+def _check_budget(label: str, table: dict, document: dict) -> list[str]:
+    problem_id = table["attrs"].get("data-problem", "")
+    problem = (document.get("problems") or {}).get(problem_id) or {}
+    rows = list(problem.get("over_budget") or [])
+    return _check_rows(f"{label} {problem_id} budget", table, rows, budget_per_image(problem))
 
 
 def _check_headline(label: str, table: dict, document: dict) -> list[str]:
@@ -236,6 +272,10 @@ def check_site(root: Path) -> list[str]:
                 errors.extend(_check_headline(label, table, document))
             elif kind == "family":
                 errors.extend(_check_family(label, table, document))
+            elif kind == "unit":
+                errors.extend(_check_unit(label, table, document))
+            elif kind == "budget":
+                errors.extend(_check_budget(label, table, document))
             elif kind == "code-rows":
                 errors.extend(_check_code_rows(label, table, document))
                 for row in table["rows"]:
@@ -262,7 +302,11 @@ def check_site(root: Path) -> list[str]:
 
         if profile_worth_showing(board_problem):
             _require(suite, f"{slug}-profile.svg", suite_label, errors)
-        harness = [row for row in board_problem.get("ranked") or [] if row.get("par2_mean") is not None]
+        harness = [
+            row
+            for row in board_problem.get("ranked") or []
+            if row.get("par2_mean") is not None and row.get("success_rate") is not None
+        ]
         if harness:
             _require(suite, f"{slug}-cost.svg", suite_label, errors)
         families = {str(row.get("family") or "") for row in board_problem.get("ranked") or []}
@@ -270,6 +314,28 @@ def check_site(root: Path) -> list[str]:
             _require(
                 suite,
                 f'data-board-table="family" data-family="{family}" data-problem="{problem["id"]}"',
+                suite_label,
+                errors,
+            )
+        unscored = [row for row in board_rows(board_problem) if row.get("failure_note")]
+        if unscored:
+            _require(suite, 'data-board-note="failures"', suite_label, errors)
+        for row in unscored:
+            _require(suite, html.escape(f"{row.get('label')} ({row['failure_note']})"), suite_label, errors)
+        differs = difference_rows(board_problem)
+        if differs:
+            _require(suite, 'data-board-note="differences"', suite_label, errors)
+        for row in differs:
+            _require(suite, html.escape(difference_text(row)), suite_label, errors)
+        if inferred_rows(board_problem):
+            _require(suite, 'data-board-note="inferred"', suite_label, errors)
+        if board_problem.get("over_budget"):
+            _require(suite, f'data-board-table="budget" data-problem="{problem["id"]}"', suite_label, errors)
+        for group in board_problem.get("other_units") or []:
+            _require(
+                suite,
+                f'data-board-table="unit" data-unit="{html.escape(str(group.get("unit") or ""))}" '
+                f'data-problem="{problem["id"]}"',
                 suite_label,
                 errors,
             )
@@ -296,7 +362,7 @@ def check_site(root: Path) -> list[str]:
                 errors.append(f"{board_include} headline is missing {problem_id}")
 
     for problem_id, problem in (document.get("problems") or {}).items():
-        for row in problem.get("ranked") or []:
+        for row in board_rows(problem):
             key = (problem_id, str(row.get("label") or ""))
             if key not in seen_code:
                 errors.append(f"code page is missing {problem_id} {key[1]}")

@@ -1,6 +1,8 @@
 """Behaviour of the v2 board built from committed result files."""
 
 import json
+import subprocess
+import sys
 from pathlib import Path
 
 import pytest
@@ -329,6 +331,7 @@ def _asv_track(
     calls: list[float],
     *,
     commit: str = "c" * 40,
+    failures: list[str | None] | None = None,
     wrong: list[bool] | None = None,
 ) -> None:
     machine = root / "results" / "asv" / "testbox"
@@ -339,20 +342,19 @@ def _asv_track(
     )
     params = [["'0'"], [f"'{index}'" for index in range(len(calls))]]
     columns = ["result", "params", "version", "started_at", "duration"]
-    zeros = [0.0] * len(calls)
-    wrong_flags = list(wrong or [])
-    if len(wrong_flags) < len(calls):
-        wrong_flags.extend([False] * (len(calls) - len(wrong_flags)))
-    wrong_track = [1.0 if flag else 0.0 for flag in wrong_flags]
-    success = [0.0 if flag else 1.0 for flag in wrong_flags]
+    if failures is None:
+        outcomes: list[str | None] = [None] * len(calls)
+        for index, flag in enumerate(wrong or []):
+            if flag:
+                outcomes[index] = "wrong_stationary"
+    else:
+        outcomes = list(failures)
     tracks = {
         "track_force_calls": list(calls),
-        "track_success": success,
-        "track_failure_cap": zeros,
-        "track_failure_wrong_stationary": wrong_track,
-        "track_failure_divergence": zeros,
-        "track_failure_crash": zeros,
+        "track_success": [1.0 if failure is None else 0.0 for failure in outcomes],
     }
+    for name in ("cap", "wrong_stationary", "divergence", "crash"):
+        tracks[f"track_failure_{name}"] = [1.0 if failure == name else 0.0 for failure in outcomes]
     results = {f"{prefix}.{name}": [value, params, "v", 0, 0.1] for name, value in tracks.items()}
     payload = {
         "commit_hash": commit,
@@ -424,7 +426,7 @@ def test_profile_lines_up_the_same_starts(tmp_path: Path):
     _starts(tmp_path, "cheap", [_row(2, True, "cluster_0000.con"), _row(2, True, "cluster_0001.con")])
     _starts(tmp_path, "dear", [_row(4, True, "0"), _row(4, True, "1")])
 
-    written = write_board(tmp_path, tmp_path / "board")
+    written = write_board(tmp_path, tmp_path / "board", site=True)
     problem = written["problems"]["minimization/toy"]
     rho = problem["profile"]["rho"]
     cheap = next(label for label in rho if "toy/cheap" in label)
@@ -485,7 +487,7 @@ def test_a_partial_problem_drops_a_plot_left_from_an_earlier_run(tmp_path: Path)
     site_webp = site / "minimization-toy-profile.webp"
     site_webp.write_bytes(b"stale-webp")
 
-    written = write_board(tmp_path, tmp_path / "board")
+    written = write_board(tmp_path, tmp_path / "board", site=True)
 
     assert written["problems"]["minimization/toy"]["ranked"] == []
     assert not stale.exists()
@@ -636,6 +638,86 @@ def test_a_campaign_and_its_asv_track_are_one_row(tmp_path: Path):
     assert ranked[0]["n"] == 2
     assert ranked[0]["mean_calls"] == 15
     assert ranked[0]["par2_mean"] == 15
+
+
+def test_a_campaign_record_and_an_asv_track_of_the_same_starts_share_one_par2(tmp_path: Path, monkeypatch):
+    from optbench import board
+
+    budget = 250000
+    _problem(tmp_path, starts=3, cap=budget)
+    _template(tmp_path)
+    template = tmp_path / "templates" / "toy" / "fast.toml"
+    template.write_text(template.read_text(encoding="utf-8") + "failure_cap = 10000\n", encoding="utf-8")
+    _registry(tmp_path)
+    monkeypatch.setattr(
+        board,
+        "_benchmark_index",
+        lambda: {"bench_toy.ToyFast": {"template": "toy/fast", "problem": "minimization/toy", "cap": 10000}},
+    )
+    _dat(tmp_path, "toy-fast", PIN)
+    _starts(
+        tmp_path,
+        "toy-fast",
+        [_row(100, True, "0"), _row(10000, False, "1", "cap"), _row(5007, False, "2", "divergence")],
+    )
+    _asv_track(tmp_path, "bench_toy.ToyFast", [100.0, 10000.0, 5007.0], failures=[None, "cap", "divergence"])
+
+    problems = board.load_all(tmp_path / "problems")
+    templates = {item["id"]: item for item in board.list_templates(tmp_path)}
+    campaign, _ = board._campaign_rows(tmp_path, problems, templates)
+    tracked, _, _ = board._asv_rows(tmp_path, problems, templates)
+    expected = (100 + 2 * (2 * budget)) / 3
+    assert [row["cap"] for row in campaign + tracked] == [budget, budget]
+    assert campaign[0]["par2_mean"] == pytest.approx(expected)
+    assert tracked[0]["par2_mean"] == campaign[0]["par2_mean"]
+
+    ranked = build_board(tmp_path)["problems"]["minimization/toy"]["ranked"]
+    assert [(row["source"], row["n"], row["nfailed"]) for row in ranked] == [("campaign, asv", 3, 2)]
+
+
+def test_an_asv_row_carries_the_client_build_its_module_checks(tmp_path: Path, monkeypatch):
+    import subprocess
+
+    from optbench import board
+
+    _problem(tmp_path, starts=2, cap=10000)
+    _template(tmp_path)
+    _registry(tmp_path, PIN)
+    registry = tmp_path / "codes" / "registry.toml"
+    registry.write_text(
+        registry.read_text(encoding="utf-8") + f'[[code]]\nid = "toy-develop"\nname = "toy"\ncommit = "{OTHER}"\n',
+        encoding="utf-8",
+    )
+    module = tmp_path / "benchmarks" / "bench_toy.py"
+    module.parent.mkdir()
+    module.write_text(f'TOY_COMMIT = "{OTHER}"\nTOY_TOKEN = "{OTHER[:7]}"\n', encoding="utf-8")
+    git = ["git", "-C", str(tmp_path), "-c", "user.name=Board Test", "-c", "user.email=board@example.invalid"]
+    subprocess.run([*git, "init", "-q"], check=True)
+    subprocess.run([*git, "add", "-A"], check=True)
+    subprocess.run([*git, "commit", "-q", "-m", "toy pins"], check=True)
+    head = subprocess.run([*git, "rev-parse", "HEAD"], check=True, capture_output=True, text=True).stdout.strip()
+    monkeypatch.setattr(
+        board,
+        "_benchmark_index",
+        lambda: {
+            "bench_toy.ToyFast": {"template": "toy/fast", "problem": "minimization/toy", "cap": None},
+            "bench_other.ToyFast": {"template": "toy/fast", "problem": "minimization/toy", "cap": None},
+        },
+    )
+    _asv_track(tmp_path, "bench_toy.ToyFast", [12.0, 22.0], commit=head)
+
+    problems = board.load_all(tmp_path / "problems")
+    templates = {item["id"]: item for item in board.list_templates(tmp_path)}
+    (row,), _, _ = board._asv_rows(tmp_path, problems, templates)
+    assert row["commit"] == OTHER
+    assert row["note"].endswith("code pin is the client build the benchmark module checks")
+    assert board._registry_match(row, board._registry(tmp_path))
+
+    (tmp_path / "results" / "asv").rename(tmp_path / "asv-toy")
+    _asv_track(tmp_path, "bench_other.ToyFast", [12.0, 22.0], commit=head)
+    (row,), _, _ = board._asv_rows(tmp_path, problems, templates)
+    assert row["commit"] == PIN
+    assert row["note"] == "asv track_force_calls"
 
 
 def test_a_missing_asv_commit_is_not_pinned_from_the_working_tree(tmp_path: Path):
@@ -900,3 +982,60 @@ def test_a_campaign_row_without_a_hessian_index_loses_to_asv(tmp_path: Path):
     assert (campaign / "ase-lj38-fire-default.starts.jsonl").is_file()
     assert (campaign / "ase-lj38-bfgs-default.starts.jsonl").is_file()
     assert (campaign / "ase-lj38-lbfgs-default.starts.jsonl").is_file()
+
+
+def _git(root: Path, *args: str) -> str:
+    return subprocess.run(["git", "-C", str(root), *args], capture_output=True, text=True, check=True).stdout
+
+
+def _checkout(root: Path) -> None:
+    _problem(root, starts=2, cap=100)
+    _template(root, "toy/cheap")
+    _template(root, "toy/dear")
+    _registry(root)
+    _dat(root, "cheap", PIN, template="toy/cheap")
+    _dat(root, "dear", PIN, template="toy/dear")
+    _starts(root, "cheap", [_row(2, True, "cluster_0000.con"), _row(2, True, "cluster_0001.con")])
+    _starts(root, "dear", [_row(4, True, "0"), _row(4, True, "1")])
+    site = root / "docs" / "source" / "_static" / "board"
+    site.mkdir(parents=True)
+    for name in ("minimization-toy-profile.svg", "minimization-toy-cost.svg"):
+        (site / name).write_text("tracked\n", encoding="utf-8")
+    include = root / "docs" / "include" / "v2-board.org"
+    include.parent.mkdir(parents=True)
+    include.write_text("tracked\n", encoding="utf-8")
+    _git(root, "init", "-q")
+    _git(root, "add", "-A")
+    _git(root, "-c", "user.name=t", "-c", "user.email=t@t", "commit", "-q", "-m", "toy")
+
+
+def test_board_output_leaves_the_checkout_clean(tmp_path: Path):
+    root = tmp_path / "checkout"
+    output = tmp_path / "out"
+    _checkout(root)
+    subprocess.run(
+        [sys.executable, "-m", "optbench", "board", "--root", str(root), "--output", str(output)],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    assert _git(root, "status", "--porcelain", "--untracked-files=all") == ""
+    assert (output / "index.json").is_file()
+    assert (output / "plots" / "minimization-toy-profile.svg").read_text(encoding="utf-8") != "tracked\n"
+    assert "PAR-2" in (output / "v2-board.org").read_text(encoding="utf-8")
+
+
+def test_the_default_output_still_updates_the_board_page(tmp_path: Path):
+    root = tmp_path / "checkout"
+    _checkout(root)
+    subprocess.run(
+        [sys.executable, "-m", "optbench", "board", "--root", str(root)],
+        cwd=root,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    changed = set(_git(root, "status", "--porcelain", "--untracked-files=all").split())
+    assert "docs/include/v2-board.org" in changed
+    assert "docs/source/_static/board/minimization-toy-profile.svg" in changed
+    assert not (root / "results" / "board" / "v2-board.org").exists()

@@ -11,6 +11,13 @@ whose sidecar is missing searches, so a track-only run is a real number.
 The seed is ``"0"``. Sidecars live under ``results/geodesic-asv`` and
 are not the published store. The published numbers are the asv result
 file and the campaign files.
+
+A sidecar's ``blas`` is the BLAS pools its search ran with.
+
+The thread variables below come after the asv server has loaded numpy,
+so they reach scipy's BLAS and not numpy's. The starting path changes
+in its last bits with that split. Start asv with
+``python -m optbench.asv_launch``.
 """
 
 from __future__ import annotations
@@ -215,11 +222,14 @@ def _bind(class_name: str, problem: str, template: str, starts: list[str], cap: 
                     "problem": self.problem_name,
                     "template": self.template_name,
                 }
+            from optbench.blas_threads import loaded
+
             record["force_calls"] = float(record["force_calls"])
             record["success"] = bool(record["success"])
             record["failure"] = _failure_of(record)
             if record["success"]:
                 record["failure"] = None
+            record["blas"] = loaded()
             return record
 
         def time_search(self, seed, start):

@@ -7,8 +7,12 @@ import os
 import re
 from pathlib import Path
 
+from .corrections import correction_errors
+from .counts import count_errors
 from .dat import normalize
+from .differences import difference_errors
 from .problems import load_all
+from .units import unit_errors
 
 # Public text, published board files, and path tokens. Schema fields inside
 # campaign records stay as written.
@@ -166,7 +170,15 @@ def check(problems_dir: Path, oracle_path: Path) -> int:
     problems = load_all(problems_dir)
     rows = load_oracle(oracle_path)
     counts: dict[str, int] = {}
-    structural: list[str] = []
+    root = oracle_path.resolve().parent.parent
+    from .site import _primary
+
+    structural: list[str] = (
+        correction_errors(root, rows)
+        + difference_errors(root, rows)
+        + count_errors(root, rows)
+        + unit_errors(problems, _primary)
+    )
     for row in rows:
         ident = f"{row['suite']}/{row['problem']}"
         counts[ident] = counts.get(ident, 0) + 1
@@ -204,11 +216,14 @@ def check(problems_dir: Path, oracle_path: Path) -> int:
                 print(f"- {line}")
         return 1
     from .board import build_board, rank_violations
+    from .campaign import list_templates
+    from .pins import pin_errors
     from .site_check import check_site
 
-    root = oracle_path.resolve().parent.parent
     site_errors = check_site(root)
-    site_errors.extend(rank_violations(build_board(root)))
+    document = build_board(root)
+    site_errors.extend(rank_violations(document))
+    site_errors.extend(pin_errors(root, list_templates(root), document["_scored_rows"]))
     site_errors.extend(held_back_errors(root))
     site_errors.extend(banned_word_errors(root))
     if site_errors:

@@ -16,11 +16,32 @@ uv run optbench check
 uv run optbench templates
 ```
 
-`uv run` reads `pyproject.toml`, installs the command-line library, and runs that command. `pytest` is the test runner. `check` exits 0 when every shared contract covers its archived rows and `oracle/archive_gaps.txt` matches the departures. `templates` prints every template id.
+`uv run` reads `pyproject.toml`, installs the command-line library, and runs that command.
+`pytest` is the test runner.
+`check` exits 0 when every shared contract covers its archived rows and `oracle/archive_gaps.txt` matches the departures.
+It also fails when a template's `code` and `commit` name no pin in `codes/registry.toml`.
+A committed campaign or asv row keeps the label it was recorded with, so `oracle/pin_gaps.txt` lists every such row whose label names no pin, and `check` fails when that list and the rows differ.
+`templates` prints every template id.
 
 `uv run optbench board` reads `results/campaign` and `results/asv` and writes `results/board` plus the v2 table on the Board page. It does not start a search. A band method is ranked on the harness force-call total across every image, and the per-image mean is a second column from that same total. A ranked row is one code, one version, and one stock method. Older full versions stay in the same tables. A run that is both a campaign file and an asv track is one row, with the source kept as a column. A row that used fewer starts than the problem's full set stays off the ranked table. An asv result that covers one start stays out of the ranked mean.
 
+`uv run optbench board --output DIR` writes the JSON, the plots, and the Board page include `v2-board.org` under `DIR`.
+It leaves `docs/` as it was.
+Only the default output, `results/board`, also copies the plots to `docs/source/_static/board`.
+That run also writes `docs/include/v2-board.org`.
+
 The harness does not contain eOn, pele, or Sella. Those are installed separately, and the commands below say which release produced the files in `results/campaign/`.
+
+The rgmin and rgsaddle codes are built from source at the commits in `codes/registry.toml`.
+Both `Cargo.toml` files set `edition = "2024"` and `rust-version = "1.88"`, so the build needs Rust 1.88 or newer.
+Cargo 1.83 stops at the manifest with ``feature `edition2024` is required``.
+The Python packages of both are nanobind extensions built by `scikit-build-core`.
+That build also needs the Python development headers, `Python.h`, from `python3.12-dev` on Ubuntu for Python 3.12.
+Without them CMake stops with `Could NOT find Python (missing: Development.Module Development.SABIModule)`.
+It needs a C++17 compiler and CMake 3.15 or newer as well.
+The harness imports `rgmin` as that Python package.
+It loads rgsaddle as `librgsaddle.so` from `cargo build --release`, which needs only Rust.
+The band runs read the library path from `RGSADDLE_LIBRARY`, and the minimum-mode runs read it from `RGSADDLE_LIB`.
 
 ## Lennard-Jones 38 L-BFGS mean
 
@@ -167,7 +188,38 @@ uv run optbench pairs \
 
 `eon-ci-swdneb` is the doubly nudged row. A start at or above 2500 force calls is left out of the mean. The climbing-image mean is 809 with 2 failures. The doubly nudged mean is 708 with 5 failures.
 
-The Henkelman client is revision 2549 of <https://theory.cm.utexas.edu/svn/eon>. A checkout of older revisions fails where historical paths are gone. Export revision 2549. That tree still names a QSC potential whose sources are not in the revision, so the QSC references have to come out of the build or the link fails. The binary should report `r2549`. The minimization templates under `templates/eon-svn/` use `lj_cluster`. The harness rows for the other problems name `ljcluster`, `lj_cut`, `lammps`, or `morse_pt` and run through `ext_pot`. The 3.5.0 templates use `ljcluster`.
+The Henkelman client is revision 2549 of <https://theory.cm.utexas.edu/svn/eon>.
+A checkout of older revisions fails where historical paths are gone.
+A whole-tree `svn export` of revision 2549 stops on E175013 (HTTP 403) at a different file on each try, and it leaves incomplete `svn-XXXXXX` files in the tree.
+Single-file requests at the revision succeed.
+`codes/eon-svn/fetch.sh` fetches the revision that way, one file per request.
+It checks each file's size and sha256 against `codes/eon-svn/r2549.manifest` and sets the svn:executable mode.
+A file that already matches is kept, so a second run resumes.
+The manifest lists all 1037 files of the revision.
+It was built from `svn list -R -r 2549` and one request per file, and every size and the server's own sha1 and md5 for each file agree.
+No file sets svn:keywords or svn:eol-style, so those are the bytes an export writes.
+The manifest's seven `POTCAR` files are VASP pseudopotentials under the VASP license.
+They are inputs of the VASP examples and of the `client/tests/vasp` test, not of the build.
+`fetch.sh` leaves them out unless it is given `--with-potcar`, and the check below skips them too.
+The fetched tree has no `.svn` metadata.
+`client/version.sh` takes the version from `svnversion`, so there it writes `Unversioned directory`, or `unknown` without svn.
+Write `client/version.h` by hand and keep it with `make -o version.h`:
+
+```bash
+codes/eon-svn/fetch.sh "$SRC"
+grep -v '^#' codes/eon-svn/r2549.manifest | awk '$4 !~ /(^|\/)POTCAR$/ {print $1 "  " $4}' | (cd "$SRC" && sha256sum -c --quiet)
+cd "$SRC/client"
+printf 'static const char VERSION[] = "2549";\nstatic const char BUILD_DATE[] = "%s";\n' "$(date)" > version.h
+make -o version.h
+./eonclient -v
+```
+
+That tree still names a quantum Sutton-Chen (QSC) potential whose sources are not in the revision, so the QSC references have to come out of the build or the link fails.
+The `svn:externals` entry on `client/potentials` points QSC at <https://theory.cm.utexas.edu/svn/qsc/c> with no revision, and the manifest leaves it out.
+The binary should report `r2549`.
+Minimization templates under `templates/eon-svn/` use `lj_cluster`.
+The harness rows for the other problems name `ljcluster`, `lj_cut`, `lammps`, or `morse_pt` and run through `ext_pot`.
+The 3.5.0 templates use `ljcluster`.
 
 A problem has one potential. Rows on another potential stay off the ranked table. `problems/tsopt/LJ38.toml` lines 8–13 and `problems/lowest-eigenvector/lj38.toml` lines 8–13 are Lennard-Jones, epsilon 1, sigma 1, cutoff 40, with periodic boundaries off. `problems/double-ended-saddle-search/lj38.toml` line 20 and `problems/double-ended-saddle-search/lj38_2ts_separation.toml` line 18 set `potential = "lj"`, which is that same unshifted cutoff. The lane rows on those problems use that kernel and stay ranked. The published `ljcluster` rows (shifted, cutoff 15) on `tsopt/LJ38`, `lowest-eigenvector/lj38`, and `lj38_2ts_separation` are unranked. The published `de-lj38` rows use the archived `lj/cut` cutoff 40 and stay ranked; their max iteration count is 8000, and the lane climbing-image rows use 1000. `problems/tsopt/pt-island.toml` lines 8–15 and `problems/saddle-search/pt-island.toml` lines 8–15 are `morse/smooth/linear`, cutoff 9.5, periodic in x and y. The lane rows match that and stay ranked. The published Pt tsopt rows use r2549 `Morse::force` and are unranked. `problems/double-ended-saddle-search/pt-island.toml` line 17 and `problems/neb/Pt-heptamer.toml` line 17 set `potential = "morse_pt"`. That name is the shifted Morse in `optbench/pes.py` lines 3–6 and 45–67: cutoff 9.5, pair energy zero at the cutoff. The lane double-ended and NEB templates were rerun on r2549 `Morse::force` with the Fortran binary. Against the smooth-linear starts, 35, 43, 48, 49, and 52 of the 59 Pt double-ended starts changed for climbing-image NEB, doubly nudged climbing image, dimer, Lanczos, and improved Lanczos. One, one, three, and one of the 13 NEB pairs changed for CG, FIRE, L-BFGS, and QuickMin. Both hTST Pt passes changed. They were not pooled with the published ids. The published climbing-image rows set spring 5 and `climbing_image_converged_only`, and the lane rows do not, so the starts are different methods. The 3.5.0 rows that still use `morse/smooth/linear` on those two problems are unranked variants. `hTST/Pt` has no potential block; the archive ini sets `morse_pt`, and those lane rows were rerun on `Morse::force`. They stay off the ranked table because success is one qualifying saddle. `hTST/Al` and the accelerated-md rows use the r2549 Aluminum EAM and stay off the ranked table. `globalopt/lj38.toml` has no potential block. The 2014 `in.lammps` is `lj/cut/opt` cutoff 40, which is the lane kernel. Basin hopping, seed 314159, has all 100 starts. The per-start wall budget is 21600 s. The force-call cap is still 2000000. Ninety-eight r2549 starts reached -173.928427. Starts 69 and 72 stopped at that cap. The success-only mean is 529113 and the PAR-2 mean is 598530. The 3.5.0 basin-hopping row has 100 starts, all below the stop. Its success-only mean and PAR-2 mean are 503146. This r2549 binary links libgfortran and the Fortran potentials, including Aluminum, Lenosky, SW, and EDIP. It is not a NO_FORTRAN build. LAMMPS is not linked. The 3.5.0 lane rows use commit 4d8b34baf1ba8d2d980df29838bac1f969d1662c. The conda binary that prints 3.5.0 (7ec1840) was not used. Hyperdynamics bond boost uses bb_dvmax 0. The bounded AKMC rows stop after 4 passes and do not reach 27 good saddles, so the PAR-2 of that incomplete catalogue is the cap penalty and the harness calls stay in the start file. The minimization rows stay as recorded. mlopt is neural-network training and was left out. tip4p has no harness kernel. lj100-binary has no binary-LJ kernel. lj75, lj98, and lj150 have no stated minimum or force-call success rule. standard_aladatom has no geometry, cap, or success rule beyond rate metrics. Minima hopping start 0 used 2000000 harness calls in 3600 s and did not reach -173.927427. The lowest monitoring energy was -173.25238. That run is not scored.
 
@@ -194,6 +246,18 @@ The LJ38 minimization templates name `ljcluster` or `lj_cluster`. They do not pa
 
 `oracle/entries.jsonl` holds every `benchmark.dat` from branch `main` of <https://gitlab.com/optbench/optbench> at commit `0f26b796`. The archived LJ38 minimization mean counts every run under 10000 force calls as a success. A new run is a success only when the force norm is at or below the problem value and the call count is under the cap. Both rules are in `problems/minimization/lj38.toml`. The reference entry is `archive/entries/minimization/lj38/eon-cg`.
 
+An archive row's run count is the entry's own.
+An hTST `benchmark.dat` gives it on the `average over N` line after the ranked mean.
+Where `benchmark.dat` gives none, `oracle/counts.toml` gives the count, what was counted, and the entry script that states it, and `check` fails when a count names no entry or no source.
+
+`oracle/corrections.toml` names an archived field that the entry's own run script contradicts.
+It gives the archived value, the value the board reads, and the source.
+The archived file stays as it is, and `check` fails when the archive no longer has the recorded value.
+
+`oracle/differences.toml` names an archived row whose values differ from the table of J. Chem. Theory Comput. 10, 5476 (2014) that prints them.
+It gives the archived and printed values, the note the board prints beside the row, and the evidence for that note.
+The row still ranks on its archived values, and `check` fails when the archive no longer has them or when they match the printed values.
+
 The front page is a result whose status is `sota` and whose commit is the present source in `codes/registry.toml`. The archive page is the 2014 scores plus later passes that do not meet that rule. A local `benchmark.dat` is a score whether or not it has been added to the front page. Adding it there means a `results/*.json` record with `optbench.result/v1`, the problem geometries, and the pinned commit.
 
 `uv run optbench import-archive ARCHIVE` rebuilds the oracle and the geometry store from a bare clone of the public GitLab project. It does not replace a problem file that already exists.
@@ -217,16 +281,19 @@ Pt-island cost is force calls in a repetition divided by the searches in that re
 The environment type is `uv-pip`, from `optbench.asv_uv`. It creates the environment with `uv venv` and installs with `uv pip`. The committed quadratic sample is that environment. eonclient is not part of it. The seven Lennard-Jones 38 classes in `benchmarks/bench_lj38.py` skip unless `OPTBENCH_ASV_EON=1`, and the default grid is one start unless `OPTBENCH_ASV_FULL=1`.
 
 ```bash
-uv run asv machine --yes
-uv run asv machine --yes --machine xeon-8c
-uv run asv run --machine xeon-8c COMMIT^! -b quadratic
+uv run python -m optbench.asv_launch machine --yes --machine xeon-8c
+uv run python -m optbench.asv_launch run --machine xeon-8c COMMIT^! -b quadratic
 uv run optbench statistics --output results/validation/statistics.json
 uv run asv publish
 ```
 
-`xeon-8c` is the machine of the committed results. Without `--machine`, `asv run` writes a new folder named after the host. Step 7 of `docs/asv.md` says why `asv machine` runs twice.
+`xeon-8c` is the machine of the committed results. Without `--machine`, `asv run` writes a new folder named after the host. Step 7 of `docs/asv.md` uses the launcher, which writes every field. Upstream `asv machine --yes --machine NAME` stores only the name.
 
-`optbench statistics` reads the saved tracks. The saved file comes from `asv run` without `--quick`. CI runs the quadratic suite with `HaoZeke/asv-perch@v1` (`.github/workflows/asv.yml`).
+`optbench statistics` reads the saved tracks.
+The saved file comes from `asv run` without `--quick`.
+`optbench.asv_launch` records the BLAS pools that the asv server starts with (`docs/asv.md`, Launcher).
+It also pins BLAS to one thread before asv loads NumPy (`docs/asv.md`, Threads).
+CI runs the quadratic suite with `HaoZeke/asv-perch@v1` (`.github/workflows/asv.yml`).
 
 ## Build the site
 

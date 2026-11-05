@@ -22,6 +22,7 @@ versions of one method are two rows.
 
 from __future__ import annotations
 
+import ast
 import html
 import json
 import math
@@ -34,8 +35,11 @@ from collections import defaultdict
 from pathlib import Path
 
 from .campaign import geometry_archive, list_templates
+from .corrections import corrected, load_corrections
+from .differences import difference_note, load_differences
+from .counts import entry_count, load_counts
 from .dat import DatError, parse_lenient
-from .failures import FAILURES
+from .failures import FAILURES, failure_of
 from .families import (
     FAMILIES,
     coordinate_count,
@@ -48,10 +52,12 @@ from .families import (
     row_label,
     version_text,
 )
+from .pins import pin_gap, same_commit
 from .problems import load_all
 from .profile import performance_profile, profile_cost
-from .score import normalize_start, score_v2
+from .score import PAR_FACTOR, normalize_start, score_v2
 from .site import SUITE_ORDER, _float, _held, _primary, campaign_problem
+from .units import FORCE_CALL_FIELDS, harness_unit, rank_unit, row_unit, unit_source
 from .v2 import parse_repetitions
 
 BOARD_SCHEMA = "optbench.board/v2"
@@ -85,12 +91,12 @@ def _json_lines(path: Path) -> list[dict]:
 def stated_full_n(root: Path, problem: dict) -> int | None:
     """How many starts the problem file calls a complete score.
 
-    ``sample.starts`` or ``sample.pairs`` wins. A minimization archive
-    with no sample count uses the number of ``.con`` files, which is
-    the Morse bulk set.
+    ``sample.starts``, ``pairs``, ``repetitions`` or ``initializations``
+    wins. A minimization archive with no sample count uses the number of
+    ``.con`` files, which is the Morse bulk set.
     """
     sample = problem.get("sample") or {}
-    for key in ("starts", "pairs", "repetitions"):
+    for key in ("starts", "pairs", "repetitions", "initializations"):
         value = sample.get(key)
         if value not in (None, "", 0, "0"):
             return int(value)
@@ -126,18 +132,10 @@ def _registry_match(row: dict, registry: list[dict]) -> bool:
     Several registry entries share the name eOn. The commit selects which pin.
     """
     recorded = str(row.get("commit") or "")
-    code = str(row.get("code") or "").lower()
+    code = str(row.get("code") or "")
     if not recorded or not code:
         return False
-    for pin in registry:
-        names = {str(pin.get("id") or "").lower(), str(pin.get("name") or "").lower()}
-        names.discard("")
-        if code not in names:
-            continue
-        pinned = str(pin.get("commit") or "")
-        if pinned and (recorded.startswith(pinned) or pinned.startswith(recorded)):
-            return True
-    return False
+    return pin_gap(code, recorded, registry) is None
 
 
 class MissingAsvCommit(RuntimeError):
@@ -233,6 +231,53 @@ def _template_at_commit(root: Path, commit: str, template_id: str) -> dict | Non
     return loaded
 
 
+_FULL_COMMIT = re.compile(r"[0-9a-f]{40}")
+
+
+def _module_pin(root: Path, commit: str, module_name: str) -> str:
+    """The client build a benchmark module checked, as the module stood at ``commit``.
+
+    A module that refuses any other build names it in one top-level
+    ``*_COMMIT`` string. Its tracks ran on that build, whatever commit the
+    template it reads names.
+    """
+    cache = getattr(_module_pin, "_cache", None)
+    if cache is None:
+        cache = {}
+        setattr(_module_pin, "_cache", cache)
+    key = (str(root.resolve()), commit, module_name)
+    if key in cache:
+        return cache[key]
+    text = ""
+    if commit and module_name:
+        try:
+            text = subprocess.check_output(
+                ["git", "-C", str(root), "show", f"{commit}:benchmarks/{module_name}.py"],
+                stderr=subprocess.DEVNULL,
+                text=True,
+            )
+        except (subprocess.CalledProcessError, FileNotFoundError, OSError):
+            text = ""
+    try:
+        body = ast.parse(text).body if text else []
+    except SyntaxError:
+        body = []
+    named = {
+        node.value.value
+        for node in body
+        if isinstance(node, ast.Assign)
+        and len(node.targets) == 1
+        and isinstance(node.targets[0], ast.Name)
+        and node.targets[0].id.endswith("_COMMIT")
+        and isinstance(node.value, ast.Constant)
+        and isinstance(node.value.value, str)
+        and _FULL_COMMIT.fullmatch(node.value.value)
+    }
+    pin = named.pop() if len(named) == 1 else ""
+    cache[key] = pin
+    return pin
+
+
 def _geometry_key(start) -> str:
     """One token per geometry so campaign names and asv indexes line up.
 
@@ -295,6 +340,13 @@ def _commit_divides_band(root: Path, commit: str) -> bool:
 
 
 def _cap_of(problem: dict | None, template: dict | None, fields: dict[str, str]) -> int | None:
+    """The PAR-2 cap of a row from any source.
+
+    The problem's ``max_force_calls`` comes first, so a campaign file and an
+    asv track of the same starts get the same score. A template limit is
+    the cap only when the problem states none, and the result file's
+    ``cap`` field only when neither does.
+    """
     if problem is not None:
         stated = (problem.get("convergence") or {}).get("max_force_calls")
         if stated not in (None, ""):
@@ -373,6 +425,7 @@ def _record_from_raw(raw: dict, cap: int | None, force_tol: float | None) -> dic
     if isinstance(reasons, list) and reasons:
         record["reasons"] = [str(item) for item in reasons]
         return record
+    record["failure_inferred"] = True
     if raw.get("error"):
         record["failure"] = "crash"
     elif cap is not None and calls >= cap:
@@ -520,6 +573,7 @@ def _blank_row(**values) -> dict:
         "published": None,
         "rank_cost": None,
         "registry_match": False,
+        "unit": "",
         "call_unit": "",
         "mean_per_image": None,
         "median_per_image": None,
@@ -536,6 +590,7 @@ def _blank_row(**values) -> dict:
         "min_calls": None,
         "max_calls": None,
         "failures": {},
+        "failure_note": "",
         "cap": None,
         "scored": False,
         "note": "",
@@ -588,6 +643,14 @@ def _apply_summary(row: dict, summary: dict, records: list[dict]) -> None:
     row["mean_per_image"] = summary.get("mean_per_image")
     row["median_per_image"] = summary.get("median_per_image")
     row["failures"] = {name: summary[f"n_{name}"] for name in FAILURES}
+    inferred: dict[str, int] = defaultdict(int)
+    for record in records:
+        if record.get("failure_inferred"):
+            label = failure_of(record, row.get("cap"))
+            if label is not None:
+                inferred[label] += 1
+    if inferred:
+        row["failures_inferred"] = {name: inferred[name] for name in FAILURES if inferred[name]}
     hessians = [
         float(record["hessian_calls"])
         for record in records
@@ -675,6 +738,13 @@ def _collapse_run(group: list[dict]) -> dict:
     base["path"] = "; ".join(paths)
     if asv_commits:
         base["asv_commit"] = asv_commits[0]
+    tracked = [row for row in ordered if "asv" in _source_parts(row) and row.get("scored")]
+    if tracked:
+        base["failures"] = dict(tracked[0].get("failures") or {})
+        if tracked[0].get("failures_inferred"):
+            base["failures_inferred"] = dict(tracked[0]["failures_inferred"])
+        else:
+            base.pop("failures_inferred", None)
     # Same score means the asv track already applied the success rule.
     # The merged row is that track, so the missing-index mark does not stick.
     if any("asv" in _source_parts(row) for row in ordered):
@@ -887,12 +957,16 @@ def _asv_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict])
                 or ""
             )
             problem = problems.get(problem_id)
-            cap = described.get("cap")
-            if cap is None:
-                cap = _cap_of(problem, source_template or template, {})
+            class_cap = described.get("cap")
+            cap = _cap_of(problem, source_template or template, {} if class_cap is None else {"cap": str(class_cap)})
             pin_note = "asv track_force_calls"
             if template_id and pinned is None:
                 pin_note = "asv track_force_calls; code pin is the working-tree template"
+            code_commit = str((source_template or {}).get("commit") or "")
+            built = _module_pin(root, str(result.commit_hash), module_name)
+            if built and not same_commit(code_commit, built):
+                code_commit = built
+                pin_note = "asv track_force_calls; code pin is the client build the benchmark module checks"
             try:
                 tracked = track_rows(result, class_name)
             except SystemExit as exc:
@@ -943,7 +1017,7 @@ def _asv_rows(root: Path, problems: dict[str, dict], templates: dict[str, dict])
                 template=template_id,
                 code=str((source_template or {}).get("code") or ""),
                 code_version=str((source_template or {}).get("code_version") or ""),
-                commit=str((source_template or {}).get("commit") or ""),
+                commit=code_commit,
                 tuning=str((source_template or {}).get("tuning") or (source_template or {}).get("profile") or ""),
                 entry=f"{module_name}.{class_name}",
                 source="asv",
@@ -1001,6 +1075,44 @@ def _rank_key(row: dict) -> tuple:
     )
 
 
+def _over_budget(row: dict, problem: dict | None) -> bool:
+    """An archived run above the problem cap with no failure for it ran under a larger cap."""
+    most = row.get("_archived_max")
+    cap = _cap_of(problem, None, {})
+    if row.get("origin") != "archive" or most is None or cap is None:
+        return False
+    return row.get("unit") == harness_unit(problem) and most > cap
+
+
+def _archive_par2(row: dict, problem: dict | None) -> tuple[float | None, str]:
+    """PAR-2 of an archived mean, or why the harness failure rule cannot score it.
+
+    The half-even rule each problem file states leaves failures out of the
+    archived mean, so the finished runs sum to that mean times their count.
+    The reason is empty when the mean leaves nothing out.
+    """
+    published = row.get("published")
+    nfailed = row.get("nfailed")
+    if published is None:
+        return None, ""
+    if nfailed is None:
+        return None, "the entry records no failure count"
+    cap = _cap_of(problem, None, {})
+    if cap is None:
+        return None, "" if nfailed == 0 else "the problem states no cap"
+    harness = harness_unit(problem)
+    if row.get("unit") != harness:
+        return None, "" if nfailed == 0 else f"it counts {row.get('unit')}, and the cap counts {harness}"
+    if _over_budget(row, problem):
+        return None, f"its archived maximum, {_format_number(row['_archived_max'])}, is above the cap of {cap}"
+    if nfailed == 0:
+        return float(published), ""
+    n = int(row.get("n") or 0)
+    if n < nfailed:
+        return None, f"the entry records {nfailed} failures and no count of {nfailed} or more runs"
+    return ((n - nfailed) * float(published) + nfailed * PAR_FACTOR * cap) / n, ""
+
+
 def _annotate_row(row: dict, problem: dict | None, registry: list[dict]) -> None:
     code = display_code(str(row.get("code") or ""), registry)
     version = version_text(str(row.get("code_version") or ""), str(row.get("commit") or ""))
@@ -1010,8 +1122,12 @@ def _annotate_row(row: dict, problem: dict | None, registry: list[dict]) -> None
     if row.get("hessian_calls") is None:
         row["hessian_calls"] = 0.0
     row["fd_calls"] = finite_difference_calls(float(row["hessian_calls"]), coordinate_count(problem))
+    row["unit"] = row_unit(problem, str(row.get("origin") or "harness"))
     if row.get("origin") == "archive":
-        row["rank_cost"] = row.get("published")
+        par2, row["failure_note"] = _archive_par2(row, problem)
+        row["_over_budget"] = _over_budget(row, problem)
+        row["par2_mean"] = par2
+        row["rank_cost"] = par2 if par2 is not None else row.get("published")
     else:
         row["published"] = None
         row["rank_cost"] = row.get("par2_mean")
@@ -1086,6 +1202,9 @@ def _archive_rows(root: Path, problems: dict[str, dict], registry: list[dict], f
     path = root / "oracle" / "entries.jsonl"
     if not path.is_file():
         return []
+    corrections = load_corrections(root)
+    differences = load_differences(root)
+    counts = load_counts(root)
     rows: list[dict] = []
     for item in load_oracle(path):
         ident = f"{item['suite']}/{item['problem']}"
@@ -1093,6 +1212,7 @@ def _archive_rows(root: Path, problems: dict[str, dict], registry: list[dict], f
         if problem is None:
             continue
         fields, _renamed = normalize(item["fields"])
+        fields = corrected(str(item.get("path") or ""), fields, corrections)
         if _held(fields):
             continue
         primary = _primary(problem)
@@ -1103,7 +1223,12 @@ def _archive_rows(root: Path, problems: dict[str, dict], registry: list[dict], f
             nfailed = int(float(nfailed_raw)) if nfailed_raw not in (None, "") else None
         except ValueError:
             nfailed = None
-        stated = full_n.get(ident)
+        own = entry_count(item, primary, counts) if primary else None
+        stated = own if own is not None else full_n.get(ident)
+        if fields.get("force_calls"):
+            mean_calls = _float(fields.get("force_calls", ""))
+        else:
+            mean_calls = published if primary in FORCE_CALL_FIELDS else None
         row = _blank_row(
             problem=ident,
             entry=str(item.get("entry") or ""),
@@ -1117,14 +1242,39 @@ def _archive_rows(root: Path, problems: dict[str, dict], registry: list[dict], f
             method=method,
             scored=True,
             published=published,
-            mean_calls=_float(fields.get("force_calls", "")) if fields.get("force_calls") else published,
+            mean_calls=mean_calls,
             median_calls=_float(fields.get("force_calls_median", "")),
             nfailed=nfailed,
             n=stated or 0,
             hessian_calls=0.0,
             note="archived score",
+            _archived_max=_float(fields["force_calls_max"]) if fields.get("force_calls_max") else None,
         )
+        difference = difference_note(row["path"], fields, differences)
+        if difference:
+            row["difference"] = difference
         rows.append(row)
+    return rows
+
+
+def _unit_groups(rows: list[dict]) -> list[tuple[str, list[dict]]]:
+    """Rows of each other unit, ranked only among themselves."""
+    grouped: dict[str, list[dict]] = defaultdict(list)
+    for row in rows:
+        grouped[str(row.get("unit") or "")].append(row)
+    out = []
+    for name in sorted(grouped):
+        group = sorted(grouped[name], key=_rank_key)
+        _assign_family_ranks(group)
+        out.append((name, group))
+    return out
+
+
+def board_rows(problem: dict) -> list[dict]:
+    """Ranked rows, then the rows of each other unit."""
+    rows = list(problem.get("ranked") or [])
+    for group in problem.get("other_units") or []:
+        rows.extend(group.get("rows") or [])
     return rows
 
 
@@ -1141,7 +1291,7 @@ def rank_violations(document: dict) -> list[str]:
     errors: list[str] = []
     for problem in (document.get("problems") or {}).values():
         ident = str(problem.get("id") or "")
-        for row in problem.get("ranked") or []:
+        for row in board_rows(problem):
             label = str(row.get("label") or row.get("template") or row.get("entry") or "")
             if row.get("short"):
                 errors.append(f"short row {ident} {label}")
@@ -1162,6 +1312,7 @@ def build_board(root: Path) -> dict:
     campaign, unparsed = _campaign_rows(root, problems, templates)
     asv_rows, asv_unparsed, unmapped = _asv_rows(root, problems, templates)
     unparsed.extend(asv_unparsed)
+    scored = [_public(row) for row in campaign + asv_rows]
     rows = _dedup(campaign + asv_rows)
     full_n: dict[str, int | None] = {}
     for problem_id, problem in problems.items():
@@ -1197,12 +1348,14 @@ def build_board(root: Path) -> dict:
     short: list[dict] = []
     withheld: list[dict] = []
     not_comparable: list[dict] = []
+    over_budget: list[dict] = []
     for problem_id in sorted(by_problem):
         group = by_problem[problem_id]
         ranked = []
         held_short = []
         held_adjusted = []
         held_client = []
+        held_budget = []
         for row in group:
             if row.get("short"):
                 held_short.append(row)
@@ -1213,19 +1366,31 @@ def build_board(root: Path) -> dict:
             elif is_adjusted(row):
                 held_adjusted.append(row)
                 withheld.append(row)
+            elif row.get("_over_budget"):
+                held_budget.append(row)
+                over_budget.append(row)
             else:
                 ranked.append(row)
+        problem = problems.get(problem_id) or {}
+        unit = rank_unit(problem, ranked)
+        other_units = _unit_groups([row for row in ranked if row.get("unit") != unit])
+        ranked = [row for row in ranked if row.get("unit") == unit]
         ranked.sort(key=_rank_key)
         _assign_family_ranks(ranked)
-        problem = problems.get(problem_id) or {}
         problems_out[problem_id] = {
             "id": problem_id,
             "title": problem.get("title", problem_id),
             "full_n": full_n.get(problem_id),
+            "unit": unit,
+            "unit_source": unit_source(problem),
             "ranked": [_public(row) for row in ranked],
+            "other_units": [
+                {"unit": name, "rows": [_public(row) for row in rows]} for name, rows in other_units
+            ],
             "short": [_public(row) for row in held_short],
             "withheld": [_public(row) for row in held_adjusted],
             "not_comparable": [_public(row) for row in held_client],
+            "over_budget": [_public(row) for row in sorted(held_budget, key=_rank_key)],
             "_ranked_rows": ranked,
         }
     return {
@@ -1236,7 +1401,9 @@ def build_board(root: Path) -> dict:
         "unparsed": [_public(row) for row in unparsed],
         "unmapped": [_public(row) for row in unmapped],
         "not_comparable": [_public(row) for row in not_comparable],
-        "ranked_count": sum(len(item["ranked"]) for item in problems_out.values()),
+        "over_budget": [_public(row) for row in over_budget],
+        "ranked_count": sum(len(board_rows(item)) for item in problems_out.values()),
+        "_scored_rows": scored,
     }
 
 
@@ -1430,9 +1597,26 @@ def _format_number(value) -> str:
     return str(value)
 
 
-def _failure_text(failures: dict) -> str:
-    parts = [f"{name} {failures.get(name, 0)}" for name in FAILURES]
+def _failure_text(failures: dict, inferred: dict | None = None) -> str:
+    parts = []
+    for name in FAILURES:
+        part = f"{name} {failures.get(name, 0)}"
+        if (inferred or {}).get(name):
+            part += f" ({inferred[name]} inferred)"
+        parts.append(part)
     return ", ".join(parts)
+
+
+def failure_cell(row: dict) -> str:
+    """Failure classes of a harness row. An archived entry records only a count."""
+    if row.get("origin") != "archive":
+        return _failure_text(row.get("failures") or {}, row.get("failures_inferred"))
+    nfailed = row.get("nfailed")
+    if nfailed is None:
+        return "not recorded"
+    if nfailed == 0:
+        return "0 failed"
+    return f"{nfailed} failed, class not recorded"
 
 
 def _cell(value) -> str:
@@ -1449,6 +1633,7 @@ def _headers(problem: dict) -> list[str]:
         "Row",
         "Family",
         "Family rank",
+        "Unit",
         "PAR-2",
         "Published",
         "Median calls",
@@ -1469,6 +1654,7 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
         ("label", str(row.get("label") or "")),
         ("family", family_title(str(row.get("family") or ""))),
         ("family_rank", "" if row.get("family_rank") is None else str(row.get("family_rank"))),
+        ("unit", str(row.get("unit") or "")),
         ("par2_mean", _format_number(row.get("par2_mean"))),
         ("published", _format_number(row.get("published"))),
         ("median_calls", _format_number(row.get("median_calls"))),
@@ -1478,7 +1664,7 @@ def ranked_cells(row: dict, per_image: bool) -> list[tuple[str, str]]:
         cells.append(("mean_per_image", _format_number(row.get("mean_per_image"))))
     cells.append(("hessian_calls", _format_number(row.get("hessian_calls"))))
     cells.append(("fd_calls", _format_number(row.get("fd_calls"))))
-    cells.append(("failures", _failure_text(row.get("failures") or {})))
+    cells.append(("failures", failure_cell(row)))
     cells.append(("n", str(row.get("n"))))
     return cells
 
@@ -1489,6 +1675,7 @@ def family_cells(row: dict) -> list[tuple[str, str]]:
         ("family_rank", "" if row.get("family_rank") is None else str(row.get("family_rank"))),
         ("label", str(row.get("label") or "")),
         ("rank_cost", _format_number(row.get("rank_cost"))),
+        ("unit", str(row.get("unit") or "")),
         ("hessian_calls", _format_number(row.get("hessian_calls"))),
         ("fd_calls", _format_number(row.get("fd_calls"))),
         ("n", str(row.get("n"))),
@@ -1761,14 +1948,21 @@ def render_problem_section(
 
 
 def _caption(per_image: bool) -> str:
-    caption = "One row is one code, one version, and one method. A lower cost is better."
+    caption = (
+        "One row is one code, one version, and one method. A lower cost is better. "
+        "PAR-2 counts a finished run as the calls it used and a failed run as twice the cap. "
+        "An archived row shows the average it published, "
+        "and its PAR-2 applies that rule to the failures the entry records. "
+        "Hessians is the mean analytic Hessian count. "
+        "FD calls is that count times one force call per coordinate."
+    )
     if per_image:
         caption += " The per-image mean divides the total by the number of moving images."
     return caption
 
 
 def _family_table(problem: dict, family_id: str, rows: list[dict]) -> str:
-    headers = ["Rank", "Row", "Cost", "Hessians", "FD calls", "Runs"]
+    headers = ["Rank", "Row", "Cost", "Unit", "Hessians", "FD calls", "Runs"]
     lines = [
         '<div class="bench-scroll">',
         (
@@ -1784,6 +1978,126 @@ def _family_table(problem: dict, family_id: str, rows: list[dict]) -> str:
             for header, (field, value) in zip(headers, family_cells(row))
         )
         lines.append(f"<tr>{cells}</tr>")
+    lines.append("</tbody></table></div>")
+    return "\n".join(lines)
+
+
+def unit_per_image(group: dict) -> bool:
+    return any(row.get("mean_per_image") is not None for row in group.get("rows") or [])
+
+
+def failure_paragraph(problem: dict) -> str:
+    """Archived rows the harness failure rule cannot score, each with the reason."""
+    rows = [row for row in board_rows(problem) if row.get("failure_note")]
+    if not rows:
+        return ""
+    items = "".join("<li>" + _cell(f"{row.get('label')} ({row['failure_note']})") + "</li>" for row in rows)
+    return (
+        '<p class="bench-gaps" data-board-note="failures">'
+        "These archived rows rank on the value each one published, which leaves out any failure. "
+        "The failure rule has no score for them, for the reason given with each.</p>"
+        f"<ul>{items}</ul>"
+    )
+
+
+INFERRED_RULE = (
+    "A failure class marked inferred comes from a start file that records no class. "
+    "A start with an error is crash, a start at or above the cap is cap, "
+    "and any other failure is divergence unless its force norm is at or below the stop, "
+    "which makes it wrong_stationary."
+)
+
+
+def inferred_rows(problem: dict) -> list[dict]:
+    """Shown rows with a failure class the board inferred."""
+    return [row for row in board_rows(problem) if row.get("failures_inferred")]
+
+
+def inferred_paragraph(problem: dict) -> str:
+    rows = inferred_rows(problem)
+    if not rows:
+        return ""
+    labels = "; ".join(str(row.get("label") or "") for row in rows)
+    return (
+        f'<p class="bench-gaps" data-board-note="inferred">{_cell(INFERRED_RULE)} '
+        f"Rows with an inferred class: {_cell(labels)}.</p>"
+    )
+
+
+def difference_rows(problem: dict) -> list[dict]:
+    """Shown archived rows that ``oracle/differences.toml`` labels."""
+    return [row for row in board_rows(problem) + list(problem.get("over_budget") or []) if row.get("difference")]
+
+
+def difference_text(row: dict) -> str:
+    return f"{row.get('label')} ({str(row['difference']).rstrip('.')})"
+
+
+def difference_paragraph(problem: dict) -> str:
+    rows = difference_rows(problem)
+    if not rows:
+        return ""
+    parts = "; ".join(difference_text(row) for row in rows)
+    return (
+        '<p class="bench-gaps" data-board-note="differences">'
+        "These archived rows differ from the table of J. Chem. Theory Comput. 10, 5476 (2014) that prints them, "
+        f"and each ranks on its archived values: {_cell(parts)}.</p>"
+    )
+
+
+def budget_per_image(problem: dict) -> bool:
+    return any(row.get("mean_per_image") is not None for row in problem.get("over_budget") or [])
+
+
+def _budget_table(problem: dict) -> str:
+    rows = list(problem.get("over_budget") or [])
+    if not rows:
+        return ""
+    per_image = budget_per_image(problem)
+    headers = _headers({"ranked": rows})
+    reasons = "; ".join(f"{row.get('label')} ({row.get('failure_note')})" for row in rows)
+    lines = [
+        "<h3>Run under a different budget</h3>",
+        "<p>These archived rows record a run above this problem's cap and no failure for it, "
+        "so they ran under a larger cap. This table keeps them apart from the ranking above: "
+        f"{_cell(reasons)}.</p>",
+        '<div class="bench-scroll">',
+        f'<table class="bench-sortable" data-board-table="budget" data-problem="{_cell(problem["id"])}">',
+        f"<caption>{_cell(_caption(per_image))}</caption>",
+        "<thead><tr>" + "".join(f"<th>{_cell(header)}</th>" for header in headers) + "</tr></thead><tbody>",
+    ]
+    for row in rows:
+        lines.append(f"<tr>{_row_cells(row, per_image)}</tr>")
+    lines.append("</tbody></table></div>")
+    return "\n".join(lines)
+
+
+def _unit_table(problem: dict, group: dict) -> str:
+    unit = str(group.get("unit") or "")
+    rows = list(group.get("rows") or [])
+    per_image = unit_per_image(group)
+    headers = _headers({"ranked": rows})
+    lines = [
+        f"<h3>Ranked in {_cell(unit)}</h3>",
+        f"<p>These rows count {_cell(unit)}. The tables above count {_cell(problem.get('unit') or '')}, "
+        "so these rows are ranked only among themselves.</p>",
+    ]
+    source = str(problem.get("unit_source") or "")
+    if source:
+        lines.append(f'<p class="bench-aside">{_cell(source)}</p>')
+    lines.extend(
+        [
+            '<div class="bench-scroll">',
+            (
+                f'<table class="bench-sortable" data-board-table="unit" data-unit="{_cell(unit)}" '
+                f'data-problem="{_cell(problem["id"])}">'
+            ),
+            f"<caption>{_cell(_caption(per_image))}</caption>",
+            "<thead><tr>" + "".join(f"<th>{_cell(header)}</th>" for header in headers) + "</tr></thead><tbody>",
+        ]
+    )
+    for row in rows:
+        lines.append(f"<tr>{_row_cells(row, per_image)}</tr>")
     lines.append("</tbody></table></div>")
     return "\n".join(lines)
 
@@ -1869,6 +2183,15 @@ def _table(
     lead = gap_paragraph(problem, unparsed)
     if lead:
         lines.append(lead)
+    unscored = failure_paragraph(problem)
+    if unscored:
+        lines.append(unscored)
+    differs = difference_paragraph(problem)
+    if differs:
+        lines.append(differs)
+    guessed = inferred_paragraph(problem)
+    if guessed:
+        lines.append(guessed)
     grouped: dict[str, list[dict]] = defaultdict(list)
     for row in ranked:
         grouped[str(row.get("family") or "")].append(row)
@@ -1889,6 +2212,13 @@ def _table(
     if not ranked:
         lines.append(f'<tr><td colspan="{len(headers)}">No ranked row.</td></tr>')
     lines.append("</tbody></table></div>")
+    if problem.get("other_units"):
+        lines.append("<p>A row that counts another unit is ranked in its own table after the overall table.</p>")
+    for group in problem.get("other_units") or []:
+        lines.append(_unit_table(problem, group))
+    budget = _budget_table(problem)
+    if budget:
+        lines.append(budget)
     held = _aside_rows(problem)
     if held:
         lines.append("<h3>Off the ranked table</h3><ul>")
@@ -1940,10 +2270,18 @@ def _strip_private(document: dict) -> dict:
     }
 
 
-def write_board(root: Path, output: Path) -> dict:
-    """Write the leaderboard JSON, the plots, and the site include."""
+def write_board(root: Path, output: Path, *, site: bool | None = None) -> dict:
+    """Write the leaderboard JSON, the plots, and the Board page include.
+
+    With ``site`` true, the plots are also copied to the site and the include
+    is the Board page under ``root/docs``. Otherwise every file goes under
+    ``output``. ``site`` left as None is true only when ``output`` is the
+    checkout's ``results/board``.
+    """
     root = Path(root)
     output = Path(output)
+    if site is None:
+        site = output.resolve() == (root / "results" / "board").resolve()
     document = build_board(root)
     output.mkdir(parents=True, exist_ok=True)
     plot_dir = output / "plots"
@@ -1997,7 +2335,7 @@ def write_board(root: Path, output: Path) -> dict:
         sections.append(
             "<section id=\"unmapped\"><h2>Not a problem template</h2><ul>" + "".join(items) + "</ul></section>"
         )
-    if site_plots != plot_dir and plot_dir.is_dir():
+    if site and site_plots != plot_dir and plot_dir.is_dir():
         site_plots.mkdir(parents=True, exist_ok=True)
         for path in plot_dir.iterdir():
             if path.is_file():
@@ -2015,7 +2353,7 @@ def write_board(root: Path, output: Path) -> dict:
             json.dumps(problem, indent=2, sort_keys=True) + "\n",
             encoding="utf-8",
         )
-    include = root / "docs" / "include" / "v2-board.org"
+    include = root / "docs" / "include" / "v2-board.org" if site else output / "v2-board.org"
     include.parent.mkdir(parents=True, exist_ok=True)
     html = "\n".join(sections) if sections else "<p>No committed results.</p>"
     include.write_text(_org_html(html), encoding="utf-8")

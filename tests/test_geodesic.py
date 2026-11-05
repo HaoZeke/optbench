@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import json
+from collections import Counter
 from pathlib import Path
 
 import numpy as np
@@ -91,6 +93,77 @@ def test_symbols_follow_the_potential():
         symbols_for("unknown", 1)
 
 
+def _pools(numpy_threads: int, scipy_threads: int) -> str:
+    return json.dumps(
+        [
+            {"owner": "numpy", "library": "libnumpy-blas.so", "version": "OpenBLAS 0.3.34", "threads": numpy_threads},
+            {"owner": "scipy", "library": "libscipy-blas.so", "version": "OpenBLAS 0.3.31", "threads": scipy_threads},
+        ],
+        sort_keys=True,
+    )
+
+
+def test_cached_path_is_reused_only_under_the_blas_setup_that_built_it(monkeypatch, tmp_path: Path):
+    import optbench.geodesic_path as geodesic_path
+
+    monkeypatch.setenv("OPTBENCH_GEODESIC_CACHE", str(tmp_path))
+    builds: list[int] = []
+
+    def build(reactant, target, symbols, n_interior, seed):
+        builds.append(1)
+        frames = np.linspace(reactant, target, n_interior + 2)
+        frames[1:-1, 0, 0] += 0.01 * len(builds)
+        return frames
+
+    monkeypatch.setattr(geodesic_path, "_interpolate", build)
+    reactant = np.array([[0.0, 0.0, 0.0], [1.1, 0.0, 0.0], [0.0, 1.1, 0.0]])
+    product = reactant + np.array([[0.2, 0.1, 0.0], [-0.1, 0.3, 0.1], [0.0, -0.2, 0.3]])
+    setup = {"pools": _pools(8, 1)}
+    monkeypatch.setattr(geodesic_path, "_blas_setup", lambda: setup["pools"])
+
+    def path() -> tuple[np.ndarray, bool]:
+        info: dict = {}
+        frames = geodesic_path.geodesic_positions(reactant, product, ["A"] * 3, 2, None, info=info)
+        return frames, info["cached"]
+
+    split, cached = path()
+    assert cached is False
+    again, cached = path()
+    assert cached is True
+    assert np.array_equal(again, split)
+
+    setup["pools"] = _pools(1, 1)
+    pinned, cached = path()
+    assert cached is False
+    assert len(builds) == 2
+    assert not np.allclose(pinned[1:-1], split[1:-1])
+
+    setup["pools"] = _pools(1, 1).replace("0.3.34", "0.3.30")
+    _, cached = path()
+    assert cached is False
+
+    setup["pools"] = None
+    files = sorted(tmp_path.iterdir())
+    _, cached = path()
+    assert cached is False
+    assert sorted(tmp_path.iterdir()) == files
+
+
+def test_blas_setup_names_both_pools():
+    from optbench.geodesic_path import _blas_setup
+
+    setup = _blas_setup()
+    if setup is None:
+        pytest.skip("no OpenBLAS pools readable in this process")
+    pools = json.loads(setup)
+    owners = {pool["owner"] for pool in pools}
+    assert {"numpy", "scipy"} <= owners or "system" in owners
+    for pool in pools:
+        assert pool["library"]
+        assert pool["version"]
+        assert pool["threads"] >= 1
+
+
 def test_path_keeps_endpoints_and_is_not_linear(monkeypatch, tmp_path: Path):
     pytest.importorskip("geodesic_interpolate")
     monkeypatch.setenv("OPTBENCH_GEODESIC_CACHE", str(tmp_path))
@@ -161,3 +234,19 @@ def test_fixed_atoms_stay_on_the_reactant(monkeypatch, tmp_path: Path):
     assert np.allclose(frames[:, ~free], reactant[~free])
     assert np.allclose(frames[0], reactant)
     assert np.allclose(frames[-1, free], product[free])
+
+
+def test_v2_score_keeps_the_failure_class_of_each_start(tmp_path: Path):
+    from optbench.failures import FAILURES
+    from optbench.rgsaddle_band import _settings, write_outputs
+
+    starts = ROOT / "results" / "campaign" / "geodesic-1.0.0-de-2ts-ci-neb.starts.jsonl"
+    records = [json.loads(line) for line in starts.read_text(encoding="utf-8").splitlines() if line.strip()]
+    template = load_template(ROOT, "geodesic/ci-neb")
+    problem = resolve_problem(ROOT, "double-ended-saddle-search/lj38_2ts_separation")
+    settings = _settings(template, problem, _registry(ROOT, "geodesic")["commit"])
+    write_outputs(tmp_path / "ci-neb.dat", records, template, settings, problem)
+    score = json.loads((tmp_path / "ci-neb.v2.json").read_text(encoding="utf-8"))["score"]
+    tally = Counter(row["failure"] for row in records if not row["success"])
+    assert tally["wrong_stationary"] == 4
+    assert {name: score[f"n_{name}"] for name in FAILURES} == {name: tally[name] for name in FAILURES}

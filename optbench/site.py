@@ -501,13 +501,13 @@ def _problem_titles(root: Path) -> dict[str, str]:
 
 
 def _code_page_html(name: str, pins: list[dict], document: dict, registry: list[dict], titles: dict[str, str]) -> str:
-    from .board import _headers, ranked_cells
+    from .board import INFERRED_RULE, _headers, board_rows, ranked_cells
     from .site_charts import cost_bars_svg
     from .site_pages import code_blurb, code_page_name, code_summaries, versions_html
 
     found: list[tuple[dict, dict]] = []
     for problem in (document.get("problems") or {}).values():
-        for row in problem.get("ranked") or []:
+        for row in board_rows(problem):
             if code_page_name(row, registry) == name:
                 found.append((problem, row))
     found.sort(
@@ -552,8 +552,13 @@ def _code_page_html(name: str, pins: list[dict], document: dict, registry: list[
     lines.append("<h3>Results</h3>")
     lines.append(
         "<p>Ranked rows for this code, one version and one method on each row. "
+        "PAR-2 counts a finished run as the calls it used and a failed run as twice the cap. "
+        "An archived row shows the average it published, "
+        "and its PAR-2 applies that rule to the failures the entry records. "
         '<a href="../../methodology.html">Scoring rules</a>.</p>'
     )
+    if any(row.get("failures_inferred") for _problem, row in found):
+        lines.append(f'<p data-board-note="inferred">{html.escape(INFERRED_RULE)}</p>')
     if found:
         headers = _headers({"ranked": []})
         lines.append('<div class="bench-scroll"><table class="bench-sortable" data-board-table="code-rows">')
@@ -608,6 +613,7 @@ def _codes_index_html(contributor: str, order: list[str]) -> str:
 
 
 def _write_code_pages(root: Path, document: dict) -> None:
+    from .board import board_rows
     from .site_pages import code_page_name, group_pins
 
     contributor, pins = _registry_pins(root)
@@ -615,7 +621,7 @@ def _write_code_pages(root: Path, document: dict) -> None:
     order = [name for name, _pins in group_pins(pins)]
     titles = _problem_titles(root)
     for problem in (document.get("problems") or {}).values():
-        for row in problem.get("ranked") or []:
+        for row in board_rows(problem):
             name = code_page_name(row, pins)
             if name not in grouped:
                 grouped[name] = []
@@ -767,7 +773,7 @@ def render(root: Path) -> None:
     )
 
     root = Path(root)
-    document = write_board(root, root / "results" / "board")
+    document = write_board(root, root / "results" / "board", site=True)
     problems = load_all(root / "problems")
     by_slug = _by_slug(problems)
     smoke = _smoke_note(root)
