@@ -323,7 +323,14 @@ def test_per_image_band_uses_the_image_cost(tmp_path: Path):
     assert row["mean_per_image"] == (5 + 10) / 2
 
 
-def _asv_track(root: Path, prefix: str, calls: list[float], *, commit: str = "c" * 40) -> None:
+def _asv_track(
+    root: Path,
+    prefix: str,
+    calls: list[float],
+    *,
+    commit: str = "c" * 40,
+    wrong: list[bool] | None = None,
+) -> None:
     machine = root / "results" / "asv" / "testbox"
     machine.mkdir(parents=True, exist_ok=True)
     (machine / "machine.json").write_text(
@@ -333,11 +340,16 @@ def _asv_track(root: Path, prefix: str, calls: list[float], *, commit: str = "c"
     params = [["'0'"], [f"'{index}'" for index in range(len(calls))]]
     columns = ["result", "params", "version", "started_at", "duration"]
     zeros = [0.0] * len(calls)
+    wrong_flags = list(wrong or [])
+    if len(wrong_flags) < len(calls):
+        wrong_flags.extend([False] * (len(calls) - len(wrong_flags)))
+    wrong_track = [1.0 if flag else 0.0 for flag in wrong_flags]
+    success = [0.0 if flag else 1.0 for flag in wrong_flags]
     tracks = {
         "track_force_calls": list(calls),
-        "track_success": [1.0] * len(calls),
+        "track_success": success,
         "track_failure_cap": zeros,
-        "track_failure_wrong_stationary": zeros,
+        "track_failure_wrong_stationary": wrong_track,
         "track_failure_divergence": zeros,
         "track_failure_crash": zeros,
     }
@@ -779,3 +791,112 @@ def test_the_current_ase_benchmark_records_the_band_total():
         text=True,
     )
     assert 'float(record["force_calls"]) / images' in old
+
+
+def _hessian_problem(root: Path) -> None:
+    path = root / "problems" / "minimization" / "hessian.toml"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        "\n".join(
+            [
+                'id = "minimization/hessian"',
+                'title = "Hessian toy"',
+                'suite = "minimization"',
+                'problem = "hessian"',
+                'contract = "stated"',
+                "",
+                "[sample]",
+                "starts = 2",
+                "",
+                "[convergence]",
+                "force_norm = 0.01",
+                "max_force_calls = 10000",
+                "",
+                "[metrics]",
+                'required = ["force_calls"]',
+                "",
+                "[scoring.v2]",
+                'success = "harness force calls under the cap, the force norm at the stop, and vibrational Hessian index 0"',
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+
+def _ase_template(root: Path, template_id: str, algorithm: str) -> None:
+    path = root / "templates" / f"{template_id}.toml"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        "\n".join(
+            [
+                f'id = "{template_id}"',
+                'engine = "ase"',
+                'code = "ASE"',
+                'code_version = "3.29.0"',
+                f'commit = "{PIN}"',
+                f'algorithm = "{algorithm}"',
+                'problem = "minimization/hessian"',
+                'tuning = "default"',
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+
+def test_a_campaign_row_without_a_hessian_index_loses_to_asv(tmp_path: Path):
+    """A success with no index loses. BFGS and LBFGS stay on cost."""
+    _hessian_problem(tmp_path)
+    _registry(tmp_path)
+    methods = {
+        "FIRE": ("ase/lj38-fire-default", "bench_ase_sella.AseLj38FireDefault"),
+        "BFGS": ("ase/lj38-bfgs-default", "bench_ase_sella.AseLj38BfgsDefault"),
+        "LBFGS": ("ase/lj38-lbfgs-default", "bench_ase_sella.AseLj38LbfgsDefault"),
+    }
+    for algorithm, (template_id, _prefix) in methods.items():
+        _ase_template(tmp_path, template_id, algorithm)
+        _dat(
+            tmp_path,
+            template_id.replace("/", "-"),
+            PIN,
+            template=template_id,
+            version="3.29.0",
+            code="ASE",
+            problem="minimization/hessian",
+        )
+    # FIRE: the campaign file is cheaper and stores no index.
+    _starts(
+        tmp_path,
+        "ase-lj38-fire-default",
+        [_row(1, True, "0"), _row(1, True, "1")],
+    )
+    _asv_track(tmp_path, methods["FIRE"][1], [4.0, 4.0], commit="c" * 40, wrong=[False, True])
+    # BFGS: the asv row is already cheaper, and the campaign file has no index.
+    _starts(
+        tmp_path,
+        "ase-lj38-bfgs-default",
+        [_row(8000, True, "0"), _row(8000, True, "1")],
+    )
+    _asv_track(tmp_path, methods["BFGS"][1], [100.0, 100.0], commit="d" * 40)
+    # LBFGS: the campaign file recorded the index and stays cheaper.
+    indexed = [_row(50, True, "0"), _row(50, True, "1")]
+    for record in indexed:
+        record["hessian_index"] = 0
+    _starts(tmp_path, "ase-lj38-lbfgs-default", indexed)
+    _asv_track(tmp_path, methods["LBFGS"][1], [200.0, 200.0], commit="e" * 40)
+
+    ranked = build_board(tmp_path)["problems"]["minimization/hessian"]["ranked"]
+    by_method = {row["method"]: row for row in ranked}
+    assert set(by_method) == {"FIRE", "BFGS", "LBFGS"}
+    assert by_method["FIRE"]["source"] == "asv"
+    assert by_method["FIRE"]["par2_mean"] == (4 + 20000) / 2
+    assert by_method["FIRE"]["failures"]["wrong_stationary"] == 1
+    assert by_method["BFGS"]["source"] == "asv"
+    assert by_method["BFGS"]["par2_mean"] == 100
+    assert by_method["LBFGS"]["source"] == "campaign"
+    assert by_method["LBFGS"]["par2_mean"] == 50
+    campaign = tmp_path / "results" / "campaign"
+    assert (campaign / "ase-lj38-fire-default.starts.jsonl").is_file()
+    assert (campaign / "ase-lj38-bfgs-default.starts.jsonl").is_file()
+    assert (campaign / "ase-lj38-lbfgs-default.starts.jsonl").is_file()

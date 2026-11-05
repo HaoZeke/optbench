@@ -124,7 +124,7 @@
    <td data-label="Problem"><a href="../suites/minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
    <td data-label="Row" data-field="label">Sella (2.6.0) · Sella</td>
    <td data-label="Family" data-field="family">Minimizers</td>
-   <td data-label="Family rank" data-field="family_rank">38</td>
+   <td data-label="Family rank" data-field="family_rank">36</td>
    <td data-label="PAR-2" data-field="par2_mean">710.089</td>
    <td data-label="Published" data-field="published"></td>
    <td data-label="Median calls" data-field="median_calls">692.5</td>

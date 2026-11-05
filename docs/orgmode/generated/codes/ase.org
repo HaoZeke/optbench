@@ -162,13 +162,13 @@
    <td data-label="Row" data-field="label">ASE (3.29.0) · BFGSLineSearch</td>
    <td data-label="Family" data-field="family">Minimizers</td>
    <td data-label="Family rank" data-field="family_rank">26</td>
-   <td data-label="PAR-2" data-field="par2_mean">561.466</td>
+   <td data-label="PAR-2" data-field="par2_mean">580.893</td>
    <td data-label="Published" data-field="published"></td>
    <td data-label="Median calls" data-field="median_calls">551</td>
    <td data-label="Mean calls" data-field="mean_calls">561.466</td>
    <td data-label="Hessians" data-field="hessian_calls">0</td>
    <td data-label="FD calls" data-field="fd_calls">0</td>
-   <td data-label="Failures" data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-label="Failures" data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 1</td>
    <td data-label="Runs" data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="ASE (3.6.0) · FIRE">
@@ -186,42 +186,12 @@
    <td data-label="Failures" data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
    <td data-label="Runs" data-field="n">1000</td>
    </tr>
-   <tr data-problem="minimization/lj38" data-label="ASE (3.29.0) · PreconLBFGS">
-   <td data-label="Suite">Minimization</td>
-   <td data-label="Problem"><a href="../suites/minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
-   <td data-label="Row" data-field="label">ASE (3.29.0) · PreconLBFGS</td>
-   <td data-label="Family" data-field="family">Minimizers</td>
-   <td data-label="Family rank" data-field="family_rank">34</td>
-   <td data-label="PAR-2" data-field="par2_mean">690.119</td>
-   <td data-label="Published" data-field="published"></td>
-   <td data-label="Median calls" data-field="median_calls">652.5</td>
-   <td data-label="Mean calls" data-field="mean_calls">690.119</td>
-   <td data-label="Hessians" data-field="hessian_calls">0</td>
-   <td data-label="FD calls" data-field="fd_calls">0</td>
-   <td data-label="Failures" data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-   <td data-label="Runs" data-field="n">1000</td>
-   </tr>
-   <tr data-problem="minimization/lj38" data-label="ASE (3.29.0) · FIRE">
-   <td data-label="Suite">Minimization</td>
-   <td data-label="Problem"><a href="../suites/minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
-   <td data-label="Row" data-field="label">ASE (3.29.0) · FIRE</td>
-   <td data-label="Family" data-field="family">Minimizers</td>
-   <td data-label="Family rank" data-field="family_rank">35</td>
-   <td data-label="PAR-2" data-field="par2_mean">706.005</td>
-   <td data-label="Published" data-field="published"></td>
-   <td data-label="Median calls" data-field="median_calls">604</td>
-   <td data-label="Mean calls" data-field="mean_calls">706.005</td>
-   <td data-label="Hessians" data-field="hessian_calls">0</td>
-   <td data-label="FD calls" data-field="fd_calls">0</td>
-   <td data-label="Failures" data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
-   <td data-label="Runs" data-field="n">1000</td>
-   </tr>
    <tr data-problem="minimization/lj38" data-label="ASE (3.29.0) · BFGS">
    <td data-label="Suite">Minimization</td>
    <td data-label="Problem"><a href="../suites/minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
    <td data-label="Row" data-field="label">ASE (3.29.0) · BFGS</td>
    <td data-label="Family" data-field="family">Minimizers</td>
-   <td data-label="Family rank" data-field="family_rank">36</td>
+   <td data-label="Family rank" data-field="family_rank">34</td>
    <td data-label="PAR-2" data-field="par2_mean">706.622</td>
    <td data-label="Published" data-field="published"></td>
    <td data-label="Median calls" data-field="median_calls">414.5</td>
@@ -231,19 +201,49 @@
    <td data-label="Failures" data-field="failures">crash 0, divergence 0, cap 3, wrong_stationary 11</td>
    <td data-label="Runs" data-field="n">1000</td>
    </tr>
+   <tr data-problem="minimization/lj38" data-label="ASE (3.29.0) · PreconLBFGS">
+   <td data-label="Suite">Minimization</td>
+   <td data-label="Problem"><a href="../suites/minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
+   <td data-label="Row" data-field="label">ASE (3.29.0) · PreconLBFGS</td>
+   <td data-label="Family" data-field="family">Minimizers</td>
+   <td data-label="Family rank" data-field="family_rank">37</td>
+   <td data-label="PAR-2" data-field="par2_mean">728.405</td>
+   <td data-label="Published" data-field="published"></td>
+   <td data-label="Median calls" data-field="median_calls">652.5</td>
+   <td data-label="Mean calls" data-field="mean_calls">690.119</td>
+   <td data-label="Hessians" data-field="hessian_calls">0</td>
+   <td data-label="FD calls" data-field="fd_calls">0</td>
+   <td data-label="Failures" data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 2</td>
+   <td data-label="Runs" data-field="n">1000</td>
+   </tr>
+   <tr data-problem="minimization/lj38" data-label="ASE (3.29.0) · FIRE">
+   <td data-label="Suite">Minimization</td>
+   <td data-label="Problem"><a href="../suites/minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
+   <td data-label="Row" data-field="label">ASE (3.29.0) · FIRE</td>
+   <td data-label="Family" data-field="family">Minimizers</td>
+   <td data-label="Family rank" data-field="family_rank">41</td>
+   <td data-label="PAR-2" data-field="par2_mean">802.368</td>
+   <td data-label="Published" data-field="published"></td>
+   <td data-label="Median calls" data-field="median_calls">604</td>
+   <td data-label="Mean calls" data-field="mean_calls">706.005</td>
+   <td data-label="Hessians" data-field="hessian_calls">0</td>
+   <td data-label="FD calls" data-field="fd_calls">0</td>
+   <td data-label="Failures" data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 5</td>
+   <td data-label="Runs" data-field="n">1000</td>
+   </tr>
    <tr data-problem="minimization/lj38" data-label="ASE (3.29.0) · PreconFIRE">
    <td data-label="Suite">Minimization</td>
    <td data-label="Problem"><a href="../suites/minimization/lj38.html">Lennard-Jones 38 clusters</a></td>
    <td data-label="Row" data-field="label">ASE (3.29.0) · PreconFIRE</td>
    <td data-label="Family" data-field="family">Minimizers</td>
    <td data-label="Family rank" data-field="family_rank">47</td>
-   <td data-label="PAR-2" data-field="par2_mean">1816.59</td>
+   <td data-label="PAR-2" data-field="par2_mean">1850.86</td>
    <td data-label="Published" data-field="published"></td>
    <td data-label="Median calls" data-field="median_calls">1562</td>
    <td data-label="Mean calls" data-field="mean_calls">1816.59</td>
    <td data-label="Hessians" data-field="hessian_calls">0</td>
    <td data-label="FD calls" data-field="fd_calls">0</td>
-   <td data-label="Failures" data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 0</td>
+   <td data-label="Failures" data-field="failures">crash 0, divergence 0, cap 0, wrong_stationary 2</td>
    <td data-label="Runs" data-field="n">1000</td>
    </tr>
    <tr data-problem="minimization/lj38" data-label="ase-Precon-LBFGS maxstep=0.1">

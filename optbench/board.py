@@ -349,6 +349,9 @@ def _record_from_raw(raw: dict, cap: int | None, force_tol: float | None) -> dic
     if cap is not None and calls >= cap:
         success = False
     record: dict = {"force_calls": calls, "success": success, "start": raw.get("start") or raw.get("geometry")}
+    # Kept so a later preference can see whether this start applied the index rule.
+    if raw.get("hessian_index") is not None:
+        record["hessian_index"] = raw["hessian_index"]
     if raw.get("hessian_calls") is not None:
         try:
             record["hessian_calls"] = float(raw["hessian_calls"])
@@ -672,6 +675,10 @@ def _collapse_run(group: list[dict]) -> dict:
     base["path"] = "; ".join(paths)
     if asv_commits:
         base["asv_commit"] = asv_commits[0]
+    # Same score means the asv track already applied the success rule.
+    # The merged row is that track, so the missing-index mark does not stick.
+    if any("asv" in _source_parts(row) for row in ordered):
+        base.pop("_missing_hessian_index", None)
     return base
 
 
@@ -777,6 +784,12 @@ def _campaign_rows(root: Path, problems: dict[str, dict], templates: dict[str, d
             row["note"] = "no per-start record"
             unparsed.append(row)
             continue
+        if _success_needs_hessian(problem) and any(
+            record.get("success") and "hessian_index" not in record for record in records
+        ):
+            # A success with no index did not apply the rule. A cap or a crash
+            # has no stationary point, so a missing index there is not this mark.
+            row["_missing_hessian_index"] = True
         try:
             summary = _score_records(records, cap)
         except (ValueError, RuntimeError) as exc:
@@ -1014,10 +1027,36 @@ def _method_key(row: dict) -> tuple:
     )
 
 
+def _success_needs_hessian(problem: dict | None) -> bool:
+    """The v2 success rule counts a Hessian index.
+
+    The sentence is the rule. ``Hessian index`` is the explicit form.
+    ``The index is vibrational`` and ``index 1 at eigenvalue`` are the
+    same count without that pair of words.
+    """
+    if not problem:
+        return False
+    text = str(((problem.get("scoring") or {}).get("v2") or {}).get("success") or "").casefold()
+    if "hessian index" in text:
+        return True
+    if "index" not in text:
+        return False
+    return "vibrational" in text or "eigenvalue" in text
+
+
 def _prefer_row(group: list[dict]) -> dict:
+    """One row for a code, version, and method.
+
+    On a problem whose success rule counts a Hessian index, a campaign
+    row whose successes stored no index loses to a row that recorded
+    the check. Cost then picks among the rows that remain, so a checked
+    row that is already cheaper stays the ranked one.
+    """
+
     def sort_key(row: dict) -> tuple:
         cost = row.get("rank_cost")
         return (
+            1 if row.get("_missing_hessian_index") else 0,
             cost is None,
             float(cost) if cost is not None else 0.0,
             -int(row.get("n") or 0),
