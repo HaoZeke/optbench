@@ -14,6 +14,11 @@ wrote. The force count is a ``HarnessCounter`` entry. The initial
 Hessian displacements are included. ``setup`` installs the pinned
 OptKing revision when it is absent. It raises ``NotImplementedError``
 when that install cannot run, and asv-runner stores that parameter as NaN.
+
+asv kills a search that reaches the class ``timeout`` before it can
+write a record. The first track method then records that start once as
+a failure with reason ``timeout`` and no force count, and the other
+track methods read that record.
 """
 
 from __future__ import annotations
@@ -159,20 +164,50 @@ def _compute(spec: dict, seed: str, start: str) -> dict:
         raise IndexError(f"{spec['template_id']} has no start {start}")
     job = dict(matched[0])
     job["scratch"] = str(_cache_dir() / "scratch" / spec["template_id"].replace("/", "-") / str(start))
-    record = search_start(job)
-    record["seed"] = SEED
     path = _cache_path(spec["template_id"], SEED, str(start))
     path.parent.mkdir(parents=True, exist_ok=True)
+    path.unlink(missing_ok=True)
+    # Outlives the search only when the process is killed, which is how asv ends a timeout.
+    started = path.with_suffix(".started")
+    started.touch()
+    try:
+        record = search_start(job)
+    except BaseException:
+        started.unlink(missing_ok=True)
+        raise
+    record["seed"] = SEED
+    _write(path, record)
+    started.unlink(missing_ok=True)
+    return record
+
+
+def _write(path: Path, record: dict) -> None:
     temporary = path.with_suffix(".json.tmp")
     temporary.write_text(json.dumps(record), encoding="utf-8")
     temporary.replace(path)
-    return record
 
 
 def _load(spec: dict, seed: str, start: str) -> dict:
     path = _cache_path(spec["template_id"], SEED, str(start))
     if path.is_file():
         return json.loads(path.read_text(encoding="utf-8"))
+    started = path.with_suffix(".started")
+    if started.is_file():
+        from optbench.failures import classify_failure
+
+        record = {
+            "schema": "optbench.start/v2",
+            "start": str(start),
+            "seed": SEED,
+            "force_calls": None,
+            "success": False,
+            "failure": classify_failure(["timeout"]),
+            "reasons": ["timeout"],
+            "error": "the search was killed before it wrote a record",
+        }
+        _write(path, record)
+        started.unlink(missing_ok=True)
+        return record
     return _compute(spec, seed, start)
 
 
@@ -192,7 +227,10 @@ class _OptkingSearch(_TrackedSearch):
         return self.record
 
     def track_force_calls(self, seed, start) -> float:
-        return float(self._stored(seed, start)["force_calls"])
+        calls = self._stored(seed, start)["force_calls"]
+        if calls is None:
+            raise RuntimeError(f"start {start} timed out, so it has no force count")
+        return float(calls)
 
     def track_success(self, seed, start) -> float:
         return 1.0 if self._stored(seed, start)["success"] else 0.0
