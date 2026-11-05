@@ -152,10 +152,8 @@ def test_optking_grid_is_seed_then_the_first_start():
 
 
 def test_pending_grid_is_every_problem_and_code():
-    from benchmarks.pending import Pending
+    from benchmarks import pending
 
-    assert Pending.param_names == ["problem", "code", "seed", "start"]
-    assert len(Pending.params[0]) == len(problem_ids())
     assert len(problem_ids()) >= 25
     assert code_ids() == [
         "eon",
@@ -189,8 +187,45 @@ def test_pending_grid_is_every_problem_and_code():
         "sella-0.1.1",
         "gpridge",
     ]
-    assert Pending.params[1] == code_ids()
-    assert Pending.track_force_calls.unit == "force calls"
+    covered = pending.covered()
+    grid = set()
+    classes = [value for name, value in vars(pending).items() if name.startswith("Pending")]
+    assert classes
+    for benchmark in classes:
+        assert benchmark.__name__.isidentifier()
+        assert benchmark.param_names == ["problem", "code", "seed", "start"]
+        problems, codes, seeds, starts = benchmark.params
+        assert len(codes) == 1 and seeds == ["0"] and starts == ["0"]
+        assert benchmark.track_force_calls.unit == "force calls"
+        cells = {(problem, codes[0]) for problem in problems}
+        assert not cells & covered
+        assert not cells & grid
+        grid |= cells
+    assert grid | covered == {(problem, code) for problem in problem_ids() for code in code_ids()}
+
+
+def test_template_modules_name_the_registry_code_of_their_templates():
+    import importlib
+    import tomllib
+
+    from benchmarks import pending
+    from optbench.campaign import load_template
+
+    names = {
+        row["id"]: row["name"]
+        for row in tomllib.loads((ROOT / "codes" / "registry.toml").read_text(encoding="utf-8"))["code"]
+    }
+    for code, module in pending.TEMPLATE_MODULES:
+        templates = [
+            getattr(value, "template_id", None) or getattr(value, "template_name", None)
+            for value in vars(importlib.import_module(f"benchmarks.bench_{module}")).values()
+            if isinstance(value, type)
+        ]
+        templates = [template for template in templates if template]
+        assert templates
+        for template in templates:
+            assert load_template(ROOT, template)["code"] == names[code]
+        assert {(problem, code) for problem in pending.template_problems(module)} <= pending.covered()
 
 
 def test_statistics_refuses_to_invent_a_document(tmp_path: Path):

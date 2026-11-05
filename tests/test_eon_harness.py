@@ -6,6 +6,8 @@ from pathlib import Path
 from optbench.extpot import format_extpot
 from optbench.potserver import PotServer
 
+ROOT = Path(__file__).resolve().parents[1]
+
 
 def test_c_bridge_matches_the_python_reply(tmp_path, monkeypatch):
     from optbench.eon_harness import bridge_binary
@@ -48,6 +50,49 @@ def test_svn_default_grid_is_one_start():
     assert EonSvnTsLj38DimerLjcut.params[0] == [1]
     assert EonSvnTsLj38DimerLjcut.params[1] == ["0000"]
     assert EonSvnTsLj38DimerLjcut.template_name == "eon-svn/ts-lj38-dimer-ljcut"
+
+
+def test_f6817b53_classes_are_the_harness_templates_of_that_build():
+    assert os.environ.get("OPTBENCH_ASV_FULL") != "1"
+    from benchmarks import bench_eon_f6817b53
+    from optbench.eon_harness import _jobs
+
+    classes = {
+        value.template_name: value
+        for value in vars(bench_eon_f6817b53).values()
+        if isinstance(value, type) and getattr(value, "template_name", None)
+    }
+    assert sorted(classes) == sorted(template["id"] for template in _jobs("f6817b53"))
+    assert "eon/develop-f6817b53-de-lj38-cap" in classes
+    for benchmark in classes.values():
+        assert len(benchmark.params[0]) == 1 and len(benchmark.params[1]) == 1
+
+
+def test_500350d9_templates_run_on_the_500350d9_build():
+    from benchmarks import bench_eon_500350d9, bench_eon_client
+    from optbench.campaign import load_template
+    from optbench.eon_harness import _family_of
+
+    def names(module):
+        return {
+            value.template_name
+            for value in vars(module).values()
+            if isinstance(value, type) and getattr(value, "template_name", None)
+        }
+
+    built = names(bench_eon_500350d9)
+    assert {
+        "eon/500350d9-neb-pt-cg",
+        "eon/500350d9-de-lj38-ci-swdneb",
+        "eon/develop-500350d9-de-2ts",
+        "eon-client/de-2ts-500350d9-dimer",
+    } <= built
+    assert not built & names(bench_eon_client)
+    for template in built:
+        assert load_template(ROOT, template)["commit"].startswith("500350d9")
+        assert _family_of(load_template(ROOT, template)) == "500350d9"
+    for template in names(bench_eon_client):
+        assert load_template(ROOT, template)["commit"].startswith("4d8b34ba")
 
 
 def test_client_default_grid_is_one_start():

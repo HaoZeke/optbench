@@ -1,4 +1,4 @@
-"""GMIN globalopt templates use the registry pin and the harness cap."""
+"""GMIN globalopt templates take the latest Wales snapshot and the harness cap."""
 
 from __future__ import annotations
 
@@ -9,7 +9,8 @@ from pathlib import Path
 import pytest
 
 from optbench.campaign import _check_stop, list_templates, resolve_problem
-from optbench.runners.gmin_go import CODE_VERSION, PIN_REF, TARBALL_SHA256, _coords_text, _data_text
+from optbench.runners.gmin_go import _coords_text, _data_text
+from optbench.wales import LATEST
 
 ROOT = Path(__file__).resolve().parents[1]
 PROBLEMS = (
@@ -20,16 +21,14 @@ PROBLEMS = (
 )
 
 
-def test_registry_pins_the_tarball():
+def test_registry_takes_the_latest_snapshot():
     registry = tomllib.loads((ROOT / "codes" / "registry.toml").read_text(encoding="utf-8"))
     row = next(item for item in registry["code"] if item["id"] == "gmin-bh")
-    assert row["name"] == "GMIN"
-    assert row["commit"] == TARBALL_SHA256
-    assert row["ref"] == PIN_REF
-    assert CODE_VERSION == "df8da599"
-    assert TARBALL_SHA256.startswith(row["ref"])
     quench = next(item for item in registry["code"] if item["id"] == "gmin")
-    assert TARBALL_SHA256 in quench["note"]
+    assert row["name"] == "GMIN"
+    assert row["commit"] == quench["commit"] == LATEST
+    assert row["ref"] == quench["ref"] == "svn.tar.bz2"
+    assert row["repository"] == quench["repository"]
 
 
 def test_bh_bhpt_and_csm_templates():
@@ -44,8 +43,8 @@ def test_bh_bhpt_and_csm_templates():
     assert ids == sorted(expected)
     for template in found:
         assert template["code"] == "GMIN"
-        assert template["code_version"] == CODE_VERSION
-        assert template["commit"] == TARBALL_SHA256
+        assert template["code_version"] == LATEST
+        assert template["commit"] == LATEST
         assert template["problem"] in PROBLEMS
         section = template["gmin"]
         assert section["method"] in {"bh", "bhpt"}
@@ -176,11 +175,11 @@ def test_lj98_cap_is_the_problem_cap_and_the_data_file_uses_it():
             assert text.startswith("MPI\nBHPT 0.10000000 1.30000000 0.10000000\n")
 
 
-def test_lj38_csm_uses_the_archive_deck_on_df8da599():
+def test_lj38_csm_uses_the_archive_deck_on_the_latest_snapshot():
     problem = resolve_problem(ROOT, "globalopt/lj38")
     assert problem["convergence"].get("max_force_calls") is None
     template = next(item for item in list_templates(ROOT) if item["id"] == "gmin/lj38-csm")
-    assert template["code_version"] == "df8da599"
+    assert template["code_version"] == LATEST
     assert int(template["failure_cap"]) == 2_000_000
     section = template["gmin"]
     text = _data_text(
@@ -245,3 +244,65 @@ def test_asv_classes_import_with_one_start():
     for benchmark in classes:
         assert benchmark.params == [["0"], ["0"]]
         assert benchmark.cap == caps[benchmark.spec["template_id"]]
+
+
+def test_asv_full_grid_is_every_stated_start(monkeypatch):
+    import importlib
+
+    import benchmarks.bench_gmin_bh as bench
+
+    monkeypatch.setenv("OPTBENCH_ASV_FULL", "1")
+    try:
+        full = importlib.reload(bench)
+        for spec in full._specs():
+            stated = int(resolve_problem(ROOT, spec["problem_id"])["sample"]["starts"])
+            benchmark = getattr(full, spec["class_name"])
+            assert benchmark.params == [["0"], [str(index) for index in range(stated)]]
+    finally:
+        monkeypatch.delenv("OPTBENCH_ASV_FULL")
+        importlib.reload(bench)
+
+
+def test_asv_every_track_has_a_value_in_a_fresh_process(monkeypatch, tmp_path):
+    import math
+
+    import benchmarks.bench_gmin_bh as bench
+    from optbench.runners import gmin_go
+
+    calls = []
+    record = {"force_calls": 4321, "success": False, "failure": "cap"}
+    build = {"wales_sha256": "a" * 64, "wales_svnrev": "1" * 40}
+
+    def plan(root, problem, template, *, scratch, limit=0, resume=False):
+        return [{"index": 0}, {"index": 1}], dict(build)
+
+    def run_one(job):
+        calls.append(job["index"])
+        return dict(record)
+
+    monkeypatch.setenv("OPTBENCH_ASV_CACHE", str(tmp_path))
+    monkeypatch.setattr(bench, "_binary_ready", lambda: True)
+    monkeypatch.setattr(gmin_go, "gmin_binary", lambda: tmp_path / "GMIN")
+    monkeypatch.setattr(gmin_go, "binary_build", lambda binary: dict(build))
+    monkeypatch.setattr(gmin_go, "plan", plan)
+    monkeypatch.setattr(gmin_go, "run_one", run_one)
+    benchmark = bench.GminLj75Bh
+    expected = {
+        "track_force_calls": 4321.0,
+        "track_success": 0.0,
+        "track_failure_cap": 1.0,
+        "track_failure_wrong_stationary": 0.0,
+        "track_failure_divergence": 0.0,
+        "track_failure_crash": 0.0,
+    }
+    for name, value in expected.items():
+        fresh = benchmark()
+        fresh.setup("0", "1")
+        got = getattr(fresh, name)("0", "1")
+        assert isinstance(got, float) and not math.isnan(got)
+        assert got == value
+    assert calls == [1]
+    timed = benchmark()
+    timed.setup("0", "1")
+    timed.time_search("0", "1")
+    assert calls == [1, 1]
