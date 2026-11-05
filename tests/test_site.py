@@ -10,6 +10,65 @@ from optbench.site_check import check_site
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def test_a_verification_link_is_rendered_only_when_set():
+    from optbench.site_pages import success_note
+
+    linked = {
+        "id": "example/toy",
+        "metrics": {"required": ["force_calls"]},
+        "scoring": {
+            "v2": {
+                "success": "the search converges.",
+                "verification": {
+                    "label": "the worked example",
+                    "url": "https://example.invalid/check",
+                },
+            }
+        },
+    }
+    html = success_note(linked)
+    assert 'href="https://example.invalid/check"' in html
+    assert "the worked example" in html
+    bare = {
+        "id": "example/toy",
+        "metrics": {"required": ["force_calls"]},
+        "scoring": {"v2": {"success": "the search converges."}},
+    }
+    plain = success_note(bare)
+    assert "href=" not in plain
+    assert "the worked example" not in plain
+
+
+def test_a_verification_link_renders_without_a_success_rule():
+    from optbench.site_pages import success_note
+
+    cost_only = {
+        "id": "example/toy",
+        "metrics": {"required": ["force_calls"]},
+        "scoring": {
+            "v2": {
+                "cost": "the published mean",
+                "verification": {
+                    "label": "the worked example",
+                    "url": "https://example.invalid/cost",
+                },
+            }
+        },
+    }
+    html = success_note(cost_only)
+    assert "Success on this problem:" not in html
+    assert 'href="https://example.invalid/cost"' in html
+    assert "the worked example" in html
+    empty = {
+        "id": "example/toy",
+        "metrics": {"required": ["force_calls"]},
+        "scoring": {"v2": {"verification": {"label": "the worked example", "url": "https://example.invalid/bare"}}},
+    }
+    bare_html = success_note(empty)
+    assert "Success on this problem:" not in bare_html
+    assert 'href="https://example.invalid/bare"' in bare_html
+
+
 def test_nav_pages_have_titles_and_the_suites_fold_under_archive():
     org = ROOT / "docs" / "orgmode"
     for name in ("index.org", "run.org", "archive.org", "codes.org", "board.org"):

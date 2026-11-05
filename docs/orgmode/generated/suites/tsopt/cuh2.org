@@ -9,9 +9,11 @@
    <div class="stat"><span class="k">System</span><span class="v">CuH2</span></div>
    <div class="stat"><span class="k">Atoms</span><span class="v num">—<sup>1</sup></span></div>
    <div class="stat"><span class="k">Runs</span><span class="v num">4</span></div>
-   <div class="stat"><span class="k">Cap</span><span class="v">10000 force calls</span></div>
+   <div class="stat"><span class="k">Cap</span><span class="v">10000 force calls. The pinned GPRidge input sets no force-call cap. This acceptance cap copies max_iterations from archive/entries/minimization/lj38/eon-cg/config.ini.</span></div>
    </div>
    <p class="bench-note"><sup>1</sup> The problem file does not state an atom count.</p>
+   <p class="bench-note">largest Cartesian force component (the L-infinity norm) at or below 0.01 eV/Angstrom. The pinned input inputs/gpridge/cuh2/params.toml sets finalConvergenceForce to 0.01 and convergenceForceNorm to linfNorm.</p>
+   <p class="bench-note">4. The pinned input inputs/gpridge/cuh2/params.toml sets sepDists to 0.02, 0.3, 1.0 and 3.0.</p>
    <p class="metric-line">The main metric is Force calls. <a href="../../../methodology.html">Scoring rules</a>.</p>
    <h2>Leaderboard</h2>
    <div class="bench-scroll">
@@ -21,7 +23,7 @@
    <tr><td colspan="6">No ranked row.</td></tr>
    </tbody></table></div>
    <p class="bench-note">The tables below list every ranked row, by method family and overall.</p>
-   <p class="bench-gaps">No committed harness run.</p>
+   <p class="bench-gaps">No run is committed for this problem.</p>
    <h3>Overall</h3>
    <div class="bench-scroll">
    <table class="bench-sortable" data-board-table="ranked" data-problem="tsopt/cuh2">
@@ -29,6 +31,10 @@
    <thead><tr><th>Row</th><th>Family</th><th>Family rank</th><th>PAR-2</th><th>Published</th><th>Median calls</th><th>Mean calls</th><th>Hessians</th><th>FD calls</th><th>Failures</th><th>Runs</th></tr></thead><tbody>
    <tr><td colspan="11">No ranked row.</td></tr>
    </tbody></table></div>
-   <p class="bench-note">Success on this problem: client force calls under the cap, a converged native search, fixed Cu atoms, max-norm H force at the stop on an independent RPC evaluation, and Hessian index 1 over the six H coordinates with no eigenvalue within 1e-6 of zero.</p>
+   <p class="bench-note">Success on this problem: the native search converges, the Cu atoms stay fixed, and the client force calls stay under the cap.</p>
+   <p class="bench-note">The maximum-norm hydrogen force meets the stop on an independent remote procedure call (RPC).</p>
+   <p class="bench-note">The Hessian index over the six hydrogen coordinates is 1.</p>
+   <p class="bench-note">A hydrogen mode is unresolved when its absolute curvature is at most the largest of the force stop, the roundoff floor on the Frobenius norm, and the critical-point floor.</p>
+   <p class="bench-note">The check links <a href="https://github.com/lode-org/optbench/blob/1f3c2295a59eff9c2ab4e32769edac372e2119cf/optbench/gpridge_dimer.py">the dimer verification</a>.</p>
    </section>
 #+end_export
